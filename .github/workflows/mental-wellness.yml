@@ -22,14 +22,14 @@ jobs:
         with:
           python-version: '3.11'
           
-      - name: Create mental wellness script
+      - name: Create mental wellness script with 30 tips
         run: |
           cat > mental_tips.py << 'EOF'
 import os
 import random
 from datetime import datetime, timedelta
 
-# Daily tips for surfers - combat fear and anxiety
+# 30 Daily tips for surfers - combat fear and anxiety
 TIPS = [
     {
         "category": "🧠 Mindfulness",
@@ -52,7 +52,7 @@ TIPS = [
     {
         "category": "😰 Ansiedade",
         "title": "Olha o horizonte",
-        "content": "Quando a ansiedade subir, olhe para o horizonte. A vista larga ajuda o cérebro a processar更多信息 e reduz a sensação de pressão.",
+        "content": "Quando a ansiedade subir, olhe para o horizonte. A vista larga ajuda o cérebro a processar mais informações e reduz a sensação de pressão.",
         "time": "Na água"
     },
     {
@@ -82,13 +82,13 @@ TIPS = [
     {
         "category": "💪 Confiança",
         "title": "Progresso não perfeição",
-        "content": "Você não precisa ser perfeita. Cada sessão de surf é evolução. Manobra pequena ou grande, 波 grande ou pequena - todas contam!",
+        "content": "Você não precisa ser perfeita. Cada sessão de surf é evolução. Manobra pequena ou grande, onda grande ou pequena - todas contam!",
         "time": "Geral"
     },
     {
         "category": "😰 Ansiedade",
-        "title": "Desligue o julgamento",
-        "content": "Na água, não julue. Não pense 'eu deveria ter pego essa onda' ou 'essa manobra foi feia'. Apenas surf. Sem julgamento.",
+        "title": "Desliga o julgamento",
+        "content": "Na água, não julgue. Não pense 'eu deveria ter pego essa onda' ou 'essa manobra foi feia'. Apenas surf. Sem julgamento.",
         "time": "Durante o surf"
     },
     {
@@ -100,7 +100,7 @@ TIPS = [
     {
         "category": "🌅 Motivação",
         "title": "Você é uma surfista",
-        "content": "Você coragem de entrar no mar. Você enfrenta ondas. Você é mais forte do que pensa. Confie no seu poder!",
+        "content": "Você tem coragem de entrar no mar. Você enfrenta ondas. Você é mais forte do que pensa. Confie no seu poder!",
         "time": "Manhã"
     },
     {
@@ -112,8 +112,116 @@ TIPS = [
     {
         "category": "🌊 Surf Mental",
         "title": "Fluir com a onda",
-        "content": "Não lute contra a onda. Quando ela te carregar, relaxa e fluí com ela. O surf é sobre parceria com a natureza, não resistência.",
+        "content": "Não lute contra a onda. Quando ela te carregar, relaxa e flui com ela. O surf é sobre parceria com a natureza, não resistência.",
         "time": "Durante o surf"
+    },
+    {
+        "category": "😰 Ansiedade",
+        "title": "Medo de remada",
+        "content": "Se tem medo de remar para ondas maiores, começa devagar. A cada dia, vai um pouco mais fundo. Seu corpo e mente se adaptam gradualmente.",
+        "time": "Progressivo"
+    },
+    {
+        "category": "💪 Confiança",
+        "title": "Celebra pequenas vitórias",
+        "content": "Pegou uma onda? Manteve o equilíbrio? Fez um cutback? Cada conquista merece celebração. Isso constrói confiança!",
+        "time": "Durante o surf"
+    },
+    {
+        "category": "🧘 Meditação",
+        "title": "Som das ondas",
+        "content": "Quando se sentir ansiosa, simplesmente ouça o som do mar. As ondas têm um ritmo que acalma. É natureza curando.",
+        "time": "Qualquer momento"
+    },
+    {
+        "category": "🌊 Surf Mental",
+        "title": "Respeita seu ritmo",
+        "content": "Tem dias que você está 100%, outros que está 50%. Tudo bem. Não force. O surf não vai embora. Seu corpo precisa de descanso.",
+        "time": "Geral"
+    },
+    {
+        "category": "🧠 Mindfulness",
+        "title": "Deixa a água te guiar",
+        "content": "No surf, você não controla a onda - você dialoga com ela. Na vida, às vezes precisa soltar o controle e deixar as coisas acontecerem.",
+        "time": "Na água"
+    },
+    {
+        "category": "😰 Ansiedade",
+        "title": "Quando errar",
+        "content": "Se perder a onda, não chore, não se culpe. Levanta, rema de volta, tenta de novo. Cada erro é um professor.",
+        "time": "Na água"
+    },
+    {
+        "category": "💪 Confiança",
+        "title": "Você já veio até aqui",
+        "content": "Pensa em todo o caminho que você percorreu. Cada sessão que você surfou te trouxe até aqui. Você é capaz!",
+        "time": "Antes de surfar"
+    },
+    {
+        "category": "🌅 Motivação",
+        "title": "O melhor horário",
+        "content": "O surf funciona em qualquer horário, mas o nascer e o pôr do sol são mágicos. A natureza oferece momentos de paz.",
+        "time": "Qualquer momento"
+    },
+    {
+        "category": "🧘 Meditação",
+        "title": "Alonga a mente",
+        "content": "Antes de surfar, além do corpo, alonga a mente. Libera tensão dos ombros, da testa, da mandíbula. Relaxamento mental = melhor desempenho.",
+        "time": "Antes de entrar na água"
+    },
+    {
+        "category": "🌊 Surf Mental",
+        "title": "Conexão com a natureza",
+        "content": "O surf te coloca em contato direto com a natureza. Senta a água, o sol, o vento. Essa conexão cura ansiedade e medo.",
+        "time": "Durante o surf"
+    },
+    {
+        "category": "😰 Ansiedade",
+        "title": "Comparação mata",
+        "content": "Não se compare com outras surfistas. Cada pessoa tem seu tempo, seu corpo, seu estilo. Surf é sobre você e o mar.",
+        "time": "Geral"
+    },
+    {
+        "category": "💪 Confiança",
+        "title": "Pede ajuda",
+        "content": "Se tiver com medo ou dúvida, pergunta para alguém mais experiente. Pedir ajuda é sinal de força, não de fraqueza.",
+        "time": "Na água"
+    },
+    {
+        "category": "🧠 Mindfulness",
+        "title": "Senta e observa",
+        "content": "Antes de entrar na água, senta e observa as ondas por 10 minutos. Entende o padrão, o ritmo, o tamanho. Conhecimento previne medo.",
+        "time": "Antes de surfar"
+    },
+    {
+        "category": "🌅 Motivação",
+        "title": "Você pertence ao mar",
+        "content": "Você não é estranha no mar - você é parte dele. O mar te aceita como você é. Aqui não tem julgamento, só liberdade.",
+        "time": "Geral"
+    },
+    {
+        "category": "🧘 Meditação",
+        "title": "Respiração 4-7-8",
+        "content": "Técnica de respiração: Inspira por 4 segundos, segura por 7, expira por 8. Repete 3x. Isso acalma instantaneamente.",
+        "time": "Quando precisar"
+    },
+    {
+        "category": "🌊 Surf Mental",
+        "title": "Quando a onda fechar",
+        "content": "Se a onda fechar e você precisar passar por ela, mantém a calma. Mergulha, deixa a onda passar, e depois volta para superfície.",
+        "time": "Técnica"
+    },
+    {
+        "category": "💪 Confiança",
+        "title": "Confia no equipamento",
+        "content": "Sua prancha, seu leash, sua/quinha - eles estão ali para te apoiar. Confia no equipamento. Ele não vai te abandonar.",
+        "time": "Antes de surfar"
+    },
+    {
+        "category": "🧠 Mindfulness",
+        "title": "Libera expectativas",
+        "content": "HOje pode ser o melhor dia ou o pior. Não importa. O que importa é que você está aqui. Sem expectativas = sem pressão.",
+        "time": "Geral"
     }
 ]
 
