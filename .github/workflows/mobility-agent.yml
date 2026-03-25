@@ -1,0 +1,35 @@
+name: ASF Daily Mobility Agent
+
+on:
+  schedule:
+    # Run daily at 6am (before surfboard agent)
+    - cron: '0 6 * * *'
+  workflow_dispatch:
+
+jobs:
+  mobility-content:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Run Mobility Agent
+        run: |
+          python3 scripts/mobility_agent.py >> mobility_content.md
+          echo "## Daily Mobility Content $(date)" >> mobility_log.md
+
+      - name: Auto-commit
+        run: |
+          git config user.name "ASF Mobility Agent"
+          git config user.email "mobility@asf.com.br"
+          git add -A
+          git diff --quiet --exit-code && echo "No changes" && exit 0
+          git commit -m "Daily mobility content - $(date +%Y-%m-%d)"
+          git push origin main || echo "No changes to push"

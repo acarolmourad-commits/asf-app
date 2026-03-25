@@ -925,6 +925,9 @@
         <button class="tab active" onclick="showSection('dicas')">
             <span class="tab-icon">📚</span> Dicas
         </button>
+        <button class="tab" onclick="showSection('mobilidade')">
+            <span class="tab-icon">🧘</span> Mobilidade
+        </button>
         <button class="tab" onclick="showSection('lojas')">
             <span class="tab-icon">🛒</span> Lojas
         </button>
@@ -1021,6 +1024,64 @@
                         <span>⏱️ 5 min</span>
                         <span>📊 Todos</span>
                     </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobilidade Section -->
+        <div class="section" id="mobilidade">
+            <div class="section-header">
+                <h2 class="section-title">🧘 Mobilidade & Alongamento</h2>
+                <a href="#" class="see-all">Ver todos →</a>
+            </div>
+            <div class="cards-grid">
+                <div class="card">
+                    <span class="card-tag purple">Alongamento</span>
+                    <h3>💪 Rotação de Ombros</h3>
+                    <p><strong>Para que serve:</strong> Melhora a mobilidade dos ombros para o paddling.</p>
+                    <p style="margin-top: 8px;"><strong>Como fazer:</strong> Gire os ombros para frente e para trás, 10 rotações cada direção. Pode fazer em pé ou sentado.</p>
+                    <p style="margin-top: 8px; font-size: 12px; color: var(--gray-400);">🎬 Exercício em casa • 2 min</p>
+                    <button class="btn btn-secondary" style="width: 100%; margin-top: 12px;">Ver Vídeo</button>
+                </div>
+                <div class="card">
+                    <span class="card-tag purple">Alongamento</span>
+                    <h3>🧘 Alongamento de Costas</h3>
+                    <p><strong>Para que serve:</strong> Previne dores nas costas causadas pelo remo.</p>
+                    <p style="margin-top: 8px;"><strong>Como fazer:</strong> Sentada, pegue as pernas e alongue as costas para frente. Segure 30 segundos.</p>
+                    <p style="margin-top: 8px; font-size: 12px; color: var(--gray-400);">🎬 Exercício em casa • 3 min</p>
+                    <button class="btn btn-secondary" style="width: 100%; margin-top: 12px;">Ver Vídeo</button>
+                </div>
+                <div class="card">
+                    <span class="card-tag purple">Alongamento</span>
+                    <h3>🦵 Mobilidade de Quadril</h3>
+                    <p><strong>Para que serve:</strong> Essencial para o movimento de transferência de peso.</p>
+                    <p style="margin-top: 8px;"><strong>Como fazer:</strong> Faça pequenos círculos com o quadril, 10 para cada lado.</p>
+                    <p style="margin-top: 8px; font-size: 12px; color: var(--gray-400);">🎬 Exercício em casa • 2 min</p>
+                    <button class="btn btn-secondary" style="width: 100%; margin-top: 12px;">Ver Vídeo</button>
+                </div>
+                <div class="card">
+                    <span class="card-tag purple">Alongamento</span>
+                    <h3>🦶 Mobilidade de Tornozelo</h3>
+                    <p><strong>Para que serve:</strong> Melhora o equilíbrio na prancha.</p>
+                    <p style="margin-top: 8px;"><strong>Como fazer:</strong> Gire o tornozelo em círculos, 10 para cada lado. Pode fazer sentado.</p>
+                    <p style="margin-top: 8px; font-size: 12px; color: var(--gray-400);">🎬 Exercício em casa • 2 min</p>
+                    <button class="btn btn-secondary" style="width: 100%; margin-top: 12px;">Ver Vídeo</button>
+                </div>
+                <div class="card">
+                    <span class="card-tag purple">Alongamento</span>
+                    <h3>🧎 Alongamento de Perna (Isquiotibiais)</h3>
+                    <p><strong>Para que serve:</strong> Importante para o movimento de pé na prancha.</p>
+                    <p style="margin-top: 8px;"><strong>Como fazer:</strong> Sentada, estique uma perna e incline-se para frente. Segure 30 segundos cada perna.</p>
+                    <p style="margin-top: 8px; font-size: 12px; color: var(--gray-400);">🎬 Exercício em casa • 4 min</p>
+                    <button class="btn btn-secondary" style="width: 100%; margin-top: 12px;">Ver Vídeo</button>
+                </div>
+                <div class="card">
+                    <span class="card-tag green">💪</span>
+                    <h3>🧠 Rotina Matinal de 10 Minutos</h3>
+                    <p>Sequência completa para fazer em casa antes de ir para a praia:</p>
+                    <p style="margin-top: 8px;">1. Rotação de ombros (2 min)<br>2. Alongamento de costas (3 min)<br>3. Mobilidade de quadril (2 min)<br>4. Alongamento de pernas (3 min)</p>
+                    <p style="margin-top: 8px; font-size: 12px; color: var(--success);">✅Rotina completa • Em casa</p>
+                    <button class="btn btn-primary" style="width: 100%; margin-top: 12px;">Ver Vídeo Completo</button>
                 </div>
             </div>
         </div>
@@ -1246,16 +1307,18 @@
             if (sectionId === 'dicas') {
                 tabs[0].classList.add('active');
                 navItems[0].classList.add('active');
-            } else if (sectionId === 'lojas') {
+            } else if (sectionId === 'mobilidade') {
                 tabs[1].classList.add('active');
+            } else if (sectionId === 'lojas') {
+                tabs[2].classList.add('active');
                 navItems[1].classList.add('active');
             } else if (sectionId === 'trips') {
-                tabs[2].classList.add('active');
+                tabs[3].classList.add('active');
                 navItems[2].classList.add('active');
             } else if (sectionId === 'utilities') {
-                tabs[3].classList.add('active');
-            } else if (sectionId === 'comunidade') {
                 tabs[4].classList.add('active');
+            } else if (sectionId === 'comunidade') {
+                tabs[5].classList.add('active');
                 navItems[3].classList.add('active');
             }
             
