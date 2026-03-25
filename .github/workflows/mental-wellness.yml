@@ -1,0 +1,188 @@
+name: Mental Wellness Daily Tips
+
+on:
+  schedule:
+    # Run daily at 7 AM BRT (UTC-3) = 10:00 UTC
+    - cron: '0 10 * * *'
+  workflow_dispatch:
+  repository_dispatch:
+    types: [daily_tips]
+
+jobs:
+  send-tip:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          
+      - name: Create mental wellness script
+        run: |
+          cat > mental_tips.py << 'EOF'
+import os
+import random
+from datetime import datetime, timedelta
+
+# Daily tips for surfers - combat fear and anxiety
+TIPS = [
+    {
+        "category": "🧠 Mindfulness",
+        "title": "Respira fundo",
+        "content": "Quando sentir medo, faça 3 respirações profundas. Inspira por 4s, segura por 4s, expira por 6s. Isso ativa o sistema nervoso parassimpático e te acalma.",
+        "time": "Antes de entrar na água"
+    },
+    {
+        "category": "🌊 Surf Mental",
+        "title": "Uma onda de cada vez",
+        "content": "Não pense em todas as ondas que vai pegar. Foque apenas na próxima. Quando ela passar, pense na seguinte. O presente é seu aliado.",
+        "time": "Durante o surf"
+    },
+    {
+        "category": "💪 Confiança",
+        "title": "Lembra das ondas que você pegou",
+        "content": "Antes de surfar, lembre-se de 3 ondas que você conseguiu pegar bem. Você sabe surfar. A confiança vem da prática.",
+        "time": "Antes de entrar na água"
+    },
+    {
+        "category": "😰 Ansiedade",
+        "title": "Olha o horizonte",
+        "content": "Quando a ansiedade subir, olhe para o horizonte. A vista larga ajuda o cérebro a processar更多信息 e reduz a sensação de pressão.",
+        "time": "Na água"
+    },
+    {
+        "category": "🧘 Meditação",
+        "title": "5 minutos de paz",
+        "content": "Senta na areia antes de surfar. Fecha os olhos. Imagina as ondas vindo suavemente. Sente o som do mar. Esses 5 minutos preparam sua mente.",
+        "time": "Antes de surfar"
+    },
+    {
+        "category": "🌅 Motivação",
+        "title": "Novo dia, novas ondas",
+        "content": "Cada sessão é uma chance de recomeçar. O que aconteceu ontem não define hoje. Você está aqui, você quer evoluir - isso é o que importa.",
+        "time": "Manhã"
+    },
+    {
+        "category": "🧠 Mindfulness",
+        "title": "Corpo presente",
+        "content": "Sente os pés na prancha. Sente a água. Sente o vento. Quando a mente divagar, traga a atenção para o corpo. Estar presente reduz a ansiedade.",
+        "time": "Durante o surf"
+    },
+    {
+        "category": "🌊 Surf Mental",
+        "title": "Aceitar o medo",
+        "content": "O medo é normal e saudável. Significa que você se importa. Não lute contra ele, aceite e use como combustível para evoluir.",
+        "time": "Geral"
+    },
+    {
+        "category": "💪 Confiança",
+        "title": "Progresso não perfeição",
+        "content": "Você não precisa ser perfeita. Cada sessão de surf é evolução. Manobra pequena ou grande, 波 grande ou pequena - todas contam!",
+        "time": "Geral"
+    },
+    {
+        "category": "😰 Ansiedade",
+        "title": "Desligue o julgamento",
+        "content": "Na água, não julue. Não pense 'eu deveria ter pego essa onda' ou 'essa manobra foi feia'. Apenas surf. Sem julgamento.",
+        "time": "Durante o surf"
+    },
+    {
+        "category": "🧘 Meditação",
+        "title": "Visualização positiva",
+        "content": "Antes de entrar na água, visualize você surfando bem. Veja as ondas, sinta o movimento, sinta a alegria. Sua mente acredita no que você visualiza.",
+        "time": "Antes de surfar"
+    },
+    {
+        "category": "🌅 Motivação",
+        "title": "Você é uma surfista",
+        "content": "Você coragem de entrar no mar. Você enfrenta ondas. Você é mais forte do que pensa. Confie no seu poder!",
+        "time": "Manhã"
+    },
+    {
+        "category": "🧠 Mindfulness",
+        "title": "Gratidão pelo mar",
+        "content": "Antes de surfar, agradeça ao mar pela oportunidade de estar ali. A gratidão transforma a relação com a água e traz paz.",
+        "time": "Antes de surfar"
+    },
+    {
+        "category": "🌊 Surf Mental",
+        "title": "Fluir com a onda",
+        "content": "Não lute contra a onda. Quando ela te carregar, relaxa e fluí com ela. O surf é sobre parceria com a natureza, não resistência.",
+        "time": "Durante o surf"
+    }
+]
+
+def get_daily_tip():
+    """Get a tip based on the day of year"""
+    day_of_year = datetime.now().timetuple().tm_yday
+    tip_index = day_of_year % len(TIPS)
+    return TIPS[tip_index]
+
+def generate_html(tip):
+    """Generate HTML card for the tip"""
+    return f'''
+    <div class="mental-tip" style="background: linear-gradient(135deg, #9B59B6 0%, #8E44AD 100%); padding: 20px; margin: 20px; border-radius: 16px; color: white;">
+        <p style="font-size: 12px; opacity: 0.9;">{tip['category']}</p>
+        <h3 style="margin: 8px 0;">{tip['title']}</h3>
+        <p style="font-size: 14px; line-height: 1.6;">{tip['content']}</p>
+        <p style="font-size: 11px; opacity: 0.8; margin-top: 12px;">⏰ {tip['time']}</p>
+    </div>
+    '''
+
+def main():
+    tip = get_daily_tip()
+    today = datetime.now().strftime('%Y-%m-%d')
+    
+    print("🧠 Mental Wellness Daily Tip")
+    print(f"📅 {today}")
+    print(f"\n{ tip['category'] }")
+    print(f"📝 {tip['title']}")
+    print(f"💬 {tip['content']}")
+    print(f"⏰ {tip['time']}")
+    
+    # Create tip for today
+    html = generate_html(tip)
+    with open('docs/daily-tip.html', 'w') as f:
+        f.write(html)
+    
+    print("\n✅ Daily tip saved!")
+    
+if __name__ == "__main__":
+    main()
+EOF
+          python mental_tips.py
+          
+      - name: Commit daily tip
+        run: |
+          git config --global user.name "ASF Bot"
+          git config --global user.email "bot@asf-app.com"
+          
+          # Check if there are changes
+          if git diff --quiet -- docs/daily-tip.html; then
+            echo "No changes - same tip for today"
+          else
+            git add docs/daily-tip.html
+            git commit -m "Daily mental wellness tip - $(date +%Y-%m-%d)"
+            git push
+            echo "✅ Daily tip updated and pushed"
+          fi
+
+  notify:
+    needs: send-tip
+    runs-on: ubuntu-latest
+    if: always()
+    
+    steps:
+      - name: Status
+        run: |
+          STATUS="${{ needs.send-tip.result }}"
+          if [ "$STATUS" == "success" ]; then
+            echo "✅ Mental wellness tip sent successfully"
+          else
+            echo "⚠️ Status: $STATUS"
+          fi
