@@ -4,284 +4,570 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ASF - Associação de Surf Feminino</title>
+    <meta name="description" content="ASF - Conectando mulheres surfistas. Dicas, comunidade e muito mais!">
+    <meta name="theme-color" content="#00A8CC">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        
         :root {
             --primary: #00A8CC;
+            --primary-light: #4DC8E0;
             --primary-dark: #0088A8;
             --secondary: #0E2439;
+            --secondary-light: #1A3A5C;
             --accent: #F4D03F;
+            --accent-light: #F7DC6F;
             --success: #2ECC71;
             --purple: #9B59B6;
-            --light: #F8F9FA;
+            --coral: #FF6B6B;
             --white: #FFFFFF;
-            --gray: #999;
+            --light: #F8F9FA;
+            --gray-100: #F0F2F5;
+            --gray-200: #E4E6E9;
+            --gray-400: #9A9A9A;
+            --gray-600: #666666;
+            --shadow-sm: 0 2px 8px rgba(0,0,0,0.06);
+            --shadow-md: 0 4px 20px rgba(0,0,0,0.08);
+            --shadow-lg: 0 8px 40px rgba(0,0,0,0.12);
+            --radius-sm: 8px;
+            --radius-md: 16px;
+            --radius-lg: 24px;
+            --radius-xl: 32px;
         }
 
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            font-family: 'Outfit', sans-serif;
             background: var(--light);
-            padding-bottom: 70px;
+            color: var(--secondary);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Animated Background */
+        .bg-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .bg-animation::before {
+            content: '';
+            position: absolute;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(0,168,204,0.15) 0%, transparent 70%);
+            top: -200px;
+            right: -200px;
+            animation: float 20s ease-in-out infinite;
+        }
+
+        .bg-animation::after {
+            content: '';
+            position: absolute;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(244,208,63,0.1) 0%, transparent 70%);
+            bottom: -100px;
+            left: -100px;
+            animation: float 15s ease-in-out infinite reverse;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            50% { transform: translate(30px, 30px) rotate(10deg); }
         }
 
         /* Header */
-        .app-header {
-            background: linear-gradient(135deg, var(--secondary) 0%, var(--primary) 100%);
-            padding: 20px;
-            color: var(--white);
+        header {
+            background: linear-gradient(135deg, var(--secondary) 0%, var(--secondary-light) 100%);
+            padding: 20px 24px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(20px);
         }
 
         .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
 
-        .app-title {
-            font-size: 28px;
-            font-weight: bold;
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
         }
 
-        .user-avatar {
-            width: 40px;
-            height: 40px;
-            background: var(--accent);
-            border-radius: 50%;
+        .logo-icon {
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+            border-radius: var(--radius-md);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-weight: bold;
-            color: var(--secondary);
-            cursor: pointer;
-        }
-
-        /* Welcome Banner */
-        .welcome-banner {
-            background: var(--white);
-            padding: 15px 20px;
-            border-radius: 15px;
-            margin: 15px 20px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-        }
-
-        .welcome-banner h2 {
-            color: var(--secondary);
-            font-size: 18px;
-            margin-bottom: 5px;
-        }
-
-        .welcome-banner p {
-            color: var(--gray);
-            font-size: 14px;
-        }
-
-        /* Quick Actions */
-        .quick-actions {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 10px;
-            padding: 0 20px;
-            margin-bottom: 20px;
-        }
-
-        .action-btn {
-            background: var(--white);
-            border: none;
-            border-radius: 15px;
-            padding: 15px 10px;
-            text-align: center;
-            cursor: pointer;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-            transition: transform 0.2s;
-        }
-
-        .action-btn:active {
-            transform: scale(0.95);
-        }
-
-        .action-btn .icon {
             font-size: 24px;
-            display: block;
-            margin-bottom: 5px;
+            box-shadow: var(--shadow-md);
         }
 
-        .action-btn .label {
-            font-size: 12px;
-            color: var(--secondary);
+        .logo-text {
+            color: var(--white);
+            font-size: 24px;
+            font-weight: 700;
+            letter-spacing: -0.5px;
         }
 
-        /* Section Titles */
-        .section-title {
-            padding: 0 20px;
-            margin: 20px 0 15px;
+        .logo-text span {
+            color: var(--primary-light);
+        }
+
+        .header-actions {
             display: flex;
-            justify-content: space-between;
+            gap: 12px;
+        }
+
+        .icon-btn {
+            width: 44px;
+            height: 44px;
+            background: rgba(255,255,255,0.1);
+            border: none;
+            border-radius: var(--radius-md);
+            color: var(--white);
+            font-size: 20px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .icon-btn:hover {
+            background: var(--primary);
+            transform: scale(1.05);
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 40px 24px;
+            text-align: center;
+        }
+
+        .hero-badge {
+            display: inline-flex;
             align-items: center;
-        }
-
-        .section-title h3 {
-            color: var(--secondary);
-            font-size: 18px;
-        }
-
-        .section-title a {
+            gap: 8px;
+            background: rgba(0,168,204,0.1);
             color: var(--primary);
+            padding: 8px 16px;
+            border-radius: 50px;
             font-size: 14px;
+            font-weight: 500;
+            margin-bottom: 20px;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+        }
+
+        .hero h1 {
+            font-size: clamp(32px, 8vw, 56px);
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 16px;
+            background: linear-gradient(135deg, var(--secondary) 0%, var(--primary-dark) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero h1 span {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--coral) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            color: var(--gray-600);
+            font-size: 18px;
+            max-width: 500px;
+            margin: 0 auto 24px;
+        }
+
+        .hero-cta {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 14px 28px;
+            border-radius: var(--radius-lg);
+            font-weight: 600;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: none;
             text-decoration: none;
         }
 
-        /* Cards */
-        .card {
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: var(--white);
+            box-shadow: 0 4px 20px rgba(0,168,204,0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(0,168,204,0.4);
+        }
+
+        .btn-secondary {
             background: var(--white);
-            border-radius: 15px;
-            padding: 15px 20px;
-            margin: 0 20px 15px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-        }
-
-        .card-tip {
-            border-left: 4px solid var(--primary);
-        }
-
-        .card-trip {
-            border-left: 4px solid var(--accent);
-        }
-
-        .card-community {
-            border-left: 4px solid var(--purple);
-        }
-
-        .card h4 {
             color: var(--secondary);
-            font-size: 16px;
+            border: 2px solid var(--gray-200);
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+
+        /* Stats */
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+            padding: 0 24px;
+            max-width: 800px;
+            margin: 0 auto 40px;
+        }
+
+        .stat-card {
+            background: var(--white);
+            padding: 20px;
+            border-radius: var(--radius-lg);
+            text-align: center;
+            box-shadow: var(--shadow-sm);
+            transition: all 0.3s;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .stat-icon {
+            font-size: 32px;
             margin-bottom: 8px;
         }
 
-        .card p {
-            color: #666;
-            font-size: 14px;
-            line-height: 1.5;
+        .stat-value {
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--secondary);
         }
 
-        .card .meta {
-            font-size: 12px;
-            color: var(--gray);
-            margin-top: 10px;
+        .stat-label {
+            font-size: 13px;
+            color: var(--gray-400);
         }
 
-        .tag {
+        /* Navigation Tabs */
+        .tabs {
+            display: flex;
+            gap: 8px;
+            padding: 0 24px;
+            max-width: 1200px;
+            margin: 0 auto;
+            overflow-x: auto;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+        }
+
+        .tabs::-webkit-scrollbar {
+            display: none;
+        }
+
+        .tab {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 20px;
+            background: var(--white);
+            border: none;
+            border-radius: var(--radius-lg);
+            font-weight: 500;
+            color: var(--gray-600);
+            cursor: pointer;
+            white-space: nowrap;
+            transition: all 0.3s;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .tab.active {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: var(--white);
+            box-shadow: var(--shadow-md);
+        }
+
+        .tab:hover:not(.active) {
+            color: var(--primary);
+            transform: translateY(-2px);
+        }
+
+        .tab-icon {
+            font-size: 18px;
+        }
+
+        /* Content Sections */
+        .content {
+            padding: 24px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section {
+            display: none;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .section.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .section-title {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--secondary);
+        }
+
+        .see-all {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        /* Cards Grid */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .card {
+            background: var(--white);
+            border-radius: var(--radius-lg);
+            padding: 24px;
+            box-shadow: var(--shadow-sm);
+            transition: all 0.3s;
+            border: 1px solid transparent;
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--primary-light);
+        }
+
+        .card-tag {
             display: inline-block;
-            padding: 4px 10px;
-            background: var(--light);
-            color: var(--secondary);
-            border-radius: 12px;
-            font-size: 11px;
-            margin-right: 5px;
-            margin-top: 10px;
-        }
-
-        .tag.primary {
-            background: var(--primary);
-            color: var(--white);
-        }
-
-        .tag.success {
-            background: var(--success);
-            color: var(--white);
-        }
-
-        /* Trip Card */
-        .trip-date {
-            background: var(--accent);
-            color: var(--secondary);
-            padding: 5px 10px;
-            border-radius: 8px;
+            padding: 6px 12px;
+            background: rgba(0,168,204,0.1);
+            color: var(--primary);
+            border-radius: 50px;
             font-size: 12px;
             font-weight: 600;
-            display: inline-block;
-            margin-bottom: 10px;
+            margin-bottom: 12px;
+        }
+
+        .card-tag.green {
+            background: rgba(46,204,113,0.1);
+            color: var(--success);
+        }
+
+        .card-tag.purple {
+            background: rgba(155,89,182,0.1);
+            color: var(--purple);
+        }
+
+        .card-tag.accent {
+            background: rgba(244,208,63,0.2);
+            color: #C9A800;
+        }
+
+        .card h3 {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: var(--secondary);
+        }
+
+        .card p {
+            color: var(--gray-600);
+            font-size: 14px;
+            line-height: 1.6;
+            margin-bottom: 16px;
+        }
+
+        .card-meta {
+            display: flex;
+            gap: 16px;
+            font-size: 13px;
+            color: var(--gray-400);
+        }
+
+        .card-meta span {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        /* Trip Card Special */
+        .trip-card {
+            border-left: 4px solid var(--accent);
+        }
+
+        .trip-date {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: var(--accent);
+            color: var(--secondary);
+            padding: 6px 12px;
+            border-radius: var(--radius-sm);
+            font-size: 13px;
+            font-weight: 600;
+            margin-bottom: 12px;
         }
 
         .trip-details {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 8px;
-            margin-top: 10px;
+            margin: 16px 0;
         }
 
         .trip-detail {
+            display: flex;
+            align-items: center;
+            gap: 6px;
             font-size: 13px;
-            color: #666;
+            color: var(--gray-600);
         }
 
-        .trip-detail span {
-            font-weight: 600;
+        .trip-detail strong {
             color: var(--secondary);
         }
 
         .trip-price {
-            font-size: 20px;
+            font-size: 24px;
+            font-weight: 700;
             color: var(--success);
-            font-weight: bold;
-            margin-top: 10px;
         }
 
         .trip-price .original {
-            font-size: 14px;
-            color: var(--gray);
+            font-size: 16px;
+            color: var(--gray-400);
             text-decoration: line-through;
-            margin-left: 10px;
+            margin-left: 8px;
         }
 
-        /* Community Post */
+        /* Community Posts */
+        .post {
+            background: var(--white);
+            border-radius: var(--radius-lg);
+            padding: 20px;
+            margin-bottom: 16px;
+            box-shadow: var(--shadow-sm);
+        }
+
         .post-header {
             display: flex;
             align-items: center;
-            gap: 10px;
-            margin-bottom: 10px;
+            gap: 12px;
+            margin-bottom: 12px;
         }
 
         .post-avatar {
-            width: 40px;
-            height: 40px;
-            background: var(--primary);
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--purple) 100%);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             color: var(--white);
-            font-weight: 600;
-            font-size: 14px;
+            font-weight: 700;
+            font-size: 18px;
         }
 
         .post-info h4 {
-            margin: 0;
-            font-size: 14px;
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--secondary);
         }
 
         .post-info .time {
-            font-size: 12px;
-            color: var(--gray);
+            font-size: 13px;
+            color: var(--gray-400);
+        }
+
+        .post-content {
+            color: var(--gray-600);
+            font-size: 15px;
+            line-height: 1.6;
+            margin-bottom: 16px;
         }
 
         .post-actions {
             display: flex;
             gap: 20px;
-            margin-top: 12px;
             padding-top: 12px;
-            border-top: 1px solid #eee;
+            border-top: 1px solid var(--gray-100);
         }
 
         .post-action {
             display: flex;
             align-items: center;
-            gap: 5px;
-            color: var(--gray);
-            font-size: 13px;
+            gap: 6px;
             background: none;
             border: none;
+            color: var(--gray-400);
+            font-size: 14px;
             cursor: pointer;
+            transition: color 0.3s;
+        }
+
+        .post-action:hover {
+            color: var(--primary);
         }
 
         /* Bottom Navigation */
@@ -293,8 +579,8 @@
             background: var(--white);
             display: flex;
             justify-content: space-around;
-            padding: 10px 5px;
-            box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
+            padding: 12px 8px;
+            box-shadow: 0 -4px 20px rgba(0,0,0,0.08);
             z-index: 100;
         }
 
@@ -302,176 +588,392 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 3px;
-            font-size: 10px;
-            color: var(--gray);
-            cursor: pointer;
+            gap: 4px;
+            padding: 8px 16px;
             background: none;
             border: none;
-            padding: 5px 10px;
+            color: var(--gray-400);
+            cursor: pointer;
+            transition: all 0.3s;
         }
 
         .nav-item.active {
             color: var(--primary);
         }
 
+        .nav-item:hover {
+            color: var(--primary);
+        }
+
         .nav-item .icon {
-            font-size: 22px;
+            font-size: 24px;
+        }
+
+        .nav-item .label {
+            font-size: 12px;
+            font-weight: 500;
         }
 
         /* Floating Action Button */
         .fab {
             position: fixed;
-            bottom: 80px;
-            right: 20px;
-            width: 55px;
-            height: 55px;
-            background: var(--primary);
+            bottom: 90px;
+            right: 24px;
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--coral) 0%, var(--primary) 100%);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 24px;
+            font-size: 28px;
             color: var(--white);
-            box-shadow: 0 4px 15px rgba(0,168,204,0.4);
+            box-shadow: var(--shadow-lg);
             cursor: pointer;
             border: none;
             z-index: 99;
+            transition: all 0.3s;
         }
 
-        /* Notification Badge */
-        .badge {
-            position: absolute;
-            top: -5px;
-            right: -5px;
-            background: var(--accent);
-            color: var(--secondary);
-            font-size: 10px;
-            font-weight: bold;
-            width: 18px;
-            height: 18px;
-            border-radius: 50%;
+        .fab:hover {
+            transform: scale(1.1);
+        }
+
+        /* Loading Animation */
+        .loading {
             display: flex;
-            align-items: center;
             justify-content: center;
+            align-items: center;
+            padding: 40px;
+        }
+
+        .spinner {
+            width: 40px;
+            height: 40px;
+            border: 4px solid var(--gray-200);
+            border-top-color: var(--primary);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .hero h1 {
+                font-size: 32px;
+            }
+
+            .cards-grid {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
 <body>
+    <!-- Animated Background -->
+    <div class="bg-animation"></div>
+
     <!-- Header -->
-    <div class="app-header">
+    <header>
         <div class="header-content">
-            <div>
-                <div class="app-title">🏄‍♀️ ASF</div>
-                <div style="font-size: 12px; opacity: 0.8;">Associação de Surf Feminino</div>
+            <div class="logo">
+                <div class="logo-icon">🏄‍♀️</div>
+                <div class="logo-text">ASF</div>
             </div>
-            <div class="user-avatar" onclick="showProfile()">C</div>
-        </div>
-    </div>
-
-    <!-- Welcome Banner -->
-    <div class="welcome-banner">
-        <h2>Olá, Carol! 👋</h2>
-        <p>Pronta para mais uma sessão de surf?</p>
-    </div>
-
-    <!-- Quick Actions -->
-    <div class="quick-actions">
-        <button class="action-btn" onclick="showSection('dicas')">
-            <span class="icon">📚</span>
-            <span class="label">Dicas</span>
-        </button>
-        <button class="action-btn" onclick="showSection('lojas')">
-            <span class="icon">🛒</span>
-            <span class="label">Lojas</span>
-        </button>
-        <button class="action-btn" onclick="showSection('trips')">
-            <span class="icon">🚗</span>
-            <span class="label">Trips</span>
-        </button>
-        <button class="action-btn" onclick="showSection('comunidade')">
-            <span class="icon">💬</span>
-            <span class="label">Chat</span>
-        </button>
-    </div>
-
-    <!-- Dicas em Destaque -->
-    <div class="section-title">
-        <h3>📚 Dicas em Destaque</h3>
-        <a href="#" onclick="showSection('dicas')">Ver todas →</a>
-    </div>
-
-    <div class="card card-tip">
-        <h4>🚀 Como escolher sua primeira prancha</h4>
-        <p>Para iniciantes, pranchas foam entre 7'0" e 8'0" são ideais. São mais largas e facilitam o aprendizado!</p>
-        <span class="tag primary">Iniciante</span>
-        <span class="tag">Prancha</span>
-    </div>
-
-    <div class="card card-tip">
-        <h4>💪 Alongamento para surfistas</h4>
-        <p>Alongue ombros, costas e pernas antes de entrar na água. Isso previne lesões!</p>
-        <span class="tag primary">Saúde</span>
-        <span class="tag">Alongamento</span>
-    </div>
-
-    <!-- Próxima Surftrip -->
-    <div class="section-title">
-        <h3>🚗 Próxima Surftrip</h3>
-        <a href="#" onclick="showSection('trips')">Ver todas →</a>
-    </div>
-
-    <div class="card card-trip">
-        <span class="trip-date">📅 15-17 Abril</span>
-        <h4>Riviera de São Lourenço, Bertioga</h4>
-        <p>Fim de semana de surf com hospedagem e instrutor!</p>
-        <div class="trip-details">
-            <div class="trip-detail"><span>🏨</span> Pousada</div>
-            <div class="trip-detail"><span>🍳</span> Café inclu.</div>
-            <div class="trip-detail"><span>🚐</span> Van</div>
-            <div class="trip-detail"><span>👩‍🏫</span> Instrutor</div>
-        </div>
-        <div class="trip-price">
-            R$ 350 <span class="original">R$ 400</span>
-        </div>
-        <span class="tag success">8 vagas!</span>
-    </div>
-
-    <!-- Comunidade -->
-    <div class="section-title">
-        <h3>👥 Comunidade</h3>
-        <a href="#" onclick="showSection('comunidade')">Ver todos →</a>
-    </div>
-
-    <div class="card card-community">
-        <div class="post-header">
-            <div class="post-avatar">G</div>
-            <div class="post-info">
-                <h4>Grazielle</h4>
-                <span class="time">2 horas atrás</span>
+            <div class="header-actions">
+                <button class="icon-btn">🔔</button>
+                <button class="icon-btn">⚙️</button>
             </div>
         </div>
-        <p>Gurias, aula de sábado confirmada! 7h na praia de Bertioga. Quem vai? 🏄‍♀️</p>
-        <div class="post-actions">
-            <button class="post-action"><span>❤️</span> 12</button>
-            <button class="post-action"><span>💬</span> 5</button>
-            <button class="post-action"><span>🔗</span> Compartilhar</button>
+    </header>
+
+    <!-- Hero -->
+    <section class="hero">
+        <div class="hero-badge">
+            <span>✨</span> Associação de Surf Feminino
+        </div>
+        <h1>Conectando <span>Mulheres Surfistas</span></h1>
+        <p>Dicas, comunidade, surftrips e muito mais. Juntas somos mais fortes!</p>
+        <div class="hero-cta">
+            <button class="btn btn-primary" onclick="showSection('dicas')">
+                📚 Ver Dicas
+            </button>
+            <button class="btn btn-secondary" onclick="showSection('comunidade')">
+                👥 Comunidade
+            </button>
+        </div>
+    </section>
+
+    <!-- Stats -->
+    <div class="stats">
+        <div class="stat-card">
+            <div class="stat-icon">👩‍🏫</div>
+            <div class="stat-value">30+</div>
+            <div class="stat-label">Dicas</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-icon">🛒</div>
+            <div class="stat-value">10+</div>
+            <div class="stat-label">Lojas</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-icon">🚗</div>
+            <div class="stat-value">3</div>
+            <div class="stat-label">Surftrips</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-icon">👥</div>
+            <div class="stat-value">500+</div>
+            <div class="stat-label">Membros</div>
         </div>
     </div>
 
-    <div class="card card-community">
-        <div class="post-header">
-            <div class="post-avatar" style="background: var(--accent);">M</div>
-            <div class="post-info">
-                <h4>Márcia</h4>
-                <span class="time">5 horas atrás</span>
+    <!-- Navigation Tabs -->
+    <div class="tabs">
+        <button class="tab active" onclick="showSection('dicas')">
+            <span class="tab-icon">📚</span> Dicas
+        </button>
+        <button class="tab" onclick="showSection('lojas')">
+            <span class="tab-icon">🛒</span> Lojas
+        </button>
+        <button class="tab" onclick="showSection('trips')">
+            <span class="tab-icon">🚗</span> Surftrips
+        </button>
+        <button class="tab" onclick="showSection('acessorios')">
+            <span class="tab-icon">🏄</span> Acessórios
+        </button>
+        <button class="tab" onclick="showSection('comunidade')">
+            <span class="tab-icon">👥</span> Comunidade
+        </button>
+    </div>
+
+    <!-- Content -->
+    <div class="content">
+        <!-- Dicas Section -->
+        <div class="section active" id="dicas">
+            <div class="section-header">
+                <h2 class="section-title">📚 Dicas de Surf</h2>
+                <a href="#" class="see-all">Ver todas →</a>
+            </div>
+            <div class="cards-grid">
+                <div class="card">
+                    <span class="card-tag">Iniciante</span>
+                    <h3>🛹 Como escolher sua prancha: Longboard vs Foam</h3>
+                    <p><strong>Longboard (9'0" ou mais):</strong> Para quem busca estabilidade, flutuação e ondas menores. Ideal para dias de Onda pequena. Maior largura proporciona mais estabilidade para Paddling. Perfeito para aprender e para quem Prefere um estilo mais clássico e descontraído.</p>
+                    <p style="margin-top: 10px;"><strong>Foam (7'0" - 8'0"):</strong> Para iniciantes, pranchas foam são ideais. São mais largas, mais grossas e mais fáceis de aprender. Recomendadas para as primeiras aulas.</p>
+                    <div class="card-meta">
+                        <span>⏱️ 5 min</span>
+                        <span>📊 Iniciante</span>
+                    </div>
+                </div>
+                <div class="card">
+                    <span class="card-tag purple">Saúde</span>
+                    <h3>💪 Alongamento para surfistas</h3>
+                    <p>Alongue ombros, costas e pernas antes de entrar na água. Isso previne lesões!</p>
+                    <div class="card-meta">
+                        <span>⏱️ 10 min</span>
+                        <span>📊 Todos</span>
+                    </div>
+                </div>
+                <div class="card">
+                    <span class="card-tag green">Nutrição</span>
+                    <h3>🥗 O que comer antes de surfar</h3>
+                    <p>Prefira alimentos leves e ricos em carboidratos: frutas, barras de cereal, pão integral.</p>
+                    <div class="card-meta">
+                        <span>⏱️ 3 min</span>
+                        <span>📊 Todos</span>
+                    </div>
+                </div>
+                <div class="card">
+                    <span class="card-tag">Técnica</span>
+                    <h3>🏄‍♀️ Como fazer o paddling correto</h3>
+                    <p>Mantém o corpo reto, cabeça alinhada com a coluna. Usa braços longos para maximizar a eficiência.</p>
+                    <div class="card-meta">
+                        <span>⏱️ 8 min</span>
+                        <span>📊 Intermediário</span>
+                    </div>
+                </div>
+                <div class="card">
+                    <span class="card-tag accent">Mental</span>
+                    <h3>🧠 Como lidar com o medo</h3>
+                    <p>O medo é normal. Respira fundo, foca no momento presente. A prática reduz o medo!</p>
+                    <div class="card-meta">
+                        <span>⏱️ 5 min</span>
+                        <span>📊 Todos</span>
+                    </div>
+                </div>
             </div>
         </div>
-        <p>Consegui desconto em lycras! Quem quiser, me chama no direct! 💙</p>
-        <div class="post-actions">
-            <button class="post-action"><span>❤️</span> 8</button>
-            <button class="post-action"><span>💬</span> 3</button>
-            <button class="post-action"><span>🔗</span> Compartilhar</button>
+
+        <!-- Lojas Section -->
+        <div class="section" id="lojas">
+            <div class="section-header">
+                <h2 class="section-title">🛒 Lojas Parceiras</h2>
+                <a href="#" class="see-all">Ver todas →</a>
+            </div>
+            <div class="cards-grid">
+                <div class="card">
+                    <span class="card-tag green">10% OFF</span>
+                    <h3>🏪 Surf World Bertioga</h3>
+                    <p>Rua das Ondas, 123 - Centro, Bertioga</p>
+                    <div class="card-meta">
+                        <span>📍 Bertioga</span>
+                        <span>🛹 Pranchas</span>
+                    </div>
+                </div>
+                <div class="card">
+                    <span class="card-tag green">15% OFF</span>
+                    <h3>🛒 Mar e Sol Surf Shop</h3>
+                    <p>Av. Paulista, 500 - São Paulo</p>
+                    <div class="card-meta">
+                        <span>📍 São Paulo</span>
+                        <span>👕 Roupas</span>
+                    </div>
+                </div>
+                <div class="card">
+                    <span class="card-tag green">10% OFF</span>
+                    <h3>🏝️ Praia Surf</h3>
+                    <p>Rua do Mar, 45 - Guarujá</p>
+                    <div class="card-meta">
+                        <span>📍 Guarujá</span>
+                        <span>🛹 Especializada</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Trips Section -->
+        <div class="section" id="trips">
+            <div class="section-header">
+                <h2 class="section-title">🚗 Próximas Surftrips</h2>
+                <a href="#" class="see-all">Ver todas →</a>
+            </div>
+            <div class="cards-grid">
+                <div class="card trip-card">
+                    <span class="trip-date">📅 15-17 Abril</span>
+                    <h3>Riviera de São Lourenço, Bertioga</h3>
+                    <p>Fim de semana de surf com hospedagem e instrutor!</p>
+                    <div class="trip-details">
+                        <div class="trip-detail"><span>🏨</span> <strong>Pousada</strong></div>
+                        <div class="trip-detail"><span>🍳</span> <strong>Café inclu.</strong></div>
+                        <div class="trip-detail"><span>🚐</span> <strong>Van</strong></div>
+                        <div class="trip-detail"><span>👩‍🏫</span> <strong>Instrutor</strong></div>
+                    </div>
+                    <div class="trip-price">
+                        R$ 350 <span class="original">R$ 400</span>
+                    </div>
+                    <button class="btn btn-primary" style="width: 100%; margin-top: 16px;">Inscrever-se</button>
+                </div>
+                <div class="card trip-card">
+                    <span class="trip-date">📅 01-04 Maio</span>
+                    <h3>Feriadão em Ubatuba</h3>
+                    <p>4 dias de muito surf na região mais波</p>
+                    <div class="trip-details">
+                        <div class="trip-detail"><span>🏨</span> <strong>Pousada</strong></div>
+                        <div class="trip-detail"><span>🍳</span> <strong>Meia pensão</strong></div>
+                        <div class="trip-detail"><span>🚐</span> <strong>Van</strong></div>
+                        <div class="trip-detail"><span>👩‍🏫</span> <strong>Instrutor</strong></div>
+                    </div>
+                    <div class="trip-price">
+                        R$ 800 <span class="original">R$ 900</span>
+                    </div>
+                    <button class="btn btn-primary" style="width: 100%; margin-top: 16px;">Inscrever-se</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Acessórios Section -->
+        <div class="section" id="acessorios">
+            <div class="section-header">
+                <h2 class="section-title">🏄 Acessórios</h2>
+                <a href="#" class="see-all">Ver todos →</a>
+            </div>
+            <div class="cards-grid">
+                <div class="card">
+                    <span class="card-tag">Pranchas</span>
+                    <h3>🛹 Prancha Funboard 7'0"</h3>
+                    <p>Ideal para iniciantes e intermediários. Muito estável.</p>
+                    <button class="btn btn-secondary" style="width: 100%; margin-top: 12px;">Ver Preços</button>
+                </div>
+                <div class="card">
+                    <span class="card-tag">Acessórios</span>
+                    <h3>🪝 Leash Profissional</h3>
+                    <p>Leash resistente e durável. Importado.</p>
+                    <button class="btn btn-secondary" style="width: 100%; margin-top: 12px;">Ver Preços</button>
+                </div>
+                <div class="card">
+                    <span class="card-tag">Vestuário</span>
+                    <h3>🧥 Lycra UV Protection</h3>
+                    <p>Proteção solar + conforto. Vários cores.</p>
+                    <button class="btn btn-secondary" style="width: 100%; margin-top: 12px;">Ver Preços</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Comunidade Section -->
+        <div class="section" id="comunidade">
+            <div class="section-header">
+                <h2 class="section-title">👥 Comunidade</h2>
+                <a href="#" class="see-all">Ver todos →</a>
+            </div>
+            <div class="post">
+                <div class="post-header">
+                    <div class="post-avatar">C</div>
+                    <div class="post-info">
+                        <h4>Carol</h4>
+                        <span class="time">2 horas atrás</span>
+                    </div>
+                </div>
+                <div class="post-content">
+                    Gurias, aula de sábado confirmada! 7h na praia de Bertioga. Quem vai? 🏄‍♀️
+                </div>
+                <div class="post-actions">
+                    <button class="post-action"><span>❤️</span> 12</button>
+                    <button class="post-action"><span>💬</span> 5</button>
+                    <button class="post-action"><span>🔗</span> Compartilhar</button>
+                </div>
+            </div>
+            <div class="post">
+                <div class="post-header">
+                    <div class="post-avatar" style="background: linear-gradient(135deg, var(--accent) 0%, var(--coral) 100%);">G</div>
+                    <div class="post-info">
+                        <h4>Grazielle</h4>
+                        <span class="time">5 horas atrás</span>
+                    </div>
+                </div>
+                <div class="post-content">
+                    Alguém quer pegar uma onda domingo? Estou pensando em ir pra praia!
+                </div>
+                <div class="post-actions">
+                    <button class="post-action"><span>❤️</span> 8</button>
+                    <button class="post-action"><span>💬</span> 3</button>
+                    <button class="post-action"><span>🔗</span> Compartilhar</button>
+                </div>
+            </div>
+            <div class="post">
+                <div class="post-header">
+                    <div class="post-avatar" style="background: linear-gradient(135deg, var(--purple) 0%, var(--coral) 100%);">M</div>
+                    <div class="post-info">
+                        <h4>Márcia</h4>
+                        <span class="time">1 dia atrás</span>
+                    </div>
+                </div>
+                <div class="post-content">
+                    Consegui desconto em lycras! Quem quiser, me chama no direct! 💙
+                </div>
+                <div class="post-actions">
+                    <button class="post-action"><span>❤️</span> 15</button>
+                    <button class="post-action"><span>💬</span> 7</button>
+                    <button class="post-action"><span>🔗</span> Compartilhar</button>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -480,36 +982,58 @@
 
     <!-- Bottom Navigation -->
     <div class="bottom-nav">
-        <button class="nav-item active" onclick="showSection('home')">
-            <span class="icon">🏠</span>
-            <span>Início</span>
-        </button>
-        <button class="nav-item" onclick="showSection('dicas')">
+        <button class="nav-item active" onclick="showSection('dicas')">
             <span class="icon">📚</span>
-            <span>Dicas</span>
+            <span class="label">Dicas</span>
         </button>
-        <button class="nav-item" onclick="showSection('trips')" style="position: relative;">
+        <button class="nav-item" onclick="showSection('lojas')">
+            <span class="icon">🛒</span>
+            <span class="label">Lojas</span>
+        </button>
+        <button class="nav-item" onclick="showSection('trips')">
             <span class="icon">🚗</span>
-            <span>Trips</span>
-            <span class="badge">1</span>
+            <span class="label">Trips</span>
         </button>
         <button class="nav-item" onclick="showSection('comunidade')">
             <span class="icon">👥</span>
-            <span>Perfil</span>
+            <span class="label">Perfil</span>
         </button>
     </div>
 
     <script>
-        function showSection(section) {
-            alert('Navegando para: ' + section + '\n\n(Em desenvolvimento completo!)');
-        }
-
-        function showProfile() {
-            alert('Perfil do usuário\n\n(Em desenvolvimento!)');
+        function showSection(sectionId) {
+            // Hide all sections
+            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+            document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+            document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+            
+            // Show selected section
+            document.getElementById(sectionId).classList.add('active');
+            
+            // Update tabs
+            const tabs = document.querySelectorAll('.tab');
+            const navItems = document.querySelectorAll('.nav-item');
+            
+            if (sectionId === 'dicas') {
+                tabs[0].classList.add('active');
+                navItems[0].classList.add('active');
+            } else if (sectionId === 'lojas') {
+                tabs[1].classList.add('active');
+                navItems[1].classList.add('active');
+            } else if (sectionId === 'trips') {
+                tabs[2].classList.add('active');
+                navItems[2].classList.add('active');
+            } else if (sectionId === 'comunidade') {
+                tabs[4].classList.add('active');
+                navItems[3].classList.add('active');
+            }
+            
+            // Scroll to top
+            window.scrollTo(0, 0);
         }
 
         function createPost() {
-            alert('Criar nova publicação\n\n(Em desenvolvimento!)');
+            alert('Funcionalidade em desenvolvimento! 🚀');
         }
     </script>
 </body>
