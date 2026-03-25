@@ -1782,10 +1782,174 @@
             <div class="cards-grid">
                 <div class="card">
                     <span class="card-tag green">+50 PONTOS</span>
-                    <h3>🌊 Quiz: Tipos de Onda</h3>
-                    <p>Teste seus conhecimentos sobre tipos de ondas e seus nomes.</p>
+                    <h3>🌊 Quiz: Básico do Surf</h3>
+                    <p>Teste seus conhecimentos sobre o universo do surf!</p>
                     <p style="margin-top: 8px; font-size: 12px; color: var(--gray-400);">10 perguntas • 5 min</p>
-                    <button class="btn btn-primary" style="width: 100%; margin-top: 12px;">Responder Quiz</button>
+                    <button class="btn btn-primary" style="width: 100%; margin-top: 12px;" onclick="startQuiz('basico')">Responder Quiz</button>
+                    <!-- Quiz Content (hidden by default) -->
+                    <div id="quiz-basico" style="display:none; margin-top: 15px; padding: 15px; background: var(--light); border-radius: 12px;">
+                        <div class="quiz-question" data-question="1">
+                            <p style="font-weight: 600; margin-bottom: 10px;">1. O que é o leash?</p>
+                            <label style="display: block; padding: 8px; background: white; border-radius: 8px; margin: 5px 0; cursor: pointer;">
+                                <input type="radio" name="q1" value="a"> A) Corda para prender a prancha na perna do surfista
+                            </label>
+                            <label style="display: block; padding: 8px; background: white; border-radius: 8px; margin: 5px 0; cursor: pointer;">
+                                <input type="radio" name="q1" value="b"> B) Uma vela de surf
+                            </label>
+                            <label style="display: block; padding: 8px; background: white; border-radius: 8px; margin: 5px 0; cursor: pointer;">
+                                <input type="radio" name="q1" value="c"> C) Tipo de onda
+                            </label>
+                            <label style="display: block; padding: 8px; background: white; border-radius: 8px; margin: 5px 0; cursor: pointer;">
+                                <input type="radio" name="q1" value="d"> D) Shape da prancha
+                            </label>
+                            <p style="font-size: 11px; color: var(--gray-400); margin-top: 8px;">✅ <strong>Resposta correta: A)</strong> O leash é a corda que prende a prancha ao tornozelo do surfista.</p>
+                        </div>
+                        <div class="quiz-question" data-question="2" style="margin-top: 20px;">
+                            <p style="font-weight: 600; margin-bottom: 10px;">2. Para que serve a parafina (wax)?</p>
+                            <label style="display: block; padding: 8px; background: white; border-radius: 8px; margin: 5px 0; cursor: pointer;">
+                                <input type="radio" name="q2" value="a"> A) Para criar aderência (grip) na prancha
+                            </label>
+                            <label style="display: block; padding: 8px; background: white; border-radius: 8px; margin: 5px 0; cursor: pointer;">
+                                <input type="radio" name="q2" value="b"> B) Para impermeabilizar a prancha
+                            </label>
+                            <label style="display: block; padding: 8px; background: white; border-radius: 8px; margin: 5px 0; cursor: pointer;">
+                                <input type="radio" name="q2" value="c"> C) Para decorative a prancha
+                            </label>
+                            <label style="display: block; padding: 8px; background: white; border-radius: 8px; margin: 5px 0; cursor: pointer;">
+                                <input type="radio" name="q2" value="d"> D) Paraellar a prancha
+                            </label>
+                            <p style="font-size: 11px; color: var(--gray-400); margin-top: 8px;">✅ <strong>Resposta correta: A)</strong> A parafina cria textura na prancha para os pés não escorregarem.</p>
+                        </div>
+                        <div class="quiz-question" data-question="3" style="margin-top: 20px;">
+                            <p style="font-weight: 600; margin-bottom: 10px;">3. Quais são os equipamentos básicos para surfar?</p>
+                            <label style="display: block; padding: 8px; background: white; border-radius: 8px; margin: 5px 0; cursor: pointer;">
+                                <input type="radio" name="q3" value="a"> A) Apenas uma prancha
+                            </label>
+                            <label style="display: block; padding: 8px; background: white; border-radius: 8px; margin: 5px 0; cursor: pointer;">
+                                <input type="radio" name="q3" value="b"> B) Prancha, leash e parafina
+                            </label>
+                            <label style="display: block; padding: 8px; background: white; border-radius: 8px; margin: 5px 0; cursor: pointer;">
+                                <input type="radio" name="q3" value="c"> C) Prancha e snorkel
+                            </label>
+                            <label style="display: block; padding: 8px; background: white; border-radius: 8px; margin: 5px 0; cursor: pointer;">
+                                <input type="radio" name="q3" value="d"> D) Apenas um shorts
+                            </label>
+                            <p style="font-size: 11px; color: var(--gray-400); margin-top: 8px;">✅ <strong>Resposta correta: B)</strong> Os 3 equipamentos básicos são: prancha, leash e parafina (wax).</p>
+                        </div>
+                        <div class="quiz-question" data-question="4" style="margin-top: 20px;">
+                            <p style="font-weight: 600; margin-bottom: 10px;">4. O que é o "stringer" da prancha?</p>
+                            <label style="display: block; padding: 8px; background: white; border-radius: 8px; margin: 5px 0; cursor: pointer;">
+                                <input type="radio" name="q4" value="a"> A) O eixo central de madeira que da resistência
+                            </label>
+                            <label style="display: block; padding: 8px; background: white; border-radius: 8px; margin: 5px 0; cursor: pointer;">
+                                <input type="radio" name="q4" value="b"> B) O nome da quilha
+                            </label>
+                            <label style="display: block; padding: 8px; background: white; border-radius: 8px; margin: 5px 0; cursor: pointer;">
+                                <input type="radio" name="q4" value="c"> C) Uma Técnica de surf
+                            </label>
+                            <label style="display: block; padding: 8px; background: white; border-radius: 8px; margin: 5px 0; cursor: pointer;">
+                                <input type="radio" name="q4" value="d"> D) O shape da prancha
+                            </label>
+                            <p style="font-size: 11px; color: var(--gray-400); margin-top: 8px;">✅ <strong>Resposta correta: A)</strong> O stringer é uma haste de madeira no centro da prancha que da estrutura.</p>
+                        </div>
+                        <div class="quiz-question" data-question="5" style="margin-top: 20px;">
+                            <p style="font-weight: 600; margin-bottom: 10px;">5. O que significa "paddling"?</p>
+                            <label style="display: block; padding: 8px; background: white; border-radius: 8px; margin: 5px 0; cursor: pointer;">
+                                <input type="radio" name="q5" value="a"> A) Remar para pegar a onda
+                            </label>
+                            <label style="display: block; padding: 8px; background: white; border-radius: 8px; margin: 5px 0; cursor: pointer;">
+                                <input type="radio" name="q5" value="b"> B) Fazer uma manobra
+                            </label>
+                            <label style="display: block; padding: 8px; background: white; border-radius: 8px; margin: 5px 0; cursor: pointer;">
+                                <input type="radio" name="q5" value="c"> C) Saltar da prancha
+                            </label>
+                            <label style="display: block; padding: 8px; background: white; border-radius: 8px; margin: 5px 0; cursor: pointer;">
+                                <input type="radio" name="q5" value="d"> D) Nadar no mar
+                            </label>
+                            <p style="font-size: 11px; color: var(--gray-400); margin-top: 8px;">✅ <strong>Resposta correta: A)</strong> Paddling é a remada para posicionar a prancha e pegar a onda.</p>
+                        </div>
+                        <div class="quiz-question" data-question="6" style="margin-top: 20px;">
+                            <p style="font-weight: 600; margin-bottom: 10px;">6. O que é "pop up"?</p>
+                            <label style="display: block; padding: 8px; background: white; border-radius: 8px; margin: 5px 0; cursor: pointer;">
+                                <input type="radio" name="q6" value="a"> A) O movimento de levantar na prancha
+                            </label>
+                            <label style="display: block; padding: 8px; background: white; border-radius: 8px; margin: 5px 0; cursor: pointer;">
+                                <input type="radio" name="q6" value="b"> B) Um tipo de onda
+                            </label>
+                            <label style="display: block; padding: 8px; background: white; border-radius: 8px; margin: 5px 0; cursor: pointer;">
+                                <input type="radio" name="q6" value="c"> C) Uma prancha de surf
+                            </label>
+                            <label style="display: block; padding: 8px; background: white; border-radius: 8px; margin: 5px 0; cursor: pointer;">
+                                <input type="radio" name="q6" value="d"> D) O leash da prancha
+                            </label>
+                            <p style="font-size: 11px; color: var(--gray-400); margin-top: 8px;">✅ <strong>Resposta correta: A)</strong> Pop up é o movimento de passar deitado para em pé na prancha.</p>
+                        </div>
+                        <div class="quiz-question" data-question="7" style="margin-top: 20px;">
+                            <p style="font-weight: 600; margin-bottom: 10px;">7. O que significa "drop" no surf?</p>
+                            <label style="display: block; padding: 8px; background: white; border-radius: 8px; margin: 5px 0; cursor: pointer;">
+                                <input type="radio" name="q7" value="a"> A) A descida na face da onda
+                            </label>
+                            <label style="display: block; padding: 8px; background: white; border-radius: 8px; margin: 5px 0; cursor: pointer;">
+                                <input type="radio" name="q7" value="b"> B) Cair da prancha
+                            </label>
+                            <label style="display: block; padding: 8px; background: white; border-radius: 8px; margin: 5px 0; cursor: pointer;">
+                                <input type="radio" name="q7" value="c"> C) Um tipo de prancha
+                            </label>
+                            <label style="display: block; padding: 8px; background: white; border-radius: 8px; margin: 5px 0; cursor: pointer;">
+                                <input type="radio" name="q7" value="d"> D) O movimento de remar
+                            </label>
+                            <p style="font-size: 11px; color: var(--gray-400); margin-top: 8px;">✅ <strong>Resposta correta: A)</strong> Drop é a descida na face da onda para pegar a força.</p>
+                        </div>
+                        <div class="quiz-question" data-question="8" style="margin-top: 20px;">
+                            <p style="font-weight: 600; margin-bottom: 10px;">8. O que é "cutback"?</p>
+                            <label style="display: block; padding: 8px; background: white; border-radius: 8px; margin: 5px 0; cursor: pointer;">
+                                <input type="radio" name="q8" value="a"> A) Manobra de retorno à onda
+                            </label>
+                            <label style="display: block; padding: 8px; background: white; border-radius: 8px; margin: 5px 0; cursor: pointer;">
+                                <input type="radio" name="q8" value="b"> B) Um tipo de prancha
+                            </label>
+                            <label style="display: block; padding: 8px; background: white; border-radius: 8px; margin: 5px 0; cursor: pointer;">
+                                <input type="radio" name="q8" value="c"> C) A parte de trás da prancha
+                            </label>
+                            <label style="display: block; padding: 8px; background: white; border-radius: 8px; margin: 5px 0; cursor: pointer;">
+                                <input type="radio" name="q8" value="d"> D) Uma técnica de remada
+                            </label>
+                            <p style="font-size: 11px; color: var(--gray-400); margin-top: 8px;">✅ <strong>Resposta correta: A)</strong> Cutback é a manobra de retornar para a parte mais crítica da onda.</p>
+                        </div>
+                        <div class="quiz-question" data-question="9" style="margin-top: 20px;">
+                            <p style="font-weight: 600; margin-bottom: 10px;">9. Qual a função das quilhas (fins)?</p>
+                            <label style="display: block; padding: 8px; background: white; border-radius: 8px; margin: 5px 0; cursor: pointer;">
+                                <input type="radio" name="q9" value="a"> A) Proporcionar direção e estabilidade
+                            </label>
+                            <label style="display: block; padding: 8px; background: white; border-radius: 8px; margin: 5px 0; cursor: pointer;">
+                                <input type="radio" name="q9" value="b"> B) Decoração da prancha
+                            </label>
+                            <label style="display: block; padding: 8px; background: white; border-radius: 8px; margin: 5px 0; cursor: pointer;">
+                                <input type="radio" name="q9" value="c"> C) Aumentar o volume da prancha
+                            </label>
+                            <label style="display: block; padding: 8px; background: white; border-radius: 8px; margin: 5px 0; cursor: pointer;">
+                                <input type="radio" name="q9" value="d"> D) Fazer a prancha flutuar mais
+                            </label>
+                            <p style="font-size: 11px; color: var(--gray-400); margin-top: 8px;">✅ <strong>Resposta correta: A)</strong> As quilhas dão direção e estabilidade na água.</p>
+                        </div>
+                        <div class="quiz-question" data-question="10" style="margin-top: 20px;">
+                            <p style="font-weight: 600; margin-bottom: 10px;">10. O que significa "goofy" e "regular"?</p>
+                            <label style="display: block; padding: 8px; background: white; border-radius: 8px; margin: 5px 0; cursor: pointer;">
+                                <input type="radio" name="q10" value="a"> A) Pés dominante (esquerdo ou direito à frente)
+                            </label>
+                            <label style="display: block; padding: 8px; background: white; border-radius: 8px; margin: 5px 0; cursor: pointer;">
+                                <input type="radio" name="q10" value="b"> B) Tipos de ondas
+                            </label>
+                            <label style="display: block; padding: 8px; background: white; border-radius: 8px; margin: 5px 0; cursor: pointer;">
+                                <input type="radio" name="q10" value="c"> C) Nomes de pranchas
+                            </label>
+                            <label style="display: block; padding: 8px; background: white; border-radius: 8px; margin: 5px 0; cursor: pointer;">
+                                <input type="radio" name="q10" value="d"> D) Marés do oceano
+                            </label>
+                            <p style="font-size: 11px; color: var(--gray-400); margin-top: 8px;">✅ <strong>Resposta correta: A)</strong> Regular = pé direito à frente, Goofy = pé esquerdo à frente.</p>
+                        </div>
+                        <button class="btn btn-primary" style="width: 100%; margin-top: 20px;" onclick="alert('Quiz enviado! +50 pontos ganhos! 🎉')">Enviar Respostas</button>
+                    </div>
                 </div>
                 <div class="card">
                     <span class="card-tag green">+50 PONTOS</span>
@@ -2140,6 +2304,23 @@
 
         function createPost() {
             alert('Funcionalidade em desenvolvimento! 🚀');
+        }
+        
+        function startQuiz(quizName) {
+            const quizDiv = document.getElementById('quiz-' + quizName);
+            const button = event.target;
+            
+            if (quizDiv.style.display === 'none') {
+                quizDiv.style.display = 'block';
+                button.textContent = 'Fechar Quiz';
+                button.classList.remove('btn-primary');
+                button.classList.add('btn-secondary');
+            } else {
+                quizDiv.style.display = 'none';
+                button.textContent = 'Responder Quiz';
+                button.classList.remove('btn-secondary');
+                button.classList.add('btn-primary');
+            }
         }
     </script>
 </body>
