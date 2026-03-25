@@ -1,35 +1,132 @@
-name: ASF Daily Mobility Agent
+name: Mobility Training Agent
 
 on:
   schedule:
-    # Run daily at 6am (before surfboard agent)
-    - cron: '0 6 * * *'
+    # Run every 3 days at 6 AM BRT (UTC-3) = 9:00 UTC
+    - cron: '0 9 */3 * *'
   workflow_dispatch:
+  repository_dispatch:
+    types: [mobility_update]
 
 jobs:
-  mobility-content:
+  update-mobility:
     runs-on: ubuntu-latest
+    timeout-minutes: 15
+    
     steps:
-      - name: Checkout code
+      - name: Checkout repository
         uses: actions/checkout@v4
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Setup Python
+        
+      - name: Set up Python
         uses: actions/setup-python@v5
         with:
           python-version: '3.11'
-
-      - name: Run Mobility Agent
+          
+      - name: Create mobility script
         run: |
-          python3 scripts/mobility_agent.py >> mobility_content.md
-          echo "## Daily Mobility Content $(date)" >> mobility_log.md
+          cat > mobility_workout.py << 'EOF'
+import os
+from datetime import datetime, timedelta
 
-      - name: Auto-commit
+# List of exercises by category
+EXERCISES = {
+    'ombros': [
+        {'name': 'Rotação de Ombros', 'duration': '2 min', 'frequency': 'Diariamente', 'level': 'Essencial'},
+        {'name': 'Elevação de Ombros', 'duration': '2 min', 'frequency': 'Diariamente', 'level': 'Essencial'},
+        {'name': 'Rotação com Extensão', 'duration': '3 min', 'frequency': '3x/semana', 'level': 'Avançado'},
+    ],
+    'costas': [
+        {'name': 'Gato-Vaca', 'duration': '2 min', 'frequency': 'Diariamente', 'level': 'Essencial'},
+        {'name': 'Alongamento Puppy', 'duration': '2 min', 'frequency': 'Diariamente', 'level': 'Essencial'},
+        {'name': 'Onda na Costa', 'duration': '3 min', 'frequency': '3x/semana', 'level': 'Avançado'},
+    ],
+    'quadril': [
+        {'name': 'Rotação de Quadril', 'duration': '2 min', 'frequency': 'Diariamente', 'level': 'Essencial'},
+        {'name': 'Borboleta', 'duration': '2 min', 'frequency': 'Diariamente', 'level': 'Essencial'},
+        {'name': 'Split Estático', 'duration': '4 min', 'frequency': '2x/semana', 'level': 'Avançado'},
+    ],
+    'pernas': [
+        {'name': 'Mobilidade de Tornozelo', 'duration': '2 min', 'frequency': 'Diariamente', 'level': 'Essencial'},
+        {'name': 'Alongamento Isquiotibiais', 'duration': '3 min', 'frequency': 'Diariamente', 'level': 'Essencial'},
+        {'name': 'Agachamento Wallace', 'duration': '3 min', 'frequency': '3x/semana', 'level': 'Avançado'},
+    ],
+    'pulsos': [
+        {'name': 'Rotação de Pulso', 'duration': '1 min', 'frequency': 'Diariamente', 'level': 'Essencial'},
+        {'name': 'Extensão de Pulso', 'duration': '1 min', 'frequency': 'Diariamente', 'level': 'Essencial'},
+        {'name': 'Exercício de Garra', 'duration': '2 min', 'frequency': '3x/semana', 'level': 'Força'},
+    ]
+}
+
+# Workout routines
+ROUTINES = {
+    'wake_up': ['Rotação de Ombros', 'Gato-Vaca', 'Rotação de Quadril', 'Borboleta', 'Mobilidade de Tornozelo', 'Alongamento Isquiotibiais', 'Rotação de Pulso'],
+    'pre_surf': ['Elevação de Ombros', 'Rotação de Ombros', 'Alongamento Puppy', 'Rotação de Quadril', 'Agachamento Wallace', 'Alongamento Isquiotibiais'],
+    'pos_surf': ['Gato-Vaca', 'Alongamento Puppy', 'Borboleta', 'Alongamento Isquiotibiais', 'Rotação de Ombros'],
+}
+
+def get_day_workout():
+    """Get workout based on day of cycle (0-2)"""
+    day = datetime.now().timetuple().tm_yday
+    cycle_day = day % 3  # 3-day cycle
+    
+    if cycle_day == 0:
+        routine = 'wake_up'
+    elif cycle_day == 1:
+        routine = 'pre_surf'
+    else:
+        routine = 'pos_surf'
+    
+    return routine, ROUTINES[routine]
+
+def main():
+    today = datetime.now().strftime('%Y-%m-%d')
+    routine_name, exercises = get_day_workout()
+    
+    print("🏄‍♀️ Mobility Training Agent")
+    print(f"📅 {today}")
+    print(f"🔄 Rotina do dia: {routine_name.replace('_', ' ').title()}")
+    print(f"\n📝 Exercícios:")
+    for i, ex in enumerate(exercises, 1):
+        print(f"   {i}. {ex}")
+    
+    print("\n✅ Workout generated!")
+    
+    # Save to file
+    with open('docs/mobility-today.html', 'w') as f:
+        f.write(f"<h2>Rotina de Hoje: {routine_name.replace('_', ' ').title()}</h2>")
+        for i, ex in enumerate(exercises, 1):
+            f.write(f"<p>{i}. {ex}</p>")
+
+if __name__ == "__main__":
+    main()
+EOF
+          python mobility_workout.py
+          
+      - name: Commit update
         run: |
-          git config user.name "ASF Mobility Agent"
-          git config user.email "mobility@asf.com.br"
-          git add -A
-          git diff --quiet --exit-code && echo "No changes" && exit 0
-          git commit -m "Daily mobility content - $(date +%Y-%m-%d)"
-          git push origin main || echo "No changes to push"
+          git config --global user.name "ASF Bot"
+          git config --global user.email "bot@asf-app.com"
+          
+          if git diff --quiet -- docs/mobility-today.html; then
+            echo "No changes to push"
+          else
+            git add docs/mobility-today.html
+            git commit -m "Mobility workout update - $(date +%Y-%m-%d)"
+            git push
+            echo "✅ Mobility workout updated"
+          fi
+
+  notify:
+    needs: update-mobility
+    runs-on: ubuntu-latest
+    if: always()
+    
+    steps:
+      - name: Status
+        run: |
+          STATUS="${{ needs.update-mobility.result }}"
+          if [ "$STATUS" == "success" ]; then
+            echo "✅ Mobility agent completed"
+          else
+            echo "⚠️ Status: $STATUS"
+          fi
