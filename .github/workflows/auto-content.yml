@@ -1,0 +1,37 @@
+name: ASF Auto Content Generator
+
+on:
+  schedule:
+    # Run every hour
+    - cron: '0 * * * *'
+  workflow_dispatch:
+    # Manual trigger
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Generate new content
+        run: |
+          python3 scripts/generate_content.py >> generated_content.md
+          echo "---" >> generated_content.md
+          echo "Generated at: $(date)" >> generated_content.md
+
+      - name: Commit and push if changes
+        run: |
+          git config user.name "ASF Bot"
+          git config user.email "bot@asf.com.br"
+          git add -A
+          git diff --quiet && exit 0
+          git commit -m "Auto content update $(date +%Y-%m-%d\ %H:%M)"
+          git push origin main
