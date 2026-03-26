@@ -6,23 +6,23 @@
     <title>Espaços para Logo - ASF App</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: Arial, sans-serif; background: linear-gradient(135deg, #00A8CC 0%, #0E2439 100%); min-height: 100vh; padding: 20px; }
+        body { font-family: Arial, sans-serif; background: linear-gradient(135deg, #00A8CC 0%, #0E2439 100%); min-height: 100vh; padding: 15px; }
         .container { max-width: 800px; margin: 0 auto; background: white; border-radius: 20px; overflow: hidden; box-shadow: 0 20px 60px rgba(0,0,0,0.3); }
-        .header { background: linear-gradient(135deg, #0E2439 0%, #1A3A5C 100%); color: white; padding: 30px; text-align: center; }
-        .header h1 { font-size: 28px; margin-bottom: 10px; }
-        .header p { font-size: 16px; opacity: 0.9; }
-        .section { padding: 25px; border-bottom: 1px solid #eee; }
-        .section-title { font-size: 18px; color: #0E2439; margin-bottom: 15px; font-weight: bold; display: flex; align-items: center; gap: 10px; }
-        .app-preview { background: #f8f9fa; border-radius: 15px; padding: 20px; position: relative; }
-        .app-screen { background: white; border-radius: 10px; padding: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
-        .app-header { background: #0E2439; color: white; padding: 15px; border-radius: 10px 10px 0 0; display: flex; justify-content: space-between; align-items: center; }
+        .header { background: linear-gradient(135deg, #0E2439 0%, #1A3A5C 100%); color: white; padding: 25px; text-align: center; }
+        .header h1 { font-size: 24px; margin-bottom: 10px; }
+        .header p { font-size: 14px; opacity: 0.9; }
+        .section { padding: 20px; border-bottom: 1px solid #eee; }
+        .section-title { font-size: 16px; color: #0E2439; margin-bottom: 15px; font-weight: bold; display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+        .app-preview { background: #f8f9fa; border-radius: 15px; padding: 15px; position: relative; }
+        .app-screen { background: white; border-radius: 10px; padding: 12px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
+        .app-header { background: #0E2439; color: white; padding: 12px; border-radius: 10px 10px 0 0; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px; }
         .app-logo { width: 30px; height: 30px; background: #00A8CC; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 18px; }
         .logo-slot { background: #FFEAA7; border: 2px dashed #F39C12; border-radius: 8px; padding: 8px; text-align: center; font-size: 10px; color: #666; font-weight: bold; }
         .logo-slot.gold { background: #FFD700; border-color: #B8860B; }
         .logo-slot.silver { background: #C0C0C0; border-color: #808080; }
         .logo-slot.bronze { background: #CD7F32; color: white; }
-        .app-nav { display: flex; gap: 5px; margin-top: 10px; justify-content: center; }
-        .nav-item { background: #eee; padding: 8px 15px; border-radius: 20px; font-size: 10px; color: #666; }
+        .app-nav { display: flex; gap: 5px; margin-top: 10px; justify-content: center; flex-wrap: wrap; }
+        .nav-item { background: #eee; padding: 8px 12px; border-radius: 20px; font-size: 10px; color: #666; }
         .nav-item.active { background: #00A8CC; color: white; }
         .placement { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 15px; }
         .placement-item { background: white; border-radius: 8px; padding: 10px; text-align: center; }
@@ -30,23 +30,52 @@
         .placement-item p { font-size: 10px; color: #666; }
         .price-tag { background: #27AE60; color: white; padding: 3px 8px; border-radius: 10px; font-size: 10px; font-weight: bold; display: inline-block; margin-top: 5px; }
         .spots { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-top: 15px; }
-        .spot { background: white; border: 2px solid #eee; border-radius: 10px; padding: 15px; text-align: center; }
-        .spot-number { font-size: 24px; font-weight: bold; color: #00A8CC; }
-        .spot-label { font-size: 11px; color: #666; margin-top: 5px; }
-        .spot-price { font-size: 12px; font-weight: bold; color: #27AE60; margin-top: 5px; }
+        .spot { background: white; border: 2px solid #eee; border-radius: 10px; padding: 12px; text-align: center; }
+        .spot-number { font-size: 20px; font-weight: bold; color: #00A8CC; }
+        .spot-label { font-size: 10px; color: #666; margin-top: 5px; }
+        .spot-price { font-size: 11px; font-weight: bold; color: #27AE60; margin-top: 5px; }
         .comparison { display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px; margin-top: 20px; }
-        .tier { border: 2px solid #eee; border-radius: 15px; padding: 20px; text-align: center; }
+        .tier { border: 2px solid #eee; border-radius: 15px; padding: 15px; text-align: center; }
         .tier.featured { border-color: #F39C12; background: #FFF9E6; }
-        .tier-name { font-size: 16px; font-weight: bold; color: #0E2439; }
-        .tier-price { font-size: 24px; font-weight: bold; color: #00A8CC; margin: 10px 0; }
-        .tier-price span { font-size: 12px; color: #666; }
-        .tier-spots { font-size: 11px; color: #666; margin-bottom: 10px; }
+        .tier-name { font-size: 14px; font-weight: bold; color: #0E2439; }
+        .tier-price { font-size: 20px; font-weight: bold; color: #00A8CC; margin: 10px 0; }
+        .tier-price span { font-size: 11px; color: #666; }
+        .tier-spots { font-size: 10px; color: #666; margin-bottom: 10px; }
         .tier-features { font-size: 10px; text-align: left; }
         .tier-features li { margin: 5px 0; list-style: none; }
-        .cta { background: linear-gradient(135deg, #00A8CC 0%, #4DC8E0 100%); color: white; padding: 30px; text-align: center; }
-        .cta h3 { font-size: 24px; margin-bottom: 10px; }
-        .footer { background: #0E2439; color: white; padding: 25px; text-align: center; }
-        .note { background: #FFF3CD; border: 1px solid #FFC107; border-radius: 10px; padding: 15px; margin: 20px; font-size: 12px; color: #856404; }
+        .cta { background: linear-gradient(135deg, #00A8CC 0%, #4DC8E0 100%); color: white; padding: 25px; text-align: center; }
+        .cta h3 { font-size: 20px; margin-bottom: 10px; }
+        .footer { background: #0E2439; color: white; padding: 20px; text-align: center; }
+        .note { background: #FFF3CD; border: 1px solid #FFC107; border-radius: 10px; padding: 15px; margin: 15px; font-size: 12px; color: #856404; }
+        
+        /* RESPONSIVE - Mobile */
+        @media (max-width: 600px) {
+            body { padding: 10px; }
+            .container { border-radius: 15px; }
+            .header { padding: 20px; }
+            .header h1 { font-size: 20px; }
+            .header p { font-size: 12px; }
+            .section { padding: 15px; }
+            .section-title { font-size: 14px; }
+            .placement { grid-template-columns: 1fr; }
+            .spots { grid-template-columns: repeat(2, 1fr); }
+            .comparison { grid-template-columns: 1fr; }
+            .tier { padding: 15px 10px; }
+            .tier-name { font-size: 16px; }
+            .tier-price { font-size: 24px; }
+            .cta h3 { font-size: 18px; }
+            .app-screen { padding: 10px; }
+            .app-header { padding: 10px; }
+            .note { margin: 10px; font-size: 11px; }
+        }
+        
+        @media (max-width: 400px) {
+            .header h1 { font-size: 18px; }
+            .spots { grid-template-columns: 1fr 1fr; gap: 8px; }
+            .spot { padding: 8px; }
+            .spot-number { font-size: 18px; }
+            .spot-label { font-size: 9px; }
+        }
     </style>
 </head>
 <body>
