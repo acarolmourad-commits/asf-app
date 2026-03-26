@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Espaços para Logo - ASF App</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: Arial, sans-serif; background: linear-gradient(135deg, #00A8CC 0%, #0E2439 100%); min-height: 100vh; padding: 20px; }
+        .container { max-width: 800px; margin: 0 auto; background: white; border-radius: 20px; overflow: hidden; box-shadow: 0 20px 60px rgba(0,0,0,0.3); }
+        .header { background: linear-gradient(135deg, #0E2439 0%, #1A3A5C 100%); color: white; padding: 30px; text-align: center; }
+        .header h1 { font-size: 28px; margin-bottom: 10px; }
+        .header p { font-size: 16px; opacity: 0.9; }
+        .section { padding: 25px; border-bottom: 1px solid #eee; }
+        .section-title { font-size: 18px; color: #0E2439; margin-bottom: 15px; font-weight: bold; display: flex; align-items: center; gap: 10px; }
+        .app-preview { background: #f8f9fa; border-radius: 15px; padding: 20px; position: relative; }
+        .app-screen { background: white; border-radius: 10px; padding: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
+        .app-header { background: #0E2439; color: white; padding: 15px; border-radius: 10px 10px 0 0; display: flex; justify-content: space-between; align-items: center; }
+        .app-logo { width: 30px; height: 30px; background: #00A8CC; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 18px; }
+        .logo-slot { background: #FFEAA7; border: 2px dashed #F39C12; border-radius: 8px; padding: 8px; text-align: center; font-size: 10px; color: #666; font-weight: bold; }
+        .logo-slot.gold { background: #FFD700; border-color: #B8860B; }
+        .logo-slot.silver { background: #C0C0C0; border-color: #808080; }
+        .logo-slot.bronze { background: #CD7F32; color: white; }
+        .app-nav { display: flex; gap: 5px; margin-top: 10px; justify-content: center; }
+        .nav-item { background: #eee; padding: 8px 15px; border-radius: 20px; font-size: 10px; color: #666; }
+        .nav-item.active { background: #00A8CC; color: white; }
+        .placement { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 15px; }
+        .placement-item { background: white; border-radius: 8px; padding: 10px; text-align: center; }
+        .placement-item h4 { font-size: 12px; color: #0E2439; margin-bottom: 5px; }
+        .placement-item p { font-size: 10px; color: #666; }
+        .price-tag { background: #27AE60; color: white; padding: 3px 8px; border-radius: 10px; font-size: 10px; font-weight: bold; display: inline-block; margin-top: 5px; }
+        .spots { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-top: 15px; }
+        .spot { background: white; border: 2px solid #eee; border-radius: 10px; padding: 15px; text-align: center; }
+        .spot-number { font-size: 24px; font-weight: bold; color: #00A8CC; }
+        .spot-label { font-size: 11px; color: #666; margin-top: 5px; }
+        .spot-price { font-size: 12px; font-weight: bold; color: #27AE60; margin-top: 5px; }
+        .comparison { display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px; margin-top: 20px; }
+        .tier { border: 2px solid #eee; border-radius: 15px; padding: 20px; text-align: center; }
+        .tier.featured { border-color: #F39C12; background: #FFF9E6; }
+        .tier-name { font-size: 16px; font-weight: bold; color: #0E2439; }
+        .tier-price { font-size: 24px; font-weight: bold; color: #00A8CC; margin: 10px 0; }
+        .tier-price span { font-size: 12px; color: #666; }
+        .tier-spots { font-size: 11px; color: #666; margin-bottom: 10px; }
+        .tier-features { font-size: 10px; text-align: left; }
+        .tier-features li { margin: 5px 0; list-style: none; }
+        .cta { background: linear-gradient(135deg, #00A8CC 0%, #4DC8E0 100%); color: white; padding: 30px; text-align: center; }
+        .cta h3 { font-size: 24px; margin-bottom: 10px; }
+        .footer { background: #0E2439; color: white; padding: 25px; text-align: center; }
+        .note { background: #FFF3CD; border: 1px solid #FFC107; border-radius: 10px; padding: 15px; margin: 20px; font-size: 12px; color: #856404; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📱 Espaços para Logo no App ASF</h1>
+            <p>Veja onde sua marca pode ficar visível!</p>
+        </div>
+
+        <div class="section">
+            <div class="section-title">🏠 HOME - Header Principal</div>
+            <div class="app-preview">
+                <div class="app-screen">
+                    <div class="app-header">
+                        <div class="app-logo">🏄</div>
+                        <span style="font-size: 12px;">ASF</span>
+                        <div style="display: flex; gap: 10px;">
+                            <div class="logo-slot gold" style="width: 50px; height: 20px;">LOGO</div>
+                        </div>
+                    </div>
+                    <div style="padding: 15px;">
+                        <div style="height: 60px; background: #f0f0f0; border-radius: 8px; display: flex; align-items: center; justify-content: center;">
+                            <span style="font-size: 10px; color: #999;">Banner Principal (Ouro/Diamante)</span>
+                        </div>
+                        <div style="margin-top: 10px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 5px;">
+                            <div style="height: 30px; background: #f0f0f0; border-radius: 5px; display: flex; align-items: center; justify-content: center;">
+                                <div class="logo-slot bronze" style="font-size: 8px; padding: 2px;">BRONZE</div>
+                            </div>
+                            <div style="height: 30px; background: #f0f0f0; border-radius: 5px; display: flex; align-items: center; justify-content: center;">
+                                <div class="logo-slot bronze" style="font-size: 8px; padding: 2px;">BRONZE</div>
+                            </div>
+                            <div style="height: 30px; background: #f0f0f0; border-radius: 5px; display: flex; align-items: center; justify-content: center;">
+                                <div class="logo-slot bronze" style="font-size: 8px; padding: 2px;">BRONZE</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="placement">
+                <div class="placement-item">
+                    <h4>Logo Header</h4>
+                    <p>Ouro / Diamante</p>
+                    <span class="price-tag">R$ 797+</span>
+                </div>
+                <div class="placement-item">
+                    <h4>Banner Home</h4>
+                    <p>Ouro / Diamante</p>
+                    <span class="price-tag">R$ 797+</span>
+                </div>
+                <div class="placement-item">
+                    <h4>3 Logos Bronze</h4>
+                    <p>Rodapé Home</p>
+                    <span class="price-tag">R$ 197 cada</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-title">🛒 SEÇÃO LOJAS - Lista de Parceiros</div>
+            <div class="app-preview">
+                <div class="app-screen">
+                    <div style="background: #f0f0f0; padding: 10px; border-radius: 8px; margin-bottom: 10px;">
+                        <div class="logo-slot" style="margin-bottom: 5px;">LOGO + @INSTAGRAM</div>
+                        <div class="logo-slot" style="margin-bottom: 5px;">LOJA 1 - @loja1</div>
+                        <div class="logo-slot" style="margin-bottom: 5px;">LOJA 2 - @loja2</div>
+                        <div class="logo-slot" style="margin-bottom: 5px;">LOJA 3 - @loja3</div>
+                        <div class="logo-slot" style="margin-bottom: 5px;">LOJA 4 - @loja4</div>
+                        <div class="logo-slot" style="margin-bottom: 5px;">LOJA 5 - @loja5</div>
+                    </div>
+                </div>
+            </div>
+            <div class="placement">
+                <div class="placement-item">
+                    <h4>Lista Lojas</h4>
+                    <p>Todas as páginas</p>
+                    <span class="price-tag">R$ 197/mês</span>
+                </div>
+                <div class="placement-item">
+                    <h4>Destaque 1º</h4>
+                    <p>Topo da lista</p>
+                    <span class="price-tag">+R$ 100</span>
+                </div>
+                <div class="placement-item">
+                    <h4>9 Vagas</h4>
+                    <p>Disponíveis</p>
+                    <span class="price-tag">R$ 197/mês</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-title">🎯 SEÇÃO PROGRESSO - Quizzes</div>
+            <div class="app-preview">
+                <div class="app-screen">
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+                        <div style="background: #f0f0f0; padding: 10px; border-radius: 8px;">
+                            <div class="logo-slot" style="margin-bottom: 5px;">QUIZ 1</div>
+                        </div>
+                        <div style="background: #f0f0f0; padding: 10px; border-radius: 8px;">
+                            <div class="logo-slot" style="margin-bottom: 5px;">QUIZ 2</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="placement">
+                <div class="placement-item">
+                    <h4>Patrocínio Quiz</h4>
+                    <p>1 quiz com marca</p>
+                    <span class="price-tag">R$ 150/quizz</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-title">🌊 Resumo de Todos os Espaços</div>
+            <div class="spots">
+                <div class="spot">
+                    <div class="spot-number">1</div>
+                    <div class="spot-label">Logo Header<br>(Home)</div>
+                    <div class="spot-price">R$ 797/mês</div>
+                </div>
+                <div class="spot">
+                    <div class="spot-number">1</div>
+                    <div class="spot-label">Banner<br>Principal</div>
+                    <div class="spot-price">R$ 797/mês</div>
+                </div>
+                <div class="spot">
+                    <div class="spot-number">3</div>
+                    <div class="spot-label">Logos Bronze<br>(Home)</div>
+                    <div class="spot-price">R$ 197/mês</div>
+                </div>
+                <div class="spot">
+                    <div class="spot-number">9</div>
+                    <div class="spot-label">Lojas<br>Parceiras</div>
+                    <div class="spot-price">R$ 197/mês</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-title">💰 Pacotes de Patrocínio</div>
+            <div class="comparison">
+                <div class="tier">
+                    <div class="tier-name">🥉 Bronze</div>
+                    <div class="tier-price">R$ 197<span>/mês</span></div>
+                    <div class="tier-spots">1 espaço</div>
+                    <ul class="tier-features">
+                        <li>✓ Logo na seção Lojas</li>
+                        <li>✓ Link Instagram</li>
+                        <li>✓ Selo Patrocinador</li>
+                    </ul>
+                </div>
+                <div class="tier featured">
+                    <div class="tier-name">🥈 Prata</div>
+                    <div class="tier-price">R$ 397<span>/mês</span></div>
+                    <div class="tier-spots">2 espaços</div>
+                    <ul class="tier-features">
+                        <li>✓ Logo na Home</li>
+                        <li>✓ Banner na Home</li>
+                        <li>✓ Seção Lojas</li>
+                    </ul>
+                </div>
+                <div class="tier">
+                    <div class="tier-name">🥇 Ouro</div>
+                    <div class="tier-price">R$ 797<span>/mês</span></div>
+                    <div class="tier-spots">4 espaços</div>
+                    <ul class="tier-features">
+                        <li>✓ Logo Header</li>
+                        <li>✓ Banner Principal</li>
+                        <li>✓ Seção Exclusiva</li>
+                    </ul>
+                </div>
+                <div class="tier">
+                    <div class="tier-name">💎 Diamante</div>
+                    <div class="tier-price">R$ 1.497<span>/mês</span></div>
+                    <div class="tier-spots">TODOS</div>
+                    <ul class="tier-features">
+                        <li>✓ Marca Principal</li>
+                        <li>✓ Todas as posições</li>
+                        <li>✓ Patrocinador Oficial</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="note">
+            <strong>📝 Nota:</strong> Os valores apresentados são baseados em manutenção e melhoria contínua do app. 
+            Cada parceiro contribui para que o app permaneça gratuito e de qualidade para todas as surfistas!
+        </div>
+
+        <div class="cta">
+            <h3>🏄‍♀️ Anuncie no App ASF!</h3>
+            <p>Sua marca alcance centenas de surfistas todos os dias</p>
+        </div>
+
+        <div class="footer">
+            <p><strong>ASF - Associação de Surf Feminino</strong></p>
+            <p style="margin-top: 10px;">CNPJ: 52.585.183/0001-03 | fund: 05/07/2019</p>
+            <p style="margin-top: 15px; font-size: 12px;">🌊 "Juntas, surfando mais forte!"</p>
+        </div>
+    </div>
+</body>
+</html>
