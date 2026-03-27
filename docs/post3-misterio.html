@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Post 3 - Preview ASF</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { 
+            font-family: 'Segoe UI', Arial, sans-serif; 
+            background: linear-gradient(135deg, #9B59B6 0%, #8E44AD 100%); 
+            min-height: 100vh; 
+            display: flex; 
+            justify-content: center; 
+            align-items: center;
+            padding: 20px;
+        }
+        .post-container {
+            width: 1080px;
+            height: 1080px;
+            background: linear-gradient(135deg, #9B59B6 0%, #8E44AD 50%, #6C3483 100%);
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: white;
+        }
+        
+        .dots-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: radial-gradient(rgba(255,255,255,0.1) 1px, transparent 1px);
+            background-size: 30px 30px;
+        }
+        
+        .content {
+            position: relative;
+            z-index: 2;
+            padding: 60px;
+        }
+        
+        .emoji-row {
+            font-size: 60px;
+            margin-bottom: 40px;
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+        }
+        
+        .title {
+            font-size: 56px;
+            font-weight: bold;
+            margin-bottom: 30px;
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.3);
+        }
+        
+        .subtitle {
+            font-size: 26px;
+            opacity: 0.95;
+            line-height: 1.7;
+            margin-bottom: 35px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+        
+        .highlight {
+            background: rgba(255,255,255,0.2);
+            padding: 15px 30px;
+            border-radius: 15px;
+            margin: 30px 0;
+            font-size: 22px;
+        }
+        
+        .cta {
+            font-size: 30px;
+            font-weight: bold;
+            margin-top: 40px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            color: #FFD700;
+        }
+        
+        .logo {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            font-size: 28px;
+            font-weight: bold;
+            opacity: 0.9;
+        }
+        
+        .logo-emoji {
+            font-size: 40px;
+        }
+        
+        .hashtag-bar {
+            position: absolute;
+            bottom: 100px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(255,255,255,0.15);
+            padding: 15px 30px;
+            border-radius: 50px;
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            justify-content: center;
+            max-width: 850px;
+        }
+        
+        .hashtag {
+            background: rgba(255,255,255,0.25);
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 12px;
+        }
+        
+        @media (max-width: 1100px) {
+            .post-container {
+                width: 100%;
+                height: auto;
+                min-height: 1080px;
+            }
+            .emoji-row { font-size: 40px; }
+            .title { font-size: 36px; }
+            .subtitle { font-size: 18px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="post-container">
+        <div class="dots-bg"></div>
+        
+        <div class="content">
+            <div class="emoji-row">
+                <span>🌊</span>
+                <span>🏄‍♀️</span>
+                <span>📱</span>
+            </div>
+            <div class="title">E se Você Soubesse...</div>
+            <div class="subtitle">
+                ...exatamente ONDE surfar hoje?<br><br>
+                E se tivesse um lugar só nosso,<br>
+                com dicas, treinos, lojas<br>
+                e as manas mais legais do litoral?
+            </div>
+            
+            <div class="highlight">
+                🔜 Resposta chegando...
+            </div>
+            
+            <div class="cta">Hmm... 🤔</div>
+        </div>
+        
+        <div class="hashtag-bar">
+            <span class="hashtag">#surfgirl</span>
+            <span class="hashtag">#surffeminino</span>
+            <span class="hashtag">#previsao</span>
+            <span class="hashtag">#ondas</span>
+            <span class="hashtag">#litoralpaulista</span>
+            <span class="hashtag">#tecnologia</span>
+            <span class="hashtag">#asf</span>
+            <span class="hashtag">#emBreve</span>
+        </div>
+        
+        <div class="logo">
+            <span class="logo-emoji">🏄‍♀️</span>
+            <span>ASF</span>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Post 1 - Mistério ASF</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { 
+            font-family: 'Segoe UI', Arial, sans-serif; 
+            background: linear-gradient(135deg, #FF6B6B 0%, #C0392B 100%); 
+            min-height: 100vh; 
+            display: flex; 
+            justify-content: center; 
+            align-items: center;
+            padding: 20px;
+        }
+        .post-container {
+            width: 1080px;
+            height: 1080px;
+            background: linear-gradient(135deg, #FF6B6B 0%, #E74C3C 50%, #C0392B 100%);
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: white;
+        }
+        
+        .wave-bg {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 200px;
+            background: linear-gradient(to top, rgba(255,255,255,0.1), transparent);
+        }
+        
+        .content {
+            position: relative;
+            z-index: 2;
+            padding: 80px;
+        }
+        
+        .emoji {
+            font-size: 150px;
+            margin-bottom: 40px;
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+        
+        .title {
+            font-size: 64px;
+            font-weight: bold;
+            margin-bottom: 30px;
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.3);
+            line-height: 1.2;
+        }
+        
+        .subtitle {
+            font-size: 28px;
+            opacity: 0.95;
+            line-height: 1.6;
+            margin-bottom: 40px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+        
+        .cta {
+            font-size: 36px;
+            font-weight: bold;
+            margin-bottom: 50px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .logo {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            font-size: 28px;
+            font-weight: bold;
+            opacity: 0.9;
+        }
+        
+        .logo-emoji {
+            font-size: 40px;
+        }
+        
+        .hashtag-bar {
+            position: absolute;
+            bottom: 100px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(255,255,255,0.2);
+            padding: 15px 30px;
+            border-radius: 50px;
+            font-size: 14px;
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            justify-content: center;
+            max-width: 800px;
+        }
+        
+        .hashtag {
+            background: rgba(255,255,255,0.3);
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+        }
+        
+        @media (max-width: 1100px) {
+            .post-container {
+                width: 100%;
+                height: auto;
+                min-height: 1080px;
+            }
+            .emoji { font-size: 100px; }
+            .title { font-size: 40px; }
+            .subtitle { font-size: 20px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="post-container">
+        <div class="wave-bg"></div>
+        
+        <div class="content">
+            <div class="emoji">🌊</div>
+            <div class="title">Algo Grande<br>Está Chegando...</div>
+            <div class="subtitle">
+                Uma onda de mudança para todas<br>
+                as mulheres que amam o surf.
+            </div>
+            <div class="cta">Você está pronta? 💪</div>
+        </div>
+        
+        <div class="hashtag-bar">
+            <span class="hashtag">#surf</span>
+            <span class="hashtag">#surfgirl</span>
+            <span class="hashtag">#surffeminino</span>
+            <span class="hashtag">#litoralpaulista</span>
+            <span class="hashtag">#asf</span>
+            <span class="hashtag">#emBreve</span>
+        </div>
+        
+        <div class="logo">
+            <span class="logo-emoji">🏄‍♀️</span>
+            <span>ASF</span>
+        </div>
+    </div>
+</body>
+</html>

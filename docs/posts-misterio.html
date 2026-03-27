@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Posts Mistério - ASF</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: Arial, sans-serif; background: #f5f5f5; padding: 20px; }
+        .container { max-width: 1200px; margin: 0 auto; }
+        .post { 
+            width: 1080px; 
+            height: 1080px; 
+            margin: 30px auto; 
+            border-radius: 20px; 
+            overflow: hidden; 
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            position: relative;
+        }
+        .post-1 { 
+            background: linear-gradient(135deg, #FF6B6B 0%, #C0392B 100%); 
+        }
+        .post-2 { 
+            background: linear-gradient(135deg, #00A8CC 0%, #0E2439 100%); 
+        }
+        .post-3 { 
+            background: linear-gradient(135deg, #9B59B6 0%, #8E44AD 100%); 
+        }
+        .post-content {
+            padding: 60px;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: white;
+        }
+        .post-emoji {
+            font-size: 120px;
+            margin-bottom: 30px;
+        }
+        .post-title {
+            font-size: 48px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        .post-subtitle {
+            font-size: 24px;
+            opacity: 0.9;
+            line-height: 1.5;
+            margin-bottom: 30px;
+        }
+        .post-date {
+            font-size: 18px;
+            opacity: 0.7;
+            margin-top: auto;
+        }
+        .post-logo {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 24px;
+            font-weight: bold;
+            opacity: 0.8;
+        }
+        
+        @media (max-width: 1100px) {
+            .post { 
+                width: 100%; 
+                height: auto; 
+                min-height: 1080px; 
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 style="text-align: center; color: #0E2439; margin-bottom: 30px;">Posts Mistério ASF 🎭</h1>
+        
+        <!-- Post 1 -->
+        <div class="post post-1">
+            <div class="post-content">
+                <div class="post-emoji">🌊</div>
+                <div class="post-title">Algo Grande Está Chegando...</div>
+                <div class="post-subtitle">Uma onda de mudança para todas as mulheres que amam o surf.<br><br>Você está pronta?</div>
+                <div class="post-logo">🏄‍♀️ ASF</div>
+            </div>
+        </div>
+        
+        <!-- Post 2 -->
+        <div class="post post-2">
+            <div class="post-content">
+                <div class="post-emoji">👀</div>
+                <div class="post-title">47 Manas Já Sabem...</div>
+                <div class="post-subtitle">E você?<br><br>Vai ficar de fora?<br><br>Algo especial está sendo criado para nós.</div>
+                <div class="post-logo">🏄‍♀️ ASF</div>
+            </div>
+        </div>
+        
+        <!-- Post 3 -->
+        <div class="post post-3">
+            <div class="post-content">
+                <div class="post-emoji">🏄‍♀️</div>
+                <div class="post-title">E se Você Soubesse...</div>
+                <div class="post-subtitle">...exatamente ONDE surfar hoje?<br><br>E se tivesse um lugar só nosso?<br><br>Aguarde. A resposta está quase chegando.</div>
+                <div class="post-logo">🏄‍♀️ ASF</div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
