@@ -3725,11 +3725,11 @@
         
         // Notificações padrão ao abrir
         const DEFAULT_NOTIFICATIONS = [
-            { id: 1, type: 'treino', icon: '💪', title: 'Novo Treino!', text: 'Treino de Força e Core disponível', time: 'Agora', read: false },
-            { id: 2, type: 'ondas', icon: '🌊', title: 'Ondas Boas!', text: 'Bertioga: 0.8m - Boa para surfar!', time: '5 min', read: false },
-            { id: 3, type: 'pontos', icon: '🎯', title: 'Quiz Disponível', text: 'Responda e ganhe +50 pontos!', time: '10 min', read: false },
-            { id: 4, type: 'dica', icon: '📚', title: 'Dica do Dia', text: 'Respiração 4-4-4 para acalmar', time: '1h', read: true },
-            { id: 5, type: 'manas', icon: '💬', title: 'Novo Grupo', text: 'Bertioga Surf Girls: 13 manas!', time: '2h', read: true }
+            { id: 1, type: 'treino', icon: '💪', title: 'Novo Treino!', text: 'Treino de Força e Core disponível', time: 'Agora', read: false, target: 'treino-1', section: 'saude' },
+            { id: 2, type: 'ondas', icon: '🌊', title: 'Ondas Boas!', text: 'Bertioga: 0.8m - Boa para surfar!', time: '5 min', read: false, target: 'wave-forecast', section: 'dicas' },
+            { id: 3, type: 'pontos', icon: '🎯', title: 'Quiz Disponível', text: 'Responda e ganhe +50 pontos!', time: '10 min', read: false, target: 'quiz-basico', section: 'progresso' },
+            { id: 4, type: 'dica', icon: '📚', title: 'Dica do Dia', text: 'Respiração 4-4-4 para acalmar', time: '1h', read: true, target: 'tip-of-day', section: 'dicas' },
+            { id: 5, type: 'manas', icon: '💬', title: 'Novo Grupo', text: 'Bertioga Surf Girls: 13 manas!', time: '2h', read: true, target: 'grupos-ativos', section: 'manas' }
         ];
         
         function loadNotifications() {
@@ -3840,6 +3840,21 @@
             
             const section = sectionMap[type] || 'dicas';
             showSection(section);
+            
+            // Se tem target específico, fazer scroll até ele
+            if (notif && notif.target) {
+                setTimeout(() => {
+                    const element = document.getElementById(notif.target) || 
+                                   document.querySelector(`[data-target="${notif.target}"]`) ||
+                                   document.querySelector(`h3:contains("${notif.text}")`);
+                    if (element) {
+                        element.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                        element.style.transition = 'background 0.3s';
+                        element.style.background = '#FFF9E6';
+                        setTimeout(() => element.style.background = '', 2000);
+                    }
+                }, 300);
+            }
         }
         
         function clearNotifications() {
