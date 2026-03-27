@@ -35,6 +35,75 @@
             --radius-xl: 32px;
         }
 
+        /* Dark Mode */
+        [data-theme="dark"] {
+            --primary: #4DC8E0;
+            --primary-light: #6DD8F0;
+            --primary-dark: #00A8CC;
+            --secondary: #E8ECF0;
+            --secondary-light: #D0D6DD;
+            --accent: #F4D03F;
+            --success: #2ECC71;
+            --purple: #BB77DD;
+            --coral: #FF7B7B;
+            --white: #1A1D23;
+            --light: #12141A;
+            --gray-100: #1E2128;
+            --gray-200: #2A2E36;
+            --gray-400: #8A8E96;
+            --gray-600: #B0B4BC;
+            --shadow-sm: 0 2px 8px rgba(0,0,0,0.3);
+            --shadow-md: 0 4px 20px rgba(0,0,0,0.4);
+            --shadow-lg: 0 8px 40px rgba(0,0,0,0.5);
+        }
+
+        [data-theme="dark"] .bg-animation::before {
+            background: radial-gradient(circle, rgba(77,200,224,0.08) 0%, transparent 70%);
+        }
+        [data-theme="dark"] .bg-animation::after {
+            background: radial-gradient(circle, rgba(244,208,63,0.05) 0%, transparent 70%);
+        }
+        [data-theme="dark"] header {
+            background: linear-gradient(135deg, #0D0F14 0%, #1A1D23 100%);
+        }
+        [data-theme="dark"] .profile-bar {
+            background: var(--white);
+        }
+        [data-theme="dark"] .card {
+            background: var(--white);
+        }
+        [data-theme="dark"] .search-bar {
+            background: var(--gray-100);
+        }
+        [data-theme="dark"] .search-bar input {
+            color: var(--secondary);
+        }
+        [data-theme="dark"] .search-results {
+            background: var(--white);
+        }
+        [data-theme="dark"] .search-result-item:hover {
+            background: var(--gray-100);
+        }
+        [data-theme="dark"] .bottom-nav {
+            background: #1A1D23;
+            box-shadow: 0 -4px 20px rgba(0,0,0,0.4);
+        }
+        [data-theme="dark"] .post {
+            background: var(--white);
+        }
+        [data-theme="dark"] .btn-secondary {
+            background: var(--gray-100);
+            color: var(--secondary);
+        }
+        [data-theme="dark"] .level-progress {
+            background: var(--gray-200);
+        }
+        [data-theme="dark"] input, [data-theme="dark"] select {
+            background: var(--gray-100);
+            color: var(--secondary);
+            border-color: var(--gray-200);
+        }
+
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
@@ -932,8 +1001,8 @@
                 <div class="logo-text">ASF</div>
             </div>
             <div class="header-actions">
+                <button class="icon-btn" id="darkModeToggle" onclick="toggleDarkMode()" title="Alternar tema">🌙</button>
                 <button class="icon-btn">🔔</button>
-                <button class="icon-btn">⚙️</button>
             </div>
         </div>
     </header>
@@ -3487,6 +3556,29 @@
 
         // Load live data on page load
         loadLiveData('bertioga');
+
+        // ============ DARK MODE ============
+        function initDarkMode() {
+            const saved = localStorage.getItem('asf-theme');
+            const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            if (saved === 'dark' || (!saved && prefersDark)) {
+                document.documentElement.setAttribute('data-theme', 'dark');
+                document.getElementById('darkModeToggle').textContent = '☀️';
+            }
+        }
+        function toggleDarkMode() {
+            const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+            if (isDark) {
+                document.documentElement.removeAttribute('data-theme');
+                localStorage.setItem('asf-theme', 'light');
+                document.getElementById('darkModeToggle').textContent = '🌙';
+            } else {
+                document.documentElement.setAttribute('data-theme', 'dark');
+                localStorage.setItem('asf-theme', 'dark');
+                document.getElementById('darkModeToggle').textContent = '☀️';
+            }
+        }
+        initDarkMode();
     </script>
 </body>
 </html>
