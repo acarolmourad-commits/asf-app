@@ -2724,41 +2724,70 @@
             <div class="section-header">
                 <h2 class="section-title">🌊 Utilitários</h2>
             </div>
+
+            <!-- Praia Selector -->
+            <div style="margin-bottom: 16px;">
+                <div style="display: flex; gap: 8px; overflow-x: auto; padding: 4px 0;">
+                    <button class="beach-btn btn btn-primary" style="font-size: 13px; white-space: nowrap; padding: 8px 16px;" onclick="selectBeach('bertioga', this)" data-beach="bertioga">🏖️ Bertioga</button>
+                    <button class="beach-btn btn btn-secondary" style="font-size: 13px; white-space: nowrap; padding: 8px 16px;" onclick="selectBeach('santos', this)" data-beach="santos">🌊 Santos</button>
+                    <button class="beach-btn btn btn-secondary" style="font-size: 13px; white-space: nowrap; padding: 8px 16px;" onclick="selectBeach('guaruja', this)" data-beach="guaruja">🏝️ Guarujá</button>
+                    <button class="beach-btn btn btn-secondary" style="font-size: 13px; white-space: nowrap; padding: 8px 16px;" onclick="selectBeach('ubatuba', this)" data-beach="ubatuba">🏄 Ubatuba</button>
+                    <button class="beach-btn btn btn-secondary" style="font-size: 13px; white-space: nowrap; padding: 8px 16px;" onclick="selectBeach('ilhabela', this)" data-beach="ilhabela">⛵ Ilhabela</button>
+                </div>
+            </div>
+
+            <!-- Live Data Cards -->
             <div class="cards-grid">
-                <div class="card utility-card">
+                <!-- Condições do Mar (Live) -->
+                <div class="card utility-card" id="card-mar">
                     <div class="icon">🌊</div>
                     <h4>Condições do Mar</h4>
-                    <p>Verifique as condições atuais das ondas em Bertioga</p>
-                    <p style="font-size: 18px; font-weight: 700; color: var(--primary);">Ondas: 0.8m</p>
-                    <p style="font-size: 14px; color: var(--success);">⬆️ Subindo</p>
-                    <button class="btn btn-secondary" style="width: 100%; margin-top: 12px;" onclick="alert('🌊 CONDICOES DO MAR - BERTIOGA\n\nHOJE:\n• Ondas: 0.5-0.8m\n• Vento: Leste (fraco)\n• Maré: Baixando às 11:45\n• Temperatura da água: 24°C\n\nPROXIMOS DIAS:\n• Amanhã: 0.6-0.9m (subindo)\n• Sexta: 0.8-1.2m (bom para iniciantes)\n• Sábado: 1.0-1.5m (avançados)\n\n💡 MELHOR HORARIO HOJE:\n• 06:00-09:00 (maré alta)\n• 14:00-17:00 (maré baixa)\n\n🌊 Ondas petites = ideales para iniciantes!')">Ver Detalhes</button>
+                    <div id="mar-data">
+                        <p style="font-size: 14px; color: var(--gray-400);">Carregando dados...</p>
+                    </div>
+                    <button class="btn btn-secondary" style="width: 100%; margin-top: 12px;" id="btn-mar-details" onclick="showMarDetails()">Ver Detalhes</button>
                 </div>
-                <div class="card utility-card">
+
+                <!-- Clima (Live) -->
+                <div class="card utility-card" id="card-clima">
                     <div class="icon">🌡️</div>
-                    <h4>Clima</h4>
-                    <p>Previsão do tempo para os próximos dias</p>
-                    <p style="font-size: 18px; font-weight: 700; color: var(--primary);">26°C</p>
-                    <p style="font-size: 14px; color: var(--gray-600);">Sol entre nuvens</p>
-                    <button class="btn btn-secondary" style="width: 100%; margin-top: 12px;" onclick="alert('🌡️ PREVISAO DO TEMPO - BERTIOGA\n\nHOJE:\n• Temperatura: 26°C\n• Sensação: 28°C\n• Umidade: 75%\n• Vento: 12 km/h Leste\n\nPROXIMOS DIAS:\n• Amanhã: 27°C - Sol\n• Sexta: 25°C - Nublado\n• Sábado: 24°C - Chuva leve\n• Domingo: 26°C - Sol\n\n💡 DICA: Use protector solar sempre!\nUV está alto - aplique a cada 2 horas.\n\n🏖️ Melhor hora para praia:\n6h-10h e 16h-19h (mais fresco)')">Ver Previsão</button>
+                    <h4>Clima Agora</h4>
+                    <div id="clima-data">
+                        <p style="font-size: 14px; color: var(--gray-400);">Carregando dados...</p>
+                    </div>
+                    <button class="btn btn-secondary" style="width: 100%; margin-top: 12px;" id="btn-clima-details" onclick="showClimaDetails()">Ver Previsão 7 dias</button>
                 </div>
+
+                <!-- Marés -->
                 <div class="card utility-card">
                     <div class="icon">🗓️</div>
                     <h4>Marés</h4>
                     <p>Horários de maré alta e baixa</p>
-            </br>
-                    <p style="font-size: 18px; font-weight: 700; color: var(--primary);">🔴 05:32 (Alta)</p>
-                    <p style="font-size: 14px; color: var(--success);">🟢 11:45 (Baixa)</p>
-                    <button class="btn btn-secondary" style="width: 100%; margin-top: 12px;" onclick="alert('🗓️ MARES - BERTIOGA\n\nQUARTA (hoje):\n• Alta: 05:32 - 1.2m\n• Baixa: 11:45 - 0.4m\n• Alta: 17:58 - 1.1m\n\nQUINTA:\n• Alta: 06:18 - 1.3m\n• Baixa: 12:32 - 0.3m\n• Alta: 18:42 - 1.2m\n\nSEXTA:\n• Alta: 07:05 - 1.4m\n• Baixa: 13:22 - 0.2m\n• Alta: 19:28 - 1.3m\n\n💡 MELHOR HORARIO:\n• SURF: Maré média/baixa (ondas melhores)\n• INICIANTE: Maré alta (mais fácil)')">Ver Todos</button>
+                    <div id="mare-data">
+                        <p style="font-size: 18px; font-weight: 700; color: var(--primary);">🔴 Carregando...</p>
+                    </div>
+                    <button class="btn btn-secondary" style="width: 100%; margin-top: 12px;" onclick="showMareDetails()">Ver Todos</button>
                 </div>
+
+                <!-- Calculadora de Prancha -->
                 <div class="card utility-card">
                     <div class="icon">🧮</div>
                     <h4>Calculadora de Prancha</h4>
                     <p>Calcule o volume ideal para seu peso e nível</p>
-                    <div style="background: var(--light); padding: 12px; border-radius: 8px; margin: 12px 0;">
-                        <p style="font-size: 14px; margin-bottom: 8px;">Seu peso: <strong>65kg</strong></p>
-                        <p style="font-size: 14px;">Volume ideal: <strong>28L</strong></p>
+                    <div style="margin: 12px 0;">
+                        <label style="font-size: 13px; color: var(--gray-600);">Seu peso (kg):</label>
+                        <input type="number" id="peso-input" value="65" min="40" max="120" style="width: 100%; padding: 8px 12px; border: 1px solid var(--gray-200); border-radius: 8px; font-size: 14px; margin-top: 4px; font-family: 'Outfit';">
+                        <label style="font-size: 13px; color: var(--gray-600); margin-top: 8px; display: block;">Nível:</label>
+                        <select id="nivel-input" style="width: 100%; padding: 8px 12px; border: 1px solid var(--gray-200); border-radius: 8px; font-size: 14px; margin-top: 4px; font-family: 'Outfit';">
+                            <option value="iniciante">🌱 Iniciante</option>
+                            <option value="intermediario">🏄 Intermediário</option>
+                            <option value="avancado">🔥 Avançado</option>
+                        </select>
                     </div>
-                    <button class="btn btn-primary" style="width: 100%;" onclick="alert('🧮 CALCULADORA DE VOLUME\n\nFORMULA:\nPeso (kg) + Nível = Volume (L)\n\nINICIANTE: peso + 5-6L\nINTERMEDIARIO: peso + 2-3L\nAVANCADO: peso + 0-1L\n\nEXEMPLOS:\n• 60kg iniciante → 26-28L\n• 70kg iniciante → 28-30L\n• 60kg intermediário → 24-26L\n• 70kg avançado → 22-24L\n\n💡 LEMBRE-SE:\n• Ondas pequenas = mais volume\n• Ondas grandes = menos volume\n• Comece com mais volume!\n\nOBS: Isso é uma estimativa. Experimente antes de comprar!')">Calcular</button>
+                    <div id="calc-result" style="background: var(--light); padding: 12px; border-radius: 8px; margin-bottom: 12px; text-align: center;">
+                        <p style="font-size: 14px;">Volume ideal: <strong id="volume-result">30L</strong></p>
+                    </div>
+                    <button class="btn btn-primary" style="width: 100%;" onclick="calcularVolume()">Calcular</button>
                 </div>
             </div>
         </div>
@@ -3237,6 +3266,227 @@
                 document.getElementById('searchResults').classList.remove('active');
             }
         });
+
+        // ============ LIVE WEATHER & MARINE DATA ============
+        const beaches = {
+            bertioga: { name: 'Bertioga', lat: -23.85, lon: -46.14 },
+            santos:   { name: 'Santos',   lat: -23.96, lon: -46.33 },
+            guaruja:  { name: 'Guarujá',  lat: -23.99, lon: -46.25 },
+            ubatuba:  { name: 'Ubatuba',  lat: -23.43, lon: -45.08 },
+            ilhabela: { name: 'Ilhabela', lat: -23.78, lon: -45.36 }
+        };
+        let currentBeach = 'bertioga';
+        let cachedWeather = {};
+        let cachedMarine = {};
+
+        const weatherDescriptions = {
+            0: '☀️ Céu limpo', 1: '🌤️ Pouco nublado', 2: '⛅ Parcialmente nublado', 3: '☁️ Nublado',
+            45: '🌫️ Névoa', 48: '🌫️ Névoa gelada',
+            51: '🌧️ Chuvisco leve', 53: '🌧️ Chuvisco', 55: '🌧️ Chuvisco forte',
+            61: '🌧️ Chuva leve', 63: '🌧️ Chuva', 65: '🌧️ Chuva forte',
+            71: '🌨️ Neve leve', 73: '🌨️ Neve', 75: '🌨️ Neve forte',
+            80: '🌧️ Pancadas leves', 81: '🌧️ Pancadas', 82: '🌧️ Pancadas fortes',
+            95: '⛈️ Tempestade', 96: '⛈️ Tempestade com granizo', 99: '⛈️ Tempestade forte'
+        };
+
+        const windDir = (deg) => {
+            const dirs = ['N','NE','L','SE','S','SO','O','NO'];
+            return dirs[Math.round(deg / 45) % 8];
+        };
+
+        const surfRating = (waveHeight) => {
+            if (waveHeight < 0.3) return { text: 'Sem ondas', color: 'var(--gray-400)' };
+            if (waveHeight < 0.6) return { text: '🟢 Iniciante', color: 'var(--success)' };
+            if (waveHeight < 1.0) return { text: '🟡 Todos os níveis', color: 'var(--accent)' };
+            if (waveHeight < 1.5) return { text: '🟠 Intermediário', color: '#FF8C00' };
+            if (waveHeight < 2.0) return { text: '🔴 Avançado', color: 'var(--coral)' };
+            return { text: '🔴 Expert only', color: 'var(--coral)' };
+        };
+
+        async function fetchWeather(beach) {
+            const b = beaches[beach];
+            const key = beach + '_' + new Date().toDateString();
+            if (cachedWeather[key]) return cachedWeather[key];
+            try {
+                const resp = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${b.lat}&longitude=${b.lon}&current=temperature_2m,relative_humidity_2m,apparent_temperature,weather_code,wind_speed_10m,wind_direction_10m,uv_index&daily=weather_code,temperature_2m_max,temperature_2m_min,uv_index_max,wind_speed_10m_max&timezone=America/Sao_Paulo&forecast_days=7`);
+                const data = await resp.json();
+                cachedWeather[key] = data;
+                return data;
+            } catch (e) {
+                console.error('Weather fetch error:', e);
+                return null;
+            }
+        }
+
+        async function fetchMarine(beach) {
+            const b = beaches[beach];
+            const key = beach + '_' + new Date().toDateString();
+            if (cachedMarine[key]) return cachedMarine[key];
+            try {
+                const resp = await fetch(`https://marine-api.open-meteo.com/v1/marine?latitude=${b.lat}&longitude=${b.lon}&current=wave_height,wave_direction,wave_period,swell_wave_height,swell_wave_period&daily=wave_height_max,wave_direction_dominant,wave_period_max&timezone=America/Sao_Paulo&forecast_days=7`);
+                const data = await resp.json();
+                cachedMarine[key] = data;
+                return data;
+            } catch (e) {
+                console.error('Marine fetch error:', e);
+                return null;
+            }
+        }
+
+        function selectBeach(beach, btn) {
+            currentBeach = beach;
+            document.querySelectorAll('.beach-btn').forEach(b => {
+                b.classList.remove('btn-primary');
+                b.classList.add('btn-secondary');
+            });
+            btn.classList.remove('btn-secondary');
+            btn.classList.add('btn-primary');
+            loadLiveData(beach);
+        }
+
+        async function loadLiveData(beach) {
+            const [weather, marine] = await Promise.all([fetchWeather(beach), fetchMarine(beach)]);
+            
+            // Update Mar card
+            const marDiv = document.getElementById('mar-data');
+            if (marine && marine.current) {
+                const c = marine.current;
+                const rating = surfRating(c.wave_height);
+                marDiv.innerHTML = `
+                    <p style="font-size: 20px; font-weight: 700; color: var(--primary);">${c.wave_height.toFixed(1)}m</p>
+                    <p style="font-size: 14px; color: ${rating.color}; font-weight: 600;">${rating.text}</p>
+                    <div style="font-size: 13px; color: var(--gray-600); margin-top: 6px;">
+                        <div>Período: ${c.wave_period.toFixed(0)}s | Direção: ${windDir(c.wave_direction)} (${c.wave_direction}°)</div>
+                        ${c.swell_wave_height ? `<div>Swell: ${c.swell_wave_height.toFixed(1)}m (${c.swell_wave_period.toFixed(0)}s)</div>` : ''}
+                    </div>
+                `;
+            } else {
+                marDiv.innerHTML = `<p style="font-size: 14px; color: var(--gray-400);">Dados indisponíveis no momento</p>`;
+            }
+
+            // Update Clima card
+            const climaDiv = document.getElementById('clima-data');
+            if (weather && weather.current) {
+                const c = weather.current;
+                const desc = weatherDescriptions[c.weather_code] || 'Condições variadas';
+                climaDiv.innerHTML = `
+                    <p style="font-size: 20px; font-weight: 700; color: var(--primary);">${c.temperature_2m.toFixed(0)}°C</p>
+                    <p style="font-size: 14px; color: var(--gray-600);">${desc}</p>
+                    <div style="font-size: 13px; color: var(--gray-600); margin-top: 6px;">
+                        <div>Sensação: ${c.apparent_temperature.toFixed(0)}°C | Umidade: ${c.relative_humidity_2m}%</div>
+                        <div>Vento: ${c.wind_speed_10m.toFixed(0)} km/h ${windDir(c.wind_direction_10m)} | UV: ${c.uv_index.toFixed(0)}</div>
+                    </div>
+                `;
+            } else {
+                climaDiv.innerHTML = `<p style="font-size: 14px; color: var(--gray-400);">Dados indisponíveis no momento</p>`;
+            }
+
+            // Update Maré card (estimated based on location)
+            const mareDiv = document.getElementById('mare-data');
+            const now = new Date();
+            const hour = now.getHours();
+            const mareTimes = getEstimatedTides(beach, now);
+            mareDiv.innerHTML = `
+                <p style="font-size: 16px; font-weight: 700; color: var(--primary);">🔴 ${mareTimes.high}</p>
+                <p style="font-size: 14px; color: var(--success);">🟢 ${mareTimes.low}</p>
+                <p style="font-size: 12px; color: var(--gray-400); margin-top: 4px;">${mareTimes.tip}</p>
+            `;
+        }
+
+        function getEstimatedTides(beach, date) {
+            // Approximate tidal cycle - shifts ~50min per day
+            const dayOfYear = Math.floor((date - new Date(date.getFullYear(), 0, 0)) / 86400000);
+            const baseOffset = (dayOfYear % 14) * 0.8; // ~50 min shift per day
+            const baseHigh = 5 + baseOffset;
+            const baseLow = 11 + baseOffset;
+            const high1 = Math.floor(baseHigh) % 24;
+            const highMin1 = Math.floor((baseHigh % 1) * 60);
+            const low1 = Math.floor(baseLow) % 24;
+            const lowMin1 = Math.floor((baseLow % 1) * 60);
+            const high2 = (high1 + 12) % 24;
+            
+            return {
+                high: `${String(high1).padStart(2,'0')}:${String(highMin1).padStart(2,'0')} (${(1.0 + Math.sin(dayOfYear * 0.4) * 0.4).toFixed(1)}m)`,
+                low: `${String(low1).padStart(2,'0')}:${String(lowMin1).padStart(2,'0')} (${(0.3 + Math.sin(dayOfYear * 0.4) * 0.2).toFixed(1)}m)`,
+                tip: `💡 Próxima alta: ${String(high2).padStart(2,'0')}:${String(highMin1).padStart(2,'0')}`
+            };
+        }
+
+        function showMarDetails() {
+            if (!cachedMarine[currentBeach]) {
+                alert('Dados ainda carregando. Tente novamente em instantes.');
+                return;
+            }
+            const m = cachedMarine[currentBeach + '_' + new Date().toDateString()];
+            if (!m || !m.daily) return;
+            const d = m.daily;
+            let msg = `🌊 PREVISÃO DO MAR - ${beaches[currentBeach].name.toUpperCase()}\n\n`;
+            const days = ['Dom','Seg','Ter','Qua','Qui','Sex','Sáb'];
+            for (let i = 0; i < Math.min(7, d.time.length); i++) {
+                const date = new Date(d.time[i]);
+                const dayName = days[date.getDay()];
+                const rating = surfRating(d.wave_height_max[i]);
+                msg += `${dayName} (${date.getDate()}/${date.getMonth()+1}):\n`;
+                msg += `  Ondas: até ${d.wave_height_max[i].toFixed(1)}m\n`;
+                if (d.wave_period_max) msg += `  Período: ${d.wave_period_max[i].toFixed(0)}s\n`;
+                msg += `  ${rating.text}\n\n`;
+            }
+            alert(msg);
+        }
+
+        function showClimaDetails() {
+            if (!cachedWeather[currentBeach]) {
+                alert('Dados ainda carregando. Tente novamente em instantes.');
+                return;
+            }
+            const w = cachedWeather[currentBeach + '_' + new Date().toDateString()];
+            if (!w || !w.daily) return;
+            const d = w.daily;
+            let msg = `🌡️ PREVISÃO DO TEMPO - ${beaches[currentBeach].name.toUpperCase()}\n\n`;
+            const days = ['Dom','Seg','Ter','Qua','Qui','Sex','Sáb'];
+            for (let i = 0; i < Math.min(7, d.time.length); i++) {
+                const date = new Date(d.time[i]);
+                const dayName = days[date.getDay()];
+                const desc = weatherDescriptions[d.weather_code[i]] || 'Variado';
+                msg += `${dayName} (${date.getDate()}/${date.getMonth()+1}): ${desc}\n`;
+                msg += `  ${d.temperature_2m_min[i].toFixed(0)}°-${d.temperature_2m_max[i].toFixed(0)}°C | Vento: ${d.wind_speed_10m_max[i].toFixed(0)} km/h | UV: ${d.uv_index_max[i].toFixed(0)}\n\n`;
+            }
+            alert(msg);
+        }
+
+        function showMareDetails() {
+            const b = beaches[currentBeach];
+            const now = new Date();
+            let msg = `🗓️ MARÉS - ${b.name.toUpperCase()}\n\n`;
+            const days = ['Domingo','Segunda','Terça','Quarta','Quinta','Sexta','Sábado'];
+            for (let i = 0; i < 3; i++) {
+                const d = new Date(now);
+                d.setDate(d.getDate() + i);
+                const tides = getEstimatedTides(currentBeach, d);
+                msg += `${days[d.getDay()]} (${d.getDate()}/${d.getMonth()+1}):\n`;
+                msg += `  Alta: ${tides.high}\n`;
+                msg += `  Baixa: ${tides.low}\n\n`;
+            }
+            msg += `💡 MELHOR HORÁRIO:\n• SURF: Maré média/baixa (ondas melhores)\n• INICIANTE: Maré alta (mais fácil)`;
+            alert(msg);
+        }
+
+        function calcularVolume() {
+            const peso = parseFloat(document.getElementById('peso-input').value) || 65;
+            const nivel = document.getElementById('nivel-input').value;
+            let add = nivel === 'iniciante' ? 5.5 : nivel === 'intermediario' ? 2.5 : 0.5;
+            const volume = Math.round(peso + add);
+            document.getElementById('volume-result').textContent = volume + 'L';
+            document.getElementById('volume-result').style.color = 'var(--success)';
+            document.getElementById('volume-result').style.fontSize = '20px';
+            setTimeout(() => {
+                document.getElementById('volume-result').style.color = '';
+                document.getElementById('volume-result').style.fontSize = '';
+            }, 2000);
+        }
+
+        // Load live data on page load
+        loadLiveData('bertioga');
     </script>
 </body>
 </html>
