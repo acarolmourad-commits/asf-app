@@ -1228,6 +1228,23 @@
         </button>
     </div>
 
+    <!-- Welcome Card (only shows once) -->
+    <div id="welcome-card" style="padding: 20px; display: none;">
+        <div style="background: linear-gradient(135deg, #00A8CC 0%, #0E2439 100%); padding: 25px; border-radius: 20px; color: white; position: relative; overflow: hidden;">
+            <button onclick="closeWelcome()" style="position: absolute; top: 10px; right: 15px; background: rgba(255,255,255,0.2); border: none; color: white; width: 30px; height: 30px; border-radius: 50%; font-size: 16px; cursor: pointer;">✕</button>
+            <div style="font-size: 60px; margin-bottom: 15px;">🏄‍♀️</div>
+            <h2 style="font-size: 24px; margin-bottom: 10px;">Bem-vinda ao ASF!</h2>
+            <p style="font-size: 14px; opacity: 0.9; line-height: 1.6; margin-bottom: 20px;">
+                Seu app completo para surf! Aqui você encontra:<br>
+                🌊 Previsão de ondas • 💪 Treinos • 📚 Dicas • 💬 Grupos
+            </p>
+            <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px;">
+                <button onclick="showSection('dicas'); closeWelcome();" style="background: rgba(255,255,255,0.2); border: none; color: white; padding: 12px; border-radius: 10px; font-size: 13px; cursor: pointer;">📚 Começar</button>
+                <button onclick="closeWelcome()" style="background: rgba(255,255,255,0.9); border: none; color: #0E2439; padding: 12px; border-radius: 10px; font-size: 13px; cursor: pointer; font-weight: bold;">Explorar Depois</button>
+            </div>
+        </div>
+    </div>
+
     <!-- Wave Forecast -->
     <div style="padding: 20px;">
         <h2 id="wave-forecast" style="font-size: 18px; color: #0E2439; margin-bottom: 15px;">🌊 Previsão de Ondas - Litoral Paulista</h2>
@@ -4008,6 +4025,24 @@
         });
         
         // ===== FIM COMPARTILHAMENTO =====
+
+        // ===== BOAS-VINDAS =====
+        function initWelcome() {
+            const hasSeenWelcome = localStorage.getItem('asf-welcome-seen');
+            if (!hasSeenWelcome) {
+                document.getElementById('welcome-card').style.display = 'block';
+            }
+        }
+        
+        function closeWelcome() {
+            document.getElementById('welcome-card').style.display = 'none';
+            localStorage.setItem('asf-welcome-seen', 'true');
+        }
+        
+        // Inicializar boas-vindas
+        initWelcome();
+        
+        // ===== FIM BOAS-VINDAS =====
 
         // ===== SISTEMA DE PONTOS ASF =====
         const POINTS_KEY = 'asf_points';
