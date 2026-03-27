@@ -3705,6 +3705,7 @@
     <!-- Floating Action Buttons -->
     <button class="fab" onclick="createPost()">+</button>
     <button class="fab-share" onclick="toggleSharePanel()" title="Compartilhar">📤</button>
+    <button id="back-to-top" onclick="scrollToTop()" style="display: none; position: fixed; bottom: 160px; right: 24px; width: 45px; height: 45px; background: rgba(0,168,204,0.9); border: none; color: white; border-radius: 50%; font-size: 20px; cursor: pointer; z-index: 99; box-shadow: 0 4px 15px rgba(0,0,0,0.2);">⬆️</button>
     
     <!-- Share Panel -->
     <div id="share-panel" style="display: none; position: fixed; bottom: 90px; right: 90px; background: white; border-radius: 16px; box-shadow: 0 10px 40px rgba(0,0,0,0.2); z-index: 1000; padding: 20px; min-width: 280px;">
@@ -4043,6 +4044,23 @@
         initWelcome();
         
         // ===== FIM BOAS-VINDAS =====
+        
+        // ===== VOLTAR AO TOPO =====
+        function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+        
+        window.addEventListener('scroll', function() {
+            const btn = document.getElementById('back-to-top');
+            if (window.scrollY > 500) {
+                btn.style.display = 'flex';
+                btn.style.alignItems = 'center';
+                btn.style.justifyContent = 'center';
+            } else {
+                btn.style.display = 'none';
+            }
+        });
+        // ===== FIM VOLTAR AO TOPO =====
 
         // ===== SISTEMA DE PONTOS ASF =====
         const POINTS_KEY = 'asf_points';
