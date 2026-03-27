@@ -812,6 +812,112 @@
                 grid-template-columns: 1fr;
             }
         }
+
+        /* Search Bar */
+        .search-container {
+            padding: 12px 20px;
+            background: var(--white);
+            position: relative;
+        }
+        .search-bar {
+            display: flex;
+            align-items: center;
+            background: var(--gray-100);
+            border-radius: 16px;
+            padding: 10px 16px;
+            gap: 10px;
+            transition: all 0.3s;
+        }
+        .search-bar:focus-within {
+            background: var(--white);
+            box-shadow: var(--shadow-md);
+            border: 1.5px solid var(--primary-light);
+        }
+        .search-bar .search-icon {
+            font-size: 18px;
+            opacity: 0.5;
+        }
+        .search-bar input {
+            flex: 1;
+            border: none;
+            background: none;
+            font-size: 15px;
+            font-family: 'Outfit', sans-serif;
+            color: var(--secondary);
+            outline: none;
+        }
+        .search-bar input::placeholder {
+            color: var(--gray-400);
+        }
+        .search-bar .search-clear {
+            background: none;
+            border: none;
+            font-size: 16px;
+            cursor: pointer;
+            color: var(--gray-400);
+            display: none;
+        }
+        .search-results {
+            position: absolute;
+            top: 100%;
+            left: 20px;
+            right: 20px;
+            background: var(--white);
+            border-radius: 16px;
+            box-shadow: var(--shadow-lg);
+            max-height: 400px;
+            overflow-y: auto;
+            z-index: 200;
+            display: none;
+        }
+        .search-results.active {
+            display: block;
+        }
+        .search-result-item {
+            padding: 12px 16px;
+            cursor: pointer;
+            border-bottom: 1px solid var(--gray-100);
+            transition: background 0.2s;
+        }
+        .search-result-item:hover {
+            background: var(--gray-100);
+        }
+        .search-result-item:last-child {
+            border-bottom: none;
+        }
+        .search-result-item .result-title {
+            font-weight: 600;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .search-result-item .result-section {
+            font-size: 12px;
+            color: var(--gray-400);
+            margin-top: 2px;
+        }
+        .search-result-item .result-preview {
+            font-size: 13px;
+            color: var(--gray-600);
+            margin-top: 4px;
+        }
+        .search-result-item .result-preview mark {
+            background: rgba(0,168,204,0.2);
+            color: var(--primary-dark);
+            padding: 0 2px;
+            border-radius: 3px;
+        }
+        .search-no-results {
+            padding: 24px 16px;
+            text-align: center;
+            color: var(--gray-400);
+        }
+        .search-no-results .emoji {
+            font-size: 40px;
+            display: block;
+            margin-bottom: 8px;
+        }
     </style>
 </head>
 <body>
@@ -831,6 +937,16 @@
             </div>
         </div>
     </header>
+
+    <!-- Search Bar -->
+    <div class="search-container">
+        <div class="search-bar">
+            <span class="search-icon">🔍</span>
+            <input type="text" id="searchInput" placeholder="Buscar dicas, lojas, treinos..." oninput="handleSearch(this.value)" onfocus="handleSearch(this.value)">
+            <button class="search-clear" id="searchClear" onclick="clearSearch()">✕</button>
+        </div>
+        <div class="search-results" id="searchResults"></div>
+    </div>
 
     <!-- Profile Bar -->
     <div class="profile-bar">
@@ -3011,6 +3127,116 @@
         }
         updateCountdown();
         setInterval(updateCountdown, 60000);
+
+        // Search Functionality
+        const searchIndex = [
+            // Dicas
+            { title: 'Longboard', icon: '🏄‍♀️', section: 'Dicas', sectionId: 'dicas', text: 'Prancha clássica com maior estabilidade e flutuação. Perfeita para ondas pequenas.' },
+            { title: 'Shortboard', icon: '🏄‍♀️', section: 'Dicas', sectionId: 'dicas', text: 'Prancha para ondas maiores e manobras radicais. Mais rápida e manobrável.' },
+            { title: 'Fish', icon: '🐟', section: 'Dicas', sectionId: 'dicas', text: 'Prancha compacta e larga, boa para ondas pequenas e intermediárias.' },
+            { title: 'Funboard', icon: '🌊', section: 'Dicas', sectionId: 'dicas', text: 'Prancha versátil para transição entre longboard e shortboard.' },
+            { title: 'Sustentabilidade', icon: '🌱', section: 'Dicas', sectionId: 'dicas', text: 'Pranchas ecológicas, protetor solar reef-safe, limpeza de praia.' },
+            { title: 'Proteção Solar', icon: '☀️', section: 'Dicas', sectionId: 'dicas', text: 'Use protetor solar reef-safe. Reaplique a cada 2 horas. Zinc no nariz.' },
+            { title: 'Etiqueta no Surf', icon: '🤝', section: 'Dicas', sectionId: 'dicas', text: 'Não droppe a wave de ninguém. Respeite a vez. Seja gentil na lineup.' },
+            // Saúde
+            { title: 'Treino Funcional', icon: '💪', section: 'Saúde', sectionId: 'saude', text: 'Exercícios para surfistas: core, equilíbrio, força e resistência.' },
+            { title: 'Treino de Core', icon: '🎯', section: 'Saúde', sectionId: 'saude', text: 'Prancha, abdominal, russian twist. Essencial para estabilidade na prancha.' },
+            { title: 'Aquecimento', icon: '🔥', section: 'Saúde', sectionId: 'saude', text: 'Sempre aqueça antes de surfar. 10-15 min de alongamento dinâmico.' },
+            { title: 'Resistência', icon: '🏊‍♀️', section: 'Saúde', sectionId: 'saude', text: 'Natação e corrida melhoram o paddle e a stamina no surf.' },
+            // Mobilidade
+            { title: 'Mobilidade', icon: '🧘', section: 'Mobilidade', sectionId: 'mobilidade', text: 'Alongamentos e exercícios de mobilidade para prevenção de lesões.' },
+            { title: 'Alongamento de Ombro', icon: '💪', section: 'Mobilidade', sectionId: 'mobilidade', text: 'Exercícios para ombros - região mais lesionada no surf.' },
+            { title: 'Quadril', icon: '🦵', section: 'Mobilidade', sectionId: 'mobilidade', text: 'Mobilidade de quadril essencial para manobras e postura na prancha.' },
+            // Alimentação
+            { title: 'Alimentação', icon: '🥗', section: 'Alimentação', sectionId: 'alimentacao', text: 'Nutrição para surfistas: o que comer antes e depois de surfar.' },
+            { title: 'Hidratação', icon: '💧', section: 'Alimentação', sectionId: 'alimentacao', text: 'Beba água! Água de coco é ótima para repor eletrólitos.' },
+            // Técnica
+            { title: 'Técnica de Surf', icon: '🏄‍♀️', section: 'Técnica', sectionId: 'tecnica', text: 'Manobras, positioning, leitura de ondas e progressão.' },
+            { title: 'Pop-up', icon: '⬆️', section: 'Técnica', sectionId: 'tecnica', text: 'A técnica de levantar na prancha. Pratique na areia primeiro.' },
+            { title: 'Bottom Turn', icon: '↩️', section: 'Técnica', sectionId: 'tecnica', text: 'A base de tudo. Gire com os quadris e olhe para onde quer ir.' },
+            { title: 'Cutback', icon: '🔄', section: 'Técnica', sectionId: 'tecnica', text: 'Manobra de volta para a onda. Gire o corpo e use os quadris.' },
+            { title: 'Duck Dive', icon: '🦆', section: 'Técnica', sectionId: 'tecnica', text: 'Técnica para passar porbaixo das ondas no paddle.' },
+            // Mental
+            { title: 'Mental', icon: '🧠', section: 'Mental', sectionId: 'mental', text: 'Técnicas de respiração, visualização e foco para surfar melhor.' },
+            { title: 'Respiração', icon: '🌬️', section: 'Mental', sectionId: 'mental', text: 'Exercícios de respiração para ansiedade e medo de ondas grandes.' },
+            { title: 'Meditação', icon: '🧘‍♀️', section: 'Mental', sectionId: 'mental', text: 'Meditação com sons do mar. Foque apenas no som das ondas.' },
+            // Lojas
+            { title: 'Lojas de Surf', icon: '🛒', section: 'Lojas', sectionId: 'lojas', text: 'Lojas de surf no litoral paulista. Todas as praias.' },
+            { title: 'Rip Curl', icon: '🏪', section: 'Lojas', sectionId: 'lojas', text: 'Loja Rip Curl - roupas, acessórios e pranchas de surf.' },
+            { title: 'Billabong', icon: '🏪', section: 'Lojas', sectionId: 'lojas', text: 'Loja Billabong - moda surf e equipamentos.' },
+            { title: 'Quiksilver', icon: '🏪', section: 'Lojas', sectionId: 'lojas', text: 'Loja Quiksilver - pranchas, roupas e acessórios.' },
+            { title: 'Boardriders', icon: '🏪', section: 'Lojas', sectionId: 'lojas', text: 'Boardriders - loja multi-marcas de surf.' },
+            // Progresso
+            { title: 'Quiz de Surf', icon: '🎯', section: 'Progresso', sectionId: 'progresso', text: 'Teste seus conhecimentos sobre surf com quizzes interativos.' },
+            { title: 'Pontos', icon: '⭐', section: 'Progresso', sectionId: 'progresso', text: 'Ganhe pontos completando atividades e suba de nível.' },
+            // Competições
+            { title: 'Competições', icon: '🏆', section: 'Competições', sectionId: 'competicoes', text: 'Próximos eventos, resultados e cronograma de treino.' },
+            { title: 'Circuito Paulista', icon: '🏅', section: 'Competições', sectionId: 'competicoes', text: 'Circuito Paulista de Surf Feminino 2026 - Santos, 12-13 de Abril.' },
+            { title: 'Treino Pré-Competição', icon: '💪', section: 'Competições', sectionId: 'competicoes', text: 'Cronograma de treino semanal para se preparar para competições.' },
+            // Utilitários
+            { title: 'Condições do Mar', icon: '🌊', section: 'Utilitários', sectionId: 'utilities', text: 'Verifique ondas, vento e temperatura da água em Bertioga.' },
+            { title: 'Previsão do Tempo', icon: '🌡️', section: 'Utilitários', sectionId: 'utilities', text: 'Clima e temperatura para os próximos dias.' },
+            { title: 'Marés', icon: '🗓️', section: 'Utilitários', sectionId: 'utilities', text: 'Horários de maré alta e baixa para planejar seu surf.' },
+            { title: 'Calculadora de Prancha', icon: '🧮', section: 'Utilitários', sectionId: 'utilities', text: 'Calcule o volume ideal da prancha pelo seu peso e nível.' },
+            // Manas
+            { title: 'Grupos de Surf', icon: '💬', section: 'Manas', sectionId: 'manas', text: 'Entre nos grupos de WhatsApp para surfar junto com outras mulheres.' },
+            // Surftrips
+            { title: 'Surftrips', icon: '🚗', section: 'Surftrips', sectionId: 'trips', text: 'Viagens de surf interativas. Responda perguntas e receba recomendações.' },
+        ];
+
+        function handleSearch(query) {
+            const resultsDiv = document.getElementById('searchResults');
+            const clearBtn = document.getElementById('searchClear');
+            
+            if (!query || query.length < 2) {
+                resultsDiv.classList.remove('active');
+                clearBtn.style.display = 'none';
+                return;
+            }
+            
+            clearBtn.style.display = 'block';
+            const q = query.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+            
+            const results = searchIndex.filter(item => {
+                const title = item.title.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+                const text = item.text.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+                const section = item.section.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+                return title.includes(q) || text.includes(q) || section.includes(q);
+            }).slice(0, 8);
+            
+            if (results.length === 0) {
+                resultsDiv.innerHTML = '<div class="search-no-results"><span class="emoji">🏄‍♀️</span>Nenhum resultado para "' + query + '"<br><small>Tente outro termo</small></div>';
+            } else {
+                resultsDiv.innerHTML = results.map(item => {
+                    const preview = item.text.length > 80 ? item.text.substring(0, 80) + '...' : item.text;
+                    const highlighted = preview.replace(new RegExp('(' + query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + ')', 'gi'), '<mark>$1</mark>');
+                    return '<div class="search-result-item" onclick="goToSection(\'' + item.sectionId + '\', this)">' +
+                        '<div class="result-title">' + item.icon + ' ' + item.title + '</div>' +
+                        '<div class="result-section">' + item.section + '</div>' +
+                        '<div class="result-preview">' + highlighted + '</div></div>';
+                }).join('');
+            }
+            
+            resultsDiv.classList.add('active');
+        }
+
+        function clearSearch() {
+            document.getElementById('searchInput').value = '';
+            document.getElementById('searchResults').classList.remove('active');
+            document.getElementById('searchClear').style.display = 'none';
+        }
+
+        function goToSection(sectionId, el) {
+            clearSearch();
+            showSection(sectionId);
+        }
+
+        // Close search on click outside
+        document.addEventListener('click', function(e) {
+            if (!e.target.closest('.search-container')) {
+                document.getElementById('searchResults').classList.remove('active');
+            }
+        });
     </script>
 </body>
 </html>
