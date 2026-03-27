@@ -1630,6 +1630,56 @@
 
     <!-- Content -->
     <div class="content">
+        <!-- Manas Próximas Section -->
+        <div class="section" id="manas-proximas">
+            <div class="section-header">
+                <h2 class="section-title">📍 Manas Próximas</h2>
+                <a href="#" class="see-all" onclick="findNearbyManas()">🔄 Atualizar</a>
+            </div>
+            
+            <div style="background: linear-gradient(135deg, #FF69B4 0%, #DB7093 100%); padding: 16px; margin: 0 20px 20px; border-radius: 16px; color: white;">
+                <p style="font-size: 14px; font-weight: 600;">📍 Encontre manas para surfar!</p>
+                <p style="font-size: 12px; opacity: 0.9; margin-top: 4px;">Ative sua localização para ver surfistas próximas</p>
+            </div>
+            
+            <div id="location-status" style="padding: 0 20px; margin-bottom: 15px;">
+                <button onclick="requestLocation()" class="btn btn-primary" style="width: 100%; background: linear-gradient(135deg, #00A8CC, #4DC8E0);">
+                    📍 Ativar Localização
+                </button>
+            </div>
+            
+            <div id="nearby-manas" style="padding: 0 20px;">
+                <p style="text-align: center; color: #999; padding: 40px;">Ative sua localização para ver manas próximas</p>
+            </div>
+            
+            <div style="padding: 20px;">
+                <h4 style="color: var(--secondary); margin-bottom: 15px;">🏖️ Praias Populares</h4>
+                <div class="cards-grid">
+                    <div class="card" onclick="showBeachManas('bertioga')" style="cursor: pointer;">
+                        <h3>🏖️ Bertioga</h3>
+                        <p style="font-size: 12px; color: var(--gray-400);">12 manas ativas</p>
+                    </div>
+                    <div class="card" onclick="showBeachManas('santos')" style="cursor: pointer;">
+                        <h3>🏐 Santos</h3>
+                        <p style="font-size: 12px; color: var(--gray-400);">23 manas ativas</p>
+                    </div>
+                    <div class="card" onclick="showBeachManas('guaruja')" style="cursor: pointer;">
+                        <h3>🏝️ Guarujá</h3>
+                        <p style="font-size: 12px; color: var(--gray-400);">8 manas ativas</p>
+                    </div>
+                    <div class="card" onclick="showBeachManas('ubatuba')" style="cursor: pointer;">
+                        <h3>🌊 Ubatuba</h3>
+                        <p style="font-size: 12px; color: var(--gray-400);">15 manas ativas</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div id="beach-manas-detail" style="display: none; padding: 0 20px 20px;">
+                <button onclick="document.getElementById('beach-manas-detail').style.display='none'" style="background: none; border: none; color: var(--primary); font-size: 14px; margin-bottom: 10px; cursor: pointer;">← Voltar</button>
+                <div id="beach-manas-list"></div>
+            </div>
+        </div>
+
         <!-- Dicas Section -->
         <div class="section active" id="dicas">
             <div class="section-header">
@@ -3735,13 +3785,13 @@
             <span class="icon">📚</span>
             <span class="label">Dicas</span>
         </button>
+        <button class="nav-item" onclick="showSection('manas-proximas')">
+            <span class="icon">📍</span>
+            <span class="label">Próximas</span>
+        </button>
         <button class="nav-item" onclick="showSection('saude')">
             <span class="icon">💪</span>
             <span class="label">Saúde</span>
-        </button>
-        <button class="nav-item" onclick="showSection('mobilidade')">
-            <span class="icon">🧘</span>
-            <span class="label">Mobilid.</span>
         </button>
         <button class="nav-item" onclick="showSection('progresso')">
             <span class="icon">🎯</span>
@@ -4061,6 +4111,148 @@
             }
         });
         // ===== FIM VOLTAR AO TOPO =====
+
+        // ===== MANAS PRÓXIMAS =====
+        let userLocation = null;
+        
+        // Manas mockadas (em produção viria de um banco de dados)
+        const MOCK_MANAS = {
+            bertioga: [
+                { name: 'Marina S.', level: 'Intermediária', beach: 'Riviera', distance: 0.5, avatar: '🏄‍♀️' },
+                { name: 'Julia R.', level: 'Iniciante', beach: 'Riviera', distance: 1.2, avatar: '🌊' },
+                { name: 'Ana P.', level: 'Avançada', beach: 'Jardim', distance: 2.3, avatar: '🦈' },
+                { name: 'Carla M.', level: 'Intermediária', beach: 'Centro', distance: 3.1, avatar: '🏄' },
+            ],
+            santos: [
+                { name: 'Beatriz L.', level: 'Avançada', beach: 'Gonzaga', distance: 0.3, avatar: '🏆' },
+                { name: 'Fernanda T.', level: 'Intermediária', beach: 'Embaré', distance: 0.8, avatar: '🏄‍♀️' },
+                { name: 'Lucia A.', level: 'Iniciante', beach: 'Praia Grande', distance: 1.5, avatar: '🌊' },
+                { name: 'Patricia O.', level: 'Intermediária', beach: 'Boqueirão', distance: 2.1, avatar: '🏄' },
+                { name: 'Renata G.', level: 'Avançada', beach: 'José Menino', distance: 2.8, avatar: '🦈' },
+            ],
+            guaruja: [
+                { name: 'Camila V.', level: 'Intermediária', beach: 'Pitangueiras', distance: 0.7, avatar: '🏄‍♀️' },
+                { name: 'Isabela M.', level: 'Iniciante', beach: 'Enseada', distance: 1.4, avatar: '🌊' },
+                { name: 'Thais R.', level: 'Avançada', beach: 'Tombo', distance: 2.0, avatar: '🦈' },
+            ],
+            ubatuba: [
+                { name: 'Daniela S.', level: 'Avançada', beach: 'Itamambuca', distance: 0.2, avatar: '🏆' },
+                { name: 'Gabriela F.', level: 'Intermediária', beach: 'Praia Grande', distance: 0.9, avatar: '🏄‍♀️' },
+                { name: 'Larissa C.', level: 'Intermediária', beach: 'Vermelha', distance: 1.6, avatar: '🏄' },
+                { name: 'Melissa P.', level: 'Iniciante', beach: 'Itamambuca', distance: 2.4, avatar: '🌊' },
+            ]
+        };
+        
+        function requestLocation() {
+            const statusDiv = document.getElementById('location-status');
+            statusDiv.innerHTML = '<p style="text-align: center; color: var(--primary);">📍 Buscando localização...</p>';
+            
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(
+                    (position) => {
+                        userLocation = {
+                            lat: position.coords.latitude,
+                            lng: position.coords.longitude
+                        };
+                        statusDiv.innerHTML = `
+                            <div style="background: #E8F5E9; padding: 15px; border-radius: 12px; text-align: center;">
+                                <p style="color: #27AE60; font-weight: bold;">✅ Localização ativada!</p>
+                                <p style="font-size: 12px; color: #666; margin-top: 5px;">${userLocation.lat.toFixed(4)}, ${userLocation.lng.toFixed(4)}</p>
+                            </div>
+                        `;
+                        findNearbyManas();
+                    },
+                    (error) => {
+                        statusDiv.innerHTML = `
+                            <div style="background: #FFEBEE; padding: 15px; border-radius: 12px; text-align: center;">
+                                <p style="color: #E74C3C;">❌ Não foi possível obter localização</p>
+                                <p style="font-size: 12px; color: #666; margin-top: 5px;">Verifique as permissões do navegador</p>
+                                <button onclick="requestLocation()" class="btn btn-secondary" style="margin-top: 10px;">Tentar novamente</button>
+                            </div>
+                        `;
+                    }
+                );
+            } else {
+                statusDiv.innerHTML = '<p style="color: #E74C3C; text-align: center;">Geolocalização não suportada neste navegador</p>';
+            }
+        }
+        
+        function findNearbyManas() {
+            const nearbyDiv = document.getElementById('nearby-manas');
+            nearbyDiv.innerHTML = '<p style="text-align: center; color: var(--primary);">🔄 Buscando manas próximas...</p>';
+            
+            // Simula busca (em produção usaria a localização real)
+            setTimeout(() => {
+                const allManas = [];
+                Object.keys(MOCK_MANAS).forEach(beach => {
+                    MOCK_MANAS[beach].forEach(mana => {
+                        allManas.push({ ...mana, region: beach });
+                    });
+                });
+                
+                // Ordena por distância
+                allManas.sort((a, b) => a.distance - b.distance);
+                
+                // Pega as 5 mais próximas
+                const closest = allManas.slice(0, 5);
+                
+                nearbyDiv.innerHTML = `
+                    <h4 style="color: var(--secondary); margin-bottom: 15px;">📍 Manas mais próximas</h4>
+                    ${closest.map(mana => `
+                        <div class="card" style="margin-bottom: 15px; cursor: pointer;" onclick="connectManas('${mana.name}')">
+                            <div style="display: flex; align-items: center; gap: 15px;">
+                                <div style="font-size: 40px;">${mana.avatar}</div>
+                                <div style="flex: 1;">
+                                    <h4 style="font-size: 16px; color: var(--secondary);">${mana.name}</h4>
+                                    <p style="font-size: 12px; color: var(--gray-600);">${mana.level} • ${mana.beach}</p>
+                                    <p style="font-size: 11px; color: var(--primary); font-weight: bold;">📍 ${mana.distance} km</p>
+                                </div>
+                                <button class="btn btn-primary" style="font-size: 12px; padding: 8px 12px;">Conectar</button>
+                            </div>
+                        </div>
+                    `).join('')}
+                    <p style="text-align: center; font-size: 12px; color: var(--gray-400); margin-top: 15px;">Total: ${allManas.length} manas encontradas</p>
+                `;
+            }, 1500);
+        }
+        
+        function showBeachManas(beach) {
+            const manas = MOCK_MANAS[beach] || [];
+            const listDiv = document.getElementById('beach-manas-list');
+            const detailDiv = document.getElementById('beach-manas-detail');
+            
+            const beachNames = {
+                bertioga: 'Bertioga',
+                santos: 'Santos',
+                guaruja: 'Guarujá',
+                ubatuba: 'Ubatuba'
+            };
+            
+            listDiv.innerHTML = `
+                <h4 style="color: var(--secondary); margin-bottom: 15px;">🏖️ Manas em ${beachNames[beach]}</h4>
+                ${manas.map(mana => `
+                    <div class="card" style="margin-bottom: 15px; cursor: pointer;" onclick="connectManas('${mana.name}')">
+                        <div style="display: flex; align-items: center; gap: 15px;">
+                            <div style="font-size: 40px;">${mana.avatar}</div>
+                            <div style="flex: 1;">
+                                <h4 style="font-size: 16px; color: var(--secondary);">${mana.name}</h4>
+                                <p style="font-size: 12px; color: var(--gray-600);">${mana.level} • ${mana.beach}</p>
+                                <p style="font-size: 11px; color: var(--primary); font-weight: bold;">📍 ${mana.distance} km</p>
+                            </div>
+                            <button class="btn btn-primary" style="font-size: 12px; padding: 8px 12px;">Conectar</button>
+                        </div>
+                    </div>
+                `).join('')}
+            `;
+            
+            detailDiv.style.display = 'block';
+        }
+        
+        function connectManas(name) {
+            alert(`🏄‍♀️ Solicitação enviada para ${name}!\n\nVocê receberá uma notificação quando ela aceitar. Enquanto isso, continue surfando! 🌊`);
+        }
+        
+        // ===== FIM MANAS PRÓXIMAS =====
 
         // ===== SISTEMA DE PONTOS ASF =====
         const POINTS_KEY = 'asf_points';
