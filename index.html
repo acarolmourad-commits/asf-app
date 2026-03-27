@@ -1047,10 +1047,24 @@
             </div>
             <div class="header-actions">
                 <button class="icon-btn" id="darkModeToggle" onclick="toggleDarkMode()" title="Alternar tema">🌙</button>
-                <button class="icon-btn">🔔</button>
+                <button class="icon-btn" onclick="toggleNotifications()" title="Notificações" style="position: relative;">
+                    🔔
+                    <span id="notif-badge" style="position: absolute; top: -5px; right: -5px; background: #E74C3C; color: white; font-size: 10px; width: 18px; height: 18px; border-radius: 50%; display: flex; align-items: center; justify-content: center; display: none;">0</span>
+                </button>
             </div>
         </div>
     </header>
+
+    <!-- Notifications Panel -->
+    <div id="notifications-panel" style="display: none; position: fixed; top: 80px; right: 15px; width: 320px; max-height: 400px; background: white; border-radius: 16px; box-shadow: 0 10px 40px rgba(0,0,0,0.2); z-index: 1000; overflow: hidden;">
+        <div style="background: linear-gradient(135deg, #0E2439 0%, #1A3A5C 100%); padding: 15px; color: white; display: flex; justify-content: space-between; align-items: center;">
+            <h3 style="font-size: 16px;">🔔 Notificações</h3>
+            <button onclick="clearNotifications()" style="background: rgba(255,255,255,0.2); border: none; color: white; padding: 5px 10px; border-radius: 8px; font-size: 11px; cursor: pointer;">Limpar</button>
+        </div>
+        <div id="notifications-list" style="max-height: 340px; overflow-y: auto; padding: 10px;">
+            <p style="text-align: center; color: #999; padding: 20px;">Sem notificações</p>
+        </div>
+    </div>
 
     <!-- Search Bar -->
     <div class="search-container">
@@ -3706,6 +3720,134 @@
             }, 800); // Show loading for 800ms
         });
         
+        // ===== SISTEMA DE NOTIFICAÇÕES =====
+        const NOTIF_KEY = 'asf_notifications';
+        
+        // Notificações padrão ao abrir
+        const DEFAULT_NOTIFICATIONS = [
+            { id: 1, type: 'treino', icon: '💪', title: 'Novo Treino!', text: 'Treino de Força e Core disponível', time: 'Agora', read: false },
+            { id: 2, type: 'ondas', icon: '🌊', title: 'Ondas Boas!', text: 'Bertioga: 0.8m - Boa para surfar!', time: '5 min', read: false },
+            { id: 3, type: 'pontos', icon: '🎯', title: 'Quiz Disponível', text: 'Responda e ganhe +50 pontos!', time: '10 min', read: false },
+            { id: 4, type: 'dica', icon: '📚', title: 'Dica do Dia', text: 'Respiração 4-4-4 para acalmar', time: '1h', read: true },
+            { id: 5, type: 'manas', icon: '💬', title: 'Novo Grupo', text: 'Bertioga Surf Girls: 13 manas!', time: '2h', read: true }
+        ];
+        
+        function loadNotifications() {
+            const saved = localStorage.getItem(NOTIF_KEY);
+            if (saved) {
+                return JSON.parse(saved);
+            }
+            // Primeira vez: usar notificações padrão
+            localStorage.setItem(NOTIF_KEY, JSON.stringify(DEFAULT_NOTIFICATIONS));
+            return DEFAULT_NOTIFICATIONS;
+        }
+        
+        function saveNotifications(notifs) {
+            localStorage.setItem(NOTIF_KEY, JSON.stringify(notifs));
+        }
+        
+        function addNotification(type, icon, title, text) {
+            const notifs = loadNotifications();
+            const newNotif = {
+                id: Date.now(),
+                type: type,
+                icon: icon,
+                title: title,
+                text: text,
+                time: 'Agora',
+                read: false
+            };
+            notifs.unshift(newNotif);
+            // Manter apenas últimas 20
+            if (notifs.length > 20) notifs.pop();
+            saveNotifications(notifs);
+            updateNotificationBadge();
+        }
+        
+        function updateNotificationBadge() {
+            const notifs = loadNotifications();
+            const unread = notifs.filter(n => !n.read).length;
+            const badge = document.getElementById('notif-badge');
+            if (unread > 0) {
+                badge.style.display = 'flex';
+                badge.textContent = unread > 9 ? '9+' : unread;
+            } else {
+                badge.style.display = 'none';
+            }
+        }
+        
+        function toggleNotifications() {
+            const panel = document.getElementById('notifications-panel');
+            const isVisible = panel.style.display === 'block';
+            panel.style.display = isVisible ? 'none' : 'block';
+            
+            if (!isVisible) {
+                renderNotifications();
+                // Marcar todas como lidas
+                const notifs = loadNotifications();
+                notifs.forEach(n => n.read = true);
+                saveNotifications(notifs);
+                updateNotificationBadge();
+            }
+        }
+        
+        function renderNotifications() {
+            const notifs = loadNotifications();
+            const list = document.getElementById('notifications-list');
+            
+            if (notifs.length === 0) {
+                list.innerHTML = '<p style="text-align: center; color: #999; padding: 20px;">Sem notificações</p>';
+                return;
+            }
+            
+            list.innerHTML = notifs.map(n => `
+                <div style="display: flex; gap: 12px; padding: 12px; border-bottom: 1px solid #eee; background: ${n.read ? 'white' : '#F0F9FF'}; border-radius: 8px; margin-bottom: 5px;">
+                    <div style="font-size: 28px; flex-shrink: 0;">${n.icon}</div>
+                    <div style="flex: 1;">
+                        <p style="font-weight: 600; font-size: 14px; color: #0E2439;">${n.title}</p>
+                        <p style="font-size: 12px; color: #666; margin-top: 3px;">${n.text}</p>
+                        <p style="font-size: 10px; color: #999; margin-top: 5px;">${n.time}</p>
+                    </div>
+                    ${!n.read ? '<div style="width: 8px; height: 8px; background: #00A8CC; border-radius: 50%; flex-shrink: 0; margin-top: 5px;"></div>' : ''}
+                </div>
+            `).join('');
+        }
+        
+        function clearNotifications() {
+            localStorage.setItem(NOTIF_KEY, '[]');
+            renderNotifications();
+            updateNotificationBadge();
+        }
+        
+        // Fechar painel ao clicar fora
+        document.addEventListener('click', function(e) {
+            const panel = document.getElementById('notifications-panel');
+            const bell = e.target.closest('button[onclick="toggleNotifications()"]');
+            if (!panel.contains(e.target) && !bell) {
+                panel.style.display = 'none';
+            }
+        });
+        
+        // Adicionar notificação quando ganha pontos
+        function notifyPoints(points, action) {
+            addNotification('pontos', '🎯', `+${points} Pontos!`, action);
+        }
+        
+        // Adicionar notificação de treino
+        function notifyWorkout(name) {
+            addNotification('treino', '💪', 'Treino Completo!', `Você terminou: ${name}`);
+        }
+        
+        // Adicionar notificação de ondas
+        function notifyWaves(beach, height) {
+            addNotification('ondas', '🌊', 'Ondas Boas!', `${beach}: ${height}m - Hora de surfar!`);
+        }
+        
+        // Inicializar badge
+        updateNotificationBadge();
+        
+        // ===== FIM NOTIFICAÇÕES =====
+
         // ===== SISTEMA DE PONTOS ASF =====
         const POINTS_KEY = 'asf_points';
         const HISTORY_KEY = 'asf_history';
