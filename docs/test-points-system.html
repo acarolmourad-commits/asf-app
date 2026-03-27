@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teste Sistema de Pontos</title>
+    <style>
+        body { font-family: Arial; padding: 20px; background: #f5f5f5; }
+        .card { background: white; padding: 20px; border-radius: 15px; margin: 10px 0; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        .points { font-size: 48px; color: #00A8CC; font-weight: bold; text-align: center; }
+        .level { font-size: 18px; color: #666; text-align: center; }
+        .progress { background: #eee; height: 20px; border-radius: 10px; margin: 15px 0; }
+        .progress-bar { background: linear-gradient(90deg, #00A8CC, #4DC8E0); height: 100%; border-radius: 10px; transition: width 0.5s; }
+        .btn { background: #00A8CC; color: white; border: none; padding: 12px 24px; border-radius: 10px; font-size: 14px; cursor: pointer; margin: 5px; }
+        .btn:hover { background: #0088A8; }
+        .achievement { background: #FFF9E6; border: 2px solid #F39C12; padding: 15px; border-radius: 10px; margin: 10px 0; }
+        h3 { color: #0E2439; margin-bottom: 10px; }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h3>📊 Meu Progresso</h3>
+        <div class="points" id="totalPoints">0</div>
+        <div class="level" id="levelText">Nível 1 - Iniciante</div>
+        <div class="progress">
+            <div class="progress-bar" id="progressBar" style="width: 0%"></div>
+        </div>
+        <p style="text-align: center; font-size: 12px; color: #999;" id="nextLevel">Próximo nível: 100 pontos</p>
+    </div>
+
+    <div class="card">
+        <h3>🎯 Como Ganhar Pontos</h3>
+        <button class="btn" onclick="earnPoints('quiz')">📝 Responder Quiz (+50 pts)</button>
+        <button class="btn" onclick="earnPoints('dica')">📚 Ler Dica (+10 pts)</button>
+        <button class="btn" onclick="earnPoints('treino')">💪 Fazer Treino (+30 pts)</button>
+        <button class="btn" onclick="earnPoints('enquete')">🗳️ Votar Enquete (+5 pts)</button>
+        <button class="btn" onclick="earnPoints('diario')">☀️ Check-in Diário (+15 pts)</button>
+    </div>
+
+    <div class="card">
+        <h3>🏆 Conquistas</h3>
+        <div id="achievements"></div>
+    </div>
+
+    <div class="card">
+        <h3>📊 Histórico</h3>
+        <div id="history"></div>
+    </div>
+
+    <script>
+        // Sistema de Pontos ASF
+        const POINTS_KEY = 'asf_points';
+        const HISTORY_KEY = 'asf_history';
+        const ACHIEVEMENTS_KEY = 'asf_achievements';
+
+        // Configuração de níveis
+        const LEVELS = [
+            { name: 'Iniciante', minPoints: 0, emoji: '🌱' },
+            { name: 'Aprendiz', minPoints: 100, emoji: '🏄‍♀️' },
+            { name: 'Ondinha', minPoints: 300, emoji: '🌊' },
+            { name: 'Onda Média', minPoints: 500, emoji: '🏄' },
+            { name: 'Barra', minPoints: 800, emoji: '🦈' },
+            { name: 'Profissional', minPoints: 1200, emoji: '🏆' },
+            { name: 'Lenda', minPoints: 2000, emoji: '👑' }
+        ];
+
+        // Configuração de conquistas
+        const ACHIEVEMENTS = [
+            { id: 'first_quiz', name: 'Primeira Onda', desc: 'Complete seu primeiro quiz', condition: (data) => data.quizzes >= 1 },
+            { id: 'five_quizzes', name: 'Estudiosa', desc: 'Complete 5 quizzes', condition: (data) => data.quizzes >= 5 },
+            { id: 'ten_dicas', name: 'Leitora', desc: 'Leia 10 dicas', condition: (data) => data.dicas >= 10 },
+            { id: 'five_workouts', name: 'Atleta', desc: 'Complete 5 treinos', condition: (data) => data.treinos >= 5 },
+            { id: 'level_3', name: 'Surfista', desc: 'Alcance nível 3', condition: (data) => getLevel(data.total).minPoints >= 500 },
+            { id: 'streak_7', name: 'Dedicada', desc: '7 dias consecutivos', condition: (data) => data.streak >= 7 }
+        ];
+
+        // Função para obter nível atual
+        function getLevel(points) {
+            for (let i = LEVELS.length - 1; i >= 0; i--) {
+                if (points >= LEVELS[i].minPoints) {
+                    return LEVELS[i];
+                }
+            }
+            return LEVELS[0];
+        }
+
+        // Função para obter próximo nível
+        function getNextLevel(points) {
+            for (let i = 0; i < LEVELS.length; i++) {
+                if (points < LEVELS[i].minPoints) {
+                    return LEVELS[i];
+                }
+            }
+            return null;
+        }
+
+        // Carregar dados salvos
+        function loadData() {
+            const saved = localStorage.getItem(POINTS_KEY);
+            if (saved) {
+                return JSON.parse(saved);
+            }
+            return {
+                total: 0,
+                quizzes: 0,
+                dicas: 0,
+                treinos: 0,
+                enquetes: 0,
+                diarios: 0,
+                streak: 0,
+                lastDaily: null
+            };
+        }
+
+        // Salvar dados
+        function saveData(data) {
+            localStorage.setItem(POINTS_KEY, JSON.stringify(data));
+        }
+
+        // Adicionar ao histórico
+        function addToHistory(action, points) {
+            const history = JSON.parse(localStorage.getItem(HISTORY_KEY) || '[]');
+            history.unshift({
+                date: new Date().toLocaleString('pt-BR'),
+                action: action,
+                points: points
+            });
+            // Manter apenas últimos 50 registros
+            if (history.length > 50) {
+                history.pop();
+            }
+            localStorage.setItem(HISTORY_KEY, JSON.stringify(history));
+        }
+
+        // Verificar conquistas
+        function checkAchievements(data) {
+            const earned = JSON.parse(localStorage.getItem(ACHIEVEMENTS_KEY) || '[]');
+            const newAchievements = [];
+
+            ACHIEVEMENTS.forEach(achievement => {
+                if (!earned.includes(achievement.id) && achievement.condition(data)) {
+                    earned.push(achievement.id);
+                    newAchievements.push(achievement);
+                }
+            });
+
+            localStorage.setItem(ACHIEVEMENTS_KEY, JSON.stringify(earned));
+            return newAchievements;
+        }
+
+        // Ganhar pontos
+        function earnPoints(type) {
+            const data = loadData();
+            let points = 0;
+            let action = '';
+
+            switch(type) {
+                case 'quiz':
+                    points = 50;
+                    action = '📝 Quiz completo';
+                    data.quizzes++;
+                    break;
+                case 'dica':
+                    points = 10;
+                    action = '📚 Dica lida';
+                    data.dicas++;
+                    break;
+                case 'treino':
+                    points = 30;
+                    action = '💪 Treino completo';
+                    data.treinos++;
+                    break;
+                case 'enquete':
+                    points = 5;
+                    action = '🗳️ Voto na enquete';
+                    data.enquetes++;
+                    break;
+                case 'diario':
+                    points = 15;
+                    action = '☀️ Check-in diário';
+                    data.diarios++;
+                    // Verificar streak
+                    const today = new Date().toDateString();
+                    const lastDaily = data.lastDaily;
+                    const yesterday = new Date(Date.now() - 86400000).toDateString();
+                    
+                    if (lastDaily === yesterday) {
+                        data.streak++;
+                    } else if (lastDaily !== today) {
+                        data.streak = 1;
+                    }
+                    data.lastDaily = today;
+                    break;
+            }
+
+            // Adicionar pontos
+            const oldLevel = getLevel(data.total);
+            data.total += points;
+            const newLevel = getLevel(data.total);
+
+            // Salvar
+            saveData(data);
+            addToHistory(action, points);
+
+            // Verificar se subiu de nível
+            if (newLevel.minPoints > oldLevel.minPoints) {
+                alert(`🎉 PARABÉNS! Você subiu para o nível ${newLevel.emoji} ${newLevel.name}!`);
+            }
+
+            // Verificar conquistas
+            const newAchievements = checkAchievements(data);
+            if (newAchievements.length > 0) {
+                setTimeout(() => {
+                    newAchievements.forEach(a => {
+                        alert(`🏆 Nova conquista desbloqueada!\n\n${a.name}\n${a.desc}`);
+                    });
+                }, 500);
+            }
+
+            // Atualizar interface
+            updateUI();
+            
+            // Feedback visual
+            showPointsAnimation(points);
+        }
+
+        // Animação de pontos
+        function showPointsAnimation(points) {
+            const div = document.createElement('div');
+            div.innerHTML = `+${points} pontos!`;
+            div.style.cssText = `
+                position: fixed;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                background: #27AE60;
+                color: white;
+                padding: 20px 40px;
+                border-radius: 15px;
+                font-size: 24px;
+                font-weight: bold;
+                z-index: 1000;
+                animation: fadeOut 1.5s forwards;
+            `;
+            document.body.appendChild(div);
+            
+            setTimeout(() => div.remove(), 1500);
+        }
+
+        // Atualizar interface
+        function updateUI() {
+            const data = loadData();
+            const level = getLevel(data.total);
+            const nextLevel = getNextLevel(data.total);
+
+            // Pontos
+            document.getElementById('totalPoints').textContent = data.total;
+
+            // Nível
+            document.getElementById('levelText').textContent = `${level.emoji} Nível ${LEVELS.indexOf(level) + 1} - ${level.name}`;
+
+            // Progresso
+            if (nextLevel) {
+                const progress = ((data.total - level.minPoints) / (nextLevel.minPoints - level.minPoints)) * 100;
+                document.getElementById('progressBar').style.width = `${progress}%`;
+                document.getElementById('nextLevel').textContent = `Próximo nível: ${nextLevel.minPoints} pontos (${nextLevel.minPoints - data.total} restantes)`;
+            } else {
+                document.getElementById('progressBar').style.width = '100%';
+                document.getElementById('nextLevel').textContent = '🎊 Você alcançou o nível máximo!';
+            }
+
+            // Conquistas
+            const earned = JSON.parse(localStorage.getItem(ACHIEVEMENTS_KEY) || '[]');
+            const achievementsDiv = document.getElementById('achievements');
+            achievementsDiv.innerHTML = '';
+            
+            ACHIEVEMENTS.forEach(a => {
+                const isEarned = earned.includes(a.id);
+                const div = document.createElement('div');
+                div.className = 'achievement';
+                div.style.opacity = isEarned ? '1' : '0.5';
+                div.innerHTML = `
+                    <strong>${isEarned ? '✅' : '🔒'} ${a.name}</strong><br>
+                    <small>${a.desc}</small>
+                `;
+                achievementsDiv.appendChild(div);
+            });
+
+            // Histórico
+            const history = JSON.parse(localStorage.getItem(HISTORY_KEY) || '[]');
+            const historyDiv = document.getElementById('history');
+            historyDiv.innerHTML = '';
+            
+            history.slice(0, 10).forEach(h => {
+                const div = document.createElement('div');
+                div.style.cssText = 'padding: 8px 0; border-bottom: 1px solid #eee; font-size: 13px;';
+                div.innerHTML = `${h.date} - ${h.action} <strong style="color: #27AE60;">+${h.points}</strong>`;
+                historyDiv.appendChild(div);
+            });
+        }
+
+        // Estilo de animação
+        const style = document.createElement('style');
+        style.innerHTML = `
+            @keyframes fadeOut {
+                0% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+                100% { opacity: 0; transform: translate(-50%, -100%) scale(1.2); }
+            }
+        `;
+        document.head.appendChild(style);
+
+        // Inicializar
+        updateUI();
+    </script>
+</body>
+</html>

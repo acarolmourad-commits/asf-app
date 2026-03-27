@@ -2769,7 +2769,7 @@
                             </label>
                             <p style="font-size: 11px; color: var(--gray-400); margin-top: 8px;">✅ <strong>Resposta correta: A)</strong> Regular = pé direito à frente, Goofy = pé esquerdo à frente.</p>
                         </div>
-                        <button class="btn btn-primary" style="width: 100%; margin-top: 20px;" onclick="alert('Quiz enviado! +50 pontos ganhos! 🎉')">Enviar Respostas</button>
+                        <button class="btn btn-primary" style="width: 100%; margin-top: 20px;" onclick="earnPoints('quiz', 50); alert('Quiz enviado! +50 pontos ganhos! 🎉')">Enviar Respostas</button>
                     </div>
                 </div>
                 <div class="card">
@@ -3620,6 +3620,73 @@
             }, 800); // Show loading for 800ms
         });
         
+        // ===== SISTEMA DE PONTOS ASF =====
+        const POINTS_KEY = 'asf_points';
+        const HISTORY_KEY = 'asf_history';
+        const ACHIEVEMENTS_KEY = 'asf_achievements';
+
+        const LEVELS = [
+            { name: 'Iniciante', minPoints: 0, emoji: '🌱' },
+            { name: 'Aprendiz', minPoints: 100, emoji: '🏄‍♀️' },
+            { name: 'Ondinha', minPoints: 300, emoji: '🌊' },
+            { name: 'Onda Média', minPoints: 500, emoji: '🏄' },
+            { name: 'Barra', minPoints: 800, emoji: '🦈' },
+            { name: 'Profissional', minPoints: 1200, emoji: '🏆' },
+            { name: 'Lenda', minPoints: 2000, emoji: '👑' }
+        ];
+
+        const ACHIEVEMENTS = [
+            { id: 'first_quiz', name: 'Primeira Onda', desc: 'Complete seu primeiro quiz' },
+            { id: 'five_quizzes', name: 'Estudiosa', desc: 'Complete 5 quizzes' },
+            { id: 'ten_dicas', name: 'Leitora', desc: 'Leia 10 dicas' },
+            { id: 'five_workouts', name: 'Atleta', desc: 'Complete 5 treinos' },
+            { id: 'level_3', name: 'Surfista', desc: 'Alcance nível 3' }
+        ];
+
+        function getLevel(points) {
+            for (let i = LEVELS.length - 1; i >= 0; i--) {
+                if (points >= LEVELS[i].minPoints) return LEVELS[i];
+            }
+            return LEVELS[0];
+        }
+
+        function loadPoints() {
+            return JSON.parse(localStorage.getItem(POINTS_KEY) || '{"total":0,"quizzes":0,"dicas":0,"treinos":0}');
+        }
+
+        function savePoints(data) {
+            localStorage.setItem(POINTS_KEY, JSON.stringify(data));
+        }
+
+        function earnPoints(type, points) {
+            const data = loadPoints();
+            data.total += points;
+            if (type === 'quiz') data.quizzes++;
+            if (type === 'dica') data.dicas++;
+            if (type === 'treino') data.treinos++;
+            savePoints(data);
+            
+            // Mostrar animação
+            const popup = document.createElement('div');
+            popup.innerHTML = `+${points} pontos! 🎉`;
+            popup.style.cssText = 'position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);background:#27AE60;color:white;padding:20px 40px;border-radius:15px;font-size:20px;font-weight:bold;z-index:9999;';
+            document.body.appendChild(popup);
+            setTimeout(() => popup.remove(), 1500);
+            
+            updatePointsDisplay();
+        }
+
+        function updatePointsDisplay() {
+            const data = loadPoints();
+            const level = getLevel(data.total);
+            // Atualizar displays se existirem
+            document.querySelectorAll('.points-display').forEach(el => {
+                el.textContent = data.total;
+            });
+        }
+        
+        // ===== FIM SISTEMA DE PONTOS =====
+
         function createPost() {
             alert('Funcionalidade em desenvolvimento! 🚀');
         }
