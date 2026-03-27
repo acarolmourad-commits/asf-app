@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Associação de Surf Feminino ASF</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #00a8cc;
+            --secondary: #0e2439;
+            --accent: #ff6b6b;
+            --light: #f8f9fa;
+            --white: #ffffff;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--secondary);
+        }
+
+        /* Header */
+        header {
+            background: var(--secondary);
+            padding: 1rem 5%;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            color: var(--white);
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .logo span {
+            color: var(--primary);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        nav a {
+            color: var(--white);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: var(--primary);
+        }
+
+        /* Hero */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(135deg, rgba(14, 36, 57, 0.9), rgba(0, 168, 204, 0.7)), 
+                        url('https://images.unsplash.com/photo-1502680390469-be75c86b636f?w=1920') center/cover;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 0 5%;
+            margin-top: 60px;
+        }
+
+        .hero-content {
+            color: var(--white);
+            max-width: 800px;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+
+        .hero h1 span {
+            color: var(--primary);
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: var(--primary);
+            color: var(--white);
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: transform 0.3s, background 0.3s;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            background: #0088a8;
+        }
+
+        /* Section */
+        section {
+            padding: 5rem 10%;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .section-title h2 {
+            font-size: 2.5rem;
+            color: var(--secondary);
+            margin-bottom: 1rem;
+        }
+
+        .section-title p {
+            color: #666;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Sobre */
+        #sobre {
+            background: var(--light);
+        }
+
+        .sobre-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .sobre-text h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+
+        .sobre-text p {
+            margin-bottom: 1rem;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+        }
+
+        .stat-box {
+            background: var(--white);
+            padding: 2rem;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: bold;
+            color: var(--primary);
+        }
+
+        .stat-label {
+            color: #666;
+        }
+
+        /* Atividades */
+        .atividades-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .atividade-card {
+            background: var(--white);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+
+        .atividade-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .atividade-icon {
+            background: var(--primary);
+            height: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+        }
+
+        .atividade-content {
+            padding: 1.5rem;
+        }
+
+        .atividade-content h3 {
+            margin-bottom: 0.5rem;
+        }
+
+        .atividade-content p {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        /* Contato */
+        #contato {
+            background: var(--secondary);
+            color: var(--white);
+        }
+
+        #contato .section-title h2 {
+            color: var(--white);
+        }
+
+        #contato .section-title p {
+            color: rgba(255,255,255,0.7);
+        }
+
+        .contato-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+        }
+
+        .contato-info h3 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .contato-item {
+            margin-bottom: 1.5rem;
+        }
+
+        .contato-item strong {
+            display: block;
+            margin-bottom: 0.25rem;
+        }
+
+        .contato-item p {
+            opacity: 0.8;
+        }
+
+        .social-links {
+            margin-top: 2rem;
+        }
+
+        .social-links a {
+            display: inline-block;
+            width: 50px;
+            height: 50px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            text-align: center;
+            line-height: 50px;
+            margin-right: 10px;
+            color: var(--white);
+            text-decoration: none;
+            transition: background 0.3s;
+        }
+
+        .social-links a:hover {
+            background: var(--primary);
+        }
+
+        .patrocinio {
+            background: rgba(255,255,255,0.1);
+            padding: 2rem;
+            border-radius: 15px;
+        }
+
+        .patrocinio h3 {
+            margin-bottom: 1rem;
+        }
+
+        .patrocinio p {
+            opacity: 0.8;
+            margin-bottom: 1.5rem;
+        }
+
+        .patrocinio-btn {
+            display: inline-block;
+            background: var(--accent);
+            color: var(--white);
+            padding: 0.75rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: transform 0.3s;
+        }
+
+        .patrocinio-btn:hover {
+            transform: scale(1.05);
+        }
+
+        /* Footer */
+        footer {
+            background: #0a1a2a;
+            color: var(--white);
+            text-align: center;
+            padding: 2rem;
+        }
+
+        footer p {
+            opacity: 0.7;
+        }
+
+        /* Mobile */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            nav {
+                display: none;
+            }
+
+            .sobre-content,
+            .contato-container {
+                grid-template-columns: 1fr;
+            }
+
+            section {
+                padding: 3rem 5%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">ASF <span>Surf</span></div>
+        <nav>
+            <ul>
+                <li><a href="#inicio">Início</a></li>
+                <li><a href="#sobre">Sobre</a></li>
+                <li><a href="#atividades">Atividades</a></li>
+                <li><a href="#contato">Contato</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="hero" id="inicio">
+        <div class="hero-content">
+            <h1>Empoderando Mulheres <span>Através do Surf</span></h1>
+            <p>Associação de Surf Feminino ASF — Promovendo inclusão, desempenho e bem-estar no mar.</p>
+            <a href="#contato" class="cta-button">Fale Conosco</a>
+        </div>
+    </section>
+
+    <section id="sobre">
+        <div class="section-title">
+            <h2>Sobre a ASF</h2>
+            <p>Somos uma associação dedicada a transformar vidas através do surf.</p>
+        </div>
+        <div class="sobre-content">
+            <div class="sobre-text">
+                <h3>Missão</h3>
+                <p>Promover o acesso ao surf para mulheres e crianças, oferecendo treinamento de alto rendimento, apoio psicológico e oportunidades de inclusão social.</p>
+                <p>Fundada em 2019, a ASF já atende dezenas de atletas e realiza eventos que colocam Bertioga no mapa do surf feminino nacional.</p>
+                <p>Nossa presidente é atleta experiente e ex-competidora, trazendo conhecimento técnico e paixão pelo esporte.</p>
+            </div>
+            <div class="stats">
+                <div class="stat-box">
+                    <div class="stat-number">50+</div>
+                    <div class="stat-label">Atletas Atendidas</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-number">2024</div>
+                    <div class="stat-label">Fundação</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-number">1</div>
+                    <div class="stat-label">CT em Construção</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-number">100%</div>
+                    <div class="stat-label">Mulheres & Crianças</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="atividades">
+        <div class="section-title">
+            <h2>Nossas Atividades</h2>
+            <p>O que oferecemos para nossas atletas e comunidade.</p>
+        </div>
+        <div class="atividades-grid">
+            <div class="atividade-card">
+                <div class="atividade-icon">🏄‍♀️</div>
+                <div class="atividade-content">
+                    <h3>Treinamento de Alto Rendimento</h3>
+                    <p>Programas estruturados para atletas que buscam competição e evolução técnica no surf.</p>
+                </div>
+            </div>
+            <div class="atividade-card">
+                <div class="atividade-icon">📚</div>
+                <div class="atividade-content">
+                    <h3>Aulas para Iniciantes</h3>
+                    <p>Aulas de surf para mulheres e crianças que querem aprender o esporte com segurança.</p>
+                </div>
+            </div>
+            <div class="atividade-card">
+                <div class="atividade-icon">🧠</div>
+                <div class="atividade-content">
+                    <h3>Apoio Psicológico</h3>
+                    <p>Atendimento psicológico para atletas, promovendo bem-estar mental e desempenho.</p>
+                </div>
+            </div>
+            <div class="atividade-card">
+                <div class="atividade-icon">🏆</div>
+                <div class="atividade-content">
+                    <h3>Eventos e Competições</h3>
+                    <p>Organização de competições femininas e eventos que reunem a comunidade do surf.</p>
+                </div>
+            </div>
+            <div class="atividade-card">
+                <div class="atividade-icon">❤️</div>
+                <div class="atividade-content">
+                    <h3>Projeto Social</h3>
+                    <p>Aulas gratuitas para crianças e mulheres em situação de vulnerabilidade social.</p>
+                </div>
+            </div>
+            <div class="atividade-card">
+                <div class="atividade-icon">🤝</div>
+                <div class="atividade-content">
+                    <h3>Parcerias</h3>
+                    <p>Convênios com marcas de surf para fornecer materiais e uniformes às atletas.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contato">
+        <div class="section-title">
+            <h2>Fale Conosco</h2>
+            <p>Entre em contato para parcerias, dúvidas ou para saber como participar.</p>
+        </div>
+        <div class="contato-container">
+            <div class="contato-info">
+                <h3>Informações de Contato</h3>
+                <div class="contato-item">
+                    <strong>Sede</strong>
+                    <p>Bertioga, São Paulo/SP</p>
+                </div>
+                <div class="contato-item">
+                    <strong>Presidente</strong>
+                    <p>Carol</p>
+                </div>
+                <div class="contato-item">
+                    <strong>CNPJ</strong>
+                    <p>52.585.183/0001-03</p>
+                </div>
+                <div class="social-links">
+                    <a href="#">📷</a>
+                    <a href="#">📘</a>
+                    <a href="#">🎵</a>
+                </div>
+            </div>
+            <div class="patrocinio">
+                <h3>Seja um Patrocinador</h3>
+                <p>Você ou sua marca podem fazer parte da ASF. Oferecemos visibilidade, impacto social e conexão com o universo do surf.</p>
+                <p><strong>Benefícios:</strong></p>
+                <ul>
+                    <li>Logo no site e redes sociais</li>
+                    <li>Marca em uniformes e eventos</li>
+                    <li>Direito de uso de imagem das atletas</li>
+                    <li>Presença em competições</li>
+                </ul>
+                <br>
+                <a href="#" class="patrocinio-btn">Quero Patrocinar</a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 Associação de Surf Feminino ASF. Todos os direitos reservados.</p>
+    </footer>
+</body>
+</html>

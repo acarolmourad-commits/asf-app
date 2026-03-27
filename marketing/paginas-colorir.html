@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>_coloring-pages.asf</title>
+    <style>
+        @page {
+            size: A4;
+            margin: 0;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: white;
+        }
+        .page {
+            width: 210mm;
+            height: 297mm;
+            page-break-after: always;
+            position: relative;
+            overflow: hidden;
+        }
+        .page:last-child {
+            page-break-after: avoid;
+        }
+        .header {
+            background: linear-gradient(135deg, #00A8CC 0%, #0E2439 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+        .header h1 {
+            font-size: 36px;
+            margin-bottom: 10px;
+        }
+        .header p {
+            font-size: 18px;
+            opacity: 0.9;
+        }
+        .footer {
+            position: absolute;
+            bottom: 20px;
+            left: 0;
+            right: 0;
+            text-align: center;
+            color: #666;
+            font-size: 12px;
+        }
+        .content {
+            padding: 40px;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+            height: calc(100% - 120px);
+        }
+        .coloring-page {
+            border: 3px dashed #ccc;
+            border-radius: 15px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            text-align: center;
+        }
+        .coloring-page svg, .coloring-page .drawing {
+            width: 100%;
+            height: 180px;
+        }
+        .coloring-page .label {
+            margin-top: 15px;
+            font-size: 14px;
+            color: #666;
+            font-weight: bold;
+        }
+        /* Simple SVG drawings for coloring */
+        .surfboard {
+            width: 150px;
+            height: 80px;
+            border: 3px solid #333;
+            border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+            position: relative;
+            margin: 20px auto;
+        }
+        .surfboard::before {
+            content: '';
+            position: absolute;
+            top: 30%;
+            left: 10%;
+            right: 10%;
+            height: 3px;
+            background: #333;
+        }
+        .wave {
+            width: 120px;
+            height: 60px;
+            border: 3px solid #333;
+            border-bottom: none;
+            border-radius: 50% 50% 0 0;
+            position: relative;
+            margin: 30px auto;
+        }
+        .wave::after {
+            content: '';
+            position: absolute;
+            top: 20px;
+            left: -10px;
+            right: -10px;
+            height: 3px;
+            background: #333;
+            border-radius: 50%;
+        }
+        .sun {
+            width: 80px;
+            height: 80px;
+            border: 3px solid #333;
+            border-radius: 50%;
+            position: relative;
+            margin: 30px auto;
+        }
+        .sun::before, .sun::after {
+            content: '';
+            position: absolute;
+            background: #333;
+        }
+        .sun::before {
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 3px;
+            height: 20px;
+        }
+        .sun::after {
+            top: 50%;
+            left: -20px;
+            transform: translateY(-50%);
+            width: 20px;
+            height: 3px;
+        }
+        .palm {
+            width: 100px;
+            height: 100px;
+            position: relative;
+            margin: 20px auto;
+        }
+        .palm-trunk {
+            width: 15px;
+            height: 60px;
+            border: 3px solid #333;
+            border-radius: 5px;
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        .palm-leaf {
+            width: 40px;
+            height: 30px;
+            border: 3px solid #333;
+            border-radius: 50% 50% 50% 50%;
+            position: absolute;
+        }
+        .palm-leaf:nth-child(2) { top: 0; left: 0; transform: rotate(-30deg); }
+        .palm-leaf:nth-child(3) { top: 0; right: 0; transform: rotate(30deg); }
+        .palm-leaf:nth-child(4) { top: -10px; left: 20px; }
+        .turtle {
+            width: 100px;
+            height: 80px;
+            position: relative;
+            margin: 20px auto;
+        }
+        .turtle-shell {
+            width: 70px;
+            height: 50px;
+            border: 3px solid #333;
+            border-radius: 50%;
+            position: absolute;
+            top: 10px;
+            left: 15px;
+        }
+        .turtle-head {
+            width: 20px;
+            height: 20px;
+            border: 3px solid #333;
+            border-radius: 50%;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+        .turtle-fin {
+            width: 20px;
+            height: 15px;
+            border: 3px solid #333;
+            border-radius: 50%;
+            position: absolute;
+        }
+        .turtle-fin:first-of-type { top: 25px; left: -5px; transform: rotate(-20deg); }
+        .turtle-fin:nth-of-type(2) { top: 25px; right: -5px; transform: rotate(20deg); }
+        .heart {
+            width: 80px;
+            height: 70px;
+            position: relative;
+            margin: 30px auto;
+        }
+        .heart::before, .heart::after {
+            content: '';
+            position: absolute;
+            width: 40px;
+            height: 60px;
+            border: 3px solid #333;
+            border-radius: 50% 50% 50% 50%;
+        }
+        .heart::before { left: 0; transform: rotate(-45deg); }
+        .heart::after { right: 0; transform: rotate(45deg); }
+        .star {
+            width: 60px;
+            height: 60px;
+            position: relative;
+            margin: 40px auto;
+        }
+        .star::before {
+            content: '★';
+            font-size: 60px;
+            line-height: 60px;
+            color: #333;
+        }
+        .dolphin {
+            width: 100px;
+            height: 60px;
+            position: relative;
+            margin: 30px auto;
+        }
+        .dolphin-body {
+            width: 80px;
+            height: 40px;
+            border: 3px solid #333;
+            border-radius: 50% 50% 50% 50%;
+            position: absolute;
+            bottom: 0;
+            left: 10px;
+        }
+        .dolphin-fin {
+            width: 0;
+            height: 0;
+            border-left: 15px solid transparent;
+            border-right: 15px solid transparent;
+            border-bottom: 25px solid #333;
+            position: absolute;
+            top: 0;
+            left: 30px;
+        }
+        .instructions {
+            background: #f8f9fa;
+            padding: 20px;
+            margin: 20px;
+            border-radius: 10px;
+        }
+        .instructions h3 {
+            color: #0E2439;
+            margin-bottom: 10px;
+        }
+        .instructions ul {
+            color: #666;
+            margin-left: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Page 1: Cover -->
+<div class="page">
+    <div class="header">
+        <h1>🏄‍♀️ ASF</h1>
+        <p>Associação de Surf Feminino</p>
+        <p style="margin-top: 20px; font-size: 16px;">Páginas para Colorir</p>
+        <p style="margin-top: 30px; font-size: 14px;">Com amor, para nossas apoiadoras!</p>
+    </div>
+    <div style="padding: 40px; text-align: center;">
+        <div style="font-size: 100px;">🎨</div>
+        <h2 style="color: #0E2439; margin: 20px 0;">Pinte e Deixe sua Imaginação Voar!</h2>
+        <p style="color: #666; font-size: 16px;">Estas páginas foram criadas especialmente para você que apoia o surf feminino.</p>
+    </div>
+    <div class="footer">
+        🌊 "Juntas, surfando mais forte!" | ASF - Associação de Surf Feminino
+    </div>
+</div>
+
+<!-- Page 2: Surf boards -->
+<div class="page">
+    <div class="header" style="padding: 20px;">
+        <h2>🏄‍♀️ Pranchas de Surf</h2>
+    </div>
+    <div class="content">
+        <div class="coloring-page">
+            <div class="surfboard"></div>
+            <div class="label">Longboard</div>
+        </div>
+        <div class="coloring-page">
+            <div class="surfboard" style="width: 100px; height: 50px;"></div>
+            <div class="label">Shortboard</div>
+        </div>
+        <div class="coloring-page">
+            <div class="surfboard" style="width: 120px; height: 60px;"></div>
+            <div class="label">Funboard</div>
+        </div>
+        <div class="coloring-page">
+            <div class="wave"></div>
+            <div class="label">Onda Perfeita</div>
+        </div>
+    </div>
+    <div class="footer">
+        Página 2 | ASF - Associação de Surf Feminino
+    </div>
+</div>
+
+<!-- Page 3: Ocean Life -->
+<div class="page">
+    <div class="header" style="padding: 20px;">
+        <h2>🐢 Vida Marinha</h2>
+    </div>
+    <div class="content">
+        <div class="coloring-page">
+            <div class="turtle">
+                <div class="turtle-head"></div>
+                <div class="turtle-shell"></div>
+                <div class="turtle-fin"></div>
+                <div class="turtle-fin"></div>
+            </div>
+            <div class="label">Tartaruga</div>
+        </div>
+        <div class="coloring-page">
+            <div class="dolphin">
+                <div class="dolphin-fin"></div>
+                <div class="dolphin-body"></div>
+            </div>
+            <div class="label">Golfinho</div>
+        </div>
+        <div class="coloring-page">
+            <div class="wave"></div>
+            <div class="label">Onda do Mar</div>
+        </div>
+        <div class="coloring-page">
+            <div class="sun"></div>
+            <div class="label">Sol Nascente</div>
+        </div>
+    </div>
+    <div class="footer">
+        Página 3 | ASF - Associação de Surf Feminino
+    </div>
+</div>
+
+<!-- Page 4: Symbols -->
+<div class="page">
+    <div class="header" style="padding: 20px;">
+        <h2>⭐ Símbolos ASF</h2>
+    </div>
+    <div class="content">
+        <div class="coloring-page">
+            <div class="heart"></div>
+            <div class="label">Coração Surfista</div>
+        </div>
+        <div class="coloring-page">
+            <div class="star"></div>
+            <div class="label">Estrela do Mar</div>
+        </div>
+        <div class="coloring-page">
+            <div class="palm">
+                <div class="palm-leaf"></div>
+                <div class="palm-leaf"></div>
+                <div class="palm-leaf"></div>
+                <div class="palm-trunk"></div>
+            </div>
+            <div class="label">Palmeira</div>
+        </div>
+        <div class="coloring-page">
+            <div class="wave" style="transform: scale(1.3);"></div>
+            <div class="label">Onda Livre</div>
+        </div>
+    </div>
+    <div class="footer">
+        Página 4 | ASF - Associação de Surf Feminino
+    </div>
+</div>
+
+<!-- Page 5: Thank you -->
+<div class="page">
+    <div style="padding: 40px; text-align: center;">
+        <h2 style="color: #0E2439; font-size: 32px; margin: 40px 0;">Obrigada por nos apoiar! 🌊</h2>
+        
+        <div style="margin: 40px 0;">
+            <div style="font-size: 80px;">🏄‍♀️</div>
+            <div style="font-size: 80px;">❤️</div>
+            <div style="font-size: 80px;">💪</div>
+        </div>
+        
+        <div style="background: #f8f9fa; padding: 30px; border-radius: 20px; margin: 40px 0;">
+            <h3 style="color: #0E2439; margin-bottom: 20px;">ASF - Associação de Surf Feminino</h3>
+            <p style="color: #666;">Fundada em 5 de julho de 2019</p>
+            <p style="color: #666;">CNPJ: 52.585.183/0001-03</p>
+            <p style="color: #666; margin-top: 20px;">📱 @associacaosurffeminino</p>
+        </div>
+        
+        <p style="color: #00A8CC; font-size: 20px; font-weight: bold;">"Juntas, surfando mais forte!"</p>
+    </div>
+    <div class="footer">
+        🌊 Created with love for all ASF supporters!
+    </div>
+</div>
+
+</body>
+</html>

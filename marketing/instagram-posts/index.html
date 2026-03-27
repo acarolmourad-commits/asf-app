@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Posts Instagram ASF</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: Arial, sans-serif; background: #f0f0f0; padding: 20px; }
+        .post-container { display: flex; flex-wrap: wrap; gap: 20px; justify-content: center; }
+        
+        .post {
+            width: 400px;
+            height: 500px;
+            background: linear-gradient(135deg, #00a8cc 0%, #0e2439 100%);
+            border-radius: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 30px;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .post::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            animation: shine 3s infinite;
+        }
+        
+        @keyframes shine {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .post-number {
+            font-size: 14px;
+            opacity: 0.8;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        
+        .post-icon {
+            font-size: 60px;
+            text-align: center;
+            margin: 20px 0;
+        }
+        
+        .post-title {
+            font-size: 24px;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 15px;
+            line-height: 1.3;
+        }
+        
+        .post-text {
+            font-size: 14px;
+            text-align: center;
+            opacity: 0.9;
+            line-height: 1.5;
+        }
+        
+        .hashtags {
+            font-size: 11px;
+            text-align: center;
+            opacity: 0.7;
+            margin-top: 15px;
+            line-height: 1.6;
+        }
+        
+        .hashtags span {
+            display: inline-block;
+            background: rgba(255,255,255,0.2);
+            padding: 3px 8px;
+            border-radius: 10px;
+            margin: 2px;
+        }
+        
+        .logo-asf {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 12px;
+            opacity: 0.6;
+        }
+    </style>
+</head>
+<body>
+    <h1 style="text-align: center; margin-bottom: 30px; color: #0e2439;">Posts Instagram - ASF</h1>
+    
+    <div class="post-container">
+        
+        <!-- SEGUNDA -->
+        <div class="post">
+            <div class="logo-asf">ASF</div>
+            <div class="post-number">SEGUNDA-FEIRA</div>
+            <div class="post-icon">🌊</div>
+            <div class="post-title">A semana começa diferente quando você tem o mar como escritório</div>
+            <div class="post-text">Na ASF, acreditamos que cada onda é uma chance de recomeçar. Traz sua filha, sua amiga, ou vem sozinha!</div>
+            <div class="hashtags">
+                <span>#SurfFeminino</span> <span>#ASF</span> <span>#Bertioga</span><br>
+                <span>#EmpoderamentoFeminino</span> <span>#SurfBrasil</span> <span>#VemPraOnda</span>
+            </div>
+        </div>
+        
+        <!-- TERÇA -->
+        <div class="post">
+            <div class="logo-asf">ASF</div>
+            <div class="post-number">TERÇA-FEIRA</div>
+            <div class="post-icon">🏄‍♀️</div>
+            <div class="post-title">Você conhece a ASF?</div>
+            <div class="post-text">Associação de Surf Feminino desde 2019 em Bertioga. Treinamento, aulas, projeto social e apoio psicológico.</div>
+            <div class="hashtags">
+                <span>#SurfFeminino</span> <span>#ASF</span> <span>#Bertioga</span><br>
+                <span>#Inclusão</span> <span>#EsporteParaTodas</span> <span>#SurfBrasil</span>
+            </div>
+        </div>
+        
+        <!-- QUARTA -->
+        <div class="post">
+            <div class="logo-asf">ASF</div>
+            <div class="post-number">QUARTA-FEIRA</div>
+            <div class="post-icon">💪</div>
+            <div class="post-title">"O surf me ensinou que não existe onda impossível"</div>
+            <div class="post-text">Na ASF, cada mulher tem espaço para crescer. Nosso apoio psicológico garante força mental e técnica.</div>
+            <div class="hashtags">
+                <span>#SurfFeminino</span> <span>#PsicologiaEsportiva</span> <span>#ASF</span><br>
+                <span>#EmpoderamentoFeminino</span> <span>#Bertioga</span>
+            </div>
+        </div>
+        
+        <!-- QUINTA -->
+        <div class="post">
+            <div class="logo-asf">ASF</div>
+            <div class="post-number">QUINTA-FEIRA</div>
+            <div class="post-icon">❤️</div>
+            <div class="post-title">Surf também é inclusão</div>
+            <div class="post-text">Vagas sociais para mulheres e crianças que querem aprender surf mas não têm condições.</div>
+            <div class="hashtags">
+                <span>#ProjetoSocial</span> <span>#SurfInclusivo</span> <span>#ASF</span><br>
+                <span>#Bertioga</span> <span>#SurfParaTodos</span> <span>#ResponsabilidadeSocial</span>
+            </div>
+        </div>
+        
+        <!-- SEXTA -->
+        <div class="post">
+            <div class="logo-asf">ASF</div>
+            <div class="post-number">SEXTA-FEIRA</div>
+            <div class="post-icon">🤝</div>
+            <div class="post-title">Parcerias que fazem a diferença!</div>
+            <div class="post-text">Agradecemos às marcas que apoiam o surf feminino. Quer ser parceira? Manda mensagem!</div>
+            <div class="hashtags">
+                <span>#Patrocínio</span> <span>#SurfFeminino</span> <span>#Parceria</span><br>
+                <span>#MarcasQueApoiam</span> <span>#ASF</span> <span>#SurfBrasil</span>
+            </div>
+        </div>
+        
+        <!-- SÁBADO -->
+        <div class="post">
+            <div class="logo-asf">ASF</div>
+            <div class="post-number">SÁBADO</div>
+            <div class="post-icon">☀️</div>
+            <div class="post-title">Sábado não tem preço</div>
+            <div class="post-text">Aqui é onde a gente recarrega e conecta com a natureza. O mar não pergunta sua idade ou condição.</div>
+            <div class="hashtags">
+                <span>#SurfLifestyle</span> <span>#SabadãoDeSurf</span> <span>#ASF</span><br>
+                <span>#Bertioga</span> <span>#Mar</span> <span>#SurfEveryDamnDay</span>
+            </div>
+        </div>
+        
+        <!-- DOMINGO -->
+        <div class="post">
+            <div class="logo-asf">ASF</div>
+            <div class="post-number">DOMINGO</div>
+            <div class="post-icon">🌊</div>
+            <div class="post-title">"A melhor onda é a que você pega"</div>
+            <div class="post-text">Não importa se você tá começando ou é profissional. O que importa é estar lá. Boa semana!</div>
+            <div class="hashtags">
+                <span>#SurfFeminino</span> <span>#ASF</span> <span>#Bertioga</span><br>
+                <span>#NeverGiveUp</span> <span>#SurfBrasil</span> <span>#FemSurf</span>
+            </div>
+        </div>
+        
+    </div>
+</body>
+</html>
