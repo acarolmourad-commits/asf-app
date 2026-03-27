@@ -8,7 +8,7 @@
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { 
             font-family: 'Segoe UI', Arial, sans-serif; 
-            background: linear-gradient(135deg, #FF6B6B 0%, #C0392B 100%); 
+            background: #333;
             min-height: 100vh; 
             display: flex; 
             justify-content: center; 
@@ -18,146 +18,135 @@
         .post-container {
             width: 1080px;
             height: 1080px;
-            background: linear-gradient(135deg, #FF6B6B 0%, #E74C3C 50%, #C0392B 100%);
-            border-radius: 20px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            background: linear-gradient(180deg, #FF6B6B 0%, #E74C3C 50%, #C0392B 100%);
+            border-radius: 0;
             position: relative;
             overflow: hidden;
             display: flex;
             flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
+            justify-content: flex-start;
+            padding: 80px 60px;
             color: white;
         }
         
-        .wave-bg {
+        .emoji-container {
+            text-align: center;
+            margin-bottom: 60px;
+            margin-top: 100px;
+        }
+        
+        .emoji {
+            font-size: 120px;
+            display: block;
+        }
+        
+        .title-container {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        
+        .title {
+            font-size: 58px;
+            font-weight: bold;
+            line-height: 1.2;
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.3);
+        }
+        
+        .subtitle-container {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        
+        .subtitle {
+            font-size: 24px;
+            line-height: 1.8;
+            opacity: 0.95;
+        }
+        
+        .cta-container {
+            text-align: center;
+            margin-bottom: 100px;
+        }
+        
+        .cta {
+            font-size: 32px;
+            font-weight: bold;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .bottom-section {
             position: absolute;
             bottom: 0;
             left: 0;
             right: 0;
-            height: 200px;
-            background: linear-gradient(to top, rgba(255,255,255,0.1), transparent);
+            padding: 40px 60px;
         }
         
-        .content {
-            position: relative;
-            z-index: 2;
-            padding: 80px;
-        }
-        
-        .emoji {
-            font-size: 150px;
-            margin-bottom: 40px;
-            animation: float 3s ease-in-out infinite;
-        }
-        
-        @keyframes float {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-20px); }
-        }
-        
-        .title {
-            font-size: 64px;
-            font-weight: bold;
-            margin-bottom: 30px;
-            text-shadow: 3px 3px 6px rgba(0,0,0,0.3);
-            line-height: 1.2;
-        }
-        
-        .subtitle {
-            font-size: 28px;
-            opacity: 0.95;
-            line-height: 1.6;
-            margin-bottom: 40px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
-        }
-        
-        .cta {
-            font-size: 36px;
-            font-weight: bold;
-            margin-bottom: 50px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
-        }
-        
-        .logo {
-            position: absolute;
-            bottom: 40px;
-            left: 50%;
-            transform: translateX(-50%);
+        .hashtags {
             display: flex;
-            align-items: center;
-            gap: 15px;
-            font-size: 28px;
-            font-weight: bold;
-            opacity: 0.9;
-        }
-        
-        .logo-emoji {
-            font-size: 40px;
-        }
-        
-        .hashtag-bar {
-            position: absolute;
-            bottom: 100px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: rgba(255,255,255,0.2);
-            padding: 15px 30px;
-            border-radius: 50px;
-            font-size: 14px;
-            display: flex;
-            gap: 15px;
-            flex-wrap: wrap;
             justify-content: center;
-            max-width: 800px;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-bottom: 30px;
         }
         
         .hashtag {
-            background: rgba(255,255,255,0.3);
-            padding: 5px 12px;
+            background: rgba(255,255,255,0.25);
+            padding: 8px 16px;
             border-radius: 20px;
-            font-size: 12px;
+            font-size: 14px;
         }
         
-        @media (max-width: 1100px) {
-            .post-container {
-                width: 100%;
-                height: auto;
-                min-height: 1080px;
-            }
-            .emoji { font-size: 100px; }
-            .title { font-size: 40px; }
-            .subtitle { font-size: 20px; }
+        .logo {
+            text-align: center;
+            font-size: 24px;
+            font-weight: bold;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .logo-emoji {
+            font-size: 32px;
         }
     </style>
 </head>
 <body>
     <div class="post-container">
-        <div class="wave-bg"></div>
+        <div class="emoji-container">
+            <span class="emoji">🌊</span>
+        </div>
         
-        <div class="content">
-            <div class="emoji">🌊</div>
+        <div class="title-container">
             <div class="title">Algo Grande<br>Está Chegando...</div>
+        </div>
+        
+        <div class="subtitle-container">
             <div class="subtitle">
                 Uma onda de mudança para todas<br>
                 as mulheres que amam o surf.
             </div>
+        </div>
+        
+        <div class="cta-container">
             <div class="cta">Você está pronta? 💪</div>
         </div>
         
-        <div class="hashtag-bar">
-            <span class="hashtag">#surf</span>
-            <span class="hashtag">#surfgirl</span>
-            <span class="hashtag">#surffeminino</span>
-            <span class="hashtag">#litoralpaulista</span>
-            <span class="hashtag">#asf</span>
-            <span class="hashtag">#emBreve</span>
-        </div>
-        
-        <div class="logo">
-            <span class="logo-emoji">🏄‍♀️</span>
-            <span>ASF</span>
+        <div class="bottom-section">
+            <div class="hashtags">
+                <span class="hashtag">#surf</span>
+                <span class="hashtag">#surfgirl</span>
+                <span class="hashtag">#surffeminino</span>
+                <span class="hashtag">#litoralpaulista</span>
+                <span class="hashtag">#asf</span>
+                <span class="hashtag">#emBreve</span>
+            </div>
+            
+            <div class="logo">
+                <span class="logo-emoji">🏄‍♀️</span>
+                <span>ASF</span>
+            </div>
         </div>
     </div>
 </body>
