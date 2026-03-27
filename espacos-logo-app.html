@@ -6,274 +6,284 @@
     <title>Espaços para Logo - ASF App</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: Arial, sans-serif; background: linear-gradient(135deg, #00A8CC 0%, #0E2439 100%); min-height: 100vh; padding: 15px; }
+        body { font-family: 'Outfit', Arial, sans-serif; background: linear-gradient(135deg, #00A8CC 0%, #0E2439 100%); min-height: 100vh; padding: 15px; }
         .container { max-width: 800px; margin: 0 auto; background: white; border-radius: 20px; overflow: hidden; box-shadow: 0 20px 60px rgba(0,0,0,0.3); }
-        .header { background: linear-gradient(135deg, #0E2439 0%, #1A3A5C 100%); color: white; padding: 25px; text-align: center; }
-        .header h1 { font-size: 24px; margin-bottom: 10px; }
-        .header p { font-size: 14px; opacity: 0.9; }
-        .section { padding: 20px; border-bottom: 1px solid #eee; }
-        .section-title { font-size: 16px; color: #0E2439; margin-bottom: 15px; font-weight: bold; display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
-        .app-preview { background: #f8f9fa; border-radius: 15px; padding: 15px; position: relative; }
-        .app-screen { background: white; border-radius: 10px; padding: 12px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
-        .app-header { background: #0E2439; color: white; padding: 12px; border-radius: 10px 10px 0 0; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px; }
-        .app-logo { width: 30px; height: 30px; background: #00A8CC; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 18px; }
-        .logo-slot { background: #FFEAA7; border: 2px dashed #F39C12; border-radius: 8px; padding: 8px; text-align: center; font-size: 10px; color: #666; font-weight: bold; }
-        .logo-slot.gold { background: #FFD700; border-color: #B8860B; }
-        .logo-slot.silver { background: #C0C0C0; border-color: #808080; }
-        .logo-slot.bronze { background: #CD7F32; color: white; }
-        .app-nav { display: flex; gap: 5px; margin-top: 10px; justify-content: center; flex-wrap: wrap; }
-        .nav-item { background: #eee; padding: 8px 12px; border-radius: 20px; font-size: 10px; color: #666; }
-        .nav-item.active { background: #00A8CC; color: white; }
-        .placement { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 15px; }
-        .placement-item { background: white; border-radius: 8px; padding: 10px; text-align: center; }
-        .placement-item h4 { font-size: 12px; color: #0E2439; margin-bottom: 5px; }
-        .placement-item p { font-size: 10px; color: #666; }
-        .price-tag { background: #27AE60; color: white; padding: 3px 8px; border-radius: 10px; font-size: 10px; font-weight: bold; display: inline-block; margin-top: 5px; }
-        .spots { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-top: 15px; }
-        .spot { background: white; border: 2px solid #eee; border-radius: 10px; padding: 12px; text-align: center; }
-        .spot-number { font-size: 20px; font-weight: bold; color: #00A8CC; }
-        .spot-label { font-size: 10px; color: #666; margin-top: 5px; }
-        .spot-price { font-size: 11px; font-weight: bold; color: #27AE60; margin-top: 5px; }
-        .comparison { display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px; margin-top: 20px; }
-        .tier { border: 2px solid #eee; border-radius: 15px; padding: 15px; text-align: center; }
-        .tier.featured { border-color: #F39C12; background: #FFF9E6; }
-        .tier-name { font-size: 14px; font-weight: bold; color: #0E2439; }
-        .tier-price { font-size: 20px; font-weight: bold; color: #00A8CC; margin: 10px 0; }
-        .tier-price span { font-size: 11px; color: #666; }
-        .tier-spots { font-size: 10px; color: #666; margin-bottom: 10px; }
-        .tier-features { font-size: 10px; text-align: left; }
-        .tier-features li { margin: 5px 0; list-style: none; }
-        .cta { background: linear-gradient(135deg, #00A8CC 0%, #4DC8E0 100%); color: white; padding: 25px; text-align: center; }
-        .cta h3 { font-size: 20px; margin-bottom: 10px; }
-        .footer { background: #0E2439; color: white; padding: 20px; text-align: center; }
-        .note { background: #FFF3CD; border: 1px solid #FFC107; border-radius: 10px; padding: 15px; margin: 15px; font-size: 12px; color: #856404; }
+        .header { background: linear-gradient(135deg, #0E2439 0%, #1A3A5C 100%); color: white; padding: 40px 25px; text-align: center; }
+        .header h1 { font-size: 32px; margin-bottom: 10px; }
+        .header p { font-size: 16px; opacity: 0.9; }
+        .header .logo { font-size: 60px; margin-bottom: 15px; }
+        .section { padding: 25px; border-bottom: 1px solid #eee; }
+        .section-title { font-size: 20px; color: #0E2439; margin-bottom: 20px; font-weight: bold; }
+        .highlight-box { background: linear-gradient(135deg, #00A8CC 0%, #4DC8E0 100%); padding: 20px; border-radius: 16px; color: white; margin-bottom: 20px; }
+        .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px; margin: 20px 0; }
+        .stat { background: #f8f9fa; padding: 20px; border-radius: 12px; text-align: center; }
+        .stat-number { font-size: 28px; font-weight: bold; color: #00A8CC; }
+        .stat-label { font-size: 12px; color: #666; margin-top: 5px; }
+        .features { display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; margin: 20px 0; }
+        .feature { background: #f8f9fa; padding: 20px; border-radius: 12px; }
+        .feature h4 { font-size: 16px; color: #0E2439; margin-bottom: 10px; }
+        .feature p { font-size: 13px; color: #666; }
+        .packages { display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px; margin: 20px 0; }
+        .package { border: 2px solid #eee; border-radius: 16px; padding: 20px; text-align: center; transition: all 0.3s; }
+        .package:hover { border-color: #00A8CC; transform: translateY(-5px); box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
+        .package.featured { border-color: #F39C12; background: linear-gradient(135deg, #FFF9E6 0%, #FFE4B5 100%); }
+        .package-name { font-size: 18px; font-weight: bold; color: #0E2439; }
+        .package-price { font-size: 28px; font-weight: bold; color: #00A8CC; margin: 15px 0; }
+        .package-price span { font-size: 14px; color: #666; }
+        .package-features { font-size: 13px; text-align: left; margin-top: 15px; }
+        .package-features li { margin: 8px 0; list-style: none; padding-left: 20px; position: relative; }
+        .package-features li::before { content: "✓"; position: absolute; left: 0; color: #27AE60; }
+        .cta { background: linear-gradient(135deg, #27AE60 0%, #2ECC71 100%); color: white; padding: 30px; text-align: center; }
+        .cta h3 { font-size: 24px; margin-bottom: 10px; }
+        .cta p { font-size: 16px; opacity: 0.9; }
+        .footer { background: #0E2439; color: white; padding: 30px; text-align: center; }
+        .footer p { font-size: 14px; opacity: 0.8; margin: 5px 0; }
+        .note { background: #E3F2FD; border: 1px solid #2196F3; border-radius: 12px; padding: 15px; margin: 20px 0; font-size: 13px; color: #1565C0; }
+        .ad-locations { background: #f8f9fa; border-radius: 16px; padding: 20px; margin: 20px 0; }
+        .ad-location { display: flex; justify-content: space-between; align-items: center; padding: 12px 0; border-bottom: 1px solid #eee; }
+        .ad-location:last-child { border-bottom: none; }
+        .ad-location-info { flex: 1; }
+        .ad-location-info h4 { font-size: 14px; color: #0E2439; margin-bottom: 5px; }
+        .ad-location-info p { font-size: 12px; color: #666; }
+        .ad-location-price { background: #27AE60; color: white; padding: 8px 15px; border-radius: 20px; font-size: 12px; font-weight: bold; }
         
-        /* RESPONSIVE - Mobile */
         @media (max-width: 600px) {
-            body { padding: 10px; }
-            .container { border-radius: 15px; }
-            .header { padding: 20px; }
-            .header h1 { font-size: 20px; }
-            .header p { font-size: 12px; }
-            .section { padding: 15px; }
-            .section-title { font-size: 14px; }
-            .placement { grid-template-columns: 1fr; }
-            .spots { grid-template-columns: repeat(2, 1fr); }
-            .comparison { grid-template-columns: 1fr; }
-            .tier { padding: 15px 10px; }
-            .tier-name { font-size: 16px; }
-            .tier-price { font-size: 24px; }
-            .cta h3 { font-size: 18px; }
-            .app-screen { padding: 10px; }
-            .app-header { padding: 10px; }
-            .note { margin: 10px; font-size: 11px; }
-        }
-        
-        @media (max-width: 400px) {
-            .header h1 { font-size: 18px; }
-            .spots { grid-template-columns: 1fr 1fr; gap: 8px; }
-            .spot { padding: 8px; }
-            .spot-number { font-size: 18px; }
-            .spot-label { font-size: 9px; }
+            .header h1 { font-size: 24px; }
+            .stats { grid-template-columns: repeat(2, 1fr); }
+            .features { grid-template-columns: 1fr; }
+            .packages { grid-template-columns: 1fr; }
+            .stat-number { font-size: 22px; }
         }
     </style>
 </head>
 <body>
     <div class="container">
+        <!-- Header -->
         <div class="header">
-            <h1>📱 Espaços para Logo no App ASF</h1>
-            <p>Veja onde sua marca pode ficar visível!</p>
+            <div class="logo">🏄‍♀️</div>
+            <h1>ASF - Associação de Surf Feminino</h1>
+            <p>Espaços para Anúncios no App</p>
+            <p style="margin-top: 10px; font-size: 14px; opacity: 0.7;">Março 2026</p>
         </div>
 
+        <!-- About -->
         <div class="section">
-            <div class="section-title">🏠 HOME - Header Principal</div>
-            <div class="app-preview">
-                <div class="app-screen">
-                    <div class="app-header">
-                        <div class="app-logo">🏄</div>
-                        <span style="font-size: 12px;">ASF</span>
-                        <div style="display: flex; gap: 10px;">
-                            <div class="logo-slot gold" style="width: 50px; height: 20px;">LOGO</div>
-                        </div>
-                    </div>
-                    <div style="padding: 15px;">
-                        <div style="height: 60px; background: #f0f0f0; border-radius: 8px; display: flex; align-items: center; justify-content: center;">
-                            <span style="font-size: 10px; color: #999;">Banner Principal (Ouro/Diamante)</span>
-                        </div>
-                        <div style="margin-top: 10px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 5px;">
-                            <div style="height: 30px; background: #f0f0f0; border-radius: 5px; display: flex; align-items: center; justify-content: center;">
-                                <div class="logo-slot bronze" style="font-size: 8px; padding: 2px;">BRONZE</div>
-                            </div>
-                            <div style="height: 30px; background: #f0f0f0; border-radius: 5px; display: flex; align-items: center; justify-content: center;">
-                                <div class="logo-slot bronze" style="font-size: 8px; padding: 2px;">BRONZE</div>
-                            </div>
-                            <div style="height: 30px; background: #f0f0f0; border-radius: 5px; display: flex; align-items: center; justify-content: center;">
-                                <div class="logo-slot bronze" style="font-size: 8px; padding: 2px;">BRONZE</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="placement">
-                <div class="placement-item">
-                    <h4>Logo Header</h4>
-                    <p>Ouro / Diamante</p>
-                    <span class="price-tag">R$ 797+</span>
-                </div>
-                <div class="placement-item">
-                    <h4>Banner Home</h4>
-                    <p>Ouro / Diamante</p>
-                    <span class="price-tag">R$ 797+</span>
-                </div>
-                <div class="placement-item">
-                    <h4>3 Logos Bronze</h4>
-                    <p>Rodapé Home</p>
-                    <span class="price-tag">R$ 197 cada</span>
-                </div>
-            </div>
+            <div class="section-title">🌊 Quem Somos</div>
+            <p style="color: #666; line-height: 1.8; margin-bottom: 15px;">
+                A <strong>ASF - Associação de Surf Feminino</strong> é a principal referência em surf feminino no Litoral Paulista. 
+                Fundada em <strong>5 de julho de 2019</strong>, promovemos inclusão, empowerment e comunidade para mulheres surfistas.
+            </p>
+            <p style="color: #666; line-height: 1.8;">
+                Nosso <strong>App ASF</strong> é a plataforma completa para surfistas mulheres, com dicas, treinos, 
+                lojas parceiras, previsão de ondas e muito mais!
+            </p>
         </div>
 
+        <!-- App Stats -->
         <div class="section">
-            <div class="section-title">🛒 SEÇÃO LOJAS - Lista de Parceiros</div>
-            <div class="app-preview">
-                <div class="app-screen">
-                    <div style="background: #f0f0f0; padding: 10px; border-radius: 8px; margin-bottom: 10px;">
-                        <div class="logo-slot" style="margin-bottom: 5px;">LOGO + @INSTAGRAM</div>
-                        <div class="logo-slot" style="margin-bottom: 5px;">LOJA 1 - @loja1</div>
-                        <div class="logo-slot" style="margin-bottom: 5px;">LOJA 2 - @loja2</div>
-                        <div class="logo-slot" style="margin-bottom: 5px;">LOJA 3 - @loja3</div>
-                        <div class="logo-slot" style="margin-bottom: 5px;">LOJA 4 - @loja4</div>
-                        <div class="logo-slot" style="margin-bottom: 5px;">LOJA 5 - @loja5</div>
-                    </div>
+            <div class="section-title">📱 Números do App</div>
+            <div class="stats">
+                <div class="stat">
+                    <div class="stat-number">50+</div>
+                    <div class="stat-label">Dicas</div>
                 </div>
-            </div>
-            <div class="placement">
-                <div class="placement-item">
-                    <h4>Lista Lojas</h4>
-                    <p>Todas as páginas</p>
-                    <span class="price-tag">R$ 197/mês</span>
+                <div class="stat">
+                    <div class="stat-number">8</div>
+                    <div class="stat-label">Cidades</div>
                 </div>
-                <div class="placement-item">
-                    <h4>Destaque 1º</h4>
-                    <p>Topo da lista</p>
-                    <span class="price-tag">+R$ 100</span>
+                <div class="stat">
+                    <div class="stat-number">47</div>
+                    <div class="stat-label">Manas</div>
                 </div>
-                <div class="placement-item">
-                    <h4>9 Vagas</h4>
-                    <p>Disponíveis</p>
-                    <span class="price-tag">R$ 197/mês</span>
+                <div class="stat">
+                    <div class="stat-number">9</div>
+                    <div class="stat-label">Seções</div>
                 </div>
             </div>
         </div>
 
+        <!-- App Sections -->
         <div class="section">
-            <div class="section-title">🎯 SEÇÃO PROGRESSO - Quizzes</div>
-            <div class="app-preview">
-                <div class="app-screen">
-                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
-                        <div style="background: #f0f0f0; padding: 10px; border-radius: 8px;">
-                            <div class="logo-slot" style="margin-bottom: 5px;">QUIZ 1</div>
-                        </div>
-                        <div style="background: #f0f0f0; padding: 10px; border-radius: 8px;">
-                            <div class="logo-slot" style="margin-bottom: 5px;">QUIZ 2</div>
-                        </div>
-                    </div>
+            <div class="section-title">🎯 Seções do App</div>
+            <div class="features">
+                <div class="feature">
+                    <h4>📚 Dicas de Surf</h4>
+                    <p>Conteúdo educacional sobre equipamentos, técnicas e segurança</p>
                 </div>
-            </div>
-            <div class="placement">
-                <div class="placement-item">
-                    <h4>Patrocínio Quiz</h4>
-                    <p>1 quiz com marca</p>
-                    <span class="price-tag">R$ 150/quizz</span>
+                <div class="feature">
+                    <h4>💪 Saúde & Treino</h4>
+                    <p>Treinos funcionais de 20 minutos para surfistas</p>
+                </div>
+                <div class="feature">
+                    <h4>🧘 Mobilidade</h4>
+                    <p>Exercícios de alongamento e prevenção de lesões</p>
+                </div>
+                <div class="feature">
+                    <h4>🧠 Mental</h4>
+                    <p>Técnicas de respiração e bem-estar mental</p>
+                </div>
+                <div class="feature">
+                    <h4>🌊 Previsão de Ondas</h4>
+                    <p>Dados em tempo real para 8 cidades do litoral</p>
+                </div>
+                <div class="feature">
+                    <h4>🎯 Progresso</h4>
+                    <p>Quizzes e gamificação para engajamento</p>
+                </div>
+                <div class="feature">
+                    <h4>💬 Manas</h4>
+                    <p>Grupos de WhatsApp para surftrips</p>
+                </div>
+                <div class="feature">
+                    <h4>🛒 Lojas</h4>
+                    <p>Diretório de lojas de surf com Instagram</p>
+                </div>
+                <div class="feature">
+                    <h4>🩷 Dicas Femininas</h4>
+                    <p>Cuidados essenciais específicos para mulheres</p>
                 </div>
             </div>
         </div>
 
+        <!-- Ad Locations -->
         <div class="section">
-            <div class="section-title">🌊 Resumo de Todos os Espaços</div>
-            <div class="spots">
-                <div class="spot">
-                    <div class="spot-number">1</div>
-                    <div class="spot-label">Logo Header<br>(Home)</div>
-                    <div class="spot-price">R$ 797/mês</div>
+            <div class="section-title">📍 Onde Sua Marca Aparece</div>
+            <div class="ad-locations">
+                <div class="ad-location">
+                    <div class="ad-location-info">
+                        <h4>🏠 Logo no Header</h4>
+                        <p>Visível em todas as páginas do app</p>
+                    </div>
+                    <div class="ad-location-price">R$ 797/mês</div>
                 </div>
-                <div class="spot">
-                    <div class="spot-number">1</div>
-                    <div class="spot-label">Banner<br>Principal</div>
-                    <div class="spot-price">R$ 797/mês</div>
+                <div class="ad-location">
+                    <div class="ad-location-info">
+                        <h4>🌊 Banner na Previsão de Ondas</h4>
+                        <p>Primeira página, alta visibilidade</p>
+                    </div>
+                    <div class="ad-location-price">R$ 597/mês</div>
                 </div>
-                <div class="spot">
-                    <div class="spot-number">3</div>
-                    <div class="spot-label">Logos Bronze<br>(Home)</div>
-                    <div class="spot-price">R$ 197/mês</div>
+                <div class="ad-location">
+                    <div class="ad-location-info">
+                        <h4>📚 Banner nas Dicas</h4>
+                        <p>Seção mais acessada do app</p>
+                    </div>
+                    <div class="ad-location-price">R$ 397/mês</div>
                 </div>
-                <div class="spot">
-                    <div class="spot-number">9</div>
-                    <div class="spot-label">Lojas<br>Parceiras</div>
-                    <div class="spot-price">R$ 197/mês</div>
+                <div class="ad-location">
+                    <div class="ad-location-info">
+                        <h4>🛒 Seção de Lojas</h4>
+                        <p>9 vagas com link para Instagram</p>
+                    </div>
+                    <div class="ad-location-price">R$ 197/mês</div>
+                </div>
+                <div class="ad-location">
+                    <div class="ad-location-info">
+                        <h4>🎯 Patrocínio de Quiz</h4>
+                        <p>Marca aparece em quizzes</p>
+                    </div>
+                    <div class="ad-location-price">R$ 150/mês</div>
+                </div>
+                <div class="ad-location">
+                    <div class="ad-location-info">
+                        <h4>💬 Banner nas Manas</h4>
+                        <p>Público engajado em surftrips</p>
+                    </div>
+                    <div class="ad-location-price">R$ 297/mês</div>
                 </div>
             </div>
         </div>
 
+        <!-- Packages -->
         <div class="section">
             <div class="section-title">💰 Pacotes de Patrocínio</div>
-            <div class="comparison">
-                <div class="tier">
-                    <div class="tier-name">🥉 Bronze</div>
-                    <div class="tier-price">R$ 197<span>/mês</span></div>
-                    <div class="tier-spots">1 espaço</div>
-                    <ul class="tier-features">
-                        <li>✓ Logo na seção Lojas</li>
-                        <li>✓ Link Instagram</li>
-                        <li>✓ Selo Patrocinador</li>
+            <div class="packages">
+                <div class="package">
+                    <div class="package-name">🥉 Bronze</div>
+                    <div class="package-price">R$ 197<span>/mês</span></div>
+                    <ul class="package-features">
+                        <li>Logo na seção Lojas</li>
+                        <li>Link para Instagram</li>
+                        <li>Selo Patrocinador</li>
+                        <li>1 post/mês no Instagram</li>
                     </ul>
                 </div>
-                <div class="tier featured">
-                    <div class="tier-name">🥈 Prata</div>
-                    <div class="tier-price">R$ 397<span>/mês</span></div>
-                    <div class="tier-spots">2 espaços</div>
-                    <ul class="tier-features">
-                        <li>✓ Logo na Home</li>
-                        <li>✓ Banner na Home</li>
-                        <li>✓ Seção Lojas</li>
+                <div class="package featured">
+                    <div class="package-name">🥈 Prata</div>
+                    <div class="package-price">R$ 497<span>/mês</span></div>
+                    <ul class="package-features">
+                        <li>Tudo do Bronze</li>
+                        <li>Banner na Previsão de Ondas</li>
+                        <li>Banner nas Dicas</li>
+                        <li>2 posts/mês + stories</li>
                     </ul>
                 </div>
-                <div class="tier">
-                    <div class="tier-name">🥇 Ouro</div>
-                    <div class="tier-price">R$ 797<span>/mês</span></div>
-                    <div class="tier-spots">4 espaços</div>
-                    <ul class="tier-features">
-                        <li>✓ Logo Header</li>
-                        <li>✓ Banner Principal</li>
-                        <li>✓ Seção Exclusiva</li>
+                <div class="package">
+                    <div class="package-name">🥇 Ouro</div>
+                    <div class="package-price">R$ 997<span>/mês</span></div>
+                    <ul class="package-features">
+                        <li>Tudo do Prata</li>
+                        <li>Logo no Header do App</li>
+                        <li>Seção exclusiva da marca</li>
+                        <li>4 posts/mês + cobertura</li>
                     </ul>
                 </div>
-                <div class="tier">
-                    <div class="tier-name">💎 Diamante</div>
-                    <div class="tier-price">R$ 1.497<span>/mês</span></div>
-                    <div class="tier-spots">TODOS</div>
-                    <ul class="tier-features">
-                        <li>✓ Marca Principal</li>
-                        <li>✓ Todas as posições</li>
-                        <li>✓ Patrocinador Oficial</li>
+                <div class="package">
+                    <div class="package-name">💎 Diamante</div>
+                    <div class="package-price">R$ 1.997<span>/mês</span></div>
+                    <ul class="package-features">
+                        <li>Tudo do Ouro</li>
+                        <li>Marca Principal do App</li>
+                        <li>Logotipos em todos os conteúdos</li>
+                        <li>8 posts/mês + patrocínio oficial</li>
                     </ul>
                 </div>
             </div>
         </div>
 
+        <!-- Benefits -->
+        <div class="section">
+            <div class="section-title">🎯 Por que Anunciar no App ASF?</div>
+            <div class="highlight-box">
+                <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px;">
+                    <div>
+                        <h4 style="margin-bottom: 8px;">👁️ Visibilidade Constante</h4>
+                        <p style="font-size: 13px; opacity: 0.9;">Acesso diário de centenas de surfistas mulheres</p>
+                    </div>
+                    <div>
+                        <h4 style="margin-bottom: 8px;">🎯 Público Qualificado</h4>
+                        <p style="font-size: 13px; opacity: 0.9;">Mulheres engajadas no surf e lifestyle</p>
+                    </div>
+                    <div>
+                        <h4 style="margin-bottom: 8px;">💰 ROI Superior</h4>
+                        <p style="font-size: 13px; opacity: 0.9;">Custo muito menor que mídia tradicional</p>
+                    </div>
+                    <div>
+                        <h4 style="margin-bottom: 8px;">🌊 Marca na Memória</h4>
+                        <p style="font-size: 13px; opacity: 0.9;">Divulgação contínua = reconhecimento</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Note -->
         <div class="note">
-            <strong>📝 Nota:</strong> Os valores apresentados são baseados em manutenção e melhoria contínua do app. 
+            <strong>📝 Nota Importante:</strong> Os valores apresentados são baseados em manutenção e melhoria contínua do app. 
             Cada parceiro contribui para que o app permaneça gratuito e de qualidade para todas as surfistas!
         </div>
 
+        <!-- CTA -->
         <div class="cta">
             <h3>🏄‍♀️ Anuncie no App ASF!</h3>
             <p>Sua marca alcance centenas de surfistas todos os dias</p>
         </div>
 
+        <!-- Footer -->
         <div class="footer">
             <p><strong>ASF - Associação de Surf Feminino</strong></p>
-            <p style="margin-top: 10px;">CNPJ: 52.585.183/0001-03 | fund: 05/07/2019</p>
+            <p>CNPJ: 52.585.183/0001-03 | Fund: 05/07/2019</p>
+            <p style="margin-top: 15px;">📱 @associacaosurffeminino</p>
+            <p>📧 asociacaosurffeminino@gmail.com</p>
             <p style="margin-top: 15px; font-size: 12px;">🌊 "Juntas, surfando mais forte!"</p>
         </div>
     </div>
