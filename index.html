@@ -877,6 +877,10 @@
             <span class="icon">🧮</span>
             <span class="label">Calculadora</span>
         </button>
+        <button class="utility-btn" onclick="showSection('competicoes')" style="background: linear-gradient(135deg, rgba(155,89,182,0.1) 0%, rgba(255,107,107,0.1) 100%);">
+            <span class="icon">🏆</span>
+            <span class="label">Competições</span>
+        </button>
     </div>
 
     <!-- Hero -->
@@ -939,6 +943,9 @@
         </button>
         <button class="tab" onclick="showSection('comunidade')">
             <span class="tab-icon">👥</span> Comunidade
+        </button>
+        <button class="tab" onclick="showSection('competicoes')">
+            <span class="tab-icon">🏆</span> Competições
         </button>
     </div>
 
@@ -2700,6 +2707,207 @@
         </div>
     </div>
 
+        <!-- Competições Section -->
+        <div class="section" id="competicoes">
+            <div class="section-header">
+                <h2 class="section-title">🏆 Competições & Eventos</h2>
+            </div>
+
+            <!-- Próximos Eventos -->
+            <div style="margin-bottom: 20px;">
+                <h3 style="font-size: 16px; margin-bottom: 12px; color: var(--secondary);">📅 Próximos Eventos</h3>
+                <div class="card" style="border-left: 4px solid var(--primary); margin-bottom: 12px;">
+                    <div style="display: flex; justify-content: space-between; align-items: start;">
+                        <div>
+                            <h4 style="font-size: 15px;">Circuito Paulista de Surf Feminino 2026</h4>
+                            <p style="font-size: 13px; color: var(--gray-600); margin-top: 4px;">📍 Santos, SP</p>
+                            <p style="font-size: 13px; color: var(--gray-600);">🗓️ 12-13 de Abril, 2026</p>
+                        </div>
+                        <span style="background: var(--success); color: white; padding: 4px 10px; border-radius: 20px; font-size: 12px; font-weight: 600;">Inscrições Abertas</span>
+                    </div>
+                    <button class="btn btn-primary" style="width: 100%; margin-top: 12px;" onclick="window.open('https://www.fpsurf.com.br', '_blank')">Inscrever-se</button>
+                </div>
+                <div class="card" style="border-left: 4px solid var(--accent); margin-bottom: 12px;">
+                    <div style="display: flex; justify-content: space-between; align-items: start;">
+                        <div>
+                            <h4 style="font-size: 15px;">Etapa Bertioga - Surf de Raia</h4>
+                            <p style="font-size: 13px; color: var(--gray-600); margin-top: 4px;">📍 Praia de Bertioga</p>
+                            <p style="font-size: 13px; color: var(--gray-600);">🗓️ 26-27 de Abril, 2026</p>
+                        </div>
+                        <span style="background: var(--primary); color: white; padding: 4px 10px; border-radius: 20px; font-size: 12px; font-weight: 600;">Em breve</span>
+                    </div>
+                    <p style="font-size: 12px; color: var(--gray-400); margin-top: 8px;">Categorias: Open, Pro-Júnior, Longboard, SUP</p>
+                </div>
+                <div class="card" style="border-left: 4px solid var(--purple); margin-bottom: 12px;">
+                    <div style="display: flex; justify-content: space-between; align-items: start;">
+                        <div>
+                            <h4 style="font-size: 15px;">ASF Open - Campeonato Interno</h4>
+                            <p style="font-size: 13px; color: var(--gray-600); margin-top: 4px;">📍 Praia de Riviera</p>
+                            <p style="font-size: 13px; color: var(--gray-600);">🗓️ 10 de Maio, 2026</p>
+                        </div>
+                        <span style="background: var(--purple); color: white; padding: 4px 10px; border-radius: 20px; font-size: 12px; font-weight: 600;">Somente Membros</span>
+                    </div>
+                    <p style="font-size: 12px; color: var(--gray-400); margin-top: 8px;">Nosso campeonato interno! Premiação para todas as categorias 🏆</p>
+                </div>
+            </div>
+
+            <!-- Meus Resultados -->
+            <div style="margin-bottom: 20px;">
+                <h3 style="font-size: 16px; margin-bottom: 12px; color: var(--secondary);">📊 Meus Resultados</h3>
+                <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 15px;">
+                    <div style="background: linear-gradient(135deg, #FFD700, #FFA500); border-radius: 12px; padding: 15px; text-align: center; color: white;">
+                        <div style="font-size: 24px;">🥇</div>
+                        <div style="font-size: 22px; font-weight: 700;">3</div>
+                        <div style="font-size: 11px;">Ouro</div>
+                    </div>
+                    <div style="background: linear-gradient(135deg, #C0C0C0, #A8A8A8); border-radius: 12px; padding: 15px; text-align: center; color: white;">
+                        <div style="font-size: 24px;">🥈</div>
+                        <div style="font-size: 22px; font-weight: 700;">2</div>
+                        <div style="font-size: 11px;">Prata</div>
+                    </div>
+                    <div style="background: linear-gradient(135deg, #CD7F32, #B8860B); border-radius: 12px; padding: 15px; text-align: center; color: white;">
+                        <div style="font-size: 24px;">🥉</div>
+                        <div style="font-size: 22px; font-weight: 700;">4</div>
+                        <div style="font-size: 11px;">Bronze</div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div style="display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px solid var(--gray-100);">
+                        <span style="font-size: 14px;">🏅 Ranking Estadual</span>
+                        <span style="font-weight: 700; color: var(--primary);">#12</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px solid var(--gray-100);">
+                        <span style="font-size: 14px;">📈 Pontos na Temporada</span>
+                        <span style="font-weight: 700; color: var(--primary);">2.450</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; align-items: center; padding: 8px 0;">
+                        <span style="font-size: 14px;">🏄‍♀️ Etapas Disputadas</span>
+                        <span style="font-weight: 700; color: var(--primary);">9</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Cronograma de Treino -->
+            <div style="margin-bottom: 20px;">
+                <h3 style="font-size: 16px; margin-bottom: 12px; color: var(--secondary);">💪 Cronograma de Treino Pré-Competição</h3>
+                <div class="card">
+                    <div style="background: var(--primary); color: white; border-radius: 12px; padding: 12px; margin-bottom: 12px; text-align: center;">
+                        <p style="font-size: 13px; opacity: 0.9;">Próxima competição em</p>
+                        <p style="font-size: 28px; font-weight: 800;" id="countdown">16 dias</p>
+                        <p style="font-size: 12px; opacity: 0.8;">Circuito Paulista - Santos</p>
+                    </div>
+                    <div style="font-size: 14px;">
+                        <div style="display: flex; align-items: center; gap: 10px; padding: 10px 0; border-bottom: 1px solid var(--gray-100);">
+                            <span style="font-size: 20px;">🌊</span>
+                            <div style="flex: 1;">
+                                <strong>Segunda</strong> - Surf (2h)
+                                <div style="font-size: 12px; color: var(--gray-400);">Foco: Paddle e remada</div>
+                            </div>
+                            <span style="color: var(--success);">✓</span>
+                        </div>
+                        <div style="display: flex; align-items: center; gap: 10px; padding: 10px 0; border-bottom: 1px solid var(--gray-100);">
+                            <span style="font-size: 20px;">💪</span>
+                            <div style="flex: 1;">
+                                <strong>Terça</strong> - Treino Funcional (1h)
+                                <div style="font-size: 12px; color: var(--gray-400);">Foco: Core e equilíbrio</div>
+                            </div>
+                            <span style="color: var(--success);">✓</span>
+                        </div>
+                        <div style="display: flex; align-items: center; gap: 10px; padding: 10px 0; border-bottom: 1px solid var(--gray-100);">
+                            <span style="font-size: 20px;">🌊</span>
+                            <div style="flex: 1;">
+                                <strong>Quarta</strong> - Surf (2h)
+                                <div style="font-size: 12px; color: var(--gray-400);">Foco: Manobras e tubos</div>
+                            </div>
+                            <span style="color: var(--primary);">Hoje</span>
+                        </div>
+                        <div style="display: flex; align-items: center; gap: 10px; padding: 10px 0; border-bottom: 1px solid var(--gray-100);">
+                            <span style="font-size: 20px;">🧘</span>
+                            <div style="flex: 1;">
+                                <strong>Quinta</strong> - Mobilidade (45min)
+                                <div style="font-size: 12px; color: var(--gray-400);">Foco: Ombros e quadril</div>
+                            </div>
+                        </div>
+                        <div style="display: flex; align-items: center; gap: 10px; padding: 10px 0; border-bottom: 1px solid var(--gray-100);">
+                            <span style="font-size: 20px;">🌊</span>
+                            <div style="flex: 1;">
+                                <strong>Sexta</strong> - Surf (2h30)
+                                <div style="font-size: 12px; color: var(--gray-400);">Foco: Simulação de bateria</div>
+                            </div>
+                        </div>
+                        <div style="display: flex; align-items: center; gap: 10px; padding: 10px 0; border-bottom: 1px solid var(--gray-100);">
+                            <span style="font-size: 20px;">🏃‍♀️</span>
+                            <div style="flex: 1;">
+                                <strong>Sábado</strong> - Corrida + Surf
+                                <div style="font-size: 12px; color: var(--gray-400);">Foco: Resistência</div>
+                            </div>
+                        </div>
+                        <div style="display: flex; align-items: center; gap: 10px; padding: 10px 0;">
+                            <span style="font-size: 20px;">😴</span>
+                            <div style="flex: 1;">
+                                <strong>Domingo</strong> - Descanso Ativo
+                                <div style="font-size: 12px; color: var(--gray-400);">Alongamento e recuperação</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Dicas para Competição -->
+            <div style="margin-bottom: 20px;">
+                <h3 style="font-size: 16px; margin-bottom: 12px; color: var(--secondary);">🎯 Dicas para Competição</h3>
+                <div class="card">
+                    <div style="padding: 10px 0; border-bottom: 1px solid var(--gray-100);">
+                        <p style="font-size: 14px;"><strong>🧠 Mental:</strong> Visualize sua bateria antes de dormir. Imagine cada wave, cada manobra.</p>
+                    </div>
+                    <div style="padding: 10px 0; border-bottom: 1px solid var(--gray-100);">
+                        <p style="font-size: 14px;"><strong>🍽️ Alimentação:</strong> Carboidratos complexos na véspera. Banana e aveia na manhã.</p>
+                    </div>
+                    <div style="padding: 10px 0; border-bottom: 1px solid var(--gray-100);">
+                        <p style="font-size: 14px;"><strong>⏰ Chegada:</strong> Chegue 1h antes. Conheça o pico, as correntes, o fundo.</p>
+                    </div>
+                    <div style="padding: 10px 0; border-bottom: 1px solid var(--gray-100);">
+                        <p style="font-size: 14px;"><strong>🏄‍♀️ Estratégia:</strong> Primeira wave = a melhor que aparecer. Não espere a "perfeita".</p>
+                    </div>
+                    <div style="padding: 10px 0;">
+                        <p style="font-size: 14px;"><strong>🌡️ Aquecimento:</strong> 15 min de aquecimento antes de entrar na água. Pular corda + alongamento.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Resultados Recentes -->
+            <div style="margin-bottom: 20px;">
+                <h3 style="font-size: 16px; margin-bottom: 12px; color: var(--secondary);">📋 Resultados Recentes</h3>
+                <div class="card" style="margin-bottom: 10px;">
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <div>
+                            <p style="font-size: 14px; font-weight: 600;">Etapa Guarujá 2026</p>
+                            <p style="font-size: 12px; color: var(--gray-400);">Open Feminino • 2º Lugar 🥈</p>
+                        </div>
+                        <span style="background: linear-gradient(135deg, #C0C0C0, #A8A8A8); color: white; padding: 4px 12px; border-radius: 20px; font-size: 12px; font-weight: 600;">+850 pts</span>
+                    </div>
+                </div>
+                <div class="card" style="margin-bottom: 10px;">
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <div>
+                            <p style="font-size: 14px; font-weight: 600;">Etapa Mongaguá 2026</p>
+                            <p style="font-size: 12px; color: var(--gray-400);">Open Feminino • 1º Lugar 🥇</p>
+                        </div>
+                        <span style="background: linear-gradient(135deg, #FFD700, #FFA500); color: white; padding: 4px 12px; border-radius: 20px; font-size: 12px; font-weight: 600;">+1200 pts</span>
+                    </div>
+                </div>
+                <div class="card">
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <div>
+                            <p style="font-size: 14px; font-weight: 600;">Etapa Praia Grande 2025</p>
+                            <p style="font-size: 12px; color: var(--gray-400);">Open Feminino • 3º Lugar 🥉</p>
+                        </div>
+                        <span style="background: linear-gradient(135deg, #CD7F32, #B8860B); color: white; padding: 4px 12px; border-radius: 20px; font-size: 12px; font-weight: 600;">+600 pts</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     <!-- Floating Action Button -->
     <button class="fab" onclick="createPost()">+</button>
 
@@ -2755,6 +2963,8 @@
                 navItems[3].classList.add('active');
             } else if (sectionId === 'manas') {
                 navItems[4].classList.add('active');
+            } else if (sectionId === 'competicoes') {
+                // Competitions section - highlight related tab
             }
             
             // Scroll to top
@@ -2781,6 +2991,26 @@
                 button.classList.add('btn-primary');
             }
         }
+
+        // Competition Countdown
+        function updateCountdown() {
+            const compDate = new Date('2026-04-12');
+            const now = new Date();
+            const diff = compDate - now;
+            const days = Math.ceil(diff / (1000 * 60 * 60 * 24));
+            const el = document.getElementById('countdown');
+            if (el) {
+                if (days > 0) {
+                    el.textContent = days + ' dia' + (days > 1 ? 's' : '');
+                } else if (days === 0) {
+                    el.textContent = 'HOJE! 🔥';
+                } else {
+                    el.textContent = 'Em andamento';
+                }
+            }
+        }
+        updateCountdown();
+        setInterval(updateCountdown, 60000);
     </script>
 </body>
 </html>
