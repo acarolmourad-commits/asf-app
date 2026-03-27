@@ -4045,15 +4045,43 @@
         function calcularVolume() {
             const peso = parseFloat(document.getElementById('peso-input').value) || 65;
             const nivel = document.getElementById('nivel-input').value;
-            let add = nivel === 'iniciante' ? 5.5 : nivel === 'intermediario' ? 2.5 : 0.5;
-            const volume = Math.round(peso + add);
-            document.getElementById('volume-result').textContent = volume + 'L';
-            document.getElementById('volume-result').style.color = 'var(--success)';
-            document.getElementById('volume-result').style.fontSize = '20px';
-            setTimeout(() => {
-                document.getElementById('volume-result').style.color = '';
-                document.getElementById('volume-result').style.fontSize = '';
-            }, 2000);
+            
+            // Cálculo de volume em litros
+            let addVolume = nivel === 'iniciante' ? 5.5 : nivel === 'intermediario' ? 2.5 : 0.5;
+            const volume = Math.round(peso + addVolume);
+            
+            // Cálculo de borda (rail height) em cm
+            let borda;
+            if (nivel === 'iniciante') {
+                borda = Math.round((peso * 0.08) + 2); // Bordas mais altas para iniciantes
+            } else if (nivel === 'intermediario') {
+                borda = Math.round((peso * 0.06) + 1.5); // Bordas médias
+            } else {
+                borda = Math.round((peso * 0.04) + 1); // Bordas mais baixas para avançados
+            }
+            
+            // Garantir limites razoáveis
+            borda = Math.max(4, Math.min(8, borda));
+            
+            // Mostrar resultado
+            const resultDiv = document.getElementById('calc-result');
+            resultDiv.innerHTML = `
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; text-align: center;">
+                    <div>
+                        <p style="font-size: 12px; color: var(--gray-600);">Volume</p>
+                        <p style="font-size: 24px; font-weight: bold; color: var(--success);" id="volume-result">${volume}L</p>
+                    </div>
+                    <div>
+                        <p style="font-size: 12px; color: var(--gray-600);">Borda</p>
+                        <p style="font-size: 24px; font-weight: bold; color: var(--primary);" id="borda-result">${borda}cm</p>
+                    </div>
+                </div>
+                <p style="font-size: 11px; color: var(--gray-400); margin-top: 10px; text-align: center;">
+                    ${nivel === 'iniciante' ? '🌱 Bordas altas = mais flutuação e estabilidade' : 
+                      nivel === 'intermediario' ? '🏄 Bordas médias = equilíbrio entre controle e performance' : 
+                      '🔥 Bordas baixas = mais agilidade e resposta'}
+                </p>
+            `;
         }
 
         // Load live data on page load
