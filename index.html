@@ -3801,7 +3801,7 @@
             }
             
             list.innerHTML = notifs.map(n => `
-                <div style="display: flex; gap: 12px; padding: 12px; border-bottom: 1px solid #eee; background: ${n.read ? 'white' : '#F0F9FF'}; border-radius: 8px; margin-bottom: 5px;">
+                <div onclick="openNotification('${n.type}', '${n.id}')" style="display: flex; gap: 12px; padding: 12px; border-bottom: 1px solid #eee; background: ${n.read ? 'white' : '#F0F9FF'}; border-radius: 8px; margin-bottom: 5px; cursor: pointer; transition: background 0.2s;" onmouseover="this.style.background='#f0f0f0'" onmouseout="this.style.background='${n.read ? 'white' : '#F0F9FF'}'">
                     <div style="font-size: 28px; flex-shrink: 0;">${n.icon}</div>
                     <div style="flex: 1;">
                         <p style="font-weight: 600; font-size: 14px; color: #0E2439;">${n.title}</p>
@@ -3809,8 +3809,37 @@
                         <p style="font-size: 10px; color: #999; margin-top: 5px;">${n.time}</p>
                     </div>
                     ${!n.read ? '<div style="width: 8px; height: 8px; background: #00A8CC; border-radius: 50%; flex-shrink: 0; margin-top: 5px;"></div>' : ''}
+                    <div style="color: #00A8CC; font-size: 12px; flex-shrink: 0; margin-top: 5px;">→</div>
                 </div>
             `).join('');
+        }
+        
+        function openNotification(type, id) {
+            // Marcar como lida
+            const notifs = loadNotifications();
+            const notif = notifs.find(n => n.id == id);
+            if (notif) notif.read = true;
+            saveNotifications(notifs);
+            updateNotificationBadge();
+            
+            // Fechar painel
+            document.getElementById('notifications-panel').style.display = 'none';
+            
+            // Navegar para a seção correta
+            const sectionMap = {
+                'treino': 'saude',
+                'ondas': 'dicas',
+                'pontos': 'progresso',
+                'dica': 'dicas',
+                'manas': 'manas',
+                'quiz': 'progresso',
+                'mobilidade': 'mobilidade',
+                'mental': 'mental',
+                'surftrip': 'manas'
+            };
+            
+            const section = sectionMap[type] || 'dicas';
+            showSection(section);
         }
         
         function clearNotifications() {
