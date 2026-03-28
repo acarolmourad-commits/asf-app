@@ -1117,9 +1117,43 @@
             display: block;
             margin-bottom: 8px;
         }
+        /* Scroll Progress Bar */
+        .scroll-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 3px;
+            background: linear-gradient(90deg, #FF6B6B, #4ECDC4, #45B7D1);
+            z-index: 10001;
+            transition: width 0.1s linear;
+        }
+        .scroll-progress.hidden { opacity: 0; }
+        /* Toast notification */
+        .toast {
+            position: fixed;
+            bottom: 80px;
+            left: 50%;
+            transform: translateX(-50%) translateY(20px);
+            background: var(--card-bg, #fff);
+            color: var(--text-primary, #333);
+            padding: 10px 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+            font-size: 14px;
+            z-index: 9999;
+            opacity: 0;
+            transition: all 0.3s ease;
+            pointer-events: none;
+        }
+        .toast.show {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+        }
     </style>
 </head>
 <body>
+    <div class="scroll-progress" id="scrollProgress"></div>
     <!-- Loading Screen -->
     <div class="loading-screen" id="loading-screen">
         <div class="loading-logo">🏄‍♀️</div>
@@ -2563,10 +2597,10 @@
             </div>
         </div>
 
-        <!-- Mobilidade Section -->
-        <div class="section" id="mobilidade">
+        <!-- Mobilidade Extra Section -->
+        <div class="section" id="mobilidade-extra">
             <div class="section-header">
-                <h2 class="section-title">🧘 Mobilidade & Alongamento</h2>
+                <h2 class="section-title">🧘 Alongamento Avançado</h2>
                 <a href="#" class="see-all">Ver todos →</a>
             </div>
             <div class="cards-grid">
@@ -4857,6 +4891,26 @@
             }
         }
         initDarkMode();
+
+        // ============ SCROLL PROGRESS BAR ============
+        const scrollBar = document.getElementById('scrollProgress');
+        window.addEventListener('scroll', () => {
+            const scrollTop = window.scrollY;
+            const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+            const progress = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+            scrollBar.style.width = progress + '%';
+            if (scrollTop < 10) scrollBar.classList.add('hidden');
+            else scrollBar.classList.remove('hidden');
+        }, { passive: true });
+
+        // ============ TOAST NOTIFICATION HELPER ============
+        function showToast(msg, duration = 2500) {
+            let t = document.querySelector('.toast');
+            if (!t) { t = document.createElement('div'); t.className = 'toast'; document.body.appendChild(t); }
+            t.textContent = msg;
+            t.classList.add('show');
+            setTimeout(() => t.classList.remove('show'), duration);
+        }
     </script>
 </body>
 </html>
