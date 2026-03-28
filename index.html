@@ -1761,7 +1761,42 @@
             <div id="nearby-manas" style="padding: 0 20px;">
                 <p style="text-align: center; color: #999; padding: 40px;">Ative sua localização para ver manas próximas</p>
             </div>
-            
+
+            <!-- Cadastro Rápido -->
+            <div style="padding: 0 20px; margin-bottom: 16px;" id="cadastro-manas">
+                <div style="background: linear-gradient(135deg, rgba(0,168,204,0.06), rgba(155,89,182,0.06)); border: 1px solid rgba(0,168,204,0.12); border-radius: 16px; padding: 16px;">
+                    <h4 style="font-size: 14px; margin-bottom: 4px;">👋 Quer aparecer para outras manas?</h4>
+                    <p style="font-size: 12px; color: var(--gray-400); margin-bottom: 12px;">Cadastre-se e manas próximas poderão te encontrar!</p>
+                    <div id="cadastro-form">
+                        <input type="text" id="cadastro-nome" placeholder="Seu nome ou apelido" style="width: 100%; padding: 10px 14px; border: 1px solid var(--gray-200, #ddd); border-radius: 10px; font-size: 14px; margin-bottom: 8px; font-family: 'Outfit'; box-sizing: border-box;">
+                        <select id="cadastro-nivel" style="width: 100%; padding: 10px 14px; border: 1px solid var(--gray-200, #ddd); border-radius: 10px; font-size: 14px; margin-bottom: 8px; font-family: 'Outfit'; box-sizing: border-box;">
+                            <option value="">Seu nível de surf</option>
+                            <option value="iniciante">🌱 Iniciante</option>
+                            <option value="intermediario">🏄 Intermediário</option>
+                            <option value="avancado">🔥 Avançada</option>
+                        </select>
+                        <select id="cadastro-praia" style="width: 100%; padding: 10px 14px; border: 1px solid var(--gray-200, #ddd); border-radius: 10px; font-size: 14px; margin-bottom: 12px; font-family: 'Outfit'; box-sizing: border-box;">
+                            <option value="">Praia que você mais frequenta</option>
+                            <option value="bertioga">🏖️ Bertioga</option>
+                            <option value="santos">🌊 Santos</option>
+                            <option value="guaruja">🏝️ Guarujá</option>
+                            <option value="ubatuba">🏄 Ubatuba</option>
+                            <option value="maresias">🌴 Maresias</option>
+                            <option value="mongagua">🏖️ Mongaguá</option>
+                            <option value="praia-grande">🏄 Praia Grande</option>
+                            <option value="ilhabela">⛵ Ilhabela</option>
+                        </select>
+                        <button onclick="cadastrarMana()" class="btn btn-primary" style="width: 100%;">🌊 Cadastrar e Aparecer!</button>
+                    </div>
+                    <div id="cadastro-done" style="display: none; text-align: center; padding: 12px 0;">
+                        <div style="font-size: 40px; margin-bottom: 8px;">🎉</div>
+                        <p style="font-size: 14px; font-weight: 600; color: var(--primary);">Você está cadastrada!</p>
+                        <p style="font-size: 12px; color: var(--gray-400); margin-top: 4px;" id="cadastro-welcome"></p>
+                        <button onclick="editCadastro()" style="background: none; border: 1px solid var(--gray-200, #ddd); padding: 6px 14px; border-radius: 8px; font-size: 12px; cursor: pointer; margin-top: 8px; color: var(--gray-400);">✏️ Editar</button>
+                    </div>
+                </div>
+            </div>
+
             <div style="padding: 20px;">
                 <h4 style="color: var(--secondary); margin-bottom: 15px;">🏖️ Praias Populares</h4>
                 <div class="cards-grid">
@@ -5244,6 +5279,41 @@
             if (scrollTop < 10) scrollBar.classList.add('hidden');
             else scrollBar.classList.remove('hidden');
         }, { passive: true });
+
+        // ============ MANAS REGISTRATION ============
+        function cadastrarMana() {
+            const nome = document.getElementById('cadastro-nome').value.trim();
+            const nivel = document.getElementById('cadastro-nivel').value;
+            const praia = document.getElementById('cadastro-praia').value;
+            if (!nome) { showToast('Digite seu nome ou apelido!'); return; }
+            if (!nivel) { showToast('Selecione seu nível de surf!'); return; }
+            if (!praia) { showToast('Escolha sua praia!'); return; }
+            const profile = { nome, nivel, praia, registered: Date.now() };
+            localStorage.setItem('asf-profile', JSON.stringify(profile));
+            document.getElementById('cadastro-form').style.display = 'none';
+            document.getElementById('cadastro-done').style.display = 'block';
+            const nivelLabel = { iniciante: '🌱 Iniciante', intermediario: '🏄 Intermediária', avancado: '🔥 Avançada' };
+            document.getElementById('cadastro-welcome').textContent = `${nome} • ${nivelLabel[nivel]} • Praia de ${praia.charAt(0).toUpperCase() + praia.slice(1)}`;
+            showToast('Cadastro feito! Bem-vinda! 🌊');
+        }
+        function editCadastro() {
+            const profile = JSON.parse(localStorage.getItem('asf-profile') || '{}');
+            document.getElementById('cadastro-nome').value = profile.nome || '';
+            document.getElementById('cadastro-nivel').value = profile.nivel || '';
+            document.getElementById('cadastro-praia').value = profile.praia || '';
+            document.getElementById('cadastro-form').style.display = '';
+            document.getElementById('cadastro-done').style.display = 'none';
+        }
+        function initCadastro() {
+            const profile = JSON.parse(localStorage.getItem('asf-profile') || '{}');
+            if (profile.nome) {
+                document.getElementById('cadastro-form').style.display = 'none';
+                document.getElementById('cadastro-done').style.display = 'block';
+                const nivelLabel = { iniciante: '🌱 Iniciante', intermediario: '🏄 Intermediária', avancado: '🔥 Avançada' };
+                document.getElementById('cadastro-welcome').textContent = `${profile.nome} • ${nivelLabel[profile.nivel] || profile.nivel} • Praia de ${(profile.praia || '').charAt(0).toUpperCase() + (profile.praia || '').slice(1)}`;
+            }
+        }
+        initCadastro();
 
         // ============ DICA DO DIA ============
         const dicas = [
