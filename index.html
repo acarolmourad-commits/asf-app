@@ -343,6 +343,62 @@
             margin-top: 4px;
         }
 
+        /* Surf Conditions Bar */
+        .surf-bar {
+            margin: -10px 16px 12px;
+            background: linear-gradient(135deg, rgba(0,168,204,0.08) 0%, rgba(14,36,57,0.04) 100%);
+            border-radius: var(--radius-md);
+            padding: 12px 16px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
+            position: relative;
+            z-index: 1;
+        }
+        .surf-bar::-webkit-scrollbar { display: none; }
+        .surf-bar-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-width: 60px;
+            gap: 2px;
+        }
+        .surf-bar-item .surf-icon { font-size: 18px; }
+        .surf-bar-item .surf-val {
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--secondary);
+        }
+        .surf-bar-item .surf-label {
+            font-size: 10px;
+            color: var(--gray-400);
+            white-space: nowrap;
+        }
+        .surf-bar-divider {
+            width: 1px;
+            height: 32px;
+            background: var(--gray-200);
+            flex-shrink: 0;
+        }
+        .surf-bar-loading {
+            font-size: 12px;
+            color: var(--gray-400);
+            padding: 4px 0;
+        }
+        .surf-condition-badge {
+            font-size: 10px;
+            padding: 2px 8px;
+            border-radius: 10px;
+            font-weight: 600;
+            white-space: nowrap;
+        }
+        .condition-bom { background: rgba(46,204,113,0.15); color: #27ae60; }
+        .condition-moderado { background: rgba(244,208,63,0.2); color: #d4a017; }
+        .condition-ruim { background: rgba(255,107,107,0.15); color: #e74c3c; }
+
         /* Utilities Section */
         .utilities-grid {
             display: grid;
@@ -1178,6 +1234,11 @@
             </button>
         </div>
     </section>
+
+    <!-- Live Surf Conditions -->
+    <div class="surf-bar" id="surfBar">
+        <div class="surf-bar-loading" id="surfBarLoading">🌊 Carregando condições...</div>
+    </div>
 
     <!-- Stats -->
     <div class="stats">
@@ -4720,6 +4781,59 @@
 
         // Load live data on page load
         loadLiveData('bertioga');
+
+        // Surf Conditions Bar (compact live data on homepage)
+        async function loadSurfBar() {
+            const bar = document.getElementById('surfBar');
+            try {
+                const [weather, marine] = await Promise.all([fetchWeather('bertioga'), fetchMarine('bertioga')]);
+                const w = weather?.current;
+                const m = marine?.current;
+                if (!w || !m) {
+                    bar.innerHTML = '<div class="surf-bar-loading">🌊 Dados indisponíveis</div>';
+                    return;
+                }
+                const rating = surfRating(m.wave_height);
+                const condClass = m.wave_height >= 0.6 && m.wave_height < 2.0 ? 'condition-bom' : m.wave_height < 0.6 ? 'condition-moderado' : 'condition-ruim';
+                const condText = m.wave_height >= 0.6 && m.wave_height < 2.0 ? 'Bom' : m.wave_height < 0.6 ? 'Calmo' : 'Pesado';
+                bar.innerHTML = `
+                    <div class="surf-bar-item">
+                        <span class="surf-icon">📍</span>
+                        <span class="surf-val">Bertioga</span>
+                        <span class="surf-label">Praia</span>
+                    </div>
+                    <div class="surf-bar-divider"></div>
+                    <div class="surf-bar-item">
+                        <span class="surf-icon">🌊</span>
+                        <span class="surf-val">${m.wave_height.toFixed(1)}m</span>
+                        <span class="surf-label">Ondas</span>
+                    </div>
+                    <div class="surf-bar-item">
+                        <span class="surf-icon">💨</span>
+                        <span class="surf-val">${w.wind_speed_10m.toFixed(0)}km/h</span>
+                        <span class="surf-label">${windDir(w.wind_direction_10m)}</span>
+                    </div>
+                    <div class="surf-bar-item">
+                        <span class="surf-icon">🌡️</span>
+                        <span class="surf-val">${w.temperature_2m.toFixed(0)}°C</span>
+                        <span class="surf-label">Temp</span>
+                    </div>
+                    <div class="surf-bar-divider"></div>
+                    <div class="surf-bar-item">
+                        <span class="surf-icon">⏱️</span>
+                        <span class="surf-val">${m.wave_period.toFixed(0)}s</span>
+                        <span class="surf-label">Período</span>
+                    </div>
+                    <div class="surf-bar-item">
+                        <span class="surf-condition-badge ${condClass}">${condText}</span>
+                        <span class="surf-label">Condição</span>
+                    </div>
+                `;
+            } catch (e) {
+                bar.innerHTML = '<div class="surf-bar-loading">🌊 Erro ao carregar</div>';
+            }
+        }
+        loadSurfBar();
 
         // ============ DARK MODE ============
         function initDarkMode() {
