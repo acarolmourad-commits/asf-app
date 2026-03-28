@@ -3583,6 +3583,14 @@
                         💡 Em destaque: 60kg (peso médio das surfistas)
                     </p>
                 </div>
+
+                <!-- Guia de Praias -->
+                <div class="card utility-card" style="background: linear-gradient(135deg, rgba(0,168,204,0.05), rgba(14,36,57,0.05));">
+                    <div class="icon">🏖️</div>
+                    <h4>Guia de Praias</h4>
+                    <p>Explore as melhores praias do Litoral Paulista com dicas de nível, ondas e infraestrutura.</p>
+                    <button class="btn btn-primary" style="width: 100%; margin-top: 12px;" onclick="showSection('praias')">🗺️ Ver Guia Completo</button>
+                </div>
             </div>
         </div>
 
@@ -3846,6 +3854,319 @@
                 </div>
             </div>
         </div>
+
+    <!-- Guia de Praias Section -->
+    <div class="section" id="praias">
+        <div class="section-header">
+            <h2 class="section-title">🏖️ Guia de Praias - Litoral Paulista</h2>
+        </div>
+
+        <!-- Filtro por Região -->
+        <div style="display: flex; gap: 8px; overflow-x: auto; padding: 0 0 12px 0; -webkit-overflow-scrolling: touch;">
+            <button class="btn btn-primary" onclick="filterBeaches('all')" id="beach-filter-all" style="white-space: nowrap; font-size: 13px; padding: 8px 16px;">Todas</button>
+            <button class="btn btn-secondary" onclick="filterBeaches('norte')" id="beach-filter-norte" style="white-space: nowrap; font-size: 13px; padding: 8px 16px;">Norte</button>
+            <button class="btn btn-secondary" onclick="filterBeaches('santos')" id="beach-filter-santos" style="white-space: nowrap; font-size: 13px; padding: 8px 16px;">Grande Santos</button>
+            <button class="btn btn-secondary" onclick="filterBeaches('sul')" id="beach-filter-sul" style="white-space: nowrap; font-size: 13px; padding: 8px 16px;">Sul</button>
+        </div>
+
+        <!-- Praias -->
+        <div id="beaches-list">
+            <!-- Ubatuba -->
+            <div class="card beach-card" data-region="norte" style="margin-bottom: 12px; border-left: 4px solid #00A8CC;">
+                <div style="display: flex; justify-content: space-between; align-items: start;">
+                    <div>
+                        <h4 style="font-size: 15px;">🌊 Praia do Itamambuca</h4>
+                        <p style="font-size: 12px; color: var(--gray-400);">Ubatuba • Norte</p>
+                    </div>
+                    <span style="background: linear-gradient(135deg, #00A8CC, #0E2439); color: white; padding: 3px 10px; border-radius: 20px; font-size: 11px; font-weight: 600;">⭐ Top Surf</span>
+                </div>
+                <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin: 12px 0; font-size: 12px;">
+                    <div style="background: var(--gray-50, #f8f9fa); padding: 8px; border-radius: 8px; text-align: center;">
+                        <div style="font-size: 16px;">🌊</div>
+                        <div style="font-weight: 600;">1-2m</div>
+                        <div style="color: var(--gray-400);">Ondas</div>
+                    </div>
+                    <div style="background: var(--gray-50, #f8f9fa); padding: 8px; border-radius: 8px; text-align: center;">
+                        <div style="font-size: 16px;">💨</div>
+                        <div style="font-weight: 600;">Offshore</div>
+                        <div style="color: var(--gray-400);">Vento</div>
+                    </div>
+                    <div style="background: var(--gray-50, #f8f9fa); padding: 8px; border-radius: 8px; text-align: center;">
+                        <div style="font-size: 16px;">📊</div>
+                        <div style="font-weight: 600;">Inter.</div>
+                        <div style="color: var(--gray-400);">Nível</div>
+                    </div>
+                </div>
+                <p style="font-size: 13px; color: var(--gray-600); margin-bottom: 8px;">🏆 Uma das melhores ondas do Brasil! Point break consistente, funciona com swell de S e SE. Palco de campeonatos nacionais e internacionais.</p>
+                <div style="font-size: 12px; color: var(--gray-400);">
+                    <span>🅿️ Estacionamento</span> • <span>🍽️ Bares na praia</span> • <span>🚿 Vestiários</span>
+                </div>
+            </div>
+
+            <div class="card beach-card" data-region="norte" style="margin-bottom: 12px; border-left: 4px solid #00A8CC;">
+                <div style="display: flex; justify-content: space-between; align-items: start;">
+                    <div>
+                        <h4 style="font-size: 15px;">🏖️ Praia das Toninhas</h4>
+                        <p style="font-size: 12px; color: var(--gray-400);">Ubatuba • Norte</p>
+                    </div>
+                    <span style="background: linear-gradient(135deg, #27ae60, #2ecc71); color: white; padding: 3px 10px; border-radius: 20px; font-size: 11px; font-weight: 600;">Iniciante</span>
+                </div>
+                <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin: 12px 0; font-size: 12px;">
+                    <div style="background: var(--gray-50, #f8f9fa); padding: 8px; border-radius: 8px; text-align: center;">
+                        <div style="font-size: 16px;">🌊</div>
+                        <div style="font-weight: 600;">0.5-1m</div>
+                        <div style="color: var(--gray-400);">Ondas</div>
+                    </div>
+                    <div style="background: var(--gray-50, #f8f9fa); padding: 8px; border-radius: 8px; text-align: center;">
+                        <div style="font-size: 16px;">💨</div>
+                        <div style="font-weight: 600;">Variável</div>
+                        <div style="color: var(--gray-400);">Vento</div>
+                    </div>
+                    <div style="background: var(--gray-50, #f8f9fa); padding: 8px; border-radius: 8px; text-align: center;">
+                        <div style="font-size: 16px;">📊</div>
+                        <div style="font-weight: 600;">Inic.</div>
+                        <div style="color: var(--gray-400);">Nível</div>
+                    </div>
+                </div>
+                <p style="font-size: 13px; color: var(--gray-600); margin-bottom: 8px;">Ótima para aprender! Ondas de beach break suaves, fundo de areia. Ambiente acolhedor, perfeita para as manas que estão começando.</p>
+                <div style="font-size: 12px; color: var(--gray-400);">
+                    <span>🅿️ Estacionamento</span> • <span>🏪 Comércio local</span> • <span>🚺 Banheiros</span>
+                </div>
+            </div>
+
+            <div class="card beach-card" data-region="norte" style="margin-bottom: 12px; border-left: 4px solid #00A8CC;">
+                <div style="display: flex; justify-content: space-between; align-items: start;">
+                    <div>
+                        <h4 style="font-size: 15px;">🌴 Praia de Maresias</h4>
+                        <p style="font-size: 12px; color: var(--gray-400);">São Sebastião • Norte</p>
+                    </div>
+                    <span style="background: linear-gradient(135deg, #e67e22, #f39c12); color: white; padding: 3px 10px; border-radius: 20px; font-size: 11px; font-weight: 600;">Intermediário</span>
+                </div>
+                <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin: 12px 0; font-size: 12px;">
+                    <div style="background: var(--gray-50, #f8f9fa); padding: 8px; border-radius: 8px; text-align: center;">
+                        <div style="font-size: 16px;">🌊</div>
+                        <div style="font-weight: 600;">1-2.5m</div>
+                        <div style="color: var(--gray-400);">Ondas</div>
+                    </div>
+                    <div style="background: var(--gray-50, #f8f9fa); padding: 8px; border-radius: 8px; text-align: center;">
+                        <div style="font-size: 16px;">💨</div>
+                        <div style="font-weight: 600;">Cross</div>
+                        <div style="color: var(--gray-400);">Vento</div>
+                    </div>
+                    <div style="background: var(--gray-50, #f8f9fa); padding: 8px; border-radius: 8px; text-align: center;">
+                        <div style="font-size: 16px;">📊</div>
+                        <div style="font-weight: 600;">Inter.</div>
+                        <div style="color: var(--gray-400);">Nível</div>
+                    </div>
+                </div>
+                <p style="font-size: 13px; color: var(--gray-600); margin-bottom: 8px;">Beach break com picos variados. Boa para evoluir! Cuidado com a corrente no canto direito. Vida noturna agitada no verão 🎉</p>
+                <div style="font-size: 12px; color: var(--gray-400);">
+                    <span>🅿️ Pago</span> • <span>🍕 Restaurantes</span> • <span>🎵 Vida noturna</span>
+                </div>
+            </div>
+
+            <!-- Bertioga -->
+            <div class="card beach-card" data-region="santos" style="margin-bottom: 12px; border-left: 4px solid #9b59b6;">
+                <div style="display: flex; justify-content: space-between; align-items: start;">
+                    <div>
+                        <h4 style="font-size: 15px;">🏄‍♀️ Praia de Bertioga</h4>
+                        <p style="font-size: 12px; color: var(--gray-400);">Bertioga • Grande Santos</p>
+                    </div>
+                    <span style="background: linear-gradient(135deg, #00A8CC, #0E2439); color: white; padding: 3px 10px; border-radius: 20px; font-size: 11px; font-weight: 600;">⭐ ASF Home</span>
+                </div>
+                <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin: 12px 0; font-size: 12px;">
+                    <div style="background: var(--gray-50, #f8f9fa); padding: 8px; border-radius: 8px; text-align: center;">
+                        <div style="font-size: 16px;">🌊</div>
+                        <div style="font-weight: 600;">0.5-1.5m</div>
+                        <div style="color: var(--gray-400);">Ondas</div>
+                    </div>
+                    <div style="background: var(--gray-50, #f8f9fa); padding: 8px; border-radius: 8px; text-align: center;">
+                        <div style="font-size: 16px;">💨</div>
+                        <div style="font-weight: 600;">Terrestre</div>
+                        <div style="color: var(--gray-400);">Vento</div>
+                    </div>
+                    <div style="background: var(--gray-50, #f8f9fa); padding: 8px; border-radius: 8px; text-align: center;">
+                        <div style="font-size: 16px;">📊</div>
+                        <div style="font-weight: 600;">Todos</div>
+                        <div style="color: var(--gray-400);">Nível</div>
+                    </div>
+                </div>
+                <p style="font-size: 13px; color: var(--gray-600); margin-bottom: 8px;">🏠 Nossa casa! Onde a ASF nasceu. Praia extensa com vários picos, perfeita para todos os níveis. Encontros toda semana!</p>
+                <div style="font-size: 12px; color: var(--gray-400);">
+                    <span>🅿️ Gratuito</span> • <span>🌊 Rio</span> • <span>🥥 Cambucos</span>
+                </div>
+            </div>
+
+            <div class="card beach-card" data-region="santos" style="margin-bottom: 12px; border-left: 4px solid #9b59b6;">
+                <div style="display: flex; justify-content: space-between; align-items: start;">
+                    <div>
+                        <h4 style="font-size: 15px;">🏙️ Praia do Gonzaga</h4>
+                        <p style="font-size: 12px; color: var(--gray-400);">Santos • Grande Santos</p>
+                    </div>
+                    <span style="background: linear-gradient(135deg, #e74c3c, #c0392b); color: white; padding: 3px 10px; border-radius: 20px; font-size: 11px; font-weight: 600;">Avançado</span>
+                </div>
+                <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin: 12px 0; font-size: 12px;">
+                    <div style="background: var(--gray-50, #f8f9fa); padding: 8px; border-radius: 8px; text-align: center;">
+                        <div style="font-size: 16px;">🌊</div>
+                        <div style="font-weight: 600;">1-3m</div>
+                        <div style="color: var(--gray-400);">Ondas</div>
+                    </div>
+                    <div style="background: var(--gray-50, #f8f9fa); padding: 8px; border-radius: 8px; text-align: center;">
+                        <div style="font-size: 16px;">💨</div>
+                        <div style="font-weight: 600;">Onshore</div>
+                        <div style="color: var(--gray-400);">Vento</div>
+                    </div>
+                    <div style="background: var(--gray-50, #f8f9fa); padding: 8px; border-radius: 8px; text-align: center;">
+                        <div style="font-size: 16px;">📊</div>
+                        <div style="font-weight: 600;">Avanç.</div>
+                        <div style="color: var(--gray-400);">Nível</div>
+                    </div>
+                </div>
+                <p style="font-size: 13px; color: var(--gray-600); margin-bottom: 8px;">Quebra de concreto (wave breaker) gera ondas tubulares! Cuidado com o fundo raso. Surf de alta performance no centro de Santos.</p>
+                <div style="font-size: 12px; color: var(--gray-400);">
+                    <span>🚇 Metrô</span> • <span>🏪 Tudo perto</span> • <span>⚠️ Tubos!</span>
+                </div>
+            </div>
+
+            <!-- Guarujá -->
+            <div class="card beach-card" data-region="santos" style="margin-bottom: 12px; border-left: 4px solid #9b59b6;">
+                <div style="display: flex; justify-content: space-between; align-items: start;">
+                    <div>
+                        <h4 style="font-size: 15px;">🏝️ Praia das Pitangueiras</h4>
+                        <p style="font-size: 12px; color: var(--gray-400);">Guarujá • Grande Santos</p>
+                    </div>
+                    <span style="background: linear-gradient(135deg, #27ae60, #2ecc71); color: white; padding: 3px 10px; border-radius: 20px; font-size: 11px; font-weight: 600;">Todos</span>
+                </div>
+                <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin: 12px 0; font-size: 12px;">
+                    <div style="background: var(--gray-50, #f8f9fa); padding: 8px; border-radius: 8px; text-align: center;">
+                        <div style="font-size: 16px;">🌊</div>
+                        <div style="font-weight: 600;">0.5-1.5m</div>
+                        <div style="color: var(--gray-400);">Ondas</div>
+                    </div>
+                    <div style="background: var(--gray-50, #f8f9fa); padding: 8px; border-radius: 8px; text-align: center;">
+                        <div style="font-size: 16px;">💨</div>
+                        <div style="font-weight: 600;">Cross</div>
+                        <div style="color: var(--gray-400);">Vento</div>
+                    </div>
+                    <div style="background: var(--gray-50, #f8f9fa); padding: 8px; border-radius: 8px; text-align: center;">
+                        <div style="font-size: 16px;">📊</div>
+                        <div style="font-weight: 600;">Todos</div>
+                        <div style="color: var(--gray-400);">Nível</div>
+                    </div>
+                </div>
+                <p style="font-size: 13px; color: var(--gray-600); margin-bottom: 8px;">A praia mais famosa do Guarujá! Boa para todos os níveis, ondas divertidas. Movimentada no verão — chegue cedo!</p>
+                <div style="font-size: 12px; color: var(--gray-400);">
+                    <span>🚢 Balsa</span> • <span>🏖️ Quiosques</span> • <span>👨‍👩‍👧 Família</span>
+                </div>
+            </div>
+
+            <!-- Sul -->
+            <div class="card beach-card" data-region="sul" style="margin-bottom: 12px; border-left: 4px solid #e74c3c;">
+                <div style="display: flex; justify-content: space-between; align-items: start;">
+                    <div>
+                        <h4 style="font-size: 15px;">🌅 Praia de Riviera de São Lourenço</h4>
+                        <p style="font-size: 12px; color: var(--gray-400);">Bertioga • Sul</p>
+                    </div>
+                    <span style="background: linear-gradient(135deg, #27ae60, #2ecc71); color: white; padding: 3px 10px; border-radius: 20px; font-size: 11px; font-weight: 600;">Iniciante</span>
+                </div>
+                <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin: 12px 0; font-size: 12px;">
+                    <div style="background: var(--gray-50, #f8f9fa); padding: 8px; border-radius: 8px; text-align: center;">
+                        <div style="font-size: 16px;">🌊</div>
+                        <div style="font-weight: 600;">0.3-1m</div>
+                        <div style="color: var(--gray-400);">Ondas</div>
+                    </div>
+                    <div style="background: var(--gray-50, #f8f9fa); padding: 8px; border-radius: 8px; text-align: center;">
+                        <div style="font-size: 16px;">💨</div>
+                        <div style="font-weight: 600;">Terrestre</div>
+                        <div style="color: var(--gray-400);">Vento</div>
+                    </div>
+                    <div style="background: var(--gray-50, #f8f9fa); padding: 8px; border-radius: 8px; text-align: center;">
+                        <div style="font-size: 16px;">📊</div>
+                        <div style="font-weight: 600;">Inic.</div>
+                        <div style="color: var(--gray-400);">Nível</div>
+                    </div>
+                </div>
+                <p style="font-size: 13px; color: var(--gray-600); margin-bottom: 8px;">Praia longa e tranquila, ideal para longboard e para quem está aprendendo. Fundo de areia, ondas suaves. Perfeita para sessões relax!</p>
+                <div style="font-size: 12px; color: var(--gray-400);">
+                    <span>🏖️ Tranquila</span> • <span>🌅 Lindo pôr do sol</span> • <span>🅿️ Estacionamento</span>
+                </div>
+            </div>
+
+            <div class="card beach-card" data-region="sul" style="margin-bottom: 12px; border-left: 4px solid #e74c3c;">
+                <div style="display: flex; justify-content: space-between; align-items: start;">
+                    <div>
+                        <h4 style="font-size: 15px;">🏖️ Praia de Mongaguá</h4>
+                        <p style="font-size: 12px; color: var(--gray-400);">Mongaguá • Sul</p>
+                    </div>
+                    <span style="background: linear-gradient(135deg, #e67e22, #f39c12); color: white; padding: 3px 10px; border-radius: 20px; font-size: 11px; font-weight: 600;">Intermediário</span>
+                </div>
+                <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin: 12px 0; font-size: 12px;">
+                    <div style="background: var(--gray-50, #f8f9fa); padding: 8px; border-radius: 8px; text-align: center;">
+                        <div style="font-size: 16px;">🌊</div>
+                        <div style="font-weight: 600;">0.5-2m</div>
+                        <div style="color: var(--gray-400);">Ondas</div>
+                    </div>
+                    <div style="background: var(--gray-50, #f8f9fa); padding: 8px; border-radius: 8px; text-align: center;">
+                        <div style="font-size: 16px;">💨</div>
+                        <div style="font-weight: 600;">Cross</div>
+                        <div style="color: var(--gray-400);">Vento</div>
+                    </div>
+                    <div style="background: var(--gray-50, #f8f9fa); padding: 8px; border-radius: 8px; text-align: center;">
+                        <div style="font-size: 16px;">📊</div>
+                        <div style="font-weight: 600;">Inter.</div>
+                        <div style="color: var(--gray-400);">Nível</div>
+                    </div>
+                </div>
+                <p style="font-size: 13px; color: var(--gray-600); margin-bottom: 8px;">Beach break consistente com ondas de boa qualidade. Palco de etapas do Circuito Paulista! Praia menos movimentada, ideal para treinar.</p>
+                <div style="font-size: 12px; color: var(--gray-400);">
+                    <span>🅿️ Fácil</span> • <span>🏖️ Pouca gente</span> • <span>🏆 Competições</span>
+                </div>
+            </div>
+
+            <div class="card beach-card" data-region="sul" style="margin-bottom: 12px; border-left: 4px solid #e74c3c;">
+                <div style="display: flex; justify-content: space-between; align-items: start;">
+                    <div>
+                        <h4 style="font-size: 15px;">🏄 Praia Grande</h4>
+                        <p style="font-size: 12px; color: var(--gray-400);">Praia Grande • Sul</p>
+                    </div>
+                    <span style="background: linear-gradient(135deg, #e67e22, #f39c12); color: white; padding: 3px 10px; border-radius: 20px; font-size: 11px; font-weight: 600;">Intermediário</span>
+                </div>
+                <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin: 12px 0; font-size: 12px;">
+                    <div style="background: var(--gray-50, #f8f9fa); padding: 8px; border-radius: 8px; text-align: center;">
+                        <div style="font-size: 16px;">🌊</div>
+                        <div style="font-weight: 600;">0.5-2m</div>
+                        <div style="color: var(--gray-400);">Ondas</div>
+                    </div>
+                    <div style="background: var(--gray-50, #f8f9fa); padding: 8px; border-radius: 8px; text-align: center;">
+                        <div style="font-size: 16px;">💨</div>
+                        <div style="font-weight: 600;">Onshore</div>
+                        <div style="color: var(--gray-400);">Vento</div>
+                    </div>
+                    <div style="background: var(--gray-50, #f8f9fa); padding: 8px; border-radius: 8px; text-align: center;">
+                        <div style="font-size: 16px;">📊</div>
+                        <div style="font-weight: 600;">Inter.</div>
+                        <div style="color: var(--gray-400);">Nível</div>
+                    </div>
+                </div>
+                <p style="font-size: 13px; color: var(--gray-600); margin-bottom: 8px;">Praia urbana com ótima infraestrutura. Ondas de beach break, boa para evoluir. Fácil acesso de SP. Melhor nas manhãs!</p>
+                <div style="font-size: 12px; color: var(--gray-400);">
+                    <span>🚇 Ônibus de SP</span> • <span>🏪 Tudo perto</span> • <span>🌅 Manhãs melhores</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Dica de Segurança -->
+        <div class="card" style="background: linear-gradient(135deg, #fff3cd, #ffeeba); border-left: 4px solid #f39c12; margin-top: 16px;">
+            <h4 style="font-size: 14px; margin-bottom: 8px;">⚠️ Dicas de Segurança</h4>
+            <ul style="font-size: 13px; color: var(--gray-600); padding-left: 16px; line-height: 1.8;">
+                <li>Sempre surf com uma mana! Nunca sozinha 🤝</li>
+                <li>Verifique a previsão e as condições antes de entrar</li>
+                <li>Use protetor solar reef-safe 🐠</li>
+                <li>Respeite a etiqueta do surf — não furta onda!</li>
+                <li>Conheça suas limitações e evolua gradualmente</li>
+            </ul>
+        </div>
+    </div>
 
     <!-- Floating Action Buttons -->
     <button class="fab" onclick="createPost()">+</button>
@@ -4502,6 +4823,11 @@
             { title: 'Competições', icon: '🏆', section: 'Competições', sectionId: 'competicoes', text: 'Próximos eventos, resultados e cronograma de treino.' },
             { title: 'Circuito Paulista', icon: '🏅', section: 'Competições', sectionId: 'competicoes', text: 'Circuito Paulista de Surf Feminino 2026 - Santos, 12-13 de Abril.' },
             { title: 'Treino Pré-Competição', icon: '💪', section: 'Competições', sectionId: 'competicoes', text: 'Cronograma de treino semanal para se preparar para competições.' },
+            { title: 'Guia de Praias', icon: '🏖️', section: 'Praias', sectionId: 'praias', text: 'Guia completo das praias do Litoral Paulista com níveis, ondas e infraestrutura.' },
+            { title: 'Praia do Itamambuca', icon: '🌊', section: 'Praias', sectionId: 'praias', text: 'Ubatuba - Point break, uma das melhores ondas do Brasil. Nível intermediário.' },
+            { title: 'Praia de Bertioga', icon: '🏄‍♀️', section: 'Praias', sectionId: 'praias', text: 'Nossa casa! Praia extensa, todos os níveis. Encontros da ASF.' },
+            { title: 'Praia de Maresias', icon: '🌴', section: 'Praias', sectionId: 'praias', text: 'São Sebastião - Beach break com picos variados, intermediário.' },
+            { title: 'Riviera de São Lourenço', icon: '🌅', section: 'Praias', sectionId: 'praias', text: 'Bertioga - Praia longa e tranquila, ideal para longboard e iniciantes.' },
             // Utilitários
             { title: 'Condições do Mar', icon: '🌊', section: 'Utilitários', sectionId: 'utilities', text: 'Verifique ondas, vento e temperatura da água em Bertioga.' },
             { title: 'Previsão do Tempo', icon: '🌡️', section: 'Utilitários', sectionId: 'utilities', text: 'Clima e temperatura para os próximos dias.' },
@@ -4902,6 +5228,23 @@
             if (scrollTop < 10) scrollBar.classList.add('hidden');
             else scrollBar.classList.remove('hidden');
         }, { passive: true });
+
+        // ============ BEACH GUIDE FILTER ============
+        function filterBeaches(region) {
+            const cards = document.querySelectorAll('.beach-card');
+            cards.forEach(card => {
+                if (region === 'all' || card.dataset.region === region) {
+                    card.style.display = '';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+            // Update filter buttons
+            document.querySelectorAll('[id^="beach-filter-"]').forEach(btn => {
+                btn.className = 'btn btn-secondary';
+            });
+            document.getElementById('beach-filter-' + region).className = 'btn btn-primary';
+        }
 
         // ============ TOAST NOTIFICATION HELPER ============
         function showToast(msg, duration = 2500) {
