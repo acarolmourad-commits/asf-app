@@ -1292,6 +1292,22 @@
         <div class="surf-bar-loading" id="surfBarLoading">🌊 Carregando condições...</div>
     </div>
 
+    <!-- Melhor Dia da Semana -->
+    <div id="best-day-widget" style="padding: 0 20px; margin-bottom: 12px; display: none;">
+        <div style="background: linear-gradient(135deg, #00A8CC, #0E2439); border-radius: 14px; padding: 14px 16px; color: white; display: flex; align-items: center; gap: 12px;">
+            <div style="font-size: 28px;" id="best-day-icon">📅</div>
+            <div style="flex: 1;">
+                <p style="font-size: 11px; opacity: 0.8; text-transform: uppercase; letter-spacing: 0.5px;">Melhor dia pra surfar</p>
+                <p style="font-size: 16px; font-weight: 700;" id="best-day-text">Carregando...</p>
+                <p style="font-size: 12px; opacity: 0.85;" id="best-day-detail"></p>
+            </div>
+            <div style="text-align: center;">
+                <div style="font-size: 24px; font-weight: 800;" id="best-day-rating">⭐</div>
+                <div style="font-size: 10px; opacity: 0.7;">rating</div>
+            </div>
+        </div>
+    </div>
+
     <!-- Dica do Dia -->
     <div id="dica-do-dia" style="padding: 0 20px; margin-bottom: 16px;">
         <div style="background: linear-gradient(135deg, rgba(0,168,204,0.08), rgba(155,89,182,0.08)); border: 1px solid rgba(0,168,204,0.15); border-radius: 16px; padding: 16px; display: flex; gap: 12px; align-items: flex-start;">
@@ -5553,6 +5569,65 @@
             }
         }
         loadSurfBar();
+
+        // ============ BEST DAY TO SURF ============
+        async function loadBestDay() {
+            try {
+                const marine = await fetchMarine('bertioga');
+                const weather = await fetchWeather('bertioga');
+                if (!marine?.daily || !weather?.daily) return;
+                const days = marine.daily;
+                const wDays = weather.daily;
+                const dayNames = ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb'];
+                const dayNamesFull = ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado'];
+                let bestIdx = 0, bestScore = 0;
+                const scores = [];
+                for (let i = 0; i < days.time.length; i++) {
+                    const wh = days.wave_height_max[i] || 0;
+                    const wp = days.wave_period_max[i] || 0;
+                    const wind = wDays.wind_speed_10m_max?.[i] || 20;
+                    // Score: wave height (0-3m ideal) + period (longer better) - wind penalty
+                    let score = 0;
+                    if (wh >= 0.5 && wh <= 2.5) score += 40;
+                    else if (wh > 2.5) score += 25;
+                    else score += 10;
+                    score += Math.min(wp * 3, 30); // period bonus
+                    score += Math.max(0, 20 - wind); // low wind bonus
+                    score += Math.random() * 10; // slight randomization
+                    scores.push({ idx: i, score, wh, wp, wind, date: days.time[i] });
+                    if (score > bestScore) { bestScore = score; bestIdx = i; }
+                }
+                const best = scores[bestIdx];
+                const d = new Date(best.date + 'T12:00:00');
+                const today = new Date(); today.setHours(0, 0, 0, 0);
+                const diffDays = Math.floor((d - today) / 86400000);
+                let dayLabel;
+                if (diffDays === 0) dayLabel = 'Hoje!';
+                else if (diffDays === 1) dayLabel = 'Amanhã';
+                else dayLabel = dayNamesFull[d.getDay()] + ' (' + d.getDate() + '/' + (d.getMonth() + 1) + ')';
+                // Rating stars
+                const stars = bestScore >= 70 ? '⭐⭐⭐' : bestScore >= 50 ? '⭐⭐' : '⭐';
+                document.getElementById('best-day-text').textContent = dayLabel;
+                document.getElementById('best-day-detail').textContent = `Ondas: ${best.wh.toFixed(1)}m • Período: ${best.wp.toFixed(0)}s • Vento: ${best.wind.toFixed(0)}km/h`;
+                document.getElementById('best-day-rating').textContent = stars;
+                document.getElementById('best-day-icon').textContent = diffDays === 0 ? '🏄‍♀️' : '📅';
+                document.getElementById('best-day-widget').style.display = 'block';
+                // Also render mini forecast
+                const widget = document.getElementById('best-day-widget');
+                const miniForecast = scores.slice(0, 5).map(s => {
+                    const dd = new Date(s.date + 'T12:00:00');
+                    const isToday = dd.toDateString() === new Date().toDateString();
+                    const cls = s.idx === bestIdx ? 'font-weight:700;color:white;background:rgba(255,255,255,0.15);border-radius:8px;' : '';
+                    return `<div style="text-align:center;font-size:11px;${cls}padding:4px 6px;min-width:45px;">
+                        <div style="opacity:0.7;">${isToday ? 'Hoje' : dayNames[dd.getDay()]}</div>
+                        <div style="font-weight:600;margin:2px 0;">${s.wh.toFixed(1)}m</div>
+                        <div style="font-size:10px;opacity:0.7;">${s.wp.toFixed(0)}s</div>
+                    </div>`;
+                }).join('');
+                widget.querySelector('div').innerHTML += `<div style="display:flex;gap:4px;margin-top:10px;overflow-x:auto;justify-content:center;">${miniForecast}</div>`;
+            } catch (e) { console.error('Best day error:', e); }
+        }
+        loadBestDay();
 
         // ============ DARK MODE ============
         function initDarkMode() {
