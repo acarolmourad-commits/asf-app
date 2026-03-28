@@ -3692,6 +3692,122 @@
                 </div>
             </div>
 
+            <!-- Competição por Fotos - NOVA -->
+            <div style="margin-bottom: 20px;">
+                <div style="background: linear-gradient(135deg, #FF6B6B 0%, #C0392B 100%); padding: 20px; border-radius: 16px; color: white; margin-bottom: 15px;">
+                    <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 15px;">
+                        <span style="font-size: 40px;">📸</span>
+                        <div>
+                            <h3 style="font-size: 18px; margin-bottom: 5px;">Competição por Fotos!</h3>
+                            <p style="font-size: 12px; opacity: 0.9;">Envie sua melhor foto e ganhe prêmios!</p>
+                        </div>
+                    </div>
+                    <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px;">
+                        <div style="background: rgba(255,255,255,0.2); padding: 12px; border-radius: 10px; text-align: center;">
+                            <p style="font-size: 24px; font-weight: bold;">📸 47</p>
+                            <p style="font-size: 10px;">Fotos enviadas</p>
+                        </div>
+                        <div style="background: rgba(255,255,255,0.2); padding: 12px; border-radius: 10px; text-align: center;">
+                            <p style="font-size: 24px; font-weight: bold;">🗳️ 892</p>
+                            <p style="font-size: 10px;">Votos</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <h3 style="font-size: 16px; margin-bottom: 12px; color: var(--secondary);">🏆 Categorias</h3>
+                
+                <div class="cards-grid">
+                    <!-- Melhor Onda -->
+                    <div class="card" style="border: 2px solid #00A8CC;">
+                        <span class="card-tag" style="background: #00A8CC; color: white;">PRINCIPAL</span>
+                        <h3>🌊 Melhor Onda</h3>
+                        <p style="font-size: 13px; color: var(--gray-600);">Envie a foto da sua melhor onda!</p>
+                        <p style="font-size: 12px; color: var(--gray-400); margin-top: 5px;">Premiação: R$ 500 + Kit Surf</p>
+                        <div style="display: flex; gap: 8px; margin-top: 12px;">
+                            <button class="btn btn-primary" style="flex: 1; font-size: 12px;" onclick="openPhotoUpload('onda')">📸 Enviar</button>
+                            <button class="btn btn-secondary" style="flex: 1; font-size: 12px;" onclick="showPhotos('onda')">🗳️ Votar</button>
+                        </div>
+                    </div>
+                    
+                    <!-- Melhor Manobra -->
+                    <div class="card" style="border: 2px solid #9B59B6;">
+                        <span class="card-tag" style="background: #9B59B6; color: white;">MANOBRA</span>
+                        <h3>🤸 Melhor Manobra</h3>
+                        <p style="font-size: 13px; color: var(--gray-600);">Cutback, aerial, tube... mostre!</p>
+                        <p style="font-size: 12px; color: var(--gray-400); margin-top: 5px;">Premiação: R$ 300 + Lycra</p>
+                        <div style="display: flex; gap: 8px; margin-top: 12px;">
+                            <button class="btn btn-primary" style="flex: 1; font-size: 12px;" onclick="openPhotoUpload('manobra')">📸 Enviar</button>
+                            <button class="btn btn-secondary" style="flex: 1; font-size: 12px;" onclick="showPhotos('manobra')">🗳️ Votar</button>
+                        </div>
+                    </div>
+                    
+                    <!-- Pôr do Sol -->
+                    <div class="card" style="border: 2px solid #F39C12;">
+                        <span class="card-tag" style="background: #F39C12; color: white;">PAISAGEM</span>
+                        <h3>🌅 Melhor Pôr do Sol</h3>
+                        <p style="font-size: 13px; color: var(--gray-600);">Capture a mágica do pôr do sol!</p>
+                        <p style="font-size: 12px; color: var(--gray-400); margin-top: 5px;">Premiação: R$ 200 + Protetor</p>
+                        <div style="display: flex; gap: 8px; margin-top: 12px;">
+                            <button class="btn btn-primary" style="flex: 1; font-size: 12px;" onclick="openPhotoUpload('por')">📸 Enviar</button>
+                            <button class="btn btn-secondary" style="flex: 1; font-size: 12px;" onclick="showPhotos('por')">🗳️ Votar</button>
+                        </div>
+                    </div>
+                    
+                    <!-- Selfie Surf -->
+                    <div class="card" style="border: 2px solid #27AE60;">
+                        <span class="card-tag" style="background: #27AE60; color: white;">SELFIE</span>
+                        <h3>🤳 Melhor Selfie</h3>
+                        <p style="font-size: 13px; color: var(--gray-600);">Selfie criativa com a prancha!</p>
+                        <p style="font-size: 12px; color: var(--gray-400); margin-top: 5px;">Premiação: R$ 150 + Boné</p>
+                        <div style="display: flex; gap: 8px; margin-top: 12px;">
+                            <button class="btn btn-primary" style="flex: 1; font-size: 12px;" onclick="openPhotoUpload('selfie')">📸 Enviar</button>
+                            <button class="btn btn-secondary" style="flex: 1; font-size: 12px;" onclick="showPhotos('selfie')">🗳️ Votar</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Ranking -->
+                <h3 style="font-size: 16px; margin: 20px 0 12px; color: var(--secondary);">🏅 Top 3 Fotos</h3>
+                <div class="card" style="margin-bottom: 10px;">
+                    <div style="display: flex; align-items: center; gap: 15px;">
+                        <span style="font-size: 30px;">🥇</span>
+                        <div style="flex: 1;">
+                            <h4 style="font-size: 14px;">Marina S. - Cutback em Bertioga</h4>
+                            <p style="font-size: 12px; color: var(--gray-600);">🗳️ 156 votos • Melhor Manobra</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="card" style="margin-bottom: 10px;">
+                    <div style="display: flex; align-items: center; gap: 15px;">
+                        <span style="font-size: 30px;">🥈</span>
+                        <div style="flex: 1;">
+                            <h4 style="font-size: 14px;">Julia R. - Onda em Santos</h4>
+                            <p style="font-size: 12px; color: var(--gray-600);">🗳️ 134 votos • Melhor Onda</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="card" style="margin-bottom: 10px;">
+                    <div style="display: flex; align-items: center; gap: 15px;">
+                        <span style="font-size: 30px;">🥉</span>
+                        <div style="flex: 1;">
+                            <h4 style="font-size: 14px;">Ana P. - Pôr do sol em Ubatuba</h4>
+                            <p style="font-size: 12px; color: var(--gray-600);">🗳️ 112 votos • Paisagem</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Regulamento -->
+                <div style="background: #f8f9fa; padding: 15px; border-radius: 12px; margin-top: 15px;">
+                    <h4 style="font-size: 14px; color: #0E2439; margin-bottom: 10px;">📋 Regulamento</h4>
+                    <ul style="font-size: 12px; color: #666; margin-left: 20px;">
+                        <li>Fotos devem ser originais</li>
+                        <li>1 voto por dia por usuário</li>
+                        <li>Competição dura 30 dias</li>
+                        <li>Vencedores no Instagram ASF</li>
+                    </ul>
+                </div>
+            </div>
+
             <!-- Cronograma de Treino -->
             <div style="margin-bottom: 20px;">
                 <h3 style="font-size: 16px; margin-bottom: 12px; color: var(--secondary);">💪 Cronograma de Treino Pré-Competição</h3>
@@ -4592,6 +4708,96 @@
         }
         
         // ===== FIM CHATBOT =====
+
+        // ===== COMPETIÇÃO POR FOTOS =====
+        let currentPhotoCategory = 'onda';
+        
+        const PHOTO_CATEGORIES = {
+            'onda': 'Melhor Onda',
+            'manobra': 'Melhor Manobra',
+            'por': 'Melhor Pôr do Sol',
+            'selfie': 'Melhor Selfie'
+        };
+        
+        function openPhotoUpload(category) {
+            currentPhotoCategory = category;
+            document.getElementById('photo-category-text').textContent = `Categoria: ${PHOTO_CATEGORIES[category]}`;
+            document.getElementById('photo-upload-modal').style.display = 'flex';
+        }
+        
+        function closePhotoUpload() {
+            document.getElementById('photo-upload-modal').style.display = 'none';
+        }
+        
+        function submitPhoto() {
+            const name = document.getElementById('photo-name').value;
+            const desc = document.getElementById('photo-desc').value;
+            const file = document.getElementById('photo-file').files[0];
+            
+            if (!name) {
+                alert('Por favor, insira seu nome!');
+                return;
+            }
+            
+            // Salva no localStorage (em produção, enviaria para servidor)
+            const photos = JSON.parse(localStorage.getItem('asf-photos') || '[]');
+            photos.push({
+                id: Date.now(),
+                category: currentPhotoCategory,
+                name: name,
+                description: desc || `Foto de ${PHOTO_CATEGORIES[currentPhotoCategory]}`,
+                votes: 0,
+                timestamp: new Date().toISOString()
+            });
+            localStorage.setItem('asf-photos', JSON.stringify(photos));
+            
+            // Feedback
+            alert(`📸 Foto enviada com sucesso!\n\nCategoria: ${PHOTO_CATEGORIES[currentPhotoCategory]}\nSua foto está concorrendo! Boa sorte! 🏆`);
+            
+            // Fecha modal
+            closePhotoUpload();
+            
+            // Limpa campos
+            document.getElementById('photo-name').value = '';
+            document.getElementById('photo-desc').value = '';
+            document.getElementById('photo-file').value = '';
+        }
+        
+        function showPhotos(category) {
+            const gallery = document.getElementById('photos-gallery');
+            const list = document.getElementById('photos-list');
+            
+            // Fotos mockadas para demonstração
+            const mockPhotos = [
+                { name: 'Marina S.', desc: 'Cutback perfeito!', votes: 156 },
+                { name: 'Julia R.', desc: 'Onda de 2m em Santos', votes: 134 },
+                { name: 'Ana P.', desc: 'Pôr do sol mágico', votes: 112 },
+                { name: 'Carla M.', desc: 'Primeira onda do dia', votes: 89 },
+                { name: 'Beatriz L.', desc: 'Aerial incrível!', votes: 76 }
+            ];
+            
+            list.innerHTML = mockPhotos.map((photo, i) => `
+                <div class="card" style="margin-bottom: 10px;">
+                    <div style="display: flex; align-items: center; gap: 15px;">
+                        <div style="width: 60px; height: 60px; background: linear-gradient(135deg, #00A8CC, #0E2439); border-radius: 10px; display: flex; align-items: center; justify-content: center; color: white; font-size: 24px;">📸</div>
+                        <div style="flex: 1;">
+                            <h4 style="font-size: 14px; color: #0E2439;">${photo.name}</h4>
+                            <p style="font-size: 12px; color: #666;">${photo.desc}</p>
+                            <p style="font-size: 11px; color: #00A8CC; font-weight: bold;">🗳️ ${photo.votes} votos</p>
+                        </div>
+                        <button onclick="votePhoto('${photo.name}')" style="background: #27AE60; border: none; color: white; padding: 8px 15px; border-radius: 20px; font-size: 12px; cursor: pointer;">Votar</button>
+                    </div>
+                </div>
+            `).join('');
+            
+            gallery.style.display = 'block';
+        }
+        
+        function votePhoto(name) {
+            alert(`🗳️ Voto registrado!\n\nVocê votou em ${name}!\n\nContinue votando nas outras fotos! 🏆`);
+        }
+        
+        // ===== FIM COMPETIÇÃO POR FOTOS =====
         
         function startQuiz(quizName) {
             const quizDiv = document.getElementById('quiz-' + quizName);
