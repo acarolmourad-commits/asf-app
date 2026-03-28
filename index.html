@@ -1274,6 +1274,21 @@
         <div class="surf-bar-loading" id="surfBarLoading">🌊 Carregando condições...</div>
     </div>
 
+    <!-- Dica do Dia -->
+    <div id="dica-do-dia" style="padding: 0 20px; margin-bottom: 16px;">
+        <div style="background: linear-gradient(135deg, rgba(0,168,204,0.08), rgba(155,89,182,0.08)); border: 1px solid rgba(0,168,204,0.15); border-radius: 16px; padding: 16px; display: flex; gap: 12px; align-items: flex-start;">
+            <div style="font-size: 32px; line-height: 1;" id="dica-emoji">💡</div>
+            <div style="flex: 1;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+                    <span style="font-size: 12px; font-weight: 600; color: var(--primary); text-transform: uppercase; letter-spacing: 0.5px;">✨ Dica do Dia</span>
+                    <button onclick="nextDica()" style="background: none; border: 1px solid var(--gray-200, #ddd); border-radius: 6px; padding: 2px 8px; font-size: 11px; cursor: pointer; color: var(--gray-400);">↻ Nova</button>
+                </div>
+                <p id="dica-text" style="font-size: 14px; color: var(--secondary, #0E2439); line-height: 1.5; font-weight: 500;"></p>
+                <p id="dica-category" style="font-size: 11px; color: var(--gray-400); margin-top: 4px;"></p>
+            </div>
+        </div>
+    </div>
+
     <!-- Stats -->
     <div class="stats">
         <div class="stat-card">
@@ -4828,6 +4843,7 @@
             { title: 'Praia de Bertioga', icon: '🏄‍♀️', section: 'Praias', sectionId: 'praias', text: 'Nossa casa! Praia extensa, todos os níveis. Encontros da ASF.' },
             { title: 'Praia de Maresias', icon: '🌴', section: 'Praias', sectionId: 'praias', text: 'São Sebastião - Beach break com picos variados, intermediário.' },
             { title: 'Riviera de São Lourenço', icon: '🌅', section: 'Praias', sectionId: 'praias', text: 'Bertioga - Praia longa e tranquila, ideal para longboard e iniciantes.' },
+            { title: 'Dica do Dia', icon: '💡', section: 'Início', sectionId: 'dicas', text: 'Dicas rotativas de surf, prevenção, nutrição e mental. Muda todo dia!' },
             // Utilitários
             { title: 'Condições do Mar', icon: '🌊', section: 'Utilitários', sectionId: 'utilities', text: 'Verifique ondas, vento e temperatura da água em Bertioga.' },
             { title: 'Previsão do Tempo', icon: '🌡️', section: 'Utilitários', sectionId: 'utilities', text: 'Clima e temperatura para os próximos dias.' },
@@ -5228,6 +5244,44 @@
             if (scrollTop < 10) scrollBar.classList.add('hidden');
             else scrollBar.classList.remove('hidden');
         }, { passive: true });
+
+        // ============ DICA DO DIA ============
+        const dicas = [
+            { text: 'Sempre alongue ombros e costas antes de entrar na água. 5 minutos podem prevenir semanas de lesão! 🧘', category: 'Prevenção', emoji: '🧘' },
+            { text: 'A melhor wave é a que você aproveita! Não fique esperando a "perfeita" — aproveite cada sessão. 🌊', category: 'Mental', emoji: '🧠' },
+            { text: 'Banana + aveia = o combo perfeito antes do surf. Carboidratos leves que dão energia sem pesar. 🍌', category: 'Nutrição', emoji: '🥗' },
+            { text: 'Quando estiver no impact zone, mergulhe fundo e nade por baixo das ondas. Nunca lute contra a corrente! 💪', category: 'Segurança', emoji: '🏊' },
+            { text: 'Protetor solar reef-safe protege você E o oceano. As corais agradecem! 🐠', category: 'Sustentabilidade', emoji: '🌱' },
+            { text: 'Paddling eficiente: corpo reto, cabeça alinhada, braços longos. Parece simples mas faz TODA diferença. 🏄‍♀️', category: 'Técnica', emoji: '🏄‍♀️' },
+            { text: 'Surf com amigas é melhor! Chama uma mana para ir junto — mais seguro e mais divertido. 🤝', category: 'Comunidade', emoji: '💬' },
+            { text: 'A previsão diz "1m" mas o mar tá perfeito? Confie nos seus olhos, não só nos apps. 👀', category: 'Sabedoria', emoji: '🌊' },
+            { text: 'Seu corpo precisa de água! Hidrate-se bem antes e depois do surf, especialmente no calor. 💧', category: 'Saúde', emoji: '💧' },
+            { text: 'Respeite a etiqueta: não furta onda, espera vez, sorria. O surf é sobre flow, não ego. 😊', category: 'Etiqueta', emoji: '🏄' },
+            { text: 'Capinha na prancha evita amarelamento e quebras no transporte. Pequeno investimento, grande retorno! 🧼', category: 'Equipamento', emoji: '🧼' },
+            { text: 'Visualize suas manobras antes de dormir. Seu cérebro treina junto com você! 🌙', category: 'Mental', emoji: '🌙' },
+            { text: 'Maré enchente costuma trazer ondas mais organizadas. Planeje suas sessões pelo ciclo das marés! 🗓️', category: 'Condições', emoji: '📅' },
+            { text: 'Ventos de manhã cedo (6-9h) são geralmente mais fracos. As melhores sessões acontecem nessas horas! ⏰', category: 'Condições', emoji: '🌅' },
+            { text: 'Longo ou funboard? Se tá aprendendo, longboard sempre. Estabilidade > velocidade no início. 🏄‍♀️', category: 'Equipamento', emoji: '📏' },
+        ];
+        function showDica(index) {
+            const d = dicas[index];
+            document.getElementById('dica-text').textContent = d.text;
+            document.getElementById('dica-category').textContent = d.category;
+            document.getElementById('dica-emoji').textContent = d.emoji;
+        }
+        function nextDica() {
+            let idx = Math.floor(Math.random() * dicas.length);
+            // Avoid repeating same one
+            const current = document.getElementById('dica-text').textContent;
+            while (dicas[idx].text === current && dicas.length > 1) idx = Math.floor(Math.random() * dicas.length);
+            showDica(idx);
+        }
+        // Pick one based on day of year for daily rotation
+        (function initDica() {
+            const now = new Date();
+            const dayOfYear = Math.floor((now - new Date(now.getFullYear(), 0, 0)) / 86400000);
+            showDica(dayOfYear % dicas.length);
+        })();
 
         // ============ BEACH GUIDE FILTER ============
         function filterBeaches(region) {
