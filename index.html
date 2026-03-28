@@ -5272,6 +5272,11 @@
                         <span class="surf-condition-badge ${condClass}">${condText}</span>
                         <span class="surf-label">Condição</span>
                     </div>
+                    <div class="surf-bar-item" style="cursor: pointer;" onclick="shareSurfConditions()" title="Compartilhar condições">
+                        <span class="surf-icon">📤</span>
+                        <span class="surf-val" style="font-size: 11px;">Share</span>
+                        <span class="surf-label">Enviar</span>
+                    </div>
                 `;
             } catch (e) {
                 bar.innerHTML = '<div class="surf-bar-loading">🌊 Erro ao carregar</div>';
@@ -5347,6 +5352,37 @@
             }
         }
         initCadastro();
+
+        // ============ SHARE SURF CONDITIONS ============
+        function shareSurfConditions() {
+            const bar = document.getElementById('surfBar');
+            const items = bar.querySelectorAll('.surf-bar-item');
+            let data = {};
+            items.forEach(item => {
+                const label = item.querySelector('.surf-label')?.textContent || '';
+                const val = item.querySelector('.surf-val')?.textContent || '';
+                if (label === 'Praia') data.beach = val;
+                if (label === 'Ondas') data.waves = val;
+                if (label === 'Temp') data.temp = val;
+                if (label === 'Período') data.period = val;
+            });
+            // Get condition from badge
+            const badge = bar.querySelector('.surf-condition-badge');
+            data.condition = badge ? badge.textContent : '';
+            // Wind info
+            const windItem = Array.from(items).find(i => {
+                const l = i.querySelector('.surf-label');
+                return l && l.textContent.includes('km/h') === false && ['N','NE','E','SE','S','SO','O','NO'].includes(l.textContent);
+            });
+            if (windItem) {
+                data.windSpeed = windItem.querySelector('.surf-val')?.textContent || '';
+                data.windDir = windItem.querySelector('.surf-label')?.textContent || '';
+            }
+
+            const msg = `🏄‍♀️ *Condições ASF - ${data.beach || 'Bertioga'}*\n\n🌊 Ondas: ${data.waves || '—'}\n💨 Vento: ${data.windSpeed || '—'} ${data.windDir || ''}\n🌡️ Temp: ${data.temp || '—'}\n⏱️ Período: ${data.period || '—'}\n📊 Condição: ${data.condition || '—'}\n\n_Bora surfar?_ 🤙`;
+            const url = `https://wa.me/?text=${encodeURIComponent(msg)}`;
+            window.open(url, '_blank');
+        }
 
         // ============ PRE-SURF CHECKLIST ============
         function updateChecklistStatus() {
