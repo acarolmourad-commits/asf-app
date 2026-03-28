@@ -3641,6 +3641,38 @@
                     <p>Explore as melhores praias do Litoral Paulista com dicas de nível, ondas e infraestrutura.</p>
                     <button class="btn btn-primary" style="width: 100%; margin-top: 12px;" onclick="showSection('praias')">🗺️ Ver Guia Completo</button>
                 </div>
+
+                <!-- Pre-Surf Checklist -->
+                <div class="card utility-card">
+                    <div class="icon">✅</div>
+                    <h4>Checklist Pré-Surf</h4>
+                    <p>Tudo pronto antes de entrar na água? Confere!</p>
+                    <div style="text-align: left; margin-top: 12px;">
+                        <label style="display: flex; align-items: center; gap: 8px; padding: 8px 0; border-bottom: 1px solid var(--gray-100, #f0f0f0); cursor: pointer; font-size: 13px;">
+                            <input type="checkbox" class="pre-surf-check" style="width: 18px; height: 18px; accent-color: #00A8CC;"> Protetor solar aplicado
+                        </label>
+                        <label style="display: flex; align-items: center; gap: 8px; padding: 8px 0; border-bottom: 1px solid var(--gray-100, #f0f0f0); cursor: pointer; font-size: 13px;">
+                            <input type="checkbox" class="pre-surf-check" style="width: 18px; height: 18px; accent-color: #00A8CC;"> Leash verificado
+                        </label>
+                        <label style="display: flex; align-items: center; gap: 8px; padding: 8px 0; border-bottom: 1px solid var(--gray-100, #f0f0f0); cursor: pointer; font-size: 13px;">
+                            <input type="checkbox" class="pre-surf-check" style="width: 18px; height: 18px; accent-color: #00A8CC;"> Alongamento feito
+                        </label>
+                        <label style="display: flex; align-items: center; gap: 8px; padding: 8px 0; border-bottom: 1px solid var(--gray-100, #f0f0f0); cursor: pointer; font-size: 13px;">
+                            <input type="checkbox" class="pre-surf-check" style="width: 18px; height: 18px; accent-color: #00A8CC;"> Água + snack
+                        </label>
+                        <label style="display: flex; align-items: center; gap: 8px; padding: 8px 0; border-bottom: 1px solid var(--gray-100, #f0f0f0); cursor: pointer; font-size: 13px;">
+                            <input type="checkbox" class="pre-surf-check" style="width: 18px; height: 18px; accent-color: #00A8CC;"> Condições checadas
+                        </label>
+                        <label style="display: flex; align-items: center; gap: 8px; padding: 8px 0; border-bottom: 1px solid var(--gray-100, #f0f0f0); cursor: pointer; font-size: 13px;">
+                            <input type="checkbox" class="pre-surf-check" style="width: 18px; height: 18px; accent-color: #00A8CC;"> Alguém sabe onde tô
+                        </label>
+                        <label style="display: flex; align-items: center; gap: 8px; padding: 8px 0; cursor: pointer; font-size: 13px;">
+                            <input type="checkbox" class="pre-surf-check" style="width: 18px; height: 18px; accent-color: #00A8CC;"> Respiração (3x fundo)
+                        </label>
+                    </div>
+                    <div id="checklist-status" style="margin-top: 12px; text-align: center; font-size: 13px; color: var(--gray-400);"></div>
+                    <button class="btn btn-secondary" style="width: 100%; margin-top: 8px;" onclick="resetChecklist()">🔄 Reiniciar</button>
+                </div>
             </div>
         </div>
 
@@ -4879,6 +4911,7 @@
             { title: 'Praia de Maresias', icon: '🌴', section: 'Praias', sectionId: 'praias', text: 'São Sebastião - Beach break com picos variados, intermediário.' },
             { title: 'Riviera de São Lourenço', icon: '🌅', section: 'Praias', sectionId: 'praias', text: 'Bertioga - Praia longa e tranquila, ideal para longboard e iniciantes.' },
             { title: 'Dica do Dia', icon: '💡', section: 'Início', sectionId: 'dicas', text: 'Dicas rotativas de surf, prevenção, nutrição e mental. Muda todo dia!' },
+            { title: 'Checklist Pré-Surf', icon: '✅', section: 'Utilitários', sectionId: 'utilities', text: 'Lista de verificação antes de entrar na água: protetor, leash, alongamento, água, condições.' },
             // Utilitários
             { title: 'Condições do Mar', icon: '🌊', section: 'Utilitários', sectionId: 'utilities', text: 'Verifique ondas, vento e temperatura da água em Bertioga.' },
             { title: 'Previsão do Tempo', icon: '🌡️', section: 'Utilitários', sectionId: 'utilities', text: 'Clima e temperatura para os próximos dias.' },
@@ -5314,6 +5347,47 @@
             }
         }
         initCadastro();
+
+        // ============ PRE-SURF CHECKLIST ============
+        function updateChecklistStatus() {
+            const checks = document.querySelectorAll('.pre-surf-check');
+            const checked = document.querySelectorAll('.pre-surf-check:checked').length;
+            const total = checks.length;
+            const el = document.getElementById('checklist-status');
+            if (checked === total) {
+                el.innerHTML = '<span style="color: var(--success, #27ae60); font-weight: 600;">🏄‍♀️ Tudo pronto! Bora surfar!</span>';
+                el.style.background = 'rgba(39, 174, 96, 0.08)';
+                el.style.borderRadius = '8px';
+                el.style.padding = '8px';
+            } else {
+                el.textContent = `${checked}/${total} itens marcados`;
+                el.style.background = 'none';
+                el.style.padding = '0';
+            }
+        }
+        function resetChecklist() {
+            document.querySelectorAll('.pre-surf-check').forEach(c => c.checked = false);
+            updateChecklistStatus();
+        }
+        // Save/load checklist state
+        document.addEventListener('DOMContentLoaded', () => {
+            const saved = localStorage.getItem('asf-checklist');
+            if (saved) {
+                const states = JSON.parse(saved);
+                document.querySelectorAll('.pre-surf-check').forEach((c, i) => {
+                    if (states[i]) c.checked = true;
+                });
+            }
+            document.querySelectorAll('.pre-surf-check').forEach(c => {
+                c.addEventListener('change', () => {
+                    const states = [];
+                    document.querySelectorAll('.pre-surf-check').forEach(cb => states.push(cb.checked));
+                    localStorage.setItem('asf-checklist', JSON.stringify(states));
+                    updateChecklistStatus();
+                });
+            });
+            updateChecklistStatus();
+        });
 
         // ============ DICA DO DIA ============
         const dicas = [
