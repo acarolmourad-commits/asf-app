@@ -2,8 +2,8 @@ name: Daily Wave Forecast Update
 
 on:
   schedule:
-    # Run daily at 5 AM BRT (UTC-3) = 8:00 UTC
-    - cron: '0 8 * * *'
+    # Run daily at 4:30 AM BRT (UTC-3) = 7:30 UTC
+    - cron: '30 7 * * *'
   workflow_dispatch:
   repository_dispatch:
     types: [wave_update]
