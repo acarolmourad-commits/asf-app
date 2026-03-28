@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Post 4 - Revelação ASF</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { 
+            font-family: 'Segoe UI', Arial, sans-serif; 
+            background: #333;
+            min-height: 100vh; 
+            display: flex; 
+            justify-content: center; 
+            align-items: center;
+            padding: 20px;
+        }
+        .post-container {
+            width: 1080px;
+            height: 1080px;
+            background: linear-gradient(180deg, #27AE60 0%, #2ECC71 50%, #1E8449 100%);
+            border-radius: 0;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            padding: 60px 60px;
+            color: white;
+        }
+        
+        .emoji-container {
+            text-align: center;
+            margin-bottom: 30px;
+            margin-top: 40px;
+        }
+        
+        .emoji {
+            font-size: 100px;
+            display: block;
+        }
+        
+        .title-container {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .title {
+            font-size: 64px;
+            font-weight: bold;
+            line-height: 1.2;
+            text-shadow: 4px 4px 8px rgba(0,0,0,0.3);
+        }
+        
+        .subtitle-container {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .subtitle {
+            font-size: 22px;
+            line-height: 1.8;
+            opacity: 0.95;
+        }
+        
+        .link-container {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .link-box {
+            background: rgba(255,255,255,0.95);
+            color: #27AE60;
+            padding: 15px 30px;
+            border-radius: 50px;
+            font-size: 20px;
+            font-weight: bold;
+            display: inline-block;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+        }
+        
+        .features {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin-bottom: 40px;
+        }
+        
+        .feature {
+            background: rgba(255,255,255,0.15);
+            padding: 15px;
+            border-radius: 12px;
+            text-align: center;
+            font-size: 16px;
+        }
+        
+        .feature-emoji {
+            font-size: 28px;
+            margin-bottom: 8px;
+            display: block;
+        }
+        
+        .cta-container {
+            text-align: center;
+            margin-bottom: 100px;
+        }
+        
+        .cta {
+            font-size: 32px;
+            font-weight: bold;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .bottom-section {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 30px 60px;
+        }
+        
+        .hashtags {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+        }
+        
+        .hashtag {
+            background: rgba(255,255,255,0.2);
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 12px;
+        }
+        
+        .logo {
+            text-align: center;
+            font-size: 24px;
+            font-weight: bold;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .logo-emoji {
+            font-size: 32px;
+        }
+    </style>
+</head>
+<body>
+    <div class="post-container">
+        <div class="emoji-container">
+            <span class="emoji">🎉</span>
+        </div>
+        
+        <div class="title-container">
+            <div class="title">CHEGOU!</div>
+        </div>
+        
+        <div class="subtitle-container">
+            <div class="subtitle">
+                O App ASF está no ar!<br>
+                Seu novo melhor amigo para surfar
+            </div>
+        </div>
+        
+        <div class="link-container">
+            <div class="link-box">📱 acarolmourad-commits.github.io/asf-app</div>
+        </div>
+        
+        <div class="features">
+            <div class="feature">
+                <span class="feature-emoji">🌊</span>
+                <div>Previsão de Ondas</div>
+            </div>
+            <div class="feature">
+                <span class="feature-emoji">📚</span>
+                <div>Dicas de Surf</div>
+            </div>
+            <div class="feature">
+                <span class="feature-emoji">💪</span>
+                <div>Treinos 20min</div>
+            </div>
+            <div class="feature">
+                <span class="feature-emoji">🛒</span>
+                <div>Lojas do Litoral</div>
+            </div>
+            <div class="feature">
+                <span class="feature-emoji">💬</span>
+                <div>Grupos das Manas</div>
+            </div>
+            <div class="feature">
+                <span class="feature-emoji">🎯</span>
+                <div>Quizzes e Pontos</div>
+            </div>
+        </div>
+        
+        <div class="cta-container">
+            <div class="cta">Acesse agora! 🚀</div>
+        </div>
+        
+        <div class="bottom-section">
+            <div class="hashtags">
+                <span class="hashtag">#surfgirl</span>
+                <span class="hashtag">#surffeminino</span>
+                <span class="hashtag">#app</span>
+                <span class="hashtag">#litoralpaulista</span>
+                <span class="hashtag">#mulheres</span>
+                <span class="hashtag">#asf</span>
+            </div>
+            
+            <div class="logo">
+                <span class="logo-emoji">🏄‍♀️</span>
+                <span>ASF</span>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
