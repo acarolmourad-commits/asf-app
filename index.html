@@ -3772,6 +3772,24 @@
                 <h2 class="section-title">👥 Comunidade</h2>
                 <a href="#" class="see-all">Ver todos →</a>
             </div>
+
+            <!-- Mana da Semana -->
+            <div style="margin: 0 20px 20px; background: linear-gradient(135deg, #ff6b6b, #ee5a24); border-radius: 16px; padding: 20px; color: white; position: relative; overflow: hidden;">
+                <div style="position: absolute; top: -10px; right: -10px; font-size: 80px; opacity: 0.15;">🏄‍♀️</div>
+                <span style="background: rgba(255,255,255,0.25); padding: 3px 10px; border-radius: 12px; font-size: 11px; font-weight: 600;">⭐ MANA DA SEMANA</span>
+                <div style="display: flex; align-items: center; gap: 14px; margin-top: 14px;">
+                    <div style="width: 56px; height: 56px; background: rgba(255,255,255,0.2); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 28px;" id="mana-avatar">👩</div>
+                    <div style="flex: 1;">
+                        <h3 style="font-size: 18px; margin-bottom: 2px;" id="mana-name">Carregando...</h3>
+                        <p style="font-size: 12px; opacity: 0.85;" id="mana-info"></p>
+                    </div>
+                </div>
+                <p style="font-size: 13px; margin-top: 12px; line-height: 1.5; opacity: 0.95;" id="mana-quote"></p>
+                <div style="display: flex; gap: 16px; margin-top: 12px; font-size: 12px; opacity: 0.8;">
+                    <span id="mana-stat1"></span>
+                    <span id="mana-stat2"></span>
+                </div>
+            </div>
             <div class="post">
                 <div class="post-header">
                     <div class="post-avatar">C</div>
@@ -5617,6 +5635,28 @@
             const url = `https://wa.me/?text=${encodeURIComponent(msg)}`;
             window.open(url, '_blank');
         }
+
+        // ============ MANA DA SEMANA ============
+        const manasSemana = [
+            { name: 'Carolina Silva', avatar: '👩‍🦱', info: 'Intermediate • Bertioga', quote: '"Surfar me fez descobrir que sou mais forte do que imaginava. Cada onda é uma vitória!"', stat1: '🏆 3 campeonatos', stat2: '🔥 45 dias de streak' },
+            { name: 'Fernanda Costa', avatar: '👩', info: 'Avançada • Itamambuca', quote: '"Comecei surfando no foam com 30 anos. Hoje faço tube. Nunca é tarde pra começar!"', stat1: '🏄 200+ sessões', stat2: '⭐ Nível 8' },
+            { name: 'Juliana Mendes', avatar: '👩‍🦰', info: 'Iniciante • Riviera', quote: '"A ASF me deu coragem de entrar no mar. Agora não vivo sem! Obrigada, manas!"', stat1: '📚 15 quizzes', stat2: '💪 30 dias ativa' },
+            { name: 'Beatriz Almeida', avatar: '👱‍♀️', info: 'Intermediária • Santos', quote: '"O surf me ensinou paciência. Você não controla a onda, mas pode escolher como surfar."', stat1: '🌊 80 sessões', stat2: '🥇 2 ouros' },
+            { name: 'Amanda Rocha', avatar: '👩‍🦳', info: 'Avançada • Maresias', quote: '"Cair faz parte. Levantar é o que te torna surfista. Em cada wipeout, uma lição."', stat1: '🏄‍♀️ 5 anos surfando', stat2: '🏆 Ranking #8' },
+            { name: 'Larissa Souza', avatar: '🧑', info: 'Iniciante • Guarujá', quote: '"Minha filha de 8 anos me ensinou a não ter medo das ondas. Crianças são ousadas!"', stat1: '👨‍👩‍👧 Mãe surfista', stat2: '📚 10 dicas lidas' },
+            { name: 'Priscila Santos', avatar: '👩‍🦱', info: 'Intermediária • Mongaguá', quote: '"O mar não tem ego. Ele aceita todo mundo do mesmo jeito. É isso que amo no surf."', stat1: '🌊 120 sessões', stat2: '🧘 Yoga + Surf' },
+        ];
+        (function initMana() {
+            const now = new Date();
+            const weekNum = Math.floor((now - new Date(now.getFullYear(), 0, 0)) / (7 * 86400000));
+            const mana = manasSemana[weekNum % manasSemana.length];
+            document.getElementById('mana-name').textContent = mana.name;
+            document.getElementById('mana-avatar').textContent = mana.avatar;
+            document.getElementById('mana-info').textContent = mana.info;
+            document.getElementById('mana-quote').textContent = mana.quote;
+            document.getElementById('mana-stat1').textContent = mana.stat1;
+            document.getElementById('mana-stat2').textContent = mana.stat2;
+        })();
 
         // ============ SURF SESSION LOG ============
         let selectedMood = '';
