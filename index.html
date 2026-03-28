@@ -4383,8 +4383,215 @@
         // ===== FIM SISTEMA DE PONTOS =====
 
         function createPost() {
-            alert('Funcionalidade em desenvolvimento! 🚀');
+            toggleChatBot();
         }
+        
+        // ===== CHATBOT ASF =====
+        const CHATBOT_RESPONSES = {
+            'surf': [
+                '🏄‍♀️ Para começar no surf, recomendo uma prancha de espuma (softboard)! Ela é mais segura e fácil de aprender.',
+                '🌊 O melhor horário para surfar é no amanhecer ou final da tarde. O vento costuma ser mais calmo!',
+                '💪 Para melhorar, pratique o pop-up em casa! Deite no chão e levante rápido 20x por dia.'
+            ],
+            'ondas': [
+                '🌊 Para ver a previsão de ondas, vá na aba Dicas! Temos dados em tempo real para 8 cidades do litoral.',
+                '📏 Ondas de 0.5-1m são ideais para iniciantes. Acima de 1.5m já é para intermediárias!',
+                '📍 Bertioga e Ubatuba geralmente têm as melhores ondas na região.'
+            ],
+            'prancha': [
+                '🧮 Use nossa calculadora de prancha na aba Saúde! Ela calcula volume e borda ideal para você.',
+                '📏 Para iniciantes: prancha mais larga e grossa = mais fácil de aprender.',
+                '🔄 Alugue antes de comprar! Teste diferentes tipos para ver qual se adapta melhor.'
+            ],
+            'seguranca': [
+                '🦺 Sempre use leash! Ele mantém sua prancha presa e evita acidentes.',
+                '👀 Antes de entrar, observe as ondas por 10 minutos. Entenda o padrão e as correntes.',
+                '🏊 Se não souber nadar bem, comece em águas rasas e nunca sozinha.'
+            ],
+            'alimentacao': [
+                '🍌 Antes de surfar: banana, aveia, pão integral. Carboidratos dão energia!',
+                '💧 Beba 500ml de água antes e depois. Mulheres desidratam mais rápido.',
+                '🍳 Pós-surf: ovos, abacate, smoothie. Proteínas ajudam na recuperação!'
+            ],
+            'treino': [
+                '💪 Temos treinos de 20 minutos na aba Saúde! Força, resistência e mobilidade.',
+                '🧘 Alongue sempre após surfar. Músculos aquecidos alongam melhor.',
+                '🏊 Fortaleça o core! Prancha, abdominal e agachamento são seus aliados.'
+            ],
+            'menstruacao': [
+                '🩸 Pode surfar menstruada sim! Use absorvente interno ou coletor menstrual.',
+                '🔥 Após o surf, aqueça a barriga com bolsa de água quente. Previne cólicas!',
+                '💊 Evite anti-inflamatórios antes de surfar. Eles podem mascarar sinais importantes.'
+            ],
+            'medo': [
+                '🧠 Medo é normal! Respiração 4-4-4 ajuda muito: inspire 4s, segure 4s, expire 4s.',
+                '📖 Temos dicas na aba Mental para lidar com ansiedade e medo.',
+                '👥 Surfe com amigas! A companhia ajuda a superar o medo.'
+            ],
+            'lojas': [
+                '🛒 Temos 9 lojas reais na aba Lojas! Todas com Instagram.',
+                '📱 As lojas do litoral paulista estão todas mapeadas no app.',
+                '📍 Sthill Surf (Santos) e Tribo Surf (Ubatuba) são as maiores!'
+            ],
+            'manas': [
+                '💬 Entre nos grupos de WhatsApp na aba Manas! 47 manas cadastradas.',
+                '📍 Use a aba Próximas para encontrar manas perto de você!',
+                '🏖️ Temos grupos em Bertioga, Santos, Guarujá e Ubatuba!'
+            ],
+            'aplicativo': [
+                '📱 O App ASF foi criado para mulheres surfistas! Dicas, treinos e comunidade.',
+                '🔔 Ative as notificações para receber dicas e novidades!',
+                '📤 Compartilhe com suas amigas pelo botão verde no canto!'
+            ],
+            'default': [
+                '🤔 Não entendi bem. Tente perguntar sobre: surf, ondas, prancha, segurança, alimentação, treino ou manas!',
+                '💬 Posso ajudar com: dicas de surf, previsão de ondas, treinos, lojas e grupos de WhatsApp!',
+                '📱 Navegue pelas abas para ver todo o conteúdo do app!'
+            ]
+        };
+        
+        function toggleChatBot() {
+            const existing = document.getElementById('chatbot-container');
+            if (existing) {
+                existing.remove();
+                return;
+            }
+            
+            const chatbot = document.createElement('div');
+            chatbot.id = 'chatbot-container';
+            chatbot.innerHTML = `
+                <div style="position: fixed; bottom: 160px; right: 20px; width: 340px; max-height: 500px; background: white; border-radius: 20px; box-shadow: 0 10px 50px rgba(0,0,0,0.3); z-index: 1001; display: flex; flex-direction: column; overflow: hidden;">
+                    <div style="background: linear-gradient(135deg, #00A8CC 0%, #0E2439 100%); padding: 15px; color: white; display: flex; justify-content: space-between; align-items: center;">
+                        <div style="display: flex; align-items: center; gap: 10px;">
+                            <span style="font-size: 28px;">🤖</span>
+                            <div>
+                                <h4 style="font-size: 14px; margin: 0;">Assistente ASF</h4>
+                                <p style="font-size: 10px; opacity: 0.8; margin: 0;">Online agora</p>
+                            </div>
+                        </div>
+                        <button onclick="document.getElementById('chatbot-container').remove()" style="background: rgba(255,255,255,0.2); border: none; color: white; width: 30px; height: 30px; border-radius: 50%; cursor: pointer; font-size: 16px;">✕</button>
+                    </div>
+                    
+                    <div id="chat-messages" style="flex: 1; overflow-y: auto; padding: 15px; max-height: 350px;">
+                        <div style="display: flex; gap: 10px; margin-bottom: 15px;">
+                            <span style="font-size: 24px;">🤖</span>
+                            <div style="background: #f0f0f0; padding: 12px; border-radius: 12px; border-top-left-radius: 0; max-width: 80%;">
+                                <p style="font-size: 13px; margin: 0;">Olá! 🏄‍♀️ Sou a assistente do ASF. Como posso ajudar?</p>
+                                <p style="font-size: 11px; color: #666; margin-top: 8px;">Pergunte sobre: surf, ondas, prancha, treinos, manas...</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div style="padding: 10px; border-top: 1px solid #eee;">
+                        <div style="display: flex; gap: 8px; margin-bottom: 8px; flex-wrap: wrap;">
+                            <button onclick="sendQuickMessage('Como começar no surf?')" style="background: #f0f0f0; border: none; padding: 6px 12px; border-radius: 15px; font-size: 11px; cursor: pointer;">🏄 Iniciante</button>
+                            <button onclick="sendQuickMessage('Previsão de ondas')" style="background: #f0f0f0; border: none; padding: 6px 12px; border-radius: 15px; font-size: 11px; cursor: pointer;">🌊 Ondas</button>
+                            <button onclick="sendQuickMessage('Treinos disponíveis')" style="background: #f0f0f0; border: none; padding: 6px 12px; border-radius: 15px; font-size: 11px; cursor: pointer;">💪 Treinos</button>
+                            <button onclick="sendQuickMessage('Lojas de surf')" style="background: #f0f0f0; border: none; padding: 6px 12px; border-radius: 15px; font-size: 11px; cursor: pointer;">🛒 Lojas</button>
+                        </div>
+                        <div style="display: flex; gap: 8px;">
+                            <input type="text" id="chat-input" placeholder="Digite sua pergunta..." style="flex: 1; padding: 10px 15px; border: 1px solid #ddd; border-radius: 25px; font-size: 13px; outline: none;" onkeypress="if(event.key==='Enter')sendMessage()">
+                            <button onclick="sendMessage()" style="background: #00A8CC; border: none; color: white; width: 40px; height: 40px; border-radius: 50%; cursor: pointer; font-size: 18px;">→</button>
+                        </div>
+                    </div>
+                </div>
+            `;
+            document.body.appendChild(chatbot);
+        }
+        
+        function sendQuickMessage(message) {
+            document.getElementById('chat-input').value = message;
+            sendMessage();
+        }
+        
+        function sendMessage() {
+            const input = document.getElementById('chat-input');
+            const message = input.value.trim();
+            if (!message) return;
+            
+            const messagesDiv = document.getElementById('chat-messages');
+            
+            // Adiciona mensagem do usuário
+            messagesDiv.innerHTML += `
+                <div style="display: flex; gap: 10px; margin-bottom: 15px; justify-content: flex-end;">
+                    <div style="background: #00A8CC; color: white; padding: 12px; border-radius: 12px; border-top-right-radius: 0; max-width: 80%;">
+                        <p style="font-size: 13px; margin: 0;">${message}</p>
+                    </div>
+                    <span style="font-size: 24px;">👤</span>
+                </div>
+            `;
+            
+            input.value = '';
+            
+            // Processa resposta
+            setTimeout(() => {
+                const response = getBotResponse(message);
+                messagesDiv.innerHTML += `
+                    <div style="display: flex; gap: 10px; margin-bottom: 15px;">
+                        <span style="font-size: 24px;">🤖</span>
+                        <div style="background: #f0f0f0; padding: 12px; border-radius: 12px; border-top-left-radius: 0; max-width: 80%;">
+                            <p style="font-size: 13px; margin: 0;">${response}</p>
+                        </div>
+                    </div>
+                `;
+                messagesDiv.scrollTop = messagesDiv.scrollHeight;
+                
+                // Salva pergunta para analytics
+                logUserQuestion(message);
+            }, 800);
+            
+            messagesDiv.scrollTop = messagesDiv.scrollHeight;
+        }
+        
+        function getBotResponse(message) {
+            const lowerMessage = message.toLowerCase();
+            
+            // Identifica o tema
+            if (lowerMessage.includes('surf') || lowerMessage.includes('começar') || lowerMessage.includes('aprender') || lowerMessage.includes('iniciante')) {
+                return getRandomResponse('surf');
+            } else if (lowerMessage.includes('onda') || lowerMessage.includes('previsão') || lowerMessage.includes('mar') || lowerMessage.includes('praia')) {
+                return getRandomResponse('ondas');
+            } else if (lowerMessage.includes('prancha') || lowerMessage.includes('litro') || lowerMessage.includes('volume') || lowerMessage.includes('borda')) {
+                return getRandomResponse('prancha');
+            } else if (lowerMessage.includes('seguran') || lowerMessage.includes('leash') || lowerMessage.includes('cuidado') || lowerMessage.includes('perigo')) {
+                return getRandomResponse('seguranca');
+            } else if (lowerMessage.includes('comer') || lowerMessage.includes('aliment') || lowerMessage.includes('nutrição') || lowerMessage.includes('dieta')) {
+                return getRandomResponse('alimentacao');
+            } else if (lowerMessage.includes('treino') || lowerMessage.includes('exerc') || lowerMessage.includes('força') || lowerMessage.includes('mobilidade')) {
+                return getRandomResponse('treino');
+            } else if (lowerMessage.includes('menstru') || lowerMessage.includes('cólica') || lowerMessage.includes('período')) {
+                return getRandomResponse('menstruacao');
+            } else if (lowerMessage.includes('medo') || lowerMessage.includes('ansiedad') || lowerMessage.includes('nervos') || lowerMessage.includes('calma')) {
+                return getRandomResponse('medo');
+            } else if (lowerMessage.includes('loja') || lowerMessage.includes('compra') || lowerMessage.includes('equipamento')) {
+                return getRandomResponse('lojas');
+            } else if (lowerMessage.includes('mana') || lowerMessage.includes('grupo') || lowerMessage.includes('whatsapp') || lowerMessage.includes('comunidade')) {
+                return getRandomResponse('manas');
+            } else if (lowerMessage.includes('app') || lowerMessage.includes('aplicativo') || lowerMessage.includes('como usar')) {
+                return getRandomResponse('aplicativo');
+            } else {
+                return getRandomResponse('default');
+            }
+        }
+        
+        function getRandomResponse(category) {
+            const responses = CHATBOT_RESPONSES[category];
+            return responses[Math.floor(Math.random() * responses.length)];
+        }
+        
+        function logUserQuestion(question) {
+            // Salva no localStorage para analytics
+            const questions = JSON.parse(localStorage.getItem('asf-chat-questions') || '[]');
+            questions.push({
+                question: question,
+                timestamp: new Date().toISOString()
+            });
+            // Mantém últimas 100
+            if (questions.length > 100) questions.shift();
+            localStorage.setItem('asf-chat-questions', JSON.stringify(questions));
+        }
+        
+        // ===== FIM CHATBOT =====
         
         function startQuiz(quizName) {
             const quizDiv = document.getElementById('quiz-' + quizName);
