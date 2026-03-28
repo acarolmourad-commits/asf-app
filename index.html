@@ -3073,6 +3073,90 @@
                 </div>
             </div>
             
+            <!-- Diário de Sessões -->
+            <h3 style="margin: 20px 20px 10px; font-size: 16px; color: var(--secondary);">📓 Diário de Sessões</h3>
+            <div style="padding: 0 20px;">
+                <div class="card" style="margin-bottom: 12px;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+                        <h4 style="font-size: 14px;">Registrar Sessão</h4>
+                        <span style="font-size: 12px; color: var(--gray-400);" id="session-count">0 sessões</span>
+                    </div>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 12px;">
+                        <div>
+                            <label style="font-size: 12px; color: var(--gray-600);">Praia</label>
+                            <select id="session-beach" style="width: 100%; padding: 8px; border: 1px solid var(--gray-200); border-radius: 8px; font-size: 13px; font-family: 'Outfit';">
+                                <option value="Bertioga">🏖️ Bertioga</option>
+                                <option value="Santos">🌊 Santos</option>
+                                <option value="Guarujá">🏝️ Guarujá</option>
+                                <option value="Ubatuba">🏄 Ubatuba</option>
+                                <option value="Maresias">🌴 Maresias</option>
+                                <option value="Mongaguá">🏖️ Mongaguá</option>
+                                <option value="Riviera">🌅 Riviera</option>
+                                <option value="Outra">📍 Outra</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label style="font-size: 12px; color: var(--gray-600);">Duração</label>
+                            <select id="session-duration" style="width: 100%; padding: 8px; border: 1px solid var(--gray-200); border-radius: 8px; font-size: 13px; font-family: 'Outfit';">
+                                <option value="30">30 min</option>
+                                <option value="60" selected>1 hora</option>
+                                <option value="90">1h30</option>
+                                <option value="120">2 horas</option>
+                                <option value="150">2h30</option>
+                                <option value="180">3+ horas</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div style="margin-bottom: 12px;">
+                        <label style="font-size: 12px; color: var(--gray-600); display: block; margin-bottom: 6px;">Como estava?</label>
+                        <div style="display: flex; gap: 8px;">
+                            <button class="session-mood-btn" onclick="selectMood(this, '🔥')" style="flex: 1; padding: 8px; border: 2px solid var(--gray-200); border-radius: 8px; background: white; font-size: 18px; cursor: pointer;">🔥</button>
+                            <button class="session-mood-btn" onclick="selectMood(this, '🌊')" style="flex: 1; padding: 8px; border: 2px solid var(--gray-200); border-radius: 8px; background: white; font-size: 18px; cursor: pointer;">🌊</button>
+                            <button class="session-mood-btn" onclick="selectMood(this, '😊')" style="flex: 1; padding: 8px; border: 2px solid var(--gray-200); border-radius: 8px; background: white; font-size: 18px; cursor: pointer;">😊</button>
+                            <button class="session-mood-btn" onclick="selectMood(this, '😐')" style="flex: 1; padding: 8px; border: 2px solid var(--gray-200); border-radius: 8px; background: white; font-size: 18px; cursor: pointer;">😐</button>
+                            <button class="session-mood-btn" onclick="selectMood(this, '😤')" style="flex: 1; padding: 8px; border: 2px solid var(--gray-200); border-radius: 8px; background: white; font-size: 18px; cursor: pointer;">😤</button>
+                        </div>
+                    </div>
+                    <div style="margin-bottom: 12px;">
+                        <label style="font-size: 12px; color: var(--gray-600);">Notas (opcional)</label>
+                        <input type="text" id="session-notes" placeholder="Ex: Peguei 2 tubos! 🤙" style="width: 100%; padding: 8px; border: 1px solid var(--gray-200); border-radius: 8px; font-size: 13px; font-family: 'Outfit';">
+                    </div>
+                    <button class="btn btn-primary" style="width: 100%;" onclick="saveSession()">💾 Salvar Sessão</button>
+                </div>
+
+                <!-- Recent Sessions -->
+                <div id="sessions-list" style="margin-bottom: 16px;"></div>
+
+                <!-- Session Stats -->
+                <div class="card" id="session-stats" style="display: none; margin-bottom: 16px;">
+                    <h4 style="font-size: 14px; margin-bottom: 12px;">📊 Suas Estatísticas</h4>
+                    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px;">
+                        <div style="text-align: center; padding: 10px; background: var(--gray-50, #f8f9fa); border-radius: 8px;">
+                            <div style="font-size: 20px; font-weight: 700; color: var(--primary);" id="stat-total">0</div>
+                            <div style="font-size: 11px; color: var(--gray-400);">Sessões</div>
+                        </div>
+                        <div style="text-align: center; padding: 10px; background: var(--gray-50, #f8f9fa); border-radius: 8px;">
+                            <div style="font-size: 20px; font-weight: 700; color: var(--primary);" id="stat-hours">0h</div>
+                            <div style="font-size: 11px; color: var(--gray-400);">Total</div>
+                        </div>
+                        <div style="text-align: center; padding: 10px; background: var(--gray-50, #f8f9fa); border-radius: 8px;">
+                            <div style="font-size: 20px; font-weight: 700; color: var(--primary);" id="stat-streak">0</div>
+                            <div style="font-size: 11px; color: var(--gray-400);">Streak 🔥</div>
+                        </div>
+                    </div>
+                    <div style="margin-top: 12px; font-size: 12px;">
+                        <div style="display: flex; justify-content: space-between; padding: 4px 0;">
+                            <span style="color: var(--gray-600);">Praia favorita</span>
+                            <span style="font-weight: 600;" id="stat-fav-beach">-</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; padding: 4px 0;">
+                            <span style="color: var(--gray-600);">Humor médio</span>
+                            <span style="font-weight: 600;" id="stat-fav-mood">-</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <!-- Conquistas -->
             <h3 style="margin: 20px 20px 10px; font-size: 16px; color: var(--secondary);">🏆 Conquistas</h3>
             <div class="cards-grid">
@@ -5054,6 +5138,8 @@
             { title: 'Cutback Perfeito', icon: '🏄‍♀️', section: 'Premium', sectionId: 'premium', text: 'Guia completo de como fazer o cutback: velocidade, olhar, peso, retorno.' },
             { title: 'Mental de Competidora', icon: '🧠', section: 'Premium', sectionId: 'premium', text: 'Técnicas de visualização, respiração box, ancoragem positiva e rotina pré-bateria.' },
             { title: 'Plano 30 Dias', icon: '💪', section: 'Premium', sectionId: 'premium', text: 'Plano de treino completo: 4 semanas de base, força, potência e integração.' },
+            { title: 'Diário de Sessões', icon: '📓', section: 'Progresso', sectionId: 'progresso', text: 'Registre suas sessões de surf: praia, duração, humor e notas. Acompanhe estatísticas.' },
+            { title: 'Estatísticas de Surf', icon: '📊', section: 'Progresso', sectionId: 'progresso', text: 'Total de sessões, horas surfadas, praia favorita e streak.' },
             // Utilitários
             { title: 'Condições do Mar', icon: '🌊', section: 'Utilitários', sectionId: 'utilities', text: 'Verifique ondas, vento e temperatura da água em Bertioga.' },
             { title: 'Previsão do Tempo', icon: '🌡️', section: 'Utilitários', sectionId: 'utilities', text: 'Clima e temperatura para os próximos dias.' },
@@ -5525,6 +5611,118 @@
             const url = `https://wa.me/?text=${encodeURIComponent(msg)}`;
             window.open(url, '_blank');
         }
+
+        // ============ SURF SESSION LOG ============
+        let selectedMood = '';
+        function selectMood(btn, mood) {
+            document.querySelectorAll('.session-mood-btn').forEach(b => {
+                b.style.borderColor = 'var(--gray-200)';
+                b.style.background = 'white';
+            });
+            btn.style.borderColor = 'var(--primary)';
+            btn.style.background = 'rgba(0,168,204,0.08)';
+            selectedMood = mood;
+        }
+
+        function getSessions() {
+            return JSON.parse(localStorage.getItem('asf-sessions') || '[]');
+        }
+
+        function saveSessions(sessions) {
+            localStorage.setItem('asf-sessions', JSON.stringify(sessions));
+        }
+
+        function saveSession() {
+            const beach = document.getElementById('session-beach').value;
+            const duration = parseInt(document.getElementById('session-duration').value);
+            const notes = document.getElementById('session-notes').value;
+            if (!selectedMood) { showToast('Selecione como estava! 😊'); return; }
+            const session = {
+                id: Date.now(),
+                date: new Date().toISOString(),
+                beach,
+                duration,
+                mood: selectedMood,
+                notes
+            };
+            const sessions = getSessions();
+            sessions.unshift(session);
+            saveSessions(sessions);
+            // Reset form
+            document.getElementById('session-notes').value = '';
+            document.querySelectorAll('.session-mood-btn').forEach(b => {
+                b.style.borderColor = 'var(--gray-200)';
+                b.style.background = 'white';
+            });
+            selectedMood = '';
+            renderSessions();
+            showToast('Sessão registrada! 🏄‍♀️ +20 pts');
+        }
+
+        function deleteSession(id) {
+            const sessions = getSessions().filter(s => s.id !== id);
+            saveSessions(sessions);
+            renderSessions();
+            showToast('Sessão removida');
+        }
+
+        function renderSessions() {
+            const sessions = getSessions();
+            const list = document.getElementById('sessions-list');
+            const count = document.getElementById('session-count');
+            const stats = document.getElementById('session-stats');
+            count.textContent = sessions.length + ' sessão' + (sessions.length !== 1 ? 'ões' : '');
+            if (sessions.length === 0) {
+                list.innerHTML = '<p style="text-align: center; color: var(--gray-400); font-size: 13px; padding: 20px;">Nenhuma sessão registrada ainda. Bora surfar! 🏄‍♀️</p>';
+                stats.style.display = 'none';
+                return;
+            }
+            stats.style.display = 'block';
+            // Render last 5 sessions
+            list.innerHTML = sessions.slice(0, 5).map(s => {
+                const d = new Date(s.date);
+                const dateStr = d.toLocaleDateString('pt-BR', { day: '2-digit', month: 'short' });
+                const timeStr = d.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
+                return `<div class="card" style="margin-bottom: 8px; padding: 12px;">
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <div style="display: flex; gap: 10px; align-items: center;">
+                            <span style="font-size: 24px;">${s.mood}</span>
+                            <div>
+                                <p style="font-size: 14px; font-weight: 600;">${s.beach}</p>
+                                <p style="font-size: 12px; color: var(--gray-400);">${dateStr} • ${s.duration}min ${s.notes ? '• ' + s.notes : ''}</p>
+                            </div>
+                        </div>
+                        <button onclick="deleteSession(${s.id})" style="background: none; border: none; font-size: 16px; cursor: pointer; opacity: 0.4;">✕</button>
+                    </div>
+                </div>`;
+            }).join('');
+            // Stats
+            const totalMin = sessions.reduce((sum, s) => sum + s.duration, 0);
+            const totalH = Math.floor(totalMin / 60);
+            const extraMin = totalMin % 60;
+            document.getElementById('stat-total').textContent = sessions.length;
+            document.getElementById('stat-hours').textContent = totalH > 0 ? totalH + 'h' + (extraMin > 0 ? extraMin : '') : totalMin + 'min';
+            // Fav beach
+            const beachCount = {};
+            sessions.forEach(s => { beachCount[s.beach] = (beachCount[s.beach] || 0) + 1; });
+            const favBeach = Object.entries(beachCount).sort((a, b) => b[1] - a[1])[0];
+            document.getElementById('stat-fav-beach').textContent = favBeach ? favBeach[0] : '-';
+            // Fav mood
+            const moodCount = {};
+            sessions.forEach(s => { moodCount[s.mood] = (moodCount[s.mood] || 0) + 1; });
+            const favMood = Object.entries(moodCount).sort((a, b) => b[1] - a[1])[0];
+            document.getElementById('stat-fav-mood').textContent = favMood ? favMood[0] : '-';
+            // Streak
+            let streak = 0;
+            const today = new Date(); today.setHours(0, 0, 0, 0);
+            for (let i = 0; i < 30; i++) {
+                const checkDate = new Date(today); checkDate.setDate(checkDate.getDate() - i);
+                const dateStr = checkDate.toISOString().split('T')[0];
+                if (sessions.some(s => s.date.split('T')[0] === dateStr)) { streak++; } else { break; }
+            }
+            document.getElementById('stat-streak').textContent = streak;
+        }
+        document.addEventListener('DOMContentLoaded', renderSessions);
 
         // ============ PREMIUM CONTENT ============
         function unlockPremium(id) {
