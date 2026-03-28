@@ -2864,7 +2864,7 @@
             <div class="cards-grid">
                 <div class="card">
                     <span class="card-tag green">+50 PONTOS</span>
-                    <h3 id="quiz-basico">🌊 Quiz: Básico do Surf</h3>
+                    <h3 id="quiz-basico-title">🌊 Quiz: Básico do Surf</h3>
                     <p>Teste seus conhecimentos sobre o universo do surf!</p>
                     <p style="margin-top: 8px; font-size: 12px; color: var(--gray-400);">10 perguntas • 5 min</p>
                     <button class="btn btn-primary" style="width: 100%; margin-top: 12px;" onclick="startQuiz('basico')">Responder Quiz</button>
@@ -3318,11 +3318,11 @@
                 
                 <div style="background: rgba(255,255,255,0.15); padding: 15px; border-radius: 12px; margin-bottom: 15px;">
                     <p style="font-size: 12px; margin-bottom: 8px;">Seu WhatsApp:</p>
-                    <input type="text" placeholder="(XX) XXXXX-XXXX" style="width: 100%; padding: 10px; border: none; border-radius: 8px; font-size: 14px; margin-bottom: 10px;" id="whatsapp-input">
+                    <input type="text" placeholder="(XX) XXXXX-XXXX" style="width: 100%; padding: 10px; border: none; border-radius: 8px; font-size: 14px; margin-bottom: 10px;" id="trips-whatsapp">
                     <p style="font-size: 12px; margin-bottom: 8px;">Seu nome:</p>
-                    <input type="text" placeholder="Seu nome" style="width: 100%; padding: 10px; border: none; border-radius: 8px; font-size: 14px; margin-bottom: 10px;" id="name-input">
+                    <input type="text" placeholder="Seu nome" style="width: 100%; padding: 10px; border: none; border-radius: 8px; font-size: 14px; margin-bottom: 10px;" id="trips-name">
                     <p style="font-size: 12px; margin-bottom: 8px;">Cidade:</p>
-                    <input type="text" placeholder="Sua cidade" style="width: 100%; padding: 10px; border: none; border-radius: 8px; font-size: 14px; margin-bottom: 15px;" id="city-input">
+                    <input type="text" placeholder="Sua cidade" style="width: 100%; padding: 10px; border: none; border-radius: 8px; font-size: 14px; margin-bottom: 15px;" id="trips-city">
                     <button class="btn btn-primary" style="width: 100%; background: #27AE60; border: none; font-weight: bold;" onclick="alert('📱 Contato enviado com sucesso!\n\nEntraremos em contato pelo WhatsApp para adicionar você ao grupo das manas! 🏄‍♀️\n\nAguarda que logo você estará surfando com a galera! 🌊')">Enviar Contato</button>
                 </div>
                 
@@ -3543,7 +3543,7 @@
                         </select>
                     </div>
                     <div id="calc-result" style="background: var(--light); padding: 12px; border-radius: 8px; margin-bottom: 12px; text-align: center;">
-                        <p style="font-size: 14px;">Volume ideal: <strong id="volume-result">30L</strong></p>
+                        <p style="font-size: 14px;">Volume ideal: <strong id="volume-result-static">30L</strong></p>
                     </div>
                     <button class="btn btn-primary" style="width: 100%;" onclick="calcularVolume()">Calcular</button>
                 </div>
@@ -4302,7 +4302,7 @@
     </div>
 
     <!-- Hidden sections for compatibility -->
-    <div class="section" id="comunidade" style="display: none;">
+    <div class="section" id="comunidade-hidden" style="display: none;">
 
     <script>
         function showSection(sectionId) {
