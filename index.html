@@ -1270,7 +1270,7 @@
     <div class="search-container">
         <div class="search-bar">
             <span class="search-icon">🔍</span>
-            <input type="text" id="searchInput" placeholder="Buscar dicas, lojas, treinos..." oninput="handleSearch(this.value)" onfocus="handleSearch(this.value)">
+            <input type="text" id="searchInput" placeholder="Buscar dicas, lojas, treinos..." oninput="handleSearch(this.value)" onfocus="showRecentSearches()">
             <button class="search-clear" id="searchClear" onclick="clearSearch()">✕</button>
         </div>
         <div class="search-results" id="searchResults"></div>
@@ -5388,6 +5388,34 @@
             }
             
             resultsDiv.classList.add('active');
+            // Save to recent searches
+            if (query.length >= 3) saveRecentSearch(query);
+        }
+
+        // Recent searches
+        function getRecentSearches() {
+            try { return JSON.parse(localStorage.getItem('asf-recent-searches') || '[]'); } catch { return []; }
+        }
+        function saveRecentSearch(query) {
+            let recent = getRecentSearches().filter(s => s !== query);
+            recent.unshift(query);
+            if (recent.length > 3) recent = recent.slice(0, 3);
+            localStorage.setItem('asf-recent-searches', JSON.stringify(recent));
+        }
+        function showRecentSearches() {
+            const recent = getRecentSearches();
+            const resultsDiv = document.getElementById('searchResults');
+            if (recent.length === 0) return;
+            const input = document.getElementById('searchInput');
+            if (input.value.length >= 2) return;
+            resultsDiv.innerHTML = '<div style="padding:8px 12px;font-size:11px;color:var(--gray-400);">Buscas recentes</div>' +
+                recent.map(s => '<div class="search-result-item" onclick="document.getElementById(\'searchInput\').value=\'' + s + '\';handleSearch(\'' + s + '\')"><div class="result-title">🕐 ' + s + '</div></div>').join('') +
+                '<div style="padding:6px 12px;text-align:right;"><button onclick="clearRecentSearches()" style="background:none;border:none;color:var(--primary);font-size:11px;cursor:pointer;">Limpar</button></div>';
+            resultsDiv.classList.add('active');
+        }
+        function clearRecentSearches() {
+            localStorage.removeItem('asf-recent-searches');
+            document.getElementById('searchResults').classList.remove('active');
         }
 
         function clearSearch() {
