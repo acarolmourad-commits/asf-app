@@ -4995,16 +4995,20 @@
         
         function copyShareLink() {
             const input = document.getElementById('share-link');
-            input.select();
-            document.execCommand('copy');
-            
-            // Feedback visual
+            const link = input.value;
+            // Modern clipboard API with fallback
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(link).then(() => showToast('📋 Link copiado!'));
+            } else {
+                input.select();
+                document.execCommand('copy');
+                showToast('📋 Link copiado!');
+            }
+            // Visual feedback
             const btn = event.target;
             const original = btn.textContent;
             btn.textContent = '✅';
             setTimeout(() => btn.textContent = original, 1500);
-            
-            alert('📋 Link copiado!\n\nCompartilhe com as manas! 🏄‍♀️');
         }
         
         // Fechar painel de share ao clicar fora
