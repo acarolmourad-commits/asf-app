@@ -3970,6 +3970,20 @@
                     <span id="mana-stat2"></span>
                 </div>
             </div>
+            <!-- Create Post -->
+            <div class="card" style="margin: 0 20px 16px;">
+                <div style="display: flex; gap: 10px; align-items: flex-start;">
+                    <div class="post-avatar" style="flex-shrink: 0;">C</div>
+                    <div style="flex: 1;">
+                        <textarea id="new-post-text" placeholder="Compartilhe algo com as manas... 🏄‍♀️" style="width: 100%; padding: 10px; border: 1px solid var(--gray-200); border-radius: 10px; font-size: 14px; font-family: 'Outfit', sans-serif; resize: none; min-height: 50px; box-sizing: border-box;" rows="2"></textarea>
+                        <div style="display: flex; justify-content: flex-end; margin-top: 8px;">
+                            <button class="btn btn-primary" style="padding: 8px 20px; font-size: 13px;" onclick="createPost()">Publicar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- User Posts -->
+            <div id="user-posts"></div>
             <div class="post">
                 <div class="post-header">
                     <div class="post-avatar">C</div>
@@ -6365,6 +6379,52 @@
                 navigator.clipboard.writeText(msg).then(() => showToast('📋 Copiado para compartilhar!'));
             }
         }
+        // Create community post
+        function createPost() {
+            const textarea = document.getElementById('new-post-text');
+            const text = textarea.value.trim();
+            if (!text) { showToast('Escreva algo antes de publicar! ✍️'); return; }
+            const posts = JSON.parse(localStorage.getItem('asf-user-posts') || '[]');
+            posts.unshift({ text, time: Date.now(), likes: 0 });
+            localStorage.setItem('asf-user-posts', JSON.stringify(posts));
+            textarea.value = '';
+            renderUserPosts();
+            showToast('Post publicado! 🎉');
+            earnPoints('dica', 5);
+        }
+        function renderUserPosts() {
+            const container = document.getElementById('user-posts');
+            const posts = JSON.parse(localStorage.getItem('asf-user-posts') || '[]');
+            if (!posts.length) { container.innerHTML = ''; return; }
+            container.innerHTML = posts.map((p, i) => {
+                const ago = getTimeAgo(p.time);
+                return `<div class="post">
+                    <div class="post-header">
+                        <div class="post-avatar">C</div>
+                        <div class="post-info"><h4>Carol</h4><span class="time">${ago}</span></div>
+                    </div>
+                    <div class="post-content">${p.text.replace(/</g, '&lt;').replace(/>/g, '&gt;')}</div>
+                    <div class="post-actions">
+                        <button class="post-action" onclick="toggleLike(this)" data-count="${p.likes || 0}"><span>🤍</span> ${p.likes || 0}</button>
+                        <button class="post-action" onclick="deleteUserPost(${i})" style="font-size:11px;opacity:0.5;">🗑️</button>
+                    </div>
+                </div>`;
+            }).join('');
+        }
+        function deleteUserPost(idx) {
+            const posts = JSON.parse(localStorage.getItem('asf-user-posts') || '[]');
+            posts.splice(idx, 1);
+            localStorage.setItem('asf-user-posts', JSON.stringify(posts));
+            renderUserPosts();
+        }
+        function getTimeAgo(ts) {
+            const diff = Date.now() - ts;
+            if (diff < 60000) return 'agora';
+            if (diff < 3600000) return Math.floor(diff / 60000) + ' min atrás';
+            if (diff < 86400000) return Math.floor(diff / 3600000) + 'h atrás';
+            return Math.floor(diff / 86400000) + 'd atrás';
+        }
+        document.addEventListener('DOMContentLoaded', renderUserPosts);
 
         // Join surf group
         function joinGroup(btn, groupName) {
