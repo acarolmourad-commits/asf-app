@@ -3595,21 +3595,21 @@
                     <h3>🏖️ Bertioga Surf Girls</h3>
                     <p>12 manas • Semanal (domingos)</p>
                     <p style="font-size: 12px; color: var(--gray-400); margin-top: 5px;">📍 Riviera de São Lourenço</p>
-                    <button class="btn btn-primary" style="width: 100%; margin-top: 10px;" onclick="alert('📞 Contato salvo!\n\nGrupo: Bertioga Surf Girls\nManas: 12\nQuando: Domingos\n\nEntraremos em contato! 🏄‍♀️')">Participar</button>
+                    <button class="btn btn-primary" style="width: 100%; margin-top: 10px;" onclick="joinGroup(this, 'Bertioga Surf Girls')" id="join-bertioga">Participar</button>
                 </div>
                 <div class="card">
                     <span class="card-tag green">ATIVO</span>
                     <h3>🏝️ Guarujá & Santos Surf</h3>
                     <p>23 manas • Sábados</p>
                     <p style="font-size: 12px; color: var(--gray-400); margin-top: 5px;">📍 Guarujá - Praia das Pitangueiras</p>
-                    <button class="btn btn-primary" style="width: 100%; margin-top: 10px;" onclick="alert('📞 Contato salvo!\n\nGrupo: Guarujá & Santos Surf\nManas: 23\nQuando: Sábados\n\nEntraremos em contato! 🏄‍♀️')">Participar</button>
+                    <button class="btn btn-primary" style="width: 100%; margin-top: 10px;" onclick="joinGroup(this, 'Guarujá & Santos Surf')" id="join-guaruja">Participar</button>
                 </div>
                 <div class="card">
                     <span class="card-tag green">ATIVO</span>
                     <h3>🌊 Ubatuba Surf Girls</h3>
                     <p>12 manas • Feriados</p>
                     <p style="font-size: 12px; color: var(--gray-400); margin-top: 5px;">📍 Ubatuba - Itamambuca</p>
-                    <button class="btn btn-primary" style="width: 100%; margin-top: 10px;" onclick="alert('📞 Contato salvo!\n\nGrupo: Ubatuba Surf Girls\nManas: 12\nQuando: Feriados\n\nEntraremos em contato! 🏄‍♀️')">Participar</button>
+                    <button class="btn btn-primary" style="width: 100%; margin-top: 10px;" onclick="joinGroup(this, 'Ubatuba Surf Girls')" id="join-ubatuba">Participar</button>
                 </div>
             </div>
         </div>
@@ -6200,6 +6200,17 @@
             }
         }
         document.addEventListener('DOMContentLoaded', renderSessions);
+        // Restore joined group states
+        document.addEventListener('DOMContentLoaded', function() {
+            ['Bertioga Surf Girls', 'Guarujá & Santos Surf', 'Ubatuba Surf Girls'].forEach(name => {
+                const key = 'asf-joined-' + name.replace(/\s+/g, '-');
+                if (localStorage.getItem(key)) {
+                    const id = 'join-' + name.split(' ')[0].toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+                    const btn = document.getElementById(id);
+                    if (btn) { btn.textContent = '✅ Inscrita!'; btn.style.background = 'var(--success)'; btn.style.pointerEvents = 'none'; }
+                }
+            });
+        });
 
         // ============ PREMIUM CONTENT ============
         function unlockPremium(id) {
@@ -6312,6 +6323,21 @@
         }
 
         // ============ TOAST NOTIFICATION HELPER ============
+        // Join surf group
+        function joinGroup(btn, groupName) {
+            const key = 'asf-joined-' + groupName.replace(/\s+/g, '-');
+            if (localStorage.getItem(key)) {
+                showToast('✅ Você já está neste grupo!');
+                return;
+            }
+            localStorage.setItem(key, 'true');
+            btn.textContent = '✅ Inscrita!';
+            btn.style.background = 'var(--success)';
+            btn.style.pointerEvents = 'none';
+            showToast('🏄‍♀️ ' + groupName + ': contato salvo! Entraremos em contato.');
+            earnPoints('dica', 10);
+        }
+
         function showToast(msg, duration = 2500) {
             let t = document.querySelector('.toast');
             if (!t) { t = document.createElement('div'); t.className = 'toast'; document.body.appendChild(t); }
