@@ -23,23 +23,28 @@ App completo para a comunidade de surf feminino do Litoral Paulista.
 - Praias: Itamambuca, Toninhas, Maresias, Bertioga, Gonzaga, Pitangueiras, Riviera, Mongaguá, Praia Grande
 
 ### 🌊 Condições ao Vivo
-- **Surf Bar** — Ondas, vento, temperatura, período em tempo real
+- **Surf Bar** — Ondas, vento, temperatura, período, UV em tempo real
 - **Melhor Dia da Semana** — Previsão otimizada com rating de estrelas
-- **Previsão 7 dias** — Wave height, período, direção
+- **Previsão Semanal** — Faixa horizontal 7 dias com altura, período e qualidade
+- **Relógio de Maré** — SVG animado mostrando posição atual da maré
+- **Índice UV** — Color-coded por severidade (🔴🟠🟡🟢)
 - API: Open-Meteo Marine + Weather
 
 ### 🎯 Progresso
 - **Diário de Sessões** — Registre praia, duração, humor, notas
-- **Estatísticas** — Total sessões, horas, streak, praia favorita
-- **Quizzes** — Teste conhecimentos e ganhe pontos
-- **Conquistas** — Badges por marcos alcançados
-- **Questionários Diários** — Hidratação, feedback de sessão
+- **Estatísticas** — Total sessões, horas, streak, praia favorita, sessão mais longa, duração média
+- **Mapa de Calor** — 30 dias de atividade visual (tipo GitHub contributions)
+- **Quizzes** — Teste conhecimentos, valida respostas e ganhe pontos
+- **Conquistas Dinâmicas** — 10 badges desbloqueadas por atividade real
+- **Contador de Água** — Tracker de hidratação com meta de 8 copos/dia
+- **Checklist Pré-Surf** — 7 itens com salvamento automático
 
 ### 👥 Comunidade
-- **Posts** — Publique e interaja com a comunidade
+- **Criar Posts** — Publique e interaja com a comunidade (persiste localmente)
+- **Curtir Posts** — Botões interativos com animação de coração
 - **Mana da Semana** — Destaque semanal de membro
-- **Grupos de WhatsApp** — Conecte-se com manas por região
-- **Surftrips** — Participe de viagens organizadas
+- **Grupos de WhatsApp** — Conecte-se com manas por região (estado persistente)
+- **Surftrips** — Enquetes interativas sobre destinos e preferências
 
 ### 🏆 Competições
 - **Próximos Eventos** — Calendário de campeonatos
@@ -53,21 +58,25 @@ App completo para a comunidade de surf feminino do Litoral Paulista.
 - Plano de Treino: 30 Dias para Surfar Melhor
 
 ### 🛒 Utilitários
-- **Lojas** — Mapa de lojas de surf no litoral
-- **Calculadora de Prancha** — Volume ideal por peso/nível
-- **Marés** — Horários de maré alta/baixa
-- **Checklist Pré-Surf** — 7 itens com salvamento automático
+- **Lojas** — Mapa de lojas de surf no litoral (com filtro por cidade)
+- **Calculadora de Prancha** — Volume ideal por peso/nível + tabela de referência
+- **Marés** — Horários de maré alta/baixa com relógio visual animado
+- **Contador de Água** — Progresso diário com reset automático
 - **Clima** — Previsão do tempo em tempo real
 
 ### ⚙️ Recursos Técnicos
-- 🌙 **Dark Mode** — Tema escuro com detecção automática
-- 🔍 **Busca** — Encontre qualquer conteúdo rapidamente
-- 📱 **PWA** — Instale como app no celular
+- 🌙 **Dark Mode** — Tema escuro com detecção automática e transição suave
+- 🔍 **Busca** — Encontre qualquer conteúdo rapidamente (com buscas recentes)
+- 📱 **PWA** — Instale como app no celular (manifest + apple-touch-icon)
 - 🔔 **Notificações** — Alertas de ondas e eventos
-- 📤 **Compartilhamento** — WhatsApp, Instagram, Facebook, Twitter
+- 📤 **Compartilhamento** — Web Share API nativa + WhatsApp fallback
 - 💡 **Dica do Dia** — Rotaciona diariamente com 15 dicas
 - 📊 **Barra de Progresso** — Scroll indicator
 - ⬆️ **Back to Top** — Botão flutuante
+- 📡 **Status de Conexão** — Banner offline/online com auto-detecção
+- ♿ **Acessibilidade** — ARIA labels, skip-to-content, navegação por teclado
+- 🏷️ **SEO** — Open Graph, Twitter Cards, JSON-LD, meta tags
+- 🎨 **Favicon** — Emoji SVG personalizado
 
 ## 🛠️ Tecnologias
 
@@ -75,26 +84,31 @@ App completo para a comunidade de surf feminino do Litoral Paulista.
 - Google Fonts (Outfit)
 - Open-Meteo API (Weather + Marine)
 - localStorage para persistência
-- Service Worker para PWA
+- Web Share API para compartilhamento nativo
 - GitHub Pages para hosting
 
 ## 📱 Instalação como PWA
 
 1. Abra o app no navegador do celular
-2. Toque em "Adicionar à Tela Inicial"
-3. O app funciona offline após instalação
+2. Toque em "Adicionar à Tela Inicial" (Chrome/Safari)
+3. O app funciona como app nativo após instalação
+
+## 📊 Status
+
+- **Linhas de código:** ~6600
+- **Commits hoje:** 27+
+- **Commits pendentes push:** 44+ (token GitHub expirado)
 
 ## 👩‍💻 Desenvolvimento
 
-O app é um único arquivo `index.html` (~6000 linhes) com:
-- CSS inline com variáveis de tema
+O app é um único arquivo `index.html` (~6600 linhas) com:
+- CSS inline com variáveis de tema e dark mode
 - JavaScript inline com módulos organizados
 - Dados estáticos embutidos
 - APIs externas para dados ao vivo
-
-### Commits pendentes
-Há commits locais aguardando push para GitHub (token expirado).
+- localStorage para toda a persistência do usuário
 
 ## 📄 License
 
 © 2026 ASF - Associação de Surf Feminino
+Feito com 💙 para a comunidade feminina de surf
