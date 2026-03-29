@@ -6009,9 +6009,14 @@
                 data.windDir = windItem.querySelector('.surf-label')?.textContent || '';
             }
 
-            const msg = `🏄‍♀️ *Condições ASF - ${data.beach || 'Bertioga'}*\n\n🌊 Ondas: ${data.waves || '—'}\n💨 Vento: ${data.windSpeed || '—'} ${data.windDir || ''}\n🌡️ Temp: ${data.temp || '—'}\n⏱️ Período: ${data.period || '—'}\n📊 Condição: ${data.condition || '—'}\n\n_Bora surfar?_ 🤙`;
-            const url = `https://wa.me/?text=${encodeURIComponent(msg)}`;
-            window.open(url, '_blank');
+            const msg = `🏄‍♀️ Condições ASF - ${data.beach || 'Bertioga'}\n\n🌊 Ondas: ${data.waves || '—'}\n💨 Vento: ${data.windSpeed || '—'} ${data.windDir || ''}\n🌡️ Temp: ${data.temp || '—'}\n⏱️ Período: ${data.period || '—'}\n📊 Condição: ${data.condition || '—'}\n\nBora surfar? 🤙`;
+            // Try native share API first (mobile), fallback to WhatsApp
+            if (navigator.share) {
+                navigator.share({ title: 'Condições ASF', text: msg }).catch(() => {});
+            } else {
+                const url = `https://wa.me/?text=${encodeURIComponent(msg)}`;
+                window.open(url, '_blank');
+            }
         }
 
         // ============ MANA DA SEMANA ============
