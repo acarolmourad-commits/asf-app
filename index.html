@@ -1365,6 +1365,12 @@
         </div>
     </div>
 
+    <!-- Week Forecast Strip -->
+    <div id="week-strip" style="padding: 0 20px; margin-bottom: 12px;">
+        <div style="display: flex; gap: 6px; overflow-x: auto; scrollbar-width: none; -webkit-overflow-scrolling: touch;" id="week-strip-inner">
+        </div>
+    </div>
+
     <!-- Dica do Dia -->
     <div id="dica-do-dia" style="padding: 0 20px; margin-bottom: 16px;">
         <div style="background: linear-gradient(135deg, rgba(0,168,204,0.08), rgba(155,89,182,0.08)); border: 1px solid rgba(0,168,204,0.15); border-radius: 16px; padding: 16px; display: flex; gap: 12px; align-items: flex-start;">
@@ -5845,6 +5851,40 @@
             } catch (e) { console.error('Best day error:', e); }
         }
         loadBestDay();
+
+        // Week Forecast Strip
+        async function loadWeekStrip() {
+            const inner = document.getElementById('week-strip-inner');
+            if (!inner) return;
+            try {
+                const weather = await fetchWeather('bertioga');
+                const marine = await fetchMarine('bertioga');
+                if (!weather?.daily || !marine?.daily) { inner.innerHTML = ''; return; }
+                const d = marine.daily;
+                const w = weather.daily;
+                const dayNames = ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb'];
+                let html = '';
+                for (let i = 0; i < Math.min(7, d.time.length); i++) {
+                    const date = new Date(d.time[i] + 'T12:00:00');
+                    const isToday = date.toDateString() === new Date().toDateString();
+                    const wh = d.wave_height_max[i] || 0;
+                    const wp = d.wave_period_max?.[i] || 0;
+                    const rating = surfRating(wh);
+                    let bg = 'var(--gray-200)';
+                    if (wh >= 0.6 && wh < 2.0) bg = 'rgba(0,168,204,0.15)';
+                    else if (wh >= 2.0) bg = 'rgba(255,107,107,0.15)';
+                    else if (wh < 0.6 && wh > 0) bg = 'rgba(244,208,63,0.15)';
+                    html += `<div style="text-align:center;padding:8px 6px;min-width:52px;border-radius:10px;background:${bg};${isToday ? 'border:2px solid var(--primary);' : ''}flex-shrink:0;">
+                        <div style="font-size:10px;font-weight:${isToday ? '700' : '400'};color:var(--gray-600);">${isToday ? 'Hoje' : dayNames[date.getDay()]}</div>
+                        <div style="font-size:15px;font-weight:700;margin:3px 0;color:var(--secondary);">${wh.toFixed(1)}m</div>
+                        <div style="font-size:10px;color:var(--gray-400);">${wp.toFixed(0)}s</div>
+                        <div style="font-size:12px;margin-top:2px;">${rating.text.split(' ')[0]}</div>
+                    </div>`;
+                }
+                inner.innerHTML = html;
+            } catch (e) { inner.innerHTML = ''; }
+        }
+        loadWeekStrip();
 
         // ============ DARK MODE ============
         function initDarkMode() {
