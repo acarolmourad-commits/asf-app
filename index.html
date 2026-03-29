@@ -4693,23 +4693,23 @@
 
     <!-- Bottom Navigation -->
     <div class="bottom-nav" role="navigation" aria-label="Menu inferior">
-        <button class="nav-item active" aria-label="Dicas de surf" onclick="showSection('dicas')">
+        <button class="nav-item active" aria-label="Dicas de surf" onclick="handleNavTap(this, 'dicas')">
             <span class="icon">📚</span>
             <span class="label">Dicas</span>
         </button>
-        <button class="nav-item" aria-label="Manas próximas" onclick="showSection('manas-proximas')">
+        <button class="nav-item" aria-label="Manas próximas" onclick="handleNavTap(this, 'manas-proximas')">
             <span class="icon">📍</span>
             <span class="label">Próximas</span>
         </button>
-        <button class="nav-item" aria-label="Saúde e bem-estar" onclick="showSection('saude')">
+        <button class="nav-item" aria-label="Saúde e bem-estar" onclick="handleNavTap(this, 'saude')">
             <span class="icon">💪</span>
             <span class="label">Saúde</span>
         </button>
-        <button class="nav-item" aria-label="Pontos e progresso" onclick="showSection('progresso')">
+        <button class="nav-item" aria-label="Pontos e progresso" onclick="handleNavTap(this, 'progresso')">
             <span class="icon">🎯</span>
             <span class="label">Pontos</span>
         </button>
-        <button class="nav-item" aria-label="Manas e comunidade" onclick="showSection('manas')">
+        <button class="nav-item" aria-label="Manas e comunidade" onclick="handleNavTap(this, 'manas')">
             <span class="icon">💬</span>
             <span class="label">Manas</span>
         </button>
@@ -4743,6 +4743,16 @@
             
             // Show selected section
             document.getElementById(sectionId).classList.add('active');
+        }
+
+        // Tap active nav item to scroll to top
+        function handleNavTap(btn, sectionId) {
+            if (btn.classList.contains('active')) {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            } else {
+                showSection(sectionId);
+            }
+        }
             
             // Update tabs
             const tabs = document.querySelectorAll('.tab');
