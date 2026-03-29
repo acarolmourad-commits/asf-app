@@ -5921,19 +5921,25 @@
             if (saved === 'dark' || (!saved && prefersDark)) {
                 document.documentElement.setAttribute('data-theme', 'dark');
                 document.getElementById('darkModeToggle').textContent = '☀️';
+                document.querySelector('meta[name="theme-color"]').content = '#1A1D23';
             }
         }
         function toggleDarkMode() {
             const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+            // Add transition for smooth theme change
+            document.documentElement.style.transition = 'background-color 0.3s ease, color 0.3s ease';
             if (isDark) {
                 document.documentElement.removeAttribute('data-theme');
                 localStorage.setItem('asf-theme', 'light');
                 document.getElementById('darkModeToggle').textContent = '🌙';
+                document.querySelector('meta[name="theme-color"]').content = '#00A8CC';
             } else {
                 document.documentElement.setAttribute('data-theme', 'dark');
                 localStorage.setItem('asf-theme', 'dark');
                 document.getElementById('darkModeToggle').textContent = '☀️';
+                document.querySelector('meta[name="theme-color"]').content = '#1A1D23';
             }
+            setTimeout(() => document.documentElement.style.transition = '', 300);
         }
         initDarkMode();
 
