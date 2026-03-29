@@ -6289,6 +6289,28 @@
             t.classList.add('show');
             setTimeout(() => t.classList.remove('show'), duration);
         }
+
+        // Connection status
+        function updateConnectionStatus() {
+            let banner = document.getElementById('offline-banner');
+            if (!navigator.onLine) {
+                if (!banner) {
+                    banner = document.createElement('div');
+                    banner.id = 'offline-banner';
+                    banner.style.cssText = 'position:fixed;top:0;left:0;right:0;background:#e74c3c;color:white;text-align:center;padding:8px;font-size:13px;font-weight:600;z-index:10000;font-family:Outfit,sans-serif;';
+                    banner.textContent = '📡 Sem conexão — modo offline';
+                    document.body.appendChild(banner);
+                }
+            } else {
+                if (banner) {
+                    banner.remove();
+                    showToast('✅ Conectado!');
+                }
+            }
+        }
+        window.addEventListener('offline', updateConnectionStatus);
+        window.addEventListener('online', updateConnectionStatus);
+        updateConnectionStatus();
     </script>
 </body>
 </html>
