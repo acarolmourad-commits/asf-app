@@ -5755,6 +5755,11 @@
                         <span class="surf-val">${w.temperature_2m.toFixed(0)}°C</span>
                         <span class="surf-label">Temp</span>
                     </div>
+                    <div class="surf-bar-item">
+                        <span class="surf-icon">${w.uv_index >= 8 ? '🔴' : w.uv_index >= 6 ? '🟠' : w.uv_index >= 3 ? '🟡' : '🟢'}</span>
+                        <span class="surf-val">${w.uv_index.toFixed(0)}</span>
+                        <span class="surf-label">UV ${w.uv_index >= 8 ? 'Ext' : w.uv_index >= 6 ? 'Alt' : w.uv_index >= 3 ? 'Mod' : 'Bai'}</span>
+                    </div>
                     <div class="surf-bar-divider"></div>
                     <div class="surf-bar-item">
                         <span class="surf-icon">⏱️</span>
