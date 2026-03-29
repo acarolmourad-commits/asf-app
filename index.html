@@ -453,6 +453,7 @@
             z-index: 1;
         }
         .surf-bar::-webkit-scrollbar { display: none; }
+        #week-strip-inner::-webkit-scrollbar { display: none; }
         .surf-bar-item {
             display: flex;
             flex-direction: column;
@@ -1404,7 +1405,7 @@
 
     <!-- Week Forecast Strip -->
     <div id="week-strip" style="padding: 0 20px; margin-bottom: 12px;">
-        <div style="display: flex; gap: 6px; overflow-x: auto; scrollbar-width: none; -webkit-overflow-scrolling: touch;" id="week-strip-inner">
+        <div style="display: flex; gap: 6px; overflow-x: auto; scrollbar-width: none; -ms-overflow-style: none; -webkit-overflow-scrolling: touch;" id="week-strip-inner">
         </div>
     </div>
 
