@@ -1224,6 +1224,8 @@
     </style>
 </head>
 <body>
+    <!-- Skip to content for accessibility -->
+    <a href="#dicas" style="position: absolute; left: -9999px; top: 0; z-index: 10000; background: var(--primary); color: white; padding: 8px 16px; border-radius: 0 0 8px 0; font-weight: 600; text-decoration: none;" onfocus="this.style.left='0'" onblur="this.style.left='-9999px'">Pular para o conteúdo</a>
     <div class="scroll-progress" id="scrollProgress"></div>
     <!-- Loading Screen -->
     <div class="loading-screen" id="loading-screen">
@@ -1403,32 +1405,32 @@
     </div>
 
     <!-- Navigation Tabs -->
-    <div class="tabs">
-        <button class="tab active" onclick="showSection('dicas')">
+    <div class="tabs" role="tablist" aria-label="Navegação principal">
+        <button class="tab active" role="tab" aria-selected="true" aria-controls="dicas" onclick="showSection('dicas')">
             <span class="tab-icon">📚</span> Dicas
         </button>
-        <button class="tab" onclick="showSection('mobilidade')">
+        <button class="tab" role="tab" aria-selected="false" aria-controls="mobilidade" onclick="showSection('mobilidade')">
             <span class="tab-icon">🧘</span> Mobilidade
         </button>
-        <button class="tab" onclick="showSection('lojas')">
+        <button class="tab" role="tab" aria-selected="false" aria-controls="lojas" onclick="showSection('lojas')">
             <span class="tab-icon">🛒</span> Lojas
         </button>
-        <button class="tab" onclick="showSection('praias')">
+        <button class="tab" role="tab" aria-selected="false" aria-controls="praias" onclick="showSection('praias')">
             <span class="tab-icon">🏖️</span> Praias
         </button>
-        <button class="tab" onclick="showSection('trips')">
+        <button class="tab" role="tab" aria-selected="false" aria-controls="trips" onclick="showSection('trips')">
             <span class="tab-icon">🚗</span> Surftrips
         </button>
-        <button class="tab" onclick="showSection('utilities')">
+        <button class="tab" role="tab" aria-selected="false" aria-controls="utilities" onclick="showSection('utilities')">
             <span class="tab-icon">🌊</span> Utilitários
         </button>
-        <button class="tab" onclick="showSection('comunidade')">
+        <button class="tab" role="tab" aria-selected="false" aria-controls="comunidade" onclick="showSection('comunidade')">
             <span class="tab-icon">👥</span> Comunidade
         </button>
-        <button class="tab" onclick="showSection('competicoes')">
+        <button class="tab" role="tab" aria-selected="false" aria-controls="competicoes" onclick="showSection('competicoes')">
             <span class="tab-icon">🏆</span> Competições
         </button>
-        <button class="tab" onclick="showSection('premium')">
+        <button class="tab" role="tab" aria-selected="false" aria-controls="premium" onclick="showSection('premium')">
             <span class="tab-icon">⭐</span> Premium
         </button>
     </div>
@@ -4676,24 +4678,24 @@
     </div>
 
     <!-- Bottom Navigation -->
-    <div class="bottom-nav">
-        <button class="nav-item active" onclick="showSection('dicas')">
+    <div class="bottom-nav" role="navigation" aria-label="Menu inferior">
+        <button class="nav-item active" aria-label="Dicas de surf" onclick="showSection('dicas')">
             <span class="icon">📚</span>
             <span class="label">Dicas</span>
         </button>
-        <button class="nav-item" onclick="showSection('manas-proximas')">
+        <button class="nav-item" aria-label="Manas próximas" onclick="showSection('manas-proximas')">
             <span class="icon">📍</span>
             <span class="label">Próximas</span>
         </button>
-        <button class="nav-item" onclick="showSection('saude')">
+        <button class="nav-item" aria-label="Saúde e bem-estar" onclick="showSection('saude')">
             <span class="icon">💪</span>
             <span class="label">Saúde</span>
         </button>
-        <button class="nav-item" onclick="showSection('progresso')">
+        <button class="nav-item" aria-label="Pontos e progresso" onclick="showSection('progresso')">
             <span class="icon">🎯</span>
             <span class="label">Pontos</span>
         </button>
-        <button class="nav-item" onclick="showSection('manas')">
+        <button class="nav-item" aria-label="Manas e comunidade" onclick="showSection('manas')">
             <span class="icon">💬</span>
             <span class="label">Manas</span>
         </button>
@@ -4722,7 +4724,7 @@
         function showSection(sectionId) {
             // Hide all sections
             document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
-            document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+            document.querySelectorAll('.tab').forEach(t => { t.classList.remove('active'); t.setAttribute('aria-selected', 'false'); });
             document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
             
             // Show selected section
@@ -4746,6 +4748,9 @@
             } else if (sectionId === 'competicoes') {
                 // Competitions section - highlight related tab
             }
+            
+            // Update aria-selected on active tab
+            document.querySelectorAll('.tab.active').forEach(t => t.setAttribute('aria-selected', 'true'));
             
             // Scroll to top
             window.scrollTo(0, 0);
