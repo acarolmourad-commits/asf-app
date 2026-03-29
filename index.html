@@ -3233,6 +3233,11 @@
                             <div style="font-size: 11px; color: var(--gray-400);">Streak 🔥</div>
                         </div>
                     </div>
+                    <!-- Session Heatmap -->
+                    <div style="margin-top: 14px;">
+                        <div style="font-size: 11px; color: var(--gray-600); margin-bottom: 6px;">📅 Últimos 30 dias</div>
+                        <div id="session-heatmap" style="display: flex; gap: 3px; flex-wrap: wrap;"></div>
+                    </div>
                     <div style="margin-top: 12px; font-size: 12px;">
                         <div style="display: flex; justify-content: space-between; padding: 4px 0;">
                             <span style="color: var(--gray-600);">Praia favorita</span>
@@ -6007,6 +6012,24 @@
                 if (sessions.some(s => s.date.split('T')[0] === dateStr)) { streak++; } else { break; }
             }
             document.getElementById('stat-streak').textContent = streak;
+            // Heatmap
+            const heatmapEl = document.getElementById('session-heatmap');
+            if (heatmapEl) {
+                let heatHTML = '';
+                for (let i = 29; i >= 0; i--) {
+                    const d = new Date(today); d.setDate(d.getDate() - i);
+                    const ds = d.toISOString().split('T')[0];
+                    const daySessions = sessions.filter(s => s.date.split('T')[0] === ds);
+                    const count = daySessions.length;
+                    let bg = 'var(--gray-200)';
+                    let title = ds;
+                    if (count === 1) { bg = 'rgba(0,168,204,0.35)'; title += ': 1 sessão'; }
+                    else if (count === 2) { bg = 'rgba(0,168,204,0.6)'; title += ': 2 sessões'; }
+                    else if (count >= 3) { bg = 'var(--primary)'; title += ': ' + count + ' sessões'; }
+                    heatHTML += `<div title="${title}" style="width: 16px; height: 16px; border-radius: 3px; background: ${bg}; cursor: default;" ></div>`;
+                }
+                heatmapEl.innerHTML = heatHTML;
+            }
         }
         document.addEventListener('DOMContentLoaded', renderSessions);
 
