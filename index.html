@@ -3694,6 +3694,15 @@
                     <div class="icon">🗓️</div>
                     <h4>Marés</h4>
                     <p>Horários de maré alta e baixa</p>
+                    <div id="tide-clock" style="display: flex; justify-content: center; margin: 8px 0;">
+                        <svg width="120" height="120" viewBox="0 0 120 120">
+                            <circle cx="60" cy="60" r="54" fill="none" stroke="var(--gray-200)" stroke-width="8" opacity="0.3"/>
+                            <circle id="tide-arc" cx="60" cy="60" r="54" fill="none" stroke="var(--primary)" stroke-width="8" stroke-linecap="round" stroke-dasharray="339.29" stroke-dashoffset="339.29" transform="rotate(-90 60 60)" style="transition: stroke-dashoffset 1s ease;"/>
+                            <text id="tide-level-icon" x="60" y="52" text-anchor="middle" font-size="28">🌊</text>
+                            <text id="tide-level-text" x="60" y="76" text-anchor="middle" font-size="13" font-weight="600" fill="var(--primary)">--</text>
+                            <text id="tide-level-label" x="60" y="92" text-anchor="middle" font-size="10" fill="var(--gray-400)">calculando...</text>
+                        </svg>
+                    </div>
                     <div id="mare-data">
                         <p style="font-size: 18px; font-weight: 700; color: var(--primary);">🔴 Carregando...</p>
                     </div>
@@ -5452,6 +5461,79 @@
                 <p style="font-size: 14px; color: var(--success);">🟢 ${mareTimes.low}</p>
                 <p style="font-size: 12px; color: var(--gray-400); margin-top: 4px;">${mareTimes.tip}</p>
             `;
+            // Animate tide clock
+            updateTideClock(mareTimes, now);
+        }
+
+        function updateTideClock(tides, now) {
+            const arc = document.getElementById('tide-arc');
+            const icon = document.getElementById('tide-level-icon');
+            const text = document.getElementById('tide-level-text');
+            const label = document.getElementById('tide-level-label');
+            if (!arc) return;
+            // Parse high/low times to estimate current tide position (0-1 cycle)
+            const highMatch = tides.high.match(/(\d+):(\d+)/);
+            const lowMatch = tides.low.match(/(\d+):(\d+)/);
+            if (!highMatch || !lowMatch) return;
+            const highMin = parseInt(highMatch[1]) * 60 + parseInt(highMatch[2]);
+            const lowMin = parseInt(lowMatch[1]) * 60 + parseInt(lowMatch[2]);
+            const nowMin = now.getHours() * 60 + now.getMinutes();
+            // Simple sine approximation between high and low
+            const cycleLen = Math.abs(lowMin - highMin) * 2;
+            let pos;
+            if (highMin < lowMin) {
+                pos = ((nowMin - highMin) / (lowMin - highMin));
+                if (nowMin < highMin) pos = 0;
+                if (nowMin > lowMin) pos = 1 - ((nowMin - lowMin) / (highMin + 1440 - lowMin));
+                if (pos < 0) pos = 0;
+                if (pos > 1) pos = 1;
+                // Map: 0=high, 0.5=low, 1=high
+                const angle = pos * Math.PI;
+                const tideHeight = Math.cos(angle); // 1=high, -1=low, 0=mid
+                const pct = (tideHeight + 1) / 2; // 0 to 1
+                const circumference = 339.29;
+                arc.style.strokeDashoffset = circumference - (circumference * pct * 0.85);
+                if (pct > 0.65) {
+                    icon.textContent = '🌊';
+                    text.textContent = 'Alta';
+                    arc.style.stroke = 'var(--primary)';
+                } else if (pct < 0.35) {
+                    icon.textContent = '🏖️';
+                    text.textContent = 'Baixa';
+                    arc.style.stroke = 'var(--success)';
+                } else {
+                    icon.textContent = '〰️';
+                    text.textContent = 'Subindo';
+                    arc.style.stroke = 'var(--accent)';
+                    if (nowMin > (highMin + lowMin) / 2 && nowMin < lowMin) text.textContent = 'Descendo';
+                }
+            } else {
+                pos = ((nowMin - lowMin) / (highMin - lowMin));
+                if (nowMin < lowMin) pos = 0;
+                if (nowMin > highMin) pos = 1 - ((nowMin - highMin) / (lowMin + 1440 - highMin));
+                if (pos < 0) pos = 0;
+                if (pos > 1) pos = 1;
+                const angle = pos * Math.PI;
+                const tideHeight = Math.cos(angle);
+                const pct = (tideHeight + 1) / 2;
+                const circumference = 339.29;
+                arc.style.strokeDashoffset = circumference - (circumference * pct * 0.85);
+                if (pct > 0.65) {
+                    icon.textContent = '🏖️';
+                    text.textContent = 'Baixa';
+                    arc.style.stroke = 'var(--success)';
+                } else if (pct < 0.35) {
+                    icon.textContent = '🌊';
+                    text.textContent = 'Alta';
+                    arc.style.stroke = 'var(--primary)';
+                } else {
+                    icon.textContent = '〰️';
+                    text.textContent = 'Subindo';
+                    arc.style.stroke = 'var(--accent)';
+                }
+            }
+            const timeStr = String(now.getHours()).padStart(2,'0') + ':' + String(now.getMinutes()).padStart(2,'0');
+            label.textContent = 'agora: ' + timeStr;
         }
 
         function getEstimatedTides(beach, date) {
