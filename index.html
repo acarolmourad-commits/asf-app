@@ -3241,7 +3241,17 @@
                     <span class="card-tag purple">DIÁRIO</span>
                     <h3>💧 Você bebeu água hoje?</h3>
                     <p>Controle sua hidratação diária.</p>
-                    <button class="btn btn-secondary" style="width: 100%; margin-top: 12px;">Registrar</button>
+                    <div style="display: flex; align-items: center; gap: 12px; margin-top: 12px;">
+                        <button onclick="addWater(-1)" style="width: 36px; height: 36px; border-radius: 50%; border: 2px solid var(--gray-200); background: white; font-size: 18px; cursor: pointer;">−</button>
+                        <div style="flex: 1; text-align: center;">
+                            <div style="font-size: 24px; font-weight: 700; color: var(--primary);" id="water-count">0</div>
+                            <div style="font-size: 11px; color: var(--gray-400);" id="water-label">de 8 copos</div>
+                            <div style="height: 6px; background: var(--gray-200); border-radius: 3px; margin-top: 6px; overflow: hidden;">
+                                <div id="water-bar" style="height: 100%; width: 0%; background: var(--primary); border-radius: 3px; transition: width 0.3s;"></div>
+                            </div>
+                        </div>
+                        <button onclick="addWater(1)" style="width: 36px; height: 36px; border-radius: 50%; border: none; background: var(--primary); color: white; font-size: 18px; cursor: pointer;">+</button>
+                    </div>
                 </div>
             </div>
             
@@ -6447,6 +6457,31 @@
             return Math.floor(diff / 86400000) + 'd atrás';
         }
         document.addEventListener('DOMContentLoaded', renderUserPosts);
+
+        // Water tracker
+        function getWaterKey() { return 'asf-water-' + new Date().toISOString().split('T')[0]; }
+        function addWater(delta) {
+            const key = getWaterKey();
+            let count = parseInt(localStorage.getItem(key) || '0');
+            count = Math.max(0, Math.min(12, count + delta));
+            localStorage.setItem(key, count);
+            updateWaterDisplay(count);
+            if (count === 8) showToast('💧 Meta atingida! Hidratada! 🎉');
+        }
+        function updateWaterDisplay(count) {
+            document.getElementById('water-count').textContent = count;
+            document.getElementById('water-bar').style.width = Math.min(100, (count / 8) * 100) + '%';
+            if (count >= 8) {
+                document.getElementById('water-bar').style.background = 'var(--success)';
+                document.getElementById('water-label').textContent = '✅ Meta atingida!';
+            } else {
+                document.getElementById('water-bar').style.background = 'var(--primary)';
+                document.getElementById('water-label').textContent = 'de 8 copos';
+            }
+        }
+        document.addEventListener('DOMContentLoaded', function() {
+            updateWaterDisplay(parseInt(localStorage.getItem(getWaterKey()) || '0'));
+        });
 
         // Join surf group
         function joinGroup(btn, groupName) {
