@@ -3371,42 +3371,9 @@
 
             <!-- Conquistas -->
             <h3 style="margin: 20px 20px 10px; font-size: 16px; color: var(--secondary);">🏆 Conquistas</h3>
-            <div class="cards-grid">
-                <div class="card">
-                    <span class="card-tag" style="background: gold; color: black;">CONQUISTADO</span>
-                    <h3>🌟 Primeira Onda</h3>
-                    <p>Complete seu primeiro quiz</p>
-                    <p style="margin-top: 8px; font-size: 12px; color: var(--success);">✅ Recebido em 20/03</p>
-                </div>
-                <div class="card">
-                    <span class="card-tag" style="background: gold; color: black;">CONQUISTADO</span>
-                    <h3>📚 Estudiosa</h3>
-                    <p>Complete 5 quizzes</p>
-                    <p style="margin-top: 8px; font-size: 12px; color: var(--success);">✅ Recebido em 22/03</p>
-                </div>
-                <div class="card">
-                    <span class="card-tag gray">🔒 BLOQUEADO</span>
-                    <h3>🏄️ Surfista Completa</h3>
-                    <p>Complete todos os quizzes</p>
-                    <p style="margin-top: 8px; font-size: 12px; color: var(--gray-400);">🔒 Necessário: 10 quizzes</p>
-                </div>
-                <div class="card">
-                    <span class="card-tag gray">🔒 BLOQUEADO</span>
-                    <h3>💪 Atleta</h3>
-                    <p>Complete 7 dias de mobilidade</p>
-                    <p style="margin-top: 8px; font-size: 12px; color: var(--gray-400);">🔒 Necessário: 7 dias</p>
-                </div>
-                <div class="card">
-                    <span class="card-tag gray">🔒 BLOQUEADO</span>
-                    <h3>🧠 Mente de Aço</h3>
-                    <p>Complete 10 dicas mentais</p>
-                    <p style="margin-top: 8px; font-size: 12px; color: var(--gray-400);">🔒 Necessário: 10 dicas</p>
-                </div>
-                <div class="card">
-                    <span class="card-tag gray">🔒 BLOQUEADO</span>
-                    <h3>🥗 Nutricionista</h3>
-                    <p>Leia todas as dicas de alimentação</p>
-                    <p style="margin-top: 8px; font-size: 12px; color: var(--gray-400);">🔒 Necessário: 9 dicas</p>
+            <div class="cards-grid" id="achievements-grid">
+                <div class="card" style="text-align: center; padding: 20px;">
+                    <p style="color: var(--gray-400);">Carregando conquistas...</p>
                 </div>
             </div>
             
@@ -5288,6 +5255,56 @@
                 if (points >= LEVELS[i].minPoints) return LEVELS[i];
             }
             return LEVELS[0];
+        }
+
+        // Dynamic achievements rendering
+        function renderAchievements() {
+            const container = document.getElementById('achievements-grid');
+            if (!container) return;
+            const data = JSON.parse(localStorage.getItem('asf_points') || '{"total":0,"quizzes":0,"dicas":0,"treinos":0}');
+            const sessions = JSON.parse(localStorage.getItem('surf-sessions') || '[]');
+            const checks = parseInt(localStorage.getItem('asf-checklist-done') || '0');
+            const waterDays = getWaterStreak();
+            const points = data.total;
+            const level = getLevel(points);
+            const achievements = [
+                { id: 'primeira-onda', name: '🌟 Primeira Onda', desc: 'Complete seu primeiro quiz', done: data.quizzes >= 1 },
+                { id: 'estudiosa', name: '📚 Estudiosa', desc: 'Complete 5 quizzes', done: data.quizzes >= 5 },
+                { id: 'surfista-completa', name: '🏄 Surfista Completa', desc: 'Complete 10 quizzes', done: data.quizzes >= 10 },
+                { id: 'atleta', name: '💪 Atleta', desc: 'Registre 5 sessões de surf', done: sessions.length >= 5 },
+                { id: 'maratonista', name: '🏃 Maratonista', desc: 'Registre 20 sessões de surf', done: sessions.length >= 20 },
+                { id: 'hidratada', name: '💧 Hidratada', desc: 'Beba 8 copos de água em 1 dia', done: waterDays > 0 },
+                { id: 'manas', name: '🤝 Conectada', desc: 'Entre em 1 grupo de surf', done: !!localStorage.getItem('asf-joined-Bertioga-Surf-Girls') || !!localStorage.getItem('asf-joined-Guarujá-&-Santos-Surf') || !!localStorage.getItem('asf-joined-Ubatuba-Surf-Girls') },
+                { id: 'nivel-5', name: '⭐ Onda Grande', desc: 'Alcance nível 5', done: level.minPoints >= 800 },
+                { id: 'checklist', name: '✅ Preparada', desc: 'Complete o checklist pré-surf 3x', done: checks >= 3 },
+                { id: 'comunidade', name: '💬 Voz Ativa', desc: 'Publique 3 posts na comunidade', done: (JSON.parse(localStorage.getItem('asf-user-posts') || '[]')).length >= 3 },
+            ];
+            const done = achievements.filter(a => a.done);
+            const locked = achievements.filter(a => !a.done);
+            container.innerHTML = done.map(a => `<div class="card">
+                <span class="card-tag" style="background: gold; color: black;">CONQUISTADO</span>
+                <h3>${a.name}</h3>
+                <p>${a.desc}</p>
+                <p style="margin-top: 8px; font-size: 12px; color: var(--success);">✅ Desbloqueada!</p>
+            </div>`).join('') + locked.map(a => `<div class="card">
+                <span class="card-tag gray">🔒 BLOQUEADO</span>
+                <h3>${a.name}</h3>
+                <p>${a.desc}</p>
+            </div>`).join('');
+            // Update stats
+            const statEl = document.querySelector('.profile-stat-value:last-of-type');
+            // Update achievement count in profile
+        }
+        function getWaterStreak() {
+            let count = 0;
+            for (let i = 0; i < 7; i++) {
+                const d = new Date(); d.setDate(d.getDate() - i);
+                const key = 'asf-water-' + d.toISOString().split('T')[0];
+                if (parseInt(localStorage.getItem(key) || '0') >= 8) count++;
+            }
+            return count;
+        }
+        document.addEventListener('DOMContentLoaded', renderAchievements);
         }
 
         function loadPoints() {
