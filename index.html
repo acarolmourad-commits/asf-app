@@ -3202,7 +3202,7 @@
                             </label>
                             <p style="font-size: 11px; color: var(--gray-400); margin-top: 8px;">✅ <strong>Resposta correta: A)</strong> Regular = pé direito à frente, Goofy = pé esquerdo à frente.</p>
                         </div>
-                        <button class="btn btn-primary" style="width: 100%; margin-top: 20px;" onclick="earnPoints('quiz', 50); alert('Quiz enviado! +50 pontos ganhos! 🎉')">Enviar Respostas</button>
+                        <button class="btn btn-primary" style="width: 100%; margin-top: 20px;" onclick="submitQuiz()">Enviar Respostas</button>
                     </div>
                 </div>
                 <div class="card">
@@ -5319,6 +5319,20 @@
                 button.classList.remove('btn-secondary');
                 button.classList.add('btn-primary');
             }
+        }
+        function submitQuiz() {
+            const answers = { q1: 'a', q2: 'a', q3: 'b', q4: 'a', q5: 'a', q6: 'a', q7: 'a', q8: 'a', q9: 'a', q10: 'a' };
+            let correct = 0;
+            let total = Object.keys(answers).length;
+            for (const [q, ans] of Object.entries(answers)) {
+                const selected = document.querySelector(`input[name="${q}"]:checked`);
+                if (selected && selected.value === ans) correct++;
+            }
+            const pct = Math.round((correct / total) * 100);
+            const pts = correct >= 8 ? 50 : correct >= 5 ? 30 : 10;
+            const emoji = pct >= 80 ? '🏆' : pct >= 50 ? '👍' : '📚';
+            showToast(`${emoji} ${correct}/${total} acertos (${pct}%)! +${pts} pontos`);
+            earnPoints('quiz', pts);
         }
 
         // Competition Countdown
