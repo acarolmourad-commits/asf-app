@@ -3970,9 +3970,9 @@
                     Gurias, aula de sábado confirmada! 7h na praia de Bertioga. Quem vai? 🏄‍♀️
                 </div>
                 <div class="post-actions">
-                    <button class="post-action"><span>❤️</span> 12</button>
+                    <button class="post-action" onclick="toggleLike(this)" data-count="12"><span>🤍</span> 12</button>
                     <button class="post-action"><span>💬</span> 5</button>
-                    <button class="post-action"><span>🔗</span> Compartilhar</button>
+                    <button class="post-action" onclick="sharePost('Gurias, aula de sábado confirmada! 7h na praia de Bertioga. Quem vai? 🏄‍♀️')"><span>🔗</span> Compartilhar</button>
                 </div>
             </div>
             <div class="post">
@@ -3987,9 +3987,9 @@
                     Alguém quer pegar uma onda domingo? Estou pensando em ir pra praia!
                 </div>
                 <div class="post-actions">
-                    <button class="post-action"><span>❤️</span> 8</button>
+                    <button class="post-action" onclick="toggleLike(this)" data-count="8"><span>🤍</span> 8</button>
                     <button class="post-action"><span>💬</span> 3</button>
-                    <button class="post-action"><span>🔗</span> Compartilhar</button>
+                    <button class="post-action" onclick="sharePost('Alguém quer pegar uma onda domingo? 🏄‍♀️')"><span>🔗</span> Compartilhar</button>
                 </div>
             </div>
             <div class="post">
@@ -4004,9 +4004,9 @@
                     Consegui desconto em lycras! Quem quiser, me chama no direct! 💙
                 </div>
                 <div class="post-actions">
-                    <button class="post-action"><span>❤️</span> 15</button>
+                    <button class="post-action" onclick="toggleLike(this)" data-count="15"><span>🤍</span> 15</button>
                     <button class="post-action"><span>💬</span> 7</button>
-                    <button class="post-action"><span>🔗</span> Compartilhar</button>
+                    <button class="post-action" onclick="sharePost('Desconto em lycras de surf! 💙')"><span>🔗</span> Compartilhar</button>
                 </div>
             </div>
         </div>
@@ -6327,6 +6327,33 @@
         }
 
         // ============ TOAST NOTIFICATION HELPER ============
+        // Toggle like on community posts
+        function toggleLike(btn) {
+            let count = parseInt(btn.dataset.count || '0');
+            const liked = btn.dataset.liked === 'true';
+            if (liked) {
+                count--;
+                btn.dataset.liked = 'false';
+                btn.querySelector('span').textContent = '🤍';
+            } else {
+                count++;
+                btn.dataset.liked = 'true';
+                btn.querySelector('span').textContent = '❤️';
+                btn.style.transform = 'scale(1.2)';
+                setTimeout(() => btn.style.transform = '', 200);
+            }
+            btn.dataset.count = count;
+            btn.lastChild.textContent = ' ' + count;
+        }
+        function sharePost(text) {
+            const msg = `🏄‍♀️ ASF - Associação de Surf Feminino\n\n"${text}"\n\n🔗 https://acarolmourad-commits.github.io/asf-app/`;
+            if (navigator.share) {
+                navigator.share({ title: 'ASF', text: msg }).catch(() => {});
+            } else if (navigator.clipboard) {
+                navigator.clipboard.writeText(msg).then(() => showToast('📋 Copiado para compartilhar!'));
+            }
+        }
+
         // Join surf group
         function joinGroup(btn, groupName) {
             const key = 'asf-joined-' + groupName.replace(/\s+/g, '-');
