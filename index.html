@@ -3310,6 +3310,14 @@
                             <span style="color: var(--gray-600);">Humor médio</span>
                             <span style="font-weight: 600;" id="stat-fav-mood">-</span>
                         </div>
+                        <div style="display: flex; justify-content: space-between; padding: 4px 0;">
+                            <span style="color: var(--gray-600);">Sessão mais longa</span>
+                            <span style="font-weight: 600;" id="stat-longest">-</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; padding: 4px 0;">
+                            <span style="color: var(--gray-600);">Duração média</span>
+                            <span style="font-weight: 600;" id="stat-avg">-</span>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -6137,6 +6145,10 @@
             const extraMin = totalMin % 60;
             document.getElementById('stat-total').textContent = sessions.length;
             document.getElementById('stat-hours').textContent = totalH > 0 ? totalH + 'h' + (extraMin > 0 ? extraMin : '') : totalMin + 'min';
+            // Avg and longest session
+            const durations = sessions.map(s => s.duration);
+            const avgMin = Math.round(totalMin / sessions.length);
+            const longestMin = Math.max(...durations);
             // Fav beach
             const beachCount = {};
             sessions.forEach(s => { beachCount[s.beach] = (beachCount[s.beach] || 0) + 1; });
@@ -6147,6 +6159,8 @@
             sessions.forEach(s => { moodCount[s.mood] = (moodCount[s.mood] || 0) + 1; });
             const favMood = Object.entries(moodCount).sort((a, b) => b[1] - a[1])[0];
             document.getElementById('stat-fav-mood').textContent = favMood ? favMood[0] : '-';
+            document.getElementById('stat-longest').textContent = longestMin >= 60 ? Math.floor(longestMin / 60) + 'h' + (longestMin % 60 > 0 ? longestMin % 60 : '') : longestMin + 'min';
+            document.getElementById('stat-avg').textContent = avgMin >= 60 ? Math.floor(avgMin / 60) + 'h' + (avgMin % 60 > 0 ? avgMin % 60 : '') : avgMin + 'min';
             // Streak
             let streak = 0;
             const today = new Date(); today.setHours(0, 0, 0, 0);
