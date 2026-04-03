@@ -4880,17 +4880,8 @@
             window.scrollTo(0, 0);
         }
 
-        // Hide loading screen after page loads
-        window.addEventListener('load', function() {
-            setTimeout(function() {
-                document.getElementById('loading-screen').classList.add('hidden');
-            }, 500);
-        });
-        
-        // Fallback: hide after 3 seconds regardless
-        setTimeout(function() {
-            document.getElementById('loading-screen').classList.add('hidden');
-        }, 3000);
+        // Hide loading screen immediately
+        document.getElementById('loading-screen').classList.add('hidden');
         
         // ===== SISTEMA DE NOTIFICAÇÕES =====
         const NOTIF_KEY = 'asf_notifications';
