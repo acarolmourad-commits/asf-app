@@ -4884,8 +4884,13 @@
         window.addEventListener('load', function() {
             setTimeout(function() {
                 document.getElementById('loading-screen').classList.add('hidden');
-            }, 800); // Show loading for 800ms
+            }, 500);
         });
+        
+        // Fallback: hide after 3 seconds regardless
+        setTimeout(function() {
+            document.getElementById('loading-screen').classList.add('hidden');
+        }, 3000);
         
         // ===== SISTEMA DE NOTIFICAÇÕES =====
         const NOTIF_KEY = 'asf_notifications';
