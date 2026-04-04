@@ -1261,6 +1261,68 @@
         ]
     }
     </script>
+
+
+// ============ PROFILE LOGIN ============
+function saveProfile() {
+    const name = document.getElementById('user-name').value.trim();
+    const phone = document.getElementById('user-phone').value.trim();
+    const email = document.getElementById('user-email').value.trim();
+    const level = document.getElementById('user-level-select').value;
+    
+    if (!name) {
+        alert('Por favor, insira seu nome!');
+        return;
+    }
+    
+    const profile = { name, phone, email, level, points: 0, aulas: 0, trips: 0, conquistas: 0, joined: new Date().toISOString() };
+    localStorage.setItem('asf-profile', JSON.stringify(profile));
+    localStorage.setItem('asf-logged', 'true');
+    
+    showProfile();
+    showToast('✨ Bem-vinda, ' + name + '!');
+}
+
+function showProfile() {
+    const logged = localStorage.getItem('asf-logged');
+    const profile = JSON.parse(localStorage.getItem('asf-profile') || 'null');
+    
+    if (logged && profile) {
+        document.getElementById('welcome-form').style.display = 'none';
+        document.getElementById('profile-bar').style.display = 'flex';
+        
+        document.getElementById('profile-name').textContent = profile.name + ' 🏄‍♀️';
+        document.getElementById('profile-avatar').textContent = profile.name.charAt(0).toUpperCase();
+        document.getElementById('stat-aulas').textContent = profile.aulas || 0;
+        document.getElementById('stat-trips').textContent = profile.trips || 0;
+        document.getElementById('stat-conquistas').textContent = profile.conquistas || 0;
+        
+        const lvl = getLevelFromPoints(profile.points || 0);
+        document.getElementById('profile-level').textContent = 'Nível ' + lvl.level + ' • ' + (profile.points || 0) + ' pontos';
+        document.getElementById('level-bar').style.width = lvl.percent + '%';
+        document.getElementById('level-text').textContent = lvl.percent + '% para Nível ' + (lvl.level + 1);
+    }
+}
+
+function getLevelFromPoints(points) {
+    const levels = [{min:0, l:1}, {min:500, l:2}, {min:1200, l:3}, {min:2500, l:4}, {min:5000, l:5}];
+    for (let i = levels.length - 1; i >= 0; i--) {
+        if (points >= levels[i].min) return {level: levels[i].l, percent: Math.min(100, Math.round((points - levels[i].min) / 50))};
+    }
+    return {level: 1, percent: 0};
+}
+
+function logout() {
+    localStorage.removeItem('asf-logged');
+    document.getElementById('profile-bar').style.display = 'none';
+    document.getElementById('welcome-form').style.display = 'flex';
+    document.getElementById('user-name').value = '';
+    document.getElementById('user-phone').value = '';
+    document.getElementById('user-email').value = '';
+    document.getElementById('user-level-select').value = '';
+}
+
+
 </head>
 <body>
     <!-- Skip to content for accessibility -->
@@ -6305,6 +6367,7 @@
         }
         // Consolidated DOMContentLoaded init
         document.addEventListener('DOMContentLoaded', function() {
+            showProfile();
             // Load theme preference
             const savedTheme = localStorage.getItem('asf-theme');
             if (savedTheme === 'dark') {
@@ -6596,5 +6659,67 @@
         window.addEventListener('online', updateConnectionStatus);
         updateConnectionStatus();
     </script>
+
+
+// ============ PROFILE LOGIN ============
+function saveProfile() {
+    const name = document.getElementById('user-name').value.trim();
+    const phone = document.getElementById('user-phone').value.trim();
+    const email = document.getElementById('user-email').value.trim();
+    const level = document.getElementById('user-level-select').value;
+    
+    if (!name) {
+        alert('Por favor, insira seu nome!');
+        return;
+    }
+    
+    const profile = { name, phone, email, level, points: 0, aulas: 0, trips: 0, conquistas: 0, joined: new Date().toISOString() };
+    localStorage.setItem('asf-profile', JSON.stringify(profile));
+    localStorage.setItem('asf-logged', 'true');
+    
+    showProfile();
+    showToast('✨ Bem-vinda, ' + name + '!');
+}
+
+function showProfile() {
+    const logged = localStorage.getItem('asf-logged');
+    const profile = JSON.parse(localStorage.getItem('asf-profile') || 'null');
+    
+    if (logged && profile) {
+        document.getElementById('welcome-form').style.display = 'none';
+        document.getElementById('profile-bar').style.display = 'flex';
+        
+        document.getElementById('profile-name').textContent = profile.name + ' 🏄‍♀️';
+        document.getElementById('profile-avatar').textContent = profile.name.charAt(0).toUpperCase();
+        document.getElementById('stat-aulas').textContent = profile.aulas || 0;
+        document.getElementById('stat-trips').textContent = profile.trips || 0;
+        document.getElementById('stat-conquistas').textContent = profile.conquistas || 0;
+        
+        const lvl = getLevelFromPoints(profile.points || 0);
+        document.getElementById('profile-level').textContent = 'Nível ' + lvl.level + ' • ' + (profile.points || 0) + ' pontos';
+        document.getElementById('level-bar').style.width = lvl.percent + '%';
+        document.getElementById('level-text').textContent = lvl.percent + '% para Nível ' + (lvl.level + 1);
+    }
+}
+
+function getLevelFromPoints(points) {
+    const levels = [{min:0, l:1}, {min:500, l:2}, {min:1200, l:3}, {min:2500, l:4}, {min:5000, l:5}];
+    for (let i = levels.length - 1; i >= 0; i--) {
+        if (points >= levels[i].min) return {level: levels[i].l, percent: Math.min(100, Math.round((points - levels[i].min) / 50))};
+    }
+    return {level: 1, percent: 0};
+}
+
+function logout() {
+    localStorage.removeItem('asf-logged');
+    document.getElementById('profile-bar').style.display = 'none';
+    document.getElementById('welcome-form').style.display = 'flex';
+    document.getElementById('user-name').value = '';
+    document.getElementById('user-phone').value = '';
+    document.getElementById('user-email').value = '';
+    document.getElementById('user-level-select').value = '';
+}
+
+
 </body>
 </html>
