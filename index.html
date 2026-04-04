@@ -173,7 +173,8 @@
         [data-theme="dark"] header {
             background: linear-gradient(135deg, #0D0F14 0%, #1A1D23 100%);
         }
-        [data-theme="dark"] .profile-bar {
+        [data-theme="dark"] /* Profile Bar */
+        .profile-bar {
             background: var(--white);
         }
         [data-theme="dark"] .card {
@@ -356,6 +357,7 @@
         }
 
         /* Profile Section */
+        /* Profile Bar */
         .profile-bar {
             background: linear-gradient(135deg, var(--primary-dark) 0%, var(--secondary) 100%);
             padding: 20px 24px;
@@ -1387,9 +1389,9 @@ function logout() {
         <div class="search-results" id="searchResults"></div>
     </div>
 
-    <!-- Profile Bar -->
-    <div class="profile-bar">
-        <div class="profile-avatar">C</div>
+    <!-- Profile Bar (Hidden - only show for logged users) -->
+    <div class="profile-bar" style="display:none;" id="profile-bar-logged">
+        <div class="profile-avatar">
         <div class="profile-info">
             <h3>Carol 🏄‍♀️</h3>
             <p>Nível 5 • 2.450 pontos</p>
