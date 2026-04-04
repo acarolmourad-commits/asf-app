@@ -6305,6 +6305,15 @@
         }
         // Consolidated DOMContentLoaded init
         document.addEventListener('DOMContentLoaded', function() {
+            // Load theme preference
+            const savedTheme = localStorage.getItem('asf-theme');
+            if (savedTheme === 'dark') {
+                document.documentElement.setAttribute('data-theme', 'dark');
+                document.getElementById('darkModeToggle').textContent = '☀️';
+            }
+            // Load user name from localStorage if exists
+            const savedName = localStorage.getItem('asf-name');
+            // (User loading happens in sections)
             renderSessions();
             renderUserPosts();
             renderAchievements();
