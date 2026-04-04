@@ -24,6 +24,94 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        /* Loading Screen */
+        .loading-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #0E2439 0%, #00A8CC 100%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease-out;
+        }
+        .loading-screen.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+        .loading-logo {
+            font-size: 80px;
+            animation: bounce 1s infinite;
+        }
+        .loading-text {
+            color: white;
+            font-size: 24px;
+            margin-top: 20px;
+            font-weight: bold;
+        }
+        .loading-subtext {
+            color: rgba(255,255,255,0.8);
+            font-size: 14px;
+            margin-top: 10px;
+        }
+        .loading-wave {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 80px;
+            overflow: hidden;
+        }
+        .loading-wave::before, .loading-wave::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: -50%;
+            width: 200%;
+            height: 100%;
+            background: rgba(255,255,255,0.06);
+            border-radius: 45%;
+            animation: wave-load 4s ease-in-out infinite;
+        }
+        .loading-wave::after {
+            background: rgba(255,255,255,0.04);
+            border-radius: 40%;
+            animation: wave-load 5s ease-in-out infinite reverse;
+            bottom: -5px;
+        }
+        .loading-progress {
+            position: absolute;
+            bottom: 80px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 120px;
+            height: 3px;
+            background: rgba(255,255,255,0.15);
+            border-radius: 2px;
+            overflow: hidden;
+        }
+        .loading-progress-bar {
+            height: 100%;
+            background: rgba(255,255,255,0.7);
+            border-radius: 2px;
+            animation: load-fill 1.8s ease-out forwards;
+        }
+        @keyframes load-fill {
+            0% { width: 0%; }
+            30% { width: 40%; }
+            60% { width: 70%; }
+            90% { width: 90%; }
+            100% { width: 100%; }
+        }
+        @keyframes wave-load {
+            0%, 100% { transform: rotate(0deg); }
+            50% { transform: rotate(3deg) translateY(-8px); }
+        }
         @keyframes bounce {
             0%, 100% { transform: translateY(0); }
             50% { transform: translateY(-10px); }
@@ -1177,6 +1265,14 @@
     <!-- Skip to content for accessibility -->
     <a href="#dicas" style="position: absolute; left: -9999px; top: 0; z-index: 10000; background: var(--primary); color: white; padding: 8px 16px; border-radius: 0 0 8px 0; font-weight: 600; text-decoration: none;" onfocus="this.style.left='0'" onblur="this.style.left='-9999px'">Pular para o conteúdo</a>
     <div class="scroll-progress" id="scrollProgress"></div>
+    <!-- Loading Screen -->
+    <div class="loading-screen" id="loading-screen">
+        <div class="loading-logo">🏄‍♀️</div>
+        <div class="loading-text">ASF</div>
+        <div class="loading-subtext">Carregando...</div>
+        <div class="loading-progress"><div class="loading-progress-bar"></div></div>
+        <div class="loading-wave"></div>
+    </div>
     <!-- Animated Background -->
     <div class="bg-animation"></div>
 
@@ -3951,148 +4047,77 @@
                 <h2 class="section-title">🏆 Competições & Eventos</h2>
             </div>
 
-            <!-- Campeonatos -->
+            <!-- Próximos Eventos -->
             <div style="margin-bottom: 20px;">
-                <h3 style="font-size: 16px; margin-bottom: 12px; color: var(--secondary);">📅 Campeonatos Oficiais</h3>
-                
-                <div class="card" style="border-left: 4px solid #00A8CC; margin-bottom: 12px;">
-                    <h4 style="font-size: 15px;">🏆 Federação Paulista de Surf - FPSurf</h4>
-                    <p style="font-size: 13px; color: var(--gray-600); margin-top: 4px;">Confira os campeonatos oficiais no site da FPSurf</p>
-                    <a href="https://www.fpsurf.com.br" target="_blank" style="display: block;">
-                        <button class="btn btn-primary" style="width: 100%; margin-top: 12px;">🌐 Acessar FPSurf</button>
-                    </a>
+                <h3 style="font-size: 16px; margin-bottom: 12px; color: var(--secondary);">📅 Próximos Eventos</h3>
+                <div class="card" style="border-left: 4px solid var(--primary); margin-bottom: 12px;">
+                    <div style="display: flex; justify-content: space-between; align-items: start;">
+                        <div>
+                            <h4 style="font-size: 15px;">Circuito Paulista de Surf Feminino 2026</h4>
+                            <p style="font-size: 13px; color: var(--gray-600); margin-top: 4px;">📍 Santos, SP</p>
+                            <p style="font-size: 13px; color: var(--gray-600);">🗓️ 12-13 de Abril, 2026</p>
+                        </div>
+                        <span style="background: var(--success); color: white; padding: 4px 10px; border-radius: 20px; font-size: 12px; font-weight: 600;">Inscrições Abertas</span>
+                    </div>
+                    <button class="btn btn-primary" style="width: 100%; margin-top: 12px;" onclick="window.open('https://www.fpsurf.com.br', '_blank')">Inscrever-se</button>
                 </div>
-                
-                <div class="card" style="border-left: 4px solid #27AE60; margin-bottom: 12px;">
-                    <h4 style="font-size: 15px;">🥇 World Surf League - WSL</h4>
-                    <p style="font-size: 13px; color: var(--gray-600); margin-top: 4px;">Circuito mundial de surf profissional</p>
-                    <a href="https://www.worldsurfleague.com" target="_blank" style="display: block;">
-                        <button class="btn btn-primary" style="width: 100%; margin-top: 12px;">🌐 Acessar WSL</button>
-                    </a>
+                <div class="card" style="border-left: 4px solid var(--accent); margin-bottom: 12px;">
+                    <div style="display: flex; justify-content: space-between; align-items: start;">
+                        <div>
+                            <h4 style="font-size: 15px;">Etapa Bertioga - Surf de Raia</h4>
+                            <p style="font-size: 13px; color: var(--gray-600); margin-top: 4px;">📍 Praia de Bertioga</p>
+                            <p style="font-size: 13px; color: var(--gray-600);">🗓️ 26-27 de Abril, 2026</p>
+                        </div>
+                        <span style="background: var(--primary); color: white; padding: 4px 10px; border-radius: 20px; font-size: 12px; font-weight: 600;">Em breve</span>
+                    </div>
+                    <p style="font-size: 12px; color: var(--gray-400); margin-top: 8px;">Categorias: Open, Pro-Júnior, Longboard, SUP</p>
                 </div>
-                
-                <div class="card" style="border-left: 4px solid #9B59B6; margin-bottom: 12px;">
-                    <h4 style="font-size: 15px;">🏄 Confederação Brasileira de Surf - CBSurf</h4>
-                    <p style="font-size: 13px; color: var(--gray-600); margin-top: 4px;">Campeonatos nacionais e calendário oficial</p>
-                    <a href="https://www.cbsurf.com.br" target="_blank" style="display: block;">
-                        <button class="btn btn-primary" style="width: 100%; margin-top: 12px;">🌐 Acessar CBSurf</button>
-                    </a>
+                <div class="card" style="border-left: 4px solid var(--purple); margin-bottom: 12px;">
+                    <div style="display: flex; justify-content: space-between; align-items: start;">
+                        <div>
+                            <h4 style="font-size: 15px;">ASF Open - Campeonato Interno</h4>
+                            <p style="font-size: 13px; color: var(--gray-600); margin-top: 4px;">📍 Praia de Riviera</p>
+                            <p style="font-size: 13px; color: var(--gray-600);">🗓️ 10 de Maio, 2026</p>
+                        </div>
+                        <span style="background: var(--purple); color: white; padding: 4px 10px; border-radius: 20px; font-size: 12px; font-weight: 600;">Somente Membros</span>
+                    </div>
+                    <p style="font-size: 12px; color: var(--gray-400); margin-top: 8px;">Nosso campeonato interno! Premiação para todas as categorias 🏆</p>
                 </div>
             </div>
 
-            <!-- Competição por Fotos - NOVA -->
+            <!-- Meus Resultados -->
             <div style="margin-bottom: 20px;">
-                <div style="background: linear-gradient(135deg, #FF6B6B 0%, #C0392B 100%); padding: 20px; border-radius: 16px; color: white; margin-bottom: 15px;">
-                    <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 15px;">
-                        <span style="font-size: 40px;">📸</span>
-                        <div>
-                            <h3 style="font-size: 18px; margin-bottom: 5px;">Competição por Fotos!</h3>
-                            <p style="font-size: 12px; opacity: 0.9;">Envie sua melhor foto e ganhe prêmios!</p>
-                        </div>
+                <h3 style="font-size: 16px; margin-bottom: 12px; color: var(--secondary);">📊 Meus Resultados</h3>
+                <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 15px;">
+                    <div style="background: linear-gradient(135deg, #FFD700, #FFA500); border-radius: 12px; padding: 15px; text-align: center; color: white;">
+                        <div style="font-size: 24px;">🥇</div>
+                        <div style="font-size: 22px; font-weight: 700;">3</div>
+                        <div style="font-size: 11px;">Ouro</div>
                     </div>
-                    <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px;">
-                        <div style="background: rgba(255,255,255,0.2); padding: 12px; border-radius: 10px; text-align: center;">
-                            <p style="font-size: 24px; font-weight: bold;">📸 47</p>
-                            <p style="font-size: 10px;">Fotos enviadas</p>
-                        </div>
-                        <div style="background: rgba(255,255,255,0.2); padding: 12px; border-radius: 10px; text-align: center;">
-                            <p style="font-size: 24px; font-weight: bold;">🗳️ 892</p>
-                            <p style="font-size: 10px;">Votos</p>
-                        </div>
+                    <div style="background: linear-gradient(135deg, #C0C0C0, #A8A8A8); border-radius: 12px; padding: 15px; text-align: center; color: white;">
+                        <div style="font-size: 24px;">🥈</div>
+                        <div style="font-size: 22px; font-weight: 700;">2</div>
+                        <div style="font-size: 11px;">Prata</div>
                     </div>
-                </div>
-                
-                <h3 style="font-size: 16px; margin-bottom: 12px; color: var(--secondary);">🏆 Categorias</h3>
-                
-                <div class="cards-grid">
-                    <!-- Melhor Onda -->
-                    <div class="card" style="border: 2px solid #00A8CC;">
-                        <span class="card-tag" style="background: #00A8CC; color: white;">PRINCIPAL</span>
-                        <h3>🌊 Melhor Onda</h3>
-                        <p style="font-size: 13px; color: var(--gray-600);">Envie a foto da sua melhor onda!</p>
-                        <p style="font-size: 12px; color: var(--gray-400); margin-top: 5px;">Premiação: R$ 500 + Kit Surf</p>
-                        <div style="display: flex; gap: 8px; margin-top: 12px;">
-                            <button class="btn btn-primary" style="flex: 1; font-size: 12px;" onclick="openPhotoUpload('onda')">📸 Enviar</button>
-                            <button class="btn btn-secondary" style="flex: 1; font-size: 12px;" onclick="showPhotos('onda')">🗳️ Votar</button>
-                        </div>
-                    </div>
-                    
-                    <!-- Melhor Manobra -->
-                    <div class="card" style="border: 2px solid #9B59B6;">
-                        <span class="card-tag" style="background: #9B59B6; color: white;">MANOBRA</span>
-                        <h3>🤸 Melhor Manobra</h3>
-                        <p style="font-size: 13px; color: var(--gray-600);">Cutback, aerial, tube... mostre!</p>
-                        <p style="font-size: 12px; color: var(--gray-400); margin-top: 5px;">Premiação: R$ 300 + Lycra</p>
-                        <div style="display: flex; gap: 8px; margin-top: 12px;">
-                            <button class="btn btn-primary" style="flex: 1; font-size: 12px;" onclick="openPhotoUpload('manobra')">📸 Enviar</button>
-                            <button class="btn btn-secondary" style="flex: 1; font-size: 12px;" onclick="showPhotos('manobra')">🗳️ Votar</button>
-                        </div>
-                    </div>
-                    
-                    <!-- Pôr do Sol -->
-                    <div class="card" style="border: 2px solid #F39C12;">
-                        <span class="card-tag" style="background: #F39C12; color: white;">PAISAGEM</span>
-                        <h3>🌅 Melhor Pôr do Sol</h3>
-                        <p style="font-size: 13px; color: var(--gray-600);">Capture a mágica do pôr do sol!</p>
-                        <p style="font-size: 12px; color: var(--gray-400); margin-top: 5px;">Premiação: R$ 200 + Protetor</p>
-                        <div style="display: flex; gap: 8px; margin-top: 12px;">
-                            <button class="btn btn-primary" style="flex: 1; font-size: 12px;" onclick="openPhotoUpload('por')">📸 Enviar</button>
-                            <button class="btn btn-secondary" style="flex: 1; font-size: 12px;" onclick="showPhotos('por')">🗳️ Votar</button>
-                        </div>
-                    </div>
-                    
-                    <!-- Selfie Surf -->
-                    <div class="card" style="border: 2px solid #27AE60;">
-                        <span class="card-tag" style="background: #27AE60; color: white;">SELFIE</span>
-                        <h3>🤳 Melhor Selfie</h3>
-                        <p style="font-size: 13px; color: var(--gray-600);">Selfie criativa com a prancha!</p>
-                        <p style="font-size: 12px; color: var(--gray-400); margin-top: 5px;">Premiação: R$ 150 + Boné</p>
-                        <div style="display: flex; gap: 8px; margin-top: 12px;">
-                            <button class="btn btn-primary" style="flex: 1; font-size: 12px;" onclick="openPhotoUpload('selfie')">📸 Enviar</button>
-                            <button class="btn btn-secondary" style="flex: 1; font-size: 12px;" onclick="showPhotos('selfie')">🗳️ Votar</button>
-                        </div>
+                    <div style="background: linear-gradient(135deg, #CD7F32, #B8860B); border-radius: 12px; padding: 15px; text-align: center; color: white;">
+                        <div style="font-size: 24px;">🥉</div>
+                        <div style="font-size: 22px; font-weight: 700;">4</div>
+                        <div style="font-size: 11px;">Bronze</div>
                     </div>
                 </div>
-                
-                <!-- Ranking -->
-                <h3 style="font-size: 16px; margin: 20px 0 12px; color: var(--secondary);">🏅 Top 3 Fotos</h3>
-                <div class="card" style="margin-bottom: 10px;">
-                    <div style="display: flex; align-items: center; gap: 15px;">
-                        <span style="font-size: 30px;">🥇</span>
-                        <div style="flex: 1;">
-                            <h4 style="font-size: 14px;">Marina S. - Cutback em Bertioga</h4>
-                            <p style="font-size: 12px; color: var(--gray-600);">🗳️ 156 votos • Melhor Manobra</p>
-                        </div>
+                <div class="card">
+                    <div style="display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px solid var(--gray-100);">
+                        <span style="font-size: 14px;">🏅 Ranking Estadual</span>
+                        <span style="font-weight: 700; color: var(--primary);">#12</span>
                     </div>
-                </div>
-                <div class="card" style="margin-bottom: 10px;">
-                    <div style="display: flex; align-items: center; gap: 15px;">
-                        <span style="font-size: 30px;">🥈</span>
-                        <div style="flex: 1;">
-                            <h4 style="font-size: 14px;">Julia R. - Onda em Santos</h4>
-                            <p style="font-size: 12px; color: var(--gray-600);">🗳️ 134 votos • Melhor Onda</p>
-                        </div>
+                    <div style="display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px solid var(--gray-100);">
+                        <span style="font-size: 14px;">📈 Pontos na Temporada</span>
+                        <span style="font-weight: 700; color: var(--primary);">2.450</span>
                     </div>
-                </div>
-                <div class="card" style="margin-bottom: 10px;">
-                    <div style="display: flex; align-items: center; gap: 15px;">
-                        <span style="font-size: 30px;">🥉</span>
-                        <div style="flex: 1;">
-                            <h4 style="font-size: 14px;">Ana P. - Pôr do sol em Ubatuba</h4>
-                            <p style="font-size: 12px; color: var(--gray-600);">🗳️ 112 votos • Paisagem</p>
-                        </div>
+                    <div style="display: flex; justify-content: space-between; align-items: center; padding: 8px 0;">
+                        <span style="font-size: 14px;">🏄‍♀️ Etapas Disputadas</span>
+                        <span style="font-weight: 700; color: var(--primary);">9</span>
                     </div>
-                </div>
-                
-                <!-- Regulamento -->
-                <div style="background: #f8f9fa; padding: 15px; border-radius: 12px; margin-top: 15px;">
-                    <h4 style="font-size: 14px; color: #0E2439; margin-bottom: 10px;">📋 Regulamento</h4>
-                    <ul style="font-size: 12px; color: #666; margin-left: 20px;">
-                        <li>Fotos devem ser originais</li>
-                        <li>1 voto por dia por usuário</li>
-                        <li>Competição dura 30 dias</li>
-                        <li>Vencedores no Instagram ASF</li>
-                    </ul>
                 </div>
             </div>
 
@@ -4785,6 +4810,13 @@
         }
 
         // Hide loading screen after page loads
+        window.addEventListener('load', function() {
+            setTimeout(function() {
+                document.getElementById('loading-screen').classList.add('hidden');
+            }, 800); // Show loading for 800ms
+        });
+        
+        // ===== SISTEMA DE NOTIFICAÇÕES =====
         const NOTIF_KEY = 'asf_notifications';
         
         // Notificações padrão ao abrir
@@ -5313,305 +5345,8 @@
         // ===== FIM SISTEMA DE PONTOS =====
 
         function createPost() {
-            toggleChatBot();
+            alert('Funcionalidade em desenvolvimento! 🚀');
         }
-        
-        // ===== CHATBOT ASF =====
-        const CHATBOT_RESPONSES = {
-            'surf': [
-                '🏄‍♀️ Para começar no surf, recomendo uma prancha de espuma (softboard)! Ela é mais segura e fácil de aprender.',
-                '🌊 O melhor horário para surfar é no amanhecer ou final da tarde. O vento costuma ser mais calmo!',
-                '💪 Para melhorar, pratique o pop-up em casa! Deite no chão e levante rápido 20x por dia.'
-            ],
-            'ondas': [
-                '🌊 Para ver a previsão de ondas, vá na aba Dicas! Temos dados em tempo real para 8 cidades do litoral.',
-                '📏 Ondas de 0.5-1m são ideais para iniciantes. Acima de 1.5m já é para intermediárias!',
-                '📍 Bertioga e Ubatuba geralmente têm as melhores ondas na região.'
-            ],
-            'prancha': [
-                '🧮 Use nossa calculadora de prancha na aba Saúde! Ela calcula volume e borda ideal para você.',
-                '📏 Para iniciantes: prancha mais larga e grossa = mais fácil de aprender.',
-                '🔄 Alugue antes de comprar! Teste diferentes tipos para ver qual se adapta melhor.'
-            ],
-            'seguranca': [
-                '🦺 Sempre use leash! Ele mantém sua prancha presa e evita acidentes.',
-                '👀 Antes de entrar, observe as ondas por 10 minutos. Entenda o padrão e as correntes.',
-                '🏊 Se não souber nadar bem, comece em águas rasas e nunca sozinha.'
-            ],
-            'alimentacao': [
-                '🍌 Antes de surfar: banana, aveia, pão integral. Carboidratos dão energia!',
-                '💧 Beba 500ml de água antes e depois. Mulheres desidratam mais rápido.',
-                '🍳 Pós-surf: ovos, abacate, smoothie. Proteínas ajudam na recuperação!'
-            ],
-            'treino': [
-                '💪 Temos treinos de 20 minutos na aba Saúde! Força, resistência e mobilidade.',
-                '🧘 Alongue sempre após surfar. Músculos aquecidos alongam melhor.',
-                '🏊 Fortaleça o core! Prancha, abdominal e agachamento são seus aliados.'
-            ],
-            'menstruacao': [
-                '🩸 Pode surfar menstruada sim! Use absorvente interno ou coletor menstrual.',
-                '🔥 Após o surf, aqueça a barriga com bolsa de água quente. Previne cólicas!',
-                '💊 Evite anti-inflamatórios antes de surfar. Eles podem mascarar sinais importantes.'
-            ],
-            'medo': [
-                '🧠 Medo é normal! Respiração 4-4-4 ajuda muito: inspire 4s, segure 4s, expire 4s.',
-                '📖 Temos dicas na aba Mental para lidar com ansiedade e medo.',
-                '👥 Surfe com amigas! A companhia ajuda a superar o medo.'
-            ],
-            'lojas': [
-                '🛒 Temos 9 lojas reais na aba Lojas! Todas com Instagram.',
-                '📱 As lojas do litoral paulista estão todas mapeadas no app.',
-                '📍 Sthill Surf (Santos) e Tribo Surf (Ubatuba) são as maiores!'
-            ],
-            'manas': [
-                '💬 Entre nos grupos de WhatsApp na aba Manas! 47 manas cadastradas.',
-                '📍 Use a aba Próximas para encontrar manas perto de você!',
-                '🏖️ Temos grupos em Bertioga, Santos, Guarujá e Ubatuba!'
-            ],
-            'aplicativo': [
-                '📱 O App ASF foi criado para mulheres surfistas! Dicas, treinos e comunidade.',
-                '🔔 Ative as notificações para receber dicas e novidades!',
-                '📤 Compartilhe com suas amigas pelo botão verde no canto!'
-            ],
-            'default': [
-                '🤔 Não entendi bem. Tente perguntar sobre: surf, ondas, prancha, segurança, alimentação, treino ou manas!',
-                '💬 Posso ajudar com: dicas de surf, previsão de ondas, treinos, lojas e grupos de WhatsApp!',
-                '📱 Navegue pelas abas para ver todo o conteúdo do app!'
-            ]
-        };
-        
-        function toggleChatBot() {
-            const existing = document.getElementById('chatbot-container');
-            if (existing) {
-                existing.remove();
-                return;
-            }
-            
-            const chatbot = document.createElement('div');
-            chatbot.id = 'chatbot-container';
-            chatbot.innerHTML = `
-                <div style="position: fixed; bottom: 160px; right: 20px; width: 340px; max-height: 500px; background: white; border-radius: 20px; box-shadow: 0 10px 50px rgba(0,0,0,0.3); z-index: 1001; display: flex; flex-direction: column; overflow: hidden;">
-                    <div style="background: linear-gradient(135deg, #00A8CC 0%, #0E2439 100%); padding: 15px; color: white; display: flex; justify-content: space-between; align-items: center;">
-                        <div style="display: flex; align-items: center; gap: 10px;">
-                            <span style="font-size: 28px;">🤖</span>
-                            <div>
-                                <h4 style="font-size: 14px; margin: 0;">Assistente ASF</h4>
-                                <p style="font-size: 10px; opacity: 0.8; margin: 0;">Online agora</p>
-                            </div>
-                        </div>
-                        <button onclick="document.getElementById('chatbot-container').remove()" style="background: rgba(255,255,255,0.2); border: none; color: white; width: 30px; height: 30px; border-radius: 50%; cursor: pointer; font-size: 16px;">✕</button>
-                    </div>
-                    
-                    <div id="chat-messages" style="flex: 1; overflow-y: auto; padding: 15px; max-height: 350px;">
-                        <div style="display: flex; gap: 10px; margin-bottom: 15px;">
-                            <span style="font-size: 24px;">🤖</span>
-                            <div style="background: #f0f0f0; padding: 12px; border-radius: 12px; border-top-left-radius: 0; max-width: 80%;">
-                                <p style="font-size: 13px; margin: 0;">Olá! 🏄‍♀️ Sou a assistente do ASF. Como posso ajudar?</p>
-                                <p style="font-size: 11px; color: #666; margin-top: 8px;">Pergunte sobre: surf, ondas, prancha, treinos, manas...</p>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div style="padding: 10px; border-top: 1px solid #eee;">
-                        <div style="display: flex; gap: 8px; margin-bottom: 8px; flex-wrap: wrap;">
-                            <button onclick="sendQuickMessage('Como começar no surf?')" style="background: #f0f0f0; border: none; padding: 6px 12px; border-radius: 15px; font-size: 11px; cursor: pointer;">🏄 Iniciante</button>
-                            <button onclick="sendQuickMessage('Previsão de ondas')" style="background: #f0f0f0; border: none; padding: 6px 12px; border-radius: 15px; font-size: 11px; cursor: pointer;">🌊 Ondas</button>
-                            <button onclick="sendQuickMessage('Treinos disponíveis')" style="background: #f0f0f0; border: none; padding: 6px 12px; border-radius: 15px; font-size: 11px; cursor: pointer;">💪 Treinos</button>
-                            <button onclick="sendQuickMessage('Lojas de surf')" style="background: #f0f0f0; border: none; padding: 6px 12px; border-radius: 15px; font-size: 11px; cursor: pointer;">🛒 Lojas</button>
-                        </div>
-                        <div style="display: flex; gap: 8px;">
-                            <input type="text" id="chat-input" placeholder="Digite sua pergunta..." style="flex: 1; padding: 10px 15px; border: 1px solid #ddd; border-radius: 25px; font-size: 13px; outline: none;" onkeypress="if(event.key==='Enter')sendMessage()">
-                            <button onclick="sendMessage()" style="background: #00A8CC; border: none; color: white; width: 40px; height: 40px; border-radius: 50%; cursor: pointer; font-size: 18px;">→</button>
-                        </div>
-                    </div>
-                </div>
-            `;
-            document.body.appendChild(chatbot);
-        }
-        
-        function sendQuickMessage(message) {
-            document.getElementById('chat-input').value = message;
-            sendMessage();
-        }
-        
-        function sendMessage() {
-            const input = document.getElementById('chat-input');
-            const message = input.value.trim();
-            if (!message) return;
-            
-            const messagesDiv = document.getElementById('chat-messages');
-            
-            // Adiciona mensagem do usuário
-            messagesDiv.innerHTML += `
-                <div style="display: flex; gap: 10px; margin-bottom: 15px; justify-content: flex-end;">
-                    <div style="background: #00A8CC; color: white; padding: 12px; border-radius: 12px; border-top-right-radius: 0; max-width: 80%;">
-                        <p style="font-size: 13px; margin: 0;">${message}</p>
-                    </div>
-                    <span style="font-size: 24px;">👤</span>
-                </div>
-            `;
-            
-            input.value = '';
-            
-            // Processa resposta
-            setTimeout(() => {
-                const response = getBotResponse(message);
-                messagesDiv.innerHTML += `
-                    <div style="display: flex; gap: 10px; margin-bottom: 15px;">
-                        <span style="font-size: 24px;">🤖</span>
-                        <div style="background: #f0f0f0; padding: 12px; border-radius: 12px; border-top-left-radius: 0; max-width: 80%;">
-                            <p style="font-size: 13px; margin: 0;">${response}</p>
-                        </div>
-                    </div>
-                `;
-                messagesDiv.scrollTop = messagesDiv.scrollHeight;
-                
-                // Salva pergunta para analytics
-                logUserQuestion(message);
-            }, 800);
-            
-            messagesDiv.scrollTop = messagesDiv.scrollHeight;
-        }
-        
-        function getBotResponse(message) {
-            const lowerMessage = message.toLowerCase();
-            
-            // Identifica o tema
-            if (lowerMessage.includes('surf') || lowerMessage.includes('começar') || lowerMessage.includes('aprender') || lowerMessage.includes('iniciante')) {
-                return getRandomResponse('surf');
-            } else if (lowerMessage.includes('onda') || lowerMessage.includes('previsão') || lowerMessage.includes('mar') || lowerMessage.includes('praia')) {
-                return getRandomResponse('ondas');
-            } else if (lowerMessage.includes('prancha') || lowerMessage.includes('litro') || lowerMessage.includes('volume') || lowerMessage.includes('borda')) {
-                return getRandomResponse('prancha');
-            } else if (lowerMessage.includes('seguran') || lowerMessage.includes('leash') || lowerMessage.includes('cuidado') || lowerMessage.includes('perigo')) {
-                return getRandomResponse('seguranca');
-            } else if (lowerMessage.includes('comer') || lowerMessage.includes('aliment') || lowerMessage.includes('nutrição') || lowerMessage.includes('dieta')) {
-                return getRandomResponse('alimentacao');
-            } else if (lowerMessage.includes('treino') || lowerMessage.includes('exerc') || lowerMessage.includes('força') || lowerMessage.includes('mobilidade')) {
-                return getRandomResponse('treino');
-            } else if (lowerMessage.includes('menstru') || lowerMessage.includes('cólica') || lowerMessage.includes('período')) {
-                return getRandomResponse('menstruacao');
-            } else if (lowerMessage.includes('medo') || lowerMessage.includes('ansiedad') || lowerMessage.includes('nervos') || lowerMessage.includes('calma')) {
-                return getRandomResponse('medo');
-            } else if (lowerMessage.includes('loja') || lowerMessage.includes('compra') || lowerMessage.includes('equipamento')) {
-                return getRandomResponse('lojas');
-            } else if (lowerMessage.includes('mana') || lowerMessage.includes('grupo') || lowerMessage.includes('whatsapp') || lowerMessage.includes('comunidade')) {
-                return getRandomResponse('manas');
-            } else if (lowerMessage.includes('app') || lowerMessage.includes('aplicativo') || lowerMessage.includes('como usar')) {
-                return getRandomResponse('aplicativo');
-            } else {
-                return getRandomResponse('default');
-            }
-        }
-        
-        function getRandomResponse(category) {
-            const responses = CHATBOT_RESPONSES[category];
-            return responses[Math.floor(Math.random() * responses.length)];
-        }
-        
-        function logUserQuestion(question) {
-            // Salva no localStorage para analytics
-            const questions = JSON.parse(localStorage.getItem('asf-chat-questions') || '[]');
-            questions.push({
-                question: question,
-                timestamp: new Date().toISOString()
-            });
-            // Mantém últimas 100
-            if (questions.length > 100) questions.shift();
-            localStorage.setItem('asf-chat-questions', JSON.stringify(questions));
-        }
-        
-        // ===== FIM CHATBOT =====
-
-        // ===== COMPETIÇÃO POR FOTOS =====
-        let currentPhotoCategory = 'onda';
-        
-        const PHOTO_CATEGORIES = {
-            'onda': 'Melhor Onda',
-            'manobra': 'Melhor Manobra',
-            'por': 'Melhor Pôr do Sol',
-            'selfie': 'Melhor Selfie'
-        };
-        
-        function openPhotoUpload(category) {
-            currentPhotoCategory = category;
-            document.getElementById('photo-category-text').textContent = `Categoria: ${PHOTO_CATEGORIES[category]}`;
-            document.getElementById('photo-upload-modal').style.display = 'flex';
-        }
-        
-        function closePhotoUpload() {
-            document.getElementById('photo-upload-modal').style.display = 'none';
-        }
-        
-        function submitPhoto() {
-            const name = document.getElementById('photo-name').value;
-            const desc = document.getElementById('photo-desc').value;
-            const file = document.getElementById('photo-file').files[0];
-            
-            if (!name) {
-                alert('Por favor, insira seu nome!');
-                return;
-            }
-            
-            // Salva no localStorage (em produção, enviaria para servidor)
-            const photos = JSON.parse(localStorage.getItem('asf-photos') || '[]');
-            photos.push({
-                id: Date.now(),
-                category: currentPhotoCategory,
-                name: name,
-                description: desc || `Foto de ${PHOTO_CATEGORIES[currentPhotoCategory]}`,
-                votes: 0,
-                timestamp: new Date().toISOString()
-            });
-            localStorage.setItem('asf-photos', JSON.stringify(photos));
-            
-            // Feedback
-            alert(`📸 Foto enviada com sucesso!\n\nCategoria: ${PHOTO_CATEGORIES[currentPhotoCategory]}\nSua foto está concorrendo! Boa sorte! 🏆`);
-            
-            // Fecha modal
-            closePhotoUpload();
-            
-            // Limpa campos
-            document.getElementById('photo-name').value = '';
-            document.getElementById('photo-desc').value = '';
-            document.getElementById('photo-file').value = '';
-        }
-        
-        function showPhotos(category) {
-            const gallery = document.getElementById('photos-gallery');
-            const list = document.getElementById('photos-list');
-            
-            // Fotos mockadas para demonstração
-            const mockPhotos = [
-                { name: 'Marina S.', desc: 'Cutback perfeito!', votes: 156 },
-                { name: 'Julia R.', desc: 'Onda de 2m em Santos', votes: 134 },
-                { name: 'Ana P.', desc: 'Pôr do sol mágico', votes: 112 },
-                { name: 'Carla M.', desc: 'Primeira onda do dia', votes: 89 },
-                { name: 'Beatriz L.', desc: 'Aerial incrível!', votes: 76 }
-            ];
-            
-            list.innerHTML = mockPhotos.map((photo, i) => `
-                <div class="card" style="margin-bottom: 10px;">
-                    <div style="display: flex; align-items: center; gap: 15px;">
-                        <div style="width: 60px; height: 60px; background: linear-gradient(135deg, #00A8CC, #0E2439); border-radius: 10px; display: flex; align-items: center; justify-content: center; color: white; font-size: 24px;">📸</div>
-                        <div style="flex: 1;">
-                            <h4 style="font-size: 14px; color: #0E2439;">${photo.name}</h4>
-                            <p style="font-size: 12px; color: #666;">${photo.desc}</p>
-                            <p style="font-size: 11px; color: #00A8CC; font-weight: bold;">🗳️ ${photo.votes} votos</p>
-                        </div>
-                        <button onclick="votePhoto('${photo.name}')" style="background: #27AE60; border: none; color: white; padding: 8px 15px; border-radius: 20px; font-size: 12px; cursor: pointer;">Votar</button>
-                    </div>
-                </div>
-            `).join('');
-            
-            gallery.style.display = 'block';
-        }
-        
-        function votePhoto(name) {
-            alert(`🗳️ Voto registrado!\n\nVocê votou em ${name}!\n\nContinue votando nas outras fotos! 🏆`);
-        }
-        
-        // ===== FIM COMPETIÇÃO POR FOTOS =====
         
         function startQuiz(quizName) {
             const quizDiv = document.getElementById('quiz-' + quizName);
