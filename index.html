@@ -1265,14 +1265,7 @@
     <!-- Skip to content for accessibility -->
     <a href="#dicas" style="position: absolute; left: -9999px; top: 0; z-index: 10000; background: var(--primary); color: white; padding: 8px 16px; border-radius: 0 0 8px 0; font-weight: 600; text-decoration: none;" onfocus="this.style.left='0'" onblur="this.style.left='-9999px'">Pular para o conteúdo</a>
     <div class="scroll-progress" id="scrollProgress"></div>
-    <!-- Loading Screen -->
-    <div class="loading-screen" id="loading-screen">
-        <div class="loading-logo">🏄‍♀️</div>
-        <div class="loading-text">ASF</div>
-        <div class="loading-subtext">Carregando...</div>
-        <div class="loading-progress"><div class="loading-progress-bar"></div></div>
-        <div class="loading-wave"></div>
-    </div>
+    <!-- Loading Screen REMOVED -->
     <!-- Animated Background -->
     <div class="bg-animation"></div>
 
@@ -4809,13 +4802,6 @@
             window.scrollTo(0, 0);
         }
 
-        // Hide loading screen after page loads
-        window.addEventListener('load', function() {
-            setTimeout(function() {
-                document.getElementById('loading-screen').classList.add('hidden');
-            }, 800); // Show loading for 800ms
-        });
-        
         // ===== SISTEMA DE NOTIFICAÇÕES =====
         const NOTIF_KEY = 'asf_notifications';
         
