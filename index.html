@@ -1389,9 +1389,7 @@ function logout() {
         <div class="search-results" id="searchResults"></div>
     </div>
 
-    <!-- Profile Bar (Hidden - only show for logged users) -->
-    <div class="profile-bar" style="display:none;" id="profile-bar-logged">
-        <div class="profile-avatar">
+    <div id="profile-bar-hidden" style="display:none;">
         <div class="profile-info">
             <h3>Carol 🏄‍♀️</h3>
             <p>Nível 5 • 2.450 pontos</p>
@@ -1555,7 +1553,7 @@ function logout() {
     </div>
 
     <!-- Welcome Card (only shows once) -->
-    <div id="welcome-card" style="padding: 20px; display: none;">
+    <div id="welcome-card" style="padding: 20px; display: none !important;">
         <div style="background: linear-gradient(135deg, #00A8CC 0%, #0E2439 100%); padding: 25px; border-radius: 20px; color: white; position: relative; overflow: hidden;">
             <button onclick="closeWelcome()" style="position: absolute; top: 10px; right: 15px; background: rgba(255,255,255,0.2); border: none; color: white; width: 30px; height: 30px; border-radius: 50%; font-size: 16px; cursor: pointer;">✕</button>
             <div style="font-size: 60px; margin-bottom: 15px;">🏄‍♀️</div>
