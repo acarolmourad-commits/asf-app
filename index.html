@@ -4008,7 +4008,25 @@
                     <button class="btn btn-secondary" style="width: 100%; margin-top: 12px;" onclick="showMareDetails()">Ver Todos</button>
                 </div>
 
-                <!-- Calculadora de Prancha -->
+                <!-- Lua -->
+                <div class="card utility-card">
+                    <div class="icon">🌙</div>
+                    <h4>Fase da Lua</h4>
+                    <p>Influencia as marés e o tamanho das ondas</p>
+                    <div id="moon-phase-display" style="display: flex; justify-content: center; margin: 12px 0;">
+                        <div style="text-align: center;">
+                            <div id="moon-icon" style="font-size: 48px; margin-bottom: 8px;">🌙</div>
+                            <p id="moon-phase-name" style="font-size: 16px; font-weight: 700; color: var(--primary);">Lua Cheia</p>
+                            <p id="moon-age" style="font-size: 12px; color: var(--gray-600);">14.5 dias</p>
+                        </div>
+                    </div>
+                    <div id="surf-tip" style="background: linear-gradient(135deg, #0E2439 0%, #00A8CC 100%); padding: 12px; border-radius: 12px; color: white; text-align: center;">
+                        <p style="font-size: 11px; opacity: 0.9;">🌊 <strong id="tide-tip">Maré Grande!</strong></p>
+                        <p style="font-size: 10px; opacity: 0.8; margin-top: 4px;" id="tide-tip-desc">Springs geram ondas maiores</p>
+                    </div>
+                </div>
+
+                <!-- Calculadora de Prancha --> -->
                 <div class="card utility-card">
                     <div class="icon">🧮</div>
                     <h4>Calculadora de Prancha</h4>
@@ -5742,6 +5760,7 @@
             { title: 'Condições do Mar', icon: '🌊', section: 'Utilitários', sectionId: 'utilities', text: 'Verifique ondas, vento e temperatura da água em Bertioga.' },
             { title: 'Previsão do Tempo', icon: '🌡️', section: 'Utilitários', sectionId: 'utilities', text: 'Clima e temperatura para os próximos dias.' },
             { title: 'Marés', icon: '🗓️', section: 'Utilitários', sectionId: 'utilities', text: 'Horários de maré alta e baixa para planejar seu surf.' },
+            { title: 'Fase da Lua', icon: '🌙', section: 'Utilitários', sectionId: 'utilities', text: 'Veja a fase atual da lua. Nueva lua e lua cheia = ondas maiores!' },
             { title: 'Calculadora de Prancha', icon: '🧮', section: 'Utilitários', sectionId: 'utilities', text: 'Calcule o volume ideal da prancha pelo seu peso e nível.' },
             // Manas
             { title: 'Grupos de Surf', icon: '💬', section: 'Manas', sectionId: 'manas', text: 'Entre nos grupos de WhatsApp para surfar junto com outras mulheres.' },
@@ -6118,6 +6137,75 @@
             alert(msg);
         }
 
+        // ===== MOON PHASE CALCULATOR ======
+        function updateMoonPhase() {
+            // Reference new moon: January 11, 2000 at 12:24 UTC
+            const knownNewMoon = new Date('2000-01-11T12:24:00Z');
+            const now = new Date();
+            
+            // Calculate days since known new moon
+            const msPerDay = 24 * 60 * 60 * 1000;
+            const daysSinceNewMoon = (now - knownNewMoon) / msPerDay;
+            
+            // Synodic month (lunation) is approximately 29.53059 days
+            const lunation = 29.53059;
+            
+            // Current moon age (0-29.5)
+            const moonAge = daysSinceNewMoon % lunation;
+            
+            // Determine phase name and icon
+            let phaseName, moonIcon, surfTip, tideTipDesc;
+            
+            if (moonAge < 1.85 || moonAge > 27.68) {
+                phaseName = 'Lua Nova';
+                moonIcon = '🌑';
+                surfTip = 'Ondas Poderosas!';
+                tideTipDesc = 'Maré grande (spring) = +tidal range';
+            } else if (moonAge < 7.38) {
+                phaseName = 'Lua Crescente';
+                moonIcon = '🌒';
+                surfTip = 'Maré Subindo';
+                tideTipDesc = 'Ondasbuildando ao longo do dia';
+            } else if (moonAge < 9.23) {
+                phaseName = 'Quarto Crescente';
+                moonIcon = '🌓';
+                surfTip = 'Maré Média';
+                tideTipDesc = 'Boas condições gerais';
+            } else if (moonAge < 14.77) {
+                phaseName = 'Gibosa Crescente';
+                moonIcon = '🌔';
+                surfTip = 'Ondas Grandes!';
+                tideTipDesc = 'Maré grandi (spring) = +tidal range';
+            } else if (moonAge < 16.61) {
+                phaseName = 'Lua Cheia';
+                moonIcon = '🌕';
+                surfTip = 'Ondas Poderosas!';
+                tideTipDesc = 'Spring tide = maior range de maré';
+            } else if (moonAge < 22.15) {
+                phaseName = 'Gibosa Minguante';
+                moonIcon = '🌖';
+                surfTip = 'Maré Caindo';
+                tideTipDesc = 'Ondas mudando ao longo do dia';
+            } else if (moonAge < 24.0) {
+                phaseName = 'Quarto Minguante';
+                moonIcon = '🌗';
+                surfTip = 'Maré Média';
+                tideTipDesc = 'Neap tide = menor range';
+            } else {
+                phaseName = 'Lua Minguante';
+                moonIcon = '🌘';
+                surfTip = 'Maré Estável';
+                tideTipDesc = 'Menor variação de maré';
+            }
+            
+            // Update the display
+            document.getElementById('moon-icon').textContent = moonIcon;
+            document.getElementById('moon-phase-name').textContent = phaseName;
+            document.getElementById('moon-age').textContent = moonAge.toFixed(1) + ' dias';
+            document.getElementById('tide-tip').textContent = surfTip;
+            document.getElementById('tide-tip-desc').textContent = tideTipDesc;
+        }
+
         function calcularVolume() {
             const peso = parseFloat(document.getElementById('peso-input').value) || 65;
             const nivel = document.getElementById('nivel-input').value;
@@ -6162,6 +6250,9 @@
 
         // Load live data on page load
         loadLiveData('bertioga');
+        
+        // Update moon phase on page load
+        updateMoonPhase();
 
         // Surf Conditions Bar (compact live data on homepage)
         async function loadSurfBar() {
