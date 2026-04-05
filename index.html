@@ -5876,7 +5876,7 @@
             const key = beach + '_' + new Date().toDateString();
             if (cachedWeather[key]) return cachedWeather[key];
             try {
-                const resp = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${b.lat}&longitude=${b.lon}&current=temperature_2m,relative_humidity_2m,apparent_temperature,weather_code,wind_speed_10m,wind_direction_10m,uv_index&daily=weather_code,temperature_2m_max,temperature_2m_min,uv_index_max,wind_speed_10m_max&timezone=America/Sao_Paulo&forecast_days=7`);
+                const resp = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${b.lat}&longitude=${b.lon}&current=temperature_2m,relative_humidity_2m,apparent_temperature,weather_code,wind_speed_10m,wind_direction_10m,uv_index,sunrise,sunset&daily=weather_code,temperature_2m_max,temperature_2m_min,uv_index_max,wind_speed_10m_max,sunrise,sunset&timezone=America/Sao_Paulo&forecast_days=7`);
                 const data = await resp.json();
                 cachedWeather[key] = data;
                 return data;
@@ -5937,10 +5937,13 @@
             if (weather && weather.current) {
                 const c = weather.current;
                 const desc = weatherDescriptions[c.weather_code] || 'Condições variadas';
+                const sunrise = c.sunrise ? c.sunrise.slice(11, 16) : '--:--';
+                const sunset = c.sunset ? c.sunset.slice(11, 16) : '--:--';
                 climaDiv.innerHTML = `
                     <p style="font-size: 20px; font-weight: 700; color: var(--primary);">${c.temperature_2m.toFixed(0)}°C</p>
                     <p style="font-size: 14px; color: var(--gray-600);">${desc}</p>
                     <div style="font-size: 13px; color: var(--gray-600); margin-top: 6px;">
+                        <div>☀️ Nascer: ${sunrise} | 🌇 Pôr: ${sunset}</div>
                         <div>Sensação: ${c.apparent_temperature.toFixed(0)}°C | Umidade: ${c.relative_humidity_2m}%</div>
                         <div>Vento: ${c.wind_speed_10m.toFixed(0)} km/h ${windDir(c.wind_direction_10m)} | UV: ${c.uv_index.toFixed(0)}</div>
                     </div>
@@ -6090,7 +6093,10 @@
                 const dayName = days[date.getDay()];
                 const desc = weatherDescriptions[d.weather_code[i]] || 'Variado';
                 msg += `${dayName} (${date.getDate()}/${date.getMonth()+1}): ${desc}\n`;
-                msg += `  ${d.temperature_2m_min[i].toFixed(0)}°-${d.temperature_2m_max[i].toFixed(0)}°C | Vento: ${d.wind_speed_10m_max[i].toFixed(0)} km/h | UV: ${d.uv_index_max[i].toFixed(0)}\n\n`;
+                msg += `  ${d.temperature_2m_min[i].toFixed(0)}°-${d.temperature_2m_max[i].toFixed(0)}°C | Vento: ${d.wind_speed_10m_max[i].toFixed(0)} km/h | UV: ${d.uv_index_max[i].toFixed(0)}\n`;
+                const sr = d.sunrise ? d.sunrise[i].slice(11, 16) : '--:--';
+                const ss = d.sunset ? d.sunset[i].slice(11, 16) : '--:--';
+                msg += `  ☀️ ${sr} - ${ss}\n\n`;
             }
             alert(msg);
         }
