@@ -4112,6 +4112,19 @@
                     <button class="btn btn-secondary" style="width: 100%; margin-top: 12px;" id="btn-clima-details" onclick="showClimaDetails()">Ver Previsão 7 dias</button>
                 </div>
 
+                <!-- UV Index -->
+                <div class="card utility-card" id="card-uv">
+                    <div class="icon">☀️</div>
+                    <h4>Índice UV</h4>
+                    <p>Radiação solar - Proteja sua pele!</p>
+                    <div id="uv-data" style="text-align: center; margin: 12px 0;">
+                        <p style="font-size: 14px; color: var(--gray-400);">Carregando...</p>
+                    </div>
+                    <div id="uv-protection" style="background: var(--light); padding: 12px; border-radius: 12px; font-size: 12px;">
+                        <p style="margin: 0;"><strong>☀️ Dica:</strong> Aplicar protetor FPS 30+ a cada 2h</p>
+                    </div>
+                </div>
+
                 <!-- Marés -->
                 <div class="card utility-card">
                     <div class="icon">🗓️</div>
@@ -5923,6 +5936,7 @@
             // Utilitários
             { title: 'Condições do Mar', icon: '🌊', section: 'Utilitários', sectionId: 'utilities', text: 'Verifique ondas, vento e temperatura da água em Bertioga.' },
             { title: 'Previsão do Tempo', icon: '🌡️', section: 'Utilitários', sectionId: 'utilities', text: 'Clima e temperatura para os próximos dias.' },
+            { title: 'Índice UV', icon: '☀️', section: 'Utilitários', sectionId: 'utilities', text: 'Radiação solar e proteção recomendada para o surf.' },
             { title: 'Marés', icon: '🗓️', section: 'Utilitários', sectionId: 'utilities', text: 'Horários de maré alta e baixa para planejar seu surf.' },
             { title: 'Fase da Lua', icon: '🌙', section: 'Utilitários', sectionId: 'utilities', text: 'Veja a fase atual da lua. Nueva lua e lua cheia = ondas maiores!' },
             { title: 'Calculadora de Prancha', icon: '🧮', section: 'Utilitários', sectionId: 'utilities', text: 'Calcule o volume ideal da prancha pelo seu peso e nível.' },
@@ -6147,6 +6161,61 @@
             `;
             // Animate tide clock
             updateTideClock(mareTimes, now);
+
+            // Update UV card
+            const uvDiv = document.getElementById('uv-data');
+            const uvProt = document.getElementById('uv-protection');
+            if (weather && weather.current && weather.daily) {
+                const currentUV = weather.current.uv_index || 0;
+                const todayMaxUV = weather.daily.uv_index_max[0] || currentUV;
+                
+                // UV level description and color
+                let uvLevel, uvColor, uvIcon;
+                if (todayMaxUV <= 2) {
+                    uvLevel = 'Baixo';
+                    uvColor = '#27ae60';
+                    uvIcon = '🟢';
+                } else if (todayMaxUV <= 5) {
+                    uvLevel = 'Moderado';
+                    uvColor = '#f39c12';
+                    uvIcon = '🟡';
+                } else if (todayMaxUV <= 7) {
+                    uvLevel = 'Alto';
+                    uvColor = '#e67e22';
+                    uvIcon = '🟠';
+                } else if (todayMaxUV <= 10) {
+                    uvLevel = 'Muito Alto';
+                    uvColor = '#e74c3c';
+                    uvIcon = '🔴';
+                } else {
+                    uvLevel = 'Extremo';
+                    uvColor = '#8e44ad';
+                    uvIcon = '⚠️';
+                }
+                
+                uvDiv.innerHTML = `
+                    <p style="font-size: 32px; font-weight: 700; color: ${uvColor};">${todayMaxUV.toFixed(0)}</p>
+                    <p style="font-size: 14px; color: ${uvColor}; font-weight: 600;">${uvIcon} ${uvLevel}</p>
+                    <p style="font-size: 12px; color: var(--gray-400); margin-top: 4px;">Máximo hoje</p>
+                `;
+                
+                // Protection tip
+                let protTip = '';
+                if (todayMaxUV <= 2) {
+                    protTip = '☀️ Protetor opcional para pele sensível';
+                } else if (todayMaxUV <= 5) {
+                    protTip = '🧴 Aplique FPS 30+ a cada 2h';
+                } else if (todayMaxUV <= 7) {
+                    protTip = '🧴 Aplique FPS 50+ a cada 2h | Usar chapéu';
+                } else if (todayMaxUV <= 10) {
+                    protTip = '🧴 FPS 50+ | Chapéu e óculos | Evitar 12-16h';
+                } else {
+                    protTip = '⚠️ Evitar sol entre 10h-16h!';
+                }
+                if (uvProt) uvProt.querySelector('p').innerHTML = `<strong>☀️ Dica:</strong> ${protTip}`;
+            } else {
+                uvDiv.innerHTML = `<p style="font-size: 14px; color: var(--gray-400);">Dados indisponíveis</p>`;
+            }
         }
 
         function updateTideClock(tides, now) {
