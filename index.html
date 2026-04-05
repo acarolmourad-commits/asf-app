@@ -4026,6 +4026,46 @@
                     </div>
                 </div>
 
+                <!-- Checklist Pré-Surf -->
+                <div class="card utility-card" id="card-checklist">
+                    <div class="icon">✅</div>
+                    <h4>Checklist Pré-Surf</h4>
+                    <p>Não esqueça nada antes de entrar no mar!</p>
+                    <div id="checklist-container" style="margin: 12px 0; text-align: left;">
+                        <label style="display: flex; align-items: center; gap: 8px; padding: 8px; background: var(--light); border-radius: 8px; margin: 4px 0; cursor: pointer; font-size: 13px;" onclick="toggleChecklistItem(this)">
+                            <input type="checkbox" style="width: 18px; height: 18px; accent-color: var(--primary);"> 🏄 Prancha & Leash
+                        </label>
+                        <label style="display: flex; align-items: center; gap: 8px; padding: 8px; background: var(--light); border-radius: 8px; margin: 4px 0; cursor: pointer; font-size: 13px;" onclick="toggleChecklistItem(this)">
+                            <input type="checkbox" style="width: 18px; height: 18px; accent-color: var(--primary);"> 🧴 Protetor Solar (FPS 30+)
+                        </label>
+                        <label style="display: flex; align-items: center; gap: 8px; padding: 8px; background: var(--light); border-radius: 8px; margin: 4px 0; cursor: pointer; font-size: 13px;" onclick="toggleChecklistItem(this)">
+                            <input type="checkbox" style="width: 18px; height: 18px; accent-color: var(--primary);"> 🧢 Chapéu / Óculos
+                        </label>
+                        <label style="display: flex; align-items: center; gap: 8px; padding: 8px; background: var(--light); border-radius: 8px; margin: 4px 0; cursor: pointer; font-size: 13px;" onclick="toggleChecklistItem(this)">
+                            <input type="checkbox" style="width: 18px; height: 18px; accent-color: var(--primary);"> 💧 Água (1.5L mínimo)
+                        </label>
+                        <label style="display: flex; align-items: center; gap: 8px; padding: 8px; background: var(--light); border-radius: 8px; margin: 4px 0; cursor: pointer; font-size: 13px;" onclick="toggleChecklistItem(this)">
+                            <input type="checkbox" style="width: 18px; height: 18px; accent-color: var(--primary);"> 🍌 Lanche / Barra
+                        </label>
+                        <label style="display: flex; align-items: center; gap: 8px; padding: 8px; background: var(--light); border-radius: 8px; margin: 4px 0; cursor: pointer; font-size: 13px;" onclick="toggleChecklistItem(this)">
+                            <input type="checkbox" style="width: 18px; height: 18px; accent-color: var(--primary);"> 📱 Celular (baixo音量)
+                        </label>
+                        <label style="display: flex; align-items: center; gap: 8px; padding: 8px; background: var(--light); border-radius: 8px; margin: 4px 0; cursor: pointer; font-size: 13px;" onclick="toggleChecklistItem(this)">
+                            <input type="checkbox" style="width: 18px; height: 18px; accent-color: var(--primary);"> 🚗 Meio de transporte
+                        </label>
+                        <label style="display: flex; align-items: center; gap: 8px; padding: 8px; background: var(--light); border-radius: 8px; margin: 4px 0; cursor: pointer; font-size: 13px;" onclick="toggleChecklistItem(this)">
+                            <input type="checkbox" style="width: 18px; height: 18px; accent-color: var(--primary);"> 🔑 Chaves (sem areia!)
+                        </label>
+                    </div>
+                    <div id="checklist-progress" style="background: var(--light); padding: 10px; border-radius: 8px; text-align: center; margin-bottom: 10px;">
+                        <p style="font-size: 13px;">Progresso: <strong id="checklist-count">0</strong>/8 itens</p>
+                        <div style="background: var(--gray-200); border-radius: 4px; height: 8px; margin-top: 6px;">
+                            <div id="checklist-bar" style="background: var(--success); border-radius: 4px; height: 100%; width: 0%; transition: width 0.3s;"></div>
+                        </div>
+                    </div>
+                    <button class="btn btn-secondary" style="width: 100%;" onclick="resetChecklist()">🔄 Resetar Checklist</button>
+                </div>
+
                 <!-- Calculadora de Prancha --> -->
                 <div class="card utility-card">
                     <div class="icon">🧮</div>
@@ -6245,6 +6285,52 @@
                       nivel === 'intermediario' ? '🏄 Bordas médias = equilíbrio entre controle e performance' : 
                       '🔥 Bordas baixas = mais agilidade e resposta'}
                 </p>
+            `;
+        }
+
+        // Checklist Pré-Surf functions
+        function toggleChecklistItem(label) {
+            const checkbox = label.querySelector('input[type="checkbox"]');
+            checkbox.checked = !checkbox.checked;
+            if (checkbox.checked) {
+                label.style.background = 'rgba(46, 204, 113, 0.15)';
+                label.style.textDecoration = 'none';
+            } else {
+                label.style.background = 'var(--light)';
+            }
+            updateChecklistProgress();
+        }
+
+        function updateChecklistProgress() {
+            const checkboxes = document.querySelectorAll('#checklist-container input[type="checkbox"]');
+            const checked = Array.from(checkboxes).filter(cb => cb.checked).length;
+            const total = checkboxes.length;
+            
+            document.getElementById('checklist-count').textContent = checked;
+            const percentage = (checked / total) * 100;
+            document.getElementById('checklist-bar').style.width = percentage + '%';
+            
+            if (checked === total) {
+                document.getElementById('checklist-progress').style.background = 'rgba(46, 204, 113, 0.15)';
+                document.getElementById('checklist-progress').innerHTML = '<p style="font-size: 14px; color: var(--success); font-weight: bold;">🎉 Tudo pronto! Bora surfar!</p>';
+            }
+        }
+
+        function resetChecklist() {
+            const checkboxes = document.querySelectorAll('#checklist-container input[type="checkbox"]');
+            const labels = document.querySelectorAll('#checklist-container label');
+            checkboxes.forEach((cb, i) => {
+                cb.checked = false;
+                labels[i].style.background = 'var(--light)';
+            });
+            document.getElementById('checklist-count').textContent = '0';
+            document.getElementById('checklist-bar').style.width = '0%';
+            document.getElementById('checklist-progress').style.background = 'var(--light)';
+            document.getElementById('checklist-progress').innerHTML = `
+                <p style="font-size: 13px;">Progresso: <strong id="checklist-count">0</strong>/8 itens</p>
+                <div style="background: var(--gray-200); border-radius: 4px; height: 8px; margin-top: 6px;">
+                    <div id="checklist-bar" style="background: var(--success); border-radius: 4px; height: 100%; width: 0%; transition: width 0.3s;"></div>
+                </div>
             `;
         }
 
