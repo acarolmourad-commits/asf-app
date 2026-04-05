@@ -3279,7 +3279,171 @@
                     <h3>🧘 Quiz: Segurança no Mar</h3>
                     <p>O quanto você sabe sobre segurança e respeito no mar?</p>
                     <p style="margin-top: 8px; font-size: 12px; color: var(--gray-400);">10 perguntas • 5 min</p>
-                    <button class="btn btn-primary" style="width: 100%; margin-top: 12px;">Responder Quiz</button>
+                    <button class="btn btn-primary" style="width: 100%; margin-top: 12px;" onclick="startQuiz('seguranca')">Responder Quiz</button>
+                    <!-- Quiz Content (hidden by default) -->
+                    <div id="quiz-seguranca" style="display:none; margin-top: 15px; padding: 15px; background: var(--light); border-radius: 12px;">
+                        <div class="quiz-question" data-question="1">
+                            <p style="font-weight: 600; margin-bottom: 10px;">1. O que é um "rip current" (corrente de retorno)?</p>
+                            <label style="display: block; padding: 8px; background: white; border-radius: 8px; margin: 5px 0; cursor: pointer;">
+                                <input type="radio" name="sq1" value="a"> A) Uma onda grande que quebra na arrebentação
+                            </label>
+                            <label style="display: block; padding: 8px; background: white; border-radius: 8px; margin: 5px 0; cursor: pointer;">
+                                <input type="radio" name="sq1" value="b"> B) Corrente que arrasta o surfista para fora do mar
+                            </label>
+                            <label style="display: block; padding: 8px; background: white; border-radius: 8px; margin: 5px 0; cursor: pointer;">
+                                <input type="radio" name="sq1" value="c"> C) Uma técnica de surf
+                            </label>
+                            <label style="display: block; padding: 8px; background: white; border-radius: 8px; margin: 5px 0; cursor: pointer;">
+                                <input type="radio" name="sq1" value="d"> D) Um tipo de prancha
+                            </label>
+                            <p style="font-size: 11px; color: var(--gray-400); margin-top: 8px;">✅ <strong>Resposta correta: B)</strong> A corrente de retorno arrasta a água da onda de volta para alto mar, podendo afastar nadadores e surfistas da praia.</p>
+                        </div>
+                        <div class="quiz-question" data-question="2" style="margin-top: 20px;">
+                            <p style="font-weight: 600; margin-bottom: 10px;">2. Se você for pego por uma corrente de retorno, o que deve fazer?</p>
+                            <label style="display: block; padding: 8px; background: white; border-radius: 8px; margin: 5px 0; cursor: pointer;">
+                                <input type="radio" name="sq2" value="a"> A) Nadar diretamente para a praia
+                            </label>
+                            <label style="display: block; padding: 8px; background: white; border-radius: 8px; margin: 5px 0; cursor: pointer;">
+                                <input type="radio" name="sq2" value="b"> B) Gritar por ajuda imediatamente
+                            </label>
+                            <label style="display: block; padding: 8px; background: white; border-radius: 8px; margin: 5px 0; cursor: pointer;">
+                                <input type="radio" name="sq2" value="c"> C) Nadar paralelo à praia e depois retornar
+                            </label>
+                            <label style="display: block; padding: 8px; background: white; border-radius: 8px; margin: 5px 0; cursor: pointer;">
+                                <input type="radio" name="sq2" value="d"> D)Entrar no fundo e caminhar
+                            </label>
+                            <p style="font-size: 11px; color: var(--gray-400); margin-top: 8px;">✅ <strong>Resposta correta: C)</strong> Nade паралельно а praia para sair da corrente, depois retorne а praia. A corrente é estreita, então em poucos metros você já estará livre.</p>
+                        </div>
+                        <div class="quiz-question" data-question="3" style="margin-top: 20px;">
+                            <p style="font-weight: 600; margin-bottom: 10px;">3. Qual é o melhor horário para iniciantes surfarem?</p>
+                            <label style="display: block; padding: 8px; background: white; border-radius: 8px; margin: 5px 0; cursor: pointer;">
+                                <input type="radio" name="sq3" value="a"> A) Manhã cedo (das 6h às 9h)
+                            </label>
+                            <label style="display: block; padding: 8px; background: white; border-radius: 8px; margin: 5px 0; cursor: pointer;">
+                                <input type="radio" name="sq3" value="b"> B) Meio-dia
+                            </label>
+                            <label style="display: block; padding: 8px; background: white; border-radius: 8px; margin: 5px 0; cursor: pointer;">
+                                <input type="radio" name="sq3" value="c"> C) Final da tarde (após 17h)
+                            </label>
+                            <label style="display: block; padding: 8px; background: white; border-radius: 8px; margin: 5px 0; cursor: pointer;">
+                                <input type="radio" name="sq3" value="d"> D) Qualquer horário
+                            </label>
+                            <p style="font-size: 11px; color: var(--gray-400); margin-top: 8px;">✅ <strong>Resposta correta: A)</strong> Manhã cedo oferece ondas menores (por causa do vento terral), mais vazio na água e água mais limpa.</p>
+                        </div>
+                        <div class="quiz-question" data-question="4" style="margin-top: 20px;">
+                            <p style="font-weight: 600; margin-bottom: 10px;">4. O que fazer se você vir alguém se afogando no mar?</p>
+                            <label style="display: block; padding: 8px; background: white; border-radius: 8px; margin: 5px 0; cursor: pointer;">
+                                <input type="radio" name="sq4" value="a"> A) Entrar no mar para rescatar immediately
+                            </label>
+                            <label style="display: block; padding: 8px; background: white; border-radius: 8px; margin: 5px 0; cursor: pointer;">
+                                <input type="radio" name="sq4" value="b"> B) Gritar por ajuda e jogar algo que flutue
+                            </label>
+                            <label style="display: block; padding: 8px; background: white; border-radius: 8px; margin: 5px 0; cursor: pointer;">
+                                <input type="radio" name="sq4" value="c"> C) Ignorar porque não é sua responsabilidade
+                            </label>
+                            <label style="display: block; padding: 8px; background: white; border-radius: 8px; margin: 5px 0; cursor: pointer;">
+                                <input type="radio" name="sq4" value="d"> D) Tirar foto para postar
+                            </label>
+                            <p style="font-size: 11px; color: var(--gray-400); margin-top: 8px;">✅ <strong>Resposta correta: B)</strong> Grite por ajuda (socorro!), jogue algo que flutue (boia, prancha,garrafa PET) e só entre se for salva-vidas treinado. Nunca entre sozinho se a pessoa estiver em pânico.</p>
+                        </div>
+                        <div class="quiz-question" data-question="5" style="margin-top: 20px;">
+                            <p style="font-weight: 600; margin-bottom: 10px;">5. Por que não é recomendado surfar sozinho?</p>
+                            <label style="display: block; padding: 8px; background: white; border-radius: 8px; margin: 5px 0; cursor: pointer;">
+                                <input type="radio" name="sq5" value="a"> A) É mais divertido com amigos
+                            </label>
+                            <label style="display: block; padding: 8px; background: white; border-radius: 8px; margin: 5px 0; cursor: pointer;">
+                                <input type="radio" name="sq5" value="b"> B) Se algo der errado, não terá ajuda imediata
+                            </label>
+                            <label style="display: block;padding: 8px; background: white; border-radius: 8px; margin: 5px 0; cursor: pointer;">
+                                <input type="radio" name="sq5" value="c"> C) Não há motivo, pode surfar sozinho
+                            </label>
+                            <label style="display: block; padding: 8px; background: white; border-radius: 8px; margin: 5px 0; cursor: pointer;">
+                                <input type="radio" name="sq5" value="d"> D) É mais difícil de carregar a prancha
+                            </label>
+                            <p style="font-size: 11px; color: var(--gray-400); margin-top: 8px;">✅ <strong>Resposta correta: B)</strong> Em caso de lesão, afogamento ou emergency, ter alguém por perto pode salvar sua vida. Sempresurf com pelo menos mais uma pessoa.</p>
+                        </div>
+                        <div class="quiz-question" data-question="6" style="margin-top: 20px;">
+                            <p style="font-weight: 600; margin-bottom: 10px;">6. O que significa bandeira vermelha na praia?</p>
+                            <label style="display: block; padding: 8px; background: white; border-radius: 8px; margin: 5px 0; cursor: pointer;">
+                                <input type="radio" name="sq6" value="a"> A) Praia fechada ao público
+                            </label>
+                            <label style="display: block; padding: 8px; background: white; border-radius: 8px; margin: 5px 0; cursor: pointer;">
+                                <input type="radio" name="sq6" value="b"> B) Perigo - não é recomendada para banho ou surf
+                            </label>
+                            <label style="display: block; padding: 8px; background: white; border-radius: 8px; margin: 5px 0; cursor: pointer;">
+                                <input type="radio" name="sq6" value="c"> C) Praia privativa
+                            </label>
+                            <label style="display: block; padding: 8px; background: white; border-radius: 8px; margin: 5px 0; cursor: pointer;">
+                                <input type="radio" name="sq6" value="d"> D) Alerta de chuva
+                            </label>
+                            <p style="font-size: 11px; color: var(--gray-400); margin-top: 8px;">✅ <strong>Resposta correta: B)</strong> Bandeira vermelha indica perigo moderado a grave. Não entre no mar. Verde = seguro, Amarelo = cuidado, Vermelho = proibido.</p>
+                        </div>
+                        <div class="quiz-question" data-question="7" style="margin-top: 20px;">
+                            <p style="font-weight: 600; margin-bottom: 10px;">7. Qual lado do mar é recomendado para entrar na água?</p>
+                            <label style="display: block; padding: 8px; background: white; border-radius: 8px; margin: 5px 0; cursor: pointer;">
+                                <input type="radio" name="sq7" value="a"> A) Qualquer lugar, tanto faz
+                            </label>
+                            <label style="display: block; padding: 8px; background: white; border-radius: 8px; margin: 5px 0; cursor: pointer;">
+                                <input type="radio" name="sq7" value="b"> B) Onde os surfistas estão pegando ondas
+                            </label>
+                            <label style="display: block; padding: 8px; background: white; border-radius: 8px; margin: 5px 0; cursor: pointer;">
+                                <input type="radio" name="sq7" value="c"> C) Local mais calmo, longe de outros surfistas
+                            </label>
+                            <label style="display: block; padding: 8px; background: white; border-radius: 8px; margin: 5px 0; cursor: pointer;">
+                                <input type="radio" name="sq7" value="d"> D) Onde tem mais ondas
+                            </label>
+                            <p style="font-size: 11px; color: var(--gray-400); margin-top: 8px;">✅ <strong>Resposta correta: C)</strong> Entre em área calma, longe de quem está surfando. Evite a "line-up" (área de pega-da-onda) para não.COLISÃO.</p>
+                        </div>
+                        <div class="quiz-question" data-question="8" style="margin-top: 20px;">
+                            <p style="font-weight: 600; margin-bottom: 10px;">8. Por que é importante aquecer antes de surfar?</p>
+                            <label style="display: block; padding: 8px; background: white; border-radius: 8px; margin: 5px 0; cursor: pointer;">
+                                <input type="radio" name="sq8" value="a"> A) Para evitar cãibras e lesões
+                            </label>
+                            <label style="display: block; padding: 8px; background: white; border-radius: 8px; margin: 5px 0; cursor: pointer;">
+                                <input type="radio" name="sq8" value="b"> B) Porque os outros fazem
+                            </label>
+                            <label style="display: block; padding: 8px; background: white; border-radius: 8px; margin: 5px 0; cursor: pointer;">
+                                <input type="radio" name="sq8" value="c"> C) Para ficar mais tempo no mar
+                            </label>
+                            <label style="display: block; padding: 8px; background: white; border-radius: 8px; margin: 5px 0; cursor: pointer;">
+                                <input type="radio" name="sq8" value="d"> D) Não é importante
+                            </label>
+                            <p style="font-size: 11px; color: var(--gray-400); margin-top: 8px;">✅ <strong>Resposta correta: A)</strong> O aquecimento previne cãibras, lesões musculares e prepara o corpo para o esforço do paddling e manobras.</p>
+                        </div>
+                        <div class="quiz-question" data-question="9" style="margin-top: 20px;">
+                            <p style="font-weight: 600; margin-bottom: 10px;">9. O que é fundamental verificar antes de entrar no mar?</p>
+                            <label style="display: block; padding: 8px; background: white; border-radius: 8px; margin: 5px 0; cursor: pointer;">
+                                <input type="radio" name="sq9" value="a"> A) A cor da areia
+                            </label>
+                            <label style="display: block; padding: 8px; background: white; border-radius: 8px; margin: 5px 0; cursor: pointer;">
+                                <input type="radio" name="sq9" value="b"> B) Condições do mar (ondas, vento, correntes) e bandeiras
+                            </label>
+                            <label style="display: block; padding: 8px; background: white; border-radius: 8px; margin: 5px 0; cursor: pointer;">
+                                <input type="radio" name="sq9" value="c"> C) A temperatura da água
+                            </label>
+                            <label style="display: block; padding: 8px; background: white; border-radius: 8px; margin: 5px 0; cursor: pointer;">
+                                <input type="radio" name="sq9" value="d"> D) Se tem salva-vidas na praia
+                            </label>
+                            <p style="font-size: 11px; color: var(--gray-400); margin-top: 8px;">✅ <strong>Resposta correta: B)</strong> Sempre verifique: tamanho das ondas, direção do vento, presença de correntes e bandeiras de perigo. Nunca entre sem saber as condições.</p>
+                        </div>
+                        <div class="quiz-question" data-question="10" style="margin-top: 20px;">
+                            <p style="font-weight: 600; margin-bottom: 10px;">10. O que fazer se vocêCapotar a prancha enquanto surf?</p>
+                            <label style="display: block; padding: 8px; background: white; border-radius: 8px; margin: 5px 0; cursor: pointer;">
+                                <input type="radio" name="sq10" value="a"> A) Ficar parado e esperar ajuda
+                            </label>
+                            <label style="display: block; padding: 8px; background: white; border-radius: 8px; margin: 5px 0; cursor: pointer;">
+                                <input type="radio" name="sq10" value="b"> B) Segurar a borda da prancha e mergulhar abaixo da onda
+                            </label>
+                            <label style="display: block; padding: 8px; background: white; border-radius: 8px; margin: 5px 0; cursor: pointer;">
+                                <input type="radio" name="sq10" value="c"> C) Tentar voltar para a superfície rapidamente
+                            </label>
+                            <label style="display: block; padding: 8px; background: white; border-radius: 8px; margin: 5px 0; cursor: pointer;">
+                                <input type="radio" name="sq10" value="d"> D) Gritar imediatamente
+                            </label>
+                            <p style="font-size: 11px; color: var(--gray-400); margin-top: 8px;">✅ <strong>Resposta correta: B)</strong> Agarre a borda da prancha, segure e mergulhe para baixo da onda que está quebrando. Não lute contra a força da água. Quando a onda passar, você pode subir.</p>
+                        </div>
+                        <button class="btn btn-primary" style="width: 100%; margin-top: 20px;" onclick="submitQuizSeguranca()">Enviar Respostas</button>
+                    </div>
                 </div>
                 <div class="card">
                     <span class="card-tag green">+30 PONTOS</span>
@@ -5467,6 +5631,23 @@
             const emoji = pct >= 80 ? '🏆' : pct >= 50 ? '👍' : '📚';
             showToast(`${emoji} ${correct}/${total} acertos (${pct}%)! +${pts} pontos`);
             earnPoints('quiz', pts);
+        }
+
+        function submitQuizSeguranca() {
+            const answers = { sq1: 'b', sq2: 'c', sq3: 'a', sq4: 'b', sq5: 'b', sq6: 'b', sq7: 'c', sq8: 'a', sq9: 'b', sq10: 'b' };
+            let correct = 0;
+            let total = Object.keys(answers).length;
+            for (const [q, ans] of Object.entries(answers)) {
+                const selected = document.querySelector(`input[name="${q}"]:checked`);
+                if (selected && selected.value === ans) correct++;
+            }
+            const pct = Math.round((correct / total) * 100);
+            const pts = correct >= 8 ? 50 : correct >= 5 ? 30 : 10;
+            const emoji = pct >= 80 ? '🏆' : pct >= 50 ? '👍' : '📚';
+            showToast(`${emoji} Segurança: ${correct}/${total} acertos (${pct}%)! +${pts} pontos`);
+            earnPoints('quiz', pts);
+            document.getElementById('quiz-seguranca').style.display = 'none';
+            document.querySelector('button[onclick="startQuiz(\'seguranca\')"]').textContent = 'Refazer Quiz';
         }
 
         // Competition Countdown
