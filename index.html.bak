@@ -4549,10 +4549,6 @@
                 <div style="font-size: 12px; color: var(--gray-400);">
                     <span>🅿️ Estacionamento</span> • <span>🍽️ Bares na praia</span> • <span>🚿 Vestiários</span>
                 </div>
-                <div style="margin-top: 10px; padding: 10px; background: linear-gradient(135deg, #FEF9E7, #FEF5E7); border-radius: 8px; font-size: 12px; cursor: pointer;" onclick="if(this.querySelector('p').style.display=='none'){this.querySelector('p').style.display='';this.querySelector('span').textContent='💡 Toque para esconder'}else{this.querySelector('p').style.display='none';this.querySelector('span').textContent='💡 Dica: Surfe aqui às 6-8h!'}">
-                    <span>💡 Dica: Surfe aqui às 6-8h!</span>
-                    <p style="display:none; margin-top: 6px; color: #666;">Nas primeiras horas o vento está calmo e as ondas ficam organizadas.</p>
-                </div>
             </div>
 
             <div class="card beach-card" data-region="norte" style="margin-bottom: 12px; border-left: 4px solid #00A8CC;">
