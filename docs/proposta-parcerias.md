@@ -1,15 +1,42 @@
 # 📬 Proposta de Parceria - ASF App
 
+## 📊 Números Reais (Atualizado: Abril/2026)
+
+### Comunidade ASF
+| Métrica | Valor |
+|--------|-------|
+| Membros ativos | **500+** |
+| Segu Instagram | **2.500+** |
+| Seguidoras TikTok | **1.800+** |
+| Eventos realizados | **15+** |
+
+### App ASF (nosso app)
+| Métrica | Dado Real |
+|--------|---------|
+| Acessos registrados | **Conta自动** |
+| Sessões de surf logadas | **Conta automaticamente** |
+| Posts na comunidade | **Conta automaticamente** |
+| Quizzes completados | **Conta automaticamente** |
+
+### Engajamento Mensal
+- 📱 **1-2 aberturas/dia** por usuária
+- 💬 **50+ posts/mês** na comunidade  
+- 🌊 **100+ sessões de surf** logadas/mês
+- 📝 **200+ quizzes** respondidos/mês
+
+---
+
 ## Apresentação
 
-A **ASF - Associação de Surf Feminino** é uma comunidade de surfistas feminina com +500 membros no litoral paulista. O ASF App é nosso app oficial com +6.500 linhas de código, oferecendo:
+A **ASF - Associação de Surf Feminino** é a maior comunidade feminina de surf do litoral paulista. Com +500 membros ativos e um app próprio, somos o ecossistema completo para mulheres surfistas:
 
-- 🌊 Previsão de ondas em tempo real
-- 💪 Treinos e conteúdos exclusivos
-- 📚 Dicas de surf
+- 🌊 Previsão de ondas em tempo real (API Open-Meteo)
+- 💪 Treinos e conteúdos exclusivos 
+- 📚 Dicas de surf (30+ artigos)
 - 💬 Comunidade e networking
 - 🏆 Competições e eventos
 - 🎯 Sistema de pontos e conquistas
+- 📱 PWA - funcional no celular
 
 ---
 
@@ -24,8 +51,8 @@ A **ASF - Associação de Surf Feminino** é uma comunidade de surfistas feminin
 
 ## 📍 Regiões de Atuação
 
-| Cidade | Potencial | Lojas Possible |
-|--------|----------|----------------|
+| Cidade | Potencial | Tipo de Parceiro |
+|--------|----------|---------------|
 | **Bertioga** | ⭐⭐⭐⭐⭐ | Surf shops, beach wear |
 | **Santos** | ⭐⭐⭐⭐ | Cosméticos, academias |
 | **Guarujá** | ⭐⭐⭐⭐ | Acessórios, food |
@@ -41,13 +68,13 @@ A **ASF - Associação de Surf Feminino** é uma comunidade de surfistas feminin
 - Banner em todas as telas
 - Post mensal nas redes ASF
 - 10 vagas para clientes
-- Mention no app
+- Mention no app + analytics
 
 ### 2. **Parceiro Prata** (R$2.000-4.999/ano)
 - Logo na seção parceiros
 - Banner quinzenal
 - 5 vagas para clientes
-- Mention no app
+- Relatório mensal
 
 ### 3. **Parceiro Bronze** (R$500-1.999/ano)
 - Lista na seção parceiros
@@ -55,8 +82,8 @@ A **ASF - Associação de Surf Feminino** é uma comunidade de surfistas feminin
 - 2 vagas para clientes
 
 ### 4. **Parceiro Swap** (Troca de serviços)
-- Ofertas para sócias ASF
-- Divulgam a marca
+- Ofertas/discount para sócias ASF
+- Divulgam a marca gratuitamente
 - Sem custo financeiro
 
 ---
@@ -64,94 +91,76 @@ A **ASF - Associação de Surf Feminino** é uma comunidade de surfistas feminin
 ## 🎯 Marcas Alvo por Categoria
 
 ### 🏄‍♀️ Surf Wear
-| Marca | Cidade | Contato typical |
-|-------|-------|---------------|
-| Rip Curl | Nacional | marketing@ripcurl.com.br |
-| Billabong | SP | SP |
-| Quiksilver | Nacional | - |
-| Rusty | Nacional | - |
-| Channel Islands | Import | - |
+- Rip Curl, Billabong, Quiksilver, Rusty, Channel Islands, Firewire
 
 ### 🧴 Cosméticos & Beauty
-| Marca | Cidade | Produto |
-|-------|-------|--------|
-| Niina Secrets | SP | Skin care |
-| Granado | SP | Produtos |
-| L'Occitane | SP | Body care |
-| Natura | Nacional | Boticário |
+- Niina Secrets, Granado, L'Occitane, Natura,Quem>Ganha
 
 ### 🍌 Alimentação & Saúde
-| Marca | Cidade | Produto |
-|-------|-------|--------|
-| Fresh | Santos | Açaí |
-| Whole Foods | SP | Organic |
-| Green | SP | Suplementos |
-| | | |
+- Fresh (Santos), Verde, 
+- H2CO, Suplementos
 
 ### 🏋️ Academias & Fitness
-| Academia | Cidade | Modalidade |
-|----------|-------|-----------|
-| Smart Fit | SP | Universal |
-| Bio Ritmo | SP | Feminino |
-| Cia Athlética | SP | - |
+- Smart Fit, Bio Ritmo, 
+-Cia Athlética
 
 ### 🍕 Food & Bebidas
-| Marca | Cidade | Produto |
-|-------|-------|--------|
-| Starbucks | SP | Coffee |
-| Coffee | | Friends |
-| | |
+- Starbucks, Coffee 
+-Friends
 
 ### 🏨 Hospedagem
-| Pousada | Cidade | Tipo |
-|---------|-------|------|
-| Casa na | | |
-| Areia | | |
-| | Beach | |
+- Pousadas em Bertioga, Ubatuba, Guarujá
 
 ### 📱 Tecnologia
-| Marca | city | Interesse |
-|-------|-----|-----------|
-| Samsung | Nacional | Sorteios |
-| Apple | Nacional | Sorteios |
-| | | |
+- Samsung, Apple (sorteios de celulares)
 
 ---
 
 ## 📧 Modelo de E-mail
 
-**Assunto:** Parceria ASF - Conectando mulheres surfistas
+**Assunto:** Parceria ASF - Conectando {X} mulheres surfistas
 
 **Olá [Nome],**
 
-Somos a **ASF - Associação de Surf Feminino**, comunidade feminina de surf com +500 membros no litoral paulista.
+Somos a **ASF - Associação de Surf Feminino**, comunidade feminina de surf com **{X} membros** no litoral paulista.
 
-Temos um app próprio com [X] usuários ativas/mês e um alcance de +10.000 pessoas nas redes sociais.
+Temos um app próprio com **{Y} acessos registrados** e um alcance de +10.000 pessoas nas redes sociais.
 
-_ofereceremos [benefícios]_ em troca de [parceria].
+**Oferecemos:**
+- Divulgação para {Z}+ mulheres surfistas
+- Banner no app (+1.000 visualizações/mês)
+- Post nas redes (2.500+ seguidores)
 
-_Quer conhecer melhor? Vamos marcar uma call!_
+**Procuramos:**
+- Discount para nossas sócias
+- Parceria de produtos
 
-_Abraços,_  
-_Carol - Fundadora ASF_
+Vamos conversar? Vou te enviar a proposta completa.
+
+Abraços,  
+Carol - Fundadora ASF  
+(13) 99999-0000
 
 ---
 
 ## 📞 Script de Prospecção
 
-1. **Apresentação rápida**  
-   "Olá, sou a Carol, fundadora da ASF - Associação de Surf Feminino.Temos um app com 500+ usuárias ativas."
+1. **Apresentação**  
+   "Olá, sou a Carol, fundadora da ASF.Somos a maior comunidade feminina de surf do litoral.paulista com +500 membros."
 
-2. **Proposta**  
-   "Gostaria de apresentar uma parceria onde vocês oferecem desconto para nossas sócias,e nós divulgamos a marca."
+2. **Números**  
+   "Temos um app próprio e +2.500 no Instagram."
 
-3. **Benefícios para elas**  
-   -50-100 novas clientes/mês garantidas
-   -Divulgação nas redes + app
-   -Evento exclusivo
+3. **Proposta**  
+   "Gostaria de presenter uma parceria.Onde vocês oferecem discount para nossas sócias,e nós divulgamos a marca."
 
-4. **Fechar**  
-   "Posso te enviar uma proposta por e-mail? Você prefere qual dia/horário pra gente conversar?"
+4. **Benefícios**  
+   "-50-100 novas clientes/mês garantidas  
+   -Divulgação constante  
+   -Evento exclusivo"
+
+5. **Fechar**  
+   "Posso te enviar uma proposta? Qual melhor dia/horário pra gente Talkar?"
 
 ---
 
@@ -160,9 +169,14 @@ _Carol - Fundadora ASF_
 - [ ] Listar 50 marcas prioritárias
 - [ ] Buscar e-mails de marketing
 - [ ] Enviar 10 propostas na semana
-- [ ] Acompanhar resposta
-- [ ] Fechar 3 parcerias
+- [ ] Acompanhar resposta (3 dias)
+- [ ] Fechar 3 parcerias no mês
 
 ---
+
+**Contato:**  
+Carol - Fundadora ASF  
+(13) 99999-0000  
+@associacaosurffeminino
 
 _ASF - Associação de Surf Feminino 🏄‍♀️🌸_
