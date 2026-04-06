@@ -1442,23 +1442,23 @@
 
     <!-- Utilities -->
     <div class="utilities-grid">
-        <button class="utility-btn" onclick="showSection('dicas'); window.scrollTo({top:400,behavior:'smooth'});">
+        <button class="utility-btn" onclick="showSection('dicas')">
             <span class="icon">🌊</span>
             <span class="label">Ondas</span>
         </button>
-        <button class="utility-btn" onclick="showSection('utilities'); window.scrollTo({top:500,behavior:'smooth'});">
+        <button class="utility-btn" onclick="showSection('utilities')">
             <span class="icon">🌡️</span>
             <span class="label">Clima</span>
         </button>
-        <button class="utility-btn" onclick="showSection('utilities'); window.scrollTo({top:550,behavior:'smooth'});">
+        <button class="utility-btn" onclick="showSection('utilities')">
             <span class="icon">🗓️</span>
             <span class="label">Marés</span>
         </button>
-        <button class="utility-btn" onclick="showSection('utilities'); window.scrollTo({top:600,behavior:'smooth'});">
+        <button class="utility-btn" onclick="showSection('utilities')">
             <span class="icon">🧮</span>
             <span class="label">Calculadora</span>
         </button>
-        <button class="utility-btn" onclick="showSection('competicoes'); window.scrollTo({top:0,behavior:'smooth'});" style="background: linear-gradient(135deg, rgba(155,89,182,0.1) 0%, rgba(255,107,107,0.1) 100%);">
+        <button class="utility-btn" onclick="showSection('competicoes')" style="background: linear-gradient(135deg, rgba(155,89,182,0.1) 0%, rgba(255,107,107,0.1) 100%);">
             <span class="icon">🏆</span>
             <span class="label">Competições</span>
         </button>
@@ -4239,7 +4239,7 @@
                     <div class="icon">🌊</div>
                     <h4>Condições do Mar</h4>
                     <div id="mar-data">
-                        <p style="font-size: 14px; color: var(--gray-400);">Carregando dados...</p>
+                        <p style="font-size: 14px; color: var(--primary);">-- Carregando...</p>
                     </div>
                     <button class="btn btn-secondary" style="width: 100%; margin-top: 12px;" id="btn-mar-details" onclick="showMarDetails()">Ver Detalhes</button>
                 </div>
@@ -4249,7 +4249,7 @@
                     <div class="icon">🌡️</div>
                     <h4>Clima Agora</h4>
                     <div id="clima-data">
-                        <p style="font-size: 14px; color: var(--gray-400);">Carregando dados...</p>
+                        <p style="font-size: 14px; color: var(--primary);">-- Carregando...</p>
                     </div>
                     <button class="btn btn-secondary" style="width: 100%; margin-top: 12px;" id="btn-clima-details" onclick="showClimaDetails()">Ver Previsão 7 dias</button>
                 </div>
@@ -4260,7 +4260,7 @@
                     <h4>Índice UV</h4>
                     <p>Radiação solar - Proteja sua pele!</p>
                     <div id="uv-data" style="text-align: center; margin: 12px 0;">
-                        <p style="font-size: 14px; color: var(--gray-400);">Carregando...</p>
+                        <p style="font-size: 14px; color: var(--primary);">-- Carregando...</p>
                     </div>
                     <div id="uv-protection" style="background: var(--light); padding: 12px; border-radius: 12px; font-size: 12px;">
                         <p style="margin: 0;"><strong>☀️ Dica:</strong> Aplicar protetor FPS 30+ a cada 2h</p>
