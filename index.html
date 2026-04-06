@@ -1332,9 +1332,67 @@
                 <a href="https://wa.me/5513999990000" target="_blank" class="icon-btn" title="Fale com a gente no WhatsApp" style="color: white; text-decoration: none;">
                     💬
                 </a>
+                <button class="icon-btn" onclick="toggleChatbot()" title=" chatbot" style="color: white;">🤖</button>
             </div>
         </div>
     </header>
+
+    <!-- Chatbot Panel -->
+    <div id="chatbot-panel" style="display:none; position:fixed; bottom:80px; right:20px; width:320px; max-height:400px; background:white; border-radius:16px; box-shadow:0 10px40px rgba(0,0,0,0.2); z-index:1000; padding:16px; overflow-y:auto;">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+            <strong style="color:#0E2439;">🤖 Assistente ASF</strong>
+            <button onclick="toggleChatbot()" style="background:none; border:none; font-size:20px; cursor:pointer;">✕</button>
+        </div>
+        <div id="chatbot-messages" style="min-height:200px; max-height:300px; overflow-y:auto;"></div>
+        <div style="display:flex; gap:8px; margin-top:12px;">
+            <input type="text" id="chatbot-input" placeholder="Pergunte algo..." style="flex:1; padding:10px; border:1px solid #ddd; border-radius:8px; font-size:13px;">
+            <button onclick="sendChatbotMessage()" style="background:#00A8CC; color:white; border:none; padding:10px 16px; border-radius:8px; cursor:pointer;">Enviar</button>
+        </div>
+    </div>
+
+    <script>
+        const chatbotFAQs = {
+            "como funciona": "O ASF App tem previsão de ondas, dicas, treinos, comunidade e muito mais! Clique nas abas para explorar.",
+            "previsão": "A previsão de ondas mostra as condições atualizadas automatically para as praias do litoral paulista.",
+            "onda": "A previsão mostra altura, período e direção das ondas para cada praia.",
+            "como participar": "Basta fazer login no app e explorar as seções.多多!",
+            "eventos": "Temos competições mensuales. Verifique a aba 'Competições'.",
+            "competições": "As competições estão na aba 🏆. Lá você vê próximos eventos e resultados.",
+            "pontos": "Você ganha pontos fazendo quizzes, logando sessões e participando. Consulte seu nível na aba Pontos.",
+            "nível": "Seu nível aumenta conforme você ganha pontos usando o app!",
+            "descontos": "Na aba Lojas tem desconto em parceiros. Mostre seu ASF App!",
+            "grupos": "Na aba Comunidad você encontra grupos de surfe por região.",
+            "manas": "Use a aba 'Próximas' para encontrar sisters surfistas perto de você!",
+            "contato": "Fale conosco pelo WhatsApp ou Instagram @associacaosurffeminino"
+        };
+
+        function toggleChatbot() {
+            const panel = document.getElementById("chatbot-panel");
+            panel.style.display = panel.style.display === "none" ? "block" : "none";
+        }
+
+        function sendChatbotMessage() {
+            const input = document.getElementById("chatbot-input");
+            const msg = input.value.toLowerCase().trim();
+            if (!msg) return;
+            
+            const msgs = document.getElementById("chatbot-messages");
+            msgs.innerHTML += "<div style='background:#eee; padding:8px; border-radius:8px; margin:4px 0;'><strong>Você:</strong> " + input.value + "</div>";
+            
+            let response = "Desculpe, não entendi. Tente: previsão, pontos, eventos, contatos ou como participar! 🤖";
+            for (const [key, value] of Object.entries(chatbotFAQs)) {
+                if (msg.includes(key)) { response = value; break; }
+            }
+            
+            msgs.innerHTML += "<div style='background:#E0F7FA; padding:8px; border-radius:8px; margin:4px 0;'><strong>🤖:</strong> " + response + "</div>";
+            msgs.scrollTop = msgs.scrollHeight;
+            input.value = "";
+        }
+
+        document.getElementById("chatbot-input").addEventListener("keypress", function(e) {
+            if (e.key === "Enter") sendChatbotMessage();
+        });
+    </script>
 
     <!-- Notifications Panel -->
     <div id="notifications-panel" style="display: none; position: fixed; top: 80px; right: 15px; width: 320px; max-height: 400px; background: white; border-radius: 16px; box-shadow: 0 10px 40px rgba(0,0,0,0.2); z-index: 1000; overflow: hidden;">
