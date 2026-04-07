@@ -1289,7 +1289,72 @@
             "https://www.tiktok.com/@Cahrol.asf"
         ]
     }
-    </script>
+    
+<script>
+var translations = {
+    'pt': {},
+    'en': {
+        'Dicas': 'Tips',
+        'Manas Próximas': 'Nearby Sisters',
+        'Mobilidade': 'Mobility',
+        'Lojas': 'Shops',
+        'Praias': 'Beaches',
+        'Surftrips': 'Surftrips',
+        'Utilitários': 'Utilities',
+        'Comunidade': 'Community',
+        'Competições': 'Competitions',
+        'Premium': 'Premium',
+        'Previsão de Ondas': 'Wave Forecast',
+        'Nível': 'Level',
+        'Pontos': 'Points',
+        'Checklist Pré-Surf': 'Pre-Surf Checklist',
+        'Calculadora de Prancha': 'Board Calculator'
+    },
+    'es': {
+        'Dicas': 'Consejos',
+        'Manas Próximas': ' sisters Cercanas',
+        'Mobilidad': 'Movilidad',
+        'Lojas': 'Tiendas',
+        'Praias': 'Playas',
+        'Surftrips': 'Surftrips',
+        'Utilitários': 'Utilidades',
+        'Comunidad': 'Comunidad',
+        'Competições': 'Competiciones',
+        'Premium': 'Premium',
+        'Previsão de Ondas': 'Pronóstico de Olas',
+        'Nível': 'Nivel',
+        'Pontos': 'Puntos',
+        'Checklist Pré-Surf': 'Lista Pre-Surf',
+        'Calculadora de Prancha': 'Calculadora de Tabla'
+    }
+};
+
+function setLanguage(lang) {
+    localStorage.setItem('asf-lang', lang);
+    document.querySelectorAll('button[onclick^="setLanguage"]').forEach(b => {
+        b.style.background = b.textContent.includes(lang === 'en' ? 'EN' : lang === 'es' ? 'ES' : 'PT') ? '#00A8CC' : 'rgba(255,255,255,0.2)';
+        b.style.color = b.textContent.includes(lang === 'en' ? 'EN' : lang === 'es' ? 'ES' : 'PT') ? 'white' : 'white';
+    });
+    var terms = translations[lang];
+    // Update section titles
+    document.querySelectorAll('.section-title').forEach(el => {
+        var text = el.textContent;
+        for (var key in terms) {
+            if (text.includes(key)) {
+                el.textContent = text.replace(key, terms[key]);
+            }
+        }
+    });
+    showToast('Idioma: ' + (lang === 'pt' ? 'Português' : lang === 'en' ? 'English' : 'Español') + ' 🌎');
+}
+
+// Load saved language
+document.addEventListener('DOMContentLoaded', function() {
+    var savedLang = localStorage.getItem('asf-lang');
+    if (savedLang) setLanguage(savedLang);
+});
+</script>
+
 </head>
 <body>
     <!-- Skip to content for accessibility -->
@@ -1392,7 +1457,72 @@
         document.getElementById("chatbot-input").addEventListener("keypress", function(e) {
             if (e.key === "Enter") sendChatbotMessage();
         });
-    </script>
+    
+<script>
+var translations = {
+    'pt': {},
+    'en': {
+        'Dicas': 'Tips',
+        'Manas Próximas': 'Nearby Sisters',
+        'Mobilidade': 'Mobility',
+        'Lojas': 'Shops',
+        'Praias': 'Beaches',
+        'Surftrips': 'Surftrips',
+        'Utilitários': 'Utilities',
+        'Comunidade': 'Community',
+        'Competições': 'Competitions',
+        'Premium': 'Premium',
+        'Previsão de Ondas': 'Wave Forecast',
+        'Nível': 'Level',
+        'Pontos': 'Points',
+        'Checklist Pré-Surf': 'Pre-Surf Checklist',
+        'Calculadora de Prancha': 'Board Calculator'
+    },
+    'es': {
+        'Dicas': 'Consejos',
+        'Manas Próximas': ' sisters Cercanas',
+        'Mobilidad': 'Movilidad',
+        'Lojas': 'Tiendas',
+        'Praias': 'Playas',
+        'Surftrips': 'Surftrips',
+        'Utilitários': 'Utilidades',
+        'Comunidad': 'Comunidad',
+        'Competições': 'Competiciones',
+        'Premium': 'Premium',
+        'Previsão de Ondas': 'Pronóstico de Olas',
+        'Nível': 'Nivel',
+        'Pontos': 'Puntos',
+        'Checklist Pré-Surf': 'Lista Pre-Surf',
+        'Calculadora de Prancha': 'Calculadora de Tabla'
+    }
+};
+
+function setLanguage(lang) {
+    localStorage.setItem('asf-lang', lang);
+    document.querySelectorAll('button[onclick^="setLanguage"]').forEach(b => {
+        b.style.background = b.textContent.includes(lang === 'en' ? 'EN' : lang === 'es' ? 'ES' : 'PT') ? '#00A8CC' : 'rgba(255,255,255,0.2)';
+        b.style.color = b.textContent.includes(lang === 'en' ? 'EN' : lang === 'es' ? 'ES' : 'PT') ? 'white' : 'white';
+    });
+    var terms = translations[lang];
+    // Update section titles
+    document.querySelectorAll('.section-title').forEach(el => {
+        var text = el.textContent;
+        for (var key in terms) {
+            if (text.includes(key)) {
+                el.textContent = text.replace(key, terms[key]);
+            }
+        }
+    });
+    showToast('Idioma: ' + (lang === 'pt' ? 'Português' : lang === 'en' ? 'English' : 'Español') + ' 🌎');
+}
+
+// Load saved language
+document.addEventListener('DOMContentLoaded', function() {
+    var savedLang = localStorage.getItem('asf-lang');
+    if (savedLang) setLanguage(savedLang);
+});
+</script>
+
 
     <!-- Notifications Panel -->
     <div id="notifications-panel" style="display: none; position: fixed; top: 80px; right: 15px; width: 320px; max-height: 400px; background: white; border-radius: 16px; box-shadow: 0 10px 40px rgba(0,0,0,0.2); z-index: 1000; overflow: hidden;">
@@ -5364,6 +5494,12 @@
             <a href="#" onclick="toggleSharePanel()" style="color: white; text-decoration: none; font-size: 13px; opacity: 0.8;">📤 Compartilhar</a>
         </div>
         <div style="border-top: 1px solid rgba(255,255,255,0.1); padding-top: 16px; font-size: 11px; opacity: 0.5;">
+            <!-- Language Selector -->
+            <div style="display:flex; justify-content:center; gap:10px; margin-bottom:12px;">
+                <button onclick="setLanguage('pt')" style="background:#00A8CC; color:white; border:none; padding:6px 12px; border-radius:6px; font-size:11px; cursor:pointer;">🇧🇷 PT</button>
+                <button onclick="setLanguage('en')" style="background:rgba(255,255,255,0.2); color:white; border:none; padding:6px 12px; border-radius:6px; font-size:11px; cursor:pointer;">🇺🇸 EN</button>
+                <button onclick="setLanguage('es')" style="background:rgba(255,255,255,0.2); color:white; border:none; padding:6px 12px; border-radius:6px; font-size:11px; cursor:pointer;">🇪🇸 ES</button>
+            </div>
             <div id="app-stats" style="display:flex; justify-content:center; gap:20px; margin-bottom:10px; font-size:12px;">
                 <span>📱 <span id="stat-opens">0</span> acessos</span>
                 <span>👥 <span id="stat-members">500+</span> sócias</span>
@@ -5377,7 +5513,72 @@
         // Display real stats
         document.getElementById('stat-opens').textContent = localStorage.getItem('asf-opens') || '1';
         document.getElementById('stat-sessions').textContent = (JSON.parse(localStorage.getItem('surf-sessions') || []).length;
-    </script>
+    
+<script>
+var translations = {
+    'pt': {},
+    'en': {
+        'Dicas': 'Tips',
+        'Manas Próximas': 'Nearby Sisters',
+        'Mobilidade': 'Mobility',
+        'Lojas': 'Shops',
+        'Praias': 'Beaches',
+        'Surftrips': 'Surftrips',
+        'Utilitários': 'Utilities',
+        'Comunidade': 'Community',
+        'Competições': 'Competitions',
+        'Premium': 'Premium',
+        'Previsão de Ondas': 'Wave Forecast',
+        'Nível': 'Level',
+        'Pontos': 'Points',
+        'Checklist Pré-Surf': 'Pre-Surf Checklist',
+        'Calculadora de Prancha': 'Board Calculator'
+    },
+    'es': {
+        'Dicas': 'Consejos',
+        'Manas Próximas': ' sisters Cercanas',
+        'Mobilidad': 'Movilidad',
+        'Lojas': 'Tiendas',
+        'Praias': 'Playas',
+        'Surftrips': 'Surftrips',
+        'Utilitários': 'Utilidades',
+        'Comunidad': 'Comunidad',
+        'Competições': 'Competiciones',
+        'Premium': 'Premium',
+        'Previsão de Ondas': 'Pronóstico de Olas',
+        'Nível': 'Nivel',
+        'Pontos': 'Puntos',
+        'Checklist Pré-Surf': 'Lista Pre-Surf',
+        'Calculadora de Prancha': 'Calculadora de Tabla'
+    }
+};
+
+function setLanguage(lang) {
+    localStorage.setItem('asf-lang', lang);
+    document.querySelectorAll('button[onclick^="setLanguage"]').forEach(b => {
+        b.style.background = b.textContent.includes(lang === 'en' ? 'EN' : lang === 'es' ? 'ES' : 'PT') ? '#00A8CC' : 'rgba(255,255,255,0.2)';
+        b.style.color = b.textContent.includes(lang === 'en' ? 'EN' : lang === 'es' ? 'ES' : 'PT') ? 'white' : 'white';
+    });
+    var terms = translations[lang];
+    // Update section titles
+    document.querySelectorAll('.section-title').forEach(el => {
+        var text = el.textContent;
+        for (var key in terms) {
+            if (text.includes(key)) {
+                el.textContent = text.replace(key, terms[key]);
+            }
+        }
+    });
+    showToast('Idioma: ' + (lang === 'pt' ? 'Português' : lang === 'en' ? 'English' : 'Español') + ' 🌎');
+}
+
+// Load saved language
+document.addEventListener('DOMContentLoaded', function() {
+    var savedLang = localStorage.getItem('asf-lang');
+    if (savedLang) setLanguage(savedLang);
+});
+</script>
+
 
     <script>
         function showSection(sectionId) {
@@ -7493,6 +7694,71 @@
         window.addEventListener('offline', updateConnectionStatus);
         window.addEventListener('online', updateConnectionStatus);
         updateConnectionStatus();
-    </script>
+    
+<script>
+var translations = {
+    'pt': {},
+    'en': {
+        'Dicas': 'Tips',
+        'Manas Próximas': 'Nearby Sisters',
+        'Mobilidade': 'Mobility',
+        'Lojas': 'Shops',
+        'Praias': 'Beaches',
+        'Surftrips': 'Surftrips',
+        'Utilitários': 'Utilities',
+        'Comunidade': 'Community',
+        'Competições': 'Competitions',
+        'Premium': 'Premium',
+        'Previsão de Ondas': 'Wave Forecast',
+        'Nível': 'Level',
+        'Pontos': 'Points',
+        'Checklist Pré-Surf': 'Pre-Surf Checklist',
+        'Calculadora de Prancha': 'Board Calculator'
+    },
+    'es': {
+        'Dicas': 'Consejos',
+        'Manas Próximas': ' sisters Cercanas',
+        'Mobilidad': 'Movilidad',
+        'Lojas': 'Tiendas',
+        'Praias': 'Playas',
+        'Surftrips': 'Surftrips',
+        'Utilitários': 'Utilidades',
+        'Comunidad': 'Comunidad',
+        'Competições': 'Competiciones',
+        'Premium': 'Premium',
+        'Previsão de Ondas': 'Pronóstico de Olas',
+        'Nível': 'Nivel',
+        'Pontos': 'Puntos',
+        'Checklist Pré-Surf': 'Lista Pre-Surf',
+        'Calculadora de Prancha': 'Calculadora de Tabla'
+    }
+};
+
+function setLanguage(lang) {
+    localStorage.setItem('asf-lang', lang);
+    document.querySelectorAll('button[onclick^="setLanguage"]').forEach(b => {
+        b.style.background = b.textContent.includes(lang === 'en' ? 'EN' : lang === 'es' ? 'ES' : 'PT') ? '#00A8CC' : 'rgba(255,255,255,0.2)';
+        b.style.color = b.textContent.includes(lang === 'en' ? 'EN' : lang === 'es' ? 'ES' : 'PT') ? 'white' : 'white';
+    });
+    var terms = translations[lang];
+    // Update section titles
+    document.querySelectorAll('.section-title').forEach(el => {
+        var text = el.textContent;
+        for (var key in terms) {
+            if (text.includes(key)) {
+                el.textContent = text.replace(key, terms[key]);
+            }
+        }
+    });
+    showToast('Idioma: ' + (lang === 'pt' ? 'Português' : lang === 'en' ? 'English' : 'Español') + ' 🌎');
+}
+
+// Load saved language
+document.addEventListener('DOMContentLoaded', function() {
+    var savedLang = localStorage.getItem('asf-lang');
+    if (savedLang) setLanguage(savedLang);
+});
+</script>
+
 </body>
 </html>
