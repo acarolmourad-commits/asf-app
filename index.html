@@ -7174,7 +7174,7 @@ document.addEventListener('DOMContentLoaded', function() {
             document.getElementById('timer-pause-btn').disabled = true;
             
             // Add points for completing workout
-            addPoints('treino', 50);
+            earnPoints('treino', 50);
             
             if ('speechSynthesis' in window) {
                 const msg = new SpeechSynthesisUtterance('Parabéns! Treino completo!');
