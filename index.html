@@ -4076,6 +4076,45 @@ document.addEventListener('DOMContentLoaded', function() {
                 <a href="#" class="see-all">Ver todas →</a>
             </div>
             
+            <!-- Surftrip Voting -->
+            <div style="background: linear-gradient(135deg, #00A8CC 0%, #0E2439 100%); padding: 20px; margin: 0 20px 20px; border-radius: 16px; color: white;">
+                <h3 style="margin-bottom: 8px;">🗳️ VOTAÇÃO: Para onde vamos?</h3>
+                <p style="font-size: 12px; opacity: 0.9; margin-bottom: 16px;">Vote no seu pico! O mais voto será o próximo Surftrip.</p>
+                
+                <h4 style="font-size: 13px; margin: 16px 0 8px;">🏄‍♀️ Picos Nacionais</h4>
+                <div style="display: flex; flex-direction: column; gap: 8px;">
+                    <button onclick="voteTrip(this, 'Bertioga')" style="background: rgba(255,255,255,0.15); border: 2px solid transparent; padding: 12px; border-radius: 10px; cursor: pointer; color: white; text-align: left; display: flex; justify-content: space-between;">
+                        <span>🏖️ Bertioga</span> <span id="vote-bertioga">0</span> votos
+                    </button>
+                    <button onclick="voteTrip(this, 'Baleia')" style="background: rgba(255,255,255,0.15); border: 2px solid transparent; padding: 12px; border-radius: 10px; cursor: pointer; color: white; text-align: left; display: flex; justify-content: space-between;">
+                        <span>🐋 Baleia</span> <span id="vote-baleia">0</span> votos
+                    </button>
+                    <button onclick="voteTrip(this, 'Ubatuba')" style="background: rgba(255,255,255,0.15); border: 2px solid transparent; padding: 12px; border-radius: 10px; cursor: pointer; color: white; text-align: left; display: flex; justify-content: space-between;">
+                        <span>🏄 Ubatuba</span> <span id="vote-ubatuba">0</span> votos
+                    </button>
+                </div>
+                
+                <h4 style="font-size: 13px; margin: 16px 0 8px;">🌍 internacionais (sem data)</h4>
+                <div style="display: flex; flex-direction: column; gap: 8px;">
+                    <button onclick="voteTrip(this, 'Bali')" style="background: rgba(255,255,255,0.1); border: 2px solid rgba(255,255,255,0.2); padding: 10px; border-radius: 10px; cursor: pointer; color: rgba(255,255,255,0.7);">
+                        🇮🇩 Bali <span id="vote-bali" style="float:right;">0</span> votos
+                    </button>
+                    <button onclick="voteTrip(this, 'Portugal')" style="background: rgba(255,255,255,0.1); border: 2px solid rgba(255,255,255,0.2); padding: 10px; border-radius: 10px; cursor: pointer; color: rgba(255,255,255,0.7);">
+                        🇵🇹 Portugal <span id="vote-portugal" style="float:right;">0</span> votos
+                    </button>
+                </div>
+            </div>
+            
+            <script>
+            function voteTrip(btn, loc) {
+                var k = 'asf-trip-' + loc, v = (parseInt(localStorage.getItem(k)||0)+1);
+                localStorage.setItem(k, v);
+                document.getElementById('vote-'+loc.toLowerCase()).textContent = v;
+                btn.style.border = '#FFD700';
+                showToast('✓ Voto: ' + loc);
+            }
+            </script>
+            
             <div style="background: linear-gradient(135deg, #9B59B6 0%, #8E44AD 100%); padding: 16px; margin: 0 20px 20px; border-radius: 16px; color: white;">
                 <p style="font-size: 14px; font-weight: 600;">👩‍👩‍👧 Suas Opiniões Importam!</p>
                 <p style="font-size: 12px; opacity: 0.9; margin-top: 4px;">Responda as perguntas e ajude a montar as melhores surftrips!</p>
