@@ -1333,20 +1333,25 @@ var translations = {
 
 function setLanguage(lang) {
     localStorage.setItem('asf-lang', lang);
-    document.querySelectorAll('button[onclick^="setLanguage"]').forEach(b => {
-        b.style.background = b.textContent.includes(lang === 'en' ? 'EN' : lang === 'es' ? 'ES' : 'PT') ? '#00A8CC' : 'rgba(255,255,255,0.2)';
-        b.style.color = b.textContent.includes(lang === 'en' ? 'EN' : lang === 'es' ? 'ES' : 'PT') ? 'white' : 'white';
+    document.querySelectorAll('button[onclick^="setLanguage"]').forEach(function(b) {
+        var isActive = b.textContent.indexOf(lang === 'en' ? 'EN' : lang === 'es' ? 'ES' : 'PT') >= 0;
+        b.style.background = isActive ? '#00A8CC' : 'rgba(255,255,255,0.2)';
+        b.style.color = 'white';
     });
     var terms = translations[lang];
-    // Update section titles
-    document.querySelectorAll('.section-title').forEach(el => {
-        var text = el.textContent;
-        for (var key in terms) {
-            if (text.includes(key)) {
-                el.textContent = text.replace(key, terms[key]);
+    if (!terms) return;
+    // Translate ALL visible text
+    function walkTree(el) {
+        if (el.nodeType === 3 && el.textContent.trim().length > 2 && !el.parentElement.classList.contains('icon')) {
+            var txt = el.textContent;
+            for (var key in terms) {
+                if (txt.indexOf(key) >= 0) el.textContent = txt.replace(key, terms[key]);
             }
+        } else if (el.nodeType === 1 && el.tagName !== 'SCRIPT' && el.tagName !== 'STYLE') {
+            Array.from(el.childNodes).forEach(walkTree);
         }
-    });
+    }
+    walkTree(document.body);
     showToast('Idioma: ' + (lang === 'pt' ? 'Português' : lang === 'en' ? 'English' : 'Español') + ' 🌎');
 }
 
@@ -1501,20 +1506,25 @@ var translations = {
 
 function setLanguage(lang) {
     localStorage.setItem('asf-lang', lang);
-    document.querySelectorAll('button[onclick^="setLanguage"]').forEach(b => {
-        b.style.background = b.textContent.includes(lang === 'en' ? 'EN' : lang === 'es' ? 'ES' : 'PT') ? '#00A8CC' : 'rgba(255,255,255,0.2)';
-        b.style.color = b.textContent.includes(lang === 'en' ? 'EN' : lang === 'es' ? 'ES' : 'PT') ? 'white' : 'white';
+    document.querySelectorAll('button[onclick^="setLanguage"]').forEach(function(b) {
+        var isActive = b.textContent.indexOf(lang === 'en' ? 'EN' : lang === 'es' ? 'ES' : 'PT') >= 0;
+        b.style.background = isActive ? '#00A8CC' : 'rgba(255,255,255,0.2)';
+        b.style.color = 'white';
     });
     var terms = translations[lang];
-    // Update section titles
-    document.querySelectorAll('.section-title').forEach(el => {
-        var text = el.textContent;
-        for (var key in terms) {
-            if (text.includes(key)) {
-                el.textContent = text.replace(key, terms[key]);
+    if (!terms) return;
+    // Translate ALL visible text
+    function walkTree(el) {
+        if (el.nodeType === 3 && el.textContent.trim().length > 2 && !el.parentElement.classList.contains('icon')) {
+            var txt = el.textContent;
+            for (var key in terms) {
+                if (txt.indexOf(key) >= 0) el.textContent = txt.replace(key, terms[key]);
             }
+        } else if (el.nodeType === 1 && el.tagName !== 'SCRIPT' && el.tagName !== 'STYLE') {
+            Array.from(el.childNodes).forEach(walkTree);
         }
-    });
+    }
+    walkTree(document.body);
     showToast('Idioma: ' + (lang === 'pt' ? 'Português' : lang === 'en' ? 'English' : 'Español') + ' 🌎');
 }
 
@@ -5610,20 +5620,25 @@ var translations = {
 
 function setLanguage(lang) {
     localStorage.setItem('asf-lang', lang);
-    document.querySelectorAll('button[onclick^="setLanguage"]').forEach(b => {
-        b.style.background = b.textContent.includes(lang === 'en' ? 'EN' : lang === 'es' ? 'ES' : 'PT') ? '#00A8CC' : 'rgba(255,255,255,0.2)';
-        b.style.color = b.textContent.includes(lang === 'en' ? 'EN' : lang === 'es' ? 'ES' : 'PT') ? 'white' : 'white';
+    document.querySelectorAll('button[onclick^="setLanguage"]').forEach(function(b) {
+        var isActive = b.textContent.indexOf(lang === 'en' ? 'EN' : lang === 'es' ? 'ES' : 'PT') >= 0;
+        b.style.background = isActive ? '#00A8CC' : 'rgba(255,255,255,0.2)';
+        b.style.color = 'white';
     });
     var terms = translations[lang];
-    // Update section titles
-    document.querySelectorAll('.section-title').forEach(el => {
-        var text = el.textContent;
-        for (var key in terms) {
-            if (text.includes(key)) {
-                el.textContent = text.replace(key, terms[key]);
+    if (!terms) return;
+    // Translate ALL visible text
+    function walkTree(el) {
+        if (el.nodeType === 3 && el.textContent.trim().length > 2 && !el.parentElement.classList.contains('icon')) {
+            var txt = el.textContent;
+            for (var key in terms) {
+                if (txt.indexOf(key) >= 0) el.textContent = txt.replace(key, terms[key]);
             }
+        } else if (el.nodeType === 1 && el.tagName !== 'SCRIPT' && el.tagName !== 'STYLE') {
+            Array.from(el.childNodes).forEach(walkTree);
         }
-    });
+    }
+    walkTree(document.body);
     showToast('Idioma: ' + (lang === 'pt' ? 'Português' : lang === 'en' ? 'English' : 'Español') + ' 🌎');
 }
 
@@ -7974,20 +7989,25 @@ var translations = {
 
 function setLanguage(lang) {
     localStorage.setItem('asf-lang', lang);
-    document.querySelectorAll('button[onclick^="setLanguage"]').forEach(b => {
-        b.style.background = b.textContent.includes(lang === 'en' ? 'EN' : lang === 'es' ? 'ES' : 'PT') ? '#00A8CC' : 'rgba(255,255,255,0.2)';
-        b.style.color = b.textContent.includes(lang === 'en' ? 'EN' : lang === 'es' ? 'ES' : 'PT') ? 'white' : 'white';
+    document.querySelectorAll('button[onclick^="setLanguage"]').forEach(function(b) {
+        var isActive = b.textContent.indexOf(lang === 'en' ? 'EN' : lang === 'es' ? 'ES' : 'PT') >= 0;
+        b.style.background = isActive ? '#00A8CC' : 'rgba(255,255,255,0.2)';
+        b.style.color = 'white';
     });
     var terms = translations[lang];
-    // Update section titles
-    document.querySelectorAll('.section-title').forEach(el => {
-        var text = el.textContent;
-        for (var key in terms) {
-            if (text.includes(key)) {
-                el.textContent = text.replace(key, terms[key]);
+    if (!terms) return;
+    // Translate ALL visible text
+    function walkTree(el) {
+        if (el.nodeType === 3 && el.textContent.trim().length > 2 && !el.parentElement.classList.contains('icon')) {
+            var txt = el.textContent;
+            for (var key in terms) {
+                if (txt.indexOf(key) >= 0) el.textContent = txt.replace(key, terms[key]);
             }
+        } else if (el.nodeType === 1 && el.tagName !== 'SCRIPT' && el.tagName !== 'STYLE') {
+            Array.from(el.childNodes).forEach(walkTree);
         }
-    });
+    }
+    walkTree(document.body);
     showToast('Idioma: ' + (lang === 'pt' ? 'Português' : lang === 'en' ? 'English' : 'Español') + ' 🌎');
 }
 
