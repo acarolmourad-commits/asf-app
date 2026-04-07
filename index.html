@@ -5554,6 +5554,34 @@ document.addEventListener('DOMContentLoaded', function() {
     <div class="section" id="comunidade-hidden" style="display: none;"></div>
 
     <!-- Footer -->
+    <!-- Apoie o ASF App -->
+    <button onclick="showBrandSupport()" style="background:linear-gradient(135deg,#00A8CC,#0E2439); color:white; border:none; padding:10px 20px; border-radius:10px; font-weight:600; cursor:pointer;">🤝 Apoie o App</button>
+    
+    <!-- Brand Support Modal -->
+    <div id="brand-support" style="display:none; position:fixed; top:0; left:0; right:0; bottom:0; background:rgba(0,0,0,0.9); z-index:9999; padding:20px; overflow-y:auto;">
+        <div style="background:white; border-radius:20px; padding:24px; max-width:500px; margin:40px auto; color:#0E2439;">
+            <button onclick="document.getElementById('brand-support').style.display='none'" style="float:right; background:none; border:none; font-size:24px; cursor:pointer;">✕</button>
+            <h2 style="margin-bottom:16px;">🤝 Apoie o Surf Feminino!</h2>
+            <p style="font-size:14px; margin-bottom:20px;">O ASF App é gratuito para todas! Mas para manter e melhorar, precisamos de apoio.</p>
+            <h3 style="font-size:16px; margin:20px 0 12px;">💰 Valores Simbólicos</h3>
+            <div style="display:grid; grid-template-columns:repeat(2,1fr); gap:10px; margin-bottom:20px;">
+                <button onclick="sendSupport('R$50/mês')" style="background:#f0f0f0; border:2px solid #00A8CC; padding:12px; border-radius:10px; cursor:pointer;">🌟 R$50/mês</button>
+                <button onclick="sendSupport('R$100/mês')" style="background:#f0f0f0; border:2px solid #00A8CC; padding:12px; border-radius:10px; cursor:pointer;">🌟 R$100/mês</button>
+                <button onclick="sendSupport('R$200/mês')" style="background:#f0f0f0; border:2px solid #00A8CC; padding:12px; border-radius:10px; cursor:pointer;">⭐ R$200/mês</button>
+                <button onclick="sendSupport('R$500/mês')" style="background:#f0f0f0; border:2px solid #FFD700; padding:12px; border-radius:10px; cursor:pointer;">👑 R$500/mês</button>
+            </div>
+            <p style="font-size:12px; color:#666;">Ao clicar, você será direcionada para o WhatsApp da fundadora Carol!</p>
+        </div>
+    </div>
+    
+    <script>
+    function showBrandSupport() { document.getElementById('brand-support').style.display = 'block'; }
+    function sendSupport(valor) {
+        var msg = 'Olá Carol! Quero apoiar o ASF App. Escolhi: ' + valor + '. Apoio o surf feminino! Me envia o PIX:';
+        window.open('https://wa.me/5511954346288?text=' + encodeURIComponent(msg), '_blank');
+    }
+    </script>
+    
     <footer style="background: linear-gradient(135deg, #0E2439, #1A3A5C); color: white; padding: 40px 20px 100px; text-align: center; margin-top: 20px;">
         <div style="font-size: 48px; margin-bottom: 12px;">🏄‍♀️</div>
         <h2 style="font-size: 22px; margin-bottom: 6px;">ASF - Associação de Surf Feminino</h2>
