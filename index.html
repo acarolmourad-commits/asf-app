@@ -1308,7 +1308,8 @@ var translations = {
         'Nível': 'Level',
         'Pontos': 'Points',
         'Checklist Pré-Surf': 'Pre-Surf Checklist',
-        'Calculadora de Prancha': 'Board Calculator'
+        'Calculadora de Prancha': 'Board Calculator',
+        'Cronômetro de Treino': 'Workout Timer'
     },
     'es': {
         'Dicas': 'Consejos',
@@ -1325,7 +1326,8 @@ var translations = {
         'Nível': 'Nivel',
         'Pontos': 'Puntos',
         'Checklist Pré-Surf': 'Lista Pre-Surf',
-        'Calculadora de Prancha': 'Calculadora de Tabla'
+        'Calculadora de Prancha': 'Calculadora de Tabla',
+        'Cronômetro de Treino': 'Temporizador'
     }
 };
 
@@ -4586,6 +4588,59 @@ document.addEventListener('DOMContentLoaded', function() {
                     </p>
                 </div>
 
+                <!-- Cronômetro de Treino -->
+                <div class="card utility-card" style="border: 2px solid #9B59B6;">
+                    <div class="icon">⏱️</div>
+                    <h4>Cronômetro de Treino</h4>
+                    <p style="font-size: 13px;">Intervalos para seus treinos de surf!</p>
+                    
+                    <!-- Timer Display -->
+                    <div style="text-align: center; margin: 15px 0;">
+                        <div id="timer-display" style="font-size: 48px; font-weight: 800; color: #9B59B6; font-family: monospace;">00:00</div>
+                        <div id="timer-phase" style="font-size: 14px; color: var(--gray-600); margin-top: 5px;">Pronto</div>
+                        <div style="background: var(--gray-200); border-radius: 8px; height: 12px; margin-top: 10px; overflow: hidden;">
+                            <div id="timer-progress" style="background: linear-gradient(90deg, #9B59B6, #E74C3C); height: 100%; width: 0%; transition: width 0.3s;"></div>
+                        </div>
+                        <div style="font-size: 12px; color: var(--gray-400); margin-top: 5px;"><span id="timer-round">0</span>/<span id="timer-total-rounds">8</span> rodadas</div>
+                    </div>
+                    
+                    <!-- Preset Buttons -->
+                    <div style="display: flex; gap: 6px; margin-bottom: 12px; flex-wrap: wrap;">
+                        <button class="btn btn-secondary" style="flex: 1; font-size: 11px; padding: 8px;" onclick="setTimerPreset('tabata')">🔥 Tabata</button>
+                        <button class="btn btn-secondary" style="flex: 1; font-size: 11px; padding: 8px;" onclick="setTimerPreset('emom')">⏰ EMOM</button>
+                        <button class="btn btn-secondary" style="flex: 1; font-size: 11px; padding: 8px;" onclick="setTimerPreset('hiit')">💪 HIIT</button>
+                    </div>
+                    
+                    <!-- Custom Settings -->
+                    <div style="background: var(--light); padding: 10px; border-radius: 8px; margin-bottom: 10px;">
+                        <div style="display: flex; gap: 8px; margin-bottom: 8px;">
+                            <div style="flex: 1;">
+                                <label style="font-size: 11px; color: var(--gray-600);">Trabalho (s)</label>
+                                <input type="number" id="timer-work" value="20" min="5" max="300" style="width: 100%; padding: 6px; border: 1px solid var(--gray-200); border-radius: 6px; font-size: 13px;">
+                            </div>
+                            <div style="flex: 1;">
+                                <label style="font-size: 11px; color: var(--gray-600);">Descanso (s)</label>
+                                <input type="number" id="timer-rest" value="10" min="5" max="300" style="width: 100%; padding: 6px; border: 1px solid var(--gray-200); border-radius: 6px; font-size: 13px;">
+                            </div>
+                            <div style="flex: 1;">
+                                <label style="font-size: 11px; color: var(--gray-600);">Rodadas</label>
+                                <input type="number" id="timer-rounds" value="8" min="1" max="50" style="width: 100%; padding: 6px; border: 1px solid var(--gray-200); border-radius: 6px; font-size: 13px;">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Control Buttons -->
+                    <div style="display: flex; gap: 8px;">
+                        <button class="btn btn-primary" style="flex: 1; background: #9B59B6;" id="timer-start-btn" onclick="startTimer()">▶ Iniciar</button>
+                        <button class="btn btn-secondary" style="flex: 1;" id="timer-pause-btn" onclick="pauseTimer()" disabled>⏸ Pausar</button>
+                        <button class="btn btn-secondary" style="flex: 1;" onclick="resetTimer()">🔄 Reset</button>
+                    </div>
+                    
+                    <div style="margin-top: 10px; text-align: center;">
+                        <button class="btn btn-secondary" style="font-size: 11px;" onclick="showTimerHistory()">📊 Ver Histórico</button>
+                    </div>
+                </div>
+
                 <!-- Guia de Praias -->
                 <div class="card utility-card" style="background: linear-gradient(135deg, rgba(0,168,204,0.05), rgba(14,36,57,0.05));">
                     <div class="icon">🏖️</div>
@@ -6362,6 +6417,7 @@ document.addEventListener('DOMContentLoaded', function() {
             { title: 'Marés', icon: '🗓️', section: 'Utilitários', sectionId: 'utilities', text: 'Horários de maré alta e baixa para planejar seu surf.' },
             { title: 'Fase da Lua', icon: '🌙', section: 'Utilitários', sectionId: 'utilities', text: 'Veja a fase atual da lua. Nueva lua e lua cheia = ondas maiores!' },
             { title: 'Calculadora de Prancha', icon: '🧮', section: 'Utilitários', sectionId: 'utilities', text: 'Calcule o volume ideal da prancha pelo seu peso e nível.' },
+            { title: 'Cronômetro de Treino', icon: '⏱️', section: 'Utilitários', sectionId: 'utilities', text: 'Timer de intervalos para treinos: Tabata, EMOM, HIIT. Cronômetro funcional com alertas.' },
             // Manas
             { title: 'Grupos de Surf', icon: '💬', section: 'Manas', sectionId: 'manas', text: 'Entre nos grupos de WhatsApp para surfar junto com outras mulheres.' },
             // Surftrips
@@ -6954,6 +7010,188 @@ document.addEventListener('DOMContentLoaded', function() {
         
         // Update moon phase on page load
         updateMoonPhase();
+
+        // ========== CRONÔMETRO DE TREINO ==========
+        let timerInterval = null;
+        let timerState = 'stopped'; // stopped, running, paused
+        let timerSeconds = 0;
+        let timerCurrentRound = 1;
+        let timerTotalRounds = 8;
+        let timerWorkTime = 20;
+        let timerRestTime = 10;
+        let timerIsWork = true;
+        let timerWorkoutHistory = JSON.parse(localStorage.getItem('asf_timer_history') || '[]');
+
+        function setTimerPreset(preset) {
+            const workInput = document.getElementById('timer-work');
+            const restInput = document.getElementById('timer-rest');
+            const roundsInput = document.getElementById('timer-rounds');
+            
+            if (preset === 'tabata') {
+                workInput.value = 20;
+                restInput.value = 10;
+                roundsInput.value = 8;
+            } else if (preset === 'emom') {
+                workInput.value = 60;
+                restInput.value = 0;
+                roundsInput.value = 10;
+            } else if (preset === 'hiit') {
+                workInput.value = 40;
+                restInput.value = 20;
+                roundsInput.value = 10;
+            }
+            
+            resetTimer();
+        }
+
+        function updateTimerDisplay() {
+            const mins = Math.floor(timerSeconds / 60).toString().padStart(2, '0');
+            const secs = (timerSeconds % 60).toString().padStart(2, '0');
+            document.getElementById('timer-display').textContent = `${mins}:${secs}`;
+            
+            const phase = timerIsWork ? '🔥 TRABALHO' : '😤 DESCANSAR';
+            document.getElementById('timer-phase').textContent = phase;
+            document.getElementById('timer-phase').style.color = timerIsWork ? '#E74C3C' : '#3498DB';
+            
+            const totalTime = timerIsWork ? timerWorkTime : timerRestTime;
+            const progress = ((totalTime - timerSeconds) / totalTime) * 100;
+            document.getElementById('timer-progress').style.width = progress + '%';
+            document.getElementById('timer-progress').style.background = timerIsWork ? 
+                'linear-gradient(90deg, #E74C3C, #F39C12)' : 'linear-gradient(90deg, #3498DB, #2ECC71)';
+            
+            document.getElementById('timer-round').textContent = timerCurrentRound;
+            document.getElementById('timer-total-rounds').textContent = timerTotalRounds;
+        }
+
+        function startTimer() {
+            if (timerState === 'running') return;
+            
+            timerWorkTime = parseInt(document.getElementById('timer-work').value) || 20;
+            timerRestTime = parseInt(document.getElementById('timer-rest').value) || 10;
+            timerTotalRounds = parseInt(document.getElementById('timer-rounds').value) || 8;
+            
+            if (timerState === 'stopped') {
+                timerSeconds = timerWorkTime;
+                timerCurrentRound = 1;
+                timerIsWork = true;
+            }
+            
+            timerState = 'running';
+            document.getElementById('timer-start-btn').disabled = true;
+            document.getElementById('timer-start-btn').textContent = '⏳ Correndo...';
+            document.getElementById('timer-pause-btn').disabled = false;
+            
+            timerInterval = setInterval(() => {
+                timerSeconds--;
+                
+                if (timerSeconds <= 0) {
+                    // Play beep sound (browser notification)
+                    if ('speechSynthesis' in window) {
+                        const msg = new SpeechSynthesisUtterance(timerIsWork ? 'Descanso' : 'Trabalho');
+                        msg.rate = 2;
+                        speechSynthesis.speak(msg);
+                    }
+                    
+                    if (timerIsWork) {
+                        // Work phase ended, go to rest
+                        if (timerRestTime > 0) {
+                            timerSeconds = timerRestTime;
+                            timerIsWork = false;
+                        } else {
+                            // No rest, go to next round
+                            timerCurrentRound++;
+                            if (timerCurrentRound > timerTotalRounds) {
+                                completeWorkout();
+                                return;
+                            }
+                            timerSeconds = timerWorkTime;
+                            timerIsWork = true;
+                        }
+                    } else {
+                        // Rest phase ended, go to work
+                        timerCurrentRound++;
+                        if (timerCurrentRound > timerTotalRounds) {
+                            completeWorkout();
+                            return;
+                        }
+                        timerSeconds = timerWorkTime;
+                        timerIsWork = true;
+                    }
+                }
+                
+                updateTimerDisplay();
+            }, 1000);
+        }
+
+        function pauseTimer() {
+            if (timerState !== 'running') return;
+            
+            clearInterval(timerInterval);
+            timerState = 'paused';
+            document.getElementById('timer-start-btn').disabled = false;
+            document.getElementById('timer-start-btn').textContent = '▶ Continuar';
+            document.getElementById('timer-pause-btn').disabled = true;
+        }
+
+        function resetTimer() {
+            clearInterval(timerInterval);
+            timerState = 'stopped';
+            timerSeconds = timerWorkTime;
+            timerCurrentRound = 1;
+            timerIsWork = true;
+            
+            document.getElementById('timer-display').textContent = '00:00';
+            document.getElementById('timer-phase').textContent = 'Pronto';
+            document.getElementById('timer-phase').style.color = 'var(--gray-600)';
+            document.getElementById('timer-progress').style.width = '0%';
+            document.getElementById('timer-round').textContent = '0';
+            
+            document.getElementById('timer-start-btn').disabled = false;
+            document.getElementById('timer-start-btn').textContent = '▶ Iniciar';
+            document.getElementById('timer-pause-btn').disabled = true;
+        }
+
+        function completeWorkout() {
+            clearInterval(timerInterval);
+            timerState = 'stopped';
+            
+            // Save to history
+            const workout = {
+                date: new Date().toISOString(),
+                rounds: timerTotalRounds,
+                workTime: timerWorkTime,
+                restTime: timerRestTime
+            };
+            timerWorkoutHistory.unshift(workout);
+            if (timerWorkoutHistory.length > 10) timerWorkoutHistory.pop();
+            localStorage.setItem('asf_timer_history', JSON.stringify(timerWorkoutHistory));
+            
+            document.getElementById('timer-phase').textContent = '🎉 TREINO COMPLETO!';
+            document.getElementById('timer-phase').style.color = '#27AE60';
+            document.getElementById('timer-display').textContent = '✓✓✓';
+            document.getElementById('timer-start-btn').disabled = false;
+            document.getElementById('timer-start-btn').textContent = '▶ Iniciar';
+            document.getElementById('timer-pause-btn').disabled = true;
+            
+            // Add points for completing workout
+            addPoints('treino', 50);
+            
+            if ('speechSynthesis' in window) {
+                const msg = new SpeechSynthesisUtterance('Parabéns! Treino completo!');
+                msg.rate = 1.5;
+                speechSynthesis.speak(msg);
+            }
+        }
+
+        function showTimerHistory() {
+            const history = timerWorkoutHistory.slice(0, 5).map((w, i) => {
+                const date = new Date(w.date);
+                return `${i+1}. ${date.toLocaleDateString('pt-BR')} - ${w.rounds} rodadas (${w.workTime}s/${w.restTime}s)`;
+            }).join('\n');
+            
+            alert('📊 Histórico de Treinos:\n\n' + (history || 'Nenhum treino registrado ainda!'));
+        }
+        // ========== END CRONÔMETRO ==========
 
         // Surf Conditions Bar (compact live data on homepage)
         async function loadSurfBar() {
