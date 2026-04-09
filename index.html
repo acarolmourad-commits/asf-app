@@ -1405,6 +1405,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     💬
                 </a>
                 <button class="icon-btn" onclick="toggleChatbot()" title=" chatbot" style="color: white;">🤖</button>
+                <button class="icon-btn" onclick="callLua()" title="Falar com Lua" style="color: white;">🌙</button>
                 <button class="icon-btn" onclick="showBrandSupport()" title="Apoie o App" style="background: linear-gradient(135deg,#FFD700,#FFA500); color: #0E2439; border-radius: 10px; font-weight: 700;">🤝</button>
             </div>
         </div>
@@ -5615,7 +5616,10 @@ document.addEventListener('DOMContentLoaded', function() {
     </div>
     
     <script>
-    function showBrandSupport() { document.getElementById('brand-support').style.display = 'block'; }
+    function callLua() {
+    showToast("🌙 Lua está verificando o app... aguarde!");
+}
+function showBrandSupport() { document.getElementById('brand-support').style.display = 'block'; }
     function sendSupport(valor) {
         var msg = 'Olá Carol! Quero apoiar o ASF App. Escolhi: ' + valor + '. Apoio o surf feminino! Me envia o PIX:';
         window.open('https://wa.me/5511954346288?text=' + encodeURIComponent(msg), '_blank');
