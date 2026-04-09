@@ -4108,11 +4108,58 @@ document.addEventListener('DOMContentLoaded', function() {
             
             <script>
             function voteTrip(btn, loc) {
-                var k = 'asf-trip-' + loc, v = (parseInt(localStorage.getItem(k)||0)+1);
-                localStorage.setItem(k, v);
-                document.getElementById('vote-'+loc.toLowerCase()).textContent = v;
-                btn.style.border = '#FFD700';
-                showToast('✓ Voto: ' + loc);
+                // Check if user is logged in
+                var user = localStorage.getItem('asf-profile');
+                if (!user) {
+                    showToast('⚠️ Faça login primeiro! 📝');
+                    // Show login modal
+                    var loginHTML = '<div style="position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.95);z-index:10000;padding:20px;display:flex;align-items:center;justify-content:center;"><div style="background:white;border-radius:16px;padding:24px;max-width:400px;width:100%;"><h3 style="margin-bottom:16px;">📝 Vote em ' + loc + '</h3><p style="font-size:13px;color:#666;margin-bottom:16px;">Precisamos saber quem você é!</p><input id="voter-name" placeholder="Seu nome" style="width:100%;padding:12px;border:1px solid #ddd;border-radius:8px;margin-bottom:10px;"><input id="voter-phone" placeholder="WhatsApp" style="width:100%;padding:12px;border:1px solid #ddd;border-radius:8px;margin-bottom:10px;"><input id="voter-email" placeholder="E-mail" style="width:100%;padding:12px;border:1px solid #ddd;border-radius:8px;margin-bottom:16px;"><button onclick="saveVoterAndVote('' + loc + '')" style="background:#00A8CC;color:white;border:none;padding:14px;border-radius:8px;width:100%;font-weight:600;">VOTAR! 🏄‍♀️</button><button onclick="this.closest(\'div\').parentElement.remove()" style="background:none;border:none;color:#666;margin-top:12px;width:100%;">Cancelar</button></div></div>';
+                    document.body.insertAdjacentHTML('beforeend', loginHTML);
+                    return;
+                }
+                // Already logged in - just vote
+                var profile = JSON.parse(user);
+                voteForLocation(btn, loc, profile.name, profile.phone, profile.email);
+            }
+            
+            function saveVoterAndVote(loc) {
+                var name = document.getElementById('voter-name').value.trim();
+                var phone = document.getElementById('voter-phone').value.trim();
+                var email = document.getElementById('voter-email').value.trim();
+                if (!name || !phone) {
+                    alert('Nome e WhatsApp são obrigatórios!');
+                    return;
+                }
+                // Save as profile for future
+                localStorage.setItem('asf-profile', JSON.stringify({name: name, phone: phone, email: email, level: 'comunidade'}));
+                // Remove modal
+                document.querySelectorAll('[style*="z-index:10000"]')[0].remove();
+                // Vote now
+                voteForLocation(null, loc, name, phone, email);
+            }
+            
+            function voteForLocation(btn, loc, name, phone, email) {
+                // Save vote with full data
+                var key = 'asf-trip-votes';
+                var votes = JSON.parse(localStorage.getItem(key) || '[]');
+                votes.push({location: loc, name: name, phone: phone, email: email, date: new Date().toISOString()});
+                localStorage.setItem(key, JSON.stringify(votes));
+                // Also update count
+                var countKey = 'asf-trip-' + loc, count = (parseInt(localStorage.getItem(countKey)||0)+1);
+                localStorage.setItem(countKey, count);
+                // Update display
+                var el = document.getElementById('vote-' + loc.toLowerCase());
+                if (el) el.textContent = count;
+                if (btn) {btn.style.border = '#FFD700'; btn.style.background = 'rgba(255,215,0,0.2)';}
+                showToast('✓ Voto registrado para ' + loc + '! 🏄‍♀️');
+                // Send to Carol via WhatsApp  
+                var msg = '🏄‍♀️ NOVO VOTO!
+
+Local: ' + loc + '
+Nome: ' + name + '
+WhatsApp: ' + phone + (email ? '
+E-mail: ' + email : '');
+                window.open('https://wa.me/5511954346288?text=' + encodeURIComponent(msg), '_blank');
             }
             </script>
             
