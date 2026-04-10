@@ -20,9 +20,9 @@
 
 ## ASF APP
 
-- Main app: https://acarolmourad-commits.github.io/asf-app/ (6050 lines)
+- Main app: https://acarolmourad-commits.github.io/asf-app/ (8021 lines)
 - Logo spaces: https://acarolmourad-commits.github.io/asf-app/espacos-logo-app.html
-- 29 commits pending push (GitHub token expired)
+- All commits synced ✅ (token renewed by Carol)
 
 ## COMPLETED IMPROVEMENTS ✅
 
@@ -48,7 +48,7 @@
 - [x] Mobility exercises (shoulders, back, hips, legs)
 - [x] Mental wellness tips
 - [x] Guia de Praias (9 beaches, region filters)
-- [x] Dica do Dia (15 rotating daily tips)
+- [x] Dica do Dia (34 rotating daily tips)
 - [x] Pre-Surf Checklist (7 items, localStorage)
 - [x] Surf Session Log (beach, duration, mood, stats)
 - [x] Mana da Semana (weekly member spotlight)
@@ -64,9 +64,10 @@
 - [x] Maré info
 - [x] Polished footer with social links
 - [x] README.md documentation
+- [x] Emergência section (SAMU, Capitania, Polícia, Bombeiros, Hospital)
+- [x] Cronômetro de Treino (re-implemented with Tabata, EMOM, HIIT presets)
 
 ## TODO IMPROVEMENTS
 
 - [ ] Create login system (needs Firebase/Supabase backend)
 - [ ] Google Sheets integration (waiting for Carol's URL)
-- [ ] Push 29 commits to GitHub (needs new PAT from Carol)
