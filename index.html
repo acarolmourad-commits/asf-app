@@ -7856,9 +7856,12 @@ document.addEventListener('DOMContentLoaded', function() {
         }
         // Consolidated DOMContentLoaded init
         document.addEventListener('DOMContentLoaded', function() {
-            // Simple analytics - app opens
-            let appOpens = parseInt(localStorage.getItem('asf-opens') || '0') + 1;
+            // Simple analytics - app opens (every time someone opens)
+            let appOpens = parseInt(localStorage.getItem('asf-opens') || '0');
+            appOpens++;
             localStorage.setItem('asf-opens', appOpens);
+            // Update display
+            try { document.getElementById('stat-opens').textContent = appOpens; } catch(e) {}
             console.log('ASF App opens:', appOpens);
             showProfile();
             // Load theme preference
