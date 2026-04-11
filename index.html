@@ -8300,10 +8300,6 @@ function setLanguage(lang) {
     showToast('Idioma: ' + (lang === 'pt' ? 'Português' : lang === 'en' ? 'English' : 'Español') + ' 🌎');
 }
 
-// Load saved language
-document.addEventListener('DOMContentLoaded', function() {
-    var savedLang = localStorage.getItem('asf-lang');
-    if (savedLang) setLanguage(savedLang);
-});
+</script>
 </body>
 </html>
