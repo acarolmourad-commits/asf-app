@@ -8282,28 +8282,5 @@ document.addEventListener('DOMContentLoaded', function() {
     var savedLang = localStorage.getItem('asf-lang');
     if (savedLang) setLanguage(savedLang);
 });
-</script>
-
-// Load real points
-document.addEventListener('DOMContentLoaded', function() {
-    try {
-        var profile = JSON.parse(localStorage.getItem('asf-profile') || '{}');
-        var opens = localStorage.getItem('asf-opens') || '0';
-        var sessions = (JSON.parse(localStorage.getItem('surf-sessions') || '[]')).length;
-        var quizzes = (JSON.parse(localStorage.getItem('quizzes-done') || '[]')).length;
-        
-        if (document.getElementById('stat-opens')) 
-            document.getElementById('stat-opens').textContent = opens;
-        if (document.getElementById('stat-sessions')) 
-            document.getElementById('stat-sessions').textContent = sessions;
-        
-        var points = (profile.points) || 0;
-        var level = Math.floor(points / 500) + 1;
-        if (points >= 2000) level = 5;
-        if (points >= 3000) level = 6;
-        
-        var levelEl = document.getElementById('profile-level');
-        if (levelEl) levelEl.textContent = 'Nível ' + level + ' • ' + points + ' pontos';
-    } catch(e) {}
-});</body>
+</body>
 </html>
