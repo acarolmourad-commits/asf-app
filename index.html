@@ -5758,6 +5758,42 @@ Comprovante: " + comprovante + "
 </script>
     </div>
 
+
+    <!-- 🔒 Secret Achievements -->
+    <div style="background: linear-gradient(135deg, #2c0a37, #4a1c5e); padding: 20px; margin: 20px; border-radius: 16px; color: white; text-align: center;">
+        <div style="font-size: 28px; margin-bottom: 8px;">🔓 Conquistas Secretas</div>
+        <p style="font-size: 12px; opacity: 0.9; margin-bottom: 16px;">Desbloqueie conquistando pontos!</p>
+        
+        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 16px;">
+            <div id="badge-surf" onclick="checkBadge('surf')" style="background: rgba(255,255,255,0.1); padding: 12px; border-radius: 10px; cursor: pointer;">
+                <div style="font-size: 24px;">🏄</div>
+                <p style="font-size: 10px;">1 Session</p>
+            </div>
+            <div id="badge-quiz" onclick="checkBadge('quiz')" style="background: rgba(255,255,255,0.1); padding: 12px; border-radius: 10px; cursor: pointer;">
+                <div style="font-size: 24px;">📝</div>
+                <p style="font-size: 10px;">5 Quizzes</p>
+            </div>
+            <div id="badge-streak" onclick="checkBadge('streak')" style="background: rgba(255,255,255,0.1); padding: 12px; border-radius: 10px; cursor: pointer;">
+                <div style="font-size: 24px;">🔥</div>
+                <p style="font-size: 10px;">3 Dias</p>
+            </div>
+        </div>
+        
+        <p style="font-size: 11px; opacity: 0.7;">Complete missões para desbloquear badges secretos! 🏆</p>
+    </div>
+    <script>
+    function checkBadge(type) {
+        var sessions = (JSON.parse(localStorage.getItem('surf-sessions') || '[]')).length;
+        var quizzes = (JSON.parse(localStorage.getItem('quizzes-done') || '[]')).length;
+        var opens = parseInt(localStorage.getItem('asf-opens') || '0');
+        
+        if (type === 'surf' && sessions >= 1) showToast('🏄 Badge desbloqueado! 🎉');
+        else if (type === 'quiz' && quizzes >= 5) showToast('📝 Badge desbloqueado! 🎉');
+        else if (type === 'streak' && opens >= 3) showToast('🔥 Badge desbloqueado! 🎉');
+        else showToast('Continue usando o app para desbloquear! 💪');
+    }
+    </script>
+
 <!-- Footer -->
     <!-- Apoie o ASF App -->
     <button onclick="showBrandSupport()" style="background:linear-gradient(135deg,#00A8CC,#0E2439); color:white; border:none; padding:10px 20px; border-radius:10px; font-weight:600; cursor:pointer;">🤝 Apoie o App</button>
