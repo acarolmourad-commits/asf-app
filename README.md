@@ -70,7 +70,7 @@ App completo para a comunidade de surf feminino do Litoral Paulista.
 - 📱 **PWA** — Instale como app no celular (manifest + apple-touch-icon)
 - 🔔 **Notificações** — Alertas de ondas e eventos
 - 📤 **Compartilhamento** — Web Share API nativa + WhatsApp fallback
-- 💡 **Dica do Dia** — Rotaciona diariamente com 15 dicas
+- 💡 **Dica do Dia** — Rotaciona diariamente com 81+ dicas (surf, técnica, mental, comunidade)
 - 📊 **Barra de Progresso** — Scroll indicator
 - ⬆️ **Back to Top** — Botão flutuante
 - 📡 **Status de Conexão** — Banner offline/online com auto-detecção
@@ -95,9 +95,10 @@ App completo para a comunidade de surf feminino do Litoral Paulista.
 
 ## 📊 Status
 
-- **Linhas de código:** ~6600
-- **Commits hoje:** 27+
-- **Commits pendentes push:** 44+ (token GitHub expirado)
+- **Linhas de código:** ~8360
+- **Dicas do Dia:** 81+ dicas rotating
+- **Commits hoje:** 29+
+- **Commits pendentes push:** 0 ( synced)
 
 ## 👩‍💻 Desenvolvimento
 
