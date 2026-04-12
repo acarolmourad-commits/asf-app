@@ -4755,25 +4755,25 @@ E-mail: ' + email : '');
                 </div>
 
                 <!-- Conquistas Secretas -->
-                <div class="card utility-card" style="background: linear-gradient(135deg, #2c0a37, #4a1c5e); border-radius: 16px; color: white;">
+                <div class="card utility-card" style="background: linear-gradient(135deg, #2c0a37, #4a1c5e); border-radius: 16px; color: white; cursor: pointer;" onclick="showSecretAchievements()">
                     <div class="icon" style="font-size: 32px;">🔓</div>
                     <h4 style="color: white;">Conquistas Secretas</h4>
                     <p style="font-size: 12px; opacity: 0.9;">Desbloqueie badges secretos usando o app!</p>
                     <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin: 12px 0;">
-                        <div onclick="checkBadge('surf')" style="background: rgba(255,255,255,0.15); padding: 10px; border-radius: 8px; text-align: center; cursor: pointer;">
+                        <div onclick="event.stopPropagation(); checkBadge('surf')" style="background: rgba(255,255,255,0.15); padding: 10px; border-radius: 8px; text-align: center;">
                             <div style="font-size: 20px;">🏄</div>
                             <p style="font-size: 9px; margin: 4px 0 0;">1 Session</p>
                         </div>
-                        <div onclick="checkBadge('quiz')" style="background: rgba(255,255,255,0.15); padding: 10px; border-radius: 8px; text-align: center; cursor: pointer;">
+                        <div onclick="event.stopPropagation(); checkBadge('quiz')" style="background: rgba(255,255,255,0.15); padding: 10px; border-radius: 8px; text-align: center;">
                             <div style="font-size: 20px;">📝</div>
                             <p style="font-size: 9px; margin: 4px 0 0;">5 Quizzes</p>
                         </div>
-                        <div onclick="checkBadge('streak')" style="background: rgba(255,255,255,0.15); padding: 10px; border-radius: 8px; text-align: center; cursor: pointer;">
+                        <div onclick="event.stopPropagation(); checkBadge('streak')" style="background: rgba(255,255,255,0.15); padding: 10px; border-radius: 8px; text-align: center;">
                             <div style="font-size: 20px;">🔥</div>
                             <p style="font-size: 9px; margin: 4px 0 0;">3 Dias</p>
                         </div>
                     </div>
-                    <p style="font-size: 10px; opacity: 0.7;">Toque para verificar progresso</p>
+                    <p style="font-size: 10px; opacity: 0.7;">👆 Toque para ver Todas</p>
                 </div>
 
                 <!-- Guia de Praias -->
@@ -5691,6 +5691,10 @@ E-mail: ' + email : '');
             <span class="icon">🎯</span>
             <span class="label">Pontos</span>
         </button>
+        <button class="nav-item" aria-label="Utilitários do surf" onclick="handleNavTap(this, 'utilities')">
+            <span class="icon">⚙️</span>
+            <span class="label">Mais</span>
+        </button>
         <button class="nav-item" aria-label="Manas e comunidade" onclick="handleNavTap(this, 'manas')">
             <span class="icon">💬</span>
             <span class="label">Manas</span>
@@ -5999,8 +6003,10 @@ document.addEventListener('DOMContentLoaded', function() {
                 navItems[2].classList.add('active');
             } else if (sectionId === 'progresso') {
                 navItems[3].classList.add('active');
-            } else if (sectionId === 'manas') {
+            } else if (sectionId === 'utilities') {
                 navItems[4].classList.add('active');
+            } else if (sectionId === 'manas') {
+                navItems[5].classList.add('active');
             } else if (sectionId === 'competicoes') {
                 // Competitions section - highlight related tab
             }
@@ -8308,6 +8314,46 @@ document.addEventListener('DOMContentLoaded', function() {
             t.textContent = msg;
             t.classList.add('show');
             setTimeout(() => t.classList.remove('show'), duration);
+        }
+
+        // Secret Achievements Modal
+        function showSecretAchievements() {
+            const sessions = (JSON.parse(localStorage.getItem('surf-sessions') || '[]')).length;
+            const quizzes = (JSON.parse(localStorage.getItem('quizzes-done') || '[]')).length;
+            const opens = parseInt(localStorage.getItem('asf-opens') || '0');
+            const modal = document.createElement('div');
+            modal.id = 'secret-modal';
+            modal.style.cssText = 'position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.9);z-index:9999;padding:20px;overflow-y:auto;';
+            modal.innerHTML = `
+                <div style="background:linear-gradient(135deg,#2c0a37,#4a1c5e);border-radius:20px;padding:24px;max-width:400px;margin:40px auto;color:white;text-align:center;">
+                    <div style="font-size:32px;margin-bottom:12px;">🔓 Conquistas Secretas</div>
+                    <p style="font-size:14px;opacity:0.9;margin-bottom:20px;">Complete missões para desbloquear!</p>
+                    
+                    <div style="display:grid;gap:12px;margin-bottom:20px;">
+                        <div style="background:rgba(255,255,255,0.15);padding:16px;border-radius:12px;text-align:center;">
+                            <div style="font-size:36px;margin-bottom:8px;">🏄</div>
+                            <div style="font-size:16px;font-weight:bold;">1 Session</div>
+                            <div style="font-size:13px;opacity:0.8;margin:8px 0;">Progresso: ${sessions}/1</div>
+                            <div style="font-size:12px;${sessions>=1?'color:#4ade80':'opacity:0.6'}">${sessions>=1?'✅ CONQUISTADO!':'⏳ Em progresso'}</div>
+                        </div>
+                        <div style="background:rgba(255,255,255,0.15);padding:16px;border-radius:12px;text-align:center;">
+                            <div style="font-size:36px;margin-bottom:8px;">📝</div>
+                            <div style="font-size:16px;font-weight:bold;">5 Quizzes</div>
+                            <div style="font-size:13px;opacity:0.8;margin:8px 0;">Progresso: ${quizzes}/5</div>
+                            <div style="font-size:12px;${quizzes>=5?'color:#4ade80':'opacity:0.6'}">${quizzes>=5?'✅ CONQUISTADO!':'⏳ Em progresso'}</div>
+                        </div>
+                        <div style="background:rgba(255,255,255,0.15);padding:16px;border-radius:12px;text-align:center;">
+                            <div style="font-size:36px;margin-bottom:8px;">🔥</div>
+                            <div style="font-size:16px;font-weight:bold;">3 Dias</div>
+                            <div style="font-size:13px;opacity:0.8;margin:8px 0;">Progresso: ${opens}/3</div>
+                            <div style="font-size:12px;${opens>=3?'color:#4ade80':'opacity:0.6'}">${opens>=3?'✅ CONQUISTADO!':'⏳ Em progresso'}</div>
+                        </div>
+                    </div>
+                    
+                    <button onclick="document.getElementById('secret-modal').remove()" style="background:white;color:#2c0a37;border:none;padding:12px 32px;border-radius:25px;font-size:14px;font-weight:bold;cursor:pointer;">Fechar</button>
+                </div>
+            `;
+            document.body.appendChild(modal);
         }
 
         // Connection status
