@@ -4754,6 +4754,28 @@ E-mail: ' + email : '');
                     </div>
                 </div>
 
+                <!-- Conquistas Secretas -->
+                <div class="card utility-card" style="background: linear-gradient(135deg, #2c0a37, #4a1c5e); border-radius: 16px; color: white;">
+                    <div class="icon" style="font-size: 32px;">🔓</div>
+                    <h4 style="color: white;">Conquistas Secretas</h4>
+                    <p style="font-size: 12px; opacity: 0.9;">Desbloqueie badges secretos usando o app!</p>
+                    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin: 12px 0;">
+                        <div onclick="checkBadge('surf')" style="background: rgba(255,255,255,0.15); padding: 10px; border-radius: 8px; text-align: center; cursor: pointer;">
+                            <div style="font-size: 20px;">🏄</div>
+                            <p style="font-size: 9px; margin: 4px 0 0;">1 Session</p>
+                        </div>
+                        <div onclick="checkBadge('quiz')" style="background: rgba(255,255,255,0.15); padding: 10px; border-radius: 8px; text-align: center; cursor: pointer;">
+                            <div style="font-size: 20px;">📝</div>
+                            <p style="font-size: 9px; margin: 4px 0 0;">5 Quizzes</p>
+                        </div>
+                        <div onclick="checkBadge('streak')" style="background: rgba(255,255,255,0.15); padding: 10px; border-radius: 8px; text-align: center; cursor: pointer;">
+                            <div style="font-size: 20px;">🔥</div>
+                            <p style="font-size: 9px; margin: 4px 0 0;">3 Dias</p>
+                        </div>
+                    </div>
+                    <p style="font-size: 10px; opacity: 0.7;">Toque para verificar progresso</p>
+                </div>
+
                 <!-- Guia de Praias -->
                 <div class="card utility-card" style="background: linear-gradient(135deg, rgba(0,168,204,0.05), rgba(14,36,57,0.05));">
                     <div class="icon">🏖️</div>
@@ -5787,10 +5809,16 @@ Comprovante: " + comprovante + "
         var quizzes = (JSON.parse(localStorage.getItem('quizzes-done') || '[]')).length;
         var opens = parseInt(localStorage.getItem('asf-opens') || '0');
         
-        if (type === 'surf' && sessions >= 1) showToast('🏄 Badge desbloqueado! 🎉');
-        else if (type === 'quiz' && quizzes >= 5) showToast('📝 Badge desbloqueado! 🎉');
-        else if (type === 'streak' && opens >= 3) showToast('🔥 Badge desbloqueado! 🎉');
-        else showToast('Continue usando o app para desbloquear! 💪');
+        if (type === 'surf') {
+            if (sessions >= 1) showToast('🏄 Badge desbloqueado! 🎉');
+            else showToast('🏄 Progresso: ' + sessions + '/1 sessão registrada');
+        } else if (type === 'quiz') {
+            if (quizzes >= 5) showToast('📝 Badge desbloqueado! 🎉');
+            else showToast('📝 Progresso: ' + quizzes + '/5 quizzes');
+        } else if (type === 'streak') {
+            if (opens >= 3) showToast('🔥 Badge desbloqueado! 🎉');
+            else showToast('🔥 Progresso: ' + opens + '/3 dias usando o app');
+        }
     }
     </script>
 
@@ -6492,7 +6520,13 @@ document.addEventListener('DOMContentLoaded', function() {
         function earnPoints(type, points) {
             const data = loadPoints();
             data.total += points;
-            if (type === 'quiz') data.quizzes++;
+            if (type === 'quiz') {
+                data.quizzes++;
+                // Sync to quizzes-done for achievements
+                const quizzes = JSON.parse(localStorage.getItem('quizzes-done') || '[]');
+                quizzes.push({date: new Date().toISOString()});
+                localStorage.setItem('quizzes-done', JSON.stringify(quizzes));
+            }
             if (type === 'dica') data.dicas++;
             if (type === 'treino') data.treinos++;
             savePoints(data);
@@ -7808,6 +7842,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
         function saveSessions(sessions) {
             localStorage.setItem('asf-sessions', JSON.stringify(sessions));
+            // Also sync to surf-sessions for achievements
+            localStorage.setItem('surf-sessions', JSON.stringify(sessions));
         }
 
         function saveSession() {
