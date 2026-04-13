@@ -4754,27 +4754,8 @@ E-mail: ' + email : '');
                     </div>
                 </div>
 
-                <!-- Conquistas Secretas -->
-                <div class="card utility-card" style="background: linear-gradient(135deg, #2c0a37, #4a1c5e); border-radius: 16px; color: white; cursor: pointer;" onclick="showSecretAchievements()">
-                    <div class="icon" style="font-size: 32px;">🔓</div>
-                    <h4 style="color: white;">Conquistas Secretas</h4>
-                    <p style="font-size: 12px; opacity: 0.9;">Desbloqueie badges secretos usando o app!</p>
-                    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin: 12px 0;">
-                        <div onclick="event.stopPropagation(); checkBadge('surf')" style="background: rgba(255,255,255,0.15); padding: 10px; border-radius: 8px; text-align: center;">
-                            <div style="font-size: 20px;">🏄</div>
-                            <p style="font-size: 9px; margin: 4px 0 0;">1 Session</p>
-                        </div>
-                        <div onclick="event.stopPropagation(); checkBadge('quiz')" style="background: rgba(255,255,255,0.15); padding: 10px; border-radius: 8px; text-align: center;">
-                            <div style="font-size: 20px;">📝</div>
-                            <p style="font-size: 9px; margin: 4px 0 0;">5 Quizzes</p>
-                        </div>
-                        <div onclick="event.stopPropagation(); checkBadge('streak')" style="background: rgba(255,255,255,0.15); padding: 10px; border-radius: 8px; text-align: center;">
-                            <div style="font-size: 20px;">🔥</div>
-                            <p style="font-size: 9px; margin: 4px 0 0;">3 Dias</p>
-                        </div>
-                    </div>
-                    <p style="font-size: 10px; opacity: 0.7;">👆 Toque para ver Todas</p>
-                </div>
+                <!-- Conquistas Secretas (Botão Fixo) -->
+                <button class="btn btn-primary" style="width:calc(100% - 40px);margin:20px;background:linear-gradient(135deg,#8b5cf6,#c084fc);color:white;border:none;padding:16px;border-radius:12px;font-size:16px;font-weight:bold;cursor:pointer;box-shadow:0 4px 15px rgba(139,92,246,0.4);" onclick="showSecretAchievements()">🔓 Ver Conquistas Secretas</button>
 
                 <!-- Guia de Praias -->
                 <div class="card utility-card" style="background: linear-gradient(135deg, rgba(0,168,204,0.05), rgba(14,36,57,0.05));">
