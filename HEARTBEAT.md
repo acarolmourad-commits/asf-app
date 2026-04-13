@@ -26,6 +26,7 @@
 
 ## COMPLETED IMPROVEMENTS ✅
 
+- [x] Add 10 new daily tips + search index (April 12)
 - [x] Search functionality
 - [x] Dark mode (with auto-detection)
 - [x] Notifications (clickable, bell icon)
