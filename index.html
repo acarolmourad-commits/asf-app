@@ -5782,6 +5782,10 @@ E-mail: ' + email : '');
             <span class="icon">🎯</span>
             <span class="label">Pontos</span>
         </button>
+        <button class="nav-item" aria-label="Surftrips e Votações" onclick="handleNavTap(this, 'trips')">
+            <span class="icon">🌊</span>
+            <span class="label">Trips</span>
+        </button>
         <button class="nav-item" aria-label="Utilitários do surf" onclick="handleNavTap(this, 'utilities')">
             <span class="icon">⚙️</span>
             <span class="label">Mais</span>
@@ -6094,10 +6098,12 @@ document.addEventListener('DOMContentLoaded', function() {
                 navItems[2].classList.add('active');
             } else if (sectionId === 'progresso') {
                 navItems[3].classList.add('active');
-            } else if (sectionId === 'utilities') {
+            } else if (sectionId === 'trips') {
                 navItems[4].classList.add('active');
-            } else if (sectionId === 'manas') {
+            } else if (sectionId === 'utilities') {
                 navItems[5].classList.add('active');
+            } else if (sectionId === 'manas') {
+                navItems[6].classList.add('active');
             } else if (sectionId === 'competicoes') {
                 // Competitions section - highlight related tab
             }
