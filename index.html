@@ -4108,6 +4108,27 @@ document.addEventListener('DOMContentLoaded', function() {
                 <a href="#" class="see-all">Ver todas →</a>
             </div>
             
+            <!-- Ver Resultados (para Carol) -->
+            <button onclick="showTripVotes()" style="background: linear-gradient(135deg, #FFD700, #FFA500); color: #0E2439; border: none; padding: 14px 20px; margin: 20px; border-radius: 10px; font-size: 14px; font-weight: 600; cursor: pointer; width: calc(100% - 40px);">🗳️ Ver Votos Recebidos</button>
+            
+            <script>
+            function showTripVotes() {
+                var votes = JSON.parse(localStorage.getItem('asf-trip-votes') || '[]');
+                if (votes.length === 0) {
+                    alert('Nenhum voto recebido ainda! Compartilhe o app para receber votos.');
+                    return;
+                }
+                // Group by location
+                var counts = {};
+                votes.forEach(function(v) { counts[v.location] = (counts[v.location] || 0) + 1; });
+                var summary = '🗳️ RESULTADOS DAS VOTAÇÕES\n\nTotal: ' + votes.length + ' votos\n\n';
+                for (var loc in counts) { summary += loc + ': ' + counts[loc] + ' voto(s)\n'; }
+                summary += '\n--- DETALHES ---\n';
+                votes.forEach(function(v, i) { summary += (i+1) + '. ' + v.name + ' - ' + v.location + '\nWhatsApp: ' + v.phone + '\n\n'; });
+                alert(summary);
+            }
+            </script>
+            
             <!-- Surftrip Voting -->
             <div style="background: linear-gradient(135deg, #00A8CC 0%, #0E2439 100%); padding: 20px; margin: 0 20px 20px; border-radius: 16px; color: white;">
                 <h3 style="margin-bottom: 8px;">🗳️ VOTAÇÃO: Para onde vamos?</h3>
