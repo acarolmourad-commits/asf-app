@@ -95,7 +95,7 @@ App completo para a comunidade de surf feminino do Litoral Paulista.
 
 ## 📊 Status
 
-- **Linhas de código:** ~8360
+- **Linhas de código:** ~8568
 - **Dicas do Dia:** 81+ dicas rotating
 - **Commits hoje:** 29+
 - **Commits pendentes push:** 0 ( synced)
