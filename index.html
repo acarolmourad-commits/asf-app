@@ -4127,12 +4127,79 @@ document.addEventListener('DOMContentLoaded', function() {
                 votes.forEach(function(v, i) { summary += (i+1) + '. ' + v.name + ' - ' + v.location + '\nWhatsApp: ' + v.phone + '\n\n'; });
                 alert(summary);
             }
+            
+            // Countdown e Resultados em Tempo Real
+            function initVotingCountdown() {
+                var startKey = 'asf-vote-start';
+                var startDate = localStorage.getItem(startKey);
+                if (!startDate) {
+                    startDate = new Date().toISOString().split('T')[0];
+                    localStorage.setItem(startKey, startDate);
+                }
+                var today = new Date();
+                var start = new Date(startDate);
+                var diffDays = Math.floor((today - start) / (1000 * 60 * 60 * 24));
+                var daysLeft = 20 - diffDays;
+                var daysEl = document.getElementById('days-left');
+                if (daysEl) {
+                    if (daysLeft <= 0) {
+                        daysEl.textContent = '0';
+                        document.getElementById('vote-countdown').innerHTML = '<div style="font-size: 18px; font-weight: bold;">✅ VOTAÇÃO ENCERRADA!</div><div style="font-size: 12px; opacity: 0.8;">Resultado final definido</div>';
+                        // Show final results
+                        showFinalResults();
+                    } else {
+                        daysEl.textContent = daysLeft;
+                    }
+                }
+                // Mostrar resultado parcial em tempo real
+                updateLiveResults();
+            }
+            
+            function updateLiveResults() {
+                var votes = JSON.parse(localStorage.getItem('asf-trip-votes') || '[]');
+                if (votes.length > 0) {
+                    var counts = {};
+                    votes.forEach(function(v) { counts[v.location] = (counts[v.location] || 0) + 1; });
+                    var sorted = Object.entries(counts).sort(function(a, b) { return b[1] - a[1]; });
+                    var resultDiv = document.getElementById('current-results');
+                    var display = document.getElementById('result-display');
+                    if (resultDiv && display) {
+                        resultDiv.style.display = 'block';
+                        display.innerHTML = sorted.map(function(c) { return c[0] + ': <b>' + c[1] + '</b> voto(s)' }).join(' | ');
+                    }
+                }
+            }
+            
+            function showFinalResults() {
+                var votes = JSON.parse(localStorage.getItem('asf-trip-votes') || '[]');
+                if (votes.length === 0) return;
+                var counts = {};
+                votes.forEach(function(v) { counts[v.location] = (counts[v.location] || 0) + 1; });
+                var sorted = Object.entries(counts).sort(function(a, b) { return b[1] - a[1]; });
+                var winner = sorted[0][0];
+                var winnerVotes = sorted[0][1];
+                var msg = '🏆 SURFTRIP ' + (new Date().getMonth() + 1) + '/' + new Date().getFullYear() + '\n\n';
+                msg += 'DESTINO: ' + winner + '\n';
+                msg += 'VOTOS: ' + winnerVotes + '\n\n';
+                msg += 'Próxima trip será em ' + winner + '! 🌊';
+                alert(msg);
+            }
+            
+            // Iniciar countdown ao carregar
+            document.addEventListener('DOMContentLoaded', initVotingCountdown);
             </script>
             
             <!-- Surftrip Voting -->
             <div style="background: linear-gradient(135deg, #00A8CC 0%, #0E2439 100%); padding: 20px; margin: 0 20px 20px; border-radius: 16px; color: white;">
                 <h3 style="margin-bottom: 8px;">🗳️ VOTAÇÃO: Para onde vamos?</h3>
-                <p style="font-size: 12px; opacity: 0.9; margin-bottom: 16px;">Vote no seu pico! O mais voto será o próximo Surftrip.</p>
+                <div id="vote-countdown" style="background: rgba(255,255,255,0.2); padding: 10px; border-radius: 10px; text-align: center; margin-bottom: 12px;">
+                    <div style="font-size: 24px; font-weight: bold;">⏰ <span id="days-left">20</span> dias</div>
+                    <div style="font-size: 11px; opacity: 0.8;">para encerrar a votação</div>
+                </div>
+                <div id="current-results" style="background: rgba(255,215,0,0.2); padding: 12px; border-radius: 10px; text-align: center; margin-bottom: 12px; display: none;">
+                    <div style="font-size: 14px; font-weight: bold;">🏆 Resultado Parcial</div>
+                    <div id="result-display" style="font-size: 13px; margin-top: 8px;"></div>
+                </div>
                 
                 <h4 style="font-size: 13px; margin: 16px 0 8px;">🏄‍♀️ Picos Nacionais</h4>
                 <div style="display: flex; flex-direction: column; gap: 8px;">
