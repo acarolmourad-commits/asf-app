@@ -4596,6 +4596,42 @@ E-mail: ' + email : '');
                 </div>
             </div>
 
+            <!-- Backup/Restore Data -->
+            <div style="display: flex; gap: 8px; margin-bottom: 16px; flex-wrap: wrap;">
+                <button class="btn btn-secondary" style="flex: 1; min-width: 140px; padding: 12px 8px; font-size: 13px;" onclick="exportData()" title="Salvar seus dados">💾 Backup Dados</button>
+                <button class="btn btn-primary" style="flex: 1; min-width: 140px; padding: 12px 8px; font-size: 13px;" onclick="document.getElementById('importFile').click()" title="Carregar seus dados">📂 Restaurar</button>
+                <input type="file" id="importFile" accept=".json" style="display: none;" onchange="importData(this)">
+            </div>
+            <script>
+            function exportData() {
+                var keys = ['asf-profile', 'surf-sessions', 'quizzes-done', 'asf-water', 'asf-checklist', 'asf-trip-votes', 'asf-parceiros', 'asf-lang', 'asf-theme', 'asf-achievements', 'asf-score', 'asf-level'];
+                var data = {};
+                keys.forEach(function(k) { var v = localStorage.getItem(k); if (v) data[k] = JSON.parse(v); });
+                var blob = new Blob([JSON.stringify(data, null, 2)], {type: 'application/json'});
+                var url = URL.createObjectURL(blob);
+                var a = document.createElement('a');
+                a.href = url;
+                a.download = 'asf-backup-' + new Date().toISOString().split('T')[0] + '.json';
+                a.click();
+                URL.revokeObjectURL(url);
+                showToast('✅ Backup salvo!', 'success');
+            }
+            function importData(input) {
+                var file = input.files[0];
+                if (!file) return;
+                var reader = new FileReader();
+                reader.onload = function(e) {
+                    try {
+                        var data = JSON.parse(e.target.result);
+                        var count = 0;
+                        for (var k in data) { localStorage.setItem(k, JSON.stringify(data[k])); count++; }
+                        showToast('✅ ' + count + ' itens restaurados! Recarregue o app.', 'success');
+                    } catch(err) { showToast('❌ Erro ao importar. Archivo inválido.', 'error'); }
+                };
+                reader.readAsText(file);
+            }
+            </script>
+
             <!-- Live Data Cards -->
             <div class="cards-grid">
                 <!-- Condições do Mar (Live) -->
