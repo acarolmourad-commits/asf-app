@@ -4144,11 +4144,15 @@ document.addEventListener('DOMContentLoaded', function() {
                 if (daysEl) {
                     if (daysLeft <= 0) {
                         daysEl.textContent = '0';
+                        var daysEl2 = document.getElementById('days-left2');
+                        if (daysEl2) daysEl2.textContent = '0';
                         document.getElementById('vote-countdown').innerHTML = '<div style="font-size: 18px; font-weight: bold;">✅ VOTAÇÃO ENCERRADA!</div><div style="font-size: 12px; opacity: 0.8;">Resultado final definido</div>';
                         // Show final results
                         showFinalResults();
                     } else {
                         daysEl.textContent = daysLeft;
+                        var daysEl2 = document.getElementById('days-left2');
+                        if (daysEl2) daysEl2.textContent = daysLeft;
                     }
                 }
                 // Mostrar resultado parcial em tempo real
@@ -4196,10 +4200,11 @@ document.addEventListener('DOMContentLoaded', function() {
                     <div style="font-size: 24px; font-weight: bold;">⏰ <span id="days-left">20</span> dias</div>
                     <div style="font-size: 11px; opacity: 0.8;">para encerrar a votação</div>
                 </div>
-                <div id="current-results" style="background: rgba(255,215,0,0.2); padding: 12px; border-radius: 10px; text-align: center; margin-bottom: 12px; display: none;">
+                <div id="current-results" style="background: rgba(255,215,0,0.2); padding: 12px; border-radius: 10px; text-align: center; margin-bottom: 12px;">
                     <div style="font-size: 14px; font-weight: bold;">🏆 Resultado Parcial</div>
                     <div id="result-display" style="font-size: 13px; margin-top: 8px;"></div>
                 </div>
+                <div style="font-size: 11px; opacity: 0.7; text-align: center;">Resultado final sai em <span id="days-left2">20</span> dias! 🌊</div>
                 
                 <h4 style="font-size: 13px; margin: 16px 0 8px;">🏄‍♀️ Picos Nacionais</h4>
                 <div style="display: flex; flex-direction: column; gap: 8px;">
