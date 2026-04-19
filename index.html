@@ -5998,6 +5998,18 @@ Comprovante: " + comprovante + "
                 <div style="font-size: 24px;">🔥</div>
                 <p style="font-size: 10px;">3 Dias</p>
             </div>
+            <div id="badge-veterana" onclick="checkBadge('veterana')" style="background: rgba(255,255,255,0.1); padding: 12px; border-radius: 10px; cursor: pointer;">
+                <div style="font-size: 24px;">🦈</div>
+                <p style="font-size: 10px;">5 Sessions</p>
+            </div>
+            <div id="badge-maratona" onclick="checkBadge('maratona')" style="background: rgba(255,255,255,0.1); padding: 12px; border-radius: 10px; cursor: pointer;">
+                <div style="font-size: 24px;">⚡</div>
+                <p style="font-size: 10px;">10 Sessions</p>
+            </div>
+            <div id="badge-share" onclick="checkBadge('share')" style="background: rgba(255,255,255,0.1); padding: 12px; border-radius: 10px; cursor: pointer;">
+                <div style="font-size: 24px;">📤</div>
+                <p style="font-size: 10px;">Compartilhar</p>
+            </div>
         </div>
         
         <p style="font-size: 11px; opacity: 0.7;">Complete missões para desbloquear badges secretos! 🏆</p>
@@ -6007,6 +6019,7 @@ Comprovante: " + comprovante + "
         var sessions = (JSON.parse(localStorage.getItem('surf-sessions') || '[]')).length;
         var quizzes = (JSON.parse(localStorage.getItem('quizzes-done') || '[]')).length;
         var opens = parseInt(localStorage.getItem('asf-opens') || '0');
+        var shares = parseInt(localStorage.getItem('asf-shares') || '0');
         
         if (type === 'surf') {
             if (sessions >= 1) showToast('🏄 Badge desbloqueado! 🎉');
@@ -6017,7 +6030,20 @@ Comprovante: " + comprovante + "
         } else if (type === 'streak') {
             if (opens >= 3) showToast('🔥 Badge desbloqueado! 🎉');
             else showToast('🔥 Progresso: ' + opens + '/3 dias usando o app');
+        } else if (type === 'veterana') {
+            if (sessions >= 5) showToast('🦈 Badge desbloqueado! 🎉');
+            else showToast('🦈 Progresso: ' + sessions + '/5 sessões');
+        } else if (type === 'maratona') {
+            if (sessions >= 10) showToast('⚡ Badge desbloqueado! 🎉');
+            else showToast('⚡ Progresso: ' + sessions + '/10 sessões');
+        } else if (type === 'share') {
+            if (shares >= 1) showToast('📤 Badge desbloqueado! 🎉');
+            else showToast('📤 Compartilhe o app para desbloquear!');
         }
+    }
+    // Track shares
+    function trackShare() {
+        localStorage.setItem('asf-shares', parseInt(localStorage.getItem('asf-shares') || '0') + 1);
     }
     </script>
 
@@ -6399,12 +6425,14 @@ document.addEventListener('DOMContentLoaded', function() {
         function shareToWhatsApp() {
             const url = `https://wa.me/?text=${encodeURIComponent(SHARE_TEXT + '\n\n' + APP_URL)}`;
             window.open(url, '_blank');
+            trackShare();
             toggleSharePanel();
         }
         
         function shareToInstagram() {
             // Instagram não permite share direto via web, copia o link
             copyShareLink();
+            trackShare();
             alert('📋 Link copiado!\n\nCole no seu Story ou Post do Instagram 📸');
             toggleSharePanel();
         }
@@ -6412,12 +6440,14 @@ document.addEventListener('DOMContentLoaded', function() {
         function shareToFacebook() {
             const url = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(APP_URL)}&quote=${encodeURIComponent(SHARE_TEXT)}`;
             window.open(url, '_blank');
+            trackShare();
             toggleSharePanel();
         }
         
         function shareToTwitter() {
             const url = `https://twitter.com/intent/tweet?text=${encodeURIComponent(SHARE_TEXT)}&url=${encodeURIComponent(APP_URL)}`;
             window.open(url, '_blank');
+            trackShare();
             toggleSharePanel();
         }
         
@@ -6432,6 +6462,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 document.execCommand('copy');
                 showToast('📋 Link copiado!');
             }
+            trackShare();
             // Visual feedback
             const btn = event.target;
             const original = btn.textContent;
