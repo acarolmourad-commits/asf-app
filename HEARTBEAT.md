@@ -67,6 +67,10 @@
 - [x] README.md documentation
 - [x] Emergência section (SAMU, Capitania, Polícia, Bombeiros, Hospital)
 - [x] Cronômetro de Treino (re-implemented with Tabata, EMOM, HIIT presets)
+- [x] Add 10 new daily tips (April 20 - 103 total)
+- [x] New badge: Veterana (10 sessions)
+- [x] Add Praia de Maresias to Guia de Praias (13 beaches)
+- [x] Add 5 new glossary terms (38 total)
 
 ## TODO IMPROVEMENTS
 
