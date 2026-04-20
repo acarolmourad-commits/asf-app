@@ -15,7 +15,7 @@ App completo para a comunidade de surf feminino do Litoral Paulista.
 - **Saúde & Treino** — Treino funcional para surfistas
 - **Técnica de Surf** — Paddling, manobras, leitura de onda
 - **Mental & Calmaria** — Gerenciamento de medo, foco, visualização
-- **📖 Glossário do Surf** — 33 termos (onda + prancha)
+- **📖 Glossário do Surf** — 38 termos (onda + prancha)
 
 ### 🏖️ Praias
 - **Guia de Praias** — 14 praias do Litoral Paulista com nível, vento, infraestrutura
