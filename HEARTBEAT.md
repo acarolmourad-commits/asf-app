@@ -20,7 +20,7 @@
 
 ## ASF APP
 
-- Main app: https://acarolmourad-commits.github.io/asf-app/ (8912 lines)
+- Main app: https://acarolmourad-commits.github.io/asf-app/ (8916 lines)
 - Logo spaces: https://acarolmourad-commits.github.io/asf-app/espacos-logo-app.html
 - All commits synced ✅ (token renewed by Carol)
 
@@ -86,6 +86,7 @@
 - [x] Add 5 fin term + 1 tip (120 total)
 - [x] Add Twin term + 1 tip (121 total)
 - [x] Add Single term + 1 tip (122 total)
+- [x] Add Pintail term + 1 tip (123 total)
 
 ## TODO IMPROVEMENTS
 
