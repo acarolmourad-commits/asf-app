@@ -20,7 +20,7 @@
 
 ## ASF APP
 
-- Main app: https://acarolmourad-commits.github.io/asf-app/ (8882 lines)
+- Main app: https://acarolmourad-commits.github.io/asf-app/ (8887 lines)
 - Logo spaces: https://acarolmourad-commits.github.io/asf-app/espacos-logo-app.html
 - All commits synced ✅ (token renewed by Carol)
 
@@ -78,6 +78,7 @@
 - [x] Add AMRAP preset to workout timer
 - [x] Add 5 new daily tips (113 total)
 - [x] Add Itamambuca to surf forecast (10 beaches)
+- [x] Add Flange to glossary + 2 new daily tips (115 total)
 
 ## TODO IMPROVEMENTS
 
