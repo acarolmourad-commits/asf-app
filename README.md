@@ -18,7 +18,7 @@ App completo para a comunidade de surf feminino do Litoral Paulista.
 - **📖 Glossário do Surf** — 33 termos (onda + prancha)
 
 ### 🏖️ Praias
-- **Guia de Praias** — 9 praias do Litoral Paulista com nível, vento, infraestrutura
+- **Guia de Praias** — 13 praias do Litoral Paulista com nível, vento, infraestrutura
 - Filtros por região: Norte, Grande Santos, Sul
 - Praias: Itamambuca, Toninhas, Maresias, Bertioga, Gonzaga, Pitangueiras, Riviera, Mongaguá, Praia Grande
 
