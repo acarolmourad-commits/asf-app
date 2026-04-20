@@ -73,6 +73,7 @@
 - [x] Add 9 new glossary terms (40 total)
 - [x] Add 5 new daily tips (108 total)
 - [x] Add wetsuit item to Pre-Surf Checklist (9 items)
+- [x] Add Praia Grande to surf session log (9 beach options)
 
 ## TODO IMPROVEMENTS
 
