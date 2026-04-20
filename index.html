@@ -4800,9 +4800,12 @@ E-mail: ' + email : '');
                         <label style="display: flex; align-items: center; gap: 8px; padding: 8px; background: var(--light); border-radius: 8px; margin: 4px 0; cursor: pointer; font-size: 13px;" onclick="toggleChecklistItem(this)">
                             <input type="checkbox" style="width: 18px; height: 18px; accent-color: var(--primary);"> 🔑 Chaves (sem areia!)
                         </label>
+                        <label style="display: flex; align-items: center; gap: 8px; padding: 8px; background: var(--light); border-radius: 8px; margin: 4px 0; cursor: pointer; font-size: 13px;" onclick="toggleChecklistItem(this)">
+                            <input type="checkbox" style="width: 18px; height: 18px; accent-color: var(--primary);"> 🧥 Wetsuit (frio)
+                        </label>
                     </div>
                     <div id="checklist-progress" style="background: var(--light); padding: 10px; border-radius: 8px; text-align: center; margin-bottom: 10px;">
-                        <p style="font-size: 13px;">Progresso: <strong id="checklist-count">0</strong>/8 itens</p>
+                        <p style="font-size: 13px;">Progresso: <strong id="checklist-count">0</strong>/9 itens</p>
                         <div style="background: var(--gray-200); border-radius: 4px; height: 8px; margin-top: 6px;">
                             <div id="checklist-bar" style="background: var(--success); border-radius: 4px; height: 100%; width: 0%; transition: width 0.3s;"></div>
                         </div>
@@ -7692,7 +7695,7 @@ document.addEventListener('DOMContentLoaded', function() {
             document.getElementById('checklist-bar').style.width = '0%';
             document.getElementById('checklist-progress').style.background = 'var(--light)';
             document.getElementById('checklist-progress').innerHTML = `
-                <p style="font-size: 13px;">Progresso: <strong id="checklist-count">0</strong>/8 itens</p>
+                <p style="font-size: 13px;">Progresso: <strong id="checklist-count">0</strong>/9 itens</p>
                 <div style="background: var(--gray-200); border-radius: 4px; height: 8px; margin-top: 6px;">
                     <div id="checklist-bar" style="background: var(--success); border-radius: 4px; height: 100%; width: 0%; transition: width 0.3s;"></div>
                 </div>
