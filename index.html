@@ -4943,6 +4943,7 @@ E-mail: ' + email : '');
                         <button class="btn btn-secondary" style="flex: 1; font-size: 11px; padding: 8px;" onclick="setTimerPreset('tabata')">🔥 Tabata</button>
                         <button class="btn btn-secondary" style="flex: 1; font-size: 11px; padding: 8px;" onclick="setTimerPreset('emom')">⏰ EMOM</button>
                         <button class="btn btn-secondary" style="flex: 1; font-size: 11px; padding: 8px;" onclick="setTimerPreset('hiit')">💪 HIIT</button>
+                        <button class="btn btn-secondary" style="flex: 1; font-size: 11px; padding: 8px;" onclick="setTimerPreset('amrap')">⏱️ AMRAP</button>
                     </div>
                     
                     <!-- Custom Settings -->
@@ -7739,6 +7740,10 @@ document.addEventListener('DOMContentLoaded', function() {
                 workInput.value = 40;
                 restInput.value = 20;
                 roundsInput.value = 10;
+            } else if (preset === 'amrap') {
+                workInput.value = 30;
+                restInput.value = 15;
+                roundsInput.value = 7;
             }
             
             resetTimer();
