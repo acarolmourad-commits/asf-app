@@ -20,7 +20,7 @@
 
 ## ASF APP
 
-- Main app: https://acarolmourad-commits.github.io/asf-app/ (8892 lines)
+- Main app: https://acarolmourad-commits.github.io/asf-app/ (8896 lines)
 - Logo spaces: https://acarolmourad-commits.github.io/asf-app/espacos-logo-app.html
 - All commits synced ✅ (token renewed by Carol)
 
@@ -81,6 +81,7 @@
 - [x] Add Flange to glossary + 2 new daily tips (115 total)
 - [x] Add Keel term + 1 new daily tip (116 total)
 - [x] Add 1 new daily tip (117 total)
+- [x] Add Thruster term + 1 tip (118 total)
 
 ## TODO IMPROVEMENTS
 
