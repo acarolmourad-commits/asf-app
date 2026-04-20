@@ -3567,6 +3567,12 @@ document.addEventListener('DOMContentLoaded', function() {
                     <div style="font-size: 11px; font-weight: 600; color: var(--secondary);">Competitiva</div>
                     <div style="font-size: 10px; color: var(--gray-400);">Primera etapa</div>
                 </div>
+                <!-- Badge 9: Veterana -->
+                <div class="achievement-badge" id="badge-veterana" style="min-width: 90px; text-align: center; padding: 12px 8px; background: var(--white); border-radius: 16px; box-shadow: var(--shadow-sm);">
+                    <div style="font-size: 32px; margin-bottom: 6px;">🧡</div>
+                    <div style="font-size: 11px; font-weight: 600; color: var(--secondary);">Veterana</div>
+                    <div style="font-size: 10px; color: var(--gray-400);">10 sessões</div>
+                </div>
             </div>
             <p style="font-size: 12px; color: var(--gray-400); text-align: center; margin: 0 20px 20px;">Toque em uma conquista para ver detalhes</p>
             
@@ -6879,6 +6885,11 @@ document.addEventListener('DOMContentLoaded', function() {
                 title: '🏆 Competitiva', 
                 desc: 'Participou de uma etapa',
                 earned: false
+            },
+            'badge-veterana': { 
+                title: '🧡 Veterana', 
+                desc: '10 sessões de surf',
+                earned: false
             }
         };
 
@@ -8379,7 +8390,16 @@ document.addEventListener('DOMContentLoaded', function() {
             { text: '🎉 Celebrate every wave caught. Small wins = big progress! 🥳', category: 'Mental', emoji: '🎉' },
             { text: '🌊 Ocean doesn\'t judge. Just paddle out and try! 🏄', category: 'Mental', emoji: '🌊' },
             { text: '🧘 Mind surf = winning surf. Mental game is 90%! 🧠', category: 'Mental', emoji: '🧘' },
-            { text: '❤️ Aloha spirit. Love the ocean, love each other! 🤙', category: 'ASF', emoji: '❤️' }
+            { text: '❤️ Aloha spirit. Love the ocean, love each other! 🤙', category: 'ASF', emoji: '❤️' },
+            { text: '🌊 Spring swells bring the best waves! Stay tuned to the forecast. 🌊', category: 'Condições', emoji: '🌊' },
+            { text: '🏄♀️ Competir é opcional, evoluir é obrigatório! Cada heat é uma chance de aprender! 💪', category: 'Competição', emoji: '🏆' },
+            { text: '🌅 Chegue 30 min antes. Observe as ondas, encontre seu spot, prepare-se mentalmente! ⏰', category: 'Rotina', emoji: '🌅' },
+            { text: '📊 Track your sessions! Note wave height, wind direction, how you felt. Data = improvement! 📱', category: 'Progresso', emoji: '📊' },
+            { text: '🤸 Yoga improves balance and flexibility. Try downward dog to strengthen your pop-up! 🧘', category: 'Treino', emoji: '🧘' },
+            { text: '🌊 O mar é democrático. Não importa seu nível — hoje pode ser SEU dia! 💫', category: 'Mental', emoji: '🌊' },
+            { text: '🏄 Never surf beyond your limits. Progression takes time. Respect the ocean! 🙏', category: 'Segurança', emoji: '🏄' },
+            { text: '🎯 Take one goal to each session. Just one thing to work on. Focused practice wins! 🎯', category: 'Técnica', emoji: '🎯' },
+            { text: '💙 ASF means community. We grow stronger together in and out of the water! 🤝', category: 'ASF', emoji: '💙' }
         ];
         
         // Old duplicate removed - tips consolidated above
