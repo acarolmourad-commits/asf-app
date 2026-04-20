@@ -20,7 +20,7 @@
 
 ## ASF APP
 
-- Main app: https://acarolmourad-commits.github.io/asf-app/ (8740 lines)
+- Main app: https://acarolmourad-commits.github.io/asf-app/ (8865 lines)
 - Logo spaces: https://acarolmourad-commits.github.io/asf-app/espacos-logo-app.html
 - All commits synced ✅ (token renewed by Carol)
 
@@ -70,7 +70,9 @@
 - [x] Add 10 new daily tips (April 20 - 103 total)
 - [x] New badge: Veterana (10 sessions)
 - [x] Add Praia de Maresias to Guia de Praias (13 beaches)
-- [x] Add 5 new glossary terms (38 total)
+- [x] Add 9 new glossary terms (40 total)
+- [x] Add 5 new daily tips (108 total)
+- [x] Add wetsuit item to Pre-Surf Checklist (9 items)
 
 ## TODO IMPROVEMENTS
 
