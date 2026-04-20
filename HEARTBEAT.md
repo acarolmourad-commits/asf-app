@@ -20,7 +20,7 @@
 
 ## ASF APP
 
-- Main app: https://acarolmourad-commits.github.io/asf-app/ (8868 lines)
+- Main app: https://acarolmourad-commits.github.io/asf-app/ (8873 lines)
 - Logo spaces: https://acarolmourad-commits.github.io/asf-app/espacos-logo-app.html
 - All commits synced ✅ (token renewed by Carol)
 
@@ -75,6 +75,7 @@
 - [x] Add wetsuit item to Pre-Surf Checklist (9 items)
 - [x] Add Praia Grande to surf session log (9 beach options)
 - [x] Add São Sebastião to surf forecast (8 beaches)
+- [x] Add AMRAP preset to workout timer
 
 ## TODO IMPROVEMENTS
 
