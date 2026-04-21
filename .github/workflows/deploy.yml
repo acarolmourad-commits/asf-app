@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - main
+  workflow_dispatch:
 
 permissions:
   contents: read
@@ -19,6 +20,15 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+
+      - name: Validate HTML
+        run: |
+          if [ -f index.html ]; then
+            echo "✅ index.html found ($(wc -l < index.html) lines)"
+          else
+            echo "❌ index.html not found!"
+            exit 1
+          fi
 
       - name: Setup Pages
         uses: actions/configure-pages@v4
