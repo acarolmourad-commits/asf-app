@@ -30,7 +30,7 @@
     <style>
         /* Smooth scroll */
         html { scroll-behavior: smooth; }
-        
+
         /* Loading Screen */
         .loading-screen {
             position: fixed;
@@ -122,7 +122,7 @@
             0%, 100% { transform: translateY(0); }
             50% { transform: translateY(-10px); }
         }
-        
+
         :root {
             --primary: #00A8CC;
             --primary-light: #4DC8E0;
@@ -323,7 +323,7 @@
             align-items: center;
             justify-content: center;
         }
-        
+
         .logo-icon svg {
             width: 100%;
             height: 100%;
@@ -529,7 +529,7 @@
             transform: translateY(-4px);
             box-shadow: var(--shadow-md);
         }
-        
+
         .utility-btn:active {
             transform: translateY(-1px);
             box-shadow: var(--shadow-sm);
@@ -1048,12 +1048,12 @@
             cursor: pointer;
             transition: all 0.3s;
         }
-        
+
         .nav-item:hover {
             color: var(--primary);
             opacity: 0.8;
         }
-        
+
         .nav-item:active {
             transform: scale(0.95);
             opacity: 0.7;
@@ -1101,7 +1101,7 @@
             transform: scale(1.1);
             box-shadow: var(--shadow-lg), 0 0 20px rgba(0,168,204,0.4);
         }
-        
+
         .fab-share {
             position: fixed;
             bottom: 90px;
@@ -1311,7 +1311,7 @@
             "https://www.tiktok.com/@Cahrol.asf"
         ]
     }
-    
+
 <script>
 var translations = {
     'pt': {},
@@ -1430,7 +1430,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     💬
                 </a>
                 <!-- Chatbot removido -->
-                
+
                 <button class="icon-btn" onclick="showBrandSupport()" title="Apoie o App" style="background: linear-gradient(135deg,#FFD700,#FFA500); color: #0E2439; border-radius: 10px; font-weight: 700;">🤝</button>
             </div>
         </div>
@@ -1474,15 +1474,15 @@ document.addEventListener('DOMContentLoaded', function() {
             const input = document.getElementById("chatbot-input");
             const msg = input.value.toLowerCase().trim();
             if (!msg) return;
-            
+
             const msgs = document.getElementById("chatbot-messages");
             msgs.innerHTML += "<div style='background:#eee; padding:8px; border-radius:8px; margin:4px 0;'><strong>Você:</strong> " + input.value + "</div>";
-            
+
             let response = "Desculpe, não entendi. Tente: previsão, pontos, eventos, contatos ou como participar! 🤖";
             for (const [key, value] of Object.entries(chatbotFAQs)) {
                 if (msg.includes(key)) { response = value; break; }
             }
-            
+
             msgs.innerHTML += "<div style='background:#E0F7FA; padding:8px; border-radius:8px; margin:4px 0;'><strong>🤖:</strong> " + response + "</div>";
             msgs.scrollTop = msgs.scrollHeight;
             input.value = "";
@@ -1491,7 +1491,7 @@ document.addEventListener('DOMContentLoaded', function() {
         document.getElementById("chatbot-input").addEventListener("keypress", function(e) {
             if (e.key === "Enter") sendChatbotMessage();
         });
-    
+
 <script>
 var translations = {
     'pt': {},
@@ -1777,16 +1777,16 @@ document.addEventListener('DOMContentLoaded', function() {
     <div style="padding: 20px;">
         <h2 id="wave-forecast" style="font-size: 18px; color: #0E2439; margin-bottom: 15px;">🌊 Previsão de Ondas - Litoral Paulista</h2>
         <img src="docs/carol2.jpg" alt="Ondas" style="width:100%; border-radius:12px; margin-bottom:15px; object-fit:cover;">
-        
+
         <div style="background: linear-gradient(135deg, #00A8CC 0%, #0E2439 100%); padding: 16px; margin-bottom: 15px; border-radius: 16px; color: white;">
             <p style="font-size: 14px; font-weight: 600;">🌊 Previsão de Ondas - Sexta, 07/04/2026</p>
             <p style="font-size: 12px; opacity: 0.9; margin-top: 4px;">Fonte: Open-Meteo Marine API</p>
         </div>
-        
+
         <a href="https://app.surfdaycheck.com.br/auth" target="_blank" style="display:block; text-align:center; background:linear-gradient(135deg,#00A8CC,#0E2439); color:white; padding:12px 16px; border-radius:12px; text-decoration:none; font-weight:600; margin-bottom:15px;">
             🌊 Ver condições em TEMPO REAL no Surf Day Check
         </a>
-        
+
         <div class="cards-grid" style="grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));">
             <!-- Bertioga -->
             <div class="card">
@@ -1815,7 +1815,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     </div>
                 </div>
             </div>
-            
+
             <!-- Santos -->
             <div class="card">
                 <div style="display: flex; justify-content: space-between; align-items: center;">
@@ -1843,7 +1843,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     </div>
                 </div>
             </div>
-            
+
             <!-- Guarujá -->
             <div class="card">
                 <div style="display: flex; justify-content: space-between; align-items: center;">
@@ -1871,7 +1871,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     </div>
                 </div>
             </div>
-            
+
             <!-- Ubatuba -->
             <div class="card">
                 <div style="display: flex; justify-content: space-between; align-items: center;">
@@ -1899,7 +1899,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     </div>
                 </div>
             </div>
-            
+
             <!-- São Sebastião -->
             <div class="card">
                 <div style="display: flex; justify-content: space-between; align-items: center;">
@@ -1927,7 +1927,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     </div>
                 </div>
             </div>
-            
+
             <!-- Ilhabela -->
             <div class="card">
                 <div style="display: flex; justify-content: space-between; align-items: center;">
@@ -1955,7 +1955,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     </div>
                 </div>
             </div>
-            
+
             <!-- Praia Grande -->
             <div class="card">
                 <div style="display: flex; justify-content: space-between; align-items: center;">
@@ -1983,7 +1983,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     </div>
                 </div>
             </div>
-            
+
             <!-- Caraguatatuba -->
             <div class="card">
                 <div style="display: flex; justify-content: space-between; align-items: center;">
@@ -2012,7 +2012,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 </div>
             </div>
         </div>
-        
+
         <p style="font-size: 12px; color: #999; text-align: center; margin-top: 15px;">🌊 Dados atualizados automaticamente às 5h da manhã</p>
     </div>
     <!-- End Wave Forecast -->
@@ -2020,7 +2020,7 @@ document.addEventListener('DOMContentLoaded', function() {
     <!-- Beach Tips Section -->
     <div style="padding: 20px;">
         <h2 style="font-size: 18px; color: #0E2439; margin-bottom: 15px;">🏖️ Dicas por Praia</h2>
-        
+
         <div class="cards-grid" style="grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));">
             <!-- Bertioga -->
             <div class="card" style="border-left: 4px solid #27AE60;">
@@ -2034,7 +2034,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     <p>🚗 <strong>Estacionamento:</strong> R$ 30-50/dia na temporada</p>
                 </div>
             </div>
-            
+
             <!-- Santos -->
             <div class="card" style="border-left: 4px solid #3498DB;">
                 <span class="card-tag">DICA DA PRAIA</span>
@@ -2047,7 +2047,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     <p>🅿️ <strong>Estacionamento:</strong> FREE na orla (rua)</p>
                 </div>
             </div>
-            
+
             <!-- Guarujá -->
             <div class="card" style="border-left: 4px solid #F39C12;">
                 <span class="card-tag accent">DICA DA PRAIA</span>
@@ -2060,7 +2060,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     <p>🏪 <strong>Estrutura:</strong> Lojas e quiosques na orla</p>
                 </div>
             </div>
-            
+
             <!-- Ubatuba -->
             <div class="card" style="border-left: 4px solid #9B59B6;">
                 <span class="card-tag purple">DICA DA PRAIA</span>
@@ -2073,7 +2073,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     <p>🦟 <strong>Atenção:</strong> Repelente sempre!</p>
                 </div>
             </div>
-            
+
             <!-- Maresias -->
             <div class="card" style="border-left: 4px solid #E74C3C;">
                 <span class="card-tag coral">DICA DA PRAIA</span>
@@ -2086,7 +2086,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     <p>🚗 <strong>Acesso:</strong> 2h de SP, estrada boa</p>
                 </div>
             </div>
-            
+
             <!-- Ilhabela -->
             <div class="card" style="border-left: 4px solid #1ABC9C;">
                 <span class="card-tag green">DICA DA PRAIA</span>
@@ -2131,7 +2131,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     <p style="font-size: 12px; opacity: 0.9;">Cuidados essenciais para mulheres surfistas</p>
                 </div>
             </div>
-            
+
             <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 15px;">
                 <!-- Tip 1 -->
                 <div style="background: rgba(255,255,255,0.15); padding: 15px; border-radius: 12px;">
@@ -2143,7 +2143,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         </div>
                     </div>
                 </div>
-                
+
                 <!-- Tip 2 -->
                 <div style="background: rgba(255,255,255,0.15); padding: 15px; border-radius: 12px;">
                     <div style="display: flex; gap: 10px; align-items: flex-start;">
@@ -2154,7 +2154,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         </div>
                     </div>
                 </div>
-                
+
                 <!-- Tip 3 -->
                 <div style="background: rgba(255,255,255,0.15); padding: 15px; border-radius: 12px;">
                     <div style="display: flex; gap: 10px; align-items: flex-start;">
@@ -2165,7 +2165,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         </div>
                     </div>
                 </div>
-                
+
                 <!-- Tip 4 -->
                 <div style="background: rgba(255,255,255,0.15); padding: 15px; border-radius: 12px;">
                     <div style="display: flex; gap: 10px; align-items: flex-start;">
@@ -2176,7 +2176,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         </div>
                     </div>
                 </div>
-                
+
                 <!-- Tip 5 -->
                 <div style="background: rgba(255,255,255,0.15); padding: 15px; border-radius: 12px;">
                     <div style="display: flex; gap: 10px; align-items: flex-start;">
@@ -2187,7 +2187,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         </div>
                     </div>
                 </div>
-                
+
                 <!-- Tip 6 -->
                 <div style="background: rgba(255,255,255,0.15); padding: 15px; border-radius: 12px;">
                     <div style="display: flex; gap: 10px; align-items: flex-start;">
@@ -2198,7 +2198,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         </div>
                     </div>
                 </div>
-                
+
                 <!-- Tip 7 -->
                 <div style="background: rgba(255,255,255,0.15); padding: 15px; border-radius: 12px;">
                     <div style="display: flex; gap: 10px; align-items: flex-start;">
@@ -2209,7 +2209,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         </div>
                     </div>
                 </div>
-                
+
                 <!-- Tip 8 -->
                 <div style="background: rgba(255,255,255,0.15); padding: 15px; border-radius: 12px;">
                     <div style="display: flex; gap: 10px; align-items: flex-start;">
@@ -2220,7 +2220,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         </div>
                     </div>
                 </div>
-                
+
                 <!-- Tip 9 -->
                 <div style="background: rgba(255,255,255,0.15); padding: 15px; border-radius: 12px;">
                     <div style="display: flex; gap: 10px; align-items: flex-start;">
@@ -2231,7 +2231,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         </div>
                     </div>
                 </div>
-                
+
                 <!-- Tip 10 -->
                 <div style="background: rgba(255,255,255,0.15); padding: 15px; border-radius: 12px;">
                     <div style="display: flex; gap: 10px; align-items: flex-start;">
@@ -2255,18 +2255,18 @@ document.addEventListener('DOMContentLoaded', function() {
                 <h2 class="section-title">📍 Manas Próximas</h2>
                 <a href="#" class="see-all" onclick="findNearbyManas()">🔄 Atualizar</a>
             </div>
-            
+
             <div style="background: linear-gradient(135deg, #FF69B4 0%, #DB7093 100%); padding: 16px; margin: 0 20px 20px; border-radius: 16px; color: white;">
                 <p style="font-size: 14px; font-weight: 600;">📍 Encontre manas para surfar!</p>
                 <p style="font-size: 12px; opacity: 0.9; margin-top: 4px;">Ative sua localização para ver surfistas próximas</p>
             </div>
-            
+
             <div id="location-status" style="padding: 0 20px; margin-bottom: 15px;">
                 <button onclick="requestLocation()" class="btn btn-primary" style="width: 100%; background: linear-gradient(135deg, #00A8CC, #4DC8E0);">
                     📍 Ativar Localização
                 </button>
             </div>
-            
+
             <div id="nearby-manas" style="padding: 0 20px;">
                 <p style="text-align: center; color: #999; padding: 40px;">Ative sua localização para ver manas próximas</p>
             </div>
@@ -2327,7 +2327,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     </div>
                 </div>
             </div>
-            
+
             <div id="beach-manas-detail" style="display: none; padding: 0 20px 20px;">
                 <button onclick="document.getElementById('beach-manas-detail').style.display='none'" style="background: none; border: none; color: var(--primary); font-size: 14px; margin-bottom: 10px; cursor: pointer;">← Voltar</button>
                 <div id="beach-manas-list"></div>
@@ -2340,7 +2340,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 <h2 class="section-title">📚 Dicas de Surf</h2>
                 <a href="#" class="see-all">Ver todas →</a>
             </div>
-            
+
             <!-- Evento do Mês - Nova Feature -->
             <div style="margin: 0 20px 20px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 16px; padding: 16px; color: white;">
                 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
@@ -2355,7 +2355,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 <p style="font-size: 13px; opacity: 0.9; margin: 0 0 12px;">📍 Praia de Santos • Inscrições abertas</p>
                 <button class="btn btn-primary" style="background: white; color: #667eea; border: none; font-size: 13px; font-weight: 600; width: 100%;" onclick="showSection('competicoes')">Ver Detalhes →</button>
             </div>
-            
+
             <!-- Próximos Eventos do Mês -->
             <div style="margin: 0 20px 16px;">
                 <h4 style="font-size: 14px; color: var(--gray-600); margin-bottom: 10px;">📅 Próximos Eventos</h4>
@@ -2377,7 +2377,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     </div>
                 </div>
             </div>
-            
+
             <div class="cards-grid">
                 <div class="card">
                     <span class="card-tag">Iniciante</span>
@@ -2389,7 +2389,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         <span>📊 Iniciante</span>
                     </div>
                 </div>
-                
+
                 <div class="card">
                     <span class="card-tag green">🌱 ECO</span>
                     <h3>♻️ Phenix Teccel: Bloco Ecológico para Prancha</h3>
@@ -2462,172 +2462,190 @@ document.addEventListener('DOMContentLoaded', function() {
                     <p>Termos que toda surfista precisa saber!</p>
                     <div style="margin-top: 12px; font-size: 13px; line-height: 1.8; color: var(--gray-600);">
                         <div style="padding: 4px 0; border-bottom: 1px solid var(--gray-100);">
-                            <strong>Beach break</strong> — Onda que quebra sobre fundo de areia
+                            <strong>Beach break</strong> - Onda que quebra sobre fundo de areia
                         </div>
                         <div style="padding: 4px 0; border-bottom: 1px solid var(--gray-100);">
-                            <strong>Point break</strong> — Onda que quebra sobre rocha/coral, mais previsível
+                            <strong>Point break</strong> - Onda que quebra sobre rocha/coral, mais previsível
                         </div>
                         <div style="padding: 4px 0; border-bottom: 1px solid var(--gray-100);">
-                            <strong>Offshore</strong> — Vento soprando do mar para terra (ondas melhores)
+                            <strong>Offshore</strong> - Vento soprando do mar para terra (ondas melhores)
                         </div>
                         <div style="padding: 4px 0; border-bottom: 1px solid var(--gray-100);">
-                            <strong>Onshore</strong> — Vento soprando da terra para o mar (ondas desorganizadas)
+                            <strong>Onshore</strong> - Vento soprando da terra para o mar (ondas desorganizadas)
                         </div>
                         <div style="padding: 4px 0; border-bottom: 1px solid var(--gray-100);">
-                            <strong>Lineup</strong> — Onde os surfistas esperam as ondas
+                            <strong>Lineup</strong> - Onde os surfistas esperam as ondas
                         </div>
                         <div style="padding: 4px 0; border-bottom: 1px solid var(--gray-100);">
-                            <strong>Peak</strong> — Pico da onda, onde ela começa a quebrar
+                            <strong>Peak</strong> - Pico da onda, onde ela começa a quebrar
                         </div>
                         <div style="padding: 4px 0; border-bottom: 1px solid var(--gray-100);">
-                            <strong>Drop</strong> — O momento de pegar a onda e descer a face
+                            <strong>Drop</strong> - O momento de pegar a onda e descer a face
                         </div>
                         <div style="padding: 4px 0; border-bottom: 1px solid var(--gray-100);">
-                            <strong>Wipeout</strong> — Queda! Faz parte, não tem problema 😄
+                            <strong>Wipeout</strong> - Queda! Faz parte, não tem problema 😄
                         </div>
                         <div style="padding: 4px 0; border-bottom: 1px solid var(--gray-100);">
-                            <strong>Barrel/Tube</strong> — O tubo da onda (todo surfista sonha!)
+                            <strong>Barrel/Tube</strong> - O tubo da onda (todo surfista sonha!)
                         </div>
                         <div style="padding: 4px 0; border-bottom: 1px solid var(--gray-100);">
-                            <strong>Bottom turn</strong> — Curva na base da onda (manobra fundamental)
+                            <strong>Bottom turn</strong> - Curva na base da onda (manobra fundamental)
                         </div>
                         <div style="padding: 4px 0; border-bottom: 1px solid var(--gray-100);">
-                            <strong>Cutback</strong> — Curva de volta para o curl da onda
+                            <strong>Cutback</strong> - Curva de volta para o curl da onda
                         </div>
                         <div style="padding: 4px 0; border-bottom: 1px solid var(--gray-100);">
-                            <strong>Take off</strong> — O momento de levantar e começar a surfar a onda
+                            <strong>Take off</strong> - O momento de levantar e começar a surfar a onda
                         </div>
                         <div style="padding: 4px 0; border-bottom: 1px solid var(--gray-100);">
-                            <strong>Paddle out</strong> — Remar para fora, para chegar ao lineup
+                            <strong>Paddle out</strong> - Remar para fora, para chegar ao lineup
                         </div>
                         <div style="padding: 4px 0; border-bottom: 1px solid var(--gray-100);">
-                            <strong>Duck dive</strong> — Mergulhar sob a onda para passar por ela
+                            <strong>Duck dive</strong> - Mergulhar sob a onda para passar por ela
                         </div>
                         <div style="padding: 4px 0; border-bottom: 1px solid var(--gray-100);">
-                            <strong>Pop up</strong> — Levantar-se rapidamente na prancha
+                            <strong>Pop up</strong> - Levantar-se rapidamente na prancha
                         </div>
                         <div style="padding: 4px 0; border-bottom: 1px solid var(--gray-100);">
-                            <strong>Goofy / Regular</strong> — Posição do pé dominante (direito/esquerdo)
+                            <strong>Goofy / Regular</strong> - Posição do pé dominante (direito/esquerdo)
                         </div>
                         <div style="padding: 4px 0; border-bottom: 1px solid var(--gray-100);">
-                            <strong>Swell</strong> — Ondas que chegam de uma direção, geradas pelo vento longe da costa
+                            <strong>Swell</strong> - Ondas que chegam de uma direção, geradas pelo vento longe da costa
                         </div>
                         <div style="padding: 4px 0; border-bottom: 1px solid var(--gray-100);">
-                            <strong>Period</strong> — Tempo entre ondas (quanto maior, mais organizadas e powerful)
+                            <strong>Period</strong> - Tempo entre ondas (quanto maior, mais organizadas e powerful)
                         </div>
                         <div style="padding: 4px 0; border-bottom: 1px solid var(--gray-100);">
-                            <strong>White water</strong> — Onda quebrada, a parte branca (iniciantes começam aqui)
+                            <strong>White water</strong> - Onda quebrada, a parte branca (iniciantes começam aqui)
                         </div>
                         <div style="padding: 4px 0; border-bottom: 1px solid var(--gray-100);">
-                            <strong>Green face</strong> — Onda intacta, ainda não quebrou, parte verde/escura
+                            <strong>Green face</strong> - Onda intacta, ainda não quebrou, parte verde/escura
                         </div>
                         <div style="padding: 4px 0; border-bottom: 1px solid var(--gray-100);">
-                            <strong>Lip</strong> — A borda da onda que vai quebrar
+                            <strong>Lip</strong> - A borda da onda que vai quebrar
                         </div>
                         <div style="padding: 4px 0; border-bottom: 1px solid var(--gray-100);">
-                            <strong>Curl</strong> — A curva da onda, onde o tube se forma
+                            <strong>Curl</strong> - A curva da onda, onde o tube se forma
                         </div>
                         <div style="padding: 4px 0; border-bottom: 1px solid var(--gray-100);">
-                            <strong>Futura onda</strong> — "Foi mal, não vi você!" (etiqueta: olhe antes de remar!)
+                            <strong>Futura onda</strong> - "Foi mal, não vi você!" (etiqueta: olhe antes de remar!)
                         </div>
                         <div style="padding: 4px 0; border-bottom: 1px solid var(--gray-100);">
-                            <strong>Reform</strong> — Onda que quebra de novo após já ter quebrado
+                            <strong>Reform</strong> - Onda que quebra de novo após já ter quebrado
                         </div>
                         <div style="padding: 4px 0; border-bottom: 1px solid var(--gray-100);">
-                            <strong>Closeout</strong> — Onda que fecha toda de uma vez, sem brecha
+                            <strong>Closeout</strong> - Onda que fecha toda de uma vez, sem brecha
                         </div>
                         <div style="padding: 4px 0; border-bottom: 1px solid var(--gray-100);">
-                            <strong>Section</strong> — Parte da onda que fecha (seção quebrada)
+                            <strong>Section</strong> - Parte da onda que fecha (seção quebrada)
                         </div>
                         <div style="padding: 4px 0; border-bottom: 1px solid var(--gray-100);">
-                            <strong>Wave face</strong> — A face lisa da onda (oposto da whitewater)
+                            <strong>Wave face</strong> - A face lisa da onda (oposto da whitewater)
                         </div>
                         <div style="padding: 4px 0; border-bottom: 1px solid var(--gray-100);">
-                            <strong>Tail</strong> — A parte de trás da prancha
+                            <strong>Tail</strong> - A parte de trás da prancha
                         </div>
                         <div style="padding: 4px 0; border-bottom: 1px solid var(--gray-100);">
-                            <strong>Nose</strong> — A ponta frontal da prancha
+                            <strong>Nose</strong> - A ponta frontal da prancha
                         </div>
                         <div style="padding: 4px 0; border-bottom: 1px solid var(--gray-100);">
-                            <strong>Deck</strong> — O topo da prancha onde ficamos em pé
+                            <strong>Deck</strong> - O topo da prancha onde ficamos em pé
                         </div>
                         <div style="padding: 4px 0; border-bottom: 1px solid var(--gray-100);">
-                            <strong>Leash</strong> — A corda que prende a prancha ao pé/tornozelo
+                            <strong>Leash</strong> - A corda que prende a prancha ao pé/tornozelo
                         </div>
                         <div style="padding: 4px 0;">
-                            <strong>Wax</strong> — Parafina que dá aderência na prancha
+                            <strong>Wax</strong> - Parafina que dá aderência na prancha
                         </div>
                         <div style="padding: 4px 0; border-bottom: 1px solid var(--gray-100);">
-                            <strong>Rails</strong> — As bordas da prancha
+                            <strong>Rails</strong> - As bordas da prancha
                         </div>
                         <div style="padding: 4px 0; border-bottom: 1px solid var(--gray-100);">
-                            <strong>Fins</strong> — Quilhas que dão direção e estabilidade
+                            <strong>Fins</strong> - Quilhas que dão direção e estabilidade
                         </div>
                         <div style="padding: 4px 0; border-bottom: 1px solid var(--gray-100);">
-                            <strong>Stringer</strong> — Barra de madeira no centro da prancha (estrutura)
+                            <strong>Stringer</strong> - Barra de madeira no centro da prancha (estrutura)
                         </div>
                         <div style="padding: 4px 0; border-bottom: 1px solid var(--gray-100);">
-                            <strong>CCC</strong> — Falha na prioridade (combo count)
+                            <strong>CCC</strong> - Falha na prioridade (combo count)
                         </div>
                         <div style="padding: 4px 0;">
-                            <strong>Drop knee</strong> — Joelho abaixado na prancha (maneira de diminuir)
+                            <strong>Drop knee</strong> - Joelho abaixado na prancha (maneira de diminuir)
                         </div>
                         <div style="padding: 4px 0; border-bottom: 1px solid var(--gray-100);">
-                            <strong>EPO</strong> — Erro deprioridade (escalada antes da vez)
+                            <strong>EPO</strong> - Erro deprioridade (escalada antes da vez)
                         </div>
                         <div style="padding: 4px 0; border-bottom: 1px solid var(--gray-100);">
-                            <strong>Flange</strong> — Borda da prancha (edges)
+                            <strong>Flange</strong> - Borda da prancha (edges)
                         </div>
                         <div style="padding: 4px 0;">
-                            <strong>Lineup</strong> — Área de espera onde as ondas chegam
+                            <strong>Lineup</strong> - Área de espera onde as ondas chegam
                         </div>
                         <div style="padding: 4px 0; border-bottom: 1px solid var(--gray-100);">
-                            <strong>Keel</strong> — Quilha mais atrás (fin config)
+                            <strong>Keel</strong> - Quilha mais atrás (fin config)
                         </div>
                         <div style="padding: 4px 0; border-bottom: 1px solid var(--gray-100);">
-                            <strong>Thruster</strong> — Configuração de 3_quilhas
+                            <strong>Thruster</strong> - Configuração de 3_quilhas
                         </div>
                         <div style="padding: 4px 0; border-bottom: 1px solid var(--gray-100);">
-                            <strong>Quad</strong> — Configuração de 4_quilhas
+                            <strong>Quad</strong> - Configuração de 4_quilhas
                         </div>
                         <div style="padding: 4px 0; border-bottom: 1px solid var(--gray-100);">
-                            <strong>5 fin</strong> — Configuração de 5_quilhas (groove/outer)
+                            <strong>5 fin</strong> - Configuração de 5_quilhas (groove/outer)
                         </div>
                         <div style="padding: 4px 0; border-bottom: 1px solid var(--gray-100);">
-                            <strong>Twin</strong> — Configuração de 2_quilhas (fish/splitter)
+                            <strong>Twin</strong> - Configuração de 2_quilhas (fish/splitter)
                         </div>
                         <div style="padding: 4px 0; border-bottom: 1px solid var(--gray-100);">
-                            <strong>Single</strong> — Prancha de 1_quilha (fish/hand)
+                            <strong>Single</strong> - Prancha de 1_quilha (fish/hand)
                         </div>
                         <div style="padding: 4px 0; border-bottom: 1px solid var(--gray-100);">
-                            <strong>Pintail</strong> — Rabo pontiagudo (prancha de onda)
+                            <strong>Pintail</strong> - Rabo pontiagudo (prancha de onda)
                         </div>
                         <div style="padding: 4px 0; border-bottom: 1px solid var(--gray-100);">
-                            <strong>Squashtail</strong> — Rabo quadrado (maisvelocidade)
+                            <strong>Squashtail</strong> - Rabo quadrado (maisvelocidade)
                         </div>
                         <div style="padding: 4px 0; border-bottom: 1px solid var(--gray-100);">
-                            <strong>Swallowtail</strong> — Rabo em forqueta (balance)
+                            <strong>Swallowtail</strong> - Rabo em forqueta (balance)
                         </div>
                         <div style="padding: 4px 0; border-bottom: 1px solid var(--gray-100);">
-                            <strong>Moon tail</strong> — Rabo lua (estabilidade)
+                            <strong>Moon tail</strong> - Rabo lua (estabilidade)
                         </div>
                         <div style="padding: 4px 0; border-bottom: 1px solid var(--gray-100);">
-                            <strong>Flyer tail</strong> — Rabo curvado (manobras)
+                            <strong>Flyer tail</strong> - Rabo curvado (manobras)
                         </div>
                         <div style="padding: 4px 0; border-bottom: 1px solid var(--gray-100);">
-                            <strong>Asimmetric</strong> — Prancha asimétrica (direita/esquerda)
+                            <strong>Asimmetric</strong> - Prancha asimétrica (direita/esquerda)
                         </div>
                         <div style="padding: 4px 0; border-bottom: 1px solid var(--gray-100);">
-                            <strong>Softop</strong> — Prancha com face macia (iniciantes)
+                            <strong>Softop</strong> - Prancha com face macia (iniciantes)
                         </div>
                         <div style="padding: 4px 0; border-bottom: 1px solid var(--gray-100);">
-                            <strong>Inside/Outside</strong> — Inside = próximo da praia; Outside = longe
+                            <strong>Inside/Outside</strong> - Inside = próximo da praia; Outside = longe
                         </div>
                         <div style="padding: 4px 0; border-bottom: 1px solid var(--gray-100);">
-                            <strong>Pocket</strong> — A parte mais côncava da onda, perto do curl
+                            <strong>Pocket</strong> - A parte mais côncava da onda, perto do curl
                         </div>
-                        <div style="padding: 4px 0;">
+                        <div style="padding: 4px 0; border-bottom: 1px solid var(--gray-100);">
                             <strong>Shoulder</strong> — A parte larga e amigável da onda
+                        </div>
+                        <div style="padding: 4px 0; border-bottom: 1px solid var(--gray-100);">
+                            <strong>Floater</strong> — Manobra de passar por cima da onda quebrando
+                        </div>
+                        <div style="padding: 4px 0; border-bottom: 1px solid var(--gray-100);">
+                            <strong>Air</strong> — Manobra de saltar fora da água
+                        </div>
+                        <div style="padding: 4px 0; border-bottom: 1px solid var(--gray-100);">
+                            <strong>Grab</strong> — Segurar a prancha com a mão no ar
+                        </div>
+                        <div style="padding: 4px 0; border-bottom: 1px solid var(--gray-100);">
+                            <strong>Snap</strong> — Curva brusca no lip da onda
+                        </div>
+                        <div style="padding: 4px 0; border-bottom: 1px solid var(--gray-100);">
+                            <strong>360</strong> — Rotação completa da prancha
+                        </div>
+                        <div style="padding: 4px 0;">
+                            <strong>Wall</strong> — A parede de água da onda (para construir manobras)
                         </div>
                     </div>
                     <div class="card-meta" style="margin-top: 12px;">
@@ -2637,19 +2655,19 @@ document.addEventListener('DOMContentLoaded', function() {
                 </div>
             </div>
         </div>
-
+        
         <!-- Mobilidade Section -->
         <div class="section" id="mobilidade">
             <div class="section-header">
                 <h2 class="section-title">🧘 Mobilidade & Prevenção</h2><img loading="lazy" src="https://images.unsplash.com/photo-1544367567-0f2fcb3e2b2f?w=600&h=150&fit=crop" alt="Alongamento" style="width:100%; border-radius:12px; margin-bottom:12px; object-fit:cover;">
                 <a href="#" class="see-all">Ver todos →</a>
             </div>
-            
+
             <div style="background: linear-gradient(135deg, #E74C3C 0%, #C0392B 100%); padding: 16px; margin: 0 20px 20px; border-radius: 16px; color: white;">
                 <p style="font-size: 14px; font-weight: 600;">🏄‍♀️ Treinos de mobilidade para surfistas</p>
                 <p style="font-size: 12px; opacity: 0.9; margin-top: 4px;">Exercícios para melhorar performance e prevenir lesões!</p>
             </div>
-            
+
             <!-- Ombros -->
             <h3 style="margin: 20px 20px 10px; font-size: 16px; color: var(--secondary);">💪 OMBROS (Paddling)</h3>
             <div class="cards-grid">
@@ -2675,7 +2693,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     <p style="margin-top: 8px; font-size: 12px; color: var(--gray-400);">⏱️ 3 min • 3x/semana</p>
                 </div>
             </div>
-            
+
             <!-- Costas -->
             <h3 style="margin: 20px 20px 10px; font-size: 16px; color: var(--secondary);">🦴 COSTAS (Remo)</h3>
             <div class="cards-grid">
@@ -2701,7 +2719,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     <p style="margin-top: 8px; font-size: 12px; color: var(--gray-400);">⏱️ 3 min • 3x/semana</p>
                 </div>
             </div>
-            
+
             <!-- Quadril -->
             <h3 style="margin: 20px 20px 10px; font-size: 16px; color: var(--secondary);">🦵 QUADRIL (Movimento)</h3>
             <div class="cards-grid">
@@ -2727,7 +2745,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     <p style="margin-top: 8px; font-size: 12px; color: var(--gray-400);">⏱️ 4 min • 2x/semana</p>
                 </div>
             </div>
-            
+
             <!-- Perna -->
             <h3 style="margin: 20px 20px 10px; font-size: 16px; color: var(--secondary);">🦿 PERNAS (Pés na prancha)</h3>
             <div class="cards-grid">
@@ -2753,7 +2771,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     <p style="margin-top: 8px; font-size: 12px; color: var(--gray-400);">⏱️ 3 min • 3x/semana</p>
                 </div>
             </div>
-            
+
             <!-- Pulso e Antebraço -->
             <h3 style="margin: 20px 20px 10px; font-size: 16px; color: var(--secondary);">🖐️ PULSO E ANTEBRAÇO</h3>
             <div class="cards-grid">
@@ -2779,7 +2797,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     <p style="margin-top: 8px; font-size: 12px; color: var(--gray-400);">⏱️ 2 min • 3x/semana</p>
                 </div>
             </div>
-            
+
             <!-- Rotina Matinal -->
             <h3 style="margin: 20px 20px 10px; font-size: 16px; color: var(--secondary);">🌅 ROTINAS PRONTAS</h3>
             <div class="cards-grid">
@@ -2820,7 +2838,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     <p style="margin-top: 8px; font-size: 12px; color: var(--gray-400);">⏱️ 10 min • Antes de dormir</p>
                 </div>
             </div>
-            
+
             <!-- Dicas de Prevenção -->
             <h3 style="margin: 20px 20px 10px; font-size: 16px; color: var(--secondary);">🛡️ DICAS DE PREVENÇÃO</h3>
             <div class="cards-grid">
@@ -2863,12 +2881,12 @@ document.addEventListener('DOMContentLoaded', function() {
                 <h2 class="section-title">🥗 Alimentação & Nutrição</h2>
                 <a href="#" class="see-all">Ver todas →</a>
             </div>
-            
+
             <div style="background: linear-gradient(135deg, #27AE60 0%, #1E8449 100%); padding: 16px; margin: 0 20px 20px; border-radius: 16px; color: white;">
                 <p style="font-size: 14px; font-weight: 600;">🥑 Alimentação para Surfistas</p>
                 <p style="font-size: 12px; opacity: 0.9; margin-top: 4px;">Dicas de nutrição para render mais no surf!</p>
             </div>
-            
+
             <div class="cards-grid">
                 <div class="card">
                     <span class="card-tag green">ANTES DO SURF</span>
@@ -2950,12 +2968,12 @@ document.addEventListener('DOMContentLoaded', function() {
                 <h2 class="section-title">💪 Saúde & Treino Funcional</h2>
                 <a href="#" class="see-all">Ver todos →</a>
             </div>
-            
+
             <div style="background: linear-gradient(135deg, #E74C3C 0%, #C0392B 100%); padding: 16px; margin: 0 20px 20px; border-radius: 16px; color: white;">
                 <p style="font-size: 14px; font-weight: 600;">💪 Treino de 20 minutos por dia</p>
                 <p style="font-size: 12px; opacity: 0.9; margin-top: 4px;">Melhore sua performance no surf!</p>
             </div>
-            
+
             <!-- Today's Workout -->
             <h3 id="treino-1" style="margin: 20px 20px 10px; font-size: 16px; color: var(--secondary);">🔥 Treino de Hoje</h3>
             <div class="cards-grid">
@@ -2963,7 +2981,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     <span class="card-tag" style="background: #E74C3C; color: white;">20 MIN</span>
                     <h3>💪 TREINO #1: FORÇA E CORE</h3>
                     <p><strong>Objetivo:</strong> Fortalecer core para melhor equilíbrio</p>
-                    
+
                     <div style="background: #f8f9fa; padding: 15px; border-radius: 10px; margin-top: 10px;">
                         <p style="font-weight: 600; margin-bottom: 8px;">Aquecimento (3 min):</p>
                         <p>• Jumping Jacks: 30s</p>
@@ -2972,7 +2990,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         <p>• Rotação de quadril: 30s</p>
                         <p>• Repita 2x</p>
                     </div>
-                    
+
                     <div style="background: #f8f9fa; padding: 15px; border-radius: 10px; margin-top: 10px;">
                         <p style="font-weight: 600; margin-bottom: 8px;">Circuito (15 min) - 3 rodadas:</p>
                         <p>• Prancha (hold): 30s</p>
@@ -2982,7 +3000,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         <p>• Burpee: 5 reps</p>
                         <p>• <em>Descanso: 30s entre rodadas</em></p>
                     </div>
-                    
+
                     <div style="background: #f8f9fa; padding: 15px; border-radius: 10px; margin-top: 10px;">
                         <p style="font-weight: 600; margin-bottom: 8px;">Volta à calma (2 min):</p>
                         <p>• Alongamento de costas: 30s</p>
@@ -2990,11 +3008,11 @@ document.addEventListener('DOMContentLoaded', function() {
                         <p>• Rotação de ombros: 30s</p>
                         <p>• Respiração profunda: 30s</p>
                     </div>
-                    
+
                     <p style="margin-top: 10px; font-size: 12px; color: var(--success);">🎯 Benefício: Melhor equilíbrio na prancha!</p>
                 </div>
             </div>
-            
+
             <!-- Weekly Workout Plan -->
             <h3 style="margin: 20px 20px 10px; font-size: 16px; color: var(--secondary);">📅 Treinos da Semana (20 min cada)</h3>
             <div class="cards-grid">
@@ -3041,7 +3059,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     <p style="font-size: 12px; color: var(--gray-400); margin-top: 5px;">20 min • Recuperação</p>
                 </div>
             </div>
-            
+
             <!-- Workout #2 -->
             <h3 style="margin: 20px 20px 10px; font-size: 16px; color: var(--secondary);">🔥 TREINO #2: RESISTÊNCIA</h3>
             <div class="cards-grid">
@@ -3049,14 +3067,14 @@ document.addEventListener('DOMContentLoaded', function() {
                     <span class="card-tag" style="background: #3498DB; color: white;">20 MIN</span>
                     <h3>🏊 TREINO #2: RESISTÊNCIA E CARDIO</h3>
                     <p><strong>Objetivo:</strong> Melhorar resistência para remar mais tempo</p>
-                    
+
                     <div style="background: #f8f9fa; padding: 15px; border-radius: 10px; margin-top: 10px;">
                         <p style="font-weight: 600; margin-bottom: 8px;">Aquecimento (3 min):</p>
                         <p>• Corrida no lugar: 1 min</p>
                         <p>• Skipping: 1 min</p>
                         <p>• Rotação de ombros: 1 min</p>
                     </div>
-                    
+
                     <div style="background: #f8f9fa; padding: 15px; border-radius: 10px; margin-top: 10px;">
                         <p style="font-weight: 600; margin-bottom: 8px;">Circuito (15 min) - 5 rodadas:</p>
                         <p>• Burpee: 8 reps</p>
@@ -3065,17 +3083,17 @@ document.addEventListener('DOMContentLoaded', function() {
                         <p>• Prancha: 30s</p>
                         <p>• <em>Descanso: 20s entre rodadas</em></p>
                     </div>
-                    
+
                     <div style="background: #f8f9fa; padding: 15px; border-radius: 10px; margin-top: 10px;">
                         <p style="font-weight: 600; margin-bottom: 8px;">Volta à calma (2 min):</p>
                         <p>• Alongamento geral</p>
                         <p>• Respiração profunda</p>
                     </div>
-                    
+
                     <p style="margin-top: 10px; font-size: 12px; color: var(--success);">🎯 Benefício: Remar mais tempo sem cansar!</p>
                 </div>
             </div>
-            
+
             <!-- Workout #3 -->
             <h3 style="margin: 20px 20px 10px; font-size: 16px; color: var(--secondary);">🔥 TREINO #3: SUPERIOR</h3>
             <div class="cards-grid">
@@ -3083,14 +3101,14 @@ document.addEventListener('DOMContentLoaded', function() {
                     <span class="card-tag" style="background: #27AE60; color: white;">20 MIN</span>
                     <h3>💪 TREINO #3: FORÇA SUPERIOR (OMBROS)</h3>
                     <p><strong>Objetivo:</strong> Fortalecer ombros para paddling</p>
-                    
+
                     <div style="background: #f8f9fa; padding: 15px; border-radius: 10px; margin-top: 10px;">
                         <p style="font-weight: 600; margin-bottom: 8px;">Aquecimento (3 min):</p>
                         <p>• Rotação de ombros: 1 min</p>
                         <p>• Elevação de ombros: 1 min</p>
                         <p>• Rotação de punho: 1 min</p>
                     </div>
-                    
+
                     <div style="background: #f8f9fa; padding: 15px; border-radius: 10px; margin-top: 10px;">
                         <p style="font-weight: 600; margin-bottom: 8px;">Circuito (15 min) - 4 rodadas:</p>
                         <p>• Flexão diamante: 8 reps</p>
@@ -3099,17 +3117,17 @@ document.addEventListener('DOMContentLoaded', function() {
                         <p>• Flexão normal: 10 reps</p>
                         <p>• <em>Descanso: 30s entre rodadas</em></p>
                     </div>
-                    
+
                     <div style="background: #f8f9fa; padding: 15px; border-radius: 10px; margin-top: 10px;">
                         <p style="font-weight: 600; margin-bottom: 8px;">Volta à calma (2 min):</p>
                         <p>• Alongamento de ombros</p>
                         <p>• Alongamento de peito</p>
                     </div>
-                    
+
                     <p style="margin-top: 10px; font-size: 12px; color: var(--success);">🎯 Benefício: Ombros mais fortes para remar!</p>
                 </div>
             </div>
-            
+
             <!-- Workout #4 -->
             <h3 style="margin: 20px 20px 10px; font-size: 16px; color: var(--secondary);">🔥 TREINO #4: INFERIOR</h3>
             <div class="cards-grid">
@@ -3117,14 +3135,14 @@ document.addEventListener('DOMContentLoaded', function() {
                     <span class="card-tag" style="background: #9B59B6; color: white;">20 MIN</span>
                     <h3>🦵 TREINO #4: FORÇA INFERIOR E EQUILÍBRIO</h3>
                     <p><strong>Objetivo:</strong> Pernas e quadril para manobras</p>
-                    
+
                     <div style="background: #f8f9fa; padding: 15px; border-radius: 10px; margin-top: 10px;">
                         <p style="font-weight: 600; margin-bottom: 8px;">Aquecimento (3 min):</p>
                         <p>• Agachamento: 10 reps</p>
                         <p>• Rotação de quadril: 1 min</p>
                         <p>• Salto no lugar: 30s</p>
                     </div>
-                    
+
                     <div style="background: #f8f9fa; padding: 15px; border-radius: 10px; margin-top: 10px;">
                         <p style="font-weight: 600; margin-bottom: 8px;">Circuito (15 min) - 4 rodadas:</p>
                         <p>• Agachamento sumô: 12 reps</p>
@@ -3133,13 +3151,13 @@ document.addEventListener('DOMContentLoaded', function() {
                         <p>• Prone leg raise: 12 reps</p>
                         <p>• <em>Descanso: 30s entre rodadas</em></p>
                     </div>
-                    
+
                     <div style="background: #f8f9fa; padding: 15px; border-radius: 10px; margin-top: 10px;">
                         <p style="font-weight: 600; margin-bottom: 8px;">Volta à calma (2 min):</p>
                         <p>• Alongamento de pernas</p>
                         <p>• Alongamento de quadril</p>
                     </div>
-                    
+
                     <p style="margin-top: 10px; font-size: 12px; color: var(--success);">🎯 Benefício: Manobras mais poderosas!</p>
                 </div>
             </div>
@@ -3151,12 +3169,12 @@ document.addEventListener('DOMContentLoaded', function() {
                 <h2 class="section-title">🏄‍♀️ Técnica de Surf</h2>
                 <a href="#" class="see-all">Ver todas →</a>
             </div>
-            
+
             <div style="background: linear-gradient(135deg, #3498DB 0%, #2980B9 100%); padding: 16px; margin: 0 20px 20px; border-radius: 16px; color: white;">
                 <p style="font-size: 14px; font-weight: 600;">🏄‍♀️ Domine a técnica do surf</p>
                 <p style="font-size: 12px; opacity: 0.9; margin-top: 4px;">Aprenda a remar, posicionar e executar manobras!</p>
             </div>
-            
+
             <div class="cards-grid">
                 <div class="card">
                     <span class="card-tag">FUNDAMENTO</span>
@@ -3254,12 +3272,12 @@ document.addEventListener('DOMContentLoaded', function() {
                 <h2 class="section-title">🧠 Mental & Calmaria</h2>
                 <a href="#" class="see-all">Ver todas →</a>
             </div>
-            
+
             <div style="background: linear-gradient(135deg, #9B59B6 0%, #8E44AD 100%); padding: 16px; margin: 0 20px 20px; border-radius: 16px; color: white;">
                 <p style="font-size: 14px; font-weight: 600;">🧘 Técnicas para acalmar a mente</p>
                 <p style="font-size: 12px; opacity: 0.9; margin-top: 4px;">Dicas de respiração e relaxamento para surfistas!</p>
             </div>
-            
+
             <div class="cards-grid">
                 <div class="card">
                     <span class="card-tag purple">💨 RESPIRAÇÃO</span>
@@ -3440,7 +3458,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 <h2 class="section-title">🛒 Lojas - Todas as Praias do Litoral Paulista</h2><img loading="lazy" src="https://images.unsplash.com/photo-1441986300917-64674bd600da?w=600&h=150&fit=crop" alt="Lojas" style="width:100%; border-radius:12px; margin-bottom:12px; object-fit:cover;">
                 <a href="#" class="see-all">Ver mapa →</a>
             </div>
-            
+
             <!-- Filtros por cidade - Todas as praias do litoral Paulista -->
             <div style="display: flex; gap: 8px; padding: 0 20px; overflow-x: auto; margin-bottom: 20px; -webkit-overflow-scrolling: touch;">
                 <span class="tag" style="background: var(--primary); color: white;">Todas</span>
@@ -3451,7 +3469,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 <span class="tag">Bertioga</span>
                 <span class="tag">São Paulo</span>
             </div>
-            
+
             <div style="background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%); padding: 16px; margin: 0 20px 20px; border-radius: 16px; color: white;">
                 <p style="font-size: 14px; font-weight: 600;">📱 Apenas lojas com Instagram</p>
                 <p style="font-size: 12px; opacity: 0.9; margin-top: 4px;">Todas as lojas aqui têm Instagram para você acompanhar novidades!</p>
@@ -3477,7 +3495,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         <a href="https://instagram.com/surftrunk" target="_blank" class="btn btn-secondary" style="flex: 1; font-size: 12px; text-align: center; text-decoration: none; display: inline-block;">📱 @surftrunk</a>
                     </div>
                 </div>
-                
+
                 <!-- UBATUBA -->
                 <div class="card">
                     <span class="card-tag green">📸 Instagram</span>
@@ -3488,7 +3506,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         <a href="https://instagram.com/tribo_surf_oficial" target="_blank" class="btn btn-secondary" style="flex: 1; font-size: 12px; text-align: center; text-decoration: none; display: inline-block;">📱 @tribo_surf_oficial</a>
                     </div>
                 </div>
-                
+
                 <!-- PRAIA GRANDE -->
                 <div class="card">
                     <span class="card-tag green">LOJA FÍSICA</span>
@@ -3499,7 +3517,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         <a href="https://instagram.com/surftripoficial" target="_blank" class="btn btn-secondary" style="flex: 1; font-size: 12px; text-align: center; text-decoration: none; display: inline-block;">📱 @surftripoficial</a>
                     </div>
                 </div>
-                
+
                 <!-- BAIXADA SANTISTA -->
                 <div class="card">
                     <span class="card-tag green">📸 Instagram</span>
@@ -3510,7 +3528,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         <a href="https://instagram.com/hawaiisurfpoint" target="_blank" class="btn btn-secondary" style="flex: 1; font-size: 12px; text-align: center; text-decoration: none; display: inline-block;">📱 @hawaiisurfpoint</a>
                     </div>
                 </div>
-                
+
                 <!-- SÃO PAULO CAPITAL -->
                 <div class="card">
                     <span class="card-tag purple">ATACADO</span>
@@ -3521,7 +3539,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         <a href="https://instagram.com/litoralsurfoficial" target="_blank" class="btn btn-secondary" style="flex: 1; font-size: 12px; text-align: center; text-decoration: none; display: inline-block;">📱 @litoralsurfoficial</a>
                     </div>
                 </div>
-                
+
                 <!-- LITORAL SUL SP -->
                 <div class="card">
                     <span class="card-tag">TRADICIONAL</span>
@@ -3532,7 +3550,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         <a href="https://instagram.com/tenansurfboards" target="_blank" class="btn btn-secondary" style="flex: 1; font-size: 12px; text-align: center; text-decoration: none; display: inline-block;">📱 @tenansurfboards</a>
                     </div>
                 </div>
-                
+
                 <!-- VOLPEM -->
                 <div class="card">
                     <span class="card-tag">PARCEIRO</span>
@@ -3543,7 +3561,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         <a href="https://instagram.com/volpem_surf" target="_blank" class="btn btn-secondary" style="flex: 1; font-size: 12px; text-align: center; text-decoration: none; display: inline-block;">📱 @volpem_surf</a>
                     </div>
                 </div>
-                
+
                 <!-- ÁGUA DO MAR -->
                 <div class="card">
                     <span class="card-tag">PARCEIRO</span>
@@ -3555,7 +3573,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     </div>
                 </div>
             </div>
-            
+
             <div style="text-align: center; margin-top: 20px; padding: 20px; background: var(--light); border-radius: 16px;">
                 <p style="font-size: 14px; color: var(--gray-600);">Sua loja não está aqui? <strong style="color: var(--primary);">Cadastre-se!</strong></p>
                 <button class="btn btn-secondary" style="margin-top: 10px;">Quero ser parceiro</button>
@@ -3568,7 +3586,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 <h2 class="section-title">🎯 Meu Progresso</h2>
                 <a href="#" class="see-all">Ver ranking →</a>
             </div>
-            
+
             <!-- User Stats -->
             <div style="background: linear-gradient(135deg, #F39C12 0%, #E67E22 100%); padding: 20px; margin: 0 20px 20px; border-radius: 16px; color: white;">
                 <div style="display: flex; justify-content: space-between; align-items: center;">
@@ -3587,7 +3605,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 </div>
                 <p style="font-size: 11px; text-align: center; margin-top: 8px;">350 / 500 pontos para o próximo nível</p>
             </div>
-            
+
             <!-- Conquistas / Badges -->
             <h3 style="margin: 20px 20px 10px; font-size: 16px; color: var(--secondary);">🏅 Minhas Conquistas</h3>
             <div style="display: flex; gap: 12px; overflow-x: auto; padding: 0 20px 16px; scrollbar-width: none;">
@@ -3647,7 +3665,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 </div>
             </div>
             <p style="font-size: 12px; color: var(--gray-400); text-align: center; margin: 0 20px 20px;">Toque em uma conquista para ver detalhes</p>
-            
+
             <!-- Quizzes Available -->
             <h3 style="margin: 20px 20px 10px; font-size: 16px; color: var(--secondary);">📝 Quizzes (Ganhe Pontos)</h3>
             <div class="cards-grid">
@@ -4008,7 +4026,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     <button class="btn btn-primary" style="width: 100%; margin-top: 12px;">Responder Quiz</button>
                 </div>
             </div>
-            
+
             <!-- Questionários Diários -->
             <h3 style="margin: 20px 20px 10px; font-size: 16px; color: var(--secondary);">📋 Questionários Diários (+10 pts)</h3>
             <div class="cards-grid">
@@ -4023,7 +4041,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     <h3>💧 Você bebeu água hoje?</h3>
                     <p>Controle sua hidratação diária.</p>
                     <div style="display: flex; align-items: center; gap: 12px; margin-top: 12px;">
-                        <button onclick="addWater(-1)" style="width: 36px; height: 36px; border-radius: 50%; border: 2px solid var(--gray-200); background: white; font-size: 18px; cursor: pointer;">−</button>
+                        <button onclick="addWater(-1)" style="width: 36px; height: 36px; border-radius: 50%; border: 2px solid var(--gray-200); background: white; font-size: 18px; cursor: pointer;">-</button>
                         <div style="flex: 1; text-align: center;">
                             <div style="font-size: 24px; font-weight: 700; color: var(--primary);" id="water-count">0</div>
                             <div style="font-size: 11px; color: var(--gray-400);" id="water-label">de 8 copos</div>
@@ -4035,7 +4053,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     </div>
                 </div>
             </div>
-            
+
             <!-- Diário de Sessões -->
             <h3 style="margin: 20px 20px 10px; font-size: 16px; color: var(--secondary);">📓 Diário de Sessões</h3>
             <div style="padding: 0 20px;">
@@ -4141,7 +4159,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     <p style="color: var(--gray-400);">Carregando conquistas...</p>
                 </div>
             </div>
-            
+
             <!-- Conteúdo Desbloqueado -->
             <h3 style="margin: 20px 20px 10px; font-size: 16px; color: var(--secondary);">🔓 Conteúdo Desbloqueado</h3>
             <div class="cards-grid">
@@ -4186,7 +4204,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     <button class="btn btn-secondary" style="width: 100%; margin-top: 12px;">Ver Detalhes</button>
                 </div>
             </div>
-            
+
             <!-- Pontuação summary -->
             <div style="background: var(--light); padding: 20px; margin: 20px; border-radius: 16px; text-align: center;">
                 <h4 style="margin-bottom: 15px;">📊 Resumo de Pontos</h4>
@@ -4213,10 +4231,10 @@ document.addEventListener('DOMContentLoaded', function() {
                 <h2 class="section-title">🌊 Surftrips - Responda!</h2><img loading="lazy" src="https://images.unsplash.com/photo-1518644961665-ed1726917771-?w=600&h=180&fit=crop" alt="Surftrip" style="width:100%; border-radius:12px; margin-bottom:12px; object-fit:cover;">
                 <a href="#" class="see-all">Ver todas →</a>
             </div>
-            
+
             <!-- Ver Resultados (para Carol) -->
             <button onclick="showTripVotes()" style="background: linear-gradient(135deg, #FFD700, #FFA500); color: #0E2439; border: none; padding: 14px 20px; margin: 20px; border-radius: 10px; font-size: 14px; font-weight: 600; cursor: pointer; width: calc(100% - 40px);">🗳️ Ver Votos Recebidos</button>
-            
+
             <script>
             function showTripVotes() {
                 var votes = JSON.parse(localStorage.getItem('asf-trip-votes') || '[]');
@@ -4233,7 +4251,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 votes.forEach(function(v, i) { summary += (i+1) + '. ' + v.name + ' - ' + v.location + '\nWhatsApp: ' + v.phone + '\n\n'; });
                 alert(summary);
             }
-            
+
             // Countdown e Resultados em Tempo Real
             function initVotingCountdown() {
                 var startKey = 'asf-vote-start';
@@ -4264,7 +4282,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 // Mostrar resultado parcial em tempo real
                 updateLiveResults();
             }
-            
+
             function updateLiveResults() {
                 var votes = JSON.parse(localStorage.getItem('asf-trip-votes') || '[]');
                 if (votes.length > 0) {
@@ -4279,7 +4297,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     }
                 }
             }
-            
+
             function showFinalResults() {
                 var votes = JSON.parse(localStorage.getItem('asf-trip-votes') || '[]');
                 if (votes.length === 0) return;
@@ -4294,11 +4312,11 @@ document.addEventListener('DOMContentLoaded', function() {
                 msg += 'Próxima trip será em ' + winner + '! 🌊';
                 alert(msg);
             }
-            
+
             // Iniciar countdown ao carregar
             document.addEventListener('DOMContentLoaded', initVotingCountdown);
             </script>
-            
+
             <!-- Surftrip Voting -->
             <div style="background: linear-gradient(135deg, #00A8CC 0%, #0E2439 100%); padding: 20px; margin: 0 20px 20px; border-radius: 16px; color: white;">
                 <h3 style="margin-bottom: 8px;">🗳️ VOTAÇÃO: Para onde vamos?</h3>
@@ -4311,7 +4329,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     <div id="result-display" style="font-size: 13px; margin-top: 8px;"></div>
                 </div>
                 <div style="font-size: 11px; opacity: 0.7; text-align: center;">Resultado final sai em <span id="days-left2">20</span> dias! 🌊</div>
-                
+
                 <h4 style="font-size: 13px; margin: 16px 0 8px;">🏄‍♀️ Picos Nacionais</h4>
                 <div style="display: flex; flex-direction: column; gap: 8px;">
                     <button onclick="voteTrip(this, 'Bertioga')" style="background: rgba(255,255,255,0.15); border: 2px solid transparent; padding: 12px; border-radius: 10px; cursor: pointer; color: white; text-align: left; display: flex; justify-content: space-between;">
@@ -4324,7 +4342,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         <span>🏄 Ubatuba</span> <span id="vote-ubatuba">0</span> votos
                     </button>
                 </div>
-                
+
                 <h4 style="font-size: 13px; margin: 16px 0 8px;">🌍 internacionais (sem data)</h4>
                 <div style="display: flex; flex-direction: column; gap: 8px;">
                     <button onclick="voteTrip(this, 'Bali')" style="background: rgba(255,255,255,0.1); border: 2px solid rgba(255,255,255,0.2); padding: 10px; border-radius: 10px; cursor: pointer; color: rgba(255,255,255,0.7);">
@@ -4335,7 +4353,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     </button>
                 </div>
             </div>
-            
+
             <script>
             function voteTrip(btn, loc) {
                 // Check if user is logged in
@@ -4351,7 +4369,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 var profile = JSON.parse(user);
                 voteForLocation(btn, loc, profile.name, profile.phone, profile.email);
             }
-            
+
             function saveVoterAndVote(loc) {
                 var name = document.getElementById('voter-name').value.trim();
                 var phone = document.getElementById('voter-phone').value.trim();
@@ -4367,7 +4385,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 // Vote now
                 voteForLocation(null, loc, name, phone, email);
             }
-            
+
             function voteForLocation(btn, loc, name, phone, email) {
                 // Save vote with full data
                 var key = 'asf-trip-votes';
@@ -4382,7 +4400,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 if (el) el.textContent = count;
                 if (btn) {btn.style.border = '#FFD700'; btn.style.background = 'rgba(255,215,0,0.2)';}
                 showToast('✓ Voto registrado para ' + loc + '! 🏄‍♀️');
-                // Send to Carol via WhatsApp  
+                // Send to Carol via WhatsApp
                 var msg = '🏄‍♀️ NOVO VOTO!
 
 Local: ' + loc + '
@@ -4395,12 +4413,12 @@ E-mail: ' + email : '');
         var formLink = 'https://docs.google.com/forms/d/1fJhfaiNyYSSq9bKElew69y6GZ6_pxLz05HR26klIsSA/edit'; // User can fill this
         // For now, we just save locally. In future, link to form.
 </script>
-            
+
             <div style="background: linear-gradient(135deg, #9B59B6 0%, #8E44AD 100%); padding: 16px; margin: 0 20px 20px; border-radius: 16px; color: white;">
                 <p style="font-size: 14px; font-weight: 600;">👩‍👩‍👧 Suas Opiniões Importam!</p>
                 <p style="font-size: 12px; opacity: 0.9; margin-top: 4px;">Responda as perguntas e ajude a montar as melhores surftrips!</p>
             </div>
-            
+
             <div class="cards-grid">
                 <!-- Question 1 -->
                 <div class="card">
@@ -4415,7 +4433,7 @@ E-mail: ' + email : '');
                         <button class="btn btn-secondary" style="width: 100%; margin: 5px 0; text-align: left;" onclick="votePoll(this, 'destino', 'Bali')">🌏 Bali</button>
                     </div>
                 </div>
-                
+
                 <!-- Question 2 -->
                 <div class="card">
                     <span class="card-tag purple">ENQUETE</span>
@@ -4428,7 +4446,7 @@ E-mail: ' + email : '');
                         <button class="btn btn-secondary" style="width: 100%; margin: 5px 0; text-align: left;" onclick="votePoll(this, 'ilhabela-trip', 'nao')">🤯 Não curto barco, prefiro terra firme</button>
                     </div>
                 </div>
-                
+
                 <!-- Question 3 -->
                 <div class="card">
                     <span class="card-tag green">PERGUNTA</span>
@@ -4441,7 +4459,7 @@ E-mail: ' + email : '');
                         <button class="btn btn-secondary" style="width: 100%; margin: 5px 0; text-align: left;" onclick="votePoll(this, 'horario', 'por-sol')">🌙 Pôr do sol (17h-19h)</button>
                     </div>
                 </div>
-                
+
                 <!-- Question 4 -->
                 <div class="card">
                     <span class="card-tag green">PERGUNTA</span>
@@ -4454,7 +4472,7 @@ E-mail: ' + email : '');
                         <button class="btn btn-secondary" style="width: 100%; margin: 5px 0; text-align: left;" onclick="votePoll(this, 'hospedagem', 'van')">🚐 Van/Busão</button>
                     </div>
                 </div>
-                
+
                 <!-- Question 5 -->
                 <div class="card">
                     <span class="card-tag coral">DIVERSÃO</span>
@@ -4468,7 +4486,7 @@ E-mail: ' + email : '');
                         <button class="btn btn-secondary" style="width: 100%; margin: 5px 0; text-align: left;" onclick="votePoll(this, 'atividade', 'yoga')">🧘 Yoga nas dunas</button>
                     </div>
                 </div>
-                
+
                 <!-- Question 6 -->
                 <div class="card">
                     <span class="card-tag coral">DIVERSÃO</span>
@@ -4481,7 +4499,7 @@ E-mail: ' + email : '');
                         <button class="btn btn-secondary" style="width: 100%; margin: 5px 0; text-align: left;" onclick="votePoll(this, 'medo-onda', 'quanto-maior')">🌀 Quanto maior, melhor!</button>
                     </div>
                 </div>
-                
+
                 <!-- Question 7 -->
                 <div class="card">
                     <span class="card-tag accent">LOGÍSTICA</span>
@@ -4493,7 +4511,7 @@ E-mail: ' + email : '');
                         <button class="btn btn-secondary" style="width: 100%; margin: 5px 0; text-align: left;" onclick="votePoll(this, 'transporte', 'aviao')">✈️ Avião (destino longe!)</button>
                     </div>
                 </div>
-                
+
                 <!-- Question 8 -->
                 <div class="card">
                     <span class="card-tag accent">LOGÍSTICA</span>
@@ -4507,13 +4525,13 @@ E-mail: ' + email : '');
                     </div>
                 </div>
             </div>
-            
+
             <!-- Results Summary -->
             <div style="background: var(--light); padding: 20px; margin: 20px; border-radius: 16px; text-align: center;">
                 <h4 style="margin-bottom: 10px;">📊 Resultados (Respostas coletadas)</h4>
                 <p style="font-size: 12px; color: var(--gray-600);">Suas respostas ajudam a organizar as melhores surftrips! Obrigada por participar! 🏄‍♀️</p>
             </div>
-            
+
             <!-- WhatsApp Contact Section -->
             <div style="background: linear-gradient(135deg, #25D366 0%, #128C7E 100%); padding: 20px; margin: 20px; border-radius: 16px; color: white;">
                 <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 15px;">
@@ -4523,9 +4541,9 @@ E-mail: ' + email : '');
                         <p style="font-size: 12px; opacity: 0.9;">Combine surftrips com outras surfistas!</p>
                     </div>
                 </div>
-                
+
                 <p style="font-size: 14px; margin-bottom: 15px;">Deixe seu contato WhatsApp e entraremos no grupo para combinar trips e surfar juntas!</p>
-                
+
                 <div style="background: rgba(255,255,255,0.15); padding: 15px; border-radius: 12px; margin-bottom: 15px;">
                     <p style="font-size: 12px; margin-bottom: 8px;">Seu WhatsApp:</p>
                     <input type="text" placeholder="(XX) XXXXX-XXXX" style="width: 100%; padding: 10px; border: none; border-radius: 8px; font-size: 14px; margin-bottom: 10px;" id="trips-whatsapp">
@@ -4535,7 +4553,7 @@ E-mail: ' + email : '');
                     <input type="text" placeholder="Sua cidade" style="width: 100%; padding: 10px; border: none; border-radius: 8px; font-size: 14px; margin-bottom: 15px;" id="trips-city">
                     <button class="btn btn-primary" style="width: 100%; background: #27AE60; border: none; font-weight: bold;" onclick="alert('📱 Contato enviado com sucesso!\n\nEntraremos em contato pelo WhatsApp para adicionar você ao grupo das manas! 🏄‍♀️\n\nAguarda que logo você estará surfando com a galera! 🌊')">Enviar Contato</button>
                 </div>
-                
+
                 <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-top: 15px;">
                     <div style="background: rgba(255,255,255,0.1); padding: 10px; border-radius: 8px; text-align: center;">
                         <p style="font-size: 20px; font-weight: bold;">47</p>
@@ -4544,7 +4562,7 @@ E-mail: ' + email : '');
                 <!-- Groups count hidden -->
                 </div>
             </div>
-            
+
             <!-- List of Surf Groups -->
             <!-- Grupos de Surf Ativos -->
             <!-- <h3 style="margin: 20px 20px 10px; font-size: 16px; color: var(--secondary);">🏖️ Grupos de Surf Ativos</h3>
@@ -4579,31 +4597,31 @@ E-mail: ' + email : '');
                 <h2 class="section-title">💬 Manas - Grupos de Surf</h2>
                 <a href="#" class="see-all">Ver todos →</a>
             </div>
-            
+
             <div style="background: linear-gradient(135deg, #25D366 0%, #128C7E 100%); padding: 16px; margin: 0 20px 20px; border-radius: 16px; color: white;">
                 <p style="font-size: 14px; font-weight: 600;">👩‍👩‍👧 Surftrip com as amigas!</p>
                 <p style="font-size: 12px; opacity: 0.9; margin-top: 4px;">Cadastre-se e entre nos grupos de WhatsApp!</p>
             </div>
-            
+
             <!-- Contact Form -->
             <div style="background: var(--light); padding: 20px; margin: 0 20px 20px; border-radius: 16px;">
                 <h4 style="margin-bottom: 15px; color: var(--secondary);">📱 Cadastre-se no Grupo</h4>
-                
+
                 <div style="margin-bottom: 15px;">
                     <label style="font-size: 12px; color: var(--gray-600);">Seu WhatsApp:</label>
                     <input type="tel" placeholder="(XX) XXXXX-XXXX" style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 10px; font-size: 14px; margin-top: 5px;" id="whatsapp-input">
                 </div>
-                
+
                 <div style="margin-bottom: 15px;">
                     <label style="font-size: 12px; color: var(--gray-600);">Seu nome:</label>
                     <input type="text" placeholder="Seu nome completo" style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 10px; font-size: 14px; margin-top: 5px;" id="name-input">
                 </div>
-                
+
                 <div style="margin-bottom: 15px;">
                     <label style="font-size: 12px; color: var(--gray-600);">Sua cidade:</label>
                     <input type="text" placeholder="Ex: Bertioga, Santos, Guarujá..." style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 10px; font-size: 14px; margin-top: 5px;" id="city-input">
                 </div>
-                
+
                 <div style="margin-bottom: 15px;">
                     <label style="font-size: 12px; color: var(--gray-600);">Nível de surf:</label>
                     <select style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 10px; font-size: 14px; margin-top: 5px; background: white;">
@@ -4613,10 +4631,10 @@ E-mail: ' + email : '');
                         <option>Avançada</option>
                     </select>
                 </div>
-                
+
                 <button class="btn btn-primary" style="width: 100%; background: #25D360; border: none; font-weight: bold; font-size: 14px;" onclick="alert('✅ Cadastro realizado!\n\n📱 Entraremos em contato pelo WhatsApp para adicionar você ao grupo das manas!\n\nAguarde que logo você estará surfando com a galera! 🌊🏄‍♀️')">Enviar Cadastro</button>
             </div>
-            
+
             <!-- Groups -->
             <h3 id="grupos-ativos" style="margin: 20px 20px 10px; font-size: 16px; color: var(--secondary);">🏖️ Grupos Ativos</h3>
             <div class="cards-grid">
@@ -4642,7 +4660,7 @@ E-mail: ' + email : '');
                     <p style="font-size: 12px; color: var(--gray-400);">🏄 Todos os níveis</p>
                 </div>
             </div>
-            
+
             <!-- Stats -->
             <div style="background: var(--light); padding: 20px; margin: 20px; border-radius: 16px;">
                 <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; text-align: center;">
@@ -4660,7 +4678,7 @@ E-mail: ' + email : '');
                     </div>
                 </div>
             </div>
-            
+
             <!-- Quick Questions -->
             <h3 style="margin: 20px 20px 10px; font-size: 16px; color: var(--secondary);">🌊 Responda Rápido</h3>
             <div class="cards-grid">
@@ -4878,7 +4896,7 @@ E-mail: ' + email : '');
                     </div>
                     <button class="btn btn-primary" style="width: 100%;" onclick="calcularVolume()">Calcular</button>
                 </div>
-                
+
                 <!-- Tabela de Referência -->
                 <div class="card utility-card" style="margin-top: 15px;">
                     <h4 style="margin-bottom: 10px;">📊 Tabela de Litragem por Peso</h4>
@@ -4970,7 +4988,7 @@ E-mail: ' + email : '');
                     <div class="icon">⏱️</div>
                     <h4>Cronômetro de Treino</h4>
                     <p style="font-size: 13px;">Intervalos para seus treinos de surf!</p>
-                    
+
                     <!-- Timer Display -->
                     <div style="text-align: center; margin: 15px 0;">
                         <div id="timer-display" style="font-size: 48px; font-weight: 800; color: #9B59B6; font-family: monospace;">00:00</div>
@@ -4980,7 +4998,7 @@ E-mail: ' + email : '');
                         </div>
                         <div style="font-size: 12px; color: var(--gray-400); margin-top: 5px;"><span id="timer-round">0</span>/<span id="timer-total-rounds">8</span> rodadas</div>
                     </div>
-                    
+
                     <!-- Preset Buttons -->
                     <div style="display: flex; gap: 6px; margin-bottom: 12px; flex-wrap: wrap;">
                         <button class="btn btn-secondary" style="flex: 1; font-size: 11px; padding: 8px;" onclick="setTimerPreset('tabata')">🔥 Tabata</button>
@@ -4988,7 +5006,7 @@ E-mail: ' + email : '');
                         <button class="btn btn-secondary" style="flex: 1; font-size: 11px; padding: 8px;" onclick="setTimerPreset('hiit')">💪 HIIT</button>
                         <button class="btn btn-secondary" style="flex: 1; font-size: 11px; padding: 8px;" onclick="setTimerPreset('amrap')">⏱️ AMRAP</button>
                     </div>
-                    
+
                     <!-- Custom Settings -->
                     <div style="background: var(--light); padding: 10px; border-radius: 8px; margin-bottom: 10px;">
                         <div style="display: flex; gap: 8px; margin-bottom: 8px;">
@@ -5006,14 +5024,14 @@ E-mail: ' + email : '');
                             </div>
                         </div>
                     </div>
-                    
+
                     <!-- Control Buttons -->
                     <div style="display: flex; gap: 8px;">
                         <button class="btn btn-primary" style="flex: 1; background: #9B59B6;" id="timer-start-btn" onclick="startTimer()">▶ Iniciar</button>
                         <button class="btn btn-secondary" style="flex: 1;" id="timer-pause-btn" onclick="pauseTimer()" disabled>⏸ Pausar</button>
                         <button class="btn btn-secondary" style="flex: 1;" onclick="resetTimer()">🔄 Reset</button>
                     </div>
-                    
+
                     <div style="margin-top: 10px; text-align: center;">
                         <button class="btn btn-secondary" style="font-size: 11px;" onclick="showTimerHistory()">📊 Ver Histórico</button>
                     </div>
@@ -5035,7 +5053,7 @@ E-mail: ' + email : '');
                     <div class="icon">🆘</div>
                     <h4>Emergência</h4>
                     <p style="font-size: 13px; color: var(--gray-600);">Números importantes para sua segurança na praia</p>
-                    
+
                     <div style="margin-top: 12px; text-align: left;">
                         <div style="padding: 10px; background: var(--gray-50, #f8f9fa); border-radius: 8px; margin-bottom: 8px; display: flex; justify-content: space-between; align-items: center;">
                             <div>
@@ -5044,7 +5062,7 @@ E-mail: ' + email : '');
                             </div>
                             <a href="tel:192" style="background: #E74C3C; color: white; padding: 8px 16px; border-radius: 20px; text-decoration: none; font-weight: 600; font-size: 14px;">192</a>
                         </div>
-                        
+
                         <div style="padding: 10px; background: var(--gray-50, #f8f9fa); border-radius: 8px; margin-bottom: 8px; display: flex; justify-content: space-between; align-items: center;">
                             <div>
                                 <div style="font-weight: 600; font-size: 14px;">🚢 Capitania dos Portos</div>
@@ -5052,7 +5070,7 @@ E-mail: ' + email : '');
                             </div>
                             <a href="tel:185" style="background: #3498DB; color: white; padding: 8px 16px; border-radius: 20px; text-decoration: none; font-weight: 600; font-size: 14px;">185</a>
                         </div>
-                        
+
                         <div style="padding: 10px; background: var(--gray-50, #f8f9fa); border-radius: 8px; margin-bottom: 8px; display: flex; justify-content: space-between; align-items: center;">
                             <div>
                                 <div style="font-weight: 600; font-size: 14px;">🚔 POLÍCIA</div>
@@ -5060,7 +5078,7 @@ E-mail: ' + email : '');
                             </div>
                             <a href="tel:190" style="background: #2ECC71; color: white; padding: 8px 16px; border-radius: 20px; text-decoration: none; font-weight: 600; font-size: 14px;">190</a>
                         </div>
-                        
+
                         <div style="padding: 10px; background: var(--gray-50, #f8f9fa); border-radius: 8px; margin-bottom: 8px; display: flex; justify-content: space-between; align-items: center;">
                             <div>
                                 <div style="font-weight: 600; font-size: 14px;">🔥 BOMBEIROS</div>
@@ -5068,7 +5086,7 @@ E-mail: ' + email : '');
                             </div>
                             <a href="tel:193" style="background: #E67E22; color: white; padding: 8px 16px; border-radius: 20px; text-decoration: none; font-weight: 600; font-size: 14px;">193</a>
                         </div>
-                        
+
                         <div style="padding: 10px; background: var(--gray-50, #f8f9fa); border-radius: 8px; display: flex; justify-content: space-between; align-items: center;">
                             <div>
                                 <div style="font-weight: 600; font-size: 14px;">🏥 Hospital Bertioga</div>
@@ -5077,7 +5095,7 @@ E-mail: ' + email : '');
                             <a href="tel:1235684700" style="background: #9B59B6; color: white; padding: 8px 16px; border-radius: 20px; text-decoration: none; font-weight: 600; font-size: 14px;">Ligar</a>
                         </div>
                     </div>
-                    
+
                     <p style="font-size: 11px; color: var(--gray-400); margin-top: 12px; text-align: center;">
                         💡 <strong>Dica:</strong> Salve estes números na agenda do seu celular!
                     </p>
@@ -5392,7 +5410,7 @@ E-mail: ' + email : '');
                     <div style="display: flex; justify-content: space-between; align-items: center;">
                         <div>
                             <p style="font-size: 14px; font-weight: 600;">Etapa Guarujá 2026</p>
-                            <p style="font-size: 12px; color: var(--gray-400);">Open Feminino • 2º Lugar 🥈</p>
+                            <p style="font-size: 12px; color: var(--gray-400);">Open Feminino • 2o Lugar 🥈</p>
                         </div>
                         <span style="background: linear-gradient(135deg, #C0C0C0, #A8A8A8); color: white; padding: 4px 12px; border-radius: 20px; font-size: 12px; font-weight: 600;">+850 pts</span>
                     </div>
@@ -5401,7 +5419,7 @@ E-mail: ' + email : '');
                     <div style="display: flex; justify-content: space-between; align-items: center;">
                         <div>
                             <p style="font-size: 14px; font-weight: 600;">Etapa Mongaguá 2026</p>
-                            <p style="font-size: 12px; color: var(--gray-400);">Open Feminino • 1º Lugar 🥇</p>
+                            <p style="font-size: 12px; color: var(--gray-400);">Open Feminino • 1o Lugar 🥇</p>
                         </div>
                         <span style="background: linear-gradient(135deg, #FFD700, #FFA500); color: white; padding: 4px 12px; border-radius: 20px; font-size: 12px; font-weight: 600;">+1200 pts</span>
                     </div>
@@ -5410,7 +5428,7 @@ E-mail: ' + email : '');
                     <div style="display: flex; justify-content: space-between; align-items: center;">
                         <div>
                             <p style="font-size: 14px; font-weight: 600;">Etapa Praia Grande 2025</p>
-                            <p style="font-size: 12px; color: var(--gray-400);">Open Feminino • 3º Lugar 🥉</p>
+                            <p style="font-size: 12px; color: var(--gray-400);">Open Feminino • 3o Lugar 🥉</p>
                         </div>
                         <span style="background: linear-gradient(135deg, #CD7F32, #B8860B); color: white; padding: 4px 12px; border-radius: 20px; font-size: 12px; font-weight: 600;">+600 pts</span>
                     </div>
@@ -5621,7 +5639,7 @@ E-mail: ' + email : '');
                         <div style="color: var(--gray-400);">Nível</div>
                     </div>
                 </div>
-                <p style="font-size: 13px; color: var(--gray-600); margin-bottom: 8px;">A praia mais famosa do Guarujá! Boa para todos os níveis, ondas divertidas. Movimentada no verão — chegue cedo!</p>
+                <p style="font-size: 13px; color: var(--gray-600); margin-bottom: 8px;">A praia mais famosa do Guarujá! Boa para todos os níveis, ondas divertidas. Movimentada no verão - chegue cedo!</p>
                 <div style="font-size: 12px; color: var(--gray-400);">
                     <span>🚢 Balsa</span> • <span>🏖️ Quiosques</span> • <span>👨‍👩‍👧 Família</span>
                 </div>
@@ -5753,7 +5771,7 @@ E-mail: ' + email : '');
                 </div>
             </div>
         </div>
-        
+
         <!-- Praia de Maresias -->
         <div class="card beach-card" data-region="norte" style="margin-bottom: 12px; border-left: 4px solid #00A8CC;">
             <div style="display: flex; justify-content: space-between; align-items: start;">
@@ -5785,7 +5803,7 @@ E-mail: ' + email : '');
                 <span>🅿️ Estacionamento</span> • <span>🏪 Bares</span> • <span>🏨 Hotéis</span>
             </div>
         </div>
-        
+
         <!-- Praia da Baleia -->
         <div class="card beach-card" data-region="norte" style="margin-bottom: 12px; border-left: 4px solid #00A8CC;">
             <div style="display: flex; justify-content: space-between; align-items: start;">
@@ -5825,7 +5843,7 @@ E-mail: ' + email : '');
                 <li>Sempre surf com uma mana! Nunca sozinha 🤝</li>
                 <li>Verifique a previsão e as condições antes de entrar</li>
                 <li>Use protetor solar reef-safe 🐠</li>
-                <li>Respeite a etiqueta do surf — não furta onda!</li>
+                <li>Respeite a etiqueta do surf - não furta onda!</li>
                 <li>Conheça suas limitações e evolua gradualmente</li>
             </ul>
         </div>
@@ -5835,7 +5853,7 @@ E-mail: ' + email : '');
     <!-- Mulher Segura -->
     <div style="background: linear-gradient(135deg, #8B0000, #DC143C); border-radius: 16px; padding: 20px; margin: 20px; color: white;">
         <h3 style="font-size: 18px;">🚺 Mulheres Seguras</h3>
-        <p style="font-size: 13px; margin: 12px 0;">Contra violência — DENUNCIE!</p>
+        <p style="font-size: 13px; margin: 12px 0;">Contra violência - DENUNCIE!</p>
         <ul style="font-size: 12px; padding-left: 16px; line-height: 2;">
             <li><strong>190</strong> - Policia</li>
             <li><strong>180</strong> - Atendimento Mulher</li>
@@ -5885,7 +5903,7 @@ E-mail: ' + email : '');
                     <strong>Passo 2: Olhe para onde quer ir</strong><br>
                     Seus olhos guiam seu corpo. Olhe de volta para a parte alta da onda ANTES de iniciar a manobra. Seu corpo vai seguir naturalmente.<br><br>
                     <strong>Passo 3: Peso na traseira</strong><br>
-                    Transfira peso para a perna traseira enquanto gira os ombros. O tail da prancha vai deslizar. Use seus braços como contrapeso — estenda o braço de fora.<br><br>
+                    Transfira peso para a perna traseira enquanto gira os ombros. O tail da prancha vai deslizar. Use seus braços como contrapeso - estenda o braço de fora.<br><br>
                     <strong>Passo 4: O Retorno</strong><br>
                     A parte mais difícil: voltar para a base da onda. Pressione o rail de volta, transfira peso para frente e acelere. Isso é o que separa um cutback bom de um excelente.<br><br>
                     <strong>Erros comuns:</strong><br>
@@ -5893,7 +5911,7 @@ E-mail: ' + email : '');
                     ❌ Girar só com os pés (use o corpo inteiro!)<br>
                     ❌ Fazer na parte errada da onda (muito baixo)<br>
                     ❌ Desistir no meio da manobra<br><br>
-                    <strong>🎯 Exercício no seco:</strong> Pratique a rotação de ombros em casa. Deixe o skate te ajudar — faça carvebacks no skate para treinar o movimento!
+                    <strong>🎯 Exercício no seco:</strong> Pratique a rotação de ombros em casa. Deixe o skate te ajudar - faça carvebacks no skate para treinar o movimento!
                 </p>
             </div>
         </div>
@@ -5908,7 +5926,7 @@ E-mail: ' + email : '');
                 </div>
             </div>
             <div id="premium-2-preview" style="margin-top: 12px;">
-                <p style="font-size: 13px; color: var(--gray-600); line-height: 1.6;">A diferença entre uma atleta boa e uma campeã muitas vezes não é técnica — é mental. As melhores surfistas do mundo usam visualização antes de cada bateria. Elas criam um "filme mental" de...</p>
+                <p style="font-size: 13px; color: var(--gray-600); line-height: 1.6;">A diferença entre uma atleta boa e uma campeã muitas vezes não é técnica - é mental. As melhores surfistas do mundo usam visualização antes de cada bateria. Elas criam um "filme mental" de...</p>
                 <div style="position: relative; margin-top: 8px;">
                     <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: linear-gradient(transparent, white); pointer-events: none;"></div>
                     <button class="btn btn-primary" style="width: 100%;" onclick="unlockPremium(2)">🔓 Ler Conteúdo Completo</button>
@@ -5952,7 +5970,7 @@ E-mail: ' + email : '');
             </div>
             <div id="premium-3-full" style="display: none; margin-top: 12px;">
                 <p style="font-size: 13px; color: var(--gray-600); line-height: 1.8;">
-                    <strong>📅 SEMANA 1 — Base</strong><br>
+                    <strong>📅 SEMANA 1 - Base</strong><br>
                     Seg: Surf 1h30 + alongamento 15min<br>
                     Terça: Core + equilíbrio (prancha Bosu, prancha instável)<br>
                     Quarta: Surf 2h<br>
@@ -5960,7 +5978,7 @@ E-mail: ' + email : '');
                     Sexta: Surf 1h30 + treino de paddle<br>
                     Sábado: Corrida leve 30min<br>
                     Domingo: Descanso ativo (yoga, caminhada)<br><br>
-                    <strong>📅 SEMANA 2 — Força</strong><br>
+                    <strong>📅 SEMANA 2 - Força</strong><br>
                     Seg: Surf 2h + agachamentos (3x15)<br>
                     Terça: Upper body (flexão, remada, shoulder press)<br>
                     Quarta: Surf 2h (foco em bottoms)<br>
@@ -5968,11 +5986,11 @@ E-mail: ' + email : '');
                     Sexta: Surf 2h30<br>
                     Sábado: HIIT 20min + surf leve<br>
                     Domingo: Descanso completo<br><br>
-                    <strong>📅 SEMANA 3 — Potência</strong><br>
+                    <strong>📅 SEMANA 3 - Potência</strong><br>
                     Explosivos: jump squat, burpees, box jump<br>
                     Surf com foco em manobras novas<br>
                     Paddle intervals (30s sprint, 30s leve)<br><br>
-                    <strong>📅 SEMANA 4 — Integração</strong><br>
+                    <strong>📅 SEMANA 4 - Integração</strong><br>
                     Combine tudo: força + surf + mental<br>
                     Simulação de bateria (20min cronometrado)<br>
                     Avaliação de progresso + ajustes
@@ -5992,18 +6010,18 @@ E-mail: ' + email : '');
     <button class="fab" onclick="alert('Em breve! 🚀')">+</button>
     <button class="fab-share" onclick="toggleSharePanel()" title="Compartilhar">📤</button>
     <button id="back-to-top" onclick="scrollToTop()" style="display: none; position: fixed; bottom: 160px; right: 24px; width: 45px; height: 45px; background: rgba(0,168,204,0.9); border: none; color: white; border-radius: 50%; font-size: 20px; cursor: pointer; z-index: 99; box-shadow: 0 4px 15px rgba(0,0,0,0.2);">⬆️</button>
-    
+
     <!-- Share Panel -->
     <div id="share-panel" style="display: none; position: fixed; bottom: 90px; right: 90px; background: white; border-radius: 16px; box-shadow: 0 10px 40px rgba(0,0,0,0.2); z-index: 1000; padding: 20px; min-width: 280px;">
         <h4 style="margin-bottom: 15px; color: #0E2439;">📤 Compartilhar ASF</h4>
-        
+
         <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px; margin-bottom: 20px;">
             <button onclick="shareToWhatsApp()" style="background: #25D366; border: none; color: white; width: 50px; height: 50px; border-radius: 50%; font-size: 24px; cursor: pointer;" title="WhatsApp">💬</button>
             <button onclick="shareToInstagram()" style="background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); border: none; color: white; width: 50px; height: 50px; border-radius: 50%; font-size: 24px; cursor: pointer;" title="Instagram">📸</button>
             <button onclick="shareToFacebook()" style="background: #1877F2; border: none; color: white; width: 50px; height: 50px; border-radius: 50%; font-size: 24px; cursor: pointer;" title="Facebook">👍</button>
             <button onclick="shareToTwitter()" style="background: #1DA1F2; border: none; color: white; width: 50px; height: 50px; border-radius: 50%; font-size: 24px; cursor: pointer;" title="Twitter">🐦</button>
         </div>
-        
+
         <div style="background: #f8f9fa; padding: 12px; border-radius: 10px;">
             <p style="font-size: 12px; color: #666; margin-bottom: 8px;">Link para compartilhar:</p>
             <div style="display: flex; gap: 8px;">
@@ -6011,7 +6029,7 @@ E-mail: ' + email : '');
                 <button onclick="copyShareLink()" style="background: #00A8CC; border: none; color: white; padding: 8px 12px; border-radius: 8px; font-size: 12px; cursor: pointer;">📋</button>
             </div>
         </div>
-        
+
         <p style="font-size: 11px; color: #999; margin-top: 12px; text-align: center;">🌊 Juntas, surfando mais forte!</p>
     </div>
 
@@ -6055,35 +6073,35 @@ E-mail: ' + email : '');
         <div class="section-header">
             <h2 class="section-title">🤝 Cadastro de Parceiros</h2>
         </div>
-        
+
         <div style="background: linear-gradient(135deg, #FFD700, #FFA500); padding: 20px; margin: 20px; border-radius: 16px; text-align: center; color: #0E2439;">
             <h3 style="font-size: 18px; margin-bottom: 8px;">🎯 Seja um Parceiro ASF!</h3>
             <p style="font-size: 13px; margin-bottom: 16px;">Divulgue sua marca para +500 mulheres surfistas.</p>
-            
+
             <div style="background: white; padding: 20px; border-radius: 12px; text-align: left;">
                 <label style="font-size: 12px; font-weight: 600; display: block; margin-bottom: 4px;">📛 Nome da Marca *</label>
                 <input id="parceiro-nome" type="text" placeholder="Sua marca" style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 8px; margin-bottom: 12px;">
-                
+
                 <label style="font-size: 12px; font-weight: 600; display: block; margin-bottom: 4px;">📷 Instagram</label>
                 <input id="parceiro-insta" type="text" placeholder="@sua marca" style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 8px; margin-bottom: 12px;">
-                
+
                 <label style="font-size: 12px; font-weight: 600; display: block; margin-bottom: 4px;">🌐 Site</label>
                 <input id="parceiro-site" type="text" placeholder="https://sua-marca.com.br" style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 8px; margin-bottom: 12px;">
-                
+
                 <label style="font-size: 12px; font-weight: 600; display: block; margin-bottom: 4px;">📷 Logo (URL da imagem)</label>
                 <input id="parceiro-logo" type="text" placeholder="https://..." style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 8px; margin-bottom: 16px;">
-                
+
                 <div style="background: #f5f5f5; padding: 16px; border-radius: 8px; margin-bottom: 16px;">
                     <button onclick="this.innerHTML = this.innerHTML.replace('Ver PIX 💰', '<br><strong style=font-size:18px>R$ 80,00</strong><br><span style=font-size:11px>PIX: 11 95434-6288 (Carol)</span>')" style="background:none;border:none;font-size:14px;cursor:pointer;color:#00A8CC;text-decoration:underline;">Ver PIX 💰</button>
                 </div>
-                
+
                 <label style="font-size: 12px; font-weight: 600; display: block; margin-bottom: 4px;">📎 Comprovante PIX *</label>
                 <input id="parceiro-comprovante" type="text" placeholder="URL do comprovante ou截图" style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 8px; margin-bottom: 16px;">
-                
+
                 <button onclick="enviarCadastroParceiro()" style="background: #00A8CC; color: white; border: none; padding: 14px; border-radius: 8px; width: 100%; font-weight: 600; cursor: pointer;">ENVIAR CADASTRO 📨</button>
             </div>
         </div>
-        
+
         <script>
         function enviarCadastroParceiro() {
             var nome = document.getElementById("parceiro-nome").value.trim();
@@ -6091,7 +6109,7 @@ E-mail: ' + email : '');
             var site = document.getElementById("parceiro-site").value.trim();
             var logo = document.getElementById("parceiro-logo").value.trim();
             var comprovante = document.getElementById("parceiro-comprovante").value.trim();
-            
+
             if (!nome) {
                 alert("Preencha o nome da marca!");
                 return;
@@ -6100,11 +6118,11 @@ E-mail: ' + email : '');
                 alert("Anexe o comprovante do PIX!");
                 return;
             }
-            
+
             // Save registration
             var parceiro = { nome: nome, insta: insta, site: site, logo: logo, comprovante: comprovante, data: new Date().toISOString() };
             localStorage.setItem("asf-parceiros", JSON.stringify(parceiro));
-            
+
             // Send to Carol
             var msg = "🏄‍♀️ NOVO CADASTRO DE PARCEIRO!
 
@@ -6120,7 +6138,7 @@ Comprovante: " + comprovante + "
 
 ";
             msg += "Revisar e ativar!";
-            
+
             window.open("https://wa.me/5511954346288?text=" + encodeURIComponent(msg), "_blank");
             showToast("✓ Cadastro enviado! Revisaremos em breve.");
         }
@@ -6135,7 +6153,7 @@ Comprovante: " + comprovante + "
     <div style="background: linear-gradient(135deg, #2c0a37, #4a1c5e); padding: 20px; margin: 20px; border-radius: 16px; color: white; text-align: center;">
         <div style="font-size: 28px; margin-bottom: 8px;">🔓 Conquistas Secretas</div>
         <p style="font-size: 12px; opacity: 0.9; margin-bottom: 16px;">Desbloqueie conquistando pontos!</p>
-        
+
         <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 16px;">
             <div id="badge-surf" onclick="checkBadge('surf')" style="background: rgba(255,255,255,0.1); padding: 12px; border-radius: 10px; cursor: pointer;">
                 <div style="font-size: 24px;">🏄</div>
@@ -6162,7 +6180,7 @@ Comprovante: " + comprovante + "
                 <p style="font-size: 10px;">Compartilhar</p>
             </div>
         </div>
-        
+
         <p style="font-size: 11px; opacity: 0.7;">Complete missões para desbloquear badges secretos! 🏆</p>
     </div>
     <script>
@@ -6171,7 +6189,7 @@ Comprovante: " + comprovante + "
         var quizzes = (JSON.parse(localStorage.getItem('quizzes-done') || '[]')).length;
         var opens = parseInt(localStorage.getItem('asf-opens') || '0');
         var shares = parseInt(localStorage.getItem('asf-shares') || '0');
-        
+
         if (type === 'surf') {
             if (sessions >= 1) showToast('🏄 Badge desbloqueado! 🎉');
             else showToast('🏄 Progresso: ' + sessions + '/1 sessão registrada');
@@ -6201,7 +6219,7 @@ Comprovante: " + comprovante + "
 <!-- Footer -->
     <!-- Apoie o ASF App -->
     <button onclick="showBrandSupport()" style="background:linear-gradient(135deg,#00A8CC,#0E2439); color:white; border:none; padding:10px 20px; border-radius:10px; font-weight:600; cursor:pointer;">🤝 Apoie o App</button>
-    
+
     <!-- Brand Support Modal -->
     <div id="brand-support" style="display:none; position:fixed; top:0; left:0; right:0; bottom:0; background:rgba(0,0,0,0.9); z-index:9999; padding:20px; overflow-y:auto;">
         <div style="background:white; border-radius:20px; padding:24px; max-width:500px; margin:40px auto; color:#0E2439;">
@@ -6218,7 +6236,7 @@ Comprovante: " + comprovante + "
             <p style="font-size:12px; color:#666;">Ao clicar, você será direcionada para o WhatsApp da fundadora Carol!</p>
         </div>
     </div>
-    
+
     <script>
     function callLua() {
     showToast("🌙 Lua está verificando o app... aguarde!");
@@ -6232,7 +6250,7 @@ function showBrandSupport() { document.getElementById('brand-support').style.dis
         var formLink = 'https://docs.google.com/forms/d/1fJhfaiNyYSSq9bKElew69y6GZ6_pxLz05HR26klIsSA/edit'; // User can fill this
         // For now, we just save locally. In future, link to form.
 </script>
-    
+
     <footer style="background: linear-gradient(135deg, #0E2439, #1A3A5C); color: white; padding: 40px 20px 100px; text-align: center; margin-top: 20px;">
         <div style="font-size: 48px; margin-bottom: 12px;">🏄‍♀️</div>
         <h2 style="font-size: 22px; margin-bottom: 6px;">ASF - Associação de Surf Feminino</h2>
@@ -6267,7 +6285,7 @@ function showBrandSupport() { document.getElementById('brand-support').style.dis
         // Display real stats
         document.getElementById('stat-opens').textContent = localStorage.getItem('asf-opens') || '1';
         document.getElementById('stat-sessions').textContent = (JSON.parse(localStorage.getItem('surf-sessions') || []).length;
-    
+
 <script>
 var translations = {
     'pt': {},
@@ -6348,7 +6366,7 @@ document.addEventListener('DOMContentLoaded', function() {
             document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
             document.querySelectorAll('.tab').forEach(t => { t.classList.remove('active'); t.setAttribute('aria-selected', 'false'); });
             document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
-            
+
             // Show selected section
             document.getElementById(sectionId).classList.add('active');
         }
@@ -6361,11 +6379,11 @@ document.addEventListener('DOMContentLoaded', function() {
                 showSection(sectionId);
             }
         }
-            
+
             // Update tabs
             const tabs = document.querySelectorAll('.tab');
             const navItems = document.querySelectorAll('.nav-item');
-            
+
             if (sectionId === 'dicas') {
                 tabs[0].classList.add('active');
                 navItems[0].classList.add('active');
@@ -6384,17 +6402,17 @@ document.addEventListener('DOMContentLoaded', function() {
             } else if (sectionId === 'competicoes') {
                 // Competitions section - highlight related tab
             }
-            
+
             // Update aria-selected on active tab
             document.querySelectorAll('.tab.active').forEach(t => t.setAttribute('aria-selected', 'true'));
-            
+
             // Scroll to top
             window.scrollTo(0, 0);
         }
 
         // ===== SISTEMA DE NOTIFICAÇÕES =====
         const NOTIF_KEY = 'asf_notifications';
-        
+
         // Notificações padrão ao abrir
         const DEFAULT_NOTIFICATIONS = [
             { id: 1, type: 'treino', icon: '💪', title: 'Novo Treino!', text: 'Treino de Força e Core disponível', time: 'Agora', read: false, target: 'treino-1', section: 'saude' },
@@ -6403,7 +6421,7 @@ document.addEventListener('DOMContentLoaded', function() {
             { id: 4, type: 'dica', icon: '📚', title: 'Dica do Dia', text: 'Respiração 4-4-4 para acalmar', time: '1h', read: true, target: 'tip-of-day', section: 'dicas' },
             { id: 5, type: 'manas', icon: '💬', title: 'Novo Grupo', text: 'Bertioga Surf Girls: 13 manas!', time: '2h', read: true, target: 'grupos-ativos', section: 'manas' }
         ];
-        
+
         function loadNotifications() {
             const saved = localStorage.getItem(NOTIF_KEY);
             if (saved) {
@@ -6413,11 +6431,11 @@ document.addEventListener('DOMContentLoaded', function() {
             localStorage.setItem(NOTIF_KEY, JSON.stringify(DEFAULT_NOTIFICATIONS));
             return DEFAULT_NOTIFICATIONS;
         }
-        
+
         function saveNotifications(notifs) {
             localStorage.setItem(NOTIF_KEY, JSON.stringify(notifs));
         }
-        
+
         function addNotification(type, icon, title, text) {
             const notifs = loadNotifications();
             const newNotif = {
@@ -6435,7 +6453,7 @@ document.addEventListener('DOMContentLoaded', function() {
             saveNotifications(notifs);
             updateNotificationBadge();
         }
-        
+
         function updateNotificationBadge() {
             const notifs = loadNotifications();
             const unread = notifs.filter(n => !n.read).length;
@@ -6447,12 +6465,12 @@ document.addEventListener('DOMContentLoaded', function() {
                 badge.style.display = 'none';
             }
         }
-        
+
         function toggleNotifications() {
             const panel = document.getElementById('notifications-panel');
             const isVisible = panel.style.display === 'block';
             panel.style.display = isVisible ? 'none' : 'block';
-            
+
             if (!isVisible) {
                 renderNotifications();
                 // Marcar todas como lidas
@@ -6462,16 +6480,16 @@ document.addEventListener('DOMContentLoaded', function() {
                 updateNotificationBadge();
             }
         }
-        
+
         function renderNotifications() {
             const notifs = loadNotifications();
             const list = document.getElementById('notifications-list');
-            
+
             if (notifs.length === 0) {
                 list.innerHTML = '<p style="text-align: center; color: #999; padding: 20px;">Sem notificações</p>';
                 return;
             }
-            
+
             list.innerHTML = notifs.map(n => `
                 <div onclick="openNotification('${n.type}', '${n.id}')" style="display: flex; gap: 12px; padding: 12px; border-bottom: 1px solid #eee; background: ${n.read ? 'white' : '#F0F9FF'}; border-radius: 8px; margin-bottom: 5px; cursor: pointer; transition: background 0.2s;" onmouseover="this.style.background='#f0f0f0'" onmouseout="this.style.background='${n.read ? 'white' : '#F0F9FF'}'">
                     <div style="font-size: 28px; flex-shrink: 0;">${n.icon}</div>
@@ -6485,7 +6503,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 </div>
             `).join('');
         }
-        
+
         function openNotification(type, id) {
             // Marcar como lida
             const notifs = loadNotifications();
@@ -6493,10 +6511,10 @@ document.addEventListener('DOMContentLoaded', function() {
             if (notif) notif.read = true;
             saveNotifications(notifs);
             updateNotificationBadge();
-            
+
             // Fechar painel
             document.getElementById('notifications-panel').style.display = 'none';
-            
+
             // Navegar para a seção correta
             const sectionMap = {
                 'treino': 'saude',
@@ -6509,14 +6527,14 @@ document.addEventListener('DOMContentLoaded', function() {
                 'mental': 'mental',
                 'surftrip': 'manas'
             };
-            
+
             const section = sectionMap[type] || 'dicas';
             showSection(section);
-            
+
             // Se tem target específico, fazer scroll até ele
             if (notif && notif.target) {
                 setTimeout(() => {
-                    const element = document.getElementById(notif.target) || 
+                    const element = document.getElementById(notif.target) ||
                                    document.querySelector(`[data-target="${notif.target}"]`) ||
                                    document.querySelector(`h3:contains("${notif.text}")`);
                     if (element) {
@@ -6528,13 +6546,13 @@ document.addEventListener('DOMContentLoaded', function() {
                 }, 300);
             }
         }
-        
+
         function clearNotifications() {
             localStorage.setItem(NOTIF_KEY, '[]');
             renderNotifications();
             updateNotificationBadge();
         }
-        
+
         // Fechar painel ao clicar fora
         document.addEventListener('click', function(e) {
             const panel = document.getElementById('notifications-panel');
@@ -6543,43 +6561,43 @@ document.addEventListener('DOMContentLoaded', function() {
                 panel.style.display = 'none';
             }
         });
-        
+
         // Adicionar notificação quando ganha pontos
         function notifyPoints(points, action) {
             addNotification('pontos', '🎯', `+${points} Pontos!`, action);
         }
-        
+
         // Adicionar notificação de treino
         function notifyWorkout(name) {
             addNotification('treino', '💪', 'Treino Completo!', `Você terminou: ${name}`);
         }
-        
+
         // Adicionar notificação de ondas
         function notifyWaves(beach, height) {
             addNotification('ondas', '🌊', 'Ondas Boas!', `${beach}: ${height}m - Hora de surfar!`);
         }
-        
+
         // Inicializar badge
         updateNotificationBadge();
-        
+
         // ===== FIM NOTIFICAÇÕES =====
 
         // ===== SISTEMA DE COMPARTILHAMENTO =====
         const APP_URL = 'https://acarolmourad-commits.github.io/asf-app/';
         const SHARE_TEXT = '🏄‍♀️ Conheça o App ASF - Dicas de surf, treinos, previsão de ondas e muito mais para mulheres surfistas! 🌊';
-        
+
         function toggleSharePanel() {
             const panel = document.getElementById('share-panel');
             panel.style.display = panel.style.display === 'none' ? 'block' : 'none';
         }
-        
+
         function shareToWhatsApp() {
             const url = `https://wa.me/?text=${encodeURIComponent(SHARE_TEXT + '\n\n' + APP_URL)}`;
             window.open(url, '_blank');
             trackShare();
             toggleSharePanel();
         }
-        
+
         function shareToInstagram() {
             // Instagram não permite share direto via web, copia o link
             copyShareLink();
@@ -6587,21 +6605,21 @@ document.addEventListener('DOMContentLoaded', function() {
             alert('📋 Link copiado!\n\nCole no seu Story ou Post do Instagram 📸');
             toggleSharePanel();
         }
-        
+
         function shareToFacebook() {
             const url = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(APP_URL)}&quote=${encodeURIComponent(SHARE_TEXT)}`;
             window.open(url, '_blank');
             trackShare();
             toggleSharePanel();
         }
-        
+
         function shareToTwitter() {
             const url = `https://twitter.com/intent/tweet?text=${encodeURIComponent(SHARE_TEXT)}&url=${encodeURIComponent(APP_URL)}`;
             window.open(url, '_blank');
             trackShare();
             toggleSharePanel();
         }
-        
+
         function copyShareLink() {
             const input = document.getElementById('share-link');
             const link = input.value;
@@ -6620,7 +6638,7 @@ document.addEventListener('DOMContentLoaded', function() {
             btn.textContent = '✅';
             setTimeout(() => btn.textContent = original, 1500);
         }
-        
+
         // Fechar painel de share ao clicar fora
         document.addEventListener('click', function(e) {
             const panel = document.getElementById('share-panel');
@@ -6629,7 +6647,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 panel.style.display = 'none';
             }
         });
-        
+
         // ===== FIM COMPARTILHAMENTO =====
 
         // ===== BOAS-VINDAS =====
@@ -6639,22 +6657,22 @@ document.addEventListener('DOMContentLoaded', function() {
                 document.getElementById('welcome-card').style.display = 'block';
             }
         }
-        
+
         function closeWelcome() {
             document.getElementById('welcome-card').style.display = 'none';
             localStorage.setItem('asf-welcome-seen', 'true');
         }
-        
+
         // Inicializar boas-vindas
         initWelcome();
-        
+
         // ===== FIM BOAS-VINDAS =====
-        
+
         // ===== VOLTAR AO TOPO =====
         function scrollToTop() {
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
-        
+
         window.addEventListener('scroll', function() {
             const btn = document.getElementById('back-to-top');
             if (window.scrollY > 500) {
@@ -6669,7 +6687,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         // ===== MANAS PRÓXIMAS =====
         let userLocation = null;
-        
+
         // Manas mockadas (em produção viria de um banco de dados)
         const MOCK_MANAS = {
             bertioga: [
@@ -6697,11 +6715,11 @@ document.addEventListener('DOMContentLoaded', function() {
                 { name: 'Melissa P.', level: 'Iniciante', beach: 'Itamambuca', distance: 2.4, avatar: '🌊' },
             ]
         };
-        
+
         function requestLocation() {
             const statusDiv = document.getElementById('location-status');
             statusDiv.innerHTML = '<p style="text-align: center; color: var(--primary);">📍 Buscando localização...</p>';
-            
+
             if (navigator.geolocation) {
                 navigator.geolocation.getCurrentPosition(
                     (position) => {
@@ -6731,11 +6749,11 @@ document.addEventListener('DOMContentLoaded', function() {
                 statusDiv.innerHTML = '<p style="color: #E74C3C; text-align: center;">Geolocalização não suportada neste navegador</p>';
             }
         }
-        
+
         function findNearbyManas() {
             const nearbyDiv = document.getElementById('nearby-manas');
             nearbyDiv.innerHTML = '<p style="text-align: center; color: var(--primary);">🔄 Buscando manas próximas...</p>';
-            
+
             // Simula busca (em produção usaria a localização real)
             setTimeout(() => {
                 const allManas = [];
@@ -6744,13 +6762,13 @@ document.addEventListener('DOMContentLoaded', function() {
                         allManas.push({ ...mana, region: beach });
                     });
                 });
-                
+
                 // Ordena por distância
                 allManas.sort((a, b) => a.distance - b.distance);
-                
+
                 // Pega as 5 mais próximas
                 const closest = allManas.slice(0, 5);
-                
+
                 nearbyDiv.innerHTML = `
                     <h4 style="color: var(--secondary); margin-bottom: 15px;">📍 Manas mais próximas</h4>
                     ${closest.map(mana => `
@@ -6770,19 +6788,19 @@ document.addEventListener('DOMContentLoaded', function() {
                 `;
             }, 1500);
         }
-        
+
         function showBeachManas(beach) {
             const manas = MOCK_MANAS[beach] || [];
             const listDiv = document.getElementById('beach-manas-list');
             const detailDiv = document.getElementById('beach-manas-detail');
-            
+
             const beachNames = {
                 bertioga: 'Bertioga',
                 santos: 'Santos',
                 guaruja: 'Guarujá',
                 ubatuba: 'Ubatuba'
             };
-            
+
             listDiv.innerHTML = `
                 <h4 style="color: var(--secondary); margin-bottom: 15px;">🏖️ Manas em ${beachNames[beach]}</h4>
                 ${manas.map(mana => `
@@ -6799,14 +6817,14 @@ document.addEventListener('DOMContentLoaded', function() {
                     </div>
                 `).join('')}
             `;
-            
+
             detailDiv.style.display = 'block';
         }
-        
+
         function connectManas(name) {
             alert(`🏄‍♀️ Solicitação enviada para ${name}!\n\nVocê receberá uma notificação quando ela aceitar. Enquanto isso, continue surfando! 🌊`);
         }
-        
+
         // ===== FIM MANAS PRÓXIMAS =====
 
         // ===== SISTEMA DE PONTOS ASF =====
@@ -6915,14 +6933,14 @@ document.addEventListener('DOMContentLoaded', function() {
             if (type === 'dica') data.dicas++;
             if (type === 'treino') data.treinos++;
             savePoints(data);
-            
+
             // Mostrar animação
             const popup = document.createElement('div');
             popup.innerHTML = `+${points} pontos! 🎉`;
             popup.style.cssText = 'position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);background:#27AE60;color:white;padding:20px 40px;border-radius:15px;font-size:20px;font-weight:bold;z-index:9999;';
             document.body.appendChild(popup);
             setTimeout(() => popup.remove(), 1500);
-            
+
             updatePointsDisplay();
         }
 
@@ -6934,17 +6952,17 @@ document.addEventListener('DOMContentLoaded', function() {
                 el.textContent = data.total;
             });
         }
-        
+
         // ===== FIM SISTEMA DE PONTOS =====
 
         function createPost() {
             alert('Funcionalidade em desenvolvimento! 🚀');
         }
-        
+
         function startQuiz(quizName) {
             const quizDiv = document.getElementById('quiz-' + quizName);
             const button = event.target;
-            
+
             if (quizDiv.style.display === 'none') {
                 quizDiv.style.display = 'block';
                 button.textContent = 'Fechar Quiz';
@@ -6991,48 +7009,48 @@ document.addEventListener('DOMContentLoaded', function() {
 
         // ===== CONQUISTAS / BADGES =====
         const achievements = {
-            'badge-primeira-onda': { 
-                title: '🌊 Primeira Onda', 
+            'badge-primeira-onda': {
+                title: '🌊 Primeira Onda',
                 desc: 'Você surfou sua primeira sessão!',
                 earned: true
             },
-            'badge-streak-7': { 
-                title: '🔥 On Fire!', 
+            'badge-streak-7': {
+                title: '🔥 On Fire!',
                 desc: '7 dias seguidos surfando',
                 earned: false
             },
-            'badge-exploradora': { 
-                title: '🧭 Exploradora', 
+            'badge-exploradora': {
+                title: '🧭 Exploradora',
                 desc: 'Visitou 3 praias diferentes',
                 earned: false
             },
-            'badge-quiz': { 
-                title: '📚 Estudiosa', 
+            'badge-quiz': {
+                title: '📚 Estudiosa',
                 desc: 'Completou 3 quizzes',
                 earned: true
             },
-            'badge-madrugada': { 
-                title: '🌅 Madrugadora', 
+            'badge-madrugada': {
+                title: '🌅 Madrugadora',
                 desc: 'Surfou antes das 7h da manhã',
                 earned: false
             },
-            'badge-duradoura': { 
-                title: '⏱️ Maratonista', 
+            'badge-duradoura': {
+                title: '⏱️ Maratonista',
                 desc: 'Uma sessão de 3+ horas',
                 earned: false
             },
-            'badge-social': { 
-                title: '👯 Companhia', 
+            'badge-social': {
+                title: '👯 Companhia',
                 desc: 'Surfou com outra mana',
                 earned: false
             },
-            'badge-competitiva': { 
-                title: '🏆 Competitiva', 
+            'badge-competitiva': {
+                title: '🏆 Competitiva',
                 desc: 'Participou de uma etapa',
                 earned: false
             },
-            'badge-veterana': { 
-                title: '🧡 Veterana', 
+            'badge-veterana': {
+                title: '🧡 Veterana',
                 desc: '10 sessões de surf',
                 earned: false
             }
@@ -7111,9 +7129,9 @@ document.addEventListener('DOMContentLoaded', function() {
             { title: 'Mental', icon: '🧠', section: 'Mental', sectionId: 'mental', text: 'Técnicas de respiração, visualização e foco para surfar melhor.' },
             { title: 'Respiração', icon: '🌬️', section: 'Mental', sectionId: 'mental', text: 'Exercícios de respiração para ansiedade e medo de ondas grandes.' },
             { title: 'Meditação', icon: '🧘‍♀️', section: 'Mental', sectionId: 'mental', text: 'Meditação com sons do mar. Foque apenas no som das ondas.' },
-            { title: 'Paciência no Surf', icon: '🐢', section: 'Mental', sectionId: 'mental', text: 'Surf é paciência. Não precisa ser a mais rápida — precisa ser no tempo certo.' },
+            { title: 'Paciência no Surf', icon: '🐢', section: 'Mental', sectionId: 'mental', text: 'Surf é paciência. Não precisa ser a mais rápida - precisa ser no tempo certo.' },
             { title: 'Leitura de Ondas', icon: '🔍', section: 'Técnica', sectionId: 'tecnica', text: 'Observar 15 min antes de entrar revela o padrão das ondas.' },
-            { title: 'Conexão no Surf', icon: '🤝', section: 'Mental', sectionId: 'mental', text: 'O surf não é sobre competir — é sobre conexão com o mar e com as mansas.' },
+            { title: 'Conexão no Surf', icon: '🤝', section: 'Mental', sectionId: 'mental', text: 'O surf não é sobre competir - é sobre conexão com o mar e com as mansas.' },
             { title: 'Leash', icon: '🔗', section: 'Equipamento', sectionId: 'dicas', text: 'Use leash sempre! Evita perder sua prancha e mantém você segura.' },
             { title: 'Treino fora d\'água', icon: '🏋️', section: 'Saúde', sectionId: 'saude', text: 'Academia + mar = combo perfeito. Fortalece muscles para o surf.' },
             // Lojas
@@ -7172,23 +7190,23 @@ document.addEventListener('DOMContentLoaded', function() {
         function handleSearch(query) {
             const resultsDiv = document.getElementById('searchResults');
             const clearBtn = document.getElementById('searchClear');
-            
+
             if (!query || query.length < 2) {
                 resultsDiv.classList.remove('active');
                 clearBtn.style.display = 'none';
                 return;
             }
-            
+
             clearBtn.style.display = 'block';
             const q = query.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
-            
+
             const results = searchIndex.filter(item => {
                 const title = item.title.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
                 const text = item.text.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
                 const section = item.section.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
                 return title.includes(q) || text.includes(q) || section.includes(q);
             }).slice(0, 8);
-            
+
             if (results.length === 0) {
                 resultsDiv.innerHTML = '<div class="search-no-results"><span class="emoji">🏄‍♀️</span>Nenhum resultado para "' + query + '"<br><small>Tente outro termo</small></div>';
             } else {
@@ -7201,7 +7219,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         '<div class="result-preview">' + highlighted + '</div></div>';
                 }).join('');
             }
-            
+
             resultsDiv.classList.add('active');
             // Save to recent searches
             if (query.length >= 3) saveRecentSearch(query);
@@ -7334,7 +7352,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         async function loadLiveData(beach) {
             const [weather, marine] = await Promise.all([fetchWeather(beach), fetchMarine(beach)]);
-            
+
             // Update Mar card
             const marDiv = document.getElementById('mar-data');
             if (marine && marine.current) {
@@ -7391,7 +7409,7 @@ document.addEventListener('DOMContentLoaded', function() {
             if (weather && weather.current && weather.daily) {
                 const currentUV = weather.current.uv_index || 0;
                 const todayMaxUV = weather.daily.uv_index_max[0] || currentUV;
-                
+
                 // UV level description and color
                 let uvLevel, uvColor, uvIcon;
                 if (todayMaxUV <= 2) {
@@ -7415,13 +7433,13 @@ document.addEventListener('DOMContentLoaded', function() {
                     uvColor = '#8e44ad';
                     uvIcon = '⚠️';
                 }
-                
+
                 uvDiv.innerHTML = `
                     <p style="font-size: 32px; font-weight: 700; color: ${uvColor};">${todayMaxUV.toFixed(0)}</p>
                     <p style="font-size: 14px; color: ${uvColor}; font-weight: 600;">${uvIcon} ${uvLevel}</p>
                     <p style="font-size: 12px; color: var(--gray-400); margin-top: 4px;">Máximo hoje</p>
                 `;
-                
+
                 // Protection tip
                 let protTip = '';
                 if (todayMaxUV <= 2) {
@@ -7523,7 +7541,7 @@ document.addEventListener('DOMContentLoaded', function() {
             const low1 = Math.floor(baseLow) % 24;
             const lowMin1 = Math.floor((baseLow % 1) * 60);
             const high2 = (high1 + 12) % 24;
-            
+
             return {
                 high: `${String(high1).padStart(2,'0')}:${String(highMin1).padStart(2,'0')} (${(1.0 + Math.sin(dayOfYear * 0.4) * 0.4).toFixed(1)}m)`,
                 low: `${String(low1).padStart(2,'0')}:${String(lowMin1).padStart(2,'0')} (${(0.3 + Math.sin(dayOfYear * 0.4) * 0.2).toFixed(1)}m)`,
@@ -7598,20 +7616,20 @@ document.addEventListener('DOMContentLoaded', function() {
             // Reference new moon: January 11, 2000 at 12:24 UTC
             const knownNewMoon = new Date('2000-01-11T12:24:00Z');
             const now = new Date();
-            
+
             // Calculate days since known new moon
             const msPerDay = 24 * 60 * 60 * 1000;
             const daysSinceNewMoon = (now - knownNewMoon) / msPerDay;
-            
+
             // Synodic month (lunation) is approximately 29.53059 days
             const lunation = 29.53059;
-            
+
             // Current moon age (0-29.5)
             const moonAge = daysSinceNewMoon % lunation;
-            
+
             // Determine phase name and icon
             let phaseName, moonIcon, surfTip, tideTipDesc;
-            
+
             if (moonAge < 1.85 || moonAge > 27.68) {
                 phaseName = 'Lua Nova';
                 moonIcon = '🌑';
@@ -7653,7 +7671,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 surfTip = 'Maré Estável';
                 tideTipDesc = 'Menor variação de maré';
             }
-            
+
             // Update the display
             document.getElementById('moon-icon').textContent = moonIcon;
             document.getElementById('moon-phase-name').textContent = phaseName;
@@ -7665,11 +7683,11 @@ document.addEventListener('DOMContentLoaded', function() {
         function calcularVolume() {
             const peso = parseFloat(document.getElementById('peso-input').value) || 65;
             const nivel = document.getElementById('nivel-input').value;
-            
+
             // Cálculo de volume em litros
             let addVolume = nivel === 'iniciante' ? 5.5 : nivel === 'intermediario' ? 2.5 : 0.5;
             const volume = Math.round(peso + addVolume);
-            
+
             // Cálculo de borda (rail height) em cm
             let borda;
             if (nivel === 'iniciante') {
@@ -7679,10 +7697,10 @@ document.addEventListener('DOMContentLoaded', function() {
             } else {
                 borda = Math.round((peso * 0.04) + 1); // Bordas mais baixas para avançados
             }
-            
+
             // Garantir limites razoáveis
             borda = Math.max(4, Math.min(8, borda));
-            
+
             // Mostrar resultado
             const resultDiv = document.getElementById('calc-result');
             resultDiv.innerHTML = `
@@ -7697,8 +7715,8 @@ document.addEventListener('DOMContentLoaded', function() {
                     </div>
                 </div>
                 <p style="font-size: 11px; color: var(--gray-400); margin-top: 10px; text-align: center;">
-                    ${nivel === 'iniciante' ? '🌱 Bordas altas = mais flutuação e estabilidade' : 
-                      nivel === 'intermediario' ? '🏄 Bordas médias = equilíbrio entre controle e performance' : 
+                    ${nivel === 'iniciante' ? '🌱 Bordas altas = mais flutuação e estabilidade' :
+                      nivel === 'intermediario' ? '🏄 Bordas médias = equilíbrio entre controle e performance' :
                       '🔥 Bordas baixas = mais agilidade e resposta'}
                 </p>
             `;
@@ -7721,11 +7739,11 @@ document.addEventListener('DOMContentLoaded', function() {
             const checkboxes = document.querySelectorAll('#checklist-container input[type="checkbox"]');
             const checked = Array.from(checkboxes).filter(cb => cb.checked).length;
             const total = checkboxes.length;
-            
+
             document.getElementById('checklist-count').textContent = checked;
             const percentage = (checked / total) * 100;
             document.getElementById('checklist-bar').style.width = percentage + '%';
-            
+
             if (checked === total) {
                 document.getElementById('checklist-progress').style.background = 'rgba(46, 204, 113, 0.15)';
                 document.getElementById('checklist-progress').innerHTML = '<p style="font-size: 14px; color: var(--success); font-weight: bold;">🎉 Tudo pronto! Bora surfar!</p>';
@@ -7752,7 +7770,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         // Load live data on page load
         loadLiveData('bertioga');
-        
+
         // Update moon phase on page load
         updateMoonPhase();
 
@@ -7771,7 +7789,7 @@ document.addEventListener('DOMContentLoaded', function() {
             const workInput = document.getElementById('timer-work');
             const restInput = document.getElementById('timer-rest');
             const roundsInput = document.getElementById('timer-rounds');
-            
+
             if (preset === 'tabata') {
                 workInput.value = 20;
                 restInput.value = 10;
@@ -7789,7 +7807,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 restInput.value = 15;
                 roundsInput.value = 7;
             }
-            
+
             resetTimer();
         }
 
@@ -7797,42 +7815,42 @@ document.addEventListener('DOMContentLoaded', function() {
             const mins = Math.floor(timerSeconds / 60).toString().padStart(2, '0');
             const secs = (timerSeconds % 60).toString().padStart(2, '0');
             document.getElementById('timer-display').textContent = `${mins}:${secs}`;
-            
+
             const phase = timerIsWork ? '🔥 TRABALHO' : '😤 DESCANSAR';
             document.getElementById('timer-phase').textContent = phase;
             document.getElementById('timer-phase').style.color = timerIsWork ? '#E74C3C' : '#3498DB';
-            
+
             const totalTime = timerIsWork ? timerWorkTime : timerRestTime;
             const progress = ((totalTime - timerSeconds) / totalTime) * 100;
             document.getElementById('timer-progress').style.width = progress + '%';
-            document.getElementById('timer-progress').style.background = timerIsWork ? 
+            document.getElementById('timer-progress').style.background = timerIsWork ?
                 'linear-gradient(90deg, #E74C3C, #F39C12)' : 'linear-gradient(90deg, #3498DB, #2ECC71)';
-            
+
             document.getElementById('timer-round').textContent = timerCurrentRound;
             document.getElementById('timer-total-rounds').textContent = timerTotalRounds;
         }
 
         function startTimer() {
             if (timerState === 'running') return;
-            
+
             timerWorkTime = parseInt(document.getElementById('timer-work').value) || 20;
             timerRestTime = parseInt(document.getElementById('timer-rest').value) || 10;
             timerTotalRounds = parseInt(document.getElementById('timer-rounds').value) || 8;
-            
+
             if (timerState === 'stopped') {
                 timerSeconds = timerWorkTime;
                 timerCurrentRound = 1;
                 timerIsWork = true;
             }
-            
+
             timerState = 'running';
             document.getElementById('timer-start-btn').disabled = true;
             document.getElementById('timer-start-btn').textContent = '⏳ Correndo...';
             document.getElementById('timer-pause-btn').disabled = false;
-            
+
             timerInterval = setInterval(() => {
                 timerSeconds--;
-                
+
                 if (timerSeconds <= 0) {
                     // Play beep sound (browser notification)
                     if ('speechSynthesis' in window) {
@@ -7840,7 +7858,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         msg.rate = 2;
                         speechSynthesis.speak(msg);
                     }
-                    
+
                     if (timerIsWork) {
                         // Work phase ended, go to rest
                         if (timerRestTime > 0) {
@@ -7867,14 +7885,14 @@ document.addEventListener('DOMContentLoaded', function() {
                         timerIsWork = true;
                     }
                 }
-                
+
                 updateTimerDisplay();
             }, 1000);
         }
 
         function pauseTimer() {
             if (timerState !== 'running') return;
-            
+
             clearInterval(timerInterval);
             timerState = 'paused';
             document.getElementById('timer-start-btn').disabled = false;
@@ -7888,13 +7906,13 @@ document.addEventListener('DOMContentLoaded', function() {
             timerSeconds = timerWorkTime;
             timerCurrentRound = 1;
             timerIsWork = true;
-            
+
             document.getElementById('timer-display').textContent = '00:00';
             document.getElementById('timer-phase').textContent = 'Pronto';
             document.getElementById('timer-phase').style.color = 'var(--gray-600)';
             document.getElementById('timer-progress').style.width = '0%';
             document.getElementById('timer-round').textContent = '0';
-            
+
             document.getElementById('timer-start-btn').disabled = false;
             document.getElementById('timer-start-btn').textContent = '▶ Iniciar';
             document.getElementById('timer-pause-btn').disabled = true;
@@ -7903,7 +7921,7 @@ document.addEventListener('DOMContentLoaded', function() {
         function completeWorkout() {
             clearInterval(timerInterval);
             timerState = 'stopped';
-            
+
             // Save to history
             const workout = {
                 date: new Date().toISOString(),
@@ -7914,17 +7932,17 @@ document.addEventListener('DOMContentLoaded', function() {
             timerWorkoutHistory.unshift(workout);
             if (timerWorkoutHistory.length > 10) timerWorkoutHistory.pop();
             localStorage.setItem('asf_timer_history', JSON.stringify(timerWorkoutHistory));
-            
+
             document.getElementById('timer-phase').textContent = '🎉 TREINO COMPLETO!';
             document.getElementById('timer-phase').style.color = '#27AE60';
             document.getElementById('timer-display').textContent = '✓✓✓';
             document.getElementById('timer-start-btn').disabled = false;
             document.getElementById('timer-start-btn').textContent = '▶ Iniciar';
             document.getElementById('timer-pause-btn').disabled = true;
-            
+
             // Add points for completing workout
             earnPoints('treino', 50);
-            
+
             if ('speechSynthesis' in window) {
                 const msg = new SpeechSynthesisUtterance('Parabéns! Treino completo!');
                 msg.rate = 1.5;
@@ -7937,7 +7955,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 const date = new Date(w.date);
                 return `${i+1}. ${date.toLocaleDateString('pt-BR')} - ${w.rounds} rodadas (${w.workTime}s/${w.restTime}s)`;
             }).join('\n');
-            
+
             alert('📊 Histórico de Treinos:\n\n' + (history || 'Nenhum treino registrado ainda!'));
         }
         // ========== END CRONÔMETRO ==========
@@ -8199,7 +8217,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 data.windDir = windItem.querySelector('.surf-label')?.textContent || '';
             }
 
-            const msg = `🏄‍♀️ Condições ASF - ${data.beach || 'Bertioga'}\n\n🌊 Ondas: ${data.waves || '—'}\n💨 Vento: ${data.windSpeed || '—'} ${data.windDir || ''}\n🌡️ Temp: ${data.temp || '—'}\n⏱️ Período: ${data.period || '—'}\n📊 Condição: ${data.condition || '—'}\n\nBora surfar? 🤙`;
+            const msg = `🏄‍♀️ Condições ASF - ${data.beach || 'Bertioga'}\n\n🌊 Ondas: ${data.waves || '-'}\n💨 Vento: ${data.windSpeed || '-'} ${data.windDir || ''}\n🌡️ Temp: ${data.temp || '-'}\n⏱️ Período: ${data.period || '-'}\n📊 Condição: ${data.condition || '-'}\n\nBora surfar? 🤙`;
             // Try native share API first (mobile), fallback to WhatsApp
             if (navigator.share) {
                 navigator.share({ title: 'Condições ASF', text: msg }).catch(() => {});
@@ -8469,7 +8487,7 @@ document.addEventListener('DOMContentLoaded', function() {
             { text: '🏊 Nunca lute contra a correnteza. Mergulhe fundo e nade por baixo.', category: 'Segurança', emoji: '💪' },
             { text: '🏄 Paddle eficiente = corpo reto + braços longos. Sim, muda TUDO!', category: 'Técnica', emoji: '🏄' },
             { text: '🍌 Banana + aveia = café de athlete. Energia LIMPA antes do surf!', category: 'Nutrição', emoji: '🥗' },
-            { text: '🤝 Respeitar vez é Básicos. Não furta onda — positividade gera!', category: 'Etiqueta', emoji: '🏄' },
+            { text: '🤝 Respeitar vez é Básicos. Não furta onda - positividade gera!', category: 'Etiqueta', emoji: '🏄' },
             { text: '👀 Olhe pro destino, não pra onda. Controle o paddle com os olhos!', category: 'Técnica', emoji: '🎯' },
             { text: '😴 Dormir 7-8h é pré-requisito. Corpo descansado = paddle melhor!', category: 'Saúde', emoji: '😴' },
             { text: '🧊 Leve gelo na bolsa. Pós-surf = recuperação 3x mais rápida!', category: 'Prevenção', emoji: '❄️' },
@@ -8492,16 +8510,16 @@ document.addEventListener('DOMContentLoaded', function() {
             { text: '🏊🏄 Qualquer dúvida, sai da água. Outro dia será melhor! ⏱️', category: 'Mental', emoji: '🛟' },
             { text: '🎯 Visualize suas manobras ANTES de dormir. Cérebro treina junto! 🌙', category: 'Mental', emoji: '🌙' },
             { text: '🏄‍♀️🌸 A gente faz parte da mesma ONDA! ASF strong! 💙', category: 'ASF', emoji: '🌸' },
-            { text: '🐢 Surf é paciência. Não precisa ser a mais rápida — precisa ser no tempo certo! ⏱️', category: 'Mental', emoji: '🐢' },
+            { text: '🐢 Surf é paciência. Não precisa ser a mais rápida - precisa ser no tempo certo! ⏱️', category: 'Mental', emoji: '🐢' },
             { text: 'Quando o mar estiver pequeno, aproveite para treinar paddle e posicionamento. Dias small são dias de treino! 🏊', category: 'Técnica', emoji: '📈' },
             { text: '🍉 Melancia pós-surf = hidratação natural + glicose. A melhor reward após uma session! 🍉', category: 'Nutrição', emoji: '🍉' },
             { text: '🏄‍♀️💪 Praticar breath control ajuda a ficar mais tempo na água. Respire fundo, permaneça calma! 🧘', category: 'Saúde', emoji: '🌬️' },
             { text: '🌊 ASF é gratidão ao mar. Cada session terminando com um thank you ao oceano! 🙏', category: 'Mental', emoji: '🙏' },
             { text: 'Aprenda a ler as ondas. Observar 15 min antes de entrar revela o padrão das ondas! 👀', category: 'Técnica', emoji: '🔍' },
-            { text: 'O surf não é sobre competir — é sobre Connection. Conecte-se com o mar, consigo e com as mansas! 💙', category: 'Mental', emoji: '🤝' },
+            { text: 'O surf não é sobre competir - é sobre Connection. Conecte-se com o mar, consigo e com as mansas! 💙', category: 'Mental', emoji: '🤝' },
             { text: '🏊‍♀️ Fazer exercício fora d\'água fortalece muscles para o surf. Academia + mar = combo perfeito! 💪', category: 'Treino', emoji: '🏋️' },
             { text: 'Use leash sempre! Imagina perder sua prancha preferida? Leash evita isso e mantém você segura! ⛓️', category: 'Equipamento', emoji: '🔗' },
-            { text: '🌊 ASF é mais que um app — é uma comunidade. Vamos surfar juntas! 🤙', category: 'ASF', emoji: '🌸' },
+            { text: '🌊 ASF é mais que um app - é uma comunidade. Vamos surfar juntas! 🤙', category: 'ASF', emoji: '🌸' },
             { text: '🏄‍♀️ keep your eyes on the destination. Look where you want to go, not at the wave! 👁️', category: 'Técnica', emoji: '🎯' },
             { text: '🐚 Check the tide before you go. Low tide = defined waves, high tide = softer waves. 📊', category: 'Condições', emoji: '🌊' },
             { text: '🍌 Eat a banana 30 min before surfing. Natural energy, no heavy feeling! 🍌', category: 'Nutrição', emoji: '🍌' },
@@ -8549,7 +8567,7 @@ document.addEventListener('DOMContentLoaded', function() {
             { text: '🌅 Chegue 30 min antes. Observe as ondas, encontre seu spot, prepare-se mentalmente! ⏰', category: 'Rotina', emoji: '🌅' },
             { text: '📊 Track your sessions! Note wave height, wind direction, how you felt. Data = improvement! 📱', category: 'Progresso', emoji: '📊' },
             { text: '🤸 Yoga improves balance and flexibility. Try downward dog to strengthen your pop-up! 🧘', category: 'Treino', emoji: '🧘' },
-            { text: '🌊 O mar é democrático. Não importa seu nível — hoje pode ser SEU dia! 💫', category: 'Mental', emoji: '🌊' },
+            { text: '🌊 O mar é democrático. Não importa seu nível - hoje pode ser SEU dia! 💫', category: 'Mental', emoji: '🌊' },
             { text: '🏄 Never surf beyond your limits. Progression takes time. Respect the ocean! 🙏', category: 'Segurança', emoji: '🏄' },
             { text: '🎯 Take one goal to each session. Just one thing to work on. Focused practice wins! 🎯', category: 'Técnica', emoji: '🎯' },
             { text: '💙 ASF means community. We grow stronger together in and out of the water! 🤝', category: 'ASF', emoji: '💙' },
@@ -8586,7 +8604,7 @@ document.addEventListener('DOMContentLoaded', function() {
             { text: '🤿 Snorkel helps build breath control. Try freediving! 🏊', category: 'Treino', emoji: '🤿' },
             { text: '📱 Use apps but trust your instincts. The ocean knows best! 🌊', category: 'Sabedoria', emoji: '🧠' }
         ];
-        
+
         // Old duplicate removed - tips consolidated above
             { text: 'Hoje o mar tá com 0.9m e período de 8s! Condições ótimas para girls de todos os níveis. Bora surfar! 🌊', category: 'Condições', emoji: '🌊' },
             { text: 'Protetor solar FPS 30+ a cada 2h, especialmente no verão brasileiro. Prevenção é Tudo! 🧴', category: 'Prevenção', emoji: '☀️' },
@@ -8596,13 +8614,13 @@ document.addEventListener('DOMContentLoaded', function() {
             { text: 'NUNCA lute contra a correnteza. Mergulhe fundo e nade por baixo. Respeite o mar! 🏊', category: 'Segurança', emoji: '💪' },
             { text: 'Paddle eficiente = corpo reto + braços longos.Looks simples mas muda tudo! 🏄', category: 'Técnica', emoji: '🏄' },
             { text: 'Banana + aveia = café da manhã de athlete. Energia LIMPA antes do surf! 🍌', category: 'Nutrição', emoji: '🥗' },
-            { text: 'Respeitar vez é básicos. Não furta onda — positividade gera positividade! 😊', category: 'Etiqueta', emoji: '🏄' },
-            { text: 'A melhor wave é a que você aproveita! Não fique esperando a "perfeita" — aproveite cada sessão. 🌊', category: 'Mental', emoji: '🧠' },
+            { text: 'Respeitar vez é básicos. Não furta onda - positividade gera positividade! 😊', category: 'Etiqueta', emoji: '🏄' },
+            { text: 'A melhor wave é a que você aproveita! Não fique esperando a "perfeita" - aproveite cada sessão. 🌊', category: 'Mental', emoji: '🧠' },
             { text: 'Banana + aveia = o combo perfeito antes do surf. Carboidratos leves que dão energia sem pesar. 🍌', category: 'Nutrição', emoji: '🥗' },
             { text: 'Quando estiver no impact zone, mergulhe fundo e nade por baixo das ondas. Nunca lute contra a corrente! 💪', category: 'Segurança', emoji: '🏊' },
             { text: 'Protetor solar reef-safe protege você E o oceano. As corais agradecem! 🐠', category: 'Sustentabilidade', emoji: '🌱' },
             { text: 'Paddling eficiente: corpo reto, cabeça alinhada, braços longos. Parece simples mas faz TODA diferença. 🏄‍♀️', category: 'Técnica', emoji: '🏄‍♀️' },
-            { text: 'Surf com amigas é melhor! Chama uma mana para ir junto — mais seguro e mais divertido. 🤝', category: 'Comunidade', emoji: '💬' },
+            { text: 'Surf com amigas é melhor! Chama uma mana para ir junto - mais seguro e mais divertido. 🤝', category: 'Comunidade', emoji: '💬' },
             { text: 'A previsão diz "1m" mas o mar tá perfeito? Confie nos seus olhos, não só nos apps. 👀', category: 'Sabedoria', emoji: '🌊' },
             { text: 'Seu corpo precisa de água! Hidrate-se bem antes e depois do surf, especialmente no calor. 💧', category: 'Saúde', emoji: '💧' },
             { text: 'Respeite a etiqueta: não furta onda, espera vez, sorria. O surf é sobre flow, não ego. 😊', category: 'Etiqueta', emoji: '🏄' },
@@ -8622,16 +8640,16 @@ document.addEventListener('DOMContentLoaded', function() {
             { text: 'Respeitar o lineup mostra experiência. Sentar fora da lineup quando lotado é sinal de boa etiqueta! 🤙', category: 'Etiqueta', emoji: '🏄' },
             { text: 'Fazer check-in com seu buddy a cada 30 minutos no mar. Segurança em primeiro lugar! 🛟', category: 'Segurança', emoji: '👯' },
             { text: 'Levar uma muda de clothes seco para o caminho de casa. Previne/resfriados depois do surf! 👕', category: 'Preparação', emoji: '🎒' },
-            { text: '🐢 Surf é paciência. Não precisa ser a mais rápida — precisa ser no tempo certo! ⏱️', category: 'Mental', emoji: '🐢' },
+            { text: '🐢 Surf é paciência. Não precisa ser a mais rápida - precisa ser no tempo certo! ⏱️', category: 'Mental', emoji: '🐢' },
             { text: 'Quando o mar estiver pequeno, aproveite para treinar paddle e posicionament. Dias small são dias de treino! 🏊', category: 'Técnica', emoji: '📈' },
             { text: '🍉 Melancia pós-surf = hidratação natural + glicose. A melhor reward após uma session! 🍉', category: 'Nutrição', emoji: '🍉' },
             { text: '🏄‍♀️💪 Praticar breath control ajuda a ficar mais tempo na água. Respire fundo, permaneça calma! 🧘', category: 'Saúde', emoji: '🌬️' },
             { text: '每次 session termina com agradecimento ao mar. A gratidão mantém a conexão com o oceano! 🌊', category: 'Mental', emoji: '🙏' },
             { text: 'Aprenda a ler as ondas. Observar 15 min antes de entrar revela o padrão das ondas! 👀', category: 'Técnica', emoji: '🔍' },
-            { text: 'O surf não é sobre competir — é sobreConnection. Conecte-se com o mar, consigo e com as mansas! 💙', category: 'Mental', emoji: '🤝' },
+            { text: 'O surf não é sobre competir - é sobreConnection. Conecte-se com o mar, consigo e com as mansas! 💙', category: 'Mental', emoji: '🤝' },
             { text: '🏊‍♀️ Fazer exercício fora d\'água fortalece muscles para o surf. Academia + mar = combo perfeito! 💪', category: 'Treino', emoji: '🏋️' },
             { text: 'Use leash sempre! Imagina perder sua prancha preferida?.Leash evita isso e mantém você segura! ⛓️', category: 'Equipamento', emoji: '🔗' },
-            { text: '🌊 ASF é mais que um app — é uma comunidade. Vamos surfar juntas! 🤙', category: 'ASF', emoji: '🌸' },
+            { text: '🌊 ASF é mais que um app - é uma comunidade. Vamos surfar juntas! 🤙', category: 'ASF', emoji: '🌸' },
             { text: '🛹 Surfskate é treinooffline! Pratique manobras em terra firme e arrive pronta para a água. 🏄', category: 'Treino', emoji: '🛹' },
             { text: '🌊 Observe a maré antes de entrar. Marébaixa = ondas mais perigosas; maré média = ondas melhores! 📊', category: 'Técnica', emoji: '🌊' },
             { text: '🐢 Surf com amigos é mais seguro e muito mais divertidok! Forme sua panelinha de manas! 👯', category: 'Comunidade', emoji: '🐢' },
@@ -8827,7 +8845,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 <div style="background:linear-gradient(135deg,#2c0a37,#4a1c5e);border-radius:20px;padding:24px;max-width:400px;margin:40px auto;color:white;text-align:center;">
                     <div style="font-size:32px;margin-bottom:12px;">🔓 Conquistas Secretas</div>
                     <p style="font-size:14px;opacity:0.9;margin-bottom:20px;">Complete missões para desbloquear!</p>
-                    
+
                     <div style="display:grid;gap:12px;margin-bottom:20px;">
                         <div style="background:rgba(255,255,255,0.15);padding:16px;border-radius:12px;text-align:center;">
                             <div style="font-size:36px;margin-bottom:8px;">🏄</div>
@@ -8848,7 +8866,7 @@ document.addEventListener('DOMContentLoaded', function() {
                             <div style="font-size:12px;${opens>=3?'color:#4ade80':'opacity:0.6'}">${opens>=3?'✅ CONQUISTADO!':'⏳ Em progresso'}</div>
                         </div>
                     </div>
-                    
+
                     <button onclick="document.getElementById('secret-modal').remove()" style="background:white;color:#2c0a37;border:none;padding:12px 32px;border-radius:25px;font-size:14px;font-weight:bold;cursor:pointer;">Fechar</button>
                 </div>
             `;
@@ -8863,7 +8881,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     banner = document.createElement('div');
                     banner.id = 'offline-banner';
                     banner.style.cssText = 'position:fixed;top:0;left:0;right:0;background:#e74c3c;color:white;text-align:center;padding:8px;font-size:13px;font-weight:600;z-index:10000;font-family:Outfit,sans-serif;';
-                    banner.textContent = '📡 Sem conexão — modo offline';
+                    banner.textContent = '📡 Sem conexão - modo offline';
                     document.body.appendChild(banner);
                 }
             } else {
