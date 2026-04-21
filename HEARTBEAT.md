@@ -92,7 +92,7 @@
 - [x] Add Moon tail term + 1 tip (126 total)
 - [x] Add Flyer tail term + 1 tip (127 total)
 - [x] Add Asymmetric term + 1 tip (128 total)
-- [x] Add Softop term + 1 tip (129 total)
+- [x] Add Softop term + 5 tips (134 total)
 
 ## TODO IMPROVEMENTS
 
