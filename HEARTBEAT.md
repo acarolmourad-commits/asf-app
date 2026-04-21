@@ -94,6 +94,7 @@
 - [x] Add Asymmetric term + 1 tip (128 total)
 - [x] Add Softop term + 5 tips (134 total)
 - [x] Add 7 glossary terms (63 total)
+- [x] Add 6 board type terms (69 total)
 
 ## TODO IMPROVEMENTS
 
