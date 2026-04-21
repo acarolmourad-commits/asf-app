@@ -1,0 +1,66 @@
+name: Mental Wellness Tips
+
+on:
+  schedule:
+    # Run daily at 7 AM BRT (UTC-3) = 10:00 UTC
+    - cron: '0 10 * * *'
+  workflow_dispatch:
+  repository_dispatch:
+    types: [mental_tip]
+
+jobs:
+  daily-tip:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Generate daily tip
+        run: |
+          cat > daily_tip.py << 'PYEOF'
+import os
+from datetime import datetime
+
+tips = [
+    {"category": "🧠 Mindfulness", "title": "Respira fundo", "content": "Quando sentir medo, faça 3 respirações profundas. Inspira por 4s, segura por 4s, expira por 6s."},
+    {"category": "🌊 Surf Mental", "title": "Uma onda de cada vez", "content": "Foque apenas na próxima onda. O presente é seu aliado."},
+    {"category": "💪 Confiança", "title": "Você sabe surfar", "content": "Lembre-se de 3 ondas que você conseguiu pegar bem. Você é capaz!"},
+    {"category": "😰 Ansiedade", "title": "Olha o horizonte", "content": "Quando a ansiedade subir, olhe para o horizonte. A vista larga ajuda."},
+    {"category": "🧘 Meditação", "title": "5 minutos de paz", "content": "Senta na areia antes de surfar. Fecha os olhos. Sente o som do mar."},
+    {"category": "🌅 Motivação", "title": "Novo dia", "content": "Cada sessão é uma chance de recomeçar. O que aconteceu ontem não define hoje."},
+    {"category": "🧠 Mindfulness", "title": "Corpo presente", "content": "Sente os pés na prancha. Sente a água. Quando a mente divagar, traga para o corpo."},
+]
+
+day = datetime.now().timetuple().tm_yday
+tip = tips[day % len(tips)]
+
+html = f"""
+<div style="background: linear-gradient(135deg, #9B59B6 0%, #8E44AD 100%); padding: 20px; margin: 20px; border-radius: 16px; color: white;">
+    <p style="font-size: 12px; opacity: 0.9;">{tip['category']}</p>
+    <h3 style="margin: 8px 0;">{tip['title']}</h3>
+    <p style="font-size: 14px; line-height: 1.6;">{tip['content']}</p>
+    <p style="font-size: 11px; opacity: 0.8; margin-top: 12px;">⏰ Dica do Dia</p>
+</div>
+"""
+
+with open('docs/daily-tip.html', 'w') as f:
+    f.write(html)
+
+print(f"✅ Daily tip: {tip['title']}")
+PYEOF
+          python daily_tip.py
+
+      - name: Commit tip
+        run: |
+          git config user.name "ASF Bot"
+          git config user.email "bot@asf-app.com"
+          git add docs/daily-tip.html
+          git commit -m "Daily mental wellness tip - $(date +%Y-%m-%d)"
+          git push
+          echo "✅ Tip committed"
