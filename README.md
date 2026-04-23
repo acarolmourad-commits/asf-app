@@ -3,6 +3,8 @@
 App completo para a comunidade de surf feminino do Litoral Paulista.
 
 ## 🆕 Atualizações Recentes (2026-04-23)
+- ✅ 5 novas dicas diárias (tipos de pranchas, previsão de ondas, eventos ASF, aquecimento pré-surfe, pranchas ecológicas)
+- ✅ Total de dicas agora: 320
 - ✅ 5 novas dicas diárias (tábua de marés, poncho de surf, proteína pós-surf, grupos locais femininos, exercícios de equilíbrio)
 - ✅ Total de dicas agora: 321
 - ✅ 5 novas dicas diárias (leitura de swell meteo, smoothie pré-surfe, alongamento de quadril, conceitos de bundling para escolha de ondas, indicação ASF)
@@ -41,7 +43,7 @@ App completo para a comunidade de surf feminino do Litoral Paulista.
 ## ✨ Funcionalidades
 
 ### 📚 Conteúdo
-- **Dicas de Surf** — 311 dicas (técnica básica/avançada, segurança, nutrição, comunidade, sustentabilidade, saúde feminina, etiqueta)
+- **Dicas de Surf** — 320 dicas (técnica básica/avançada, segurança, nutrição, comunidade, sustentabilidade, saúde feminina, etiqueta)
 - **Mobilidade & Prevenção** — Exercícios para ombros, costas, quadril, pernas
 - **Alimentação & Nutrição** — O que comer antes/depois do surf
 - **Saúde & Treino** — Treino funcional para surfistas
