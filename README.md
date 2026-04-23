@@ -3,6 +3,8 @@
 App completo para a comunidade de surf feminino do Litoral Paulista.
 
 ## 🆕 Atualizações Recentes (2026-04-23)
+- ✅ 5 novas dicas diárias (aquecimento dinâmico pré-surfe, suco de laranja pós-surf, direção do vento off-shore, maiôs com costas cruzadas, indicação ASF para amigas)
+- ✅ Total de dicas agora: 301
 - ✅ 5 novas dicas diárias (teste de pranchas, óleo de rícino, foco em manobras, grupos WhatsApp ASF, vegetais verdes)
 - ✅ Total de dicas agora: 296
 - ✅ 5 novas dicas diárias (variação de pranchas, chapéus de proteção, yoga na areia, fotos de progresso, caminhada na areia)
@@ -31,7 +33,7 @@ App completo para a comunidade de surf feminino do Litoral Paulista.
 ## ✨ Funcionalidades
 
 ### 📚 Conteúdo
-- **Dicas de Surf** — 296 dicas (técnica básica/avançada, segurança, nutrição, comunidade, sustentabilidade, saúde feminina, etiqueta)
+- **Dicas de Surf** — 301 dicas (técnica básica/avançada, segurança, nutrição, comunidade, sustentabilidade, saúde feminina, etiqueta)
 - **Mobilidade & Prevenção** — Exercícios para ombros, costas, quadril, pernas
 - **Alimentação & Nutrição** — O que comer antes/depois do surf
 - **Saúde & Treino** — Treino funcional para surfistas
@@ -92,7 +94,7 @@ App completo para a comunidade de surf feminino do Litoral Paulista.
 - 📱 **PWA** — Instale como app no celular (manifest + apple-touch-icon)
 - 🔔 **Notificações** — Alertas de ondas e eventos
 - 📤 **Compartilhamento** — Web Share API nativa + WhatsApp fallback
-- 💡 **Dica do Dia** — Rotaciona diariamente com 291 dicas (surf, técnica, mental, comunidade, saúde feminina, etiqueta, técnicas avançadas, segurança)
+- 💡 **Dica do Dia** — Rotaciona diariamente com 301 dicas (surf, técnica, mental, comunidade, saúde feminina, etiqueta, técnicas avançadas, segurança)
 - 📊 **Barra de Progresso** — Scroll indicator
 - ⬆️ **Back to Top** — Botão flutuante
 - 📡 **Status de Conexão** — Banner offline/online com auto-detecção
@@ -118,7 +120,7 @@ App completo para a comunidade de surf feminino do Litoral Paulista.
 ## 📊 Status
 
 - **Linhas de código:** ~7900
-- **Dicas do Dia:** 296 dicas rotating (incluindo 5 novas dicas de teste de pranchas, óleo de rícino, foco em manobras, grupos WhatsApp ASF e vegetais verdes)
+- **Dicas do Dia:** 301 dicas rotating (incluindo 5 novas dicas de aquecimento dinâmico, suco de laranja, vento off-shore, maiôs com costas cruzadas e indicação ASF)
 - **Commits hoje:** 30+
 - **Commits pendentes push:** 1 (pending)
 - **Otimizações recentes:** Minificação de JS e CSS, redução de estilos não utilizados, 5 novas dicas adicionadas, layout mobile melhorado
