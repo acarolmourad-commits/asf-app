@@ -3,9 +3,10 @@
 App completo para a comunidade de surf feminino do Litoral Paulista.
 
 ## 🆕 Atualizações Recentes (2026-04-23)
-- ✅ 5 novas dicas diárias focadas em saúde feminina e etiqueta do surf
+- ✅ 5 novas dicas diárias focadas em treino de surf e nutrição (agora 268 dicas no total)
+- ✅ Otimização de CSS para carregamento mais rápido (minificação de estilos inline)
 - ✅ Otimização do layout mobile (melhor espaçamento para telas pequenas)
-- ✅ Atualização do contador de dicas (263 total disponíveis)
+- ✅ Atualização do contador de dicas (268 total disponíveis)
 - ✅ Correção de sintaxe no array de dicas
 - ✅ Novas dicas sobre saúde feminina (coletor menstrual, assoalho pélvico, sustentação)
 
