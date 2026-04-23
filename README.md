@@ -2,6 +2,12 @@
 
 App completo para a comunidade de surf feminino do Litoral Paulista.
 
+## 🆕 Atualizações Recentes (2026-04-23)
+- ✅ Nova dica diária focada em saúde feminina (ciclo menstrual e surf)
+- ✅ Remoção de dicas duplicadas para melhor organização
+- ✅ Atualização do contador de dicas (130+ disponíveis)
+- ✅ Melhorias na formatação e consistência do conteúdo
+
 ## 🌐 Acesso
 
 **URL:** https://acarolmourad-commits.github.io/asf-app/
