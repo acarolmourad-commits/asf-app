@@ -1236,6 +1236,83 @@
             }
         }
 
+        /* Small phones optimization */
+        @media (max-width: 480px) {
+            .section {
+                padding: 12px;
+            }
+
+            .card {
+                padding: 14px;
+                margin-bottom: 10px;
+            }
+
+            .hero h1 {
+                font-size: 24px;
+            }
+
+            .hero p {
+                font-size: 14px;
+            }
+
+            .stats {
+                grid-template-columns: 1fr;
+                gap: 10px;
+            }
+
+            .stat {
+                padding: 12px;
+            }
+
+            .stat-value {
+                font-size: 24px;
+            }
+
+            .stat-label {
+                font-size: 12px;
+            }
+
+            .tab {
+                padding: 10px 16px;
+                font-size: 13px;
+            }
+
+            .utilities-grid {
+                grid-template-columns: 1fr;
+                gap: 10px;
+            }
+
+            button, .btn {
+                padding: 14px 16px;
+                font-size: 15px;
+            }
+
+            #dica-do-dia {
+                padding: 0 12px !important;
+                margin-bottom: 12px !important;
+            }
+
+            #dica-text {
+                font-size: 14px;
+                line-height: 1.5;
+            }
+
+            input, select, textarea {
+                padding: 14px 16px;
+            }
+
+            .modal-content {
+                width: 100%;
+                margin: 10px auto;
+                padding: 16px;
+                border-radius: 16px 16px 0 0;
+                position: fixed;
+                bottom: 0;
+                left: 0;
+                right: 0;
+            }
+        }
+
         /* Search Bar */
         .search-container {
             padding: 12px 20px;
@@ -8729,7 +8806,7 @@ document.addEventListener('DOMContentLoaded', function() {
             { text: '🏄♀️ Shorebreak is dangerous! Never turn back on a wave! ⚠️', category: 'Segurança', emoji: '⚠️' },
             { text: '📱 Check swell direction before choosing your spot! 🌊', category: 'Condições', emoji: '📱' },
             { text: '💪 Frontside surf = smooth and stylish. Master it! 🏄', category: 'Técnica', emoji: '💪' },
-            { text: '🌊 Backside = tricky but rewarding. Challenge accepted! 🏄', category: 'Técnica', emoji: '🌊' }
+            { text: '🌊 Backside = tricky but rewarding. Challenge accepted! 🏄', category: 'Técnica', emoji: '🌊' },
             { text: '🌅 Chegue 30 min antes. Observe as ondas, encontre seu spot, prepare-se mentalmente! ⏰', category: 'Rotina', emoji: '🌅' },
             { text: '📊 Track your sessions! Note wave height, wind direction, how you felt. Data = improvement! 📱', category: 'Progresso', emoji: '📊' },
             { text: '🤸 Yoga improves balance and flexibility. Try downward dog to strengthen your pop-up! 🧘', category: 'Treino', emoji: '🧘' },
@@ -8870,7 +8947,12 @@ document.addEventListener('DOMContentLoaded', function() {
             { text: '🏄‍♀️ Aprenda a fazer o floater! Passar por cima da parte quebrando da onda mantém sua velocidade e flow. 🌊', category: 'Técnica Avançada', emoji: '🌊' },
             { text: '🛟 Sempre informe alguém em terra sobre seu horário de retorno. Se algo der errado, o resgate será mais rápido. 📱', category: 'Segurança', emoji: '🛟' },
             { text: '🏄‍♀️ Treine o bottom turn perfeito! A base de todas as manobras começa com uma curva firme e bem posicionada. 🎯', category: 'Técnica Avançada', emoji: '🎯' },
-            { text: '🩸 Surfe no seu ciclo! Dias de PMS são ótimos para treinar foco mental e respiração. Ouça seu corpo! 🧘‍♀️', category: 'Saúde', emoji: '🩸' }
+            { text: '🩸 Surfe no seu ciclo! Dias de PMS são ótimos para treinar foco mental e respiração. Ouça seu corpo! 🧘‍♀️', category: 'Saúde', emoji: '🩸' },
+            { text: '🩸 Use coletor menstrual ou absorvente de tecido no surf. Liberdade total para pegar ondas durante o ciclo! 🌊', category: 'Saúde Feminina', emoji: '🩸' },
+            { text: '🏄‍♀️ Respeite a prioridade das mansas na lineup. Quem está mais próxima da zona de quebra tem preferência! ⚡', category: 'Etiqueta', emoji: '⚡' },
+            { text: '💪 Fortaleça o assoalho pélvico! Exercícios de Kegel melhoram a estabilidade na prancha e previnem incontinência. 🏋️‍♀️', category: 'Saúde Feminina', emoji: '💪' },
+            { text: '🤝 Na dúvida sobre a onda, ceda o direito. Boa etiqueta gera respeito e um lineup mais harmonioso! ✌️', category: 'Etiqueta', emoji: '🤝' },
+            { text: '🩺 Use top de surf com boa sustentação. Seios precisam de suporte firme para evitar dores nas costas! 🏄‍♀️', category: 'Saúde Feminina', emoji: '🩺' }
         ];
         function showDica(index) {
             const d = dicas[index];

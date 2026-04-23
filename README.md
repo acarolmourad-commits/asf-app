@@ -3,10 +3,11 @@
 App completo para a comunidade de surf feminino do Litoral Paulista.
 
 ## 🆕 Atualizações Recentes (2026-04-23)
-- ✅ Nova dica diária focada em saúde feminina (ciclo menstrual e surf)
-- ✅ Remoção de dicas duplicadas para melhor organização
-- ✅ Atualização do contador de dicas (130+ disponíveis)
-- ✅ Melhorias na formatação e consistência do conteúdo
+- ✅ 5 novas dicas diárias focadas em saúde feminina e etiqueta do surf
+- ✅ Otimização do layout mobile (melhor espaçamento para telas pequenas)
+- ✅ Atualização do contador de dicas (263 total disponíveis)
+- ✅ Correção de sintaxe no array de dicas
+- ✅ Novas dicas sobre saúde feminina (coletor menstrual, assoalho pélvico, sustentação)
 
 ## 🌐 Acesso
 
@@ -15,7 +16,7 @@ App completo para a comunidade de surf feminino do Litoral Paulista.
 ## ✨ Funcionalidades
 
 ### 📚 Conteúdo
-- **Dicas de Surf** — 134 dicas (técnica básica/avançada, segurança, nutrição, comunidade, sustentabilidade)
+- **Dicas de Surf** — 263 dicas (técnica básica/avançada, segurança, nutrição, comunidade, sustentabilidade, saúde feminina, etiqueta)
 - **Mobilidade & Prevenção** — Exercícios para ombros, costas, quadril, pernas
 - **Alimentação & Nutrição** — O que comer antes/depois do surf
 - **Saúde & Treino** — Treino funcional para surfistas
@@ -76,7 +77,7 @@ App completo para a comunidade de surf feminino do Litoral Paulista.
 - 📱 **PWA** — Instale como app no celular (manifest + apple-touch-icon)
 - 🔔 **Notificações** — Alertas de ondas e eventos
 - 📤 **Compartilhamento** — Web Share API nativa + WhatsApp fallback
-- 💡 **Dica do Dia** — Rotaciona diariamente com 129 dicas (surf, técnica, mental, comunidade)
+- 💡 **Dica do Dia** — Rotaciona diariamente com 263 dicas (surf, técnica, mental, comunidade, saúde feminina, etiqueta)
 - 📊 **Barra de Progresso** — Scroll indicator
 - ⬆️ **Back to Top** — Botão flutuante
 - 📡 **Status de Conexão** — Banner offline/online com auto-detecção
@@ -101,11 +102,11 @@ App completo para a comunidade de surf feminino do Litoral Paulista.
 
 ## 📊 Status
 
-- **Linhas de código:** ~8700+
-- **Dicas do Dia:** 134 dicas rotating (incluindo 5 novas dicas de técnica avançada e segurança)
-- **Commits hoje:** 29+
-- **Commits pendentes push:** 0 ( synced)
-- **Otimizações recentes:** Layout mobile melhorado com melhores touch targets, font sizes ajustados e navegação otimizada
+- **Linhas de código:** ~8800+
+- **Dicas do Dia:** 263 dicas rotating (incluindo 5 novas dicas de saúde feminina e etiqueta)
+- **Commits hoje:** 30+
+- **Commits pendentes push:** 0 (synced)
+- **Otimizações recentes:** Layout mobile melhorado com melhores touch targets, font sizes ajustados, espaçamento otimizado para telas pequenas e modais responsivos
 
 ## 👩‍💻 Desenvolvimento
 
