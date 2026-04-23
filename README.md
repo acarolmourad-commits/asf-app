@@ -3,6 +3,8 @@
 App completo para a comunidade de surf feminino do Litoral Paulista.
 
 ## 🆕 Atualizações Recentes (2026-04-23)
+- ✅ 5 novas dicas diárias (yoga na areia, eventos ASF, chocolate amargo pós-surf, etiqueta na lineup, registro de progressos)
+- ✅ Total de dicas agora: 306
 - ✅ 5 novas dicas diárias (aquecimento dinâmico pré-surfe, suco de laranja pós-surf, direção do vento off-shore, maiôs com costas cruzadas, indicação ASF para amigas)
 - ✅ Total de dicas agora: 301
 - ✅ 5 novas dicas diárias (teste de pranchas, óleo de rícino, foco em manobras, grupos WhatsApp ASF, vegetais verdes)
@@ -33,7 +35,7 @@ App completo para a comunidade de surf feminino do Litoral Paulista.
 ## ✨ Funcionalidades
 
 ### 📚 Conteúdo
-- **Dicas de Surf** — 301 dicas (técnica básica/avançada, segurança, nutrição, comunidade, sustentabilidade, saúde feminina, etiqueta)
+- **Dicas de Surf** — 306 dicas (técnica básica/avançada, segurança, nutrição, comunidade, sustentabilidade, saúde feminina, etiqueta)
 - **Mobilidade & Prevenção** — Exercícios para ombros, costas, quadril, pernas
 - **Alimentação & Nutrição** — O que comer antes/depois do surf
 - **Saúde & Treino** — Treino funcional para surfistas
@@ -120,7 +122,7 @@ App completo para a comunidade de surf feminino do Litoral Paulista.
 ## 📊 Status
 
 - **Linhas de código:** ~7900
-- **Dicas do Dia:** 301 dicas rotating (incluindo 5 novas dicas de aquecimento dinâmico, suco de laranja, vento off-shore, maiôs com costas cruzadas e indicação ASF)
+- **Dicas do Dia:** 306 dicas rotating (incluindo 5 novas dicas de yoga na areia, eventos ASF, chocolate amargo, etiqueta na lineup e registro de progressos)
 - **Commits hoje:** 30+
 - **Commits pendentes push:** 1 (pending)
 - **Otimizações recentes:** Minificação de JS e CSS, redução de estilos não utilizados, 5 novas dicas adicionadas, layout mobile melhorado
