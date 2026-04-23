@@ -1140,10 +1140,12 @@
         @media (max-width: 768px) {
             .stats {
                 grid-template-columns: repeat(2, 1fr);
+                gap: 12px;
             }
 
             .utilities-grid {
                 grid-template-columns: repeat(2, 1fr);
+                gap: 12px;
             }
 
             .profile-stats {
@@ -1151,11 +1153,86 @@
             }
 
             .hero h1 {
-                font-size: 32px;
+                font-size: 28px;
+                line-height: 1.2;
             }
 
             .cards-grid {
                 grid-template-columns: 1fr;
+                gap: 16px;
+            }
+
+            /* Better touch targets */
+            button, .btn, .tab {
+                min-height: 44px;
+                padding: 12px 16px;
+            }
+
+            /* Improve input fields */
+            input, select, textarea {
+                font-size: 16px; /* Prevent zoom on iOS */
+                padding: 12px 16px;
+            }
+
+            /* Adjust search bar */
+            .search-bar {
+                padding: 12px 16px;
+            }
+
+            .search-bar input {
+                font-size: 16px;
+            }
+
+            /* Fix tab navigation */
+            .tabs {
+                overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
+                scrollbar-width: none;
+            }
+
+            .tabs::-webkit-scrollbar {
+                display: none;
+            }
+
+            .tab {
+                white-space: nowrap;
+                padding: 12px 20px;
+                font-size: 14px;
+            }
+
+            /* Improve card spacing */
+            .card {
+                padding: 16px;
+                margin-bottom: 12px;
+            }
+
+            /* Better spacing for sections */
+            .section {
+                padding: 16px;
+            }
+
+            /* Adjust tip text */
+            #dica-text {
+                font-size: 15px;
+                line-height: 1.6;
+            }
+
+            /* Improve button spacing */
+            .btn {
+                width: 100%;
+                margin: 8px 0;
+            }
+
+            /* Fix overflow issues */
+            body {
+                overflow-x: hidden;
+            }
+
+            /* Adjust modal/popup sizing */
+            .modal-content {
+                width: 95%;
+                margin: 20px auto;
+                padding: 20px;
             }
         }
 
@@ -8788,7 +8865,12 @@ document.addEventListener('DOMContentLoaded', function() {
             { text: '🌊 Watch the horizon. Spot the swell! 👀', category: 'Técnica', emoji: '🌊' },
             { text: '🥤 Hydrate with intention. Conscious water! 💧', category: 'Nutrição', emoji: '💧' },
             { text: '🧠 Visualize success. Mind creates reality! 🧠', category: 'Mental', emoji: '🧠' },
-            { text: '🏖️ Beach gratitude. Thank the ocean! 🙏', category: 'Mental', emoji: '🙏' }
+            { text: '🏖️ Beach gratitude. Thank the ocean! 🙏', category: 'Mental', emoji: '🙏' },
+            { text: '🏄‍♀️ Domine o cutback! Girar a prancha na parede da onda permite conectar seções e manter o momentum. 🔄', category: 'Técnica Avançada', emoji: '🔄' },
+            { text: '⚠️ Nunca surfe em áreas com recifes rasos sem guia local. Conhecer o fundo é essencial para evitar lesões graves. 🗺️', category: 'Segurança', emoji: '⚠️' },
+            { text: '🏄‍♀️ Aprenda a fazer o floater! Passar por cima da parte quebrando da onda mantém sua velocidade e flow. 🌊', category: 'Técnica Avançada', emoji: '🌊' },
+            { text: '🛟 Sempre informe alguém em terra sobre seu horário de retorno. Se algo der errado, o resgate será mais rápido. 📱', category: 'Segurança', emoji: '🛟' },
+            { text: '🏄‍♀️ Treine o bottom turn perfeito! A base de todas as manobras começa com uma curva firme e bem posicionada. 🎯', category: 'Técnica Avançada', emoji: '🎯' }
         ];
         function showDica(index) {
             const d = dicas[index];

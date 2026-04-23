@@ -9,7 +9,7 @@ App completo para a comunidade de surf feminino do Litoral Paulista.
 ## ✨ Funcionalidades
 
 ### 📚 Conteúdo
-- **Dicas de Surf** — 129 dicas (técnica, nutrição, komunitas, sustentabilidade)
+- **Dicas de Surf** — 134 dicas (técnica básica/avançada, segurança, nutrição, comunidade, sustentabilidade)
 - **Mobilidade & Prevenção** — Exercícios para ombros, costas, quadril, pernas
 - **Alimentação & Nutrição** — O que comer antes/depois do surf
 - **Saúde & Treino** — Treino funcional para surfistas
@@ -95,10 +95,11 @@ App completo para a comunidade de surf feminino do Litoral Paulista.
 
 ## 📊 Status
 
-- **Linhas de código:** ~8637
-- **Dicas do Dia:** 85+++ dicas rotating
+- **Linhas de código:** ~8700+
+- **Dicas do Dia:** 134 dicas rotating (incluindo 5 novas dicas de técnica avançada e segurança)
 - **Commits hoje:** 29+
 - **Commits pendentes push:** 0 ( synced)
+- **Otimizações recentes:** Layout mobile melhorado com melhores touch targets, font sizes ajustados e navegação otimizada
 
 ## 👩‍💻 Desenvolvimento
 
