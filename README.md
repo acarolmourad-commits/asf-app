@@ -3,13 +3,15 @@
 App completo para a comunidade de surf feminino do Litoral Paulista.
 
 ## 🆕 Atualizações Recentes (2026-04-23)
+- ✅ 5 novas dicas diárias (variação de pranchas, chapéus de proteção, yoga na areia, fotos de progresso, caminhada na areia)
+- ✅ Total de dicas agora: 291
 - ✅ 5 novas dicas diárias (snap, biquíni reciclado, surf yoga em terra, marcação nas fotos ASF, respiração apneia)
-- ✅ Total de dicas agora: 280
+- ✅ Total de dicas agora: 286
 - ✅ 5 novas dicas diárias (kit primeiros socorros, podcasts de surf, maiô de qualidade, gel de babosa pós-sol, mobilidade pré-surfe)
-- ✅ Total de dicas agora: 280
+- ✅ Total de dicas agora: 281
 - ✅ Otimização de layout e código para melhor performance
 - ✅ 5 novas dicas diárias (clínicas ASF, cuidado com cabelo pós-surf, variedade de praias, recuperação com chocolate amargo, alongamento de coluna torácica)
-- ✅ Total de dicas agora: 270
+- ✅ Total de dicas agora: 276
 - ✅ 5 novas dicas diárias (competição: ligas femininas, equipamento: wax específico, saúde mental: surf reduz estresse, sustentabilidade: pranchas ecológicas, ASF: mutirões de limpeza)
 - ✅ Total de dicas agora: 265
 - ✅ 5 novas dicas diárias (técnica avançada: bottom turn, segurança: correntes de retorno, mental: meditação pré-surf, nutrição: banana com pasta de amendoim, comunidade: surf com mana)
@@ -29,7 +31,7 @@ App completo para a comunidade de surf feminino do Litoral Paulista.
 ## ✨ Funcionalidades
 
 ### 📚 Conteúdo
-- **Dicas de Surf** — 280 dicas (técnica básica/avançada, segurança, nutrição, comunidade, sustentabilidade, saúde feminina, etiqueta)
+- **Dicas de Surf** — 291 dicas (técnica básica/avançada, segurança, nutrição, comunidade, sustentabilidade, saúde feminina, etiqueta)
 - **Mobilidade & Prevenção** — Exercícios para ombros, costas, quadril, pernas
 - **Alimentação & Nutrição** — O que comer antes/depois do surf
 - **Saúde & Treino** — Treino funcional para surfistas
@@ -90,7 +92,7 @@ App completo para a comunidade de surf feminino do Litoral Paulista.
 - 📱 **PWA** — Instale como app no celular (manifest + apple-touch-icon)
 - 🔔 **Notificações** — Alertas de ondas e eventos
 - 📤 **Compartilhamento** — Web Share API nativa + WhatsApp fallback
-- 💡 **Dica do Dia** — Rotaciona diariamente com 255 dicas (surf, técnica, mental, comunidade, saúde feminina, etiqueta, técnicas avançadas, segurança)
+- 💡 **Dica do Dia** — Rotaciona diariamente com 291 dicas (surf, técnica, mental, comunidade, saúde feminina, etiqueta, técnicas avançadas, segurança)
 - 📊 **Barra de Progresso** — Scroll indicator
 - ⬆️ **Back to Top** — Botão flutuante
 - 📡 **Status de Conexão** — Banner offline/online com auto-detecção
@@ -115,8 +117,8 @@ App completo para a comunidade de surf feminino do Litoral Paulista.
 
 ## 📊 Status
 
-- **Linhas de código:** ~8800+
-- **Dicas do Dia:** 280 dicas rotating (incluindo 5 novas dicas de prevenção, recuperação, condições, segurança e mobilidade)
+- **Linhas de código:** ~7900
+- **Dicas do Dia:** 291 dicas rotating (incluindo 5 novas dicas de variação de pranchas, proteção solar, yoga, monitoramento de progresso e treino de pernas)
 - **Commits hoje:** 30+
 - **Commits pendentes push:** 1 (pending)
 - **Otimizações recentes:** Minificação de JS e CSS, redução de estilos não utilizados, 5 novas dicas adicionadas, layout mobile melhorado
