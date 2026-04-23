@@ -7209,7 +7209,6 @@ document.addEventListener('DOMContentLoaded', function() {
             localStorage.setItem('asf-opens', appOpens);
             // Update display
             try { document.getElementById('stat-opens').textContent = appOpens; } catch(e) {}
-            console.log('ASF App opens:', appOpens);
             showProfile();
             // Load theme preference
             const savedTheme = localStorage.getItem('asf-theme');
@@ -7604,7 +7603,12 @@ document.addEventListener('DOMContentLoaded', function() {
             { text: '🍌 Smoothie de banana e aveia 1h antes do surf. Energia sustentada e digestão leve! 🥤', category: 'Nutrição', emoji: '🍌' },
             { text: '🧘‍♀️ Alongue o quadril不定期! Movimentos circulares ajudam na rotação e previnem lesões. 🦵', category: 'Treino', emoji: '🧘‍♀️' },
             { text: '🌊 Use conceitos de bundling para escolher ondas. Em dias de ondas pequenas, priorize as séries maiores! 📊', category: 'Técnica', emoji: '🎯' },
-            { text: '💙 Indique uma amiga para a ASF hoje! Crescemos juntas quando trazemos mais mulheres para o surf. 🤝', category: 'ASF', emoji: '💙' }
+            { text: '💙 Indique uma amiga para a ASF hoje! Crescemos juntas quando trazemos mais mulheres para o surf. 🤝', category: 'ASF', emoji: '💙' },
+            { text: '🌊 Consulte a tábua de marés antes de sair! Conhecer a variação da maré ajuda a escolher o melhor horário para pegar ondas. 📅', category: 'Condições', emoji: '🌊' },
+            { text: '🧥 Use uma poncho de surf para trocar de roupa na praia com conforto e privacidade. Praticidade pós-surf! 🧥', category: 'Equipamento', emoji: '🧥' },
+            { text: '🍗 Ingerir proteínas no pós-surf acelera a recuperação muscular. Iogurte, frango ou whey são ótimas opções! 🍗', category: 'Nutrição', emoji: '🍗' },
+            { text: '👯 Junte-se a grupos locais de surf feminino! Trocar experiências e marcar sessions juntas fortalece a comunidade. 🤝', category: 'Comunidade', emoji: '👯' },
+            { text: '⚖️ Treine exercícios de equilíbrio fora d\'água! Pratique em uma prancha de equilíbrio ou no slackline para melhorar no surf. ⚖️', category: 'Treino', emoji: '⚖️' }
         ];
         function showDica(index) {
             const d = dicas[index];
