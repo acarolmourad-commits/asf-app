@@ -3,9 +3,11 @@
 App completo para a comunidade de surf feminino do Litoral Paulista.
 
 ## 🆕 Atualizações Recentes (2026-04-23)
+- ✅ 5 novas dicas diárias (kit primeiros socorros, podcasts de surf, maiô de qualidade, gel de babosa pós-sol, mobilidade pré-surfe)
+- ✅ Total de dicas agora: 275
+- ✅ Otimização de layout e código para melhor performance
 - ✅ 5 novas dicas diárias (clínicas ASF, cuidado com cabelo pós-surf, variedade de praias, recuperação com chocolate amargo, alongamento de coluna torácica)
 - ✅ Total de dicas agora: 270
-- ✅ Otimização de layout e código para melhor performance
 - ✅ 5 novas dicas diárias (competição: ligas femininas, equipamento: wax específico, saúde mental: surf reduz estresse, sustentabilidade: pranchas ecológicas, ASF: mutirões de limpeza)
 - ✅ Total de dicas agora: 265
 - ✅ 5 novas dicas diárias (técnica avançada: bottom turn, segurança: correntes de retorno, mental: meditação pré-surf, nutrição: banana com pasta de amendoim, comunidade: surf com mana)
@@ -25,7 +27,7 @@ App completo para a comunidade de surf feminino do Litoral Paulista.
 ## ✨ Funcionalidades
 
 ### 📚 Conteúdo
-- **Dicas de Surf** — 270 dicas (técnica básica/avançada, segurança, nutrição, comunidade, sustentabilidade, saúde feminina, etiqueta)
+- **Dicas de Surf** — 275 dicas (técnica básica/avançada, segurança, nutrição, comunidade, sustentabilidade, saúde feminina, etiqueta)
 - **Mobilidade & Prevenção** — Exercícios para ombros, costas, quadril, pernas
 - **Alimentação & Nutrição** — O que comer antes/depois do surf
 - **Saúde & Treino** — Treino funcional para surfistas
@@ -112,7 +114,7 @@ App completo para a comunidade de surf feminino do Litoral Paulista.
 ## 📊 Status
 
 - **Linhas de código:** ~8800+
-- **Dicas do Dia:** 270 dicas rotating (incluindo 5 novas dicas de prevenção, recuperação, condições e comunidade ASF)
+- **Dicas do Dia:** 275 dicas rotating (incluindo 5 novas dicas de prevenção, recuperação, condições, segurança e mobilidade)
 - **Commits hoje:** 30+
 - **Commits pendentes push:** 1 (pending)
 - **Otimizações recentes:** Minificação de JS e CSS, redução de estilos não utilizados, 5 novas dicas adicionadas, layout mobile melhorado
