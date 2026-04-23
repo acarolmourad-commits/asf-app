@@ -386,7 +386,7 @@ document.addEventListener('DOMContentLoaded', function() {
         </div>
         <h1>Conectando <span>Mulheres Surfistas</span></h1>
         <p>Dicas, comunidade, surftrips e muito mais. Juntas somos mais fortes!</p>
-        <img src="docs/carol.jpg" alt="Carol - Fundadora ASF" style="width:80px; height:80px; border-radius:50%; margin-top:12px; object-fit:cover; border: 3px solid white; box-shadow: 0 4px 12px rgba(0,0,0,0.2);">
+        <img loading="lazy" src="docs/carol.jpg" alt="Carol - Fundadora ASF" style="width:80px; height:80px; border-radius:50%; margin-top:12px; object-fit:cover; border: 3px solid white; box-shadow: 0 4px 12px rgba(0,0,0,0.2);">
         <img loading="lazy" src="https://images.unsplash.com/photo-1502680390469-be75c86b636f?w=400&h=200&fit=crop" alt="Mulheres surfando" loading="lazy" style="width:100%; border-radius:12px; margin-top:12px; object-fit:cover; max-height:150px;">
         <div class="hero-cta">
             <button class="btn btn-primary" onclick="showSection('dicas')">
@@ -519,7 +519,7 @@ document.addEventListener('DOMContentLoaded', function() {
     <!-- Wave Forecast -->
     <div style="padding: 20px;">
         <h2 id="wave-forecast" style="font-size: 18px; color: #0E2439; margin-bottom: 15px;">🌊 Previsão de Ondas - Litoral Paulista</h2>
-        <img src="docs/carol2.jpg" alt="Ondas" style="width:100%; border-radius:12px; margin-bottom:15px; object-fit:cover;">
+        <img loading="lazy" src="docs/carol2.jpg" alt="Ondas" style="width:100%; border-radius:12px; margin-bottom:15px; object-fit:cover;">
 
         <div style="background: linear-gradient(135deg, #00A8CC 0%, #0E2439 100%); padding: 16px; margin-bottom: 15px; border-radius: 16px; color: white;">
             <p style="font-size: 14px; font-weight: 600;">🌊 Previsão de Ondas - Sexta, 07/04/2026</p>
@@ -7557,7 +7557,12 @@ document.addEventListener('DOMContentLoaded', function() {
             { text: '🕯️ Use wax específico para o clima da sua região. Temperatura certa = aderência perfeita!', category: 'Equipamento', emoji: '🕯️' },
             { text: '🌊 Surfar reduz o estresse! O oceano é a melhor terapia para a mente feminina!', category: 'Saúde Mental', emoji: '🌊' },
             { text: '♻️ Use pranchas de materiais sustentáveis. Preserve o oceano para as próximas gerações!', category: 'Sustentabilidade', emoji: '♻️' },
-            { text: '💙 Junte-se aos mutirões de limpeza da ASF! Cuidar da praia é cuidar do nosso playground!', category: 'ASF', emoji: '💙' }
+            { text: '💙 Junte-se aos mutirões de limpeza da ASF! Cuidar da praia é cuidar do nosso playground!', category: 'ASF', emoji: '💙' },
+            { text: '🏄‍♀️ Participe das clínicas da ASF! Aprenda com profissionais e evolua sua técnica rapidamente!', category: 'ASF', emoji: '🏄‍♀️' },
+            { text: '🧴 Use óleo de coco no cabelo após o surf para evitar ressecamento pelo sal e sol!', category: 'Cuidados', emoji: '🧴' },
+            { text: '🌊 Surfe em diferentes praias para conhecer novas ondas e adaptar sua técnica!', category: 'Técnica', emoji: '🌊' },
+            { text: '🍫 Chocolate amargo pós-surf! Antioxidantes ajudam na recuperação muscular!', category: 'Nutrição', emoji: '🍫' },
+            { text: '🧘‍♂️ Alongue a coluna torácica para melhorar a rotação no surf!', category: 'Treino', emoji: '🧘‍♂️' }
         ];
         function showDica(index) {
             const d = dicas[index];
