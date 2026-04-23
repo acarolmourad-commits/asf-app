@@ -432,7 +432,7 @@ document.addEventListener('DOMContentLoaded', function() {
     </div>
 
     <!-- Dica do Dia -->
-    <div id="dica-do-dia" style="padding: 0 20px; margin-bottom: 16px;">
+    <div id="dica-do-dia" style="padding: 0 20px; margin-bottom: 16px; transition: opacity 0.2s ease, transform 0.2s ease;">
         <div style="background: linear-gradient(135deg, rgba(0,168,204,0.08), rgba(155,89,182,0.08)); border: 1px solid rgba(0,168,204,0.15); border-radius: 16px; padding: 16px; display: flex; gap: 12px; align-items: flex-start;">
             <div style="font-size: 32px; line-height: 1;" id="dica-emoji">💡</div>
             <div style="flex: 1;">
@@ -7579,13 +7579,27 @@ document.addEventListener('DOMContentLoaded', function() {
             { text: '🌿 Use chapéus de palha ou bonés de surf para proteger o rosto e pescoço do sol intenso!', category: 'Prevenção', emoji: '👒' },
             { text: '🧘‍♀️ Yoga na areia após o surf relaxa os músculos e mantém a flexibilidade. 10 minutos fazem diferença!', category: 'Recuperação', emoji: '🧘‍♀️' },
             { text: '📸 Tire fotos das suas sessions para acompanhar sua evolução técnica ao longo do tempo!', category: 'Progresso', emoji: '📸' },
-            { text: '🚶‍♀️ Treine caminhadas na areia! Fortalece as pernas e melhora o equilíbrio na prancha!', category: 'Treino', emoji: '🚶‍♀️' }
+            { text: '🚶‍♀️ Treine caminhadas na areia! Fortalece as pernas e melhora o equilíbrio na prancha!', category: 'Treino', emoji: '🚶‍♀️' },
+            { text: '🏄‍♀️ Teste pranchas de diferentes tamanhos! Entender como cada uma se comporta melhora sua adaptação a diferentes ondas!', category: 'Equipamento', emoji: '🏄‍♀️' },
+            { text: '🧴 Use óleo de rícino no couro cabeludo antes do surf para proteger contra o cloro e o sal!', category: 'Cuidados', emoji: '🧴' },
+            { text: '🎯 Foque em uma única manobra por sessão. A prática deliberada acelera sua evolução técnica!', category: 'Técnica', emoji: '🎯' },
+            { text: '💙 Participe dos grupos de WhatsApp da ASF! Conecte-se com manas da sua região e combine sessions!', category: 'ASF', emoji: '💙' },
+            { text: '🥦 Inclua vegetais verdes no pré-surfe! Ferro e magnésio previnem cãibras e mantêm a energia!', category: 'Nutrição', emoji: '🥦' }
         ];
         function showDica(index) {
             const d = dicas[index];
-            document.getElementById('dica-text').textContent = d.text;
-            document.getElementById('dica-category').textContent = d.category;
-            document.getElementById('dica-emoji').textContent = d.emoji;
+            const container = document.getElementById('dica-do-dia');
+            // Fade out
+            container.style.opacity = '0';
+            container.style.transform = 'translateY(10px)';
+            setTimeout(() => {
+                document.getElementById('dica-text').textContent = d.text;
+                document.getElementById('dica-category').textContent = d.category;
+                document.getElementById('dica-emoji').textContent = d.emoji;
+                // Fade in
+                container.style.opacity = '1';
+                container.style.transform = 'translateY(0)';
+            }, 200);
         }
         function nextDica() {
             let idx = Math.floor(Math.random() * dicas.length);

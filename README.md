@@ -3,10 +3,10 @@
 App completo para a comunidade de surf feminino do Litoral Paulista.
 
 ## 🆕 Atualizações Recentes (2026-04-23)
+- ✅ 5 novas dicas diárias (teste de pranchas, óleo de rícino, foco em manobras, grupos WhatsApp ASF, vegetais verdes)
+- ✅ Total de dicas agora: 296
 - ✅ 5 novas dicas diárias (variação de pranchas, chapéus de proteção, yoga na areia, fotos de progresso, caminhada na areia)
 - ✅ Total de dicas agora: 291
-- ✅ 5 novas dicas diárias (snap, biquíni reciclado, surf yoga em terra, marcação nas fotos ASF, respiração apneia)
-- ✅ Total de dicas agora: 286
 - ✅ 5 novas dicas diárias (kit primeiros socorros, podcasts de surf, maiô de qualidade, gel de babosa pós-sol, mobilidade pré-surfe)
 - ✅ Total de dicas agora: 281
 - ✅ Otimização de layout e código para melhor performance
@@ -31,7 +31,7 @@ App completo para a comunidade de surf feminino do Litoral Paulista.
 ## ✨ Funcionalidades
 
 ### 📚 Conteúdo
-- **Dicas de Surf** — 291 dicas (técnica básica/avançada, segurança, nutrição, comunidade, sustentabilidade, saúde feminina, etiqueta)
+- **Dicas de Surf** — 296 dicas (técnica básica/avançada, segurança, nutrição, comunidade, sustentabilidade, saúde feminina, etiqueta)
 - **Mobilidade & Prevenção** — Exercícios para ombros, costas, quadril, pernas
 - **Alimentação & Nutrição** — O que comer antes/depois do surf
 - **Saúde & Treino** — Treino funcional para surfistas
@@ -118,7 +118,7 @@ App completo para a comunidade de surf feminino do Litoral Paulista.
 ## 📊 Status
 
 - **Linhas de código:** ~7900
-- **Dicas do Dia:** 291 dicas rotating (incluindo 5 novas dicas de variação de pranchas, proteção solar, yoga, monitoramento de progresso e treino de pernas)
+- **Dicas do Dia:** 296 dicas rotating (incluindo 5 novas dicas de teste de pranchas, óleo de rícino, foco em manobras, grupos WhatsApp ASF e vegetais verdes)
 - **Commits hoje:** 30+
 - **Commits pendentes push:** 1 (pending)
 - **Otimizações recentes:** Minificação de JS e CSS, redução de estilos não utilizados, 5 novas dicas adicionadas, layout mobile melhorado
