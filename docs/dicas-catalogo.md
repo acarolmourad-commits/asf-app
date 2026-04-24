@@ -229,3 +229,34 @@
 
 *ASF - Associação de Surf Feminino 🏄‍♀️💙
 Total de dicas: 35*
+
+---
+
+## 🆕 NOVAS DICAS (2026-04-24 07:37 UTC)
+
+### 232. Respiração 4-7-8 pré-surf
+**Nível:** Mental
+**Dica:** Antes de entrar no mar, faça 3 ciclos de respiração 4-7-8 (inspire por 4s, segure por 7s, expire por 8s). Reduz a ansiedade e melhora o foco.
+**Tags:** #Mental #Respiração #Foco
+
+### 233. Proteção solar para surfistas
+**Nível:** Saúde
+**Dica:** Use protetor solar water-resistant FPS 50+ no rosto, ombros e costas. Reaplique a cada 2 horas, mesmo em dias nublados.
+**Tags:** #Saúde #ProteçãoSolar #Pele
+
+### 234. Leitura de vento side-off
+**Nível:** Técnica
+**Dica:** Vento side-off (vindo da lateral e para o mar) é ideal: limpa a face da onda e empurra você para a direção correta. Aprenda a identificar!
+**Tags:** #Técnica #Vento #Ocean
+
+### 235. Limpeza de cera da prancha
+**Nível:** Equipamento
+**Dica:** Use um removedor de cera específico ou um pano quente para limpar a cera velha. Aplique cera nova em camadas finas para melhor aderência.
+**Tags:** #Equipamento #Manutenção #Prancha
+
+### 236. Celebração de conquistas no mar
+**Nível:** Mulher
+**Dica:** Comemore cada onda boa com um "uau!" ou um gesto para as outras surfistas. Celebrar conquistas pequenas motiva toda a comunidade.
+**Tags:** #Mulher #Motivação #Comunidade
+
+*Total de dicas agora: 440*
