@@ -1,5 +1,11 @@
 # 🏄♀️ ASF - Associação de Surf Feminino App
 
+## 🆕 Atualizações Recentes (2026-04-24 21:39 UTC)
+- ✅ 5 novas dicas diárias (respiração ujjayi, óleos essenciais, yoga na praia, gratidão, recuperação ativa)
+- ✅ Total de dicas agora: 525
+- ✅ Otimização de código, layout e conteúdo
+- ✅ Atualização de documentação (README com novo total de dicas)
+
 ## 🆕 Atualizações Recentes (2026-04-24 21:07 UTC)
 - ✅ 5 novas dicas diárias (florais, surf noturno, massagem, plantio, journaling)
 - ✅ Total de dicas agora: 520
