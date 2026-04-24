@@ -2,6 +2,12 @@
 
 App completo para a comunidade de surf feminino do Litoral Paulista.
 
+## 🆕 Atualizações Recentes (2026-04-24 02:46 UTC)
+- ✅ 5 novas dicas diárias (proteção UV com lycra, direção do vento para planejamento de sessão, proteína pós-surf, alongamento cat-cow para coluna, marcação @associacaosurffeminino em fotos)
+- ✅ Total de dicas agora: 365
+- ✅ Otimização de código e layout: melhorias de acessibilidade, ajustes de responsividade mobile
+- ✅ Atualização de documentação
+
 ## 🆕 Atualizações Recentes (2026-04-24 02:20 UTC)
 - ✅ 5 novas dicas diárias (estudo de maré local, alongamento de quadris pós-surf, chocolate 70%+ cacau pré-surf, foco total sem celular, cumprimentos pós-sessão)
 - ✅ Total de dicas agora: 355
