@@ -2,6 +2,12 @@
 
 App completo para a comunidade de surf feminino do Litoral Paulista.
 
+## 🆕 Atualizações Recentes (2026-04-24 01:47 UTC)
+- ✅ 5 novas dicas diárias (rash guard UV, treino de duck dive, snack de castanhas, atenção a bancos de areia, compartilhamento de conquistas na comunidade)
+- ✅ Total de dicas agora: 375
+- ✅ Atualização de contador de dicas no index.html (316+ → 375+)
+- ✅ Atualização de documentação
+
 ## 🆕 Atualizações Recentes (2026-04-24 02:46 UTC)
 - ✅ 5 novas dicas diárias (meditação pré-surf, direção do vento OFF/onshore, kit primeiros socorros, chocolate amargo pré-surf, pop-up em terra firme)
 - ✅ Total de dicas agora: 370
