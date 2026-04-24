@@ -3,9 +3,9 @@
 App completo para a comunidade de surf feminino do Litoral Paulista.
 
 ## 🆕 Atualizações Recentes (2026-04-24 09:37 UTC)
-- ✅ 5 novas dicas diárias (ajuste de quilhas, yoga para surfistas, leitura de maré, nutrição pós-surf, etiqueta de preferência)
-- ✅ Total de dicas agora: 455
-- ✅ Otimização de código e layout via layout_optimizer (animações, modo escuro, transições)
+- ✅ 5 novas dicas diárias (surf em dias de semana, meditação pré-surf, chocolate amargo, tamanho de leash, observação de locais)
+- ✅ Total de dicas agora: 456
+- ✅ Otimização de código e layout
 - ✅ Atualização de documentação (README com novo total de dicas)
 
 ## 🆕 Atualizações Recentes (2026-04-24 09:07 UTC)
