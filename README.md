@@ -149,7 +149,7 @@ App completo para a comunidade de surf feminino do Litoral Paulista.
 ## 📊 Status
 
 - **Linhas de código:** ~7920
-- **Dicas do Dia:** 350 dicas rotating (incluindo 5 novas dicas de alongamento de coluna, chocolate amargo, direção de swell, manteiga de cacau, convite a amigas)
+- **Dicas do Dia:** 355 dicas rotating (incluindo 5 novas dicas de shapes de pranchas, condicionador biodegradável, foco total no mar, natação em piscina, marcação ASF em fotos)
 - **Commits hoje:** 31+
 - **Commits pendentes push:** 1 (pending)
 - **Otimizações recentes:** Minificação de JS e CSS, redução de estilos não utilizados, 10 novas dicas adicionadas (5 anteriores + 5 novas), layout mobile melhorado, README atualizado com contagem de 325 dicas
