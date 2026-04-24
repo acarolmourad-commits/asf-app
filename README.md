@@ -2,6 +2,12 @@
 
 App completo para a comunidade de surf feminino do Litoral Paulista.
 
+## 🆕 Atualizações Recentes (2026-04-24 05:48 UTC)
+- ✅ 5 novas dicas diárias (queda segura, recuperação com abacate, volume de prancha, vento offside, união na comunidade)
+- ✅ Total de dicas agora: 425
+- ✅ Otimização de código e layout via layout_optimizer
+- ✅ Atualização de documentação (README com novo total de dicas)
+
 ## 🆕 Atualizações Recentes (2026-04-24 04:47 UTC)
 - ✅ 5 novas dicas diárias (surfe sustentável, comunidade ASF, aquecimento pré-surf, cuidado pós-mar, etiqueta na pista)
 - ✅ Total de dicas agora: 420
