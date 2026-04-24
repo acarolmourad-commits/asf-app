@@ -224,44 +224,6 @@ document.addEventListener('DOMContentLoaded', function() {
             if (e.key === "Enter") sendChatbotMessage();
         });
 
-<script>
-var translations = {
-    'pt': {},
-    'en': {
-        'Dicas': 'Tips',
-        'Manas Próximas': 'Nearby Sisters',
-        'Mobilidade': 'Mobility',
-        'Lojas': 'Shops',
-        'Praias': 'Beaches',
-        'Surftrips': 'Surftrips',
-        'Utilitários': 'Utilities',
-        'Comunidade': 'Community',
-        'Competições': 'Competitions',
-        'Premium': 'Premium',
-        'Previsão de Ondas': 'Wave Forecast',
-        'Nível': 'Level',
-        'Pontos': 'Points',
-        'Checklist Pré-Surf': 'Pre-Surf Checklist',
-        'Calculadora de Prancha': 'Board Calculator'
-    },
-    'es': {
-        'Dicas': 'Consejos',
-        'Manas Próximas': ' sisters Cercanas',
-        'Mobilidad': 'Movilidad',
-        'Lojas': 'Tiendas',
-        'Praias': 'Playas',
-        'Surftrips': 'Surftrips',
-        'Utilitários': 'Utilidades',
-        'Comunidad': 'Comunidad',
-        'Competições': 'Competiciones',
-        'Premium': 'Premium',
-        'Previsão de Ondas': 'Pronóstico de Olas',
-        'Nível': 'Nivel',
-        'Pontos': 'Puntos',
-        'Checklist Pré-Surf': 'Lista Pre-Surf',
-        'Calculadora de Prancha': 'Calculadora de Tabla'
-    }
-};
 
 function setLanguage(lang) {
     localStorage.setItem('asf-lang', lang);
@@ -7803,7 +7765,12 @@ document.addEventListener('DOMContentLoaded', function() {
             { text: '🧴 Use protetor solar em pó para o rosto. Não escorre com o suor e protege por horas!', category: 'Prevenção', emoji: '🧴' },
             { text: '🌊 Observe a formação dos sets por 10 minutos antes de remar. Identifique o padrão e economize energia!', category: 'Técnica', emoji: '👀' },
             { text: '🥣 Iogurte grego com mel 30 min antes do surf. Proteína leve e energia duradoura!', category: 'Nutrição', emoji: '🥣' },
-            { text: '💙 Convide uma amiga iniciante para surfar com você. Mentorar outras mulheres fortalece a comunidade ASF!', category: 'ASF', emoji: '👭' }
+            { text: '💙 Convide uma amiga iniciante para surfar com você. Mentorar outras mulheres fortalece a comunidade ASF!', category: 'ASF', emoji: '👭' },
+            { text: '🏄‍♀️ Use pranchas de espuma para iniciantes. Mais segurança e menos medo de bater!', category: 'Equipamento', emoji: '🏄‍♀️' },
+            { text: '🍓 Frutas vermelhas pós-surf = antioxidantes que ajudam na recuperação muscular!', category: 'Nutrição', emoji: '🍓' },
+            { text: '🧴 Reaplique protetor solar no queue e coxas. Áreas esquecidas que queimam fácil!', category: 'Prevenção', emoji: '🧴' },
+            { text: '👭 Organize um surf session em grupo. Surfar com amigas é mais seguro e divertido!', category: 'Comunidade', emoji: '👭' },
+            { text: '♻️ Leve um saco para recolher lixo na praia. Pequenos gestos salvam o oceano!', category: 'Sustentabilidade', emoji: '♻️' }
         ];
         function showDica(index) {
             const d = dicas[index];
