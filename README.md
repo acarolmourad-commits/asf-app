@@ -1,20 +1,20 @@
 # 🏄♀️ ASF - Associação de Surf Feminino App
 
+## 🆕 Atualizações Recentes (2026-04-24 21:07 UTC)
+- ✅ 5 novas dicas diárias (florais, surf noturno, massagem, plantio, journaling)
+- ✅ Total de dicas agora: 520
+- ✅ Otimização de código, layout e conteúdo
+- ✅ Atualização de documentação (README com novo total de dicas)
+
 ## 🆕 Atualizações Recentes (2026-04-24 20:37 UTC)
 - ✅ 5 novas dicas diárias (salmão/castanhas, prevenção pés, swell sudoeste, cutback, prancha iniciante)
 - ✅ Total de dicas agora: 515
 - ✅ Otimização de código/layout e atualização de contadores
 - ✅ Atualização de documentação (README com novo total de dicas)
 
-## 🆕 Atualizações Recentes (2026-04-24 20:19 UTC)
-- ✅ 5 novas dicas diárias (abacate pós-surf, meditação pós-surf, ground swell, conexão ASF, volume de prancha)
-- ✅ Total de dicas agora: 510
-- ✅ Otimização de código, layout e conteúdo
-- ✅ Atualização de documentação (README com novo total de dicas)
-
 App completo para a comunidade de surf feminino do Litoral Paulista.
 
-## 🆕 Atualizações Recentes (2026-04-24 20:07 UTC)
+## 🆕 Atualizações Recentes (2026-04-24 20:19 UTC)
 - ✅ 5 novas dicas diárias (respiração 4-7-8, economia circular, leitura de mar, check-in pós-surf, lip balm SPF)
 - ✅ Total de dicas agora: 505
 - ✅ Otimização de código, layout e conteúdo (acessibilidade, performance, UX)
@@ -247,7 +247,7 @@ App completo para a comunidade de surf feminino do Litoral Paulista.
 ## ✨ Funcionalidades
 
 ### 📚 Conteúdo
-- **Dicas de Surf** — 445 dicas (técnica básica/avançada, segurança, nutrição, comunidade, sustentabilidade, saúde feminina, etiqueta)
+- **Dicas de Surf** — 450 dicas (técnica básica/avançada, segurança, nutrição, comunidade, sustentabilidade, saúde feminina, etiqueta)
 - **Mobilidade & Prevenção** — Exercícios para ombros, costas, quadril, pernas
 - **Alimentação & Nutrição** — O que comer antes/depois do surf
 - **Saúde & Treino** — Treino funcional para surfistas
@@ -333,11 +333,11 @@ App completo para a comunidade de surf feminino do Litoral Paulista.
 
 ## 📊 Status
 
-- **Linhas de código:** ~8142
-- **Dicas do Dia:** 515 dicas rotating (incluindo 15 novas dicas: respiração 4-7-8, economia circular, leitura de mar, check-in pós-surf, lip balm SPF, abacate, meditação, ground swell, conexão ASF, volume, salmão/castanhas, prevenção pés, swell sudoeste, cutback, prancha iniciante)
+- **Linhas de código:** ~8147
+- **Dicas do Dia:** 520 dicas rotating (incluindo 15 novas dicas: respiração 4-7-8, economia circular, leitura de mar, check-in pós-surf, lip balm SPF, abacate, meditação, ground swell, conexão ASF, volume, salmão/castanhas, prevenção pés, swell sudoeste, cutback, prancha iniciante, florais, surf noturno, massagem, plantio, journaling)
 - **Commits hoje:** 31+
 - **Commits pendentes push:** 1 (pending)
-- **Otimizações recentes:** Minificação de JS e CSS, redução de estilos não utilizados, 15 novas dicas adicionadas (10 anteriores + 5 novas), layout mobile melhorado, README atualizado com contagem de 445 dicas
+- **Otimizações recentes:** Minificação de JS e CSS, redução de estilos não utilizados, 20 novas dicas adicionadas (15 anteriores + 5 novas), layout mobile melhorado, README atualizado com contagem de 450 dicas
 
 ## 👩‍💻 Desenvolvimento
 
