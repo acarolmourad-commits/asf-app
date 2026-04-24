@@ -6025,6 +6025,13 @@ document.addEventListener('DOMContentLoaded', function() {
             { title: 'Gratidão no Surf', icon: '🙏', section: 'Mental', sectionId: 'mental', text: 'Antes de entrar, agradeça ao mar. A gratidão conecta e atrai boas ondas. Espalhe vibração positiva!' },
             { title: 'Recuperação Ativa', icon: '♨️', section: 'Saúde', sectionId: 'saude', text: 'Banho alternando quente/frio após sessão pesada. Melhora circulação e reduz inflamação muscular.' },
         ];
+        // Normalized search index [Optimized] - cache normalized strings for faster search
+        const normalizedSearchIndex = searchIndex.map(item => ({
+            ...item,
+            _titleNorm: item.title.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, ''),
+            _textNorm: item.text.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, ''),
+            _sectionNorm: item.section.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, ''),
+        }));
 
         // Debounced search
         let _searchTimer;
@@ -6042,12 +6049,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
             clearBtn.style.display = 'block';
             const q = query.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
-
-            const results = searchIndex.filter(item => {
-                const title = item.title.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
-                const text = item.text.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
-                const section = item.section.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
-                return title.includes(q) || text.includes(q) || section.includes(q);
+            const results = normalizedSearchIndex.filter(item => {
+                return item._titleNorm.includes(q) || item._textNorm.includes(q) || item._sectionNorm.includes(q);
             }).slice(0, 8);
 
             if (results.length === 0) {
@@ -7857,6 +7860,11 @@ document.addEventListener('DOMContentLoaded', function() {
             { text: '💫 Respiração 4-7-8 pré-surf: 4s inspira, 7s segura, 8s solta. Acalma o sistema nervoso! 🧘', category: 'Mental', emoji: '💫' },
             { text: '🌊 Mulheres 50+ no surf: força, sabedoria e ousadia sem idade! Seu momento é AGORA! 🌸', category: 'Comunidade', emoji: '🌊' },
             { text: '🥑 Fôlego de atleta: simulação de apneia segura em casa = mais confiança nas ondas grandes! 🌊', category: 'Treino', emoji: '🫁' },
+            { text: 'Faça check-in diário: como se sente antes de surfar? Escute seu corpo hoje! 🌸', category: 'Mental', emoji: '💭' },
+            { text: 'Roupas com proteção UV 50+ protegem mais que protetor solar comum. Invista em qualidade! 🌞', category: 'Saúde', emoji: '👕' },
+            { text: 'Yoga na areia antes do surf melhora foco, respiração e connection com o mar 🏖️🧘', category: 'Preparação', emoji: '🧘' },
+            { text: 'Celebre cada pequena vitória! Remada mais longa, queda mais suave, pop-up mais rápido. ✨', category: 'Mental', emoji: '🎉' },
+            { text: 'Escute seu corpo: dor aguda não é normal. Pare, avalie e não force o limite. 🛑💚', category: 'Prevenção', emoji: '🚦' },
         ];
         function showDica(index) {
             const d = dicas[index];
@@ -7888,20 +7896,20 @@ document.addEventListener('DOMContentLoaded', function() {
         })();
 
         // ============ BEACH GUIDE FILTER ============
+        // Beach filter with cached card list [Optimized]
+        let beachCards = null;
         function filterBeaches(region) {
-            const cards = document.querySelectorAll('.beach-card');
-            cards.forEach(card => {
-                if (region === 'all' || card.dataset.region === region) {
-                    card.style.display = '';
-                } else {
-                    card.style.display = 'none';
-                }
+            if (!beachCards) beachCards = document.querySelectorAll('.beach-card');
+            const showAll = region === 'all';
+            beachCards.forEach(card => {
+                card.style.display = (showAll || card.dataset.region === region) ? '' : 'none';
             });
             // Update filter buttons
             document.querySelectorAll('[id^="beach-filter-"]').forEach(btn => {
                 btn.className = 'btn btn-secondary';
             });
-            document.getElementById('beach-filter-' + region).className = 'btn btn-primary';
+            const activeBtn = document.getElementById('beach-filter-' + region);
+            if (activeBtn) activeBtn.className = 'btn btn-primary';
         }
 
         // ============ TOAST NOTIFICATION HELPER ============
