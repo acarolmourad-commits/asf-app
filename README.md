@@ -1,5 +1,12 @@
 # 🏄♀️ ASF - Associação de Surf Feminino App
 
+## 🆕 Atualizações Recentes (2026-04-24 23:41 UTC)
+- ✅ 5 novas dicas diárias (turtle roll, mutirão limpeza, surftrip mansas, visualização noturna, massagem foam roller)
+- ✅ Total de dicas agora: 545
+- ✅ Otimização de código, layout e conteúdo
+- ✅ Atualização de documentação (README com novo total de dicas)
+- ✅ Sincronização de HEARTBEAT.md - checklist a cada 15 min
+
 ## 🆕 Atualizações Recentes (2026-04-24 22:37 UTC)
 - ✅ 5 novas dicas diárias (biomecânica feminina, surf menstrual, respiração 4-7-8, mulheres 50+, fôlego de atleta)
 - ✅ Adicionadas 5 novas dicas extras (check-in diário, UV 50+, yoga, celebração, escuta corporal)
