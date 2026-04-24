@@ -19,6 +19,11 @@ TIPS = [
     {"categoria": "Técnica", "titulo": "Leitura de onda", "conteudo": "Observa o mar por 15-20 min antes de entrar. Nota o padrão das ondas (sets).", "tags": ["Técnica", "Ocean"]},
     {"categoria": "Saúde", "titulo": "Hidratação no mar", "conteudo": "Beba 500ml de água antes de entrar no mar. Não espere ter sede!", "tags": ["Saúde", "Hidratação"]},
     {"categoria": "Iniciante", "titulo": "Segurança básica", "conteudo": "Sempre surf dentro dos seus limites. Respeita os surfistas mais experientes.", "tags": ["Iniciante", "Segurança"]},
+    {"categoria": "Equipamento", "titulo": "Como ajustar as quilhas da prancha", "conteudo": "Ajuste as quilhas na posição correta: frente mais próxima da borda para manobras rápidas, ou centralizada para estabilidade.", "tags": ["Técnica", "Equipamento"]},
+    {"categoria": "Saúde", "titulo": "Benefícios do yoga para surfistas", "conteudo": "O yoga melhora a flexibilidade, equilíbrio e foco – essencial para manobras precisas e prevenção de lesões.", "tags": ["Saúde", "Mental", "Yoga"]},
+    {"categoria": "Técnica", "titulo": "Como ler a maré para o surf", "conteudo": "Marés baixas expõem bancos de areia, criando ondas mais cavadas. Marés altas suavizam a quebra da onda.", "tags": ["Técnica", "Ocean", "Maré"]},
+    {"categoria": "Nutrição", "titulo": "Nutrição pós-surf: recuperação rápida", "conteudo": "Ingere proteínas e carboidratos em até 30 min após o surf: iogurte com frutas ou um shake de whey.", "tags": ["Nutrição", "Saúde", "Recuperação"]},
+    {"categoria": "Segurança", "titulo": "Dica de etiqueta: direito de preferência", "conteudo": "O surfista que está mais próximo da quebra da onda tem prioridade. Não furas a fila!", "tags": ["Segurança", "Etiqueta", "Surf"]},
 ]
 
 # Frases motivacionais
