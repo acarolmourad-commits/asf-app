@@ -2,6 +2,12 @@
 
 App completo para a comunidade de surf feminino do Litoral Paulista.
 
+## 🆕 Atualizações Recentes (2026-04-24 04:32 UTC)
+- ✅ 5 novas dicas diárias (meditação pré-surf, verificação de areia, banana com pasta de amendoim, marcação @associacaosurffeminino, leitura de direção de swell)
+- ✅ Total de dicas agora: 415
+- ✅ Otimização de documentação: README atualizado com novo total de dicas
+- ✅ Atualização de contadores no README (Dicas de Surf e Dicas do Dia)
+
 ## 🆕 Atualizações Recentes (2026-04-24 04:17 UTC)
 - ✅ 5 novas dicas diárias (treino de pop-up em terra, blueberries pós-surf, padrão de séries, convite a amigas, hidratante pós-surf)
 - ✅ Total de dicas agora: 410
@@ -121,7 +127,7 @@ App completo para a comunidade de surf feminino do Litoral Paulista.
 ## ✨ Funcionalidades
 
 ### 📚 Conteúdo
-- **Dicas de Surf** — 355 dicas (técnica básica/avançada, segurança, nutrição, comunidade, sustentabilidade, saúde feminina, etiqueta)
+- **Dicas de Surf** — 415 dicas (técnica básica/avançada, segurança, nutrição, comunidade, sustentabilidade, saúde feminina, etiqueta)
 - **Mobilidade & Prevenção** — Exercícios para ombros, costas, quadril, pernas
 - **Alimentação & Nutrição** — O que comer antes/depois do surf
 - **Saúde & Treino** — Treino funcional para surfistas
@@ -208,7 +214,7 @@ App completo para a comunidade de surf feminino do Litoral Paulista.
 ## 📊 Status
 
 - **Linhas de código:** ~7920
-- **Dicas do Dia:** 360 dicas rotating (incluindo 5 novas dicas de estudo de maré, alongamento de quadris, chocolate 70%+ pré-surf, foco sem celular, cumprimentos pós-sessão)
+- **Dicas do Dia:** 415 dicas rotating (incluindo 5 novas dicas de meditação pré-surf, verificação de areia, energia pré-surf, marcação ASF, leitura de swell)
 - **Commits hoje:** 31+
 - **Commits pendentes push:** 1 (pending)
 - **Otimizações recentes:** Minificação de JS e CSS, redução de estilos não utilizados, 10 novas dicas adicionadas (5 anteriores + 5 novas), layout mobile melhorado, README atualizado com contagem de 325 dicas
