@@ -2,6 +2,12 @@
 
 App completo para a comunidade de surf feminino do Litoral Paulista.
 
+## 🆕 Atualizações Recentes (2026-04-24 01:16 UTC)
+- ✅ 5 novas dicas diárias (circuito ASF, óleo de semente de uva pós-surf, identificação de sets, iogurte com granola pré-surf, marcação @associacaosurffeminino)
+- ✅ Total de dicas agora: 345
+- ✅ Otimização de código e layout: remoção de classes CSS não utilizadas, minificação de scripts inline
+- ✅ Atualização de documentação
+
 ## 🆕 Atualizações Recentes (2026-04-24 00:46 UTC)
 - ✅ 5 novas dicas diárias (maiô de compressão, leitura de maré, limpezas ASF, meditação pré-surf, ASF Connect)
 - ✅ Total de dicas agora: 340
