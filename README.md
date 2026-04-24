@@ -2,6 +2,13 @@
 
 App completo para a comunidade de surf feminino do Litoral Paulista.
 
+## 🆕 Atualizações Recentes (2026-04-24 01:51 UTC)
+- ✅ 5 novas dicas diárias (alongamento de coluna torácica pós-surf, chocolate amargo 70%+ pós-surf, observação de direção de swell meteo, manteiga de cacau nos lábios pré-surf, convite a amigas para surfar)
+- ✅ Total de dicas agora: 350
+- ✅ Otimização de código: remoção de comentários desnecessários, minificação de scripts inline
+- ✅ Otimização de layout: melhoria de espaçamento mobile, ajuste de fontes para acessibilidade
+- ✅ Atualização de documentação
+
 ## 🆕 Atualizações Recentes (2026-04-24 01:16 UTC)
 - ✅ 5 novas dicas diárias (circuito ASF, óleo de semente de uva pós-surf, identificação de sets, iogurte com granola pré-surf, marcação @associacaosurffeminino)
 - ✅ Total de dicas agora: 345
@@ -55,7 +62,7 @@ App completo para a comunidade de surf feminino do Litoral Paulista.
 ## ✨ Funcionalidades
 
 ### 📚 Conteúdo
-- **Dicas de Surf** — 335 dicas (técnica básica/avançada, segurança, nutrição, comunidade, sustentabilidade, saúde feminina, etiqueta)
+- **Dicas de Surf** — 350 dicas (técnica básica/avançada, segurança, nutrição, comunidade, sustentabilidade, saúde feminina, etiqueta)
 - **Mobilidade & Prevenção** — Exercícios para ombros, costas, quadril, pernas
 - **Alimentação & Nutrição** — O que comer antes/depois do surf
 - **Saúde & Treino** — Treino funcional para surfistas
@@ -142,7 +149,7 @@ App completo para a comunidade de surf feminino do Litoral Paulista.
 ## 📊 Status
 
 - **Linhas de código:** ~7920
-- **Dicas do Dia:** 335 dicas rotating (incluindo 5 novas dicas de leave-in conditioner, exercício wolf, observação de correntes, frutas vermelhas pós-surf, Instagram ASF)
+- **Dicas do Dia:** 350 dicas rotating (incluindo 5 novas dicas de alongamento de coluna, chocolate amargo, direção de swell, manteiga de cacau, convite a amigas)
 - **Commits hoje:** 31+
 - **Commits pendentes push:** 1 (pending)
 - **Otimizações recentes:** Minificação de JS e CSS, redução de estilos não utilizados, 10 novas dicas adicionadas (5 anteriores + 5 novas), layout mobile melhorado, README atualizado com contagem de 325 dicas
