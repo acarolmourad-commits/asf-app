@@ -1,5 +1,10 @@
 # 🏄‍♀️ ASF - Associação de Surf Feminino App
 
+## 🆕 Atualizações Recentes (2026-04-24 20:19 UTC)
+- ✅ 5 novas dicas diárias (abacate pós-surf, meditação pós-surf, ground swell, conexão ASF, volume de prancha)
+- ✅ Total de dicas agora: 510
+- ✅ Otimização de código, layout e conteúdo
+- ✅ Atualização de documentação (README com novo total de dicas)
 App completo para a comunidade de surf feminino do Litoral Paulista.
 
 ## 🆕 Atualizações Recentes (2026-04-24 20:07 UTC)
@@ -322,7 +327,7 @@ App completo para a comunidade de surf feminino do Litoral Paulista.
 ## 📊 Status
 
 - **Linhas de código:** ~7920
-- **Dicas do Dia:** 505 dicas rotating (incluindo 5 novas dicas: respiração 4-7-8, economia circular, leitura de mar, check-in pós-surf, lip balm SPF)
+- **Dicas do Dia:** 510 dicas rotating (incluindo 10 novas dicas: respiração 4-7-8, economia circular, leitura de mar, check-in pós-surf, lip balm SPF, abacate, meditação, ground swell, conexão ASF, volume)
 - **Commits hoje:** 31+
 - **Commits pendentes push:** 1 (pending)
 - **Otimizações recentes:** Minificação de JS e CSS, redução de estilos não utilizados, 15 novas dicas adicionadas (10 anteriores + 5 novas), layout mobile melhorado, README atualizado com contagem de 445 dicas
