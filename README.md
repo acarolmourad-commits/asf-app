@@ -2,6 +2,12 @@
 
 App completo para a comunidade de surf feminino do Litoral Paulista.
 
+## 🆕 Atualizações Recentes (2026-04-24 17:37 UTC)
+- ✅ 5 novas dicas diárias (check-in diário, ajuda na remada, protetor com cor, frutas vermelhas, surf trip sustentável)
+- ✅ Total de dicas agora: 500
+- ✅ Otimização de código e layout (ajustes de acessibilidade e performance)
+- ✅ Atualização de documentação (README com novo total de dicas)
+
 ## 🆕 Atualizações Recentes (2026-04-24 13:37 UTC)
 - ✅ 5 novas dicas diárias (convide amiga iniciante, óleo de cenoula pós-surf, registro de progresso, mutirão ASF, meditação pós-surf)
 - ✅ Total de dicas agora: 495
@@ -310,7 +316,7 @@ App completo para a comunidade de surf feminino do Litoral Paulista.
 ## 📊 Status
 
 - **Linhas de código:** ~7920
-- **Dicas do Dia:** 495 dicas rotating (incluindo 5 novas dicas de convite a amigas, óleo de cenoula, registro de progresso, mutirão ASF, meditação pós-surf)
+- **Dicas do Dia:** 500 dicas rotating (incluindo 10 novas dicas: check-in diário, ajuda na remada, protetor com cor, frutas vermelhas, surf trip sustentável + 5 anteriores)
 - **Commits hoje:** 31+
 - **Commits pendentes push:** 1 (pending)
 - **Otimizações recentes:** Minificação de JS e CSS, redução de estilos não utilizados, 15 novas dicas adicionadas (10 anteriores + 5 novas), layout mobile melhorado, README atualizado com contagem de 445 dicas
