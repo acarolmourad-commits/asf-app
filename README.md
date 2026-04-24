@@ -2,10 +2,11 @@
 
 App completo para a comunidade de surf feminino do Litoral Paulista.
 
-## 🆕 Atualizações Recentes (2026-04-24)
-- ✅ 5 novas dicas diárias (leave-in conditioner, exercício wolf, observação de correntes, frutas vermelhas pós-surf, Instagram ASF)
-- ✅ Total de dicas agora: 335
+## 🆕 Atualizações Recentes (2026-04-24 00:46 UTC)
+- ✅ 5 novas dicas diárias (maiô de compressão, leitura de maré, limpezas ASF, meditação pré-surf, ASF Connect)
+- ✅ Total de dicas agora: 340
 - ✅ Otimização de código e layout
+- ✅ Atualização de documentação
 
 ## 🆕 Atualizações Recentes (2026-04-23)
 - ✅ 5 novas dicas diárias (tipos de pranchas, previsão de ondas, eventos ASF, aquecimento pré-surfe, pranchas ecológicas)
