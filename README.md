@@ -15,6 +15,13 @@ App completo para a comunidade de surf feminino do Litoral Paulista.
 - ✅ Otimização de código e layout: melhorias de acessibilidade, ajustes de responsividade mobile
 - ✅ Atualização de documentação
 
+## 🆕 Atualizações Recentes (2026-04-24 03:17 UTC)
+- ✅ 5 novas dicas diárias (prática de pop-up em terra, abacate pós-surf, colete salva-vidas para iniciantes, convite a amigas para surfar, recolhimento de lixo na praia)
+- ✅ Total de dicas agora: 390
+- ✅ Otimização de código: remoção de scripts duplicados, minificação de CSS inline
+- ✅ Otimização de layout: melhoria de responsividade mobile para seção de dicas, ajuste de espaçamento em cards
+- ✅ Atualização de documentação (README com novo total de dicas)
+
 ## 🆕 Atualizações Recentes (2026-04-24 02:46 UTC)
 - ✅ 5 novas dicas diárias (respiração diafragmática pré-surf, sandálias adequadas para areia, app Tide Graph para marés, frutas vermelhas pós-surf, conexão ASF com eventos)
 - ✅ Total de dicas agora: 385
