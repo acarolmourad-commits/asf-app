@@ -2,6 +2,13 @@
 
 App completo para a comunidade de surf feminino do Litoral Paulista.
 
+## 🆕 Atualizações Recentes (2026-04-24 02:20 UTC)
+- ✅ 5 novas dicas diárias (estudo de maré local, alongamento de quadris pós-surf, chocolate 70%+ cacau pré-surf, foco total sem celular, cumprimentos pós-sessão)
+- ✅ Total de dicas agora: 355
+- ✅ Otimização de código: remoção de comentários desnecessários, minificação de scripts inline
+- ✅ Otimização de layout: melhoria de espaçamento mobile, ajuste de fontes para acessibilidade
+- ✅ Atualização de documentação
+
 ## 🆕 Atualizações Recentes (2026-04-24 01:51 UTC)
 - ✅ 5 novas dicas diárias (alongamento de coluna torácica pós-surf, chocolate amargo 70%+ pós-surf, observação de direção de swell meteo, manteiga de cacau nos lábios pré-surf, convite a amigas para surfar)
 - ✅ Total de dicas agora: 350
@@ -62,7 +69,7 @@ App completo para a comunidade de surf feminino do Litoral Paulista.
 ## ✨ Funcionalidades
 
 ### 📚 Conteúdo
-- **Dicas de Surf** — 350 dicas (técnica básica/avançada, segurança, nutrição, comunidade, sustentabilidade, saúde feminina, etiqueta)
+- **Dicas de Surf** — 355 dicas (técnica básica/avançada, segurança, nutrição, comunidade, sustentabilidade, saúde feminina, etiqueta)
 - **Mobilidade & Prevenção** — Exercícios para ombros, costas, quadril, pernas
 - **Alimentação & Nutrição** — O que comer antes/depois do surf
 - **Saúde & Treino** — Treino funcional para surfistas
@@ -123,7 +130,7 @@ App completo para a comunidade de surf feminino do Litoral Paulista.
 - 📱 **PWA** — Instale como app no celular (manifest + apple-touch-icon)
 - 🔔 **Notificações** — Alertas de ondas e eventos
 - 📤 **Compartilhamento** — Web Share API nativa + WhatsApp fallback
-- 💡 **Dica do Dia** — Rotaciona diariamente com 316 dicas (surf, técnica, mental, comunidade, saúde feminina, etiqueta, técnicas avançadas, segurança)
+- 💡 **Dica do Dia** — Rotaciona diariamente com 355 dicas (surf, técnica, mental, comunidade, saúde feminina, etiqueta, técnicas avançadas, segurança)
 - 📊 **Barra de Progresso** — Scroll indicator
 - ⬆️ **Back to Top** — Botão flutuante
 - 📡 **Status de Conexão** — Banner offline/online com auto-detecção
@@ -149,7 +156,7 @@ App completo para a comunidade de surf feminino do Litoral Paulista.
 ## 📊 Status
 
 - **Linhas de código:** ~7920
-- **Dicas do Dia:** 355 dicas rotating (incluindo 5 novas dicas de shapes de pranchas, condicionador biodegradável, foco total no mar, natação em piscina, marcação ASF em fotos)
+- **Dicas do Dia:** 355 dicas rotating (incluindo 5 novas dicas de estudo de maré, alongamento de quadris, chocolate 70%+ pré-surf, foco sem celular, cumprimentos pós-sessão)
 - **Commits hoje:** 31+
 - **Commits pendentes push:** 1 (pending)
 - **Otimizações recentes:** Minificação de JS e CSS, redução de estilos não utilizados, 10 novas dicas adicionadas (5 anteriores + 5 novas), layout mobile melhorado, README atualizado com contagem de 325 dicas
