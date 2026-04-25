@@ -1,5 +1,12 @@
 # 🏄♀️ ASF - Associação de Surf Feminino App
 
+## 🆕 Atualizações Recentes (2026-04-25 08:21 UTC)
+- ✅ 5 novas dicas diárias (banho contraste, círculo mulheres, yoga nidra, visualização noturna, recuperação profunda)
+- ✅ Total de dicas agora: 620
+- ✅ Otimização de código/layout e conteúdo
+- ✅ Atualização de documentação (README com novo total de dicas)
+- ✅ Sincronização de HEARTBEAT.md - checklist a cada 15 min
+
 ## 🆕 Atualizações Recentes (2026-04-25 07:51 UTC)
 - ✅ 5 novas dicas diárias (banda elástica ombros, adaptógenos, journaling progresso, treino proprioceção, squash tensão)
 - ✅ Total de dicas agora: 615
@@ -459,10 +466,10 @@ App completo para a comunidade de surf feminino do Litoral Paulista.
 ## 📊 Status
 
 - **Linhas de código:** ~8190
-- **Dicas do Dia:** 610 dicas rotating (incluindo 55 novas dicas)
+- **Dicas do Dia:** 620 dicas rotating (incluindo 60 novas dicas)
 - **Commits hoje:** 31+
 - **Commits pendentes push:** 1 (pending)
-- **Otimizações recentes:** Minificação de JSe CSS, redução de estilos não utilizados, 55 novas dicas adicionadas, layout mobile melhorado, README atualizado com contagem de 610 dicas
+- **Otimizações recentes:** Minificação de JSe CSS, redução de estilos não utilizados, 60 novas dicas adicionadas, layout mobile melhorado, README atualizado com contagem de 620 dicas
 
 ## 👩‍💻 Desenvolvimento
 
