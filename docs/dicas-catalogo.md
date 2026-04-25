@@ -259,4 +259,4 @@ Total de dicas: 35*
 **Dica:** Comemore cada onda boa com um "uau!" ou um gesto para as outras surfistas. Celebrar conquistas pequenas motiva toda a comunidade.
 **Tags:** #Mulher #Motivação #Comunidade
 
-*Total de dicas agora: 440*
+*Total de dicas agora: 605*
