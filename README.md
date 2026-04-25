@@ -1,5 +1,12 @@
 # 🏄♀️ ASF - Associação de Surf Feminino App
 
+## 🆕 Atualizações Recentes (2026-04-25 01:51 UTC)
+- ✅ 5 novas dicas diárias (treino tronco, skincare surfista, leitura swell, circle mansas, micro-habits)
+- ✅ Total de dicas agora: 565
+- ✅ Otimização de código/layout e conteúdo
+- ✅ Atualização de documentação (README com novo total de dicas)
+- ✅ Sincronização de HEARTBEAT.md - checklist a cada 15 min
+
 ## 🆕 Atualizações Recentes (2026-04-25 01:21 UTC)
 - ✅ 5 novas dicas diárias (rotação de tronco, plástico zero, ancestrais, ondas pequenas, ritual pré-surf)
 - ✅ Total de dicas agora: 560
@@ -390,10 +397,10 @@ App completo para a comunidade de surf feminino do Litoral Paulista.
 ## 📊 Status
 
 - **Linhas de código:** ~8190
-- **Dicas do Dia:** 560 dicas rotating (incluindo 20 novas dicas: rotação de tronco, plástico zero, ancestrais, ondas pequenas, ritual pré-surf, treino visualização, massagem foam roller, nutrição ômega-3, respiração ujjayi, reef-safe, check-in emocional, alongamento punho/antebraço, turtle roll, mutirão limpeza, surftrip mansas, visualização noturna, biomecânica feminina, surf menstrual, respiração 4-7-8, mulheres 50+, fôlego de atleta, yoga, meditação, ground swell, florais, surf noturno, massagem, plantio, journaling)
+- **Dicas do Dia:** 565 dicas rotating (incluindo 25 novas dicas: rotação de tronco, plástico zero, ancestrais, ondas pequenas, ritual pré-surf, treino visualização, massagem foam roller, nutrição ômega-3, respiração ujjayi, reef-safe, check-in emocional, alongamento punho/antebraço, turtle roll, mutirão limpeza, surftrip mansas, visualização noturna, biomecânica feminina, surf menstrual, respiração 4-7-8, mulheres 50+, fôlego de atleta, yoga, meditação, ground swell, florais, surf noturno, massagem, plantio, journaling, treino tronco, skincare surfista, leitura swell, circle mansas, micro-habits)
 - **Commits hoje:** 31+
 - **Commits pendentes push:** 1 (pending)
-- **Otimizações recentes:** Minificação de JS e CSS, redução de estilos não utilizados, 20 novas dicas adicionadas (15 anteriores + 5 novas), layout mobile melhorado, README atualizado com contagem de 450 dicas
+- **Otimizações recentes:** Minificação de JS e CSS, redução de estilos não utilizados, 25 novas dicas adicionadas, layout mobile melhorado, README atualizado com contagem de 565 dicas
 
 ## 👩‍💻 Desenvolvimento
 
