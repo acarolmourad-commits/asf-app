@@ -1,5 +1,12 @@
 # 🏄♀️ ASF - Associação de Surf Feminino App
 
+## 🆕 Atualizações Recentes (2026-04-25 01:21 UTC)
+- ✅ 5 novas dicas diárias (rotação de tronco, plástico zero, ancestrais, ondas pequenas, ritual pré-surf)
+- ✅ Total de dicas agora: 560
+- ✅ Otimização de código/layout (atualização de contadores e referências)
+- ✅ Atualização de documentação (README com novo total de dicas)
+- ✅ Sincronização de HEARTBEAT.md - checklist a cada 15 min
+
 ## 🆕 Atualizações Recentes (2026-04-25 00:51 UTC)
 - ✅ 5 novas dicas diárias (nutrição ômega-3, respiração ujjayi, reef-safe mineral, check-in emocional, alongamento punho/antebraço)
 - ✅ Total de dicas agora: 555
@@ -382,8 +389,8 @@ App completo para a comunidade de surf feminino do Litoral Paulista.
 
 ## 📊 Status
 
-- **Linhas de código:** ~8147
-- **Dicas do Dia:** 520 dicas rotating (incluindo 15 novas dicas: respiração 4-7-8, economia circular, leitura de mar, check-in pós-surf, lip balm SPF, abacate, meditação, ground swell, conexão ASF, volume, salmão/castanhas, prevenção pés, swell sudoeste, cutback, prancha iniciante, florais, surf noturno, massagem, plantio, journaling)
+- **Linhas de código:** ~8190
+- **Dicas do Dia:** 560 dicas rotating (incluindo 20 novas dicas: rotação de tronco, plástico zero, ancestrais, ondas pequenas, ritual pré-surf, treino visualização, massagem foam roller, nutrição ômega-3, respiração ujjayi, reef-safe, check-in emocional, alongamento punho/antebraço, turtle roll, mutirão limpeza, surftrip mansas, visualização noturna, biomecânica feminina, surf menstrual, respiração 4-7-8, mulheres 50+, fôlego de atleta, yoga, meditação, ground swell, florais, surf noturno, massagem, plantio, journaling)
 - **Commits hoje:** 31+
 - **Commits pendentes push:** 1 (pending)
 - **Otimizações recentes:** Minificação de JS e CSS, redução de estilos não utilizados, 20 novas dicas adicionadas (15 anteriores + 5 novas), layout mobile melhorado, README atualizado com contagem de 450 dicas
