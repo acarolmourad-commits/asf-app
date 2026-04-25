@@ -89,46 +89,7 @@
         ]
     }
 
-<script>
-var translations = {
-    'pt': {},
-    'en': {
-        'Dicas': 'Tips',
-        'Manas Próximas': 'Nearby Sisters',
-        'Mobilidade': 'Mobility',
-        'Lojas': 'Shops',
-        'Praias': 'Beaches',
-        'Surftrips': 'Surftrips',
-        'Utilitários': 'Utilities',
-        'Comunidade': 'Community',
-        'Competições': 'Competitions',
-        'Premium': 'Premium',
-        'Previsão de Ondas': 'Wave Forecast',
-        'Nível': 'Level',
-        'Pontos': 'Points',
-        'Checklist Pré-Surf': 'Pre-Surf Checklist',
-        'Calculadora de Prancha': 'Board Calculator',
-        'Cronômetro de Treino': 'Workout Timer'
-    },
-    'es': {
-        'Dicas': 'Consejos',
-        'Manas Próximas': ' sisters Cercanas',
-        'Mobilidad': 'Movilidad',
-        'Lojas': 'Tiendas',
-        'Praias': 'Playas',
-        'Surftrips': 'Surftrips',
-        'Utilitários': 'Utilidades',
-        'Comunidad': 'Comunidad',
-        'Competições': 'Competiciones',
-        'Premium': 'Premium',
-        'Previsão de Ondas': 'Pronóstico de Olas',
-        'Nível': 'Nivel',
-        'Pontos': 'Puntos',
-        'Checklist Pré-Surf': 'Lista Pre-Surf',
-        'Calculadora de Prancha': 'Calculadora de Tabla',
-        'Cronômetro de Treino': 'Temporizador'
-    }
-};
+
 
 function setLanguage(lang) {
     localStorage.setItem('asf-lang', lang);
@@ -438,12 +399,12 @@ document.addEventListener('DOMContentLoaded', function() {
         </div>
     </div>
 
-    <!-- Dica do Dia (654) -->
+    <!-- Dica do Dia (659) -->
     <div id="dica-do-dia">
         <div><div id="dica-emoji">💡</div>
             <div id="dica-content">
                 <div class="dica-header">
-                    <span class="dica-badge">✨ Dica do Dia (654)</span>
+                    <span class="dica-badge">✨ Dica do Dia (659)</span>
                     <button onclick="nextDica()" class="dica-refresh-btn">↻ Nova</button>
                 </div>
                 <p id="dica-text"></p>
@@ -456,7 +417,7 @@ document.addEventListener('DOMContentLoaded', function() {
     <div class="stats">
         <div class="stat-card">
             <div class="stat-icon">👩‍🏫</div>
-            <div class="stat-value">654</div>
+            <div class="stat-value">659</div>
             <div class="stat-label">Dicas</div>
         </div>
         <div class="stat-card">
@@ -8017,7 +7978,12 @@ document.addEventListener('DOMContentLoaded', function() {
             { text: "Técnica de remada circular: engaje core e gire torso para potência máxima sem cansar braços! 🌀", category: "Técnica", emoji: "💪" },
             { text: "Hidratação com eletrólitos: água de coco natural repõe minerais perdidos no suor! 🥥", category: "Nutrição", emoji: "🥥" },
             { text: "Alongamento de isquiotibiais: pernas flexíveis = pop-up mais rápido e eficiente! 🤸", category: "Prevenção", emoji: "🧘" },
-            { text: "Mentalização de sucesso: visualize-se surfando com confiança e estilo próprio! ✨", category: "Mental", emoji: "🌟" }
+            { text: "Mentalização de sucesso: visualize-se surfando com confiança e estilo próprio! ✨", category: "Mental", emoji: "🌟" },
+            { text: "Respiração 4-7-8 pré-surf: 4s inspira, 7s segura, 8s expira. Reduz ansiedade e aumenta foco! 🧘", category: "Mental", emoji: "🫁" },
+            { text: "Liberação miofascial com bolinha de tênis: 2 min por ponto gatilho nos pés melhora propriocepção! 🎾", category: "Recuperação", emoji: "🦶" },
+            { text: "Leia as ondas: observe o horizonte para ondulações distantes. Preveja onde o swell vai quebrar! 🔍", category: "Técnica", emoji: "🌊" },
+            { text: "ASF é irmandade: organize um beach clean-up com suas manas surfistas! Oceano agradece 🌊💙", category: "ASF", emoji: "♻️" },
+            { text: "Pranayama Ujjayi: respiração ujjayi pós-surf acalma sistema nervoso e melhora recuperação! 🌊", category: "Saúde", emoji: "🧘" }
         ];
         function showDica(index) {
             const d = dicas[index];
@@ -8258,47 +8224,6 @@ document.addEventListener('DOMContentLoaded', function() {
         window.addEventListener('offline', updateConnectionStatus);
         window.addEventListener('online', updateConnectionStatus);
         updateConnectionStatus();
-</script>
-
-<script>
-var translations = {
-    'pt': {},
-    'en': {
-        'Dicas': 'Tips',
-        'Manas Próximas': 'Nearby Sisters',
-        'Mobilidade': 'Mobility',
-        'Lojas': 'Shops',
-        'Praias': 'Beaches',
-        'Surftrips': 'Surftrips',
-        'Utilitários': 'Utilities',
-        'Comunidade': 'Community',
-        'Competições': 'Competitions',
-        'Premium': 'Premium',
-        'Previsão de Ondas': 'Wave Forecast',
-        'Nível': 'Level',
-        'Pontos': 'Points',
-        'Checklist Pré-Surf': 'Pre-Surf Checklist',
-        'Calculadora de Prancha': 'Board Calculator'
-    },
-    'es': {
-        'Dicas': 'Consejos',
-        'Manas Próximas': ' sisters Cercanas',
-        'Mobilidad': 'Movilidad',
-        'Lojas': 'Tiendas',
-        'Praias': 'Playas',
-        'Surftrips': 'Surftrips',
-        'Utilitários': 'Utilidades',
-        'Comunidad': 'Comunidad',
-        'Competições': 'Competiciones',
-        'Premium': 'Premium',
-        'Previsão de Ondas': 'Pronóstico de Olas',
-        'Nível': 'Nivel',
-        'Pontos': 'Puntos',
-        'Checklist Pré-Surf': 'Lista Pre-Surf',
-        'Calculadora de Prancha': 'Calculadora de Tabla'
-    }
-};
-
 function setLanguage(lang) {
     localStorage.setItem('asf-lang', lang);
     document.querySelectorAll('button[onclick^="setLanguage"]').forEach(function(b) {

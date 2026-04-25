@@ -1,5 +1,12 @@
 # 🏄♀️ ASF - Associação de Surf Feminino App
 
+## 🆕 Atualizações Recentes (2026-04-25 13:09 UTC)
+- ✅ 5 novas dicas diárias (Respiração 4-7-8, Liberação miofascial, Leitura de ondas, ASF irmandade, Pranayama Ujjayi)
+- ✅ Total de dicas agora: **659**
+- ✅ Otimização de código/layout e conteúdo
+- ✅ Atualização de documentação (README com novo total de dicas)
+- ✅ Sincronização de HEARTBEAT.md - checklist a cada 15 min
+
 ## 🆕 Atualizações Recentes (2026-04-25 12:39 UTC)
 - ✅ 5 novas dicas diárias (Alongamento de piriforme, Mentalização de manobra, Banho de contraste, Core 3x/semana, Alimentação anti-inflamatória)
 - ✅ Total de dicas agora: **654**
