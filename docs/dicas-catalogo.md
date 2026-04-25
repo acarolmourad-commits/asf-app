@@ -259,4 +259,33 @@ Total de dicas: 35*
 **Dica:** Comemore cada onda boa com um "uau!" ou um gesto para as outras surfistas. Celebrar conquistas pequenas motiva toda a comunidade.
 **Tags:** #Mulher #Motivação #Comunidade
 
-*Total de dicas agora: 605*
+---
+
+## 🆕 NOVAS DICAS (2026-04-25 12:39 UTC)
+
+### 237. Alongamento de piriforme
+**Nível:** Saúde
+**Dica:** Sentada, cruze uma perna sobre a outra e puxe o joelho em direção ao ombro oposto. Segure 30s cada lado. Alivia tensão lombar após longas sessões!
+**Tags:** #Saúde #Alongamento #Piriforme
+
+### 238. Mentalização de manobra
+**Nível:** Mental
+**Dica:** Antes de tentar uma manobra nova, visualize-a 3x na sua mente. Veja cada detalhe: posicionamento, velocidade, execução. A mente não distingue real da imaginação.
+**Tags:** #Mental #Visualização #Performance
+
+### 239. Banho de contraste
+**Nível:** Saúde
+**Dica:** Após surf intenso, alterne 1 min de água quente com 30s de água fria nas pernas (3x). Melhora circulação, reduz inflamação e acelera recuperação!
+**Tags:** #Saúde #Recuperação #Contraste
+
+### 240. Core 3x/semana
+**Nível:** Treino
+**Dica:** Prancha isométrica (3x30s), prancha lateral (2x20s), hollow hold (3x20s). Core forte = melhor equilíbrio, transferência de peso e menos dores lombares.
+**Tags:** #Treino #Core #Força
+
+### 241. Alimentação anti-inflamatória
+**Nível:** Nutrição
+**Dica:** Consuma cúrcuma (com pimenta), gengibre, frutas vermelhas e ômega-3 (salmão, chia, linhaça) pós-surf. Reduz inflamação muscular naturalmente!
+**Tags:** #Nutrição #AntiInflamatório #Recuperação
+
+*Total de dicas agora: 654*
