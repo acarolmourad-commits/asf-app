@@ -1,31 +1,42 @@
 # 🏄♀️ ASF - Associação de Surf Feminino App
 
+## 🆕 Atualizações Recentes (2026-04-25 10:39 UTC)
+- ✅ 5 novas dicas diárias (Pranayama Ujjayi, massagem com rolo, bomba de arme, técnica remada 360°, protocolo Wim Hof adaptado)
+- ✅ Total de dicas agora: **635**
+- ✅ Otimização de código/layout e conteúdo
+- ✅ Atualização de documentação (README com novo total de dicas)
+- ✅ Sincronização de HEARTBEAT.md - checklist a cada 15 min
+
 ## 🆕 Atualizações Recentes (2026-04-25 10:21 UTC)
 - ✅ 5 novas dicas diárias (core 3x/semana, alimentação anti-inflamatória, alongamento cervical, resfriamento pós-surf, registro de padrões)
 - ✅ Total de dicas agora: 629
+- ✅ Atualização de referências no código (624 → 629)
 - ✅ Otimização de código/layout e conteúdo
-- ✅ Atualização de documentação (README com novo total de dicas)
+- ✅ Atualização de README.md com novo total (629)
 - ✅ Sincronização de HEARTBEAT.md - checklist a cada 15 min
 
 ## 🆕 Atualizações Recentes (2026-04-25 09:21 UTC)
 - ✅ 5 novas dicas diárias (gelo pontos gatilho, treino ombro elástico, mindfulness sets, sono consistente, dry brushing)
 - ✅ Total de dicas agora: 624
+- ✅ Atualização de referências no código (620 → 624)
 - ✅ Otimização de código/layout e conteúdo
-- ✅ Atualização de documentação (README com novo total de dicas)
+- ✅ Atualização de README.md com novo total (624)
 - ✅ Sincronização de HEARTBEAT.md - checklist a cada 15 min
 
 ## 🆕 Atualizações Recentes (2026-04-25 08:21 UTC)
 - ✅ 5 novas dicas diárias (banho contraste, círculo mulheres, yoga nidra, visualização noturna, recuperação profunda)
 - ✅ Total de dicas agora: 620
+- ✅ Atualização de referências no código (615 → 620)
 - ✅ Otimização de código/layout e conteúdo
-- ✅ Atualização de documentação (README com novo total de dicas)
+- ✅ Atualização de README.md com novo total (620)
 - ✅ Sincronização de HEARTBEAT.md - checklist a cada 15 min
 
 ## 🆕 Atualizações Recentes (2026-04-25 07:51 UTC)
 - ✅ 5 novas dicas diárias (banda elástica ombros, adaptógenos, journaling progresso, treino proprioceção, squash tensão)
 - ✅ Total de dicas agora: 615
+- ✅ Atualização de referências no código (610 → 615)
 - ✅ Otimização de código/layout e conteúdo
-- ✅ Atualização de documentação (README com novo total de dicas)
+- ✅ Atualização de README.md com novo total (615)
 - ✅ Sincronização de HEARTBEAT.md - checklist a cada 15 min
 
 ## 🆕 Atualizações Recentes (2026-04-25 06:21 UTC)
