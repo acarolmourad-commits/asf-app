@@ -1,5 +1,12 @@
 # 🏄♀️ ASF - Associação de Surf Feminino App
 
+## 🆕 Atualizações Recentes (2026-04-25 04:51 UTC)
+- ✅ 5 novas dicas diárias (foam roller miofascial, rotação tronco, check-in emocional, micro-habits, leitura swell)
+- ✅ Total de dicas agora: 595
+- ✅ Otimização de código/layout e conteúdo
+- ✅ Atualização de documentação (README com novo total de dicas)
+- ✅ Sincronização de HEARTBEAT.md - checklist a cada 15 min
+
 ## 🆕 Atualizações Recentes (2026-04-25 04:21 UTC)
 - ✅ 5 novas dicas diárias (círculo de mulheres, treino remada piscina, protetor labial FPS, banho frio, visualização noturna)
 - ✅ Total de dicas agora: 590
@@ -425,10 +432,10 @@ App completo para a comunidade de surf feminino do Litoral Paulista.
 ## 📊 Status
 
 - **Linhas de código:** ~8190
-- **Dicas do Dia:** 565 dicas rotating (incluindo 25 novas dicas: rotação de tronco, plástico zero, ancestrais, ondas pequenas, ritual pré-surf, treino visualização, massagem foam roller, nutrição ômega-3, respiração ujjayi, reef-safe, check-in emocional, alongamento punho/antebraço, turtle roll, mutirão limpeza, surftrip mansas, visualização noturna, biomecânica feminina, surf menstrual, respiração 4-7-8, mulheres 50+, fôlego de atleta, yoga, meditação, ground swell, florais, surf noturno, massagem, plantio, journaling, treino tronco, skincare surfista, leitura swell, circle mansas, micro-habits)
+- **Dicas do Dia:** 595 dicas rotating (incluindo 40 novas dicas: rotação de tronco, plástico zero, ancestrais, ondas pequenas, ritual pré-surf, treino visualização, massagem foam roller, nutrição ômega-3, respiração ujjayi, reef-safe, check-in emocional, alongamento punho/antebraço, turtle roll, mutirão limpeza, surftrip mansas, visualização noturna, biomecânica feminina, surf menstrual, respiração 4-7-8, mulheres 50+, fôlego de atleta, yoga, meditação, ground swell, florais, surf noturno, massagem, plantio, journaling, treino tronco, skincare surfista, leitura swell, circle mansas, micro-habits, foam roller miofascial, treino rotação tronco, check-in emocional, micro-habits, leitura swell, massagem miofascial, treino rotação tronco, check-in emocional, micro-habits, leitura swell)
 - **Commits hoje:** 31+
 - **Commits pendentes push:** 1 (pending)
-- **Otimizações recentes:** Minificação de JS e CSS, redução de estilos não utilizados, 25 novas dicas adicionadas, layout mobile melhorado, README atualizado com contagem de 565 dicas
+- **Otimizações recentes:** Minificação de JS e CSS, redução de estilos não utilizados, 40 novas dicas adicionadas, layout mobile melhorado, README atualizado com contagem de 595 dicas
 
 ## 👩‍💻 Desenvolvimento
 
