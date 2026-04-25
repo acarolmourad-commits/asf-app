@@ -1,5 +1,12 @@
 # 🏄♀️ ASF - Associação de Surf Feminino App
 
+## 🆕 Atualizações Recentes (2026-04-25 06:23 UTC)
+- ✅ 5 novas dicas diárias (respiração ujjayi, óleos essenciais, yoga na praia, gratidão, recuperação ativa)
+- ✅ Total de dicas agora: 610
+- ✅ Otimização de código/layout e conteúdo
+- ✅ Atualização de documentação (README com novo total de dicas)
+- ✅ Sincronização de HEARTBEAT.md - checklist a cada 15 min
+
 ## 🆕 Atualizações Recentes (2026-04-25 05:51 UTC)
 - ✅ 5 novas dicas diárias (treino respiração 4-4-4, hidratação com eletrólitos, check-in emocional, micro-habits pós-surf, leitura de swell)
 - ✅ Total de dicas agora: 605
@@ -105,13 +112,11 @@
 - ✅ Total de dicas agora: 530
 - ✅ Otimização de código, layout e conteúdo
 - ✅ Atualização de documentação (README com novo total de dicas)
-- ✅ Sincronização de HEARTBEAT.md - checklist a cada 15 min
 
 ## 🆕 Atualizações Recentes (2026-04-24 21:39 UTC)
 - ✅ 5 novas dicas diárias (respiração ujjayi, óleos essenciais, yoga na praia, gratidão, recuperação ativa)
 - ✅ Total de dicas agora: 530
 - ✅ Otimização de código, layout e conteúdo
-- ✅ Atualização de documentação (README com novo total de dicas)
 
 ## 🆕 Atualizações Recentes (2026-04-24 21:07 UTC)
 - ✅ 5 novas dicas diárias (florais, surf noturno, massagem, plantio, journaling)
@@ -447,10 +452,10 @@ App completo para a comunidade de surf feminino do Litoral Paulista.
 ## 📊 Status
 
 - **Linhas de código:** ~8190
-- **Dicas do Dia:** 600 dicas rotating (incluindo 50 novas dicas: rotação de tronco, plástico zero, ancestrais, ondas pequenas, ritual pré-surf, treino visualização, massagem foam roller, nutrição ômega-3, respiração ujjayi, reef-safe, check-in emocional, alongamento punho/antebraço, turtle roll, mutirão limpeza, surftrip mansas, visualização noturna, biomecânica feminina, surf menstrual, respiração 4-7-8, mulheres 50+, fôlego de atleta, yoga, meditação, ground swell, florais, surf noturno, massagem, plantio, journaling, treino tronco, skincare surfista, leitura swell, circle mansas, micro-habits, foam roller miofascial, treino rotação tronco, check-in emocional, micro-habits, leitura swell, massagem miofascial, treino rotação tronco, check-in emocional, micro-habits, leitura swell, treino ombros elástica, protetor mineral reef-safe, journaling pós-surf, propriocepção, alimentação anti-inflamatória)
+- **Dicas do Dia:** 610 dicas rotating (incluindo 55 novas dicas)
 - **Commits hoje:** 31+
 - **Commits pendentes push:** 1 (pending)
-- **Otimizações recentes:** Minificação de JS e CSS, redução de estilos não utilizados, 50 novas dicas adicionadas, layout mobile melhorado, README atualizado com contagem de 600 dicas
+- **Otimizações recentes:** Minificação de JSe CSS, redução de estilos não utilizados, 55 novas dicas adicionadas, layout mobile melhorado, README atualizado com contagem de 610 dicas
 
 ## 👩‍💻 Desenvolvimento
 
