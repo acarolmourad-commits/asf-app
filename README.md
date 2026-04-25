@@ -1,8 +1,15 @@
 # 🏄♀️ ASF - Associação de Surf Feminino App
 
+## 🆕 Atualizações Recentes (2026-04-25 11:09 UTC)
+- ✅ 5 novas dicas diárias (Core 3x/semana, alimentação anti-inflamatória, alongamento piriforme, mentalização de manobra, banho de contraste)
+- ✅ Total de dicas agora: **640**
+- ✅ Otimização de código/layout e conteúdo
+- ✅ Atualização de documentação (README com novo total de dicas)
+- ✅ Sincronização de HEARTBEAT.md - checklist a cada 15 min
+
 ## 🆕 Atualizações Recentes (2026-04-25 10:39 UTC)
 - ✅ 5 novas dicas diárias (Pranayama Ujjayi, massagem com rolo, bomba de arme, técnica remada 360°, protocolo Wim Hof adaptado)
-- ✅ Total de dicas agora: **635**
+- ✅ Total de dicas agora: 640
 - ✅ Otimização de código/layout e conteúdo
 - ✅ Atualização de documentação (README com novo total de dicas)
 - ✅ Sincronização de HEARTBEAT.md - checklist a cada 15 min
@@ -56,27 +63,6 @@
 ## 🆕 Atualizações Recentes (2026-04-25 05:21 UTC)
 - ✅ 5 novas dicas diárias (treino ombros elástica, protetor mineral reef-safe, journaling pós-surf, propriocepção, alimentação anti-inflamatória)
 - ✅ Total de dicas agora: 600
-- ✅ Otimização de código/layout e conteúdo
-- ✅ Atualização de documentação (README com novo total de dicas)
-- ✅ Sincronização de HEARTBEAT.md - checklist a cada 15 min
-
-## 🆕 Atualizações Recentes (2026-04-25 04:51 UTC)
-- ✅ 5 novas dicas diárias (foam roller miofascial, treino rotação tronco, check-in emocional, micro-habits, leitura swell)
-- ✅ Total de dicas agora: 595
-- ✅ Otimização de código/layout e conteúdo
-- ✅ Atualização de documentação (README com novo total de dicas)
-- ✅ Sincronização de HEARTBEAT.md - checklist a cada 15 min
-
-## 🆕 Atualizações Recentes (2026-04-25 04:21 UTC)
-- ✅ 5 novas dicas diárias (círculo de mulheres, treino remada piscina, protetor labial FPS, banho frio, visualização noturna)
-- ✅ Total de dicas agora: 590
-- ✅ Otimização de código/layout e conteúdo
-- ✅ Atualização de documentação (README com novo total de dicas)
-- ✅ Sincronização de HEARTBEAT.md - checklist a cada 15 min
-
-## 🆕 Atualizações Recentes (2026-04-25 03:51 UTC)
-- ✅ 5 novas dicas diárias (sororidade, yoga na prancha, leitura do mar, banho contraste, anti-inflamatória)
-- ✅ Total de dicas agora: 585
 - ✅ Otimização de código/layout e conteúdo
 - ✅ Atualização de documentação (README com novo total de dicas)
 - ✅ Sincronização de HEARTBEAT.md - checklist a cada 15 min
