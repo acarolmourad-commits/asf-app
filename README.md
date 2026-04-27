@@ -1,5 +1,9 @@
 # 🏄♀️ ASF - Associação de Surf Feminino App
 
+## 🆕 Atualizações Recentes (2026-04-27 13:45 UTC)
+- ✅ Otimização de carregamento: adiar chamadas de API de clima/mar via requestIdleCallback, melhorando tempo de interação inicial
+- ✅ Nenhuma nova dica adicionada (foco em performance)
+
 ## 🆕 Atualizações Recentes (2026-04-27 12:45 UTC)
 - ✅ 5 novas dicas diárias (Triagem de ondas, Treino core integrado, Alongamento dinâmico pós-session, Aquecimento auditivo, Checklist segurança)
 - ✅ Total de dicas agora: **669**
