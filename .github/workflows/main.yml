@@ -1,0 +1,478 @@
+name: ASF App - Daily Automation
+
+on:
+  push:
+    branches: [main]
+  schedule:
+    # Wave forecast: daily at 7 AM BRT (10:00 UTC)
+    - cron: '0 10 * * *'
+    # Daily tip: also daily at 7 AM BRT (10:00 UTC) - runs in parallel
+    - cron: '0 10 * * *'
+  workflow_dispatch:
+  repository_dispatch:
+    types: [daily_update, deploy, content_update]
+
+# Global settings
+env:
+  PYTHON_VERSION: '3.11'
+  GIT_AUTHOR_NAME: ASF Bot
+  GIT_AUTHOR_EMAIL: bot@asf-app.com
+
+jobs:
+  # ========================================
+  # DEPLOY JOB - Runs on every push to main
+  # ========================================
+  deploy:
+    name: 🚀 Deploy to GitHub Pages
+    runs-on: ubuntu-latest
+    if: github.event_name == 'push' || github.event_name == 'workflow_dispatch'
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: 📥 Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - name: 🔍 Validate app
+        run: |
+          echo "📱 Validating ASF App..."
+          if [ ! -f index.html ]; then
+            echo "❌ CRITICAL: index.html not found!"
+            exit 1
+          fi
+          
+          LINES=$(wc -l < index.html)
+          SIZE=$(du -h index.html | cut -f1)
+          echo "✅ index.html found: $LINES lines, $SIZE"
+          
+          # Basic HTML validation
+          if grep -q "<!DOCTYPE html>" index.html; then
+            echo "✅ Valid HTML5 doctype"
+          else
+            echo "⚠️ Missing DOCTYPE"
+          fi
+
+      - name: 🐍 Setup Python (for validation)
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+          cache: 'pip'
+
+      - name: 📦 Install dependencies
+        run: |
+          if [ -f requirements.txt ]; then
+            pip install -r requirements.txt
+          fi
+
+      - name: ✅ Run validation scripts
+        run: |
+          echo "🔍 Running validation..."
+          python3 scripts/link_checker.py || echo "⚠️ Link checker found issues (non-fatal)"
+          python3 scripts/layout_optimizer.py || echo "⚠️ Layout optimizer found issues (non-fatal)"
+
+      - name: 📊 Generate status report
+        run: |
+          echo "## 📱 ASF App Status - $(date)" > status.md
+          echo "- **Lines of code:** $(wc -l < index.html)" >> status.md
+          echo "- **File size:** $(du -h index.html | cut -f1)" >> status.md
+          echo "- **Last commit:** $(git log -1 --format=%s)" >> status.md
+          cat status.md
+
+      - name: ⚙️ Setup Pages
+        uses: actions/configure-pages@v4
+
+      - name: 📤 Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: '.'
+
+      - name: 🚀 Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
+        with:
+          timeout: 300000
+
+  # ========================================
+  # WAVE FORECAST JOB - Runs daily
+  # ========================================
+  wave-forecast:
+    name: 🌊 Update Wave Forecast
+    runs-on: ubuntu-latest
+    if: github.event_name == 'schedule' || github.event_name == 'repository_dispatch' || github.event_name == 'workflow_dispatch'
+    timeout-minutes: 15
+    steps:
+      - name: 📥 Checkout
+        uses: actions/checkout@v4
+
+      - name: 🐍 Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+          cache: 'pip'
+
+      - name: 📦 Install dependencies
+        run: pip install requests  # urllib is built-in, requests for future use
+
+      - name: 🌊 Run wave forecast script
+        run: |
+          echo "🌊 Fetching wave data from Open-Meteo Marine API..."
+          python3 scripts/wave_forecast.py
+          
+          # Check if file was created
+          if [ -f docs/wave-forecast.html ]; then
+            echo "✅ Forecast generated successfully"
+            echo "📊 File size: $(du -h docs/wave-forecast.html | cut -f1)"
+          else
+            echo "❌ ERROR: docs/wave-forecast.html not created"
+            exit 1
+          fi
+
+      - name: 🔄 Update index.html with forecast
+        run: |
+          echo "🔄 Updating index.html with new forecast..."
+          
+          python3 << 'PYEOF'
+import re
+
+# Read files
+with open('index.html', 'r', encoding='utf-8') as f:
+    content = f.read()
+
+with open('docs/wave-forecast.html', 'r', encoding='utf-8') as f:
+    forecast = f.read()
+
+# Check if forecast section exists
+if '<!-- Wave Forecast -->' in content:
+    # Replace existing section
+    pattern = r'<!-- Wave Forecast -->.*?<!-- End Wave Forecast -->'
+    replacement = f'<!-- Wave Forecast -->\n{forecast}\n<!-- End Wave Forecast -->'
+    content = re.sub(pattern, replacement, content, flags=re.DOTALL)
+    print("✅ Replaced existing forecast section")
+else:
+    # Insert after header
+    marker = '</header>'
+    if marker in content:
+        insertion = f'\n        <!-- Wave Forecast -->\n{forecast}\n<!-- End Wave Forecast -->'
+        content = content.replace(marker, marker + insertion, 1)
+        print("✅ Inserted forecast after header")
+    else:
+        print("⚠️ Could not find insertion point, appending to body")
+        content = content.replace('<body>', '<body>\n' + forecast)
+
+with open('index.html', 'w', encoding='utf-8') as f:
+    f.write(content)
+
+print("✅ index.html updated successfully")
+PYEOF
+
+      - name: 📝 Commit changes
+        run: |
+          git config user.name "${{ env.GIT_AUTHOR_NAME }}"
+          git config user.email "${{ env.GIT_AUTHOR_EMAIL }}"
+          
+          if git diff --quiet; then
+            echo "📭 No changes to commit (forecast already up-to-date)"
+          else
+            git add docs/wave-forecast.html index.html
+            git commit -m "🌊 Wave forecast update - $(date +%Y-%m-%d %H:%M)"
+            git push origin main
+            echo "✅ Forecast updated and pushed"
+          fi
+
+  # ========================================
+  # DAILY TIP JOB - Runs daily
+  # ========================================
+  daily-tip:
+    name: 🧠 Generate Daily Tip
+    runs-on: ubuntu-latest
+    if: github.event_name == 'schedule' || github.event_name == 'repository_dispatch' || github.event_name == 'workflow_dispatch'
+    timeout-minutes: 10
+    steps:
+      - name: 📥 Checkout
+        uses: actions/checkout@v4
+
+      - name: 🐍 Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+
+      - name: 🧠 Generate and save tip
+        run: |
+          echo "🧠 Generating daily mental wellness tip..."
+          
+          python3 << 'PYEOF'
+import os
+from datetime import datetime
+
+# Extended tips database (30 tips)
+TIPS = [
+    {"cat": "🧠 Mindfulness", "title": "Respira fundo", "text": "Quando sentir medo, faça 3 respirações profundas. Inspira por 4s, segura por 4s, expira por 6s."},
+    {"cat": "🌊 Surf Mental", "title": "Uma onda de cada vez", "text": "Foque apenas na próxima onda. O presente é seu aliado."},
+    {"cat": "💪 Confiança", "title": "Você sabe surfar", "text": "Lembre-se de 3 ondas que você conseguiu. Você é capaz!"},
+    {"cat": "😰 Ansiedade", "title": "Olha o horizonte", "text": "Quando a ansiedade subir, olhe para o horizonte. A vista larga ajuda."},
+    {"cat": "🧘 Meditação", "title": "5 minutos de paz", "text": "Senta na areia antes de surfar. Fecha os olhos. Sente o som do mar."},
+    {"cat": "🌅 Motivação", "title": "Novo dia", "text": "Cada sessão é uma chance de recomeçar. O que aconteceu ontem não define hoje."},
+    {"cat": "🧠 Mindfulness", "title": "Corpo presente", "text": "Sente os pés na prancha. Sente a água. Quando a mente divagar, traga para o corpo."},
+    {"cat": "🌊 Surf Mental", "title": "Aceitar o medo", "text": "O medo é normal e saudável. Aceite e use como combustível para evoluir."},
+    {"cat": "💪 Confiança", "title": "Celebra pequenas vitórias", "text": "Pegou uma onda? Manteve equilíbrio? Cada conquista merece celebração!"},
+    {"cat": "😰 Ansiedade", "title": "Desliga o julgamento", "text": "Na água, não julgue. Apenas surf. Sem julgamento."},
+    {"cat": "🧘 Meditação", "title": "Visualização positiva", "text": "Antes de entrar, visualize você surfando bem. Sua mente acredita no que você visualiza."},
+    {"cat": "🌅 Motivação", "title": "Você é uma surfista", "text": "Você tem coragem de entrar no mar. Você é mais forte do que pensa!"},
+    {"cat": "🧠 Mindfulness", "title": "Gratidão pelo mar", "text": "Agradeça ao mar pela oportunidade. A gratidão traz paz."},
+    {"cat": "🌊 Surf Mental", "title": "Fluir com a onda", "text": "Não lute contra a onda. O surf é parceria com a natureza."},
+    {"cat": "💪 Confiança", "title": "Progresso não perfeição", "text": "Cada sessão é evolução. Manobra pequena ou grande - todas contam!"},
+]
+
+day = datetime.now().timetuple().tm_yday
+tip = TIPS[day % len(TIPS)]
+
+html = f'''<div style="background: linear-gradient(135deg, #9B59B6 0%, #8E44AD 100%); padding: 20px; margin: 20px; border-radius: 16px; color: white;">
+    <p style="font-size: 12px; opacity: 0.9;">{tip['cat']}</p>
+    <h3 style="margin: 8px 0;">{tip['title']}</h3>
+    <p style="font-size: 14px; line-height: 1.6;">{tip['text']}</p>
+    <p style="font-size: 11px; opacity: 0.8; margin-top: 12px;">⏰ Dica do Dia - {datetime.now().strftime('%d/%m/%Y')}</p>
+</div>'''
+
+os.makedirs('docs', exist_ok=True)
+with open('docs/daily-tip.html', 'w', encoding='utf-8') as f:
+    f.write(html)
+
+print(f"✅ Daily tip generated: {tip['title']}")
+print(f"📅 Date: {datetime.now().strftime('%Y-%m-%d')}")
+PYEOF
+
+      - name: 📝 Commit tip
+        run: |
+          git config user.name "${{ env.GIT_AUTHOR_NAME }}"
+          git config user.email "${{ env.GIT_AUTHOR_EMAIL }}"
+          
+          git add docs/daily-tip.html
+          git commit -m "🧠 Daily mental wellness tip - $(date +%Y-%m-%d)" || echo "No changes"
+          git push origin main
+          echo "✅ Tip committed"
+
+  # ========================================
+  # CONTENT GENERATOR - Runs every 6h
+  # ========================================
+  content-generator:
+    name: 📝 Content Generator
+    runs-on: ubuntu-latest
+    if: github.event_name == 'schedule' || github.event_name == 'repository_dispatch' || github.event_name == 'workflow_dispatch'
+    timeout-minutes: 15
+    steps:
+      - name: 📥 Checkout
+        uses: actions/checkout@v4
+
+      - name: 🐍 Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+
+      - name: 📝 Generate new content
+        run: |
+          echo "📝 Generating new content..."
+          
+          if [ -f scripts/generate_content.py ]; then
+            python3 scripts/generate_content.py
+            echo "✅ Content generated"
+          else
+            echo "❌ generate_content.py not found"
+            exit 1
+          fi
+
+      - name: 🔍 Link check (non-fatal)
+        if: always()
+        run: |
+          echo "🔍 Checking links..."
+          if [ -f scripts/link_checker.py ]; then
+            python3 scripts/link_checker.py || true
+            echo "✅ Link check completed (non-fatal errors allowed)"
+          else
+            echo "⚠️ link_checker.py not found"
+          fi
+
+      - name: 🎨 Layout optimization (non-fatal)
+        if: always()
+        run: |
+          echo "🎨 Running layout optimizer..."
+          if [ -f scripts/layout_optimizer.py ]; then
+            python3 scripts/layout_optimizer.py || true
+            echo "✅ Layout optimization completed"
+          else
+            echo "⚠️ layout_optimizer.py not found"
+          fi
+
+      - name: 💾 Commit all changes
+        run: |
+          git config user.name "${{ env.GIT_AUTHOR_NAME }}"
+          git config user.email "${{ env.GIT_AUTHOR_EMAIL }}"
+          
+          if git diff --quiet; then
+            echo "📭 No content changes to commit"
+          else
+            git add -A
+            git commit -m "📝 Auto content update - $(date +%Y-%m-%d\ %H:%M)"
+            git push origin main
+            echo "✅ Content changes committed and pushed"
+          fi
+
+  # ========================================
+  # MOBILITY AGENT - Runs every 3 days
+  # ========================================
+  mobility:
+    name: 🧘 Mobility Agent
+    runs-on: ubuntu-latest
+    if: github.event_name == 'schedule' || github.event_name == 'repository_dispatch'
+    timeout-minutes: 10
+    steps:
+      - name: 📥 Checkout
+        uses: actions/checkout@v4
+
+      - name: 🐍 Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+
+      - name: 🧘 Generate mobility content
+        run: |
+          echo "🧘 Generating mobility content..."
+          
+          if [ -f scripts/mobility_agent.py ]; then
+            python3 scripts/mobility_agent.py
+            echo "✅ Mobility content generated"
+          else
+            echo "❌ mobility_agent.py not found"
+            exit 1
+          fi
+
+      - name: 💾 Commit mobility updates
+        run: |
+          git config user.name "${{ env.GIT_AUTHOR_NAME }}"
+          git config user.email "${{ env.GIT_AUTHOR_EMAIL }}"
+          
+          if git diff --quiet; then
+            echo "📭 No mobility updates"
+          else
+            git add -A
+            git commit -m "🧘 Mobility update - $(date +%Y-%m-%d)"
+            git push origin main
+            echo "✅ Mobility updates committed"
+          fi
+
+  # ========================================
+  # SMART GENERATOR - Runs every 6h
+  # ========================================
+  smart-gen:
+    name: 🤖 Smart Content Generator
+    runs-on: ubuntu-latest
+    if: github.event_name == 'schedule' || github.event_name == 'repository_dispatch'
+    timeout-minutes: 10
+    steps:
+      - name: 📥 Checkout
+        uses: actions/checkout@v4
+
+      - name: 🤖 Run smart generator
+        run: |
+          echo "🤖 Running smart generator..."
+          
+          if [ -f scripts/smart_generator.py ]; then
+            python3 scripts/smart_generator.py
+            echo "✅ Smart generation complete"
+          else
+            echo "⚠️ smart_generator.py not found"
+          fi
+
+      - name: 💾 Commit smart changes
+        if: always()
+        run: |
+          git config user.name "${{ env.GIT_AUTHOR_NAME }}"
+          git config user.email "${{ env.GIT_AUTHOR_EMAIL }}"
+          
+          if git diff --quiet; then
+            echo "📭 No smart generator changes"
+          else
+            git add -A
+            git commit -m "🤖 Smart content update - $(date +%Y-%m-%d\ %H:%M)"
+            git push origin main
+            echo "✅ Smart updates committed"
+          fi
+
+  # ========================================
+  # ECO BOARD AGENT - Runs daily
+  # ========================================
+  eco-board:
+    name: 🌱 Eco Board Agent
+    runs-on: ubuntu-latest
+    if: github.event_name == 'schedule' || github.event_name == 'repository_dispatch'
+    timeout-minutes: 10
+    steps:
+      - name: 📥 Checkout
+        uses: actions/checkout@v4
+
+      - name: 🌱 Run eco board agent
+        run: |
+          echo "🌱 Running eco board agent..."
+          
+          if [ -f scripts/eco_board_agent.py ]; then
+            python3 scripts/eco_board_agent.py
+            echo "✅ Eco board content generated"
+          else
+            echo "⚠️ eco_board_agent.py not found"
+          fi
+
+      - name: 💾 Commit eco updates
+        run: |
+          git config user.name "${{ env.GIT_AUTHOR_NAME }}"
+          git config user.email "${{ env.GIT_AUTHOR_EMAIL }}"
+          
+          if git diff --quiet; then
+            echo "📭 No eco updates"
+          else
+            git add -A
+            git commit -m "🌱 Eco board content - $(date +%Y-%m-%d)"
+            git push origin main
+            echo "✅ Eco updates committed"
+          fi
+
+# ========================================
+# NOTIFICATION JOB - Always runs (optional)
+# ========================================
+notify:
+  name: 📢 Status Notification
+  runs-on: ubuntu-latest
+  needs: [deploy, wave-forecast, daily-tip, content-generator, mobility, smart-gen, eco-board]
+  if: always()
+  steps:
+    - name: 📋 Generate status summary
+      run: |
+        echo "## 📊 ASF App - Workflow Execution Summary"
+        echo ""
+        echo "### ✅ Successful Jobs:"
+        echo "| Job | Status | Duration |"
+        echo "|-----|--------|----------|"
+        
+        for job in deploy wave-forecast daily-tip content-generator mobility smart-gen eco-board; do
+          status="${{ needs[$job].result }}"
+          if [ "$status" == "success" ]; then
+            echo "| $job | ✅ Success | - |"
+          else
+            echo "| $job | ⚠️ $status | - |"
+          fi
+        done
+        
+        echo ""
+        echo "**Trigger:** ${{ github.event_name }}"
+        echo "**Branch:** ${{ github.ref }}"
+        echo "**Commit:** ${{ github.sha }}"
+        echo ""
+        echo "📱 App URL: https://acarolmourad-commits.github.io/asf-app/"
+      > notify.md
+
+      - name: 💾 Save status artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: workflow-status
+          path: notify.md
+          retention-days: 7

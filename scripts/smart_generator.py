@@ -1,61 +1,70 @@
 #!/usr/bin/env python3
 """
-ASF Smart Content & Utility Generator
-Analisa, cria conteúdo e utilities inteligentes automaticamente
+ASF Smart Generator - Gera sugestões inteligentes
 """
 
 import random
-from datetime import datetime
 import json
+from datetime import datetime
 
-# Novas dicas de surf
 NEW_TIPS = [
-    {"category": "Técnica", "title": "Como fazer o bottom turn", "content": "O bottom turn é a base de todas as manobras. Ao descer a onda, transfere o peso para o pé da frente e faz a prancha girar.", "tags": ["Técnica", "Manobras"]},
-    {"category": "Equipamento", "title": "Qual leash escolher", "content": "O leash deve ser do mesmo tamanho ou ligeiramente menor que sua prancha. Para Longboard, use leash de 9-10'.", "tags": ["Equipamento", "Leash"]},
-    {"category": "Saúde", "title": "Treino de força para surfistas", "content": "Foque em exercícios compostos: remada com elastico, agachamentos, e plank. 2-3x por semana é o ideal.", "tags": ["Saúde", "Treino"]},
-    {"category": "Mental", "title": "Visualização antes de surfar", "content": "Antes de entrar na água, visualize as ondas que quer pegar. Isso melhora seu desempenho!", "tags": ["Mental", "Foco"]},
-    {"category": "Nível", "title": "Quando avançar para prancha menor", "content": "Quando conseguir fazerbottom turn e gerar speed sozinha, é hora de pensar em prancha menor.", "tags": ["Progressão", "Técnica"]},
+    {"category": "Técnica", "title": "Como fazer o bottom turn", "content": "O bottom turn é a base. Transfira o peso para o pé da frente e gire a prancha.", "tags": ["Técnica", "Manobras"]},
+    {"category": "Equipamento", "title": "Qual leash escolher", "content": "Use leash do mesmo tamanho ou ligeiramente menor que a prancha.", "tags": ["Equipamento", "Leash"]},
+    {"category": "Saúde", "title": "Treino de força", "content": "Foque em exercícios compostos: remada com elástico, agachamentos, plank. 2-3x/semana.", "tags": ["Saúde", "Treino"]},
 ]
 
-# Utilitários inteligentes
 UTILITIES = [
-    {"name": "Previsão de Ondas", "description": "Previsão para os próximos 7 dias", "icon": "🌊", "function": "wave_forecast"},
-    {"name": "Calculadora de Maré", "description": "Horários de maré para a semana", "icon": "🗓️", "function": "tide_calculator"},
-    {"name": "Calculadora de Prancha", "description": "Volume ideal para seu peso e nível", "icon": "🧮", "function": "board_calculator"},
-    {"name": "Medidor de Energia", "description": "Quanto tempo você consegue surfar", "icon": "🔋", "function": "energy_tracker"},
-    {"name": "Agendamento de Aulas", "description": "Agende sua próxima aula", "icon": "📅", "function": "schedule_class"},
-    {"name": "Rastreador de Progresso", "description": "Acompanhe sua evolução", "icon": "📈", "function": "progress_tracker"},
+    {"name": "Previsão de Ondas", "description": "7 dias de previsão", "icon": "🌊"},
+    {"name": "Calculadora de Maré", "description": "Horários de maré", "icon": "🗓️"},
+    {"name": "Calculadora de Prancha", "description": "Volume ideal", "icon": "🧮"},
 ]
 
-def generate_tip():
-    """Gera uma nova dica"""
-    return random.choice(NEW_TIPS)
+IMPROVEMENTS = [
+    {"type": "content", "title": "Mais dicas técnicas avançadas", "priority": "high"},
+    {"type": "feature", "title": "Medidor de condições do mar", "priority": "high"},
+    {"type": "layout", "title": "Modo escuro", "priority": "medium"},
+]
 
-def generate_utility():
-    """Gera um novo utilitário"""
-    return random.choice(UTILITIES)
-
-def find_improvements():
-    """Encontra oportunidades de melhoria"""
-    return [
-        {"type": "content", "title": "Adicionar mais dicas de técnicas avançadas", "priority": "high"},
-        {"type": "utility", "title": "Adicionar medidor de condições do mar", "priority": "high"},
-        {"type": "layout", "title": "Adicionar modo escuro", "priority": "medium"},
-        {"type": "content", "title": "Criar sección de eventos mensais", "priority": "high"},
-    ]
-
-def auto_optimize():
-    """Executa otimização automática"""
-    return {
-        "timestamp": datetime.now().isoformat(),
-        "new_tip": generate_tip(),
-        "new_utility": generate_utility(),
-        "improvements": find_improvements(),
-        "status": "success"
+def generate_smart():
+    today = datetime.now().strftime("%Y-%m-%d")
+    
+    content = {
+        "date": today,
+        "new_tip": random.choice(NEW_TIPS),
+        "new_utility": random.choice(UTILITIES),
+        "improvements": random.sample(IMPROVEMENTS, 2),
+        "generated_at": datetime.now().isoformat()
     }
+    
+    os.makedirs('docs/generated', exist_ok=True)
+    
+    # Save JSON
+    with open('docs/generated/smart.json', 'w', encoding='utf-8') as f:
+        json.dump(content, f, ensure_ascii=False, indent=2)
+    
+    # Save HTML summary
+    html = f"""
+<div class="smart-summary" style="background: #f0f0f0; padding: 16px; margin: 16px; border-radius: 12px;">
+    <h4 style="margin: 0 0 12px 0;">🤖 Sugestões Inteligentes</h4>
+    <p><strong>💡 Nova dica:</strong> {content['new_tip']['title']}</p>
+    <p><strong>🔧 Novo utilitário:</strong> {content['new_utility']['name']} - {content['new_utility']['description']}</p>
+    <p><strong>✨ Melhorias sugeridas:</strong> {'; '.join(i['title'] for i in content['improvements'])}</p>
+    <p style="font-size: 11px; color: #999; margin-top: 12px;">Gerado em {content['generated_at']}</p>
+</div>
+"""
+    with open('docs/generated/smart.html', 'w', encoding='utf-8') as f:
+        f.write(html)
+    
+    return content
+
+def main():
+    print("🤖 ASF Smart Generator")
+    print("=" * 50)
+    content = generate_smart()
+    print(f"✅ Smart suggestions for {content['date']}")
+    print(f"   💡 {content['new_tip']['title']}")
+    print(f"   🔧 {content['new_utility']['name']}")
 
 if __name__ == "__main__":
-    print("🧠 ASF Smart Content & Utility Generator")
-    print("=" * 50)
-    result = auto_optimize()
-    print(json.dumps(result, indent=2, ensure_ascii=False))
+    import os
+    main()

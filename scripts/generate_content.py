@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-ASF Content Generator - Gera conteúdo automaticamente
+ASF Content Generator - Gera conteúdo automaticamente e salva em arquivos
 """
 
 import os
@@ -19,56 +19,86 @@ TIPS = [
     {"categoria": "Técnica", "titulo": "Leitura de onda", "conteudo": "Observa o mar por 15-20 min antes de entrar. Nota o padrão das ondas (sets).", "tags": ["Técnica", "Ocean"]},
     {"categoria": "Saúde", "titulo": "Hidratação no mar", "conteudo": "Beba 500ml de água antes de entrar no mar. Não espere ter sede!", "tags": ["Saúde", "Hidratação"]},
     {"categoria": "Iniciante", "titulo": "Segurança básica", "conteudo": "Sempre surf dentro dos seus limites. Respeita os surfistas mais experientes.", "tags": ["Iniciante", "Segurança"]},
-    {"categoria": "Equipamento", "titulo": "Como ajustar as quilhas da prancha", "conteudo": "Ajuste as quilhas na posição correta: frente mais próxima da borda para manobras rápidas, ou centralizada para estabilidade.", "tags": ["Técnica", "Equipamento"]},
-    {"categoria": "Saúde", "titulo": "Benefícios do yoga para surfistas", "conteudo": "O yoga melhora a flexibilidade, equilíbrio e foco – essencial para manobras precisas e prevenção de lesões.", "tags": ["Saúde", "Mental", "Yoga"]},
-    {"categoria": "Técnica", "titulo": "Como ler a maré para o surf", "conteudo": "Marés baixas expõem bancos de areia, criando ondas mais cavadas. Marés altas suavizam a quebra da onda.", "tags": ["Técnica", "Ocean", "Maré"]},
-    {"categoria": "Nutrição", "titulo": "Nutrição pós-surf: recuperação rápida", "conteudo": "Ingere proteínas e carboidratos em até 30 min após o surf: iogurte com frutas ou um shake de whey.", "tags": ["Nutrição", "Saúde", "Recuperação"]},
-    {"categoria": "Segurança", "titulo": "Dica de etiqueta: direito de preferência", "conteudo": "O surfista que está mais próximo da quebra da onda tem prioridade. Não furas a fila!", "tags": ["Segurança", "Etiqueta", "Surf"]},
+    {"categoria": "Técnica", "titulo": "Bottom Turn", "conteudo": "O bottom turn é a base de todas as manobras. Transfira o peso para o pé da frente e gire a prancha.", "tags": ["Técnica", "Manobras"]},
+    {"categoria": "Saúde", "titulo": "Yoga para surfistas", "conteudo": "O yoga melhora flexibilidade, equilíbrio e foco – essencial para manobras precisas.", "tags": ["Saúde", "Yoga"]},
+    {"categoria": "Técnica", "titulo": "Leitura de maré", "conteudo": "Marés baixas expõem bancos de areia criando ondas cavadas. Marés altas suavizam a quebra.", "tags": ["Técnica", "Maré"]},
+    {"categoria": "Mental", "titulo": "Visualização", "conteudo": "Visualize as ondas que quer pegar antes de entrar. Isso program sua mente para o sucesso!", "tags": ["Mental", "Foco"]},
 ]
 
-# Frases motivacionais
 QUOTES = [
     "A melhor onda é a que você pega.",
     "O mar ensina a serenidade.",
     "Não existe onda impossível, só onda que ainda não chegou.",
     "Cada onda é uma chance de recomeçar.",
-    "O surf é meditation em movimento.",
+    "O surf é meditação em movimento.",
     "Mulher que surfa não tem limites.",
     "A onda espera por ninguém. Entre nela!",
 ]
 
-def generate_new_tip():
-    """Gera uma nova dica aleatória"""
+def generate_content():
+    """Gera conteúdo para o app"""
     tip = random.choice(TIPS)
-    return f"### {tip['categoria']}\n\n**{tip['titulo']}**\n\n{tip['conteudo']}\n\nTags: {', '.join(tip['tags'])}\n"
-
-def generate_community_post():
-    """Gera um post de comunidade"""
-    author = random.choice(["Carol", "Grazielle", "Márcia", "Leticia"])
-    topics = [
-        "aulão de surf este fim de semana",
-        "encontro na praia",
-        "desconto em lycras",
-        "nova trip confirmada",
-        "vídeo de aula",
-        "dica de equipamento"
-    ]
+    quote = random.choice(QUOTES)
+    author = random.choice(["Carol", "Grazielle", "Márcia", "Letícia"])
+    topics = ["aulão de surf", "encontro na praia", "desconto em lycras", "nova trip", "vídeo de aula"]
     topic = random.choice(topics)
-    post = f"**{author}**\n\n{topic.title()}! Quem quer participar?"
-    return post
-
-def generate_new_content():
-    """Gera novo conteúdo para o app"""
-    content = {
-        "tip": generate_new_tip(),
-        "quote": random.choice(QUOTES),
-        "post": generate_community_post(),
+    
+    return {
+        "date": datetime.now().strftime("%Y-%m-%d"),
+        "tip": tip,
+        "quote": quote,
+        "community_post": f"**{author}**\n\n**{topic.title()}**! Quem quer participar?",
         "generated_at": datetime.now().isoformat()
     }
+
+def save_content(content):
+    """Salva conteúdo em arquivos"""
+    os.makedirs('docs/generated', exist_ok=True)
+    
+    # Save tip
+    tip_html = f"""
+<div class="auto-tip" style="background: #f8f9fa; padding: 16px; margin: 16px 20px; border-radius: 12px; border-left: 4px solid #00A8CC;">
+    <p style="font-size: 12px; color: #666; margin: 0;">{content['tip']['categoria']}</p>
+    <h4 style="margin: 8px 0; color: #0E2439;">{content['tip']['titulo']}</h4>
+    <p style="font-size: 14px; line-height: 1.6; color: #333;">{content['tip']['conteudo']}</p>
+    <p style="font-size: 11px; color: #999; margin-top: 8px;">Tags: {', '.join(content['tip']['tags'])}</p>
+</div>
+"""
+    with open('docs/generated/tip.html', 'w', encoding='utf-8') as f:
+        f.write(tip_html)
+    
+    # Save quote
+    quote_html = f"""
+<div class="auto-quote" style="text-align: center; padding: 20px; margin: 20px; font-style: italic; font-size: 16px; color: #555;">
+    "{content['quote']}"
+</div>
+"""
+    with open('docs/generated/quote.html', 'w', encoding='utf-8') as f:
+        f.write(quote_html)
+    
+    # Save community post
+    post_html = f"""
+<div class="auto-post" style="background: #fff; padding: 16px; margin: 10px 20px; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+    {content['community_post']}
+    <p style="font-size: 11px; color: #999; margin-top: 8px;">Gerado automaticamente em {content['date']}</p>
+</div>
+"""
+    with open('docs/generated/post.html', 'w', encoding='utf-8') as f:
+        f.write(post_html)
+    
     return content
 
-if __name__ == "__main__":
+def main():
     print("🎲 ASF Content Generator")
-    print("=" * 30)
-    content = generate_new_content()
-    print(content)
+    print("=" * 50)
+    content = generate_content()
+    saved = save_content(content)
+    
+    print(f"✅ Generated content for {saved['date']}")
+    print(f"   📌 Tip: {saved['tip']['titulo']}")
+    print(f"   💬 Quote: {saved['quote'][:50]}...")
+    print(f"   👤 Post: {saved['community_post'][:50]}...")
+    print(f"\n📁 Files saved to docs/generated/")
+
+if __name__ == "__main__":
+    main()

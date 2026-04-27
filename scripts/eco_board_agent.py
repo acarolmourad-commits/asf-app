@@ -1,122 +1,79 @@
 #!/usr/bin/env python3
 """
-ASF Surfboard & Eco Agent
-Agente que gera conteúdo diário sobre pranchas e sustentabilidade
+ASF Eco Board Agent
+Gera conteúdo sobre pranchas e sustentabilidade
 """
 
 import random
-from datetime import datetime
 import json
+from datetime import datetime
 
-# Conteúdo sobre pranchas
 BOARD_CONTENT = [
-    {
-        "title": "Longboard: O clássico atemporal",
-        "content": "Longboards são pranchas de 9'0\" ou mais. Perfeitas para ondas pequenas e para quem busca estabilidade. O estilo classic surfing com trilhos paralelos está voltando com força!",
-        "tags": ["Longboard", "Técnica", "Clássico"]
-    },
-    {
-        "title": "Funboard: O estilo versátil",
-        "content": "Funboards (7'0\" - 8'6\") são ideais para quem quer evoluir. Mais ágil que o longboard, oferece mais manobras mantendo a estabilidade. Perfeito transição!",
-        "tags": ["Funboard", "Evolução", "Versátil"]
-    },
-    {
-        "title": "Shortboard: Radical e performance",
-        "content": "Shortboards (5'6\" - 6'6\") são para quem busca performance. Mais rápida, ideal para ondas médias a grandes. Requer mais técnica e condition física.",
-        "tags": ["Shortboard", "Performance", "Radical"]
-    },
-    {
-        "title": "Fish: Ondas pequenas não são problema",
-        "content": "A shape fish tem outline mais curto e largo. Perfeita para ondas fracas! Twin fin ou quad fin gives mais speed em ondas pequenas.",
-        "tags": ["Fish", "Ondas Pequenas", "Speed"]
-    },
-    {
-        "title": "Evolua da Foam para Hardboard",
-        "content": "Quando você conseguir fazer paddling, pop-up e bottom turn com facilidade, é hora de pensar em移行 para prancha de fiberglass. A transição gradual é fundamental!",
-        "tags": ["Evolução", "Iniciante", "Dicas"]
-    },
+    {"title": "Longboard: O clássico", "content": "Longboards (9'0\"+) são perfeitas para ondas pequenas e estabilidade.", "tags": ["Longboard", "Clássico"]},
+    {"title": "Funboard: A versátil", "content": "Funboards (7'0\"-8'6\") são ideais para evolução. Mais ágil que longboard, mantém estabilidade.", "tags": ["Funboard", "Evolução"]},
+    {"title": "Shortboard: Performance", "content": "Shortboards (5'6\"-6'6\") são para performance. Requer técnica e condicionamento.", "tags": ["Shortboard", "Performance"]},
+    {"title": "Fish: Para ondas pequenas", "content": "Shape com outline curto e largo. Perfeita para ondas fracas! Twin ou quad fin para mais speed.", "tags": ["Fish", "Speed"]},
 ]
 
-# Conteúdo sobre Phenix Teccel
 PHENIX_CONTENT = [
-    {
-        "title": "O que é o Bloco Phenix Teccel?",
-        "content": "É um núcleo de EPS (poliestireno expandido) ecologicamente correto, desenvolvido pela Phenix Teccel. Pode ser 100% reciclado ou biodegradado, reduzindo significativamente o impacto ambiental.",
-        "category": "Sustentabilidade"
-    },
-    {
-        "title": "Benefícios do Bloco Ecológico",
-        "content": "1. ♻️ 100% reciclável\n2. 🌿 Biodegradável\n3. 🧊 Livre de CFC\n4. 💧 Menor consumo de água\n5. 🎯 Maior durabilidade\n\nEscolha consciente!",
-        "category": "Meio Ambiente"
-    },
-    {
-        "title": "Por que escolher prancha com bloco ecológico?",
-        "content": "Quando sua prancha chegar ao fim da vida útil, o bloco Phenix Teccel pode ser reciclado corretamente ou se degrada naturalmente. Menos lixo nos oceanos!",
-        "category": "Consumo Consciente"
-    },
-    {
-        "title": "Inovação que respeito o mar",
-        "content": "A Phenix Teccel desenvolveu uma tecnologia que mantém a performance (flutuação, leveza) sem comprometer o planeta. O surf do futuro é sustentável!",
-        "category": "Inovação"
-    },
-    {
-        "title": " ciclo de vida da prancha sustentável",
-        "content": "1. Fabricação: menos água e energia\n2. Uso: performance excellent\n3. Fim de vida: reciclagem ou biodegradação\n\n闭环!",
-        "category": "Sustentabilidade"
-    },
+    {"title": "Bloco Phenix Teccel", "content": "Núcleo EPS ecológico. Pode ser 100% reciclado ou biodegradado. Menor impacto ambiental.", "category": "Sustentabilidade"},
+    {"title": "Benefícios do Bloco Ecológico", "content": "1. ♻️ 100% reciclável 2. 🌿 Biodegradável 3. 🧊 Livre de CFC 4. 💧 Menor consumo de água", "category": "Meio Ambiente"},
+    {"title": "Por que escolher ecológico?", "content": "Quando a prancha chegar ao fim, o bloco pode ser reciclado ou se degrada naturalmente!", "category": "Consumo Consciente"},
 ]
 
-# Dicas diárias
 DAILY_TIPS = [
-    "Hoje as ondas estãosubindo em Bertioga! 🌊 Altura: 0.8m. Bom para Longboard e Funboard!",
-    "Você sabia? O bloco Phenix Teccel pode ser recicladonem pontos de coleta específicos!",
-    "Maré baixa às 11:45 hoje - melhor momento para iniciantes!",
-    "Protoção solar é essencial! Reaplique a cada 2 horas.",
-    "Hidratação: beba 500ml de água antes de surfar!",
+    "Maré baixa às 11:45 hoje - melhor para iniciantes!",
+    "Você sabia? O bloco Phenix Teccel pode ser reciclado!",
+    "Protetor solar: reaplique a cada 2 horas!",
+    "Hidrate-se: 500ml de água antes de surfar!",
     "Alongue ombros e costas antes de entrar na água!",
-    "Respeite os maisexperientes no lineup - Etiqueta no mar!",
-    "Longboard é ideal para ondas abaixo de 1m!",
-    "Funboard ofrece o melhor equilíbrio entre estabilidade e manobras!",
-    "O bloco ecológico Phenix Teccel é biodegradável! 🌱",
 ]
 
-def generate_daily_content():
-    """Gera conteúdo diário"""
+def generate_daily():
     today = datetime.now().strftime("%Y-%m-%d")
+    board = random.choice(BOARD_CONTENT)
+    eco = random.choice(PHENIX_CONTENT)
+    tip = random.choice(DAILY_TIPS)
     
-    return {
+    content = {
         "date": today,
-        "board_tip": random.choice(BOARD_CONTENT),
-        "phenix_tip": random.choice(PHENIX_CONTENT),
-        "daily_message": random.choice(DAILY_TIPS),
+        "board_tip": board,
+        "eco_tip": eco,
+        "daily_message": tip,
         "generated_at": datetime.now().isoformat()
     }
-
-def create_notification_message():
-    """Cria mensagem de notificação diária"""
-    content = generate_daily_content()
     
-    message = f"""
-🏄‍♀️ ASF - Dicas do Dia!
-
-{content['daily_message']}
-
-💡 {content['board_tip']['title']}
-{content['board_tip']['content']}
-
-🌱 Eco Dica: {content['phenix_tip']['title']}
-{content['phenix_tip']['content']}
-
-#SurfFeminino #ASF #Sustentabilidade #PhenixTeccel #EcoSurf
+    os.makedirs('docs/generated', exist_ok=True)
+    
+    # Save JSON
+    with open('docs/generated/eco-board.json', 'w', encoding='utf-8') as f:
+        json.dump(content, f, ensure_ascii=False, indent=2)
+    
+    # Save HTML
+    html = f"""
+<div class="eco-content" style="background: linear-gradient(135deg, #f1f8e9, #dcedc8); padding: 20px; margin: 20px; border-radius: 16px;">
+    <h3 style="color: #2e7d32; margin: 0 0 12px 0;">🏄 {board['title']}</h3>
+    <p style="color: #333; margin: 0 0 16px 0;">{board['content']}</p>
+    <div style="background: #fff; padding: 12px; border-radius: 8px; border-left: 4px solid #4CAF50;">
+        <h4 style="margin: 0 0 8px 0; color: #2e7d32;">🌱 {eco['title']}</h4>
+        <p style="margin: 0; color: #555; font-size: 14px;">{eco['content']}</p>
+    </div>
+    <p style="margin-top: 16px; font-style: italic; color: #666;">💡 {tip}</p>
+</div>
 """
-    return message
+    with open('docs/generated/eco-board.html', 'w', encoding='utf-8') as f:
+        f.write(html)
+    
+    return content
+
+def main():
+    print("🏄‍♀️ ASF Eco Board Agent")
+    print("=" * 50)
+    content = generate_daily()
+    print(f"✅ Eco content for {content['date']}")
+    print(f"   📌 Board: {content['board_tip']['title']}")
+    print(f"   🌱 Eco: {content['eco_tip']['title']}")
 
 if __name__ == "__main__":
-    print("🏄‍♀️ ASF Surfboard & Eco Agent")
-    print("=" * 50)
-    content = generate_daily_content()
-    print(json.dumps(content, indent=2, ensure_ascii=False))
-    
-    print("\n" + "=" * 50)
-    print("📱 Mensagem de notificação:")
-    print(create_notification_message())
+    import os
+    main()
