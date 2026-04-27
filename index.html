@@ -6625,11 +6625,18 @@ document.addEventListener('DOMContentLoaded', function() {
             `;
         }
 
-        // Load live data on page load
-        loadLiveData('bertioga');
-
-        // Update moon phase on page load
-        updateMoonPhase();
+        // Defer non-critical initializations to improve page load performance
+        (function() {
+            const init = () => {
+                loadLiveData('bertioga');
+                updateMoonPhase();
+            };
+            if (typeof requestIdleCallback === 'function') {
+                requestIdleCallback(init);
+            } else {
+                setTimeout(init, 0);
+            }
+        })();
 
         // ========== CRONÔMETRO DE TREINO ==========
         let timerInterval = null;
