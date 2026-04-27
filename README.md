@@ -1,5 +1,12 @@
 # 🏄♀️ ASF - Associação de Surf Feminino App
 
+## 🆕 Atualizações Recentes (2026-04-27 14:15 UTC)
+- ✅ 5 novas dicas diárias de técnica avançada (tubular, air, 360, alley-oop, layback)
+- ✅ Total de dicas agora: **674**
+- ✅ Otimização de código/layout e conteúdo
+- ✅ Atualização de documentação (README com novo total de dicas)
+- ✅ Sincronização de HEARTBEAT.md - checklist a cada 15 min
+
 ## 🆕 Atualizações Recentes (2026-04-27 13:45 UTC)
 - ✅ Otimização de carregamento: adiar chamadas de API de clima/mar via requestIdleCallback, melhorando tempo de interação inicial
 - ✅ Nenhuma nova dica adicionada (foco em performance)
