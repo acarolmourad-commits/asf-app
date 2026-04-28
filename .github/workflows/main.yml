@@ -1,50 +1,28 @@
-name: ASF App - Daily Automation
+name: ASF App - Daily Automation (Audited & Improved v2)
 
 on:
   push:
     branches: [main]
   schedule:
-    # Wave forecast: daily at 7 AM BRT (10:00 UTC)
+    # 🌊 Wave forecast: daily at 7:00 AM BRT (10:00 UTC)
     - cron: '0 10 * * *'
-    # Daily tips: also daily at 7 AM BRT (10:00 UTC)
-    - cron: '0 10 * * *'
-    # Breathing & stretching: every 6 hours
+    # 📝 Daily content: 8:00 AM BRT (11:00 UTC) - includes tips, breathing, stretching, mobility, etc.
+    - cron: '0 11 * * *'
+    # 🧘 Breathing & stretching extra: every 6h (0,6,12,18 UTC)
     - cron: '0 */6 * * *'
   workflow_dispatch:
   repository_dispatch:
     types: [daily_update, deploy, content_update, breathing_stretch]
 
-# Global settings
 env:
   PYTHON_VERSION: '3.11'
   GIT_AUTHOR_NAME: ASF Bot
   GIT_AUTHOR_EMAIL: bot@asf-app.com
+  BOT_SIGNATURE: "🤖 ASF Automation"
 
 jobs:
   # ========================================
-  # DEPLOY JOB
-  # ========================================
-  deploy:
-    name: 🚀 Deploy to GitHub Pages
-    runs-on: ubuntu-latest
-    if: github.event_name == 'push' || github.event_name == 'workflow_dispatch'
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    steps:
-      - uses: actions/checkout@v4
-      - name: 🔍 Validate
-        run: |
-          if [ ! -f index.html ]; then echo "❌ index.html missing"; exit 1; fi
-          echo "✅ index.html: $(wc -l < index.html) lines"
-      - uses: actions/configure-pages@v4
-      - uses: actions/upload-pages-artifact@v3
-        with:
-          path: '.'
-      - uses: actions/deploy-pages@v4
-
-  # ========================================
-  # WAVE FORECAST
+  # 🌊 WAVE FORECAST (10:00 UTC daily)
   # ========================================
   wave-forecast:
     name: 🌊 Wave Forecast
@@ -53,17 +31,21 @@ jobs:
     timeout-minutes: 15
     steps:
       - uses: actions/checkout@v4
-      - name: 🐍 Setup Python
+      - name: 🐍 Setup Python ${{ env.PYTHON_VERSION }}
         uses: actions/setup-python@v5
         with:
           python-version: ${{ env.PYTHON_VERSION }}
-      - name: 🌊 Fetch wave data
+      - name: 🌊 Generate Wave Forecast
         run: |
           python3 scripts/wave_forecast.py
+          echo "✅ Wave forecast generated"
+      - name: ✅ Validate Output
+        run: |
           if [ -f docs/wave-forecast.html ]; then
-            echo "✅ Forecast generated"
+            size=$(wc -c < docs/wave-forecast.html)
+            echo "✅ docs/wave-forecast.html exists ($size bytes)"
           else
-            echo "❌ Forecast file not created"
+            echo "❌ ERROR: docs/wave-forecast.html not created!"
             exit 1
           fi
       - name: 💾 Commit
@@ -71,7 +53,7 @@ jobs:
           git config user.name "${{ env.GIT_AUTHOR_NAME }}"
           git config user.email "${{ env.GIT_AUTHOR_EMAIL }}"
           if git diff --quiet docs/wave-forecast.html; then
-            echo "📭 No changes"
+            echo "📭 No changes in wave forecast"
           else
             git add docs/wave-forecast.html
             git commit -m "🌊 Wave forecast - $(date +%Y-%m-%d)"
@@ -80,186 +62,208 @@ jobs:
           fi
 
   # ========================================
-  # DAILY TIP (Mental Wellness)
+  # 🧘 BREATHING & STRETCHING (every 6h)
   # ========================================
-  daily-tip:
-    name: 🧠 Daily Mental Tip
+  breathing-stretching:
+    name: 🧘 Breathing & Stretching
     runs-on: ubuntu-latest
     if: github.event_name == 'schedule' || github.event_name == 'repository_dispatch'
     timeout-minutes: 10
     steps:
       - uses: actions/checkout@v4
-      - name: 🧠 Generate tip
+      - name: 🐍 Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+      - name: 🧘 Generate Breathing Tip
         run: |
-          python3 << 'PYEOF'
-import os
-from datetime import datetime
-TIPS = [
-    {"cat": "🧠 Mindfulness", "title": "Respiração 4-7-8", "text": "Inspire 4s, segure 7s, expire 8s. Repita 3x. Acalma instantaneamente!"},
-    {"cat": "🌊 Surf Mental", "title": "Uma onda de cada vez", "text": "Foque apenas na próxima onda. O presente é seu aliado."},
-    {"cat": "💪 Confiança", "title": "Você sabe surfar", "text": "Lembre-se de 3 ondas que você conseguiu. Você é capaz!"},
-    {"cat": "😰 Ansiedade", "title": "Olha o horizonte", "text": "Quando ansiedade subir, olhe para horizonte. A vista larga ajuda."},
-    {"cat": "🧘 Meditação", "title": "5 minutos de paz", "text": "Senta na areia antes de surfar. Fecha olhos. Sente o som do mar."},
-    {"cat": "🌅 Motivação", "title": "Novo dia", "text": "Cada sessão é uma chance de recomeçar. O que passou não define hoje."},
-    {"cat": "🧠 Mindfulness", "title": "Corpo presente", "text": "Sente pés na prancha. Sente água. Mente divagando? Traz pro corpo."},
-]
-day = datetime.now().timetuple().tm_yday
-tip = TIPS[day % len(TIPS)]
-html = f'''<div style="background:linear-gradient(135deg,#9B59B6,#8E44AD);padding:20px;margin:20px;border-radius:16px;color:white;">
-<p style="font-size:12px;opacity:0.9;">{tip['cat']}</p><h3 style="margin:8px 0;">{tip['title']}</h3><p style="font-size:14px;line-height:1.6;">{tip['text']}</p><p style="font-size:11px;opacity:0.8;margin-top:12px;">⏰ {datetime.now().strftime('%d/%m/%Y')}</p></div>'''
-os.makedirs('docs', exist_ok=True)
-with open('docs/daily-tip.html','w',encoding='utf-8') as f: f.write(html)
-print(f"✅ Tip: {tip['title']}")
-PYEOF
-      - name: 💾 Commit
+          python3 scripts/respiracao_dicas.py
+          echo "✅ Breathing tip generated"
+      - name: ✅ Validate Breathing Output
         run: |
-          git config user.name "${{ env.GIT_AUTHOR_NAME }}"
-          git config user.email "${{ env.GIT_AUTHOR_EMAIL }}"
-          git add docs/daily-tip.html
-          git commit -m "🧠 Daily tip - $(date +%Y-%m-%d)" || echo "No changes"
-          git push
-
-  # ========================================
-  # RESPIRAÇÃO DICAS (New!)
-  # ========================================
-  respiracao:
-    name: 🧘 Respiração Tips
-    runs-on: ubuntu-latest
-    if: github.event_name == 'schedule' || github.event_name == 'repository_dispatch'
-    timeout-minutes: 10
-    steps:
-      - uses: actions/checkout@v4
-      - name: 🧘 Generate breathing tips
-        run: |
-          python3 scripts/respiração_dicas.py
-      - name: 💾 Commit
-        run: |
-          git config user.name "${{ env.GIT_AUTHOR_NAME }}"
-          git config user.email "${{ env.GIT_AUTHOR_EMAIL }}"
-          if git diff --quiet docs/generated/respiracao.html; then
-            echo "📭 No changes"
+          if [ -f docs/generated/respiracao.html ]; then
+            echo "✅ respiracao.html exists ($(wc -c < docs/generated/respiracao.html) bytes)"
           else
-            git add docs/generated/respiracao.html
-            git commit -m "🧘 Breathing tip update - $(date +%Y-%m-%d)"
-            git push
-            echo "✅ Updated"
+            echo "❌ ERROR: respiracao.html missing"
+            exit 1
           fi
-
-  # ========================================
-  # ALONGAMENTO DICAS (New!)
-  # ========================================
-  alongamento:
-    name: 🧘 Alongamento Tips
-    runs-on: ubuntu-latest
-    if: github.event_name == 'schedule' || github.event_name == 'repository_dispatch'
-    timeout-minutes: 10
-    steps:
-      - uses: actions/checkout@v4
-      - name: 🧘 Generate stretching tips
+      - name: 🧘 Generate Stretching Tip
         run: |
           python3 scripts/alongamento_dicas.py
+          echo "✅ Stretching tip generated"
+      - name: ✅ Validate Stretching Output
+        run: |
+          if [ -f docs/generated/alongamento.html ]; then
+            echo "✅ alongamento.html exists ($(wc -c < docs/generated/alongamento.html) bytes)"
+          else
+            echo "❌ ERROR: alongamento.html missing"
+            exit 1
+          fi
       - name: 💾 Commit
         run: |
           git config user.name "${{ env.GIT_AUTHOR_NAME }}"
           git config user.email "${{ env.GIT_AUTHOR_EMAIL }}"
-          if git diff --quiet docs/generated/alongamento.html; then
-            echo "📭 No changes"
-          else
-            git add docs/generated/alongamento.html
-            git commit -m "🧘 Stretching tip update - $(date +%Y-%m-%d)"
+          changed=false
+          for file in docs/generated/respiracao.html docs/generated/alongamento.html; do
+            if ! git diff --quiet "$file"; then
+              changed=true
+              echo "📝 $file changed"
+            fi
+          done
+          if [ "$changed" = true ]; then
+            git add docs/generated/respiracao.html docs/generated/alongamento.html
+            git commit -m "🧘 Breathing & stretching update - $(date +%Y-%m-%d %H:%M)"
             git push
             echo "✅ Updated"
+          else
+            echo "📭 No changes"
           fi
 
   # ========================================
-  # CONTENT GENERATOR
+  # 📝 DAILY CONTENT (11:00 UTC daily)
   # ========================================
-  content-generator:
-    name: 📝 Content Generator
+  daily-content:
+    name: 📝 Daily Content Pack
     runs-on: ubuntu-latest
     if: github.event_name == 'schedule' || github.event_name == 'repository_dispatch'
-    timeout-minutes: 15
+    timeout-minutes: 20
     steps:
       - uses: actions/checkout@v4
-      - name: 📝 Generate content
+      - name: 🐍 Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+      - name: 🧠 Generate Daily Mental Tip
+        run: |
+          python3 scripts/daily_tip.py
+      - name: ✅ Validate Daily Tip
+        run: |
+          if [ -f docs/daily-tip.html ]; then
+            echo "✅ daily-tip.html exists"
+          else
+            echo "❌ daily-tip.html missing"
+            exit 1
+          fi
+      - name: 📝 Generate Full Content (tips, quotes, posts)
         run: |
           python3 scripts/generate_content.py
-      - name: 🔍 Link check (non-fatal)
+      - name: ✅ Validate Full Content
+        run: |
+          for file in docs/generated/tip.html docs/generated/quote.html docs/generated/post.html; do
+            if [ -f "$file" ]; then
+              echo "✅ $file"
+            else
+              echo "❌ $file missing"
+              exit 1
+            fi
+          done
+      - name: 🧘 Generate Mobility
+        run: |
+          python3 scripts/mobility_agent.py
+      - name: ✅ Validate Mobility
+        run: |
+          for file in docs/generated/mobility.json docs/generated/mobility.html; do
+            if [ -f "$file" ]; then
+              echo "✅ $file"
+            else
+              echo "❌ $file missing"
+              exit 1
+            fi
+          done
+      - name: 🤖 Generate Smart Suggestions
+        run: |
+          python3 scripts/smart_generator.py
+      - name: ✅ Validate Smart
+        run: |
+          for file in docs/generated/smart.json docs/generated/smart.html; do
+            if [ -f "$file" ]; then
+              echo "✅ $file"
+            else
+              echo "❌ $file missing"
+              exit 1
+            fi
+          done
+      - name: 🌱 Generate Eco Board
+        run: |
+          python3 scripts/eco_board_agent.py
+      - name: ✅ Validate Eco
+        run: |
+          for file in docs/generated/eco-board.json docs/generated/eco-board.html; do
+            if [ -f "$file" ]; then
+              echo "✅ $file"
+            else
+              echo "❌ $file missing"
+              exit 1
+            fi
+          done
+      - name: 🎨 Run Layout Optimizer (non-fatal)
         if: always()
-        run: python3 scripts/link_checker.py || true
-      - name: 💾 Commit
         run: |
-          git config user.name "${{ env.GIT_AUTHOR_NAME }}"
-          git config user.email "${{ env.GIT_AUTHOR_EMAIL }}"
-          if ! git diff --quiet; then
-            git add -A
-            git commit -m "📝 Auto content - $(date +%Y-%m-%d\ %H:%M)"
-            git push
-          fi
-
-  # ========================================
-  # MOBILITY AGENT
-  # ========================================
-  mobility:
-    name: 🧘 Mobility Agent
-    runs-on: ubuntu-latest
-    if: github.event_name == 'schedule' || github.event_name == 'repository_dispatch'
-    timeout-minutes: 10
-    steps:
-      - uses: actions/checkout@v4
-      - name: 🧘 Generate mobility
-        run: python3 scripts/mobility_agent.py
-      - name: 💾 Commit
-        run: |
-          git config user.name "${{ env.GIT_AUTHOR_NAME }}"
-          git config user.email "${{ env.GIT_AUTHOR_EMAIL }}"
-          if ! git diff --quiet; then
-            git add -A
-            git commit -m "🧘 Mobility update - $(date +%Y-%m-%d)"
-            git push
-          fi
-
-  # ========================================
-  # SMART GENERATOR
-  # ========================================
-  smart-gen:
-    name: 🤖 Smart Generator
-    runs-on: ubuntu-latest
-    if: github.event_name == 'schedule' || github.event_name == 'repository_dispatch'
-    timeout-minutes: 10
-    steps:
-      - uses: actions/checkout@v4
-      - name: 🤖 Generate smart
-        run: python3 scripts/smart_generator.py
-      - name: 💾 Commit
+          python3 scripts/layout_optimizer.py || true
+      - name: 🔍 Run Link Checker (non-fatal)
         if: always()
         run: |
-          git config user.name "${{ env.GIT_AUTHOR_NAME }}"
-          git config user.email "${{ env.GIT_AUTHOR_EMAIL }}"
-          if ! git diff --quiet; then
-            git add -A
-            git commit -m "🤖 Smart update - $(date +%Y-%m-%d\ %H:%M)"
-            git push
-          fi
-
-  # ========================================
-  # ECO BOARD AGENT
-  # ========================================
-  eco-board:
-    name: 🌱 Eco Board Agent
-    runs-on: ubuntu-latest
-    if: github.event_name == 'schedule' || github.event_name == 'repository_dispatch'
-    timeout-minutes: 10
-    steps:
-      - uses: actions/checkout@v4
-      - name: 🌱 Generate eco
-        run: python3 scripts/eco_board_agent.py
-      - name: 💾 Commit
+          python3 scripts/link_checker.py || true
+      - name: ✅ Validate Layout & Link Reports
+        run: |
+          for file in docs/generated/layout-report.json docs/generated/link-checker.json; do
+            if [ -f "$file" ]; then
+              echo "✅ $file"
+            else
+              echo "❌ $file missing"
+              exit 1
+            fi
+          done
+      - name: 💾 Commit All Changes
         run: |
           git config user.name "${{ env.GIT_AUTHOR_NAME }}"
           git config user.email "${{ env.GIT_AUTHOR_EMAIL }}"
-          if ! git diff --quiet; then
+
+          if git diff --quiet; then
+            echo "📭 No changes to commit"
+          else
             git add -A
-            git commit -m "🌱 Eco update - $(date +%Y-%m-%d)"
+            git status --short
+            git commit -m "📝 Daily content update - $(date +%Y-%m-%d)"
             git push
+            echo "✅ All changes committed"
           fi
+
+  # ========================================
+  # 🚀 DEPLOY (on push only)
+  # ========================================
+  deploy:
+    name: 🚀 Deploy to GitHub Pages
+    runs-on: ubuntu-latest
+    if: github.event_name == 'push' || github.event_name == 'workflow_dispatch'
+    needs: [wave-forecast, breathing-stretching, daily-content]
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: 🔍 Validate App Structure
+        run: |
+          echo "🔍 Validating app structure..."
+          if [ ! -f index.html ]; then
+            echo "❌ index.html missing!"
+            exit 1
+          fi
+          lines=$(wc -l < index.html)
+          echo "✅ index.html: $lines lines"
+
+          # Check critical sections
+          grep -q "Brand Hub" index.html && echo "✅ Brand Hub section found"
+          grep -q "badges" index.html && echo "✅ Badges section found"
+          grep -q "Comunidade ASF" index.html && echo "✅ Community section found"
+          grep -q "🏆 Minhas Conquistas" index.html && echo "✅ Badges page found"
+      - uses: actions/configure-pages@v4
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: '.'
+      - uses: actions/deploy-pages@v4
+        id: deployment
+      - name: ✅ Deployment Success
+        run: |
+          echo "🎉 App deployed successfully!"
+          echo "🌐 URL: ${{ steps.deployment.outputs.page_url }}"
