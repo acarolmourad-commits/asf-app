@@ -1,0 +1,146 @@
+<!-- SEÇÃO BRAND HUB - Para inserir no index.html -->
+<div class="section" id="brandhub">
+    <div class="section-header">
+        <h2 class="section-title">🤝 Brand Hub - Parceiros ASF</h2>
+    </div>
+
+    <!-- Destaque Principal -->
+    <div style="background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%); padding: 30px; margin: 20px; border-radius: 20px; color: #0E2439; text-align: center;">
+        <div style="font-size: 48px; margin-bottom: 16px;">🏆</div>
+        <h3 style="font-size: 24px; margin-bottom: 12px;">DESAFIO DA SEMANA</h3>
+        <p style="font-size: 18px; font-weight: bold; margin-bottom: 8px;">Patrocinado por <span id="brand-sponsor">[Nome da Marca]</span></p>
+        <p style="font-size: 16px; margin-bottom: 20px;">"Melhor foto com prancha na praia de Bertioga"</p>
+
+        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; margin-bottom: 25px;">
+            <div style="background: rgba(255,255,255,0.3); padding: 15px; border-radius: 12px;">
+                <div style="font-size: 24px; font-weight: bold;">150+</div>
+                <div>Fotos enviadas</div>
+            </div>
+            <div style="background: rgba(255,255,255,0.3); padding: 15px; border-radius: 12px;">
+                <div style="font-size: 24px; font-weight: bold;">3.4K</div>
+                <div>Votos</div>
+            </div>
+            <div style="background: rgba(255,255,255,0.3); padding: 15px; border-radius: 12px;">
+                <div style="font-size: 24px; font-weight: bold;">R$500</div>
+                <div>Em prêmios</div>
+            </div>
+        </div>
+
+        <button onclick="showBrandChallenge()" class="cta-button" style="background: #0E2439; color: white; padding: 16px 32px; border-radius: 50px; font-size: 16px; border: none; cursor: pointer;">
+            📸 Participar do Desafio
+        </button>
+    </div>
+
+    <!-- Ofertas Exclusivas -->
+    <div style="margin: 0 20px 30px;">
+        <h3 style="margin-bottom: 15px;">🔥 Ofertas Exclusivas para Manas ASF</h3>
+        <div class="cards-grid" id="brand-offers">
+            <!-- Será preenchido dinamicamente via JS -->
+        </div>
+    </div>
+
+    <!-- Galeria UGC -->
+    <div style="margin: 0 20px 30px;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+            <h3 style="margin: 0;">📸 Galeria da Comunidade</h3>
+            <span style="font-size: 12px; opacity: 0.7;">Fotos reais de manas usando marcas parceiras</span>
+        </div>
+        <div id="ugc-gallery" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px;">
+            <!-- Imagens preenchidas via JS -->
+        </div>
+    </div>
+
+    <!-- Seja um Parceiro -->
+    <div style="background: linear-gradient(135deg, #2c0a37, #4a1c5e); padding: 30px; margin: 20px; border-radius: 20px; text-align: center; color: white;">
+        <h3 style="font-size: 22px; margin-bottom: 12px;">🤝 Sua marca quer fazer parte?</h3>
+        <p style="margin-bottom: 20px; opacity: 0.9;">Chegue a 10.000+ surfistas mulheres com conteúdo autêntico!</p>
+        <button onclick="showBrandContact()" class="cta-button" style="background: white; color: #0E2439; padding: 14px 28px; border-radius: 50px; font-size: 15px; border: none; cursor: pointer;">
+            📲 Falar com a Carol
+        </button>
+    </div>
+</div>
+
+<script>
+// Mock data - will be replaced by real API
+const BRAND_OFFERS = [
+    {
+        brand: "STHILL SURF",
+        discount: "20% OFF",
+        code: "ASF20",
+        description: "Em todas as pranchas e acessórios",
+        expires: "30/04",
+        color: "#3498db"
+    },
+    {
+        brand: "TRIBOSURF",
+        discount: "30% OFF",
+        code: "ASF30",
+        description: "Lycras e rash guards",
+        expires: "15/05",
+        color: "#e74c3c"
+    },
+    {
+        brand: "SURFTRUNK",
+        discount: "Brinde exclusivo",
+        code: "ASFBONUS",
+        description: "Compra acima de R$300",
+        expires: "31/05",
+        color: "#2ecc71"
+    }
+];
+
+const UGC_IMAGES = [
+    "https://images.unsplash.com/photo-1502680390469-be75c86b636f?w=400&h=400&fit=crop", // surf mulher
+    "https://images.unsplash.com/photo-1527124423653-95a5c4b1d379?w=400&h=400&fit=crop", // surf
+    "https://images.unsplash.com/photo-1522207672534-b15242e0e8f8?w=400&h=400&fit=crop", // praia
+    "https://images.unsplash.com/photo-1519046904884-53103b34b206?w=400&h=400&fit=crop", // onda
+    "https://images.unsplash.com/photo-1530549387789-4c1017266635?w=400&h=400&fit=crop", // surfista
+    "https://images.unsplash.com/photo-1501423390713-72334d66b181?w=400&h=400&fit=crop"  // prancha
+];
+
+function renderBrandHub() {
+    // Render offers
+    const offersContainer = document.getElementById('brand-offers');
+    if (offersContainer) {
+        offersContainer.innerHTML = BRAND_OFFERS.map(offer => `
+            <div class="card" style="background: linear-gradient(135deg, ${offer.color}22, ${offer.color}11); border-left: 4px solid ${offer.color};">
+                <div style="display: flex; justify-content: space-between; align-items: start;">
+                    <h4 style="margin: 0 0 8px 0; color: ${offer.color};">${offer.brand}</h4>
+                    <span style="background: ${offer.color}; color: white; padding: 4px 12px; border-radius: 12px; font-size: 12px; font-weight: bold;">${offer.discount}</span>
+                </div>
+                <p style="font-size: 13px; margin: 0 0 8px 0;">${offer.description}</p>
+                <div style="display: flex; justify-content: space-between; font-size: 11px; opacity: 0.7;">
+                    <span>Código: <strong>${offer.code}</strong></span>
+                    <span>⏰ Válido até ${offer.expires}</span>
+                </div>
+                <button onclick="applyDiscount('${offer.code}')" style="width: 100%; margin-top: 10px; padding: 8px; background: ${offer.color}; color: white; border: none; border-radius: 8px; cursor: pointer;">Aplicar cupom</button>
+            </div>
+        `).join('');
+    }
+
+    // Render UGC gallery
+    const gallery = document.getElementById('ugc-gallery');
+    if (gallery) {
+        gallery.innerHTML = UGC_IMAGES.map(imgurl => `
+            <div style="aspect-ratio: 1; overflow: hidden; border-radius: 12px; background: linear-gradient(135deg, #00A8CC, #0E2439); display: flex; align-items: center; justify-content: center;">
+                <img src="${imgurl}" alt="UGC" style="width: 100%; height: 100%; object-fit: cover;" loading="lazy">
+            </div>
+        `).join('');
+    }
+}
+
+function showBrandChallenge() {
+    alert('🏆 DESAFIO DA SEMANA\n\n📸 Tema: "Melhor foto com prancha na praia"\n🏅 Prêmio: R$500 em produtos\n📅 Prazo: 7 dias\n\nComo participar:\n1. Tire sua foto\n2. Poste no Instagram marcando @associacaosurffeminino\n3. Use #ASFChallenge\n4. Compartilhe no app!\n\nBoa sorte! 🏄‍♀️');
+}
+
+function showBrandContact() {
+    window.open('https://wa.me/5511954346288?text=Olá!%20Quero%20anunciar%20no%20ASF%20Brand%20Lab.%20Meu%20nome:%20[MARCA]', '_blank');
+}
+
+function applyDiscount(code) {
+    alert(`✅ Cupom ${code} copiado!\n\nUse no site da marca parceira.\nDesconto aplicado automaticamente.`);
+}
+
+// Initialize when DOM ready
+document.addEventListener('DOMContentLoaded', renderBrandHub);
+</script>

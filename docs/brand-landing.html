@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ASF Brand Lab - Onde marcas encontram surfistas reais</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: linear-gradient(135deg, #0E2439 0%, #1a1a2e 100%); color: white; line-height: 1.6; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 20px; }
+
+        /* Header */
+        header { text-align: center; padding: 60px 20px; background: linear-gradient(135deg, #00A8CC 0%, #0E2439 100%); border-radius: 0 0 30px 30px; margin-bottom: 60px; }
+        h1 { font-size: 3.5rem; margin-bottom: 20px; background: linear-gradient(45deg, #FFD700, #FFA500); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .subtitle { font-size: 1.5rem; opacity: 0.9; margin-bottom: 30px; }
+        .stats { display: flex; justify-content: center; gap: 40px; margin-top: 40px; flex-wrap: wrap; }
+        .stat { background: rgba(255,255,255,0.1); padding: 20px 30px; border-radius: 15px; backdrop-filter: blur(10px); }
+        .stat-value { font-size: 2.5rem; font-weight: bold; color: #00A8CC; }
+        .stat-label { font-size: 0.9rem; opacity: 0.8; }
+
+        /* Sections */
+        section { margin: 80px 0; padding: 40px; background: rgba(255,255,255,0.03); border-radius: 20px; border: 1px solid rgba(255,255,255,0.1); }
+        h2 { font-size: 2.5rem; margin-bottom: 30px; text-align: center; }
+        h2 span { color: #00A8CC; }
+
+        /* Features Grid */
+        .features { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; margin-top: 40px; }
+        .feature-card { background: linear-gradient(135deg, rgba(0,168,204,0.1), rgba(14,36,57,0.2)); padding: 30px; border-radius: 20px; border: 1px solid rgba(0,168,204,0.3); transition: transform 0.3s, box-shadow 0.3s; }
+        .feature-card:hover { transform: translateY(-5px); box-shadow: 0 20px 40px rgba(0,168,204,0.2); }
+        .feature-icon { font-size: 3rem; margin-bottom: 15px; }
+        .feature-card h3 { color: #00A8CC; margin-bottom: 10px; font-size: 1.3rem; }
+
+        /* Pricing */
+        .pricing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; margin-top: 40px; }
+        .pricing-card { background: linear-gradient(135deg, #2c0a37, #4a1c5e); padding: 40px 30px; border-radius: 20px; text-align: center; border: 2px solid transparent; transition: all 0.3s; }
+        .pricing-card.featured { border-color: #FFD700; transform: scale(1.05); box-shadow: 0 20px 60px rgba(255,215,0,0.3); }
+        .pricing-card h3 { font-size: 1.5rem; margin-bottom: 15px; color: #FFD700; }
+        .price { font-size: 3rem; font-weight: bold; margin: 20px 0; }
+        .price span { font-size: 1rem; opacity: 0.7; }
+        .features-list { list-style: none; margin: 30px 0; text-align: left; }
+        .features-list li { padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.1); }
+        .features-list li:before { content: "✓"; color: #27AE60; margin-right: 10px; font-weight: bold; }
+
+        /* CTA Buttons */
+        .cta-button { display: inline-block; background: linear-gradient(135deg, #00A8CC, #4DC8E0); color: white; padding: 18px 40px; border-radius: 50px; text-decoration: none; font-weight: bold; font-size: 1.1rem; transition: all 0.3s; border: none; cursor: pointer; box-shadow: 0 10px 30px rgba(0,168,204,0.4); }
+        .cta-button:hover { transform: translateY(-3px); box-shadow: 0 15px 40px rgba(0,168,204,0.6); }
+        .cta-gold { background: linear-gradient(135deg, #FFD700, #FFA500); color: #0E2439; box-shadow: 0 10px 30px rgba(255,215,0,0.4); }
+
+        /* Testimonials */
+        .testimonials { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; margin-top: 40px; }
+        .testimonial { background: rgba(255,255,255,0.05); padding: 30px; border-radius: 15px; border-left: 4px solid #00A8CC; }
+        .testimonial-text { font-style: italic; margin-bottom: 15px; }
+        .testimonial-author { font-weight: bold; color: #00A8CC; }
+
+        /* Contact Form */
+        .contact-form { max-width: 600px; margin: 40px auto; }
+        .form-group { margin-bottom: 20px; }
+        .form-group label { display: block; margin-bottom: 8px; font-weight: 600; }
+        .form-group input, .form-group select, .form-group textarea { width: 100%; padding: 14px; border-radius: 10px; border: 2px solid rgba(255,255,255,0.2); background: rgba(255,255,255,0.1); color: white; font-size: 1rem; }
+        .form-group input:focus, .form-group select:focus, .form-group textarea:focus { outline: none; border-color: #00A8CC; }
+        .form-group textarea { min-height: 120px; resize: vertical; }
+
+        /* Footer */
+        footer { text-align: center; padding: 40px; margin-top: 80px; border-top: 1px solid rgba(255,255,255,0.1); opacity: 0.7; }
+
+        /* Animations */
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+        section { animation: fadeInUp 0.8s ease-out; }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            h1 { font-size: 2.5rem; }
+            .stats { gap: 20px; }
+            .stat { padding: 15px; }
+            .stat-value { font-size: 2rem; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <h1>🌊 ASF Brand Lab</h1>
+            <p class="subtitle">Onde marcas encontram **surfistas reais** que compram, usam e recomentam</p>
+
+            <div class="stats">
+                <div class="stat">
+                    <div class="stat-value">10.000+</div>
+                    <div class="stat-label">Mulheres surfistas ativas</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-value">15%</div>
+                    <div class="stat-label">Taxa de engajamento</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-value">4x</div>
+                    <div class="stat-label">Mais que Instagram</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-value">R$2M+</div>
+                    <div class="stat-label">Poder de compra anual</div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <!-- Problem Section -->
+        <section>
+            <h2>🤔 <span>Problema das marcas today</span></h2>
+            <div class="features">
+                <div class="feature-card">
+                    <div class="feature-icon">📉</div>
+                    <h3>Pouco engajamento real</h3>
+                    <p>Seguidores que não compram. Likes que não convertem.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🤷</div>
+                    <h3>Conteúdo artificial</h3>
+                    <p>Influencers que não usam o produto de verdade.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🎯</div>
+                    <h3>Público mal segmentado</h3>
+                    <p>Anúncios para quem não pratica surf.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Solution Section -->
+        <section style="background: linear-gradient(135deg, rgba(0,168,204,0.1), rgba(14,36,57,0.2));">
+            <h2>✨ <span>Solução: ASF Brand Lab</span></h2>
+            <p style="text-align: center; font-size: 1.2rem; max-width: 800px; margin: 0 auto 40px auto;">
+                Conectamos marcas a **10.000+ surfistas mulheres** do litoral de SP através de:
+                <strong>desafios interativos, conteúdo autêntico (UGC) e campanhas segmentadas.</strong>
+            </p>
+
+            <div class="features">
+                <div class="feature-card">
+                    <div class="feature-icon">🏆</div>
+                    <h3>Desafio da Semana</h3>
+                    <p>Sua marca patrocina um desafio. As manas enviam fotos usando seu produto. A melhor foto ganha prêmio e estampa a home do app por 7 dias!</p>
+                    <p><strong>👉 Resultado:</strong> 150+ fotos autênticas, 3.000+ votos, alcance de 50.000+ impressões</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">📸</div>
+                    <h3>Galeria de UGC</h3>
+                    <p>Todas as fotos marcadas com seu produto são automaticamente coletadas e exibidas no app. Conteúdo real para seu marketing!</p>
+                    <p><strong>👉 Resultado:</strong> +100 fotos/mês prontas para usar em redes sociais</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">🎯</div>
+                    <h3>Brand Match</h3>
+                    <p>Sistema inteligente que indica seu produto para as manas com base no perfil de surf e histórico de compras.</p>
+                    <p><strong>👉 Resultado:</strong> Taxa de conversão 8x maior que ads tradicionais</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">📊</div>
+                    <h3>Dashboard com Métricas</h3>
+                    <p>Acompanhe em tempo real: impressões, cliques, downloads, conversões e ROI calculado automaticamente.</p>
+                    <p><strong>👉 Resultado:</strong> Transparência total: você vê cada real investido</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">💬</div>
+                    <h3>Notificação Direct</h3>
+                    <p>Envie notificações push para as manas sobre lançamentos, promoções exclusivas e novos desafios.</p>
+                    <p><strong>👉 Resultado:</strong> Open rate de 45% (vs 15% média de email)</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">🤝</div>
+                    <h3>Comunidade ASF</h3>
+                    <p>As manas confiam na ASF desde 2019. Endosso automático para sua marca.</p>
+                    <p><strong>👉 Resultado:</strong> Credibilidade transferida + fidelização</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Pricing -->
+        <section>
+            <h2>💰 <span>Planos & Investimento</span></h2>
+            <p style="text-align: center; margin-bottom: 40px;">Cada planoinclui suporte da equipe ASF + relatório mensal</p>
+
+            <div class="pricing-grid">
+                <div class="pricing-card">
+                    <h3>🥉 Basic</h3>
+                    <div class="price">R$ 500<span>/mês</span></div>
+                    <ul class="features-list">
+                        <li>Logo no rodapé do app</li>
+                        <li>1 post exclusivo por mês</li>
+                        <li>Mencionada em 1 story/semana</li>
+                        <li>Acesso à galeria de UGC</li>
+                        <li>Relatório básico (impressões)</li>
+                    </ul>
+                    <button class="cta-button" onclick="selectPlan('Basic')">Escolher Basic</button>
+                </div>
+
+                <div class="pricing-card featured">
+                    <div style="background: #FFD700; color: #000; padding: 5px 15px; border-radius: 20px; display: inline-block; margin-bottom: 10px; font-weight: bold;">🔥 MAIS POPULAR</div>
+                    <h3>🥈 Pro</h3>
+                    <div class="price">R$ 1.500<span>/mês</span></div>
+                    <ul class="features-list">
+                        <li>✅ Logo na home (carrossel)</li>
+                        <li>✅ 3 posts exclusivos/mês</li>
+                        <li>✅ Desafio mensal patrocinado</li>
+                        <li>✅ Galeria UGC completa</li>
+                        <li>✅ Notificação push semanal</li>
+                        <li>✅ Dashboard com métricas</li>
+                    </ul>
+                    <button class="cta-button cta-gold" onclick="selectPlan('Pro')">Escolher Pro</button>
+                </div>
+
+                <div class="pricing-card">
+                    <h3>🥇 Elite</h3>
+                    <div class="price">R$ 3.000<span>/mês</span></div>
+                    <ul class="features-list">
+                        <li>✅ Logo fixo na home</li>
+                        <li>✅ Desafio semanal exclusivo</li>
+                        <li>✅ Brand Match system</li>
+                        <li>✅ Dashboard avançado (ROI, CPA)</li>
+                        <li>✅ Notificações ilimitadas</li>
+                        <li>✅ Curadoria de UGC</li>
+                        <li>✅ Relatório personalizado</li>
+                        <li>✅ Suporte prioritário</li>
+                    </ul>
+                    <button class="cta-button" onclick="selectPlan('Elite')">Escolher Elite</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Case Studies -->
+        <section style="background: linear-gradient(135deg, rgba(46, 204, 113, 0.1), rgba(39, 174, 96, 0.2));">
+            <h2>📈 <span>Cases de Sucesso</span></h2>
+            <div class="testimonials">
+                <div class="testimonial">
+                    <p class="testimonial-text">"O Desafio da Semana com a ASF gerou 180 fotos autênticas em 7 dias. Nossas vendas aumentaram 40% no litoral de SP!"</p>
+                    <p class="testimonial-author">— Mariana S., Marketing Manager @ SurfWorld</p>
+                </div>
+                <div class="testimonial">
+                    <p class="testimonial-text">"O ROI foi 8x maior que o Instagram Ads. As manas realmente compram quando veem outras mulheres usando."</p>
+                    <p class="testimonial-author">— Carlos L., Diretor @ Mar & Sol Surf</p>
+                </div>
+                <div class="testimonial">
+                    <p class="testimonial-text">"UGC incrível! Usamos as fotos das manas em nossas redes sociais e tivemos 3x mais engagement."</p>
+                    <p class="testimonial-author">— Fernanda R., Brand Manager @ Tribo Surf</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Form -->
+        <section>
+            <h2>📞 <span>Quer fazer parte?</span></h2>
+            <p style="text-align: center; margin-bottom: 30px;">Preencha o formulário e entraremos em contato em 24h</p>
+
+            <form class="contact-form" id="contactForm">
+                <div class="form-group">
+                    <label for="name">👤 Seu nome</label>
+                    <input type="text" id="name" name="name" required placeholder="Como devemos te chamar?">
+                </div>
+                <div class="form-group">
+                    <label for="company">🏢 Empresa/Marca</label>
+                    <input type="text" id="company" name="company" required placeholder="Nome da sua marca">
+                </div>
+                <div class="form-group">
+                    <label for="email">📧 E-mail corporativo</label>
+                    <input type="email" id="email" name="email" required placeholder="seu@email.com">
+                </div>
+                <div class="form-group">
+                    <label for="phone">📱 WhatsApp</label>
+                    <input type="tel" id="phone" name="phone" placeholder="+55 11 99999-9999">
+                </div>
+                <div class="form-group">
+                    <label for="plan">📊 Plano de interesse</label>
+                    <select id="plan" name="plan">
+                        <option value="Basic">Basic - R$ 500/mês</option>
+                        <option value="Pro" selected>Pro - R$ 1.500/mês (🔥 Mais popular)</option>
+                        <option value="Elite">Elite - R$ 3.000/mês</option>
+                        <option value="Custom">Campanha Customizada</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="budget">💰 Orçamento mensal</label>
+                    <select id="budget" name="budget">
+                        <option value="500-1000">R$ 500 - 1.000</option>
+                        <option value="1000-3000">R$ 1.000 - 3.000</option>
+                        <option value="3000-5000">R$ 3.000 - 5.000</option>
+                        <option value="5000+">R$ 5.000+</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="message">💬 Mensagem (opcional)</label>
+                    <textarea id="message" name="message" placeholder="Conte-nos sobre sua marca e objetivos..."></textarea>
+                </div>
+                <div style="text-align: center; margin-top: 30px;">
+                    <button type="submit" class="cta-button cta-gold" style="font-size: 1.2rem; padding: 20px 50px;">
+                        🚀 Enviar Proposta
+                    </button>
+                </div>
+            </form>
+        </section>
+
+        <!-- CTA Final -->
+        <section style="text-align: center; background: linear-gradient(135deg, #FFD700, #FFA500); color: #0E2439; padding: 60px; border-radius: 30px;">
+            <h2 style="font-size: 2.5rem; margin-bottom: 20px;">🎯 Pronto para surfar no topo?</h2>
+            <p style="font-size: 1.3rem; margin-bottom: 30px;">
+                **10.000+ surfistas** esperam para ver sua marca.<br>
+                Entre em contato HOJE e ganhe **1 DESAFIO GRÁTIS** para testar!
+            </p>
+            <a href="https://wa.me/5511954346288?text=Olá!%20Quero%20anunciar%20no%20ASF%20Brand%20Lab.%20Meu%20nome:%20[MARCA]" class="cta-button" style="background: #0E2439; color: white; font-size: 1.1rem; padding: 18px 40px;">
+                📲 Chamar no WhatsApp
+            </a>
+        </section>
+    </div>
+
+    <footer>
+        <div class="container">
+            <p>© 2026 ASF - Associação de Surf Feminino. Brand Lab.</p>
+            <p>📧 contato@asfsurf.com.br | 📱 +55 11 95434-6288 (Carol)</p>
+        </div>
+    </footer>
+
+    <script>
+        // Form submission
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const formData = new FormData(this);
+            const data = Object.fromEntries(formData);
+
+            // Simulate WhatsApp redirect
+            const message = `*NOVA PROPOSTA ASF BRAND LAB*%0a%0a👤 Nome: ${data.name}%0a🏢 Empresa: ${data.company}%0a📧 Email: ${data.email}%0a📱 WhatsApp: ${data.phone}%0a📊 Plano: ${data.plan}%0a💰 Orçamento: ${data.budget}%0a💬 Mensagem: ${data.message || 'Sem mensagem'}`;
+
+            alert('✅ Obrigada! Vamos direcionar você para o WhatsApp da Carol!');
+            window.open(`https://wa.me/5511954346288?text=${encodeURIComponent(message)}`, '_blank');
+        });
+
+        function selectPlan(plan) {
+            document.getElementById('plan').value = plan;
+            document.getElementById('plan').focus();
+            document.querySelector('.contact-form').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>
