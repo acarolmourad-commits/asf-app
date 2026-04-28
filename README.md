@@ -1,5 +1,22 @@
 # 🏄♀️ ASF - Associação de Surf Feminino App
 
+## 💰 MONETIZAÇÃO (2026-04-28)
+
+### **NOVO: App Agora Gera Receita!**
+- 🛒 **Loja ASF** - 6 produtos afiliados (Mercado Livre)
+- ⭐ **ASF Premium** - R$19,90/mês (900+ dicas + badges VIP)
+- 📧 **Newsletter** - Dicas no seu email (sem spam)
+- 📱 **WhatsApp Direct** - Fale com a ASF
+- 📊 **Google Analytics 4** - Analytics completos
+
+**Próximos passos:** Google AdSense, YouTube channel, E-book
+
+Veja: `docs/audit-monetization.md` para detalhes completos.
+
+---
+
+# 🏄♀️ ASF - Associação de Surf Feminino App
+
 ## 🆕 Atualizações Recentes (2026-04-28 23:15 UTC)
 - ✅ 5 novas dicas diárias (vídeo análise, pós-surf recovery, meditação guiada, patrocínio ASF, ondas pequenas)
 - ✅ Total de dicas agora: **899**

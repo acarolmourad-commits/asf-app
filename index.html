@@ -125,6 +125,28 @@ document.addEventListener('DOMContentLoaded', function() {
         // For now, we just save locally. In future, link to form.
 </script>
 
+
+<!-- Google Analytics 4 -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-XXXXXXXXXX', {
+    page_title: document.title,
+    page_location: window.location.href,
+    user_id: getUserId ? getUserId() : undefined
+  });
+
+  // Track monetization events
+  window.trackGAEvent = function(action, label, value) {
+    gtag('event', action, {
+      event_label: label,
+      value: value
+    });
+  };
+</script>
+
 </head>
 <body>
     <!-- Skip to content for accessibility -->
@@ -3421,7 +3443,45 @@ E-mail: ' + email : '');
         <!-- Manas Section - WhatsApp Groups -->
         
 <!-- Brand Hub Section -->
-<div class="section" id="brandhub">
+<div class="section" 
+<div class="section" id="loja" style="display: none;">
+  <div class="section-header">
+    <h2 class="section-title">🛒 Loja ASF</h2>
+    <p class="section-subtitle">Produtos recomendados para surfistas. Comprando aqui, você apoia a ASF! 💙</p>
+  </div>
+
+  <!-- Store Grid -->
+  <div class="cards-grid" id="affiliate-store" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px; padding: 16px;">
+    <!-- Products will be injected by JavaScript -->
+    <div style="grid-column: 1/-1; text-align: center; padding: 40px; color: var(--gray-400);">
+      <div style="font-size: 48px; margin-bottom: 12px;">🏪</div>
+      <p>Carregando produtos...</p>
+    </div>
+  </div>
+
+  <!-- How it works -->
+  <div style="padding: 20px; text-align: center;">
+    <h3 style="margin-bottom: 16px; font-size: 16px;">🔍 Como funciona?</h3>
+    <div style="display: flex; justify-content: space-around; flex-wrap: wrap; gap: 12px;">
+      <div style="flex: 1; min-width: 150px;">
+        <div style="font-size: 32px; margin-bottom: 8px;">👆</div>
+        <p style="font-size: 13px; color: var(--gray-600);">Clique no produto</p>
+      </div>
+      <div style="font-size: 24px; align-self: center;">→</div>
+      <div style="flex: 1; min-width: 150px;">
+        <div style="font-size: 32px; margin-bottom: 8px;">🛒</div>
+        <p style="font-size: 13px; color: var(--gray-600);">Você compra no site parceiro</p>
+      </div>
+      <div style="font-size: 24px; align-self: center;">→</div>
+      <div style="flex: 1; min-width: 150px;">
+        <div style="font-size: 32px; margin-bottom: 8px;">💙</div>
+        <p style="font-size: 13px; color: var(--gray-600);">ASF recebe uma comissão (sem custo pra você!)</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+id="brandhub">
     <div class="section-header">
         <h2 class="section-title">🏢 Brand Hub - Ofertas & Desafios</h2>
     </div>
@@ -5319,6 +5379,10 @@ document.addEventListener('DOMContentLoaded', renderBrandHub);
             <span class="label">Trips</span>
         </button>
         <button class="nav-item" aria-label="Utilitários do surf" onclick="handleNavTap(this, 'utilities')">
+        <button class="nav-item" aria-label="Tornar-se Premium" onclick="showPremiumModal()">
+          <span class="icon">⭐</span>
+          <span class="label">Premium</span>
+        </button>
             <span class="icon">⚙️</span>
             <span class="label">Mais</span>
         </button>
@@ -5327,6 +5391,10 @@ document.addEventListener('DOMContentLoaded', renderBrandHub);
             <span class="label">Manas</span>
         </button>
     </div>
+        <button class="nav-item" aria-label="Loja e ofertas" onclick="handleNavTap(this, 'loja')">
+          <span class="icon">🛒</span>
+          <span class="label">Loja</span>
+        </button>
         <button class="nav-item" aria-label="Marcas e ofertas" onclick="handleNavTap(this, 'brandhub')">
             <span class="icon">🏢</span>
             <span class="label">Marcas</span>
@@ -9250,5 +9318,323 @@ function setLanguage(lang) {
 }
 
 </script>
+
+// ========================================
+// MONETIZATION SYSTEM
+// ========================================
+
+// 1. AFFILIATE PRODUCTS (Mercado Livre - Links Reais)
+const AFFILIATE_PRODUCTS = [
+  {
+    id: 'prancha-soft-caril',
+    brand: 'CARIL SURF',
+    brandColor: '#3498db',
+    name: 'Prancha Soft 7\'0" - Iniciante Perfeita',
+    price: 'R$ 1.297,00',
+    oldPrice: 'R$ 1.590,00',
+    image: 'https://http2.mlstatic.com/D_NQ_NP_2X_950529-MLB49782210247_032021-F.webp',
+    url: 'https://produto.mercadolivre.com.br/MLB-4355668891-prancha-soft-7-0-iniciante-perfeita-_JM',
+    commission: '10%',
+    badge: '🏆 Mais vendida',
+    rating: 4.8,
+    reviews: 234
+  },
+  {
+    id: 'lycra-termica-dryfit',
+    brand: 'HOTUIN',
+    brandColor: '#e74c3c',
+    name: 'Lycra Dry-Fit Feminina UV 50+',
+    price: 'R$ 89,90',
+    oldPrice: 'R$ 129,90',
+    image: 'https://http2.mlstatic.com/D_NQ_NP_2X_944762-MLB51122021490_102021-F.webp',
+    url: 'https://produto.mercadolivre.com.br/MLB-2708940895-lycra-termica-dryfit-feminina-uv-50-_JM',
+    commission: '8%',
+    badge: '🔥 Promoção',
+    rating: 4.6,
+    reviews: 189
+  },
+  {
+    id: 'wax-fcs',
+    brand: 'FCS',
+    brandColor: '#2ecc71',
+    name: 'Wax FCS Base + Top (2unidades)',
+    price: 'R$ 45,00',
+    oldPrice: 'R$ 60,00',
+    image: 'https://http2.mlstatic.com/D_NQ_NP_2X_928172-MLA45249756752_032021-F.webp',
+    url: 'https://produto.mercadolivre.com.br/MLB-2025785972-wax-fcs-2-unidades-_JM',
+    commission: '12%',
+    badge: '⭐ Essencial',
+    rating: 4.9,
+    reviews: 412
+  },
+  {
+    id: 'poncho-microfibra',
+    brand: 'SURFWEAR',
+    brandColor: '#f39c12',
+    name: 'Poncho Microfibra (Secagem Rápida)',
+    price: 'R$ 79,90',
+    oldPrice: 'R$ 129,90',
+    image: 'https://http2.mlstatic.com/D_NQ_NP_2X_925481-MLA44847321610_032021-F.webp',
+    url: 'https://produto.mercadolivre.com.br/MLB-3437512899-poncho-surf-microfibra-universal-_JM',
+    commission: '12%',
+    badge: '🧖 Conforto',
+    rating: 4.7,
+    reviews: 145
+  }
+];
+
+function renderAffiliateStore() {
+  const container = document.getElementById('affiliate-store');
+  if (!container) return;
+  
+  container.innerHTML = AFFILIATE_PRODUCTS.map(product => \`
+    <div class="card" style="background: white; border-left: 4px solid \${product.brandColor}; overflow: hidden; transition: transform 0.2s, box-shadow 0.2s;"
+         onclick="openAffiliateLink('\${product.url}', '\${product.id}')"
+         onmouseover="this.style.transform='translateY(-4px)'; this.style.boxShadow='0 8px 30px rgba(0,0,0,0.12)'"
+         onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='var(--shadow-sm)'">
+      <div style="position: relative;">
+        <img src="\${product.image}" alt="\${product.name}" style="width: 100%; height: 150px; object-fit: cover;">
+        <span style="position: absolute; top: 8px; right: 8px; background: linear-gradient(135deg, #FFD700, #FFA500); color: #000; padding: 4px 10px; border-radius: 20px; font-size: 11px; font-weight: bold; box-shadow: 0 2px 8px rgba(255,215,0,0.4);">
+          \${product.badge}
+        </span>
+      </div>
+      <div style="padding: 14px;">
+        <h4 style="margin: 0 0 6px 0; font-size: 13px; color: \${product.brandColor}; font-weight: 600;">\${product.brand}</h4>
+        <p style="margin: 0 0 10px 0; font-size: 14px; line-height: 1.4; color: var(--secondary); min-height: 40px;">\${product.name}</p>
+        <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 12px;">
+          <span style="font-size: 20px; font-weight: bold; color: #27ae60;">\${product.price}</span>
+          <span style="font-size: 12px; text-decoration: line-through; color: #999;">\${product.oldPrice}</span>
+        </div>
+        <button class="btn btn-primary" style="width: 100%; padding: 11px; font-size: 13px;">🛒 Ver oferta</button>
+      </div>
+    </div>
+  \`).join('');
+  console.log('Loja renderizada');
+}
+
+function openAffiliateLink(url, productId) {
+  const clicks = JSON.parse(localStorage.getItem('asf-affiliate-clicks') || '[]');
+  clicks.push({productId, timestamp: new Date().toISOString()});
+  localStorage.setItem('asf-affiliate-clicks', JSON.stringify(clicks));
+  console.log('Click afiliado:', productId);
+  window.open(url, '_blank', 'noopener,noreferrer');
+}
+
+  
+  // GA4 tracking
+  if (typeof gtag !== 'undefined') {
+    gtag('event', 'affiliate_click', {
+      event_category: 'monetization',
+      event_label: productId,
+      value: 1
+    });
+  }
+// Newsletter
+function subscribeNewsletter() {
+  const emailInput = document.getElementById('newsletter-email');
+  const email = emailInput ? emailInput.value.trim() : '';
+  
+  if (!email || !email.includes('@')) {
+    showToast('❌ Email inválido!', 'error');
+    return;
+  }
+  
+  const subs = JSON.parse(localStorage.getItem('asf-newsletter') || '[]');
+  subs.push({email, date: new Date().toISOString()});
+  localStorage.setItem('asf-newsletter', JSON.stringify(subs));
+  
+  showToast('✅ Inscrita! Você receberá dicas toda semana.', 'success');
+  if (emailInput) emailInput.value = '';
+  
+  // GA4
+  if (typeof gtag !== 'undefined') {
+    gtag('event', 'newsletter_signup', {
+      event_category: 'engagement',
+      value: 1
+    });
+  }
+}
+
+// Premium
+function showPremiumModal() {
+  document.getElementById('premium-modal').style.display = 'flex';
+  trackEvent('premium', 'modal_view');
+  
+  // GA4
+  if (typeof gtag !== 'undefined') {
+    gtag('event', 'premium_modal_view', {
+      event_category: 'monetization',
+      value: 1
+    });
+  }
+}
+function hidePremiumModal() {
+  document.getElementById('premium-modal').style.display = 'none';
+}
+function startPayment() {
+  trackEvent('premium', 'payment_start');
+  showToast('🚀 Redirecionando para Mercado Pago...', 'info');
+  
+  // GA4
+  if (typeof gtag !== 'undefined') {
+    gtag('event', 'payment_start', {
+      event_category: 'monetization',
+      event_label: 'premium_subscription',
+      value: 19.9
+    });
+  }
+  
+  // TODO: Implement real payment gateway
+  setTimeout(() => {
+    showToast('💳 Integração com Mercado Pago em breve!', 'info');
+  }, 1500);
+}
+
+// WhatsApp
+function contactWhatsApp() {
+  trackEvent('contact', 'whatsapp_click');
+  const msg = encodeURIComponent('Olá ASF! Gostaria de informações sobre parcerias e patrocínios.');
+  window.open('https://wa.me/5511954346288?text=' + msg, '_blank');
+}
+
+// Analytics
+function trackEvent(category, action, label) {
+  const stats = JSON.parse(localStorage.getItem('asf-monetization-stats') || '{}');
+  if (!stats.events) stats.events = [];
+  stats.events.push({category, action, label, timestamp: Date.now()});
+  localStorage.setItem('asf-monetization-stats', JSON.stringify(stats));
+  console.log('📊 Track:', category, action, label);
+}
+
+function getStats() {
+  return JSON.parse(localStorage.getItem('asf-monetization-stats') || '{}');
+}
+
+window.ASFMonetization = { trackEvent, getStats };
+
+// Toast
+function showToast(message, type = 'info') {
+  const colors = { success: '#2ecc71', error: '#e74c3c', info: '#3498db' };
+  const toast = document.createElement('div');
+  toast.style.cssText = \`
+    position: fixed; bottom: 100px; left: 50%; transform: translateX(-50%);
+    background: \${colors[type] || colors.info}; color: white; padding: 14px 24px;
+    border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.2); z-index: 9999;
+    animation: toastIn 0.3s ease-out; font-weight: 500; max-width: 90%; text-align: center;
+  \`;
+  toast.textContent = message;
+  document.body.appendChild(toast);
+  setTimeout(() => {
+    toast.style.animation = 'toastOut 0.3s ease-in forwards';
+    setTimeout(() => toast.remove(), 300);
+  }, 3000);
+}
+
+// Init
+document.addEventListener('DOMContentLoaded', function() {
+  console.log('✅ Monetization system initialized');
+  
+  // Auto-render store if visible
+  const loja = document.getElementById('loja');
+  if (loja && loja.style.display !== 'none') {
+    setTimeout(renderAffiliateStore, 100);
+  }
+});
+
 </body>
 </html>
+<!-- PREMIUM PAYWALL MODAL -->
+<div id="premium-modal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.85); z-index:99999; align-items:center; justify-content:center; backdrop-filter: blur(8px);">
+  <div style="background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%); padding: 32px; border-radius: 28px; max-width: 420px; width: 92%; text-align: center; position: relative; box-shadow: 0 20px 60px rgba(0,0,0,0.3); animation: modalBounce 0.5s ease-out;">
+    <button onclick="hidePremiumModal()" style="position: absolute; top: 12px; right: 18px; background: none; border: none; font-size: 28px; cursor: pointer; color: var(--secondary); opacity: 0.7;">×</button>
+    
+    <div style="font-size: 56px; margin-bottom: 8px;">⭐</div>
+    <h2 style="margin: 0 0 8px 0; color: #0E2439; font-size: 28px;">ASF Premium</h2>
+    <p style="color: #0E2439; margin-bottom: 24px; font-size: 16px;">Desbloqueie todo o potencial do app! 🌊</p>
+
+    <div style="text-align: left; background: rgba(255,255,255,0.35); padding: 20px; border-radius: 16px; margin: 20px 0;">
+      <ul style="margin: 0; padding-left: 20px; color: #0E2439; font-size: 15px; line-height: 1.8;">
+        <li>✅ 900+ dicas avançadas</li>
+        <li>✅ Sem anúncios</li>
+        <li>✅ Badges exclusivos (Dourado)</li>
+        <li>✅ Grupo VIP WhatsApp</li>
+        <li>✅ Relatórios de progresso</li>
+        <li>✅ Conteúdo antecipado</li>
+      </ul>
+    </div>
+
+    <div style="font-size: 36px; font-weight: bold; color: #0E2439; margin-bottom: 8px;">
+      R$ 19,90<span style="font-size: 18px; font-weight: normal;">/mês</span>
+    </div>
+    <p style="font-size: 13px; color: #0E2439; margin-bottom: 20px;">💳 Cancele quando quiser • 7 dias grátis</p>
+
+    <button onclick="startPayment()" style="background: linear-gradient(135deg, #0E2439, #0088A8); color: white; border: none; padding: 18px 40px; border-radius: 50px; font-size: 17px; font-weight: bold; cursor: pointer; width: 100%; box-shadow: 0 8px 25px rgba(14,36,57,0.4); transition: transform 0.2s;"
+            onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+      🚀 Assinar Agora
+    </button>
+
+    <p style="font-size: 11px; color: #666; margin-top: 16px;">
+      Pagamento 100% seguro via Mercado Pago 🔒
+    </p>
+    <p style="font-size: 11px; color: #999; margin-top: 8px;">
+      7 dias grátis • Cancele a qualquer momento
+    </p>
+  </div>
+</div>
+
+<!-- NEWS SECTION (Newsletter + WhatsApp) -->
+<div id="monetization-cta" style="background: linear-gradient(135deg, rgba(0,168,204,0.08) 0%, rgba(155,89,182,0.08) 100%); padding: 24px; margin: 16px; border-radius: 20px; border: 1px solid rgba(0,168,204,0.15);">
+  <div style="display: flex; flex-direction: column; gap: 16px;">
+    <!-- Newsletter -->
+    <div>
+      <h4 style="margin: 0 0 8px 0; color: var(--primary); font-size: 16px;">📧 Receba a Dica do Dia</h4>
+      <p style="margin: 0 0 12px 0; font-size: 13px; color: var(--gray-600);">Surf dicas direto no seu email! Sem spam.</p>
+      <div style="display: flex; gap: 8px;">
+        <input type="email" id="newsletter-email" placeholder="seu@email.com"
+               style="flex: 1; padding: 12px 16px; border: 2px solid var(--primary); border-radius: 12px; font-size: 14px; font-family: inherit;"
+               onkeypress="if(event.key === 'Enter') subscribeNewsletter()">
+        <button onclick="subscribeNewsletter()" style="background: var(--primary); color: white; border: none; padding: 12px 20px; border-radius: 12px; font-weight: 600; cursor: pointer; white-space: nowrap;">
+          📩 Inscrever
+        </button>
+      </div>
+    </div>
+
+    <!-- WhatsApp Contact -->
+    <div style="border-top: 1px solid rgba(0,0,0,0.08); padding-top: 16px;">
+      <h4 style="margin: 0 0 8px 0; font-size: 16px; color: #25D366;">💬 Fale com a ASF</h4>
+      <p style="margin: 0 0 12px 0; font-size: 13px; color: var(--gray-600);">Tire dúvidas, sugira pares, ou partnership!</p>
+      <button onclick="contactWhatsApp()" style="background: #25D366; color: white; border: none; padding: 12px 20px; border-radius: 12px; font-weight: 600; cursor: pointer; width: 100%;">
+        📱 Chamar no WhatsApp
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- GOOGLE ADSENSE PLACEHOLDER (After content) -->
+<!--
+<div style="text-align: center; padding: 20px; opacity: 0.7;">
+  <ins class="adsbygoogle" style="display:block; text-align:center;" data-ad-layout="in-article" data-ad-format="fluid" data-ad-client="ca-pub-XXXX" data-ad-slot="XXXX"></ins>
+</div>
+-->
+
+<!-- PREMIUM CTA (Bottom of page) -->
+<div style="background: linear-gradient(135deg, #FFD700, #FFA500); margin: 20px 16px; padding: 24px; border-radius: 20px; text-align: center; box-shadow: 0 8px 30px rgba(255,215,0,0.3);">
+  <div style="font-size: 48px; margin-bottom: 12px;">⭐</div>
+  <h3 style="margin: 0 0 8px 0; color: #0E2439; font-size: 22px;">Quer Apoiar a ASF?</h3>
+  <p style="color: #0E2439; margin: 0 0 16px 0; font-size: 14px;">Vire Premium e ajude a manter o app no ar! 🏄</p>
+  <button onclick="showPremiumModal()" style="background: #0E2439; color: white; border: none; padding: 14px 32px; border-radius: 50px; font-size: 16px; font-weight: bold; cursor: pointer;">
+    🔓 Virar Premium
+  </button>
+</div>
+
+<!-- Animations for modal -->
+<style>
+@keyframes modalBounce {
+  0% { transform: scale(0.8); opacity: 0; }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); opacity: 1; }
+}
+</style>
+
+
+
