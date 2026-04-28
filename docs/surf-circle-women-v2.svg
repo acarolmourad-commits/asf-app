@@ -1,0 +1,102 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400">
+  <!-- Background Ocean -->
+  <defs>
+    <linearGradient id="ocean" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#4DC8E0;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#0E2439;stop-opacity:1" />
+    </linearGradient>
+    <radialGradient id="sunGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" style="stop-color:#FFF9C4;stop-opacity:0.8" />
+      <stop offset="100%" style="stop-color:#FFF9C4;stop-opacity:0" />
+    </radialGradient>
+  </defs>
+
+  <!-- Ocean background -->
+  <rect width="400" height="400" fill="url(#ocean)"/>
+
+  <!-- Sun rays (subtle) -->
+  <circle cx="320" cy="80" r="60" fill="url(#sunGlow)"/>
+
+  <!-- ASF Logo center (smaller, elegant) -->
+  <g transform="translate(200,200)">
+    <text x="0" y="8" text-anchor="middle" font-size="32" fill="#FFD700" font-weight="bold" font-family="Arial, sans-serif">ASF</text>
+  </g>
+
+  <!-- Circle of women (connected) -->
+  <g transform="translate(200,200)">
+    <!-- 8 women around circle, each slightly different pose -->
+    <!-- Woman 1: waving -->
+    <g transform="rotate(-135)">
+      <circle cx="0" cy="-110" r="16" fill="#FFB6C1" stroke="#FF69B4" stroke-width="2"/>
+      <ellipse cx="0" cy="-135" rx="8" ry="10" fill="#FF69B4"/> <!-- head -->
+      <path d="M-8,-115 Q-15,-90 -12,-75 M8,-115 Q15,-90 12,-75" stroke="#8B4513" stroke-width="3" fill="none"/> <!-- arms waving -->
+    </g>
+
+    <!-- Woman 2: helping -->
+    <g transform="rotate(-90)">
+      <circle cx="0" cy="-110" r="16" fill="#FFB6C1" stroke="#FF69B4" stroke-width="2"/>
+      <ellipse cx="0" cy="-135" rx="8" ry="10" fill="#FF69B4"/>
+      <path d="M-10,-115 L-25,-95 M10,-115 L25,-95" stroke="#8B4513" stroke-width="3"/> <!-- arms out to side -->
+    </g>
+
+    <!-- Woman 3: high five -->
+    <g transform="rotate(-45)">
+      <circle cx="0" cy="-110" r="16" fill="#FFB6C1" stroke="#FF69B4" stroke-width="2"/>
+      <ellipse cx="0" cy="-135" rx="8" ry="10" fill="#FF69B4"/>
+      <path d="M-8,-115 L-5,-90 M8,-115 L5,-90" stroke="#8B4513" stroke-width="3"/>
+    </g>
+
+    <!-- Woman 4: right side -->
+    <g transform="rotate(0)">
+      <circle cx="0" cy="-110" r="16" fill="#FFB6C1" stroke="#FF69B4" stroke-width="2"/>
+      <ellipse cx="0" cy="-135" rx="8" ry="10" fill="#FF69B4"/>
+      <path d="M-8,-115 L-5,-90 M8,-115 L5,-90" stroke="#8B4513" stroke-width="3"/>
+    </g>
+
+    <!-- Woman 5: helping -->
+    <g transform="rotate(45)">
+      <circle cx="0" cy="-110" r="16" fill="#FFB6C1" stroke="#FF69B4" stroke-width="2"/>
+      <ellipse cx="0" cy="-135" rx="8" ry="10" fill="#FF69B4"/>
+      <path d="M-10,-115 L-25,-95 M10,-115 L25,-95" stroke="#8B4513" stroke-width="3"/>
+    </g>
+
+    <!-- Woman 6: waving -->
+    <g transform="rotate(90)">
+      <circle cx="0" cy="-110" r="16" fill="#FFB6C1" stroke="#FF69B4" stroke-width="2"/>
+      <ellipse cx="0" cy="-135" rx="8" ry="10" fill="#FF69B4"/>
+      <path d="M-8,-115 Q-15,-90 -12,-75 M8,-115 Q15,-90 12,-75" stroke="#8B4513" stroke-width="3"/>
+    </g>
+
+    <!-- Woman 7: connecting -->
+    <g transform="rotate(135)">
+      <circle cx="0" cy="-110" r="16" fill="#FFB6C1" stroke="#FF69B4" stroke-width="2"/>
+      <ellipse cx="0" cy="-135" rx="8" ry="10" fill="#FF69B4"/>
+      <path d="M-6,-118 L0,-100 M6,-118 L0,-100" stroke="#8B4513" stroke-width="3"/>
+    </g>
+
+    <!-- Woman 8: bottom center (support) -->
+    <g transform="rotate(180)">
+      <circle cx="0" cy="-110" r="16" fill="#FFB6C1" stroke="#FF69B4" stroke-width="2"/>
+      <ellipse cx="0" cy="-135" rx="8" ry="10" fill="#FF69B4"/>
+      <path d="M-6,-115 L-5,-95 M6,-115 L5,-95" stroke="#8B4513" stroke-width="3"/>
+    </g>
+  </g>
+
+  <!-- Connecting circle line -->
+  <circle cx="200" cy="200" r="130" fill="none" stroke="#FFD700" stroke-width="4" stroke-dasharray="12,6" opacity="0.6"/>
+
+  <!-- Small waves around -->
+  <g opacity="0.3">
+    <path d="M50,200 Q60,180 80,200 T110,200" stroke="#4DC8E0" fill="none" stroke-width="2">
+      <animate attributeName="d" values="M50,200 Q60,180 80,200 T110,200;M50,200 Q60,220 80,200 T110,200;M50,200 Q60,180 80,200 T110,200" dur="3s" repeatCount="indefinite"/>
+    </path>
+    <path d="M290,200 Q300,180 320,200 T350,200" stroke="#4DC8E0" fill="none" stroke-width="2">
+      <animate attributeName="d" values="M290,200 Q300,180 320,200 T350,200;M290,200 Q300,220 320,200 T350,200;M290,200 Q300,180 320,200 T350,200" dur="3s" repeatCount="indefinite"/>
+    </path>
+  </g>
+
+  <!-- Tagline at bottom -->
+  <text x="200" y="360" text-anchor="middle" font-size="16" fill="#FFF" font-family="Arial, sans-serif" font-weight="bold" opacity="0.9">
+    Juntas na água, fortes na vida
+  </text>
+</svg>
