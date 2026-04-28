@@ -1,0 +1,111 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600">
+  <!-- Background: ocean gradient -->
+  <defs>
+    <linearGradient id="oceanGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#4DC8E0;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#0E2439;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="skyGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#87CEEB;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#E0F7FF;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+
+  <!-- Sky -->
+  <rect width="800" height="250" fill="url(#skyGrad)"/>
+
+  <!-- Ocean -->
+  <rect y="250" width="800" height="350" fill="url(#oceanGrad)"/>
+
+  <!-- Sun -->
+  <circle cx="650" cy="80" r="40" fill="#FFF9C4" opacity="0.9">
+    <animate attributeName="r" values="40;42;40" dur="4s" repeatCount="indefinite"/>
+  </circle>
+
+  <!-- Waves -->
+  <path d="M0,280 Q200,260 400,280 T800,280 L800,600 L0,600 Z" fill="#00A8CC" opacity="0.3">
+    <animate attributeName="d" values="M0,280 Q200,260 400,280 T800,280 L800,600 L0,600 Z;M0,290 Q200,270 400,290 T800,290 L800,600 L0,600 Z;M0,280 Q200,260 400,280 T800,280 L800,600 L0,600 Z" dur="3s" repeatCount="indefinite"/>
+  </path>
+
+  <!-- Circle of women (surfers in water) -->
+  <g transform="translate(400,380)">
+    <!-- Center text -->
+    <text x="0" y="0" text-anchor="middle" font-size="60" fill="#FFD700" font-weight="bold" opacity="0.9">ASF</text>
+
+    <!-- Women in circle (simplified figures) -->
+    <!-- Woman 1 (top) -->
+    <g transform="rotate(-72)">
+      <circle cx="0" cy="-120" r="18" fill="#FFB6C1"/>
+      <path d="M-20,-100 Q-25,-80 -20,-60 L20,-60 Q25,-80 20,-100 Z" fill="#FF69B4"/>
+      <path d="M-25,-100 L-40,-130 M25,-100 L40,-130" stroke="#8B4513" stroke-width="3"/>
+    </g>
+
+    <!-- Woman 2 -->
+    <g transform="rotate(-36)">
+      <circle cx="0" cy="-120" r="18" fill="#FFB6C1"/>
+      <path d="M-20,-100 Q-25,-80 -20,-60 L20,-60 Q25,-80 20,-100 Z" fill="#FF69B4"/>
+      <path d="M-25,-100 L-40,-130 M25,-100 L40,-130" stroke="#8B4513" stroke-width="3"/>
+    </g>
+
+    <!-- Woman 3 (right) -->
+    <g transform="rotate(0)">
+      <circle cx="0" cy="-120" r="18" fill="#FFB6C1"/>
+      <path d="M-20,-100 Q-25,-80 -20,-60 L20,-60 Q25,-80 20,-100 Z" fill="#FF69B4"/>
+      <path d="M-25,-100 L-40,-130 M25,-100 L40,-130" stroke="#8B4513" stroke-width="3"/>
+    </g>
+
+    <!-- Woman 4 -->
+    <g transform="rotate(36)">
+      <circle cx="0" cy="-120" r="18" fill="#FFB6C1"/>
+      <path d="M-20,-100 Q-25,-80 -20,-60 L20,-60 Q25,-80 20,-100 Z" fill="#FF69B4"/>
+      <path d="M-25,-100 L-40,-130 M25,-100 L40,-130" stroke="#8B4513" stroke-width="3"/>
+    </g>
+
+    <!-- Woman 5 -->
+    <g transform="rotate(72)">
+      <circle cx="0" cy="-120" r="18" fill="#FFB6C1"/>
+      <path d="M-20,-100 Q-25,-80 -20,-60 L20,-60 Q25,-80 20,-100 Z" fill="#FF69B4"/>
+      <path d="M-25,-100 L-40,-130 M25,-100 L40,-130" stroke="#8B4513" stroke-width="3"/>
+    </g>
+
+    <!-- Woman 6 (bottom) -->
+    <g transform="rotate(108)">
+      <circle cx="0" cy="-120" r="18" fill="#FFB6C1"/>
+      <path d="M-20,-100 Q-25,-80 -20,-60 L20,-60 Q25,-80 20,-100 Z" fill="#FF69B4"/>
+      <path d="M-25,-100 L-40,-130 M25,-100 L40,-130" stroke="#8B4513" stroke-width="3"/>
+    </g>
+  </g>
+
+  <!-- Connecting circle line -->
+  <circle cx="400" cy="380" r="130" fill="none" stroke="#FFD700" stroke-width="4" stroke-dasharray="10,5" opacity="0.6">
+    <animateTransform attributeName="transform" type="rotate" from="0 400 380" to="360 400 380" dur="60s" repeatCount="indefinite"/>
+  </circle>
+
+  <!-- Hands connecting (dots around circle) -->
+  <g fill="#FFF">
+    <circle cx="400" cy="250" r="8"/>
+    <circle cx="520" cy="280" r="8"/>
+    <circle cx="600" cy="350" r="8"/>
+    <circle cx="580" cy="450" r="8"/>
+    <circle cx="480" cy="520" r="8"/>
+    <circle cx="320" cy="520" r="8"/>
+    <circle cx="220" cy="450" r="8"/>
+    <circle cx="200" cy="350" r="8"/>
+    <circle cx="280" cy="280" r="8"/>
+  </g>
+
+  <!-- Bottom text -->
+  <text x="400" y="580" text-anchor="middle" font-size="24" fill="#FFF" font-family="Arial, sans-serif" font-weight="bold" opacity="0.9">
+    Juntas, vamos mais longe 🌊
+  </text>
+
+  <!-- Surfboards floating -->
+  <g transform="translate(150,500) rotate(-30)">
+    <rect x="0" y="0" width="80" height="12" fill="#FF6B6B" rx="6"/>
+    <rect x="0" y="-8" width="80" height="12" fill="#4ECDC4" rx="6"/>
+  </g>
+  <g transform="translate(650,520) rotate(20)">
+    <rect x="0" y="0" width="80" height="12" fill="#FFE66D" rx="6"/>
+    <rect x="0" y="-8" width="80" height="12" fill="#95E1D3" rx="6"/>
+  </g>
+</svg>
