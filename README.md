@@ -1,7 +1,14 @@
 # 🏄♀️ ASF - Associação de Surf Feminino App
 
+## 🆕 Atualizações Recentes (2026-04-28 00:15 UTC)
+- ✅ 5 novas dicas diárias (circuito funcional, chá verde, análise de waves, respiração box, estatísticas no app)
+- ✅ Total de dicas agora: **704**
+- ✅ Otimização de código/layout e conteúdo
+- ✅ Atualização de documentação (README com novo total de dicas)
+- ✅ Sincronização de HEARTBEAT.md - checklist a cada 15 min
+
 ## 🆕 Atualizações Recentes (2026-04-27 23:45 UTC)
-- ✅ 5 novas dicas diárias (treino resistido, meditação pós-surf, identificação de correntes, proteção térmica, registro em vídeo)
+- ✅ 5 novas dicas diárias (paddle simulado, surf noturno, higiene pós-surf, diário de sessões, etiqueta da prioridade)
 - ✅ Total de dicas agora: **699**
 - ✅ Otimização de código/layout e conteúdo
 - ✅ Atualização de documentação (README com novo total de dicas)
