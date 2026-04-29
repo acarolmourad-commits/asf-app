@@ -6,6 +6,7 @@ Exercícios de alongamento para surfistas
 
 import random
 import json
+import os
 from datetime import datetime
 
 ALONGAMENTO_EXERCICIOS = [

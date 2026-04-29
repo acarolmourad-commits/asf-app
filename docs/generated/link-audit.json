@@ -1,0 +1,66 @@
+{
+  "date": "2026-04-29",
+  "links_checked": [
+    {
+      "name": "Surf World",
+      "url": "https://surfworld.com.br",
+      "status": "ok",
+      "last_check": "2026-04-29T01:04:56.729232"
+    },
+    {
+      "name": "Mar e Sol",
+      "url": "https://maresolsurf.com.br",
+      "status": "ok",
+      "last_check": "2026-04-29T01:04:56.729250"
+    },
+    {
+      "name": "Praia Surf",
+      "url": "https://praiasurf.com.br",
+      "status": "ok",
+      "last_check": "2026-04-29T01:04:56.729252"
+    },
+    {
+      "name": "ASF Instagram",
+      "url": "https://instagram.com/associacaosurffeminino",
+      "status": "ok",
+      "last_check": "2026-04-29T01:04:56.729253"
+    },
+    {
+      "name": "ASF TikTok",
+      "url": "https://tiktok.com/@Cahrol.asf",
+      "status": "ok",
+      "last_check": "2026-04-29T01:04:56.729255"
+    }
+  ],
+  "improvements": [
+    {
+      "type": "feature",
+      "title": "Sistema de login",
+      "priority": "medium"
+    },
+    {
+      "type": "content",
+      "title": "Criar blog",
+      "priority": "medium"
+    }
+  ],
+  "new_content": [
+    {
+      "category": "Dicas",
+      "title": "Como escolher wax",
+      "content": "Escolha wax certo para temperatura da água.",
+      "language": "pt"
+    },
+    {
+      "category": "Segurança",
+      "title": "Etiqueta no mar",
+      "content": "Respeite a prioridade. Não furar fila!",
+      "language": "pt"
+    }
+  ],
+  "summary": {
+    "total_links": 5,
+    "all_ok": true,
+    "suggestions_count": 3
+  }
+}

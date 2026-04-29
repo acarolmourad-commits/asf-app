@@ -1,0 +1,30 @@
+{
+  "date": "2026-04-29",
+  "new_tip": {
+    "category": "Técnica",
+    "title": "Como fazer o bottom turn",
+    "content": "O bottom turn é a base. Transfira o peso para o pé da frente e gire a prancha.",
+    "tags": [
+      "Técnica",
+      "Manobras"
+    ]
+  },
+  "new_utility": {
+    "name": "Calculadora de Prancha",
+    "description": "Volume ideal",
+    "icon": "🧮"
+  },
+  "improvements": [
+    {
+      "type": "content",
+      "title": "Mais dicas técnicas avançadas",
+      "priority": "high"
+    },
+    {
+      "type": "layout",
+      "title": "Modo escuro",
+      "priority": "medium"
+    }
+  ],
+  "generated_at": "2026-04-29T01:04:56.816998"
+}

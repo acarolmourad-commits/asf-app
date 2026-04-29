@@ -6,6 +6,7 @@ Técnicas de respiração para surfistas
 
 import random
 import json
+import os
 from datetime import datetime
 
 RESPIRAÇÃO_DICAS = [

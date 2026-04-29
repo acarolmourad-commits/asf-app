@@ -1,0 +1,155 @@
+# 🍪 COOKIE CONSENT - LGPD COMPLIANCE
+
+<div id="cookie-consent-banner" style="
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(135deg, #0E2439 0%, #0088A8 100%);
+    color: white;
+    padding: 20px;
+    z-index: 999999;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    box-shadow: 0 -4px 20px rgba(0,0,0,0.2);
+">
+  <div style="
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+  ">
+    <div style="flex: 1; min-width: 300px;">
+      <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 8px;">
+        <span style="font-size: 24px;">🍪</span>
+        <h4 style="margin: 0; font-size: 16px;">Nós usamos cookies</h4>
+      </div>
+      <p style="margin: 0; font-size: 14px; line-height: 1.5; opacity: 0.9;">
+        Usamos cookies para analisar o app (Google Analytics) e exibir anúncios (AdSense/Infolinks futuramente).
+        Ao continuar, você aceita nossa
+        <a href="docs/privacy-policy.html" target="_blank" style="color: #00A8CC; text-decoration: underline;">Política de Privacidade</a>
+        e
+        <a href="docs/terms.html" target="_blank" style="color: #00A8CC; text-decoration: underline;">Termos de Serviço</a>.
+      </p>
+    </div>
+    <div style="display: flex; gap: 10px; flex-shrink: 0;">
+      <button onclick="acceptCookies()" style="
+        background: linear-gradient(135deg, #00A8CC, #00B8D4);
+        color: white;
+        border: none;
+        padding: 12px 24px;
+        border-radius: 25px;
+        font-weight: 600;
+        cursor: pointer;
+        font-size: 14px;
+        transition: transform 0.2s;
+      " onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+        ✅ Aceitar Todos
+      </button>
+      <button onclick="essentialCookiesOnly()" style="
+        background: transparent;
+        color: white;
+        border: 2px solid rgba(255,255,255,0.3);
+        padding: 10px 20px;
+        border-radius: 25px;
+        cursor: pointer;
+        font-size: 14px;
+      ">
+        ⚡ Apenas Essenciais
+      </button>
+    </div>
+  </div>
+</div>
+
+<script>
+// Cookie consent logic
+const COOKIE_CONSENT_KEY = 'asf-cookie-consent';
+
+function getCookieConsent() {
+  return localStorage.getItem(COOKIE_CONSENT_KEY);
+}
+
+function setCookieConsent(level) {
+  // level: 'all' | 'essential'
+  localStorage.setItem(COOKIE_CONSENT_KEY, level);
+  console.log('🍪 Cookie consent set:', level);
+
+  // Track
+  if (typeof gtag !== 'undefined') {
+    gtag('event', 'cookie_consent', {
+      event_category: 'legal',
+      event_label: level
+    });
+  }
+
+  // Hide banner
+  const banner = document.getElementById('cookie-consent-banner');
+  if (banner) {
+    banner.style.animation = 'slideDown 0.3s ease-out forwards';
+    setTimeout(() => banner.remove(), 300);
+  }
+
+  // Initialize analytics/ads based on consent
+  if (level === 'all') {
+    initGoogleAnalytics();
+    // initAdSense() - future
+    // initInfolinks() - future
+  }
+}
+
+function acceptCookies() {
+  setCookieConsent('all');
+}
+
+function essentialCookiesOnly() {
+  setCookieConsent('essential');
+}
+
+function initGoogleAnalytics() {
+  // GA4 already loaded globally
+  console.log('📊 Analytics enabled (user consent)');
+}
+
+function showCookieBanner() {
+  // Don't show if already consented
+  if (getCookieConsent()) return;
+
+  const banner = document.getElementById('cookie-consent-banner');
+  if (!banner) return;
+
+  // Show with animation
+  banner.style.animation = 'slideUp 0.5s ease-out';
+}
+
+// CSS animation
+const style = document.createElement('style');
+style.textContent = `
+  @keyframes slideUp {
+    from { transform: translateY(100%); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+  }
+  @keyframes slideDown {
+    from { transform: translateY(0); opacity: 1; }
+    to { transform: translateY(100%); opacity: 0; }
+  }
+  #cookie-consent-banner {
+    transform: translateY(100%);
+    opacity: 0;
+    animation: slideUp 0.5s ease-out forwards;
+  }
+`;
+document.head.appendChild(style);
+
+// Auto-show on page load (after a brief delay)
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', () => setTimeout(showCookieBanner, 1000));
+} else {
+  setTimeout(showCookieBanner, 1000);
+}
+
+// Expose functions globally
+window.acceptCookies = acceptCookies;
+window.essentialCookiesOnly = essentialCookiesOnly;
+</script>
