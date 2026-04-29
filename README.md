@@ -17,6 +17,13 @@ Veja: `docs/audit-monetization.md` para detalhes completos.
 
 # 🏄♀️ ASF - Associação de Surf Feminino App
 
+## 🆕 Atualizações Recentes (2026-04-29 06:15 UTC)
+- ✅ 5 novas dicas diárias (gestão energia, protocolo segurança, equipamentos segurança, cuidados pré-session, travessia remada)
+- ✅ Total de dicas agora: **949**
+- ✅ Otimização de código/layout e conteúdo
+- ✅ Atualização de documentação (README com novo total de dicas)
+- ✅ Sincronização de HEARTBEAT.md - checklist a cada 15 min
+
 ## 🆕 Atualizações Recentes (2026-04-29 05:15 UTC)
 - ✅ 5 novas dicas diárias (tempo espera, armazenamento prancha, mobilidade articular, confiança remada, sinalização resgate)
 - ✅ Total de dicas agora: **944**
