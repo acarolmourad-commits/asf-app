@@ -17,6 +17,20 @@ Veja: `docs/audit-monetization.md` para detalhes completos.
 
 # 🏄♀️ ASF - Associação de Surf Feminino App
 
+## 🆕 Atualizações Recentes (2026-04-30 00:15 UTC)
+- ✅ 5 novas dicas diárias (drop knee big wave, vento backdoor, preparação gelo extremo, segurança surf gelo, gestão energia campeonatos)
+- ✅ Total de dicas agora: **1099**
+- ✅ Otimização de código/layout e conteúdo
+- ✅ Atualização de documentação (README com novo total de dicas)
+- ✅ Sincronização de HEARTBEAT.md - checklist a cada 15 min
+
+## 🆕 Atualizações Recentes (2026-04-29 23:45 UTC)
+- ✅ 5 novas dicas diárias (no-rep, vento tropical, preparação travel, segurança pesquisa, diário surf)
+- ✅ Total de dicas agora: **1094**
+- ✅ Otimização de código/layout e conteúdo
+- ✅ Atualização de documentação (README com novo total de dicas)
+- ✅ Sincronização de HEARTBEAT.md - checklist a cada 15 min
+
 ## 🆕 Atualizações Recentes (2026-04-29 23:15 UTC)
 - ✅ 5 novas dicas diárias (foamball, vento outer reef, preparação profissional, segurança zonas remotas, gestão risco campeonatos)
 - ✅ Total de dicas agora: **1089**
