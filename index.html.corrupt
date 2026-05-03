@@ -326,12 +326,12 @@
         </div>
     </div>
 
-    <!-- Dica do Dia (1199) -->
+    <!-- Dica do Dia (1289) -->
     <div id="dica-do-dia">
         <div><div id="dica-emoji">💡</div>
             <div id="dica-content">
                 <div class="dica-header">
-                    <span class="dica-badge">✨ Dica do Dia (1199)</span>
+                    <span class="dica-badge">✨ Dica do Dia (1289)</span>
                     <button onclick="nextDica()" class="dica-refresh-btn">↻ Nova</button>
                 </div>
                 <p id="dica-text"></p>
@@ -748,7 +748,7 @@
             <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 10px;">
                 <span style="font-size: 32px;">💡</span>
                 <div>
-                    <h3 id="tip-of-day" style="font-size: 16px; margin-bottom: 5px;">Dica do Dia (1199)</h3>
+                    <h3 id="tip-of-day" style="font-size: 16px; margin-bottom: 5px;">Dica do Dia (1289)</h3>
                     <p style="font-size: 12px; opacity: 0.9;">Sexta, 07/04/2026</p>
                 </div>
             </div>
@@ -5313,10 +5313,380 @@ document.addEventListener('DOMContentLoaded', renderBrandHub);
     </footer>
     
         // Display real stats
+
+
+
+        
+
+            // Update tabs
+
+            // Highlight active nav item by aria-label
+
+
+            // Update aria-selected on active tab
+
+            // Scroll to top
+
+        // ===== SISTEMA DE NOTIFICAÇÕES =====
+
+        // Notificações padrão ao abrir
+
+        
+
+        
+
+        
+
+        
+
+        
+
+        
+
+        
+
+        
+
+        // Fechar painel ao clicar fora
+
+        // Adicionar notificação quando ganha pontos
+        
+
+        // Adicionar notificação de treino
+        
+
+        // Adicionar notificação de ondas
+        
+
+        // Inicializar badge
+
+        // ===== FIM NOTIFICAÇÕES =====
+
+        // ===== SISTEMA DE COMPARTILHAMENTO =====
+
+        
+
+        
+
+        
+
+        // Normalized search index [Optimized] - cache normalized strings for faster search
+
+        // Debounced search
+        
+
+        
+
+        // Recent searches
+        
+        
+        
+        
+
+        
+
+        
+
+        // Close search on click outside
+
+        // ============ LIVE WEATHER & MARINE DATA ============
+
+
+
+
+
+
+        
+
+
+        
+
+        
+
+        
+
+        
+
+        
+
+        // ===== MOON PHASE CALCULATOR ======
+        
+
+        
+
+        // Checklist Pré-Surf functions
+        
+
+        
+
+        
+
+        // Defer non-critical initializations to improve page load performance
+
+        // ========== CRONÔMETRO DE TREINO ==========
+
+        
+
+        
+
+        
+
+        
+
+        
+
+        
+
+        
+        // ========== END CRONÔMETRO ==========
+
+        // Surf Conditions Bar (compact live data on homepage)
+
+        // ============ BEST DAY TO SURF ============
+
+        // Week Forecast Strip
+
+        // ============ DARK MODE ============
+        
+        
+
+        // ============ SCROLL PROGRESS BAR ============
+
+        // ============ MANAS REGISTRATION ============
+        
+        
+        
+
+        // ============ SHARE SURF CONDITIONS ============
+        
+
+        // ============ MANA DA SEMANA ============
+
+        // ============ SURF SESSION LOG ============
+        
+
+        
+
+        
+
+        
+
+        
+
+        
+        // Brand Hub countdown timer
+
+        // Load badges from localStorage
+        
+
+        // Save badges to localStorage
+        
+
+        // Update badge progress based on sessions
+        
+
+        // Render badges grid
+        
+
+        // Show badge details modal
+        
+
+        // Animation when badge is earned
+        
+
+        // Initialize badges on DOM load
+        
+
+                // Consolidated DOMContentLoaded init
+            // Simple analytics - app opens (every time someone opens)
+            // Start Brand Hub countdown
+            // Initialize badges system
+            // Update display
+            // Load theme preference
+            // Load user name from localStorage if exists
+            // (User loading happens in sections)
+            // Restore joined group states
+            // Water tracker
+            // Checklist
+
+        // ============ PREMIUM CONTENT ============
+        
+
+        // ============ PRE-SURF CHECKLIST ============
+        
+        
+        // Save/load checklist state (called from consolidated DOMContentLoaded)
+        
+
+        // ============ DICA DO DIA (989) ============
+        
+        
+        // Pick one based on day of year for daily rotation
+
+        // ============ BEACH GUIDE FILTER ============
+        // Beach filter with cached card list [Optimized]
+        
+
+        // ============ TOAST NOTIFICATION HELPER ============
+        // Toggle like on community posts
+        
+        
+        // Create community post
+        
+        
+        
+        
+
+        // Water tracker
+        
+        
+        
+
+        // Poll voting
+        
+
+        // Join surf group
+        
+
+        
+
+        // Secret Achievements Modal
+        
+
+        // Connection status
+        
+
+
+
+
+
+  
+  // GA4 tracking
+// Newsletter
+
+
+// Premium
+
+
+
+
+// WhatsApp
+
+
+// Analytics
+
+
+
+
+
+// Toast
+
+
+// Init
+// Cookie Consent
+
+
+
+
+// Show banner after 2s if no consent
+
+// Pix Donation
+
+
+// Referral System
+
+
+
+<!-- PREMIUM PAYWALL MODAL -->
+<div id="premium-modal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.85); z-index:99999; align-items:center; justify-content:center; backdrop-filter: blur(8px);">
+  <div style="background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%); padding: 32px; border-radius: 28px; max-width: 420px; width: 92%; text-align: center; position: relative; box-shadow: 0 20px 60px rgba(0,0,0,0.3); animation: modalBounce 0.5s ease-out;">
+    <button onclick="hidePremiumModal()" style="position: absolute; top: 12px; right: 18px; background: none; border: none; font-size: 28px; cursor: pointer; color: var(--secondary); opacity: 0.7;">×</button>
+    <div style="font-size: 56px; margin-bottom: 8px;">⭐</div>
+    <h2 style="margin: 0 0 8px 0; color: #0E2439; font-size: 28px;">ASF Premium</h2>
+    <p style="color: #0E2439; margin-bottom: 24px; font-size: 16px;">Desbloqueie todo o potencial do app! 🌊</p>
+    <div style="text-align: left; background: rgba(255,255,255,0.35); padding: 20px; border-radius: 16px; margin: 20px 0;">
+      <ul style="margin: 0; padding-left: 20px; color: #0E2439; font-size: 15px; line-height: 1.8;">
+        <li>✅ 900+ dicas avançadas</li>
+        <li>✅ Sem anúncios</li>
+        <li>✅ Badges exclusivos (Dourado)</li>
+        <li>✅ Grupo VIP WhatsApp</li>
+        <li>✅ Relatórios de progresso</li>
+        <li>✅ Conteúdo antecipado</li>
+      </ul>
+    </div>
+    <div style="font-size: 36px; font-weight: bold; color: #0E2439; margin-bottom: 8px;">R$ 19,90<span style="font-size: 18px; font-weight: normal;">/mês</span></div>
+    <p style="font-size: 13px; color: #0E2439; margin-bottom: 20px;">💳 Cancele quando quiser • 7 dias grátis</p>
+    <button onclick="startPayment()" style="background: linear-gradient(135deg, #0E2439, #0088A8); color: white; border: none; padding: 18px 40px; border-radius: 50px; font-size: 17px; font-weight: bold; cursor: pointer; width: 100%; box-shadow: 0 8px 25px rgba(14,36,57,0.4); transition: transform 0.2s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">🚀 Assinar Agora</button>
+    <p style="font-size: 11px; color: #666; margin-top: 16px;">Pagamento 100% seguro via Mercado Pago 🔒</p>
+    <p style="font-size: 11px; color: #999; margin-top: 8px;">7 dias grátis • Cancele a qualquer momento</p>
+  </div>
+</div>
+
+<!-- PIX DONATION MODAL -->
+<div id="pix-modal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.85); z-index:99999; align-items:center; justify-content:center; backdrop-filter: blur(8px);">
+  <div style="background: linear-gradient(135deg, #00A8CC 0%, #28a745 100%); padding: 32px; border-radius: 24px; max-width: 380px; width: 90%; text-align: center; position: relative; box-shadow: 0 20px 60px rgba(0,0,0,0.3);">
+    <button onclick="hidePixDonation()" style="position: absolute; top: 12px; right: 18px; background: none; border: none; font-size: 28px; cursor: pointer; color: white; opacity: 0.8;">×</button>
+    <div style="font-size: 56px; margin-bottom: 8px;">❤️</div>
+    <h2 style="margin: 0 0 8px 0; color: white; font-size: 24px;">Apoie a ASF</h2>
+    <p style="color: rgba(255,255,255,0.9); margin-bottom: 24px; font-size: 14px;">Qualquer valor nos ajuda a manter o app gratuito!</p>
+    
+    <div style="background: white; padding: 20px; border-radius: 16px; margin: 20px 0;">
+      <div style="font-size: 48px; font-weight: bold; color: #00A8CC; margin-bottom: 8px;">R$ 10,00</div>
+      <p style="color: #666; margin: 0 0 16px; font-size: 13px;">Sugestão mínima (você pode doar qualquer valor)</p>
+      <div style="font-size: 14px; color: #333; line-height: 1.6;">
+        <strong>Chave Pix (CNPJ):</strong><br>
+        <small style="color: #666;">Associação de Surf Feminino</small>
+      </div>
+    </div>
+    
+    <div style="display: flex; gap: 10px; justify-content: center; flex-wrap: wrap;">
+      <button onclick="window.open('https://wa.me/5511954346288?text=Olá! Gostaria de doar via Pix', '_blank')" style="background: white; color: #00A8CC; border: none; padding: 12px 24px; border-radius: 25px; font-weight: bold; cursor: pointer; font-size: 14px;">📱 WhatsApp</button>
+      <button onclick="copyPixKey()" style="background: rgba(255,255,255,0.2); color: white; border: none; padding: 12px 24px; border-radius: 25px; font-weight: 600; cursor: pointer; font-size: 14px;">📋 Copiar Chave</button>
+    </div>
+    
+    <p style="font-size: 11px; color: rgba(255,255,255,0.7); margin-top: 16px;">Obrigada pelo apoio! 🏄‍♀️</p>
+  </div>
+</div>
+
+<style>@keyframes modalBounce{0%{transform:scale(0.8);opacity:0}50%{transform:scale(1.05)}100%{transform:scale(1);opacity:1}}</style>
+
+
+<!-- MONETIZATION CTA -->
+<div id="monetization-cta" style="background: linear-gradient(135deg, rgba(0,168,204,0.08) 0%, rgba(155,89,182,0.08) 100%); padding: 24px; margin: 16px; border-radius: 20px; border: 1px solid rgba(0,168,204,0.15);">
+  <div style="display: flex; flex-direction: column; gap: 16px;">
+    <div>
+      <h4 style="margin: 0 0 8px 0; color: var(--primary); font-size: 16px;">📧 Receba a Dica do Dia</h4>
+      <p style="margin: 0 0 12px 0; font-size: 13px; color: var(--gray-600);">Surf dicas direto no seu email! Sem spam.</p>
+      <div style="display: flex; gap: 8px;">
+        <input type="email" id="newsletter-email" placeholder="seu@email.com" style="flex: 1; padding: 12px 16px; border: 2px solid var(--primary); border-radius: 12px; font-size: 14px; font-family: inherit;" onkeypress="if(event.key === 'Enter') subscribeNewsletter()">
+        <button onclick="subscribeNewsletter()" style="background: var(--primary); color: white; border: none; padding: 12px 20px; border-radius: 12px; font-weight: 600; cursor: pointer; white-space: nowrap;">📩 Inscrever</button>
+      </div>
+    </div>
+    <div style="border-top: 1px solid rgba(0,0,0,0.08); padding-top: 16px;">
+      <h4 style="margin: 0 0 8px 0; font-size: 16px; color: #25D366;">💬 Fale com a ASF</h4>
+      <p style="margin: 0 0 12px 0; font-size: 13px; color: var(--gray-600);">Tire dúvidas, sugira pares, ou partnership!</p>
+      <button onclick="contactWhatsApp()" style="background: #25D366; color: white; border: none; padding: 12px 20px; border-radius: 12px; font-weight: 600; cursor: pointer; width: 100%;">📱 Chamar no WhatsApp</button>
+    </div>
+  </div>
+</div>
+
+
+<div style="background: linear-gradient(135deg, #FFD700, #FFA500); margin: 20px 16px; padding: 24px; border-radius: 20px; text-align: center; box-shadow: 0 8px 30px rgba(255,215,0,0.3);">
+  <div style="font-size: 48px; margin-bottom: 12px;">⭐</div>
+  <h3 style="margin: 0 0 8px 0; color: #0E2439; font-size: 22px;">Quer Apoiar a ASF?</h3>
+  <p style="color: #0E2439; margin: 0 0 16px 0; font-size: 14px;">Vire Premium e ajude a maintainer o app no ar! 🏄</p>
+  <div style="display: flex; gap: 10px; justify-content: center; flex-wrap: wrap;">
+    <button onclick="showPremiumModal()" style="background: #0E2439; color: white; border: none; padding: 14px 32px; border-radius: 50px; font-size: 16px; font-weight: bold; cursor: pointer;">🔓 Virar Premium</button>
+    <button onclick="showReferralModal()" style="background: #9B59B6; color: white; border: none; padding: 14px 32px; border-radius: 50px; font-size: 16px; font-weight: bold; cursor: pointer;">🎁 Indique & Ganhe</button>
+    <button onclick="showPixDonation()" style="background: linear-gradient(135deg, #00A8CC, #28a745); color: white; border: none; padding: 14px 32px; border-radius: 50px; font-size: 16px; font-weight: bold; cursor: pointer;">❤️ Doar via Pix</button>
+  </div>
+  </div>
+
+  <!-- Footer -->
+
+  <script>
         document.getElementById('stat-opens').textContent = localStorage.getItem('asf-opens') || '1';
-        document.getElementById('stat-sessions').textContent = (JSON.parse(localStorage.getItem('surf-sessions') || []).length;
-
-
+        document.getElementById('stat-sessions').textContent = JSON.parse(localStorage.getItem('surf-sessions') || []).length;
 var translations = {
     'pt': {},
     'en': {
@@ -5355,71 +5725,16 @@ var translations = {
     }
 };
 
- to scroll to top
-        
 
-            // Update tabs
-            const tabs = document.querySelectorAll('.tab');
-            const navItems = document.querySelectorAll('.nav-item');
-
-            // Highlight active nav item by aria-label
-            const sectionLabels = {
-              'dicas': 'Dicas de surf',
-              'manas-proximas': 'Manas próximas',
-              'saude': 'Saúde e bem-estar',
-              'progresso': 'Pontos e progresso',
-              'trips': 'Surftrips e Votações',
-              'utilities': 'Utilitários do surf',
-              'brandhub': 'Marcas e ofertas',
-              'badges': 'Minhas conquistas',
-              'manas': 'Manas e comunidade'
-            };
-
-            const label = sectionLabels[sectionId];
-            if (label) {
-              const navItem = Array.from(navItems).find(item =>
-                item.getAttribute('aria-label') === label
-              );
-              if (navItem) navItem.classList.add('active');
-            }
-
-            // Update aria-selected on active tab
-            document.querySelectorAll('.tab.active').forEach(t => t.setAttribute('aria-selected', 'true'));
-
-            // Scroll to top
-            window.scrollTo(0, 0);
-        }
-
-        // ===== SISTEMA DE NOTIFICAÇÕES =====
         const NOTIF_KEY = 'asf_notifications';
-
-        // Notificações padrão ao abrir
         const DEFAULT_NOTIFICATIONS = [
             { id: 1, type: 'treino', icon: '💪', title: 'Novo Treino!', text: 'Treino de Força e Core disponível', time: 'Agora', read: false, target: 'treino-1', section: 'saude' },
             { id: 2, type: 'ondas', icon: '🌊', title: 'Ondas Boas!', text: 'Bertioga: 0.8m - Boa para surfar!', time: '5 min', read: false, target: 'wave-forecast', section: 'dicas' },
             { id: 3, type: 'pontos', icon: '🎯', title: 'Quiz Disponível', text: 'Responda e ganhe +50 pontos!', time: '10 min', read: false, target: 'quiz-basico', section: 'progresso' },
-            { id: 4, type: 'dica', icon: '📚', title: 'Dica do Dia (1199)', text: 'Respiração 4-4-4 para acalmar', time: '1h', read: true, target: 'tip-of-day', section: 'dicas' },
+            { id: 4, type: 'dica', icon: '📚', title: 'Dica do Dia (1289)', text: 'Respiração 4-4-4 para acalmar', time: '1h', read: true, target: 'tip-of-day', section: 'dicas' },
             { id: 5, type: 'manas', icon: '💬', title: 'Novo Grupo', text: 'Bertioga Surf Girls: 13 manas!', time: '2h', read: true, target: 'grupos-ativos', section: 'manas' },
-            { id: 6, type: 'dica', icon: '💧', title: 'Dica do Dia (1199)', text: 'Hidratação é chave – beba água antes de surfar.', time: '1h', read: false, target: 'tip-of-day', section: 'dicas' }
+            { id: 6, type: 'dica', icon: '💧', title: 'Dica do Dia (1289)', text: 'Hidratação é chave – beba água antes de surfar.', time: '1h', read: false, target: 'tip-of-day', section: 'dicas' }
         ];
-
-        
-
-        
-
-        
-
-        
-
-        
-
-        
-
-        
-
-        
-
-        // Fechar painel ao clicar fora
         document.addEventListener('click', function(e) {
             const panel = document.getElementById('notifications-panel');
             const bell = e.target.closest('button[onclick="toggleNotifications()"]');
@@ -5427,74 +5742,22 @@ var translations = {
                 panel.style.display = 'none';
             }
         });
-
-        // Adicionar notificação quando ganha pontos
-        
-
-        // Adicionar notificação de treino
-        
-
-        // Adicionar notificação de ondas
-        
-
-        // Inicializar badge
         updateNotificationBadge();
-
-        // ===== FIM NOTIFICAÇÕES =====
-
-        // ===== SISTEMA DE COMPARTILHAMENTO =====
         const APP_URL = 'https://acarolmourad-commits.github.io/asf-app/';
         const SHARE_TEXT = '🏄‍♀️ Conheça o App ASF - Dicas de surf, treinos, previsão de ondas e muito mais para mulheres surfistas! 🌊';
 
-        
-
-        
-
-        
-
-        on: '🌬️', section: 'Mental', sectionId: 'mental', text: 'Respiração com som suave no fundo da garganta. Acalma ondas internas e externas durante o surf.' },
-            { title: 'Óleos Essenciais', icon: '🌿', section: 'Saúde', sectionId: 'saude', text: 'Lavanda no pulso relaxa, hortelã refresca. Misture com óleo de coco para recuperação muscular pós-surf.' },
-            { title: 'Yoga na Praia', icon: '🧘', section: 'Mobilidade', sectionId: 'mobilidade', text: 'Alongamento na areia antes do surf aumenta flexibilidade. 10 min de soltura nos ombros e quadril.' },
-            { title: 'Gratidão no Surf', icon: '🙏', section: 'Mental', sectionId: 'mental', text: 'Antes de entrar, agradeça ao mar. A gratidão conecta e atrai boas ondas. Espalhe vibração positiva!' },
-            { title: 'Biofeedback HRV', icon: '❤️', section: 'Biofeedback', sectionId: 'saude', text: 'Monitore variabilidade cardíaca para medir prontidão física e mental para o surf.' },
-            { title: 'Navegação Correntes', icon: '🌊', section: 'Navegação', sectionId: 'dicas', text: 'Use linhas de espuma como guia para cruzar canais de maré com segurança.' },
-            { title: 'Regeneração Contraste', icon: '❄️🔥', section: 'Regeneração', sectionId: 'saude', text: 'Banho frio/quente alternado acelera recuperação muscular em 40%.' },
-            { title: 'Periodização Treino', icon: '📈', section: 'Metodologia', sectionId: 'treino', text: 'Alterne volume e intensidade no treino para evitar platô e lesões.' },
-            { title: 'Mindset Crescimento', icon: '💡', section: 'Mindset', sectionId: 'mental', text: 'Cada wipeout é dado, não falha - analise e evolua consistentemente.' },
-            { title: 'Recuperação Ativa', icon: '♨️', section: 'Saúde', sectionId: 'saude', text: 'Banho alternando quente/frio após sessão pesada. Melhora circulação e reduz inflamação muscular.' },
-        ];
-        // Normalized search index [Optimized] - cache normalized strings for faster search
         const normalizedSearchIndex = searchIndex.map(item => ({
             ...item,
             _titleNorm: item.title.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, ''),
             _textNorm: item.text.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, ''),
             _sectionNorm: item.section.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, ''),
         }));
-
-        // Debounced search
         let _searchTimer;
-        
-
-        
-
-        // Recent searches
-        
-        
-        
-        
-
-        
-
-        
-
-        // Close search on click outside
         document.addEventListener('click', function(e) {
             if (!e.target.closest('.search-container')) {
                 document.getElementById('searchResults').classList.remove('active');
             }
         });
-
-        // ============ LIVE WEATHER & MARINE DATA ============
         const beaches = {
             bertioga: { name: 'Bertioga', lat: -23.85, lon: -46.14 },
             santos:   { name: 'Santos',   lat: -23.96, lon: -46.33 },
@@ -5503,14 +5766,13 @@ var translations = {
             ilhabela: { name: 'Ilhabela', lat: -23.78, lon: -45.36 },
             maresias: { name: 'Maresias', lat: -23.79, lon: -45.36 },
             baleia: { name: 'Praia da Baleia', lat: -23.82, lon: -45.45 },
-            sao-sebastiao: { name: 'São Sebastião', lat: -23.80, lon: -45.44 },
+            'sao-sebastiao': { name: 'São Sebastião', lat: -23.80, lon: -45.44 },
             itamambuca: { name: 'Itamambuca', lat: -23.45, lon: -45.05 },
             cambraia: { name: 'Cambraia', lat: -23.77, lon: -45.50 }
         };
         let currentBeach = 'bertioga';
         let cachedWeather = {};
         let cachedMarine = {};
-
         const weatherDescriptions = {
             0: '☀️ Céu limpo', 1: '🌤️ Pouco nublado', 2: '⛅ Parcialmente nublado', 3: '☁️ Nublado',
             45: '🌫️ Névoa', 48: '🌫️ Névoa gelada',
@@ -5520,12 +5782,10 @@ var translations = {
             80: '🌧️ Pancadas leves', 81: '🌧️ Pancadas', 82: '🌧️ Pancadas fortes',
             95: '⛈️ Tempestade', 96: '⛈️ Tempestade com granizo', 99: '⛈️ Tempestade forte'
         };
-
         const windDir = (deg) => {
             const dirs = ['N','NE','L','SE','S','SO','O','NO'];
             return dirs[Math.round(deg / 45) % 8];
         };
-
         const surfRating = (waveHeight) => {
             if (waveHeight < 0.3) return { text: 'Sem ondas', color: 'var(--gray-400)' };
             if (waveHeight < 0.6) return { text: '🟢 Iniciante', color: 'var(--success)' };
@@ -5534,38 +5794,9 @@ var translations = {
             if (waveHeight < 2.0) return { text: '🔴 Avançado', color: 'var(--coral)' };
             return { text: '🔴 Expert only', color: 'var(--coral)' };
         };
-
         async 
-
         async 
-
-        
-
         async 
-
-        
-
-        
-
-        
-
-        
-
-        
-
-        // ===== MOON PHASE CALCULATOR ======
-        
-
-        
-
-        // Checklist Pré-Surf functions
-        
-
-        
-
-        
-
-        // Defer non-critical initializations to improve page load performance
         (function() {
             const init = () => {
                 loadLiveData('bertioga');
@@ -5577,8 +5808,6 @@ var translations = {
                 setTimeout(init, 0);
             }
         })();
-
-        // ========== CRONÔMETRO DE TREINO ==========
         let timerInterval = null;
         let timerState = 'stopped'; // stopped, running, paused
         let timerSeconds = 0;
@@ -5588,40 +5817,13 @@ var translations = {
         let timerRestTime = 10;
         let timerIsWork = true;
         let timerWorkoutHistory = JSON.parse(localStorage.getItem('asf_timer_history') || '[]');
-
-        
-
-        
-
-        
-
-        
-
-        
-
-        
-
-        
-        // ========== END CRONÔMETRO ==========
-
-        // Surf Conditions Bar (compact live data on homepage)
         async 
         loadSurfBar();
-
-        // ============ BEST DAY TO SURF ============
         async 
         loadBestDay();
-
-        // Week Forecast Strip
         async 
         loadWeekStrip();
-
-        // ============ DARK MODE ============
-        
-        
         initDarkMode();
-
-        // ============ SCROLL PROGRESS BAR ============
         const scrollBar = document.getElementById('scrollProgress');
         window.addEventListener('scroll', () => {
             const scrollTop = window.scrollY;
@@ -5631,17 +5833,7 @@ var translations = {
             if (scrollTop < 10) scrollBar.classList.add('hidden');
             else scrollBar.classList.remove('hidden');
         }, { passive: true });
-
-        // ============ MANAS REGISTRATION ============
-        
-        
-        
         initCadastro();
-
-        // ============ SHARE SURF CONDITIONS ============
-        
-
-        // ============ MANA DA SEMANA ============
         const manasSemana = [
             { name: 'Carolina Silva', avatar: '👩‍🦱', info: 'Intermediate • Bertioga', quote: '"Surfar me fez descobrir que sou mais forte do que imaginava. Cada onda é uma vitória!"', stat1: '🏆 3 campeonatos', stat2: '🔥 45 dias de streak' },
             { name: 'Fernanda Costa', avatar: '👩', info: 'Avançada • Itamambuca', quote: '"Comecei surfando no foam com 30 anos. Hoje faço tube. Nunca é tarde pra começar!"', stat1: '🏄 200+ sessões', stat2: '⭐ Nível 8' },
@@ -5651,27 +5843,8 @@ var translations = {
             { name: 'Larissa Souza', avatar: '🧑', info: 'Iniciante • Guarujá', quote: '"Minha filha de 8 anos me ensinou a não ter medo das ondas. Crianças são ousadas!"', stat1: '👨‍👩‍👧 Mãe surfista', stat2: '📚 10 dicas lidas' },
             { name: 'Priscila Santos', avatar: '👩‍🦱', info: 'Intermediária • Mongaguá', quote: '"O mar não tem ego. Ele aceita todo mundo do mesmo jeito. É isso que amo no surf."', stat1: '🌊 120 sessões', stat2: '🧘 Yoga + Surf' },
         ];
-        ()();
-
-        // ============ SURF SESSION LOG ============
         let selectedMood = '';
-        
-
-        
-
-        
-
-        
-
-        
-
-        
-        // Brand Hub countdown timer
-        earned: false,
-            earnedAt: null,
-            progress: 0,
-            shareable: true
-          },
+        const BRAND_BADGES = [
           {
             id: 'sthill-silver',
             brand: 'STHILL SURF',
@@ -5690,7 +5863,7 @@ var translations = {
           {
             id: 'sthill-gold',
             brand: 'STHILL SURF',
-            brandColor: '#3498db',
+            brandColor: '#f1c40f',
             icon: '🥇',
             name: 'Surfista STHILL Gold',
             description: 'Complete 50 surf sessions com prancha STHILL',
@@ -5707,11 +5880,11 @@ var translations = {
             brand: 'TRIBOSURF',
             brandColor: '#e74c3c',
             icon: '👕',
-            name: 'Mana TRIBOSURF',
-            description: 'Use lycra TRIBOSURF em 10 sessions',
-            type: 'usage',
+            name: 'Tribosurf Lycra Owner',
+            description: 'Compre uma lycra oficial Tribosurf',
+            type: 'purchase',
             level: 1,
-            required: 10,
+            required: 1,
             earned: false,
             earnedAt: null,
             progress: 0,
@@ -5720,82 +5893,36 @@ var translations = {
           {
             id: 'asf-founder',
             brand: 'ASF',
-            brandColor: '#FFD700',
+            brandColor: '#e91e63',
             icon: '🌟',
-            name: 'ASF Founder',
-            description: 'Membro desde o início da comunidade (2019)',
-            type: 'legacy',
+            name: 'Fundador ASF',
+            description: 'Apoie a ASF com doação PIX de qualquer valor',
+            type: 'donation',
             level: 5,
-            required: 0,
-            earned: true,
-            earnedAt: '2019-01-01',
-            progress: 1,
-            shareable: true
-          },
-          {
-            id: 'asf-ambassador',
-            brand: 'ASF',
-            brandColor: '#FFD700',
-            icon: '👑',
-            name: 'Embaixadora ASF',
-            description: 'Indicou 10+ amigas para o app',
-            type: 'community',
-            level: 5,
-            required: 10,
+            required: 1,
             earned: false,
             earnedAt: null,
             progress: 0,
             shareable: true
           }
         ];
-
-        // Load badges from localStorage
-        
-
-        // Save badges to localStorage
-        
-
-        // Update badge progress based on sessions
-        
-
-        // Render badges grid
-        
-
-        // Show badge details modal
-        
-
-        // Animation when badge is earned
-        
-
-        // Initialize badges on DOM load
-        
-
-                // Consolidated DOMContentLoaded init
         document.addEventListener('DOMContentLoaded', function() {
-            // Simple analytics - app opens (every time someone opens)
-            // Start Brand Hub countdown
             if (document.getElementById("challenge-timer")) updateBrandTimer();
-            // Initialize badges system
             if (typeof initBadges === 'function') initBadges();
             let appOpens = parseInt(localStorage.getItem('asf-opens') || '0');
             appOpens++;
             localStorage.setItem('asf-opens', appOpens);
-            // Update display
             try { document.getElementById('stat-opens').textContent = appOpens; } catch(e) {}
             showProfile();
-            // Load theme preference
             const savedTheme = localStorage.getItem('asf-theme');
             if (savedTheme === 'dark') {
                 document.documentElement.setAttribute('data-theme', 'dark');
                 document.getElementById('darkModeToggle').textContent = '☀️';
             }
-            // Load user name from localStorage if exists
             const savedName = localStorage.getItem('asf-name');
-            // (User loading happens in sections)
             renderSessions();
             renderUserPosts();
             renderAchievements();
-            // Restore joined group states
             ['Bertioga Surf Girls', 'Guarujá & Santos Surf', 'Ubatuba Surf Girls'].forEach(name => {
                 const key = 'asf-joined-' + name.replace(/\s+/g, '-');
                 if (localStorage.getItem(key)) {
@@ -5804,22 +5931,9 @@ var translations = {
                     if (btn) { btn.textContent = '✅ Inscrita!'; btn.style.background = 'var(--success)'; btn.style.pointerEvents = 'none'; }
                 }
             });
-            // Water tracker
             updateWaterDisplay(parseInt(localStorage.getItem(getWaterKey()) || '0'));
-            // Checklist
             initChecklist();
         });
-
-        // ============ PREMIUM CONTENT ============
-        
-
-        // ============ PRE-SURF CHECKLIST ============
-        
-        
-        // Save/load checklist state (called from consolidated DOMContentLoaded)
-        
-
-        // ============ DICA DO DIA (989) ============
         const dicas = [
             { text: '🌊 O mar hoje tá com ondas de 0.5-1.0m! Boas para todas. Bora surfar!', category: 'Condições', emoji: '🌊' },
             { text: '☀️ Protetor solar FPS 30+ a cada 2h. No Brasil, prevenção é tudo!', category: 'Prevenção', emoji: '☀️' },
@@ -6069,7 +6183,7 @@ var translations = {
             { text: '🏄‍♀️ Master the bottom turn: shift weight forward, use rails to carve back up the wave face for max speed! 🚀', category: 'Técnica Avançada', emoji: '🏄‍♀️' },
             { text: '🌊 Practice proper duck diving in waves over head-high: angle board 45°, push with front foot, arch back to submerge fully! 🤿', category: 'Segurança Avançada', emoji: '🌊' },
             { text: '⚠️ Always check for rip currents: look for discolored water, choppy waves, debris moving seaward. Swim parallel to escape! 🛟', category: 'Segurança', emoji: '⚠️' },
-            { text: '🎯 Time your cutback when the wave flattens: use back foot to pivot, redirect toward the wave's pocket for power! 🔄', category: 'Técnica Avançada', emoji: '🎯' },
+            { text: '🎯 Time your cutback when the wave flattens: use back foot to pivot, redirect toward the wave\'s pocket for power! 🔄', category: 'Técnica Avançada', emoji: '🎯' },
             { text: '☀️ Apply reef-safe SPF 50+ 30min before surfing, reapply every 2h. UPF rash guard for extended sessions! 🧴', category: 'Prevenção', emoji: '☀️' },
             { text: '👒 Use um chapéu de surf para proteger rosto e pescoço do sol. Mais proteção que apenas protetor!', category: 'Prevenção', emoji: '👒' },
             { text: '🤸 Alongue-se APÓS o surf para evitar rigidez muscular. 5 minutos de alongamento fazem maravilhas!', category: 'Recuperação', emoji: '🤸' },
@@ -6207,7 +6321,7 @@ var translations = {
             { text: '🥜 Snack de castanhas e frutas secas entre sessões repõe energia rápido e saudável.', category: 'Nutrição', emoji: '🥜' },
             { text: '💬 Junte-se ao grupo WhatsApp da ASF da sua região para ficar por dentro de eventos e condições locais.', category: 'Comunidade', emoji: '💬' },
             { text: '🧘‍♀️ Faça 5 min de respiração diafragmática antes de entrar no mar. Calma no corpo = foco na onda! 🌬️', category: 'Saúde', emoji: '🧘♀️' },
-            { text: '🦶 Use sandálias adequadas na areia para evitar cortes com conchas ou pedras afiadas. Segurança começa fora d'água! 👡', category: 'Segurança', emoji: '🦶' },
+            { text: '🦶 Use sandálias adequadas na areia para evitar cortes com conchas ou pedras afiadas. Segurança começa fora d\'água! 👡', category: 'Segurança', emoji: '🦶' },
             { text: '📱 Baixe o app Tide Graph para acompanhar marés em tempo real. Planejamento é chave para boas sessões! 📊', category: 'Condições', emoji: '📱' },
             { text: '🍇 Frutas vermelhas pós-surf ajudam na recuperação muscular por causa dos antioxidantes. Snack saudável! 🍇', category: 'Nutrição', emoji: '🍇' },
             { text: '🏄‍♀️💙 Surfe com a ASF te conecta a outras mulheres surfistas. Junte-se a nós em eventos e treinos! 🤝', category: 'ASF', emoji: '💙' },
@@ -6275,7 +6389,7 @@ var translations = {
             { text: '🧘‍♂️ Meditate before surfing. Calm mind = better wave reading! 🧠', category: 'Mental', emoji: '🧘' },
             { text: '🍫 Dark chocolate 70%+ gives quick energy without crash! Perfect pre-surf snack! 🍫', category: 'Nutrição', emoji: '🍫' },
             { text: '📏 Check your leash length: should match your board length! Too short = dangerous! ⚠️', category: 'Equipamento', emoji: '📏' },
-            { text: '🌊 Watch local surfers: learn the spot's peculiarities and wave patterns! 👀', category: 'Técnica', emoji: '🌊' },
+            { text: '🌊 Watch local surfers: learn the spot\'s peculiarities and wave patterns! 👀', category: 'Técnica', emoji: '🌊' },
             { text: '🧘‍♀️ Faça respiração diafragmática antes de entrar: 4s inspire, 7s segure, 8s expire. Foco total!', category: 'Mental', emoji: '🧘‍♀️' },
             { text: '🧴 Use protetor solar em pó para o rosto. Não escorre com o suor e protege por horas!', category: 'Prevenção', emoji: '🧴' },
             { text: '🌊 Observe a formação dos sets por 10 minutos antes de remar. Identifique o padrão e economize energia!', category: 'Técnica', emoji: '👀' },
@@ -6548,7 +6662,7 @@ var translations = {
             { text: '📱 App offline mode: salve dicas e地图 para acessar na praia sem internet! 🗺️', category: 'Tecnologia', emoji: '📱' },
             { text: '🍍 Abacaxi pós-surf: anti-inflamatório natural para recuperação muscular! 🍍', category: 'Nutrição', emoji: '🍍' },
             { text: '🧭 Orientação por pontos: use a costa como referência para não se perder no mar! 🧭', category: 'Segurança', emoji: '🧭' },
-            { text: '🎥 Filmagem aérea: drone mostra sua técnica de fora d'água. Análise poderosa! 📹', category: 'Progresso', emoji: '📹' },
+            { text: '🎥 Filmagem aérea: drone mostra sua técnica de fora d\'água. Análise poderosa! 📹', category: 'Progresso', emoji: '📹' },
             { text: '👕 Camiseta rash guard UV: proteção extra contra o sol em sessões longas! 👕', category: 'Equipamento', emoji: '👕' },
             { text: '🌊 Wave selection: nem toda onda vale a pena. Escolha as que combinam com seu estilo! 🎯', category: 'Técnica', emoji: '🎯' },
             { text: '🍊 Laranja pós-surf: vitamina C para imunidade e recuperação! 🍊', category: 'Nutrição', emoji: '🍊' },
@@ -6922,7 +7036,7 @@ var translations = {
             { text: '🔋 Gestão energia campeonatos longos: alimentação estratégica + ritmo sustentável! ⚡', category: 'Competição', emoji: '⚡' },
             { text: '🏋️ Preparação por tipo de onda: aqueça-se de acordo com o estilo da session! 🌅', category: 'Preparação', emoji: '🌅' },
             { text: '💨 Leitura vento slab: ventos offshore criam ondas pesadas e tubeáveis! 🏔️', category: 'Condições', emoji: '🏔️' },
-            { text: '❄️ Preparação surf ondas gelo: proteção térmica total + equipo à prova d'água! 🧊', category: 'Preparação', emoji: '🧊' },
+            { text: '❄️ Preparação surf ondas gelo: proteção térmica total + equipo à prova d\'água! 🧊', category: 'Preparação', emoji: '🧊' },
             { text: '👥 Protocolo segurança multi-surf: zonas de separação + comunicação rádio! 📡', category: 'Segurança', emoji: '📡' },
             { text: '🧘 Gestão stress campeonatos: técnicas de respiração + foco no presente! 🧘', category: 'Mental', emoji: '🧘' },
             { text: '🏄 Técnica de snapback big wave: snap potente em ondas grandes para retorno rápido! 🌊', category: 'Técnica', emoji: '🌊' },
@@ -7015,50 +7129,103 @@ var translations = {
             { text: '🎬 Produção vídeo surf: edição ritmo + trilha sonora + storytelling! 🎥', category: 'Aprendizado', emoji: '🎥' },
             { text: '💼 Empreendedorismo surf: transforme paixão em negócio sustentável! 🚀', category: 'Social', emoji: '🚀' },
             { text: '📢 Advocacy surf: participe de consultas públicas sobre praias e meio ambiente! 🏛️', category: 'Cidadania', emoji: '🏛️' },
-            { text: '♿ Acesso praias deficientes: rampas adaptadas + estruturas inclusivas! 🦽', category: 'Inclusão', emoji: '🦽' },
-            { text: '🌊 Surf inclusivo: programa adaptado atletas com deficiência! 🤝', category: 'Inclusão', emoji: '🤝' },
-            { text: '🛍️ Consumo consciente surf: escolhas sustentáveis no dia-a-dia! ♻️', category: 'Sustentabilidade', emoji: '♻️' },
-            { text: '👥 Economia colaborativa surf: compartilhamento equipamentos + recursos! 🤲', category: 'Economia', emoji: '🤲' },
-            { text: '💡 Inovação social surf: soluções criativas comunidades costeiras! 🌱', category: 'Inovação', emoji: '🌱' },
+            { text: '🎓 Formação instrutor ASF: certificação técnica + metodologia pedagógica! 📜', category: 'Aprendizado', emoji: '📜' },
+            { text: '🏆 Organização campeonato: cronograma, juízes, patrocínios e logística! 📋', category: 'Eventos', emoji: '📋' },
+            { text: '🚚 Logística surf trips: transporte pranchas + check-list equipamento! 📦', category: 'Viagem', emoji: '📦' },
+            { text: '💉 Terapia regenerativa: terapia com células-tronco para lesões crônicas! 🧬', category: 'Saúde', emoji: '🧬' },
+            { text: '📚 Literatura surf: livros, crônicas e poesia do oceano! 🌊', category: 'Cultura', emoji: '🌊' },
+            { text: '📸 Técnica fotografia surf: shutter speed + composition + action! 📷', category: 'Progresso', emoji: '📷' },
+            { text: '🎙️ Podcast surf: entrevistas + histórias + educação em áudio! 🎧', category: 'Aprendizado', emoji: '🎧' },
+            { text: '🏛️ Direito desportivo surf: contratos, direitos image e governança! ⚖️', category: 'Segurança', emoji: '⚖️' },
+            { text: '🤖 AI coaching surf: análise técnica em tempo real via smartphone! 📱', category: 'Tecnologia', emoji: '📱' },
+            { text: '🌍 Mulheres surf pioneers: história das primeiras mulher surfistas! 📖', category: 'ASF', emoji: '📖' },
+            { text: '🌊 Meteorologia surf pressão: sistemas de alta pressão criam ondas perfeitas! 🌤️', category: 'Condições', emoji: '🌤️' },
+            { text: '🧠 Neurociência surf: plasticidade cerebral e aprendizado motor! 🔬', category: 'Saúde', emoji: '🔬' },
+            { text: '📊 Ciência dados surf: análise estatística de sessões e evolução! 📈', category: 'Tecnologia', emoji: '📈' },
+            { text: '🌍 Mudança climática surf: elevação mar + acidificação oceanos! 🏖️', category: 'Sustentabilidade', emoji: '🏖️' },
+            { text: '🔬 Biomecânica comparada: compara técnica com atletas de elite! 🎯', category: 'Treino', emoji: '🎯' },
+            { text: '🌊 Monitoramento oceanográfico: sensores mede ondas, corrente e qualidade água! 📡', category: 'Sustentabilidade', emoji: '📡' },
+            { text: '📋 Plano diretor costa: zoneamento uso solo + proteção costeira! 🏖️', category: 'Cidadania', emoji: '🏖️' },
+            { text: '📈 Modelagem swell numérico: previsão ondas com modelagem física! 🧮', category: 'Condições', emoji: '🧮' },
+            { text: '🎬 Documentário surf: roteiro + entrevistas + narrativa oceânica! 🎬', category: 'Cultura', emoji: '🎬' },
+            { text: '🤝 Protocolo acordos internacionais: cooperação transnacional surf! 🌍', category: 'Cidadania', emoji: '🌍' },
+            { text: '🧬 Genética surfista: análise DNA para potencial competitivo e lesões! 🧬', category: 'Saúde', emoji: '🧬' },
+            { text: '🌐 Padronização API surf: interoperabilidade entre apps de previsão! 🔗', category: 'Tecnologia', emoji: '🔗' },
+            { text: '📺 Streaming surf: plataforma digital para campeonatos e conteúdo! 🎬', category: 'Cultura', emoji: '🎬' },
+            { text: '🏛️ Política costeira: legislação praias e direitos de acesso! ⚖️', category: 'Cidadania', emoji: '⚖️' },
+            { text: '🎯 Flow state surf: psicologia do desempenho máximo em pico! 🌊', category: 'Mental', emoji: '🌊' },
+            { text: '🌊 Oceanografia física: correntes marinhas + dinâmica costeira! 🔬', category: 'Condições', emoji: '🔬' },
+            { text: '⚖️ Direito marítimo: legislação navegação + direitos marítimos! 🚢', category: 'Cidadania', emoji: '🚢' },
+            { text: '💰 Finanças sustentáveis: investimento verde no surf! 🌱', category: 'Sustentabilidade', emoji: '🌱' },
+            { text: '♻️ Economia circular surf: reutilização materiais + resíduos zero! 🔄', category: 'Sustentabilidade', emoji: '🔄' },
+            { text: '🧠 Neurociência do esporte: cérebro atleta + performance mental! 🧪', category: 'Mental', emoji: '🧪' },
+            { text: '🌌 Astrobiologia oceanográfica: busca vida oceânica extraterrestre! 👽', category: 'Ciência', emoji: '👽' },
+            { text: '🏗️ Engenharia costeira: estruturas proteção praias sustentáveis! 🏖️', category: 'Engenharia', emoji: '🏗️' },
+            { text: '🔋 Energia azul: conversão ondas em eletricidade limpa! ⚡', category: 'Tecnologia', emoji: '⚡' },
+            { text: '🧬 Bioengenharia tecidos: regeneração lesions células-tronco! 🧫', category: 'Saúde', emoji: '🧫' },
+            { text: '🤖 Modelagem preditiva: algoritmos preveem swell 72h com 85% precisão! 📊', category: 'Tecnologia', emoji: '📊' },
+            { text: '📡 Sismologia marinha: monitoramento sísmico submarino alerta tsunamis! 🌊', category: 'Segurança', emoji: '🌊' },
+            { text: '🧭 Hidrografia: mapeamento batimétrico detalhado para navegação segura! 🗺️', category: 'Engenharia', emoji: '🗺️' },
+            { text: '🌡️ Climatologia: análise padrões climáticos longo prazo planejamento surf! 📈', category: 'Ciência', emoji: '📈' },
+            { text: '💾 Ciência dados oceanográficos: Big Data previsão ondas hiperlocal! 📊', category: 'Tecnologia', emoji: '📊' },
+            { text: '🧠 IA oceanografia: machine learning prevê swells com 90% precisão! 🤖', category: 'Tecnologia', emoji: '🤖' },
+            { text: '🦈 Bioacústica marinha: sons das ondas + comunicação fauna subaquática! 🎵', category: 'Ciência', emoji: '🎵' },
+            { text: '🏛️ Arqueologia submarina: sítios históricos naufrágios + patrimônio cultural! ⚓', category: 'Cultura', emoji: '⚓' },
+            { text: '⛓️ Física fluidos: dinâmica ondas + interação oceano-atmosfera! 🌊', category: 'Ciência', emoji: '🌊' },
+            { text: '🔭 Paleoclimatologia: padrões climáticos históricos previsão surf longo prazo! 📜', category: 'Ciência', emoji: '📜' },
+            { text: '⚡ Energia ondas: conversão energia cinética ondas em eletricidade! 🔋', category: 'Tecnologia', emoji: '🔋' },
+            { text: '📜 História surf: evolução prática + cultura através décadas! 📚', category: 'Cultura', emoji: '📚' },
+            { text: '👥 Sociologia surf: dinâmica comunidades + identidade cultural! 🌊', category: 'Social', emoji: '🌊' },
+            { text: '📚 Pedagogia surf: métodos ensino adaptativos + progressão individual! 🎓', category: 'Aprendizado', emoji: '🎓' },
+            { text: '📊 Métricas performance surf: KPIs + análise dados sessão! 📈', category: 'Tecnologia', emoji: '📈' },
+            { text: '👑 Liderança surf: habilidades gestão comunidades mulheres! 🌟', category: 'Valores', emoji: '🌟' },
+            { text: '🌊 Filosofia oceano: conexão espiritual + ética ambiental marítima! 🧘', category: 'Ética', emoji: '🧘' },
+            { text: '⚖️ Direitos humanos surf: acesso equitativo praias + não discriminação! ✊', category: 'Cidadania', emoji: '✊' },
+            { text: '⌚ Tecnologia vestível surf: smartwatches monitoram performance em tempo real! ⌚', category: 'Tecnologia', emoji: '⌚' },
+            { text: '🥽 Realidade aumentada surf: overlay ondas + linhas remada no campo visão! 🥽', category: 'Tecnologia', emoji: '🥽' },
+            { text: '🔗 Blockchain surf: ledger seguro registro conquistas + conquistas NFT! 🪙', category: 'Tecnologia', emoji: '🪙' },
+            { text: '🌏 Antropologia surf: culturas práticas + significados comunidades costeiras! 🏝️', category: 'Antropologia', emoji: '🏝️' },
+            { text: '🗺️ Geopolítica surf: disputa territórios costeiros + diplomacia oceânica! 🌍', category: 'Geopolítica', emoji: '🌍' },
+            { text: '📢 Comunicação surf: estratégias disseminação informação comunidades! 📡', category: 'Comunicação', emoji: '📡' },
+            { text: '📈 Estatística surf: análise quantitativa performance + previsão probabilística! 🎲', category: 'Estatística', emoji: '🎲' },
+            { text: '🎨 Artes surf: expressão cultural + criatividade através pintura música! 🎭', category: 'Artes', emoji: '🎭' },
+            { text: '🌿 Ética ambiental surf: responsabilidade preservação oceanos + ecologia marina! 🐋', category: 'Ética', emoji: '🐋' },
+            { text: '♿ Surf adaptado: inclusão pessoas deficiência + equipamentos especiais! 🌊', category: 'Saúde', emoji: '🌊' },
+            { text: '🔧 Tecnologia assistiva surf: dispositivos auxílio mobilidade água! 🤖', category: 'Tecnologia', emoji: '🤖' },
+            { text: '⚖️ Direito ambiental surf: legislação proteção costeira + recursos hídricos! 🌍', category: 'Cidadania', emoji: '🌍' },
+            { text: '💼 Empreendedorismo feminino surf: negócios liderados mulheres no surf! 👩', category: 'Cidadania', emoji: '👩' },
+            { text: '🧠 Psicologia do esporte: motivação atleta + mentalidade vencedora! 🏆', category: 'Psicologia', emoji: '🏆' },
+            { text: '🤔 Filosofia do esporte: significado paddling + existência marítima! 🌊', category: 'Filosofia', emoji: '🌊' },
+            { text: '🏋️ Educação Física surf: prescrição exercícios + periodização treino! 📋', category: 'Educação Física', emoji: '📋' },
+            { text: '📢 Marketing digital surf: estratégias engajamento + crescimento marca pessoal! 📱', category: 'Marketing', emoji: '📱' },
+            { text: '📰 Jornalismo esportivo surf: cobertura campeonatos + narrativas atletas! 🎤', category: 'Jornalismo', emoji: '🎤' },
+            { text: '🚤 Hydrofoil surf: pranchas com formato hidrodinâmico deslizam sobre água! 🌊', category: 'Equipamento', emoji: '🌊' },
+            { text: '🪁 Wing surf: vela handheld + prancha - nova modalidade without ropes! 🌬️', category: 'Esportes', emoji: '🌬️' },
+            { text: '🧹 Ocean cleanup surf: remadores coletivos removem lixo marinho durante sessions! 🗑️', category: 'Sustentabilidade', emoji: '🗑️' },
+            { text: '🩺 Surf terapêutico: prescrição médica reabilitação lesões + saúde mental! 🏥', category: 'Saúde', emoji: '🏥' },
+            { text: '🏘️ Projeto social surf: ensino gratuito jovens comunidades costeiras! 👧', category: 'Comunidade', emoji: '👧' },
+            { text: '✈️ Turismo surf responsável: viagens sustentáveis + impacto local positivo! 🌍', category: 'Turismo', emoji: '🌍' },
+            { text: '👗 Moda sustentável surf: roupas ecológicas + slow fashion no surf! 👚', category: 'Moda', emoji: '👚' },
+            { text: '🌐 Direito internacional surf: tratados marítimos + cooperação global oceanos! 🤝', category: 'Direito Internacional', emoji: '🤝' },
+            { text: '🎵 Música surf: trilhas sonoras sessions + cultura musical das praias! 🎶', category: 'Música', emoji: '🎶' },
+            { text: '📋 Gestão projetos surf: planejamento execução iniciativas surf completas! 📊', category: 'Administração', emoji: '📊' },
+            { text: '🎬 Cinema surf: filmes documentários cultura surf + representação cinematográfica! 🎥', category: 'Cinema', emoji: '🎥' },
+            { text: '🎭 Teatro surf: peças performances arte cênica inspiradas surf! 🎭', category: 'Teatro', emoji: '🎭' },
+            { text: '💃 Dança surf: coreografias inspiradas movimentos surf + expressão corporal! 🎶', category: 'Dança', emoji: '🎶' },
+            { text: '🏗️ Arquitetura surf: design espaços urbano costeiro + infraestrutura praias! 🏛️', category: 'Arquitetura', emoji: '🏛️' },
+            { text: '🧪 Microplásticos surf: análise impacto partículas plásticas saúde + ambiente! 🔬', category: 'Saúde', emoji: '🔬' },
+            { text: '🍽️ Gastronomia surf: culinária praiana + nutrição pós-session! 🍴', category: 'Gastronomia', emoji: '🍴' },
+            { text: '🏙️ Urbanismo surf: planejamento cidades costeiras + infraestrutura surf! 🏙️', category: 'Urbanismo', emoji: '🏙️' },
+            { text: '🎨 Design surf: estética produtos + identidade visual marcas! 🎨', category: 'Design', emoji: '🎨' },
+            { text: '🚚 Transportes surf: logística equipamentos + mobilidade urbana surf! 🚛', category: 'Transportes', emoji: '🚛' },
+            { text: '🔋 Energia renovável surf: painéis solares + energia ondas sustentável! ⚡', category: 'Energia', emoji: '⚡' },
+            { text: '🏗️ Construção surf: edifícios praias + estruturas sustentáveis costeiras! 🏗️', category: 'Construção', emoji: '🏗️' },
+            { text: '🌾 Agricultura surf: cultivo orgânico + food forest comunidades costeiras! 🌿', category: 'Agricultura', emoji: '🌿' },
+            { text: '🎣 Pesca sustentável surf: técnicas responsáveis + preservação vida marinha! 🐟', category: 'Sustentabilidade', emoji: '🐟' },
+            { text: '🏆 Certificação sustentável surf: selos verdes + padrões ambientais surf! 🌱', category: 'Sustentabilidade', emoji: '🌱' },
+            { text: '📜 Selo ecossurf: certificação ecossistema + projetos conservação! 🌊', category: 'Sustentabilidade', emoji: '🌊' },
         ];
-        
-        
-        // Pick one based on day of year for daily rotation
         ()();
-
-        // ============ BEACH GUIDE FILTER ============
-        // Beach filter with cached card list [Optimized]
-        let beachCards = null;
-        
-
-        // ============ TOAST NOTIFICATION HELPER ============
-        // Toggle like on community posts
-        
-        
-        // Create community post
-        
-        
-        
-        
-
-        // Water tracker
-        
-        
-        
-
-        // Poll voting
-        
-
-        // Join surf group
-        
-
-        
-
-        // Secret Achievements Modal
-        
-
-        // Connection status
-        
         window.addEventListener('offline', updateConnectionStatus);
         window.addEventListener('online', updateConnectionStatus);
         updateConnectionStatus();
@@ -7139,13 +7306,6 @@ var translations = {
     reviews: 145
   }
 ];
-
-
-
-
-
-  
-  // GA4 tracking
   if (typeof gtag !== 'undefined') {
     gtag('event', 'affiliate_click', {
       event_category: 'monetization',
@@ -7153,134 +7313,15 @@ var translations = {
       value: 1
     });
   }
-// Newsletter
-
-
-// Premium
-
-
-
-
-// WhatsApp
-
-
-// Analytics
-
-
-
-
 window.ASFMonetization = { trackEvent, getStats };
-
-// Toast
-
-
-// Init
-// Cookie Consent
-
-
-
-
-// Show banner after 2s if no consent
 setTimeout(()=>{if(!getCookieConsent()){const b=document.getElementById('cookie-consent-banner');if(b)b.style.display='block'}},2000);
-
-// Pix Donation
-
-
-// Referral System
 ',name:'Capinha Celular À Prova D\'Água',price:'R$ 49,90',oldPrice:'R$ 79,90',image:'https://http2.mlstatic.com/D_NQ_NP_2X_998431-MLA53354855865_042022-F.webp',url:'https://produto.mercadolivre.com.br/MLB-2564859304-capinha-celular-a-prova-dagua-surf-_JM',commission:'15%',badge:'📱 Imperdível',rating:4.5,reviews:203},
   { id:'poncho-microfibra',brand:'SURFWEAR',brandColor:'#f39c12',name:'Poncho Microfibra (Secagem Rápida)',price:'R$ 79,90',oldPrice:'R$ 129,90',image:'https://http2.mlstatic.com/D_NQ_NP_2X_925481-MLA44847321610_032021-F.webp',url:'https://produto.mercadolivre.com.br/MLB-3437512899-poncho-surf-microfibra-universal-_JM',commission:'12%',badge:'🧖 Conforto',rating:4.7,reviews:145}
 ];
-
 window.ASFMonetization={trackEvent,getStats};const a=document.createElement('style');a.textContent=\`@keyframes toastIn{from{opacity:0;transform:translateX(-50%) translateY(20px)}to{opacity:1;transform:translateX(-50%) translateY(0)}}@keyframes toastOut{from{opacity:1;transform:translateX(-50%) translateY(0)}to{opacity:0;transform:translateX(-50%) translateY(20px)}}\`,document.head.appendChild(a);document.addEventListener('DOMContentLoaded',function(){console.log('✅ Monetization system initialized'),const e=document.getElementById('loja');e&&getComputedStyle(e).display!=='none'&&setTimeout(renderAffiliateStore,100)});
-
-
-<!-- PREMIUM PAYWALL MODAL -->
-<div id="premium-modal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.85); z-index:99999; align-items:center; justify-content:center; backdrop-filter: blur(8px);">
-  <div style="background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%); padding: 32px; border-radius: 28px; max-width: 420px; width: 92%; text-align: center; position: relative; box-shadow: 0 20px 60px rgba(0,0,0,0.3); animation: modalBounce 0.5s ease-out;">
-    <button onclick="hidePremiumModal()" style="position: absolute; top: 12px; right: 18px; background: none; border: none; font-size: 28px; cursor: pointer; color: var(--secondary); opacity: 0.7;">×</button>
-    <div style="font-size: 56px; margin-bottom: 8px;">⭐</div>
-    <h2 style="margin: 0 0 8px 0; color: #0E2439; font-size: 28px;">ASF Premium</h2>
-    <p style="color: #0E2439; margin-bottom: 24px; font-size: 16px;">Desbloqueie todo o potencial do app! 🌊</p>
-    <div style="text-align: left; background: rgba(255,255,255,0.35); padding: 20px; border-radius: 16px; margin: 20px 0;">
-      <ul style="margin: 0; padding-left: 20px; color: #0E2439; font-size: 15px; line-height: 1.8;">
-        <li>✅ 900+ dicas avançadas</li>
-        <li>✅ Sem anúncios</li>
-        <li>✅ Badges exclusivos (Dourado)</li>
-        <li>✅ Grupo VIP WhatsApp</li>
-        <li>✅ Relatórios de progresso</li>
-        <li>✅ Conteúdo antecipado</li>
-      </ul>
-    </div>
-    <div style="font-size: 36px; font-weight: bold; color: #0E2439; margin-bottom: 8px;">R$ 19,90<span style="font-size: 18px; font-weight: normal;">/mês</span></div>
-    <p style="font-size: 13px; color: #0E2439; margin-bottom: 20px;">💳 Cancele quando quiser • 7 dias grátis</p>
-    <button onclick="startPayment()" style="background: linear-gradient(135deg, #0E2439, #0088A8); color: white; border: none; padding: 18px 40px; border-radius: 50px; font-size: 17px; font-weight: bold; cursor: pointer; width: 100%; box-shadow: 0 8px 25px rgba(14,36,57,0.4); transition: transform 0.2s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">🚀 Assinar Agora</button>
-    <p style="font-size: 11px; color: #666; margin-top: 16px;">Pagamento 100% seguro via Mercado Pago 🔒</p>
-    <p style="font-size: 11px; color: #999; margin-top: 8px;">7 dias grátis • Cancele a qualquer momento</p>
-  </div>
-</div>
-
-<!-- PIX DONATION MODAL -->
-<div id="pix-modal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.85); z-index:99999; align-items:center; justify-content:center; backdrop-filter: blur(8px);">
-  <div style="background: linear-gradient(135deg, #00A8CC 0%, #28a745 100%); padding: 32px; border-radius: 24px; max-width: 380px; width: 90%; text-align: center; position: relative; box-shadow: 0 20px 60px rgba(0,0,0,0.3);">
-    <button onclick="hidePixDonation()" style="position: absolute; top: 12px; right: 18px; background: none; border: none; font-size: 28px; cursor: pointer; color: white; opacity: 0.8;">×</button>
-    <div style="font-size: 56px; margin-bottom: 8px;">❤️</div>
-    <h2 style="margin: 0 0 8px 0; color: white; font-size: 24px;">Apoie a ASF</h2>
-    <p style="color: rgba(255,255,255,0.9); margin-bottom: 24px; font-size: 14px;">Qualquer valor nos ajuda a manter o app gratuito!</p>
-    
-    <div style="background: white; padding: 20px; border-radius: 16px; margin: 20px 0;">
-      <div style="font-size: 48px; font-weight: bold; color: #00A8CC; margin-bottom: 8px;">R$ 10,00</div>
-      <p style="color: #666; margin: 0 0 16px; font-size: 13px;">Sugestão mínima (você pode doar qualquer valor)</p>
-      <div style="font-size: 14px; color: #333; line-height: 1.6;">
-        <strong>Chave Pix (CNPJ):</strong><br>
         asf@asf-surf.org<br>
-        <small style="color: #666;">Associação de Surf Feminino</small>
-      </div>
-    </div>
-    
-    <div style="display: flex; gap: 10px; justify-content: center; flex-wrap: wrap;">
-      <button onclick="window.open('https://wa.me/5511954346288?text=Olá! Gostaria de doar via Pix', '_blank')" style="background: white; color: #00A8CC; border: none; padding: 12px 24px; border-radius: 25px; font-weight: bold; cursor: pointer; font-size: 14px;">📱 WhatsApp</button>
-      <button onclick="copyPixKey()" style="background: rgba(255,255,255,0.2); color: white; border: none; padding: 12px 24px; border-radius: 25px; font-weight: 600; cursor: pointer; font-size: 14px;">📋 Copiar Chave</button>
-    </div>
-    
-    <p style="font-size: 11px; color: rgba(255,255,255,0.7); margin-top: 16px;">Obrigada pelo apoio! 🏄‍♀️</p>
-  </div>
-</div>
+  </script>
 
-<style>@keyframes modalBounce{0%{transform:scale(0.8);opacity:0}50%{transform:scale(1.05)}100%{transform:scale(1);opacity:1}}</style>
-
-
-<!-- MONETIZATION CTA -->
-<div id="monetization-cta" style="background: linear-gradient(135deg, rgba(0,168,204,0.08) 0%, rgba(155,89,182,0.08) 100%); padding: 24px; margin: 16px; border-radius: 20px; border: 1px solid rgba(0,168,204,0.15);">
-  <div style="display: flex; flex-direction: column; gap: 16px;">
-    <div>
-      <h4 style="margin: 0 0 8px 0; color: var(--primary); font-size: 16px;">📧 Receba a Dica do Dia</h4>
-      <p style="margin: 0 0 12px 0; font-size: 13px; color: var(--gray-600);">Surf dicas direto no seu email! Sem spam.</p>
-      <div style="display: flex; gap: 8px;">
-        <input type="email" id="newsletter-email" placeholder="seu@email.com" style="flex: 1; padding: 12px 16px; border: 2px solid var(--primary); border-radius: 12px; font-size: 14px; font-family: inherit;" onkeypress="if(event.key === 'Enter') subscribeNewsletter()">
-        <button onclick="subscribeNewsletter()" style="background: var(--primary); color: white; border: none; padding: 12px 20px; border-radius: 12px; font-weight: 600; cursor: pointer; white-space: nowrap;">📩 Inscrever</button>
-      </div>
-    </div>
-    <div style="border-top: 1px solid rgba(0,0,0,0.08); padding-top: 16px;">
-      <h4 style="margin: 0 0 8px 0; font-size: 16px; color: #25D366;">💬 Fale com a ASF</h4>
-      <p style="margin: 0 0 12px 0; font-size: 13px; color: var(--gray-600);">Tire dúvidas, sugira pares, ou partnership!</p>
-      <button onclick="contactWhatsApp()" style="background: #25D366; color: white; border: none; padding: 12px 20px; border-radius: 12px; font-weight: 600; cursor: pointer; width: 100%;">📱 Chamar no WhatsApp</button>
-    </div>
-  </div>
-</div>
-
-
-<div style="background: linear-gradient(135deg, #FFD700, #FFA500); margin: 20px 16px; padding: 24px; border-radius: 20px; text-align: center; box-shadow: 0 8px 30px rgba(255,215,0,0.3);">
-  <div style="font-size: 48px; margin-bottom: 12px;">⭐</div>
-  <h3 style="margin: 0 0 8px 0; color: #0E2439; font-size: 22px;">Quer Apoiar a ASF?</h3>
-  <p style="color: #0E2439; margin: 0 0 16px 0; font-size: 14px;">Vire Premium e ajude a maintainer o app no ar! 🏄</p>
-  <div style="display: flex; gap: 10px; justify-content: center; flex-wrap: wrap;">
-    <button onclick="showPremiumModal()" style="background: #0E2439; color: white; border: none; padding: 14px 32px; border-radius: 50px; font-size: 16px; font-weight: bold; cursor: pointer;">🔓 Virar Premium</button>
-    <button onclick="showReferralModal()" style="background: #9B59B6; color: white; border: none; padding: 14px 32px; border-radius: 50px; font-size: 16px; font-weight: bold; cursor: pointer;">🎁 Indique & Ganhe</button>
-    <button onclick="showPixDonation()" style="background: linear-gradient(135deg, #00A8CC, #28a745); color: white; border: none; padding: 14px 32px; border-radius: 50px; font-size: 16px; font-weight: bold; cursor: pointer;">❤️ Doar via Pix</button>
-  </div>
-  </div>
-
-  <!-- Footer -->
   <footer id="app-footer" style="margin-top: 40px; padding: 24px; text-align: center; color: var(--gray-500); font-size: 12px; border-top: 1px solid var(--gray-200);">
     <p style="margin: 0 0 8px;">
       © 2026 ASF - Associação de Surf Feminino • 
@@ -7429,11 +7470,8 @@ window.ASFMonetization={trackEvent,getStats};const a=document.createElement('sty
   
 
 <script>
-  // Initialize: load saved language
   var savedLang = localStorage.getItem('asf-lang');
   if (savedLang) setLanguage(savedLang);
-  
-  // Google Analytics 4 initialization
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
@@ -7448,10 +7486,6 @@ window.ASFMonetization={trackEvent,getStats};const a=document.createElement('sty
       value: value
     });
   };
-
-
-
-
 function setLanguage(lang) {
     localStorage.setItem('asf-lang', lang);
     document.querySelectorAll('button[onclick^="setLanguage"]').forEach(function(b) {
@@ -7461,8 +7495,6 @@ function setLanguage(lang) {
     });
     var terms = translations[lang];
     if (!terms) return;
-    // Translate ALL visible text
-    
     walkTree(document.body);
     showToast('Idioma: ' + (lang === 'pt' ? 'Português' : lang === 'en' ? 'English' : 'Español') + ' 🌎');
 }
@@ -7474,15 +7506,12 @@ function sendChatbotMessage() {
             const input = document.getElementById("chatbot-input");
             const msg = input.value.toLowerCase().trim();
             if (!msg) return;
-
             const msgs = document.getElementById("chatbot-messages");
             msgs.innerHTML += "<div style='background:#eee; padding:8px; border-radius:8px; margin:4px 0;'><strong>Você:</strong> " + input.value + "</div>";
-
             let response = "Desculpe, não entendi. Tente: previsão, pontos, eventos, contatos ou como participar! 🤖";
             for (const [key, value] of Object.entries(chatbotFAQs)) {
                 if (msg.includes(key)) { response = value; break; }
             }
-
             msgs.innerHTML += "<div style='background:#E0F7FA; padding:8px; border-radius:8px; margin:4px 0;'><strong>🤖:</strong> " + response + "</div>";
             msgs.scrollTop = msgs.scrollHeight;
             input.value = "";
@@ -7493,7 +7522,6 @@ function showTripVotes() {
                     alert('Nenhum voto recebido ainda! Compartilhe o app para receber votos.');
                     return;
                 }
-                // Group by location
                 var counts = {};
                 votes.forEach(function(v) { counts[v.location] = (counts[v.location] || 0) + 1; });
                 var summary = '🗳️ RESULTADOS DAS VOTAÇÕES\n\nTotal: ' + votes.length + ' votos\n\n';
@@ -7520,7 +7548,6 @@ function initVotingCountdown() {
                         var daysEl2 = document.getElementById('days-left2');
                         if (daysEl2) daysEl2.textContent = '0';
                         document.getElementById('vote-countdown').innerHTML = '<div style="font-size: 18px; font-weight: bold;">✅ VOTAÇÃO ENCERRADA!</div><div style="font-size: 12px; opacity: 0.8;">Resultado final definido</div>';
-                        // Show final results
                         showFinalResults();
                     } else {
                         daysEl.textContent = daysLeft;
@@ -7528,7 +7555,6 @@ function initVotingCountdown() {
                         if (daysEl2) daysEl2.textContent = daysLeft;
                     }
                 }
-                // Mostrar resultado parcial em tempo real
                 updateLiveResults();
             }
 function updateLiveResults() {
@@ -7560,16 +7586,13 @@ function showFinalResults() {
                 alert(msg);
             }
 function voteTrip(btn, loc) {
-                // Check if user is logged in
                 var user = localStorage.getItem('asf-profile');
                 if (!user) {
                     showToast('⚠️ Faça login primeiro! 📝');
-                    // Show login modal
                     var loginHTML = '<div style="position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.95);z-index:10000;padding:20px;display:flex;align-items:center;justify-content:center;"><div style="background:white;border-radius:16px;padding:24px;max-width:400px;width:100%;"><h3 style="margin-bottom:16px;">📝 Vote em ' + loc + '</h3><p style="font-size:13px;color:#666;margin-bottom:16px;">Precisamos saber quem você é!</p><input id="voter-name" placeholder="Seu nome" style="width:100%;padding:12px;border:1px solid #ddd;border-radius:8px;margin-bottom:10px;"><input id="voter-phone" placeholder="WhatsApp" style="width:100%;padding:12px;border:1px solid #ddd;border-radius:8px;margin-bottom:10px;"><input id="voter-email" placeholder="E-mail" style="width:100%;padding:12px;border:1px solid #ddd;border-radius:8px;margin-bottom:16px;"><button onclick="saveVoterAndVote(\'\' + loc + \')" style="background:#00A8CC;color:white;border:none;padding:14px;border-radius:8px;width:100%;font-weight:600;">VOTAR! 🏄‍♀️</button><button onclick="this.closest(\'div\').parentElement.remove()" style="background:none;border:none;color:#666;margin-top:12px;width:100%;">Cancelar</button></div></div>';
                     document.body.insertAdjacentHTML('beforeend', loginHTML);
                     return;
                 }
-                // Already logged in - just vote
                 var profile = JSON.parse(user);
                 voteForLocation(btn, loc, profile.name, profile.phone, profile.email);
             }
@@ -7581,33 +7604,25 @@ function saveVoterAndVote(loc) {
                     alert('Nome e WhatsApp são obrigatórios!');
                     return;
                 }
-                // Save as profile for future
                 localStorage.setItem('asf-profile', JSON.stringify({name: name, phone: phone, email: email, level: 'comunidade'}));
-                // Remove modal
                 document.querySelectorAll('[style*="z-index:10000"]')[0].remove();
-                // Vote now
                 voteForLocation(null, loc, name, phone, email);
             }
 function voteForLocation(btn, loc, name, phone, email) {
-                // Save vote with full data
                 var key = 'asf-trip-votes';
                 var votes = JSON.parse(localStorage.getItem(key) || '[]');
                 votes.push({location: loc, name: name, phone: phone, email: email, date: new Date().toISOString()});
                 localStorage.setItem(key, JSON.stringify(votes));
-                // Also update count
                 var countKey = 'asf-trip-' + loc, count = (parseInt(localStorage.getItem(countKey)||0)+1);
                 localStorage.setItem(countKey, count);
-                // Update display
                 var el = document.getElementById('vote-' + loc.toLowerCase());
                 if (el) el.textContent = count;
                 if (btn) {btn.style.border = '#FFD700'; btn.style.background = 'rgba(255,215,0,0.2)';}
                 showToast('✓ Voto registrado para ' + loc + '! 🏄‍♀️');
-                // Send to Carol via WhatsApp
                 var msg = '🏄♀️ NOVO VOTO!\nLocal: ' + loc + '\nNome: ' + name + '\nWhatsApp: ' + phone + (email ? '\nE-mail: ' + email : '');
                 window.open('https://wa.me/5511954346288?text=' + encodeURIComponent(msg), '_blank');
             }
 function renderBrandHub() {
-    // Render offers
     const offersContainer = document.getElementById('brand-offers');
     if (offersContainer) {
         offersContainer.innerHTML = BRAND_OFFERS.map(offer => `
@@ -7625,8 +7640,6 @@ function renderBrandHub() {
             </div>
         `).join('');
     }
-
-    // Render UGC gallery
     const gallery = document.getElementById('ugc-gallery');
     if (gallery) {
         gallery.innerHTML = UGC_IMAGES.map(imgurl => `
@@ -7678,7 +7691,6 @@ function enviarCadastroParceiro() {
             var site = document.getElementById("parceiro-site").value.trim();
             var logo = document.getElementById("parceiro-logo").value.trim();
             var comprovante = document.getElementById("parceiro-comprovante").value.trim();
-
             if (!nome) {
                 alert("Preencha o nome da marca!");
                 return;
@@ -7687,19 +7699,14 @@ function enviarCadastroParceiro() {
                 alert("Anexe o comprovante do PIX!");
                 return;
             }
-
-            // Save registration
             var parceiro = { nome: nome, insta: insta, site: site, logo: logo, comprovante: comprovante, data: new Date().toISOString() };
             localStorage.setItem("asf-parceiros", JSON.stringify(parceiro));
-
-            // Send to Carol
             var msg = "🏄♀️ NOVO CADASTRO DE PARCEIRO!\n\n";
             msg += "Marca: " + nome + "\n";
             if (insta) msg += "Instagram: " + insta + "\n";
             if (site) msg += "Site: " + site + "\n";
             msg += "\nComprovante: " + comprovante + "\n";
             msg += "Revisar e ativar!";
-
             window.open("https://wa.me/5511954346288?text=" + encodeURIComponent(msg), "_blank");
             showToast("✓ Cadastro enviado! Revisaremos em breve.");
         }
@@ -7708,7 +7715,6 @@ function checkBadge(type) {
         var quizzes = (JSON.parse(localStorage.getItem('quizzes-done') || '[]')).length;
         var opens = parseInt(localStorage.getItem('asf-opens') || '0');
         var shares = parseInt(localStorage.getItem('asf-shares') || '0');
-
         if (type === 'surf') {
             if (sessions >= 1) showToast('🏄 Badge desbloqueado! 🎉');
             else showToast('🏄 Progresso: ' + sessions + '/1 sessão registrada');
@@ -7744,10 +7750,7 @@ function showSection(sectionId) {
             document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
             document.querySelectorAll('.tab').forEach(t => { t.classList.remove('active'); t.setAttribute('aria-selected', 'false'); });
             document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
-
-            // Show selected section
             document.getElementById(sectionId).classList.add('active');
-            // Render affiliate store if loja section
             if (sectionId === 'loja' && typeof renderAffiliateStore === 'function') {
                 renderAffiliateStore();
             }
@@ -7757,7 +7760,6 @@ function handleNavTap(btn, sectionId) {
                 window.scrollTo({ top: 0, behavior: 'smooth' });
             } else {
                 showSection(sectionId);
-                // Update badges if opening badges section
                 if (sectionId === 'badges') {
                     if (typeof updateBadgeProgress === 'function') updateBadgeProgress();
                 }
@@ -7768,7 +7770,6 @@ function loadNotifications() {
             if (saved) {
                 return JSON.parse(saved);
             }
-            // Primeira vez: usar notificações padrão
             localStorage.setItem(NOTIF_KEY, JSON.stringify(DEFAULT_NOTIFICATIONS));
             return DEFAULT_NOTIFICATIONS;
         }
@@ -7787,7 +7788,6 @@ function addNotification(type, icon, title, text) {
                 read: false
             };
             notifs.unshift(newNotif);
-            // Manter apenas últimas 20
             if (notifs.length > 20) notifs.pop();
             saveNotifications(notifs);
             updateNotificationBadge();
@@ -7807,10 +7807,8 @@ function toggleNotifications() {
             const panel = document.getElementById('notifications-panel');
             const isVisible = panel.style.display === 'block';
             panel.style.display = isVisible ? 'none' : 'block';
-
             if (!isVisible) {
                 renderNotifications();
-                // Marcar todas como lidas
                 const notifs = loadNotifications();
                 notifs.forEach(n => n.read = true);
                 saveNotifications(notifs);
@@ -7820,12 +7818,10 @@ function toggleNotifications() {
 function renderNotifications() {
             const notifs = loadNotifications();
             const list = document.getElementById('notifications-list');
-
             if (notifs.length === 0) {
                 list.innerHTML = '<p style="text-align: center; color: #999; padding: 20px;">Sem notificações</p>';
                 return;
             }
-
             list.innerHTML = notifs.map(n => `
                 <div onclick="openNotification('${n.type}', '${n.id}')" style="display: flex; gap: 12px; padding: 12px; border-bottom: 1px solid #eee; background: ${n.read ? 'white' : '#F0F9FF'}; border-radius: 8px; margin-bottom: 5px; cursor: pointer; transition: background 0.2s;" onmouseover="this.style.background='#f0f0f0'" onmouseout="this.style.background='${n.read ? 'white' : '#F0F9FF'}'">
                     <div style="font-size: 28px; flex-shrink: 0;">${n.icon}</div>
@@ -7840,17 +7836,12 @@ function renderNotifications() {
             `).join('');
         }
 function openNotification(type, id) {
-            // Marcar como lida
             const notifs = loadNotifications();
             const notif = notifs.find(n => n.id == id);
             if (notif) notif.read = true;
             saveNotifications(notifs);
             updateNotificationBadge();
-
-            // Fechar painel
             document.getElementById('notifications-panel').style.display = 'none';
-
-            // Navegar para a seção correta
             const sectionMap = {
                 'treino': 'saude',
                 'ondas': 'dicas',
@@ -7862,11 +7853,8 @@ function openNotification(type, id) {
                 'mental': 'mental',
                 'surftrip': 'manas'
             };
-
             const section = sectionMap[type] || 'dicas';
             showSection(section);
-
-            // Se tem target específico, fazer scroll até ele
             if (notif && notif.target) {
                 setTimeout(() => {
                     const element = document.getElementById(notif.target) ||
@@ -7906,7 +7894,6 @@ function shareToWhatsApp() {
             toggleSharePanel();
         }
 function shareToInstagram() {
-            // Instagram não permite share direto via web, copia o link
             copyShareLink();
             trackShare();
             alert('📋 Link copiado!\n\nCole no seu Story ou Post do Instagram 📸');
@@ -7927,7 +7914,6 @@ function shareToTwitter() {
 function copyShareLink() {
             const input = document.getElementById('share-link');
             const link = input.value;
-            // Modern clipboard API with fallback
             if (navigator.clipboard) {
                 navigator.clipboard.writeText(link).then(() => showToast('📋 Link copiado!'));
             } else {
@@ -7936,7 +7922,6 @@ function copyShareLink() {
                 showToast('📋 Link copiado!');
             }
             trackShare();
-            // Visual feedback
             const btn = event.target;
             const original = btn.textContent;
             btn.textContent = '✅';
@@ -7958,7 +7943,6 @@ function scrollToTop() {
 function requestLocation() {
             const statusDiv = document.getElementById('location-status');
             statusDiv.innerHTML = '<p style="text-align: center; color: var(--primary);">📍 Buscando localização...</p>';
-
             if (navigator.geolocation) {
                 navigator.geolocation.getCurrentPosition(
                     (position) => {
@@ -7991,8 +7975,6 @@ function requestLocation() {
 function findNearbyManas() {
             const nearbyDiv = document.getElementById('nearby-manas');
             nearbyDiv.innerHTML = '<p style="text-align: center; color: var(--primary);">🔄 Buscando manas próximas...</p>';
-
-            // Simula busca (em produção usaria a localização real)
             setTimeout(() => {
                 const allManas = [];
                 Object.keys(MOCK_MANAS).forEach(beach => {
@@ -8000,13 +7982,8 @@ function findNearbyManas() {
                         allManas.push({ ...mana, region: beach });
                     });
                 });
-
-                // Ordena por distância
                 allManas.sort((a, b) => a.distance - b.distance);
-
-                // Pega as 5 mais próximas
                 const closest = allManas.slice(0, 5);
-
                 nearbyDiv.innerHTML = `
                     <h4 style="color: var(--secondary); margin-bottom: 15px;">📍 Manas mais próximas</h4>
                     ${closest.map(mana => `
@@ -8030,14 +8007,12 @@ function showBeachManas(beach) {
             const manas = MOCK_MANAS[beach] || [];
             const listDiv = document.getElementById('beach-manas-list');
             const detailDiv = document.getElementById('beach-manas-detail');
-
             const beachNames = {
                 bertioga: 'Bertioga',
                 santos: 'Santos',
                 guaruja: 'Guarujá',
                 ubatuba: 'Ubatuba'
             };
-
             listDiv.innerHTML = `
                 <h4 style="color: var(--secondary); margin-bottom: 15px;">🏖️ Manas em ${beachNames[beach]}</h4>
                 ${manas.map(mana => `
@@ -8054,7 +8029,6 @@ function showBeachManas(beach) {
                     </div>
                 `).join('')}
             `;
-
             detailDiv.style.display = 'block';
         }
 function connectManas(name) {
@@ -8075,7 +8049,6 @@ function renderAchievements() {
             const waterDays = getWaterStreak();
             const points = data.total;
             const level = getLevel(points);
-            // Check for early morning sessions (before 7am)
             const earlyMorningCount = sessions.filter(s => {
                 const hour = new Date(s.date).getHours();
                 return hour < 7;
@@ -8105,9 +8078,7 @@ function renderAchievements() {
                 <h3>${a.name}</h3>
                 <p>${a.desc}</p>
             </div>`).join('');
-            // Update stats
             const statEl = document.querySelector('.profile-stat-value:last-of-type');
-            // Update achievement count in profile
         }
 function getWaterStreak() {
             let count = 0;
@@ -8129,7 +8100,6 @@ function earnPoints(type, points) {
             data.total += points;
             if (type === 'quiz') {
                 data.quizzes++;
-                // Sync to quizzes-done for achievements
                 const quizzes = JSON.parse(localStorage.getItem('quizzes-done') || '[]');
                 quizzes.push({date: new Date().toISOString()});
                 localStorage.setItem('quizzes-done', JSON.stringify(quizzes));
@@ -8137,20 +8107,16 @@ function earnPoints(type, points) {
             if (type === 'dica') data.dicas++;
             if (type === 'treino') data.treinos++;
             savePoints(data);
-
-            // Mostrar animação
             const popup = document.createElement('div');
             popup.innerHTML = `+${points} pontos! 🎉`;
             popup.style.cssText = 'position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);background:#27AE60;color:white;padding:20px 40px;border-radius:15px;font-size:20px;font-weight:bold;z-index:9999;';
             document.body.appendChild(popup);
             setTimeout(() => popup.remove(), 1500);
-
             updatePointsDisplay();
         }
 function updatePointsDisplay() {
             const data = loadPoints();
             const level = getLevel(data.total);
-            // Atualizar displays se existirem
             document.querySelectorAll('.points-display').forEach(el => {
                 el.textContent = data.total;
             });
@@ -8170,7 +8136,6 @@ function createPost() {
 function startQuiz(quizName) {
             const quizDiv = document.getElementById('quiz-' + quizName);
             const button = event.target;
-
             if (quizDiv.style.display === 'none') {
                 quizDiv.style.display = 'block';
                 button.textContent = 'Fechar Quiz';
@@ -8240,19 +8205,16 @@ function debouncedSearch(q) { clearTimeout(_searchTimer); _searchTimer = setTime
 function handleSearch(query) {
             const resultsDiv = document.getElementById('searchResults');
             const clearBtn = document.getElementById('searchClear');
-
             if (!query || query.length < 2) {
                 resultsDiv.classList.remove('active');
                 clearBtn.style.display = 'none';
                 return;
             }
-
             clearBtn.style.display = 'block';
             const q = query.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
             const results = normalizedSearchIndex.filter(item => {
                 return item._titleNorm.includes(q) || item._textNorm.includes(q) || item._sectionNorm.includes(q);
             }).slice(0, 8);
-
             if (results.length === 0) {
                 resultsDiv.innerHTML = '<div class="search-no-results"><span class="emoji">🏄‍♀️</span>Nenhum resultado para "' + query + '"<br><small>Tente outro termo</small></div>';
             } else {
@@ -8265,9 +8227,7 @@ function handleSearch(query) {
                         '<div class="result-preview">' + highlighted + '</div></div>';
                 }).join('');
             }
-
             resultsDiv.classList.add('active');
-            // Save to recent searches
             if (query.length >= 3) saveRecentSearch(query);
         }
 function getRecentSearches() {
@@ -8343,8 +8303,6 @@ function selectBeach(beach, btn) {
         }
 async function loadLiveData(beach) {
             const [weather, marine] = await Promise.all([fetchWeather(beach), fetchMarine(beach)]);
-
-            // Update Mar card
             const marDiv = document.getElementById('mar-data');
             if (marine && marine.current) {
                 const c = marine.current;
@@ -8360,8 +8318,6 @@ async function loadLiveData(beach) {
             } else {
                 marDiv.innerHTML = `<p style="font-size: 14px; color: var(--gray-400);">Dados indisponíveis no momento</p>`;
             }
-
-            // Update Clima card
             const climaDiv = document.getElementById('clima-data');
             if (weather && weather.current) {
                 const c = weather.current;
@@ -8380,8 +8336,6 @@ async function loadLiveData(beach) {
             } else {
                 climaDiv.innerHTML = `<p style="font-size: 14px; color: var(--gray-400);">Dados indisponíveis no momento</p>`;
             }
-
-            // Update Maré card (estimated based on location)
             const mareDiv = document.getElementById('mare-data');
             const now = new Date();
             const hour = now.getHours();
@@ -8391,17 +8345,12 @@ async function loadLiveData(beach) {
                 <p style="font-size: 14px; color: var(--success);">🟢 ${mareTimes.low}</p>
                 <p style="font-size: 12px; color: var(--gray-400); margin-top: 4px;">${mareTimes.tip}</p>
             `;
-            // Animate tide clock
             updateTideClock(mareTimes, now);
-
-            // Update UV card
             const uvDiv = document.getElementById('uv-data');
             const uvProt = document.getElementById('uv-protection');
             if (weather && weather.current && weather.daily) {
                 const currentUV = weather.current.uv_index || 0;
                 const todayMaxUV = weather.daily.uv_index_max[0] || currentUV;
-
-                // UV level description and color
                 let uvLevel, uvColor, uvIcon;
                 if (todayMaxUV <= 2) {
                     uvLevel = 'Baixo';
@@ -8424,14 +8373,11 @@ async function loadLiveData(beach) {
                     uvColor = '#8e44ad';
                     uvIcon = '⚠️';
                 }
-
                 uvDiv.innerHTML = `
                     <p style="font-size: 32px; font-weight: 700; color: ${uvColor};">${todayMaxUV.toFixed(0)}</p>
                     <p style="font-size: 14px; color: ${uvColor}; font-weight: 600;">${uvIcon} ${uvLevel}</p>
                     <p style="font-size: 12px; color: var(--gray-400); margin-top: 4px;">Máximo hoje</p>
                 `;
-
-                // Protection tip
                 let protTip = '';
                 if (todayMaxUV <= 2) {
                     protTip = '☀️ Protetor opcional para pele sensível';
@@ -8455,14 +8401,12 @@ function updateTideClock(tides, now) {
             const text = document.getElementById('tide-level-text');
             const label = document.getElementById('tide-level-label');
             if (!arc) return;
-            // Parse high/low times to estimate current tide position (0-1 cycle)
             const highMatch = tides.high.match(/(\d+):(\d+)/);
             const lowMatch = tides.low.match(/(\d+):(\d+)/);
             if (!highMatch || !lowMatch) return;
             const highMin = parseInt(highMatch[1]) * 60 + parseInt(highMatch[2]);
             const lowMin = parseInt(lowMatch[1]) * 60 + parseInt(lowMatch[2]);
             const nowMin = now.getHours() * 60 + now.getMinutes();
-            // Simple sine approximation between high and low
             const cycleLen = Math.abs(lowMin - highMin) * 2;
             let pos;
             if (highMin < lowMin) {
@@ -8471,7 +8415,6 @@ function updateTideClock(tides, now) {
                 if (nowMin > lowMin) pos = 1 - ((nowMin - lowMin) / (highMin + 1440 - lowMin));
                 if (pos < 0) pos = 0;
                 if (pos > 1) pos = 1;
-                // Map: 0=high, 0.5=low, 1=high
                 const angle = pos * Math.PI;
                 const tideHeight = Math.cos(angle); // 1=high, -1=low, 0=mid
                 const pct = (tideHeight + 1) / 2; // 0 to 1
@@ -8520,7 +8463,6 @@ function updateTideClock(tides, now) {
             label.textContent = 'agora: ' + timeStr;
         }
 function getEstimatedTides(beach, date) {
-            // Approximate tidal cycle - shifts ~50min per day
             const dayOfYear = Math.floor((date - new Date(date.getFullYear(), 0, 0)) / 86400000);
             const baseOffset = (dayOfYear % 14) * 0.8; // ~50 min shift per day
             const baseHigh = 5 + baseOffset;
@@ -8530,7 +8472,6 @@ function getEstimatedTides(beach, date) {
             const low1 = Math.floor(baseLow) % 24;
             const lowMin1 = Math.floor((baseLow % 1) * 60);
             const high2 = (high1 + 12) % 24;
-
             return {
                 high: `${String(high1).padStart(2,'0')}:${String(highMin1).padStart(2,'0')} (${(1.0 + Math.sin(dayOfYear * 0.4) * 0.4).toFixed(1)}m)`,
                 low: `${String(low1).padStart(2,'0')}:${String(lowMin1).padStart(2,'0')} (${(0.3 + Math.sin(dayOfYear * 0.4) * 0.2).toFixed(1)}m)`,
@@ -8597,23 +8538,13 @@ function showMareDetails() {
             alert(msg);
         }
 function updateMoonPhase() {
-            // Reference new moon: January 11, 2000 at 12:24 UTC
             const knownNewMoon = new Date('2000-01-11T12:24:00Z');
             const now = new Date();
-
-            // Calculate days since known new moon
             const msPerDay = 24 * 60 * 60 * 1000;
             const daysSinceNewMoon = (now - knownNewMoon) / msPerDay;
-
-            // Synodic month (lunation) is approximately 29.53059 days
             const lunation = 29.53059;
-
-            // Current moon age (0-29.5)
             const moonAge = daysSinceNewMoon % lunation;
-
-            // Determine phase name and icon
             let phaseName, moonIcon, surfTip, tideTipDesc;
-
             if (moonAge < 1.85 || moonAge > 27.68) {
                 phaseName = 'Lua Nova';
                 moonIcon = '🌑';
@@ -8655,8 +8586,6 @@ function updateMoonPhase() {
                 surfTip = 'Maré Estável';
                 tideTipDesc = 'Menor variação de maré';
             }
-
-            // Update the display
             document.getElementById('moon-icon').textContent = moonIcon;
             document.getElementById('moon-phase-name').textContent = phaseName;
             document.getElementById('moon-age').textContent = moonAge.toFixed(1) + ' dias';
@@ -8666,12 +8595,8 @@ function updateMoonPhase() {
 function calcularVolume() {
             const peso = parseFloat(document.getElementById('peso-input').value) || 65;
             const nivel = document.getElementById('nivel-input').value;
-
-            // Cálculo de volume em litros
             let addVolume = nivel === 'iniciante' ? 5.5 : nivel === 'intermediario' ? 2.5 : 0.5;
             const volume = Math.round(peso + addVolume);
-
-            // Cálculo de borda (rail height) em cm
             let borda;
             if (nivel === 'iniciante') {
                 borda = Math.round((peso * 0.08) + 2); // Bordas mais altas para iniciantes
@@ -8680,11 +8605,7 @@ function calcularVolume() {
             } else {
                 borda = Math.round((peso * 0.04) + 1); // Bordas mais baixas para avançados
             }
-
-            // Garantir limites razoáveis
             borda = Math.max(4, Math.min(8, borda));
-
-            // Mostrar resultado
             const resultDiv = document.getElementById('calc-result');
             resultDiv.innerHTML = `
                 <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; text-align: center;">
@@ -8719,11 +8640,9 @@ function updateChecklistProgress() {
             const checkboxes = document.querySelectorAll('#checklist-container input[type="checkbox"]');
             const checked = Array.from(checkboxes).filter(cb => cb.checked).length;
             const total = checkboxes.length;
-
             document.getElementById('checklist-count').textContent = checked;
             const percentage = (checked / total) * 100;
             document.getElementById('checklist-bar').style.width = percentage + '%';
-
             if (checked === total) {
                 document.getElementById('checklist-progress').style.background = 'rgba(46, 204, 113, 0.15)';
                 document.getElementById('checklist-progress').innerHTML = '<p style="font-size: 14px; color: var(--success); font-weight: bold;">🎉 Tudo pronto! Bora surfar!</p>';
@@ -8737,7 +8656,6 @@ function setTimerPreset(preset) {
             const workInput = document.getElementById('timer-work');
             const restInput = document.getElementById('timer-rest');
             const roundsInput = document.getElementById('timer-rounds');
-
             if (preset === 'tabata') {
                 workInput.value = 20;
                 restInput.value = 10;
@@ -8755,63 +8673,50 @@ function setTimerPreset(preset) {
                 restInput.value = 15;
                 roundsInput.value = 7;
             }
-
             resetTimer();
         }
 function updateTimerDisplay() {
             const mins = Math.floor(timerSeconds / 60).toString().padStart(2, '0');
             const secs = (timerSeconds % 60).toString().padStart(2, '0');
             document.getElementById('timer-display').textContent = `${mins}:${secs}`;
-
             const phase = timerIsWork ? '🔥 TRABALHO' : '😤 DESCANSAR';
             document.getElementById('timer-phase').textContent = phase;
             document.getElementById('timer-phase').style.color = timerIsWork ? '#E74C3C' : '#3498DB';
-
             const totalTime = timerIsWork ? timerWorkTime : timerRestTime;
             const progress = ((totalTime - timerSeconds) / totalTime) * 100;
             document.getElementById('timer-progress').style.width = progress + '%';
             document.getElementById('timer-progress').style.background = timerIsWork ?
                 'linear-gradient(90deg, #E74C3C, #F39C12)' : 'linear-gradient(90deg, #3498DB, #2ECC71)';
-
             document.getElementById('timer-round').textContent = timerCurrentRound;
             document.getElementById('timer-total-rounds').textContent = timerTotalRounds;
         }
 function startTimer() {
             if (timerState === 'running') return;
-
             timerWorkTime = parseInt(document.getElementById('timer-work').value) || 20;
             timerRestTime = parseInt(document.getElementById('timer-rest').value) || 10;
             timerTotalRounds = parseInt(document.getElementById('timer-rounds').value) || 8;
-
             if (timerState === 'stopped') {
                 timerSeconds = timerWorkTime;
                 timerCurrentRound = 1;
                 timerIsWork = true;
             }
-
             timerState = 'running';
             document.getElementById('timer-start-btn').disabled = true;
             document.getElementById('timer-start-btn').textContent = '⏳ Correndo...';
             document.getElementById('timer-pause-btn').disabled = false;
-
             timerInterval = setInterval(() => {
                 timerSeconds--;
-
                 if (timerSeconds <= 0) {
-                    // Play beep sound (browser notification)
                     if ('speechSynthesis' in window) {
                         const msg = new SpeechSynthesisUtterance(timerIsWork ? 'Descanso' : 'Trabalho');
                         msg.rate = 2;
                         speechSynthesis.speak(msg);
                     }
-
                     if (timerIsWork) {
-                        // Work phase ended, go to rest
                         if (timerRestTime > 0) {
                             timerSeconds = timerRestTime;
                             timerIsWork = false;
                         } else {
-                            // No rest, go to next round
                             timerCurrentRound++;
                             if (timerCurrentRound > timerTotalRounds) {
                                 completeWorkout();
@@ -8821,7 +8726,6 @@ function startTimer() {
                             timerIsWork = true;
                         }
                     } else {
-                        // Rest phase ended, go to work
                         timerCurrentRound++;
                         if (timerCurrentRound > timerTotalRounds) {
                             completeWorkout();
@@ -8831,13 +8735,11 @@ function startTimer() {
                         timerIsWork = true;
                     }
                 }
-
                 updateTimerDisplay();
             }, 1000);
         }
 function pauseTimer() {
             if (timerState !== 'running') return;
-
             clearInterval(timerInterval);
             timerState = 'paused';
             document.getElementById('timer-start-btn').disabled = false;
@@ -8850,13 +8752,11 @@ function resetTimer() {
             timerSeconds = timerWorkTime;
             timerCurrentRound = 1;
             timerIsWork = true;
-
             document.getElementById('timer-display').textContent = '00:00';
             document.getElementById('timer-phase').textContent = 'Pronto';
             document.getElementById('timer-phase').style.color = 'var(--gray-600)';
             document.getElementById('timer-progress').style.width = '0%';
             document.getElementById('timer-round').textContent = '0';
-
             document.getElementById('timer-start-btn').disabled = false;
             document.getElementById('timer-start-btn').textContent = '▶ Iniciar';
             document.getElementById('timer-pause-btn').disabled = true;
@@ -8864,8 +8764,6 @@ function resetTimer() {
 function completeWorkout() {
             clearInterval(timerInterval);
             timerState = 'stopped';
-
-            // Save to history
             const workout = {
                 date: new Date().toISOString(),
                 rounds: timerTotalRounds,
@@ -8875,17 +8773,13 @@ function completeWorkout() {
             timerWorkoutHistory.unshift(workout);
             if (timerWorkoutHistory.length > 10) timerWorkoutHistory.pop();
             localStorage.setItem('asf_timer_history', JSON.stringify(timerWorkoutHistory));
-
             document.getElementById('timer-phase').textContent = '🎉 TREINO COMPLETO!';
             document.getElementById('timer-phase').style.color = '#27AE60';
             document.getElementById('timer-display').textContent = '✓✓✓';
             document.getElementById('timer-start-btn').disabled = false;
             document.getElementById('timer-start-btn').textContent = '▶ Iniciar';
             document.getElementById('timer-pause-btn').disabled = true;
-
-            // Add points for completing workout
             earnPoints('treino', 50);
-
             if ('speechSynthesis' in window) {
                 const msg = new SpeechSynthesisUtterance('Parabéns! Treino completo!');
                 msg.rate = 1.5;
@@ -8897,7 +8791,6 @@ function showTimerHistory() {
                 const date = new Date(w.date);
                 return `${i+1}. ${date.toLocaleDateString('pt-BR')} - ${w.rounds} rodadas (${w.workTime}s/${w.restTime}s)`;
             }).join('\n');
-
             alert('📊 Histórico de Treinos:\n\n' + (history || 'Nenhum treino registrado ainda!'));
         }
 async function loadSurfBar() {
@@ -8975,7 +8868,6 @@ async function loadBestDay() {
                     const wh = days.wave_height_max[i] || 0;
                     const wp = days.wave_period_max[i] || 0;
                     const wind = wDays.wind_speed_10m_max?.[i] || 20;
-                    // Score: wave height (0-3m ideal) + period (longer better) - wind penalty
                     let score = 0;
                     if (wh >= 0.5 && wh <= 2.5) score += 40;
                     else if (wh > 2.5) score += 25;
@@ -8994,14 +8886,12 @@ async function loadBestDay() {
                 if (diffDays === 0) dayLabel = 'Hoje!';
                 else if (diffDays === 1) dayLabel = 'Amanhã';
                 else dayLabel = dayNamesFull[d.getDay()] + ' (' + d.getDate() + '/' + (d.getMonth() + 1) + ')';
-                // Rating stars
                 const stars = bestScore >= 70 ? '⭐⭐⭐' : bestScore >= 50 ? '⭐⭐' : '⭐';
                 document.getElementById('best-day-text').textContent = dayLabel;
                 document.getElementById('best-day-detail').textContent = `Ondas: ${best.wh.toFixed(1)}m • Período: ${best.wp.toFixed(0)}s • Vento: ${best.wind.toFixed(0)}km/h`;
                 document.getElementById('best-day-rating').textContent = stars;
                 document.getElementById('best-day-icon').textContent = diffDays === 0 ? '🏄‍♀️' : '📅';
                 document.getElementById('best-day-widget').style.display = 'block';
-                // Also render mini forecast
                 const widget = document.getElementById('best-day-widget');
                 const miniForecast = scores.slice(0, 5).map(s => {
                     const dd = new Date(s.date + 'T12:00:00');
@@ -9058,7 +8948,6 @@ function initDarkMode() {
         }
 function toggleDarkMode() {
             const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
-            // Add transition for smooth theme change
             document.documentElement.style.transition = 'background-color 0.3s ease, color 0.3s ease';
             if (isDark) {
                 document.documentElement.removeAttribute('data-theme');
@@ -9117,10 +9006,8 @@ function shareSurfConditions() {
                 if (label === 'Temp') data.temp = val;
                 if (label === 'Período') data.period = val;
             });
-            // Get condition from badge
             const badge = bar.querySelector('.surf-condition-badge');
             data.condition = badge ? badge.textContent : '';
-            // Wind info
             const windItem = Array.from(items).find(i => {
                 const l = i.querySelector('.surf-label');
                 return l && l.textContent.includes('km/h') === false && ['N','NE','E','SE','S','SO','O','NO'].includes(l.textContent);
@@ -9129,9 +9016,7 @@ function shareSurfConditions() {
                 data.windSpeed = windItem.querySelector('.surf-val')?.textContent || '';
                 data.windDir = windItem.querySelector('.surf-label')?.textContent || '';
             }
-
             const msg = `🏄‍♀️ Condições ASF - ${data.beach || 'Bertioga'}\n\n🌊 Ondas: ${data.waves || '-'}\n💨 Vento: ${data.windSpeed || '-'} ${data.windDir || ''}\n🌡️ Temp: ${data.temp || '-'}\n⏱️ Período: ${data.period || '-'}\n📊 Condição: ${data.condition || '-'}\n\nBora surfar? 🤙`;
-            // Try native share API first (mobile), fallback to WhatsApp
             if (navigator.share) {
                 navigator.share({ title: 'Condições ASF', text: msg }).catch(() => {});
             } else {
@@ -9164,7 +9049,6 @@ function getSessions() {
         }
 function saveSessions(sessions) {
             localStorage.setItem('asf-sessions', JSON.stringify(sessions));
-            // Also sync to surf-sessions for achievements
             localStorage.setItem('surf-sessions', JSON.stringify(sessions));
         }
 function saveSession() {
@@ -9178,12 +9062,10 @@ function saveSession() {
                 beach,
                 duration,
                 mood: selectedMood,
-                notes
             };
             const sessions = getSessions();
             sessions.unshift(session);
             saveSessions(sessions);
-            // Reset form
             document.getElementById('session-notes').value = '';
             document.querySelectorAll('.session-mood-btn').forEach(b => {
                 b.style.borderColor = 'var(--gray-200)';
@@ -9211,7 +9093,6 @@ function renderSessions() {
                 return;
             }
             stats.style.display = 'block';
-            // Render last 5 sessions
             list.innerHTML = sessions.slice(0, 5).map(s => {
                 const d = new Date(s.date);
                 const dateStr = d.toLocaleDateString('pt-BR', { day: '2-digit', month: 'short' });
@@ -9229,29 +9110,24 @@ function renderSessions() {
                     </div>
                 </div>`;
             }).join('');
-            // Stats
             const totalMin = sessions.reduce((sum, s) => sum + s.duration, 0);
             const totalH = Math.floor(totalMin / 60);
             const extraMin = totalMin % 60;
             document.getElementById('stat-total').textContent = sessions.length;
             document.getElementById('stat-hours').textContent = totalH > 0 ? totalH + 'h' + (extraMin > 0 ? extraMin : '') : totalMin + 'min';
-            // Avg and longest session
             const durations = sessions.map(s => s.duration);
             const avgMin = Math.round(totalMin / sessions.length);
             const longestMin = Math.max(...durations);
-            // Fav beach
             const beachCount = {};
             sessions.forEach(s => { beachCount[s.beach] = (beachCount[s.beach] || 0) + 1; });
             const favBeach = Object.entries(beachCount).sort((a, b) => b[1] - a[1])[0];
             document.getElementById('stat-fav-beach').textContent = favBeach ? favBeach[0] : '-';
-            // Fav mood
             const moodCount = {};
             sessions.forEach(s => { moodCount[s.mood] = (moodCount[s.mood] || 0) + 1; });
             const favMood = Object.entries(moodCount).sort((a, b) => b[1] - a[1])[0];
             document.getElementById('stat-fav-mood').textContent = favMood ? favMood[0] : '-';
             document.getElementById('stat-longest').textContent = longestMin >= 60 ? Math.floor(longestMin / 60) + 'h' + (longestMin % 60 > 0 ? longestMin % 60 : '') : longestMin + 'min';
             document.getElementById('stat-avg').textContent = avgMin >= 60 ? Math.floor(avgMin / 60) + 'h' + (avgMin % 60 > 0 ? avgMin % 60 : '') : avgMin + 'min';
-            // Streak
             let streak = 0;
             const today = new Date(); today.setHours(0, 0, 0, 0);
             for (let i = 0; i < 30; i++) {
@@ -9260,7 +9136,6 @@ function renderSessions() {
                 if (sessions.some(s => s.date.split('T')[0] === dateStr)) { streak++; } else { break; }
             }
             document.getElementById('stat-streak').textContent = streak;
-            // Heatmap
             const heatmapEl = document.getElementById('session-heatmap');
             if (heatmapEl) {
                 let heatHTML = '';
@@ -9280,24 +9155,19 @@ function renderSessions() {
             }
         }
 function updateBrandTimer() {
-            // Countdown: 7 dias a partir de agora
             const endDate = new Date();
             endDate.setDate(endDate.getDate() + 7);
-            
             function update() {
                 const now = new Date();
                 const diff = endDate - now;
-                
                 if (diff <= 0) {
                     document.getElementById('challenge-timer').textContent = 'Encerrado!';
                     return;
                 }
-                
                 const days = Math.floor(diff / (1000 * 60 * 60 * 24));
                 const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
                 document.getElementById('challenge-timer').textContent = `${days} dias ${hours}h`;
             }
-            
             update();
             setInterval(update, 60000); // Atualiza a cada minuto
         }
@@ -9305,7 +9175,6 @@ function loadBadges() {
           const saved = localStorage.getItem('asf-badges');
           if (saved) {
             const earnedBadges = JSON.parse(saved);
-            // Merge with current badge definitions
             BRAND_BADGES.forEach(badge => {
               const earned = earnedBadges.find(e => e.id === badge.id);
               if (earned) {
@@ -9324,21 +9193,17 @@ function saveBadges() {
 function updateBadgeProgress() {
           const sessions = JSON.parse(localStorage.getItem('surf-sessions') || '[]');
           let changed = false;
-
           BRAND_BADGES.forEach(badge => {
             if (!badge.earned && badge.type === 'usage') {
-              // Count sessions with matching brand
               let count = 0;
               sessions.forEach(s => {
                 if (s.boardBrand && s.boardBrand.toLowerCase().includes(badge.brand.toLowerCase().split(' ')[0])) {
                   count++;
                 }
-                // Also check equipment notes
                 if (s.notes && s.notes.toLowerCase().includes(badge.brand.toLowerCase().split(' ')[0])) {
                   count++;
                 }
               });
-
               badge.progress = Math.min(count, badge.required);
               if (count >= badge.required) {
                 badge.earned = true;
@@ -9349,31 +9214,25 @@ function updateBadgeProgress() {
               }
             }
           });
-
           if (changed) saveBadges();
           updateBadgesUI();
         }
 function renderBadges() {
           const container = document.getElementById('badges-container');
           const noBadges = document.getElementById('no-badges');
-
           if (!container) return;
-
           const earnedBadges = BRAND_BADGES.filter(b => b.earned);
           const allBadges = BRAND_BADGES; // Show all (locked/unlocked)
-
           if (earnedBadges.length === 0) {
             noBadges.style.display = 'block';
             container.style.display = 'none';
           } else {
             noBadges.style.display = 'none';
             container.style.display = 'grid';
-
             container.innerHTML = allBadges.map(badge => {
               const isEarned = badge.earned;
               const opacity = isEarned ? '1' : '0.5';
               const filter = isEarned ? 'none' : 'grayscale(80%)';
-
               return `
                 <div class="badge-card" data-badge-id="${badge.id}"
                      style="background: ${isEarned ? `linear-gradient(135deg, ${badge.brandColor}22, ${badge.brandColor}11)` : 'rgba(150,150,150,0.1)'};
@@ -9401,23 +9260,17 @@ function renderBadges() {
 function showBadgeDetails(badgeId) {
           const badge = BRAND_BADGES.find(b => b.id === badgeId);
           if (!badge) return;
-
           const message = `
 🏆 ${badge.name}
 ${badge.icon} ${badge.brand}
-
 📝 ${badge.description}
-
 📊 Progresso: ${badge.progress}/${badge.required}
 ${badge.earned ? '✅ Ganho em: ' + badge.earnedAt : '🔒 Continue evoluindo!'}
-
 💡 Dica: ${badge.type === 'usage' ? 'Use produtos da marca em suas sessions' : 'Participe de campanhas ASF'}
           `;
-
           alert(message);
         }
 function showBadgeEarnedAnimation(badge) {
-          // Create floating badge element
           const badgeEl = document.createElement('div');
           badgeEl.innerHTML = `${badge.icon}`;
           badgeEl.style.cssText = `
@@ -9427,8 +9280,6 @@ function showBadgeEarnedAnimation(badge) {
             pointer-events: none;
           `;
           document.body.appendChild(badgeEl);
-
-          // Add CSS animation
           if (!document.getElementById('badge-anim-style')) {
             const style = document.createElement('style');
             style.id = 'badge-anim-style';
@@ -9444,7 +9295,6 @@ function showBadgeEarnedAnimation(badge) {
             `;
             document.head.appendChild(style);
           }
-
           setTimeout(() => badgeEl.remove(), 1500);
         }
 function initBadges() {
@@ -9501,21 +9351,18 @@ function initChecklist() {
 function showDica(index) {
             const d = dicas[index];
             const container = document.getElementById('dica-do-dia');
-            // Fade out
             container.style.opacity = '0';
             container.style.transform = 'translateY(10px)';
             setTimeout(() => {
                 document.getElementById('dica-text').textContent = d.text;
                 document.getElementById('dica-category').textContent = d.category;
                 document.getElementById('dica-emoji').textContent = d.emoji;
-                // Fade in
                 container.style.opacity = '1';
                 container.style.transform = 'translateY(0)';
             }, 200);
         }
 function nextDica() {
             let idx = Math.floor(Math.random() * dicas.length);
-            // Avoid repeat
             const current = document.getElementById('dica-text').textContent;
             while (dicas[idx].text === current && dicas.length > 1) idx = Math.floor(Math.random() * dicas.length);
             showDica(idx);
@@ -9531,7 +9378,6 @@ function filterBeaches(region) {
             beachCards.forEach(card => {
                 card.style.display = (showAll || card.dataset.region === region) ? '' : 'none';
             });
-            // Update filter buttons
             document.querySelectorAll('[id^="beach-filter-"]').forEach(btn => {
                 btn.className = 'btn btn-secondary';
             });
@@ -9619,10 +9465,8 @@ function votePoll(btn, pollId, option) {
             const key = 'asf-poll-' + pollId;
             if (localStorage.getItem(key)) { showToast('Você já votou! 🗳️'); return; }
             localStorage.setItem(key, option);
-            // Mark this button
             btn.style.background = '#27AE60';
             btn.style.color = 'white';
-            // Disable all siblings
             btn.parentElement.querySelectorAll('button').forEach(b => b.style.pointerEvents = 'none');
             showToast('Voto registrado! 🗳️ +5 pts');
             earnPoints('dica', 5);
@@ -9658,7 +9502,6 @@ function showSecretAchievements() {
                 <div style="background:linear-gradient(135deg,#2c0a37,#4a1c5e);border-radius:20px;padding:24px;max-width:400px;margin:40px auto;color:white;text-align:center;">
                     <div style="font-size:32px;margin-bottom:12px;">🔓 Conquistas Secretas</div>
                     <p style="font-size:14px;opacity:0.9;margin-bottom:20px;">Complete missões para desbloquear!</p>
-
                     <div style="display:grid;gap:12px;margin-bottom:20px;">
                         <div style="background:rgba(255,255,255,0.15);padding:16px;border-radius:12px;text-align:center;">
                             <div style="font-size:36px;margin-bottom:8px;">🏄</div>
@@ -9679,7 +9522,6 @@ function showSecretAchievements() {
                             <div style="font-size:12px;${opens>=3?'color:#4ade80':'opacity:0.6'}">${opens>=3?'✅ CONQUISTADO!':'⏳ Em progresso'}</div>
                         </div>
                     </div>
-
                     <button onclick="document.getElementById('secret-modal').remove()" style="background:white;color:#2c0a37;border:none;padding:12px 32px;border-radius:25px;font-size:14px;font-weight:bold;cursor:pointer;">Fechar</button>
                 </div>
             `;
@@ -9705,7 +9547,6 @@ function updateConnectionStatus() {
 function renderAffiliateStore() {
   const container = document.getElementById('affiliate-store');
   if (!container) return;
-
   container.innerHTML = AFFILIATE_PRODUCTS.map(product => `
     <div class="card" style="background: white; border-left: 4px solid ${product.brandColor}; overflow: hidden; transition: transform 0.2s, box-shadow 0.2s;"
          onclick="openAffiliateLink('${product.url}', '${product.id}')"
@@ -9730,14 +9571,12 @@ function renderAffiliateStore() {
   `).join('');
   console.log('Loja renderizada');
 }
-
 function openAffiliateLink(url, productId) {
   const clicks = JSON.parse(localStorage.getItem('asf-affiliate-clicks') || '[]');
   clicks.push({productId, timestamp: new Date().toISOString()});
   localStorage.setItem('asf-affiliate-clicks', JSON.stringify(clicks));
   console.log('Click afiliado:', productId);
   window.open(url, '_blank', 'noopener,noreferrer');
-  // GA4 tracking
   if (typeof gtag !== 'undefined') {
     gtag('event', 'affiliate_click', {
       event_category: 'monetization',
@@ -9746,7 +9585,6 @@ function openAffiliateLink(url, productId) {
     });
   }
 }
-// Newsletter
 function subscribeNewsletter(){const e=document.getElementById('newsletter-email'),t=e?e.value.trim():'';if(!t||!t.includes('@'))return showToast('❌ Email inválido!','error');const o=JSON.parse(localStorage.getItem('asf-newsletter')||'[]');o.push({email:t,date:new Date().toISOString()}),localStorage.setItem('asf-newsletter',JSON.stringify(o)),showToast('✅ Inscrita! Você receberá dicas toda semana.','success'),e&&(e.value=''),typeof gtag!=='undefined'&&gtag('event','newsletter_signup',{event_category:'engagement',value:1})}
 function showPremiumModal(){document.getElementById('premium-modal').style.display='flex',trackEvent('premium','modal_view'),typeof gtag!=='undefined'&&gtag('event','premium_modal_view',{event_category:'monetization',value:1})}
 function hidePremiumModal(){document.getElementById('premium-modal').style.display='none'}

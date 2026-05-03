@@ -17,9 +17,16 @@ Veja: `docs/audit-monetization.md` para detalhes completos.
 
 # 🏄♀️ ASF - Associação de Surf Feminino App
 
+## 🆕 Atualizações Recentes (2026-05-03 22:45 UTC)
+- ✅ 5 novas dicas diárias (acesso praias deficientes, surf inclusivo, consumo consciente surf, economia colaborativa surf, inovação social surf)
+- ✅ Total de dicas agora: **1199**
+- ✅ Otimização de código/layout e conteúdo
+- ✅ Atualização de documentação (README com novo total de dicas)
+- ✅ Sincronização de HEARTBEAT.md - checklist a cada 15 min
+
 ## 🆕 Atualizações Recentes (2026-04-30 23:15 UTC)
 - ✅ 5 novas dicas diárias (construção surf, agricultura surf, pesca sustentável surf, certificação sustentável surf, selo ecossurf)
-- ✅ Total de dicas agora: **1289**
+- ✅ Total de dicas agora: **1194**
 - ✅ Otimização de código/layout e conteúdo
 - ✅ Atualização de documentação (README com novo total de dicas)
 - ✅ Sincronização de HEARTBEAT.md - checklist a cada 15 min
