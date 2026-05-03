@@ -1,8 +1,6 @@
-
   // Initialize: load saved language
   var savedLang = localStorage.getItem('asf-lang');
   if (savedLang) setLanguage(savedLang);
-  
   // Google Analytics 4 initialization
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
@@ -18,10 +16,6 @@
       value: value
     });
   };
-
-
-
-
 function setLanguage(lang) {
     localStorage.setItem('asf-lang', lang);
     document.querySelectorAll('button[onclick^="setLanguage"]').forEach(function(b) {
@@ -44,15 +38,12 @@ function sendChatbotMessage() {
             const input = document.getElementById("chatbot-input");
             const msg = input.value.toLowerCase().trim();
             if (!msg) return;
-
             const msgs = document.getElementById("chatbot-messages");
             msgs.innerHTML += "<div style='background:#eee; padding:8px; border-radius:8px; margin:4px 0;'><strong>Você:</strong> " + input.value + "</div>";
-
             let response = "Desculpe, não entendi. Tente: previsão, pontos, eventos, contatos ou como participar! 🤖";
             for (const [key, value] of Object.entries(chatbotFAQs)) {
                 if (msg.includes(key)) { response = value; break; }
             }
-
             msgs.innerHTML += "<div style='background:#E0F7FA; padding:8px; border-radius:8px; margin:4px 0;'><strong>🤖:</strong> " + response + "</div>";
             msgs.scrollTop = msgs.scrollHeight;
             input.value = "";
@@ -195,7 +186,6 @@ function renderBrandHub() {
             </div>
         `).join('');
     }
-
     // Render UGC gallery
     const gallery = document.getElementById('ugc-gallery');
     if (gallery) {
@@ -248,7 +238,6 @@ function enviarCadastroParceiro() {
             var site = document.getElementById("parceiro-site").value.trim();
             var logo = document.getElementById("parceiro-logo").value.trim();
             var comprovante = document.getElementById("parceiro-comprovante").value.trim();
-
             if (!nome) {
                 alert("Preencha o nome da marca!");
                 return;
@@ -257,11 +246,9 @@ function enviarCadastroParceiro() {
                 alert("Anexe o comprovante do PIX!");
                 return;
             }
-
             // Save registration
             var parceiro = { nome: nome, insta: insta, site: site, logo: logo, comprovante: comprovante, data: new Date().toISOString() };
             localStorage.setItem("asf-parceiros", JSON.stringify(parceiro));
-
             // Send to Carol
             var msg = "🏄♀️ NOVO CADASTRO DE PARCEIRO!\n\n";
             msg += "Marca: " + nome + "\n";
@@ -269,7 +256,6 @@ function enviarCadastroParceiro() {
             if (site) msg += "Site: " + site + "\n";
             msg += "\nComprovante: " + comprovante + "\n";
             msg += "Revisar e ativar!";
-
             window.open("https://wa.me/5511954346288?text=" + encodeURIComponent(msg), "_blank");
             showToast("✓ Cadastro enviado! Revisaremos em breve.");
         }
@@ -278,7 +264,6 @@ function checkBadge(type) {
         var quizzes = (JSON.parse(localStorage.getItem('quizzes-done') || '[]')).length;
         var opens = parseInt(localStorage.getItem('asf-opens') || '0');
         var shares = parseInt(localStorage.getItem('asf-shares') || '0');
-
         if (type === 'surf') {
             if (sessions >= 1) showToast('🏄 Badge desbloqueado! 🎉');
             else showToast('🏄 Progresso: ' + sessions + '/1 sessão registrada');
@@ -314,7 +299,6 @@ function showSection(sectionId) {
             document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
             document.querySelectorAll('.tab').forEach(t => { t.classList.remove('active'); t.setAttribute('aria-selected', 'false'); });
             document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
-
             // Show selected section
             document.getElementById(sectionId).classList.add('active');
             // Render affiliate store if loja section
@@ -377,7 +361,6 @@ function toggleNotifications() {
             const panel = document.getElementById('notifications-panel');
             const isVisible = panel.style.display === 'block';
             panel.style.display = isVisible ? 'none' : 'block';
-
             if (!isVisible) {
                 renderNotifications();
                 // Marcar todas como lidas
@@ -390,12 +373,10 @@ function toggleNotifications() {
 function renderNotifications() {
             const notifs = loadNotifications();
             const list = document.getElementById('notifications-list');
-
             if (notifs.length === 0) {
                 list.innerHTML = '<p style="text-align: center; color: #999; padding: 20px;">Sem notificações</p>';
                 return;
             }
-
             list.innerHTML = notifs.map(n => `
                 <div onclick="openNotification('${n.type}', '${n.id}')" style="display: flex; gap: 12px; padding: 12px; border-bottom: 1px solid #eee; background: ${n.read ? 'white' : '#F0F9FF'}; border-radius: 8px; margin-bottom: 5px; cursor: pointer; transition: background 0.2s;" onmouseover="this.style.background='#f0f0f0'" onmouseout="this.style.background='${n.read ? 'white' : '#F0F9FF'}'">
                     <div style="font-size: 28px; flex-shrink: 0;">${n.icon}</div>
@@ -416,10 +397,8 @@ function openNotification(type, id) {
             if (notif) notif.read = true;
             saveNotifications(notifs);
             updateNotificationBadge();
-
             // Fechar painel
             document.getElementById('notifications-panel').style.display = 'none';
-
             // Navegar para a seção correta
             const sectionMap = {
                 'treino': 'saude',
@@ -432,10 +411,8 @@ function openNotification(type, id) {
                 'mental': 'mental',
                 'surftrip': 'manas'
             };
-
             const section = sectionMap[type] || 'dicas';
             showSection(section);
-
             // Se tem target específico, fazer scroll até ele
             if (notif && notif.target) {
                 setTimeout(() => {
@@ -528,7 +505,6 @@ function scrollToTop() {
 function requestLocation() {
             const statusDiv = document.getElementById('location-status');
             statusDiv.innerHTML = '<p style="text-align: center; color: var(--primary);">📍 Buscando localização...</p>';
-
             if (navigator.geolocation) {
                 navigator.geolocation.getCurrentPosition(
                     (position) => {
@@ -561,7 +537,6 @@ function requestLocation() {
 function findNearbyManas() {
             const nearbyDiv = document.getElementById('nearby-manas');
             nearbyDiv.innerHTML = '<p style="text-align: center; color: var(--primary);">🔄 Buscando manas próximas...</p>';
-
             // Simula busca (em produção usaria a localização real)
             setTimeout(() => {
                 const allManas = [];
@@ -570,13 +545,10 @@ function findNearbyManas() {
                         allManas.push({ ...mana, region: beach });
                     });
                 });
-
                 // Ordena por distância
                 allManas.sort((a, b) => a.distance - b.distance);
-
                 // Pega as 5 mais próximas
                 const closest = allManas.slice(0, 5);
-
                 nearbyDiv.innerHTML = `
                     <h4 style="color: var(--secondary); margin-bottom: 15px;">📍 Manas mais próximas</h4>
                     ${closest.map(mana => `
@@ -600,14 +572,12 @@ function showBeachManas(beach) {
             const manas = MOCK_MANAS[beach] || [];
             const listDiv = document.getElementById('beach-manas-list');
             const detailDiv = document.getElementById('beach-manas-detail');
-
             const beachNames = {
                 bertioga: 'Bertioga',
                 santos: 'Santos',
                 guaruja: 'Guarujá',
                 ubatuba: 'Ubatuba'
             };
-
             listDiv.innerHTML = `
                 <h4 style="color: var(--secondary); margin-bottom: 15px;">🏖️ Manas em ${beachNames[beach]}</h4>
                 ${manas.map(mana => `
@@ -624,7 +594,6 @@ function showBeachManas(beach) {
                     </div>
                 `).join('')}
             `;
-
             detailDiv.style.display = 'block';
         }
 function connectManas(name) {
@@ -707,14 +676,12 @@ function earnPoints(type, points) {
             if (type === 'dica') data.dicas++;
             if (type === 'treino') data.treinos++;
             savePoints(data);
-
             // Mostrar animação
             const popup = document.createElement('div');
             popup.innerHTML = `+${points} pontos! 🎉`;
             popup.style.cssText = 'position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);background:#27AE60;color:white;padding:20px 40px;border-radius:15px;font-size:20px;font-weight:bold;z-index:9999;';
             document.body.appendChild(popup);
             setTimeout(() => popup.remove(), 1500);
-
             updatePointsDisplay();
         }
 function updatePointsDisplay() {
@@ -740,7 +707,6 @@ function createPost() {
 function startQuiz(quizName) {
             const quizDiv = document.getElementById('quiz-' + quizName);
             const button = event.target;
-
             if (quizDiv.style.display === 'none') {
                 quizDiv.style.display = 'block';
                 button.textContent = 'Fechar Quiz';
@@ -810,19 +776,16 @@ function debouncedSearch(q) { clearTimeout(_searchTimer); _searchTimer = setTime
 function handleSearch(query) {
             const resultsDiv = document.getElementById('searchResults');
             const clearBtn = document.getElementById('searchClear');
-
             if (!query || query.length < 2) {
                 resultsDiv.classList.remove('active');
                 clearBtn.style.display = 'none';
                 return;
             }
-
             clearBtn.style.display = 'block';
             const q = query.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
             const results = normalizedSearchIndex.filter(item => {
                 return item._titleNorm.includes(q) || item._textNorm.includes(q) || item._sectionNorm.includes(q);
             }).slice(0, 8);
-
             if (results.length === 0) {
                 resultsDiv.innerHTML = '<div class="search-no-results"><span class="emoji">🏄‍♀️</span>Nenhum resultado para "' + query + '"<br><small>Tente outro termo</small></div>';
             } else {
@@ -835,7 +798,6 @@ function handleSearch(query) {
                         '<div class="result-preview">' + highlighted + '</div></div>';
                 }).join('');
             }
-
             resultsDiv.classList.add('active');
             // Save to recent searches
             if (query.length >= 3) saveRecentSearch(query);
@@ -913,7 +875,6 @@ function selectBeach(beach, btn) {
         }
 async function loadLiveData(beach) {
             const [weather, marine] = await Promise.all([fetchWeather(beach), fetchMarine(beach)]);
-
             // Update Mar card
             const marDiv = document.getElementById('mar-data');
             if (marine && marine.current) {
@@ -930,7 +891,6 @@ async function loadLiveData(beach) {
             } else {
                 marDiv.innerHTML = `<p style="font-size: 14px; color: var(--gray-400);">Dados indisponíveis no momento</p>`;
             }
-
             // Update Clima card
             const climaDiv = document.getElementById('clima-data');
             if (weather && weather.current) {
@@ -950,7 +910,6 @@ async function loadLiveData(beach) {
             } else {
                 climaDiv.innerHTML = `<p style="font-size: 14px; color: var(--gray-400);">Dados indisponíveis no momento</p>`;
             }
-
             // Update Maré card (estimated based on location)
             const mareDiv = document.getElementById('mare-data');
             const now = new Date();
@@ -963,14 +922,12 @@ async function loadLiveData(beach) {
             `;
             // Animate tide clock
             updateTideClock(mareTimes, now);
-
             // Update UV card
             const uvDiv = document.getElementById('uv-data');
             const uvProt = document.getElementById('uv-protection');
             if (weather && weather.current && weather.daily) {
                 const currentUV = weather.current.uv_index || 0;
                 const todayMaxUV = weather.daily.uv_index_max[0] || currentUV;
-
                 // UV level description and color
                 let uvLevel, uvColor, uvIcon;
                 if (todayMaxUV <= 2) {
@@ -994,13 +951,11 @@ async function loadLiveData(beach) {
                     uvColor = '#8e44ad';
                     uvIcon = '⚠️';
                 }
-
                 uvDiv.innerHTML = `
                     <p style="font-size: 32px; font-weight: 700; color: ${uvColor};">${todayMaxUV.toFixed(0)}</p>
                     <p style="font-size: 14px; color: ${uvColor}; font-weight: 600;">${uvIcon} ${uvLevel}</p>
                     <p style="font-size: 12px; color: var(--gray-400); margin-top: 4px;">Máximo hoje</p>
                 `;
-
                 // Protection tip
                 let protTip = '';
                 if (todayMaxUV <= 2) {
@@ -1100,7 +1055,6 @@ function getEstimatedTides(beach, date) {
             const low1 = Math.floor(baseLow) % 24;
             const lowMin1 = Math.floor((baseLow % 1) * 60);
             const high2 = (high1 + 12) % 24;
-
             return {
                 high: `${String(high1).padStart(2,'0')}:${String(highMin1).padStart(2,'0')} (${(1.0 + Math.sin(dayOfYear * 0.4) * 0.4).toFixed(1)}m)`,
                 low: `${String(low1).padStart(2,'0')}:${String(lowMin1).padStart(2,'0')} (${(0.3 + Math.sin(dayOfYear * 0.4) * 0.2).toFixed(1)}m)`,
@@ -1170,20 +1124,15 @@ function updateMoonPhase() {
             // Reference new moon: January 11, 2000 at 12:24 UTC
             const knownNewMoon = new Date('2000-01-11T12:24:00Z');
             const now = new Date();
-
             // Calculate days since known new moon
             const msPerDay = 24 * 60 * 60 * 1000;
             const daysSinceNewMoon = (now - knownNewMoon) / msPerDay;
-
             // Synodic month (lunation) is approximately 29.53059 days
             const lunation = 29.53059;
-
             // Current moon age (0-29.5)
             const moonAge = daysSinceNewMoon % lunation;
-
             // Determine phase name and icon
             let phaseName, moonIcon, surfTip, tideTipDesc;
-
             if (moonAge < 1.85 || moonAge > 27.68) {
                 phaseName = 'Lua Nova';
                 moonIcon = '🌑';
@@ -1225,7 +1174,6 @@ function updateMoonPhase() {
                 surfTip = 'Maré Estável';
                 tideTipDesc = 'Menor variação de maré';
             }
-
             // Update the display
             document.getElementById('moon-icon').textContent = moonIcon;
             document.getElementById('moon-phase-name').textContent = phaseName;
@@ -1236,11 +1184,9 @@ function updateMoonPhase() {
 function calcularVolume() {
             const peso = parseFloat(document.getElementById('peso-input').value) || 65;
             const nivel = document.getElementById('nivel-input').value;
-
             // Cálculo de volume em litros
             let addVolume = nivel === 'iniciante' ? 5.5 : nivel === 'intermediario' ? 2.5 : 0.5;
             const volume = Math.round(peso + addVolume);
-
             // Cálculo de borda (rail height) em cm
             let borda;
             if (nivel === 'iniciante') {
@@ -1250,10 +1196,8 @@ function calcularVolume() {
             } else {
                 borda = Math.round((peso * 0.04) + 1); // Bordas mais baixas para avançados
             }
-
             // Garantir limites razoáveis
             borda = Math.max(4, Math.min(8, borda));
-
             // Mostrar resultado
             const resultDiv = document.getElementById('calc-result');
             resultDiv.innerHTML = `
@@ -1289,11 +1233,9 @@ function updateChecklistProgress() {
             const checkboxes = document.querySelectorAll('#checklist-container input[type="checkbox"]');
             const checked = Array.from(checkboxes).filter(cb => cb.checked).length;
             const total = checkboxes.length;
-
             document.getElementById('checklist-count').textContent = checked;
             const percentage = (checked / total) * 100;
             document.getElementById('checklist-bar').style.width = percentage + '%';
-
             if (checked === total) {
                 document.getElementById('checklist-progress').style.background = 'rgba(46, 204, 113, 0.15)';
                 document.getElementById('checklist-progress').innerHTML = '<p style="font-size: 14px; color: var(--success); font-weight: bold;">🎉 Tudo pronto! Bora surfar!</p>';
@@ -1307,7 +1249,6 @@ function setTimerPreset(preset) {
             const workInput = document.getElementById('timer-work');
             const restInput = document.getElementById('timer-rest');
             const roundsInput = document.getElementById('timer-rounds');
-
             if (preset === 'tabata') {
                 workInput.value = 20;
                 restInput.value = 10;
@@ -1325,48 +1266,39 @@ function setTimerPreset(preset) {
                 restInput.value = 15;
                 roundsInput.value = 7;
             }
-
             resetTimer();
         }
 function updateTimerDisplay() {
             const mins = Math.floor(timerSeconds / 60).toString().padStart(2, '0');
             const secs = (timerSeconds % 60).toString().padStart(2, '0');
             document.getElementById('timer-display').textContent = `${mins}:${secs}`;
-
             const phase = timerIsWork ? '🔥 TRABALHO' : '😤 DESCANSAR';
             document.getElementById('timer-phase').textContent = phase;
             document.getElementById('timer-phase').style.color = timerIsWork ? '#E74C3C' : '#3498DB';
-
             const totalTime = timerIsWork ? timerWorkTime : timerRestTime;
             const progress = ((totalTime - timerSeconds) / totalTime) * 100;
             document.getElementById('timer-progress').style.width = progress + '%';
             document.getElementById('timer-progress').style.background = timerIsWork ?
                 'linear-gradient(90deg, #E74C3C, #F39C12)' : 'linear-gradient(90deg, #3498DB, #2ECC71)';
-
             document.getElementById('timer-round').textContent = timerCurrentRound;
             document.getElementById('timer-total-rounds').textContent = timerTotalRounds;
         }
 function startTimer() {
             if (timerState === 'running') return;
-
             timerWorkTime = parseInt(document.getElementById('timer-work').value) || 20;
             timerRestTime = parseInt(document.getElementById('timer-rest').value) || 10;
             timerTotalRounds = parseInt(document.getElementById('timer-rounds').value) || 8;
-
             if (timerState === 'stopped') {
                 timerSeconds = timerWorkTime;
                 timerCurrentRound = 1;
                 timerIsWork = true;
             }
-
             timerState = 'running';
             document.getElementById('timer-start-btn').disabled = true;
             document.getElementById('timer-start-btn').textContent = '⏳ Correndo...';
             document.getElementById('timer-pause-btn').disabled = false;
-
             timerInterval = setInterval(() => {
                 timerSeconds--;
-
                 if (timerSeconds <= 0) {
                     // Play beep sound (browser notification)
                     if ('speechSynthesis' in window) {
@@ -1374,7 +1306,6 @@ function startTimer() {
                         msg.rate = 2;
                         speechSynthesis.speak(msg);
                     }
-
                     if (timerIsWork) {
                         // Work phase ended, go to rest
                         if (timerRestTime > 0) {
@@ -1401,13 +1332,11 @@ function startTimer() {
                         timerIsWork = true;
                     }
                 }
-
                 updateTimerDisplay();
             }, 1000);
         }
 function pauseTimer() {
             if (timerState !== 'running') return;
-
             clearInterval(timerInterval);
             timerState = 'paused';
             document.getElementById('timer-start-btn').disabled = false;
@@ -1420,13 +1349,11 @@ function resetTimer() {
             timerSeconds = timerWorkTime;
             timerCurrentRound = 1;
             timerIsWork = true;
-
             document.getElementById('timer-display').textContent = '00:00';
             document.getElementById('timer-phase').textContent = 'Pronto';
             document.getElementById('timer-phase').style.color = 'var(--gray-600)';
             document.getElementById('timer-progress').style.width = '0%';
             document.getElementById('timer-round').textContent = '0';
-
             document.getElementById('timer-start-btn').disabled = false;
             document.getElementById('timer-start-btn').textContent = '▶ Iniciar';
             document.getElementById('timer-pause-btn').disabled = true;
@@ -1434,7 +1361,6 @@ function resetTimer() {
 function completeWorkout() {
             clearInterval(timerInterval);
             timerState = 'stopped';
-
             // Save to history
             const workout = {
                 date: new Date().toISOString(),
@@ -1445,17 +1371,14 @@ function completeWorkout() {
             timerWorkoutHistory.unshift(workout);
             if (timerWorkoutHistory.length > 10) timerWorkoutHistory.pop();
             localStorage.setItem('asf_timer_history', JSON.stringify(timerWorkoutHistory));
-
             document.getElementById('timer-phase').textContent = '🎉 TREINO COMPLETO!';
             document.getElementById('timer-phase').style.color = '#27AE60';
             document.getElementById('timer-display').textContent = '✓✓✓';
             document.getElementById('timer-start-btn').disabled = false;
             document.getElementById('timer-start-btn').textContent = '▶ Iniciar';
             document.getElementById('timer-pause-btn').disabled = true;
-
             // Add points for completing workout
             earnPoints('treino', 50);
-
             if ('speechSynthesis' in window) {
                 const msg = new SpeechSynthesisUtterance('Parabéns! Treino completo!');
                 msg.rate = 1.5;
@@ -1467,7 +1390,6 @@ function showTimerHistory() {
                 const date = new Date(w.date);
                 return `${i+1}. ${date.toLocaleDateString('pt-BR')} - ${w.rounds} rodadas (${w.workTime}s/${w.restTime}s)`;
             }).join('\n');
-
             alert('📊 Histórico de Treinos:\n\n' + (history || 'Nenhum treino registrado ainda!'));
         }
 async function loadSurfBar() {
@@ -1699,7 +1621,6 @@ function shareSurfConditions() {
                 data.windSpeed = windItem.querySelector('.surf-val')?.textContent || '';
                 data.windDir = windItem.querySelector('.surf-label')?.textContent || '';
             }
-
             const msg = `🏄‍♀️ Condições ASF - ${data.beach || 'Bertioga'}\n\n🌊 Ondas: ${data.waves || '-'}\n💨 Vento: ${data.windSpeed || '-'} ${data.windDir || ''}\n🌡️ Temp: ${data.temp || '-'}\n⏱️ Período: ${data.period || '-'}\n📊 Condição: ${data.condition || '-'}\n\nBora surfar? 🤙`;
             // Try native share API first (mobile), fallback to WhatsApp
             if (navigator.share) {
@@ -1894,7 +1815,6 @@ function saveBadges() {
 function updateBadgeProgress() {
           const sessions = JSON.parse(localStorage.getItem('surf-sessions') || '[]');
           let changed = false;
-
           BRAND_BADGES.forEach(badge => {
             if (!badge.earned && badge.type === 'usage') {
               // Count sessions with matching brand
@@ -1908,7 +1828,6 @@ function updateBadgeProgress() {
                   count++;
                 }
               });
-
               badge.progress = Math.min(count, badge.required);
               if (count >= badge.required) {
                 badge.earned = true;
@@ -1919,31 +1838,25 @@ function updateBadgeProgress() {
               }
             }
           });
-
           if (changed) saveBadges();
           updateBadgesUI();
         }
 function renderBadges() {
           const container = document.getElementById('badges-container');
           const noBadges = document.getElementById('no-badges');
-
           if (!container) return;
-
           const earnedBadges = BRAND_BADGES.filter(b => b.earned);
           const allBadges = BRAND_BADGES; // Show all (locked/unlocked)
-
           if (earnedBadges.length === 0) {
             noBadges.style.display = 'block';
             container.style.display = 'none';
           } else {
             noBadges.style.display = 'none';
             container.style.display = 'grid';
-
             container.innerHTML = allBadges.map(badge => {
               const isEarned = badge.earned;
               const opacity = isEarned ? '1' : '0.5';
               const filter = isEarned ? 'none' : 'grayscale(80%)';
-
               return `
                 <div class="badge-card" data-badge-id="${badge.id}"
                      style="background: ${isEarned ? `linear-gradient(135deg, ${badge.brandColor}22, ${badge.brandColor}11)` : 'rgba(150,150,150,0.1)'};
@@ -1971,19 +1884,14 @@ function renderBadges() {
 function showBadgeDetails(badgeId) {
           const badge = BRAND_BADGES.find(b => b.id === badgeId);
           if (!badge) return;
-
           const message = `
 🏆 ${badge.name}
 ${badge.icon} ${badge.brand}
-
 📝 ${badge.description}
-
 📊 Progresso: ${badge.progress}/${badge.required}
 ${badge.earned ? '✅ Ganho em: ' + badge.earnedAt : '🔒 Continue evoluindo!'}
-
 💡 Dica: ${badge.type === 'usage' ? 'Use produtos da marca em suas sessions' : 'Participe de campanhas ASF'}
           `;
-
           alert(message);
         }
 function showBadgeEarnedAnimation(badge) {
@@ -1997,7 +1905,6 @@ function showBadgeEarnedAnimation(badge) {
             pointer-events: none;
           `;
           document.body.appendChild(badgeEl);
-
           // Add CSS animation
           if (!document.getElementById('badge-anim-style')) {
             const style = document.createElement('style');
@@ -2014,7 +1921,6 @@ function showBadgeEarnedAnimation(badge) {
             `;
             document.head.appendChild(style);
           }
-
           setTimeout(() => badgeEl.remove(), 1500);
         }
 function initBadges() {
@@ -2228,7 +2134,6 @@ function showSecretAchievements() {
                 <div style="background:linear-gradient(135deg,#2c0a37,#4a1c5e);border-radius:20px;padding:24px;max-width:400px;margin:40px auto;color:white;text-align:center;">
                     <div style="font-size:32px;margin-bottom:12px;">🔓 Conquistas Secretas</div>
                     <p style="font-size:14px;opacity:0.9;margin-bottom:20px;">Complete missões para desbloquear!</p>
-
                     <div style="display:grid;gap:12px;margin-bottom:20px;">
                         <div style="background:rgba(255,255,255,0.15);padding:16px;border-radius:12px;text-align:center;">
                             <div style="font-size:36px;margin-bottom:8px;">🏄</div>
@@ -2249,7 +2154,6 @@ function showSecretAchievements() {
                             <div style="font-size:12px;${opens>=3?'color:#4ade80':'opacity:0.6'}">${opens>=3?'✅ CONQUISTADO!':'⏳ Em progresso'}</div>
                         </div>
                     </div>
-
                     <button onclick="document.getElementById('secret-modal').remove()" style="background:white;color:#2c0a37;border:none;padding:12px 32px;border-radius:25px;font-size:14px;font-weight:bold;cursor:pointer;">Fechar</button>
                 </div>
             `;
@@ -2275,7 +2179,6 @@ function updateConnectionStatus() {
 function renderAffiliateStore() {
   const container = document.getElementById('affiliate-store');
   if (!container) return;
-
   container.innerHTML = AFFILIATE_PRODUCTS.map(product => `
     <div class="card" style="background: white; border-left: 4px solid ${product.brandColor}; overflow: hidden; transition: transform 0.2s, box-shadow 0.2s;"
          onclick="openAffiliateLink('${product.url}', '${product.id}')"
@@ -2300,7 +2203,6 @@ function renderAffiliateStore() {
   `).join('');
   console.log('Loja renderizada');
 }
-
 function openAffiliateLink(url, productId) {
   const clicks = JSON.parse(localStorage.getItem('asf-affiliate-clicks') || '[]');
   clicks.push({productId, timestamp: new Date().toISOString()});
