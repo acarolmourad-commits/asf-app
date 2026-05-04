@@ -17,6 +17,13 @@ Veja: `docs/audit-monetization.md` para detalhes completos.
 
 # 🏄♀️ ASF - Associação de Surf Feminino App
 
+## 🆕 Atualizações Recentes (2026-05-04 10:00 UTC)
+- ✅ 5 novas dicas diárias (desconto surf shop, promoção marca surf, liquidar estoque surf, black friday surf, outlet surf)
+- ✅ Total de dicas agora: **1409**
+- ✅ Otimização de código/layout e conteúdo
+- ✅ Atualização de documentação (README com novo total de dicas)
+- ✅ Sincronização de HEARTBEAT.md - checklist a cada 15 min
+
 ## 🆕 Atualizações Recentes (2026-05-04 09:45 UTC)
 - ✅ 5 novas dicas diárias (luxo praia venda, imóvel alto padrão, penthouse surf spot, casa de praia premium, apart hotel surf)
 - ✅ Total de dicas agora: **1404**
