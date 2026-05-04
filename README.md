@@ -17,6 +17,13 @@ Veja: `docs/audit-monetization.md` para detalhes completos.
 
 # 🏄♀️ ASF - Associação de Surf Feminino App
 
+## 🆕 Atualizações Recentes (2026-05-04 09:15 UTC)
+- ✅ 5 novas dicas diárias (permuta marcas surf, brand swap surf, troca patrocínio, partnership surf, colaboração surf)
+- ✅ Total de dicas agora: **1394**
+- ✅ Otimização de código/layout e conteúdo
+- ✅ Atualização de documentação (README com novo total de dicas)
+- ✅ Sincronização de HEARTBEAT.md - checklist a cada 15 min
+
 ## 🆕 Atualizações Recentes (2026-05-04 09:00 UTC)
 - ✅ 5 novas dicas diárias (surf feminino Brasil, pioneiras surf, mulheres big wave, ASF história, surf feminino atual)
 - ✅ Total de dicas agora: **1389**
