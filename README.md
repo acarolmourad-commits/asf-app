@@ -17,6 +17,13 @@ Veja: `docs/audit-monetization.md` para detalhes completos.
 
 # 🏄♀️ ASF - Associação de Surf Feminino App
 
+## 🆕 Atualizações Recentes (2026-05-04 10:45 UTC)
+- ✅ 5 novas dicas diárias (design prancha custom, shape surfboard, dimensões prancha ideal, volume prancha surfista, rocker surfboard)
+- ✅ Total de dicas agora: **1424**
+- ✅ Otimização de código/layout e conteúdo
+- ✅ Atualização de documentação (README com novo total de dicas)
+- ✅ Sincronização de HEARTBEAT.md - checklist a cada 15 min
+
 ## 🆕 Atualizações Recentes (2026-05-04 10:30 UTC)
 - ✅ 5 novas dicas diárias (taxa juros surf loan, financiamento imóvel praia, seguro surfista, previdência surfista, investimento REIT)
 - ✅ Total de dicas agora: **1419**
