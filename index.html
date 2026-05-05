@@ -80,6 +80,13 @@
     @media(prefers-reduced-motion:reduce){*{-webkit-animation-duration:0.01ms!important;animation-duration:0.01ms!important;transition-duration:0.01ms!important;}}
 
     @media(max-width:768px){#dica-do-dia{padding:0 12px;}}
+
+/* Hide visible descriptions - requested by Carol */
+.offer-description, .product-description, .badge-description, 
+[style*="font-size: 13px"][style*="margin: 0 0 8px 0"],
+.dica-desc, .post-desc, p[style*="font-size: 13px"] {
+  display: none !important;
+}
 </style>
     <!-- Structured Data -->
     
@@ -8040,7 +8047,7 @@ function renderBrandHub() {
                     <h4 style="margin: 0 0 8px 0; color: ${offer.color};">${offer.brand}</h4>
                     <span style="background: ${offer.color}; color: white; padding: 4px 12px; border-radius: 12px; font-size: 12px; font-weight: bold;">${offer.discount}</span>
                 </div>
-                <p style="font-size: 13px; margin: 0 0 8px 0;">${offer.description}</p>
+                
                 <div style="display: flex; justify-content: space-between; font-size: 11px; opacity: 0.7;">
                     <span>Código: <strong>${offer.code}</strong></span>
                     <span>⏰ Válido até ${offer.expires}</span>
@@ -9830,7 +9837,7 @@ function showBadgeDetails(badgeId) {
 🏆 ${badge.name}
 ${badge.icon} ${badge.brand}
 
-📝 ${badge.description}
+
 
 📊 Progresso: ${badge.progress}/${badge.required}
 ${badge.earned ? '✅ Ganho em: ' + badge.earnedAt : '🔒 Continue evoluindo!'}
