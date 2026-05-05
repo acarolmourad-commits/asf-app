@@ -17,6 +17,13 @@ Veja: `docs/audit-monetization.md` para detalhes completos.
 
 # 🏄♀️ ASF - Associação de Surf Feminino App
 
+## 🆕 Atualizações Recentes (2026-05-05 02:15 UTC)
+- ✅ 5 novas dicas diárias (insta360 surf, insta360 onda, timelapse surf, hyperlapse surf, zoom surf)
+- ✅ Total de dicas agora: **1469**
+- ✅ Otimização de código/layout e conteúdo
+- ✅ Atualização de documentação (README com novo total de dicas)
+- ✅ Sincronização de HEARTBEAT.md - checklist a cada 15 min
+
 ## 🆕 Atualizações Recentes (2026-05-05 01:45 UTC)
 - ✅ 5 novas dicas diárias (drone surf, gimbal stabilizador, underwater housing, gopro surf, action cam)
 - ✅ Total de dicas agora: **1464**
