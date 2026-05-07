@@ -17,6 +17,13 @@ Veja: `docs/audit-monetization.md` para detalhes completos.
 
 # 🏄♀️ ASF - Associação de Surf Feminino App
 
+## 🆕 Atualizações Recentes (2026-05-07 14:45 UTC)
+- ✅ 10 novas dicas diárias (altura onda, wave height praia, altura surf, breaking wave costa, altura mar, direção onda, wave direction surf, período swell costa, swell direction praia, direção mar)
+- ✅ Total de dicas agora: **2007**
+- ✅ Otimização de código/layout e conteúdo
+- ✅ Atualização de documentação (README com novo total de dicas)
+- ✅ Sincronização de HEARTBEAT.md - checklist a cada 15 min
+
 ## 🆕 Atualizações Recentes (2026-05-07 14:15 UTC)
 - ✅ 10 novas dicas diárias (frequência surf, frequency onda, frequência costa, frequency praia, frequência mar, rítmo surf, rhythm onda, rítmo costa, rhythm praia, rítmo mar)
 - ✅ Total de dicas agora: **1997**
