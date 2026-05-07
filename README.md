@@ -17,6 +17,13 @@ Veja: `docs/audit-monetization.md` para detalhes completos.
 
 # 🏄♀️ ASF - Associação de Surf Feminino App
 
+## 🆕 Atualizações Recentes (2026-05-07 14:15 UTC)
+- ✅ 10 novas dicas diárias (frequência surf, frequency onda, frequência costa, frequency praia, frequência mar, rítmo surf, rhythm onda, rítmo costa, rhythm praia, rítmo mar)
+- ✅ Total de dicas agora: **1997**
+- ✅ Otimização de código/layout e conteúdo
+- ✅ Atualização de documentação (README com novo total de dicas)
+- ✅ Sincronização de HEARTBEAT.md - checklist a cada 15 min
+
 ## 🆕 Atualizações Recentes (2026-05-07 13:45 UTC)
 - ✅ 10 novas dicas diárias (resonância surf, resonance onda, resonância costa, resonance praia, resonância mar, vibração surf, vibration onda, vibração costa, vibration praia, vibração mar)
 - ✅ Total de dicas agora: **1987**
