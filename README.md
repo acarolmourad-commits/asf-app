@@ -17,6 +17,13 @@ Veja: `docs/audit-monetization.md` para detalhes completos.
 
 # 🏄♀️ ASF - Associação de Surf Feminino App
 
+## 🆕 Atualizações Recentes (2026-05-07 23:45 UTC — 4 ciclos recuperados)
+- ✅ 20 novas dicas diárias adicionadas (giração, rotação, movimento, dinâmica temas)
+- ✅ Total de dicas agora: **2212**
+- ✅ Otimização de código/layout e conteúdo
+- ✅ Atualização de documentação (README com novo total de dicas)
+- ✅ Sincronização de HEARTBEAT.md - 4 ciclos em 1 lote (atraso recuperado)
+
 ## 🆕 Atualizações Recentes (2026-05-07 23:15 UTC — 2 ciclos recuperados)
 - ✅ 10 novas dicas diárias (cura surf, healing onda, cura costa, healing praia, cura mar, restauração surf, restoration onda, restauração costa, restoration praia, restauração mar)
 - ✅ Total de dicas agora: **2192**
