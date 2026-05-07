@@ -17,6 +17,13 @@ Veja: `docs/audit-monetization.md` para detalhes completos.
 
 # 🏄♀️ ASF - Associação de Surf Feminino App
 
+## 🆕 Atualizações Recentes (2026-05-07 15:45 UTC)
+- ✅ 10 novas dicas diárias (habilidade surf, skill onda, habilidade costa, skill praia, habilidade mar, prática surf, technique onda, técnica costa, technique praia, técnica mar)
+- ✅ Total de dicas agora: **2027**
+- ✅ Otimização de código/layout e conteúdo
+- ✅ Atualização de documentação (README com novo total de dicas)
+- ✅ Sincronização de HEARTBEAT.md - checklist a cada 15 min
+
 ## 🆕 Atualizações Recentes (2026-05-07 15:15 UTC)
 - ✅ 10 novas dicas diárias (intensidade surf, intensity onda, intensidade costa, intensity praia, intensidade mar, força surf, force onda, força costa, force praia, força mar)
 - ✅ Total de dicas agora: **2017**
