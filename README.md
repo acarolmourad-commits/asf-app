@@ -17,6 +17,13 @@ Veja: `docs/audit-monetization.md` para detalhes completos.
 
 # 🏄♀️ ASF - Associação de Surf Feminino App
 
+## 🆕 Atualizações Recentes (2026-05-07 12:15 UTC)
+- ✅ 20 novas dicas diárias (complexidade, simplicidade, paradoxo, harmonia temas)
+- ✅ Total de dicas agora: **1957**
+- ✅ Otimização de código/layout e conteúdo
+- ✅ Atualização de documentação (README com novo total de dicas)
+- ✅ Sincronização de HEARTBEAT.md - checklist a cada 15 min
+
 ## 🆕 Atualizações Recentes (2026-05-07 11:15 UTC)
 - ✅ 10 novas dicas diárias (detalhe surf, detail onda, detalhe costa, detail praia, detalhe mar, nuance surf, subtlety onda, nuance costa, subtlety praia, nuance mar)
 - ✅ Total de dicas agora: **1937**
