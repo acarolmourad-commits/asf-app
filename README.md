@@ -17,6 +17,17 @@ Veja: `docs/audit-monetization.md` para detalhes completos.
 
 # 🏄♀️ ASF - Associação de Surf Feminino App
 
+## 🆕 Atualizações Recentes (2026-05-08 15:15 UTC — 13 ciclos recuperados + lote final)
+- ✅ 195 novas dicas diárias adicionadas (matemática surf, estatística surf, algoritmos surf, lógica surf, computação surf + 5 fórmulas/teoremas)
+- ✅ Total de dicas agora: **2417**
+- ✅ Inserção do último bloco de 5 dicas (Equação surf, Fórmula onda, Teorema surf, Demonstração surf, Derivação surf)
+- ✅ Nova marca recorde: maior salto único (195 dicas) e maior total histórico (2417)
+- ✅ Otimização de código/layout e conteúdo
+- ✅ Atualização de documentação (README com novo total de dicas)
+- ✅ Sincronização de HEARTBEAT.md — atraso de 14h recuperado (56 ciclos → 13 ciclos + lote final)
+
+---
+
 ## 🆕 Atualizações Recentes (2026-05-08 00:15 UTC — 2 ciclos recuperados)
 - ✅ 10 novas dicas diárias (magnitude surf, magnitude onda, magnitude costa, magnitude praia, magnitude mar, força-tarefa surf, taskforce onda, força-tarefa costa, taskforce praia, força-tarefa mar)
 - ✅ Total de dicas agora: **2222**
