@@ -3,87 +3,129 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ASF - Mercado de Permuta & Competição</title>
+    <title>ASF - Tábua de Maré & Previsão</title>
     <style>
-        :root{--p:#00A8CC;--s:#0E2439;--a:#F4D03F;--w:#fff;--l:#F8F9FA;}
+        :root{--p:#00A8CC;--s:#0E2439;--a:#F4D03F;--w:#fff;--l:#F8F9FA;--g:#9A9A9A;}
         *{margin:0;padding:0;box-sizing:border-box;}
         body{font-family:'Outfit',sans-serif;background:var(--l);color:var(--s);}
         header{background:linear-gradient(135deg,var(--s),var(--p));padding:15px;color:var(--w);text-align:center;}
-        .hero{padding:25px 15px;text-align:center;background:linear-gradient(135deg,rgba(0,168,204,0.1),rgba(244,208,63,0.1));}
-        .btn{background:linear-gradient(135deg,var(--p),var(--s));color:var(--w);border:none;padding:10px 14px;border-radius:10px;margin:3px;cursor:pointer;font-size:14px;}
+        .hero{padding:20px;text-align:center;background:linear-gradient(135deg,rgba(0,168,204,0.08),rgba(244,208,63,0.08));}
+        .btn{background:linear-gradient(135deg,var(--p),var(--s));color:var(--w);border:none;padding:10px 14px;border-radius:10px;margin:3px;cursor:pointer;font-size:13px;}
         .section{padding:15px;max-width:1200px;margin:0 auto;}
-        .card{background:var(--w);border-radius:12px;padding:12px;margin:8px;box-shadow:0 2px 6px rgba(0,0,0,0.08);}
-        .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px;}
+        .card{background:var(--w);border-radius:12px;padding:15px;margin:10px 0;box-shadow:0 2px 8px rgba(0,0,0,0.08);}
+        .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:15px;}
         @media(max-width:768px){.grid{grid-template-columns:1fr;}}
-        .badge{background:var(--a);color:var(--s);padding:3px 8px;border-radius:12px;font-size:11px;margin:2px;display:inline-block;}
-        .progress{height:16px;background:#eee;border-radius:8px;overflow:hidden;}
-        .bar{height:100%;background:var(--p);}
-        input,select{width:100%;padding:10px;margin:5px 0;border:1px solid #ddd;border-radius:8px;}
+        .badge{background:var(--a);color:var(--s);padding:3px 10px;border-radius:15px;font-size:11px;margin:2px;display:inline-block;}
+        table{width:100%;border-collapse:collapse;margin-top:10px;}
+        th,td{padding:10px;text-align:center;border-bottom:1px solid #eee;}
+        th{background:var(--p);color:var(--w);}
+        .wave-high{color:#27ae60;font-weight:bold;}
+        .wave-med{color:#f39c12;}
+        .wave-low{color:#e74c3c;}
     </style>
 </head>
 <body>
     <header>
-        <h1>🏄‍♀️ ASF - Mercado & Competição</h1>
-        <p style="font-size:13px">Pontos: <span id="pts">0</span> | 🏆 Ranking: <span id="rank">#</span></p>
+        <h1>🏄‍♀️ ASF - Marés & Ondas</h1>
+        <p style="font-size:13px">Litoral Paulista • <span id="date"></span></p>
     </header>
     
     <section class="hero">
-        <h2 style="font-size:20px">Mercado de Permuta - Troque coisas de surf!</h2>
-        <button class="btn" onclick="show('market')">Mercado</button>
-        <button class="btn" onclick="show('comp')">Competição ASF</button>
-        <button class="btn" onclick="show('events')">Eventos WSL</button>
+        <h2 style="font-size:18px">Tábua de Maré • Previsão de Ondas • Dicas Femininas</h2>
+        <button class="btn" onclick="show('tides')">Marés</button>
+        <button class="btn" onclick="show('forecast')">Previsão</button>
+        <button class="btn" onclick="show('womendtips')">Dicas</button>
     </section>
     
-    <section class="section" id="market">
-        <h2>🏪 Mercado de Permuta</h2>
+    <section class="section" id="tides">
+        <h2>🌙 Tábua de Maré - Bertioga</h2>
         <div class="card">
-            <h3>Anunciar Item</h3>
-            <input type="text" placeholder="Título (ex: Prancha 6'0")" id="title">
-            <select id="cat"><option>Tamanho</option><option>Roupa</option><option>Acessório</option></select>
-            <input type="text" placeholder="Descrição" id="desc">
-            <button class="btn" onclick="postItem()">Publicar</button>
+            <table>
+                <tr><th>Dia</th><th>Maré Alta</th><th>Maré Baixa</th><th>Altura (m)</th></tr>
+                <tr><td>Hoje</td><td>06:23</td><td>12:45</td><td>2.3/0.4</td></tr>
+                <tr><td>Amanhã</td><td>07:10</td><td>13:30</td><td>2.1/0.5</td></tr>
+                <tr><td>Qua</td><td>07:55</td><td>14:15</td><td>1.9/0.6</td></tr>
+                <tr><td>Qui</td><td>08:40</td><td>15:00</td><td>1.7/0.7</td></tr>
+            </table>
         </div>
-        <h3 style="margin-top:15px">Itens Disponíveis</h3>
-        <div class="grid" id="items">
-            <div class="card"><span class="badge">Tamanho</span><h3>Prancha 6'0</h3><p>Semi nova, troca por wetsuit</p><button class="btn">Contatar</button></div>
-            <div class="card"><span class="badge">Roupa</span><h3>Wetsuit 3/2</h3><p>Tamanho M, troca por prancha menor</p><button class="btn">Contatar</button></div>
-        </div>
-    </section>
-    
-    <section class="section" id="comp">
-        <h2>🏆 Competição Regional ASF</h2>
-        <div id="leaderboard"></div>
+        <h3 style="margin-top:15px">🌅 Dicas de Maré para Mulheres</h3>
         <div class="card">
-            <h3>Inscrever Time</h3>
-            <input type="text" placeholder="Nome da surfista" id="name">
-            <select id="spot"><option>Bertioga</option><option>Santos</option><option>Guarujá</option></select>
-            <button class="btn" onclick="register()">Inscrever</button>
+            <ul style="margin-left:20px;line-height:1.8">
+                <li><strong>Maré baixa</strong> = Ondas mais consistentes, ideal para aprender</li>
+                <li><strong>Maré alta</strong> = Corais expostos, use leash curto</li>
+                <li><strong>Mulheres</strong> = Surfe com proteção solar FPS 50+ resistente à água</li>
+                <li><strong>Saúde</strong> = Hidrate-se bem antes da sessão</li>
+            </ul>
         </div>
     </section>
     
-    <section class="section" id="events">
-        <h2>📅 Calendário WSL</h2>
-        <div class="grid" id="eventsList">
-            <div class="card"><h3>🏄 Rio Pro</h3><p>Jul 15-25 • Arpoador</p><span class="badge">WSL CT</span></div>
-            <div class="card"><h3>🏄 Oi Rio</h3><p>Sep 10-20 • Barra</p><span class="badge">WSL QS</span></div>
-            <div class="card"><h3>🏄 Itacaré</h3><p>Nov 5-15 • Praia do Futuro</p><span class="badge">Longboard</span></div>
+    <section class="section" id="forecast">
+        <h2>🌊 Previsão de Ondas - Litoral Paulista</h2>
+        <div class="grid">
+            <div class="card">
+                <h3>🏖️ Bertioga</h3>
+                <p class="wave-high">Alta: 1.2m</p>
+                <p>Período: 9s • Direção: SE</p>
+                <span class="badge">Bom</span>
+            </div>
+            <div class="card">
+                <h3>🏙️ Santos</h3>
+                <p class="wave-med">Média: 0.9m</p>
+                <p>Período: 8s • Direção: SSE</p>
+                <span class="badge">Moderado</span>
+            </div>
+            <div class="card">
+                <h3>🏝️ Guarujá</h3>
+                <p class="wave-high">Alta: 1.4m</p>
+                <p>Período: 10s • Direção: SE</p>
+                <span class="badge">Ótimo</span>
+            </div>
+            <div class="card">
+                <h3>🌅 Ubatuba</h3>
+                <p class="wave-med">Média: 1.0m</p>
+                <p>Período: 8s • Direção: ESE</p>
+                <span class="badge">Bom</span>
+            </div>
+        </div>
+    </section>
+    
+    <section class="section" id="womendtips">
+        <h2>👩‍💖 Dicas Exclusivas para Mulheres Surfistas</h2>
+        <div class="card">
+            <h3>1. Equipamento Ideal</h3>
+            <p>• Pranchas maiores dão mais flutuação para mulheres</p>
+            <p>• Wetsuits femininos com cavalo maior evitam marcas</p>
+            <p>• Leash de 7mm é mais visível (segurança)</p>
+        </div>
+        <div class="card">
+            <h3>2. Segurança na Água</h3>
+            <p>• Nunca surfe sozinha - grupo é mais seguro</p>
+            <p>• Use colete salva-vidas em dias de corrente</p>
+            <p>• Saia da água se mar estiver muito cheia</p>
+        </div>
+        <div class="card">
+            <h3>3. Fortalecimento Específico</h3>
+            <p>• Core mais forte para equilíbrio na prancha</p>
+            <p>• Alongamento de quadril para penetrar ondas</p>
+            <p>• Respiração diafragmática para relaxar</p>
+        </div>
+        <div class="card">
+            <h3>4. Superando Medos</h3>
+            <p>• Comece com ondas pequenas e vá aumentando</p>
+            <p>• Visualize a manobra antes de executar</p>
+            <p>• Celebre cada conquista, por menor que pareça</p>
         </div>
     </section>
     
     <footer style="background:var(--s);color:var(--w);text-align:center;padding:20px;">
-        <p>🏄‍♀️ ASF Mercado & Competição</p>
+        <p>🏄‍♀️ ASF - Associação de Surf Feminino • Bertioga</p>
+        <button class="btn" onclick="openWA()">Grupo WhatsApp</button>
     </footer>
     
     <script>
-        let pts=0, rank=10;
-        const LEAD=[{n:"Carol",p:1200},{n:"Ana",p:950},{n:"Julia",p:800}];
-        
-        function upd(){document.getElementById('pts').textContent=pts;document.getElementById('rank').textContent='#'+Math.floor(Math.random()*20+1);}
-        function renderBoard(){document.getElementById('leaderboard').innerHTML=`<div class="grid">${LEAD.map((l,i)=>`<div class="card"><h3>#${i+1} ${l.n}</h3><p>${l.p} pts</p></div>`).join('')}</div>`;}
-        function postItem(){pts+=50;upd();alert('Item publicado! +50pts');}
-        function register(){pts+=100;upd();rank=Math.max(1,Math.floor(Math.random()*30));alert('Inscrito! Boa sorte!');}
+        document.getElementById('date').textContent = new Date().toLocaleDateString('pt-BR');
         function show(id){document.getElementById(id).scrollIntoView({behavior:'smooth'});}
-        document.addEventListener('DOMContentLoaded',()=>{upd();renderBoard();});
+        function openWA(){window.open('https://wa.me/5511954346288','_blank');}
     </script>
 </body>
 </html>
