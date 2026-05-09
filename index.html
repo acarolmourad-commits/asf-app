@@ -3,89 +3,94 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ASF - Surf App Feminino</title>
+    <title>ASF - App Feminino para Surfistas</title>
     <style>
         :root{--p:#00A8CC;--s:#0E2439;--a:#F4D03F;--w:#fff;--l:#F8F9FA;}
         *{margin:0;padding:0;box-sizing:border-box;}
         body{font-family:'Outfit',sans-serif;background:var(--l);color:var(--s);}
         header{background:linear-gradient(135deg,var(--s),var(--p));padding:15px;color:var(--w);text-align:center;}
-        .hero{padding:30px 15px;text-align:center;background:linear-gradient(135deg,rgba(0,168,204,0.1),rgba(244,208,63,0.1));}
-        .btn{background:linear-gradient(135deg,var(--p),var(--s));color:var(--w);border:none;padding:12px 16px;border-radius:12px;margin:4px;cursor:pointer;}
+        .hero{padding:25px 15px;text-align:center;background:linear-gradient(135deg,rgba(0,168,204,0.1),rgba(244,208,63,0.1));}
+        .btn{background:linear-gradient(135deg,var(--p),var(--s));color:var(--w);border:none;padding:10px 14px;border-radius:10px;margin:3px;cursor:pointer;font-size:14px;}
         .section{padding:15px;max-width:1200px;margin:0 auto;}
-        .card{background:var(--w);border-radius:12px;padding:15px;margin:8px;box-shadow:0 2px 6px rgba(0,0,0,0.1);}
-        .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px;}
+        .card{background:var(--w);border-radius:12px;padding:12px;margin:8px;box-shadow:0 2px 6px rgba(0,0,0,0.08);}
+        .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px;}
         @media(max-width:768px){.grid{grid-template-columns:1fr;}}
-        .progress{height:18px;background:#eee;border-radius:9px;overflow:hidden;}
+        .badge{background:var(--a);color:var(--s);padding:3px 8px;border-radius:12px;font-size:11px;margin:2px;display:inline-block;}
+        .progress{height:16px;background:#eee;border-radius:8px;overflow:hidden;}
         .bar{height:100%;background:var(--p);}
-        .badge{background:var(--a);color:var(--s);padding:3px 8px;border-radius:12px;font-size:12px;margin:2px;display:inline-block;}
     </style>
 </head>
 <body>
     <header>
-        <h1>🏄‍♀️ ASF APP</h1>
-        <p>Pontos: <span id="pts">0</span> | Posição: <span id="rank">#-</span></p>
+        <h1>🏄‍♀️ ASF - App Feminino</h1>
+        <p style="font-size:13px">Pontos: <span id="pts">0</span> | <span id="notif" style="color:var(--a)">🔔</span></p>
+        <button class="btn" onclick="notifOn()" id="notifBtn">Ativar Notificações</button>
     </header>
     
     <section class="hero">
-        <h2>App Completo para Mulheres Surfistas</h2>
+        <h2 style="font-size:20px">App completo para mulheres surfistas</h2>
+        <button class="btn" onclick="show('feed')">Instagram Feed</button>
+        <button class="btn" onclick="show('shops')">Lojas Parceiras</button>
         <button class="btn" onclick="show('tips')">Dicas</button>
         <button class="btn" onclick="show('challenges')">Metas</button>
-        <button class="btn" onclick="show('trips')">Trips</button>
-        <button class="btn" onclick="show('meditation')">Meditação</button>
-        <button class="btn" onclick="show('tides')">Marés</button>
     </section>
     
-    <section class="section" id="challenges">
-        <h2>🎯 Desafios da Semana</h2>
-        <div id="chl"></div>
+    <section class="section" id="feed">
+        <h2>📸 Instagram Feed #ASFsurfLife</h2>
+        <div class="grid" id="instaFeed"></div>
+    </section>
+    
+    <section class="section" id="shops">
+        <h2>🏪 Lojas Parceiras</h2>
+        <div class="grid" id="shopsList"></div>
     </section>
     
     <section class="section" id="tips">
-        <h2>🏄‍♀️ Dicas</h2>
-        <div class="grid" id="tips"></div>
+        <h2>🏄‍♀️ Dicas do Dia</h2>
+        <div class="grid" id="tipsList"></div>
     </section>
     
-    <section class="section" id="trips">
-        <h2>🌊 Surftrip Planner</h2>
-        <div class="grid" id="trips"></div>
-    </section>
-    
-    <section class="section" id="meditation">
-        <h2>🧘 Meditação Guiada</h2>
+    <section class="section" id="challenges">
+        <h2>🎯 Clube ASF Premium</h2>
         <div class="card">
-            <h3>Respiração 4-7-8</h3>
-            <audio controls style="width:100%"><source src="https://assets.mixkit.co/sfx/preview/mixkit-beach-waves-1208.mp3" type="audio/mpeg"></audio>
-            <p>Inspire 4s, segure 7s, expire 8s</p>
+            <h3>💎 Assinatura Premium</h3>
+            <p>Acesso a aulas exclusivas, coaching e descontos</p>
+            <ul>
+                <li>✅ Aulas de surf ao vivo</li>
+                <li>✅ Coaching individual</li>
+                <li>✅ Descontos parceiros</li>
+                <li>✅ Comunidade VIP</li>
+            </ul>
+            <button class="btn" onclick="premium()">Assinar R$29,90/mês</button>
         </div>
-    </section>
-    
-    <section class="section" id="tides">
-        <h2>🌙 Calendário de Marés</h2>
-        <div id="tides"></div>
+        <div id="chl"></div>
     </section>
     
     <footer style="background:var(--s);color:var(--w);text-align:center;padding:20px;">
-        <p>🏄‍♀️ ASF - Conectando surfistas desde 2019</p>
+        <p>🏄‍♀️ ASF desde 2019 | Bertioga, Santos, Guarujá, Ubatuba</p>
         <button class="btn" onclick="openWA()">Grupo WhatsApp</button>
     </footer>
     
     <script>
-        let pts=0;
-        const C=[{n:"Respiração 3x",v:0,p:50},{n:"Alongamento",v:0,p:30},{n:"3 sessões surf",v:0,p:100},{n:"Compartilhar",v:0,p:20}];
-        const T=[{c:"Respiração",t:"4-7-8",d:"Inspire 4s, segure 7s, expire 8s"},{c:"Alongamento",t:"Ombros",d:"10 rotações para mobilidade"},{c:"Técnica",t:"Paddling",d:"Corpo reto, braços longos"}];
-        const TR=[{n:"Fernando de Noronha",b:"Ago-Out",w:"Morro dos Conventos"},{n:"Maresias",b:"Jun-Set",w:"Maresias"}];
-        const TD=[{d:"Hoje",t:"06:30/18:45",h:"2.5m"},{d:"Amanhã",t:"07:15/19:30",h:"2.8m"}];
+        let pts=0, notifOn_=false;
+        const C=[{n:"Respiração 3x",v:0,p:50},{n:"Alongamento",v:0,p:30}];
+        const T=[{c:"Respiração",t:"4-7-8",d:"Inspire 4s, segure 7s, expire 8s"},{c:"Alongamento",t:"Ombros",d:"Rotação para mobilidade"}];
+        const INSTA=[{u:"@cahrol_asf",i:"https://picsum.photos/300/300?random=1"},{u:"@asf_surf",i:"https://picsum.photos/300/300?random=2"}];
+        const SHOPS=[{n:"STHILL Surf",l:"Bertioga",d:"10% OFF"},{n:"TRIBOSURF",l:"Santos",d:"15% OFF"}];
         
-        function rd(){document.getElementById('pts').textContent=pts;document.getElementById('rank').textContent='#'+Math.floor(Math.random()*50+1);}
-        function rdC(){document.getElementById('chl').innerHTML=C.map((c,i)=>`<div class="card"><h3>${c.n}</h3><div class="progress"><div class="bar" style="width:${c.v*100}%"></div></div><button class="btn" onclick="cmp(${i})">${c.v?'Feito':'Marcar'}</button></div>`).join('');}
-        function rdt(){document.getElementById('tips').innerHTML=T.map(t=>`<div class="card" onclick="addPts(10,this)"><span style="background:${['#00A8CC','#27ae60','#9B59B6'][Math.floor(Math.random()*3)]};color:white;padding:2px 8px;border-radius:10px;font-size:11px">${t.c}</span><h3>${t.t}</h3><p>${t.d}</p></div>`).join('');}
-        function rtr(){document.getElementById('trips').innerHTML=TR.map(t=>`<div class="card"><h3>📍 ${t.n}</h3><p>Melhor: ${t.b}</p><p>Onda: ${t.w}</p></div>`).join('');}
-        function rtt(){document.getElementById('tides').innerHTML=`<div class="grid">${TD.map(t=>`<div class="card"><h3>${t.d}</h3><p>${t.t}</p><p>${t.h}</p></div>`).join('')}</div>`;}
-        function addPts(p,el){pts+=p;rd();el.style.opacity='.5';}
-        function cmp(i){C[i].v=1;pts+=C[i].p;rd();rdC();}
+        function rd(){document.getElementById('pts').textContent=pts;}
+        function rdf(){document.getElementById('instaFeed').innerHTML=INSTA.map(i=>`<div class="card"><img src="${i.i}" style="width:100%;border-radius:8px"><p>${i.u}</p></div>`).join('');}
+        function rds(){document.getElementById('shopsList').innerHTML=SHOPS.map(s=>`<div class="card"><h3>${s.n}</h3><p>${s.l}</p><span class="badge">${s.d}</span></div>`).join('');}
+        function rdt(){document.getElementById('tipsList').innerHTML=T.map(t=>`<div class="card" onclick="addPts(10,this)"><span class="badge">${t.c}</span><h3>${t.t}</h3><p>${t.d}</p></div>`).join('');}
+        function rdc(){document.getElementById('chl').innerHTML=C.map((c,i)=>`<div class="card"><h3>${c.n}</h3><div class="progress"><div class="bar" style="width:${c.v*100}%"></div></div><button class="btn" onclick="cmp(${i})">${c.v?'Feito':'Marcar'}</button></div>`).join('');}
+        function addPts(p,el){pts+=p;rd();el.style.opacity='.5'; if(pts>50)alert('Parabéns! Ganhou badge de Bronze! 🏅');}
+        function cmp(i){C[i].v=1;pts+=C[i].p;rd();rdc();}
         function show(id){document.getElementById(id).scrollIntoView({behavior:'smooth'});}
-        function openWA(){alert('WhatsApp: wa.me/5511954346288');}
-        document.addEventListener('DOMContentLoaded',()=>{rd();rdC();rdt();rtr();rtt();});
+        function openWA(){window.open('https://wa.me/5511954346288','_blank');}
+        function notifOn(){notifOn_=true;document.getElementById('notif').textContent='✅';alert('Notificações ativadas! Você receberá alertas de boas condições de surf!');}
+        function premium(){alert('Redirecionando para pagamento...');}
+        
+        document.addEventListener('DOMContentLoaded',()=>{rd();rdf();rds();rdt();rdc();setInterval(()=>{if(notifOn_)document.getElementById('notif').style.color='var(--success)';},5000);});
     </script>
 </body>
 </html>
