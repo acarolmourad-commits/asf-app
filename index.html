@@ -14,9 +14,11 @@
         .section{padding:15px;max-width:1200px;margin:0 auto;}
         .card{background:var(--w);border-radius:12px;padding:15px;margin:10px 0;box-shadow:0 2px 8px rgba(0,0,0,0.08);}
         .badge{background:var(--a);color:var(--s);padding:3px 10px;border-radius:15px;font-size:11px;margin:2px;display:inline-block;}
+        table{width:100%;border-collapse:collapse;margin-top:10px;}
+        th,td{padding:8px;text-align:center;border-bottom:1px solid #eee;}
+        th{background:var(--p);color:var(--w);}
         .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:12px;}
         @media(max-width:768px){.grid{grid-template-columns:1fr;}}
-        .emergency{background:linear-gradient(135deg,rgba(231,76,60,0.1),rgba(244,208,63,0.1));border-left:4px solid #e74c3c;padding:12px;border-radius:8px;}
     </style>
 </head>
 <body>
@@ -26,72 +28,77 @@
     </header>
     
     <section class="hero">
-        <button class="btn" onclick="show('asl')">Gírias</button>
-        <button class="btn" onclick="show('waves')">Ondas</button>
-        <button class="btn" onclick="show('etiquette')">Etiqueta</button>
-        <button class="btn" onclick="show('sisterhood')">Irmãs</button>
-        <button class="btn" onclick="show('emergency')">Denúncias</button>
+        <button class="btn" onclick="show('tides')">Marés</button>
+        <button class="btn" onclick="show('surf')">Dicas Surf</button>
+        <button class="btn" onclick="show('breath')">Respiração</button>
+        <button class="btn" onclick="show('women')">Mulheres</button>
     </section>
     
-    <section class="section" id="asl">
-        <h2>🎤 Gírias do Surf</h2>
-        <div class="grid">
-            <div class="card"><h3>Goofy</h3><p>Pé direito à frente</p></div>
-            <div class="card"><h3>Regular</h3><p>Pé esquerdo à frente</p></div>
-            <div class="card"><h3>Offshore</h3><p>Vento da terra para o mar</p></div>
-            <div class="card"><h3>Barrel</h3><p>Túnel de onda</p></div>
-            <div class="card"><h3>Ace</h3><p>Ótimo!</p></div>
-            <div class="card"><h3>Stoked</h3><p>Animado</p></div>
-        </div>
-    </section>
-    
-    <section class="section" id="waves">
-        <h2>🌊 Tipos de Ondas</h2>
-        <div class="grid">
-            <div class="card"><h3>Beach Break</h3><p>Bertioga, areia</p></div>
-            <div class="card"><h3>Reef Break</h3><p>Ponta Grossa, recife</p></div>
-            <div class="card"><h3>Point Break</h3><p>Maresias, ponta</p></div>
-        </div>
-    </section>
-    
-    <section class="section" id="etiquette">
-        <h2>🤝 Etiqueta do Surf</h2>
+    <section class="section" id="tides">
+        <h2>🌙 Tábua de Maré - Bertioga</h2>
+        <table>
+            <tr><th>Dia</th><th>Alta</th><th>Baixa</th><th>Altura</th></tr>
+            <tr><td>Hoje</td><td>06:23</td><td>12:45</td><td>2.3/0.4</td></tr>
+            <tr><td>Amanhã</td><td>07:10</td><td>13:30</td><td>2.1/0.5</td></tr>
+            <tr><td>Qua</td><td>07:55</td><td>14:15</td><td>1.9/0.6</td></tr>
+        </table>
         <div class="card">
-            <h3>Prioridade</h3>
-            <p>Quem está mais perto da quebra tem prioridade</p>
-            <p>Não fuque fila</p>
-        </div>
-        <div class="card" style="background:rgba(231,76,60,0.1)">
-            <h3 style="color:#e74c3c">NUNCA SOLTE A PRANCHA!</h3>
-            <p>Mantenha sempre a mão na leash</p>
-        </div>
-    </section>
-    
-    <section class="section" id="sisterhood">
-        <h2>👭 Apoio às Irmãs</h2>
-        <div class="card">
-            <p><strong>Juntas somos mais fortes!</strong> Cada mulher no mar inspira outras.</p>
-            <p>#ASFsurfFeminino #JuntasSomosFortes</p>
-        </div>
-        <div class="card">
-            <h3>Como apoiar</h3>
+            <h3>Dicas Femininas</h3>
             <ul style="margin-left:20px">
-                <li>Fotografe conquistas</li>
-                <li>Comemore vitórias alheias</li>
-                <li>Ofereça dicas com carinho</li>
+                <li>Maré baixa = ondas mais consistentes</li>
+                <li>Use protetor solar FPS 50+</li>
+                <li>Saia cedo se mar estiver cheia</li>
             </ul>
         </div>
     </section>
     
-    <section class="section" id="emergency">
-        <h2>🚨 Denúncias</h2>
-        <div class="emergency">
-            <h3 style="color:#e74c3c">DELEGACIA DA MULHER: 180</h3>
-            <p>Ligue em caso de assédio ou violência no esporte</p>
+    <section class="section" id="surf">
+        <h2>🏄‍♀️ Dicas de Surf</h2>
+        <div class="grid">
+            <div class="card"><h3>Paddling</h3><p>Corpo reto, braços longos</p></div>
+            <div class="card"><h3>Takeoff</h3><p>Puxe a prancha com força</p></div>
+            <div class="card"><h3>Bottom Turn</h3><p>Primeira manobra essencial</p></div>
         </div>
         <div class="card">
-            <p><strong>WhatsApp ASF: (11) 9 5434-6288</strong></p>
-            <button class="btn" onclick="openWA()">Falar Conosco</button>
+            <h3>Dica Feminina</h3>
+            <p>Pranchas maiores dão mais flutuação para mulheres</p>
+        </div>
+    </section>
+    
+    <section class="section" id="breath">
+        <h2>🌬️ Respiração</h2>
+        <div class="card">
+            <h3>4-7-8 (Surf & Dia a Dia)</h3>
+            <p>Inspire 4s → Segure 7s → Expire 8s</p>
+            <p style="font-size:12px;color:#666">Acalma ansiedade antes de surfar e no estresse diário</p>
+        </div>
+        <div class="card">
+            <h3>Respiração Box</h3>
+            <p>4s → 4s → 4s → 4s. Equilibra corpo e mente.</p>
+        </div>
+    </section>
+    
+    <section class="section" id="women">
+        <h2>👩‍⚕️ Dicas Femininas</h2>
+        <div class="card">
+            <h3>Alimentação</h3>
+            <ul style="margin-left:20px">
+                <li>Ômega 3: linhaça, chia, peixe</li>
+                <li>Proteína pós-surf: shake + fruta</li>
+                <li>Hidrate-se: 500ml antes de entrar</li>
+            </ul>
+        </div>
+        <div class="card">
+            <h3>Vida Saudável</h3>
+            <ul style="margin-left:20px">
+                <li>Alongamento noturno</li>
+                <li>Alongamento de quadril (borboleta)</li>
+                <li>Alongamento de isquiotibiais</li>
+            </ul>
+        </div>
+        <div class="card">
+            <h3>Saúde Óssea</h3>
+            <p>Calcule suplemento de cálcio e vit D</p>
         </div>
     </section>
     
@@ -101,7 +108,6 @@
     
     <script>
         function show(id){document.getElementById(id).scrollIntoView({behavior:'smooth'});}
-        function openWA(){window.open('https://wa.me/5511954346288','_blank');}
     </script>
 </body>
 </html>
