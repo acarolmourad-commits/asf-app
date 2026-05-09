@@ -35,8 +35,13 @@
         <button class="btn" onclick="show('surf')">Dicas</button>
         <button class="btn" onclick="show('breath')">Respiração</button>
         <button class="btn" onclick="show('women')">Mulheres</button>
+        <button class="btn" onclick="show('nature')">Natureza</button>
+        <button class="btn" onclick="show('fears')">Medo Surf</button>
         <button class="btn" onclick="show('challenges')">Metas</button>
         <button class="btn" onclick="show('trips')">Viagens</button>
+        <button class="btn" onclick="show('market')">Mercado</button>
+        <button class="btn" onclick="show('compet')">Competição</button>
+        <button class="btn" onclick="show('news')">Notícias</button>
         <button class="btn" onclick="show('emergency')">Denúncias</button>
     </section>
     
@@ -48,6 +53,11 @@
             <tr><td>Amanhã</td><td>07:10</td><td>13:30</td><td>2.1/0.5</td></tr>
             <tr><td>Qua</td><td>07:55</td><td>14:15</td><td>1.9/0.6</td></tr>
         </table>
+        <div class="card">
+            <h3>📅 Calendário WSL</h3>
+            <p><strong>Rio Pro</strong> - 15-25 julho • Arpoador</p>
+            <p><strong>Oi Rio</strong> - 10-20 setembro • Barra</p>
+        </div>
     </section>
     
     <section class="section" id="surf">
@@ -65,7 +75,7 @@
     </section>
     
     <section class="section" id="breath">
-        <h2>🌬️ Respiração</h2>
+        <h2>🌬️ Respiração para Acalmar</h2>
         <div class="card">
             <h3>4-7-8</h3>
             <p>Inspire 4s → Segure 7s → Expire 8s</p>
@@ -75,6 +85,10 @@
             <h3>Box (4-4-4-4)</h3>
             <p>Equilibra corpo e mente</p>
             <button class="btn" onclick="startBreath(4,4,4)">Praticar</button>
+        </div>
+        <div class="card">
+            <h3>Respiração para o Dia a Dia</h3>
+            <p>Use 4-7-8 antes de surfar ou em momentos de estresse</p>
         </div>
     </section>
     
@@ -89,12 +103,61 @@
             </ul>
         </div>
         <div class="card">
-            <h3>Saúde</h3>
+            <h3>Saúde e Alongamento</h3>
             <ul style="margin-left:20px">
                 <li>Alongamento noturno</li>
                 <li>Quadril (borboleta)</li>
                 <li>Isquiotibiais</li>
             </ul>
+        </div>
+    </section>
+    
+    <section class="section" id="nature">
+        <h2>🌿 Conexão com a Natureza</h2>
+        <div class="card">
+            <h3>Ritual de Conexão</h3>
+            <ol style="margin-left:20px">
+                <li>Chegue 15 min antes para observar o mar</li>
+                <li>Sinta a areia entre os dedos</li>
+                <li>Ouça as ondas - música da Terra</li>
+                <li>Respire o ar úmido cheio de sais minerais</li>
+            </ol>
+        </div>
+        <div class="card">
+            <h3>Sinais da Natureza</h3>
+            <ul style="margin-left:20px">
+                <li>Vento offshore = condições perfeitas</li>
+                <li>Pássaros voando baixo = ondas grandes vindas</li>
+                <li>Mar calmo = saia cedo, tempestade vindo</li>
+            </ul>
+        </div>
+    </section>
+    
+    <section class="section" id="fears">
+        <h2>😨 Como Amenizar o Medo na Hora do Surf</h2>
+        <div class="card">
+            <h3>Antes de Entrar</h3>
+            <ul style="margin-left:20px">
+                <li>Visualize sucesso mentalmente</li>
+                <li>Respire 4-7-8 três vezes</li>
+                <li>Foco apenas na próxima onda</li>
+            </ul>
+        </div>
+        <div class="card">
+            <h3>Durante o Surf</h3>
+            <ul style="margin-left:20px">
+                <li>Olhe para o horizonte quando ansioso</li>
+                <li>Divida sessão em metas menores</li>
+                <li>Saiba seu limite - não force</li>
+            </ul>
+        </div>
+        <div class="card">
+            <h3>Mensagens para Repetir</h3>
+            <div style="font-style:italic;background:rgba(0,168,204,0.1);padding:12px;border-radius:8px">
+                <p>"Você já surfou ondas difíceis antes"</p>
+                <p>"O medo é normal, respeite-o"</p>
+                <p>"Cada onda é uma conquista"</p>
+            </div>
         </div>
     </section>
     
@@ -121,6 +184,43 @@
         </div>
     </section>
     
+    <section class="section" id="market">
+        <h2>🏪 Mercado de Permuta</h2>
+        <div class="card">
+            <h3>Anunciar Item</h3>
+            <input type="text" placeholder="Título (ex: Prancha 6'0)" id="title">
+            <select id="cat"><option>Tamanho</option><option>Roupa</option><option>Acessório</option></select>
+            <button class="btn" onclick="postItem()">Publicar</button>
+        </div>
+        <h3 style="margin-top:15px">Itens Disponíveis</h3>
+        <div class="grid">
+            <div class="card"><span class="badge">Tamanho</span><h3>Prancha 6'0</h3><button class="btn">Contatar</button></div>
+            <div class="card"><span class="badge">Roupa</span><h3>Wetsuit 3/2</h3><button class="btn">Contatar</button></div>
+        </div>
+    </section>
+    
+    <section class="section" id="compet">
+        <h2>🏆 Competição Regional ASF</h2>
+        <div class="card">
+            <h3>Inscrever Time</h3>
+            <input type="text" placeholder="Nome da surfista" id="name">
+            <select id="spot"><option>Bertioga</option><option>Santos</option><option>Guarujá</option></select>
+            <button class="btn" onclick="register()">Inscrever</button>
+        </div>
+    </section>
+    
+    <section class="section" id="news">
+        <h2>📰 Notícias do Surf</h2>
+        <div class="card">
+            <h3>🏆 WSL Rio Pro 2026</h3>
+            <p><strong>15-25 julho</strong> • Arpoador, RJ</p>
+        </div>
+        <div class="card">
+            <h3>🌊 Pranchas Femininas</h3>
+            <p>STHILL coleção exclusiva</p>
+        </div>
+    </section>
+    
     <section class="section" id="emergency">
         <h2>🚨 Denúncias</h2>
         <div class="emergency">
@@ -139,11 +239,9 @@
         let pts=0;const up=()=>{document.getElementById('pts').textContent=pts;}
         function show(id){document.getElementById(id).scrollIntoView({behavior:'smooth'});}
         function addPoints(p,el){pts+=p;up();if(el)el.style.opacity='.5';}
-        function startBreath(inVal,holdVal,outVal){
-            const steps=[inVal,holdVal,outVal,holdVal],labels=['Inspire','Segure','Expire','Pare'];
-            let s=0,c=0;
-            alert('Começando respiração '+inVal+'-'+holdVal+'-'+outVal);
-        }
+        function startBreath(inVal,holdVal,outVal){alert('Começando respiração '+inVal+'-'+holdVal+'-'+outVal);}
+        function postItem(){pts+=50;up();alert('Item publicado! +50pts');}
+        function register(){pts+=100;up();alert('Inscrito! Boa sorte!');}
     </script>
 </body>
 </html>
