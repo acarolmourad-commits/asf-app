@@ -4,95 +4,136 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ASF - Associação de Surf Feminino | App Oficial</title>
-    <meta name="robots" content="index,follow">
-    <meta name="description" content="ASF - Associação de Surf Feminino. 2222 dicas de surf, previsão de ondas em tempo real, surftrips e comunidade exclusiva para mulheres surfistas.">
-    <meta name="theme-color" content="#00A8CC">
-    <script type="application/ld+json">
-    {"@context":"https://schema.org","@type":"Organization","name":"ASF - Associação de Surf Feminino","url":"https://acarolmourad-commits.github.io/asf-app/","logo":"https://images.unsplash.com/photo-1502680390469-be75c86b636f?w=200","description":"Conectando mulheres surfistas desde 2019"}
-    </script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <meta name="description" content="ASF - App completo para mulheres surfistas. Dicas, badges, metas semanais, planner de surftrips e comunidade exclusiva.">
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"ASF"}</script>
     <style>
-        :root{--primary:#00A8CC;--primary-dark:#0088A8;--secondary:#0E2439;--accent:#F4D03F;--success:#2ECC71;--white:#FFFFFF;--light:#F8F9FA;--gray:#9A9A9A;}
+        :root{--primary:#00A8CC;--secondary:#0E2439;--accent:#F4D03F;--success:#2ECC71;--white:#fff;--light:#F8F9FA;}
         *{margin:0;padding:0;box-sizing:border-box;}
-        body{font-family:'Outfit',sans-serif;background:var(--light);color:var(--secondary);line-height:1.6;}
-        header{background:linear-gradient(135deg,var(--secondary) 0%,var(--primary-dark) 100%);padding:20px 24px;position:sticky;top:0;z-index:100;}
-        .hero{padding:40px 24px;text-align:center;background:linear-gradient(135deg,rgba(0,168,204,0.1) 0%,rgba(244,208,63,0.1) 100%);}
-        .hero h1{font-size:clamp(28px,6vw,42px);font-weight:800;margin-bottom:10px;}
-        .btn{background:linear-gradient(135deg,var(--primary) 0%,var(--primary-dark) 100%);color:var(--white);border:none;padding:12px 24px;border-radius:12px;cursor:pointer;font-weight:600;margin:4px;}
-        .section{padding:24px;max-width:1200px;margin:0 auto;}
-        .cards-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px;}
-        .card{background:var(--white);border-radius:16px;padding:20px;box-shadow:0 4px 12px rgba(0,0,0,0.08);transition:transform 0.3s;}
-        .grid-2{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;}
-        @media(max-width:768px){.grid-2{grid-template-columns:1fr;}.cards-grid{grid-template-columns:1fr;}}
-        footer{background:var(--secondary);color:var(--white);text-align:center;padding:30px 24px;margin-top:40px;}
-        .cat-tag{display:inline-block;padding:4px 10px;background:var(--primary);color:var(--white);border-radius:20px;font-size:11px;margin-bottom:8px;}
-        .badge{display:inline-flex;align-items:center;gap:6px;background:var(--accent);color:var(--secondary);padding:4px 10px;border-radius:20px;font-size:12px;margin:2px;}
+        body{font-family:'Outfit',sans-serif;background:var(--light);color:var(--secondary);}
+        header{background:linear-gradient(135deg,var(--secondary),var(--primary));padding:20px;}
+        .hero{padding:40px 20px;text-align:center;background:linear-gradient(135deg,rgba(0,168,204,0.1),rgba(244,208,63,0.1));}
+        .btn{background:linear-gradient(135deg,var(--primary),var(--secondary));color:var(--white);border:none;padding:12px 20px;border-radius:12px;cursor:pointer;margin:4px;}
+        .section{padding:20px;max-width:1200px;margin:0 auto;}
+        .card{background:var(--white);border-radius:16px;padding:16px;margin:8px;box-shadow:0 2px 8px rgba(0,0,0,0.1);}
+        .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:12px;}
+        .badge{background:var(--accent);color:var(--secondary);padding:4px 10px;border-radius:20px;font-size:12px;margin:2px;display:inline-block;}
+        .progress{background:#eee;border-radius:10px;height:20px;overflow:hidden;}
+        .progress-bar{height:100%;background:var(--primary);transition:width 0.5s;}
+        @media(max-width:768px){.grid{grid-template-columns:1fr;}}
     </style>
 </head>
 <body>
     <header>
-        <div style="max-width:1200px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;">
-            <div style="display:flex;align-items:center;gap:12px;">
-                <div style="width:40px;height:40px;background:var(--white);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:20px;">🏄‍♀️</div>
-                <div style="color:var(--white);font-size:20px;font-weight:700;">ASF</div>
-            </div>
-        </div>
+        <h1 style="color:var(--white);text-align:center;font-size:24px;">🏄‍♀️ ASF APP</h1>
+        <p style="color:var(--white);text-align:center;opacity:0.9;">Sistema de Pontos: <span id="points">0</span> pts</p>
     </header>
     
     <section class="hero">
-        <h1>Conectando Mulheres Surfistas</h1>
-        <p>Dicas, comunidade, previsões e surftrips</p>
-        <button class="btn" onclick="showSection('tips')">Ver Dicas</button>
-        <button class="btn" onclick="showSection('badges')">Meus Badges</button>
+        <h2 style="font-size:28px;margin-bottom:10px;">Bem-vinda, surfista!</h2>
+        <p>Complete metas, ganhe badges e conecte-se com outras mulheres surfistas</p>
+        <button class="btn" onclick="showSection('tips')">Dicas de Surf</button>
+        <button class="btn" onclick="showSection('challenges')">Metas Semanais</button>
+        <button class="btn" onclick="showSection('trips')">Surftrip Planner</button>
+    </section>
+    
+    <section class="section" id="challenges">
+        <h2>🎯 Metas Semanais</h2>
+        <div id="challenges-list"></div>
     </section>
     
     <section class="section" id="tips">
-        <h2 style="font-size:24px;font-weight:700;margin-bottom:20px;">🏄‍♀️ Dicas de Surf</h2>
-        <div class="cards-grid" id="tips-grid"></div>
+        <h2>🏄‍♀️ Dicas de Surf</h2>
+        <div class="grid" id="tips-grid"></div>
     </section>
     
-    <section class="section" id="badges">
-        <h2 style="font-size:24px;font-weight:700;margin-bottom:20px;">🏆 Brand Badges</h2>
-        <div id="badges-display"></div>
+    <section class="section" id="trips">
+        <h2>🌊 Surftrip Planner</h2>
+        <div class="grid" id="trips-grid"></div>
     </section>
     
-    <footer>
-        <p>&copy; 2024 ASF - Associação de Surf Feminino</p>
-        <p style="font-size:12px;opacity:0.7;">Bertioga, Santos, Guarujá, Ubatuba</p>
+    <footer style="background:var(--secondary);color:var(--white);text-align:center;padding:30px;">
+        <p>🏄‍♀️ ASF - Conectando mulheres surfistas desde 2019</p>
+        <button class="btn" onclick="openWhatsApp()">Entrar no Grupo WhatsApp</button>
     </footer>
     
     <script>
-        const SURF_TIPS = [
-            {categoria:"Respiração", titulo:"4-7-8", conteudo:"Inspire 4s, segure 7s, expire 8s. Equilibra corpo e mente.", tags:["Respiração","Mental"]},
-            {categoria:"Alongamento", titulo:"Ombros", conteudo:"10 rotações frente/trás. Melhora mobilidade para paddling.", tags:["Alongamento","Ombros"]},
-            {categoria:"Técnica", titulo:"Paddling", conteudo:"Corpo reto, cabeça alinhada, braços longos sem afundar.", tags:["Técnica","Paddling"]},
-            {categoria:"Mental", titulo:"Visualização", conteudo:"Antes de entrar, visualize você surfando bem.", tags:["Mental","Foco"]},
-            {categoria:"Saúde", titulo:"Hidratação", conteudo:"500ml água antes de entrar. Reaplique a cada 1h.", tags:["Saúde","Hidratação"]},
-            {categoria:"Equipamento", titulo:"Prancha Iniciante", conteudo:"Foam 7'-8' são ideais. Mais largas e flutuantes.", tags:["Iniciante","Prancha"]},
-            {categoria:"Segurança", titulo:"Etiqueta no Mar", conteudo:"Quem está mais próximo da quebra tem prioridade.", tags:["Segurança","Etiqueta"]},
-            {categoria:"Mulher", titulo:"Comunidade", conteudo:"Surfar em grupo é mais seguro e divertido!", tags:["Mulher","Comunidade"]},
+        let points = 0;
+        const TIPS = [
+            {cat:"Respiração", title:"4-7-8", text:"Inspire 4s, segure 7s, expire 8s"},
+            {cat:"Alongamento", title:"Ombros", text:"10 rotações para mobilidade"},
+            {cat:"Técnica", title:"Paddling", text:"Corpo reto, braços longos"},
+            {cat:"Mental", title:"Visualização", text:"Visualize ondas antes de entrar"},
+            {cat:"Saúde", title:"Hidratação", text:"500ml água antes de surfar"},
         ];
         
-        const BRAND_BADGES = [
-            {name:"STHILL Bronze", desc:"Primeira compra", icon:"🛒"},
-            {name:"TRIBOSURF Silver", desc:"Lycra comprada", icon:"🏄"},
-            {name:"ASF Founder", desc:"Membro fundador", icon:"🎯"},
-            {name:"Embaixadora", desc:"Indica 3 amigas", icon:"👥"},
+        const CHALLENGES = [
+            {name:"Respiração 3x", done:false, pts:50},
+            {name:"Alongamento diário", done:false, pts:30},
+            {name:"3 sessões de surf", done:false, pts:100},
+            {name:"Compartilhar no grupo", done:false, pts:20},
+        ];
+        
+        const TRIPS = [
+            {dest:"Fernando de Noronha", best:"Ago-Out", wave:"Morro dos Conventos"},
+            {dest:"Maresias", best:"Jun-Set", wave:"Maresias"},
+            {dest:"Garopaba", best:"Ago-Mar", wave:"Praia do Rosa"},
         ];
         
         function renderTips(){
-            document.getElementById('tips-grid').innerHTML = SURF_TIPS.map(t=>`<div class="card"><span class="cat-tag">${t.categoria}</span><h3>${t.titulo}</h3><p>${t.conteudo}</p></div>`).join('');
+            document.getElementById('tips-grid').innerHTML = TIPS.map(t=>`
+                <div class="card" onclick="completeTip(this)">
+                    <span style="background:${['#00A8CC','#27ae60','#9B59B6','#FF6B6B','#2980b9'][Math.floor(Math.random()*5)]};color:white;padding:2px 8px;border-radius:10px;font-size:11px;">${t.cat}</span>
+                    <h3>${t.title}</h3>
+                    <p>${t.text}</p>
+                </div>
+            `).join('');
         }
         
-        function renderBadges(){
-            document.getElementById('badges-display').innerHTML = `<div>${BRAND_BADGES.map(b=>`<span class="badge">${b.icon} ${b.name}</span>`).join('')}</div>`;
+        function renderChallenges(){
+            document.getElementById('challenges-list').innerHTML = CHALLENGES.map((c,i)=>`
+                <div class="card">
+                    <h3>${c.name}</h3>
+                    <div class="progress"><div class="progress-bar" style="width:${c.done?100:0}%"></div></div>
+                    <p>${c.pts} pts</p>
+                    <button class="btn" onclick="completeChallenge(${i})">${c.done?'Feito':'Marcar'}</button>
+                </div>
+            `).join('');
         }
+        
+        function renderTrips(){
+            document.getElementById('trips-grid').innerHTML = TRIPS.map(t=>`
+                <div class="card">
+                    <h3>📍 ${t.dest}</h3>
+                    <p>Melhor época: ${t.best}</p>
+                    <p>Onda: ${t.wave}</p>
+                </div>
+            `).join('');
+        }
+        
+        function completeTip(el){
+            el.style.opacity='0.5';
+            points += 10;
+            updatePoints();
+        }
+        
+        function completeChallenge(i){
+            CHALLENGES[i].done = true;
+            points += CHALLENGES[i].pts;
+            updatePoints();
+            renderChallenges();
+        }
+        
+        function updatePoints(){document.getElementById('points').textContent = points;}
         
         function showSection(id){document.getElementById(id)?.scrollIntoView({behavior:'smooth'});}
         
-        document.addEventListener('DOMContentLoaded',()=>{renderTips();renderBadges();});
-        console.log('✅ ASF App carregado');
+        function openWhatsApp(){
+            alert('Grupo WhatsApp: link disponível após cadastro no app');
+        }
+        
+        document.addEventListener('DOMContentLoaded',()=>{
+            renderTips();renderChallenges();renderTrips();
+        });
     </script>
 </body>
 </html>
