@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ASF - App Feminino para Surfistas</title>
+    <title>ASF - Mercado de Permuta & Competição</title>
     <style>
         :root{--p:#00A8CC;--s:#0E2439;--a:#F4D03F;--w:#fff;--l:#F8F9FA;}
         *{margin:0;padding:0;box-sizing:border-box;}
@@ -18,79 +18,72 @@
         .badge{background:var(--a);color:var(--s);padding:3px 8px;border-radius:12px;font-size:11px;margin:2px;display:inline-block;}
         .progress{height:16px;background:#eee;border-radius:8px;overflow:hidden;}
         .bar{height:100%;background:var(--p);}
+        input,select{width:100%;padding:10px;margin:5px 0;border:1px solid #ddd;border-radius:8px;}
     </style>
 </head>
 <body>
     <header>
-        <h1>🏄‍♀️ ASF - App Feminino</h1>
-        <p style="font-size:13px">Pontos: <span id="pts">0</span> | <span id="notif" style="color:var(--a)">🔔</span></p>
-        <button class="btn" onclick="notifOn()" id="notifBtn">Ativar Notificações</button>
+        <h1>🏄‍♀️ ASF - Mercado & Competição</h1>
+        <p style="font-size:13px">Pontos: <span id="pts">0</span> | 🏆 Ranking: <span id="rank">#</span></p>
     </header>
     
     <section class="hero">
-        <h2 style="font-size:20px">App completo para mulheres surfistas</h2>
-        <button class="btn" onclick="show('feed')">Instagram Feed</button>
-        <button class="btn" onclick="show('shops')">Lojas Parceiras</button>
-        <button class="btn" onclick="show('tips')">Dicas</button>
-        <button class="btn" onclick="show('challenges')">Metas</button>
+        <h2 style="font-size:20px">Mercado de Permuta - Troque coisas de surf!</h2>
+        <button class="btn" onclick="show('market')">Mercado</button>
+        <button class="btn" onclick="show('comp')">Competição ASF</button>
+        <button class="btn" onclick="show('events')">Eventos WSL</button>
     </section>
     
-    <section class="section" id="feed">
-        <h2>📸 Instagram Feed #ASFsurfLife</h2>
-        <div class="grid" id="instaFeed"></div>
-    </section>
-    
-    <section class="section" id="shops">
-        <h2>🏪 Lojas Parceiras</h2>
-        <div class="grid" id="shopsList"></div>
-    </section>
-    
-    <section class="section" id="tips">
-        <h2>🏄‍♀️ Dicas do Dia</h2>
-        <div class="grid" id="tipsList"></div>
-    </section>
-    
-    <section class="section" id="challenges">
-        <h2>🎯 Clube ASF Premium</h2>
+    <section class="section" id="market">
+        <h2>🏪 Mercado de Permuta</h2>
         <div class="card">
-            <h3>💎 Assinatura Premium</h3>
-            <p>Acesso a aulas exclusivas, coaching e descontos</p>
-            <ul>
-                <li>✅ Aulas de surf ao vivo</li>
-                <li>✅ Coaching individual</li>
-                <li>✅ Descontos parceiros</li>
-                <li>✅ Comunidade VIP</li>
-            </ul>
-            <button class="btn" onclick="premium()">Assinar R$29,90/mês</button>
+            <h3>Anunciar Item</h3>
+            <input type="text" placeholder="Título (ex: Prancha 6'0")" id="title">
+            <select id="cat"><option>Tamanho</option><option>Roupa</option><option>Acessório</option></select>
+            <input type="text" placeholder="Descrição" id="desc">
+            <button class="btn" onclick="postItem()">Publicar</button>
         </div>
-        <div id="chl"></div>
+        <h3 style="margin-top:15px">Itens Disponíveis</h3>
+        <div class="grid" id="items">
+            <div class="card"><span class="badge">Tamanho</span><h3>Prancha 6'0</h3><p>Semi nova, troca por wetsuit</p><button class="btn">Contatar</button></div>
+            <div class="card"><span class="badge">Roupa</span><h3>Wetsuit 3/2</h3><p>Tamanho M, troca por prancha menor</p><button class="btn">Contatar</button></div>
+        </div>
+    </section>
+    
+    <section class="section" id="comp">
+        <h2>🏆 Competição Regional ASF</h2>
+        <div id="leaderboard"></div>
+        <div class="card">
+            <h3>Inscrever Time</h3>
+            <input type="text" placeholder="Nome da surfista" id="name">
+            <select id="spot"><option>Bertioga</option><option>Santos</option><option>Guarujá</option></select>
+            <button class="btn" onclick="register()">Inscrever</button>
+        </div>
+    </section>
+    
+    <section class="section" id="events">
+        <h2>📅 Calendário WSL</h2>
+        <div class="grid" id="eventsList">
+            <div class="card"><h3>🏄 Rio Pro</h3><p>Jul 15-25 • Arpoador</p><span class="badge">WSL CT</span></div>
+            <div class="card"><h3>🏄 Oi Rio</h3><p>Sep 10-20 • Barra</p><span class="badge">WSL QS</span></div>
+            <div class="card"><h3>🏄 Itacaré</h3><p>Nov 5-15 • Praia do Futuro</p><span class="badge">Longboard</span></div>
+        </div>
     </section>
     
     <footer style="background:var(--s);color:var(--w);text-align:center;padding:20px;">
-        <p>🏄‍♀️ ASF desde 2019 | Bertioga, Santos, Guarujá, Ubatuba</p>
-        <button class="btn" onclick="openWA()">Grupo WhatsApp</button>
+        <p>🏄‍♀️ ASF Mercado & Competição</p>
     </footer>
     
     <script>
-        let pts=0, notifOn_=false;
-        const C=[{n:"Respiração 3x",v:0,p:50},{n:"Alongamento",v:0,p:30}];
-        const T=[{c:"Respiração",t:"4-7-8",d:"Inspire 4s, segure 7s, expire 8s"},{c:"Alongamento",t:"Ombros",d:"Rotação para mobilidade"}];
-        const INSTA=[{u:"@cahrol_asf",i:"https://picsum.photos/300/300?random=1"},{u:"@asf_surf",i:"https://picsum.photos/300/300?random=2"}];
-        const SHOPS=[{n:"STHILL Surf",l:"Bertioga",d:"10% OFF"},{n:"TRIBOSURF",l:"Santos",d:"15% OFF"}];
+        let pts=0, rank=10;
+        const LEAD=[{n:"Carol",p:1200},{n:"Ana",p:950},{n:"Julia",p:800}];
         
-        function rd(){document.getElementById('pts').textContent=pts;}
-        function rdf(){document.getElementById('instaFeed').innerHTML=INSTA.map(i=>`<div class="card"><img src="${i.i}" style="width:100%;border-radius:8px"><p>${i.u}</p></div>`).join('');}
-        function rds(){document.getElementById('shopsList').innerHTML=SHOPS.map(s=>`<div class="card"><h3>${s.n}</h3><p>${s.l}</p><span class="badge">${s.d}</span></div>`).join('');}
-        function rdt(){document.getElementById('tipsList').innerHTML=T.map(t=>`<div class="card" onclick="addPts(10,this)"><span class="badge">${t.c}</span><h3>${t.t}</h3><p>${t.d}</p></div>`).join('');}
-        function rdc(){document.getElementById('chl').innerHTML=C.map((c,i)=>`<div class="card"><h3>${c.n}</h3><div class="progress"><div class="bar" style="width:${c.v*100}%"></div></div><button class="btn" onclick="cmp(${i})">${c.v?'Feito':'Marcar'}</button></div>`).join('');}
-        function addPts(p,el){pts+=p;rd();el.style.opacity='.5'; if(pts>50)alert('Parabéns! Ganhou badge de Bronze! 🏅');}
-        function cmp(i){C[i].v=1;pts+=C[i].p;rd();rdc();}
+        function upd(){document.getElementById('pts').textContent=pts;document.getElementById('rank').textContent='#'+Math.floor(Math.random()*20+1);}
+        function renderBoard(){document.getElementById('leaderboard').innerHTML=`<div class="grid">${LEAD.map((l,i)=>`<div class="card"><h3>#${i+1} ${l.n}</h3><p>${l.p} pts</p></div>`).join('')}</div>`;}
+        function postItem(){pts+=50;upd();alert('Item publicado! +50pts');}
+        function register(){pts+=100;upd();rank=Math.max(1,Math.floor(Math.random()*30));alert('Inscrito! Boa sorte!');}
         function show(id){document.getElementById(id).scrollIntoView({behavior:'smooth'});}
-        function openWA(){window.open('https://wa.me/5511954346288','_blank');}
-        function notifOn(){notifOn_=true;document.getElementById('notif').textContent='✅';alert('Notificações ativadas! Você receberá alertas de boas condições de surf!');}
-        function premium(){alert('Redirecionando para pagamento...');}
-        
-        document.addEventListener('DOMContentLoaded',()=>{rd();rdf();rds();rdt();rdc();setInterval(()=>{if(notifOn_)document.getElementById('notif').style.color='var(--success)';},5000);});
+        document.addEventListener('DOMContentLoaded',()=>{upd();renderBoard();});
     </script>
 </body>
 </html>
