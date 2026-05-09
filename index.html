@@ -7,6 +7,9 @@
     <meta name="robots" content="index,follow">
     <meta name="description" content="ASF - Associação de Surf Feminino. Dicas, comunidade, previsões de ondas, treino e surftrips. Conectando mulheres surfistas de Bertioga, Santos, Guarujá e Ubatuba.">
     <meta name="theme-color" content="#00A8CC">
+    <script type="application/ld+json">
+    {"@context":"https://schema.org","@type":"Organization","name":"ASF - Associação de Surf Feminino","url":"https://acarolmourad-commits.github.io/asf-app/","logo":"https://images.unsplash.com/photo-1502680390469-be75c86b636f?w=200","description":"Conectando mulheres surfistas"}
+    </script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -79,13 +82,36 @@
     <script>
         const SURF_TIPS = [
             {categoria: "Respiração", titulo: "Respiração 4-7-8", conteudo: "Inspire 4s, segure 7s, expire 8s. Repita 3x. Acalma instantaneamente o sistema nervoso!", tags: ["Respiração", "Mental", "Calma"]},
+            {categoria: "Respiração", titulo: "Respiração Box (4-4-4-4)", conteudo: "Inspire 4s → segure 4s → expire 4s → segure 4s. Padrão quadrado que equilibra corpo e mente!", tags: ["Respiração", "Foco", "Controle"]},
+            {categoria: "Respiração", titulo: "Respiração Abdominal", conteudo: "Mãos na barriga. Inspire expandindo barriga (não peito!). Expira completamente. Ativa nervo vago!", tags: ["Respiração", "Saúde", "Relaxamento"]},
             {categoria: "Alongamento", titulo: "Rotação de Ombros", conteudo: "10 rotações para frente, 10 para trás. Mantém core engajado. Melhora mobilidade para paddling!", tags: ["Alongamento", "Ombros", "Paddling"]},
-            {categoria: "Técnica", titulo: "Paddling correto", conteudo: "Corpo reto, cabeça alinhada, braços longos. Mergulhe alternadamente. Movimento longo sem afundar prancha!", tags: ["Técnica", "Paddling"]},
-            {categoria: "Mental", titulo: "Visualização positiva", conteudo: "Antes de entrar, visualize você surfando bem. Sinta ondas, movimento, alegria!", tags: ["Mental", "Foco", "Confiança"]},
+            {categoria: "Alongamento", titulo: "Alongamento Costas (Gato-Vaca)", conteudo: "De joelhos, alterna arquear/curvar coluna. 10x. Alivia tensão do remo e aumenta flexibilidade.", tags: ["Alongamento", "Costas", "Mobilidade"]},
+            {categoria: "Alongamento", titulo: "Alongamento Quadril (Borboleta)", conteudo: "Sentada, plantas pés juntas, joelhos fora. Segure 30s. Abre quadril para bottom turn!", tags: ["Alongamento", "Quadril", "Manobras"]},
+            {categoria: "Técnica", titulo: "Paddling correto", conteudo: "Corpo reto, cabeça alinhada, braços longos. Mergulhe alternadamente. Movimento longo sem afundar!", tags: ["Técnica", "Paddling"]},
+            {categoria: "Técnica", titulo: "Leitura de onda", conteudo: "Observe mar 15-20min antes de entrar. Identifique padrões (sets), direção e força.", tags: ["Técnica", "Ocean"]},
+            {categoria: "Técnica", titulo: "Bottom Turn", conteudo: "Base de todas as manobras. Desça onda, transfira peso para pé da frente e gire com ombros/quadris.", tags: ["Técnica", "Manobras"]},
             {categoria: "Saúde", titulo: "Hidratação no mar", conteudo: "Beba 500ml água antes de entrar. Reaplique a cada 1h! Não espere ter sede.", tags: ["Saúde", "Hidratação"]},
+            {categoria: "Saúde", titulo: "Alimentação pós-surf", conteudo: "Em 30min após surfar: proteína + carboidrato. Recuperação muscular 40% mais rápida!", tags: ["Saúde", "Nutrição", "Recuperação"]},
+            {categoria: "Saúde", titulo: "Proteção solar", conteudo: "FPS 50+ resistente à água. Reaplique a cada 2h. Protetor é sua 1ª linha contra câncer!", tags: ["Saúde", "Proteção"]},
+            {categoria: "Mental", titulo: "Visualização positiva", conteudo: "Antes de entrar, visualize você surfando bem. Sinta ondas, movimento, alegria!", tags: ["Mental", "Foco", "Confiança"]},
+            {categoria: "Mental", titulo: "Lidar com medo", conteudo: "Medo é normal. Aceite, não lute. Use como combustível! Respira 4-7-8.", tags: ["Mental", "Coragem", "Medo"]},
+            {categoria: "Mental", titulo: "Foco no presente", conteudo: "Mente divagando? Olhe para horizonte/água. Foque só nisso.", tags: ["Mental", "Mindfulness"]},
             {categoria: "Equipamento", titulo: "Escolher primeira prancha", conteudo: "Para iniciantes, pranchas foam 7'0\"-8'0\" são ideais. Mais largas e flutuantes facilitam!", tags: ["Iniciante", "Prancha"]},
+            {categoria: "Equipamento", titulo: "Escolher leash", conteudo: "Leash mesmo tamanho ou 10cm menor que prancha. Longboard: 9-10'. CHECK antes de cada sessão!", tags: ["Equipamento", "Leash", "Segurança"]},
+            {categoria: "Equipamento", titulo: "Wax correto", conteudo: "Wax quente para águas frias (<18°C). Wax frio para águas quentes (>22°C).", tags: ["Equipamento", "Wax", "Aderência"]},
+            {categoria: "Segurança", titulo: "Etiqueta no mar", conteudo: "Quem está mais próximo da quebra tem prioridade. Não fuça fila. Respeite experientes!", tags: ["Segurança", "Etiqueta", "Respeito"]},
+            {categoria: "Segurança", titulo: "Sinal de socorro", conteudo: "Braço levantado + waved. Se virar embarcação, acene com prancha.", tags: ["Segurança", "Emergência"]},
             {categoria: "Mulher", titulo: "Mulher no surf", conteudo: "O surf é para todos! Não importa corpo, idade, experiência. Cada mulher na água inspira outras!", tags: ["Mulher", "Empoderamento"]},
-            {categoria: "Segurança", titulo: "Etiqueta no mar", conteudo: "Quem está mais próximo da quebra tem prioridade. Não fuça fila. Respeite experientes!", tags: ["Segurança", "Etiqueta"]},
+            {categoria: "Mulher", titulo: "Força da comunidade", conteudo: "Surfar em grupo é mais seguro e divertido! Chame amigas. ASF existe para conectar mulheres surfistas.", tags: ["Mulher", "Comunidade"]},
+        ];
+        
+        const QUOTES = [
+            "A melhor onda é a que você pega.",
+            "O mar ensina a serenidade.",
+            "Não existe onda impossível, só onda que ainda não chegou.",
+            "Cada onda é uma chance de recomeçar.",
+            "O surf é meditação em movimento.",
+            "Mulher que surfa não tem limites.",
         ];
         
         function renderTips(){
@@ -104,7 +130,7 @@
         }
         
         document.addEventListener('DOMContentLoaded', renderTips);
-        console.log('✅ ASF App carregado com sucesso');
+        console.log('✅ ASF App carregado com ' + SURF_TIPS.length + ' dicas');
     </script>
 </body>
 </html>
