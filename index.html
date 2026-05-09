@@ -5,65 +5,103 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ASF - Associação de Surf Feminino</title>
     <meta name="robots" content="index,follow">
-    <meta name="description" content="ASF - Associação de Surf Feminino. Dicas, comunidade, previsões, treino, surftrips.">
+    <meta name="description" content="ASF - Associação de Surf Feminino. Dicas, comunidade, previsões, treino, surftrips. Conectando mulheres surfistas.">
     <meta name="theme-color" content="#00A8CC">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏄‍♀️</text></svg>">
     <style>
-        :root{--primary:#00A8CC;--secondary:#0E2439;--success:#2ECC71;--white:#FFFFFF;--light:#F8F9FA;--gray:#9A9A9A;}
+        :root{--primary:#00A8CC;--primary-dark:#0088A8;--secondary:#0E2439;--accent:#F4D03F;--success:#2ECC71;--white:#FFFFFF;--light:#F8F9FA;--gray:#9A9A9A;}
         *{margin:0;padding:0;box-sizing:border-box;}
-        body{font-family:'Outfit',sans-serif;background:var(--light);color:var(--secondary);}
-        header{background:linear-gradient(135deg,var(--secondary) 0%,var(--primary) 100%);padding:20px;}
+        body{font-family:'Outfit',sans-serif;background:var(--light);color:var(--secondary);line-height:1.6;}
+        header{background:linear-gradient(135deg,var(--secondary) 0%,var(--primary-dark) 100%);padding:20px 24px;position:sticky;top:0;z-index:100;}
+        .header-content{max-width:1200px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;}
         .logo{display:flex;align-items:center;gap:12px;}
-        .logo-icon{width:40px;height:40px;background:var(--white);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:20px;}
+        .logo-icon{width:40px;height:40px;background:var(--white);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:20px;}
         .logo-text{color:var(--white);font-size:20px;font-weight:700;}
-        .hero{padding:40px 20px;text-align:center;}
-        .hero h1{font-size:32px;font-weight:800;margin-bottom:10px;}
-        .hero p{color:var(--gray);margin-bottom:20px;}
-        .btn{background:var(--primary);color:var(--white);border:none;padding:12px 24px;border-radius:8px;cursor:pointer;font-weight:600;}
-        .section{padding:20px;}
-        .card{background:var(--white);border-radius:12px;padding:20px;margin-bottom:16px;box-shadow:0 2px 8px rgba(0,0,0,0.1);}
-        .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;}
-        @media(max-width:768px){.grid{grid-template-columns:1fr;}}
-        footer{background:var(--secondary);color:var(--white);text-align:center;padding:20px;margin-top:40px;}
+        .hero{padding:40px 24px;text-align:center;background:linear-gradient(135deg,rgba(0,168,204,0.1) 0%,rgba(244,208,63,0.1) 100%);}
+        .hero h1{font-size:clamp(28px,6vw,42px);font-weight:800;margin-bottom:10px;}
+        .hero p{color:var(--gray);font-size:16px;max-width:500px;margin:0 auto 20px;}
+        .btn{background:linear-gradient(135deg,var(--primary) 0%,var(--primary-dark) 100%);color:var(--white);border:none;padding:12px 24px;border-radius:12px;cursor:pointer;font-weight:600;transition:transform 0.3s;}
+        .btn:hover{transform:translateY(-2px);}
+        .section{padding:24px;max-width:1200px;margin:0 auto;}
+        .section-title{font-size:24px;font-weight:700;margin-bottom:20px;color:var(--secondary);}
+        .cards-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px;}
+        .card{background:var(--white);border-radius:16px;padding:20px;box-shadow:0 4px 12px rgba(0,0,0,0.08);transition:transform 0.3s;}
+        .card:hover{transform:translateY(-4px);}
+        .card h3{font-size:18px;font-weight:600;margin-bottom:8px;}
+        .card p{color:var(--gray);font-size:14px;margin-bottom:12px;}
+        .grid-2{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;}
+        @media(max-width:768px){.grid-2{grid-template-columns:1fr;}}
+        footer{background:var(--secondary);color:var(--white);text-align:center;padding:30px 24px;margin-top:40px;}
+        footer p{margin-bottom:5px;}
     </style>
 </head>
 <body>
     <header>
-        <div class="logo">
-            <div class="logo-icon">🏄‍♀️</div>
-            <div class="logo-text">ASF</div>
+        <div class="header-content">
+            <div class="logo">
+                <div class="logo-icon">🏄‍♀️</div>
+                <div class="logo-text">ASF</div>
+            </div>
         </div>
     </header>
     
     <section class="hero">
         <h1>Conectando Mulheres Surfistas</h1>
-        <p>Dicas, comunidade e surftrips</p>
-        <button class="btn" onclick="showToast('Bem-vinda!')">Começar</button>
+        <p>Dicas, comunidade, previsões e surftrips</p>
+        <button class="btn" onclick="showSection('tips')">Ver Dicas</button>
+    </section>
+    
+    <section class="section" id="tips">
+        <h2 class="section-title">🏄‍♀️ Dicas de Surf</h2>
+        <div class="cards-grid" id="tips-grid"></div>
     </section>
     
     <section class="section">
-        <div class="grid">
+        <h2 class="section-title">🌊 Previsão de Ondas</h2>
+        <div class="grid-2">
             <div class="card">
-                <h3>🏄‍♀️ Dicas de Surf</h3>
-                <p>Técnicas e manobras</p>
+                <h3>Bertioga</h3>
+                <p>📅 Atualizado: Hoje</p>
             </div>
             <div class="card">
-                <h3>🌊 Previsão</h3>
-                <p>Ondas e condições</p>
+                <h3>Santos</h3>
+                <p>📅 Atualizado: Hoje</p>
             </div>
         </div>
     </section>
     
     <footer>
         <p>&copy; 2024 ASF - Associação de Surf Feminino</p>
+        <p style="font-size:12px;opacity:0.7;">Bertioga, Santos, Guarujá, Ubatuba</p>
     </footer>
     
     <script>
-        function showToast(msg){alert(msg);}
-        console.log('ASF App carregado');
+        const SURF_TIPS = [
+            {title: "Respiração 4-7-8", text: "Inspire 4s, segure 7s, expire 8s. Acalma instantaneamente!", cat: "🧠 Mindfulness"},
+            {title: "Uma onda de cada vez", text: "Foque apenas na próxima onda. O presente é seu aliado.", cat: "🌊 Surf Mental"},
+            {title: "Você sabe surfar", text: "Lembre-se de 3 ondas que você conseguiu. Você é capaz!", cat: "💪 Confiança"},
+            {title: "Olha o horizonte", text: "Quando ansiedade subir, olhe para horizonte.", cat: "😰 Ansiedade"},
+        ];
+        
+        function renderTips(){
+            const grid = document.getElementById('tips-grid');
+            grid.innerHTML = SURF_TIPS.map(tip => `
+                <div class="card">
+                    <p style="font-size:12px;color:var(--primary);">${tip.cat}</p>
+                    <h3>${tip.title}</h3>
+                    <p>${tip.text}</p>
+                </div>
+            `).join('');
+        }
+        
+        function showSection(id){
+            document.getElementById(id)?.scrollIntoView({behavior:'smooth'});
+        }
+        
+        document.addEventListener('DOMContentLoaded', renderTips);
+        console.log('✅ ASF App carregado com sucesso');
     </script>
 </body>
 </html>
