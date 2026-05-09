@@ -8,112 +8,95 @@
         :root{--p:#00A8CC;--s:#0E2439;--a:#F4D03F;--w:#fff;--l:#F8F9FA;}
         *{margin:0;padding:0;box-sizing:border-box;}
         body{font-family:'Outfit',sans-serif;background:var(--l);color:var(--s);}
-        header{background:linear-gradient(135deg,var(--s),var(--p));padding:20px;color:var(--w);text-align:center;}
-        .hero{padding:25px 15px;text-align:center;background:linear-gradient(135deg,rgba(0,168,204,0.08),rgba(244,208,63,0.08));}
-        .btn{background:linear-gradient(135deg,var(--p),var(--s));color:var(--w);border:none;padding:12px 18px;border-radius:12px;margin:5px;cursor:pointer;font-size:14px;font-weight:600;}
+        header{background:linear-gradient(135deg,var(--s),var(--p));padding:15px;color:var(--w);text-align:center;}
+        .hero{padding:20px;text-align:center;background:linear-gradient(135deg,rgba(0,168,204,0.08),rgba(244,208,63,0.08));}
+        .btn{background:linear-gradient(135deg,var(--p),var(--s));color:var(--w);border:none;padding:10px 14px;border-radius:10px;margin:3px;cursor:pointer;font-size:13px;}
         .section{padding:15px;max-width:1200px;margin:0 auto;}
-        .card{background:var(--w);border-radius:12px;padding:18px;margin:12px 0;box-shadow:0 2px 8px rgba(0,0,0,0.08);}
-        .badge{background:var(--a);color:var(--s);padding:4px 12px;border-radius:15px;font-size:12px;margin:3px;display:inline-block;}
-        .emergency{background:linear-gradient(135deg,rgba(231,76,60,0.15),rgba(244,208,63,0.15));border-left:4px solid #e74c3c;padding:15px;border-radius:8px;}
+        .card{background:var(--w);border-radius:12px;padding:15px;margin:10px 0;box-shadow:0 2px 8px rgba(0,0,0,0.08);}
+        .badge{background:var(--a);color:var(--s);padding:3px 10px;border-radius:15px;font-size:11px;margin:2px;display:inline-block;}
+        .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:12px;}
+        @media(max-width:768px){.grid{grid-template-columns:1fr;}}
+        .emergency{background:linear-gradient(135deg,rgba(231,76,60,0.1),rgba(244,208,63,0.1));border-left:4px solid #e74c3c;padding:12px;border-radius:8px;}
     </style>
 </head>
 <body>
     <header>
         <h1>🏄‍♀️ ASF</h1>
-        <p style="font-size:16px"><strong>Associação de Surf Feminino</strong></p>
-        <p style="font-size:13px">Fortalecendo mulheres surfistas desde 2019</p>
+        <p style="font-size:13px"><strong>Associação de Surf Feminino</strong> • Juntas somos mais fortes!</p>
     </header>
     
     <section class="hero">
-        <h2 style="font-size:22px;color:var(--s);margin-bottom:15px">"Juntas somos mais fortes!"</h2>
-        <p style="font-size:15px;margin-bottom:20px">Conectando, apoiando e fortalecendo o surf feminino no Brasil</p>
-        <button class="btn" onclick="show('about')">Sobre a ASF</button>
-        <button class="btn" onclick="show('support')">Apoio às Irmãs</button>
+        <button class="btn" onclick="show('asl')">Gírias</button>
+        <button class="btn" onclick="show('waves')">Ondas</button>
+        <button class="btn" onclick="show('etiquette')">Etiqueta</button>
+        <button class="btn" onclick="show('sisterhood')">Irmãs</button>
         <button class="btn" onclick="show('emergency')">Denúncias</button>
     </section>
     
-    <section class="section" id="about">
-        <h2>🌊 Sobre a ASF</h2>
-        <div class="card">
-            <h3>Nossa Missão</h3>
-            <p>Unir mulheres surfistas para fortalecer o esporte, compartilhar conhecimento e criar um ambiente seguro e acolhedor no mar.</p>
-        </div>
-        <div class="card">
-            <h3>Por que somos importantes?</h3>
-            <ul style="margin-left:20px;line-height:1.8">
-                <li><strong>Força coletiva</strong> - Juntas criamos coragem</li>
-                <li><strong>Conhecimento compartilhado</strong> - Dicas, ondas, segurança</li>
-                <li><strong>Ambiente seguro</strong> - Respeito mútuo no mar</li>
-                <li><strong>Visibilidade</strong> - Mulheres no topo!</li>
-            </ul>
-        </div>
-        <div class="card">
-            <h3>Como participar?</h3>
-            <p>📱 Grupos no WhatsApp por região</p>
-            <p>🏄 Encontros semanais no mar</p>
-            <p>💪 Campeonatos femininos</p>
-            <button class="btn" onclick="openWA()">Entrar no Grupo</button>
+    <section class="section" id="asl">
+        <h2>🎤 Gírias do Surf</h2>
+        <div class="grid">
+            <div class="card"><h3>Goofy</h3><p>Pé direito à frente</p></div>
+            <div class="card"><h3>Regular</h3><p>Pé esquerdo à frente</p></div>
+            <div class="card"><h3>Offshore</h3><p>Vento da terra para o mar</p></div>
+            <div class="card"><h3>Barrel</h3><p>Túnel de onda</p></div>
+            <div class="card"><h3>Ace</h3><p>Ótimo!</p></div>
+            <div class="card"><h3>Stoked</h3><p>Animado</p></div>
         </div>
     </section>
     
-    <section class="section" id="support">
-        <h2>👭 Apoio às Irmãs Surfistas</h2>
-        
-        <div class="card">
-            <h3>Movimento: Somos Muito Mais Fortes Juntas!</h3>
-            <p style="font-size:15px;line-height:1.6">
-                O surf feminino precisa de apoio mútuo. Cada mulher que entra no mar 
-                inspira outras. Cada conquista compartilhada fortalece a comunidade. 
-            </p>
-            <p style="margin-top:10px"><strong>#ASFsurfFeminino #JuntasSomosFortes</strong></p>
+    <section class="section" id="waves">
+        <h2>🌊 Tipos de Ondas</h2>
+        <div class="grid">
+            <div class="card"><h3>Beach Break</h3><p>Bertioga, areia</p></div>
+            <div class="card"><h3>Reef Break</h3><p>Ponta Grossa, recife</p></div>
+            <div class="card"><h3>Point Break</h3><p>Maresias, ponta</p></div>
         </div>
-        
+    </section>
+    
+    <section class="section" id="etiquette">
+        <h2>🤝 Etiqueta do Surf</h2>
         <div class="card">
-            <h3>Como apoiar outras surfistas</h3>
-            <ul style="margin-left:20px;line-height:1.8">
-                <li>🏄 Fotografe e compartilhe conquistas</li>
-                <li>🎉 Comemore as vitórias alheias</li>
-                <li>🙌 Ofereça dicas com carinho</li>
-                <li>🤝 Convide para sessões no mar</li>
-                <li>🌟 Fortaleça a confiança das iniciantes</li>
+            <h3>Prioridade</h3>
+            <p>Quem está mais perto da quebra tem prioridade</p>
+            <p>Não fuque fila</p>
+        </div>
+        <div class="card" style="background:rgba(231,76,60,0.1)">
+            <h3 style="color:#e74c3c">NUNCA SOLTE A PRANCHA!</h3>
+            <p>Mantenha sempre a mão na leash</p>
+        </div>
+    </section>
+    
+    <section class="section" id="sisterhood">
+        <h2>👭 Apoio às Irmãs</h2>
+        <div class="card">
+            <p><strong>Juntas somos mais fortes!</strong> Cada mulher no mar inspira outras.</p>
+            <p>#ASFsurfFeminino #JuntasSomosFortes</p>
+        </div>
+        <div class="card">
+            <h3>Como apoiar</h3>
+            <ul style="margin-left:20px">
+                <li>Fotografe conquistas</li>
+                <li>Comemore vitórias alheias</li>
+                <li>Ofereça dicas com carinho</li>
             </ul>
         </div>
     </section>
     
     <section class="section" id="emergency">
-        <h2>🚨 Denúncias e Apoio</h2>
-        
+        <h2>🚨 Denúncias</h2>
         <div class="emergency">
-            <h3 style="color:#e74c3c;margin-bottom:10px">⚠️ DELEGACIA DA MULHER</h3>
-            <p style="font-size:18px;color:#000;margin:10px 0"><strong>180</strong> (Atendimento 24h)</p>
-            <p>Ligue em caso de assédio, agressão ou qualquer forma de violência no esporte ou na vida pública.</p>
-            <p><strong>WhatsApp: (11) 9 9999-9999</strong></p>
+            <h3 style="color:#e74c3c">DELEGACIA DA MULHER: 180</h3>
+            <p>Ligue em caso de assédio ou violência no esporte</p>
         </div>
-        
         <div class="card">
-            <h3>No Caso de Assédio no Surf</h3>
-            <p>Se você testemunhar ou for vítima de assédio no mar ou em eventos:</p>
-            <ol style="margin-left:20px;line-height:1.8">
-                <li>Procure apoio de outras surfistas</li>
-                <li>Registre tudo (fotos, vídeos, testemunhas)</li>
-                <li>Ligue para a Delegacia da Mulher: 180</li>
-                <li>Denuncie à organização do evento</li>
-                <li>Conte para a ASF - vamos apoiar!</li>
-            </ol>
-        </div>
-        
-        <div class="card">
-            <h3>Contato ASF para Apoio</h3>
-            <p><strong>WhatsApp: (11) 9 5434-6288</strong></p>
-            <p>@cahrol_asf (Instagram)</p>
-            <button class="btn" style="background:#25D366" onclick="openWA()">Falar Conosco</button>
+            <p><strong>WhatsApp ASF: (11) 9 5434-6288</strong></p>
+            <button class="btn" onclick="openWA()">Falar Conosco</button>
         </div>
     </section>
     
-    <footer style="background:var(--s);color:var(--w);text-align:center;padding:25px;">
-        <h3>🏄‍♀️ ASF - Associação de Surf Feminino</h3>
-        <p>Bertioga, Santos, Guarujá, Ubatuba e região</p>
-        <p><strong>"Juntas somos mais fortes!"</strong></p>
+    <footer style="background:var(--s);color:var(--w);text-align:center;padding:15px;">
+        <p>🏄‍♀️ ASF - Associação de Surf Feminino</p>
     </footer>
     
     <script>
