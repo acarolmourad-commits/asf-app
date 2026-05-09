@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ASF - Associação de Surf Feminino</title>
     <meta name="robots" content="index,follow">
-    <meta name="description" content="ASF - Associação de Surf Feminino. Dicas, comunidade, previsões, treino, surftrips. Conectando mulheres surfistas.">
+    <meta name="description" content="ASF - Associação de Surf Feminino. Dicas, comunidade, previsões de ondas, treino e surftrips. Conectando mulheres surfistas de Bertioga, Santos, Guarujá e Ubatuba.">
     <meta name="theme-color" content="#00A8CC">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -22,7 +22,7 @@
         .hero{padding:40px 24px;text-align:center;background:linear-gradient(135deg,rgba(0,168,204,0.1) 0%,rgba(244,208,63,0.1) 100%);}
         .hero h1{font-size:clamp(28px,6vw,42px);font-weight:800;margin-bottom:10px;}
         .hero p{color:var(--gray);font-size:16px;max-width:500px;margin:0 auto 20px;}
-        .btn{background:linear-gradient(135deg,var(--primary) 0%,var(--primary-dark) 100%);color:var(--white);border:none;padding:12px 24px;border-radius:12px;cursor:pointer;font-weight:600;transition:transform 0.3s;}
+        .btn{background:linear-gradient(135deg,var(--primary) 0%,var(--primary-dark) 100%);color:var(--white);border:none;padding:12px 24px;border-radius:12px;cursor:pointer;font-weight:600;transition:transform 0.3s;margin:4px;}
         .btn:hover{transform:translateY(-2px);}
         .section{padding:24px;max-width:1200px;margin:0 auto;}
         .section-title{font-size:24px;font-weight:700;margin-bottom:20px;color:var(--secondary);}
@@ -32,9 +32,11 @@
         .card h3{font-size:18px;font-weight:600;margin-bottom:8px;}
         .card p{color:var(--gray);font-size:14px;margin-bottom:12px;}
         .grid-2{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;}
-        @media(max-width:768px){.grid-2{grid-template-columns:1fr;}}
+        @media(max-width:768px){.grid-2{grid-template-columns:1fr;}.cards-grid{grid-template-columns:1fr;}}
         footer{background:var(--secondary);color:var(--white);text-align:center;padding:30px 24px;margin-top:40px;}
         footer p{margin-bottom:5px;}
+        .quote-box{background:linear-gradient(135deg,var(--accent),var(--primary));color:var(--secondary);padding:20px;text-align:center;font-style:italic;border-radius:12px;margin:20px;}
+        .cat-tag{display:inline-block;padding:4px 10px;background:var(--primary);color:var(--white);border-radius:20px;font-size:11px;margin-bottom:8px;}
     </style>
 </head>
 <body>
@@ -50,7 +52,8 @@
     <section class="hero">
         <h1>Conectando Mulheres Surfistas</h1>
         <p>Dicas, comunidade, previsões e surftrips</p>
-        <button class="btn" onclick="showSection('tips')">Ver Dicas</button>
+        <button class="btn" onclick="showSection('tips')">Dicas de Surf</button>
+        <button class="btn" onclick="showSection('forecast')">Previsão de Ondas</button>
     </section>
     
     <section class="section" id="tips">
@@ -58,17 +61,13 @@
         <div class="cards-grid" id="tips-grid"></div>
     </section>
     
-    <section class="section">
-        <h2 class="section-title">🌊 Previsão de Ondas</h2>
+    <section class="section" id="forecast">
+        <h2 class="section-title">🌊 Previsão de Ondas - Litoral Paulista</h2>
         <div class="grid-2">
-            <div class="card">
-                <h3>Bertioga</h3>
-                <p>📅 Atualizado: Hoje</p>
-            </div>
-            <div class="card">
-                <h3>Santos</h3>
-                <p>📅 Atualizado: Hoje</p>
-            </div>
+            <div class="card"><h3>🏖️ Bertioga</h3><p>📅 Atualizado: Hoje</p><p>Condições: 🟢 Bom</p></div>
+            <div class="card"><h3>🏙️ Santos</h3><p>📅 Atualizado: Hoje</p><p>Condições: 🟢 Bom</p></div>
+            <div class="card"><h3>🏝️ Guarujá</h3><p>📅 Atualizado: Hoje</p><p>Condições: 🟡 Moderado</p></div>
+            <div class="card"><h3>🌅 Ubatuba</h3><p>📅 Atualizado: Hoje</p><p>Condições: 🟢 Bom</p></div>
         </div>
     </section>
     
@@ -79,19 +78,23 @@
     
     <script>
         const SURF_TIPS = [
-            {title: "Respiração 4-7-8", text: "Inspire 4s, segure 7s, expire 8s. Acalma instantaneamente!", cat: "🧠 Mindfulness"},
-            {title: "Uma onda de cada vez", text: "Foque apenas na próxima onda. O presente é seu aliado.", cat: "🌊 Surf Mental"},
-            {title: "Você sabe surfar", text: "Lembre-se de 3 ondas que você conseguiu. Você é capaz!", cat: "💪 Confiança"},
-            {title: "Olha o horizonte", text: "Quando ansiedade subir, olhe para horizonte.", cat: "😰 Ansiedade"},
+            {categoria: "Respiração", titulo: "Respiração 4-7-8", conteudo: "Inspire 4s, segure 7s, expire 8s. Repita 3x. Acalma instantaneamente o sistema nervoso!", tags: ["Respiração", "Mental", "Calma"]},
+            {categoria: "Alongamento", titulo: "Rotação de Ombros", conteudo: "10 rotações para frente, 10 para trás. Mantém core engajado. Melhora mobilidade para paddling!", tags: ["Alongamento", "Ombros", "Paddling"]},
+            {categoria: "Técnica", titulo: "Paddling correto", conteudo: "Corpo reto, cabeça alinhada, braços longos. Mergulhe alternadamente. Movimento longo sem afundar prancha!", tags: ["Técnica", "Paddling"]},
+            {categoria: "Mental", titulo: "Visualização positiva", conteudo: "Antes de entrar, visualize você surfando bem. Sinta ondas, movimento, alegria!", tags: ["Mental", "Foco", "Confiança"]},
+            {categoria: "Saúde", titulo: "Hidratação no mar", conteudo: "Beba 500ml água antes de entrar. Reaplique a cada 1h! Não espere ter sede.", tags: ["Saúde", "Hidratação"]},
+            {categoria: "Equipamento", titulo: "Escolher primeira prancha", conteudo: "Para iniciantes, pranchas foam 7'0\"-8'0\" são ideais. Mais largas e flutuantes facilitam!", tags: ["Iniciante", "Prancha"]},
+            {categoria: "Mulher", titulo: "Mulher no surf", conteudo: "O surf é para todos! Não importa corpo, idade, experiência. Cada mulher na água inspira outras!", tags: ["Mulher", "Empoderamento"]},
+            {categoria: "Segurança", titulo: "Etiqueta no mar", conteudo: "Quem está mais próximo da quebra tem prioridade. Não fuça fila. Respeite experientes!", tags: ["Segurança", "Etiqueta"]},
         ];
         
         function renderTips(){
             const grid = document.getElementById('tips-grid');
             grid.innerHTML = SURF_TIPS.map(tip => `
                 <div class="card">
-                    <p style="font-size:12px;color:var(--primary);">${tip.cat}</p>
-                    <h3>${tip.title}</h3>
-                    <p>${tip.text}</p>
+                    <span class="cat-tag">${tip.categoria}</span>
+                    <h3>${tip.titulo}</h3>
+                    <p>${tip.conteudo}</p>
                 </div>
             `).join('');
         }
