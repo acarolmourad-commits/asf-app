@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ASF - Respiração, Medo & Conexão</title>
+    <title>ASF - Gírias, Ondas & Etiqueta</title>
     <style>
         :root{--p:#00A8CC;--s:#0E2439;--a:#F4D03F;--w:#fff;--l:#F8F9FA;}
         *{margin:0;padding:0;box-sizing:border-box;}
@@ -14,142 +14,124 @@
         .section{padding:15px;max-width:1200px;margin:0 auto;}
         .card{background:var(--w);border-radius:12px;padding:15px;margin:10px 0;box-shadow:0 2px 8px rgba(0,0,0,0.08);}
         .badge{background:var(--a);color:var(--s);padding:3px 10px;border-radius:15px;font-size:11px;margin:2px;display:inline-block;}
-        .timer{width:100px;height:100px;border:4px solid var(--p);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:24px;font-weight:bold;margin:20px auto;color:var(--s);}
-        .circle{animation: pulse 2s infinite;}
-        @keyframes pulse{0%{transform:scale(1);}50%{transform:scale(1.05);}100%{transform:scale(1);}}
+        .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:12px;}
+        @media(max-width:768px){.grid{grid-template-columns:1fr;}}
     </style>
 </head>
 <body>
     <header>
-        <h1>🧘‍♀️ ASF - Respiração & Conexão</h1>
+        <h1>🏄‍♀️ ASF - Gírias & Etiqueta</h1>
     </header>
     
     <section class="hero">
-        <h2 style="font-size:18px">Ferramentas para acalmar e conectar</h2>
-        <button class="btn" onclick="show('breath')">Respiração</button>
-        <button class="btn" onclick="show('fear')">Medo no Surf</button>
-        <button class="btn" onclick="show('nature')">Natureza</button>
+        <h2 style="font-size:18px">Fale como um local!</h2>
+        <button class="btn" onclick="show('slang')">Gírias</button>
+        <button class="btn" onclick="show('waves')">Tipos de Ondas</button>
+        <button class="btn" onclick="show('etiquette')">Etiqueta</button>
     </section>
     
-    <section class="section" id="breath">
-        <h2>🌬️ Técnicas de Respiração para Acalmar</h2>
-        
-        <div class="card">
-            <h3>4-7-8 - Relaxamento Profundo</h3>
-            <div class="timer circle" id="timer1">Iniciar</div>
-            <p><strong>Inspire 4s</strong> → <strong>Segure 7s</strong> → <strong>Expire 8s</strong></p>
-            <p style="font-size:13px;color:#666">Acalma o sistema nervoso instantaneamente</p>
-            <button class="btn" onclick="startBreath(4,7,8,1)">Praticar</button>
-        </div>
-        
-        <div class="card">
-            <h3>Respiração Box (4-4-4-4)</h3>
-            <div class="timer" id="timer2">Iniciar</div>
-            <p><strong>Inspire 4s</strong> → <strong>Segure 4s</strong> → <strong>Expire 4s</strong> → <strong>Segure 4s</strong></p>
-            <button class="btn" onclick="startBreath(4,4,4,2)">Praticar</button>
-        </div>
-        
-        <div class="card">
-            <h3>Respiração Abdominal</h3>
-            <p>Mãos na barriga. Inspire expandindo o abdômen (não o peito)</p>
-            <ul style="margin-left:20px;line-height:1.8">
-                <li>Deite ou sente-se reta</li>
-                <li>Uma mão no peito, outra no abdômen</li>
-                <li>Inspire pelo nariz, o abdômen deve subir</li>
-                <li>Expire pela boca, abdômen desce</li>
-                <li>Repita 5 minutos</li>
-            </ul>
+    <section class="section" id="slang">
+        <h2>🎤 Gírias do Surf</h2>
+        <div class="grid">
+            <div class="card"><h3>Goofy</h3><p>Surfista que pisa com o pé direito à frente</p></div>
+            <div class="card"><h3>Regular</h3><p>Pisa com o pé esquerdo à frente</p></div>
+            <div class="card"><h3>Offshore</h3><p>Vento que sopra da terra para o mar (ótimo!)</p></div>
+            <div class="card"><h3>Onshore</h3><p>Vento contrário - ondas fechadas</p></div>
+            <div class="card"><h3>Pumping</h3><p>Ondas grandes e boas!</p></div>
+            <div class="card"><h3>Glassy</h3><p>Mar calmo como vidro</p></div>
+            <div class="card"><h3>Set</h3><p>Série de ondas grandes</p></div>
+            <div class="card"><h3>Peak</h3><p>O melhor ponto da quebra</p></div>
+            <div class="card"><h3>Barrel</h3><p>Túnel de onda perfeito</p></div>
+            <div class="card"><h3>Ace</h3><p>Ótimo! Perfeito!</p></div>
+            <div class="card"><h3>Shred</h3><p>Surf muito bom</p></div>
+            <div class="card"><h3>Kook</h3><p>Surfista inexperiente</p></div>
+            <div class="card"><h3>Stoked</h3><p>Animado, empolgado</p></div>
+            <div class="card"><h3>Pit</h3><p>Queda feia</p></div>
         </div>
     </section>
     
-    <section class="section" id="fear">
-        <h2>😨 Como Amenizar o Medo na Hora do Surf</h2>
+    <section class="section" id="waves">
+        <h2>🌊 Tipos de Ondas</h2>
         
         <div class="card">
-            <h3>Antes de Entrar</h3>
-            <ul style="margin-left:20px;line-height:1.8">
-                <li><strong>Visualize sucesso</strong> - Veja você surfando bem mentalmente</li>
-                <li><strong>Respire fundo</strong> - 3 ciclos de 4-7-8</li>
-                <li><strong>Foco no presente</strong> - Só esta onda importa</li>
-            </ul>
+            <h3>Beach Break</h3>
+            <p style="color:#27ae60"><strong>Bertioga, Praia do Tombo</strong></p>
+            <p>Ondas quebram em areia. Boas para todos os níveis</p>
         </div>
         
         <div class="card">
-            <h3>Durante o Surf</h3>
-            <ul style="margin-left:20px;line-height:1.8">
-                <li><strong>Olhe para o horizonte</strong> quando ansioso</li>
-                <li><strong>Divida a sessão</strong> em metas menores</li>
-                <li><strong>Saiba seu limite</strong> - Não force demais</li>
-            </ul>
+            <h3>Reef Break</h3>
+            <p style="color:#f39c12"><strong>Ponta Grossa, Paraty</strong></p>
+            <p>Quebra em recifes. Ondas mais fortes, atenção!</p>
         </div>
         
         <div class="card">
-            <h3>Mensagens para Repetir</h3>
-            <div style="font-style:italic;background:rgba(0,168,204,0.1);padding:12px;border-radius:8px">
-                <p>"Você já surfou ondas difíceis antes"</p>
-                <p>"O medo é normal, respeite-o"</p>
-                <p>"Cada onda é uma conquista"</p>
-            </div>
+            <h3>Point Break</h3>
+            <p style="color:#3498db"><strong>Maresias, Joaquina</strong></p>
+            <p>Quebra em formato de ponta. Ondas longas</p>
+        </div>
+        
+        <div class="card">
+            <h3>Rivermouth</h3>
+            <p style="color:#9b59b6"><strong>Barra de Itararé</strong></p>
+            <p>Entrada de rio. Ondas consistentes</p>
+        </div>
+        
+        <div class="card">
+            <h3>Slab</h3>
+            <p style="color:#e74c3c"><strong>Rosa, Itacaré</strong></p>
+            <p>Ondas grossas e fechadas. Só para experts!</p>
         </div>
     </section>
     
-    <section class="section" id="nature">
-        <h2>🌿 Conexão com a Natureza</h2>
+    <section class="section" id="etiquette">
+        <h2>🤝 Etiqueta do Surf - Regras de Respeito</h2>
         
         <div class="card">
-            <h3>Ritual de Conexão</h3>
-            <ol style="margin-left:20px;line-height:1.8">
-                <li><strong>Chegue 15 min antes</strong> só para observar o mar</li>
-                <li><strong>Sinta a areia</strong> entre os dedos</li>
-                <li><strong>Ouça as ondas</strong> - é a música da Terra</li>
-                <li><strong>Respire o ar úmido</strong> cheio de sais minerais</li>
-            </ol>
-        </div>
-        
-        <div class="card">
-            <h3>Agradecimento à Onda</h3>
-            <p>Após cada sessão, agradeça mentalmente:</p>
-            <div style="background:rgba(0,168,204,0.08);padding:12px;border-radius:8px;font-style:italic">
-                <p>"Obrigada, mar, por este momento de paz"</p>
-                <p>"Grato pelo aprendizado desta onda"</p>
-                <p>"Conexão renovada, coração leve"</p>
-            </div>
-        </div>
-        
-        <div class="card">
-            <h3>Sinais da Natureza</h3>
+            <h3>👑 Direito de Prioridade</h3>
             <ul style="margin-left:20px;line-height:1.8">
-                <li>Vento offshore = condições perfeitas</li>
-                <li>Pássaros voando baixo = ondas grandes vindo</li>
-                <li>Mar calmo = saia cedo, tempestade vindo</li>
-                <li>Cheiro de mar = você pertence aqui</li>
+                <li><strong>Quem está mais próximo da quebra</strong> tem prioridade</li>
+                <li><strong>Quem está na posição de paddling</strong> tem prioridade</li>
+                <li><strong>Não fuque fila</strong> - espere sua vez</li>
+            </ul>
+        </div>
+        
+        <div class="card">
+            <h3>🦶 Para Onde Ir</h3>
+            <ul style="margin-left:20px;line-height:1.8">
+                <li><span class="badge">ESQUERDA</span> Vá para a esquerda se a onda estiver indo para direita</li>
+                <li><span class="badge">DIREITA</span> Vá para a direita se a onda estiver indo para esquerda</li>
+                <li><span class="badge">NÃO</span> Nunca fique na linha da onda - isso é perigoso!</li>
+            </ul>
+        </div>
+        
+        <div class="card" style="background:linear-gradient(135deg,rgba(231,76,60,0.1),rgba(244,208,63,0.1))">
+            <h3 style="color:#e74c3c">🚨 NUNCA SOLTE A PRANCHA!</h3>
+            <ul style="margin-left:20px;line-height:1.8;font-weight:bold">
+                <li>Mantenha sempre a mão na leash</li>
+                <li>Se cair, segure a prancha com força</li>
+                <li>Não deixe a prancha flutuar - é perigoso para outros</li>
+                <li>Use leash sempre, mesmo em ondas pequenas</li>
+            </ul>
+        </div>
+        
+        <div class="card">
+            <h3>👍 Respeito na Linha</h3>
+            <ul style="margin-left:20px;line-height:1.8">
+                <li>Sorria e cumprimente outros surfistas</li>
+                <li>Não critique erros alheios</li>
+                <li>Ajude se alguém estiver em apuros</li>
+                <li>Limpe a linha se for o último a sair</li>
             </ul>
         </div>
     </section>
     
     <footer style="background:var(--s);color:var(--w);text-align:center;padding:20px;">
-        <p>🏄‍♀️ ASF - Conexão e Equilíbrio</p>
-        <button class="btn" onclick="openWA()">Grupo WhatsApp</button>
+        <p>🏄‍♀️ ASF - Conhecimento & Respeito</p>
     </footer>
     
     <script>
-        let timerInt;
-        function startBreath(inVal, holdVal, outVal, num){
-            const timer = document.getElementById(`timer${num}`);
-            let step = 0, count = 0;
-            const steps = [inVal, holdVal, outVal, holdVal];
-            const labels = ['Inspire', 'Segure', 'Expire', 'Pare'];
-            clearInterval(timerInt);
-            timerInt = setInterval(()=>{
-                if(count >= 4) {count = 0; step = 1;}
-                timer.textContent = labels[step];
-                step = (step + 1) % 4;
-                count++;
-            }, 1000);
-            setTimeout(()=>clearInterval(timerInt), 8000);
-        }
         function show(id){document.getElementById(id).scrollIntoView({behavior:'smooth'});}
-        function openWA(){window.open('https://wa.me/5511954346288','_blank');}
     </script>
 </body>
 </html>
