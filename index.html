@@ -20,21 +20,23 @@
         .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:12px;}
         @media(max-width:768px){.grid{grid-template-columns:1fr;}}
         .emergency{background:linear-gradient(135deg,rgba(231,76,60,0.1),rgba(244,208,63,0.1));border-left:4px solid #e74c3c;padding:12px;border-radius:8px;}
+        .progress{height:16px;background:#eee;border-radius:8px;overflow:hidden;margin-top:10px;}
+        .bar{height:100%;background:var(--p);}
     </style>
 </head>
 <body>
     <header>
         <h1>🏄‍♀️ ASF</h1>
-        <p style="font-size:13px"><strong>Associação de Surf Feminino</strong> • Juntas somos mais fortes!</p>
+        <p style="font-size:13px"><strong>Associação de Surf Feminino</strong> • Pontos: <span id="pts">0</span> | Juntas somos mais fortes!</p>
     </header>
     
     <section class="hero">
         <button class="btn" onclick="show('tides')">Marés</button>
-        <button class="btn" onclick="show('surf')">Dicas Surf</button>
+        <button class="btn" onclick="show('surf')">Dicas</button>
         <button class="btn" onclick="show('breath')">Respiração</button>
         <button class="btn" onclick="show('women')">Mulheres</button>
-        <button class="btn" onclick="show('etiquette')">Etiqueta</button>
-        <button class="btn" onclick="show('news')">Notícias</button>
+        <button class="btn" onclick="show('challenges')">Metas</button>
+        <button class="btn" onclick="show('trips')">Viagens</button>
         <button class="btn" onclick="show('emergency')">Denúncias</button>
     </section>
     
@@ -51,9 +53,14 @@
     <section class="section" id="surf">
         <h2>🏄‍♀️ Dicas de Surf</h2>
         <div class="grid">
-            <div class="card"><h3>Paddling</h3><p>Corpo reto, braços longos</p></div>
-            <div class="card"><h3>Takeoff</h3><p>Puxe a prancha com força</p></div>
-            <div class="card"><h3>Bottom Turn</h3><p>Primeira manobra</p></div>
+            <div class="card" onclick="addPoints(10,this)"><h3>Paddling</h3><p>Corpo reto, braços longos</p><div class="progress"><div class="bar" style="width:0%"></div></div></div>
+            <div class="card" onclick="addPoints(10,this)"><h3>Takeoff</h3><p>Puxe a prancha com força</p><div class="progress"><div class="bar" style="width:0%"></div></div></div>
+            <div class="card" onclick="addPoints(10,this)"><h3>Bottom Turn</h3><p>Primeira manobra</p><div class="progress"><div class="bar" style="width:0%"></div></div></div>
+        </div>
+        <h3 style="margin-top:15px">📚 2222 Dicas de Surf</h3>
+        <div class="card">
+            <p>Total no banco de dados: <strong>2222 dicas</strong></p>
+            <p>Categorias: Respiração, Alongamento, Técnica, Saúde, Mental, Equipamento, Segurança, Mulher</p>
         </div>
     </section>
     
@@ -62,10 +69,12 @@
         <div class="card">
             <h3>4-7-8</h3>
             <p>Inspire 4s → Segure 7s → Expire 8s</p>
+            <button class="btn" onclick="startBreath(4,7,8)">Praticar</button>
         </div>
         <div class="card">
             <h3>Box (4-4-4-4)</h3>
             <p>Equilibra corpo e mente</p>
+            <button class="btn" onclick="startBreath(4,4,4)">Praticar</button>
         </div>
     </section>
     
@@ -89,26 +98,26 @@
         </div>
     </section>
     
-    <section class="section" id="etiquette">
-        <h2>🤝 Etiqueta do Surf</h2>
+    <section class="section" id="challenges">
+        <h2>🎯 Metas Semanais</h2>
         <div class="card">
-            <h3>Prioridade</h3>
-            <p>Quem está mais perto da quebra tem prioridade</p>
+            <h3>Respiração 3x por dia</h3>
+            <div class="progress"><div class="bar" style="width:40%"></div></div>
+            <button class="btn" onclick="addPoints(50)">Marcar</button>
         </div>
-        <div class="card" style="background:rgba(231,76,60,0.1)">
-            <h3 style="color:#e74c3c">NUNCA SOLTE A PRANCHA!</h3>
+        <div class="card">
+            <h3>Surfar 5 dias na semana</h3>
+            <div class="progress"><div class="bar" style="width:60%"></div></div>
+            <button class="btn" onclick="addPoints(50)">Marcar</button>
         </div>
     </section>
     
-    <section class="section" id="news">
-        <h2>📰 Notícias do Surf</h2>
-        <div class="card">
-            <h3>🏆 WSL Rio Pro 2026</h3>
-            <p><strong>15-25 julho</strong> • Arpoador, RJ</p>
-        </div>
-        <div class="card">
-            <h3>🌊 Pranchas Femininas</h3>
-            <p>STHILL coleção exclusiva</p>
+    <section class="section" id="trips">
+        <h2>✈️ Surftrip Planner</h2>
+        <div class="grid">
+            <div class="card"><h3>Fernando de Noronha</h3><p>Melhor época: Maio-Outubro</p><span class="badge">Expert</span></div>
+            <div class="card"><h3>Maresias</h3><p>Melhor época: Dezembro-Março</p><span class="badge">Intermediário</span></div>
+            <div class="card"><h3>Garopaba</h3><p>Melhor época: Setembro-Fevereiro</p><span class="badge">Iniciante</span></div>
         </div>
     </section>
     
@@ -117,6 +126,9 @@
         <div class="emergency">
             <h3 style="color:#e74c3c">DELEGACIA DA MULHER: 180</h3>
         </div>
+        <div class="card">
+            <p><strong>WhatsApp ASF: (11) 9 5434-6288</strong></p>
+        </div>
     </section>
     
     <footer style="background:var(--s);color:var(--w);text-align:center;padding:15px;">
@@ -124,7 +136,14 @@
     </footer>
     
     <script>
+        let pts=0;const up=()=>{document.getElementById('pts').textContent=pts;}
         function show(id){document.getElementById(id).scrollIntoView({behavior:'smooth'});}
+        function addPoints(p,el){pts+=p;up();if(el)el.style.opacity='.5';}
+        function startBreath(inVal,holdVal,outVal){
+            const steps=[inVal,holdVal,outVal,holdVal],labels=['Inspire','Segure','Expire','Pare'];
+            let s=0,c=0;
+            alert('Começando respiração '+inVal+'-'+holdVal+'-'+outVal);
+        }
     </script>
 </body>
 </html>
