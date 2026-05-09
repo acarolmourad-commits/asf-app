@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ASF - Surf News & Monetização</title>
+    <title>ASF - Associação de Surf Feminino</title>
     <style>
         :root{--p:#00A8CC;--s:#0E2439;--a:#F4D03F;--w:#fff;--l:#F8F9FA;}
         *{margin:0;padding:0;box-sizing:border-box;}
@@ -14,80 +14,108 @@
         .section{padding:15px;max-width:1200px;margin:0 auto;}
         .card{background:var(--w);border-radius:12px;padding:15px;margin:10px 0;box-shadow:0 2px 8px rgba(0,0,0,0.08);}
         .badge{background:var(--a);color:var(--s);padding:3px 10px;border-radius:15px;font-size:11px;margin:2px;display:inline-block;}
-        .price{background:var(--s);color:var(--w);padding:5px 10px;border-radius:5px;font-weight:bold;}
-        .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px;}
+        table{width:100%;border-collapse:collapse;margin-top:10px;}
+        th,td{padding:8px;text-align:center;border-bottom:1px solid #eee;}
+        th{background:var(--p);color:var(--w);}
+        .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:12px;}
         @media(max-width:768px){.grid{grid-template-columns:1fr;}}
+        .emergency{background:linear-gradient(135deg,rgba(231,76,60,0.1),rgba(244,208,63,0.1));border-left:4px solid #e74c3c;padding:12px;border-radius:8px;}
     </style>
 </head>
 <body>
     <header>
         <h1>🏄‍♀️ ASF</h1>
-        <p style="font-size:13px"><strong>Associação de Surf Feminino</strong></p>
+        <p style="font-size:13px"><strong>Associação de Surf Feminino</strong> • Juntas somos mais fortes!</p>
     </header>
     
     <section class="hero">
-        <button class="btn" onclick="show('news')">Surf News</button>
-        <button class="btn" onclick="show('monetize')">Monetização</button>
+        <button class="btn" onclick="show('tides')">Marés</button>
+        <button class="btn" onclick="show('surf')">Dicas Surf</button>
+        <button class="btn" onclick="show('breath')">Respiração</button>
+        <button class="btn" onclick="show('women')">Mulheres</button>
+        <button class="btn" onclick="show('etiquette')">Etiqueta</button>
+        <button class="btn" onclick="show('news')">Notícias</button>
+        <button class="btn" onclick="show('emergency')">Denúncias</button>
+    </section>
+    
+    <section class="section" id="tides">
+        <h2>🌙 Tábua de Maré - Bertioga</h2>
+        <table>
+            <tr><th>Dia</th><th>Alta</th><th>Baixa</th><th>Altura</th></tr>
+            <tr><td>Hoje</td><td>06:23</td><td>12:45</td><td>2.3/0.4</td></tr>
+            <tr><td>Amanhã</td><td>07:10</td><td>13:30</td><td>2.1/0.5</td></tr>
+            <tr><td>Qua</td><td>07:55</td><td>14:15</td><td>1.9/0.6</td></tr>
+        </table>
+    </section>
+    
+    <section class="section" id="surf">
+        <h2>🏄‍♀️ Dicas de Surf</h2>
+        <div class="grid">
+            <div class="card"><h3>Paddling</h3><p>Corpo reto, braços longos</p></div>
+            <div class="card"><h3>Takeoff</h3><p>Puxe a prancha com força</p></div>
+            <div class="card"><h3>Bottom Turn</h3><p>Primeira manobra</p></div>
+        </div>
+    </section>
+    
+    <section class="section" id="breath">
+        <h2>🌬️ Respiração</h2>
+        <div class="card">
+            <h3>4-7-8</h3>
+            <p>Inspire 4s → Segure 7s → Expire 8s</p>
+        </div>
+        <div class="card">
+            <h3>Box (4-4-4-4)</h3>
+            <p>Equilibra corpo e mente</p>
+        </div>
+    </section>
+    
+    <section class="section" id="women">
+        <h2>👩‍⚕️ Dicas Femininas</h2>
+        <div class="card">
+            <h3>Alimentação</h3>
+            <ul style="margin-left:20px">
+                <li>Ômega 3: linhaça, chia, peixe</li>
+                <li>Proteína pós-surf: shake + fruta</li>
+                <li>500ml água antes de entrar</li>
+            </ul>
+        </div>
+        <div class="card">
+            <h3>Saúde</h3>
+            <ul style="margin-left:20px">
+                <li>Alongamento noturno</li>
+                <li>Quadril (borboleta)</li>
+                <li>Isquiotibiais</li>
+            </ul>
+        </div>
+    </section>
+    
+    <section class="section" id="etiquette">
+        <h2>🤝 Etiqueta do Surf</h2>
+        <div class="card">
+            <h3>Prioridade</h3>
+            <p>Quem está mais perto da quebra tem prioridade</p>
+        </div>
+        <div class="card" style="background:rgba(231,76,60,0.1)">
+            <h3 style="color:#e74c3c">NUNCA SOLTE A PRANCHA!</h3>
+        </div>
     </section>
     
     <section class="section" id="news">
-        <h2>📰 Surf News Atualizado</h2>
-        
+        <h2>📰 Notícias do Surf</h2>
         <div class="card">
             <h3>🏆 WSL Rio Pro 2026</h3>
-            <p><strong>Data:</strong> 15-25 julho</p>
-            <p><strong>Local:</strong> Arpoador, Rio de Janeiro</p>
-            <span class="badge">WSL CT</span>
+            <p><strong>15-25 julho</strong> • Arpoador, RJ</p>
         </div>
-        
         <div class="card">
-            <h3>🌊 Nova Marca de Pranchas Femininas</h3>
-            <p>STHILL lança coleção exclusiva para mulheres</p>
-            <span class="price">30% OFF para membros ASF</span>
-        </div>
-        
-        <div class="card">
-            <h3>🌡️ Previsão de Temporada</h3>
-            <p>El Niño traz ondas grandes ao litoral paulista</p>
-            <span class="badge">Bertioga +30%</span>
-            <span class="badge">Guarujá +25%</span>
+            <h3>🌊 Pranchas Femininas</h3>
+            <p>STHILL coleção exclusiva</p>
         </div>
     </section>
     
-    <section class="section" id="monetize">
-        <h2>💰 Monetização do App</h2>
-        
-        <div class="card">
-            <h3>💎 Assinatura Premium</h3>
-            <p><strong>R$ 29,90/mês</strong></p>
-            <ul style="margin-left:20px">
-                <li>Conteúdo exclusivo</li>
-                <li>Aulas ao vivo</li>
-                <li>Descontos nas lojas</li>
-            </ul>
-            <button class="btn">Assinar</button>
-        </div>
-        
-        <div class="card">
-            <h3>🤝 Afiliados</h3>
-            <p>Parceria com lojas de surf</p>
-            <ul style="margin-left:20px">
-                <li>STHILL - 15% comissão</li>
-                <li>TRIBOSURF - 12% comissão</li>
-                <li>Campinas Surf - 10% comissão</li>
-            </ul>
-        </div>
-        
-        <div class="card">
-            <h3>☕ Apoia.se</h3>
-            <p>Contribua para manter o app grátis</p>
-            <button class="btn" onclick="openPix()">Doar via PIX</button>
-        </div>
-        
-        <div class="card">
-            <h3>🏪 Loja Virtual</h3>
-            <p>Camisetas, stickers ASF</p>
-            <button class="btn">Ver Produtos</button>
+    <section class="section" id="emergency">
+        <h2>🚨 Denúncias</h2>
+        <div class="emergency">
+            <h3 style="color:#e74c3c">DELEGACIA DA MULHER: 180</h3>
         </div>
     </section>
     
@@ -97,7 +125,6 @@
     
     <script>
         function show(id){document.getElementById(id).scrollIntoView({behavior:'smooth'});}
-        function openPix(){alert('PIX: asf.surffeminino@gmail.com')}
     </script>
 </body>
 </html>
