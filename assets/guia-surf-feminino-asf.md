@@ -94,4 +94,29 @@
 - **Mãos:** Palmas para fora, cotovelos para baixo
 - **Quadril:** Leve inclinação para frente
 - **Olhar:** Sempre para a berço
-- **Respiração:** Expirar ao levantar**
+- **Respiração:** Expirar ao levantar
+
+---
+
+## 🎬 Dicas de Análise Visual
+
+### Assista Vídeos de Surf
+- Estude o posicionamento de surfistas experientes
+- Pause e analise o setup de cada onda
+- Compare com sua própria técnica
+
+### Atenção no Olhar
+- **Olhar sempre para a berço** (onde a onda quebra)
+- Mantenha o olhar fixo na direção da onda
+- Não olhe para baixo - perde equilíbrio
+
+### Atenção para o Lado da Onda
+- **Onda fechando:** Posicione-se mais centrado
+- **Onda abrindo:** Pode recuar no pico
+- **Veja o angle:** 45° lateral à berço
+
+### Posicionamento de Pé, Joelho e Quadril
+- **Pés:** Na prancha, afastados do bico
+- **Joelho:** Levemente dobrado, pronto para explosão
+- **Quadril:** Peso levemente para frente
+- **Transição:** Joelho-quadril simultaneamente no drop
