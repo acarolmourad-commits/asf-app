@@ -307,6 +307,51 @@
 
 **Transição**: Joelho e quadril juntos no drop
 
+
+
+---
+
+## ⚠️ REGRAS NO SURF - ETIQUETA MARINHA
+
+### Regra de Ouro: Segurança em Primeiro Lugar
+
+**Nunca solte a prancha!**
+- Sua prancha pode voltar na onda como um projétil
+- Pode acertar surfistas atrás de você
+- Sempre segure a prancha até chegar à água
+- Se cair, segure a prancha com força
+
+### Regra da Remada
+
+**Reme sempre na direção contrária do surfista que já estiver na onda**
+- Se alguém está na berço, não entre na mesma onda
+- Espere sua vez - paciência é virtude no surf
+- Rema para fora (outside) para não atrapalhar
+
+### Regra da Prioridade
+
+**Quem está mais perto do pico tem prioridade!**
+- O pico é onde a onda começa a quebrar
+- Se você estiver mais perto do pico que outro, a onda é sua
+- Comunique com olhos - um sinal de "vou" é suficiente
+- Respeite sempre!
+
+### Não Seja Fominha
+
+**Todos querem e podem surfar!**
+- Não fuja da berço quando outra surfista está indo
+- Não fique "presa" na berço por medo
+- Apoie outras surfistas - somos todas uma família!
+- Sorria e dê espaço - o surf é para todos
+
+### Procure Canais para Entrar no Outside
+
+**Outside = área externa da berço**
+- Rema para fora até encontrar o canal de entrada
+- Canais são áreas mais profundas entre as berços
+- Entre pelo canal e evite bater em outros
+- Observe onde os outros entram com segurança
+
 ---
 
 **Associação de Surf Feminino - ASF**
