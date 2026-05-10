@@ -14,6 +14,7 @@
         .section{padding:15px;max-width:1200px;margin:0 auto;}
         .card{background:var(--w);border-radius:12px;padding:15px;margin:10px 0;box-shadow:0 2px 8px rgba(0,0,0,0.08);}
         .badge{background:var(--a);color:var(--s);padding:3px 10px;border-radius:15px;font-size:11px;margin:2px;display:inline-block;}
+        .badge-success{background:#27ae60;color:white;}
         table{width:100%;border-collapse:collapse;margin-top:10px;}
         th,td{padding:8px;text-align:center;border-bottom:1px solid #eee;}
         th{background:var(--p);color:var(--w);}
@@ -24,6 +25,7 @@
         .bar{height:100%;background:var(--p);}
         .eco{background:linear-gradient(135deg,rgba(39,174,96,0.1),rgba(46,204,113,0.1));border-left:4px solid #27ae60;padding:12px;border-radius:8px;}
         .teccel{background:linear-gradient(135deg,rgba(52,152,219,0.1),rgba(76,175,80,0.1));border-left:4px solid #3498db;padding:12px;border-radius:8px;}
+        .money{background:linear-gradient(135deg,rgba(241,196,15,0.1),rgba(230,126,34,0.1));border-left:4px solid #f1c40f;padding:12px;border-radius:8px;}
     </style>
 </head>
 <body>
@@ -39,6 +41,7 @@
         <button class="btn" onclick="show('women')">Mulheres</button>
         <button class="btn" onclick="show('eco')">Eco Surf</button>
         <button class="btn" onclick="show('teccel')">Teccel</button>
+        <button class="btn" onclick="show('money')">Apoiar</button>
         <button class="btn" onclick="show('nature')">Natureza</button>
         <button class="btn" onclick="show('fears')">Medo Surf</button>
         <button class="btn" onclick="show('challenges')">Metas</button>
@@ -147,6 +150,37 @@
                 <li>Troca de pranchas usadas</li>
                 <li>Consultoria em equipamentos sustentáveis</li>
             </ul>
+        </div>
+    </section>
+    
+    <section class="section" id="money">
+        <h2>💰 Apoie a ASF</h2>
+        
+        <div class="money">
+            <h3>Ajude a manter o projeto</h3>
+            <p>Sua contribuição mantém a ASF viva e gratuita!</p>
+        </div>
+        
+        <div class="card">
+            <h3>Pix para Doação</h3>
+            <p><strong>Chave:</strong> asf@pix.com.br</p>
+            <button class="btn" onclick="alert('Pix copiado!')">Copiar Chave</button>
+        </div>
+        
+        <div class="card">
+            <h3>Recompensas por Apoio</h3>
+            <div class="grid">
+                <div class="card"><span class="badge">R$10</span><p>Agradecimento + 50 pts</p></div>
+                <div class="card"><span class="badge badge-success">R$25</span><p>Tarefa exclusiva + 120 pts</p></div>
+                <div class="card"><span class="badge badge-success">R$50</span><p>Moeda ASF + 300 pts</p></div>
+            </div>
+        </div>
+        
+        <div class="card">
+            <h3>Programa de Indicação</h3>
+            <p>Indique amigas e ganhe pontos!</p>
+            <p>1 indicação = 300 pts</p>
+            <button class="btn" onclick="alert('Código: ASF2026')">Ver Código</button>
         </div>
     </section>
     
