@@ -32,3 +32,66 @@
 - Nunca vá sozinha
 - Informe alguém do horário de retorno
 - Conheça a praia antes
+
+---
+
+## 🛠️ Materiais para Produção de Prancha
+
+### Estrutura
+- **Núcleo de espuma** (PU, EPS ou EVA)
+- **Película de fibra de vidro** (300-450g/m²)
+- **Resina poliéster** (ou epóxi para eco)
+- **Balsa lã de coco** (top e bottom)
+
+### Ferramentas
+- Lixa (grãos 80, 120, 320)
+- Serra de fita ou tico-tico
+- Pistola de spray
+- Rolo de espuma
+- Pano limpo
+
+## 🎒 Acessórios Básicos
+
+### Obrigatórios
+- **Leash (cordinha)** - 7ft, salva vida
+- **Quilha** - Tamanho conforme prancha
+- **Parafina de abelha** - Para quilha
+- **Proteção solar** - FPS 50+, resistente à água
+- **Poncho** - Para trocar em lugares sem banheiro
+
+### Recomendados
+- **Wax (parafina)** - Base + top coat
+- **Chave de quilha** - Allen 5mm
+- **Bolsa de prancha** - Ventosa ou zíper
+- **Toalha microfibra** - Rápida secagem
+
+---
+
+## 🏋️‍♀️ Treinos para Iniciantes (Casa)
+
+### Burpees
+1. Postura de flexão
+2. Pule para frente
+3. Coloque as pernas atrás
+4. Suba rápido
+**3 séries de 10 repetições**
+
+### Remada deitado no chão
+1. Deitado de costas
+2. Eleve quadril (glúteos)
+3. Mãos ao peito = remada
+4. Volte devagar
+**3 séries de 15 repetições**
+
+### Movimentos do Drop
+1. Falso drop no chão
+2. Salto lateral
+3. Aterrisagem em posição surfista
+4. Practice equilíbrio
+**5 minutos diários**
+
+### Direção das Mãos e Quadril
+- **Mãos:** Palmas para fora, cotovelos para baixo
+- **Quadril:** Leve inclinação para frente
+- **Olhar:** Sempre para a berço
+- **Respiração:** Expirar ao levantar**
