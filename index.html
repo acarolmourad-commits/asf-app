@@ -3000,6 +3000,9 @@ document.addEventListener('DOMContentLoaded', function() {
         <button class="tab" role="tab" aria-selected="false" aria-controls="premium" onclick="showSection('premium')">
             <span class="tab-icon">⭐</span> Premium
         </button>
+        <button class="tab" role="tab" aria-selected="false" aria-controls="assinantes" onclick="showSection('assinantes')">
+            <span class="tab-icon">👑</span> Assinantes
+        </button>
     </div>
 
     <!-- Welcome Card (only shows once) -->
@@ -7857,6 +7860,92 @@ document.addEventListener('DOMContentLoaded', renderBrandHub);
     // Track shares
     
     
+
+
+    <!-- SEÇÃO DE ASSINANTES -->
+    <div class="section" id="assinantes">
+        <div class="cards-grid">
+            <div class="card" style="background: linear-gradient(135deg, rgba(0,168,204,0.1) 0%, rgba(155,89,182,0.1) 100%);">
+                <span class="card-tag" style="background: var(--primary); color: white;">ASSINANTE</span>
+                <h3>📆 Calendário WSL</h3>
+                <p>Acompanhe todas as etapas do Circuito Mundial de Surf Feminino</p>
+                <div style="margin: 12px 0; padding: 12px; background: rgba(255,255,255,0.5); border-radius: 8px;">
+                    <div style="font-size: 13px; margin-bottom: 8px;"><strong>Próximas etapas:</strong></div>
+                    <div style="font-size: 12px; color: var(--gray-600); line-height: 1.8;">
+                        🏄‍♀️ <b>Rio de Janeiro</b> - 15/06 a 22/06<br>
+                        🏄‍♀️ <b>Costa Rica</b> - 01/07 a 08/07<br>
+                        🏄‍♀️ <b>Hawaii</b> - 15/11 a 23/11
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card" style="background: linear-gradient(135deg, rgba(244,208,63,0.15) 0%, rgba(255,107,107,0.1) 100%);">
+                <span class="card-tag" style="background: var(--accent); color: var(--secondary);">VIP</span>
+                <h3>🔮 Previsões Antecipadas</h3>
+                <p>Atualizações diárias com 7 dias de antecedência para spots premium</p>
+                <ul style="font-size: 13px; color: var(--gray-600); padding-left: 18px; margin: 10px 0;">
+                    <li>📍 Praias secretas de Bertioga</li>
+                    <li>📍 Melhores horários de maré</li>
+                    <li>📍 Swell direction otimizada</li>
+                    <li>📍 Wind charts exclusivos</li>
+                </ul>
+            </div>
+            
+            <div class="card" style="background: linear-gradient(135deg, rgba(46,204,113,0.15) 0%, rgba(0,168,204,0.1) 100%);">
+                <span class="card-tag" style="background: var(--success); color: white;">BRUTOS</span>
+                <h3>💬 Análise de Ondas</h3>
+                <p>Detalhes técnicos que só os assinantes têm acesso</p>
+                <div style="font-size: 13px; color: var(--gray-600);">
+                    <div style="margin-bottom: 6px;">🌊 Breaking angle: 45° ± 5°</div>
+                    <div style="margin-bottom: 6px;">⏱ Peak period: 14:30-16:00</div>
+                    <div style="margin-bottom: 6px;">📏 Face height: 1.2-1.8m</div>
+                    <div>🌬 Offshore wind: 12-18 knots</div>
+                </div>
+            </div>
+            
+            <div class="card" style="background: linear-gradient(135deg, rgba(155,89,182,0.15) 0%, rgba(255,107,107,0.1) 100%);">
+                <span class="card-tag" style="background: var(--purple); color: white;">EXCLUSIVO</span>
+                <h3>🏖️ Guia de Spots</h3>
+                <p>Lista atualizada de spots com acesso restrito</p>
+                <div style="font-size: 12px; color: var(--gray-600);">
+                    <div style="display: flex; justify-content: space-between; margin: 8px 0;">
+                        <span>Secret Reef</span><span style="color: var(--success);">✅</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; margin: 8px 0;">
+                        <span>Sunset Peak</span><span style="color: var(--success);">✅</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; margin: 8px 0;">
+                        <span>Moon Beach</span><span style="color: var(--coral);">🔒</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="card" style="margin-top: 20px; background: linear-gradient(135deg, rgba(0,168,204,0.05) 0%, rgba(14,36,57,0.05) 100%);">
+            <h3 style="text-align: center; color: var(--primary);">💎 Benefícios Premium para Assinantes</h3>
+            <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-top: 16px;">
+                <div style="text-align: center; padding: 12px; background: white; border-radius: 12px;">
+                    <div style="font-size: 32px;">📊</div>
+                    <div style="font-size: 12px; font-weight: 600;">Análises técnicas</div>
+                </div>
+                <div style="text-align: center; padding: 12px; background: white; border-radius: 12px;">
+                    <div style="font-size: 32px;">🌙</div>
+                    <div style="font-size: 12px; font-weight: 600;">Spots noturnos</div>
+                </div>
+                <div style="text-align: center; padding: 12px; background: white; border-radius: 12px;">
+                    <div style="font-size: 32px;">📸</div>
+                    <div style="font-size: 12px; font-weight: 600;">Galeria exclusiva</div>
+                </div>
+                <div style="text-align: center; padding: 12px; background: white; border-radius: 12px;">
+                    <div style="font-size: 32px;">🎯</div>
+                    <div style="font-size: 12px; font-weight: 600;">Alertas personalizados</div>
+                </div>
+            </div>
+            <button onclick="showPremiumModal()" style="width: 100%; margin-top: 20px; background: linear-gradient(135deg, var(--primary), var(--purple)); color: white; border: none; padding: 16px; border-radius: 12px; font-weight: bold; font-size: 16px; cursor: pointer;">
+                🚀 TORNAR-SE ASSINANTE
+            </button>
+        </div>
+    </div>
 
 <!-- Footer -->
     <!-- Apoie o ASF App -->
