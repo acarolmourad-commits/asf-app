@@ -468,6 +468,9 @@ div[style*="font-size: 14px"] { display: none !important; }
         <button class="tab" role="tab" aria-selected="false" aria-controls="competicoes" onclick="showSection('competicoes')">
             <span class="tab-icon">🏆</span> Competições
         </button>
+        <button class="tab" role="tab" aria-selected="false" aria-controls="assinantes" onclick="showSection('assinantes')">
+            <span class="tab-icon">👑</span> Assinantes
+        </button>
         <button class="tab" role="tab" aria-selected="false" aria-controls="premium" onclick="showSection('premium')">
             <span class="tab-icon">⭐</span> Premium
         </button>
@@ -5328,6 +5331,96 @@ document.addEventListener('DOMContentLoaded', renderBrandHub);
     // Track shares
     
     
+
+
+    <!-- SEÇÃO DE ASSINANTES -->
+    <div class="section" id="assinantes">
+        <div class="section-header">
+            <h2 class="section-title">👑 Área de Assinantes</h2>
+        </div>
+        
+        <div class="cards-grid">
+            <!-- Calendário WSL -->
+            <div class="card" style="background: linear-gradient(135deg, rgba(0,168,204,0.1) 0%, rgba(155,89,182,0.1) 100%);">
+                <span class="card-tag" style="background: var(--primary); color: white;">📅 WSL</span>
+                <h3>Calendário WSL Feminino</h3>
+                <p style="font-size: 14px; margin: 10px 0;">Próximas etapas do Circuito Mundial</p>
+                <div style="margin: 12px 0; padding: 12px; background: rgba(255,255,255,0.5); border-radius: 8px;">
+                    <div style="font-size: 13px; margin-bottom: 6px;"><strong>📍 Rio de Janeiro</strong> — 15-22 Jun</div>
+                    <div style="font-size: 13px; margin-bottom: 6px;"><strong>📍 Costa Rica</strong> — 01-08 Jul</div>
+                    <div style="font-size: 13px;"><strong>📍 Hawaii</strong> — 15-23 Nov</div>
+                </div>
+            </div>
+            
+            <!-- Previsões Antecipadas -->
+            <div class="card" style="background: linear-gradient(135deg, rgba(244,208,63,0.15) 0%, rgba(255,107,107,0.1) 100%);">
+                <span class="card-tag" style="background: var(--accent); color: var(--secondary);">🔮 VIP</span>
+                <h3>Previsões Antecipadas</h3>
+                <p style="font-size: 14px; margin: 10px 0;">7 dias de antecedência para spots premium</p>
+                <ul style="font-size: 13px; color: var(--gray-600); padding-left: 18px; margin: 10px 0;">
+                    <li>📍 Praias secretas de Bertioga</li>
+                    <li>📍 Melhores horários de maré</li>
+                    <li>📍 Swell direction otimizada</li>
+                </ul>
+            </div>
+            
+            <!-- Análise Técnica -->
+            <div class="card" style="background: linear-gradient(135deg, rgba(46,204,113,0.15) 0%, rgba(0,168,204,0.1) 100%);">
+                <span class="card-tag" style="background: var(--success); color: white;">🔬 Tech</span>
+                <h3>Análise Técnica</h3>
+                <p style="font-size: 14px; margin: 10px 0;">Detalhes avançados para spots premium</p>
+                <div style="font-size: 13px; color: var(--gray-600);">
+                    <div style="margin-bottom: 4px;">🌊 Breaking angle: <b>45° ± 5°</b></div>
+                    <div style="margin-bottom: 4px;">⏱ Peak period: <b>14:30-16:00</b></div>
+                    <div>📏 Face height: <b>1.2-1.8m</b></div>
+                </div>
+            </div>
+            
+            <!-- Guia de Spots -->
+            <div class="card" style="background: linear-gradient(135deg, rgba(155,89,182,0.15) 0%, rgba(255,107,107,0.1) 100%);">
+                <span class="card-tag" style="background: var(--purple); color: white;">🏖️ Spots</span>
+                <h3>Guia de Spots Exclusivo</h3>
+                <p style="font-size: 14px; margin: 10px 0;">Spots com acesso restrito para assinantes</p>
+                <div style="font-size: 12px; color: var(--gray-600);">
+                    <div style="display: flex; justify-content: space-between; margin: 8px 0;">
+                        <span>Secret Reef</span><span style="color: var(--success);">✅</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; margin: 8px 0;">
+                        <span>Sunset Peak</span><span style="color: var(--success);">✅</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; margin: 8px 0;">
+                        <span>Moon Beach</span><span style="color: var(--coral);">🔒</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Benefícios -->
+        <div class="card" style="margin-top: 20px; background: linear-gradient(135deg, rgba(0,168,204,0.05) 0%, rgba(14,36,57,0.05) 100%);">
+            <h3 style="text-align: center; color: var(--primary); margin-bottom: 16px;">💎 Benefícios Premium</h3>
+            <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px;">
+                <div style="text-align: center; padding: 12px; background: white; border-radius: 12px;">
+                    <div style="font-size: 32px;">📊</div>
+                    <div style="font-size: 12px; font-weight: 600;">Análises técnicas</div>
+                </div>
+                <div style="text-align: center; padding: 12px; background: white; border-radius: 12px;">
+                    <div style="font-size: 32px;">🌙</div>
+                    <div style="font-size: 12px; font-weight: 600;">Spots noturnos</div>
+                </div>
+                <div style="text-align: center; padding: 12px; background: white; border-radius: 12px;">
+                    <div style="font-size: 32px;">📸</div>
+                    <div style="font-size: 12px; font-weight: 600;">Galeria exclusiva</div>
+                </div>
+                <div style="text-align: center; padding: 12px; background: white; border-radius: 12px;">
+                    <div style="font-size: 32px;">🎯</div>
+                    <div style="font-size: 12px; font-weight: 600;">Alertas personalizados</div>
+                </div>
+            </div>
+            <button onclick="showPremiumModal()" style="width: 100%; margin-top: 20px; background: linear-gradient(135deg, var(--primary), var(--purple)); color: white; border: none; padding: 16px; border-radius: 12px; font-weight: bold; font-size: 16px; cursor: pointer;">
+                🚀 TORNAR-SE ASSINANTE
+            </button>
+        </div>
+    </div>
 
 <!-- Footer -->
     <!-- Apoie o ASF App -->
