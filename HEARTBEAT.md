@@ -8,7 +8,7 @@
 4. Update documentation
 5. Push changes to GitHub
 
-*Last check completed: 10:15 UTC (2026-05-07)*
+*Last check completed: 23:30 UTC (2026-05-12)*
 
 ## ALWAYS IMPROVE
 
@@ -346,6 +346,8 @@
 - [x] Add 5 new daily tips (649 total), update all counters to 649, optimize code/layout, push to GitHub (2026-04-25 12:09 UTC)
 - [x] Add 5 new daily tips (654 total), update all counters to 654, optimize code/layout, push to GitHub (2026-04-25 12:39 UTC)
 - [x] Add 5 new daily tips (659 total), remove duplicate translations, optimize code/layout, update README & HEARTBEAT.md, push to GitHub (2026-04-25 13:09 UTC)
+- [x] Add área de Assinantes (subscribers) com conteúdo exclusivo: Calendário WSL, Previsões Antecipadas, Análise de Ondas, Guia de Spots, Benefícios Premium (2026-05-11)
+- [x] Add "Assinantes" section with exclusive content (WSL calendar, 7-day forecasts, wave analysis, spot guide, badges), new navigation tab (👑 Assinantes), push to GitHub (2026-05-12)
 
 ## TODO IMPROVEMENTS
 
