@@ -354,7 +354,87 @@
 
 ---
 
+## 🌱 2º MÊS PREMIUM - VIDA SAUDÁVEL
+
+### 🥗 ALIMENTOS ENERGÉTICOS NATURAIS
+
+**Café da manhã pré-surf:**
+- Aveia com banana + canela (150 calorias)
+- Abacate com limão (120 calorias)
+- Chia seeds no leite vegetal (100 calorias)
+
+**Almoço pós-surf:**
+- Quinoa + salmão + abacate (400 calorias)
+- Arroz integral + frango + vegetais (350 calorias)
+- Smoothie verde: couve, banana, manga (200 calorias)
+
+**Lanches energéticos:**
+- Amêndoas (20g proteína)
+- Iogurte grego natural
+- Barra de aveia caseira (sem açúcar)
+
+**Hidratação:**
+- 500ml água ao acordar
+- 250ml a cada hora de surf
+- Eletrólitos caseiros (água de coco + sal)
+
+### 🏃‍♀️ CRONOGRAMA SEMANAL
+
+**Segunda:** Core + Alongamento (20 min)
+**Terça:** Treino de força (30 min)
+**Quarta:** Yoga + Respiração (25 min)
+**Quinta:** Treino de força (30 min)
+**Sexta:** Mobilidade + Alongamento (20 min)
+**Sábado:** Surf + Recuperação (45 min total)
+**Domingo:** Descanso ativo (caminhada leve)
+
+### 💧 HÁBITOS SAUDÁVEIS
+
+**Rotina matinal (5:30 AM):**
+1. 500ml água com limão
+2. Alongamento 5 minutos
+3. Respiração 4-7-8 (3 ciclos)
+4. Café da manhã nutritivo
+
+**Ritual pré-surf (30 min antes):**
+1. Lanche energético
+2. Alongamento dinâmico
+3. Visualização das ondas
+
+**Recuperação pós-surf:**
+1. 500ml água ou isotônico
+2. Almoço nutritivo em 30 min
+3. Alongamento de 15 min
+
+### 🥑 RECEITAS ENERGÉTICAS
+
+**Smoothie pré-surf:**
+- 1 banana congelada
+- 1 colher de sopa de aveia
+- 200ml leite de amêndoim
+- 1 colher de chia
+- 1 colher de mel
+
+**Barrinha caseira:**
+- 1 xícara de aveia
+- 2 bananas maduras
+- 2 colheres de sopa de sementes
+- Formar barras e congelar
+
+**Shake pós-treino:**
+- 1 scoop proteína vegana
+- 200ml leite de aveia
+- 1 colher de cacau
+- Gelo a gosto
+
+---
+
 **Associação de Surf Feminino - ASF**
+*Juntas somos mais fortes!*
+
+**Contato**: (11) 9 5434-6288
+**Instagram**: @cahrol_asf
+**Hashtag**: #ASFsurfLife
 *Juntas somos mais fortes!*
 
 **Contato**: (11) 9 5434-6288
