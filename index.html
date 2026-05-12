@@ -83,11 +83,11 @@
 
 /* Hide visible descriptions - requested by Carol */
 
+
 /* Hide visible descriptions - requested by Carol */
 .offer-description, .product-description, .badge-description,
 .dica-desc, .post-desc {
   display: none !important;
-}
 
 /* DEFINITIVE hide - Carol's request */
 header, #header, .header, 
@@ -100,13 +100,12 @@ footer, #footer, .footer,
 .section-title, h2, h3, h4,
 .notif-badge, .wave-forecast {
   display: none !important;
-}
+
 
 /* Hide header text elements */
 .logo-text, .logo-text span, 
 .icon-btn[title], button[title] { 
   display: none !important; 
-}
 
 /* ==== DEFINITIVE HIDE - Carol's requirement ==== */
 /* Hide ALL descriptive text elements */
@@ -146,20 +145,30 @@ p[style*="font-size"],
 div[style*="font-size: 13px"],
 div[style*="font-size: 14px"] { display: none !important; }
 </style>
+    <!-- Structured Data -->
     
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "ASF - Associação de Surf Feminino",
+        "url": "https://acarolmourad-commits.github.io/asf-app/",
+        "description": "Conectando mulheres surfistas. Dicas, comunidade, surftrips e muito mais!",
+        "sameAs": [
+            "https://www.instagram.com/associacaosurffeminino",
+            "https://www.tiktok.com/@Cahrol.asf"
+        ]
 
-<!-- Schema.org JSON-LD for SEO -->
+
+
+
+
     <script type="application/ld+json">
-    {
      "@context": "https://schema.org",
      "@type": "Organization",
      "name": "ASF - Associação de Surf Feminino",
      "url": "https://acarolmourad-commits.github.io/asf-app/"
-    }
     </script>
     <link rel="stylesheet" href="subscriber-styles.css">
 </head><body>
-    <!-- Skip to content for accessibility -->
     <a href="#dicas" style="position: absolute; left: -9999px; top: 0; z-index: 10000; background: var(--primary); color: white; padding: 8px 16px; border-radius: 0 0 8px 0; font-weight: 600; text-decoration: none;" onfocus="this.style.left='0'" onblur="this.style.left='-9999px'">Pular para o conteúdo</a>
     <div class="scroll-progress" id="scrollProgress"></div>
     <!-- Loading Screen REMOVED -->
@@ -203,7 +212,6 @@ div[style*="font-size: 14px"] { display: none !important; }
                 <div class="logo-text">ASF</div>
             </div>
             <div class="header-actions">
-                <button class="icon-btn" id="darkModeToggle" onclick="var d=document.documentElement,w=localStorage,t=d.getAttribute('data-theme');if(t==='dark'){d.removeAttribute('data-theme');w.setItem('asf-theme','light');this.textContent='🌙'}else{d.setAttribute('data-theme','dark');w.setItem('asf-theme','dark');this.textContent='☀️'}" title="Modo Noturno" style="font-size:22px;width:48px;height:48px;">🌙</button>
                 <button class="icon-btn" onclick="toggleNotifications()" title="Notificações" style="position: relative;">
                     🔔
                     <span id="notif-badge" style="position: absolute; top: -5px; right: -5px; background: #E74C3C; color: white; font-size: 10px; width: 18px; height: 18px; border-radius: 50%; display: flex; align-items: center; justify-content: center; display: none;">0</span>
@@ -232,13 +240,27 @@ div[style*="font-size: 14px"] { display: none !important; }
     </div>
 
     
+            "como funciona": "O ASF App tem previsão de ondas, dicas, treinos, comunidade e muito mais! Clique nas abas para explorar.",
+            "previsão": "A previsão de ondas mostra as condições atualizadas automatically para as praias do litoral paulista.",
+            "onda": "A previsão mostra altura, período e direção das ondas para cada praia.",
+            "como participar": "Basta fazer login no app e explorar as seções!",
+            "eventos": "Temos competições mensuales. Verifique a aba 'Competições'.",
+            "competições": "As competições estão na aba 🏆. Lá você vê próximos eventos e resultados.",
+            "pontos": "Você ganha pontos fazendo quizzes, logando sessões e participando. Consulte seu nível na aba Pontos.",
+            "nível": "Seu nível aumenta conforme você ganha pontos usando o app!",
+            "descontos": "Na aba Lojas tem desconto em parceiros. Mostre seu ASF App!",
+            "grupos": "Na aba Comunidad você encontra grupos de surfe por região.",
+            "manas": "Use a aba 'Próximas' para encontrar sisters surfistas perto de você!",
+            "contato": "Fale conosco pelo WhatsApp ou Instagram @associacaosurffeminino"
         };
 
         
 
         
 
+            if (e.key === "Enter") sendChatbotMessage();
         });
+
 
 "notifications-panel" style="display: none; position: fixed; top: 80px; right: 15px; width: 320px; max-height: 400px; background: white; border-radius: 16px; box-shadow: 0 10px 40px rgba(0,0,0,0.2); z-index: 1000; overflow: hidden;">
         <div style="background: linear-gradient(135deg, #0E2439 0%, #1A3A5C 100%); padding: 15px; color: white; display: flex; justify-content: space-between; align-items: center;">
@@ -744,7 +766,7 @@ div[style*="font-size: 14px"] { display: none !important; }
                     <p>🌊 <strong>Melhor época:</strong> Março a Outubro</p>
                     <p>🏄 <strong>Nível:</strong> Iniciante a Avançado</p>
                     <p>🌅 <strong> directions:</strong> Sul</p>
-                    <p>💡 <strong>Dica:</strong> Praia das Astúrias e Tombo são as melhores. Evite高峰期!</p>
+                    <p>💡 <strong>Dica:</strong> Praia das Astúrias e Tombo são as melhores. Evitehorário de pico!</p>
                     <p>🏪 <strong>Estrutura:</strong> Lojas e quiosques na orla</p>
                 </div>
             </div>
@@ -770,7 +792,7 @@ div[style*="font-size: 14px"] { display: none !important; }
                     <p>🌊 <strong>Melhor época:</strong> Abril a Setembro</p>
                     <p>🏄 <strong>Nível:</strong> Intermediário a Avançado</p>
                     <p>🌅 <strong> directions:</strong> Sul</p>
-                    <p>💡 <strong>Dica:</strong> Point break仁爱. Muita gente no final de semana!</p>
+                    <p>💡 <strong>Dica:</strong> Point breake muito amor. Muita gente no final de semana!</p>
                     <p>🚗 <strong>Acesso:</strong> 2h de SP, estrada boa</p>
                 </div>
             </div>
@@ -1502,7 +1524,6 @@ div[style*="font-size: 14px"] { display: none !important; }
                 <div class="card">
                     <span class="card-tag green">ESSENCIAL</span>
                     <h3>🧘 Alongamento de Gato-Vaca</h3>
-                    <p><strong>Como fazer:</strong> De joelhos, alterna entre curvar e arquear as costas. 10 repetições.</p>
                     <p style="margin-top: 8px;"><strong>Benefício:</strong> Mobilidade da coluna, alivia tensão.</p>
                     <p style="margin-top: 8px; font-size: 12px; color: var(--gray-400);">⏱️ 2 min • Diariamente</p>
                 </div>
@@ -2225,7 +2246,7 @@ div[style*="font-size: 14px"] { display: none !important; }
                     <p><strong>Para que serve:</strong> Essencial para o movimento de transferência de peso.</p>
                     <p style="margin-top: 8px;"><strong>Como fazer:</strong> Faça pequenos círculos com o quadril, 10 para cada lado.</p>
                     <p style="margin-top: 8px; font-size: 12px; color: var(--gray-400);">🎬 Exercício em casa • 2 min</p>
-                    <button class="btn btn-secondary" style="width: 100%; margin-top: 12px;" onclick="alert('🦵 MOBILIDADE DE QUADRIL\n\nPASSO A PASSO:\n1. Em pé, pés na largura dos ombros\n2. Coloque as mãos no quadril\n3. Faça círculos grandes para a direita (10x)\n4. Faça círculos para a esquerda (10x)\n5. Faça círculos menores (10x cada lado)\n\nVARIAÇÃO: same com os joelhos levemente dobrados.\n\nBENEFICIOS:\n• Essencial para manobras\n• Melhora transferência de peso\n• Previne lesões no quadril')">Ver Vídeo</button>
+                    <button class="btn btn-secondary" style="width: 100%; margin-top: 12px;" onclick="alert('🦵 MOBILIDADE DE QUADRIL\n\nPASSO A PASSO:\n1. Em pé, pés na largura dos ombros\n2. Coloque as mãos no quadril\n3. Faça círculos grandes para a direita (10x)\n4. Faça círculos para a esquerda (10x)\n5. Faça círculos menores (10x cada lado)\n\nVARIAÇÃO: mesma coisa com os joelhos levemente dobrados.\n\nBENEFICIOS:\n• Essencial para manobras\n• Melhora transferência de peso\n• Previne lesões no quadril')">Ver Vídeo</button>
                 </div>
                 <div class="card">
                     <span class="card-tag purple">Alongamento</span>
@@ -2241,7 +2262,7 @@ div[style*="font-size: 14px"] { display: none !important; }
                     <p><strong>Para que serve:</strong> Importante para o movimento de pé na prancha.</p>
                     <p style="margin-top: 8px;"><strong>Como fazer:</strong> Sentada, estique uma perna e incline-se para frente. Segure 30 segundos cada perna.</p>
                     <p style="margin-top: 8px; font-size: 12px; color: var(--gray-400);">🎬 Exercício em casa • 4 min</p>
-                    <button class="btn btn-secondary" style="width: 100%; margin-top: 12px;" onclick="alert('🧎 ALONGAMENTO ISQUIOTIBIAIS\n\nPASSO A PASSO:\n1. Sentada no chão\n2. Estique uma perna, другой dobrada\n3. Mantenha a coluna reta\n4. Inspire e incline para frente\n5. Segure 30 segundos\n6. Repita com a outra perna\n\nDICA: Não pegue no pé se não alcançar.\n\nBENEFICIOS:\n• Flexibilidade para manobras\n• Previne lesões\n• Melhora movimento de pé')">Ver Vídeo</button>
+                    <button class="btn btn-secondary" style="width: 100%; margin-top: 12px;" onclick="alert('🧎 ALONGAMENTO ISQUIOTIBIAIS\n\nPASSO A PASSO:\n1. Sentada no chão\n2. Estique uma perna, outra dobrada\n3. Mantenha a coluna reta\n4. Inspire e incline para frente\n5. Segure 30 segundos\n6. Repita com a outra perna\n\nDICA: Não pegue no pé se não alcançar.\n\nBENEFICIOS:\n• Flexibilidade para manobras\n• Previne lesões\n• Melhora movimento de pé')">Ver Vídeo</button>
                 </div>
                 <div class="card">
                     <span class="card-tag green">💪</span>
@@ -2645,7 +2666,7 @@ div[style*="font-size: 14px"] { display: none !important; }
                 <div class="card">
                     <span class="card-tag green">+50 PONTOS</span>
                     <h3>🏄 Quiz: Partes da Prancha</h3>
-                    <p>你知道 as partes da prancha? Nose, tail, stringer e mais!</p>
+                    <p>Saiba que as partes da prancha? Nose, tail, stringer e mais!</p>
                     <p style="margin-top: 8px; font-size: 12px; color: var(--gray-400);">10 perguntas • 5 min</p>
                     <button class="btn btn-primary" style="width: 100%; margin-top: 12px;">Responder Quiz</button>
                 </div>
@@ -2674,7 +2695,6 @@ div[style*="font-size: 14px"] { display: none !important; }
                             <p style="font-size: 11px; color: var(--gray-400); margin-top: 8px;">✅ <strong>Resposta correta: B)</strong> A corrente de retorno arrasta a água da onda de volta para alto mar, podendo afastar nadadores e surfistas da praia.</p>
                         </div>
                         <div class="quiz-question" data-question="2" style="margin-top: 20px;">
-                            <p style="font-weight: 600; margin-bottom: 10px;">2. Se você for pego por uma corrente de retorno, o que deve fazer?</p>
                             <label style="display: block; padding: 8px; background: white; border-radius: 8px; margin: 5px 0; cursor: pointer;">
                                 <input type="radio" name="sq2" value="a"> A) Nadar diretamente para a praia
                             </label>
@@ -2687,7 +2707,7 @@ div[style*="font-size: 14px"] { display: none !important; }
                             <label style="display: block; padding: 8px; background: white; border-radius: 8px; margin: 5px 0; cursor: pointer;">
                                 <input type="radio" name="sq2" value="d"> D)Entrar no fundo e caminhar
                             </label>
-                            <p style="font-size: 11px; color: var(--gray-400); margin-top: 8px;">✅ <strong>Resposta correta: C)</strong> Nade паралельно а praia para sair da corrente, depois retorne а praia. A corrente é estreita, então em poucos metros você já estará livre.</p>
+                            <p style="font-size: 11px; color: var(--gray-400); margin-top: 8px;">✅ <strong>Resposta correta: C)</strong> Nade paralelamente a praia para sair da corrente, depois retorne a praia. A corrente é estreita, então em poucos metros você já estará livre.</p>
                         </div>
                         <div class="quiz-question" data-question="3" style="margin-top: 20px;">
                             <p style="font-weight: 600; margin-bottom: 10px;">3. Qual é o melhor horário para iniciantes surfarem?</p>
@@ -2719,7 +2739,6 @@ div[style*="font-size: 14px"] { display: none !important; }
                             <label style="display: block; padding: 8px; background: white; border-radius: 8px; margin: 5px 0; cursor: pointer;">
                                 <input type="radio" name="sq4" value="d"> D) Tirar foto para postar
                             </label>
-                            <p style="font-size: 11px; color: var(--gray-400); margin-top: 8px;">✅ <strong>Resposta correta: B)</strong> Grite por ajuda (socorro!), jogue algo que flutue (boia, prancha,garrafa PET) e só entre se for salva-vidas treinado. Nunca entre sozinho se a pessoa estiver em pânico.</p>
                         </div>
                         <div class="quiz-question" data-question="5" style="margin-top: 20px;">
                             <p style="font-weight: 600; margin-bottom: 10px;">5. Por que não é recomendado surfar sozinho?</p>
@@ -2735,7 +2754,6 @@ div[style*="font-size: 14px"] { display: none !important; }
                             <label style="display: block; padding: 8px; background: white; border-radius: 8px; margin: 5px 0; cursor: pointer;">
                                 <input type="radio" name="sq5" value="d"> D) É mais difícil de carregar a prancha
                             </label>
-                            <p style="font-size: 11px; color: var(--gray-400); margin-top: 8px;">✅ <strong>Resposta correta: B)</strong> Em caso de lesão, afogamento ou emergency, ter alguém por perto pode salvar sua vida. Sempresurf com pelo menos mais uma pessoa.</p>
                         </div>
                         <div class="quiz-question" data-question="6" style="margin-top: 20px;">
                             <p style="font-weight: 600; margin-bottom: 10px;">6. O que significa bandeira vermelha na praia?</p>
@@ -2905,7 +2923,6 @@ div[style*="font-size: 14px"] { display: none !important; }
                         <label style="font-size: 12px; color: var(--gray-600);">Notas (opcional)</label>
                         <input type="text" id="session-notes" placeholder="Ex: Peguei 2 tubos! 🤙" style="width: 100%; padding: 8px; border: 1px solid var(--gray-200); border-radius: 8px; font-size: 13px; font-family: 'Outfit';">
                     </div>
-                    <button class="btn btn-primary" style="width: 100%;" onclick="saveSession()">💾 Salvar Sessão</button>
                 </div>
 
                 <!-- Recent Sessions -->
@@ -3096,6 +3113,7 @@ div[style*="font-size: 14px"] { display: none !important; }
             
             // Send data to Google Sheets (if form link available)
         // For now, we just save locally. In future, link to form.
+
 
             <div style="background: linear-gradient(135deg, #9B59B6 0%, #8E44AD 100%); padding: 16px; margin: 0 20px 20px; border-radius: 16px; color: white;">
                 <p style="font-size: 14px; font-weight: 600;">👩‍👩‍👧 Suas Opiniões Importam!</p>
@@ -3314,6 +3332,7 @@ div[style*="font-size: 14px"] { display: none !important; }
     </div>
   </div>
 </div>
+
 
 <div class="section" id="loja" style="display: none;">
   <div class="section-header">
@@ -3594,6 +3613,7 @@ id="brandhub">
     </div>
 </div>
 
+
 // Mock data - will be replaced by real API
         brand: "STHILL SURF",
         discount: "20% OFF",
@@ -3625,8 +3645,17 @@ id="brandhub">
     "https://images.unsplash.com/photo-1501423390713-72334d66b181?w=400&h=400&fit=crop"  // prancha
 ];
 
+
+
+
+
+
+
+
+
 // Initialize when DOM ready
 document.addEventListener('DOMContentLoaded', renderBrandHub);
+
 
     <!-- Badges Patrocinados -->
     <div style="margin: 0 20px 30px;">
@@ -3847,7 +3876,6 @@ document.addEventListener('DOMContentLoaded', renderBrandHub);
 
             <!-- Backup/Restore Data -->
             <div style="display: flex; gap: 8px; margin-bottom: 16px; flex-wrap: wrap;">
-                <button class="btn btn-secondary" style="flex: 1; min-width: 140px; padding: 12px 8px; font-size: 13px;" onclick="exportData()" title="Salvar seus dados">💾 Backup Dados</button>
                 <button class="btn btn-primary" style="flex: 1; min-width: 140px; padding: 12px 8px; font-size: 13px;" onclick="document.getElementById('importFile').click()" title="Carregar seus dados">📂 Restaurar</button>
                 <input type="file" id="importFile" accept=".json" style="display: none;" onchange="importData(this)">
             </div>
@@ -3951,7 +3979,7 @@ document.addEventListener('DOMContentLoaded', renderBrandHub);
                             <input type="checkbox" style="width: 18px; height: 18px; accent-color: var(--primary);"> 🍌 Lanche / Barra
                         </label>
                         <label style="display: flex; align-items: center; gap: 8px; padding: 8px; background: var(--light); border-radius: 8px; margin: 4px 0; cursor: pointer; font-size: 13px;" onclick="toggleChecklistItem(this)">
-                            <input type="checkbox" style="width: 18px; height: 18px; accent-color: var(--primary);"> 📱 Celular (baixo音量)
+                            <input type="checkbox" style="width: 18px; height: 18px; accent-color: var(--primary);"> 📱 Celular (baixovolume)
                         </label>
                         <label style="display: flex; align-items: center; gap: 8px; padding: 8px; background: var(--light); border-radius: 8px; margin: 4px 0; cursor: pointer; font-size: 13px;" onclick="toggleChecklistItem(this)">
                             <input type="checkbox" style="width: 18px; height: 18px; accent-color: var(--primary);"> 🚗 Meio de transporte
@@ -4953,6 +4981,7 @@ document.addEventListener('DOMContentLoaded', renderBrandHub);
         </div>
     </div>
 
+
     <!-- Mulher Segura -->
     <div style="background: linear-gradient(135deg, #8B0000, #DC143C); border-radius: 16px; padding: 20px; margin: 20px; color: white;">
         <h3 style="font-size: 18px;">🚺 Mulheres Seguras</h3>
@@ -5193,7 +5222,6 @@ document.addEventListener('DOMContentLoaded', renderBrandHub);
             <span class="label">Badges</span>
         </button>
 
-    <!-- Hidden sections for compatibility -->
     <div class="section" id="comunidade-hidden" style="display: none;"></div>
 
     <!-- Parceiros - Cadastro -->
@@ -5224,7 +5252,7 @@ document.addEventListener('DOMContentLoaded', renderBrandHub);
                 </div>
 
                 <label style="font-size: 12px; font-weight: 600; display: block; margin-bottom: 4px;">📎 Comprovante PIX *</label>
-                <input id="parceiro-comprovante" type="text" placeholder="URL do comprovante ou截图" style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 8px; margin-bottom: 16px;">
+                <input id="parceiro-comprovante" type="text" placeholder="URL do comprovante oucaptura de tela" style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 8px; margin-bottom: 16px;">
 
                 <button onclick="enviarCadastroParceiro()" style="background: #00A8CC; color: white; border: none; padding: 14px; border-radius: 8px; width: 100%; font-weight: 600; cursor: pointer;">ENVIAR CADASTRO 📨</button>
             </div>
@@ -5236,6 +5264,7 @@ document.addEventListener('DOMContentLoaded', renderBrandHub);
         // For now, we just save locally. In future, link to form.
 
     </div>
+
 
     <!-- 🔒 Secret Achievements -->
     <div style="background: linear-gradient(135deg, #2c0a37, #4a1c5e); padding: 20px; margin: 20px; border-radius: 16px; color: white; text-align: center;">
@@ -5276,6 +5305,7 @@ document.addEventListener('DOMContentLoaded', renderBrandHub);
     // Track shares
     
     
+
 
     <!-- SEÇÃO DE ASSINANTES -->
     <div class="section" id="assinantes">
@@ -5394,6 +5424,7 @@ document.addEventListener('DOMContentLoaded', renderBrandHub);
     // Send data to Google Sheets (if form link available)
         // For now, we just save locally. In future, link to form.
 
+
     <footer style="background: linear-gradient(135deg, #0E2439, #1A3A5C); color: white; padding: 40px 20px 100px; text-align: center; margin-top: 20px;">
         <div style="font-size: 48px; margin-bottom: 12px;">🏄‍♀️</div>
         <h2 style="font-size: 22px; margin-bottom: 6px;">ASF - Associação de Surf Feminino</h2>
@@ -5428,6 +5459,7 @@ document.addEventListener('DOMContentLoaded', renderBrandHub);
         // Display real stats
         document.getElementById('stat-opens').textContent = localStorage.getItem('asf-opens') || '1';
         document.getElementById('stat-sessions').textContent = (JSON.parse(localStorage.getItem('surf-sessions') || []).length;
+
 
     'pt': {},
     'en': {
@@ -5482,8 +5514,10 @@ document.addEventListener('DOMContentLoaded', renderBrandHub);
               'manas': 'Manas e comunidade'
             };
 
+            if (label) {
                 item.getAttribute('aria-label') === label
               );
+              if (navItem) navItem.classList.add('active');
 
             // Update aria-selected on active tab
             document.querySelectorAll('.tab.active').forEach(t => t.setAttribute('aria-selected', 'true'));
@@ -5716,6 +5750,7 @@ document.addEventListener('DOMContentLoaded', renderBrandHub);
 
         // Fechar painel ao clicar fora
         document.addEventListener('click', function(e) {
+            if (!panel.contains(e.target) && !bell) {
                 panel.style.display = 'none';
         });
 
@@ -5971,6 +6006,7 @@ document.addEventListener('DOMContentLoaded', renderBrandHub);
 
         // Close search on click outside
         document.addEventListener('click', function(e) {
+            if (!e.target.closest('.search-container')) {
                 document.getElementById('searchResults').classList.remove('active');
         });
 
@@ -5999,6 +6035,11 @@ document.addEventListener('DOMContentLoaded', renderBrandHub);
             return dirs[Math.round(deg / 45) % 8];
         };
 
+            if (waveHeight < 0.3) return { text: 'Sem ondas', color: 'var(--gray-400)' };
+            if (waveHeight < 0.6) return { text: '🟢 Iniciante', color: 'var(--success)' };
+            if (waveHeight < 1.0) return { text: '🟡 Todos os níveis', color: 'var(--accent)' };
+            if (waveHeight < 1.5) return { text: '🟠 Intermediário', color: '#FF8C00' };
+            if (waveHeight < 2.0) return { text: '🔴 Avançado', color: 'var(--coral)' };
             return { text: '🔴 Expert only', color: 'var(--coral)' };
         };
 
@@ -6037,6 +6078,7 @@ document.addEventListener('DOMContentLoaded', renderBrandHub);
                 loadLiveData('bertioga');
                 updateMoonPhase();
             };
+            if (typeof requestIdleCallback === 'function') {
                 requestIdleCallback(init);
             } else {
                 setTimeout(init, 0);
@@ -6079,6 +6121,7 @@ document.addEventListener('DOMContentLoaded', renderBrandHub);
         // ============ SCROLL PROGRESS BAR ============
         window.addEventListener('scroll', () => {
             scrollBar.style.width = progress + '%';
+            if (scrollTop < 10) scrollBar.classList.add('hidden');
             else scrollBar.classList.remove('hidden');
         }, { passive: true });
 
@@ -6608,13 +6651,16 @@ document.addEventListener('DOMContentLoaded', renderBrandHub);
         document.addEventListener('DOMContentLoaded', function() {
             // Simple analytics - app opens (every time someone opens)
             // Start Brand Hub countdown
+            if (document.getElementById("challenge-timer")) updateBrandTimer();
             // Initialize badges system
+            if (typeof initBadges === 'function') initBadges();
             appOpens++;
             localStorage.setItem('asf-opens', appOpens);
             // Update display
             try { document.getElementById('stat-opens').textContent = appOpens; } catch(e) {}
             showProfile();
             // Load theme preference
+            if (savedTheme === 'dark') {
                 document.documentElement.setAttribute('data-theme', 'dark');
                 document.getElementById('darkModeToggle').textContent = '☀️';
             // Load user name from localStorage if exists
@@ -6624,6 +6670,8 @@ document.addEventListener('DOMContentLoaded', renderBrandHub);
             renderAchievements();
             // Restore joined group states
             ['Bertioga Surf Girls', 'Guarujá & Santos Surf', 'Ubatuba Surf Girls'].forEach(name => {
+                if (localStorage.getItem(key)) {
+                    if (btn) { btn.textContent = '✅ Inscrita!'; btn.style.background = 'var(--success)'; btn.style.pointerEvents = 'none'; }
             });
             // Water tracker
             updateWaterDisplay(parseInt(localStorage.getItem(getWaterKey()) || '0'));
@@ -6937,7 +6985,7 @@ document.addEventListener('DOMContentLoaded', renderBrandHub);
             { text: '🧘 Respire fundo antes de entrar: 4s inspire, 4s segure, 6s expire. Reduz ansiedade! 🧘', category: 'Mental', emoji: '🌬️' },
             { text: '🏄‍♀️ Aprenda a ler o swell meteo! Entender a formação das ondas te deixa uma surfista mais completa. 🌊', category: 'Técnica Avançada', emoji: '📡' },
             { text: '🍌 Smoothie de banana e aveia 1h antes do surf. Energia sustentada e digestão leve! 🥤', category: 'Nutrição', emoji: '🍌' },
-            { text: '🧘‍♀️ Alongue o quadril不定期! Movimentos circulares ajudam na rotação e previnem lesões. 🦵', category: 'Treino', emoji: '🧘‍♀️' },
+            { text: '🧘‍♀️ Alongue o quadrilregularmente! Movimentos circulares ajudam na rotação e previnem lesões. 🦵', category: 'Treino', emoji: '🧘‍♀️' },
             { text: '🌊 Use conceitos de bundling para escolher ondas. Em dias de ondas pequenas, priorize as séries maiores! 📊', category: 'Técnica', emoji: '🎯' },
             { text: '💙 Indique uma amiga para a ASF hoje! Crescemos juntas quando trazemos mais mulheres para o surf. 🤝', category: 'ASF', emoji: '💙' },
             { text: '🌊 Consulte a tábua de marés antes de sair! Conhecer a variação da maré ajuda a escolher o melhor horário para pegar ondas. 📅', category: 'Condições', emoji: '🌊' },
@@ -7308,7 +7356,7 @@ document.addEventListener('DOMContentLoaded', renderBrandHub);
             { text: '🏄‍♀️ Registros do app: toda session salva é um passo rumo à evolução consciente! 📈', category: 'Progresso', emoji: '📈' },
             { text: '🏋️ Treino deremo resistido: puxar corda naval fortalece a remada! Simule a resistência da água em casa! 💪', category: 'Treino', emoji: '🏋️' },
             { text: '🧘 Meditação guiada pós-surf: 10 min de gratidão pelo mar elevam o bem-estar! 🧠', category: 'Mental', emoji: '🧘' },
-            { text: '🌊识别 correntes de retorno: água mais escura e espuma que afasta da praia. Saia lateralmente! 🧭', category: 'Segurança', emoji: '🧭' },
+            { text: '🌊identifique correntes de retorno: água mais escura e espuma que afasta da praia. Saia lateralmente! 🧭', category: 'Segurança', emoji: '🧭' },
             { text: '👙 Proteção térmica: lycra térmica mantém calor corporal, evita choque térmico em águas frias! 🌡️', category: 'Equipamento', emoji: '🌡️' },
             { text: '📸 Registre sua evolução: vídeos de side-view mostram erros de postura que fotos não revelam! 🎬', category: 'Progresso', emoji: '🎬' },
             { text: '🏋️ Paddle simulado em terra: remada seca com elástico resistivo melhora força e técnica! 💪', category: 'Treino', emoji: '🏋️' },
@@ -7341,7 +7389,7 @@ document.addEventListener('DOMContentLoaded', renderBrandHub);
             { text: '🌬️ Vento offshore forecast: confira 2h antes. Ondas perfeitas exigem vento certo! 💨', category: 'Condições', emoji: '💨' },
             { text: '🔄 Rotatividade na lineup: deixe ondas passarem para entender o ritmo do mar! ⏸️', category: 'Técnica', emoji: '⏸️' },
             { text: '🧼 Cera ecológica: opções biodegradáveis protegem o oceano! 🌱', category: 'Sustentabilidade', emoji: '🌱' },
-            { text: '📱 App offline mode: salve dicas e地图 para acessar na praia sem internet! 🗺️', category: 'Tecnologia', emoji: '📱' },
+            { text: '📱 App offline mode: salve dicas emapa para acessar na praia sem internet! 🗺️', category: 'Tecnologia', emoji: '📱' },
             { text: '🍍 Abacaxi pós-surf: anti-inflamatório natural para recuperação muscular! 🍍', category: 'Nutrição', emoji: '🍍' },
             { text: '🧭 Orientação por pontos: use a costa como referência para não se perder no mar! 🧭', category: 'Segurança', emoji: '🧭' },
             { text: '🎥 Filmagem aérea: drone mostra sua técnica de fora d'água. Análise poderosa! 📹', category: 'Progresso', emoji: '📹' },
@@ -7413,7 +7461,7 @@ document.addEventListener('DOMContentLoaded', renderBrandHub);
             { text: '📸 Registro fotográfico: documente sua evolução com photos antes/depois! 📷', category: 'Progresso', emoji: '📷' },
             { text: '🧼 Cenário limpo: evite lesões com ambienteareo e sem obstáculos! 🧹', category: 'Segurança', emoji: '🧹' },
             { text: '📱 App ASF Premium: conteúdo exclusivo para membros ASF! 👑', category: 'ASF', emoji: '👑' },
-            { text: '🌊 Ondas de reef:知道了 a formação — safety first! 🏜️', category: 'Técnica', emoji: '🏜️' },
+            { text: '🌊 Ondas de reef:entendeu a formação — safety first! 🏜️', category: 'Técnica', emoji: '🏜️' },
             { text: '🎧 Fones de ouvido: música que não atrapalha a hearing das ondas! 🎶', category: 'Mental', emoji: '🎶' },
             { text: '🏆 Streak de surfs: mantenha sequência de dias no mar — evolução garantida! 🔥', category: 'Progresso', emoji: '🔥' },
             { text: '🔄 Rotina variada: mix de exercises prevents plateaus and keeps motivation high! ⚡', category: 'Treino', emoji: '⚡' },
@@ -7460,8 +7508,8 @@ document.addEventListener('DOMContentLoaded', renderBrandHub);
             { text: '🎯 Metas de habilidades: liste manobras que quer dominar este ano! 📋', category: 'Progresso', emoji: '📋' },
             { text: '🏄 Warm-up dinâmico: movemente articulações antes de remar! 🔄', category: 'Preparação', emoji: '🔄' },
             { text: '🧠 Mental rehearsal: visualize a execução perfeita da manobra antes de tentar! 🎯', category: 'Mental', emoji: '🎯' },
-            { text: '🌊 Ondas grandes: treine respiração e心理 para segurar a respiração! 🤿', category: 'Segurança', emoji: '🤿' },
-            { text: '📱 App offline: salve dicas e地图 para acessar na praia sem internet! 📱', category: 'Tecnologia', emoji: '📱' },
+            { text: '🌊 Ondas grandes: treine respiração emental para segurar a respiração! 🤿', category: 'Segurança', emoji: '🤿' },
+            { text: '📱 App offline: salve dicas emapa para acessar na praia sem internet! 📱', category: 'Tecnologia', emoji: '📱' },
             { text: '🏋️ Fortalecimento de pernas: agachamentos e lunges melhoram estabilidade! 💪', category: 'Treino', emoji: '💪' },
             { text: '🎮 Gamificação: complete desafios no app para manter a motivação! 🎯', category: 'ASF', emoji: '🎯' },
             { text: '🧭 Navegação segura: use GPS e marcar pontos de referência na praia! 🗺', category: 'Segurança', emoji: '🗺' },
@@ -7547,7 +7595,7 @@ document.addEventListener('DOMContentLoaded', renderBrandHub);
             { text: '🔧 Reparo de prancha: aprenda a fixar pequenos danos com kit de emergência! 🛠️', category: 'Manutenção', emoji: '🛠️' },
             { text: '⚠️ Zona de impacto: evite área de impacto das ondas quebrando — safety first! 🚫', category: 'Segurança', emoji: '🚫' },
             { text: '📍 Posicionamento no lineup: escolha seu lugar com base na ordem de chegada e respeito! 👥', category: 'Ética', emoji: '👥' },
-            { text: '🏋️ Remada em águas turbulentas:保持 corpo baixo e remadas potentes! 🔥', category: 'Técnica', emoji: '🔥' },
+            { text: '🏋️ Remada em águas turbulentas:mantenha corpo baixo e remadas potentes! 🔥', category: 'Técnica', emoji: '🔥' },
             { text: '💪 Paddle sprint: sprints de 50m melhoram potência e velocidade na remada! ⚡', category: 'Treino', emoji: '⚡' },
             { text: '🧠 Técnica do turtle roll: quando pego inside, rolar a prancha para passar! 🐢', category: 'Técnica', emoji: '🐢' },
             { text: '🌅 Surf amanhecer: mar flat, vento offshore, sessions perfeitas! 🌄', category: 'Experiência', emoji: '🌄' },
@@ -7616,7 +7664,7 @@ document.addEventListener('DOMContentLoaded', renderBrandHub);
             { text: '🏄 Técnica de floater small wave: mantenha velocidade em ondas de menor energia! ⚡', category: 'Técnica', emoji: '⚡' },
             { text: '⚠️ Segurança em séries pesadas: conheça seus limites em sets grandes — duck dive cedo! 🚨', category: 'Segurança', emoji: '🚨' },
             { text: '📡 Protocolo de comunicação: sinais visuais e chamadas de voz no lineup! 📢', category: 'Segurança', emoji: '📢' },
-            { text: '🏋️ Preparação física longboard: foco em equilíbrio eCore稳定性! 🧘', category: 'Preparação', emoji: '🧘' },
+            { text: '🏋️ Preparação física longboard: foco em equilíbrio eCoreestabilidade! 🧘', category: 'Preparação', emoji: '🧘' },
             { text: '🐬 Técnica de duck dive: empurre a prancha para baixo em ondas maiores! 👇', category: 'Técnica', emoji: '👇' },
             { text: '🌊 Leitura de correntes de retorno: identificação visual + escape lateral! 🚤', category: 'Segurança', emoji: '🚤' },
             { text: '👥 Gestão de grupo no lineup: comunicação não-verbal + espaço pessoal! 🤝', category: 'Ética', emoji: '🤝' },
@@ -7643,7 +7691,7 @@ document.addEventListener('DOMContentLoaded', renderBrandHub);
             { text: '💥 Preparação para wipeout: treine respiração e relaxamento sob pressão! 🌊', category: 'Segurança', emoji: '🌊' },
             { text: '📢 Protocolo de sinalização de resgate: bandeira vermelha + apito + chamada! 🚨', category: 'Segurança', emoji: '🚨' },
             { text: '🏄 Técnica de floater onda grande: maior velocidade + weight shift atrasado! 🚀', category: 'Técnica', emoji: '🚀' },
-            { text: '💨 Leitura vento spots fechados: vento locais afetam微观 ondulação! 🌬️', category: 'Condições', emoji: '🌬️' },
+            { text: '💨 Leitura vento spots fechados: vento locais afetammicroscópico ondulação! 🌬️', category: 'Condições', emoji: '🌬️' },
             { text: '💪 Gestão de confiança: registre pequenas vitórias para autoestima! 🏆', category: 'Mental', emoji: '🏆' },
             { text: '📅 Preparação competition: simulação ondas + mental rehearsal antes do evento! 🎯', category: 'Preparação', emoji: '🎯' },
             { text: '🚨 Protocolo emergência surf camp: reunião segurança + lista emergencies! 🆘', category: 'Segurança', emoji: '🆘' },
@@ -7678,7 +7726,7 @@ document.addEventListener('DOMContentLoaded', renderBrandHub);
             { text: '🛰️ Previsão de ondas por satélite: dados oceanográficos em tempo real! 📡', category: 'Condições', emoji: '📡' },
             { text: '👥 Técnica de remada em grupo: espaçamento + comunicação visual para evitar collisions! 🚫', category: 'Segurança', emoji: '🚫' },
             { text: '🏄 Técnica de layback em ondas grandes: controle total na descida da face! 🌊', category: 'Técnica', emoji: '🌊' },
-            { text: '💨 Leitura vento shore break: ventos변화 em quebras próximas à praia são imprevisíveis! ⚠️', category: 'Condições', emoji: '⚠️' },
+            { text: '💨 Leitura vento shore break: ventos que mudam em quebras próximas à praia são imprevisíveis! ⚠️', category: 'Condições', emoji: '⚠️' },
             { text: '🧪 Preparação surf águas poluídas: evite ingestão + banho pós-session urgente! 🚫', category: 'Segurança', emoji: '🚫' },
             { text: '🚑 Protocolo resgate ondas grandes: cordas de resgate + sinalização + evacuação rápida! 🆘', category: 'Segurança', emoji: '🆘' },
             { text: '📊 Gestão volume treino: registre sessões + descanso para evitar overtraining! 📈', category: 'Treino', emoji: '📈' },
@@ -9137,8 +9185,13 @@ document.addEventListener('DOMContentLoaded', renderBrandHub);
     reviews: 145
 ];
 
+
+
+
+
   
   // GA4 tracking
+  if (typeof gtag !== 'undefined') {
     gtag('event', 'affiliate_click', {
       event_category: 'monetization',
       event_label: productId,
@@ -9146,27 +9199,42 @@ document.addEventListener('DOMContentLoaded', renderBrandHub);
     });
 // Newsletter
 
+
 // Premium
+
+
+
 
 // WhatsApp
 
+
 // Analytics
+
+
+
 
 window.ASFMonetization = { trackEvent, getStats };
 
 // Toast
 
+
 // Init
 // Cookie Consent
+
+
+
 
 // Show banner after 2s if no consent
 
 // Pix Donation
 
+
 // Referral System
 ',name:'Capinha Celular À Prova D\'Água',price:'R$ 49,90',oldPrice:'R$ 79,90',image:'https://http2.mlstatic.com/D_NQ_NP_2X_998431-MLA53354855865_042022-F.webp',url:'https://produto.mercadolivre.com.br/MLB-2564859304-capinha-celular-a-prova-dagua-surf-_JM',commission:'15%',badge:'📱 Imperdível',rating:4.5,reviews:203},
   { id:'poncho-microfibra',brand:'SURFWEAR',brandColor:'#f39c12',name:'Poncho Microfibra (Secagem Rápida)',price:'R$ 79,90',oldPrice:'R$ 129,90',image:'https://http2.mlstatic.com/D_NQ_NP_2X_925481-MLA44847321610_032021-F.webp',url:'https://produto.mercadolivre.com.br/MLB-3437512899-poncho-surf-microfibra-universal-_JM',commission:'12%',badge:'🧖 Conforto',rating:4.7,reviews:145}
 ];
+
+
 
 <!-- PREMIUM PAYWALL MODAL -->
 <div id="premium-modal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.85); z-index:99999; align-items:center; justify-content:center; backdrop-filter: blur(8px);">
@@ -9222,6 +9290,7 @@ window.ASFMonetization = { trackEvent, getStats };
 
 <style>@keyframes modalBounce{0%{transform:scale(0.8);opacity:0}50%{transform:scale(1.05)}100%{transform:scale(1);opacity:1}}</style>
 
+
 <!-- MONETIZATION CTA -->
 <div id="monetization-cta" style="background: linear-gradient(135deg, rgba(0,168,204,0.08) 0%, rgba(155,89,182,0.08) 100%); padding: 24px; margin: 16px; border-radius: 20px; border: 1px solid rgba(0,168,204,0.15);">
   <div style="display: flex; flex-direction: column; gap: 16px;">
@@ -9240,6 +9309,7 @@ window.ASFMonetization = { trackEvent, getStats };
     </div>
   </div>
 </div>
+
 
 <div style="background: linear-gradient(135deg, #FFD700, #FFA500); margin: 20px 16px; padding: 24px; border-radius: 20px; text-align: center; box-shadow: 0 8px 30px rgba(255,215,0,0.3);">
   <div style="font-size: 48px; margin-bottom: 12px;">⭐</div>
@@ -9262,8 +9332,11 @@ window.ASFMonetization = { trackEvent, getStats };
     
     
     
+    window.acceptAllCookies = function() { setConsent('all'); };
+    window.essentialCookies = function() { setConsent('essential'); };
     
     // Show banner if no consent
+    if (!getConsent() && banner) {
       setTimeout(() => {
         banner.style.display = 'block';
         banner.style.animation = 'slideUp 0.5s ease-out';
@@ -9276,6 +9349,8 @@ window.ASFMonetization = { trackEvent, getStats };
   // Infolinks contextual ads - sign up at infolinks.com
   // (script loaded dynamically on consent)
   
+
+
 
 <!-- REFERRAL MODAL -->
 <div id="referral-modal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.85); z-index:99999; align-items:center; justify-content:center; backdrop-filter: blur(8px); padding: 20px;">
@@ -9313,6 +9388,8 @@ window.ASFMonetization = { trackEvent, getStats };
     </div>
   </div>
 </div>
+
+
 
   <!-- Cookie Consent Banner -->
   <div id="cookie-consent-banner" style="
@@ -9352,6 +9429,7 @@ window.ASFMonetization = { trackEvent, getStats };
       </div>
     </div>
   </div>
+
 
   
 
@@ -9398,6 +9476,9 @@ window.ASFMonetization = { trackEvent, getStats };
     });
   };
 
+
+
+
 function setLanguage(lang) {
     localStorage.setItem('asf-lang', lang);
     document.querySelectorAll('button[onclick^="setLanguage"]').forEach(function(b) {
@@ -9425,6 +9506,7 @@ function sendChatbotMessage() {
             msgs.innerHTML += "<div style='background:#eee; padding:8px; border-radius:8px; margin:4px 0;'><strong>Você:</strong> " + input.value + "</div>";
 
             let response = "Desculpe, não entendi. Tente: previsão, pontos, eventos, contatos ou como participar! 🤖";
+            for (const [key, value] of Object.entries(chatbotFAQs)) {
                 if (msg.includes(key)) { response = value; break; }
             }
 
@@ -11350,6 +11432,8 @@ function showBadgeDetails(badgeId) {
           const message = `
 🏆 ${badge.name}
 ${badge.icon} ${badge.brand}
+
+
 
 📊 Progresso: ${badge.progress}/${badge.required}
 ${badge.earned ? '✅ Ganho em: ' + badge.earnedAt : '🔒 Continue evoluindo!'}
