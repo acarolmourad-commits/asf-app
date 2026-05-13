@@ -153,6 +153,7 @@ div[style*="font-size: 14px"] { display: none !important; }
     <!-- Schema.org JSON-LD for SEO -->
     <script type="application/ld+json">
     </script>
+    <link rel="stylesheet" href="subscriber-styles.css">
 </head><body>
     <!-- Skip to content for accessibility -->
     <a href="#dicas" style="position: absolute; left: -9999px; top: 0; z-index: 10000; background: var(--primary); color: white; padding: 8px 16px; border-radius: 0 0 8px 0; font-weight: 600; text-decoration: none;" onfocus="this.style.left='0'" onblur="this.style.left='-9999px'">Pular para o conteúdo</a>
@@ -3073,7 +3074,7 @@ div[style*="font-size: 14px"] { display: none !important; }
 
             
             // Send data to Google Sheets (if form link available)
-        var formLink = 'https://docs.google.com/forms/d/1fJhfaiNyYSSq9bKElew69y6GZ6_pxLz05HR26klIsSA/edit'; // User can fill this
+         // User can fill this
         // For now, we just save locally. In future, link to form.
 
 
@@ -3577,41 +3578,9 @@ id="brandhub">
 
 
 // Mock data - will be replaced by real API
-const BRAND_OFFERS = [
-    {
-        brand: "STHILL SURF",
-        discount: "20% OFF",
-        code: "ASF20",
-        description: "Em todas as pranchas e acessórios",
-        expires: "30/04",
-        color: "#3498db"
-    },
-    {
-        brand: "TRIBOSURF",
-        discount: "30% OFF",
-        code: "ASF30",
-        description: "Lycras e rash guards",
-        expires: "15/05",
-        color: "#e74c3c"
-    },
-    {
-        brand: "SURFTRUNK",
-        discount: "Brinde exclusivo",
-        code: "ASFBONUS",
-        description: "Compra acima de R$300",
-        expires: "31/05",
-        color: "#2ecc71"
-    }
-];
 
-const UGC_IMAGES = [
-    "https://images.unsplash.com/photo-1502680390469-be75c86b636f?w=400&h=400&fit=crop", // surf mulher
-    "https://images.unsplash.com/photo-1527124423653-95a5c4b1d379?w=400&h=400&fit=crop", // surf
-    "https://images.unsplash.com/photo-1522207672534-b15242e0e8f8?w=400&h=400&fit=crop", // praia
-    "https://images.unsplash.com/photo-1519046904884-53103b34b206?w=400&h=400&fit=crop", // onda
-    "https://images.unsplash.com/photo-1530549387789-4c1017266635?w=400&h=400&fit=crop", // surfista
-    "https://images.unsplash.com/photo-1501423390713-72334d66b181?w=400&h=400&fit=crop"  // prancha
-];
+
+
 
 
 
@@ -5231,7 +5200,7 @@ document.addEventListener('DOMContentLoaded', renderBrandHub);
         
         
         // Send data to Google Sheets (if form link available)
-        var formLink = 'https://docs.google.com/forms/d/1fJhfaiNyYSSq9bKElew69y6GZ6_pxLz05HR26klIsSA/edit'; // User can fill this
+         // User can fill this
         // For now, we just save locally. In future, link to form.
 
     </div>
@@ -5393,7 +5362,7 @@ document.addEventListener('DOMContentLoaded', renderBrandHub);
 
     
     // Send data to Google Sheets (if form link available)
-        var formLink = 'https://docs.google.com/forms/d/1fJhfaiNyYSSq9bKElew69y6GZ6_pxLz05HR26klIsSA/edit'; // User can fill this
+         // User can fill this
         // For now, we just save locally. In future, link to form.
 
 
@@ -5433,7 +5402,6 @@ document.addEventListener('DOMContentLoaded', renderBrandHub);
         document.getElementById('stat-sessions').textContent = (JSON.parse(localStorage.getItem('surf-sessions') || []).length;
 
 
-var translations = {
     'pt': {},
     'en': {
         'Dicas': 'Tips',
@@ -5475,11 +5443,8 @@ var translations = {
         
 
             // Update tabs
-            const tabs = document.querySelectorAll('.tab');
-            const navItems = document.querySelectorAll('.nav-item');
 
             // Highlight active nav item by aria-label
-            const sectionLabels = {
               'dicas': 'Dicas de surf',
               'manas-proximas': 'Manas próximas',
               'saude': 'Saúde e bem-estar',
@@ -5491,9 +5456,7 @@ var translations = {
               'manas': 'Manas e comunidade'
             };
 
-            const label = sectionLabels[sectionId];
             if (label) {
-              const navItem = Array.from(navItems).find(item =>
                 item.getAttribute('aria-label') === label
               );
               if (navItem) navItem.classList.add('active');
@@ -5507,10 +5470,8 @@ var translations = {
         }
 
         // ===== SISTEMA DE NOTIFICAÇÕES =====
-        const NOTIF_KEY = 'asf_notifications';
 
         // Notificações padrão ao abrir
-        const DEFAULT_NOTIFICATIONS = [
             { id: 1, type: 'treino', icon: '💪', title: 'Novo Treino!', text: 'Treino de Força e Core disponível', time: 'Agora', read: false, target: 'treino-1', section: 'saude' },
             { id: 2, type: 'ondas', icon: '🌊', title: 'Ondas Boas!', text: 'Bertioga: 0.8m - Boa para surfar!', time: '5 min', read: false, target: 'wave-forecast', section: 'dicas' },
             { id: 3, type: 'pontos', icon: '🎯', title: 'Quiz Disponível', text: 'Responda e ganhe +50 pontos!', time: '10 min', read: false, target: 'quiz-basico', section: 'progresso' },
@@ -5733,8 +5694,6 @@ var translations = {
 
         // Fechar painel ao clicar fora
         document.addEventListener('click', function(e) {
-            const panel = document.getElementById('notifications-panel');
-            const bell = e.target.closest('button[onclick="toggleNotifications()"]');
             if (!panel.contains(e.target) && !bell) {
                 panel.style.display = 'none';
             }
@@ -5755,8 +5714,6 @@ var translations = {
         // ===== FIM NOTIFICAÇÕES =====
 
         // ===== SISTEMA DE COMPARTILHAMENTO =====
-        const APP_URL = 'https://acarolmourad-commits.github.io/asf-app/';
-        const SHARE_TEXT = '🏄‍♀️ Conheça o App ASF - Dicas de surf, treinos, previsão de ondas e muito mais para mulheres surfistas! 🌊';
 
         
 
@@ -5972,7 +5929,6 @@ var translations = {
             { text: '🧮 Derivação surf: derivation + surf + math! 🧮', category: 'Derivacao', emoji: '🧮' }
         ];
         // Normalized search index [Optimized] - cache normalized strings for faster search
-        const normalizedSearchIndex = searchIndex.map(item => ({
             ...item,
             _titleNorm: item.title.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, ''),
             _textNorm: item.text.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, ''),
@@ -5980,7 +5936,6 @@ var translations = {
         }));
 
         // Debounced search
-        let _searchTimer;
         
 
         
@@ -6003,7 +5958,6 @@ var translations = {
         });
 
         // ============ LIVE WEATHER & MARINE DATA ============
-        const beaches = {
             bertioga: { name: 'Bertioga', lat: -23.85, lon: -46.14 },
             santos:   { name: 'Santos',   lat: -23.96, lon: -46.33 },
             guaruja:  { name: 'Guarujá',  lat: -23.99, lon: -46.25 },
@@ -6015,11 +5969,7 @@ var translations = {
             itamambuca: { name: 'Itamambuca', lat: -23.45, lon: -45.05 },
             cambraia: { name: 'Cambraia', lat: -23.77, lon: -45.50 }
         };
-        let currentBeach = 'bertioga';
-        let cachedWeather = {};
-        let cachedMarine = {};
 
-        const weatherDescriptions = {
             0: '☀️ Céu limpo', 1: '🌤️ Pouco nublado', 2: '⛅ Parcialmente nublado', 3: '☁️ Nublado',
             45: '🌫️ Névoa', 48: '🌫️ Névoa gelada',
             51: '🌧️ Chuvisco leve', 53: '🌧️ Chuvisco', 55: '🌧️ Chuvisco forte',
@@ -6029,12 +5979,9 @@ var translations = {
             95: '⛈️ Tempestade', 96: '⛈️ Tempestade com granizo', 99: '⛈️ Tempestade forte'
         };
 
-        const windDir = (deg) => {
-            const dirs = ['N','NE','L','SE','S','SO','O','NO'];
             return dirs[Math.round(deg / 45) % 8];
         };
 
-        const surfRating = (waveHeight) => {
             if (waveHeight < 0.3) return { text: 'Sem ondas', color: 'var(--gray-400)' };
             if (waveHeight < 0.6) return { text: '🟢 Iniciante', color: 'var(--success)' };
             if (waveHeight < 1.0) return { text: '🟡 Todos os níveis', color: 'var(--accent)' };
@@ -6075,7 +6022,6 @@ var translations = {
 
         // Defer non-critical initializations to improve page load performance
         (function() {
-            const init = () => {
                 loadLiveData('bertioga');
                 updateMoonPhase();
             };
@@ -6087,15 +6033,6 @@ var translations = {
         })();
 
         // ========== CRONÔMETRO DE TREINO ==========
-        let timerInterval = null;
-        let timerState = 'stopped'; // stopped, running, paused
-        let timerSeconds = 0;
-        let timerCurrentRound = 1;
-        let timerTotalRounds = 8;
-        let timerWorkTime = 20;
-        let timerRestTime = 10;
-        let timerIsWork = true;
-        let timerWorkoutHistory = JSON.parse(localStorage.getItem('asf_timer_history') || '[]');
 
         
 
@@ -6130,11 +6067,7 @@ var translations = {
         initDarkMode();
 
         // ============ SCROLL PROGRESS BAR ============
-        const scrollBar = document.getElementById('scrollProgress');
         window.addEventListener('scroll', () => {
-            const scrollTop = window.scrollY;
-            const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-            const progress = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
             scrollBar.style.width = progress + '%';
             if (scrollTop < 10) scrollBar.classList.add('hidden');
             else scrollBar.classList.remove('hidden');
@@ -6150,7 +6083,6 @@ var translations = {
         
 
         // ============ MANA DA SEMANA ============
-        const manasSemana = [
             { name: 'Carolina Silva', avatar: '👩‍🦱', info: 'Intermediate • Bertioga', quote: '"Surfar me fez descobrir que sou mais forte do que imaginava. Cada onda é uma vitória!"', stat1: '🏆 3 campeonatos', stat2: '🔥 45 dias de streak' },
             { name: 'Fernanda Costa', avatar: '👩', info: 'Avançada • Itamambuca', quote: '"Comecei surfando no foam com 30 anos. Hoje faço tube. Nunca é tarde pra começar!"', stat1: '🏄 200+ sessões', stat2: '⭐ Nível 8' },
             { name: 'Juliana Mendes', avatar: '👩‍🦰', info: 'Iniciante • Riviera', quote: '"A ASF me deu coragem de entrar no mar. Agora não vivo sem! Obrigada, manas!"', stat1: '📚 15 quizzes', stat2: '💪 30 dias ativa' },
@@ -6358,7 +6290,6 @@ var translations = {
         ()();
 
         // ============ SURF SESSION LOG ============
-        let selectedMood = '';
         
 
         
@@ -6677,30 +6608,24 @@ var translations = {
             if (document.getElementById("challenge-timer")) updateBrandTimer();
             // Initialize badges system
             if (typeof initBadges === 'function') initBadges();
-            let appOpens = parseInt(localStorage.getItem('asf-opens') || '0');
             appOpens++;
             localStorage.setItem('asf-opens', appOpens);
             // Update display
             try { document.getElementById('stat-opens').textContent = appOpens; } catch(e) {}
             showProfile();
             // Load theme preference
-            const savedTheme = localStorage.getItem('asf-theme');
             if (savedTheme === 'dark') {
                 document.documentElement.setAttribute('data-theme', 'dark');
                 document.getElementById('darkModeToggle').textContent = '☀️';
             }
             // Load user name from localStorage if exists
-            const savedName = localStorage.getItem('asf-name');
             // (User loading happens in sections)
             renderSessions();
             renderUserPosts();
             renderAchievements();
             // Restore joined group states
             ['Bertioga Surf Girls', 'Guarujá & Santos Surf', 'Ubatuba Surf Girls'].forEach(name => {
-                const key = 'asf-joined-' + name.replace(/\s+/g, '-');
                 if (localStorage.getItem(key)) {
-                    const id = 'join-' + name.split(' ')[0].toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
-                    const btn = document.getElementById(id);
                     if (btn) { btn.textContent = '✅ Inscrita!'; btn.style.background = 'var(--success)'; btn.style.pointerEvents = 'none'; }
                 }
             });
@@ -6720,7 +6645,6 @@ var translations = {
         
 
         // ============ DICA DO DIA (989) ============
-        const dicas = [
             { text: '🌊 O mar hoje tá com ondas de 0.5-1.0m! Boas para todas. Bora surfar!', category: 'Condições', emoji: '🌊' },
             { text: '☀️ Protetor solar FPS 30+ a cada 2h. No Brasil, prevenção é tudo!', category: 'Prevenção', emoji: '☀️' },
             { text: '🧘 Alongue ombros, quadril e tornozelos ANTES de entrar. 5 min evita lesão!', category: 'Prevenção', emoji: '🧘' },
@@ -9147,7 +9071,6 @@ var translations = {
 
         // ============ BEACH GUIDE FILTER ============
         // Beach filter with cached card list [Optimized]
-        let beachCards = null;
         
 
         // ============ TOAST NOTIFICATION HELPER ============
@@ -9405,8 +9328,6 @@ window.ASFMonetization={trackEvent,getStats};const a=document.createElement('sty
   <!-- Cookie Consent Banner -->
   
   (function() {
-    const COOKIE_CONSENT = 'asf-cookie-consent';
-    const banner = document.getElementById('cookie-consent-banner');
     
     
     
