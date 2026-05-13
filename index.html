@@ -179,7 +179,7 @@ div[style*="font-size: 14px"] { display: none !important; }
     <link rel="stylesheet" href="subscriber-styles.css">
 </head><body>
     <!-- Skip to content for accessibility -->
-    <a href="#dicas" style="position: absolute; left: -9999px; top: 0; z-index: 10000; background: var(--primary); color: white; padding: 8px 16px; border-radius: 0 0 8px 0; font-weight: 600; text-decoration: none;" onfocus="this.style.left='0'" onblur="this.style.left='-9999px'">Pular para o conteúdo</a>
+    <!-- Link skip to content movido para script -->
     <div class="scroll-progress" id="scrollProgress"></div>
     <!-- Loading Screen REMOVED -->
     <!-- Animated Background -->
@@ -5623,7 +5623,7 @@ removed = {
             if (!panel.contains(e.target) && !bell) {
                 panel.style.display = 'none';
             }
-        });
+        })();
 
         // Adicionar notificação quando ganha pontos
         
@@ -5885,7 +5885,7 @@ removed = {
             if (!e.target.closest('.search-container')) {
                 document.getElementById('searchResults').classList.remove('active');
             }
-        });
+        })();
 
         // ============ LIVE WEATHER & MARINE DATA ============
         const beaches = {
@@ -6023,7 +6023,7 @@ removed = {
             scrollBar.style.width = progress + '%';
             if (scrollTop < 10) scrollBar.classList.add('hidden');
             else scrollBar.classList.remove('hidden');
-        }, { passive: true });
+        }, { passive: true })();
 
         // ============ MANAS REGISTRATION ============
         
@@ -6588,12 +6588,12 @@ removed = {
                     const btn = document.getElementById(id);
                     if (btn) { btn.textContent = '✅ Inscrita!'; btn.style.background = 'var(--success)'; btn.style.pointerEvents = 'none'; }
                 }
-            });
+            })();
             // Water tracker
             updateWaterDisplay(parseInt(localStorage.getItem(getWaterKey()) || '0'));
             // Checklist
             initChecklist();
-        });
+        })();
 
         // ============ PREMIUM CONTENT ============
         
@@ -9155,7 +9155,7 @@ removed = {
       event_category: 'monetization',
       event_label: productId,
       value: 1
-    });
+    })();
   }
 // Newsletter
 
@@ -9195,7 +9195,7 @@ setTimeout(()=>{if(!getCookieConsent()){const b=document.getElementById('cookie-
   { id:'poncho-microfibra',brand:'SURFWEAR',brandColor:'#f39c12',name:'Poncho Microfibra (Secagem Rápida)',price:'R$ 79,90',oldPrice:'R$ 129,90',image:'https://http2.mlstatic.com/D_NQ_NP_2X_925481-MLA44847321610_032021-F.webp',url:'https://produto.mercadolivre.com.br/MLB-3437512899-poncho-surf-microfibra-universal-_JM',commission:'12%',badge:'🧖 Conforto',rating:4.7,reviews:145}
 ];
 
-window.ASFMonetization={trackEvent,getStats};const a=document.createElement('style');a.textContent=\`@keyframes toastIn{from{opacity:0;transform:translateX(-50%) translateY(20px)}to{opacity:1;transform:translateX(-50%) translateY(0)}}@keyframes toastOut{from{opacity:1;transform:translateX(-50%) translateY(0)}to{opacity:0;transform:translateX(-50%) translateY(20px)}}\`,document.head.appendChild(a);document.addEventListener('DOMContentLoaded',function(){console.log('✅ Monetization system initialized'),const e=document.getElementById('loja');e&&getComputedStyle(e).display!=='none'&&setTimeout(renderAffiliateStore,100)});
+window.ASFMonetization={trackEvent,getStats};const a=document.createElement('style');a.textContent=\`@keyframes toastIn{from{opacity:0;transform:translateX(-50%) translateY(20px)}to{opacity:1;transform:translateX(-50%) translateY(0)}}@keyframes toastOut{from{opacity:1;transform:translateX(-50%) translateY(0)}to{opacity:0;transform:translateX(-50%) translateY(20px)}}\`,document.head.appendChild(a);document.addEventListener('DOMContentLoaded',function(){console.log('✅ Monetization system initialized'),const e=document.getElementById('loja');e&&getComputedStyle(e).display!=='none'&&setTimeout(renderAffiliateStore,100)})();
 
 
 <!-- PREMIUM PAYWALL MODAL -->
@@ -9435,12 +9435,12 @@ window.ASFMonetization={trackEvent,getStats};const a=document.createElement('sty
     page_title: document.title,
     page_location: window.location.href,
     user_id: getUserId ? getUserId() : undefined
-  });
+  })();
   window.trackGAEvent = function(action, label, value) {
     gtag('event', action, {
       event_label: label,
       value: value
-    });
+    })();
   };
 
 
@@ -9452,7 +9452,7 @@ function setLanguage(lang) {
         var isActive = b.textContent.indexOf(lang === 'en' ? 'EN' : lang === 'es' ? 'ES' : 'PT') >= 0;
         b.style.background = isActive ? '#00A8CC' : 'rgba(255,255,255,0.2)';
         b.style.color = 'white';
-    });
+    })();
     var terms = translations[lang];
     if (!terms) return;
     // Translate ALL visible text
@@ -9489,11 +9489,11 @@ function showTripVotes() {
                 }
                 // Group by location
                 var counts = {};
-                votes.forEach(function(v) { counts[v.location] = (counts[v.location] || 0) + 1; });
+                votes.forEach(function(v) { counts[v.location] = (counts[v.location] || 0) + 1; })();
                 var summary = '🗳️ RESULTADOS DAS VOTAÇÕES\n\nTotal: ' + votes.length + ' votos\n\n';
                 for (var loc in counts) { summary += loc + ': ' + counts[loc] + ' voto(s)\n'; }
                 summary += '\n--- DETALHES ---\n';
-                votes.forEach(function(v, i) { summary += (i+1) + '. ' + v.name + ' - ' + v.location + '\nWhatsApp: ' + v.phone + '\n\n'; });
+                votes.forEach(function(v, i) { summary += (i+1) + '. ' + v.name + ' - ' + v.location + '\nWhatsApp: ' + v.phone + '\n\n'; })();
                 alert(summary);
             }
 function initVotingCountdown() {
@@ -9529,8 +9529,8 @@ function updateLiveResults() {
                 var votes = JSON.parse(localStorage.getItem('asf-trip-votes') || '[]');
                 if (votes.length > 0) {
                     var counts = {};
-                    votes.forEach(function(v) { counts[v.location] = (counts[v.location] || 0) + 1; });
-                    var sorted = Object.entries(counts).sort(function(a, b) { return b[1] - a[1]; });
+                    votes.forEach(function(v) { counts[v.location] = (counts[v.location] || 0) + 1; })();
+                    var sorted = Object.entries(counts).sort(function(a, b) { return b[1] - a[1]; })();
                     var resultDiv = document.getElementById('current-results');
                     var display = document.getElementById('result-display');
                     if (resultDiv && display) {
@@ -9543,8 +9543,8 @@ function showFinalResults() {
                 var votes = JSON.parse(localStorage.getItem('asf-trip-votes') || '[]');
                 if (votes.length === 0) return;
                 var counts = {};
-                votes.forEach(function(v) { counts[v.location] = (counts[v.location] || 0) + 1; });
-                var sorted = Object.entries(counts).sort(function(a, b) { return b[1] - a[1]; });
+                votes.forEach(function(v) { counts[v.location] = (counts[v.location] || 0) + 1; })();
+                var sorted = Object.entries(counts).sort(function(a, b) { return b[1] - a[1]; })();
                 var winner = sorted[0][0];
                 var winnerVotes = sorted[0][1];
                 var msg = '🏆 SURFTRIP ' + (new Date().getMonth() + 1) + '/' + new Date().getFullYear() + '\n\n';
@@ -9586,7 +9586,7 @@ function voteForLocation(btn, loc, name, phone, email) {
                 // Save vote with full data
                 var key = 'asf-trip-votes';
                 var votes = JSON.parse(localStorage.getItem(key) || '[]');
-                votes.push({location: loc, name: name, phone: phone, email: email, date: new Date().toISOString()});
+                votes.push({location: loc, name: name, phone: phone, email: email, date: new Date().toISOString()})();
                 localStorage.setItem(key, JSON.stringify(votes));
                 // Also update count
                 var countKey = 'asf-trip-' + loc, count = (parseInt(localStorage.getItem(countKey)||0)+1);
@@ -9642,8 +9642,8 @@ function applyDiscount(code) {
 function exportData() {
                 var keys = ['asf-profile', 'surf-sessions', 'quizzes-done', 'asf-water', 'asf-checklist', 'asf-trip-votes', 'asf-parceiros', 'asf-lang', 'asf-theme', 'asf-achievements', 'asf-score', 'asf-level'];
                 var data = {};
-                keys.forEach(function(k) { var v = localStorage.getItem(k); if (v) data[k] = JSON.parse(v); });
-                var blob = new Blob([JSON.stringify(data, null, 2)], {type: 'application/json'});
+                keys.forEach(function(k) { var v = localStorage.getItem(k); if (v) data[k] = JSON.parse(v); })();
+                var blob = new Blob([JSON.stringify(data, null, 2)], {type: 'application/json'})();
                 var url = URL.createObjectURL(blob);
                 var a = document.createElement('a');
                 a.href = url;
@@ -9736,7 +9736,7 @@ function sendSupport(valor) {
     }
 function showSection(sectionId) {
             document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
-            document.querySelectorAll('.tab').forEach(t => { t.classList.remove('active'); t.setAttribute('aria-selected', 'false'); });
+            document.querySelectorAll('.tab').forEach(t => { t.classList.remove('active'); t.setAttribute('aria-selected', 'false'); })();
             document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
 
             // Show selected section
@@ -9748,7 +9748,7 @@ function showSection(sectionId) {
         }
 function handleNavTap(btn, sectionId) {
             if (btn.classList.contains('active')) {
-                window.scrollTo({ top: 0, behavior: 'smooth' });
+                window.scrollTo({ top: 0, behavior: 'smooth' })();
             } else {
                 showSection(sectionId);
                 // Update badges if opening badges section
@@ -9867,7 +9867,7 @@ function openNotification(type, id) {
                                    document.querySelector(`[data-target="${notif.target}"]`) ||
                                    document.querySelector(`h3:contains("${notif.text}")`);
                     if (element) {
-                        element.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                        element.scrollIntoView({ behavior: 'smooth', block: 'center' })();
                         element.style.transition = 'background 0.3s';
                         element.style.background = '#FFF9E6';
                         setTimeout(() => element.style.background = '', 2000);
@@ -9947,7 +9947,7 @@ function closeWelcome() {
             localStorage.setItem('asf-welcome-seen', 'true');
         }
 function scrollToTop() {
-            window.scrollTo({ top: 0, behavior: 'smooth' });
+            window.scrollTo({ top: 0, behavior: 'smooth' })();
         }
 function requestLocation() {
             const statusDiv = document.getElementById('location-status');
@@ -9991,9 +9991,9 @@ function findNearbyManas() {
                 const allManas = [];
                 Object.keys(MOCK_MANAS).forEach(beach => {
                     MOCK_MANAS[beach].forEach(mana => {
-                        allManas.push({ ...mana, region: beach });
-                    });
-                });
+                        allManas.push({ ...mana, region: beach })();
+                    })();
+                })();
 
                 // Ordena por distância
                 allManas.sort((a, b) => a.distance - b.distance);
@@ -10125,7 +10125,7 @@ function earnPoints(type, points) {
                 data.quizzes++;
                 // Sync to quizzes-done for achievements
                 const quizzes = JSON.parse(localStorage.getItem('quizzes-done') || '[]');
-                quizzes.push({date: new Date().toISOString()});
+                quizzes.push({date: new Date().toISOString()})();
                 localStorage.setItem('quizzes-done', JSON.stringify(quizzes));
             }
             if (type === 'dica') data.dicas++;
@@ -10147,14 +10147,14 @@ function updatePointsDisplay() {
             // Atualizar displays se existirem
             document.querySelectorAll('.points-display').forEach(el => {
                 el.textContent = data.total;
-            });
+            })();
         }
 function createPost() {
             const textarea = document.getElementById('new-post-text');
             const text = textarea.value.trim();
             if (!text) { showToast('Escreva algo antes de publicar! ✍️'); return; }
             const posts = JSON.parse(localStorage.getItem('asf-user-posts') || '[]');
-            posts.unshift({ text, time: Date.now(), likes: 0 });
+            posts.unshift({ text, time: Date.now(), likes: 0 })();
             localStorage.setItem('asf-user-posts', JSON.stringify(posts));
             textarea.value = '';
             renderUserPosts();
@@ -10330,7 +10330,7 @@ function selectBeach(beach, btn) {
             document.querySelectorAll('.beach-btn').forEach(b => {
                 b.classList.remove('btn-primary');
                 b.classList.add('btn-secondary');
-            });
+            })();
             btn.classList.remove('btn-secondary');
             btn.classList.add('btn-primary');
             loadLiveData(beach);
@@ -10977,7 +10977,7 @@ async function loadBestDay() {
                     score += Math.min(wp * 3, 30); // period bonus
                     score += Math.max(0, 20 - wind); // low wind bonus
                     score += Math.random() * 10; // slight randomization
-                    scores.push({ idx: i, score, wh, wp, wind, date: days.time[i] });
+                    scores.push({ idx: i, score, wh, wp, wind, date: days.time[i] })();
                     if (score > bestScore) { bestScore = score; bestIdx = i; }
                 }
                 const best = scores[bestIdx];
@@ -11110,7 +11110,7 @@ function shareSurfConditions() {
                 if (label === 'Ondas') data.waves = val;
                 if (label === 'Temp') data.temp = val;
                 if (label === 'Período') data.period = val;
-            });
+            })();
             // Get condition from badge
             const badge = bar.querySelector('.surf-condition-badge');
             data.condition = badge ? badge.textContent : '';
@@ -11118,7 +11118,7 @@ function shareSurfConditions() {
             const windItem = Array.from(items).find(i => {
                 const l = i.querySelector('.surf-label');
                 return l && l.textContent.includes('km/h') === false && ['N','NE','E','SE','S','SO','O','NO'].includes(l.textContent);
-            });
+            })();
             if (windItem) {
                 data.windSpeed = windItem.querySelector('.surf-val')?.textContent || '';
                 data.windDir = windItem.querySelector('.surf-label')?.textContent || '';
@@ -11127,7 +11127,7 @@ function shareSurfConditions() {
             const msg = `🏄‍♀️ Condições ASF - ${data.beach || 'Bertioga'}\n\n🌊 Ondas: ${data.waves || '-'}\n💨 Vento: ${data.windSpeed || '-'} ${data.windDir || ''}\n🌡️ Temp: ${data.temp || '-'}\n⏱️ Período: ${data.period || '-'}\n📊 Condição: ${data.condition || '-'}\n\nBora surfar? 🤙`;
             // Try native share API first (mobile), fallback to WhatsApp
             if (navigator.share) {
-                navigator.share({ title: 'Condições ASF', text: msg }).catch(() => {});
+                navigator.share({ title: 'Condições ASF', text: msg }).catch(() => {})();
             } else {
                 const url = `https://wa.me/?text=${encodeURIComponent(msg)}`;
                 window.open(url, '_blank');
@@ -11148,7 +11148,7 @@ function selectMood(btn, mood) {
             document.querySelectorAll('.session-mood-btn').forEach(b => {
                 b.style.borderColor = 'var(--gray-200)';
                 b.style.background = 'white';
-            });
+            })();
             btn.style.borderColor = 'var(--primary)';
             btn.style.background = 'rgba(0,168,204,0.08)';
             selectedMood = mood;
@@ -11182,7 +11182,7 @@ function saveSession() {
             document.querySelectorAll('.session-mood-btn').forEach(b => {
                 b.style.borderColor = 'var(--gray-200)';
                 b.style.background = 'white';
-            });
+            })();
             selectedMood = '';
             renderSessions();
             showToast('Sessão registrada! 🏄‍♀️ +20 pts');
@@ -11208,8 +11208,8 @@ function renderSessions() {
             // Render last 5 sessions
             list.innerHTML = sessions.slice(0, 5).map(s => {
                 const d = new Date(s.date);
-                const dateStr = d.toLocaleDateString('pt-BR', { day: '2-digit', month: 'short' });
-                const timeStr = d.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
+                const dateStr = d.toLocaleDateString('pt-BR', { day: '2-digit', month: 'short' })();
+                const timeStr = d.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' })();
                 return `<div class="card" style="margin-bottom: 8px; padding: 12px;">
                     <div style="display: flex; justify-content: space-between; align-items: center;">
                         <div style="display: flex; gap: 10px; align-items: center;">
@@ -11235,12 +11235,12 @@ function renderSessions() {
             const longestMin = Math.max(...durations);
             // Fav beach
             const beachCount = {};
-            sessions.forEach(s => { beachCount[s.beach] = (beachCount[s.beach] || 0) + 1; });
+            sessions.forEach(s => { beachCount[s.beach] = (beachCount[s.beach] || 0) + 1; })();
             const favBeach = Object.entries(beachCount).sort((a, b) => b[1] - a[1])[0];
             document.getElementById('stat-fav-beach').textContent = favBeach ? favBeach[0] : '-';
             // Fav mood
             const moodCount = {};
-            sessions.forEach(s => { moodCount[s.mood] = (moodCount[s.mood] || 0) + 1; });
+            sessions.forEach(s => { moodCount[s.mood] = (moodCount[s.mood] || 0) + 1; })();
             const favMood = Object.entries(moodCount).sort((a, b) => b[1] - a[1])[0];
             document.getElementById('stat-fav-mood').textContent = favMood ? favMood[0] : '-';
             document.getElementById('stat-longest').textContent = longestMin >= 60 ? Math.floor(longestMin / 60) + 'h' + (longestMin % 60 > 0 ? longestMin % 60 : '') : longestMin + 'min';
@@ -11307,7 +11307,7 @@ function loadBadges() {
                 badge.earnedAt = earned.earnedAt;
                 badge.progress = earned.progress || badge.required;
               }
-            });
+            })();
           }
         }
 function saveBadges() {
@@ -11331,7 +11331,7 @@ function updateBadgeProgress() {
                 if (s.notes && s.notes.toLowerCase().includes(badge.brand.toLowerCase().split(' ')[0])) {
                   count++;
                 }
-              });
+              })();
 
               badge.progress = Math.min(count, badge.required);
               if (count >= badge.required) {
@@ -11342,7 +11342,7 @@ function updateBadgeProgress() {
                 sendNotification(`🎉 Novo badge: ${badge.name}!`);
               }
             }
-          });
+          })();
 
           if (changed) saveBadges();
           updateBadgesUI();
@@ -11480,7 +11480,7 @@ function initChecklist() {
                 const states = JSON.parse(saved);
                 document.querySelectorAll('.pre-surf-check').forEach((c, i) => {
                     if (states[i]) c.checked = true;
-                });
+                })();
             }
             document.querySelectorAll('.pre-surf-check').forEach(c => {
                 c.addEventListener('change', () => {
@@ -11488,8 +11488,8 @@ function initChecklist() {
                     document.querySelectorAll('.pre-surf-check').forEach(cb => states.push(cb.checked));
                     localStorage.setItem('asf-checklist', JSON.stringify(states));
                     updateChecklistStatus();
-                });
-            });
+                })();
+            })();
             updateChecklistStatus();
         }
 function showDica(index) {
@@ -11524,11 +11524,11 @@ function filterBeaches(region) {
             const showAll = region === 'all';
             beachCards.forEach(card => {
                 card.style.display = (showAll || card.dataset.region === region) ? '' : 'none';
-            });
+            })();
             // Update filter buttons
             document.querySelectorAll('[id^="beach-filter-"]').forEach(btn => {
                 btn.className = 'btn btn-secondary';
-            });
+            })();
             const activeBtn = document.getElementById('beach-filter-' + region);
             if (activeBtn) activeBtn.className = 'btn btn-primary';
         }
@@ -11552,7 +11552,7 @@ function toggleLike(btn) {
 function sharePost(text) {
             const msg = `🏄‍♀️ ASF - Associação de Surf Feminino\n\n"${text}"\n\n🔗 https://acarolmourad-commits.github.io/asf-app/`;
             if (navigator.share) {
-                navigator.share({ title: 'ASF', text: msg }).catch(() => {});
+                navigator.share({ title: 'ASF', text: msg }).catch(() => {})();
             } else if (navigator.clipboard) {
                 navigator.clipboard.writeText(msg).then(() => showToast('📋 Copiado para compartilhar!'));
             }
@@ -11727,7 +11727,7 @@ function renderAffiliateStore() {
 
 function openAffiliateLink(url, productId) {
   const clicks = JSON.parse(localStorage.getItem('asf-affiliate-clicks') || '[]');
-  clicks.push({productId, timestamp: new Date().toISOString()});
+  clicks.push({productId, timestamp: new Date().toISOString()})();
   localStorage.setItem('asf-affiliate-clicks', JSON.stringify(clicks));
   console.log('Click afiliado:', productId);
   window.open(url, '_blank', 'noopener,noreferrer');
@@ -11737,7 +11737,7 @@ function openAffiliateLink(url, productId) {
       event_category: 'monetization',
       event_label: productId,
       value: 1
-    });
+    })();
   }
 }
 // Newsletter
@@ -11763,13 +11763,13 @@ function copyPixKey(){
     showToast('✅ Chave Pix copiada!', 'success');
   }).catch(()=>{
     showToast('❌ Erro ao copiar', 'error');
-  });
+  })();
   trackEvent('donation','pix_copy');
 }
 function getUserId(){try{let uid=localStorage.getItem('asf-user-id');if(!uid){uid='user_'+Math.random().toString(36).substring(7);localStorage.setItem('asf-user-id',uid)}return uid}catch(e){return 'user_anon'}}
 function generateReferralCode(){const userId=getUserId();const code=btoa(`${userId}:${Date.now()}`).substring(0,8);localStorage.setItem(`asf-referral-${code}`,userId);return code}
-function trackReferral(code,targetEmail){const referrerId=localStorage.getItem(`asf-referral-${code}`);if(referrerId){const r=JSON.parse(localStorage.getItem('asf-referrals')||'[]');r.push({code,targetEmail,timestamp:Date.now(),rewardGranted:false});localStorage.setItem('asf-referrals',JSON.stringify(r));trackEvent('referral','code_used',code);console.log('📨 Referral tracked:',code)}}
-function buyEbook(){const isPremium=localStorage.getItem('asf-premium-status')==='active';const price=isPremium?(29.90*0.7):29.90;trackEvent('ebook','purchase_click',{price,premium_user:isPremium});showToast('🚀 Redirecionando para pagamento...','info');setTimeout(()=>{showToast('📦 Ebook disponível em breve!','info')},1500)}
+function trackReferral(code,targetEmail){const referrerId=localStorage.getItem(`asf-referral-${code}`);if(referrerId){const r=JSON.parse(localStorage.getItem('asf-referrals')||'[]');r.push({code,targetEmail,timestamp:Date.now(),rewardGranted:false})();localStorage.setItem('asf-referrals',JSON.stringify(r));trackEvent('referral','code_used',code);console.log('📨 Referral tracked:',code)}}
+function buyEbook(){const isPremium=localStorage.getItem('asf-premium-status')==='active';const price=isPremium?(29.90*0.7):29.90;trackEvent('ebook','purchase_click',{price,premium_user:isPremium})();showToast('🚀 Redirecionando para pagamento...','info');setTimeout(()=>{showToast('📦 Ebook disponível em breve!','info')},1500)}
 function submitUGC(){const fileInput=document.getElementById('ugc-photo');if(!fileInput||!fileInput.files[0])return showToast('📷 Selecione uma foto primeiro','error');showToast('✅ Foto enviada! Em análise.','success');trackEvent('ugc','photo_submitted');fileInput.value=''}
 function initGoogleAnalytics(){console.log('📊 Analytics enabled')}
 function getConsent() { return localStorage.getItem(COOKIE_CONSENT); }
