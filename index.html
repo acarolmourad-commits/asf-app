@@ -88,6 +88,7 @@
 .offer-description, .product-description, .badge-description,
 .dica-desc, .post-desc {
   display: none !important;
+}
 
 /* DEFINITIVE hide - Carol's request */
 header, #header, .header, 
@@ -100,12 +101,14 @@ footer, #footer, .footer,
 .section-title, h2, h3, h4,
 .notif-badge, .wave-forecast {
   display: none !important;
+}
 
 
 /* Hide header text elements */
 .logo-text, .logo-text span, 
 .icon-btn[title], button[title] { 
   display: none !important; 
+}
 
 /* ==== DEFINITIVE HIDE - Carol's requirement ==== */
 /* Hide ALL descriptive text elements */
@@ -147,28 +150,11 @@ div[style*="font-size: 14px"] { display: none !important; }
 </style>
     <!-- Structured Data -->
     
-        "@context": "https://schema.org",
-        "@type": "Organization",
-        "name": "ASF - Associação de Surf Feminino",
-        "url": "https://acarolmourad-commits.github.io/asf-app/",
-        "description": "Conectando mulheres surfistas. Dicas, comunidade, surftrips e muito mais!",
-        "sameAs": [
-            "https://www.instagram.com/associacaosurffeminino",
-            "https://www.tiktok.com/@Cahrol.asf"
-        ]
-
-
-
-
-
+    <!-- Schema.org JSON-LD for SEO -->
     <script type="application/ld+json">
-     "@context": "https://schema.org",
-     "@type": "Organization",
-     "name": "ASF - Associação de Surf Feminino",
-     "url": "https://acarolmourad-commits.github.io/asf-app/"
     </script>
-    <link rel="stylesheet" href="subscriber-styles.css">
 </head><body>
+    <!-- Skip to content for accessibility -->
     <a href="#dicas" style="position: absolute; left: -9999px; top: 0; z-index: 10000; background: var(--primary); color: white; padding: 8px 16px; border-radius: 0 0 8px 0; font-weight: 600; text-decoration: none;" onfocus="this.style.left='0'" onblur="this.style.left='-9999px'">Pular para o conteúdo</a>
     <div class="scroll-progress" id="scrollProgress"></div>
     <!-- Loading Screen REMOVED -->
@@ -212,6 +198,7 @@ div[style*="font-size: 14px"] { display: none !important; }
                 <div class="logo-text">ASF</div>
             </div>
             <div class="header-actions">
+                <button class="icon-btn" id="darkModeToggle" onclick="var d=document.documentElement,w=localStorage,t=d.getAttribute('data-theme');if(t==='dark'){d.removeAttribute('data-theme');w.setItem('asf-theme','light');this.textContent='🌙'}else{d.setAttribute('data-theme','dark');w.setItem('asf-theme','dark');this.textContent='☀️'}" title="Modo Noturno" style="font-size:22px;width:48px;height:48px;">🌙</button>
                 <button class="icon-btn" onclick="toggleNotifications()" title="Notificações" style="position: relative;">
                     🔔
                     <span id="notif-badge" style="position: absolute; top: -5px; right: -5px; background: #E74C3C; color: white; font-size: 10px; width: 18px; height: 18px; border-radius: 50%; display: flex; align-items: center; justify-content: center; display: none;">0</span>
@@ -238,39 +225,7 @@ div[style*="font-size: 14px"] { display: none !important; }
             <button onclick="sendChatbotMessage()" style="background:#00A8CC; color:white; border:none; padding:10px 16px; border-radius:8px; cursor:pointer;">Enviar</button>
         </div>
     </div>
-
-    
-            "como funciona": "O ASF App tem previsão de ondas, dicas, treinos, comunidade e muito mais! Clique nas abas para explorar.",
-            "previsão": "A previsão de ondas mostra as condições atualizadas automatically para as praias do litoral paulista.",
-            "onda": "A previsão mostra altura, período e direção das ondas para cada praia.",
-            "como participar": "Basta fazer login no app e explorar as seções!",
-            "eventos": "Temos competições mensuales. Verifique a aba 'Competições'.",
-            "competições": "As competições estão na aba 🏆. Lá você vê próximos eventos e resultados.",
-            "pontos": "Você ganha pontos fazendo quizzes, logando sessões e participando. Consulte seu nível na aba Pontos.",
-            "nível": "Seu nível aumenta conforme você ganha pontos usando o app!",
-            "descontos": "Na aba Lojas tem desconto em parceiros. Mostre seu ASF App!",
-            "grupos": "Na aba Comunidad você encontra grupos de surfe por região.",
-            "manas": "Use a aba 'Próximas' para encontrar sisters surfistas perto de você!",
-            "contato": "Fale conosco pelo WhatsApp ou Instagram @associacaosurffeminino"
-        };
-
-        
-
-        
-
-            if (e.key === "Enter") sendChatbotMessage();
         });
-
-
-"notifications-panel" style="display: none; position: fixed; top: 80px; right: 15px; width: 320px; max-height: 400px; background: white; border-radius: 16px; box-shadow: 0 10px 40px rgba(0,0,0,0.2); z-index: 1000; overflow: hidden;">
-        <div style="background: linear-gradient(135deg, #0E2439 0%, #1A3A5C 100%); padding: 15px; color: white; display: flex; justify-content: space-between; align-items: center;">
-            <h3 style="font-size: 16px;">🔔 Notificações</h3>
-            <button onclick="clearNotifications()" style="background: rgba(255,255,255,0.2); border: none; color: white; padding: 5px 10px; border-radius: 8px; font-size: 11px; cursor: pointer;">Limpar</button>
-        </div>
-        <div id="notifications-list" style="max-height: 340px; overflow-y: auto; padding: 10px;">
-            <p style="text-align: center; color: #999; padding: 20px;">Sem notificações</p>
-        </div>
-    </div>
 
     <!-- Search Bar -->
     <div class="search-container">
@@ -1028,6 +983,7 @@ div[style*="font-size: 14px"] { display: none !important; }
 
             <div id="location-status" class="p-h-20 m-b-15">
                 <button onclick="requestLocation()" class="btn btn-primary" style="width: 100%; background: linear-gradient(135deg, #00A8CC, #4DC8E0);">
+                    📍 Ativar Localização
                 </button>
             </div>
 
@@ -1524,6 +1480,7 @@ div[style*="font-size: 14px"] { display: none !important; }
                 <div class="card">
                     <span class="card-tag green">ESSENCIAL</span>
                     <h3>🧘 Alongamento de Gato-Vaca</h3>
+                    <p><strong>Como fazer:</strong> De joelhos, alterna entre curvar e arquear as costas. 10 repetições.</p>
                     <p style="margin-top: 8px;"><strong>Benefício:</strong> Mobilidade da coluna, alivia tensão.</p>
                     <p style="margin-top: 8px; font-size: 12px; color: var(--gray-400);">⏱️ 2 min • Diariamente</p>
                 </div>
@@ -2695,6 +2652,7 @@ div[style*="font-size: 14px"] { display: none !important; }
                             <p style="font-size: 11px; color: var(--gray-400); margin-top: 8px;">✅ <strong>Resposta correta: B)</strong> A corrente de retorno arrasta a água da onda de volta para alto mar, podendo afastar nadadores e surfistas da praia.</p>
                         </div>
                         <div class="quiz-question" data-question="2" style="margin-top: 20px;">
+                            <p style="font-weight: 600; margin-bottom: 10px;">2. Se você for pego por uma corrente de retorno, o que deve fazer?</p>
                             <label style="display: block; padding: 8px; background: white; border-radius: 8px; margin: 5px 0; cursor: pointer;">
                                 <input type="radio" name="sq2" value="a"> A) Nadar diretamente para a praia
                             </label>
@@ -2739,6 +2697,7 @@ div[style*="font-size: 14px"] { display: none !important; }
                             <label style="display: block; padding: 8px; background: white; border-radius: 8px; margin: 5px 0; cursor: pointer;">
                                 <input type="radio" name="sq4" value="d"> D) Tirar foto para postar
                             </label>
+                            <p style="font-size: 11px; color: var(--gray-400); margin-top: 8px;">✅ <strong>Resposta correta: B)</strong> Grite por ajuda (socorro!), jogue algo que flutue (boia, prancha,garrafa PET) e só entre se for salva-vidas treinado. Nunca entre sozinho se a pessoa estiver em pânico.</p>
                         </div>
                         <div class="quiz-question" data-question="5" style="margin-top: 20px;">
                             <p style="font-weight: 600; margin-bottom: 10px;">5. Por que não é recomendado surfar sozinho?</p>
@@ -2754,6 +2713,7 @@ div[style*="font-size: 14px"] { display: none !important; }
                             <label style="display: block; padding: 8px; background: white; border-radius: 8px; margin: 5px 0; cursor: pointer;">
                                 <input type="radio" name="sq5" value="d"> D) É mais difícil de carregar a prancha
                             </label>
+                            <p style="font-size: 11px; color: var(--gray-400); margin-top: 8px;">✅ <strong>Resposta correta: B)</strong> Em caso de lesão, afogamento ou emergency, ter alguém por perto pode salvar sua vida. Sempresurf com pelo menos mais uma pessoa.</p>
                         </div>
                         <div class="quiz-question" data-question="6" style="margin-top: 20px;">
                             <p style="font-weight: 600; margin-bottom: 10px;">6. O que significa bandeira vermelha na praia?</p>
@@ -2923,6 +2883,7 @@ div[style*="font-size: 14px"] { display: none !important; }
                         <label style="font-size: 12px; color: var(--gray-600);">Notas (opcional)</label>
                         <input type="text" id="session-notes" placeholder="Ex: Peguei 2 tubos! 🤙" style="width: 100%; padding: 8px; border: 1px solid var(--gray-200); border-radius: 8px; font-size: 13px; font-family: 'Outfit';">
                     </div>
+                    <button class="btn btn-primary" style="width: 100%;" onclick="saveSession()">💾 Salvar Sessão</button>
                 </div>
 
                 <!-- Recent Sessions -->
@@ -3112,6 +3073,7 @@ div[style*="font-size: 14px"] { display: none !important; }
 
             
             // Send data to Google Sheets (if form link available)
+        var formLink = 'https://docs.google.com/forms/d/1fJhfaiNyYSSq9bKElew69y6GZ6_pxLz05HR26klIsSA/edit'; // User can fill this
         // For now, we just save locally. In future, link to form.
 
 
@@ -3615,6 +3577,8 @@ id="brandhub">
 
 
 // Mock data - will be replaced by real API
+const BRAND_OFFERS = [
+    {
         brand: "STHILL SURF",
         discount: "20% OFF",
         code: "ASF20",
@@ -3622,6 +3586,7 @@ id="brandhub">
         expires: "30/04",
         color: "#3498db"
     },
+    {
         brand: "TRIBOSURF",
         discount: "30% OFF",
         code: "ASF30",
@@ -3629,14 +3594,17 @@ id="brandhub">
         expires: "15/05",
         color: "#e74c3c"
     },
+    {
         brand: "SURFTRUNK",
         discount: "Brinde exclusivo",
         code: "ASFBONUS",
         description: "Compra acima de R$300",
         expires: "31/05",
         color: "#2ecc71"
+    }
 ];
 
+const UGC_IMAGES = [
     "https://images.unsplash.com/photo-1502680390469-be75c86b636f?w=400&h=400&fit=crop", // surf mulher
     "https://images.unsplash.com/photo-1527124423653-95a5c4b1d379?w=400&h=400&fit=crop", // surf
     "https://images.unsplash.com/photo-1522207672534-b15242e0e8f8?w=400&h=400&fit=crop", // praia
@@ -3876,6 +3844,7 @@ document.addEventListener('DOMContentLoaded', renderBrandHub);
 
             <!-- Backup/Restore Data -->
             <div style="display: flex; gap: 8px; margin-bottom: 16px; flex-wrap: wrap;">
+                <button class="btn btn-secondary" style="flex: 1; min-width: 140px; padding: 12px 8px; font-size: 13px;" onclick="exportData()" title="Salvar seus dados">💾 Backup Dados</button>
                 <button class="btn btn-primary" style="flex: 1; min-width: 140px; padding: 12px 8px; font-size: 13px;" onclick="document.getElementById('importFile').click()" title="Carregar seus dados">📂 Restaurar</button>
                 <input type="file" id="importFile" accept=".json" style="display: none;" onchange="importData(this)">
             </div>
@@ -5222,6 +5191,7 @@ document.addEventListener('DOMContentLoaded', renderBrandHub);
             <span class="label">Badges</span>
         </button>
 
+    <!-- Hidden sections for compatibility -->
     <div class="section" id="comunidade-hidden" style="display: none;"></div>
 
     <!-- Parceiros - Cadastro -->
@@ -5261,6 +5231,7 @@ document.addEventListener('DOMContentLoaded', renderBrandHub);
         
         
         // Send data to Google Sheets (if form link available)
+        var formLink = 'https://docs.google.com/forms/d/1fJhfaiNyYSSq9bKElew69y6GZ6_pxLz05HR26klIsSA/edit'; // User can fill this
         // For now, we just save locally. In future, link to form.
 
     </div>
@@ -5422,6 +5393,7 @@ document.addEventListener('DOMContentLoaded', renderBrandHub);
 
     
     // Send data to Google Sheets (if form link available)
+        var formLink = 'https://docs.google.com/forms/d/1fJhfaiNyYSSq9bKElew69y6GZ6_pxLz05HR26klIsSA/edit'; // User can fill this
         // For now, we just save locally. In future, link to form.
 
 
@@ -5461,6 +5433,7 @@ document.addEventListener('DOMContentLoaded', renderBrandHub);
         document.getElementById('stat-sessions').textContent = (JSON.parse(localStorage.getItem('surf-sessions') || []).length;
 
 
+var translations = {
     'pt': {},
     'en': {
         'Dicas': 'Tips',
@@ -5495,14 +5468,18 @@ document.addEventListener('DOMContentLoaded', renderBrandHub);
         'Pontos': 'Puntos',
         'Checklist Pré-Surf': 'Lista Pre-Surf',
         'Calculadora de Prancha': 'Calculadora de Tabla'
+    }
 };
 
  to scroll to top
         
 
             // Update tabs
+            const tabs = document.querySelectorAll('.tab');
+            const navItems = document.querySelectorAll('.nav-item');
 
             // Highlight active nav item by aria-label
+            const sectionLabels = {
               'dicas': 'Dicas de surf',
               'manas-proximas': 'Manas próximas',
               'saude': 'Saúde e bem-estar',
@@ -5514,20 +5491,26 @@ document.addEventListener('DOMContentLoaded', renderBrandHub);
               'manas': 'Manas e comunidade'
             };
 
+            const label = sectionLabels[sectionId];
             if (label) {
+              const navItem = Array.from(navItems).find(item =>
                 item.getAttribute('aria-label') === label
               );
               if (navItem) navItem.classList.add('active');
+            }
 
             // Update aria-selected on active tab
             document.querySelectorAll('.tab.active').forEach(t => t.setAttribute('aria-selected', 'true'));
 
             // Scroll to top
             window.scrollTo(0, 0);
+        }
 
         // ===== SISTEMA DE NOTIFICAÇÕES =====
+        const NOTIF_KEY = 'asf_notifications';
 
         // Notificações padrão ao abrir
+        const DEFAULT_NOTIFICATIONS = [
             { id: 1, type: 'treino', icon: '💪', title: 'Novo Treino!', text: 'Treino de Força e Core disponível', time: 'Agora', read: false, target: 'treino-1', section: 'saude' },
             { id: 2, type: 'ondas', icon: '🌊', title: 'Ondas Boas!', text: 'Bertioga: 0.8m - Boa para surfar!', time: '5 min', read: false, target: 'wave-forecast', section: 'dicas' },
             { id: 3, type: 'pontos', icon: '🎯', title: 'Quiz Disponível', text: 'Responda e ganhe +50 pontos!', time: '10 min', read: false, target: 'quiz-basico', section: 'progresso' },
@@ -5750,8 +5733,11 @@ document.addEventListener('DOMContentLoaded', renderBrandHub);
 
         // Fechar painel ao clicar fora
         document.addEventListener('click', function(e) {
+            const panel = document.getElementById('notifications-panel');
+            const bell = e.target.closest('button[onclick="toggleNotifications()"]');
             if (!panel.contains(e.target) && !bell) {
                 panel.style.display = 'none';
+            }
         });
 
         // Adicionar notificação quando ganha pontos
@@ -5769,6 +5755,8 @@ document.addEventListener('DOMContentLoaded', renderBrandHub);
         // ===== FIM NOTIFICAÇÕES =====
 
         // ===== SISTEMA DE COMPARTILHAMENTO =====
+        const APP_URL = 'https://acarolmourad-commits.github.io/asf-app/';
+        const SHARE_TEXT = '🏄‍♀️ Conheça o App ASF - Dicas de surf, treinos, previsão de ondas e muito mais para mulheres surfistas! 🌊';
 
         
 
@@ -5983,6 +5971,8 @@ document.addEventListener('DOMContentLoaded', renderBrandHub);
             { text: '✅ Demonstração surf: demonstration + surf + show! ✅', category: 'Demonstracao', emoji: '✅' },
             { text: '🧮 Derivação surf: derivation + surf + math! 🧮', category: 'Derivacao', emoji: '🧮' }
         ];
+        // Normalized search index [Optimized] - cache normalized strings for faster search
+        const normalizedSearchIndex = searchIndex.map(item => ({
             ...item,
             _titleNorm: item.title.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, ''),
             _textNorm: item.text.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, ''),
@@ -5990,6 +5980,7 @@ document.addEventListener('DOMContentLoaded', renderBrandHub);
         }));
 
         // Debounced search
+        let _searchTimer;
         
 
         
@@ -6008,9 +5999,11 @@ document.addEventListener('DOMContentLoaded', renderBrandHub);
         document.addEventListener('click', function(e) {
             if (!e.target.closest('.search-container')) {
                 document.getElementById('searchResults').classList.remove('active');
+            }
         });
 
         // ============ LIVE WEATHER & MARINE DATA ============
+        const beaches = {
             bertioga: { name: 'Bertioga', lat: -23.85, lon: -46.14 },
             santos:   { name: 'Santos',   lat: -23.96, lon: -46.33 },
             guaruja:  { name: 'Guarujá',  lat: -23.99, lon: -46.25 },
@@ -6022,7 +6015,11 @@ document.addEventListener('DOMContentLoaded', renderBrandHub);
             itamambuca: { name: 'Itamambuca', lat: -23.45, lon: -45.05 },
             cambraia: { name: 'Cambraia', lat: -23.77, lon: -45.50 }
         };
+        let currentBeach = 'bertioga';
+        let cachedWeather = {};
+        let cachedMarine = {};
 
+        const weatherDescriptions = {
             0: '☀️ Céu limpo', 1: '🌤️ Pouco nublado', 2: '⛅ Parcialmente nublado', 3: '☁️ Nublado',
             45: '🌫️ Névoa', 48: '🌫️ Névoa gelada',
             51: '🌧️ Chuvisco leve', 53: '🌧️ Chuvisco', 55: '🌧️ Chuvisco forte',
@@ -6032,9 +6029,12 @@ document.addEventListener('DOMContentLoaded', renderBrandHub);
             95: '⛈️ Tempestade', 96: '⛈️ Tempestade com granizo', 99: '⛈️ Tempestade forte'
         };
 
+        const windDir = (deg) => {
+            const dirs = ['N','NE','L','SE','S','SO','O','NO'];
             return dirs[Math.round(deg / 45) % 8];
         };
 
+        const surfRating = (waveHeight) => {
             if (waveHeight < 0.3) return { text: 'Sem ondas', color: 'var(--gray-400)' };
             if (waveHeight < 0.6) return { text: '🟢 Iniciante', color: 'var(--success)' };
             if (waveHeight < 1.0) return { text: '🟡 Todos os níveis', color: 'var(--accent)' };
@@ -6075,6 +6075,7 @@ document.addEventListener('DOMContentLoaded', renderBrandHub);
 
         // Defer non-critical initializations to improve page load performance
         (function() {
+            const init = () => {
                 loadLiveData('bertioga');
                 updateMoonPhase();
             };
@@ -6082,9 +6083,19 @@ document.addEventListener('DOMContentLoaded', renderBrandHub);
                 requestIdleCallback(init);
             } else {
                 setTimeout(init, 0);
+            }
         })();
 
         // ========== CRONÔMETRO DE TREINO ==========
+        let timerInterval = null;
+        let timerState = 'stopped'; // stopped, running, paused
+        let timerSeconds = 0;
+        let timerCurrentRound = 1;
+        let timerTotalRounds = 8;
+        let timerWorkTime = 20;
+        let timerRestTime = 10;
+        let timerIsWork = true;
+        let timerWorkoutHistory = JSON.parse(localStorage.getItem('asf_timer_history') || '[]');
 
         
 
@@ -6119,7 +6130,11 @@ document.addEventListener('DOMContentLoaded', renderBrandHub);
         initDarkMode();
 
         // ============ SCROLL PROGRESS BAR ============
+        const scrollBar = document.getElementById('scrollProgress');
         window.addEventListener('scroll', () => {
+            const scrollTop = window.scrollY;
+            const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+            const progress = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
             scrollBar.style.width = progress + '%';
             if (scrollTop < 10) scrollBar.classList.add('hidden');
             else scrollBar.classList.remove('hidden');
@@ -6135,6 +6150,7 @@ document.addEventListener('DOMContentLoaded', renderBrandHub);
         
 
         // ============ MANA DA SEMANA ============
+        const manasSemana = [
             { name: 'Carolina Silva', avatar: '👩‍🦱', info: 'Intermediate • Bertioga', quote: '"Surfar me fez descobrir que sou mais forte do que imaginava. Cada onda é uma vitória!"', stat1: '🏆 3 campeonatos', stat2: '🔥 45 dias de streak' },
             { name: 'Fernanda Costa', avatar: '👩', info: 'Avançada • Itamambuca', quote: '"Comecei surfando no foam com 30 anos. Hoje faço tube. Nunca é tarde pra começar!"', stat1: '🏄 200+ sessões', stat2: '⭐ Nível 8' },
             { name: 'Juliana Mendes', avatar: '👩‍🦰', info: 'Iniciante • Riviera', quote: '"A ASF me deu coragem de entrar no mar. Agora não vivo sem! Obrigada, manas!"', stat1: '📚 15 quizzes', stat2: '💪 30 dias ativa' },
@@ -6342,6 +6358,7 @@ document.addEventListener('DOMContentLoaded', renderBrandHub);
         ()();
 
         // ============ SURF SESSION LOG ============
+        let selectedMood = '';
         
 
         
@@ -6359,6 +6376,7 @@ document.addEventListener('DOMContentLoaded', renderBrandHub);
             progress: 0,
             shareable: true
           },
+          {
             id: 'sthill-silver',
             brand: 'STHILL SURF',
             brandColor: '#3498db',
@@ -6373,6 +6391,7 @@ document.addEventListener('DOMContentLoaded', renderBrandHub);
             progress: 0,
             shareable: true
           },
+          {
             id: 'sthill-gold',
             brand: 'STHILL SURF',
             brandColor: '#3498db',
@@ -6387,6 +6406,7 @@ document.addEventListener('DOMContentLoaded', renderBrandHub);
             progress: 0,
             shareable: true
           },
+          {
             id: 'tribosurf-lycra',
             brand: 'TRIBOSURF',
             brandColor: '#e74c3c',
@@ -6401,6 +6421,7 @@ document.addEventListener('DOMContentLoaded', renderBrandHub);
             progress: 0,
             shareable: true
           },
+          {
             id: 'asf-founder',
             brand: 'ASF',
             brandColor: '#FFD700',
@@ -6415,6 +6436,7 @@ document.addEventListener('DOMContentLoaded', renderBrandHub);
             progress: 1,
             shareable: true
           },
+          {
             id: 'asf-ambassador',
             brand: 'ASF',
             brandColor: '#FFD700',
@@ -6428,6 +6450,7 @@ document.addEventListener('DOMContentLoaded', renderBrandHub);
             earnedAt: null,
             progress: 0,
             shareable: true
+          }
 { text: '⚡ proporção surf: proportion + surf + surf! ⚡', category: 'Propor??o', emoji: '⚡' },
             { text: '🔍 proportion onda: proporção + wave + surf! 🔍', category: 'Propor??o', emoji: '🔍' },
             { text: '📏 proporção costa: proportion + coast + surf! 📏', category: 'Propor??o', emoji: '📏' },
@@ -6654,24 +6677,32 @@ document.addEventListener('DOMContentLoaded', renderBrandHub);
             if (document.getElementById("challenge-timer")) updateBrandTimer();
             // Initialize badges system
             if (typeof initBadges === 'function') initBadges();
+            let appOpens = parseInt(localStorage.getItem('asf-opens') || '0');
             appOpens++;
             localStorage.setItem('asf-opens', appOpens);
             // Update display
             try { document.getElementById('stat-opens').textContent = appOpens; } catch(e) {}
             showProfile();
             // Load theme preference
+            const savedTheme = localStorage.getItem('asf-theme');
             if (savedTheme === 'dark') {
                 document.documentElement.setAttribute('data-theme', 'dark');
                 document.getElementById('darkModeToggle').textContent = '☀️';
+            }
             // Load user name from localStorage if exists
+            const savedName = localStorage.getItem('asf-name');
             // (User loading happens in sections)
             renderSessions();
             renderUserPosts();
             renderAchievements();
             // Restore joined group states
             ['Bertioga Surf Girls', 'Guarujá & Santos Surf', 'Ubatuba Surf Girls'].forEach(name => {
+                const key = 'asf-joined-' + name.replace(/\s+/g, '-');
                 if (localStorage.getItem(key)) {
+                    const id = 'join-' + name.split(' ')[0].toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+                    const btn = document.getElementById(id);
                     if (btn) { btn.textContent = '✅ Inscrita!'; btn.style.background = 'var(--success)'; btn.style.pointerEvents = 'none'; }
+                }
             });
             // Water tracker
             updateWaterDisplay(parseInt(localStorage.getItem(getWaterKey()) || '0'));
@@ -6689,6 +6720,7 @@ document.addEventListener('DOMContentLoaded', renderBrandHub);
         
 
         // ============ DICA DO DIA (989) ============
+        const dicas = [
             { text: '🌊 O mar hoje tá com ondas de 0.5-1.0m! Boas para todas. Bora surfar!', category: 'Condições', emoji: '🌊' },
             { text: '☀️ Protetor solar FPS 30+ a cada 2h. No Brasil, prevenção é tudo!', category: 'Prevenção', emoji: '☀️' },
             { text: '🧘 Alongue ombros, quadril e tornozelos ANTES de entrar. 5 min evita lesão!', category: 'Prevenção', emoji: '🧘' },
@@ -6703,6 +6735,7 @@ document.addEventListener('DOMContentLoaded', renderBrandHub);
             { text: '🧊 Leve gelo na bolsa. Pós-surf = recuperação 3x mais rápida!', category: 'Prevenção', emoji: '❄️' },
             { text: '🕯️ Renove a wax. Verão + calor = wax derretido = paddle escorregadio!', category: 'Equipamento', emoji: '🕯️' },
             { text: '🌙 Lua cheia = ondas maiores. Planeje sessões pelo calendário lunar!', category: 'Condições', emoji: '🌙' },
+            { text: '💪 Levar isotônico evita cãibras. Previna, não chore depois!', category: 'Nutrição', emoji: '💪' },
             { text: '🦶 Pés precisam de amor! Hidrate APÓS o surf, especially entre dedos.', category: 'Cuidado', emoji: '🦶' },
             { text: '🤙 Senta FORA da lineup quando lotado = boa etiqueta!', category: 'Etiqueta', emoji: '🏄' },
             { text: '✨ Prancha certo pro seu nível. Estabilidade > velocidade, sempre!', category: 'Equipamento', emoji: '🏄' },
@@ -6724,6 +6757,7 @@ document.addEventListener('DOMContentLoaded', renderBrandHub);
             { text: '🍉 Melancia pós-surf = hidratação natural + glicose. A melhor reward após uma session! 🍉', category: 'Nutrição', emoji: '🍉' },
             { text: '🏄‍♀️💪 Praticar breath control ajuda a ficar mais tempo na água. Respire fundo, permaneça calma! 🧘', category: 'Saúde', emoji: '🌬️' },
             { text: '🌊 ASF é gratidão ao mar. Cada session terminando com um thank you ao oceano! 🙏', category: 'Mental', emoji: '🙏' },
+            { text: 'Aprenda a ler as ondas. Observar 15 min antes de entrar revela o padrão das ondas! 👀', category: 'Técnica', emoji: '🔍' },
             { text: 'O surf não é sobre competir - é sobre Connection. Conecte-se com o mar, consigo e com as mansas! 💙', category: 'Mental', emoji: '🤝' },
             { text: '🏊‍♀️ Fazer exercício fora d\'água fortalece muscles para o surf. Academia + mar = combo perfeito! 💪', category: 'Treino', emoji: '🏋️' },
             { text: 'Use leash sempre! Imagina perder sua prancha preferida? Leash evita isso e mantém você segura! ⛓️', category: 'Equipamento', emoji: '🔗' },
@@ -6757,6 +6791,7 @@ document.addEventListener('DOMContentLoaded', renderBrandHub);
             { text: '👀 Watch before you paddle. 5 min observation saves energy! 👁️', category: 'Técnica', emoji: '👀' },
             { text: '💧 Drink water between sets. Hydration = performance! 💦', category: 'Nutrição', emoji: '💧' },
             { text: '🌅 Sunrise session = best session. Try it! 🌅', category: 'Rotina', emoji: '🌅' },
+            { text: '🏊 Swim for paddle fitness. Dry land = better pop-up! 💪', category: 'Treino', emoji: '🏊' },
             { text: '🧴 SPF 50+ reapply every 2h. No excuses! ☀️', category: 'Prevenção', emoji: '🧴' },
             { text: '🏄♀️ We rise by lifting each other. ASF! 💙', category: 'ASF', emoji: '🏄♀️' },
             { text: '🎯 Focus on the wave, not the crowd. Your session = your rules! 🎯', category: 'Mental', emoji: '🎯' },
@@ -6788,6 +6823,7 @@ document.addEventListener('DOMContentLoaded', renderBrandHub);
             { text: '🎬 Watch surf videos. Study the pros, visualize your style! 📹', category: 'Técnica', emoji: '📹' },
             { text: '🏄♀️ Start slow. Master the basics before fancy moves! 📚', category: 'Técnica', emoji: '📚' },
             { text: '🌊 Check conditions before you go. Wind, tide, and swell matter! 📊', category: 'Condições', emoji: '📊' },
+            { text: '🏄 Train your balance. Single-leg stance while brushing teeth helps! 🦵', category: 'Treino', emoji: '🦵' },
             { text: '🤜 Don\'t burn out. Rest days are part of progression! 📅', category: 'Recuperação', emoji: '📅' },
             { text: '🌅 Evening sessions rule! Less crowd, better vibes! 🌙', category: 'Rotina', emoji: '🌅' },
             { text: '🧠 Positive mindset = better surfing. Believe in yourself! 💪', category: 'Mental', emoji: '🧠' },
@@ -6796,6 +6832,7 @@ document.addEventListener('DOMContentLoaded', renderBrandHub);
             { text: '🏄♀️ Your surf journey is unique. Don\'t compare, just progress! 📈', category: 'Mental', emoji: '📈' },
             { text: '🏄 Learn from falls. Every wipeout teaches something! 📚', category: 'Técnica', emoji: '📚' },
             { text: '🌊 Surf solo? No way! Always with a buddy! 🛟', category: 'Segurança', emoji: '🛟' },
+            { text: '🧴 Double layers for cold water. Warm surf = better session! 🧥', category: 'Equipamento', emoji: '🧥' },
             { text: '🏄♀️ Warm up properly. 5 min makes all difference! 🧘', category: 'Prevenção', emoji: '🧘' },
             { text: '💧 Electrolytes matter in long sessions! 🥤', category: 'Nutrição', emoji: '🥤' },
             { text: '🎿 Practice on land. Pop-up anywhere! 🏠', category: 'Treino', emoji: '🏠' },
@@ -6803,8 +6840,10 @@ document.addEventListener('DOMContentLoaded', renderBrandHub);
             { text: '🚿 Rinse wetsuit EVERY time. Smell better, last longer! 🧼', category: 'Equipamento', emoji: '🚿' },
             { text: '🧠 Visualize your session before hitting the water! 🌊', category: 'Mental', emoji: '🧠' },
             { text: '🏄♀️ Progress takes time. Be patient with yourself! 📈', category: 'Mental', emoji: '📈' },
+            { text: '🏄♀️ Choose right board for conditions. Not all waves need same board! 🏄', category: 'Equipamento', emoji: '🏄' },
             { text: '🏄♀️ Respect locals. They know the spot best! 🤙', category: 'Etiqueta', emoji: '🤙' },
             { text: '🏄♀️ Set realistic goals. Small wins lead to big progress! 🎯', category: 'Mental', emoji: '🎯' },
+            { text: '🏄♀️ Softop boards are great for learning! 🦈', category: 'Equipamento', emoji: '🦈' },
             { text: '🦈 Epoxy boards are more durable but less eco. Choose wisely! 🌱', category: 'Sustentabilidade', emoji: '🌱' },
             { text: '🎯 Focus on one trick at a time. Master it before moving on! 📚', category: 'Técnica', emoji: '🎯' },
             { text: '🌊 Watch the ocean before paddling out. Read the sets! 👀', category: 'Condições', emoji: '🌊' },
@@ -6815,6 +6854,7 @@ document.addEventListener('DOMContentLoaded', renderBrandHub);
             { text: '🌊 Feel the wave energy. Stand in the sweet spot! ⚡', category: 'Técnica', emoji: '⚡' },
             { text: '🎒 Pack light. Less gear = more fun! 🏖️', category: 'Rotina', emoji: '🎒' },
             { text: '🏆 Every heat is learning. Compete to grow! 🥇', category: 'Competição', emoji: '🏆' },
+            { text: '🌅 Sunset sessions = magical vibes. Stay for the golden hour! 🌄', category: 'Rotina', emoji: '🌅' },
             { text: '🏄 Try night surf! Moonlit sessions are unforgettable! 🌙', category: 'Experiência', emoji: '🌙' },
             { text: '💪 Endurance > strength. Long paddles build stamina! 🏊', category: 'Treino', emoji: '💪' },
             { text: '🌊 Surf forecast says 0.5m? Still go! Small waves = big fun! 🏄', category: 'Mental', emoji: '🌊' },
@@ -6833,11 +6873,13 @@ document.addEventListener('DOMContentLoaded', renderBrandHub);
             { text: '🏖️ Leave only footprints. Beach clean = respect! 🌍', category: 'Sustentabilidade', emoji: '🌿' },
             { text: '🎒 Pack light. Less gear = more fun! 🏄', category: 'Prática', emoji: '🎒' },
             { text: '📱 Airplane mode at the beach. Focus = flow! 🧠', category: 'Mental', emoji: '✈️' },
+            { text: '🦀 Watch for sea life. Respect the ocean roommates! 🐬', category: 'Sustentabilidade', emoji: '🐢' },
             { text: '😊 Smile at your lineup. Good vibes spread! 😄', category: 'Comunidade', emoji: '💜' },
             { text: '🍌 Banana after surf. Natural potassium boost! 🍌', category: 'Nutrição', emoji: '🍌' },
             { text: '🎂 Celebrate every session. You earned it! 🎉', category: 'Mental', emoji: '🎂' },
             { text: '📖 Watch surf movies. Visualize your style! 🎬', category: 'Técnica', emoji: '📽️' },
             { text: '🧴 Reef-safe sunscreen. Protect the ocean! 🦈', category: 'Sustentabilidade', emoji: '🧴' },
+            { text: '💤 Sleep well. Recovery happens while you rest! 💤', category: 'Recuperação', emoji: '😴' },
             { text: '📓 Write surf journal. Track progress! 📓', category: 'Técnica', emoji: '📝' },
             { text: '🌊 Check conditions twice. They change fast! 🧭', category: 'Prática', emoji: '🌊' },
             { text: '🧊 Cold water = natural anti-inflammatory! ❄️', category: 'Recuperação', emoji: '🧊' },
@@ -6871,10 +6913,12 @@ document.addEventListener('DOMContentLoaded', renderBrandHub);
             { text: '🦶 Ankle mobility = better pop-up! 🦿', category: 'Treino', emoji: '🦶' },
             { text: '🏄‍♀️ Drop in with confidence. You earned your spot! 💪', category: 'Técnica', emoji: '💪' },
             { text: '🦀 Respect rip currents. They are powerful! 🌊', category: 'Segurança', emoji: '⚠️' },
+            { text: '🌅 Golden hour = magic light. Perfect for photos! 📸', category: 'Experiência', emoji: '🌅' },
             { text: '💧 Freshwater rinse after. Salt = rust! 🚿', category: 'Equipamento', emoji: '💧' },
             { text: '🧩 Duct tape in board bag. Essential hack! 🔧', category: 'Equipamento', emoji: '🛠️' },
             { text: '🏄‍♀️ Surf trip = new skills + adventures! ✈️', category: 'Experiência', emoji: '🌴' },
             { text: '🎯 Set intentions before your session! 🎯', category: 'Mental', emoji: '🧠' },
+            { text: '💙 Cheer for other mansas. We rise together! 🙌', category: 'Comunidade', emoji: '💪' },
             { text: '🕐 Check tide schedule. Timing = everything! 🕐', category: 'Prática', emoji: '🌊' },
             { text: '🌊 Read buoy data. Swells announce early! 📡', category: 'Técnica', emoji: '🌊' },
             { text: '💆 Massage foam roll. Stay injury-free! 🧘', category: 'Recuperação', emoji: '💆' },
@@ -6922,7 +6966,11 @@ document.addEventListener('DOMContentLoaded', renderBrandHub);
             { text: '🧘‍♀️ Yoga para surfistas: postura do cão-cabeça-para-baixo melhora flexibilidade de ombros e tornozelos. 🧘‍♀️', category: 'Treino', emoji: '🧘‍♀️' },
             { text: '🍗 Peito de frango + arroz integral 2h antes do surf. Combinação ideal de proteína e carboidrato complexo. 🍗', category: 'Nutrição', emoji: '🍗' },
             { text: '🏊‍♀️ Nade crawl 2x por semana! Melhora a resistência do paddle e a postura na prancha. 🏊‍♀️', category: 'Treino', emoji: '🏊‍♀️' },
+            { text: '🏄‍♀️ Master the bottom turn: shift weight forward, use rails to carve back up the wave face for max speed! 🚀', category: 'Técnica Avançada', emoji: '🏄‍♀️' },
             { text: '🌊 Practice proper duck diving in waves over head-high: angle board 45°, push with front foot, arch back to submerge fully! 🤿', category: 'Segurança Avançada', emoji: '🌊' },
+            { text: '⚠️ Always check for rip currents: look for discolored water, choppy waves, debris moving seaward. Swim parallel to escape! 🛟', category: 'Segurança', emoji: '⚠️' },
+            { text: '🎯 Time your cutback when the wave flattens: use back foot to pivot, redirect toward the wave's pocket for power! 🔄', category: 'Técnica Avançada', emoji: '🎯' },
+            { text: '☀️ Apply reef-safe SPF 50+ 30min before surfing, reapply every 2h. UPF rash guard for extended sessions! 🧴', category: 'Prevenção', emoji: '☀️' },
             { text: '👒 Use um chapéu de surf para proteger rosto e pescoço do sol. Mais proteção que apenas protetor!', category: 'Prevenção', emoji: '👒' },
             { text: '🤸 Alongue-se APÓS o surf para evitar rigidez muscular. 5 minutos de alongamento fazem maravilhas!', category: 'Recuperação', emoji: '🤸' },
             { text: '📢 Confira relatos de outras surfistas locais, não apenas apps. A experiência delas é valiosa!', category: 'Condições', emoji: '🗣️' },
@@ -6997,6 +7045,7 @@ document.addEventListener('DOMContentLoaded', renderBrandHub);
             { text: '🌊 Acompanhe as previsões de ondas regularmente para escolher os melhores horários para surfar!', category: 'Condições', emoji: '📊' },
             { text: '🤝 Participe de eventos locais da ASF para conhecer mais surfistas e fortalecer a comunidade!', category: 'Comunidade', emoji: '🤝' },
             { text: '🧘 Faça um aquecimento adequado antes de entrar na água para evitar lesões e melhorar o desempenho!', category: 'Prevenção', emoji: '🧘' },
+            { text: '🌱 Use pranchas ecológicas e protetor solar reef-safe para ajudar a preservar os oceanos!', category: 'Sustentabilidade', emoji: '🌱' },
             { text: '🏄‍♀️ Faça agachamentos e rotações de tronco na areia por 3 min antes de entrar. Previne lesões!', category: 'Prevenção', emoji: '🏋️' },
             { text: '🍫 Chocolate amargo 70%+ pós-surf repõe antioxidantes e dá energia. Merecido!', category: 'Nutrição', emoji: '🍫' },
             { text: '💬 Junte-se ao grupo WhatsApp ASF da sua região. Dicas locais e novas amigas!', category: 'Comunidade', emoji: '💬' },
@@ -7019,6 +7068,7 @@ document.addEventListener('DOMContentLoaded', renderBrandHub);
             { text: '🤝 Cadastre-se no ASF Connect para conhecer outras surfistas da sua região!', category: 'Comunidade', emoji: '🤝' },
             { text: '🏄‍♀️ Participe do circuito da ASF! Competir com outras mulheres fortalece sua técnica e confiança! 🏆', category: 'ASF', emoji: '🏄‍♀️' },
             { text: '🧴 Use óleo de semente de uva no corpo após o surf para hidratar a pele ressecada pelo sal! 🌿', category: 'Cuidados', emoji: '🧴' },
+            { text: '🌊 Aprenda a identificar os sets de ondas! Observar por 15 minutos antes de entrar economiza energia! 👀', category: 'Técnica', emoji: '🌊' },
             { text: '🍌 Iogurte natural com granola 1h antes do surf. Proteína leve e carboidrato para energia! 🥣', category: 'Nutrição', emoji: '🥣' },
             { text: '📸 Marque @associacaosurffeminino nas suas fotos! Vamos compartilhar sua evolução com a comunidade! 📱', category: 'Comunidade', emoji: '📸' },
             { text: '🧘‍♀️ Alongamento de coluna torácica após o surf. Reduz tensão acumulada nas costas!', category: 'Prevenção', emoji: '🧘‍♀️' },
@@ -7039,6 +7089,7 @@ document.addEventListener('DOMContentLoaded', renderBrandHub);
             { text: '👙 Use lycra UV protection under your swimsuit or wetsuit. Extra protection against sunburn during long sessions! 👙', category: 'Prevenção', emoji: '👙' },
             { text: '💨 Check wind direction! Offshore wind = glassy waves, onshore = choppy. Plan your session accordingly! 💨', category: 'Condições', emoji: '💨' },
             { text: '🍗 Post-surf protein boost! Chicken, tofu, or beans help rebuild muscles faster! 🍗', category: 'Nutrição', emoji: '🍗' },
+            { text: '🐈 Cat-cow stretch for spine mobility. Essential for smooth pop-ups and injury prevention! 🐈', category: 'Treino', emoji: '🐈' },
             { text: '📸 Tag @associacaosurffeminino in your surf photos! We love featuring our community members! 📸', category: 'ASF', emoji: '📸' },
             { text: '🧘‍♀️ Medite 5 minutos antes de surfar para reduzir ansiedade e melhorar foco. Cérebro calmo = melhores manobras!', category: 'Mental', emoji: '🧘‍♀️' },
             { text: '🌬️ Verifique a direção do vento: vento OFF (terra para o mar) deixa ondas mais lisas. Evite onshore!', category: 'Condições', emoji: '🌬️' },
@@ -7065,6 +7116,7 @@ document.addEventListener('DOMContentLoaded', renderBrandHub);
             { text: '🛟 Use colete salva-vidas se estiver aprendendo. Segurança primeiro, sempre!', category: 'Segurança', emoji: '🛟' },
             { text: '💙 Convide uma amiga para surfar. O mar é melhor quando compartilhado!', category: 'Comunidade', emoji: '💙' },
             { text: '♻️ Recolha lixo na praia antes de surfar. Pequenos gestos salvam oceanos!', category: 'Sustentabilidade', emoji: '♻️' },
+            { text: '🧜‍♀️ Aprenda a identificar correntes de retorno. Observar onde o mar puxa é vital para segurança!', category: 'Segurança', emoji: '🧜‍♀️' },
             { text: '📅 Cadastre-se nos eventos ASF! Networking + surf + diversão = crescimento!', category: 'ASF', emoji: '📅' },
             { text: '🏋️ Exercícios de core fortalecem o equilíbrio na prancha. 10 min por dia mudam tudo!', category: 'Treino', emoji: '🏋️' },
             { text: '🌿 Use shampoo biodegradável após o surf. Cuide do seu cabelo e do oceano!', category: 'Sustentabilidade', emoji: '🌿' },
@@ -7148,14 +7200,17 @@ document.addEventListener('DOMContentLoaded', renderBrandHub);
             { text: '🧴 Reaplique protetor solar nas orelhas, nuca e pés a cada 1.5h, mesmo com protetor water-resistant!', category: 'Prevenção', emoji: '🧴' },
             { text: '🏋️‍♀️ Treine agachamentos em casa para fortalecer pernas, essencial para manter a posição na prancha!', category: 'Treino', emoji: '🏋️' },
             { text: '🌸 Participe de eventos da ASF! Conhecer outras surfistas da comunidade fortalece sua rede e motivação!', category: 'ASF', emoji: '🌸' },
+            { text: '🌊 Observar a ressaca por 10 min antes de entrar ajuda a identificar os melhores canais para remar!', category: 'Técnica', emoji: '👀' },
             { text: '💪 Mulheres no surf: apoie outras surfistas na água, a união fortalece a nossa comunidade! 🌊👩‍🦰', category: 'Comunidade', emoji: '💪' },
             { text: '💧 Hidrate-se bem antes e depois da sessão: beba pelo menos 500ml de água para repor o que perdeu no sol.', category: 'Saúde', emoji: '💧' },
             { text: '🌊 Verifique a previsão de marés e correntes antes de remar: o conhecimento do mar é essencial para sua segurança.', category: 'Segurança', emoji: '🌊' },
+            { text: '🌿 Use protetor solar biodegradável para proteger sua pele e preservar os recifes e a vida marinha.', category: 'Sustentabilidade', emoji: '🌿' },
             { text: '🌸 Participe das ações da ASF: voluntariado em eventos, limpeza de praias e workshops fazem a diferença!', category: 'ASF', emoji: '🌸' },
             { text: '🏄‍♀️ Pratique o pop-up em terra firme: 10 repetições diárias melhoram sua velocidade na hora de pegar a onda!', category: 'Técnica', emoji: '🏄‍♀️' },
             { text: '☀️ Evite surfar no horário de pico do sol (12h-14h) para reduzir o risco de queimaduras e insolação.', category: 'Prevenção', emoji: '☀️' },
             { text: '🤝 Compartilhe suas experiências nas redes sociais com #ASFComunidade: inspire outras mulheres a surfar!', category: 'Comunidade', emoji: '📱' },
             { text: '🍎 Consuma alimentos ricos em potássio (banana, laranja) antes do surf para evitar cãibras musculares.', category: 'Nutrição', emoji: '🍎' },
+            { text: '🌊 Respeite o tempo de recuperação: após 2 horas de surf, faça uma pausa de 30 min para renovar energias.', category: 'Saúde', emoji: '⏱️' },
             { text: '🤝 Convide uma amiga iniciante para surfar. Sororidade na água fortalece a comunidade ASF!', category: 'Comunidade', emoji: '🤝' },
             { text: '🧴 Use óleo de cenoula pós-surf para hidratar a pele do rosto protegida do sol intensamente.', category: 'Cuidado', emoji: '🧴' },
             { text: '📸 Registre seu progresso com fotos/vídeos curtos. Ver evolução motiva e ajuda a corrigir erros!', category: 'Mental', emoji: '📸' },
@@ -7222,6 +7277,7 @@ document.addEventListener('DOMContentLoaded', renderBrandHub);
             { text: 'Check-in emocional pré-surf: como está sua mente hoje? Surf também é terapia mental! 💭', category: 'Saúde Mental', emoji: '🌸' },
             { text: 'Alongamento de pulso e antebraço: previne tendinite de tanto remar! 💪', category: 'Prevenção', emoji: '🤲' },
             { text: 'Rotacione o tronco no takeoff: gire ombros e quadril juntos para máxima velocidade! 🌪️', category: 'Técnica Avançada', emoji: '🌪️' },
+            { text: 'Fuja do plástico: use squeeze de metal/vidro e bloqueador reef-safe para salvar corais! 🐠', category: 'Sustentabilidade', emoji: '♻️' },
             { text: 'Conecte-se com suas ancestrais: o surf feminino tem raízes profundas nas ilhas do Pacífico! 🌺', category: 'ASF', emoji: '🌸' },
             { text: 'Ondas pequenas ensinam: paciência e posicionamento valem mais que força bruta no surf! 🐢', category: 'Mental', emoji: '🧘' },
             { text: 'Crie um ritual pré-surf: música, respiração e intenção definem sua energia na água! 🎵', category: 'Preparação', emoji: '🧘♀️' },
@@ -7464,6 +7520,7 @@ document.addEventListener('DOMContentLoaded', renderBrandHub);
             { text: '🌊 Ondas de reef:entendeu a formação — safety first! 🏜️', category: 'Técnica', emoji: '🏜️' },
             { text: '🎧 Fones de ouvido: música que não atrapalha a hearing das ondas! 🎶', category: 'Mental', emoji: '🎶' },
             { text: '🏆 Streak de surfs: mantenha sequência de dias no mar — evolução garantida! 🔥', category: 'Progresso', emoji: '🔥' },
+            { text: '🚨 Sinal de HELP: learned gestures and signals for emergencies in the water! 🆘', category: 'Segurança', emoji: '🆘' },
             { text: '🔄 Rotina variada: mix de exercises prevents plateaus and keeps motivation high! ⚡', category: 'Treino', emoji: '⚡' },
             { text: '🌍 Surf sostenible: choose eco-friendly brands and respect marine life! 🌱', category: 'Sustentabilidade', emoji: '🌱' },
             { text: '📊 Progress tracker: use o app para medir evolução e definir novas metas! 📈', category: 'Progresso', emoji: '📈' },
@@ -7477,6 +7534,7 @@ document.addEventListener('DOMContentLoaded', renderBrandHub);
             { text: '🏋️ Fortalecimento core: exercícios abdominais e lombares melhoram estabilidade! 💪', category: 'Treino', emoji: '💪' },
             { text: '📱 App ASF Grupo: crie desafios e motivem-se em equipe! 👊', category: 'ASF', emoji: '👊' },
             { text: '🌊 Previsão de ondas: interpretar gráficos de swell e período! 📈', category: 'Condições', emoji: '📈' },
+            { text: '🛡️ Proteção solar: roupas UV + protetor reef-safe para preservar a pele! 🧴', category: 'Saúde', emoji: '🧴' },
             { text: '📋 Plano de sessão: defina objetivo, tempo e local antes de entrar no mar! 📝', category: 'Planejamento', emoji: '📝' },
             { text: '🧠 Foco no presente: concentre-se na remada, não no passado ou futuro! 🎯', category: 'Mental', emoji: '🎯' },
             { text: '🎥 Revisão semanal: analise uma session por semana para identificar melhorias! 📹', category: 'Progresso', emoji: '📹' },
@@ -7585,6 +7643,7 @@ document.addEventListener('DOMContentLoaded', renderBrandHub);
             { text: '📦 Transporte de prancha: use capa protetora e verifique fixação antes de viajar! 🛡️', category: 'Equipamento', emoji: '🛡️' },
             { text: '🥤 Hidratação inteligente: garrafa térmica com gelo mantém água fresca na sessão! ❄️', category: 'Saúde', emoji: '❄️' },
             { text: '🧠 Foco absoluto: bloqueie distrações e concentre-se_only na onda! 🎯', category: 'Mental', emoji: '🎯' },
+            { text: '🚨 Sinal de emergência: apito e bandeira vermelha salvar vidas! 🚩', category: 'Segurança', emoji: '🚩' },
             { text: '🏋️ Exercícios de equilíbrio: prancha estática no chão melhora estabilidade! ⚖️', category: 'Treino', emoji: '⚖️' },
             { text: '🍳 Alimentação pré-surf: carboidratos complexos 2h antes para energia sustentada! 🥞', category: 'Nutrição', emoji: '🥞' },
             { text: '💨 Leitura de vento: identify offshore/onshore pela superfície da água! 🌬️', category: 'Condições', emoji: '🌬️' },
@@ -7597,6 +7656,7 @@ document.addEventListener('DOMContentLoaded', renderBrandHub);
             { text: '📍 Posicionamento no lineup: escolha seu lugar com base na ordem de chegada e respeito! 👥', category: 'Ética', emoji: '👥' },
             { text: '🏋️ Remada em águas turbulentas:mantenha corpo baixo e remadas potentes! 🔥', category: 'Técnica', emoji: '🔥' },
             { text: '💪 Paddle sprint: sprints de 50m melhoram potência e velocidade na remada! ⚡', category: 'Treino', emoji: '⚡' },
+            { text: '📱 App updates: always install latest version for bug fixes and new features! 🔄', category: 'Tecnologia', emoji: '🔄' },
             { text: '🧠 Técnica do turtle roll: quando pego inside, rolar a prancha para passar! 🐢', category: 'Técnica', emoji: '🐢' },
             { text: '🌅 Surf amanhecer: mar flat, vento offshore, sessions perfeitas! 🌄', category: 'Experiência', emoji: '🌄' },
             { text: '🏋️ Treinamento cardiovascular: corrida ou bike melhoram resistência geral! ❤️', category: 'Treino', emoji: '❤️' },
@@ -8069,6 +8129,7 @@ document.addEventListener('DOMContentLoaded', renderBrandHub);
             { text: '🎉 Promoção marca surf: timing + packaging + divulgação! 🚀', category: 'Marketing', emoji: '🎉' },
             { text: '📦 Liquidar estoque surf: preço + prazo + canais! 📉', category: 'Marketing', emoji: '📦' },
             { text: '🛒 Black friday surf: preparação + estoque + campanha! ⏰', category: 'Marketing', emoji: '🛒' },
+            { text: '🏪 Outlet surf: liquidação + categorias + preços! 🏷️', category: 'Marketing', emoji: '🏪' },
             { text: '📦 Dropshipping surf: fornecedor + logística + margem! 🚚', category: 'Negócios', emoji: '📦' },
             { text: '🛒 Ecommerce surf wear: plataforma + estoque + divulgação! 💻', category: 'Negócios', emoji: '🛒' },
             { text: '🌐 Loja virtual surf: domínio + checkout + marketing! 🏪', category: 'Negócios', emoji: '🌐' },
@@ -8562,6 +8623,11 @@ document.addEventListener('DOMContentLoaded', renderBrandHub);
             { text: '🐛 Transformação costa: evolução + progresso + crescimento! 🐛', category: 'Transformacao', emoji: '🐛' },
             { text: '🌱 Transformation praia: germinação + florescer + desenvolver! 🌱', category: 'Transformacao', emoji: '🌱' },
             { text: '🌊 Transformação mar: mudança + fluir + adaptação! 🌊', category: 'Transformacao', emoji: '🌊' },
+            { text: '🔄 Renovação surf: renovar + refrescar + recomeçar! 🔄', category: 'Renovacao', emoji: '🔄' },
+            { text: '🔁 Renewal onda: renovar + recomeçar + revitalizar! 🔁', category: 'Renovacao', emoji: '🔁' },
+            { text: '🌿 Renovação costa: renovar + regenerar + revitalizar! 🌿', category: 'Renovacao', emoji: '🌿' },
+            { text: '💧 Renewal praia: renovar + refrescar + renovar! 💧', category: 'Renovacao', emoji: '💧' },
+            { text: '🐚 Renovação mar: renovar + regenerar + reciclar! 🐚', category: 'Renovacao', emoji: '🐚' },
             { text: '🌅 Renascimento surf: renascer + renascer + renovar! 🌅', category: 'Renascimento', emoji: '🌅' },
             { text: '🌱 Rebirth onda: renascer + renascer + renascer! 🌱', category: 'Renascimento', emoji: '🌱' },
             { text: '🌸 Renascimento costa: flor + nascer + renascer! 🌸', category: 'Renascimento', emoji: '🌸' },
@@ -9076,10 +9142,12 @@ document.addEventListener('DOMContentLoaded', renderBrandHub);
         ];
         
         
+        // Pick one based on day of year for daily rotation
         ()();
 
         // ============ BEACH GUIDE FILTER ============
         // Beach filter with cached card list [Optimized]
+        let beachCards = null;
         
 
         // ============ TOAST NOTIFICATION HELPER ============
@@ -9119,6 +9187,7 @@ document.addEventListener('DOMContentLoaded', renderBrandHub);
     rating: 4.8,
     reviews: 234
   },
+  {
     id: 'lycra-termica-dryfit',
     brand: 'HOTUIN',
     brandColor: '#e74c3c',
@@ -9132,6 +9201,7 @@ document.addEventListener('DOMContentLoaded', renderBrandHub);
     rating: 4.6,
     reviews: 189
   },
+  {
     id: 'wax-fcs',
     brand: 'FCS',
     brandColor: '#2ecc71',
@@ -9145,6 +9215,7 @@ document.addEventListener('DOMContentLoaded', renderBrandHub);
     rating: 4.9,
     reviews: 412
   },
+  {
     id: 'leash-fcs-premium',
     brand: 'FCS',
     brandColor: '#2ecc71',
@@ -9158,6 +9229,7 @@ document.addEventListener('DOMContentLoaded', renderBrandHub);
     rating: 4.7,
     reviews: 156
   },
+  {
     id: 'capinha-agua-surf',
     brand: 'SURFCELL',
     brandColor: '#9b59b6',
@@ -9171,6 +9243,7 @@ document.addEventListener('DOMContentLoaded', renderBrandHub);
     rating: 4.5,
     reviews: 203
   },
+  {
     id: 'poncho-microfibra',
     brand: 'SURFWEAR',
     brandColor: '#f39c12',
@@ -9183,6 +9256,7 @@ document.addEventListener('DOMContentLoaded', renderBrandHub);
     badge: '🧖 Conforto',
     rating: 4.7,
     reviews: 145
+  }
 ];
 
 
@@ -9197,6 +9271,7 @@ document.addEventListener('DOMContentLoaded', renderBrandHub);
       event_label: productId,
       value: 1
     });
+  }
 // Newsletter
 
 
@@ -9225,6 +9300,7 @@ window.ASFMonetization = { trackEvent, getStats };
 
 
 // Show banner after 2s if no consent
+setTimeout(()=>{if(!getCookieConsent()){const b=document.getElementById('cookie-consent-banner');if(b)b.style.display='block'}},2000);
 
 // Pix Donation
 
@@ -9234,6 +9310,7 @@ window.ASFMonetization = { trackEvent, getStats };
   { id:'poncho-microfibra',brand:'SURFWEAR',brandColor:'#f39c12',name:'Poncho Microfibra (Secagem Rápida)',price:'R$ 79,90',oldPrice:'R$ 129,90',image:'https://http2.mlstatic.com/D_NQ_NP_2X_925481-MLA44847321610_032021-F.webp',url:'https://produto.mercadolivre.com.br/MLB-3437512899-poncho-surf-microfibra-universal-_JM',commission:'12%',badge:'🧖 Conforto',rating:4.7,reviews:145}
 ];
 
+window.ASFMonetization={trackEvent,getStats};const a=document.createElement('style');a.textContent=\`@keyframes toastIn{from{opacity:0;transform:translateX(-50%) translateY(20px)}to{opacity:1;transform:translateX(-50%) translateY(0)}}@keyframes toastOut{from{opacity:1;transform:translateX(-50%) translateY(0)}to{opacity:0;transform:translateX(-50%) translateY(20px)}}\`,document.head.appendChild(a);document.addEventListener('DOMContentLoaded',function(){console.log('✅ Monetization system initialized'),const e=document.getElementById('loja');e&&getComputedStyle(e).display!=='none'&&setTimeout(renderAffiliateStore,100)});
 
 
 <!-- PREMIUM PAYWALL MODAL -->
@@ -9328,6 +9405,8 @@ window.ASFMonetization = { trackEvent, getStats };
   <!-- Cookie Consent Banner -->
   
   (function() {
+    const COOKIE_CONSENT = 'asf-cookie-consent';
+    const banner = document.getElementById('cookie-consent-banner');
     
     
     
@@ -9341,12 +9420,15 @@ window.ASFMonetization = { trackEvent, getStats };
         banner.style.display = 'block';
         banner.style.animation = 'slideUp 0.5s ease-out';
       }, 2000);
+    }
   })();
   
 
   <!-- Infolinks (Free Ads) - DISABLED -->
   
   // Infolinks contextual ads - sign up at infolinks.com
+  // var infolinks_pid = 0; // YOUR PID HERE
+  // var infolinks_wsid = 0;
   // (script loaded dynamically on consent)
   
 
