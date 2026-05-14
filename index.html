@@ -3426,27 +3426,56 @@ id="brandhub">
     </div>
 
     <!-- Parafinas para Cada Tipo de Água -->
-    <!-- Conquistas Secretas -->
-    <div id="conquistas-secretas" style="margin: 30px 20px; padding: 20px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 20px; color: white;">
-        <h3 style="text-align: center; margin-bottom: 20px; font-size: 22px;">🏆 Conquistas Secretas</h3>
+    <!-- 🔓 Conquistas Secretas - Aba Profissional -->
+    <div id="conquistas-secretas" class="section" style="padding: 20px; max-width: 1200px; margin: 0 auto;">
+        <div class="section-header">
+            <h2 class="section-title">🔓 Conquistas Secretas</h2>
+            <p style="text-align: center; color: var(--gray-600); margin-top: 8px;">Desbloqueie conquistas especiais fazendo atividades de surf</p>
+        </div>
         
-        <button onclick="checkConquista('longboard-wave', this)" style="width: 100%; margin-bottom: 10px; padding: 12px; background: rgba(255,255,255,0.2); color: white; border: none; border-radius: 10px; font-weight: 600; cursor: pointer;">
-            🌊 Surfar uma onda de longboard
-        </button>
-        
-        <button onclick="checkConquista('first-tide', this)" style="width: 100%; margin-bottom: 10px; padding: 12px; background: rgba(255,255,255,0.2); color: white; border: none; border-radius: 10px; font-weight: 600; cursor: pointer;">
-            ⏰ Chegar no horário certo da maré
-        </button>
-        
-        <button onclick="checkConquista('wax-master', this)" style="width: 100%; margin-bottom: 10px; padding: 12px; background: rgba(255,255,255,0.2); color: white; border: none; border-radius: 10px; font-weight: 600; cursor: pointer;">
-            🧈 Escolher a parafina certa
-        </button>
-        
-        <button onclick="checkConquista('sun-protection', this)" style="width: 100%; margin-bottom: 10px; padding: 12px; background: rgba(255,255,255,0.2); color: white; border: none; border-radius: 10px; font-weight: 600; cursor: pointer;">
-            ☀️ Usar protetor solar UV 50+
-        </button>
-        
-        <div id="conquista-result" style="margin-top: 15px; text-align: center; font-size: 14px; min-height: 24px;"></div>
+        <div style="background: var(--white); border-radius: 20px; padding: 20px; box-shadow: var(--shadow-md); margin-bottom: 20px;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                <h3 style="font-size: 18px; color: var(--secondary);">Seu Progresso</h3>
+                <span id="conquista-count" style="background: var(--primary); color: white; padding: 8px 16px; border-radius: 20px; font-weight: 600;">0/4</span>
+            </div>
+            <div style="background: var(--gray-200); border-radius: 10px; height: 12px; overflow: hidden;">
+                <div id="conquista-bar" style="background: linear-gradient(90deg, var(--primary), var(--accent)); height: 100%; width: 0%; transition: width 0.5s;"></div>
+            </div>
+        </div>
+
+        <div class="cards-grid">
+            <div class="card" style="border-left: 4px solid #FFD700;">
+                <div style="font-size: 32px; text-align: center; margin-bottom: 10px;">🌊</div>
+                <h4 style="text-align: center; margin-bottom: 8px;">Longboard Wave</h4>
+                <p style="font-size: 13px; color: var(--gray-600); text-align: center; margin-bottom: 15px;">Surfar 5 ondas em longboard</p>
+                <button onclick="unlockConquista('longboard-wave', this)" class="btn btn-primary" style="width: 100%; font-size: 14px;">Desbloquear</button>
+                <div class="conquista-status" id="status-longboard-wave" style="margin-top: 10px; text-align: center; font-size: 12px; color: var(--success); display: none;">✅ Conquistado!</div>
+            </div>
+
+            <div class="card" style="border-left: 4px solid #00A8CC;">
+                <div style="font-size: 32px; text-align: center; margin-bottom: 10px;">⏰</div>
+                <h4 style="text-align: center; margin-bottom: 8px;">Tide Timing</h4>
+                <p style="font-size: 13px; color: var(--gray-600); text-align: center; margin-bottom: 15px;">Surfar em 3 marés diferentes</p>
+                <button onclick="unlockConquista('tide-timing', this)" class="btn btn-primary" style="width: 100%; font-size: 14px;">Desbloquear</button>
+                <div class="conquista-status" id="status-tide-timing" style="margin-top: 10px; text-align: center; font-size: 12px; color: var(--success); display: none;">✅ Conquistado!</div>
+            </div>
+
+            <div class="card" style="border-left: 4px solid #9B59B6;">
+                <div style="font-size: 32px; text-align: center; margin-bottom: 10px;">🧈</div>
+                <h4 style="text-align: center; margin-bottom: 8px;">Wax Wizard</h4>
+                <p style="font-size: 13px; color: var(--gray-600); text-align: center; margin-bottom: 15px;">Usar parafina correta 5x</p>
+                <button onclick="unlockConquista('wax-wizard', this)" class="btn btn-primary" style="width: 100%; font-size: 14px;">Desbloquear</button>
+                <div class="conquista-status" id="status-wax-wizard" style="margin-top: 10px; text-align: center; font-size: 12px; color: var(--success); display: none;">✅ Conquistado!</div>
+            </div>
+
+            <div class="card" style="border-left: 4px solid #FF6B6B;">
+                <div style="font-size: 32px; text-align: center; margin-bottom: 10px;">☀️</div>
+                <h4 style="text-align: center; margin-bottom: 8px;">Sun Guardian</h4>
+                <p style="font-size: 13px; color: var(--gray-600); text-align: center; margin-bottom: 15px;">Usar protetor por 7 dias seguidos</p>
+                <button onclick="unlockConquista('sun-guardian', this)" class="btn btn-primary" style="width: 100%; font-size: 14px;">Desbloquear</button>
+                <div class="conquista-status" id="status-sun-guardian" style="margin-top: 10px; text-align: center; font-size: 12px; color: var(--success); display: none;">✅ Conquistado!</div>
+            </div>
+        </div>
     </div>
 
     <div style="margin: 20px;">
@@ -5404,19 +5433,25 @@ document.addEventListener("DOMContentLoaded", renderBrandHub);
 
     <script>
 
-function checkConquista(type, btn) {
-    const messages = {
-        'longboard-wave': '🏆 Conquista desbloqueada: Longboard Wave Rider!',
-        'first-tide': '🌊 Conquista desbloqueada: Tide Timing Master!',
-        'wax-master': '🧈 Conquista desbloqueada: Wax Wizard!',
-        'sun-protection': '☀️ Conquista desbloqueada: Sun Protection Pro!'
-    };
-    
-    const result = document.getElementById('conquista-result');
-    if (result) {
-        result.innerHTML = messages[type] || '🏆 Conquista desbloqueada!';
-        btn.style.background = 'rgba(255,215,0,0.5)';
+function unlockConquista(type, btn) {
+    const statusEl = document.getElementById('status-' + type);
+    if (statusEl) {
+        statusEl.style.display = 'block';
+        btn.textContent = 'Conquistado!';
         btn.disabled = true;
+        btn.style.background = 'var(--success)';
+        
+        // Atualizar contador
+        let count = parseInt(localStorage.getItem('conquistas-count') || '0');
+        count++;
+        localStorage.setItem('conquistas-count', count);
+        
+        const countEl = document.getElementById('conquista-count');
+        const barEl = document.getElementById('conquista-bar');
+        if (countEl) countEl.textContent = count + '/4';
+        if (barEl) barEl.style.width = (count * 25) + '%';
+        
+        showToast('🏆 Conquista desbloqueada!', 'success');
     }
 }
 
