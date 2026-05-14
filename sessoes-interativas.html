@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sessões Interativas - ASF</title>
+    <link rel="stylesheet" href="subscriber-styles.css">
+    <style>
+        :root {
+            --primary: #00A8CC;
+            --secondary: #0E2439;
+            --accent: #F4D03F;
+            --success: #2ECC71;
+            --coral: #FF6B6B;
+            --purple: #9B59B6;
+            --white: #FFFFFF;
+            --light: #F8F9FA;
+            --gray-100: #F0F2F5;
+            --gray-200: #E4E6E9;
+            --gray-400: #9A9A9A;
+            --gray-600: #666666;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Outfit', sans-serif; background: var(--light); color: var(--secondary); }
+        .chat-container { max-width: 100%; margin: 0 auto; height: 100vh; display: flex; flex-direction: column; }
+        .chat-header { background: linear-gradient(135deg, var(--secondary), var(--primary)); color: white; padding: 16px 20px; display: flex; align-items: center; gap: 12px; }
+        .back-btn { background: none; border: none; color: white; font-size: 24px; cursor: pointer; }
+        .chat-title { flex: 1; font-size: 18px; font-weight: 600; }
+        .online-dot { width: 10px; height: 10px; background: var(--success); border-radius: 50%; animation: pulse 2s infinite; }
+        @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
+        
+        .rooms-list { padding: 16px; }
+        .room-card { background: white; border-radius: 16px; padding: 16px; margin-bottom: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); cursor: pointer; transition: transform 0.2s; }
+        .room-card:hover { transform: translateY(-2px); }
+        .room-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
+        .room-name { font-weight: 600; color: var(--secondary); }
+        .room-count { font-size: 12px; color: var(--gray-400); }
+        .room-desc { font-size: 13px; color: var(--gray-600); }
+        .room-badge { background: var(--primary); color: white; padding: 2px 8px; border-radius: 10px; font-size: 11px; }
+        
+        .chat-messages { flex: 1; padding: 16px; overflow-y: auto; }
+        .message { display: flex; gap: 10px; margin-bottom: 16px; }
+        .message-avatar { width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 16px; flex-shrink: 0; }
+        .message-content { flex: 1; }
+        .message-author { font-size: 12px; font-weight: 600; color: var(--gray-600); margin-bottom: 4px; }
+        .message-text { background: white; padding: 10px 14px; border-radius: 16px; font-size: 14px; display: inline-block; }
+        .message-time { font-size: 10px; color: var(--gray-400); margin-top: 4px; }
+        
+        .message.mine { flex-direction: row-reverse; }
+        .message.mine .message-content { text-align: right; }
+        .message.mine .message-text { background: var(--primary); color: white; }
+        
+        .chat-input-area { padding: 12px 16px; background: white; border-top: 1px solid var(--gray-200); display: flex; gap: 10px; align-items: flex-end; }
+        .chat-input { flex: 1; border: 1px solid var(--gray-200); border-radius: 20px; padding: 10px 16px; font-size: 14px; font-family: 'Outfit', sans-serif; resize: none; max-height: 100px; }
+        .send-btn { background: var(--primary); color: white; border: none; width: 44px; height: 44px; border-radius: 50%; cursor: pointer; font-size: 18px; }
+        
+        .section-title { font-size: 20px; font-weight: 700; margin: 16px 16px 12px; color: var(--secondary); }
+        .quick-actions { display: flex; gap: 8px; padding: 0 16px 16px; overflow-x: auto; }
+        .quick-btn { background: white; border: 1px solid var(--gray-200); border-radius: 20px; padding: 8px 16px; font-size: 13px; white-space: nowrap; }
+        
+        .hidden { display: none !important; }
+    </style>
+</head>
+<body>
+    <!-- Rooms List View -->
+    <div id="rooms-view">
+        <div class="chat-header">
+            <button class="back-btn" onclick="location.href='index.html'">←</button>
+            <div class="chat-title">Sessões Interativas</div>
+            <div class="online-dot"></div>
+        </div>
+        
+        <p style="padding: 16px; color: var(--gray-600); font-size: 14px;">
+            Converse com outras surfistas, compartilhe experiências e organize sessões!
+        </p>
+        
+        <div class="quick-actions">
+            <button class="quick-btn" onclick="createNewRoom()">+ Criar Sala</button>
+            <button class="quick-btn" onclick="showNearbySurfers()">📍 Perto de Mim</button>
+            <button class="quick-btn" onclick="showMyRooms()">⭐ Minhas Salas</button>
+        </div>
+        
+        <h3 class="section-title">Salas Populares</h3>
+        <div class="rooms-list">
+            <div class="room-card" onclick="openRoom('bertioga-mansas')">
+                <div class="room-header">
+                    <span class="room-name">🏄‍♀️ Bertioga Manas</span>
+                    <span class="room-count">24 online</span>
+                </div>
+                <div class="room-desc">Sessões na praia do Tombo e Itararé</div>
+            </div>
+            
+            <div class="room-card" onclick="openRoom('surf-trips')">
+                <div class="room-header">
+                    <span class="room-name">🚐 Surf Trips</span>
+                    <span class="room-count">18 online</span>
+                </div>
+                <div class="room-desc">Planejando viagens e aventuras</div>
+            </div>
+            
+            <div class="room-card" onclick="openRoom('iniciantes')">
+                <div class="room-header">
+                    <span class="room-name">🌱 Iniciantes</span>
+                    <span class="room-count">31 online</span>
+                </div>
+                <div class="room-desc">Dicas para quem tá começando</div>
+            </div>
+            
+            <div class="room-card" onclick="openRoom('competicao')">
+                <div class="room-header">
+                    <span class="room-name">🏆 Competição</span>
+                    <span class="room-count">12 online</span>
+                </div>
+                <div class="room-desc">Discutindo campeonatos e técnicas</div>
+            </div>
+            
+            <div class="room-card" onclick="openRoom('longboard')">
+                <div class="room-header">
+                    <span class="room-name">🛹 Longboard Ladies</span>
+                    <span class="room-count">9 online</span>
+                </div>
+                <div class="room-desc">Puro longboard e noseride</div>
+            </div>
+            
+            <div class="room-card" onclick="openRoom('health')">
+                <div class="room-header">
+                    <span class="room-name">💪 Saúde & Treino</span>
+                    <span class="room-count">15 online</span>
+                </div>
+                <div class="room-desc">Fisioterapia e preparação física</div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Chat Room View -->
+    <div id="chat-view" class="hidden">
+        <div class="chat-header">
+            <button class="back-btn" onclick="showRoomsList()">←</button>
+            <div class="chat-title" id="room-title">Sala</div>
+            <div class="online-dot"></div>
+        </div>
+        
+        <div class="chat-messages" id="messages-container">
+            <!-- Mensagens aparecerão aqui -->
+        </div>
+        
+        <div class="chat-input-area">
+            <textarea id="message-input" class="chat-input" placeholder="Digite sua mensagem..." rows="1"></textarea>
+            <button class="send-btn" onclick="sendMessage()">➤</button>
+        </div>
+    </div>
+
+    <script>
+        // Dados das salas e mensagens (simulados com localStorage)
+        let currentRoom = null;
+        
+        // Inicializar mensagens demo
+        function initMessages() {
+            const demoMessages = {
+                'bertioga-mansas': [
+                    { author: 'Carol', avatar: '🏄‍♀️', text: 'Gurias, aula de sábado confirmada! 7h na praia do Itararé', time: '10:30' },
+                    { author: 'Grazi', avatar: '🌸', text: 'Eu vou! E mais algumas amigas', time: '10:32' },
+                    { author: 'Juliana', avatar: '🌊', text: 'Alguém leva pranchas extras? Preciso emprestar', time: '10:35' }
+                ],
+                'surf-trips': [
+                    { author: 'Márcia', avatar: '🚐', text: 'Viagem ao Nordeste em julho! Quem interessa?', time: '09:15' },
+                    { author: 'Ana', avatar: '🌺', text: 'Eu e mais 2 amigas!', time: '09:20' }
+                ],
+                'iniciantes': [
+                    { author: 'Sol', avatar: '💛', text: 'Dicas para quem tá começando: respiração e posição!', time: '08:00' },
+                    { author: 'Beatriz', avatar: '🐚', text: 'Quanto tempo demora pra pegar na primeira onda?', time: '08:05' },
+                    { author: 'Sol', avatar: '💛', text: 'Cada um no seu tempo! O importante é se divertir! 🌊', time: '08:07' }
+                ]
+            };
+            
+            // Salvar no localStorage se não existir
+            Object.keys(demoMessages).forEach(room => {
+                if (!localStorage.getItem('asf-room-' + room)) {
+                    localStorage.setItem('asf-room-' + room, JSON.stringify(demoMessages[room]));
+                }
+            });
+        }
+        
+        // Abrir uma sala
+        function openRoom(roomId) {
+            currentRoom = roomId;
+            document.getElementById('rooms-view').classList.add('hidden');
+            document.getElementById('chat-view').classList.remove('hidden');
+            document.getElementById('room-title').textContent = getRoomName(roomId);
+            loadMessages(roomId);
+        }
+        
+        // Voltar para lista de salas
+        function showRoomsList() {
+            document.getElementById('chat-view').classList.add('hidden');
+            document.getElementById('rooms-view').classList.remove('hidden');
+        }
+        
+        // Obter nome da sala
+        function getRoomName(roomId) {
+            const names = {
+                'bertioga-mansas': '🏄‍♀️ Bertioga Manas',
+                'surf-trips': '🚐 Surf Trips',
+                'iniciantes': '🌱 Iniciantes',
+                'competicao': '🏆 Competição',
+                'longboard': '🛹 Longboard Ladies',
+                'health': '💪 Saúde & Treino'
+            };
+            return names[roomId] || roomId;
+        }
+        
+        // Carregar mensagens
+        function loadMessages(roomId) {
+            const container = document.getElementById('messages-container');
+            const messages = JSON.parse(localStorage.getItem('asf-room-' + roomId) || '[]');
+            
+            container.innerHTML = messages.map(msg => `
+                <div class="message${msg.isMine ? ' mine' : ''}">
+                    <div class="message-avatar" style="background: ${getAvatarColor(msg.author)}">
+                        ${msg.avatar || msg.author[0]}
+                    </div>
+                    <div class="message-content">
+                        <div class="message-author">${msg.author}</div>
+                        <div class="message-text">${msg.text}</div>
+                        <div class="message-time">${msg.time}</div>
+                    </div>
+                </div>
+            `).join('');
+            
+            container.scrollTop = container.scrollHeight;
+        }
+        
+        // Enviar mensagem
+        function sendMessage() {
+            const input = document.getElementById('message-input');
+            const text = input.value.trim();
+            if (!text || !currentRoom) return;
+            
+            const messages = JSON.parse(localStorage.getItem('asf-room-' + currentRoom) || '[]');
+            const newMsg = {
+                author: 'Você',
+                avatar: '🌟',
+                text: text,
+                time: new Date().toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' }),
+                isMine: true
+            };
+            
+            messages.push(newMsg);
+            localStorage.setItem('asf-room-' + currentRoom, JSON.stringify(messages));
+            input.value = '';
+            loadMessages(currentRoom);
+        }
+        
+        // Criar nova sala
+        function createNewRoom() {
+            const name = prompt('Nome da nova sala:');
+            if (!name) return;
+            alert('Sala "' + name + '" criada! Compartilhe o link com suas amigas! 🌊');
+        }
+        
+        // Mostrar surfistas perto
+        function showNearbySurfers() {
+            alert('Funcionalidade em desenvolvimento! Em breve você poderá ver surfistas perto de você! 📍');
+        }
+        
+        // Mostrar minhas salas
+        function showMyRooms() {
+            alert('Suas salas aparecerão aqui! 🌟');
+        }
+        
+        // Cor do avatar baseado no nome
+        function getAvatarColor(name) {
+            const colors = ['#00A8CC', '#9B59B6', '#FF6B6B', '#F4D03F', '#2ECC71'];
+            let hash = 0;
+            for (let i = 0; i < name.length; i++) {
+                hash = name.charCodeAt(i) + ((hash << 5) - hash);
+            }
+            return colors[Math.abs(hash) % colors.length];
+        }
+        
+        // Enviar ao apertar Enter
+        document.addEventListener('DOMContentLoaded', function() {
+            initMessages();
+            const input = document.getElementById('message-input');
+            if (input) {
+                input.addEventListener('keypress', function(e) {
+                    if (e.key === 'Enter' && !e.shiftKey) {
+                        e.preventDefault();
+                        sendMessage();
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+</html>
