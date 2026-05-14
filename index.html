@@ -3426,6 +3426,29 @@ id="brandhub">
     </div>
 
     <!-- Parafinas para Cada Tipo de Água -->
+    <!-- Conquistas Secretas -->
+    <div id="conquistas-secretas" style="margin: 30px 20px; padding: 20px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 20px; color: white;">
+        <h3 style="text-align: center; margin-bottom: 20px; font-size: 22px;">🏆 Conquistas Secretas</h3>
+        
+        <button onclick="checkConquista('longboard-wave', this)" style="width: 100%; margin-bottom: 10px; padding: 12px; background: rgba(255,255,255,0.2); color: white; border: none; border-radius: 10px; font-weight: 600; cursor: pointer;">
+            🌊 Surfar uma onda de longboard
+        </button>
+        
+        <button onclick="checkConquista('first-tide', this)" style="width: 100%; margin-bottom: 10px; padding: 12px; background: rgba(255,255,255,0.2); color: white; border: none; border-radius: 10px; font-weight: 600; cursor: pointer;">
+            ⏰ Chegar no horário certo da maré
+        </button>
+        
+        <button onclick="checkConquista('wax-master', this)" style="width: 100%; margin-bottom: 10px; padding: 12px; background: rgba(255,255,255,0.2); color: white; border: none; border-radius: 10px; font-weight: 600; cursor: pointer;">
+            🧈 Escolher a parafina certa
+        </button>
+        
+        <button onclick="checkConquista('sun-protection', this)" style="width: 100%; margin-bottom: 10px; padding: 12px; background: rgba(255,255,255,0.2); color: white; border: none; border-radius: 10px; font-weight: 600; cursor: pointer;">
+            ☀️ Usar protetor solar UV 50+
+        </button>
+        
+        <div id="conquista-result" style="margin-top: 15px; text-align: center; font-size: 14px; min-height: 24px;"></div>
+    </div>
+
     <div style="margin: 20px;">
         <h3 style="font-size: 20px; margin-bottom: 15px; color: #0E2439;">🧈 Parafinas por Tipo de Água</h3>
         <div class="card" style="border-radius: 15px; margin-bottom: 15px; border-left: 4px solid #00A8CC;">
@@ -5380,6 +5403,23 @@ document.addEventListener("DOMContentLoaded", renderBrandHub);
     </footer>
 
     <script>
+
+function checkConquista(type, btn) {
+    const messages = {
+        'longboard-wave': '🏆 Conquista desbloqueada: Longboard Wave Rider!',
+        'first-tide': '🌊 Conquista desbloqueada: Tide Timing Master!',
+        'wax-master': '🧈 Conquista desbloqueada: Wax Wizard!',
+        'sun-protection': '☀️ Conquista desbloqueada: Sun Protection Pro!'
+    };
+    
+    const result = document.getElementById('conquista-result');
+    if (result) {
+        result.innerHTML = messages[type] || '🏆 Conquista desbloqueada!';
+        btn.style.background = 'rgba(255,215,0,0.5)';
+        btn.disabled = true;
+    }
+}
+
         // Display real stats
         document.getElementById('stat-opens').textContent = localStorage.getItem('asf-opens') || '1';
         document.getElementById('stat-sessions').textContent = (JSON.parse(localStorage.getItem('surf-sessions') || []).length;
