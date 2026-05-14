@@ -148,6 +148,36 @@ header, footer,
 p[style*="font-size"], 
 div[style*="font-size: 13px"],
 div[style*="font-size: 14px"] { display: none !important; }
+
+/* Modern Glassmorphism */
+.glass-card {
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+[data-theme="dark"] .glass-card {
+    background: rgba(26, 29, 35, 0.7);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Modern button hover */
+.btn-modern:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 30px rgba(0, 168, 204, 0.3);
+}
+
+/* Animated gradient */
+@keyframes gradientShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+.animated-gradient {
+    background: linear-gradient(90deg, var(--primary), var(--purple), var(--coral));
+    background-size: 200% 200%;
+    animation: gradientShift 8s ease infinite;
+}
 </style>
     <!-- Structured Data movido para script -->
 
@@ -9392,7 +9422,37 @@ window.ASFMonetization={trackEvent,getStats};const a=document.createElement('sty
   </div>
 </div>
 
-<style>@keyframes modalBounce{0%{transform:scale(0.8);opacity:0}50%{transform:scale(1.05)}100%{transform:scale(1);opacity:1}}</style>
+<style>@keyframes modalBounce{0%{transform:scale(0.8);opacity:0}50%{transform:scale(1.05)}100%{transform:scale(1);opacity:1}}
+/* Modern Glassmorphism */
+.glass-card {
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+[data-theme="dark"] .glass-card {
+    background: rgba(26, 29, 35, 0.7);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Modern button hover */
+.btn-modern:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 30px rgba(0, 168, 204, 0.3);
+}
+
+/* Animated gradient */
+@keyframes gradientShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+.animated-gradient {
+    background: linear-gradient(90deg, var(--primary), var(--purple), var(--coral));
+    background-size: 200% 200%;
+    animation: gradientShift 8s ease infinite;
+}
+</style>
 
 
 <!-- MONETIZATION CTA -->
