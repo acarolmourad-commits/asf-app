@@ -30,4 +30,10 @@ const ALL_TIPS = [
 // === MULHER ===
 {categoria: "Mulher", titulo: "Mulher no surf", conteudo: "O surf é para todos! Não importa corpo, idade.", tags: ["Mulher", "Empoderamento"]},
 {categoria: "Mulher", titulo: "Força da comunidade", conteudo: "Surfar em grupo é mais seguro e divertido!", tags: ["Mulher", "Comunidade"]},
+// === NOVAS DICAS 2026-05-14 ===
+{categoria: "Técnica", titulo: "Popup perfeito", conteudo: "Pratique popup 50x por dia. Corpo reto, joelhos flexionadas, olhar à frente!", tags: ["Técnica", "Popup", "Iniciante"]},
+{categoria: "Saúde", titulo: "Recuperação ativa", conteudo: "Caminhada leve no dia após sessão intensa acelera recuperação muscular.", tags: ["Saúde", "Recuperação"]},
+{categoria: "Mental", titulo: "Flow state", conteudo: "Quando tudo fluí: mergulhe na onda e deixe o momento levar!", tags: ["Mental", "Flow"]},
+{categoria: "Equipamento", titulo: "Fins de onda", conteudo: "Fin mais largo para estabilidade. Fin mais estreito para manobras.", tags: ["Equipamento", "Fin"]},
+{categoria: "Segurança", titulo: "Checklist pré-sessão", conteudo: "Prancha? Leash? Wax? Sol? Marés? Verifique tudo antes de entrar!", tags: ["Segurança", "Checklist"]},
 ];
