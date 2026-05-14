@@ -44,6 +44,24 @@ const SURF_NEWS = [
     categoria: "Social",
     imagem: "💙",
     link: "#"
+  },
+  {
+    id: 6,
+    titulo: "ASF Team no Campeonato Sul-Americano",
+    resumo: "Representantes do surf feminino paulista foram selecionados para representar o Brasil em Santiago.",
+    data: "2026-04-20",
+    categoria: "Competição",
+    imagem: "🇵🇾",
+    link: "#"
+  },
+  {
+    id: 7,
+    titulo: "Parceria com Marca de Roupas de Surf",
+    resumo: "ASF fecha parceria com marca sustentável de roupas de surf. Descontos exclusivos para membros!",
+    data: "2026-04-15",
+    categoria: "Comunidade",
+    imagem: "🤝",
+    link: "#"
   }
 ];
 
