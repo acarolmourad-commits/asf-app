@@ -436,6 +436,9 @@ div[style*="font-size: 14px"] { display: none !important; }
         <button class="tab" role="tab" aria-selected="false" aria-controls="praias" onclick="showSection('praias')">
             <span class="tab-icon">🏖️</span> Praias
         </button>
+        <button class="tab" role="tab" aria-selected="false" aria-controls="surf-news" onclick="showSection('surf-news')">
+            <span class="tab-icon">📰</span> News
+        </button>
         <button class="tab" role="tab" aria-selected="false" aria-controls="trips" onclick="showSection('trips')">
             <span class="tab-icon">🚗</span> Surftrips
         </button>
@@ -4597,6 +4600,25 @@ document.addEventListener("DOMContentLoaded", renderBrandHub);
                 </div>
             </div>
         </div>
+
+
+    <!-- Surf News Section -->
+    <div class="section" id="surf-news">
+        <div class="section-header">
+            <h2 class="section-title">📰 Surf News & Updates</h2>
+        </div>
+        
+        <div id="surf-news-container" style="padding: 0 16px;">
+            <!-- News will be rendered by surf-news.js -->
+            <div class="card" style="background: linear-gradient(135deg, rgba(0,168,204,0.05), rgba(155,89,182,0.05));">
+                <div style="text-align: center; padding: 20px;">
+                    <div style="font-size: 48px;">📰</div>
+                    <h4 style="font-size: 16px; margin: 10px 0;">Carregando notícias...</h4>
+                    <p style="font-size: 13px; color: var(--gray-600);">Atualizações do mundo surf e eventos ASF</p>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- Guia de Praias Section -->
     <div class="section" id="praias">
@@ -11996,4 +12018,6 @@ function walkTree(el) {
     }
 </script>
 </body>
+
+<script src="surf-news.js"></script>
 </html>
