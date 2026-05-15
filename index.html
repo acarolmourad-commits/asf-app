@@ -9718,5 +9718,52 @@ setTimeout(()=>{if(!getCookieConsent()){const b=document.getElementById('cookie-
   
   
 
+
+  <script>
+  (function() {
+    try {
+      // Remove stray JavaScript text nodes from <body>
+      // Only targets actual JS code characteristics
+      var walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, null, false);
+      var toRemove = [];
+      var node;
+      while (node = walker.nextNode()) {
+        var t = node.textContent;
+        var s = t.trim();
+        if (!s) continue;
+        var parent = node.parentNode;
+        // Skip if parent is a script, style, noscript, code, or pre tag
+        if (!parent) continue;
+        var tag = parent.tagName;
+        if (['SCRIPT','STYLE','NOSCRIPT','CODE','PRE','TEXTAREA','INPUT','TITLE'].indexOf(tag) !== -1) continue;
+        // Detection heuristics (must match at least one):
+        // 1. Starts with // comment (multi-line JS comment block)
+        var startsComment = s.indexOf('// ') === 0 && s.length > 30;
+        // 2. const/var/let with typical JS patterns (declaration followed by =)
+        var hasJsDecl = /^(const|var|let)\s+[\w$]+\s*[=!:]/.test(s) || /^(const|var|let)\s+\w+\s*=\s*\{/.test(s);
+        // 3. document.something or window.something (not in onclick handler context)
+        var hasDomCall = /^(document|window)\.[\w$]+/.test(s);
+        // 4. function keyword at start
+        var hasFunc = /^(function|async\s+function)\s+[\w$]+/.test(s);
+        // 5. JSON.parse / localStorage / Array patterns
+        var hasJSPattern = /^(JSON\.|localStorage\.|Array\.from|Math\.\w+)/.test(s);
+        // 6. Multi-line JS block: has JS syntax AND has multiple lines AND parent is DIV/SPAN/SECTION
+        var isMultiLine = s.indexOf('\n') !== -1;
+        var hasJsSyntax = /[\{\};\(\)]\s*[\{\};\(\)]/.test(s) || /(addEventListener|getElementById|querySelector|localStorage|JSON\.)/.test(s);
+        var parentIsGeneric = ['DIV','SPAN','SECTION','P','LI'].indexOf(tag) !== -1;
+        var multiLineJs = isMultiLine && hasJsSyntax && parentIsGeneric;
+
+        if (startsComment || hasJsDecl || hasDomCall || hasFunc || hasJSPattern || multiLineJs) {
+          toRemove.push(node);
+        }
+      }
+      // Remove in reverse order (preserves sibling positions)
+      for (var i = toRemove.length - 1; i >= 0; i--) {
+        try { toRemove[i].remove(); } catch(e) { toRemove[i].parentNode.removeChild(toRemove[i]); }
+      }
+      if (toRemove.length) console.log('[ASF Cleanup] Removed ' + toRemove.length + ' JS stray text nodes');
+    } catch(e) { console.warn('[ASF Cleanup]', e); }
+  })();
+  </script>
 </body>
 </html>
