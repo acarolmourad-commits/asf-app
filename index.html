@@ -4334,7 +4334,7 @@ document.addEventListener("DOMContentLoaded", renderBrandHub);
                     <div style="flex: 1;">
                         <textarea id="new-post-text" placeholder="Compartilhe algo com as manas... 🏄‍♀️" style="width: 100%; padding: 10px; border: 1px solid var(--gray-200); border-radius: 10px; font-size: 14px; font-family: 'Outfit', sans-serif; resize: none; min-height: 50px; box-sizing: border-box;" rows="2"></textarea>
                         <div style="display: flex; justify-content: flex-end; margin-top: 8px;">
-                            <button class="btn btn-primary" style="padding: 8px 20px; font-size: 13px;" onclick="alert('Em breve! 🚀')">Publicar</button>
+                            <button class="btn btn-primary" style="padding: 8px 20px; font-size: 13px;" onclick="publishPost()">Publicar</button>
                         </div>
                     </div>
                 </div>
@@ -5206,7 +5206,7 @@ document.addEventListener("DOMContentLoaded", renderBrandHub);
     </div>
 
     <!-- Floating Action Buttons -->
-    <button class="fab" onclick="alert('Em breve! 🚀')">+</button>
+    <button class="fab" onclick="showCreateMenu()">+</button>
     <button class="fab-share" onclick="toggleSharePanel()" title="Compartilhar">📤</button>
     <button id="back-to-top" onclick="scrollToTop()" style="display: none; position: fixed; bottom: 160px; right: 24px; width: 45px; height: 45px; background: rgba(0,168,204,0.9); border: none; color: white; border-radius: 50%; font-size: 20px; cursor: pointer; z-index: 99; box-shadow: 0 4px 15px rgba(0,0,0,0.2);">⬆️</button>
 
@@ -12039,4 +12039,5 @@ function walkTree(el) {
 <script src="surf-calculator.js"></script>
 
 <script src="surf-goals.js"></script>
+<script src="app-posts.js"></script>
 </html>
