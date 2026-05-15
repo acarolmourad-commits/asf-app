@@ -352,6 +352,7 @@
 - [x] Add 5 new surf tips (popup, flow state, fins, recovery, checklist), push to GitHub (2026-05-14)
 - [x] Add Surf News section with dynamic news updates (WSL, community, tech, events), new tab (📰 News), push to GitHub (2026-05-14)
 - [x] Fix JS stray textos aparecendo na página (5 blocos removidos com script de limpeza no body), push to GitHub (2026-05-15 23:22 UTC)
+- [x] Adiciona seção 🏄♀️ Manobras de Longboard com 12 manobras organizadas por nível + Canvas Placeholder, push to GitHub (2026-05-15 23:35 UTC)
 - [x] Add Surf Goals system to track surf achievements with progress visualization, new tab (🎯 Metas), push to GitHub (2026-05-14)
 - [x] Add Surf Culture section with historical stories from Hawaii, Brazil, Peru, Japan, Australia, South Africa, new tab (🏛️ Cultura), push to GitHub (2026-05-14)
 - [x] Add Instagram Content section with ready-to-post surf content for @associacaosurffeminino, new tab (📸 Posts), push to GitHub (2026-05-15)
