@@ -8,7 +8,7 @@
 4. Update documentation
 5. Push changes to GitHub
 
-*Last check completed: 23:30 UTC (2026-05-12)*
+*Last check completed: 12:45 UTC (2026-05-15)*
 
 ## ALWAYS IMPROVE
 
@@ -348,6 +348,17 @@
 - [x] Add 5 new daily tips (659 total), remove duplicate translations, optimize code/layout, update README & HEARTBEAT.md, push to GitHub (2026-04-25 13:09 UTC)
 - [x] Add área de Assinantes (subscribers) com conteúdo exclusivo: Calendário WSL, Previsões Antecipadas, Análise de Ondas, Guia de Spots, Benefícios Premium (2026-05-11)
 - [x] Add "Assinantes" section with exclusive content (WSL calendar, 7-day forecasts, wave analysis, spot guide, badges), new navigation tab (👑 Assinantes), push to GitHub (2026-05-12)
+- [x] Add Sessões Interativas - Chat system for surfers to communicate and share surf experiences, new navigation tab (💬 Sessões), push to GitHub (2026-05-14)
+- [x] Add 5 new surf tips (popup, flow state, fins, recovery, checklist), push to GitHub (2026-05-14)
+- [x] Add Surf News section with dynamic news updates (WSL, community, tech, events), new tab (📰 News), push to GitHub (2026-05-14)
+- [x] Add Surf Calculator tool for volume, board size, and fin calculations, push to GitHub (2026-05-14)
+- [x] Add Surf Goals system to track surf achievements with progress visualization, new tab (🎯 Metas), push to GitHub (2026-05-14)
+- [x] Add Surf Culture section with historical stories from Hawaii, Brazil, Peru, Japan, Australia, South Africa, new tab (🏛️ Cultura), push to GitHub (2026-05-14)
+- [x] Add Instagram Content section with ready-to-post surf content for @associacaosurffeminino, new tab (📸 Posts), push to GitHub (2026-05-15)
+- [x] Add 1200+ new surf tips across 14 categories (Técnica, Segurança, Equipamento, Nutrição, Saúde, Mental, Comunidade, Cultura, Sustentabilidade, Competição, ASF, Imóveis, Recuperação, Prevention), push to GitHub (2026-05-15)
+- [x] Configure competição 2026 dates (WQS Praia do Tombo, Copa Litoral, Etapa Bertioga), push to GitHub
+- [x] Implement post publishing with localStorage persistence
+- [x] Add create menu (FAB) with session/goal/post options
 
 ## TODO IMPROVEMENTS
 
