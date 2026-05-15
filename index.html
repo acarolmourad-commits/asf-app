@@ -2978,6 +2978,9 @@ document.addEventListener('DOMContentLoaded', function() {
         <button class="tab active" role="tab" aria-selected="true" aria-controls="dicas" onclick="showSection('dicas')">
             <span class="tab-icon">📚</span> Dicas
         </button>
+        <button class="tab" role="tab" aria-selected="false" aria-controls="longboard" onclick="showSection('longboard')">
+            <span class="tab-icon">🏄♀️</span> Longboard
+        </button>
         <button class="tab" role="tab" aria-selected="false" aria-controls="mobilidade" onclick="showSection('mobilidade')">
             <span class="tab-icon">🧘</span> Mobilidade
         </button>
@@ -4019,6 +4022,199 @@ document.addEventListener('DOMContentLoaded', function() {
                         <span>📊 Todos</span>
                     </div>
                 </div>
+            </div>
+        </div>
+        
+        <!-- Longboard Manobras Section -->
+        <div class="section" id="longboard">
+            <div class="section-header">
+                <h2 class="section-title">🏄♀️ Manobras de Longboard</h2>
+                <a href="#" class="see-all">Ver todas →</a>
+            </div>
+
+            <div style="margin: 0 20px 16px; background: linear-gradient(135deg, #0E2439 0%, #1A3A5C 100%); border-radius: 16px; padding: 16px; color: white;">
+                <p style="font-size: 14px; font-weight: 600;">🌊 A arte do Longboard</p>
+                <p style="font-size: 12px; opacity: 0.9; margin-top: 4px;">O longboard é sobre glide, elegância e conexão com a onda. Cada manobra requer paciência e fluxo!</p>
+            </div>
+
+            <!-- INICIANTE -->
+            <h3 style="margin: 16px 20px 10px; font-size: 16px; color: var(--secondary);">🌱 Iniciante</h3>
+            <div class="cards-grid">
+                <div class="card">
+                    <span class="card-tag green">INICIANTE</span>
+                    <h3>🚶 Cross-Step</h3>
+                    <p><strong>O que é:</strong> Caminhar para a frente da prancha cruzando as pernas, como se estivesse subindo uma escada.</p>
+                    <p style="margin-top: 8px;"><strong>Como fazer:</strong> Do pé de trás, cruze por cima do pé da frente até o nariz. Repita até chegar ao nose.</p>
+                    <p style="margin-top: 8px; font-size: 12px; color: var(--gray-400);">⭐ Base para todas as manobras de longboard</p>
+                </div>
+                <div class="card">
+                    <span class="card-tag green">INICIANTE</span>
+                    <h3>🦶 Hang 5</h3>
+                    <p><strong>O que é:</strong> Colocar 5 dedos do pé da frente na ponta do nariz da prancha, enquanto o pé de trás fica no centro.</p>
+                    <p style="margin-top: 8px;"><strong>Dica:</strong> Mantém o peso no pé de trás para não dar "pearl" (mergulhar o nariz).</p>
+                    <p style="margin-top: 8px; font-size: 12px; color: var(--gray-400);">⭐ A manobra clássica do longboard!</p>
+                </div>
+                <div class="card">
+                    <span class="card-tag green">INICIANTE</span>
+                    <h3>🏄 Trim (Ajuste)</h3>
+                    <p><strong>O que é:</strong> Conduzir a prancha ao longo da face da onda para manter velocidade sem perder a posição.</p>
+                    <p style="margin-top: 8px;"><strong>Como fazer:</strong> Incline o corpo levemente para os lados. O peso nos calcanhares dá mais velocidade; nos dedos, menos.</p>
+                    <p style="margin-top: 8px; font-size: 12px; color: var(--gray-400);">⭐ A base de todo o longboard surf</p>
+                </div>
+            </div>
+
+            <!-- INTERMEDIÁRIO -->
+            <h3 style="margin: 20px 20px 10px; font-size: 16px; color: var(--secondary);">🔥 Intermediário</h3>
+            <div class="cards-grid">
+                <div class="card">
+                    <span class="card-tag accent">INTERMEDIÁRIO</span>
+                    <h3>🙌 Hang 10</h3>
+                    <p><strong>O que é:</strong> A evolução do Hang 5 — os dois pés na ponta do nariz com todos os 10 dedos para fora da borda!</p>
+                    <p style="margin-top: 8px;"><strong>Dica:</strong> Só tente em ondas pequenas-médias e bem laminadas. Quanto mais lenta a onda, mais tempo você tem para a manobra.</p>
+                    <p style="margin-top: 8px; font-size: 12px; color: var(--gray-400);">🏆 O Santo Graal do longboard!</p>
+                </div>
+                <div class="card">
+                    <span class="card-tag accent">INTERMEDIÁRIO</span>
+                    <h3>💫 Nose Ride</h3>
+                    <p><strong>O que é:</strong> Ficar na ponta do nariz da prancha e surfar por vários segundos enquanto a cauda desliza atrás de você.</p>
+                    <p style="margin-top: 8px;"><strong>Segredo:</strong> Movimentos mínimos, muito equilíbrio, e use o movimento da onda para manter a posição — não lute contra ela!</p>
+                    <p style="margin-top: 8px; font-size: 12px; color: var(--gray-400);">🏄 A essência do longboard style</p>
+                </div>
+                <div class="card">
+                    <span class="card-tag accent">INTERMEDIÁRIO</span>
+                    <h3>↩️ Cutback</h3>
+                    <p><strong>O que é:</strong> Uma curva de volta em direção à parte quebranda da onda, usada para recuperar velocidade e posição.</p>
+                    <p style="margin-top: 8px;"><strong>No longboard:</strong> Mais suave e amplo que no shortboard. Use o peso no calcanhar para fazer o tail cavar e traçar uma curva larga.</p>
+                    <p style="margin-top: 8px; font-size: 12px; color: var(--gray-400);">🌊 O "freio" do longboard</p>
+                </div>
+                <div class="card">
+                    <span class="card-tag accent">INTERMEDIÁRIO</span>
+                    <h3>🌊 Floater</h3>
+                    <p><strong>O que é:</strong> Passar por cima da onda que está quebrando, deslizando sobre a espuma na parte de cima da prancha.</p>
+                    <p style="margin-top: 8px;"><strong>Como fazer:</strong> Pegue velocidade, direcione para a seção fechando e deixe a prancha deslizar sobre a espuma.</p>
+                    <p style="margin-top: 8px; font-size: 12px; color: var(--gray-400);">💨 Mantém o glide em ondas pequenas</p>
+                </div>
+            </div>
+
+            <!-- AVANÇADO -->
+            <h3 style="margin: 20px 20px 10px; font-size: 16px; color: var(--secondary);">⚡ Avançado</h3>
+            <div class="cards-grid">
+                <div class="card">
+                    <span class="card-tag coral">AVANÇADO</span>
+                    <h3>🌪️ 360 no Longboard</h3>
+                    <p><strong>O que é:</strong> Girar a prancha 360° na superfície da onda enquanto surfa.</p>
+                    <p style="margin-top: 8px;"><strong>No longboard:</strong> Mais difícil que no shortboard! Aproxime-se rápido da onda e incline levemente a prancha em direção à parte alta.</p>
+                    <p style="margin-top: 8px; font-size: 12px; color: var(--gray-400);">🔥 Requer velocidade e timing perfeitos</p>
+                </div>
+                <div class="card">
+                    <span class="card-tag coral">AVANÇADO</span>
+                    <h3>🪦 Drop Knee Turn</h3>
+                    <p><strong>O que é:</strong> Colocar o joelho de trás sobre a prancha enquanto curva, diminuindo o raio da virada.</p>
+                    <p style="margin-top: 8px;"><strong>Segredo:</strong> O pé da frente cruza o stingrer (centro). O joelho de trás toca a prancha, o peso vai todo para trás, depois cai para frente para controlar.</p>
+                    <p style="margin-top: 8px; font-size: 12px; color: var(--gray-400);">💪 Virada apertada sem perder glide</p>
+                </div>
+                <div class="card">
+                    <span class="card-tag coral">AVANÇADO</span>
+                    <h3>💤 Coffin (Caixão)</h3>
+                    <p><strong>O que é:</strong> Deitar de costas na prancha como um caixão, deslizar no flat da onda e depois se levantar.</p>
+                    <p style="margin-top: 8px;"><strong>Como fazer:</strong> Deite gradualmente pelo centro da prancha, nunca pressione só um lado, senão ela tomba. Deslize, depois se recomponha.</p>
+                    <p style="margin-top: 8px; font-size: 12px; color: var(--gray-400);">🎭 Show off puro — impressiona!</p>
+                </div>
+                <div class="card">
+                    <span class="card-tag coral">AVANÇADO</span>
+                    <h3>↩️ Layback Turn</h3>
+                    <p><strong>O que é:</strong> Fazer uma curva larga jogando o corpo para trás, encostando uma das mãos na água.</p>
+                    <p style="margin-top: 8px;"><strong>No longboard:</strong> Mais fluido e gracioso que no shortboard. A prancha desliza com estilo. Perfeito para fundos de onda longos e suaves.</p>
+                    <p style="margin-top: 8px; font-size: 12px; color: var(--gray-400);">✨ Pura elegância na água</p>
+                </div>
+                <div class="card">
+                    <span class="card-tag coral">AVANÇADO</span>
+                    <h3>🔄 Cheater-Five Shuvit</h3>
+                    <p><strong>O que é:</strong> Combina Hang 5 com um giro de 180° da prancha — incrível e super técnico!</p>
+                    <p style="margin-top: 8px;"><strong>Como:</strong> Chega até o nariz com cross-step, faz o Cheater 5, então transfere todo o peso para o pé da frente e gira o tail 180°.</p>
+                    <p style="margin-top: 8px; font-size: 12px; color: var(--gray-400);">🔥 A manobra mais técnica do longboard!</p>
+                </div>
+            </div>
+
+            <!-- TÉCNICAS ESSENCIAIS -->
+            <h3 style="margin: 20px 20px 10px; font-size: 16px; color: var(--secondary);">💡 Técnicas Essenciais</h3>
+            <div class="cards-grid">
+                <div class="card">
+                    <span class="card-tag purple">TÉCNICA</span>
+                    <h3>🏃 Corrida da Espuma (Race)</h3>
+                    <p><strong>O que é:</strong> Corrida contra a espuma quebrando usando só glide — sem remar!</p>
+                    <p style="margin-top: 8px;"><strong>Usar:</strong> Quando você está passando por uma seção que fecha rapidamente. Mantém a prancha sempre no ponto mais rápido da onda.</p>
+                    <p style="margin-top: 8px; font-size: 12px; color: var(--gray-400);">⚡ Escapar da whitewater como um profissional</p>
+                </div>
+                <div class="card">
+                    <span class="card-tag purple">TÉCNICA</span>
+                    <h3>🎯 Stall (Parada Estratégica)</h3>
+                    <p><strong>O que é:</strong> Colocar o peso todo no tail da prancha para parar a velocidade e esperar a onda fechar.</p>
+                    <p style="margin-top: 8px;"><strong>Regra:</strong> Quanto MAIS longa a prancha, MAIS veloz. Use o stall para ajustar a posição antes de uma manobra.</p>
+                    <p style="margin-top: 8px; font-size: 12px; color: var(--gray-400);">🐌 Pare sem sair da onda!</p>
+                </div>
+                <div class="card">
+                    <span class="card-tag purple">TÉCNICA</span>
+                    <h3>🤸 Pump</h3>
+                    <p><strong>O que é:</strong> Movimento de subir e descer a prancha em zigue-zague para gerar velocidade extra na onda.</p>
+                    <p style="margin-top: 8px;"><strong>Dica:</strong> Menos eficaz no longboard que no shortboard, mas útil em ondas muito pequenas. Combine com stall para best effect!</p>
+                    <p style="margin-top: 8px; font-size: 12px; color: var(--gray-400);">⚡ Gere velocidade onde a onda não ajuda</p>
+                </div>
+                <div class="card">
+                    <span class="card-tag purple">TÉCNICA</span>
+                    <h3>🏄 Bottom Turn (Virada de Baixo)</h3>
+                    <p><strong>O que é:</strong> A primeira curva funda na parte baixa da onda, que define todo o seu movimento seguinte.</p>
+                    <p style="margin-top: 8px;"><strong>No longboard:</strong> Coloca os pés mais para trás para ter controle. Uma boa bottom turn te coloca na posição perfeita para cutback ou noseride!</p>
+                    <p style="margin-top: 8px; font-size: 12px; color: var(--gray-400);">🌊 Toda grande manobra começa aqui</p>
+                </div>
+                <div class="card">
+                    <span class="card-tag purple">TÉCNICA</span>
+                    <h3>⬆️ Top Turn (Virada de Cima)</h3>
+                    <p><strong>O que é:</strong> Subir até a borda da onda e fazer uma virada de volta para descer.</p>
+                    <p style="margin-top: 8px;"><strong>No longboard:</strong> O andar suave e a largura facilitam uma curva mais ampla e estilosa no topo da onda. Ótima antes de um re-entry ou floater!</p>
+                    <p style="margin-top: 8px; font-size: 12px; color: var(--gray-400);">🎯 Controle total na parte alta da onda</p>
+                </div>
+                <div class="card">
+                    <span class="card-tag purple">TÉCNICA</span>
+                    <h3>🔁 Re-Entry</h3>
+                    <p><strong>O que é:</strong> Bater na parte alta da onda (lip) e voltar rapidamente para a face, ganhando velocidade.</p>
+                    <p style="margin-top: 8px;"><strong>No longboard:</strong> Mais suave e artístico que no shortboard. Use a virada do topo para pegar o flat da onda em alta velocidade.</p>
+                    <p style="margin-top: 8px; font-size: 12px; color: var(--gray-400);">🔄 Bate, volta, e vai mais rápido!</p>
+                </div>
+                <div class="card">
+                    <span class="card-tag purple">TÉCNICA</span>
+                    <h3>🌬️ Hang Heels</h3>
+                    <p><strong>O que é:</strong> Nose ride na posição de "goofy" — os calcanhares pendurados para fora da borda trás da prancha!</p>
+                    <p style="margin-top: 8px;"><strong>Dica:</strong> O nome parece estranho, mas é uma das posições mais estilosas do longboard surf. Pés no nariz, calcanhares no ar!</p>
+                    <p style="margin-top: 8px; font-size: 12px; color: var(--gray-400);">👡 Estilo puro!</p>
+                </div>
+                <div class="card">
+                    <span class="card-tag purple">TÉCNICA</span>
+                    <h3>🦶 Switch Stance</h3>
+                    <p><strong>O que é:</strong> Trocar de posição (regular → goofy ou vice-versa) no meio da onda — de trás e de frente!</p>
+                    <p style="margin-top: 8px;"><strong>No longboard:</strong> O tamanho da prancha te dá espaço para trocar os pés. Combine com o cross-step para um visual impressionante.</p>
+                    <p style="margin-top: 8px; font-size: 12px; color: var(--gray-400);">🔄 Ambidextro na água!</p>
+                </div>
+            </div>
+
+            <!-- DICA DO DIA LONGBOARD -->
+            <div style="margin: 20px 20px 0;">
+                <div style="background: linear-gradient(135deg, rgba(155,89,182,0.08), rgba(0,168,204,0.08)); border: 1px solid rgba(155,89,182,0.2); border-radius: 16px; padding: 20px; text-align: center;">
+                    <p style="font-size: 26px; margin-bottom: 8px;">🏄♀️</p>
+                    <h3 style="font-size: 16px; margin-bottom: 8px; color: var(--secondary);">O segredo do Longboard</h3>
+                    <p style="font-size: 14px; color: var(--gray-600); line-height: 1.6; margin-bottom: 12px;">
+                        "O longboard não é sobre fazer a manobra mais radical — é sobre a conexão com a onda.
+                        Um bom longboarder surfa com menos esforço e mais estilo!"
+                    </p>
+                    <p style="font-size: 12px; color: var(--gray-400);">— Filosofia do gliding</p>
+                </div>
+            </div>
+
+            <!-- BACK TO SURFING BUTTON -->
+            <div style="text-align: center; margin: 24px 20px 40px;">
+                <button class="btn btn-secondary" onclick="showSection('dicas')" style="width: 100%; max-width: 300px;">
+                    ← Voltar para Dicas
+                </button>
             </div>
         </div>
         
