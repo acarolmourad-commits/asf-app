@@ -2801,8 +2801,8 @@ document.addEventListener('DOMContentLoaded', function() {
             <button onclick="sendChatbotMessage()" style="background:#00A8CC; color:white; border:none; padding:10px 16px; border-radius:8px; cursor:pointer;">Enviar</button>
         </div>
     </div>
- style="display: none; position: fixed; top: 80px; right: 15px; width: 320px; max-height: 400px; background: white; border-radius: 16px; box-shadow: 0 10px 40px rgba(0,0,0,0.2); z-index: 1000; overflow: hidden;">
-        <div style="background: linear-gradient(135deg, #0E2439 0%, #1A3A5C 100%); padding: 15px; color: white; display: flex; justify-content: space-between; align-items: center;">
+    <div id="notifications-panel" style="display: none; position: fixed; top: 80px; right: 15px; width: 320px; max-height: 400px; background: white; border-radius: 16px; box-shadow: 0 10px 40px rgba(0,0,0,0.2); z-index: 1000; overflow: hidden;">
+        <div style="background: linear-gradient(135deg, #0E2439 0%, #1A3A5C 100%); padding: 15px; color: white; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap;">
             <h3 style="font-size: 16px;">🔔 Notificações</h3>
             <button onclick="clearNotifications()" style="background: rgba(255,255,255,0.2); border: none; color: white; padding: 5px 10px; border-radius: 8px; font-size: 11px; cursor: pointer;">Limpar</button>
         </div>
