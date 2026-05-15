@@ -2519,10 +2519,12 @@ function trackReferral(code,targetEmail){const referrerId=localStorage.getItem(`
 function buyEbook(){const isPremium=localStorage.getItem('asf-premium-status')==='active';const price=isPremium?(29.90*0.7):29.90;trackEvent('ebook','purchase_click',{price,premium_user:isPremium});showToast('🚀 Redirecionando para pagamento...','info');setTimeout(()=>{showToast('📦 Ebook disponível em breve!','info')},1500)}
 function submitUGC(){const fileInput=document.getElementById('ugc-photo');if(!fileInput||!fileInput.files[0])return showToast('📷 Selecione uma foto primeiro','error');showToast('✅ Foto enviada! Em análise.','success');trackEvent('ugc','photo_submitted');fileInput.value=''}
 function initGoogleAnalytics(){console.log('📊 Analytics enabled')}
-function getConsent() { return localStorage.getItem(COOKIE_CONSENT); }
+// Legacy cookie functions (kept for compatibility but fixed null key bug)
+function getConsent() { return localStorage.getItem('asf-cookie-consent'); }
 function setConsent(level) {
-      localStorage.setItem(COOKIE_CONSENT, level);
-      if (banner) banner.remove();
+      localStorage.setItem('asf-cookie-consent', level);
+      var b = document.getElementById('cookie-consent-banner');
+      if (b) b.remove();
       trackEvent('legal', 'cookie_consent', level);
       console.log('🍪 Cookie consent:', level);
     }
@@ -2639,7 +2641,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const banner = document.getElementById('cookie-consent-banner');
         if (banner) {
             setTimeout(() => {
-                banner.style.display = 'block';
+                banner.style.display = 'flex';
                 banner.style.animation = 'slideUp 0.5s ease-out';
             }, 2000);
         }
@@ -2738,7 +2740,7 @@ document.addEventListener('DOMContentLoaded', function() {
     <div class="bg-animation"></div>
 
     <!-- Cookie Consent Banner (LGPD) -->
-    <div id="cookie-consent-banner" style="position: fixed; bottom: 0; left: 0; right: 0; background: #1A3A5C; color: white; padding: 16px 20px; display: flex; align-items: center; justify-content: space-between; gap: 12px; z-index: 9999; box-shadow: 0 -4px 20px rgba(0,0,0,0.3); font-size: 13px;">
+    <div id="cookie-consent-banner" style="display: none; position: fixed; bottom: 0; left: 0; right: 0; background: #1A3A5C; color: white; padding: 16px 20px; align-items: center; justify-content: space-between; gap: 12px; z-index: 9999; box-shadow: 0 -4px 20px rgba(0,0,0,0.3); font-size: 13px;">
       <div style="flex: 1;">
         <strong>🍪 Cookies</strong> — Usamos cookies essenciais para funcionar e analytics (Google) para melhorar o app. Ao continuar, você aceita nossa
         <a href="docs/privacy-policy.html" target="_blank" style="color: #00A8CC; text-decoration: underline;">Política de Privacidade</a>.
@@ -9603,7 +9605,7 @@ var translations = {
 
 
 // Show banner after 2s if no consent
-setTimeout(()=>{if(!getCookieConsent()){const b=document.getElementById('cookie-consent-banner');if(b)b.style.display='block'}},2000);
+setTimeout(()=>{if(!getCookieConsent()){const b=document.getElementById('cookie-consent-banner');if(b)b.style.display='flex'}},2000);
 
 // Pix Donation
 
