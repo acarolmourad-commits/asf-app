@@ -2540,120 +2540,122 @@ function walkTree(el) {
     }
 
 document.addEventListener('DOMContentLoaded', function() {
-  cleanupStrayText();
-  injectToastCSS();
-  renderContentRecommendations();
-  ensureFooterLinks();
+  // Stray JS cleaner
+  if (typeof cleanupStrayText === 'function') cleanupStrayText();
+  // Toast CSS
+  if (typeof injectToastCSS === 'function') injectToastCSS();
+  // Recommendation engine
+  if (typeof renderContentRecommendations === 'function') renderContentRecommendations();
+  // Footer links
+  if (typeof ensureFooterLinks === 'function') ensureFooterLinks();
 
-    // Chatbot: initialize FAQ if not defined and set keypress listener
-    if (typeof chatbotFAQs === 'undefined') {
-  cleanupStrayText();
-
-  injectToastCSS();
-
-  renderContentRecommendations();
-
-  ensureFooterLinks();
-
-        const chatbotFAQs = {
-            "como funciona": "O ASF App tem previsão de ondas, dicas, treinos, comunidade e muito mais!",
-            "previsão": "A previsão de ondas mostra as condições atualizadas automaticamente para as praias do litoral paulista.",
-            "onda": "A previsão mostra altura, período e direção das ondas para cada praia.",
-            "como participar": "Basta fazer login no app e explorar as seções.",
-            "eventos": "Temos competições mensais. Verifique a aba 'Competições'.",
-            "competições": "As competições estão na aba 🏆. Lá você vê próximos eventos e resultados.",
-            "pontos": "Você ganha pontos fazendo quizzes, logando sessões e participando. Consulte seu nível na aba Pontos.",
-            "nível": "Seu nível aumenta conforme você ganha pontos usando o app!",
-            "descontos": "Na aba Lojas tem desconto em parceiros. Mostre seu ASF App!",
-            "grupos": "Na aba Comunidade você encontra grupos de surfe por região.",
-            "manas": "Use a aba 'Próximas' para encontrar sisters surfistas perto de você!",
-            "contato": "Fale conosco pelo WhatsApp ou Instagram @associacaosurffeminino"
-        };
-    }
-    const chatbotInput = document.getElementById('chatbot-input');
-    if (chatbotInput) {
-        chatbotInput.addEventListener('keypress', function(e) {
-            if (e.key === 'Enter') sendChatbotMessage();
-        });
-    }
-
-    // Close notifications panel on outside click
-    document.addEventListener('click', function(e) {
-        const panel = document.getElementById('notifications-panel');
-        const bell = e.target.closest('button[onclick="toggleNotifications()"]');
-        if (panel && !panel.contains(e.target) && !bell) {
-            panel.style.display = 'none';
-        }
-    });
-
-    // Close search results on outside click
-    document.addEventListener('click', function(e) {
-        if (!e.target.closest('.search-container')) {
-            const searchResults = document.getElementById('searchResults');
-            if (searchResults) searchResults.classList.remove('active');
-        }
-    });
-
-    // Deferred non-critical initialization
-    const initDeferred = () => {
-        if (typeof loadLiveData === 'function') loadLiveData('bertioga');
-        if (typeof updateMoonPhase === 'function') updateMoonPhase();
+  // Chatbot: initialize FAQ if not defined
+  if (typeof chatbotFAQs === 'undefined') {
+    window.chatbotFAQs = {
+      "como funciona": "O ASF App tem previsão de ondas, dicas, treinos, comunidade e muito mais!",
+      "previsão": "A previsão de ondas mostra as condições atualizadas automaticamente para as praias do litoral paulista.",
+      "onda": "A previsão mostra altura, período e direção das ondas para cada praia.",
+      "como participar": "Basta fazer login no app e explorar as seções.",
+      "eventos": "Temos competições mensais. Verifique a aba 'Competições'.",
+      "competições": "As competições estão na aba 🏆. Lá você vê próximos eventos e resultados.",
+      "pontos": "Você ganha pontos fazendo quizzes, logando sessões e participando. Consulte seu nível na aba Pontos.",
+      "nível": "Seu nível aumenta conforme você ganha pontos usando o app!",
+      "descontos": "Na aba Lojas tem desconto em parceiros. Mostre seu ASF App!",
+      "grupos": "Na aba Comunidade você encontra grupos de surfe por região.",
+      "manas": "Use a aba 'Próximas' para encontrar sisters surfistas perto de você!",
+      "contato": "Fale conosco pelo WhatsApp ou Instagram @associacaosurffeminino"
     };
-    if (typeof requestIdleCallback === 'function') {
-        requestIdleCallback(initDeferred);
-    } else {
-        setTimeout(initDeferred, 0);
-    }
+  }
 
-    // Core app initialization
-    if (document.getElementById("challenge-timer")) { if (typeof updateBrandTimer === 'function') updateBrandTimer(); }
-    if (typeof initBadges === 'function') initBadges();
-    let appOpens = parseInt(localStorage.getItem('asf-opens') || '0');
-    appOpens++;
-    localStorage.setItem('asf-opens', appOpens);
-    try { document.getElementById('stat-opens').textContent = appOpens; } catch(e) {}
-    if (typeof showProfile === 'function') showProfile();
-    const savedTheme = localStorage.getItem('asf-theme');
-    if (savedTheme === 'dark') {
-        document.documentElement.setAttribute('data-theme', 'dark');
-        const darkToggle = document.getElementById('darkModeToggle');
-        if (darkToggle) darkToggle.textContent = '☀️';
-    }
-    if (typeof renderSessions === 'function') renderSessions();
-    if (typeof renderUserPosts === 'function') renderUserPosts();
-    if (typeof renderAchievements === 'function') renderAchievements();
-    ['Bertioga Surf Girls', 'Guarujá & Santos Surf', 'Ubatuba Surf Girls'].forEach(name => {
-        const key = 'asf-joined-' + name.replace(/\s+/g, '-');
-        if (localStorage.getItem(key)) {
-            const id = 'join-' + name.split(' ')[0].toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '');
-            const btn = document.getElementById(id);
-            if (btn) { btn.textContent = '✅ Inscrita!'; btn.style.background = 'var(--success)'; btn.style.pointerEvents = 'none'; }
-        }
+  // Chatbot keypress
+  const chatbotInput = document.getElementById('chatbot-input');
+  if (chatbotInput) {
+    chatbotInput.addEventListener('keypress', function(e) {
+      if (e.key === 'Enter') sendChatbotMessage();
     });
-    if (typeof updateWaterDisplay === 'function') {
-        const waterKey = (typeof getWaterKey === 'function') ? getWaterKey() : 'asf-water';
-        updateWaterDisplay(parseInt(localStorage.getItem(waterKey) || '0'));
-    }
-    if (typeof initChecklist === 'function') initChecklist();
+  }
 
-    // Cookie Consent banner
-    if (typeof getCookieConsent === 'function' && !getCookieConsent()) {
-        const banner = document.getElementById('cookie-consent-banner');
-        if (banner) {
-            setTimeout(() => {
-                banner.style.display = 'flex';
-                banner.style.animation = 'slideUp 0.5s ease-out';
-            }, 2000);
-        }
+  // Close notifications panel on outside click
+  document.addEventListener('click', function(e) {
+    const panel = document.getElementById('notifications-panel');
+    const bell = e.target.closest('button[onclick="toggleNotifications()"]');
+    if (panel && !panel.contains(e.target) && !bell) {
+      panel.style.display = 'none';
     }
+  });
 
-    // Render affiliate store if loja is visible (also triggered by showSection)
-    if (typeof renderAffiliateStore === 'function') {
-        const lojaEl = document.getElementById('loja');
-        if (lojaEl && getComputedStyle(lojaEl).display !== 'none') {
-            setTimeout(renderAffiliateStore, 100);
-        }
+  // Close search results on outside click
+  document.addEventListener('click', function(e) {
+    if (!e.target.closest('.search-container')) {
+      const searchResults = document.getElementById('searchResults');
+      if (searchResults) searchResults.classList.remove('active');
     }
+  });
+
+  // Deferred non-critical init
+  const initDeferred = () => {
+    if (typeof loadLiveData === 'function') loadLiveData('bertioga');
+    if (typeof updateMoonPhase === 'function') updateMoonPhase();
+  };
+  if (typeof requestIdleCallback === 'function') {
+    requestIdleCallback(initDeferred);
+  } else {
+    setTimeout(initDeferred, 0);
+  }
+
+  // Core app initialization
+  if (document.getElementById('challenge-timer') && typeof updateBrandTimer === 'function') updateBrandTimer();
+  if (typeof initBadges === 'function') initBadges();
+  let appOpens = parseInt(localStorage.getItem('asf-opens') || '0');
+  appOpens++;
+  localStorage.setItem('asf-opens', appOpens);
+  try { document.getElementById('stat-opens').textContent = appOpens; } catch(e) {}
+  if (typeof showProfile === 'function') showProfile();
+  const savedTheme = localStorage.getItem('asf-theme');
+  if (savedTheme === 'dark') {
+    document.documentElement.setAttribute('data-theme', 'dark');
+    const darkToggle = document.getElementById('darkModeToggle');
+    if (darkToggle) darkToggle.textContent = '☀️';
+  }
+  if (typeof renderSessions === 'function') renderSessions();
+  if (typeof renderUserPosts === 'function') renderUserPosts();
+  if (typeof renderAchievements === 'function') renderAchievements();
+  ['Bertioga Surf Girls', 'Guarujá & Santos Surf', 'Ubatuba Surf Girls'].forEach(name => {
+    const key = 'asf-joined-' + name.replace(/\s+/g, '-');
+    if (localStorage.getItem(key)) {
+      const id = 'join-' + name.split(' ')[0].toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '');
+      const btn = document.getElementById(id);
+      if (btn) { btn.textContent = '✅ Inscrita!'; btn.style.background = 'var(--success)'; btn.style.pointerEvents = 'none'; }
+    }
+  });
+  if (typeof updateWaterDisplay === 'function') {
+    const waterKey = (typeof getWaterKey === 'function') ? getWaterKey() : 'asf-water';
+    updateWaterDisplay(parseInt(localStorage.getItem(waterKey) || '0'));
+  }
+  if (typeof initChecklist === 'function') initChecklist();
+
+  // Cookie Consent – show banner if no consent saved
+  if (typeof getCookieConsent === 'function' && !getCookieConsent()) {
+    setTimeout(() => {
+      const banner = document.getElementById('cookie-consent-banner');
+      if (banner) {
+        // Remove old inline style first so animation plays from scratch
+        banner.style.removeProperty('display');
+        banner.style.removeProperty('animation');
+        void banner.offsetHeight; // force reflow
+        banner.style.display = 'flex';
+        banner.style.animation = 'slideUp 0.5s ease-out';
+      }
+    }, 1500);
+  }
+
+  // Render affiliate store if loja is visible
+  if (typeof renderAffiliateStore === 'function') {
+    const lojaEl = document.getElementById('loja');
+    if (lojaEl && getComputedStyle(lojaEl).display !== 'none') {
+      setTimeout(renderAffiliateStore, 100);
+    }
+  }
 });
 
 </script>
@@ -9799,8 +9801,6 @@ var translations = {
 
 
 
-
-// Show banner after 2s if no consent
 setTimeout(()=>{if(!getCookieConsent()){const b=document.getElementById('cookie-consent-banner');if(b)b.style.display='flex'}},2000);
 
 // Pix Donation
