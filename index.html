@@ -2496,8 +2496,8 @@ function contactWhatsApp(){trackEvent('contact','whatsapp_click'),window.open('h
 function trackEvent(e,t,o){const n=JSON.parse(localStorage.getItem('asf-monetization-stats')||'{}');n.events||(n.events=[]),n.events.push({category:e,action:t,label:o,timestamp:Date.now()}),localStorage.setItem('asf-monetization-stats',JSON.stringify(n)),console.log('📊 Track:',e,t,o)}
 function getStats(){return JSON.parse(localStorage.getItem('asf-monetization-stats')||'{}')}
 function getCookieConsent(){return localStorage.getItem('asf-cookie-consent')}
-function acceptAllCookies(){localStorage.setItem('asf-cookie-consent','all');const b=document.getElementById('cookie-consent-banner');if(b){b.style.animation='slideDown 0.3s ease-out forwards';setTimeout(()=>b.remove(),300)}trackEvent('legal','cookie_consent','all');console.log('🍪 Cookie: all')}
-function essentialCookies(){localStorage.setItem('asf-cookie-consent','essential');const b=document.getElementById('cookie-consent-banner');if(b){b.style.animation='slideDown 0.3s ease-out forwards';setTimeout(()=>b.remove(),300)}trackEvent('legal','cookie_consent','essential');console.log('🍪 Cookie: essential')}
+function acceptAllCookies(){localStorage.setItem('asf-cookie-consent','all');const b=document.getElementById('cookie-consent-banner');if(b){b.style.transition='opacity 0.3s ease, transform 0.3s ease';b.style.opacity='0';b.style.transform='translateY(10px)';setTimeout(()=>{b.style.display='none'},350)}trackEvent('legal','cookie_consent','all');console.log('🍪 Cookie: all')}
+function essentialCookies(){localStorage.setItem('asf-cookie-consent','essential');const b=document.getElementById('cookie-consent-banner');if(b){b.style.transition='opacity 0.3s ease, transform 0.3s ease';b.style.opacity='0';b.style.transform='translateY(10px)';setTimeout(()=>{b.style.display='none'},350)}trackEvent('legal','cookie_consent','essential');console.log('🍪 Cookie: essential')}
 function showPixDonation(){const m=document.getElementById('pix-modal');if(m)m.style.display='flex';trackEvent('donation','pix_modal_view')}
 function showReferralModal(){const m=document.getElementById('referral-modal');if(m){m.style.display='flex';const codeDisplay=document.getElementById('referral-code-display');if(codeDisplay){const userCode=localStorage.getItem('asf-my-referral-code');if(userCode){codeDisplay.textContent=userCode}else{const newCode=generateReferralCode();localStorage.setItem('asf-my-referral-code',newCode);codeDisplay.textContent=newCode}}trackEvent('referral','modal_view')}
 function hideReferralModal(){const m=document.getElementById('referral-modal');if(m)m.style.display='none'}
@@ -2519,13 +2519,6 @@ function trackReferral(code,targetEmail){const referrerId=localStorage.getItem(`
 function buyEbook(){const isPremium=localStorage.getItem('asf-premium-status')==='active';const price=isPremium?(29.90*0.7):29.90;trackEvent('ebook','purchase_click',{price,premium_user:isPremium});showToast('🚀 Redirecionando para pagamento...','info');setTimeout(()=>{showToast('📦 Ebook disponível em breve!','info')},1500)}
 function submitUGC(){const fileInput=document.getElementById('ugc-photo');if(!fileInput||!fileInput.files[0])return showToast('📷 Selecione uma foto primeiro','error');showToast('✅ Foto enviada! Em análise.','success');trackEvent('ugc','photo_submitted');fileInput.value=''}
 function initGoogleAnalytics(){console.log('📊 Analytics enabled')}
-function getConsent() { return localStorage.getItem(COOKIE_CONSENT); }
-function setConsent(level) {
-      localStorage.setItem(COOKIE_CONSENT, level);
-      if (banner) banner.remove();
-      trackEvent('legal', 'cookie_consent', level);
-      console.log('🍪 Cookie consent:', level);
-    }
 function walkTree(el) {
         if (el.nodeType === 3 && el.textContent.trim().length > 2 && !el.parentElement.classList.contains('icon')) {
             var txt = el.textContent;
@@ -2545,15 +2538,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Chatbot: initialize FAQ if not defined and set keypress listener
     if (typeof chatbotFAQs === 'undefined') {
-  cleanupStrayText();
-
-  injectToastCSS();
-
-  renderContentRecommendations();
-
-  ensureFooterLinks();
-
-        const chatbotFAQs = {
+        var chatbotFAQs = {
             "como funciona": "O ASF App tem previsão de ondas, dicas, treinos, comunidade e muito mais!",
             "previsão": "A previsão de ondas mostra as condições atualizadas automaticamente para as praias do litoral paulista.",
             "onda": "A previsão mostra altura, período e direção das ondas para cada praia.",
@@ -2639,8 +2624,10 @@ document.addEventListener('DOMContentLoaded', function() {
         const banner = document.getElementById('cookie-consent-banner');
         if (banner) {
             setTimeout(() => {
-                banner.style.display = 'block';
-                banner.style.animation = 'slideUp 0.5s ease-out';
+                banner.style.transition = 'opacity 0.4s ease, transform 0.4s ease';
+                banner.style.opacity = '1';
+                banner.style.transform = 'translateY(0)';
+                banner.style.display = 'flex';
             }, 2000);
         }
     }
@@ -2739,7 +2726,7 @@ document.addEventListener('DOMContentLoaded', function() {
     <div class="bg-animation"></div>
 
     <!-- Cookie Consent Banner (LGPD) -->
-    <div id="cookie-consent-banner" style="position: fixed; bottom: 0; left: 0; right: 0; background: #1A3A5C; color: white; padding: 16px 20px; display: flex; align-items: center; justify-content: space-between; gap: 12px; z-index: 9999; box-shadow: 0 -4px 20px rgba(0,0,0,0.3); font-size: 13px;">
+    <div id="cookie-consent-banner" style="position: fixed; bottom: 0; left: 0; right: 0; background: #1A3A5C; color: white; padding: 16px 20px; display: none; align-items: center; justify-content: space-between; gap: 12px; z-index: 9999; box-shadow: 0 -4px 20px rgba(0,0,0,0.3); font-size: 13px;">
       <div style="flex: 1;">
         <strong>🍪 Cookies</strong> — Usamos cookies essenciais para funcionar e analytics (Google) para melhorar o app. Ao continuar, você aceita nossa
         <a href="docs/privacy-policy.html" target="_blank" style="color: #00A8CC; text-decoration: underline;">Política de Privacidade</a>.
