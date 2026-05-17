@@ -242,6 +242,9 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - uses: actions/checkout@v4
+        with:
+          submodules: false
+          fetch-depth: 1
       - name: 🔍 Validate App Structure
         run: |
           echo "🔍 Validating app structure..."
@@ -257,6 +260,16 @@ jobs:
           grep -q "badges" index.html && echo "✅ Badges section found"
           grep -q "Comunidade ASF" index.html && echo "✅ Community section found"
           grep -q "🏆 Minhas Conquistas" index.html && echo "✅ Badges page found"
+      - name: 🧹 Cleanup nested submodules
+        run: |
+          echo "🧹 Removing nested asf-app submodule (not needed for deploy)..."
+          rm -rf asf-app
+          echo "✅ asf-app removed"
+      - name: 📄 Ensure .nojekyll present
+        run: |
+          touch .nojekyll
+          git add .nojekyll
+          echo "✅ .nojekyll added"
       - uses: actions/configure-pages@v4
       - uses: actions/upload-pages-artifact@v3
         with:
