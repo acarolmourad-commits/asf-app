@@ -236,7 +236,7 @@ jobs:
     name: 🚀 Deploy to GitHub Pages
     runs-on: ubuntu-latest
     if: github.event_name == 'push' || github.event_name == 'workflow_dispatch'
-    needs: [wave-forecast, breathing-stretching, daily-content]
+    needs: []
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
