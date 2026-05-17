@@ -3,10 +3,29 @@
 **Purpose**: Track every 15-minute interval checklist for app maintenance
 
 ## Last Completed Check
-**Time**: 14:15 UTC (2026-05-17)
+**Time**: 15:19 UTC (2026-05-17)
 - **Status**: ✅ Complete
-- **Commit**: pending
-- **Notes**: 4,543 tips total, HTTP 404 — GitHub Pages still not enabled (has_pages: False). Carol needs to enable at repo settings.
+- **Commit**: 6f9fc47
+- **Notes**: Site LIVE at https://acarolmourad-commits.github.io/asf-app/ — HTTP 200 ✅, 1,131,171 bytes. Home redesign: dica-do-dia gradient card + stats gradient bars. Bug 689/div> fixed. Committed & pushed successfully.
+
+---
+
+## Checkpoint: 14:49 UTC (May 17)
+- **Status**: ✅ Complete
+- **Commit**: 6f9fc47
+- **Items Completed**:
+  - ✅ Redesigned home section: Dica do Dia gradient card, large emoji (44px), filled badge pill, hover lift/shadow, dark-theme variants
+  - ✅ Stats row: 4-col cards with colored gradient top-bar per column, stat-value 30px, stat-label uppercase, hover lift -6px
+  - ✅ Responsive breakpoints: 2-col stats at 768px; single-col + compact button at 480px
+  - ✅ Bug fix: `689/div>` → `689</div>`
+  - ✅ Commit pushed and GitHub Pages serving HTTP 200 ✅
+
+### **Home Checkpoint: 14:49 UTC (May 17)
+- **Status**: ✅ Complete
+- **Items Completed**:
+  - ✅ Added 5 new daily tips (alimentação pré-surf diversificada, treino agachamento profundo, surf pôr do sol estético, playlist motivação surfista, notificações push personalizadas)
+  - ✅ Total de dicas: 914 → 919
+  - ✅ Atualização de referências no código (914 → 919)
 
 ---
 
@@ -647,4 +666,4 @@
 
 ---
 
-**⚠️ URGENTE: GitHub Pages retornando HTTP 404. Repo nao tem Pages habilitado (has_pages: False). Preciso de habilitacao manual de Carol atraves das settings do GitHub. O index.html ja esta correto no disco e commitado.**
+**✅ GitHub Pages está LIVE (HTTP 200)** — commit `6f9fc47`, 1,131,171 bytes. Dica do Dia e Stats redesenhados.
