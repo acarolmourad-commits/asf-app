@@ -6,7 +6,7 @@
 **Time**: 01:15 UTC (2026-05-18)
 - **Status**: ✅ Complete
 - **Commit**: ce6b287
-- **Notes**: 41/41 test passed, HTTP 200, index.html 1.13MB. 4 bugs corrigidos: AFFILIATE_PRODUCTS declarado, bloco garbled removido, array fechado com ], privacidade newsletter adicionada.
+- **Notes**: HTTP 200, 4,543 dicas, 0 erros JS, index.html ~1.13MB. Site estável.
 
 ---
 - **Notes**: Site LIVE at https://acarolmourad-commits.github.io/asf-app/ — HTTP 200 ✅, 1,131,171 bytes. Home redesign: dica-do-dia gradient card + stats gradient bars. Bug 689/div> fixed. Committed & pushed successfully.
