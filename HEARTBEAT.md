@@ -15,7 +15,7 @@
 
 ## Checkpoint: 14:49 UTC (May 17)
 - **Status**: ✅ Complete
-- **Commit**: 6596636
+8b001a7
 - **Items Completed**:
   - ✅ Redesigned home section: Dica do Dia gradient card, large emoji (44px), filled badge pill, hover lift/shadow, dark-theme variants
   - ✅ Stats row: 4-col cards with colored gradient top-bar per column, stat-value 30px, stat-label uppercase, hover lift -6px
