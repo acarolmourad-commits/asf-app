@@ -3,9 +3,9 @@
 **Purpose**: Track every 15-minute interval checklist for app maintenance
 
 ## Last Completed Check
-**Time**: 12:50 UTC (2026-05-21)
+**Time**: 14:13 UTC (2026-05-21)
 - **Status**: ✅ Complete
-- **Commit**: 31046eb
+- **Commit**: ee94e8e
 - **Notes**: HTTP 200, 4,543 dicas, 0 erros JS, index.html ~1.13MB. Site estável.
 
 ---
@@ -677,4 +677,40 @@
 
 ---
 
-**✅ GitHub Pages está LIVE (HTTP 200)** — commit `6f9fc47`, 1,131,171 bytes. Dica do Dia e Stats redesenhados.
+**✅ GitHub Pages está LIVE (HTTP 200)** — commit `6f9fc47`, 1,131,171 bytes. Dica do Dia e Stats redesenhados.📧 BRAND EMAIL PROJECT — 2026-05-21 13:12 UTC
+- ✅ Brand Kit HTML criado: docs/brand-kit-partnership.html (9,327 bytes)
+- ✅ 10 marcas alvo listadas: docs/brand-targets.json
+- ✅ Template de e-mail: docs/brand-email-template.md
+- ⏳ Aguardando credentials.json do Google OAuth para conectar gog + asf.surffeminino@gmail.com
+- ⏳ pip instalando (get-pip.py) — depois: PDF brand-kit + envio 10 e-mails automático
+
+
+## Checkpoint: 13:20 UTC (May 21)
+- **Status**: ⏳aguardando credentials.json +1 arquivo dello
+- **Items Preparadas**:
+  - ✅ Brand Kit HTML: docs/brand-kit-partnership.html (9,3 KB)
+  - ✅ Brand Kit PDF: docs/brand-kit-asf.pdf (126 KB, MD5: 19a15c15)
+  - ✅ 10 marcas alvo: docs/brand-targets.json
+  - ✅ 4 e-mails confirmados + assunto: docs/brand-emails-confirmed.json
+  - ✅ Template de e-mail: docs/brand-email-template.md
+- **E-mails Confirmed**:
+  1. lojavirtual@ripcurl.com.br (Rip Curl)
+  2. sac@billabong.com.br (Billabong)
+  3. sac@quiksilver.com.br (Quiksilver)
+  4. b2b@granado.com.br (Granado)
+- **Para Carol**: Enviar `credentials.json` (Google Cloud → Credentials → OAuth Desktop)
+
+## Checkpoint: 13:20 UTC (May 21)
+- **Status**: Aguardando credentials.json OAuth do Google
+- **Items Preparadas**:
+  - Brand Kit HTML docs/brand-kit-partnership.html (9,3 KB)
+  - Brand Kit PDF docs/brand-kit-asf.pdf (126 KB confirmed)
+  - 10 marcas alvo docs/brand-targets.json
+  - 4 e-mails confirmados docs/brand-emails-confirmed.json
+  - Template de e-mail docs/brand-email-template.md
+- **Emails Confirmadas (4)**:
+  1. lojavirtual@ripcurl.com.br
+  2. sac@billabong.com.br
+  3. sac@quiksilver.com.br
+  4. b2b@granado.com.br
+- TODO Carol: Enviar credentials.json (Google Cloud → OAuth Desktop)
