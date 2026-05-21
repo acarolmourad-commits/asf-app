@@ -525,6 +525,9 @@ div[style*="font-size: 14px"] { display: none !important; }
         </button>
         <button class="tab" role="tab" aria-selected="false" aria-controls="competicoes" onclick="showSection('competicoes')">
             <span class="tab-icon">🏆</span> Competições
+        <button class="tab" role="tab" aria-selected="false" aria-controls="quiz" onclick="showSection('quiz')">
+            <span class="tab-icon">🧠</span> Quiz
+        </button>
         </button>
         <button class="tab" role="tab" aria-selected="false" aria-controls="assinantes" onclick="showSection('assinantes')">
             <span class="tab-icon">👑</span> Assinantes
@@ -534,7 +537,34 @@ div[style*="font-size: 14px"] { display: none !important; }
         </button>
     </div>
 
-    <!-- Welcome Card (only shows once) -->
+    <!--     <!-- Quiz Diário -->
+    <div class="section" id="quiz" style="display:none">
+        <div class="section-header">
+            <h2 class="section-title">🧠 Quiz do Dia</h2>
+            <span id="quiz-streak-badge" style="display:flex;align-items:center;gap:6px;background:linear-gradient(135deg,rgba(244,208,63,0.2),rgba(244,208,63,0.1));border:1px solid rgba(244,208,63,0.4);padding:6px 14px;border-radius:50px;font-size:13px;font-weight:600;color:#d4a017">
+                🔥 <span id="quiz-streak-count">0</span> seguidos
+            </span>
+        </div>
+        <div id="quiz-card" style="padding:4px">
+            <div class="card" style="background:linear-gradient(135deg,rgba(0,168,204,0.08),rgba(14,36,57,0.06));border:1.5px solid rgba(0,168,204,0.2);padding:20px;margin-bottom:16px">
+                <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px">
+                    <span style="font-size:36px">🧠</span>
+                    <div>
+                        <p id="quiz-question" style="font-size:17px;font-weight:600;color:var(--secondary);margin-bottom:4px">🎯 Responda para ganhar +15 XP!</p>
+                        <p id="quiz-meta" style="font-size:12px;color:var(--gray-400)">Clique em Novo Quiz para começar</p>
+                    </div>
+                </div>
+                <div id="quiz-options" style="display:flex;flex-direction:column;gap:10px"></div>
+                <div id="quiz-result" style="display:none;margin-top:16px;padding:16px;border-radius:12px;text-align:center"></div>
+            </div>
+        </div>
+        <div style="display:flex;gap:8px;padding:0 4px 8px">
+            <div onclick="startQuizDay()" style="flex:1;background:linear-gradient(135deg,var(--primary),var(--primary-dark));color:var(--white);border:none;border-radius:12px;padding:14px;cursor:pointer;text-align:center;font-weight:600;font-size:14px">🔄 Novo Quiz</div>
+            <div onclick="showQuizHistory()" style="flex:1;background:var(--white);border:1px solid var(--gray-200);border-radius:12px;padding:14px;cursor:pointer;text-align:center;font-weight:600;font-size:14px;color:var(--gray-600)">📊 Histórico</div>
+        </div>
+        <div id="quiz-history-panel" style="display:none;padding:0 4px 20px"></div>
+    </div>
+Welcome Card (only shows once) -->
     <div id="welcome-card" style="padding: 20px; display: none !important;">
         <div style="background: linear-gradient(135deg, #00A8CC 0%, #0E2439 100%); padding: 25px; border-radius: 20px; color: white; position: relative; overflow: hidden;">
             <button onclick="closeWelcome()" style="position: absolute; top: 10px; right: 15px; background: rgba(255,255,255,0.2); border: none; color: white; width: 30px; height: 30px; border-radius: 50%; font-size: 16px; cursor: pointer;">✕</button>
@@ -10619,7 +10649,12 @@ removed = {
             { text: 'Pratique o stand-up rápido e fluido!', category: 'Saúde', emoji: '🌬️' },
             { text: 'Use o momentum do paddle no takeoff!', category: 'Mental', emoji: '🌊' },
             { text: 'Mantenha os braços estendidos no paddle!', category: 'Comunidade', emoji: '💜' },
-            { text: 'Posicione o corpo baixo na prancha!', category: 'Etiqueta', emoji: '🤝' }
+            { text: 'Posicione o corpo baixo na prancha!', category: 'Etiqueta', emoji: '🤝' },
+            { text: 'Coloque o backuplightado para dar contraste no topo do tubo!', category: 'Etiqueta', emoji: '💡' },
+            { text: 'Evite areia movediça — procure áreas de areia compacta na praia.', category: 'Segurança', emoji: '⚠️' },
+            { text: 'Leia a direção do vento na areia antes de entrar: off-shore = ondas mais bonitas!', category: 'Condições', emoji: '🌊' },
+            { text: 'Respeite o \"take-off priority\": quem está mais perto da onda tem a vez.', category: 'Etiqueta', emoji: '🤝' },
+            { text: 'Lanche pós-surf: banana + aveia = recuperação natural dos músculos!', category: 'Nutrição', emoji: '🍌' },
         ]; ];
         
         
@@ -13445,4 +13480,36 @@ function walkTree(el) {
 <script src="app-posts.js"></script>
 <script src="surf-culture.js"></script>
 <script src="instagram-content.js"></script>
+
+// QUIZ + XP BAR JS
+const ASF_QUIZ={questions:[
+{q:"Qual é a origem do surf?",opts:["Havaí, Polinésia","Austrália","África do Sul","Califórnia"],a:0},
+{q:"O que é 'dropping in'?",opts:["Remar até a onda","Cortar a linha de outro surfista","Fazer um tubo","Cair da prancha"],a:1},
+{q:"Tamanho mínimo para iniciantes?",opts:["5'6"","6'0"","7'0"+","4'6""],a:2},
+{q:"'Pegar a onda por trás'?",opts:["Ficar de costas na praia","Entrar na onda depois","Remar por dentro do tubo","Fazer aéreas"],a:1},
+{q:"Maré melhor para aprender?",opts:["Cheia sempre","Vazia sempre","Baixa nas pedras","Depende do pico"],a:3},
+{q:"O que é 'bottom turn'?",opts:["Drop no fundo","Primeira curva na base","Voltar à areia","Girar 360"],a:1},
+{q:"Por que usar leash?",opts:["Estilo","Evitar perder prancha/acidentes","Não afunda","Obrigatório legal"],a:1},
+{q:"Prioridade de onda?",opts:["Mais perto do pico","Quem remou primeiro","Mais rápido","Melhor prancha"],a:1},
+{q:"O que é 'stall'?",opts:["Parar na hora errada","Desacelerar enquanto rema","Remar rápido demais","Ficar parado"],a:1},
+{q:"O que é 'take-off'?",opts:["Antes de entrar na onda","Levantar na prancha","Depois de cair","O tubo"],a:1}
+],XP_REWARD:15,STREAK_KEY:'asf-quiz-streak',LAST_KEY:'asf-last-quiz-date',HISTORY_KEY:'asf-quiz-history',
+getToday(){return new Date().toISOString().split('T')[0]},
+getIndex(){return Math.abs(this.hashDay(this.getToday()))%this.questions.length},
+hashDay(d){let h=0;for(let i=0;i<d.length;i++)h=((h<<5)-h)+d.charCodeAt(i);return h},
+getStreak(){return parseInt(localStorage.getItem(this.STREAK_KEY)||'0')},
+setStreak(n){localStorage.setItem(this.STREAK_KEY,String(n))},
+getLast(){return localStorage.getItem(this.LAST_KEY)||''},
+addHistory(q,ok){const h=(()=>{try{return JSON.parse(localStorage.getItem(this.HISTORY_KEY)||'[]')}catch(e){return[]}})();h.unshift({date:this.getToday(),question:q.q.substring(0,50),correct:ok});if(h.length>30)h.length=30;localStorage.setItem(this.HISTORY_KEY,JSON.stringify(h))},
+render(){const idx=this.getIndex(),q=this.questions[idx],s=this.getStreak();document.getElementById('quiz-question').textContent=q.q;document.getElementById('quiz-meta').textContent='Pergunta '+(idx+1)+' de '+this.questions.length+' • Streak: '+s+' 🧠';document.getElementById('quiz-streak-count').textContent=s;document.getElementById('quiz-progress').textContent=(idx+1)+'/'+this.questions.length;document.getElementById('quiz-result').style.display='none';const o=document.getElementById('quiz-options');o.innerHTML='';q.opts.forEach((opt,i)=>{const b=document.createElement('div');b.style.cssText='padding:14px 16px;background:var(--white);border:1.5px solid var(--gray-200);border-radius:12px;cursor:pointer;font-size:15px;font-weight:500;color:var(--secondary);transition:all 0.2s;display:flex;align-items:center;gap:10px';b.innerHTML='<span style="width:28px;height:28px;background:var(--gray-100);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;color:var(--gray-400)">'+String.fromCharCode(65+i)+'</span><span>'+opt+'</span>';b.onclick=()=>ASF_QUIZ.submit(i,q);o.appendChild(b)})},
+submit(cidx,q){const ok=cidx===q.a,s=ASF_QUIZ.getStreak(),last=ASF_QUIZ.getLast(),today=ASF_QUIZ.getToday();if(last===today){document.getElementById('quiz-result').style.display='block';document.getElementById('quiz-result').style.cssText='margin-top:16px;padding:16px;border-radius:12px;background:rgba(255,107,107,0.1);text-align:center;font-weight:600;color:#e74c3c';document.getElementById('quiz-result').textContent='⚠️ Já respondeu hoje! Volte amanhã.';return}const ns=ok?s+1:0;ASF_QUIZ.setStreak(ns);ASF_QUIZ.addHistory(q,ok);const xp=parseInt(localStorage.getItem('asf-xp')||'0');localStorage.setItem('asf-xp',xp+ASF_QUIZ.XP_REWARD);window.updateXPBar&&window.updateXPBar();const r=document.getElementById('quiz-result');r.style.display='block';r.style.cssText='margin-top:16px;padding:16px;border-radius:12px;background:'+(ok?'rgba(46,204,113,0.12)':'rgba(255,107,107,0.12)')+';text-align:center;font-weight:600;color:'+(ok?'#27ae60':'#e74c3c');r.innerHTML=ok?'✅ Correto! +'+ASF_QUIZ.XP_REWARD+' XP'+(ns>2?' 🔥':''):'❌ Errado! Resposta: '+String.fromCharCode(65+q.a)+'. Streak resetado.';if(ok&&ns%5===0&&typeof ASFConfetti!=='undefined')ASFConfetti.burst(12);document.getElementById('quiz-streak-count').textContent=ns;setTimeout(()=>ASF_QUIZ.render(),2500)},
+renderHistory(){const h=(()=>{try{return JSON.parse(localStorage.getItem('asf-quiz-history')||'[]')}catch(e){return[]}})();const p=document.getElementById('quiz-history-panel');if(!h.length){p.style.display='none';return}p.style.display='block';p.innerHTML='<div style="background:var(--white);border:1px solid var(--gray-200);border-radius:12px;padding:16px"><h3 style="font-size:15px;font-weight:600;margin-bottom:12px;color:var(--secondary)">📊 Histórico</h3><div>'+h.slice(0,10).map(e=>'<div style="display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid var(--gray-100);font-size:14px"><span>'+e.correct?'✅':'❌'+'</span><span style="flex:1;color:var(--gray-600)">'+e.question.substring(0,40)+'…</span><span style="font-size:12px;color:var(--gray-400)">'+e.date+'</span></div>').join('')+'</div></div>'}
+};
+
+function startQuizDay(){document.getElementById('quiz').style.display='block';document.querySelectorAll('.section').forEach(s=>{if(s.id!=='quiz')s.style.display='none'});ASF_QUIZ.render()}
+function showQuizHistory(){ASF_QUIZ.renderHistory()}
+
+window.updateXPBar=function(){const xp=parseInt(localStorage.getItem('asf-xp')||'0'),lvl=Math.floor(xp/100)+1,xi=xp%100;const p=document.querySelector('.profile-info p')||document.querySelector('.level-text');if(p)p.textContent='Nível '+lvl+' • '+xp+' pontos';const b=document.querySelector('.level-progress-bar');if(b){b.style.width=xi+'%';b.style.transition='width 0.5s ease'}const lt=document.querySelector('.level-text');if(lt)lt.textContent=xi+'/100 para Nível '+(lvl+1)};
+if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',function(){window.ASFAutoInit&&ASFAutoInit();window.updateXPBar&&updateXPBar();if(window.ASF_QUIZ)ASF_QUIZ.render()})}
+
 </html>
