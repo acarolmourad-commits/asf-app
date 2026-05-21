@@ -10655,8 +10655,17 @@ removed = {
             { text: 'Leia a direção do vento na areia antes de entrar: off-shore = ondas mais bonitas!', category: 'Condições', emoji: '🌊' },
             { text: 'Respeite o \"take-off priority\": quem está mais perto da onda tem a vez.', category: 'Etiqueta', emoji: '🤝' },
             { text: 'Lanche pós-surf: banana + aveia = recuperação natural dos músculos!', category: 'Nutrição', emoji: '🍌' },
-        ]; ];
-        
+            { text: 'Cuide da sua saúde mental: surfe também é terapia natural!', category: 'Saúde Mental', emoji: '🧠' },
+            { text: 'Respeite os seus limites — um dia sem surf também vale por um descanso!', category: 'Saúde Mental', emoji: '🧠' },
+            { text: 'Celebre cada onda surfada, não só as perfeitas — pequenos progressos contam!', category: 'Saúde Mental', emoji: '🧠' },
+            { text: 'Use protetor solar biodegradable: proteja a sua pele e o oceano!', category: 'Sustentabilidade', emoji: '🌊' },
+            { text: 'Recolha o lixo que encontrar na praia — cada ação pequena ajuda!', category: 'Sustentabilidade', emoji: '🌊' },
+            { text: 'Prefira pranchas de materiais recicláveis — mais ecológico!', category: 'Sustentabilidade', emoji: '🌊' },
+            { text: 'Na remada, use o tronco rotacional — mais força com menos esforço!', category: 'Técnica', emoji: '🏄' },
+            { text: 'Olhe para a direção que quer ir — o olhar guia o corpo toda a onda!', category: 'Técnica', emoji: '🏄' },
+            { text: 'Bottom turn: deixe o peso do corpo seguir a curva da onda!', category: 'Técnica', emoji: '🏄' },
+            { text: 'Quando a onda fechar por dentro, suba a prancha e saia por cima!', category: 'Técnica', emoji: '🏄' },
+        ];        
         
         // Pick one based on day of year for daily rotation
         ()();
@@ -11285,7 +11294,12 @@ function renderBrandHub() {
     }
 
     // Render UGC gallery
-        const UGC_IMAGES = [];
+        const UGC_IMAGES = [
+            'https://images.unsplash.com/photo-1520367445093-50dc08a59d9d?w=400&h=400&fit=crop',
+            'https://images.unsplash.com/photo-1502680390469-be75c86b636f?w=400&h=400&fit=crop',
+            'https://images.unsplash.com/photo-1559827291-72ee739d0d9a?w=400&h=400&fit=crop',
+            'https://images.unsplash.com/photo-1519046904884-53103b34b206?w=400&h=400&fit=crop'
+        ];
     const gallery = document.getElementById('ugc-gallery');
     if (gallery) {
         gallery.innerHTML = UGC_IMAGES.map(imgurl => `
