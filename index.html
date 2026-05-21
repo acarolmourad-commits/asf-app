@@ -403,7 +403,7 @@ div[style*="font-size: 14px"] { display: none !important; }
         </div>
         <h1>Conectando <span>Mulheres Surfistas</span></h1>
         <p>Dicas, comunidade, surftrips e muito mais. Juntas somos mais fortes!</p>
-        <img loading="lazy" src="docs/carol.jpg" alt="Carol - Fundadora ASF" style="width:80px; height:80px; border-radius:50%; margin-top:12px; object-fit:cover; border: 3px solid white; box-shadow: 0 4px 12px rgba(0,0,0,0.2);">
+        <img loading="lazy" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 80 80'%3E%3Ccircle cx='40' cy='40' r='38' fill='%2300A8CC'/%3E%3Ctext x='40' y='56' text-anchor='middle' font-size='36'%3E🏄‍♀️%3C/text%3E%3C/svg%3E" alt="Fundadora ASF" style="width:80px; height:80px; border-radius:50%; margin-top:12px; object-fit:cover; border: 3px solid white; box-shadow: 0 4px 12px rgba(0,0,0,0.2);">
         <img loading="lazy" src="https://images.unsplash.com/photo-1502680390469-be75c86b636f?w=400&h=200&fit=crop" alt="Mulheres surfando" loading="lazy" style="width:100%; border-radius:12px; margin-top:12px; object-fit:cover; max-height:150px;">
         <div class="hero-cta">
             <button class="btn btn-primary" onclick="showSection('dicas')">
@@ -584,7 +584,7 @@ Welcome Card (only shows once) -->
     <!-- Wave Forecast -->
     <div style="padding: 20px;">
         <h2 id="wave-forecast" style="font-size: 18px; color: #0E2439; margin-bottom: 15px;">🌊 Previsão de Ondas - Litoral Paulista</h2>
-        <img loading="lazy" src="docs/carol2.jpg" alt="Ondas" style="width:100%; border-radius:12px; margin-bottom:15px; object-fit:cover;">
+        <img loading="lazy" src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=800&h=400&fit=crop" alt="Ondas" style="width:100%; border-radius:12px; margin-bottom:15px; object-fit:cover;">
 
         <div style="background: linear-gradient(135deg, #00A8CC 0%, #0E2439 100%); padding: 16px; margin-bottom: 15px; border-radius: 16px; color: white;">
             <p style="font-size: 14px; font-weight: 600;">🌊 Previsão de Ondas - Sexta, 07/04/2026</p>
@@ -11284,6 +11284,7 @@ function renderBrandHub() {
     }
 
     // Render UGC gallery
+        const UGC_IMAGES = [];
     const gallery = document.getElementById('ugc-gallery');
     if (gallery) {
         gallery.innerHTML = UGC_IMAGES.map(imgurl => `
