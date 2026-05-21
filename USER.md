@@ -1,17 +1,28 @@
 # USER.md - About Your Human
 
-_Learn about the person you're helping. Update this as you go._
-
-- **Name:**
-- **What to call them:**
-- **Pronouns:** _(optional)_
-- **Timezone:**
+- **Name:** Carol (Cahrol)
+- **What to call them:** Carol / Cahrol
+- **Pronouns:** ela
+- **Timezone:** UTC
 - **Notes:**
+  - PT-BR, surfe, comunidade feminina
+  - Usa WSL (Windows) + OpenClaw Server + Telegram
+  - GitHub: acarolmourad-commits
+  - Projetos: ASF App, Brand Hub, parcerias surf
 
 ## Context
 
-_(What do they care about? What projects are they working on? What annoys them? What makes them laugh? Build this over time.)_
+**Trabalhos:**
+- ASF (Associação de Surf Feminino) — app web + comunidade + monetização
+- Brand partnership — Rip Curl, Billabong, Quiksilver, Granado
+- Documentação e scripts Python para o ASF
 
----
+**Ferramentas:**
+- Windows + WSL
+- OpenClaw Assistant
+- GitHub Pages, WhatsApp, Instagram
 
-The more you know, the better you can help. But remember — you're learning about a person, not building a dossier. Respect the difference.
+**Estilo:**
+- Autônoma, orientada a dados, documentada
+- Português brasileiro
+- Surf + conteúdo feminino + sustentabilidade
