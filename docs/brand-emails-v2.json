@@ -1,0 +1,71 @@
+{
+  "generated": "2026-05-21T13:20 UTC",
+  "note": "E-mails públicos confirmados via busca web",
+  "brands": [
+    {
+      "id": 1, "name": "Rip Curl Brasil",
+      "email": "lojavirtual@ripcurl.com.br",
+      "source": "Politica de Privacidade ripcurl.com.br — público",
+      "confidence": "confirmed", "category": "Surf Wear"
+    },
+    {
+      "id": 2, "name": "Billabong Brasil",
+      "email": "sac@billabong.com.br",
+      "source": "Fale Conosco billabong.com.br — público",
+      "confidence": "confirmed", "category": "Surf Wear"
+    },
+    {
+      "id": 3, "name": "Quiksilver Brasil",
+      "email": "sac@quiksilver.com.br",
+      "source": "Garantia/Assistência quiksilver.com.br — público",
+      "confidence": "confirmed", "category": "Surf Wear"
+    },
+    {
+      "id": 4, "name": "Granado Pharmácias",
+      "email": "b2b@granado.com.br",
+      "source": "revendedora.net (Como revender Granado) — público B2B",
+      "confidence": "confirmed", "category": "Beauty"
+    },
+    {
+      "id": 5, "name": "Smart Fit",
+      "email": "faleconosco@smartfit.com.br",
+      "source": "whatsapp.blog.br (Fale Conosco Smart Fit)",
+      "confidence": "high", "category": "Fitness"
+    },
+    {
+      "id": 6, "name": "Loop Surf Shop (Santos)",
+      "email": "contato@loopsurfsantos.com.br",
+      "source": "Formato padrão — confirmar no Instagram @loopsurfsantos",
+      "confidence": "unconfirmed", "category": "Surf Shop Local",
+      "note": "Site encontrado: loopsshop.com.br (pode ser marca diferente)"
+    },
+    {
+      "id": 7, "name": "Pousada da Vila Jacãa (Ubatuba)",
+      "email": "adm@pousadavilajacaa.com.br",
+      "source": "TravelAgentNearby.com — endereço Ubatuba, 4,4 estrelas",
+      "confidence": "medium",
+      "note": "Confirmar se é a 'Pousada da Vila' correta no site oficial"
+    },
+    {
+      "id": 8, "name": "Starbucks Brasil",
+      "email": "sac@starbucks.com.br",
+      "source": "Formato padrão SAC — confirmar em starbucks.com.br/sobre/atendimento",
+      "confidence": "unconfirmed", "category": "Food & Bebidas"
+    },
+    {
+      "id": 9, "name": "Niina Secrets",
+      "email": "contato@niinasecrets.com.br",
+      "source": "Formato padrão — confirmar no site oficial",
+      "confidence": "unconfirmed", "category": "Beauty / Influenciadora"
+    },
+    {
+      "id": 10, "name": "H2CO",
+      "email": null,
+      "source": "Marca H2 não encontrada — pesquisar diretamente",
+      "confidence": "none", "category": "Alimentação & Saúde"
+    }
+  ],
+  "confirmed_count": 4,
+  "high_confidence": 1,
+  "needs_confirmation": 5
+}

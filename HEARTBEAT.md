@@ -5,8 +5,8 @@
 ## Last Completed Check
 **Time**: 21:16 UTC (2026-05-21)
 - **Status**: ✅ Complete
-- **Commit**: 5bdb8b3
-- **Notes**: +5 novas dicas (4543 → 4548). HTTP 200, 0 erros JS, site estável. Commit & push OK.
+- **Commit**: 7feb947
+- **Notes**: +5 novas dicas (4543 → 4548). HTTP 200, 0 erros JS, site estável. Commit & push OK. UGC_IMAGES vazia, carol.jpg/carol2.jpg removidas, todos 6 produtos com image field, fallback no template.
 
 ---
 - **Notes**: Site LIVE at https://acarolmourad-commits.github.io/asf-app/ — HTTP 200 ✅, 1,131,171 bytes. Home redesign: dica-do-dia gradient card + stats gradient bars. Bug 689/div> fixed. Committed & pushed successfully.

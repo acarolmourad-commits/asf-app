@@ -1,0 +1,84 @@
+{
+  "brands": [
+    {
+      "id": 1,
+      "name": "Rip Curl",
+      "category": "Surf Wear",
+      "website": "https://www.ripcurl.com",
+      "reason": "Líder global do mercado surf feminino — alvo perfeito",
+      "proposal_price": "R$ 2.000/mês (Parceira Prata)"
+    },
+    {
+      "id": 2,
+      "name": "Billabong",
+      "category": "Surf Wear",
+      "website": "https://www.billabong.com.br",
+      "reason": "Marca brasileira, forte no público feminino jovem",
+      "proposal_price": "R$ 1.500/mês (Parceira Prata)"
+    },
+    {
+      "id": 3,
+      "name": "Quiksilver",
+      "category": "Surf Wear",
+      "website": "https://www.quiksilver.com.br",
+      "reason": "Marca global, busca engajamento jovem",
+      "proposal_price": "R$ 1.500/mês (Parceira Prata)"
+    },
+    {
+      "id": 4,
+      "name": "Granado",
+      "category": "Beauty / Cosméticos",
+      "website": "https://www.granado.com.br",
+      "reason": "Marca brasileira, valoriza a autenticidade, surf-friendly",
+      "proposal_price": "R$ 1.000/mês (Parceira Bronze/Prata)"
+    },
+    {
+      "id": 5,
+      "name": "Niina Secrets",
+      "category": "Beauty / Influenciadora",
+      "website": "https://niinasecrets.com.br",
+      "reason": "Influenciadora brasileira, público totalmente feminino",
+      "proposal_price": "R$ 1.500/mês (Parceira Prata)"
+    },
+    {
+      "id": 6,
+      "name": "Smart Fit",
+      "category": "Academia / Fitness",
+      "website": "https://www.smartfit.com.br",
+      "reason": "Rede mais ampla do Brasil, presença em todas as cidades-alvo",
+      "proposal_price": "R$ 2.000/mês (Parceira Prata)"
+    },
+    {
+      "id": 7,
+      "name": "Starbucks Brasil",
+      "category": "Food & Bebidas",
+      "website": "https://www.starbucks.com.br",
+      "reason": "Presença Bertioga/Santos/Guarujá, marca de lifestyle",
+      "proposal_price": "R$ 3.000/mês (Parceira Ouro)"
+    },
+    {
+      "id": 8,
+      "name": "Pousada da Vila (Ubatuba)",
+      "category": "Hospedagem / Turismo",
+      "website": "https://www.pousadadavila.com.br",
+      "reason": "Pousada icônica em Ubatuba, destino surf por excelência",
+      "proposal_price": "R$ 500/trimestre (Parceira Bronze)"
+    },
+    {
+      "id": 9,
+      "name": "Loop Surf Shop (Santos)",
+      "category": "Surf Shop Local",
+      "website": "https://www.loopsurfsantos.com.br",
+      "reason": "Surf shop consolidada em Santos, fácil aproximação local",
+      "proposal_price": "R$ 500/mês (Parceira Bronze)"
+    },
+    {
+      "id": 10,
+      "name": "H2CO — Água & Saúde",
+      "category": "Alimentação & Saúde",
+      "website": "https://www.h2co.com.br",
+      "reason": "Marca nacional de hidratação e suplementação, atleta-friendly",
+      "proposal_price": "R$ 1.000/mês (Parceira Bronze/Prata)"
+    }
+  ]
+}

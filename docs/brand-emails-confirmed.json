@@ -1,0 +1,36 @@
+{
+  "brand_emails": [
+    {
+      "id": 1,
+      "name": "Rip Curl Brasil",
+      "email": "lojavirtual@ripcurl.com.br",
+      "category": "Surf Wear",
+      "proposal_price": "R$ 2.000/mês (Parceira Prata)",
+      "subject": "Parceria ASF — Rip Curl × 500+ mulheres surfistas 🏄♀️"
+    },
+    {
+      "id": 2,
+      "name": "Billabong Brasil",
+      "email": "sac@billabong.com.br",
+      "category": "Surf Wear",
+      "proposal_price": "R$ 1.500/mês (Parceira Prata)",
+      "subject": "Parceria ASF — Billabong × 500+ mulheres surfistas 🏄♀️"
+    },
+    {
+      "id": 3,
+      "name": "Quiksilver Brasil",
+      "email": "sac@quiksilver.com.br",
+      "category": "Surf Wear",
+      "proposal_price": "R$ 1.500/mês (Parceira Prata)",
+      "subject": "Parceria ASF — Quiksilver × 500+ mulheres surfistas 🏄♀️"
+    },
+    {
+      "id": 4,
+      "name": "Granado Pharmácias",
+      "email": "b2b@granado.com.br",
+      "category": "Cosméticos / Beauty",
+      "proposal_price": "R$ 1.000/mês (Parceira Bronze)",
+      "subject": "Parceria ASF — Granado × 500+ mulheres surfistas 🏄♀️"
+    }
+  ]
+}

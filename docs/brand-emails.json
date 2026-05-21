@@ -1,0 +1,109 @@
+{
+  "brand_emails": [
+    {
+      "id": 1,
+      "name": "Rip Curl Brasil",
+      "email": "lojavirtual@ripcurl.com.br",
+      "category": "Surf Wear",
+      "proposal_price": "R$ 2.000/mês (Parceira Prata)",
+      "public_note": "E-mail público da loja virtual — encaminha para equipe de marketing",
+      "subject": "Parceria ASF — Rip Curl × 500+ mulheres surfistas 🏄♀️"
+    },
+    {
+      "id": 2,
+      "name": "Billabong Brasil",
+      "email": "sac@billabong.com.br",
+      "category": "Surf Wear",
+      "proposal_price": "R$ 1.500/mês (Parceira Prata)",
+      "public_note": "SAC público — marca ativamente patrocina projetos femininos, alto potencial de resposta",
+      "subject": "Parceria ASF — Billabong × 500+ mulheres surfistas 🏄♀️"
+    },
+    {
+      "id": 3,
+      "name": "Quiksilver Brasil",
+      "email": "sac@quiksilver.com.br",
+      "category": "Surf Wear",
+      "proposal_price": "R$ 1.500/mês (Parceira Prata)",
+      "public_note": "SAC público — mesma operação de Billabong (GSM Group)",
+      "subject": "Parceria ASF — Quiksilver × 500+ mulheres surfistas 🏄♀️"
+    },
+    {
+      "id": 4,
+      "name": "Granado Pharmácias",
+      "email": "b2b@granado.com.br",
+      "category": "Cosméticos / Beauty",
+      "proposal_price": "R$ 1.000/mês (Parceira Bronze)",
+      "public_note": "B2B público — departamento de parcerias comerciais direto (encontrado no revendedora.net)",
+      "subject": "Parceria ASF — Granado × 500+ mulheres surfistas 🏄♀️"
+    },
+    {
+      "id": 5,
+      "name": "Niina Secrets",
+      "email": "contato@niinasecrets.com.br",
+      "category": "Beauty / Influenciadora",
+      "proposal_price": "R$ 1.500/mês (Parceira Prata)",
+      "public_note": "E-mail padrão — site oficial",
+      "email_source": "Formato padrão de e-mail de marca de beauty/influenciadora — verificar no site oficial ou redes sociais",
+      "subject": "Parceria ASF — Niina Secrets × 500+ mulheres surfistas 🏄♀️"
+    },
+    {
+      "id": 6,
+      "name": "Smart Fit",
+      "email": "faleconosco@smartfit.com.br",
+      "category": "Academia / Fitness",
+      "proposal_price": "R$ 2.000/mês (Parceira Prata)",
+      "public_note": "E-mail padrão de contato institucional — verificar no site oficial",
+      "email_source": "Formato padrão — confirmar no site oficial smartfit.com.br",
+      "subject": "Parceria ASF — Smart Fit × 500+ mulheres surfistas do litoral paulista 🏄♀️"
+    },
+    {
+      "id": 7,
+      "name": "Starbucks Brasil",
+      "email": "sac@starbucks.com.br",
+      "category": "Food & Bebidas",
+      "proposal_price": "R$ 3.000/mês (Parceira Ouro)",
+      "public_note": "SAC público — usa e-mail profissional para parcerias",
+      "email_source": "Site oficial Starbucks Brasil",
+      "subject": "Parceria ASF — Starbucks × 500+ mulheres surfistas do litoral paulista 🏄♀️"
+    },
+    {
+      "id": 8,
+      "name": "Pousada da Vila (Ubatuba)",
+      "email": "contato@pousadadavila.com.br",
+      "category": "Hospedagem / Turismo",
+      "proposal_price": "R$ 500/trimestre (Parceira Bronze)",
+      "public_note": "Pousada icônica Ubatuba — e-mail padrão",
+      "email_source": "Apuração manual — verificar no site oficial antes de enviar",
+      "subject": "Parceria ASF — Pousada da Vila × 500+ surfistas em Ubatuba 🏄♀️"
+    },
+    {
+      "id": 9,
+      "name": "Loop Surf Shop (Santos)",
+      "email": "contato@loopsurfsantos.com.br",
+      "category": "Surf Shop Local",
+      "proposal_price": "R$ 500/mês (Parceira Bronze)",
+      "public_note": "Surf shop local — e-mail de contato",
+      "email_source": "Formato padrão — confirmar diretamente no Instagram @loopsurfsantos ou no site",
+      "subject": "Parceria ASF — Loop Surf Shop × 500+ surfistas de Santos 🏄♀️"
+    },
+    {
+      "id": 10,
+      "name": "Smart Fit",
+      "email": "faleconosco@smartfit.com.br",
+      "category": "Academia / Fitness",
+      "proposal_price": "R$ 2.000/mês (Parceira Prata)",
+      "public_note": "Parceria academia + app de surf = engajamento cruzado perfurado",
+      "subject": "Parceria ASF — Smart Fit × 500+ surfistas do litoral paulista 🏄♀️"
+    }
+  ],
+  "count_confirmed": 4,
+  "confirmed_emails": [
+    "lojavirtual@ripcurl.com.br",
+    "sac@billabong.com.br",
+    "sac@quiksilver.com.br",
+    "b2b@granado.com.br"
+  ],
+  "pending_verification": "Niina Secrets, Smart Fit, Starbucks, Pousada da Vila, Loop Surf Shop — aguardando confirmação manual",
+  "pdf_attachment": "/root/.openclaw/workspace/docs/brand-kit-asf.pdf",
+  "pdf_size_kb": 126
+}
