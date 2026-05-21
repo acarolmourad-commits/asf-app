@@ -461,6 +461,35 @@ div[style*="font-size: 14px"] { display: none !important; }
         </div>
     </div>
 
+    <!-- Quiz do Dia (Home Card) -->
+    <div id="quiz-home-card" style="margin: 12px 4px; background: linear-gradient(135deg, rgba(244,208,63,0.06), rgba(14,36,57,0.04)); border: 1.5px solid rgba(244,208,63,0.25); border-radius: 16px; padding: 18px; box-shadow: 0 2px 12px rgba(0,0,0,0.06)">
+        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px">
+            <div style="display:flex;align-items:center;gap:8px">
+                <span style="font-size:30px">🧠</span>
+                <div>
+                    <p style="font-size:15px;font-weight:700;color:var(--secondary);margin:0">Quiz do Dia</p>
+                    <p style="font-size:12px;color:var(--gray-400);margin:2px 0 0" id="quiz-home-meta">5 perguntas — responda para ganhar +15 XP 🎯</p>
+                </div>
+            </div>
+            <span id="quiz-home-streak" style="display:flex;align-items:center;gap:5px;background:linear-gradient(135deg,rgba(244,208,63,0.2),rgba(244,208,63,0.1));border:1px solid rgba(244,208,63,0.35);padding:4px 12px;border-radius:20px;font-size:12px;font-weight:600;color:#d4a017">
+                🔥 <span id="quiz-home-streak-count">0</span>
+            </span>
+        </div>
+        <!-- Pergunta -->
+        <div id="quiz-home-question-wrap" style="display:flex;flex-direction:column;gap:8px">
+            <p id="quiz-home-progress" style="font-size:12px;font-weight:600;color:var(--primary)">Pergunta 1 de 5</p>
+            <p id="quiz-home-question" style="font-size:15px;font-weight:600;color:var(--secondary);margin:0">Carregando…</p>
+            <div id="quiz-home-options" style="display:flex;flex-direction:column;gap:6px"></div>
+            <div id="quiz-home-result" style="display:none;padding:12px;border-radius:10px;text-align:center;font-size:14px;font-weight:600"></div>
+        </div>
+        <div id="quiz-home-done" style="display:none;text-align:center;padding:8px 0">
+            <p style="font-size:28px;margin:0 0 6px">🏆</p>
+            <p style="font-size:15px;font-weight:700;color:var(--secondary);margin:0 0 4px">Parabéns, surfista!</p>
+            <p style="font-size:13px;color:var(--gray-400);margin:0 0 10px">Você completou o quiz de hoje! Volte amanhã. 🌊</p>
+            <button onclick="ASF_QUIZ_HOME.reset()" style="background:linear-gradient(135deg,var(--primary),var(--primary-dark));color:white;border:none;border-radius:10px;padding:10px 22px;font-size:13px;font-weight:600;cursor:pointer;letter-spacing:0.3px">🔄 Reiniciar</button>
+        </div>
+    </div>
+
     <!-- Stats -->
     <div class="stats">
         <div class="stat-card">
@@ -13597,10 +13626,70 @@ renderHistory(){const h=(()=>{try{return JSON.parse(localStorage.getItem(this.HI
 function startQuizDay(){document.getElementById('quiz').style.display='block';document.querySelectorAll('.section').forEach(s=>{if(s.id!=='quiz')s.style.display='none'});ASF_QUIZ.render()}
 function showQuizHistory(){ASF_QUIZ.renderHistory()}
 
-function startQuizDay(){document.getElementById('quiz').style.display='block';document.querySelectorAll('.section').forEach(s=>{if(s.id!=='quiz')s.style.display='none'});ASF_QUIZ.render()}
-function showQuizHistory(){ASF_QUIZ.renderHistory()}
+const ASF_QUIZ_HOME={_state:{idx:0,answered:false},Q:null,
+init(){
+  const seed=this.hashDay(this.today()),total=ASF_QUIZ.questions.length;
+  this._state.idx=Math.abs(seed)%total;
+  this.Q=ASF_QUIZ.questions[this._state.idx];
+  this._state.answered=false;
+  this.render();
+},
+hashDay(d){
+  let h=0;
+  for(let i=0;i<d.length;i++)h=((h<<5)-h)+d.charCodeAt(i);
+  return h;
+},
+today(){return new Date().toISOString().split('T')[0]},
+getStreak(){return ASF_QUIZ.getStreak()},
+submit(idx){
+  if(this._state.answered)return;
+  this._state.answered=true;
+  const ok=idx===this.Q.a,r=document.getElementById('quiz-home-result');
+  const ns=ok?this.getStreak()+1:0;
+  ASF_QUIZ.setStreak(ns);
+  ASF_QUIZ.addHistory(this.Q,ok);
+  if(ok)ASF_QUIZ.addXP(ASF_QUIZ.XP_REWARD);
+  const emoji=ok?'✅':'❌';
+  const msgsC=["Acertou! 🎉","Perfeito! 🌟","Mandou bem! ⭐","Excelente! 🏆","Incrível! 🔥","Brabo! 💪"];
+  const msgsE=["Quase! 💪","Não desista! 🌊","Tente de novo! 🏄️","Aprendeu! 📚","Próxima dá! ✨"];
+  const title=ok?msgsC[Math.floor(Math.random()*msgsC.length)]:msgsE[Math.floor(Math.random()*msgsE.length)];
+  const msg=ok?'+15 XP | Streak: '+ns+' días seguidos! 🧠':'Resposta: '+String.fromCharCode(65+this.Q.a)+'. Continue!';
+  r.style.display='block';
+  r.style.cssText=(ok?'padding:14px;border-radius:10px;background:rgba(46,204,113,0.12);color:#27ae60':'padding:14px;border-radius:10px;background:rgba(255,107,107,0.12);color:#e74c3c');
+  r.innerHTML=emoji+' <strong>'+title+'</strong><br>'+msg;
+  document.getElementById('quiz-home-streak-count').textContent=ns;
+  if(ok&&ns%5===0&&typeof ASFConfetti!=='undefined')ASFConfetti.burst(12);
+  setTimeout(()=>this.showDone()||this.render(),2200);
+},
+showDone(){
+  document.getElementById('quiz-home-question-wrap').style.display='none';
+  document.getElementById('quiz-home-done').style.display='block';
+  document.getElementById('quiz-home-meta').textContent='Completo hoje! Volte amanhã 🌊';
+},
+reset(){
+  this._state={idx:0,answered:false};
+  document.getElementById('quiz-home-question-wrap').style.display='flex';
+  document.getElementById('quiz-home-done').style.display='none';
+  this.init();
+},
+render(){
+  const q=this.Q,s=this.getStreak();
+  document.getElementById('quiz-home-progress').textContent='Pergunta 1 de 5';
+  document.getElementById('quiz-home-question').textContent=q.q;
+  document.getElementById('quiz-home-result').style.display='none';
+  const o=document.getElementById('quiz-home-options');o.innerHTML='';
+  q.opts.forEach((opt,i)=>{
+    const b=document.createElement('div');
+    b.style.cssText='padding:12px 14px;background:var(--white);border:1.5px solid var(--gray-200);border-radius:10px;cursor:pointer;font-size:14px;font-weight:500;color:var(--secondary);transition:all 0.2s;display:flex;align-items:center;gap:10px';
+    b.innerHTML='<span style="width:24px;height:24px;background:var(--gray-100);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:var(--gray-400)">'+String.fromCharCode(65+i)+'</span><span>'+opt+'</span>';
+    b.onclick=()=>this.submit(i);
+    o.appendChild(b);
+  });
+  if(this._state.answered)this.showDone();
+}
+};
 
 window.updateXPBar=function(){const xp=parseInt(localStorage.getItem('asf-xp')||'0'),lvl=Math.floor(xp/100)+1,xi=xp%100;const p=document.querySelector('.profile-info p')||document.querySelector('.level-text');if(p)p.textContent='Nível '+lvl+' • '+xp+' pontos';const b=document.querySelector('.level-progress-bar');if(b){b.style.width=xi+'%';b.style.transition='width 0.5s ease'}const lt=document.querySelector('.level-text');if(lt)lt.textContent=xi+'/100 para Nível '+(lvl+1)};
-if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',function(){window.ASFAutoInit&&ASFAutoInit();window.updateXPBar&&updateXPBar();if(window.ASF_QUIZ)ASF_QUIZ.render()})}
+if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',function(){window.ASFAutoInit&&ASFAutoInit();window.updateXPBar&&updateXPBar();if(window.ASF_QUIZ)ASF_QUIZ.render();if(window.ASF_QUIZ_HOME)ASF_QUIZ_HOME.init()})}
 
 </html>
