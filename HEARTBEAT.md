@@ -685,32 +685,20 @@
 - ⏳ pip instalando (get-pip.py) — depois: PDF brand-kit + envio 10 e-mails automático
 
 
-## Checkpoint: 13:20 UTC (May 21)
-- **Status**: ⏳aguardando credentials.json +1 arquivo dello
-- **Items Preparadas**:
-  - ✅ Brand Kit HTML: docs/brand-kit-partnership.html (9,3 KB)
-  - ✅ Brand Kit PDF: docs/brand-kit-asf.pdf (126 KB, MD5: 19a15c15)
-  - ✅ 10 marcas alvo: docs/brand-targets.json
-  - ✅ 4 e-mails confirmados + assunto: docs/brand-emails-confirmed.json
-  - ✅ Template de e-mail: docs/brand-email-template.md
-- **E-mails Confirmed**:
-  1. lojavirtual@ripcurl.com.br (Rip Curl)
-  2. sac@billabong.com.br (Billabong)
-  3. sac@quiksilver.com.br (Quiksilver)
-  4. b2b@granado.com.br (Granado)
-- **Para Carol**: Enviar `credentials.json` (Google Cloud → Credentials → OAuth Desktop)
+## Checkpoint: 20:18 UTC (May 21)
+- **Status**: ✅ Complete
+- **Commit**: 05892a6
+- **Items Completed**:
+  - ✅ Bug fix: `UGC_IMAGES` declarado como `[]` antes da galeria (linha 11287)
+  - ✅ `docs/carol.jpg` substituído por avatar SVG inline (emoji 🏄‍♀️)
+  - ✅ `docs/carol2.jpg` substituído por Unsplash URL (ondas)
+  - ✅ Commit pushed, GitHub Pages HTTP 200 ✅
 
-## Checkpoint: 13:20 UTC (May 21)
-- **Status**: Aguardando credentials.json OAuth do Google
-- **Items Preparadas**:
-  - Brand Kit HTML docs/brand-kit-partnership.html (9,3 KB)
-  - Brand Kit PDF docs/brand-kit-asf.pdf (126 KB confirmed)
-  - 10 marcas alvo docs/brand-targets.json
-  - 4 e-mails confirmados docs/brand-emails-confirmed.json
-  - Template de e-mail docs/brand-email-template.md
-- **Emails Confirmadas (4)**:
-  1. lojavirtual@ripcurl.com.br
-  2. sac@billabong.com.br
-  3. sac@quiksilver.com.br
-  4. b2b@granado.com.br
-- TODO Carol: Enviar credentials.json (Google Cloud → OAuth Desktop)
+---
+
+## ⏭️ NEXT STEPS (Not in this session, for Carol)
+
+### **Immediate (Today)**
+- [ ] Testar site no GitHub Pages
+- [ ] Verificar todos os botões (Loja, Premium, Pix, Referral, Newsletter)
+- [ ] Confirmar console sem erros (F12)
