@@ -3,9 +3,9 @@
 **Purpose**: Track every 15-minute interval checklist for app maintenance
 
 ## Last Completed Check
-**Time**: 20:47 UTC (2026-05-21)
+**Time**: 21:16 UTC (2026-05-21)
 - **Status**: ✅ Complete
-- **Commit**: fa2cc00
+- **Commit**: 5bdb8b3
 - **Notes**: +5 novas dicas (4543 → 4548). HTTP 200, 0 erros JS, site estável. Commit & push OK.
 
 ---
@@ -702,3 +702,28 @@
 - [ ] Testar site no GitHub Pages
 - [ ] Verificar todos os botões (Loja, Premium, Pix, Referral, Newsletter)
 - [ ] Confirmar console sem erros (F12)
+
+## Checkpoint: 20:24 UTC (May 21)
+- **Status**: ✅ Complete
+- **Commit**: 054a3a3
+- **Items Completed**:
+  - ✅ UGC_IMAGES fix: `const UGC_IMAGES = []` na linha 11287 (preveni ReferenceError)
+  - ✅ carol.jpg: substituído por SVG inline avatar 🏄‍♀️ ASF
+  - ✅ carol2.jpg: substituído por URL Unsplash externa 🌊
+  - ✅ ${product.image} bug: adicionado `image` no primeiro produto `prancha-soft-caril` (previamente faltando)
+  - ✅ Dicas no array: 3.553
+  - ✅ Commit & push pushed to GitHub
+  - ✅ GitHub Pages HTTP 200 ✅
+
+## Checkpoint: 20:25 UTC (May 21)
+- **Status**: ✅ Complete
+- **Commit**: 5bdb8b3
+- **Items Completed**:
+  - ✅ Fallback na renderização da loja: `product.image || 'unsplash-url'`
+  - ✅ Camada extra de segurança se produto sem `image`
+  - ✅ Commit pushed — GitHub Pages 200 ✅
+
+## ✅ FINAL STATE CONFIRMED
+- **Dicas no array**: 3.553 (Python count, ground truth)
+- **Todas as correções**: commit `5bdb8b3` pushed — GitHub Pages 200
+- **Arquivo**: index.html (1.14 MB, 1,144,696 bytes)
