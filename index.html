@@ -618,6 +618,21 @@ div[style*="font-size: 14px"] { display: none !important; }
         <button class="tab" role="tab" aria-selected="false" aria-controls="premium" onclick="showSection('premium')">
             <span class="tab-icon">⭐</span> Premium
         </button>
+        <button class="tab" role="tab" aria-selected="false" aria-controls="eventos" onclick="showSection('eventos')">
+            <span class="tab-icon">📅</span> Eventos
+        </button>
+        <button class="tab" role="tab" aria-selected="false" aria-controls="assistente" onclick="showSection('assistente')">
+            <span class="tab-icon">🤖</span> Assistente
+        </button>
+        <button class="tab" role="tab" aria-selected="false" aria-controls="conteudo" onclick="showSection('conteudo')">
+            <span class="tab-icon">📖</span> Conteúdo
+        </button>
+        <button class="tab" role="tab" aria-selected="false" aria-controls="carteirinha" onclick="showSection('carteirinha')">
+            <span class="tab-icon">📝</span> Associadas
+        </button>
+        <button class="tab" role="tab" aria-selected="false" aria-controls="seguranca" onclick="showSection('seguranca')">
+            <span class="tab-icon">🚺</span> Segurança
+        </button>
     </div>
 
     <!--     <!-- Quiz Diário -->
@@ -13773,6 +13788,71 @@ function walkTree(el) {
     .quiz-home-opt:active{transform:scale(0.97)!important}
     .quiz-result-msg{animation:fadeSlideIn 0.3s ease}
   </style>
+
+    <!-- PONTOS FEMININOS - SEGURANCA -->
+    <div class="section" id="seguranca" style="display:none">
+        <div class="section-header">
+            <h2 class="section-title" style="display:block">&#x1F93A; Pontos Femininos - Seguranca</h2>
+        </div>
+        <div style="padding: 0 16px;" id="seguranca-content"></div>
+    </div>
+
+    <!-- CALENDARIO DE EVENTOS -->
+    <div class="section" id="eventos" style="display:none">
+        <div class="section-header">
+            <h2 class="section-title" style="display:block">&#x1F4C5; Calendario de Eventos</h2>
+            <div style="display:flex;gap:8px">
+                <button onclick="ASF_CALENDAR.render('calendar-content')" style="padding:6px 12px;border-radius:8px;border:1.5px solid var(--primary);background:white;color:var(--primary);font-size:12px;cursor:pointer;font-family:'Outfit',sans-serif" aria-label="Ver mes">&#x1F4C6; Mes</button>
+                <button onclick="ASF_CALENDAR.renderUpcoming('calendar-upcoming')" style="padding:6px 12px;border-radius:8px;border:none;background:var(--primary);color:white;font-size:12px;cursor:pointer;font-family:'Outfit',sans-serif" aria-label="Ver lista">&#x1F4CB; Lista</button>
+            </div>
+        </div>
+        <div id="calendar-content" style="padding:0 16px;"></div>
+        <div id="calendar-upcoming" style="padding:0 16px;display:none;"></div>
+    </div>
+
+    <!-- ASSISTENTE VIRTUAL ASF -->
+    <div class="section" id="assistente" style="display:none">
+        <div class="section-header">
+            <h2 class="section-title" style="display:block">&#x1F916; Assistente Virtual ASF</h2>
+        </div>
+        <div style="padding:0 16px;" id="chatbot-content">
+            <div style="max-width:480px;margin:0 auto;background:var(--white);border-radius:20px;box-shadow:var(--shadow-md);overflow:hidden">
+                <div style="background:linear-gradient(135deg,var(--primary),var(--primary-dark));padding:16px;color:white">
+                    <div style="display:flex;align-items:center;gap:10px">
+                        <span style="font-size:28px">&#x1F916;</span>
+                        <div><p style="font-size:16px;font-weight:700;margin:0">ManaBot ASF</p><p style="font-size:12px;opacity:0.8;margin:2px 0 0">Assistente virtual da comunidade</p></div>
+                    </div>
+                </div>
+                <div id="chatbot-messages-asf" style="min-height:280px;max-height:380px;overflow-y:auto;padding:16px;background:var(--gray-100)"></div>
+                <div style="display:flex;gap:8px;padding:12px 16px;border-top:1px solid var(--gray-100)">
+                    <input type="text" id="chatbot-input-asf" placeholder="Pergunte sobre surf, praias, equipamento..." style="flex:1;padding:12px 14px;border:1.5px solid var(--gray-200);border-radius:12px;font-size:14px;font-family:'Outfit',sans-serif;box-sizing:border-box" aria-label="Pergunte ao assistente ASF">
+                    <button onclick="ASF_CHATBOT.sendAsf()" id="chatbot-send-asf" style="padding:12px 18px;border-radius:12px;border:none;background:var(--primary);color:white;font-size:16px;cursor:pointer" aria-label="Enviar mensagem">&#x25B6;</button>
+                </div>
+                <div style="padding:0 16px 14px;display:flex;flex-wrap:wrap;gap:6px">
+                    <button onclick="document.getElementById('chatbot-input-asf').value='Melhor praia para iniciantes?';ASF_CHATBOT.sendAsf()" style="padding:5px 10px;border-radius:16px;border:1px solid var(--gray-200);background:var(--white);color:var(--gray-600);font-size:12px;cursor:pointer;font-family:'Outfit',sans-serif">Melhor praia para iniciantes?</button>
+                    <button onclick="document.getElementById('chatbot-input-asf').value='Qual tamanho de prancha para comecar?';ASF_CHATBOT.sendAsf()" style="padding:5px 10px;border-radius:16px;border:1px solid var(--gray-200);background:var(--white);color:var(--gray-600);font-size:12px;cursor:pointer;font-family:'Outfit',sans-serif">Tamanho de prancha?</button>
+                    <button onclick="document.getElementById('chatbot-input-asf').value='Que horas devo surfar?';ASF_CHATBOT.sendAsf()" style="padding:5px 10px;border-radius:16px;border:1px solid var(--gray-200);background:var(--white);color:var(--gray-600);font-size:12px;cursor:pointer;font-family:'Outfit',sans-serif">Melhor horario?</button>
+                    <button onclick="document.getElementById('chatbot-input-asf').value='Qual cor de wax usar no verao?';ASF_CHATBOT.sendAsf()" style="padding:5px 10px;border-radius:16px;border:1px solid var(--gray-200);background:var(--white);color:var(--gray-600);font-size:12px;cursor:pointer;font-family:'Outfit',sans-serif">Cor do wax?</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- CONTEUDO ASF -->
+    <div class="section" id="conteudo" style="display:none">
+        <div class="section-header">
+            <h2 class="section-title" style="display:block">&#x1F4D6; Conteudo ASF</h2>
+        </div>
+        <div style="padding:0 16px;" id="conteudo-content"></div>
+    </div>
+
+    <!-- CARTEIRINHA DIGITAL DE ASSOCIADAS -->
+    <div class="section" id="carteirinha" style="display:none">
+        <div class="section-header">
+            <h2 class="section-title" style="display:block">&#x1F4DD; Carteirinha ASF</h2>
+        </div>
+        <div style="padding:0 16px;" id="member-card-content"></div>
+    </div>
 </body>
 
 </script>
@@ -14216,6 +14296,436 @@ function asfToastNews(t){showToast('📰 '+t+' — em breve: ler artigo completo
 // === Surf Conditions Renderer ===
 function loadSurfConditions(){const el=document.getElementById('asf-surf-data');if(!el)return;ASF_SURF_CONDITIONS.fetchConditions().then(d=>{el.innerHTML='<div style="text-align:center"><span style="font-size:18px">🌊</span><p style="font-size:18px;font-weight:700;color:var(--primary);margin:1px 0">'+d.altura+'m</p><p style="font-size:10px;color:var(--gray-400)">Altura</p></div><div style="text-align:center"><span style="font-size:18px">⏱️</span><p style="font-size:18px;font-weight:700;color:var(--accent);margin:1px 0">'+d.periodo+'s</p><p style="font-size:10px;color:var(--gray-400)">Período</p></div><div style="text-align:center"><span style="font-size:18px">💨</span><p style="font-size:18px;font-weight:700;color:var(--purple);margin:1px 0">'+d.ventoKmh+' km/h</p><p style="font-size:10px;color:var(--gray-400)">'+d.ventoDir+'</p></div>';const ee=document.getElementById('asf-surf-extra');if(ee)ee.innerHTML='<p style="font-size:13px;color:var(--gray-500);text-align:center;margin-bottom:8px">'+d.condicao+' · '+d.temp+'°C · '+'⭐'.repeat(Math.max(0,d.rating))+'☆'.repeat(5-Math.max(0,d.rating))+'</p><button onclick="loadSurfConditions()" style="flex:1;padding:8px;border-radius:8px;border:1.5px solid var(--primary);background:transparent;color:var(--primary);font-size:13px;font-weight:600;cursor:pointer">🔄 Atualizar</button><button onclick="showToast('📍 Guia de Praias em breve!')" style="flex:1;padding:8px;border-radius:8px;border:none;background:var(--primary);color:white;font-size:13px;font-weight:600;cursor:pointer">📍 Guia</button>'}).catch(()=>{const el=document.getElementById('asf-surf-data');if(el)el.innerHTML='<p style="font-size:13px;color:var(--gray-400);text-align:center;padding:16px">⚠️ Dados indisponíveis — tente novamente</p>'})}
 
+
+// =============================================
+// ASF EVOLUTION - NOVOS MODULOS
+// =============================================
+
+// CALENDARIO INTELIGENTE DE EVENTOS
+const ASF_CALENDAR = {
+view: 'month',
+currentMonth: new Date().getMonth(),
+currentYear: new Date().getFullYear(),
+events: [
+{id:1,title:"WQS 5000 - Praia do Tombo",date:"2026-08-15",endDate:"2026-08-17",type:"competicao",icon:"&#x1F3C6;",location:"Bertioga",confirmed:true,participants:12,maxParticipants:24,description:"Etapa feminina do World Qualifying Series",category:"Competicao"},
+{id:2,title:"Aula Coletiva de Surf",date:"2026-08-23",type:"aula",icon:"&#x1F3C4;",location:"Maresias",confirmed:true,participants:8,maxParticipants:15,description:"Aula para iniciantes — 7h na praia",category:"Aula"},
+{id:3,title:"Encontro Mulheres no Mar",date:"2026-09-05",type:"encontro",icon:"&#x1F469;",location:"Guaruja",confirmed:false,participants:5,maxParticipants:30,description:"Encontro de mulheres surfistas - networking + surf",category:"Encontro"},
+{id:4,title:"Surf Trip - Feriada^o",date:"2026-09-07",endDate:"2026-09-10",type:"trip",icon:"&#x1F697;",location:"Joaquina/SC",confirmed:false,participants:6,maxParticipants:12,description:"Surf trip de feriada^o — 4 dias de ondas!",category:"Surf Trip"},
+{id:5,title:"Clinica de Ondas Grandes",date:"2026-09-20",type:"clinica",icon:"&#x1F3CB;",location:"Itamambuca",confirmed:false,participants:4,maxParticipants:10,description:"Clinica com atleta profissional - tecnicas de tubo e big wave",category:"Clinica"},
+],
+toggleEvent(id){
+const ev=this.events.find(e=>e.id===id);if(!ev)return;
+ev.confirmed=!ev.confirmed;
+if(ev.confirmed)ev.participants++;else ev.participants--;
+localStorage.setItem('asf-calendar-events',JSON.stringify(this.events));
+showToast(ev.confirmed?"&#x2705; Confirmado em: "+ev.title:"&#x274C; Cancelado: "+ev.title);
+this.render('calendar-content');
+},
+render(containerId){
+const el=document.getElementById(containerId);if(!el)return;
+const months=['Janeiro','Fevereiro','Marco','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'];
+const month=this.currentMonth,year=this.currentYear;
+const today=new Date();
+const firstDay=new Date(year,month,1);
+const lastDay=new Date(year,month+1,0);
+const startDay=firstDay.getDay()===0?6:firstDay.getDay()-1;
+const daysInMonth=lastDay.getDate();
+let html='<div style="max-width:480px;margin:0 auto 20px;background:var(--white);border-radius:20px;box-shadow:var(--shadow-md);overflow:hidden)"><div style="display:flex;align-items:center;justify-content:space-between;padding:16px;background:linear-gradient(135deg,var(--primary),var(--primary-dark));color:white)"><button onclick="ASF_CALENDAR.changeMonth(-1)" style="background:rgba(255,255,255,0.2);border:none;color:white;width:36px;height:36px;border-radius:50%;cursor:pointer;font-size:18px">&#x2039;</button><div style="text-align:center"><p style="font-size:18px;font-weight:700;margin:0">'+months[month]+'</p><p style="font-size:12px;opacity:0.8;margin:2px 0 0">'+year+'</p></div><button onclick="ASF_CALENDAR.changeMonth(1)" style="background:rgba(255,255,255,0.2);border:none;color:white;width:36px;height:36px;border-radius:50%;cursor:pointer;font-size:18px">&#x203A;</button></div><div style="display:grid;grid-template-columns:repeat(7,1fr);text-align:center;border-bottom:1px solid var(--gray-100);padding:0 8px"><span style="font-size:11px;font-weight:600;color:var(--gray-400);padding:8px 0">Seg</span><span style="font-size:11px;font-weight:600;color:var(--gray-400);padding:8px 0">Ter</span><span style="font-size:11px;font-weight:600;color:var(--gray-400);padding:8px 0">Qua</span><span style="font-size:11px;font-weight:600;color:var(--gray-400);padding:8px 0">Qui</span><span style="font-size:11px;font-weight:600;color:var(--gray-400);padding:8px 0">Sex</span><span style="font-size:11px;font-weight:600;color:var(--gray-400);padding:8px 0">Sab</span><span style="font-size:11px;font-weight:600;color:var(--gray-400);padding:8px 0">Dom</span></div><div style="display:grid;grid-template-columns:repeat(7,1fr);grid-auto-rows:40px)">';
+for(let i=0;i<startDay;i++)html+='<div></div>';
+for(let d=1;d<=daysInMonth;d++){
+const dStr=year+'-'+String(month+1).padStart(2,'0')+'-'+String(d).padStart(2,'0');
+const dayEvents=this.events.filter(e=>dStr>=e.date&&(!e.endDate||dStr<=e.endDate));
+const isToday=today.getDate()===d&&today.getMonth()===month&&today.getFullYear()===year;
+html+='<div style="position:relative;padding:4px;text-align:center')+(isToday?'style="background:rgba(0,168,204,0.1)"':'')+'><span style="font-size:13px;font-weight:'+(isToday?'700':'400')+';color:'+(isToday?'var(--primary)':'')+'">'+d+'</span>';
+if(dayEvents.length>0)html+='<div style="font-size:9px;background:'+(dayEvents[0].confirmed?'var(--success)':'var(--coral)')+';color:white;border-radius:4px;padding:0 4px;margin-top:2px;overflow:hidden">'+dayEvents.length+' evento(s)</div>';
+html+='</div>';
+}
+html+='</div><div style="padding:12px 16px;background:var(--gray-50)"><p style="font-size:12px;color:var(--gray-400);margin:0">&#x1F947; Competicao | &#x1F3C4; Aula | &#x1F469; Encontro | &#x1F697; Trip | &#x1F3CB; Clinica | &#x2705; Confirmado | &#x1F535; Pendente</p></div></div>';
+this.view='month';
+document.getElementById('calendar-content').style.display='block';
+document.getElementById('calendar-upcoming').style.display='none';
+},
+changeMonth(delta){
+this.currentMonth+=delta;
+if(this.currentMonth>11){this.currentMonth=0;this.currentYear++}
+if(this.currentMonth<0){this.currentMonth=11;this.currentYear--}
+this.render('calendar-content');
+},
+renderUpcoming(containerId){
+const el=document.getElementById(containerId);if(!el)return;
+const now=new Date();
+const events=this.events.filter(e=>new Date(e.date)>=now).sort((a,b)=>new Date(a.date)-new Date(b.date));
+if(events.length===0){el.innerHTML='<p style="text-align:center;color:var(--gray-400);padding:40px">&#x1F38A; Nenhum evento proximo! Fique de olho nas novidades.</p>';return;}
+let html='<div style="max-width:480px;margin:0 auto">';
+events.forEach(e=>{
+const fillPct=Math.round((e.participants/e.maxParticipants)*100);
+const date=new Date(e.date).toLocaleDateString('pt-BR',{day:'2-digit',month:'short'});
+html+='<div class="card" style="margin-bottom:10px;border-left:4px solid '+(e.confirmed?'var(--success)':'var(--coral)')+';cursor:pointer" onclick="ASF_CALENDAR.toggleEvent('+e.id+')"><div style="display:flex;align-items:center;gap:10px"><div style="width:46px;height:46px;display:flex;flex-direction:column;align-items:center;justify-content:center;background:rgba(0,168,204,0.1);border-radius:12px;flex-shrink:0"><span style="font-size:10px;font-weight:600;color:var(--primary);text-transform:uppercase">'+date.split(' ')[1]+'</span><span style="font-size:16px;font-weight:800;color:var(--primary);line-height:1">'+date.split(' ')[0]+'</span></div><div style="flex:1"><p style="font-size:13px;font-weight:600;color:var(--secondary);margin:0 0 2px">'+e.icon+' '+e.title+'</p><p style="font-size:11px;color:var(--gray-400);margin:0">&#x1F4CD; '+e.location+'</p></div><div style="text-align:center;flex-shrink:0"><span style="font-size:10px;padding:3px 8px;border-radius:10px;'+(e.confirmed?'background:rgba(46,204,113,0.1);color:#27ae60':'background:rgba(255,107,107,0.1);color:#e74c3c')+'">'+(e.confirmed?'&#x2705; Confirmado':'&#x23F3; Pendente')+'</span><p style="font-size:11px;color:var(--gray-400);margin:4px 0 0">'+e.participants+'/'+e.maxParticipants+' vagas</p></div></div><div style="margin-top:6px;height:5px;background:var(--gray-100);border-radius:3px;overflow:hidden"><div style="height:100%;width:'+fillPct+'%;background:linear-gradient(90deg,var(--primary),var(--primary-dark));border-radius:3px"></div></div></div>';
+});
+html+='</div>';
+el.innerHTML=html;
+this.view='upcoming';
+document.getElementById('calendar-content').style.display='none';
+document.getElementById('calendar-upcoming').style.display='block';
+}
+};
+(function(){const saved=localStorage.getItem('asf-calendar-events');if(saved){try{ASF_CALENDAR.events=JSON.parse(saved)}catch(e){}}});
+
+// MAPA DE PRAIAS COM SEGURANCA
+const ASF_BEACH_MAP = {
+praias:[
+{id:'maresias',nome:'Maresias',lat:-23.7869,lng:-45.5769,nivel:'Intermediario',swell:'Sudeste',melhorHorario:'6h-9h',estacionamento:true,salvaVidas:true,seguraMulher:true,horarioSeguro:'Todo horario',pontosEncontro:['Estacionamento principal','Quiosque do Ze'],policiaAmbulante:true,descSeguranca:'Area segura durante todo o dia com iluminacao noturna'},
+{id:'tombo',nome:'Praia do Tombo',lat:-23.8561,lng:-45.4078,nivel:'Todos',swell:'Nordeste',melhorHorario:'7h-11h',estacionamento:true,salvaVidas:true,seguraMulher:true,horarioSeguro:'4h-20h',pontosEncontro:['Estacionamento sul','Beach bar'],policiaAmbulante:true,descSeguranca:'Policia militar no verao + salva-vidas fixo'},
+{id:'itamambuca',nome:'Itamambuca',lat:-23.4006,lng:-45.0317,nivel:'Avancado',swell:'Sudeste/Sul',melhorHorario:'6h-10h',estacionamento:true,salvaVidas:true,seguraMulher:true,horarioSeguro:'5h-18h',pontosEncontro:['Camping do centro','Parte sul da praia'],policiaAmbulante:false,descSeguranca:'Regiao afastada - va em grupo, avise alguem'},
+{id:'guaruja',nome:'Guaruja Centro',lat:-24.0034,lng:-46.2576,nivel:'Iniciante',swell:'Sudeste',melhorHorario:'8h-12h',estacionamento:true,salvaVidas:true,seguraMulher:true,horarioSeguro:'6h-22h',pontosEncontro:['Av. da Praia','Quiosque central'],policiaAmbulante:true,descSeguranca:'Area urbana iluminada e movimentada'},
+{id:'praiaverde',nome:'Praia Verde',lat:-24.0447,lng:-46.4098,nivel:'Iniciante',swell:'Sudeste/Leste',melhorHorario:'6h-10h',estacionamento:true,salvaVidas:false,seguraMulher:true,horarioSeguro:'5h-21h',pontosEncontro:['Estacionamento principal','Fim da orla'],policiaAmbulante:true,descSeguranca:'Ambiente familiar, frequentada por familias'},
+{id:'enseada',nome:'Enseada',lat:-24.0729,lng:-46.3331,nivel:'Todos',swell:'Sul',melhorHorario:'7h-11h',estacionamento:true,salvaVidas:true,seguraMulher:true,horarioSeguro:'Todo horario',pontosEncontro:['Shopping Enseada','Bermuda Bar'],policiaAmbulante:true,descSeguranca:'Um dos pontos mais seguros do Guaruja'},
+{id:'pernambuco',nome:'Praia de Pernambuco',lat:-23.4232,lng:-45.0761,nivel:'Intermediario',swell:'Sudeste',melhorHorario:'6h-10h',estacionamento:true,salvaVidas:true,seguraMulher:true,horarioSeguro:'6h-19h',pontosEncontro:['Camping do Hughes'],policiaAmbulante:true,descSeguranca:'Ambiente calmo — ideal para sessoes focadas'},
+{id:'joaquina',nome:'Joaquina - SC',lat:-27.6196,lng:-48.4356,nivel:'Intermediario',swell:'Sul/Sudeste',melhorHorario:'6h-10h',estacionamento:true,salvaVidas:true,seguraMulher:true,horarioSeguro:'5h-22h',pontosEncontro:['Estacionamento oficial','Ponto de aluguel'],policiaAmbulante:true,descSeguranca:'Infraestrutura completa — referencia em Florianopolis'},
+],
+render(containerId){
+const el=document.getElementById(containerId);if(!el)return;
+const nivelEmoji={Iniciante:'&#x1F7E2;',Intermediario:'&#x1F7E1;',Avancado:'&#x1F534;',Todos:'&#x1F535;'};
+const nivelColor={Iniciante:'var(--success)',Intermediario:'var(--accent)',Avancado:'var(--coral)',Todos:'var(--primary)'};
+let html='<div style="max-width:480px;margin:0 auto"><p style="font-size:13px;color:var(--gray-600);margin-bottom:16px;text-align:center">&#x1F30A; '+this.praias.length+' praias cadastradas com informacoes de seguranca para mulheres</p>';
+this.praias.forEach(p=>{
+const safeBadge=p.seguraMulher?'&#x1F6E1;&#xFE0F;':'&#x26A0;&#xFE0F;';
+const safeLabel=p.seguraMulher?'Safe Spot':'Atencao';
+html+='<div class="card" style="padding:14px 16px;margin-bottom:10px;border-left:4px solid '+(nivelColor[p.nivel]||'var(--primary)')+';cursor:pointer"><div style="display:flex;align-items:center;gap:10px;margin-bottom:8px"><span style="font-size:28px">&#x1F3D6;&#xFE0F;</span><div style="flex:1"><p style="font-size:15px;font-weight:700;color:var(--secondary);margin:0 0 2px">'+p.nome+'</p><p style="font-size:11px;color:var(--gray-400);margin:0">&#x1F4CD; '+p.pontosEncontro[0]+'</p></div><span style="font-size:11px;padding:3px 10px;border-radius:10px;background:rgba(0,168,204,0.1);color:var(--primary);font-weight:600">'+(nivelEmoji[p.nivel]||'')+' '+p.nivel+'</span></div><div style="display:flex;flex-wrap:wrap;gap:5px">'+(p.seguraMulher?'<span style="font-size:11px;padding:3px 8px;border-radius:8px;background:rgba(46,204,113,0.1);color:#27ae60;font-weight:600">&#x1F6E1;&#xFE0F; Safe Spot</span>':'<span style="font-size:11px;padding:3px 8px;border-radius:8px;background:rgba(255,107,107,0.1);color:var(--coral);font-weight:600">&#x26A0;&#xFE0F; Ver detalhes</span>')+'<span style="font-size:11px;padding:3px 8px;border-radius:8px;background:var(--gray-100);color:var(--gray-600)">&#x23F0; '+p.horarioSeguro+'</span>'+(p.estacionamento?'<span style="font-size:11px;padding:3px 8px;border-radius:8px;background:var(--gray-100);color:var(--gray-600)">&#x1F17F;&#xFE0F; Estac.</span>':'')+(p.salvaVidas?'<span style="font-size:11px;padding:3px 8px;border-radius:8px;background:var(--gray-100);color:var(--gray-600)">&#x1F6DF; Salva-vidas</span>':'')+'<span style="font-size:11px;padding:3px 8px;border-radius:8px;background:var(--gray-100);color:var(--gray-600)">&#x1F32C; '+p.swell+'</span></div><p style="font-size:11px;color:var(--gray-500);margin:8px 0 0;font-style:italic">&#x1F550; Melhor: '+p.melhorHorario+' - '+p.descSeguranca+'</p></div>';
+});
+html+='</div>';
+el.innerHTML=html;
+}
+};
+
+// ASSISTENTE CHAT ASF
+const ASF_CHATBOT = {
+knowledgeBase:[
+{q:['melhor praia','iniciante','onde comecar','praia para comecar','primeira praia'],a:'&#x1F947; Para comecar — Praia Verde (SP): ondas pequenas e mansas. Maresias e perfeita para nivel intermediario. Tombo e Guaruja Centro tem ondas consistentes para todos os niveis! Todos sao &#x1F6E1;&#xFE0F; Safe Spots na plataforma ASF.'},
+{q:['prancha','tamanho','primeira prancha','beginner board','comprar prancha'],a:'&#x1F3C4; Primeira prancha: comece com 7\'\'\' a 8\'\'\' (funboard ou longboard). Volume: pelo menos 2x seu peso em litros. Consulte nossa Calculadora de Prancha na aba &#x1F30A; Utilitarios! Uma prancha mais larga e longa te deixa mais estavel nos primeiros swells.'},
+{q:['horario','melhor horario','que horas','manha','maneira de surfar'],a:'&#x23F0; Melhor horario geral: 6h-10h. O vento geralmente fica mais fraco pela manha. As ondas tambem estao mais limpas e o mar esta mais vazio. Verifique a &#x1F30A; Previsao de Ondas na aba principal!'},
+{q:['wax','parafina','qual cor','base coat','para surfar','temperatura'],a:'&#x1F954; Wax por temperatura: &#x1F7E0; Amarela: 22-28C (verao brasileiro). &#x1F7E1; Laranja: 15-22C (outono/inverno SP). &#x1F534; Vermelha: <15C. Aplique primeiro uma base coat, depois top coat. Nunca deixe parafina no fundo da prancha!'},
+{q:['swell','mar','marea','condicao de onda','previsao','boletim','ondas grandes'],a:'&#x1F30A; Swell de grounding (leste/sudeste) traz as melhores ondas para o litoral paulista. Periodo acima de 10s = ondas mais organizadas. Maré cheia em bancos de areia cria tubos perfeitos. Use a aba &#x1F30A; Ondas para dados em tempo real!'},
+{q:['medo','seguranca','seguranca no mar','nao sei nadar','primeira vez','comecar surf','insegura'],a:'&#x1F91D; Nao se preocupe! Muitas mulheres comecam assim. Dicas: 1) Use equipamento de flutuacao completa, 2) Fique nas zonas rasas primeiro, 3) Aulas coletivas sao perfeitas para comecar — procure na nossa comunidade! A comunidade ASF apoia todas as manas!'},
+{q:['wetsuit','roupa de borracha','lycra','agua fria','temperatura da agua','frio no mar'],a:'&#x1F9E5; Roupas de borracha por temperatura: &#x1F7E1; 3/2mm (18-22C). &#x1F7E2; 4/3mm (14-18C). &#x1F535; 5/4mm (<14C, inverno SP). Lycra UV obrigatoria em qualquer epoca! Protege do sol e do atrito.'},
+{q:['competicao','wqs','evento','campeonato','torneio de surf','inscricao'],a:'&#x1F3C6; Maiores eventos ASF: WQS 5000 Praia do Tombo (ago), etapas regionais em Bertioga e Guaruja. Inscricoes pela aba &#x1F3C6; Competicoes no menu principal. Iniciantes — comecando por classificatorias locais!'},
+{q:['dieta','alimentacao','o que comer','antes do surf','depois do surf','nutricao'],a:'&#x1F957; Antes da sessao: banana + pasta de amendoim. Depois: proteina magra + frutas. Evite alcool 24h antes de surfar — desidrata e diminui reflexos. Hidrate-se bem antes de entrar no mar!'},
+{q:['ondas perfeitas','condicao perfeita','boa condicao','massarandupio','bom swell'],a:'&#x1F305; Condicoes perfeitas: Swell leste/sudeste, periodo 10-14s, vento LESTE fraco. Maré cheia cria tubos perfeitas em bancos de areia. Vazia em bancos de coral/rocha = tubos perfeitos. Use a aba &#x1F305; Ondas!'},
+],
+sendAsf(){
+const inp=document.getElementById('chatbot-input-asf');
+const msg=inp?inp.value.trim():'';
+if(!msg)return;
+const msgs=document.getElementById('chatbot-messages-asf');
+msgs.innerHTML+='<div style="display:flex;justify-content:flex-end;margin-bottom:8px"><div style="background:var(--primary);color:white;padding:10px 14px;border-radius:16px 16px 4px 16px;font-size:14px;max-width:80%">'+this.esc(msg)+'</div></div>';
+inp.value='';
+setTimeout(()=>{
+const resp=this.respond(msg);
+msgs.innerHTML+='<div style="display:flex;justify-content:flex-start;margin-bottom:12px"><div style="background:var(--gray-100);color:var(--secondary);padding:10px 14px;border-radius:16px 16px 16px 4px;font-size:14px;max-width:85%"><strong style="color:var(--primary)">&#x1F916; ManaBot:</strong><br>'+resp+'</div></div>';
+msgs.scrollTop=msgs.scrollHeight;
+},600);
+msgs.scrollTop=msgs.scrollHeight;
+},
+respond(msg){
+const m=msg.toLowerCase();
+for(const e of this.knowledgeBase){if(e.q.some(kw=>m.includes(kw)))return e.a}
+return '&#x1F914; Nao tenho essa informacao ainda! Tente perguntar sobre: praias, prancha, horario, wax, swell, wetsuit, evento, alimentacao ou condicao de ondas. Usa o botao &#x1F30A; Ondas na aba principal para dados em tempo real!';
+},
+esc(str){const d=document.createElement('div');d.textContent=str;return d.innerHTML}
+};
+
+// GAMIFICACAO + RANKING
+const ASF_GAMIFICATION = {
+BADGES:[
+{id:'primeira-onda',icon:'&#x1F30A;',title:'Primeira Onda',req:()=> parseInt(localStorage.getItem('asf-xp')||'0')>=10, desc:'Complete seu primeiro desafio'},
+{id:'7-dias',icon:'&#x1F525;',title:'7 Dias Seguidos',req:()=> parseInt(localStorage.getItem('asf-quiz-streak')||'0')>=7, desc:'Quiz por 7 dias consecutivos'},
+{id:'leitora',icon:'&#x1F4DA;',title:'Leitora',req:()=> localStorage.getItem('asf-content-read')==='true', desc:'Leia seu primeiro artigo de Conteudo'},
+{id:'comentadora',icon:'&#x1F4AC;',title:'Comentadora',req:()=>{try{return(JSON.parse(localStorage.getItem('asf-dica-comments-0')||'[]')).length>0}catch(e){return false}}, desc:'Faca seu primeiro comentario'},
+{id:'mestre-quiz',icon:'&#x1F9E0;',title:'Mestre do Quiz',req:()=>{try{const h=JSON.parse(localStorage.getItem('asf-quiz-history')||'[]');return h.filter(x=>x.correct).length>=10}catch(e){return false}}, desc:'Acertou 10 perguntas de quiz'},
+{id:'premium',icon:'&#x1F451;',title:'ASF Premium',req:()=> localStorage.getItem('asf-premium')==='true', desc:'Seja membro Premium'},
+{id:'ativa',icon:'&#x26A1;',title:'Surfista Ativa',req:()=> localStorage.getItem('asf-pos-surf-done')!==null, desc:'Complete seu primeiro checklist pos-surf'},
+],
+_getBadges(){return JSON.parse(localStorage.getItem('asf-badges')||'[]')},
+_addBadge(id){const b=this._getBadges();if(!b.includes(id)){b.push(id);localStorage.setItem('asf-badges',JSON.stringify(b))}},
+getLevel(xp){
+if(xp>=1000)return{level:'Diamante &#x1F48E;',color:'#00D4FF',next:0,need:0};
+if(xp>=500)return{level:'Ouro &#x1F947;',color:'#F4D03F',next:1000,need:1000-xp};
+if(xp>=200)return{level:'Prata &#x1F948;',color:'#C0C0C0',next:500,need:500-xp};
+return{level:'Bronze &#x1F949;',color:'#CD7F32',next:200,need:200-xp};
+},
+getXP(){return parseInt(localStorage.getItem('asf-xp')||'0')},
+addXP(v){const xp=this.getXP()+v;localStorage.setItem('asf-xp',String(xp));if(typeof ASF_QUIZ!=='undefined'&&window.updateXPBar)window.updateXPBar()},
+checkAll(){
+this.BADGES.forEach(b=>{try{if(b.req()&&!this._getBadges().includes(b.id)){this._addBadge(b.id);showToast('&#x1F389; Nova conquista: '+b.icon+' '+b.title+'!')}}catch(e){}});
+},
+renderRanking(containerId){
+const el=document.getElementById(containerId);if(!el)return;
+const xp=this.getXP();
+const level=this.getLevel(xp);
+const earned=this._getBadges();
+let html='<div style="max-width:480px;margin:0 auto"><div class="card" style="margin-bottom:16px;background:linear-gradient(135deg,'+level.color+'22,'+level.color+'11);border:2px solid '+level.color+'33"><div style="display:flex;align-items:center;gap:12px;margin-bottom:10px"><span style="font-size:32px">'+level.level.split(' ')[1]+'</span><div><p style="font-size:18px;font-weight:800;color:var(--secondary)">'+level.level.split(' ')[0]+'</p><p style="font-size:12px;color:var(--gray-400);margin:2px 0 0">'+xp+' XP acumulados</p></div></div>';
+if(level.need>0){
+html+='<div style="margin-top:8px"><div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:4px"><span>Proximo: '+(level.next<=500?'Ouro':'Diamante')+'</span><span>'+level.need+' XP restantes</span></div><div style="height:10px;background:var(--gray-100);border-radius:5px;overflow:hidden"><div style="height:100%;width:'+Math.min(100,Math.round(((xp%500)/500)*100))+'%;background:'+level.color+';border-radius:5px;transition:width 0.5s"></div></div></div>';
+}else{
+html+='<p style="font-size:14px;font-weight:600;color:var(--primary);margin:0">&#x1F389; Nivel maximo!</p>';
+}
+html+='</div><div style="margin-bottom:16px"><h3 style="font-size:15px;font-weight:700;color:var(--secondary);margin:0 0 10px">&#x1F3C6; Conquistas ('+earned.length+'/'+this.BADGES.length+')</h3><div style="display:flex;flex-wrap:wrap;gap:8px">';
+this.BADGES.forEach(b=>{
+const isEarned=earned.includes(b.id);
+html+='<button aria-label="'+b.title+': '+b.desc+'" style="width:60px;height:60px;border-radius:14px;border:2px solid '+(isEarned?'var(--primary)':'var(--gray-200)')+';cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;background:'+(isEarned?'linear-gradient(135deg,var(--primary)22,var(--primary)11)':'var(--gray-50)')+';font-size:20px;opacity:'+(isEarned?'1':'0.4')+';filter:'+(isEarned?'none':'grayscale(0.7)')+';transition:all 0.2s" onclick="'+(isEarned?"ASF_GAMIFICATION.showToast('"+b.title+': '+b.desc+"')":"ASF_GAMIFICATION.showToast('&#x1F512; "+b.title+" — em breve!')")+'" title="'+b.title+': '+b.desc+'"><span>'+b.icon+'</span><span style="font-size:8px;font-weight:600;color:'+(isEarned?'var(--secondary)':'var(--gray-400)')+'">'+(b.title.split(' ')[0])+'</span></button>';
+});
+html+='</div></div></div>';
+el.innerHTML=html;
+},
+showToast(msg){showToast(msg)}
+};
+
+// NOTIFICACOES INTELIGENTES
+const ASF_NOTIFICATIONS = {
+pending:{},
+pedirPermissao(){
+if(!('Notification' in window))return showToast('Notificacoes nao suportadas por este navegador');
+if(Notification.permission==='granted')return true;
+if(Notification.permission==='denied')return false;
+return Notification.requestPermission().then(p=>{
+if(p==='granted')showToast('Notificacoes ativadas! &#x1F514;');
+return p==='granted';
+});
+},
+agendar(eventId,titulo,horario){
+if(!('Notification' in window))return;
+const when=new Date(horario);
+const delay=when.getTime()-Date.now();
+if(delay<=0)return;
+const tid=setTimeout(()=>{
+if(Notification.permission==='granted') new Notification('ASF - '+titulo,{body:'Seu evento ASF esta prestes a comecar!',tag:'asf-ev-'+eventId,requireInteraction:false});
+delete this.pending[eventId];
+this.atualizarBadge();
+},Math.max(0,delay));
+this.pending[eventId]=tid;
+this.atualizarBadge();
+},
+cancelar(eventId){
+if(this.pending[eventId]){clearTimeout(this.pending[eventId]);delete this.pending[eventId]}
+this.atualizarBadge();
+},
+atualizarBadge(){
+const b=document.getElementById('notif-badge');
+if(!b)return;
+const cnt=Object.keys(this.pending).length;
+b.textContent=cnt>9?'9+':String(cnt);
+b.style.display=cnt>0?'flex':'none';
+},
+init(){
+this.pedirPermissao().then(()=>{
+ASF_CALENDAR.events.filter(e=>e.confirmed).forEach(e=>{
+const evtDate=new Date(e.date);
+const notifyAt=new Date(evtDate.getTime()-2*60*60*1000);
+if(notifyAt>new Date()) this.agendar(e.id,e.title,notifyAt.toISOString());
+});
+});
+}
+};
+
+// CARTEIRINHA DIGITAL
+const ASF_MEMBER_CARD = {
+beneficios:['Desconto 15% em lojas parceiras','Inscricao prioritaria em eventos','Acesso a aulas exclusivas','Newsletter semanal com dicas especiais','Acesso ao ranking interno da comunidade'],
+gerar(){
+const num='ASF-'+Date.now().toString(36).toUpperCase()+Math.random().toString(36).substr(2,3).toUpperCase();
+const hoje=new Date();hoje.setFullYear(hoje.getFullYear()+1);
+const validade=hoje.toLocaleDateString('pt-BR');
+localStorage.setItem('asf-member-number',num);
+localStorage.setItem('asf-member-validade',validade);
+localStorage.setItem('asf-member-since',new Date().toLocaleDateString('pt-BR'));
+localStorage.setItem('asf-member-status','active');
+showToast('Carteirinha gerada! &#x1F4DD;');
+return{numero:num,validade:validade};
+},
+getData(){return{numero:localStorage.getItem('asf-member-number'),validade:localStorage.getItem('asf-member-validade'),desde:localStorage.getItem('asf-member-since')}},
+render(containerId){
+const el=document.getElementById(containerId);if(!el)return;
+const d=this.getData();
+const isMember=!!d.numero;
+if(!isMember){
+el.innerHTML='<div style="max-width:480px;margin:0 auto"><div class="card" style="margin-bottom:16px;background:linear-gradient(135deg,rgba(0,168,204,0.06),rgba(155,89,182,0.08));border:2px dashed rgba(0,168,204,0.3)"><div style="text-align:center;padding:24px"><span style="font-size:48px;display:block;margin-bottom:8px">&#x1F3C4;&#x200D;&#x2640;&#xFE0F;</span><p style="font-size:18px;font-weight:700;color:var(--secondary);margin:0 0 8px">Torne-se Associada ASF</p><p style="font-size:14px;color:var(--gray-600);margin:0 0 20px">Junte-se a maior comunidade de surf feminino do Brasil!</p><div style="text-align:left;margin-bottom:20px;background:var(--white);border-radius:12px;padding:16px;font-size:13px;color:var(--secondary)">'+
+this.beneficios.map(b=>'<div style="display:flex;align-items:center;gap:8px;padding:6px 0;border-bottom:1px solid var(--gray-100)"><span style="color:var(--success);font-size:16px">&#x2705;</span>'+b+'</div>').join('')+
+'</div><button onclick="ASF_MEMBER_CARD.gerar();ASF_MEMBER_CARD.render(\\'member-card-content\\');ASF_GAMIFICATION.checkAll()" style="padding:14px 24px;border-radius:12px;border:none;background:linear-gradient(135deg,var(--primary),var(--primary-dark));color:white;font-size:16px;font-weight:700;cursor:pointer;width:100%">&#x1FAAA; Gerar Carteirinha Gratis</button></div></div></div>';
+return;
+}
+el.innerHTML='<div style="max-width:480px;margin:0 auto"><div style="background:linear-gradient(135deg,var(--secondary) 0%,var(--secondary-light) 100%);border-radius:24px;padding:24px;color:white;position:relative;overflow:hidden;box-shadow:var(--shadow-lg);margin-bottom:16px"><div style="position:absolute;top:-40px;right:-40px;width:160px;height:160px;background:radial-gradient(circle,rgba(0,168,204,0.2),transparent 70%);border-radius:50%"></div><div style="position:absolute;bottom:-40px;left:-40px;width:160px;height:160px;background:radial-gradient(circle,rgba(255,107,107,0.15),transparent 70%);border-radius:50%"></div><div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;position:relative"><div style="display:flex;align-items:center;gap:10px"><span style="font-size:36px">&#x1F3C4;&#x200D;&#x2640;&#xFE0F;</span><div><p style="font-size:20px;font-weight:800;margin:0;letter-spacing:1px">ASF</p><p style="font-size:11px;opacity:0.7;margin:0">ASSOCIACAO DE SURF FEMININO</p></div></div><div style="text-align:right"><span style="font-size:12px;opacity:0.6">Valida ate</span><p style="font-size:14px;font-weight:600;margin:0">'+d.validade+'</p></div></div><div style="background:rgba(255,255,255,0.08);border-radius:16px;padding:20px;text-align:center;position:relative"><p style="font-size:11px;opacity:0.5;margin:0 0 8px;letter-spacing:2px;text-transform:uppercase">Numero da Associada</p><p style="font-size:22px;font-weight:800;letter-spacing:2px;margin:0;font-family:monospace">'+d.numero+'</p></div></div><div style="background:var(--white);border-radius:16px;padding:20px;box-shadow:var(--shadow-sm);margin-bottom:16px"><h4 style="font-size:15px;font-weight:700;color:var(--secondary);margin:0 0 12px">&#x2705; Seus Beneficios</h4>'+
+this.beneficios.map(b=>'<div style="display:flex;align-items:center;gap:8px;padding:8px 0;border-bottom:1px solid var(--gray-100);font-size:13px;color:var(--gray-700)"><span style="font-size:16px">&#x2705;</span>'+b+'</div>').join('')+
+'</div><p style="font-size:11px;color:var(--gray-400);text-align:center;margin:0">Associada desde '+(d.desde||'Hoje')+'. Sob recadastro anual.</p></div>';
+}
+};
+
+// CONTEUDO ASF
+const ASF_CONTEUDO = {
+categorias:[
+{id:'tecnica',icon:'&#x1F3C4;',cor:'var(--primary)',artigos:[
+{t:'Como fazer o Pop Up perfeito',r:'Os 3 passos que todo surfista deve dominar — do drop ao first turn.',tempo:'4 min',img:'https://images.unsplash.com/photo-1502680390469-be75c86b636f?w=400&h=200&fit=crop',saved:false},
+{t:'Drops seguros: zero medo',r:'A tecnica correta para descer na onda sem receio — especialmente em ondas grandes.',tempo:'6 min',img:'https://images.unsplash.com/photo-1520813792240-56fc4a3765a7?w=400&h=200&fit=crop',saved:false},
+{t:'Tipos de onda e como surfar cada uma',r:'Reef break, beach break, point break — entenda cada formacao e adapte seu surf.',tempo:'8 min',img:'https://images.unsplash.com/photo-1455729552865-3658a5d39692?w=400&h=200&fit=crop',saved:false},
+]},
+{id:'mental',icon:'&#x1F9D8;',cor:'var(--purple)',artigos:[
+{t:'Surf e terapia: como o mar cuida da mente',r:'Estudos mostram: 20min de surf reduzem cortisol em ate 30%.',tempo:'5 min',img:'https://images.unsplash.com/photo-1476480862126-209bfaa8edc8?w=400&h=200&fit=crop',saved:false},
+{t:'Superando o medo de ondas grandes',r:'Tecnicas de visualizacao e respiracao usadas por atletas profissionais.',tempo:'7 min',img:'https://images.unsplash.com/photo-1520854221256-17451a7ccb6f?w=400&h=200&fit=crop',saved:false},
+]},
+{id:'alimentacao',icon:'&#x1F957;',cor:'var(--accent)',artigos:[
+{t:'O que comer antes e depois do surf',r:'Guia de alimentacao para energia maxima nas sessoes e recuperacao rapida.',tempo:'5 min',img:'https://images.unsplash.com/photo-1490645935967-10de6ba17061?w=400&h=200&fit=crop',saved:false},
+{t:'Hidratacao no surf: nao e so agua',r:'Quantidade, tipo de bebida e quando beber — a hidratacao que realmente funciona.',tempo:'4 min',img:'https://images.unsplash.com/photo-1559839914-5172d30c0e86?w=400&h=200&fit=crop',saved:false},
+]},
+{id:'sustentabilidade',icon:'&#x1F33F;',cor:'var(--success)',artigos:[
+{t:'Wax sustentavel: opcoes ecologicas',r:'Marcas de parafina biodegradavel e como descartar sua wax corretamente.',tempo:'3 min',img:'https://images.unsplash.com/photo-1466611653911-95081537e5b7?w=400&h=200&fit=crop',saved:false},
+{t:'Como reduzir seu impacto no mar',r:'Dias de pratica consciente: limpe seu equipamento e proteja os corais.',tempo:'4 min',img:'https://images.unsplash.com/photo-1518556058467-25a27d317de6?w=400&h=200&fit=crop',saved:false},
+]},
+{id:'treino',icon:'&#x1F3CB;',cor:'#FF6B6B',artigos:[
+{t:'Treino de equilibrio em casa',r:'5 exercicios com prancha de equilibrio em 15min por dia.',tempo:'6 min',img:'https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=400&h=200&fit=crop',saved:false},
+{t:'Condicionamento para surfistas',r:'Rotina de fortalecimento especifico para remar melhor e cair menos.',tempo:'8 min',img:'https://images.unsplash.com/photo-1517836357463-d25dfeac3438?w=400&h=200&fit=crop',saved:false},
+]},
+],
+toggleSave(catId,idx){
+const cat=this.categorias.find(c=>c.id===catId);if(!cat)return;
+const art=cat.artigos[idx];
+art.saved=!art.saved;
+const allSaved=this.categorias.map(c=>c.artigos).flat().filter(a=>a.saved).map(a=>a.t);
+localStorage.setItem('asf-content-saved',JSON.stringify(allSaved));
+this.render('conteudo-content');
+showToast(art.saved?'&#x1F4D6; Salvo!':'&#x1F494; Removido');
+},
+markRead(catId,idx){
+localStorage.setItem('asf-content-read','true');
+if(typeof ASF_QUIZ!=='undefined')ASF_QUIZ.addXP(5);
+showToast('&#x2705; Artigo lido! +5 XP');
+},
+render(containerId){
+const el=document.getElementById(containerId);if(!el)return;
+el.innerHTML='<div style="max-width:480px;margin:0 auto"><div style="display:flex;gap:8px;overflow-x:auto;padding-bottom:8px;margin-bottom:16px;scrollbar-width:none">'+
+this.categorias.map((c,i)=>'<button onclick="ASF_CONTEUDO.showCat(\\'conteudo-content\\',\\''+c.id+'\\')" style="padding:5px 12px;border-radius:20px;border:1.5px solid '+(i===0?'var(--primary)':'var(--gray-200)')+';background:'+(i===0?'var(--primary)':'white')+';color:'+(i===0?'white':'var(--gray-600)')+';font-size:12px;cursor:pointer;white-space:nowrap;font-family:'Outfit',sans-serif">'+c.icon+' '+c.id.charAt(0).toUpperCase()+c.id.slice(1)+'</button>').join('')+
+'</div><div id="asf-cont-cats">'+this._catHtml(this.categorias[0].id)+'</div></div>';
+},
+showCat(containerId,catId){
+const area=document.getElementById('asf-cont-cats');
+if(area)area.innerHTML=this._catHtml(catId);
+},
+_catHtml(catId){
+const cat=this.categorias.find(c=>c.id===catId);if(!cat)return'';
+return cat.artigos.map((a,i)=>
+'<div class="card" style="padding:0;margin-bottom:10px;overflow:hidden;cursor:pointer" onclick="ASF_CONTEUDO.markRead(\\''+cat.id+'\\','+i+')">'+
+'<div style="height:110px;background:url(\\''+a.img+'\\') center/cover"></div>'+
+'<div style="padding:12px 14px"><p style="font-size:14px;font-weight:600;color:var(--secondary);margin:0 0 4px">'+a.t+'</p>'+
+'<p style="font-size:12px;color:var(--gray-500);margin:0 0 8px">'+a.r+'</p>'+
+'<div style="display:flex;justify-content:space-between;align-items:center">'+
+'<span style="font-size:11px;padding:3px 8px;border-radius:8px;background:'+cat.cor+'15;color:'+cat.cor+';font-weight:600">'+cat.icon+' '+cat.id+'</span>'+
+'<div style="font-size:15px;cursor:pointer" onclick="event.stopPropagation();ASF_CONTEUDO.toggleSave(\\''+cat.id+'\\','+i+')">'+(a.saved?'&#x2764;&#xFE0F;':'&#x1F90D;')+'</div></div></div></div>'
+).join('');
+}
+};
+
+// LOJA ASF
+const ASF_SHOP = {
+produtos:[
+{id:1,nome:'Lycra ASF Pro UV50+',preco:129.90,categoria:'roupas',desc:'Lycra UV50+ de garrafas PET recicladas',img:'https://images.unsplash.com/photo-1551698618-1dfe5d97d256?w=300&h=200&fit=crop',icon:'&#x1F455;'},
+{id:2,nome:'Bone ASF Surf Strapback',preco:79.90,categoria:'acessorios',desc:'Bone strapback — protecao solar + estilo ajustavel',img:'https://images.unsplash.com/photo-1521369909029-2afed882baee?w=300&h=200&fit=crop',icon:'&#x1F9E2;'},
+{id:3,nome:'Funboard 7\'2" Iniciante',preco:1899.90,categoria:'pranchas',desc:'Funboard perfeita para comecar — volume alto e estavel',img:'https://images.unsplash.com/photo-1502680390469-be75c86b636f?w=300&h=200&fit=crop',icon:'&#x1F3C4;'},
+{id:4,nome:'Leash ASF Comp 7"',preco:89.90,categoria:'acessorios',desc:'Leash para pranchas curtas — 7mm, minimo de arrasto',img:'https://images.unsplash.com/photo-1520854221256-17451a7ccb6f?w=300&h=200&fit=crop',icon:'&#x1F517;'},
+{id:5,nome:'Wax Tropical ASF Amarela',preco:19.90,categoria:'acessorios',desc:'Parafina amarela para agua de 22-28C (verao SP)',img:'https://images.unsplash.com/photo-1439405326854-014607f694d7?w=300&h=200&fit=crop',icon:'&#x1F954;'},
+{id:6,nome:'Mochila ASF Dry Bag 20L',preco:159.90,categoria:'acessorios',desc:'Bolsa a prova dagua 20L — guarde roupas e celular',img:'https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=300&h=200&fit=crop',icon:'&#x1F392;'},
+{id:7,nome:'Camiseta ASF 100% Algodao',preco:69.90,categoria:'roupas',desc:'Camiseta cotton premium com logo bordado',img:'https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=300&h=200&fit=crop',icon:'&#x1F455;'},
+{id:8,nome:'Lixa de Prancha ASF Grip',preco:34.90,categoria:'acessorios',desc:'Lixa de surf premium — aderencia maxima',img:'https://images.unsplash.com/photo-1455587734955-081b22074882?w=300&h=200&fit=crop',icon:'&#x1FAA8;'},
+],
+getCart(){try{return JSON.parse(localStorage.getItem('asf-shop-cart')||'[]')}catch(e){return[]}},
+addToCart(id){
+const cart=this.getCart();
+const ex=cart.find(p=>p.id===id);
+if(ex)ex.qty++;else{const p=this.produtos.find(x=>x.id===id);if(p)cart.push({...p,qty:1})}
+localStorage.setItem('asf-shop-cart',JSON.stringify(cart));
+showToast('&#x1F6D2; Adicionado ao carrinho!');
+this.renderCartCount();
+},
+removeFromCart(id){
+const cart=this.getCart().filter(p=>p.id!==id);
+localStorage.setItem('asf-shop-cart',JSON.stringify(cart));
+this.render('shop-content');this.renderCartCount();
+},
+updateQty(id,delta){
+const cart=this.getCart();
+const item=cart.find(p=>p.id===id);
+if(!item)return;
+item.qty+=delta;
+if(item.qty<=0){this.removeFromCart(id);return}
+localStorage.setItem('asf-shop-cart',JSON.stringify(cart));
+this.render('shop-content');this.renderCartCount();
+},
+getTotal(){
+return this.getCart().reduce((s,p)=>s+p.preco*p.qty,0);
+},
+getCartCount(){
+return this.getCart().reduce((s,p)=>s+p.qty,0);
+},
+renderCartCount(){
+const b=document.getElementById('shop-cart-badge');
+if(!b)return;
+const cnt=this.getCartCount();
+b.textContent=String(cnt);
+b.style.display=cnt>0?'flex':'none';
+},
+checkoutWhatsApp(){
+const cart=this.getCart();
+if(cart.length===0)return showToast('&#x1F6D2; Carrinho vazio!');
+const total=this.getTotal().toFixed(2);
+const items=cart.map(p=>p.qty+'x '+p.nome+' — R$ '+p.preco.toFixed(2).replace('.',',')).join('%0A');
+const nome=localStorage.getItem('asf-username')||'Cliente ASF';
+const msg=encodeURIComponent('&#x1F3C4;&#x200D;&#x2640;&#xFE0F; Pedido ASF — '+nome+'%0A%0A'+items+'%0A%0A&#x1F4B0; TOTAL: R$ '+total.replace('.',',')+'%0A%0AOla! Fazendo meu pedido atraves da comunidade ASF!');
+window.open('https://wa.me/5511999999999?text='+msg,'_blank');
+showToast('&#x1F4F1; Abrindo WhatsApp!');
+},
+render(containerId){
+const el=document.getElementById(containerId);if(!el)return;
+const cart=this.getCart();
+const total=this.getTotal();
+const cat=document.getElementById('shop-cat-btns');
+const area=document.getElementById('shop-products-area');
+if(!area)return;
+el.innerHTML='<div style="max-width:480px;margin:0 auto"><div id="shop-cat-btns" style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px"></div><div id="shop-products-area">'+this._renderProducts('all')+'</div>';
+if(cart.length>0){
+el.innerHTML+='<div style="position:sticky;bottom:0;background:var(--white);border-top:2px solid var(--gray-200);padding:16px;margin-top:16px;box-shadow:0 -4px 20px rgba(0,0,0,0.1)"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px"><span style="font-size:13px;color:var(--gray-600)">&#x1F6D2; '+cart.length+' item(s)</span><span style="font-size:18px;font-weight:800;color:var(--secondary)">R$ '+total.toFixed(2).replace('.',',')+'</span></div><button onclick="ASF_SHOP.checkoutWhatsApp()" style="width:100%;padding:14px;border-radius:14px;border:none;background:linear-gradient(135deg,#25D366,#128C7E);color:white;font-size:15px;font-weight:700;cursor:pointer;font-family:Outfit,sans-serif">&#x1F4F1; Finalizar no WhatsApp</button></div>';
+}
+const catBtns=el.querySelector('#shop-cat-btns');
+if(catBtns){
+['roupas','acessorios','pranchas'].forEach(c=>{
+const b=document.createElement('button');
+b.textContent=c.charAt(0).toUpperCase()+c.slice(1);
+b.style.cssText='padding:5px 12px;border-radius:16px;border:1px solid var(--gray-200);background:white;color:var(--gray-600);font-size:12px;cursor:pointer;font-family:Outfit,sans-serif';
+b.onclick=()=>document.getElementById('shop-products-area').innerHTML=ASF_SHOP._renderProducts(c);
+catBtns.appendChild(b);
+});
+}
+},
+_renderProducts(catFilter){
+const prods=catFilter==='all'?this.produtos:this.produtos.filter(p=>p.categoria===catFilter);
+const cart=this.getCart();
+return prods.map(p=>{
+const ci=cart.find(c=>c.id===p.id);
+const inCart=!!ci;
+return'<div class="card" style="padding:0;margin-bottom:10px;overflow:hidden"><div style="height:110px;background:url('+p.img+') center/cover;display:flex;align-items:center;justify-content:center;font-size:44px"><span>'+p.icon+'</span></div><div style="padding:12px 14px"><p style="font-size:14px;font-weight:700;color:var(--secondary);margin:0 0 4px">'+p.nome+'</p><p style="font-size:12px;color:var(--gray-500);margin:0 0 10px">'+p.desc+'</p><div style="display:flex;justify-content:space-between;align-items:center">'+
+'<p style="font-size:18px;font-weight:800;color:var(--success);margin:0">R$ '+p.preco.toFixed(2).replace('.',',')+'</p>'+
+(inCart?'<div style="display:flex;align-items:center;gap:4px;background:rgba(0,168,204,0.1);border-radius:8px;padding:2px 4px"><button onclick="ASF_SHOP.updateQty('+p.id+',-1)" style="width:26px;height:26px;border:none;background:none;cursor:pointer;color:var(--primary)">-</button><span style="font-size:13px;font-weight:700;color:var(--secondary);min-width:16px;text-align:center">'+ci.qty+'</span><button onclick="ASF_SHOP.updateQty('+p.id+',1)" style="width:26px;height:26px;border:none;background:none;cursor:pointer;color:var(--primary)">+</button></div>':'<button onclick="ASF_SHOP.addToCart('+p.id+')" style="padding:8px 14px;border-radius:10px;border:none;background:var(--primary);color:white;font-size:12px;font-weight:600;cursor:pointer">&#x1F6D2; Adicionar</button>')
++'</div></div></div>';
+}).join('');
+}
+};
+
+(function(){
+try{
+const saved=JSON.parse(localStorage.getItem('asf-content-saved')||'[]');
+if(saved.length>0&&typeof ASF_CONTEUDO!=='undefined'){
+ASF_CONTEUDO.categorias.forEach(cat=>{cat.artigos.forEach(a=>{if(saved.includes(a.t))a.saved=true})});
+}
+}catch(e){}
+})();
+
+// Init badge check on page actions
+window.checkASFBadges=function(){if(typeof ASF_GAMIFICATION!=='undefined')ASF_GAMIFICATION.checkAll()};
 </script>
 
 </html>
