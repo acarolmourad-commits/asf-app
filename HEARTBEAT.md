@@ -16,6 +16,14 @@
 
 ---
 
+## Checkpoint: 03:17 UTC (May 22)
+- **Status**: ✅ Complete
+- **Items Completed**:
+  - ✅ Heartbeat check — HTTP 200, 3,642 dicas, 4 UGC URLs, 0 carol.jpg refs, 0 JS errors
+  - ✅ File size: ~1,136 KB, site stable
+  - ✅ Ground truth verified: 3,573 single-quote + 69 double-quote = 3,642 total
+
+
 ## Checkpoint: 14:49 UTC (May 17)
 - **Status**: ✅ Complete
 - **Commit**: 95b5e5f
@@ -727,6 +735,6 @@
   - ✅ Commit pushed — GitHub Pages 200 ✅
 
 ## ✅ FINAL STATE CONFIRMED
-- **Dicas no array**: 3.553 (Python count, ground truth)
+- **Dicas no array**: 3,642 (Python array count — 3,573 aspas simples + 69 aspas duplas)
 - **Todas as correções**: commit `5bdb8b3` pushed — GitHub Pages 200
 - **Arquivo**: index.html (1.14 MB, 1,144,696 bytes)
