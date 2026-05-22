@@ -7060,6 +7060,7 @@ removed = {
             localStorage.setItem('asf-opens', appOpens);
             // Update display
             try { document.getElementById('stat-opens').textContent = appOpens; } catch(e) {}
+            try { document.getElementById('stat-sessions').textContent = (JSON.parse(localStorage.getItem('surf-sessions') || '[]')).length; } catch(e) {}
             showProfile();
             // Load theme preference
             const savedTheme = localStorage.getItem('asf-theme');
