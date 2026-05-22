@@ -13661,7 +13661,7 @@ const ASF_QUIZ={questions:[
 STREAK_KEY:'asf-quiz-streak',LAST_KEY:'asf-last-quiz-date',HISTORY_KEY:'asf-quiz-history',
 PER_DAY:5,
 MSG_CORRECT:["Acertou! 🎉","Perfeito! 🌟","Mandou bem! ⭐","Excelente! 🏆","Incrível! 🔥","Brabo! 💪","Genial! ✨","Isso aí! 🎯","Surfista nota 10! 🏄","Voando na onda! ✈️","Hidratado(a)! 🥥 shark attack!","Fadiga mental? Nunca! 🧠","Dropou certo! 🏄♀️","Mente de campeã! 🏅","Caiu na onda certa! 🌊"],
-MSG_WRONG:["Quase! 💪","Não desista! 🌊","Tente de novo! 🏄‍♀️","Errou, mas aprendeu! 📚","Próxima dá certo! ✨"],
+MSG_WRONG:["Quase! 💪","Não desista! 🌊","Tente de novo! 🏄‍♀️","Errou, mas aprendeu! 📚","Próxima dá certo! ✨","Wipeout não é fim! 🏄","O surf é paciência! 🐢","Nem todo drop dá certo! 🤙","Continue surfando! 🌊","Caiu? Levanta! 🚀"],
 getToday(){return new Date().toISOString().split('T')[0]},
 getDaySeed(){return this.hashDay(this.getToday())},
 getIndexoffset(){const seed=this.getDaySeed(),total=this.questions.length,pd=this.PER_DAY;return(seed*(pd+3))%(total-pd+1)},
