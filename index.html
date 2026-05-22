@@ -322,7 +322,7 @@ div[style*="font-size: 14px"] { display: none !important; }
                 <a href="https://wa.me/5511954346288" target="_blank" class="icon-btn" title="Fale com a gente no WhatsApp" style="color: white; text-decoration: none;">
                     💬
                 </a>
-                <!-- Chatbot removido -->
+                <button class="icon-btn" onclick="showCampaignModal()" title="Regras de Campanha" style="font-size:16px;width:44px;height:44px;" aria-label="Regras de Campanha">📋</button>
 
                 <button class="icon-btn" onclick="showBrandSupport()" title="Apoie o App" style="background: linear-gradient(135deg,#FFD700,#FFA500); color: #0E2439; border-radius: 10px; font-weight: 700;">🤝</button>
             </div>
@@ -472,13 +472,19 @@ div[style*="font-size: 14px"] { display: none !important; }
             <div id="dica-content">
                 <div class="dica-header">
                     <span class="dica-badge dica-badge-filled">✨ Dica do Dia</span>
+                    <div style="display:flex;gap:8px;align-items:center">
+                    <button onclick="renderDicaComments(dicas.findIndex(d=>d.text===document.getElementById('dica-text').textContent))" class="dica-refresh-btn dica-refresh-lg" title="Comentários das manas">💬</button>
                     <button onclick="nextDica()" class="dica-refresh-btn dica-refresh-lg">↻ Nova dica</button>
+                    </div>
                 </div>
                 <p id="dica-text" class="dica-text-lg"></p>
                 <p id="dica-category" class="dica-category"></p>
             </div>
         </div>
     </div>
+
+    <!-- 💬 Comentários da Dica do Dia -->
+    <div id="dica-community-section" style="max-width:800px;margin:0 auto 24px;padding:0 16px"></div>
 
     <!-- Quiz do Dia (Home Card) -->
     <div id="quiz-home-card" style="margin: 12px 4px; background: linear-gradient(135deg, rgba(244,208,63,0.06), rgba(14,36,57,0.04)); border: 1.5px solid rgba(244,208,63,0.25); border-radius: 16px; padding: 18px; box-shadow: 0 2px 12px rgba(0,0,0,0.06)">
@@ -13358,6 +13364,8 @@ function showDica(index) {
                 document.getElementById('dica-text').textContent = d.text;
                 document.getElementById('dica-category').textContent = d.category;
                 document.getElementById('dica-emoji').textContent = d.emoji;
+                // Render comentários
+                if(typeof renderDicaComments==='function')renderDicaComments(index);
                 // Fade in
                 container.style.opacity = '1';
                 container.style.transform = 'translateY(0)';
@@ -13926,6 +13934,150 @@ if(ctaBar)ctaBar.innerHTML=brands.length<ASF_BRANDS_DATA.length?'<p style="font-
 function copyCoupon(code){navigator.clipboard.writeText(code).then(()=>showToast('Cupom '+code+' copiado! 🎉'))}
 
 if(window.ASF_QUIZ)ASF_QUIZ.render();if(window.ASF_QUIZ_HOME)ASF_QUIZ_HOME.init();if(window.ASF_BRAND_HOME)ASF_BRAND_HOME.init()})}
+
+// =============================================
+// 🏄 ASF — REGRAS DE CAMPANHA & TERMOS DE USO
+// =============================================
+const ASF_CAMPAIGN_RULES={
+  nome:'Campanha ASF — Regras Oficiais',
+  versao:'1.0',
+  regras:[
+    '1. Todo material da ASF (logo, cores, tipografia) é de uso exclusivo da associação.',
+    '2. Crédito obrigatório: @asf.surffeminino no Instagram e "ASF" na legenda.',
+    '3. Uso comercial de fotos/artes requer autorização por e-mail: asf@asf-surf.org.',
+    '4. Divulgação de produtos parceiros deve incluir o cupom oficial da marca.',
+    '5. Todo conteúdo gerado pela comunidade (UGC) pode ser usado pela ASF em redes sociais desde que com crédito @asf.surffeminino.',
+    '6. Não é permitido usar a marca ASF em produtos vendidos por terceiros sem contrato.',
+    '7. A ASF pode remover qualquer conteúdo que infrinja diretrizes ou a LGPD.',
+    '8. Ao participar de campanhas, você concorda com estes termos automaticamente.'
+  ],
+  comoParticipar:[
+    '1. Escolha uma dica da semana e pratique!',
+    '2. Tire uma foto/vídeo e marque @asf.surffeminino no Instagram.',
+    '3. Use a hashtag #ASFNosMares nas redes sociais.',
+    '4. As melhores publicações são destaque no app toda semana!'
+  ],
+  mostrarRegras(){showCampaignModal()},
+  mostrarTermosImagem(){showImageTermsModal()}
+};
+const ASF_IMAGE_TERMS={
+  titulo:'Termos de Uso de Imagem — ASF',
+  versao:'1.0',
+  secao1_titulo:'O que permitimos:',
+  secao1_texto:'Ao postar fotos/vídeos com a hashtag #ASFNosMares, você concede à ASF o direito não exclusivo de usar esse material para fins de divulgação institucional e educacional, nas plataformas oficiais.',
+  secao2_titulo:'O que requer autorização:',
+  secao2_texto:'Uso comercial por terceiros, venda de produtos com a marca ASF, e uso em campanhas de marcas parceiras sem aprovação prévia.',
+  secao3_titulo:'Seus direitos:',
+  secao3_texto:'Você pode solicitar a remoção de qualquer seu material da ASF a qualquer momento enviando e-mail para asf@asf-surf.org com o link da publicação.',
+  secao4_titulo:'LGPD:',
+  secao4_texto:'Seus dados pessoais são protegidos pela Lei 13.709/2018. Para mais detalhes, leia nossa Política de Privacidade.',
+  LGPD_link:'/privacidade'
+};
+
+// Show campaign rules modal
+function showCampaignModal(){
+  const modal=document.getElementById('campaign-modal')||createCampaignModal();
+  const regras=ASF_CAMPAIGN_RULES.regras.map(r=>'<li style="font-size:13px;color:var(--gray-700);margin:4px 0">'+r+'</li>').join('');
+  const como=ASF_CAMPAIGN_RULES.comoParticipar.map(r=>'<li style="font-size:13px;color:var(--primary);margin:4px 0">'+r+'</li>').join('');
+  modal.querySelector('.modal-body').innerHTML=''
+    +'<h2 style="font-size:18px;font-weight:700;margin-bottom:16px">🏄 '+ASF_CAMPAIGN_RULES.nome+'</h2>'
+    +'<p style="font-size:12px;color:var(--gray-500);margin-bottom:20px">Versão '+ASF_CAMPAIGN_RULES.versao+' — última atualização: Maio 2026</p>'
+    +'<h3 style="font-size:15px;font-weight:600;margin-bottom:12px;color:var(--primary-dark)">📋 Regras</h3>'
+    +'<ul style="padding-left:18px;margin-bottom:24px;border-left:3px solid var(--primary);padding-left:18px">'+regras+'</ul>'
+    +'<h3 style="font-size:15px;font-weight:600;margin-bottom:12px;color:var(--accent)">🌟 Como Participar</h3>'
+    +'<ol style="padding-left:18px;margin-bottom:24px;border-left:3px solid var(--accent);padding-left:18px">'+como+'</ol>'
+    +'<button onclick="showImageTermsModal()" style="width:100%;padding:12px;border-radius:10px;border:1.5px solid var(--gray-300);background:white;font-size:14px;font-weight:600;cursor:pointer;margin-top:8px">📷 Ver Termos de Uso de Imagem</button>';
+  modal.style.display='flex'
+}
+
+// Show image terms modal
+function showImageTermsModal(){
+  const modal=document.getElementById('campaign-modal')||createCampaignModal();
+  const t=ASF_IMAGE_TERMS;
+  modal.querySelector('.modal-body').innerHTML=''
+    +'<h2 style="font-size:18px;font-weight:700;margin-bottom:16px">📷 '+t.titulo+'</h2>'
+    +'<p style="font-size:12px;color:var(--gray-500);margin-bottom:20px">Versão '+t.versao+' — Leia antes de postar!</p>'
+    +'<div style="background:var(--gray-50);border-left:3px solid var(--primary);padding:12px 16px;border-radius:0 8px 8px 0;margin-bottom:16px">'
+    +'<strong style="color:var(--primary-dark)">Ψ '+t.secao1_titulo+'</strong><br>'
+    +'<span style="font-size:13px;color:var(--gray-700)">'+t.secao1_texto+'</span>'
+    +'</div>'
+    +'<div style="background:var(--gray-50);border-left:3px solid var(--accent);padding:12px 16px;border-radius:0 8px 8px 0;margin-bottom:16px">'
+    +'<strong style="color:var(--accent)">'+t.secao2_titulo+'</strong><br>'
+    +'<span style="font-size:13px;color:var(--gray-700)">'+t.secao2_texto+'</span>'
+    +'</div>'
+    +'<div style="background:var(--gray-50);border-left:3px solid var(--success);padding:12px 16px;border-radius:0 8px 8px 0;margin-bottom:16px">'
+    +'<strong style="color:var(--success)">🛡️ '+t.secao3_titulo+'</strong><br>'
+    +'<span style="font-size:13px;color:var(--gray-700)">'+t.secao3_texto+'</span>'
+    +'</div>'
+    +'<div style="background:rgba(231,76,60,0.08);border-left:3px solid #e74c3c;padding:12px 16px;border-radius:0 8px 8px 0;margin-bottom:16px">'
+    +'<strong style="color:#e74c3c">🔒 '+t.secao4_titulo+'</strong><br>'
+    +'<span style="font-size:13px;color:var(--gray-700)">'+t.secao4_texto+'</span>'
+    +'</div>'
+    +'<p style="font-size:12px;color:var(--gray-500);font-style:italic;margin-bottom:20px">Dúvidas? asf@asf-surf.org</p>'
+    +'<button onclick="showCampaignModal()" style="padding:10px 20px;border-radius:8px;border:none;background:var(--primary);color:white;font-size:14px;font-weight:600;cursor:pointer">← Voltar às Regras</button>';
+  modal.style.display='flex'
+}
+
+// Create campaign modal if not exists
+function createCampaignModal(){
+  let modal=document.getElementById('campaign-modal');
+  if(modal)return modal;
+  modal=document.createElement('div');
+  modal.id='campaign-modal';
+  modal.style.cssText='display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.85);z-index:99998;align-items:center;justify-content:center;backdrop-filter:blur(8px);padding:20px';
+  modal.innerHTML=''
+    +'<div style="background:white;border-radius:20px;max-width:560px;width:100%;max-height:85vh;overflow-y:auto;padding:28px;position:relative">'
+    +'<button onclick="this.closest(\'[id*=campaign]\').style.display=\'none\'" style="position:absolute;top:12px;right:16px;background:none;border:none;font-size:22px;cursor:pointer;color:var(--gray-400)">×</button>'
+    +'<div class="modal-body"></div>'
+    +'</div>';
+  document.body.appendChild(modal);
+  return modal
+}
+
+// =============================================
+// 💬 SISTEMA DE COMENTÁRIOS NAS DICAS
+// =============================================
+function renderDicaComments(dicaIdx){
+  const section=document.getElementById('dica-community-section');
+  if(!section)return;
+  const saved=JSON.parse(localStorage.getItem('asf-dica-comments-'+dicaIdx)||'[]');
+  section.innerHTML=''
+    +'<div style="margin:20px">'
+    +'<h3 style="font-size:16px;font-weight:700;color:var(--secondary);margin-bottom:12px">💬 Comentários das Manas ( '+saved.length+' )</h3>'
+    +(saved.length===0?'<p style="font-size:13px;color:var(--gray-400);margin-bottom:16px">Seja a primeira a comentar! 🏄‍♀️</p>':'')
+    +'<div style="display:flex;gap:8px;margin-bottom:16px">'
+    +'<input id="dica-comment-input" type="text" placeholder="Deixa seu comentário sobre essa dica... 💬" style="flex:1;padding:10px 14px;border:1.5px solid var(--gray-200);border-radius:12px;font-size:14px;font-family:\'Outfit\',sans-serif;box-sizing:border-box" maxlength="280">'
+    +'<button onclick="postDicaComment('+dicaIdx+')" style="padding:10px 18px;border-radius:12px;border:none;background:var(--primary);color:white;font-size:13px;font-weight:600;cursor:pointer">Enviar</button>'
+    +'</div>'
+    +saved.map((c,i)=>'<div style="background:var(--gray-50);border-radius:8px;padding:10px 14px;margin-bottom:8px;font-size:13px">'
+    +'<div style="display:flex;justify-content:space-between;margin-bottom:4px">'
+    +'<strong style="color:var(--primary-dark)">'+escapeHtml(c.author)+'</strong>'
+    +'<span style="font-size:11px;color:var(--gray-400)">'+c.ts+'</span>'
+    +'</div>'
+    +'<span style="color:var(--gray-700)">'+escapeHtml(c.text)+'</span>'
+    +'</div>').join('')
+    +'</div>'
+}
+function postDicaComment(dicaIdx){
+  const inp=document.getElementById('dica-comment-input');
+  if(!inp||!inp.value.trim())return showToast('💬 Escreva algo primeiro!');
+  const saved=JSON.parse(localStorage.getItem('asf-dica-comments-'+dicaIdx)||'[]');
+  const author=localStorage.getItem('asf-username')||'Mana Anônima';
+  const now=new Date();
+  const ts=now.toLocaleDateString('pt-BR')+' '+now.toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit'});
+  saved.push({text:inp.value.trim(),author,ts});
+  localStorage.setItem('asf-dica-comments-'+dicaIdx,JSON.stringify(saved));
+  inp.value='';
+  renderDicaComments(dicaIdx);
+  showToast('💬 Comentário enviado!');
+  trackSafe('dica_comment','dica_id',dicaIdx)
+}
+
+// Helper
+function escapeHtml(str){const d=document.createElement('div');d.textContent=str;return d.innerHTML}
+
+function trackSafe(cat,lbl,val){try{console.log('[track]',cat,lbl,val)}catch(e){}}
+
 
 </script>
 
