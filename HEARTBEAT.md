@@ -4,7 +4,7 @@
 
 ## Last Completed Check
 **Time**: 9:16 UTC (2026-05-22)
-- **Status**: ✅ Complete
+- **Status**: ✅ Complete — +JSON-LD + preconnets + decoding=async
 - **Commit**: d3bdc4e
 - **Notes**: +5 novas dicas temáticas (Sustentabilidade 2, Técnica 2, Mental 1, Nutrição 1). +5 dicas temáticas (Saúde Mental 3, Sustentabilidade 3, Técnica 4). +5 dicas (4543→4578). Total: 3568. UGC_IMAGES com 4 URLs. HTTP 200, 0 erros JS. Commit & push OK.
 
@@ -733,6 +733,17 @@
   - ✅ Fallback na renderização da loja: `product.image || 'unsplash-url'`
   - ✅ Camada extra de segurança se produto sem `image`
   - ✅ Commit pushed — GitHub Pages 200 ✅
+
+
+## Checkpoint: 22:19 UTC (May 21)
+- **Status**: ✅ Complete
+- **Commit**: d32fc1f
+- **Items Completed**:
+  - ✅ JSON-LD: SportsOrganization schema (720 chars, surf/organization type)
+  - ✅ Preconnect extras: wa.me + resources.infolinks.com (total 8 preconnects)
+  - ✅ decoding='async' em 9 imagens Unsplash
+  - ✅ Script imbalance confirmado: 13 abertos vs 12 fechados — markup OK
+  - ✅ Audit completo pós-melhorias — HTTP 200, 3,652 dicas, 0 bugs
 
 ## ✅ FINAL STATE CONFIRMED
 - **Dicas no array**: 3,642 (Python array count — 3,573 aspas simples + 69 aspas duplas)
