@@ -13752,6 +13752,15 @@ function walkTree(el) {
         </div>
     </div>
 
+  <!-- 🎯 Metas de Surf (nova seção) -->
+  <div class="section" id="metas" style="display:none">
+    <div class="section-header">
+      <h2 class="section-title">🎯 Metas de Surf</h2>
+    </div>
+    <div id="metas-container" style="padding: 0 16px;"></div>
+  </div>
+
+
   <style>
     @keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-4px)}75%{transform:translateX(4px)}}
     @keyframes fadeSlideIn{0%{opacity:0;transform:translateY(6px)}100%{opacity:1;transform:translateY(0)}}
@@ -14148,7 +14157,119 @@ if(ctaBar)ctaBar.innerHTML=brands.length<ASF_BRANDS_DATA.length?'<p style="font-
 }
 function copyCoupon(code){navigator.clipboard.writeText(code).then(()=>showToast('Cupom '+code+' copiado! 🎉'))}
 
-if(window.ASF_QUIZ)ASF_QUIZ.render();if(window.ASF_QUIZ_HOME)ASF_QUIZ_HOME.init();if(window.ASF_BRAND_HOME)ASF_BRAND_HOME.init()})}
+if(window.ASF_QUIZ)ASF_QUIZ.render();if(window.ASF_QUIZ_HOME)ASF_QUIZ_HOME.init();if(window.ASF_BRAND_HOME)ASF_BRAND_HOME.init();if(window.ASF_METAS)ASF_METAS.init()
+})}
+
+
+// =============================================
+// 🎯 ASF — METAS DE SURF
+// =============================================
+const ASF_METAS = {
+  categorias: ['Geral', 'Iniciante', 'Intermediario', 'Avancado'],
+  metasPredefinidas: [
+    {id:'p1', nivel:'Iniciante', icone:'🌊', titulo:'Primeira onda em pé', desc:'Conseguir ficar em pé e surfar uma onda completa', cor:'#27ae60', feita:0},
+    {id:'p2', nivel:'Iniciante', icone:'🏄', titulo:'10 sessões no mês', desc:'Surfar pelo menos 10 vezes em um mês', cor:'#2980b9', feita:0},
+    {id:'p3', nivel:'Iniciante', icone:'🏖️', titulo:'Conheça 3 praias novas', desc:'Explorar e surfar em 3 praias diferentes', cor:'#8e44ad', feita:0},
+    {id:'p4', nivel:'Intermediario', icone:'🎯', titulo:'Bottom turn consistente', desc:'Executar bottom turn consistente em ondas de 1m+', cor:'#e67e22', feita:0},
+    {id:'p5', nivel:'Intermediario', icone:'🌅', titulo:'Surfar ao entardecer', desc:'Entrar no mar no por do sol e pegar ao menos 5 ondas', cor:'#f39c12', feita:0},
+    {id:'p6', nivel:'Intermediario', icone:'📊', titulo:'Diário de surf por 3 meses', desc:'Manter um diário de surf por 3 meses seguidos', cor:'#27ae60', feita:0},
+    {id:'p7', nivel:'Avancado', icone:'🏆', titulo:'Competir em um campeonato ASF', desc:'Inscrever-se e participar de um campeonato ASF', cor:'#e74c3c', feita:0},
+    {id:'p8', nivel:'Avancado', icone:'🤙', titulo:'Cutback perfeito', desc:'Fazer um cutback limpo e fluido em uma onda formando tubo', cor:'#9b59b6', feita:0},
+    {id:'p9', nivel:'Geral', icone:'🤝', titulo:'Convidar uma amiga', desc:'Levar uma amiga iniciante para a praia pela primeira vez', cor:'#1abc9c', feita:0}
+  ],
+  metasPessoais: [],
+  metasPessoaisSalvasKey: 'metas-pessoais',
+  carregarMetasPessoais(){
+    try { this.metasPessoais = JSON.parse(localStorage.getItem(this.metasPessoaisSalvasKey) || '[]'); } catch(e){ this.metasPessoais = []; }
+  },
+  salvarMetasPessoais(){
+    localStorage.setItem(this.metasPessoaisSalvasKey, JSON.stringify(this.metasPessoais));
+  },
+  togglePredef(id){
+    const m = this.metasPredefinidas.find(x => x.id === id);
+    if(!m) return;
+    m.feita = m.feita ? 0 : 1;
+    const el = document.getElementById('meta-pd-' + id);
+    if(el) el.innerHTML = m.feita ? '<span style="font-size:16px">✅</span>' : '<span style="font-size:16px">⬜</span>';
+  },
+  adicionarMeta(titulo, nivel){
+    if(!titulo.trim()) return;
+    this.metasPessoais.push({id:'mp' + Date.now(), texto:titulo, nivel: nivel || 'Geral', icone:'✨', cor:'#00A8CC', feita:0});
+    this.salvarMetasPessoais();
+    this.renderMetasPessoais();
+  },
+  renderMetasPessoais(){
+    const el = document.getElementById('metas-pessoais');
+    if(!el) return;
+    if(!this.metasPessoais.length){
+      el.innerHTML = '<p style="font-size:13px;color:var(--gray-400);text-align:center;margin:10px 0">✨ Adicione sua primeira meta!</p>';
+      return;
+    }
+    const ps = this.metasPessoais.map(m =>
+      '<div style="display:flex;align-items:center;gap:10px;padding:10px 14px;background:var(--gray-50);border-radius:12px;margin-bottom:8px;border-left:3px solid ' + m.cor + '">'
+      + '<span style="font-size:18px">' + (m.feita ? '✅' : '⬜') + '</span>'
+      + '<span style="flex:1;font-size:14px;font-weight:600;color:var(--secondary)">' + m.texto + '</span>'
+      + '<span style="font-size:11px;color:var(--gray-400);background:rgba(0,168,204,0.08);padding:3px 8px;border-radius:10px">' + m.nivel + '</span>'
+      + '</div>'
+    ).join('');
+    el.innerHTML = ps;
+  },
+  postAddMeta(){
+    const inp = document.getElementById('nova-meta-texto');
+    const sel = document.getElementById('nova-meta-nivel');
+    if(inp && inp.value.trim()){ this.adicionarMeta(inp.value, sel ? sel.value : 'Geral'); inp.value=''; }
+  },
+  render(){
+    const el = document.getElementById('metas-container');
+    if(!el) return;
+
+    const stats = {
+      feitas: this.metasPessoais.filter(m=>m.feita).length,
+      pessoais: this.metasPessoais.length,
+      predefFeitas: this.metasPredefinidas.filter(m=>m.feita).length,
+      predefTotal: this.metasPredefinidas.length
+    };
+
+    const niv = ['Geral', 'Iniciante', 'Intermediario', 'Avancado'];
+    const nivC = ['#00A8CC', '#27ae60', '#f39c12', '#e74c3c'];
+    const nivOpts = niv.map((n,i) => '<option value="' + n + '">' + n + '</option>').join('');
+
+    const cards = this.metasPredefinidas.map(m =>
+      '<div id="meta-pd-' + m.id + '" onclick="ASF_METAS.togglePredef(\'' + m.id + '\')"'
+      + ' style="cursor:pointer;padding:12px 14px;border-radius:12px;margin-bottom:8px;background:var(--white);border:1px solid var(--gray-200);display:flex;align-items:center;gap:10px;transition:all 0.2s;' + (m.feita ? 'opacity:0.6;' : '') + '">'
+      + '<span style="font-size:20px">' + m.icone + '</span>'
+      + '<div style="flex:1">'
+      + '<p style="font-size:14px;font-weight:600;color:var(--secondary);margin:0">' + m.titulo + '</p>'
+      + '<p style="font-size:11px;color:var(--gray-400);margin:3px 0 0">' + m.desc + '</p>'
+      + '</div>'
+      + '<div style="font-size:11px;padding:3px 8px;border-radius:10px;background:' + m.cor + '1A;color:' + m.cor + ';font-weight:700">' + m.nivel + '</div>'
+      + '<span style="font-size:16px">' + (m.feita ? '✅' : '⬜') + '</span>'
+      + '</div>'
+    ).join('');
+
+    el.innerHTML =
+      '<div style="margin-bottom:18px">'
+      + '<p style="font-size:14px;font-weight:700;color:var(--primary);margin:0 0 10px">🏅 Metas oficiais da ASF — clique para marcar</p>'
+      + cards
+      + '</div>'
+      + '<div style="background:rgba(0,168,204,0.05);border:1.5px solid rgba(0,168,204,0.15);border-radius:14px;padding:16px">'
+      + '<p style="font-size:13px;font-weight:700;color:var(--primary);margin:0 0 12px">✨ Minhas metas pessoais</p>'
+      + '<div id="metas-pessoais"></div>'
+      + '<div style="display:flex;gap:8px;margin:12px 0 0">'
+      + '<input id="nova-meta-texto" placeholder="Nova meta..." style="flex:1;padding:10px;border-radius:10px;border:1.5px solid var(--gray-200);font-size:13px;font-family:Outfit,sans-serif" autocomplete="off">'
+      + '<select id="nova-meta-nivel" style="padding:10px 8px;border-radius:10px;border:1.5px solid var(--gray-200);font-size:13px;font-family:Outfit,sans-serif;background:white">' + nivOpts + '</select>'
+      + '</div>'
+      + '<button onclick="ASF_METAS.adicionarMeta((document.getElementById(\\'nova-meta-texto\\')||{}).value,(document.getElementById(\\'nova-meta-nivel\\')||{}).value)" style="width:100%;padding:12px;border-radius:10px;border:none;background:linear-gradient(135deg,var(--primary),var(--primary-dark));color:white;font-size:13px;font-weight:700;cursor:pointer;margin-top:10px">+ Adicionar meta</button>'
+      + '</div>';
+
+    this.renderMetasPessoais();
+  },
+  init(){
+    this.carregarMetasPessoais();
+    const container = document.getElementById('metas-container');
+    if(container) this.render();
+  }
+};
 
 // =============================================
 // 🏄 ASF — REGRAS DE CAMPANHA & TERMOS DE USO
