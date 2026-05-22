@@ -3522,6 +3522,20 @@ div[style*="font-size: 14px"] { display: none !important; }
         <p style="text-align: center; color: var(--gray-600); margin-top: 8px;">Ofertas exclusivas e desafios para manas surfistas</p>
     </div>
 
+
+    <!-- VITRINE DE MARCAS — Brand Grid -->
+    <div id="brand-showcase" style="margin:20px">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:20px">
+            <div>
+                <h3 style="font-size:18px;font-weight:700;color:var(--secondary);margin:0">🏆 Marcas Parceiras</h3>
+                <p style="font-size:13px;color:var(--gray-500);margin:4px 0 0">Quem apoia o surf feminino brasileiro</p>
+            </div>
+            <div id="brand-filter" style="display:flex;gap:6px"></div>
+        </div>
+        <div id="brand-grid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px"></div>
+        <div id="brand-cta-bar" style="text-align:center;margin:24px 0 8px"></div>
+    </div>
+
     <!-- Destaque Principal -->
     <div style="background: linear-gradient(135deg, #00A8CC 0%, #9B59B6 100%); padding: 30px; margin: 20px; border-radius: 24px; color: white; text-align: center; box-shadow: var(--shadow-lg);">
         <div style="font-size: 48px; margin-bottom: 12px;">🏆</div>
@@ -13838,7 +13852,48 @@ reset(){
 };
 
 window.updateXPBar=function(){const xp=parseInt(localStorage.getItem('asf-xp')||'0'),lvl=Math.floor(xp/100)+1,xi=xp%100;const p=document.querySelector('.profile-info p')||document.querySelector('.level-text');if(p)p.textContent='Nível '+lvl+' • '+xp+' pontos';const b=document.querySelector('.level-progress-bar');if(b){b.style.width=xi+'%';b.style.transition='width 0.5s ease'}const lt=document.querySelector('.level-text');if(lt)lt.textContent=xi+'/100 para Nível '+(lvl+1)};
-if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',function(){window.ASFAutoInit&&ASFAutoInit();window.updateXPBar&&updateXPBar();if(window.ASF_QUIZ)ASF_QUIZ.render();if(window.ASF_QUIZ_HOME)ASF_QUIZ_HOME.init();if(window.ASF_BRAND_HOME)ASF_BRAND_HOME.init()})}
+if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',function(){window.ASFAutoInit&&ASFAutoInit();window.updateXPBar&&updateXPBar();
+// Brand Partners Data
+const ASF_BRANDS_DATA=[
+{id:'rip-curl',name:'Rip Curl',logo:'🏄',tagline:'Onda por onda desde 1969',color:'#0066A1',bg:'rgba(0,102,161,0.08)',discount:'ASF15',category:'roupas',verified:true,established:'1969 · Austrália',desc:'A marca que nasceu na onda e cresceu com a comunidade feminina de surf.'},
+{id:'billabong',name:'Billabong',logo:'🌊',tagline:'Surf é vida, vida é surf',color:'#E87722',bg:'rgba(232,119,34,0.08)',discount:'ASF20',category:'roupas',verified:true,established:'1973 · Austrália',desc:'Do skate ao surf, representa a alma livre da mulher que surfa.'},
+{id:'quiksilver',name:'Quiksilver',logo:'🏆',tagline:'A tribo mais épica do surf',color:'#1A1A1A',bg:'rgba(26,26,26,0.06)',discount:'ASF10',category:'roupas',verified:true,established:'1969 · França',desc:'A marca das ondas grandes e da atitude que não tem medo de cair.'},
+{id:'granado',name:'Granado',logo:'💚',tagline:'Surf + clean beauty brasileira',color:'#00A651',bg:'rgba(0,166,81,0.08)',discount:'ASF25',category:'beleza',verified:true,established:'1870 · Brasil',desc:'Do Rio para o mundo — cosméticos naturais para manas que cuidam da pele sem química.'},
+{id:'onda-livre',name:'Onda Livre',logo:'🌊',tagline:'Do litoral para você',color:'#0087B2',bg:'rgba(0,135,178,0.08)',discount:'ASF30',category:'equipamentos',verified:false,established:'2023 · Brasil',desc:'Marco nacional de pranchas soft top feitas para mulheres por mulheres.'},
+{id:'sthll-surf',name:'STHILL SURF',logo:'🌅',tagline:'A revolução do surf feminino',color:'#9B59B6',bg:'rgba(155,89,182,0.08)',discount:'ASF50',category:'challenge',verified:true,established:'2024 · Brasil',desc:'Patrocina desafios e eventos da comunidade ASF.'}
+];
+function renderBrands(filter){
+const grid=document.getElementById('brand-grid');const filterBar=document.getElementById('brand-filter');
+if(!grid)return;
+const brands=filter&&filter!=='all'?ASF_BRANDS_DATA.filter(b=>b.category===filter):ASF_BRANDS_DATA;
+const categories=[...new Set(ASF_BRANDS_DATA.map(b=>b.category))];
+filterBar.innerHTML='<button onclick="renderBrands(\'all\')" style="padding:4px 12px;border-radius:20px;border:1px solid var(--primary);color:var(--primary);background:white;font-size:12px;font-weight:600;cursor:pointer">Todas</button>'+categories.map(cat=>'<button onclick="renderBrands(\''+cat+'\')" style="padding:4px 12px;border-radius:20px;border:1px solid var(--gray-300);color:var(--gray-600);background:white;font-size:12px;cursor:pointer">'+{roupas:'🩱 Roupas',beleza:'🧴 Beleza',equipamentos:'🏄 Equipamentos',challenge:'🏆 Desafios'}[cat]+'</button>').join('');
+grid.innerHTML=brands.map(b=>\`
+<div class="card" style="border-top:3px solid ${b.color};border-radius:16px;overflow:hidden;transition:all 0.3s ease" onmouseenter="this.style.transform=\'translateY(-4px)\';this.style.boxShadow=\'0 8px 30px rgba(0,0,0,0.1)\''" onmouseleave="this.style.transform='';this.style.boxShadow=''">
+  <div style="background:${b.bg};padding:20px;text-align:center">
+    <span style="font-size:40px;line-height:1">\${b.logo}</span>
+    \${b.verified?'<span style="font-size:12px;color:#27ae60;font-weight:600"> ✅ Verificada</span>':''}
+    <h4 style="font-size:16px;font-weight:700;color:var(--secondary);margin:8px 0 4px">\${b.name}</h4>
+    <p style="font-size:12px;color:var(--gray-500);margin:0">\${b.tagline}</p>
+  </div>
+  <div style="padding:16px">
+    <p style="font-size:13px;color:var(--gray-700);line-height:1.5;margin:0 0 12px">\${b.desc}</p>
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px">
+      <span style="font-size:11px;color:var(--gray-400)">\${b.established}</span>
+      <span style="font-size:12px;font-weight:700;color:var(--primary)"> Cupom: <code style="background:var(--gray-100);padding:2px 6px;border-radius:4px">\${b.discount}</code></span>
+    </div>
+    <div style="display:flex;gap:8px">
+      <a href="#loja" onclick="showSection('loja');return false" style="flex:1;text-align:center;padding:8px 12px;border-radius:8px;background:${b.color};color:white;font-size:13px;font-weight:600;text-decoration:none;cursor:pointer">Ver na Loja</a>
+      <a href="#" onclick="copyCoupon('\${b.discount}');return false" style="flex:1;text-align:center;padding:8px 12px;border-radius:8px;border:1.5px solid ${b.color};color:${b.color};font-size:13px;font-weight:600;cursor:pointer">Copiar Cupom</a>
+    </div>
+  </div>
+</div>\`).join('');
+const ctaBar=document.getElementById('brand-cta-bar');
+if(ctaBar)ctaBar.innerHTML=brands.length<ASF_BRANDS_DATA.length?'<p style="font-size:13px;color:var(--gray-400)">Mostrando '+brands.length+' de '+ASF_BRANDS_DATA.length+' marcas — <a href=#brandhub onclick=\'renderBrands("all");return false\' style="color:var(--primary);text-decoration:none;cursor:pointer">ver todas</a></p>':'';
+}
+function copyCoupon(code){navigator.clipboard.writeText(code).then(()=>showToast('Cupom '+code+' copiado! 🎉'))}
+
+if(window.ASF_QUIZ)ASF_QUIZ.render();if(window.ASF_QUIZ_HOME)ASF_QUIZ_HOME.init();if(window.ASF_BRAND_HOME)ASF_BRAND_HOME.init()})}
 
 </script>
 
