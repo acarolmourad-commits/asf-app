@@ -1,17 +1,17 @@
 {
-  "total_dicas": 3883,
-  "total_categorias": 258,
+  "total_dicas": 3692,
+  "total_categorias": 256,
   "por_categoria": {
-    "Técnica": 233,
-    "Mental": 209,
-    "Segurança": 207,
-    "Treino": 172,
-    "Condições": 154,
+    "Técnica": 234,
+    "Mental": 211,
+    "Segurança": 208,
+    "Treino": 173,
+    "Condições": 155,
     "Nutrição": 153,
-    "Equipamento": 152,
-    "Comunidade": 134,
+    "Equipamento": 153,
+    "Comunidade": 135,
     "ASF": 130,
-    "Sustentabilidade": 122,
+    "Sustentabilidade": 123,
     "Saúde": 120,
     "Recuperação": 114,
     "Cultura": 114,
@@ -207,7 +207,6 @@
     "Ciência": 4,
     "Equipamentos": 4,
     "Mindfulness": 4,
-    "monetization": 4,
     "Saúde Feminina": 3,
     "Inclusão": 3,
     "Urbanismo": 3,
@@ -258,8 +257,7 @@
     "Demonstração": 1,
     "Derivação": 1,
     "Respiração": 1,
-    "Surf Lifestyle": 1,
-    "engagement": 1
+    "Surf Lifestyle": 1
   },
   "exemplos": {
     "Condições": [
@@ -1316,8 +1314,7 @@
     "Demonstração",
     "Derivação",
     "Respiração",
-    "Surf Lifestyle",
-    "engagement"
+    "Surf Lifestyle"
   ],
-  "espurias_count": 39
+  "espurias_count": 38
 }
