@@ -13590,6 +13590,7 @@ function walkTree(el) {
 
 </body>
 
+</script>
 <script src="surf-news.js"></script>
 
 <script src="surf-calculator.js"></script>
@@ -13599,7 +13600,8 @@ function walkTree(el) {
 <script src="surf-culture.js"></script>
 <script src="instagram-content.js"></script>
 
-// QUIZ + XP BAR JS
+<!-- QUIZ + XP BAR JS -->
+<script>
 const ASF_QUIZ={questions:[
 {q:"Qual é a origem do surf?",opts:["Havaí, Polinésia","Austrália","África do Sul","Califórnia"],a:0,cat:"historia"},
 {q:"O que é 'dropping in'?",opts:["Remar até a onda","Cortar a linha de outro surfista","Fazer um tubo","Cair da prancha"],a:1,cat:"etiqueta"},
@@ -13736,5 +13738,7 @@ render(){
 
 window.updateXPBar=function(){const xp=parseInt(localStorage.getItem('asf-xp')||'0'),lvl=Math.floor(xp/100)+1,xi=xp%100;const p=document.querySelector('.profile-info p')||document.querySelector('.level-text');if(p)p.textContent='Nível '+lvl+' • '+xp+' pontos';const b=document.querySelector('.level-progress-bar');if(b){b.style.width=xi+'%';b.style.transition='width 0.5s ease'}const lt=document.querySelector('.level-text');if(lt)lt.textContent=xi+'/100 para Nível '+(lvl+1)};
 if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',function(){window.ASFAutoInit&&ASFAutoInit();window.updateXPBar&&updateXPBar();if(window.ASF_QUIZ)ASF_QUIZ.render();if(window.ASF_QUIZ_HOME)ASF_QUIZ_HOME.init()})}
+
+</script>
 
 </html>
