@@ -745,6 +745,21 @@
   - ✅ Script imbalance confirmado: 13 abertos vs 12 fechados — markup OK
   - ✅ Audit completo pós-melhorias — HTTP 200, 3,652 dicas, 0 bugs
 
+## Checkpoint: ~19:30 UTC (May 22)
+- **Status**: ✅ Complete
+- **Commit**: a74061f
+- **Items Completed**:
+  - ✅ ASF_CAMPAIGN_RULES — 8 regras oficiais para campanhas + como participar
+  - ✅ ASF_IMAGE_TERMS — Termos de Uso de Imagem (LGPD, direitos, remoção)
+  - ✅ Modal duplo: Regras de Campanha ↔ Termos de Uso de Imagem
+  - ✅ Botão 📋 no header — acesso 1-click às regras
+  - ✅ Sistema de comentários por dica (localStorage, 280 chars, escapeHtml)
+  - ✅ Botão 💬 no header da Dica do Dia
+  - ✅ showDica() agora renderiza comentários por dica
+  - ✅ Dicas: 3692 | Scripts: 14/14 | Linhas: 14,084
+  - ✅ Commit pushed + submodule sincronizado + HTTP 200
+
+
 ## ✅ FINAL STATE CONFIRMED
 - **Dicas no array**: 3,642 (Python array count — 3,573 aspas simples + 69 aspas duplas)
 - **Todas as correções**: commit `5bdb8b3` pushed — GitHub Pages 200
