@@ -10,8 +10,10 @@ Ajudar Carol na manutenção e evolução do **ASF App** ( Associação de Surf 
 | Repo GitHub | `https://github.com/acarolmourad-commits/asf-app.git` |
 | Site ao vivo | `https://acarolmourad-commits.github.io/asf-app/` |
 | Branch | `main` |
-| Arquivo principal | `/root/.openclaw/workspace/index.html` (1.07 MB) |
+| Arquivo principal | `/root/.openclaw/workspace/index.html` (1.09 MB, 14,000+ linhas) |
 | GitHub Pages HTTP | `200` ✅ |
+| HEAD atual | `a74061f` |
+| Dicas no array | **3,692** (todas aspas simples) |
 | Remote | `origin` → `https://github.com/acarolmourad-commits/asf-app.git` |
 
 ## 📊 Estado atual (22:45 UTC — verificar sempre antes de editar!)
