@@ -13602,6 +13602,17 @@ function walkTree(el) {
         </div>
     </div>
 
+  <style>
+    @keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-4px)}75%{transform:translateX(4px)}}
+    @keyframes fadeSlideIn{0%{opacity:0;transform:translateY(6px)}100%{opacity:1;transform:translateY(0)}}
+    @keyframes pulseStreak{0%,100%{transform:scale(1)}50%{transform:scale(1.1)}}
+    .quiz-home-opt{transition:all 0.25s cubic-bezier(0.4,0,0.2,1)!important;border:1.5px solid var(--gray-200)!important}
+    .quiz-home-opt:hover{border-color:var(--primary)!important;box-shadow:0 3px 12px rgba(0,168,204,0.15)!important;transform:translateY(-1px)!important}
+    .quiz-home-opt.correct{background:rgba(39,174,96,0.1)!important;border-color:#27ae60!important;color:#27ae60!important}
+    .quiz-home-opt.wrong{background:rgba(231,76,60,0.1)!important;border-color:#e74c3c!important;color:#e74c3c!important}
+    .quiz-home-opt:active{transform:scale(0.97)!important}
+    .quiz-result-msg{animation:fadeSlideIn 0.3s ease}
+  </style>
 </body>
 
 </script>
@@ -13695,6 +13706,8 @@ init(){
   this._state.answered=false;
   this.render();
 },
+  randPickE(){return ASF_QUIZ.MSG_WRONG[Math.floor(Math.random()*this.MSG_WRONG.length)]},
+  randPickC(){return ASF_QUIZ.MSG_CORRECT[Math.floor(Math.random()*this.MSG_CORRECT.length)]},
 hashDay(d){
   let h=0;
   for(let i=0;i<d.length;i++)h=((h<<5)-h)+d.charCodeAt(i);
@@ -13702,27 +13715,31 @@ hashDay(d){
 },
 today(){return new Date().toISOString().split('T')[0]},
 getStreak(){return ASF_QUIZ.getStreak()},
-submit(idx){
-  if(this._state.answered)return;
-  this._state.answered=true;
-  const ok=idx===this.Q.a,r=document.getElementById('quiz-home-result');
-  const ns=ok?this.getStreak()+1:0;
-  ASF_QUIZ.setStreak(ns);
-  ASF_QUIZ.addHistory(this.Q,ok);
-  if(ok)ASF_QUIZ.addXP(ASF_QUIZ.XP_REWARD);
-  const emoji=ok?'✅':'❌';
-  const msgsC=["Acertou! 🎉","Perfeito! 🌟","Mandou bem! ⭐","Excelente! 🏆","Incrível! 🔥","Brabo! 💪"];
-  const msgsE=["Quase! 💪","Não desista! 🌊","Tente de novo! 🏄️","Aprendeu! 📚","Próxima dá! ✨"];
-  const title=ok?msgsC[Math.floor(Math.random()*msgsC.length)]:msgsE[Math.floor(Math.random()*msgsE.length)];
-  const msg=ok?'+15 XP | Streak: '+ns+' días seguidos! 🧠':'Resposta: '+String.fromCharCode(65+this.Q.a)+'. Continue!';
-  r.style.display='block';
-  r.style.cssText=(ok?'padding:14px;border-radius:10px;background:rgba(46,204,113,0.12);color:#27ae60':'padding:14px;border-radius:10px;background:rgba(255,107,107,0.12);color:#e74c3c');
-  r.innerHTML=emoji+' <strong>'+title+'</strong><br>'+msg;
-  document.getElementById('quiz-home-streak-count').textContent=ns;
-  if(ok&&ns%5===0&&typeof ASFConfetti!=='undefined')ASFConfetti.burst(12);
-  setTimeout(()=>this.showDone()||this.render(),2200);
-},
-showDone(){
+  submit(idx){
+    if(this._state.answered)return;
+    this._state.answered=true;
+    const ok=idx===this.Q.a,r=document.getElementById('quiz-home-result');
+    const ns=ok?this.getStreak()+1:0;
+    ASF_QUIZ.setStreak(ns);
+    ASF_QUIZ.addHistory(this.Q,ok);
+    if(ok)ASF_QUIZ.addXP(ASF_QUIZ.XP_REWARD);
+    const emoji=ok?'✅':'❌';
+    const title=ok?this.randPickC():this.randPickE();
+    const msg=ok?'+15 XP | Streak: '+ns+' seguidos! 🧠':'Resposta correta: '+String.fromCharCode(65+this.Q.a)+'. Continue tentando!';
+    // Feedback visual das opções
+    const opts=document.querySelectorAll('#quiz-home-options > div');
+    opts.forEach((el,i)=>{
+      el.style.pointerEvents='none';
+      if(i===idx){el.style.background=ok?'rgba(39,174,96,0.1)':'rgba(231,76,60,0.1)';el.style.borderColor=ok?'#27ae60':'#e74c3c';const sp=el.querySelector('span');sp.style.background=ok?'#27ae60':'#e74c3c';sp.style.color='white'}else if(i===this.Q.a&&!ok){const sp=el.querySelector('span');sp.style.background='#27ae60';sp.style.color='white';el.style.borderColor='#27ae60'}if(!ok&&i===idx)el.style.animation='shake 0.4s ease'});
+    // Mensagem de resultado estilizada
+    r.style.display='block';
+    r.style.cssText='padding:16px;border-radius:12px;margin-top:16px;background:'+(ok?'rgba(39,174,96,0.12)':'rgba(231,76,60,0.12)')+';color:'+(ok?'#27ae60':'#e74c3c')+';text-align:center;animation:fadeSlideIn 0.3s ease';
+    r.innerHTML=emoji+' <strong style="font-size:16px">'+title+'</strong><br><span style="font-size:13px;opacity:0.85">'+msg+'</span>';
+    document.getElementById('quiz-home-streak-count').textContent=ns;
+    if(ok&&ns>0){const sd=document.getElementById('quiz-home-streak-display');if(sd){sd.textContent='🔥 '+ns+' seguidos';sd.style.display='inline-block'}}
+    if(ok&&ns%5===0&&typeof ASFConfetti!=='undefined')ASFConfetti.burst(20);
+    setTimeout(()=>{this.showDone();ASF_QUIZ.render&&ASF_QUIZ.render()},2200);
+  },
   document.getElementById('quiz-home-question-wrap').style.display='none';
   document.getElementById('quiz-home-done').style.display='block';
   document.getElementById('quiz-home-meta').textContent='Completo hoje! Volte amanhã 🌊';
@@ -13733,19 +13750,25 @@ reset(){
   document.getElementById('quiz-home-done').style.display='none';
   this.init();
 },
-render(){
-  const q=this.Q,s=this.getStreak();
-  document.getElementById('quiz-home-progress').textContent='Pergunta 1 de 5';
-  document.getElementById('quiz-home-question').textContent=q.q;
-  document.getElementById('quiz-home-result').style.display='none';
-  const o=document.getElementById('quiz-home-options');o.innerHTML='';
-  q.opts.forEach((opt,i)=>{
-    const b=document.createElement('div');
-    b.style.cssText='padding:12px 14px;background:var(--white);border:1.5px solid var(--gray-200);border-radius:10px;cursor:pointer;font-size:14px;font-weight:500;color:var(--secondary);transition:all 0.2s;display:flex;align-items:center;gap:10px';
-    b.innerHTML='<span style="width:24px;height:24px;background:var(--gray-100);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:var(--gray-400)">'+String.fromCharCode(65+i)+'</span><span>'+opt+'</span>';
-    b.onclick=()=>this.submit(i);
-    o.appendChild(b);
-  });
+  render(){
+    const q=this.Q,s=this.getStreak();
+    const answered=ASF_QUIZ.getProgress(),total=ASF_QUIZ.PER_DAY||5;
+    document.getElementById('quiz-home-progress').textContent='Pergunta '+(answered+1)+' de '+total;
+    document.getElementById('quiz-home-progress').style.color=answered>=total?'var(--success)':'var(--primary)';
+    document.getElementById('quiz-home-question').textContent=q.q;
+    document.getElementById('quiz-home-result').style.display='none';
+    const o=document.getElementById('quiz-home-options');o.innerHTML='';
+    const letters=['A','B','C','D'];
+    q.opts.forEach((opt,i)=>{
+      const b=document.createElement('div');
+      b.className='quiz-home-opt';
+      b.style.cssText='padding:12px 14px;background:var(--white);border-radius:10px;cursor:pointer;font-size:14px;font-weight:500;color:var(--secondary);display:flex;align-items:center;gap:10px';
+      b.innerHTML='<span style="width:24px;height:24px;background:var(--gray-100);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:var(--gray-400)">'+letters[i]+'</span><span>'+opt+'</span>';
+      b.onclick=()=>this.submit(i);
+      o.appendChild(b);
+    });
+    if(this._state.answered)this.showDone();
+  }
   if(this._state.answered)this.showDone();
 }
 };
