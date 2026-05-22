@@ -1,0 +1,1323 @@
+{
+  "total_dicas": 3883,
+  "total_categorias": 258,
+  "por_categoria": {
+    "Técnica": 233,
+    "Mental": 209,
+    "Segurança": 207,
+    "Treino": 172,
+    "Condições": 154,
+    "Nutrição": 153,
+    "Equipamento": 152,
+    "Comunidade": 134,
+    "ASF": 130,
+    "Sustentabilidade": 122,
+    "Saúde": 120,
+    "Recuperação": 114,
+    "Cultura": 114,
+    "Prevenção": 108,
+    "Competição": 92,
+    "Etiqueta": 87,
+    "Imóveis": 80,
+    "Progresso": 59,
+    "Preparação": 40,
+    "Tecnologia": 38,
+    "Técnico": 30,
+    "Negócios": 28,
+    "Técnica Avançada": 18,
+    "Social": 18,
+    "Marketing": 16,
+    "Mídia": 15,
+    "Cuidado": 14,
+    "Experiência": 14,
+    "Rotina": 13,
+    "Arte": 12,
+    "Viagem": 10,
+    "Aprendizado": 10,
+    "Terapia": 10,
+    "Esportes": 10,
+    "Purificacao": 10,
+    "Sabedoria": 9,
+    "Prática": 9,
+    "Saúde Mental": 9,
+    "Cuidados": 7,
+    "Turismo": 7,
+    "Energia": 7,
+    "Planejamento": 6,
+    "Manutenção": 6,
+    "Economia": 6,
+    "Moda": 6,
+    "Tech": 6,
+    "Finanças": 6,
+    "Engenharia": 6,
+    "Design": 5,
+    "Bem-estar": 5,
+    "Eventos": 5,
+    "Parcerias": 5,
+    "Diversidade": 5,
+    "Nutricao": 5,
+    "Negocios": 5,
+    "Financas": 5,
+    "Consultoria": 5,
+    "Gestao": 5,
+    "Historia": 5,
+    "Ciencia": 5,
+    "Legal": 5,
+    "Politica": 5,
+    "Certificacao": 5,
+    "Premios": 5,
+    "Empreendedorismo": 5,
+    "Saude": 5,
+    "Educacao": 5,
+    "Pesquisa": 5,
+    "Transporte": 5,
+    "Alimentacao": 5,
+    "Seguranca": 5,
+    "MeioAmbiente": 5,
+    "Vida": 5,
+    "Amor": 5,
+    "Alegria": 5,
+    "Paz": 5,
+    "Amizade": 5,
+    "Familia": 5,
+    "Gratidao": 5,
+    "Esperanca": 5,
+    "Fe": 5,
+    "Sonhos": 5,
+    "Motivacao": 5,
+    "Coragem": 5,
+    "Sorte": 5,
+    "Tempo": 5,
+    "Risadas": 5,
+    "Resiliencia": 5,
+    "Amizades": 5,
+    "Alma": 5,
+    "Mente": 5,
+    "Corpo": 5,
+    "Espiritualidade": 5,
+    "Meditacao": 5,
+    "Vitalidade": 5,
+    "Serenidade": 5,
+    "Visoes": 5,
+    "Aventura": 5,
+    "Exploracao": 5,
+    "Descoberta": 5,
+    "Liberdade": 5,
+    "Transformacao": 5,
+    "Renovacao": 5,
+    "Renascimento": 5,
+    "Clareamento": 5,
+    "Detalhe": 5,
+    "Nuance": 5,
+    "Complexidade": 5,
+    "Simplicidade": 5,
+    "Paradoxo": 5,
+    "Harmonia": 5,
+    "Equilibrio": 5,
+    "Sintonia": 5,
+    "Sinergia": 5,
+    "Convergencia": 5,
+    "Resonancia": 5,
+    "Vibracao": 5,
+    "Frequencia": 5,
+    "Ritmo": 5,
+    "Intensidade": 5,
+    "Forca": 5,
+    "Habilidade": 5,
+    "Pratica": 5,
+    "Estilo": 5,
+    "Fluxo": 5,
+    "Expressao": 5,
+    "Experiencia": 5,
+    "Sentimento": 5,
+    "Memoria": 5,
+    "Nostalgia": 5,
+    "Inspiracao": 5,
+    "Criatividade": 5,
+    "Preservacao": 5,
+    "Conquista": 5,
+    "Superacao": 5,
+    "Superpoderes": 5,
+    "Autoestima": 5,
+    "Confianca": 5,
+    "Habilidades": 5,
+    "Competencias": 5,
+    "Maestria": 5,
+    "Excelencia": 5,
+    "Consciencia": 5,
+    "Presenca": 5,
+    "Potencial": 5,
+    "Foco": 5,
+    "Cura": 5,
+    "Restauracao": 5,
+    "Giração": 5,
+    "Rotacao": 5,
+    "Movimento": 5,
+    "Dinamica": 5,
+    "Magnitude": 5,
+    "ForcaTarefa": 5,
+    "Capacidade": 5,
+    "Reconhecimento": 5,
+    "Realizacao": 5,
+    "Sonho": 5,
+    "Ambicao": 5,
+    "Altura": 5,
+    "Direcao": 5,
+    "Proporção": 5,
+    "Razão": 5,
+    "Dimensão": 5,
+    "Perímetro": 5,
+    "Comprimento": 5,
+    "Extensão": 5,
+    "Grau": 5,
+    "Classe": 5,
+    "Malha": 5,
+    "Teia": 5,
+    "Informação": 5,
+    "Busca": 5,
+    "Investigação": 5,
+    "Verificação": 5,
+    "Validação": 5,
+    "Confirmação": 5,
+    "Normalização": 5,
+    "Funcionamento": 5,
+    "Efetividade": 5,
+    "Componente": 5,
+    "Elemento": 5,
+    "Fator": 5,
+    "Aspecto": 5,
+    "Atributo": 5,
+    "Desvantagem": 5,
+    "Administração": 5,
+    "Exame": 5,
+    "Detecção": 5,
+    "Sensação": 5,
+    "Situação": 5,
+    "Contexto": 5,
+    "Primeiroplano": 5,
+    "Panodefundo": 5,
+    "Sombra": 5,
+    "Substância": 5,
+    "Rede": 5,
+    "Protocolo": 5,
+    "Norma": 5,
+    "Segurança Online": 5,
+    "Ética": 4,
+    "Direito": 4,
+    "Ciência": 4,
+    "Equipamentos": 4,
+    "Mindfulness": 4,
+    "monetization": 4,
+    "Saúde Feminina": 3,
+    "Inclusão": 3,
+    "Urbanismo": 3,
+    "Estratégia": 2,
+    "Filosofia": 2,
+    "Educação": 2,
+    "Dados": 2,
+    "História": 2,
+    "Performance": 2,
+    "Neurociência": 2,
+    "Política": 2,
+    "Meteo": 2,
+    "Surf Trip": 2,
+    "Segurança Avançada": 1,
+    "Biofeedback": 1,
+    "Navegação": 1,
+    "Regeneração": 1,
+    "Metodologia": 1,
+    "Mindset": 1,
+    "Safety": 1,
+    "Valores": 1,
+    "Cidadania": 1,
+    "Inovação": 1,
+    "Agricultura": 1,
+    "Gestão": 1,
+    "Científico": 1,
+    "Mobilidade": 1,
+    "Psicologia": 1,
+    "Antropologia": 1,
+    "Geopolítica": 1,
+    "Comunicação": 1,
+    "Direitos": 1,
+    "Web3": 1,
+    "Sociologia": 1,
+    "Liderança": 1,
+    "Arqueologia": 1,
+    "Física": 1,
+    "Genética": 1,
+    "Oceanografia": 1,
+    "Meteorologia": 1,
+    "Clima": 1,
+    "Biologia": 1,
+    "Água": 1,
+    "Atenção": 1,
+    "Equação": 1,
+    "Fórmula": 1,
+    "Teorema": 1,
+    "Demonstração": 1,
+    "Derivação": 1,
+    "Respiração": 1,
+    "Surf Lifestyle": 1,
+    "engagement": 1
+  },
+  "exemplos": {
+    "Condições": [
+      "🌊 O mar hoje tá com ondas de 0.5-1.0m! Boas para todas. Bora surfar!",
+      "🌅 Madrugue! 6-9h tem vento OFF e ondas mais limpinhas."
+    ],
+    "Prevenção": [
+      "☀️ Protetor solar FPS 30+ a cada 2h. No Brasil, prevenção é tudo!",
+      "🧘 Alongue ombros, quadril e tornozelos ANTES de entrar. 5 min evita lesão!"
+    ],
+    "Nutrição": [
+      "💧 Leve 1.5L de água. Desidratação não combina com surf!",
+      "🍌 Banana + aveia = café de athlete. Energia LIMPA antes do surf!"
+    ],
+    "Segurança": [
+      "🏊 Nunca lute contra a correnteza. Mergulhe fundo e nade por baixo.",
+      "👯 Check-in com buddy a cada 30min. Segurança first! 🛟"
+    ],
+    "Técnica": [
+      "🏄 Paddle eficiente = corpo reto + braços longos. Sim, muda TUDO!",
+      "👀 Olhe pro destino, não pra onda. Controle o paddle com os olhos!"
+    ],
+    "Etiqueta": [
+      "🤝 Respeitar vez é Básicos. Não furta onda - positividade gera!",
+      "🤙 Senta FORA da lineup quando lotado = boa etiqueta!"
+    ],
+    "Saúde": [
+      "😴 Dormir 7-8h é pré-requisito. Corpo descansado = paddle melhor!",
+      "🏄‍♀️💪 Praticar breath control ajuda a ficar mais tempo na água. Respire fundo, p"
+    ],
+    "Equipamento": [
+      "🕯️ Renove a wax. Verão + calor = wax derretido = paddle escorregadio!",
+      "✨ Prancha certo pro seu nível. Estabilidade > velocidade, sempre!"
+    ],
+    "Cuidado": [
+      "🦶 Pés precisam de amor! Hidrate APÓS o surf, especially entre dedos.",
+      "🧴 Hidratante pós-surf é essencial. Água salgada resseca pele e cabelo. Cuide-se!"
+    ],
+    "Sabedoria": [
+      "🌊 Confie nos seus olhos, não só nos apps. O mar tem seus próprios planos!",
+      "🌊 Respect the ocean. It was here before us, it will be here after! 🌊"
+    ],
+    "Comunidade": [
+      "💙 Surf com mana = mais segurança + mais divertimento! 🤝",
+      "🏄‍♀️🌸 Juntas somos mais fortes! Uma apoia a outra no mar! 💪"
+    ],
+    "Sustentabilidade": [
+      "🐠 Use protetor reef-safe. Oceans thank you! 🌱",
+      "🦀 Wetsuit pode serrei reused! Doe ou recicle. Océano agradecce! ♻️"
+    ],
+    "Mental": [
+      "🌊 Surfarei novamente? Sempre! Depois da sessão, já já pensa na próxima. 🔄",
+      "🏊🏄 Qualquer dúvida, sai da água. Outro dia será melhor! ⏱️"
+    ],
+    "Rotina": [
+      "🌊 Dia clássico de verão: madrugar, surfar 7-9h, voltar pra casa! ☀️",
+      "🌅 Sunrise session = best session. Try it! 🌅"
+    ],
+    "ASF": [
+      "🏄‍♀️🌸 A gente faz parte da mesma ONDA! ASF strong! 💙",
+      "🌊 ASF é mais que um app - é uma comunidade. Vamos surfar juntas! 🤙"
+    ],
+    "Treino": [
+      "🏊‍♀️ Fazer exercício fora d\\",
+      "💪 Strength train legs: squats and lunges improve your pop-up and balance! 🏋️"
+    ],
+    "Progresso": [
+      "📅 Anote suas sessões. Diário de surf = evolução visível! 📓",
+      "📸 Photo or it didn\\"
+    ],
+    "Recuperação": [
+      "🧊 Ice your shoulders after surf. 15 min = faster recovery! ❄️",
+      "🤜 Don\\"
+    ],
+    "Competição": [
+      "🏄♀️ Competir é opcional, evoluir é obrigatório! Cada heat é uma chance de aprend",
+      "🏆 Join competitions. Growth happens outside comfort zone! 🥇"
+    ],
+    "Experiência": [
+      "🏄 Try night surf! Moonlit sessions are unforgettable! 🌙",
+      "🌅 Early morning = glassy waves. Alarm set! ⏰"
+    ],
+    "Prática": [
+      "🎒 Pack light. Less gear = more fun! 🏄",
+      "🌊 Check conditions twice. They change fast! 🧭"
+    ],
+    "Saúde Mental": [
+      "💚 Surf therapy: ocean heals anxiety. Let waves wash worries away! 🌊",
+      "🌊 Surfar reduz o estresse! O oceano é a melhor terapia para a mente feminina!"
+    ],
+    "Técnica Avançada": [
+      "🏄‍♀️ Domine o cutback! Girar a prancha na parede da onda permite conectar seções",
+      "🏄‍♀️ Aprenda a fazer o floater! Passar por cima da parte quebrando da onda manté"
+    ],
+    "Saúde Feminina": [
+      "🩸 Use coletor menstrual ou absorvente de tecido no surf. Liberdade total para pe",
+      "💪 Fortaleça o assoalho pélvico! Exercícios de Kegel melhoram a estabilidade na p"
+    ],
+    "Segurança Avançada": [
+      "🌊 Practice proper duck diving in waves over head-high: angle board 45°, push wit"
+    ],
+    "Cuidados": [
+      "🧴 Use óleo de coco no cabelo após o surf para evitar ressecamento pelo sal e sol",
+      "🌿 Passe gel de babosa no corpo após o sol. Alivia o ardor e hidrata a pele resse"
+    ],
+    "Preparação": [
+      "Yoga na areia antes do surf melhora foco, respiração e connection com o mar 🏖️🧘",
+      "Respiração ujjayi no aquecimento: expande capacidade pulmonar para remadas mais "
+    ],
+    "Biofeedback": [
+      "Biofeedback de HRV: monitore variabilidade cardíaca para medir prontidão física "
+    ],
+    "Navegação": [
+      "Navegação por correntes: use linhas de espuma como guia para cruzar canais de ma"
+    ],
+    "Regeneração": [
+      "Regeneração ativa contraste: banho 2 min frio/2 min quente x 3 ciclos acelera re"
+    ],
+    "Metodologia": [
+      "Metodologia periodização: alterne volume e intensidade no treino para evitar pla"
+    ],
+    "Mindset": [
+      "Mindset de crescimento: cada wipeout é dado, não falha - analise e evolua consis"
+    ],
+    "Tecnologia": [
+      "📱 App ASF offline: salve dicas favoritas e acesse conteúdos sem internet na prai",
+      "📱 Notificações do app: ative alertas de condições favoráveis na sua região! Nunc"
+    ],
+    "Planejamento": [
+      "📝 Diário de viagens: registre spots, condições e dicas para futuras expedições! ",
+      "📅 Agenda de ondas: planeje sessões em dias de mar favorável com antecedência! 📆"
+    ],
+    "Manutenção": [
+      "🧽 Freshwater rinse: enxágue prancha e equipamento com água doce após surf! 🌊",
+      "🧰 Kit de reparos: cera, reparo de quilhas e cabo extra na bolsa sempre! 🔧"
+    ],
+    "Cultura": [
+      "🏄 Respeito à cultura: conheça a história do surf e os locais que você surfa! 🙏",
+      "🌊 Consciência oceânica: observe Wildlife e entenda o ecossistema marinho! 🐋"
+    ],
+    "Ética": [
+      "🤝 Conexões no mar: cumprimente e estabeleça respeito antes de pegar ondas! 👋",
+      "📍 Posicionamento no lineup: escolha seu lugar com base na ordem de chegada e res"
+    ],
+    "Viagem": [
+      "🌍 Surf travel: pesquispique spots internacionais — planeje viagens com antecedên",
+      "✈️ Gestão jet lag surf trips: adaptação horária antes da competição! 🏖️"
+    ],
+    "Safety": [
+      "🌊 Ondas grandes: treine respiração e mental para conseguir segurar a respiração!"
+    ],
+    "Aprendizado": [
+      "📸 Documentação visual: fotografe sua evolução e ondas para aprender! 📷",
+      "🧠 Ensino mentorado: aprenda com surfistas experientes e evite erros comuns! 👩‍🏫"
+    ],
+    "Estratégia": [
+      "⏱️ Gestão intervalo waves: posicionamento estratégico entre sets! 📊",
+      "🗺️ Posicionamento tático picos concorridos: leitura da crowd + inside positionin"
+    ],
+    "Valores": [
+      "🤝 Ética surf: respeito ao próximo, regras do pico e ambiente! 🤝"
+    ],
+    "Social": [
+      "🤲 Voluntariado surf: ensinar crianças em projetos sociais! 🤲",
+      "💼 Empreendedorismo surf: transforme paixão em negócio sustentável! 🚀"
+    ],
+    "Cidadania": [
+      "📢 Advocacy surf: participe de consultas públicas sobre praias e meio ambiente! 🏛"
+    ],
+    "Inclusão": [
+      "♿ Acesso praias deficientes: rampas adaptadas + estruturas inclusivas! 🦽",
+      "🌊 Surf inclusivo: programa adaptado atletas com deficiência! 🤝"
+    ],
+    "Economia": [
+      "👥 Economia colaborativa surf: compartilhamento equipamentos + recursos! 🤲",
+      "💱 Negocio onda: modelo + receita + escalabilidade! 💱"
+    ],
+    "Inovação": [
+      "💡 Inovação social surf: soluções criativas comunidades costeiras! 🌱"
+    ],
+    "Turismo": [
+      "🏨 Hotelaria surf: hospedagem sustentável + experiências oceânicas! 🏨",
+      "🧳 Turismo surf responsável: viajar com respeito ao ecossistema! ♻️"
+    ],
+    "Agricultura": [
+      "🌾 Agricultura surf: cultivo orgânico + food forest costeiro! 🌻"
+    ],
+    "Urbanismo": [
+      "🏗️ Construção surf: edifícios ecológicos + integração paisagem costeira! 🏠",
+      "🏛️ Arquitetura surf: design que dialoga com o ambiente costeiro! 🏗️"
+    ],
+    "Direito": [
+      "⚖️ Direito internacional surf: leis oceânicas + direitos marítimos! 📜",
+      "⚖️ Direito ambiental surf: preservação + legislação costeira! 🏛️"
+    ],
+    "Gestão": [
+      "📋 Gestão projetos surf: metodologias ágeis + gestão de eventos! 📊"
+    ],
+    "Arte": [
+      "🎭 Teatro surf: performance artística + expressão no mar! 🎭",
+      "💃 Dança surf: movimento corporal + ritmo das ondas! 💃"
+    ],
+    "Científico": [
+      "🧪 Microplásticos surf: impacto e ações de conscientização! 🔬"
+    ],
+    "Design": [
+      "🎨 Design surf: identidade visual + branding oceânico! 🎨",
+      "🎨 Grafico onda: cores + formas + movimento! 🎨"
+    ],
+    "Mobilidade": [
+      "🚌 Transportes surf: logística sustentável + acessibilidade praia! 🚐"
+    ],
+    "Moda": [
+      "👗 Moda sustentável surf: marcas eco-friendly + materiais reciclados! 🌿",
+      "👕 Moda surf: roupas + acessórios + tendências! 👕"
+    ],
+    "Psicologia": [
+      "🧠 Psicologia do esporte surf: mindset vencedor + gestão de pressão! 🏆"
+    ],
+    "Filosofia": [
+      "📚 Filosofia do esporte surf: ética + valores no esporte! ⚖️",
+      "🌊 Filosofia oceano: sabedoria + significado das águas! 🤔"
+    ],
+    "Educação": [
+      "🤸 Educação física surf: aulas adaptadas + desenvolvimento motor! 🎓",
+      "🎓 Pedagogia surf: ensino + aprendizagem do esporte! 📖"
+    ],
+    "Marketing": [
+      "📈 Marketing digital surf: estratégias para marcas do mar! 📊",
+      "🏷️ Desconto surf shop: estratégia + margem + clientes! 💸"
+    ],
+    "Mídia": [
+      "🗞️ Jornalismo esportivo surf: como cobrir competições e eventos! 🎤",
+      "📺 Streaming surf: lives + transmissões de ondas! 🎥"
+    ],
+    "Negócios": [
+      "👩 Empreendedorismo feminino surf: liderança + negócios na água! 💼",
+      "🤝 Parcerias surf: estratégia + alinhamento + benefícios! 📈"
+    ],
+    "Antropologia": [
+      "🧬 Antropologia surf: cultura + tradição dos povos do mar! 🌊"
+    ],
+    "Geopolítica": [
+      "🌍 Geopolítica surf: poder + fronteiras costeiras! 🗺️"
+    ],
+    "Comunicação": [
+      "📢 Comunicação surf: networking + storytelling na tribo! 🗣️"
+    ],
+    "Dados": [
+      "📊 Estatística surf: dados + análise de performance! 📈",
+      "📊 Ciência dados surf: análise + tendências + insights! 🎯"
+    ],
+    "Direitos": [
+      "🤝 Direitos humanos surf: inclusão + acesso universal às praias! ✊"
+    ],
+    "Tech": [
+      "⌚ Tecnologia vestível surf: wearables + tracking de performance! 🏄‍♀️",
+      "👓 Realidade aumentada surf: AR + treinamento imersivo! 🌟"
+    ],
+    "Web3": [
+      "₿ Blockchain surf: NFTs + tokenização de experiências! 🔗"
+    ],
+    "História": [
+      "📚 História surf: das origens havaianas ao esporte global! 🏄",
+      "👑 Mulheres surf pioneers: histórias + legado + inspiração! 👸"
+    ],
+    "Sociologia": [
+      "👥 Sociologia surf: tribo + hierarquia nas linhas! 🤝"
+    ],
+    "Performance": [
+      "📈 Métricas performance: dados + análise de evolução! 📊",
+      "🌊 Flow state surf: zen + estado de excelência! 🧘"
+    ],
+    "Liderança": [
+      "🏆 Liderança surf: comando + decisão nas ondas! 👑"
+    ],
+    "Ciência": [
+      "🎵 Bioacústica marinha: sons do oceano + vida marinha! 🎶",
+      "🧊 Paleoclimatologia: climas passados + correlatos oceânicos! ❄️"
+    ],
+    "Arqueologia": [
+      "🏛️ Arqueologia submarina: tesouros + destruídos no fundo! ⚓"
+    ],
+    "Física": [
+      "💧 Física fluidos: ondas + dinâmica das águas! 🌊"
+    ],
+    "Energia": [
+      "⚡ Energia ondas: conversão + tecnologias verdes! 🔋",
+      "🔵 Energia azul: ondas + correntes + marés! 💧"
+    ],
+    "Finanças": [
+      "💰 Finanças sustentáveis: investimentos azuis! 💎",
+      "💹 Taxa juros surf loan: empréstimo + taxas + aprovação! 💰"
+    ],
+    "Neurociência": [
+      "🧠 Neurociência do esporte: mente + performance surf! 🧠",
+      "🧠 Neurociência surf: ondas cerebrais + performance! 🧬"
+    ],
+    "Genética": [
+      "🧬 Genética surfista: genes + performance genética! 🧬"
+    ],
+    "Política": [
+      "🏛️ Política costeira: governança + gestão de áreas litorâneas! 📋",
+      "🤝 Protocolo acordos internacionais: convênios + cooperação costeira! 🌍"
+    ],
+    "Oceanografia": [
+      "📡 Monitoramento oceanográfico: sensores + dados em tempo real! 📊"
+    ],
+    "Engenharia": [
+      "🏗️ Engenharia costeira: estruturas + proteção litorânea! 🏖️",
+      "🛠️ Engenharia surf: estruturas + materiais + resistência! 🛠️"
+    ],
+    "Meteorologia": [
+      "🌪️ Meteorologia pressão: altas + baixas + previsão! 📊"
+    ],
+    "Clima": [
+      "🌡️ Mudança climática surf: impactos + adaptação! 🌍"
+    ],
+    "Biologia": [
+      "⚙️ Biomecânica comparada: movimento + eficiência + prevención! 🏄"
+    ],
+    "Meteo": [
+      "💨 Leitura vento local: micro condições + timing! 🌬️",
+      "🌀 Padrão ondulação: formação + características! 📊"
+    ],
+    "Água": [
+      "🧊 Geleira surf: água fria + resistência! 🥶"
+    ],
+    "Bem-estar": [
+      "🌊 Ocean wellness: cura + equilíbrio + conexão! 🌊",
+      "💧 Water mindfulness: atenção + respiração + movimento! 🧘"
+    ],
+    "Imóveis": [
+      "🏠 Imóvel surfista: localização + waves + lifestyle! 🏄",
+      "💰 Investimento imóvel praia: valorização + demanda + retorno! 📈"
+    ],
+    "Técnico": [
+      "📹 Videografia surf: ação + ángulo + narrativa! 📹",
+      "📸 Fotografia praia: luz + composição + movimento! 📸"
+    ],
+    "Eventos": [
+      "🎪 Festival praia: música + comunidade + celebração! 🎪",
+      "🎤 Show surf: som + ondas + público! 🎤"
+    ],
+    "Parcerias": [
+      "🤝 Parceria ASF: colaboração + apoio + desenvolvimento! 🤝",
+      "🤲 Colaboracao surf: uniao + objetivos + resultados! 🤲"
+    ],
+    "Diversidade": [
+      "🌈 Diversidade surf: variedade + respeito + aceitação! 🌈",
+      "🤝 Inclusao praia: acesso + oportunidades + integração! 🤝"
+    ],
+    "Terapia": [
+      "♿ Esporte adaptado: inclusão + acessibilidade + igualdade! ♿",
+      "🧘 Atividade terapia: bem-estar + relaxamento + conexão! 🧘"
+    ],
+    "Nutricao": [
+      "🥗 Alimentacao surf: hidratação + energia + performance! 🥗",
+      "🥤 Nutricao onda: suplementos + recuperação + imunidade! 🥤"
+    ],
+    "Equipamentos": [
+      "👜 Acessorios surf: bolsas + toalhas + kits! 👜",
+      "🎒 Equipamentos onda: malas + organização + transporte! 🎒"
+    ],
+    "Negocios": [
+      "💼 Negocio surf: plano + execução + resultados! 💼",
+      "🚀 Empreendedorismo onda: startup + investimento + escala! 🚀"
+    ],
+    "Financas": [
+      "💰 Financas surf: orçamento + fluxo + economia! 💰",
+      "📈 Investimento onda: retorno + risco + horizonte! 📈"
+    ],
+    "Consultoria": [
+      "🧭 Consultor onda: expertise + estratégia + resultados! 🧭",
+      "📊 Consultoria costa: análise + diagnóstico + recomendações! 📊"
+    ],
+    "Gestao": [
+      "📋 Gestao surf: processos + métricas + equipe! 📋",
+      "📊 Administracao onda: KPIs + relatórios + decisão! 📊"
+    ],
+    "Esportes": [
+      "🏄 Esportes surf: disciplinas + categorias + competições! 🏄",
+      "🤙 Modalidades onda: shortboard + longboard + bodyboard! 🤙"
+    ],
+    "Historia": [
+      "📜 Mitos onda: lendas + seres + crenças! 📜",
+      "📚 Historia costa: eventos + personagens + eras! 📚"
+    ],
+    "Ciencia": [
+      "🔬 Cientistas surf: oceanografia + meteorologia + ecologia! 🔬",
+      "📡 Pesquisadores onda: dados + instrumentos + descobertas! 📡"
+    ],
+    "Legal": [
+      "📋 Permissoes surf: autorizações + regulamentações + processos! 📋",
+      "⚖️ Licencas onda: legais + ambientais + operacionais! ⚖️"
+    ],
+    "Politica": [
+      "🏛️ Politica surf: políticas + regulamentação + lobby! 🏛️",
+      "📋 Governance onda: gestão + transparência + accountability! 📋"
+    ],
+    "Certificacao": [
+      "🏅 Certificacao surf: padrões + qualidade + reconhecimento! 🏅",
+      "📜 Iso onda: normas + auditorias + conformidade! 📜"
+    ],
+    "Premios": [
+      "🏆 Premios surf: categorias + indicações + vencedores! 🏆",
+      "🎁 Recompensas onda: reconhecimento + homenagens + distinções! 🎁"
+    ],
+    "Empreendedorismo": [
+      "🚀 Startup onda: inovação + investimento + escala! 🚀",
+      "💡 Empreendedorismo costa: oportunidades + mentoria + capital! 💡"
+    ],
+    "Saude": [
+      "🩺 Medicina surf: lesões + recuperação + prevenção! 🩺",
+      "💊 Healthcare onda: terapias + medicamentos + tratamentos! 💊"
+    ],
+    "Educacao": [
+      "📚 Educacao surf: escolas + cursos + certificações! 📚",
+      "🎓 Aprendizagem onda: métodos + técnicas + estratégias! 🎓"
+    ],
+    "Pesquisa": [
+      "🔬 Pesquisa surf: metodologia + dados + publicações! 🔬",
+      "📖 Estudos onda: hipóteses + experimentos + resultados! 📖"
+    ],
+    "Transporte": [
+      "🚗 Transporte surf: frota + logística + acessibilidade! 🚗",
+      "🚲 Mobility onda: bicicletas + compartilhamento + rotas! 🚲"
+    ],
+    "Alimentacao": [
+      "🍱 Food onda: kits + suplementos + hidratação! 🍱",
+      "🍤 Culinaria praia: peixes + frutos do mar + receitas! 🍤"
+    ],
+    "Seguranca": [
+      "🛡️ Seguranca surf: vigilância + protocolos + emergências! 🛡️",
+      "🔒 Security onda: cibernética + monitoramento + prevenção! 🔒"
+    ],
+    "MeioAmbiente": [
+      "🌿 Meioambiente surf: impacto + mitigação + sustentabilidade! 🌿",
+      "♻️ Environment onda: emissões + compensação + carbono! ♻️"
+    ],
+    "Vida": [
+      "🌅 Vida surf: lifestyle + rotina + equilíbrio! 🌅",
+      "☀️ Life onda: bem-estar + energia + vitalidade! ☀️"
+    ],
+    "Amor": [
+      "💖 Amor surf: romance + encontro + conexão! 💖",
+      "💕 Love onda: paixão + desejo + atração! 💕"
+    ],
+    "Alegria": [
+      "🎉 Alegria surf: emoção + felicidade + euforia! 🎉",
+      "🎊 Joy onda: celebração + vitória + conquista! 🎊"
+    ],
+    "Paz": [
+      "☮️ Paz surf: calma + serenidade + aceitação! ☮️",
+      "🕊️ Peace onda: silêncio + contemplação + escuta! 🕊️"
+    ],
+    "Amizade": [
+      "🤝 Amizade surf: companheiros + apoio + lealdade! 🤝",
+      "💪 Friendship onda: grupo + uniao + colaboracao! 💪"
+    ],
+    "Familia": [
+      "👨‍👩‍👧 Familia surf: legado + tradição + presente! 👨‍👩‍👧",
+      "👨‍👩‍👦 Family onda: geracoes + valores + memórias! 👨‍👩‍👦"
+    ],
+    "Gratidao": [
+      "🙏 Gratidao surf: reconhecimento + apreciacao + valor! 🙏",
+      "🌟 Gratitude onda: reconhecimento + apreciacao + gratidão! 🌟"
+    ],
+    "Esperanca": [
+      "🌈 Esperança surf: futuro + possibilidades + sonhos! 🌈",
+      "✨ Hope onda: potencial + transformação + renovação! ✨"
+    ],
+    "Fe": [
+      "✝️ Fé surf: crença + confiança + entrega! ✝️",
+      "🕊️ Faith onda: espiritualidade + entendimento + aceitação! 🕊️"
+    ],
+    "Sonhos": [
+      "💤 Sonhos surf: viagem + onisciência + realidade! 💤",
+      "🌙 Dreams onda: projeção + controle + exploração! 🌙"
+    ],
+    "Motivacao": [
+      "🚀 Motivação surf: impulso + ação + superação! 🚀",
+      "💪 Motivation onda: disciplina + foco + persistência! 💪"
+    ],
+    "Coragem": [
+      "🦁 Coragem surf: ousadia + arriscar + vencer! 🦁",
+      "🛡️ Courage onda: bravura + enfrentar + persistir! 🛡️"
+    ],
+    "Sorte": [
+      "🍀 Sorte surf: acaso + oportunidade + momento! 🍀",
+      "🍃 Luck onda: coincidência + encontro + sincronicidade! 🍃"
+    ],
+    "Tempo": [
+      "⏰ Tempo surf: fluidez + ritmo + momento! ⏰",
+      "🕐 Time onda: maré + ciclo + batida! 🕐"
+    ],
+    "Risadas": [
+      "😂 Risadas surf: gargalhada + diversão + leveza! 😂",
+      "🤣 Laugh onda: gargalhada + ondas + explosão! 🤣"
+    ],
+    "Resiliencia": [
+      "🌱 Resiliência surf: adaptação + recuperação + força mental! 🌱",
+      "💪 Resilience onda: flexibilidade + elasticidade + superar! 💪"
+    ],
+    "Amizades": [
+      "🤝 Amizades surf: camaradagem + sessão + parceria! 🤝",
+      "🌐 Friendships onda: networking + conexões + comunidade! 🌐"
+    ],
+    "Alma": [
+      "👻 Alma surf: energia + essência + conexão! 👻",
+      "🎭 Soul onda: passão + fogo + paixão! 🎭"
+    ],
+    "Mente": [
+      "🧠 Mente surf: foco + concentração + claridade! 🧠",
+      "🧘 Mind onda: meditação + zen + equilíbrio! 🧘"
+    ],
+    "Corpo": [
+      "💪 Corpo surf: força + condicionamento + potência! 💪",
+      "🏋️ Body onda: treino + exercício + resistência! 🏋️"
+    ],
+    "Espiritualidade": [
+      "🙏 Espiritualidade surf: conexão + universo + energia! 🙏",
+      "🕉️ Spiritual onda: transcendental + divino + sagrado! 🕉️"
+    ],
+    "Meditacao": [
+      "🧘 Meditação surf: respiração + mindfulness + presença! 🧘",
+      "🌅 Meditation onda: onda + respiração + zen! 🌅"
+    ],
+    "Vitalidade": [
+      "⚡ Vitalidade surf: vitalidade + energia + força! ⚡",
+      "🌟 Vitality onda: vital + power + dynamic! 🌟"
+    ],
+    "Serenidade": [
+      "🕊️ Serenidade surf: calma + tranquilidade + equilíbrio! 🕊️",
+      "🌿 Serenity onda: calma + tranquilidade + zen! 🌿"
+    ],
+    "Visoes": [
+      "👁️ Visões surf: perspectiva + insight + visão! 👁️",
+      "🔮 Visions onda: insight + revelação + visão interior! 🔮"
+    ],
+    "Aventura": [
+      "🧭 Aventura surf: descoberta + exploração + coragem! 🧭",
+      "🗺️ Adventure onda: exploração + novas ondas + fronteiras! 🗺️"
+    ],
+    "Exploracao": [
+      "🔍 Exploração surf: mapear + investigar + descobrir! 🔍",
+      "🚀 Exploration onda: navegar + mapear + fronteiras! 🚀"
+    ],
+    "Descoberta": [
+      "💎 Descoberta surf: achado + tesouro + revelação! 💎",
+      "🏆 Discovery onda: revelação + conquista + vitória! 🏆"
+    ],
+    "Liberdade": [
+      "🕊️ Liberdade surf: voar + fluir + independente! 🕊️",
+      "🌊 Freedom onda: livre + onda + movimento! 🌊"
+    ],
+    "Transformacao": [
+      "🦋 Transformação surf: metamorfose + evolução + renascimento! 🦋",
+      "🪱 Transformation onda: mudança + mutação + reinvenção! 🪱"
+    ],
+    "Renovacao": [
+      "🔄 Renovação surf: renovar + refrescar + recomeçar! 🔄",
+      "🔁 Renewal onda: renovar + recomeçar + revitalizar! 🔁"
+    ],
+    "Renascimento": [
+      "🌅 Renascimento surf: renascer + renascer + renovar! 🌅",
+      "🌱 Rebirth onda: renascer + renascer + renascer! 🌱"
+    ],
+    "Purificacao": [
+      "⚡ Purificação surf: limpar + purificar + eletricidade! ⚡",
+      "🌊 Purification onda: limpar + purificar + onda! 🌊"
+    ],
+    "Clareamento": [
+      "☀️ Clareamento surf: clarear + iluminar + brilhar! ☀️",
+      "✨ Brightening onda: iluminar + brilhar + clarificar! ✨"
+    ],
+    "Detalhe": [
+      "🔍 Detalhe surf: detalhe + observação + precisão! 🔍",
+      "🔎 Detail onda: detail + observation + precision! 🔍"
+    ],
+    "Nuance": [
+      "🎨 Nuance surf: nuance + subtlety + art! 🎨",
+      "🖌️ Subtlety onda: subtle + nuanced + artistic! 🖌️"
+    ],
+    "Complexidade": [
+      "🌀 Complexidade surf: complex + patterns + layers! 🌀",
+      "🧩 Complexity onda: complex + wave + structure! 🧩"
+    ],
+    "Simplicidade": [
+      "⚖️ Simplicidade surf: simple + clean + essence! ⚖️",
+      "🎯 Simplicity onda: focus + simple + direct! 🎯"
+    ],
+    "Paradoxo": [
+      "🎭 Paradoxo surf: paradox + contradiction + truth! 🎭",
+      "🔄 Paradox onda: change + opposite + balance! 🔄"
+    ],
+    "Harmonia": [
+      "🎵 Harmonia surf: music + rhythm + balance! 🎵",
+      "🎶 Harmony onda: musical + wave + synchronized! 🎶"
+    ],
+    "Equilibrio": [
+      "⚖️ Equilíbrio surf: balance + center + stability! ⚖️",
+      "⚖️ Balance onda: balanced + stable + centered! ⚖️"
+    ],
+    "Sintonia": [
+      "🎯 Sintonia surf: sync + match + tune! 🎯",
+      "📡 Synchronization onda: sync + align + connect! 📡"
+    ],
+    "Sinergia": [
+      "🤝 Sinergia surf: teamwork + combined + strength! 🤝",
+      "🔗 Synergy onda: linked + connected + powerful! 🔗"
+    ],
+    "Convergencia": [
+      "🎯 Convergência surf: focus + converge + point! 🎯",
+      "🔭 Convergence onda: focus + telescope + converge! 🔭"
+    ],
+    "Resonancia": [
+      "🎵 Resonância surf: resonance + sound + vibration! 🎵",
+      "🎼 Resonance onda: musical + wave + frequency! 🎼"
+    ],
+    "Vibracao": [
+      "🌀 Vibração surf: vibration + motion + energy! 🌀",
+      "📳 Vibration onda: tremor + wave + shake! 📳"
+    ],
+    "Frequencia": [
+      "📡 Frequência surf: radio + surf + signal! 📡",
+      "📻 Frequency onda: wave + radio + broadcast! 📻"
+    ],
+    "Ritmo": [
+      "🥁 Rítmo surf: beat + surf + timing! 🥁",
+      "🎵 Rhythm onda: musical + wave + tempo! 🎵"
+    ],
+    "Intensidade": [
+      "⚡ Intensidade surf: intensity + power + energy! ⚡",
+      "🔥 Intensity onda: intense + wave + force! 🔥"
+    ],
+    "Forca": [
+      "💥 Força surf: force + surf + strength! 💥",
+      "⚔️ Force onda: powerful + wave + impact! ⚔️"
+    ],
+    "Habilidade": [
+      "🎯 Habilidade surf: skill + ability + talent! 🎯",
+      "⭐ Skill onda: ability + wave + surf! ⭐"
+    ],
+    "Pratica": [
+      "📝 Prática surf: practice + surf + training! 📝",
+      "🔧 Technique onda: method + wave + technique! 🔧"
+    ],
+    "Estilo": [
+      "🕺 Estilo surf: style + surf + fashion! 🕺",
+      "🦄 Style onda: fashionable + wave + surf! 🦄"
+    ],
+    "Fluxo": [
+      "💫 Fluxo surf: flow + surf + movement! 💫",
+      "🌬️ Flow onda: air + wave + surf! 🌬️"
+    ],
+    "Expressao": [
+      "🎭 Expressão surf: expression + style + art! 🎭",
+      "🎨 Expression onda: creative + wave + surf! 🎨"
+    ],
+    "Experiencia": [
+      "🌅 Experiência surf: experience + surf + memory! 🌅",
+      "📸 Experience onda: photo + wave + moment! 📸"
+    ],
+    "Sentimento": [
+      "❤️ Sentimento surf: feeling + surf + emotion! ❤️",
+      "😊 Feeling onda: happy + wave + surf! 😊"
+    ],
+    "Memoria": [
+      "📚 Memória surf: memory + surf + history! 📚",
+      "📀 Memory onda: wave + memory + recall! 📀"
+    ],
+    "Nostalgia": [
+      "🎥 Nostalgia surf: nostalgic + surf + past! 🎥",
+      "📺 Nostalgia onda: retro + wave + vintage! 📺"
+    ],
+    "Inspiracao": [
+      "💡 Inspiração surf: inspire + idea + creative! 💡",
+      "✨ Inspiration onda: spark + wave + insight! ✨"
+    ],
+    "Criatividade": [
+      "🎨 Criatividade surf: creative + surf + art! 🎨",
+      "🖌️ Creativity onda: paint + wave + express! 🖌️"
+    ],
+    "Preservacao": [
+      "🌿 Preservação surf: preserve + protect + sustain! 🌿",
+      "🛡️ Preservation onda: protect + wave + conserve! 🛡️"
+    ],
+    "Conquista": [
+      "🏆 Conquista surf: achievement + surf + win! 🏆",
+      "🥇 Achievement onda: gold + wave + success! 🥇"
+    ],
+    "Superacao": [
+      "💪 Superação surf: overcome + rise + triumph! 💪",
+      "🚀 Overcoming onda: conquer + wave + success! 🚀"
+    ],
+    "Superpoderes": [
+      "🦸 Superpoderes surf: super + powers + surf! 🦸",
+      "🦸 Superpowers onda: super + wave + power! 🦸"
+    ],
+    "Autoestima": [
+      "💖 Autoestima surf: self-love + surf + confidence! 💖",
+      "✨ Selfesteem onda: self-love + wave + surf! ✨"
+    ],
+    "Confianca": [
+      "🎯 Confiança surf: trust + surf + believe! 🎯",
+      "⭐ Confidence onda: trust + wave + faith! ⭐"
+    ],
+    "Habilidades": [
+      "⭐ Habilidades surf: skills + abilities + talent! ⭐",
+      "🎯 Abilities onda: capability + wave + skill! 🎯"
+    ],
+    "Competencias": [
+      "🔧 Competências surf: competence + skill + mastery! 🔧",
+      "⚙️ Competence onda: ability + wave + expert! ⚙️"
+    ],
+    "Maestria": [
+      "🧠 Maestria surf: mastery + surf + expertise! 🧠",
+      "🎓 Mastery onda: expert + wave + skill! 🎓"
+    ],
+    "Excelencia": [
+      "🌟 Excelência surf: excellence + surf + perfect! 🌟",
+      "⭐ Excellence onda: perfect + wave + elite! ⭐"
+    ],
+    "Consciencia": [
+      "🧠 Consciência surf: awareness + surf + mindful! 🧠",
+      "🌊 Consciousness onda: aware + wave + present! 🌊"
+    ],
+    "Presenca": [
+      "📍 Presença surf: present + surf + now! 📍",
+      "🎯 Presence onda: here + wave + moment! 🎯"
+    ],
+    "Potencial": [
+      "💪 Potencial surf: potential + power + future! 💪",
+      "🚀 Potential onda: future + wave + possibility! 🚀"
+    ],
+    "Atenção": [
+      "🧠 Atenção surf: attention + focus + mindful! 🧠"
+    ],
+    "Mindfulness": [
+      "🌊 Mindfulness onda: aware + wave + present! 🌊",
+      "🌍 Mindfulness costa: earth + coast + mindful! 🌍"
+    ],
+    "Foco": [
+      "🎯 Foco surf: focus + surf + concentration! 🎯",
+      "🧭 Focus onda: target + wave + aim! 🧭"
+    ],
+    "Cura": [
+      "💚 Cura surf: heal + recover + restore! 💚",
+      "🩹 Healing onda: mend + wave + repair! 🩹"
+    ],
+    "Restauracao": [
+      "🔧 Restauração surf: restore + fix + renew! 🔧",
+      "🛠️ Restoration onda: rebuild + wave + restore! 🛠️"
+    ],
+    "Giração": [
+      "🌀 Giração surf: spinning + rotating + turning! 🌀",
+      "🔁 Spinning onda: spin + wave + rotate! 🔁"
+    ],
+    "Rotacao": [
+      "🌀 Rotação surf: rotation + surf + spin! 🌀",
+      "🔄 Rotation onda: axis + wave + turn! 🔄"
+    ],
+    "Movimento": [
+      "🏃 Movimento surf: movement + surf + action! 🏃",
+      "🎬 Movement onda: motion + wave + surf! 🎬"
+    ],
+    "Dinamica": [
+      "⚡ Dinâmica surf: dynamic + surf + energy! ⚡",
+      "🔥 Dynamics onda: power + wave + motion! 🔥"
+    ],
+    "Magnitude": [
+      "🌌 Magnitude surf: size + scale + impact! 🌌",
+      "🔭 Magnitude onda: wave + size + measure! 🔭"
+    ],
+    "ForcaTarefa": [
+      "👷 Força-tarefa surf: taskforce + surf + action! 👷",
+      "🛡️ Taskforce onda: team + wave + mission! 🛡️"
+    ],
+    "Capacidade": [
+      "🎯 Capacidade surf: capacity + ability + skill! 🎯",
+      "🧠 Capacity onda: brain + wave + power! 🧠"
+    ],
+    "Reconhecimento": [
+      "🎖️ Reconhecimento surf: recognition + honor + award! 🎖️",
+      "🏆 Recognition onda: trophy + wave + achievement! 🏆"
+    ],
+    "Realizacao": [
+      "🎯 Realização surf: achievement + surf + success! 🎯",
+      "⭐ Fulfillment onda: dream + wave + complete! ⭐"
+    ],
+    "Sonho": [
+      "🌟 Sonho surf: dream + surf + imagine! 🌟",
+      "💭 Dream onda: vision + wave + aspiration! 💭"
+    ],
+    "Ambicao": [
+      "🔥 Ambição surf: ambition + surf + goal! 🔥",
+      "🏔️ Ambition onda: drive + wave + success! 🏔️"
+    ],
+    "Altura": [
+      "📏 Altura onda: wave + height + measurement! 📏",
+      "📐 Wave height praia: beach + wave height + surf! 📐"
+    ],
+    "Direcao": [
+      "🧭 Direção onda: direction + wave + compass! 🧭",
+      "🧭 Wave direction surf: compass + wave + angle! 🧭"
+    ],
+    "Proporção": [
+      "⚡ proporção surf: proportion + surf + surf! ⚡",
+      "🔍 proportion onda: proporção + wave + surf! 🔍"
+    ],
+    "Razão": [
+      "💡 razão surf: ratio + surf + surf! 💡",
+      "🦾 ratio onda: razão + wave + surf! 🦾"
+    ],
+    "Dimensão": [
+      "🎪 dimensão surf: dimension + surf + surf! 🎪",
+      "🎵 dimension onda: dimensão + wave + surf! 🎵"
+    ],
+    "Perímetro": [
+      "📚 perímetro surf: perimeter + surf + surf! 📚",
+      "🎓 perimeter onda: perímetro + wave + surf! 🎓"
+    ],
+    "Comprimento": [
+      "🎖️ comprimento surf: length + surf + surf! 🎖️",
+      "🌅 length onda: comprimento + wave + surf! 🌅"
+    ],
+    "Extensão": [
+      "🔁 extensão surf: extension + surf + surf! 🔁",
+      "🔃 extension onda: extensão + wave + surf! 🔃"
+    ],
+    "Grau": [
+      "🌿 grau surf: degree + surf + surf! 🌿",
+      "🛡️ degree onda: grau + wave + surf! 🛡️"
+    ],
+    "Classe": [
+      "🎥 classe surf: class + surf + surf! 🎥",
+      "📷 class onda: classe + wave + surf! 📷"
+    ],
+    "Malha": [
+      "💫 malha surf: mesh + surf + surf! 💫",
+      "✨ mesh onda: malha + wave + surf! ✨"
+    ],
+    "Teia": [
+      "🕊️ teia surf: web + surf + surf! 🕊️",
+      "🌻 web onda: teia + wave + surf! 🌻"
+    ],
+    "Informação": [
+      "🩹 informação surf: information + surf + surf! 🩹",
+      "💚 information onda: informação + wave + surf! 💚"
+    ],
+    "Busca": [
+      "🏗️ busca surf: search + surf + surf! 🏗️",
+      "🧱 search onda: busca + wave + surf! 🧱"
+    ],
+    "Investigação": [
+      "🔄 investigação surf: investigation + surf + surf! 🔄",
+      "🔁 investigation onda: investigação + wave + surf! 🔁"
+    ],
+    "Verificação": [
+      "🎠 verificação surf: verification + surf + surf! 🎠",
+      "🔄 verification onda: verificação + wave + surf! 🔄"
+    ],
+    "Validação": [
+      "🎢 validação surf: validation + surf + surf! 🎢",
+      "🗺️ validation onda: validação + wave + surf! 🗺️"
+    ],
+    "Confirmação": [
+      "📉 confirmação surf: confirmation + surf + surf! 📉",
+      "🧩 confirmation onda: confirmação + wave + surf! 🧩"
+    ],
+    "Normalização": [
+      "⚡ normalização surf: normalization + surf + surf! ⚡",
+      "🔍 normalization onda: normalização + wave + surf! 🔍"
+    ],
+    "Funcionamento": [
+      "💡 funcionamento surf: functioning + surf + surf! 💡",
+      "🦾 functioning onda: funcionamento + wave + surf! 🦾"
+    ],
+    "Efetividade": [
+      "🎪 efetividade surf: effectiveness + surf + surf! 🎪",
+      "🎵 effectiveness onda: efetividade + wave + surf! 🎵"
+    ],
+    "Componente": [
+      "📚 componente surf: component + surf + surf! 📚",
+      "🎓 component onda: componente + wave + surf! 🎓"
+    ],
+    "Elemento": [
+      "🎖️ elemento surf: element + surf + surf! 🎖️",
+      "🌅 element onda: elemento + wave + surf! 🌅"
+    ],
+    "Fator": [
+      "🔁 fator surf: factor + surf + surf! 🔁",
+      "🔃 factor onda: fator + wave + surf! 🔃"
+    ],
+    "Aspecto": [
+      "🌿 aspecto surf: aspect + surf + surf! 🌿",
+      "🛡️ aspect onda: aspecto + wave + surf! 🛡️"
+    ],
+    "Atributo": [
+      "🎥 atributo surf: attribute + surf + surf! 🎥",
+      "📷 attribute onda: atributo + wave + surf! 📷"
+    ],
+    "Desvantagem": [
+      "💫 desvantagem surf: disadvantage + surf + surf! 💫",
+      "✨ disadvantage onda: desvantagem + wave + surf! ✨"
+    ],
+    "Administração": [
+      "🕊️ administração surf: administration + surf + surf! 🕊️",
+      "🌻 administration onda: administração + wave + surf! 🌻"
+    ],
+    "Exame": [
+      "🩹 exame surf: examination + surf + surf! 🩹",
+      "💚 examination onda: exame + wave + surf! 💚"
+    ],
+    "Detecção": [
+      "🏗️ detecção surf: detection + surf + surf! 🏗️",
+      "🧱 detection onda: detecção + wave + surf! 🧱"
+    ],
+    "Sensação": [
+      "🔄 sensação surf: sensation + surf + surf! 🔄",
+      "🔁 sensation onda: sensação + wave + surf! 🔁"
+    ],
+    "Situação": [
+      "🎠 situação surf: situation + surf + surf! 🎠",
+      "🔄 situation onda: situação + wave + surf! 🔄"
+    ],
+    "Contexto": [
+      "🎢 contexto surf: context + surf + surf! 🎢",
+      "🗺️ context onda: contexto + wave + surf! 🗺️"
+    ],
+    "Primeiroplano": [
+      "📉 primeiro plano surf: foreground + surf + surf! 📉",
+      "🧩 foreground onda: primeiro plano + wave + surf! 🧩"
+    ],
+    "Panodefundo": [
+      "⚡ pano de fundo surf: backdrop + surf + surf! ⚡",
+      "🔍 backdrop onda: pano de fundo + wave + surf! 🔍"
+    ],
+    "Sombra": [
+      "💡 sombra surf: shadow + surf + surf! 💡",
+      "🦾 shadow onda: sombra + wave + surf! 🦾"
+    ],
+    "Substância": [
+      "🎪 substância surf: substance + surf + surf! 🎪",
+      "🎵 substance onda: substância + wave + surf! 🎵"
+    ],
+    "Rede": [
+      "📚 rede surf: network + surf + surf! 📚",
+      "🎓 network onda: rede + wave + surf! 🎓"
+    ],
+    "Protocolo": [
+      "🎖️ protocolo surf: protocol + surf + surf! 🎖️",
+      "🌅 protocol onda: protocolo + wave + surf! 🌅"
+    ],
+    "Norma": [
+      "🔁 norma surf: norm + surf + surf! 🔁",
+      "🔃 norm onda: norma + wave + surf! 🔃"
+    ],
+    "Equação": [
+      "📐 Equação surf: equation + surf + math! 📐"
+    ],
+    "Fórmula": [
+      "🔢 Fórmula onda: formula + wave + calculate! 🔢"
+    ],
+    "Teorema": [
+      "📜 Teorema surf: theorem + surf + prove! 📜"
+    ],
+    "Demonstração": [
+      "✅ Demonstração surf: demonstration + surf + show! ✅"
+    ],
+    "Derivação": [
+      "🧮 Derivação surf: derivation + surf + math! 🧮"
+    ],
+    "Segurança Online": [
+      "Use senha forte e única na conta ASF — evite senhas de redes sociais!",
+      "Ative a autenticação de dois fatores (2FA) no app para proteger seu perfil."
+    ],
+    "Respiração": [
+      "A respiração no surf é tudo: inspire na remada, expire no drop!"
+    ],
+    "Surf Lifestyle": [
+      "O oceanário ao amanhecer é sagrado: pouca gente, ondas perfeitas, silêncio!"
+    ],
+    "Surf Trip": [
+      "Bateria de maré vazia pode ser a melhor session do mês: menos gente, mar limpo, ",
+      "Leve uma toalha microfibra na prancha: seca rápido, ocupa pouco, sempre útil!"
+    ]
+  },
+  "top_emojis": {
+    "🌊": 192,
+    "🎯": 100,
+    "🤝": 86,
+    "🧘": 73,
+    "🏄": 73,
+    "💪": 72,
+    "⚡": 70,
+    "🌅": 60,
+    "🧠": 54,
+    "🔥": 52,
+    "📈": 48,
+    "💙": 47,
+    "🏆": 47,
+    "💧": 46,
+    "🔄": 45
+  },
+  "top_10": [
+    "Técnica",
+    "Mental",
+    "Segurança",
+    "Treino",
+    "Condições",
+    "Nutrição",
+    "Equipamento",
+    "Comunidade",
+    "ASF",
+    "Sustentabilidade"
+  ],
+  "espurias_1_dica": [
+    "Segurança Avançada",
+    "Biofeedback",
+    "Navegação",
+    "Regeneração",
+    "Metodologia",
+    "Mindset",
+    "Safety",
+    "Valores",
+    "Cidadania",
+    "Inovação",
+    "Agricultura",
+    "Gestão",
+    "Científico",
+    "Mobilidade",
+    "Psicologia",
+    "Antropologia",
+    "Geopolítica",
+    "Comunicação",
+    "Direitos",
+    "Web3",
+    "Sociologia",
+    "Liderança",
+    "Arqueologia",
+    "Física",
+    "Genética",
+    "Oceanografia",
+    "Meteorologia",
+    "Clima",
+    "Biologia",
+    "Água",
+    "Atenção",
+    "Equação",
+    "Fórmula",
+    "Teorema",
+    "Demonstração",
+    "Derivação",
+    "Respiração",
+    "Surf Lifestyle",
+    "engagement"
+  ],
+  "espurias_count": 39
+}
