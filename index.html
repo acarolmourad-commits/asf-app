@@ -509,6 +509,21 @@ div[style*="font-size: 14px"] { display: none !important; }
         </div>
     </div>
 
+
+    <!-- Home Card de Marcas Parceiras -->
+    <div id="brand-home-card" style="background:linear-gradient(135deg,rgba(255,255,255,0.95),rgba(240,248,255,0.9));border-radius:16px;padding:20px 20px 16px;margin-bottom:20px;box-shadow:0 4px 20px rgba(0,0,0,0.06);border:1px solid rgba(0,168,204,0.12)">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px">
+            <div>
+                <p style="font-size:13px;font-weight:600;color:var(--primary);margin:0;letter-spacing:0.3px">🤝 MARCAS PARCEIRAS</p>
+                <p style="font-size:12px;color:var(--gray-400);margin:2px 0 0">Quem apoia o surf feminino</p>
+            </div>
+            <a href="#brandhub" onclick="showSection('brandhub')" style="font-size:12px;font-weight:600;color:var(--primary);text-decoration:none;cursor:pointer">Ver todas →</a>
+        </div>
+        <div id="brand-home-logos" style="display:flex;gap:10px;overflow-x:auto;padding-bottom:4px;-webkit-overflow-scrolling:touch;scrollbar-width:none"></div>
+        <div id="brand-home-rotator" style="display:flex;gap:10px;justify-content:center;margin-top:10px"></div>
+        <div id="brand-home-text" style="text-align:center;font-size:13px;font-weight:600;color:var(--secondary);margin-top:8px"></div>
+        <div id="brand-home-cta" style="text-align:center;margin-top:12px"></div>
+    </div>
     <!-- Stats -->
     <div class="stats">
         <div class="stat-card">
@@ -13698,6 +13713,55 @@ renderHistory(){const h=(()=>{try{return JSON.parse(localStorage.getItem(this.HI
 function startQuizDay(){document.getElementById('quiz').style.display='block';document.querySelectorAll('.section').forEach(s=>{if(s.id!=='quiz')s.style.display='none'});ASF_QUIZ.render()}
 function showQuizHistory(){ASF_QUIZ.renderHistory()}
 
+const ASF_BRAND_HOME=(()=>{
+const BRANDS=[
+{name:"Rip Curl",tagline:"Onda por onda desde 1969 🏄",logo:"🏄",cta:"🌐 Conheça a coleção",url:"#brandhub",color:"#0066A1"},
+{name:"Billabong",tagline:"Surf é vida, vida é surf 🏖️",logo:"🌊",cta:"🛒 Ver produtos",url:"#brandhub",color:"#E87722"},
+{name:"Quiksilver",tagline:"A tribo mais épica do surf 🏆",logo:"🏆",cta:"🔥 Novidades",url:"#brandhub",color:"#1A1A1A"},
+{name:"Granado",tagline:"Surf + clean beauty 💚",logo:"💚",cta:"🧴 Ver linha",url:"#brandhub",color:"#00A651"},
+{name:"Onda Livre",tagline:"Do litoral para você 🌊",logo:"🌊",cta:"🧢 Ver mais",url:"#brandhub",color:"#0087B2"},
+];
+let _current=0,_timer=null;
+function rotateBrands(){
+const logosDiv=document.getElementById('brand-home-logos');
+const rotatorDiv=document.getElementById('brand-home-rotator');
+const textEl=document.getElementById('brand-home-text');
+const ctaEl=document.getElementById('brand-home-cta');
+if(!logosDiv||!rotatorDiv)return;
+const b=BRANDS[_current%BRANDS.length];
+// Texto principal
+textEl.textContent=b.tagline;
+// CTA
+ctaEl.innerHTML='<a href="'+b.url+'" onclick="showSection(\'brandhub\');return false" style="display:inline-block;padding:8px 20px;border-radius:20px;background:linear-gradient(135deg,'+b.color+','+(b.color||'#0EA5E9').replace('#','cc')+');color:white;font-size:13px;font-weight:600;cursor:pointer;text-decoration:none;letter-spacing:0.2px">'+b.cta+'</a>';
+// Rotator de logos
+rotatorDiv.innerHTML='';
+BRANDS.forEach(brd=>{
+const dot=document.createElement('div');
+dot.style.cssText='width:8px;height:8px;border-radius:50%;background:'+(brd.name===b.name?b.color:'var(--gray-300)')+';transition:all 0.3s ease;cursor:pointer';
+dot.title=brd.name;
+dot.onclick=()=>{ASF_BRAND_HOME.show(brd.name)};
+rotatorDiv.appendChild(dot);
+});
+// Logo strip
+logosDiv.innerHTML=BRANDS.map(brd=>\`
+<div style="display:flex;flex-direction:column;align-items:center;gap:2px;min-width:64px;cursor:pointer;padding:6px 10px;border-radius:10px;transition:all 0.2s"
+  title="\${brd.name}"
+  onclick="ASF_BRAND_HOME.show('\${brd.name}')">
+  <span style="font-size:28px;line-height:1">\${brd.logo}</span>
+  <span style="font-size:10px;font-weight:700;color:var(--gray-600);white-space:nowrap">\${brd.name}</span>
+</div>\`).join('');
+/timer&&clearInterval(_timer);
+_timer=setInterval(()=>{_current++;rotateBrands()},4000);
+}
+function show(name){
+_current=BRANDS.findIndex(b=>b.name===name);
+if(_current<0)_current=0;
+rotateBrands();
+if(_timer){clearInterval(_timer);_timer=null}
+_timer=setInterval(()=>{_current++;rotateBrands()},4000);
+}
+function init(){rotateBrands()}
+return{init,show}})();
 const ASF_QUIZ_HOME={_state:{idx:0,answered:false},Q:null,
 init(){
   const seed=this.hashDay(this.today()),total=ASF_QUIZ.questions.length;
@@ -13774,7 +13838,7 @@ reset(){
 };
 
 window.updateXPBar=function(){const xp=parseInt(localStorage.getItem('asf-xp')||'0'),lvl=Math.floor(xp/100)+1,xi=xp%100;const p=document.querySelector('.profile-info p')||document.querySelector('.level-text');if(p)p.textContent='Nível '+lvl+' • '+xp+' pontos';const b=document.querySelector('.level-progress-bar');if(b){b.style.width=xi+'%';b.style.transition='width 0.5s ease'}const lt=document.querySelector('.level-text');if(lt)lt.textContent=xi+'/100 para Nível '+(lvl+1)};
-if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',function(){window.ASFAutoInit&&ASFAutoInit();window.updateXPBar&&updateXPBar();if(window.ASF_QUIZ)ASF_QUIZ.render();if(window.ASF_QUIZ_HOME)ASF_QUIZ_HOME.init()})}
+if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',function(){window.ASFAutoInit&&ASFAutoInit();window.updateXPBar&&updateXPBar();if(window.ASF_QUIZ)ASF_QUIZ.render();if(window.ASF_QUIZ_HOME)ASF_QUIZ_HOME.init();if(window.ASF_BRAND_HOME)ASF_BRAND_HOME.init()})}
 
 </script>
 
