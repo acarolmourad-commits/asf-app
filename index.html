@@ -1244,7 +1244,7 @@ div[style*="font-size: 14px"] { display: none !important; }
         <div class="section" id="manas-proximas">
             <div class="section-header">
                 <h2 class="section-title">📍 Manas Próximas</h2>
-                <a href="#" class="see-all" onclick="findNearbyManas()">🔄 Atualizar</a>
+                <a href="#" class="see-all" onclick="findNearbyManas();return false">🔄 Atualizar</a>
             </div>
 
             <div style="background: linear-gradient(135deg, #FF69B4 0%, #DB7093 100%); padding: 16px; margin: 0 20px 20px; border-radius: 16px; color: white;">
@@ -1329,7 +1329,7 @@ div[style*="font-size: 14px"] { display: none !important; }
         <div class="section active" id="dicas">
             <div class="section-header">
                 <h2 class="section-title">📚 Dicas de Surf</h2>
-                <a href="#" class="see-all">Ver todas →</a>
+                <a href="#" class="see-all" onclick="event.preventDefault();return false">Ver todas →</a>
             </div>
 
             <!-- Evento do Mês - Nova Feature -->
@@ -1711,7 +1711,7 @@ div[style*="font-size: 14px"] { display: none !important; }
         <div class="section" id="mobilidade">
             <div class="section-header">
                 <h2 class="section-title">🧘 Mobilidade & Prevenção</h2><img loading="lazy" src="https://images.unsplash.com/photo-1552196563-55cd4e45efb3?w=600&h=150&fit=crop" alt="Alongamento" style="width:100%; border-radius:12px; margin-bottom:12px; object-fit:cover;" decoding="async">
-                <a href="#" class="see-all">Ver todos →</a>
+                <a href="#" class="see-all" onclick="event.preventDefault();return false">Ver todos →</a>
             </div>
 
             <div style="background: linear-gradient(135deg, #E74C3C 0%, #C0392B 100%); padding: 16px; margin: 0 20px 20px; border-radius: 16px; color: white;">
@@ -1930,7 +1930,7 @@ div[style*="font-size: 14px"] { display: none !important; }
         <div class="section" id="alimentacao">
             <div class="section-header">
                 <h2 class="section-title">🥗 Alimentação & Nutrição</h2>
-                <a href="#" class="see-all">Ver todas →</a>
+                <a href="#" class="see-all" onclick="event.preventDefault();return false">Ver todas →</a>
             </div>
 
             <div style="background: linear-gradient(135deg, #27AE60 0%, #1E8449 100%); padding: 16px; margin: 0 20px 20px; border-radius: 16px; color: white;">
@@ -2017,7 +2017,7 @@ div[style*="font-size: 14px"] { display: none !important; }
         <div class="section" id="saude">
             <div class="section-header">
                 <h2 class="section-title">💪 Saúde & Treino Funcional</h2>
-                <a href="#" class="see-all">Ver todos →</a>
+                <a href="#" class="see-all" onclick="event.preventDefault();return false">Ver todos →</a>
             </div>
 
             <div style="background: linear-gradient(135deg, #E74C3C 0%, #C0392B 100%); padding: 16px; margin: 0 20px 20px; border-radius: 16px; color: white;">
@@ -2218,7 +2218,7 @@ div[style*="font-size: 14px"] { display: none !important; }
         <div class="section" id="tecnica">
             <div class="section-header">
                 <h2 class="section-title">🏄‍♀️ Técnica de Surf</h2>
-                <a href="#" class="see-all">Ver todas →</a>
+                <a href="#" class="see-all" onclick="event.preventDefault();return false">Ver todas →</a>
             </div>
 
             <div style="background: linear-gradient(135deg, #3498DB 0%, #2980B9 100%); padding: 16px; margin: 0 20px 20px; border-radius: 16px; color: white;">
@@ -2321,7 +2321,7 @@ div[style*="font-size: 14px"] { display: none !important; }
         <div class="section" id="mental">
             <div class="section-header">
                 <h2 class="section-title">🧠 Mental & Calmaria</h2>
-                <a href="#" class="see-all">Ver todas →</a>
+                <a href="#" class="see-all" onclick="event.preventDefault();return false">Ver todas →</a>
             </div>
 
             <div style="background: linear-gradient(135deg, #9B59B6 0%, #8E44AD 100%); padding: 16px; margin: 0 20px 20px; border-radius: 16px; color: white;">
@@ -2449,7 +2449,7 @@ div[style*="font-size: 14px"] { display: none !important; }
         <div class="section" id="mobilidade-extra">
             <div class="section-header">
                 <h2 class="section-title">🧘 Alongamento Avançado</h2>
-                <a href="#" class="see-all">Ver todos →</a>
+                <a href="#" class="see-all" onclick="event.preventDefault();return false">Ver todos →</a>
             </div>
             <div class="cards-grid">
                 <div class="card">
@@ -2507,7 +2507,7 @@ div[style*="font-size: 14px"] { display: none !important; }
         <div class="section" id="lojas">
             <div class="section-header">
                 <h2 class="section-title">🛒 Lojas - Todas as Praias do Litoral Paulista</h2><img loading="lazy" src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&h=150&fit=crop" alt="Lojas" style="width:100%; border-radius:12px; margin-bottom:12px; object-fit:cover;" decoding="async">
-                <a href="#" class="see-all">Ver mapa →</a>
+                <a href="#" class="see-all" onclick="event.preventDefault();return false">Ver mapa →</a>
             </div>
 
             <!-- Filtros por cidade - Todas as praias do litoral Paulista -->
@@ -2635,7 +2635,7 @@ div[style*="font-size: 14px"] { display: none !important; }
         <div class="section" id="progresso">
             <div class="section-header">
                 <h2 class="section-title">🎯 Meu Progresso</h2>
-                <a href="#" class="see-all">Ver ranking →</a>
+                <a href="#" class="see-all" onclick="event.preventDefault();return false">Ver ranking →</a>
             </div>
 
             <!-- User Stats -->
@@ -3280,7 +3280,7 @@ div[style*="font-size: 14px"] { display: none !important; }
         <div class="section" id="trips" style="display:block;">
             <div class="section-header">
                 <h2 class="section-title">🌊 Surftrips - Responda!</h2><img loading="lazy" src="https://images.unsplash.com/photo-1502680390469-be75c86b636f?w=600&h=180&fit=crop" alt="Surftrip" style="width:100%; border-radius:12px; margin-bottom:12px; object-fit:cover;" decoding="async">
-                <a href="#" class="see-all">Ver todas →</a>
+                <a href="#" class="see-all" onclick="event.preventDefault();return false">Ver todas →</a>
             </div>
 
             <!-- Ver Resultados (para Carol) -->
@@ -3968,7 +3968,7 @@ div[style*="font-size: 14px"] { display: none !important; }
 <div class="section" id="manas">
             <div class="section-header">
                 <h2 class="section-title">💬 Manas - Grupos de Surf</h2>
-                <a href="#" class="see-all">Ver todos →</a>
+                <a href="#" class="see-all" onclick="event.preventDefault();return false">Ver todos →</a>
             </div>
 
             <div style="background: linear-gradient(135deg, #25D366 0%, #128C7E 100%); padding: 16px; margin: 0 20px 20px; border-radius: 16px; color: white;">
@@ -4495,7 +4495,7 @@ div[style*="font-size: 14px"] { display: none !important; }
         <div class="section" id="comunidade">
             <div class="section-header">
                 <h2 class="section-title">👥 Comunidade</h2>
-                <a href="#" class="see-all">Ver todos →</a>
+                <a href="#" class="see-all" onclick="event.preventDefault();return false">Ver todos →</a>
             </div>
 
             <!-- Mana da Semana -->
@@ -4840,7 +4840,7 @@ div[style*="font-size: 14px"] { display: none !important; }
 
     <!-- 🏆 Desafios -->
     <!-- 🌊 Ondas / Condições (desktop home) -->
-    <div class="section" id="surf-conditions">
+    <div class="section" id="surf-conditions"><p style="text-align:center;padding:32px;font-size:14px;color:var(--gray-400)">🌊 Carregando condições do mar…</p>
       <div class="section-header"><h2 class="section-title">🌊 Condições das Ondas</h2></div>
       <div id="surf-conditions-container" style="padding:0 16px;"></div>
     </div>
@@ -5743,7 +5743,7 @@ div[style*="font-size: 14px"] { display: none !important; }
 
             <a href="https://www.instagram.com/associacaosurffeminino" target="_blank" style="color: white; text-decoration: none; font-size: 13px; opacity: 0.8;">📸 Instagram</a>
             <a href="https://www.tiktok.com/@Cahrol.asf" target="_blank" style="color: white; text-decoration: none; font-size: 13px; opacity: 0.8;">🎵 TikTok</a>
-            <a href="#" onclick="toggleSharePanel()" style="color: white; text-decoration: none; font-size: 13px; opacity: 0.8;">📤 Compartilhar</a>
+            <a href="#" onclick="toggleSharePanel();return false" style="color: white; text-decoration: none; font-size: 13px; opacity: 0.8;">📤 Compartilhar</a>
         </div>
         <div style="border-top: 1px solid rgba(255,255,255,0.1); padding-top: 16px; font-size: 11px; opacity: 0.5;">
             <!-- Language Selector -->
@@ -13743,7 +13743,7 @@ function walkTree(el) {
 </script>
 
     <!-- Surf Culture Section -->
-    <div class="section" id="surf-culture">
+    <div class="section" id="surf-culture"><p style="text-align:center;padding:32px;font-size:14px;color:var(--gray-400)">🎨 Carregando cultura surf…</p>
         <div class="section-header">
             <h2 class="section-title">🏛️ Histórias do Surf</h2>
         </div>
@@ -13759,7 +13759,7 @@ function walkTree(el) {
     </div>
 
   <!-- 🎯 Metas de Surf (nova seção) -->
-  <div class="section" id="metas" style="display:none">
+  <div class="section" id="metas" style="display:none"><p style="text-align:center;padding:32px;font-size:14px;color:var(--gray-400)">🎯 Carregando metas…</p>
     <div class="section-header">
       <h2 class="section-title">🎯 Metas de Surf</h2>
     </div>
@@ -13780,7 +13780,7 @@ function walkTree(el) {
   </style>
 
     <!-- PONTOS FEMININOS - SEGURANCA -->
-    <div class="section" id="seguranca" style="display:none">
+    <div class="section" id="seguranca" style="display:none"><p style="text-align:center;padding:32px;font-size:14px;color:var(--gray-400)">🦺 Carregando guia de segurança…</p>
         <div class="section-header">
             <h2 class="section-title" style="display:block">&#x1F93A; Pontos Femininos - Seguranca</h2>
         </div>
