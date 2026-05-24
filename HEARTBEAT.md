@@ -12,7 +12,7 @@
 
 
 ## Last Completed Check
-*Time*: 10:40 UTC (2026-05-24)
+**Time**: 10:40 UTC (2026-05-24)
 - **Status**: ✅ Complete — +JSON-LD + preconnets + decoding=async
 - **Commit**: 9d0b4b0
 - **Notes**: active-hours check 10:33 UTC (2026-05-24) — stable
