@@ -1,0 +1,11 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://acarolmourad-commits.github.io/asf-app/sitemap.xml
+
+# Bloquear páginas sensíveis (nenhuma atualmente)
+Disallow: /docs/
+Disallow: /_/
+
+# Permitir tudo o resto
+Allow: /sessoes-interativas.html
