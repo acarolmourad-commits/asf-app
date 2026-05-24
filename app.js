@@ -2249,6 +2249,80 @@ function generateReferralCode(){const userId=getUserId();const code=btoa(`${user
 function trackReferral(code,targetEmail){const referrerId=localStorage.getItem(`asf-referral-${code}`);if(referrerId){const r=JSON.parse(localStorage.getItem('asf-referrals')||'[]');r.push({code,targetEmail,timestamp:Date.now(),rewardGranted:false});localStorage.setItem('asf-referrals',JSON.stringify(r));trackEvent('referral','code_used',code);console.log('📨 Referral tracked:',code)}}
 function buyEbook(){const isPremium=localStorage.getItem('asf-premium-status')==='active';const price=isPremium?(29.90*0.7):29.90;trackEvent('ebook','purchase_click',{price,premium_user:isPremium});showToast('🚀 Redirecionando para pagamento...','info');setTimeout(()=>{showToast('📦 Ebook disponível em breve!','info')},1500)}
 function submitUGC(){const fileInput=document.getElementById('ugc-photo');if(!fileInput||!fileInput.files[0])return showToast('📷 Selecione uma foto primeiro','error');showToast('✅ Foto enviada! Em análise.','success');trackEvent('ugc','photo_submitted');fileInput.value=''}
+
+// ─── Metas de Surf ────────────────────────────────────
+function addMeta() {
+    const input = document.getElementById('meta-input');
+    const text = (input.value || '').trim();
+    if (!text) { showToast('⚠️ Escreva sua meta primeiro!', 'error'); return; }
+    const metas = JSON.parse(localStorage.getItem('asf-metas') || '[]');
+    metas.push({ text, done: false, createdAt: Date.now() });
+    localStorage.setItem('asf-metas', JSON.stringify(metas));
+    input.value = '';
+    renderMetas();
+    showToast('🎯 Meta adicionada!', 'success');
+}
+
+function toggleMeta(index) {
+    const metas = JSON.parse(localStorage.getItem('asf-metas') || '[]');
+    metas[index].done = !metas[index].done;
+    localStorage.setItem('asf-metas', JSON.stringify(metas));
+    renderMetas();
+    if (metas[index].done) showToast('✅ Meta concluída!', 'success');
+}
+
+function deleteMeta(index) {
+    const metas = JSON.parse(localStorage.getItem('asf-metas') || '[]');
+    metas.splice(index, 1);
+    localStorage.setItem('asf-metas', JSON.stringify(metas));
+    renderMetas();
+}
+
+function renderMetas() {
+    const metas = JSON.parse(localStorage.getItem('asf-metas') || '[]');
+    const active = metas.filter(m => !m.done);
+    const done   = metas.filter(m => m.done);
+    const listEl  = document.getElementById('metas-list');
+    const doneEl  = document.getElementById('metas-concluidas-list');
+
+    if (!listEl || !doneEl) return;
+
+    if (active.length === 0) {
+        listEl.innerHTML = '<div class="card" style="text-align:center;padding:16px;color:var(--gray-500);font-size:13px;">🎯 Nenhuma meta ativa ainda. Adicione uma acima!</div>';
+    } else {
+        listEl.innerHTML = active.map((m, i) => {
+            const orig = metas.indexOf(m);
+            return `<div class="card" style="display:flex;align-items:center;gap:12px;padding:12px;margin-bottom:8px;border-radius:12px;border-left:4px solid var(--primary);">
+                <button onclick="toggleMeta(${orig})" style="background:none;border:none;font-size:20px;cursor:pointer;flex-shrink:0;">⬜</button>
+                <span style="flex:1;font-size:14px;">${m.text}</span>
+                <button onclick="deleteMeta(${orig})" style="background:none;border:none;color:var(--danger);cursor:pointer;font-size:16px;">✕</button>
+            </div>`;
+        }).join('');
+    }
+
+    if (done.length > 0) {
+        doneEl.innerHTML = '<h4 style="font-size:14px;color:var(--gray-600);margin:16px 0 8px;">🏆 Concluídas</h4>' +
+            done.map((m, i) => {
+                const orig = metas.indexOf(m);
+                return `<div class="card" style="display:flex;align-items:center;gap:12px;padding:10px;margin-bottom:6px;border-radius:12px;background:var(--light);opacity:0.7;">
+                <span style="font-size:18px;">✅</span>
+                <span style="flex:1;font-size:13px;text-decoration:line-through;color:var(--gray-500);">${m.text}</span>
+                <button onclick="deleteMeta(${orig})" style="background:none;border:none;color:var(--gray-400);cursor:pointer;font-size:14px;">✕</button>
+            </div>`;
+            }).join('');
+    } else {
+        doneEl.innerHTML = '';
+    }
+}
+
+// Auto-render no init
+(function(){
+    if (typeof window.METAS_INIT !== 'undefined') return;
+    window.METAS_INIT = true;
+    document.addEventListener('DOMContentLoaded', renderMetas);
+    renderMetas();
+})();
+
 function initGoogleAnalytics(){console.log('📊 Analytics enabled')}
 function getConsent() { return localStorage.getItem(COOKIE_CONSENT); }
 function setConsent(level) {
