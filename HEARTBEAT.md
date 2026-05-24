@@ -773,3 +773,16 @@
 - **Dicas no array**: 3,642 (Python array count — 3,573 aspas simples + 69 aspas duplas)
 - **Todas as correções**: commit `5bdb8b3` pushed — GitHub Pages 200
 - **Arquivo**: index.html (1.14 MB, 1,144,696 bytes)
+
+## 🛑 STANDBY UNTIL 28/05 — Session Paused
+**Until**: Thursday 28/05/2026 (5 days)
+**Trigger**: Carol commits B2 on server carol-server → asf-app repo
+**My action**: pull → apply B2 locally → commit → push → test 200
+**Los’:**
+- TODAY (24/05): B13 window.dicas applied (7 refs)
+- TODAY: B13b adicionarMeta duplicate removed
+- TODAY: B2 trunk — 3 loose `//` → `<!-- -->`
+- SPA sections mapped: 27
+- File: 14,921 lines (was 14,926)
+- Remote: 73f7e70
+- TODO saved: TODO-28MAY.md

@@ -486,7 +486,7 @@ t Section -->
                 <div class="dica-header">
                     <span class="dica-badge dica-badge-filled">✨ Dica do Dia</span>
                     <div style="display:flex;gap:8px;align-items:center">
-                    <button onclick="renderDicaComments(dicas.findIndex(d=>d.text===document.getElementById('dica-text').textContent))" class="dica-refresh-btn dica-refresh-lg" title="Comentários das manas">💬</button>
+                    <button onclick="renderDicaComments(window.dicas.findIndex(d=>d.text===document.getElementById('dica-text').textContent))" class="dica-refresh-btn dica-refresh-lg" title="Comentários das manas">💬</button>
                     <button onclick="nextDica()" class="dica-refresh-btn dica-refresh-lg">↻ Nova dica</button>
                     </div>
                 </div>
@@ -3292,14 +3292,14 @@ t Section -->
             
             
 
-            // Countdown e Resultados em Tempo Real
+            <!--  Countdown e Resultados em Tempo Real -->
             
 
             
 
             
 
-            // Iniciar countdown ao carregar
+            <!--  Iniciar countdown ao carregar -->
             document.addEventListener('DOMContentLoaded', initVotingCountdown);
             
 
@@ -5631,7 +5631,7 @@ t Section -->
     </div>
     
     
-    // Track shares
+    <!--  Track shares -->
     
     
 
@@ -7228,7 +7228,7 @@ removed = {
         
 
         // ============ DICA DO DIA (989) ============
-        const dicas = [
+        window.dicas = [
             { text: '🌊 O mar hoje tá com ondas de 0.5-1.0m! Boas para todas. Bora surfar!', category: 'Condições', emoji: '🌊' },
             { text: '☀️ Protetor solar FPS 30+ a cada 2h. No Brasil, prevenção é tudo!', category: 'Prevenção', emoji: '☀️' },
             { text: '🧘 Alongue ombros, quadril e tornozelos ANTES de entrar. 5 min evita lesão!', category: 'Prevenção', emoji: '🧘' },
@@ -13447,7 +13447,7 @@ function initChecklist() {
             updateChecklistStatus();
         }
 function showDica(index) {
-            const d = dicas[index];
+            const d = window.dicas[index];
             const container = document.getElementById('dica-do-dia');
             // Fade out
             container.style.opacity = '0';
@@ -13464,16 +13464,16 @@ function showDica(index) {
             }, 200);
         }
 function nextDica() {
-            let idx = Math.floor(Math.random() * dicas.length);
+            let idx = Math.floor(Math.random() * window.dicas.length);
             // Avoid repeat
             const current = document.getElementById('dica-text').textContent;
-            while (dicas[idx].text === current && dicas.length > 1) idx = Math.floor(Math.random() * dicas.length);
+            while (window.dicas[idx].text === current && window.dicas.length > 1) idx = Math.floor(Math.random() * dicas.length);
             showDica(idx);
         }
 function initDica() {
             const now = new Date();
             const dayOfYear = Math.floor((now - new Date(now.getFullYear(), 0, 0)) / 86400000);
-            showDica(dayOfYear % dicas.length);
+            showDica(dayOfYear % window.dicas.length);
         }
 function filterBeaches(region) {
             if (!beachCards) beachCards = document.querySelectorAll('.beach-card');
@@ -14216,13 +14216,7 @@ const ASF_METAS = {
     this.renderMetasPessoais();
     if(typeof showToast === 'function') showToast('✨ Nova meta adicionada!', 'success');
   },
-  adicionarMeta(titulo, nivel){
-    if(!titulo.trim()) return;
-    this.metasPessoais.push({id:'mp' + Date.now(), texto:titulo, nivel: nivel || 'Geral', icone:'✨', cor:'#00A8CC', feita:0});
-    this.salvarMetasPessoais();
-    this.renderMetasPessoais();
-  },
-  renderMetasPessoais(){
+  renderMetasPessoais({
     const el = document.getElementById('metas-pessoais');
     if(!el) return;
     if(!this.metasPessoais.length){
