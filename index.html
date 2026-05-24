@@ -328,7 +328,7 @@ t Section -->
                     🔔
                     <span id="notif-badge" style="position: absolute; top: -5px; right: -5px; background: #E74C3C; color: white; font-size: 10px; width: 18px; height: 18px; border-radius: 50%; display: flex; align-items: center; justify-content: center; display: none;">0</span>
                 </button>
-                <button class="icon-btn" id="shop-cart-btn" onclick="if(typeof ASF_SHOP!=='undefined'){showSection('loja');ASF_SHOP.render('shop-content')}" title="Carrinho" style="position:relative;font-size:20px;width:48px;height:48px;">🛒
+                <button class="icon-btn" id="shop-cart-btn" onclick="if(typeof ASF_SHOP!=='undefined'){openLojaShop(this)}" title="Carrinho" style="position:relative;font-size:20px;width:48px;height:48px;">🛒
                     <span id="shop-cart-badge" style="position:absolute;top:-5px;right:-5px;background:#25D366;color:white;font-size:10px;width:18px;height:18px;border-radius:50%;display:flex;align-items:center;justify-content:center;display:none;">0</span>
                 </button>
                 <a href="https://wa.me/5511954346288" target="_blank" class="icon-btn" title="Fale com a gente no WhatsApp" style="color: white; text-decoration: none;">
@@ -11687,6 +11687,7 @@ function showSection(sectionId) {
                 renderAffiliateStore();
             }
         }
+function openLojaShop(btn) { showSection('loja'); if(typeof ASF_SHOP!=='undefined'){ ASF_SHOP.render('shop-content'); } }
 function handleNavTap(btn, sectionId) {
             if (btn.classList.contains('active')) {
                 window.scrollTo({ top: 0, behavior: 'smooth' })();
@@ -13871,7 +13872,6 @@ button:focus-visible,a:focus-visible{outline:2px solid var(--primary)!important;
         </div>
         <div style="padding:0 16px;" id="member-card-content"></div>
     </div>
-</body>
 
 </script>
 <!-- =============================================
@@ -14924,4 +14924,5 @@ ASF_CONTEUDO.categorias.forEach(cat=>{cat.artigos.forEach(a=>{if(saved.includes(
 window.checkASFBadges=function(){if(typeof ASF_GAMIFICATION!=='undefined')ASF_GAMIFICATION.checkAll()};
 </script>
 
+</body>
 </html>
