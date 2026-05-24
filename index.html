@@ -14207,6 +14207,7 @@ const ASF_METAS = {
     const el = document.getElementById('meta-pd-' + id);
     if(el) el.innerHTML = m.feita ? '<span style="font-size:16px">✅</span>' : '<span style="font-size:16px">⬜</span>';
     if(typeof showToast === 'function') showToast(m.feita ? '✅ Meta cumprida!' : '⬜ Meta desmarcada', 'success');
+    if(typeof this.mostrarSalvar === 'function') this.mostrarSalvar(m.feita ? 'cumpriu' : 'removeu');
     this.salvarMetasPessoais();
   },
   adicionarMeta(titulo, nivel){
@@ -14215,7 +14216,37 @@ const ASF_METAS = {
     this.salvarMetasPessoais();
     this.renderMetasPessoais();
     if(typeof showToast === 'function') showToast('✨ Nova meta adicionada!', 'success');
+    if(typeof this.mostrarSalvar === 'function') this.mostrarSalvar('adicionou');
   },
+  mostrarSalvar(acao){
+    const mensagens = {
+      cumpriu: [
+        '🏆 Parabéns! Meta cumprida com sucesso!',
+        '🌟 Arrasou! Continue assim!',
+        '💪 Força de surfista!',
+        '✨ Meta concluída — inspiração pura!',
+        '🎯 Você é incrível!'
+      ],
+      removeu: [
+        '🧹 Tarefa limpa! Próximo desafio?',
+        '🔄 Rota atualizada — vamos em frente!',
+        '📝 Meta ajustada, foco mantido!',
+        '➖ Menos uma, mais orgulho!',
+        '✅ Organização em dia!'
+      ],
+      adicionou: [
+        '🚀 Nova meta adicionada! Vamos nessa!',
+        '⭐ Mais uma para sua lista de conquistas!',
+        '🌊 Pronta pra surfar essa nova meta!',
+        '✨ Adicionada! Sua jornada continua!',
+        '🎯 Meta nova, energia renovada!'
+      ]
+    };
+    const msgs = mensagens[acao] || mensagens.adicionou;
+    const msg = msgs[Math.floor(Math.random() * msgs.length)];
+    if(typeof showToast === 'function') showToast(msg, 'success');
+  },
+
   renderMetasPessoais({
     const el = document.getElementById('metas-pessoais');
     if(!el) return;
