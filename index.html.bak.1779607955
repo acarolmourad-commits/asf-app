@@ -328,7 +328,7 @@ t Section -->
                     🔔
                     <span id="notif-badge" style="position: absolute; top: -5px; right: -5px; background: #E74C3C; color: white; font-size: 10px; width: 18px; height: 18px; border-radius: 50%; display: flex; align-items: center; justify-content: center; display: none;">0</span>
                 </button>
-                <button class="icon-btn" id="shop-cart-btn" onclick="if(typeof ASF_SHOP!=='undefined'){openLojaShop(this)}" title="Carrinho" style="position:relative;font-size:20px;width:48px;height:48px;">🛒
+                <button class="icon-btn" id="shop-cart-btn" onclick="if(typeof ASF_SHOP!=='undefined'){showSection('loja');ASF_SHOP.render('shop-content')}" title="Carrinho" style="position:relative;font-size:20px;width:48px;height:48px;">🛒
                     <span id="shop-cart-badge" style="position:absolute;top:-5px;right:-5px;background:#25D366;color:white;font-size:10px;width:18px;height:18px;border-radius:50%;display:flex;align-items:center;justify-content:center;display:none;">0</span>
                 </button>
                 <a href="https://wa.me/5511954346288" target="_blank" class="icon-btn" title="Fale com a gente no WhatsApp" style="color: white; text-decoration: none;">
@@ -486,7 +486,7 @@ t Section -->
                 <div class="dica-header">
                     <span class="dica-badge dica-badge-filled">✨ Dica do Dia</span>
                     <div style="display:flex;gap:8px;align-items:center">
-                    <button onclick="renderDicaComments(window.dicas.findIndex(d=>d.text===document.getElementById('dica-text').textContent))" class="dica-refresh-btn dica-refresh-lg" title="Comentários das manas">💬</button>
+                    <button onclick="renderDicaComments(dicas.findIndex(d=>d.text===document.getElementById('dica-text').textContent))" class="dica-refresh-btn dica-refresh-lg" title="Comentários das manas">💬</button>
                     <button onclick="nextDica()" class="dica-refresh-btn dica-refresh-lg">↻ Nova dica</button>
                     </div>
                 </div>
@@ -3292,14 +3292,14 @@ t Section -->
             
             
 
-            <!--  Countdown e Resultados em Tempo Real -->
+            // Countdown e Resultados em Tempo Real
             
 
             
 
             
 
-            <!--  Iniciar countdown ao carregar -->
+            // Iniciar countdown ao carregar
             document.addEventListener('DOMContentLoaded', initVotingCountdown);
             
 
@@ -5631,7 +5631,7 @@ t Section -->
     </div>
     
     
-    <!--  Track shares -->
+    // Track shares
     
     
 
@@ -5781,6 +5781,7 @@ function unlockConquista(type, btn) {
         btn.disabled = true;
         btn.style.background = 'var(--success)';
         
+        // Atualizar contador
         let count = parseInt(localStorage.getItem('conquistas-count') || '0');
         count++;
         localStorage.setItem('conquistas-count', count);
@@ -5794,6 +5795,7 @@ function unlockConquista(type, btn) {
     }
 }
 
+        // Display real stats
         document.getElementById('stat-opens').textContent = localStorage.getItem('asf-opens') || '1';
         document.getElementById('stat-sessions').textContent = (JSON.parse(localStorage.getItem('surf-sessions') || []).length;
 
@@ -5839,9 +5841,11 @@ removed = {
  to scroll to top
         
 
+            // Update tabs
             const tabs = document.querySelectorAll('.tab');
             const navItems = document.querySelectorAll('.nav-item');
 
+            // Highlight active nav item by aria-label
             const sectionLabels = {
               'dicas': 'Dicas de surf',
               'manas-proximas': 'Manas próximas',
@@ -5862,13 +5866,17 @@ removed = {
               if (navItem) navItem.classList.add('active');
             }
 
+            // Update aria-selected on active tab
             document.querySelectorAll('.tab.active').forEach(t => t.setAttribute('aria-selected', 'true'));
 
+            // Scroll to top
             window.scrollTo(0, 0);
         }
 
+        // ===== SISTEMA DE NOTIFICAÇÕES =====
         const NOTIF_KEY = 'asf_notifications';
 
+        // Notificações padrão ao abrir
         const DEFAULT_NOTIFICATIONS = [
             { id: 1, type: 'treino', icon: '💪', title: 'Novo Treino!', text: 'Treino de Força e Core disponível', time: 'Agora', read: false, target: 'treino-1', section: 'saude' },
             { id: 2, type: 'ondas', icon: '🌊', title: 'Ondas Boas!', text: 'Bertioga: 0.8m - Boa para surfar!', time: '5 min', read: false, target: 'wave-forecast', section: 'dicas' },
@@ -6230,6 +6238,7 @@ removed = {
 
         
 
+        // Fechar painel ao clicar fora
         document.addEventListener('click', function(e) {
             const panel = document.getElementById('notifications-panel');
             const bell = e.target.closest('button[onclick="toggleNotifications()"]');
@@ -6238,15 +6247,21 @@ removed = {
             }
         })();
 
+        // Adicionar notificação quando ganha pontos
         
 
+        // Adicionar notificação de treino
         
 
+        // Adicionar notificação de ondas
         
 
+        // Inicializar badge
         updateNotificationBadge();
 
+        // ===== FIM NOTIFICAÇÕES =====
 
+        // ===== SISTEMA DE COMPARTILHAMENTO =====
         const APP_URL = 'https://acarolmourad-commits.github.io/asf-app/';
         const SHARE_TEXT = '🏄‍♀️ Conheça o App ASF - Dicas de surf, treinos, previsão de ondas e muito mais para mulheres surfistas! 🌊';
 
@@ -6463,6 +6478,7 @@ removed = {
             { text: '✅ Demonstração surf: demonstration + surf + show! ✅', category: 'Demonstração', emoji: '✅' },
             { text: '🧮 Derivação surf: derivation + surf + math! 🧮', category: 'Derivação', emoji: '🧮' }
         ];
+        // Normalized search index [Optimized] - cache normalized strings for faster search
         const normalizedSearchIndex = searchIndex.map(item => ({
             ...item,
             _titleNorm: item.title.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, ''),
@@ -6470,11 +6486,13 @@ removed = {
             _sectionNorm: item.section.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, ''),
         }));
 
+        // Debounced search
         let _searchTimer;
         
 
         
 
+        // Recent searches
         
         
         
@@ -6484,12 +6502,14 @@ removed = {
 
         
 
+        // Close search on click outside
         document.addEventListener('click', function(e) {
             if (!e.target.closest('.search-container')) {
                 document.getElementById('searchResults').classList.remove('active');
             }
         })();
 
+        // ============ LIVE WEATHER & MARINE DATA ============
         const beaches = {
             bertioga: { name: 'Bertioga', lat: -23.85, lon: -46.14 },
             santos:   { name: 'Santos',   lat: -23.96, lon: -46.33 },
@@ -6548,16 +6568,19 @@ removed = {
 
         
 
+        // ===== MOON PHASE CALCULATOR ======
+        
+
+        
+
+        // Checklist Pré-Surf functions
         
 
         
 
         
 
-        
-
-        
-
+        // Defer non-critical initializations to improve page load performance
         (function() {
             const init = () => {
                 loadLiveData('bertioga');
@@ -6570,6 +6593,7 @@ removed = {
             }
         })();
 
+        // ========== CRONÔMETRO DE TREINO ==========
         let timerInterval = null;
         let timerState = 'stopped'; // stopped, running, paused
         let timerSeconds = 0;
@@ -6593,20 +6617,26 @@ removed = {
         
 
         
+        // ========== END CRONÔMETRO ==========
 
+        // Surf Conditions Bar (compact live data on homepage)
         async 
         loadSurfBar();
 
+        // ============ BEST DAY TO SURF ============
         async 
         loadBestDay();
 
+        // Week Forecast Strip
         async 
         loadWeekStrip();
 
+        // ============ DARK MODE ============
         
         
         initDarkMode();
 
+        // ============ SCROLL PROGRESS BAR ============
         const scrollBar = document.getElementById('scrollProgress');
         window.addEventListener('scroll', () => {
             const scrollTop = window.scrollY;
@@ -6617,13 +6647,16 @@ removed = {
             else scrollBar.classList.remove('hidden');
         }, { passive: true })();
 
+        // ============ MANAS REGISTRATION ============
         
         
         
         initCadastro();
 
+        // ============ SHARE SURF CONDITIONS ============
         
 
+        // ============ MANA DA SEMANA ============
         const manasSemana = [
             { name: 'Carolina Silva', avatar: '👩‍🦱', info: 'Intermediate • Bertioga', quote: '"Surfar me fez descobrir que sou mais forte do que imaginava. Cada onda é uma vitória!"', stat1: '🏆 3 campeonatos', stat2: '🔥 45 dias de streak' },
             { name: 'Fernanda Costa', avatar: '👩', info: 'Avançada • Itamambuca', quote: '"Comecei surfando no foam com 30 anos. Hoje faço tube. Nunca é tarde pra começar!"', stat1: '🏄 200+ sessões', stat2: '⭐ Nível 8' },
@@ -6831,6 +6864,7 @@ removed = {
         ];
         ()();
 
+        // ============ SURF SESSION LOG ============
         let selectedMood = '';
         
 
@@ -6843,6 +6877,7 @@ removed = {
         
 
         
+        // Brand Hub countdown timer
         earned: false,
             earnedAt: null,
             progress: 0,
@@ -7121,38 +7156,54 @@ removed = {
             { text: '🧮 Derivação surf: derivation + surf + math! 🧮', category: 'Derivação', emoji: '🧮' }
         ];
 
+        // Load badges from localStorage
         
 
+        // Save badges to localStorage
         
 
+        // Update badge progress based on sessions
         
 
+        // Render badges grid
         
 
+        // Show badge details modal
         
 
+        // Animation when badge is earned
         
 
+        // Initialize badges on DOM load
         
 
+                // Consolidated DOMContentLoaded init
         document.addEventListener('DOMContentLoaded', function() {
+            // Simple analytics - app opens (every time someone opens)
+            // Start Brand Hub countdown
             if (document.getElementById("challenge-timer")) updateBrandTimer();
+            // Initialize badges system
             if (typeof initBadges === 'function') initBadges();
             let appOpens = parseInt(localStorage.getItem('asf-opens') || '0');
             appOpens++;
             localStorage.setItem('asf-opens', appOpens);
+            // Update display
             try { document.getElementById('stat-opens').textContent = appOpens; } catch(e) {}
             try { document.getElementById('stat-sessions').textContent = (JSON.parse(localStorage.getItem('surf-sessions') || '[]')).length; } catch(e) {}
             showProfile();
+            // Load theme preference
             const savedTheme = localStorage.getItem('asf-theme');
             if (savedTheme === 'dark') {
                 document.documentElement.setAttribute('data-theme', 'dark');
                 document.getElementById('darkModeToggle').textContent = '☀️';
             }
+            // Load user name from localStorage if exists
             const savedName = localStorage.getItem('asf-name');
+            // (User loading happens in sections)
             renderSessions();
             renderUserPosts();
             renderAchievements();
+            // Restore joined group states
             ['Bertioga Surf Girls', 'Guarujá & Santos Surf', 'Ubatuba Surf Girls'].forEach(name => {
                 const key = 'asf-joined-' + name.replace(/\s+/g, '-');
                 if (localStorage.getItem(key)) {
@@ -7161,18 +7212,23 @@ removed = {
                     if (btn) { btn.textContent = '✅ Inscrita!'; btn.style.background = 'var(--success)'; btn.style.pointerEvents = 'none'; }
                 }
             })();
+            // Water tracker
             updateWaterDisplay(parseInt(localStorage.getItem(getWaterKey()) || '0'));
+            // Checklist
             initChecklist();
         })();
 
+        // ============ PREMIUM CONTENT ============
         
 
+        // ============ PRE-SURF CHECKLIST ============
         
         
+        // Save/load checklist state (called from consolidated DOMContentLoaded)
         
 
         // ============ DICA DO DIA (989) ============
-        window.dicas = [
+        const dicas = [
             { text: '🌊 O mar hoje tá com ondas de 0.5-1.0m! Boas para todas. Bora surfar!', category: 'Condições', emoji: '🌊' },
             { text: '☀️ Protetor solar FPS 30+ a cada 2h. No Brasil, prevenção é tudo!', category: 'Prevenção', emoji: '☀️' },
             { text: '🧘 Alongue ombros, quadril e tornozelos ANTES de entrar. 5 min evita lesão!', category: 'Prevenção', emoji: '🧘' },
@@ -10868,30 +10924,41 @@ removed = {
             { text: 'Deixe a inveja na praia: celebre a onda da outra, sua hora chega!', category: 'Mental', emoji: '\U0001F49B' },
             { text: 'Inspecione o leash todo mes: desgaste simples pode te deixar sem prancha!', category: 'Segurança', emoji: '\U0001F50D' },
         ];        
+        // Pick one based on day of year for daily rotation
         ()();
 
+        // ============ BEACH GUIDE FILTER ============
+        // Beach filter with cached card list [Optimized]
         let beachCards = null;
         
 
+        // ============ TOAST NOTIFICATION HELPER ============
+        // Toggle like on community posts
         
         
+        // Create community post
         
         
         
         
 
+        // Water tracker
         
         
         
 
+        // Poll voting
+        
+
+        // Join surf group
         
 
         
 
+        // Secret Achievements Modal
         
 
-        
-
+        // Connection status
         
         window.addEventListener('offline', updateConnectionStatus);
         window.addEventListener('online', updateConnectionStatus);
@@ -10988,6 +11055,7 @@ removed = {
 
 
   
+  // GA4 tracking
   if (typeof gtag !== 'undefined') {
     gtag('event', 'affiliate_click', {
       event_category: 'monetization',
@@ -10995,30 +11063,40 @@ removed = {
       value: 1
     })();
   }
+// Newsletter
+
+
+// Premium
 
 
 
 
+// WhatsApp
 
 
-
-
+// Analytics
 
 
 
 
 window.ASFMonetization = { trackEvent, getStats };
 
+// Toast
+
+
+// Init
+// Cookie Consent
 
 
 
 
-
-
+// Show banner after 2s if no consent
 setTimeout(()=>{if(!getCookieConsent()){const b=document.getElementById('cookie-consent-banner');if(b)b.style.display='block'}},2000);
 
+// Pix Donation
 
 
+// Referral System
 
 window.ASFMonetization={trackEvent,getStats};const a=document.createElement('style');a.textContent=\`@keyframes toastIn{from{opacity:0;transform:translateX(-50%) translateY(20px)}to{opacity:1;transform:translateX(-50%) translateY(0)}}@keyframes toastOut{from{opacity:1;transform:translateX(-50%) translateY(0)}to{opacity:0;transform:translateX(-50%) translateY(20px)}}\`,document.head.appendChild(a);document.addEventListener('DOMContentLoaded',function(){console.log('✅ Monetization system initialized'),const e=document.getElementById('loja');e&&getComputedStyle(e).display!=='none'&&setTimeout(renderAffiliateStore,100)})();
 
@@ -11156,6 +11234,7 @@ window.ASFMonetization={trackEvent,getStats};const a=document.createElement('sty
     window.acceptAllCookies = function() { setConsent('all'); };
     window.essentialCookies = function() { setConsent('essential'); };
     
+    // Show banner if no consent
     if (!getConsent() && banner) {
       setTimeout(() => {
         banner.style.display = 'block';
@@ -11167,6 +11246,10 @@ window.ASFMonetization={trackEvent,getStats};const a=document.createElement('sty
 
   <!-- Infolinks (Free Ads) - DISABLED -->
   
+  // Infolinks contextual ads - sign up at infolinks.com
+  // var infolinks_pid = 0; // YOUR PID HERE
+  // var infolinks_wsid = 0;
+  // (script loaded dynamically on consent)
   
 
 
@@ -11275,9 +11358,11 @@ window.ASFMonetization={trackEvent,getStats};const a=document.createElement('sty
   
 
 <script>
+  // Initialize: load saved language
   var savedLang = localStorage.getItem('asf-lang');
   if (savedLang) setLanguage(savedLang);
   
+  // Google Analytics 4 initialization
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
@@ -11305,6 +11390,7 @@ function setLanguage(lang) {
     })();
     var terms = translations[lang];
     if (!terms) return;
+    // Translate ALL visible text
     
     walkTree(document.body);
     showToast('Idioma: ' + (lang === 'pt' ? 'Português' : lang === 'en' ? 'English' : 'Español') + ' 🌎');
@@ -11336,6 +11422,7 @@ function showTripVotes() {
                     showToast('Nenhum voto recebido ainda! Compartilhe o app para receber votos.');
                     return;
                 }
+                // Group by location
                 var counts = {};
                 votes.forEach(function(v) { counts[v.location] = (counts[v.location] || 0) + 1; })();
                 var summary = '🗳️ RESULTADOS DAS VOTAÇÕES\n\nTotal: ' + votes.length + ' votos\n\n';
@@ -11362,6 +11449,7 @@ function initVotingCountdown() {
                         var daysEl2 = document.getElementById('days-left2');
                         if (daysEl2) daysEl2.textContent = '0';
                         document.getElementById('vote-countdown').innerHTML = '<div style="font-size: 18px; font-weight: bold;">✅ VOTAÇÃO ENCERRADA!</div><div style="font-size: 12px; opacity: 0.8;">Resultado final definido</div>';
+                        // Show final results
                         showFinalResults();
                     } else {
                         daysEl.textContent = daysLeft;
@@ -11369,6 +11457,7 @@ function initVotingCountdown() {
                         if (daysEl2) daysEl2.textContent = daysLeft;
                     }
                 }
+                // Mostrar resultado parcial em tempo real
                 updateLiveResults();
             }
 function updateLiveResults() {
@@ -11400,13 +11489,16 @@ function showFinalResults() {
                 showToast(msg);
             }
 function voteTrip(btn, loc) {
+                // Check if user is logged in
                 var user = localStorage.getItem('asf-profile');
                 if (!user) {
                     showToast('⚠️ Faça login primeiro! 📝');
+                    // Show login modal
                     var loginHTML = '<div style="position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.95);z-index:10000;padding:20px;display:flex;align-items:center;justify-content:center;"><div style="background:white;border-radius:16px;padding:24px;max-width:400px;width:100%;"><h3 style="margin-bottom:16px;">📝 Vote em ' + loc + '</h3><p style="font-size:13px;color:#666;margin-bottom:16px;">Precisamos saber quem você é!</p><input id="voter-name" placeholder="Seu nome" style="width:100%;padding:12px;border:1px solid #ddd;border-radius:8px;margin-bottom:10px;"><input id="voter-phone" placeholder="WhatsApp" style="width:100%;padding:12px;border:1px solid #ddd;border-radius:8px;margin-bottom:10px;"><input id="voter-email" placeholder="E-mail" style="width:100%;padding:12px;border:1px solid #ddd;border-radius:8px;margin-bottom:16px;"><button onclick="saveVoterAndVote(\'\' + loc + \')" style="background:#00A8CC;color:white;border:none;padding:14px;border-radius:8px;width:100%;font-weight:600;">VOTAR! 🏄‍♀️</button><button onclick="this.closest(\'div\').parentElement.remove()" style="background:none;border:none;color:#666;margin-top:12px;width:100%;">Cancelar</button></div></div>';
                     document.body.insertAdjacentHTML('beforeend', loginHTML);
                     return;
                 }
+                // Already logged in - just vote
                 var profile = JSON.parse(user);
                 voteForLocation(btn, loc, profile.name, profile.phone, profile.email);
             }
@@ -11418,25 +11510,33 @@ function saveVoterAndVote(loc) {
                     showToast('Nome e WhatsApp são obrigatórios!');
                     return;
                 }
+                // Save as profile for future
                 localStorage.setItem('asf-profile', JSON.stringify({name: name, phone: phone, email: email, level: 'comunidade'}));
+                // Remove modal
                 document.querySelectorAll('[style*="z-index:10000"]')[0].remove();
+                // Vote now
                 voteForLocation(null, loc, name, phone, email);
             }
 function voteForLocation(btn, loc, name, phone, email) {
+                // Save vote with full data
                 var key = 'asf-trip-votes';
                 var votes = JSON.parse(localStorage.getItem(key) || '[]');
                 votes.push({location: loc, name: name, phone: phone, email: email, date: new Date().toISOString()})();
                 localStorage.setItem(key, JSON.stringify(votes));
+                // Also update count
                 var countKey = 'asf-trip-' + loc, count = (parseInt(localStorage.getItem(countKey)||0)+1);
                 localStorage.setItem(countKey, count);
+                // Update display
                 var el = document.getElementById('vote-' + loc.toLowerCase());
                 if (el) el.textContent = count;
                 if (btn) {btn.style.border = '#FFD700'; btn.style.background = 'rgba(255,215,0,0.2)';}
                 showToast('✓ Voto registrado para ' + loc + '! 🏄‍♀️');
+                // Send to Carol via WhatsApp
                 var msg = '🏄♀️ NOVO VOTO!\nLocal: ' + loc + '\nNome: ' + name + '\nWhatsApp: ' + phone + (email ? '\nE-mail: ' + email : '');
                 window.open('https://wa.me/5511954346288?text=' + encodeURIComponent(msg), '_blank');
             }
 function renderBrandHub() {
+    // Render offers
     const offersContainer = document.getElementById('brand-offers');
     if (offersContainer) {
         offersContainer.innerHTML = BRAND_OFFERS.map(offer => `
@@ -11455,6 +11555,7 @@ function renderBrandHub() {
         `).join('');
     }
 
+    // Render UGC gallery
         const UGC_IMAGES = [
             'https://images.unsplash.com/photo-1520367445093-50dc08a59d9d?w=400&h=400&fit=crop',
             'https://images.unsplash.com/photo-1502680390469-be75c86b636f?w=400&h=400&fit=crop',
@@ -11522,9 +11623,11 @@ function enviarCadastroParceiro() {
                 return;
             }
 
+            // Save registration
             var parceiro = { nome: nome, insta: insta, site: site, logo: logo, comprovante: comprovante, data: new Date().toISOString() };
             localStorage.setItem("asf-parceiros", JSON.stringify(parceiro));
 
+            // Send to Carol
             var msg = "🏄♀️ NOVO CADASTRO DE PARCEIRO!\n\n";
             msg += "Marca: " + nome + "\n";
             if (insta) msg += "Instagram: " + insta + "\n";
@@ -11577,17 +11680,19 @@ function showSection(sectionId) {
             document.querySelectorAll('.tab').forEach(t => { t.classList.remove('active'); t.setAttribute('aria-selected', 'false'); })();
             document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
 
+            // Show selected section
             document.getElementById(sectionId).classList.add('active');
+            // Render affiliate store if loja section
             if (sectionId === 'loja' && typeof renderAffiliateStore === 'function') {
                 renderAffiliateStore();
             }
         }
-function openLojaShop(btn) { showSection('loja'); if(typeof ASF_SHOP!=='undefined'){ ASF_SHOP.render('shop-content'); } }
 function handleNavTap(btn, sectionId) {
             if (btn.classList.contains('active')) {
                 window.scrollTo({ top: 0, behavior: 'smooth' })();
             } else {
                 showSection(sectionId);
+                // Update badges if opening badges section
                 if (sectionId === 'badges') {
                     if (typeof updateBadgeProgress === 'function') updateBadgeProgress();
                 }
@@ -11598,6 +11703,7 @@ function loadNotifications() {
             if (saved) {
                 return JSON.parse(saved);
             }
+            // Primeira vez: usar notificações padrão
             localStorage.setItem(NOTIF_KEY, JSON.stringify(DEFAULT_NOTIFICATIONS));
             return DEFAULT_NOTIFICATIONS;
         }
@@ -11616,6 +11722,7 @@ function addNotification(type, icon, title, text) {
                 read: false
             };
             notifs.unshift(newNotif);
+            // Manter apenas últimas 20
             if (notifs.length > 20) notifs.pop();
             saveNotifications(notifs);
             updateNotificationBadge();
@@ -11638,6 +11745,7 @@ function toggleNotifications() {
 
             if (!isVisible) {
                 renderNotifications();
+                // Marcar todas como lidas
                 const notifs = loadNotifications();
                 notifs.forEach(n => n.read = true);
                 saveNotifications(notifs);
@@ -11667,14 +11775,17 @@ function renderNotifications() {
             `).join('');
         }
 function openNotification(type, id) {
+            // Marcar como lida
             const notifs = loadNotifications();
             const notif = notifs.find(n => n.id == id);
             if (notif) notif.read = true;
             saveNotifications(notifs);
             updateNotificationBadge();
 
+            // Fechar painel
             document.getElementById('notifications-panel').style.display = 'none';
 
+            // Navegar para a seção correta
             const sectionMap = {
                 'treino': 'saude',
                 'ondas': 'dicas',
@@ -11690,6 +11801,7 @@ function openNotification(type, id) {
             const section = sectionMap[type] || 'dicas';
             showSection(section);
 
+            // Se tem target específico, fazer scroll até ele
             if (notif && notif.target) {
                 setTimeout(() => {
                     const element = document.getElementById(notif.target) ||
@@ -11729,6 +11841,7 @@ function shareToWhatsApp() {
             toggleSharePanel();
         }
 function shareToInstagram() {
+            // Instagram não permite share direto via web, copia o link
             copyShareLink();
             trackShare();
             showToast('📋 Link copiado!\n\nCole no seu Story ou Post do Instagram 📸');
@@ -11749,6 +11862,7 @@ function shareToTwitter() {
 function copyShareLink() {
             const input = document.getElementById('share-link');
             const link = input.value;
+            // Modern clipboard API with fallback
             if (navigator.clipboard) {
                 navigator.clipboard.writeText(link).then(() => showToast('📋 Link copiado!'));
             } else {
@@ -11757,6 +11871,7 @@ function copyShareLink() {
                 showToast('📋 Link copiado!');
             }
             trackShare();
+            // Visual feedback
             const btn = event.target;
             const original = btn.textContent;
             btn.textContent = '✅';
@@ -11812,6 +11927,7 @@ function findNearbyManas() {
             const nearbyDiv = document.getElementById('nearby-manas');
             nearbyDiv.innerHTML = '<p style="text-align: center; color: var(--primary);">🔄 Buscando manas próximas...</p>';
 
+            // Simula busca (em produção usaria a localização real)
             setTimeout(() => {
                 const allManas = [];
                 Object.keys(MOCK_MANAS).forEach(beach => {
@@ -11820,8 +11936,10 @@ function findNearbyManas() {
                     })();
                 })();
 
+                // Ordena por distância
                 allManas.sort((a, b) => a.distance - b.distance);
 
+                // Pega as 5 mais próximas
                 const closest = allManas.slice(0, 5);
 
                 nearbyDiv.innerHTML = `
@@ -11892,6 +12010,7 @@ function renderAchievements() {
             const waterDays = getWaterStreak();
             const points = data.total;
             const level = getLevel(points);
+            // Check for early morning sessions (before 7am)
             const earlyMorningCount = sessions.filter(s => {
                 const hour = new Date(s.date).getHours();
                 return hour < 7;
@@ -11933,7 +12052,9 @@ function renderAchievements() {
                 <h3>${a.name}</h3>
                 <p>${a.desc}</p>
             </div>`).join('');
+            // Update stats
             const statEl = document.querySelector('.profile-stat-value:last-of-type');
+            // Update achievement count in profile
         }
 function getWaterStreak() {
             let count = 0;
@@ -11955,6 +12076,7 @@ function earnPoints(type, points) {
             data.total += points;
             if (type === 'quiz') {
                 data.quizzes++;
+                // Sync to quizzes-done for achievements
                 const quizzes = JSON.parse(localStorage.getItem('quizzes-done') || '[]');
                 quizzes.push({date: new Date().toISOString()})();
                 localStorage.setItem('quizzes-done', JSON.stringify(quizzes));
@@ -11963,6 +12085,7 @@ function earnPoints(type, points) {
             if (type === 'treino') data.treinos++;
             savePoints(data);
 
+            // Mostrar animação
             const popup = document.createElement('div');
             popup.innerHTML = `+${points} pontos! 🎉`;
             popup.style.cssText = 'position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);background:#27AE60;color:white;padding:20px 40px;border-radius:15px;font-size:20px;font-weight:bold;z-index:9999;';
@@ -11974,6 +12097,7 @@ function earnPoints(type, points) {
 function updatePointsDisplay() {
             const data = loadPoints();
             const level = getLevel(data.total);
+            // Atualizar displays se existirem
             document.querySelectorAll('.points-display').forEach(el => {
                 el.textContent = data.total;
             })();
@@ -12090,6 +12214,7 @@ function handleSearch(query) {
             }
 
             resultsDiv.classList.add('active');
+            // Save to recent searches
             if (query.length >= 3) saveRecentSearch(query);
         }
 function getRecentSearches() {
@@ -12166,6 +12291,7 @@ function selectBeach(beach, btn) {
 async function loadLiveData(beach) {
             const [weather, marine] = await Promise.all([fetchWeather(beach), fetchMarine(beach)]);
 
+            // Update Mar card
             const marDiv = document.getElementById('mar-data');
             if (marine && marine.current) {
                 const c = marine.current;
@@ -12182,6 +12308,7 @@ async function loadLiveData(beach) {
                 marDiv.innerHTML = `<p style="font-size: 14px; color: var(--gray-400);">Dados indisponíveis no momento</p>`;
             }
 
+            // Update Clima card
             const climaDiv = document.getElementById('clima-data');
             if (weather && weather.current) {
                 const c = weather.current;
@@ -12201,6 +12328,7 @@ async function loadLiveData(beach) {
                 climaDiv.innerHTML = `<p style="font-size: 14px; color: var(--gray-400);">Dados indisponíveis no momento</p>`;
             }
 
+            // Update Maré card (estimated based on location)
             const mareDiv = document.getElementById('mare-data');
             const now = new Date();
             const hour = now.getHours();
@@ -12210,14 +12338,17 @@ async function loadLiveData(beach) {
                 <p style="font-size: 14px; color: var(--success);">🟢 ${mareTimes.low}</p>
                 <p style="font-size: 12px; color: var(--gray-400); margin-top: 4px;">${mareTimes.tip}</p>
             `;
+            // Animate tide clock
             updateTideClock(mareTimes, now);
 
+            // Update UV card
             const uvDiv = document.getElementById('uv-data');
             const uvProt = document.getElementById('uv-protection');
             if (weather && weather.current && weather.daily) {
                 const currentUV = weather.current.uv_index || 0;
                 const todayMaxUV = weather.daily.uv_index_max[0] || currentUV;
 
+                // UV level description and color
                 let uvLevel, uvColor, uvIcon;
                 if (todayMaxUV <= 2) {
                     uvLevel = 'Baixo';
@@ -12247,6 +12378,7 @@ async function loadLiveData(beach) {
                     <p style="font-size: 12px; color: var(--gray-400); margin-top: 4px;">Máximo hoje</p>
                 `;
 
+                // Protection tip
                 let protTip = '';
                 if (todayMaxUV <= 2) {
                     protTip = '☀️ Protetor opcional para pele sensível';
@@ -12270,12 +12402,14 @@ function updateTideClock(tides, now) {
             const text = document.getElementById('tide-level-text');
             const label = document.getElementById('tide-level-label');
             if (!arc) return;
+            // Parse high/low times to estimate current tide position (0-1 cycle)
             const highMatch = tides.high.match(/(\d+):(\d+)/);
             const lowMatch = tides.low.match(/(\d+):(\d+)/);
             if (!highMatch || !lowMatch) return;
             const highMin = parseInt(highMatch[1]) * 60 + parseInt(highMatch[2]);
             const lowMin = parseInt(lowMatch[1]) * 60 + parseInt(lowMatch[2]);
             const nowMin = now.getHours() * 60 + now.getMinutes();
+            // Simple sine approximation between high and low
             const cycleLen = Math.abs(lowMin - highMin) * 2;
             let pos;
             if (highMin < lowMin) {
@@ -12284,6 +12418,7 @@ function updateTideClock(tides, now) {
                 if (nowMin > lowMin) pos = 1 - ((nowMin - lowMin) / (highMin + 1440 - lowMin));
                 if (pos < 0) pos = 0;
                 if (pos > 1) pos = 1;
+                // Map: 0=high, 0.5=low, 1=high
                 const angle = pos * Math.PI;
                 const tideHeight = Math.cos(angle); // 1=high, -1=low, 0=mid
                 const pct = (tideHeight + 1) / 2; // 0 to 1
@@ -12332,6 +12467,7 @@ function updateTideClock(tides, now) {
             label.textContent = 'agora: ' + timeStr;
         }
 function getEstimatedTides(beach, date) {
+            // Approximate tidal cycle - shifts ~50min per day
             const dayOfYear = Math.floor((date - new Date(date.getFullYear(), 0, 0)) / 86400000);
             const baseOffset = (dayOfYear % 14) * 0.8; // ~50 min shift per day
             const baseHigh = 5 + baseOffset;
@@ -12408,16 +12544,21 @@ function showMareDetails() {
             showToast(msg);
         }
 function updateMoonPhase() {
+            // Reference new moon: January 11, 2000 at 12:24 UTC
             const knownNewMoon = new Date('2000-01-11T12:24:00Z');
             const now = new Date();
 
+            // Calculate days since known new moon
             const msPerDay = 24 * 60 * 60 * 1000;
             const daysSinceNewMoon = (now - knownNewMoon) / msPerDay;
 
+            // Synodic month (lunation) is approximately 29.53059 days
             const lunation = 29.53059;
 
+            // Current moon age (0-29.5)
             const moonAge = daysSinceNewMoon % lunation;
 
+            // Determine phase name and icon
             let phaseName, moonIcon, surfTip, tideTipDesc;
 
             if (moonAge < 1.85 || moonAge > 27.68) {
@@ -12462,6 +12603,7 @@ function updateMoonPhase() {
                 tideTipDesc = 'Menor variação de maré';
             }
 
+            // Update the display
             document.getElementById('moon-icon').textContent = moonIcon;
             document.getElementById('moon-phase-name').textContent = phaseName;
             document.getElementById('moon-age').textContent = moonAge.toFixed(1) + ' dias';
@@ -12472,9 +12614,11 @@ function calcularVolume() {
             const peso = parseFloat(document.getElementById('peso-input').value) || 65;
             const nivel = document.getElementById('nivel-input').value;
 
+            // Cálculo de volume em litros
             let addVolume = nivel === 'iniciante' ? 5.5 : nivel === 'intermediario' ? 2.5 : 0.5;
             const volume = Math.round(peso + addVolume);
 
+            // Cálculo de borda (rail height) em cm
             let borda;
             if (nivel === 'iniciante') {
                 borda = Math.round((peso * 0.08) + 2); // Bordas mais altas para iniciantes
@@ -12484,8 +12628,10 @@ function calcularVolume() {
                 borda = Math.round((peso * 0.04) + 1); // Bordas mais baixas para avançados
             }
 
+            // Garantir limites razoáveis
             borda = Math.max(4, Math.min(8, borda));
 
+            // Mostrar resultado
             const resultDiv = document.getElementById('calc-result');
             resultDiv.innerHTML = `
                 <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; text-align: center;">
@@ -12599,6 +12745,7 @@ function startTimer() {
                 timerSeconds--;
 
                 if (timerSeconds <= 0) {
+                    // Play beep sound (browser notification)
                     if ('speechSynthesis' in window) {
                         const msg = new SpeechSynthesisUtterance(timerIsWork ? 'Descanso' : 'Trabalho');
                         msg.rate = 2;
@@ -12606,10 +12753,12 @@ function startTimer() {
                     }
 
                     if (timerIsWork) {
+                        // Work phase ended, go to rest
                         if (timerRestTime > 0) {
                             timerSeconds = timerRestTime;
                             timerIsWork = false;
                         } else {
+                            // No rest, go to next round
                             timerCurrentRound++;
                             if (timerCurrentRound > timerTotalRounds) {
                                 completeWorkout();
@@ -12619,6 +12768,7 @@ function startTimer() {
                             timerIsWork = true;
                         }
                     } else {
+                        // Rest phase ended, go to work
                         timerCurrentRound++;
                         if (timerCurrentRound > timerTotalRounds) {
                             completeWorkout();
@@ -12662,6 +12812,7 @@ function completeWorkout() {
             clearInterval(timerInterval);
             timerState = 'stopped';
 
+            // Save to history
             const workout = {
                 date: new Date().toISOString(),
                 rounds: timerTotalRounds,
@@ -12679,6 +12830,7 @@ function completeWorkout() {
             document.getElementById('timer-start-btn').textContent = '▶ Iniciar';
             document.getElementById('timer-pause-btn').disabled = true;
 
+            // Add points for completing workout
             earnPoints('treino', 50);
 
             if ('speechSynthesis' in window) {
@@ -12770,6 +12922,7 @@ async function loadBestDay() {
                     const wh = days.wave_height_max[i] || 0;
                     const wp = days.wave_period_max[i] || 0;
                     const wind = wDays.wind_speed_10m_max?.[i] || 20;
+                    // Score: wave height (0-3m ideal) + period (longer better) - wind penalty
                     let score = 0;
                     if (wh >= 0.5 && wh <= 2.5) score += 40;
                     else if (wh > 2.5) score += 25;
@@ -12788,12 +12941,14 @@ async function loadBestDay() {
                 if (diffDays === 0) dayLabel = 'Hoje!';
                 else if (diffDays === 1) dayLabel = 'Amanhã';
                 else dayLabel = dayNamesFull[d.getDay()] + ' (' + d.getDate() + '/' + (d.getMonth() + 1) + ')';
+                // Rating stars
                 const stars = bestScore >= 70 ? '⭐⭐⭐' : bestScore >= 50 ? '⭐⭐' : '⭐';
                 document.getElementById('best-day-text').textContent = dayLabel;
                 document.getElementById('best-day-detail').textContent = `Ondas: ${best.wh.toFixed(1)}m • Período: ${best.wp.toFixed(0)}s • Vento: ${best.wind.toFixed(0)}km/h`;
                 document.getElementById('best-day-rating').textContent = stars;
                 document.getElementById('best-day-icon').textContent = diffDays === 0 ? '🏄‍♀️' : '📅';
                 document.getElementById('best-day-widget').style.display = 'block';
+                // Also render mini forecast
                 const widget = document.getElementById('best-day-widget');
                 const miniForecast = scores.slice(0, 5).map(s => {
                     const dd = new Date(s.date + 'T12:00:00');
@@ -12850,6 +13005,7 @@ function initDarkMode() {
         }
 function toggleDarkMode() {
             const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+            // Add transition for smooth theme change
             document.documentElement.style.transition = 'background-color 0.3s ease, color 0.3s ease';
             if (isDark) {
                 document.documentElement.removeAttribute('data-theme');
@@ -12908,8 +13064,10 @@ function shareSurfConditions() {
                 if (label === 'Temp') data.temp = val;
                 if (label === 'Período') data.period = val;
             })();
+            // Get condition from badge
             const badge = bar.querySelector('.surf-condition-badge');
             data.condition = badge ? badge.textContent : '';
+            // Wind info
             const windItem = Array.from(items).find(i => {
                 const l = i.querySelector('.surf-label');
                 return l && l.textContent.includes('km/h') === false && ['N','NE','E','SE','S','SO','O','NO'].includes(l.textContent);
@@ -12920,6 +13078,7 @@ function shareSurfConditions() {
             }
 
             const msg = `🏄‍♀️ Condições ASF - ${data.beach || 'Bertioga'}\n\n🌊 Ondas: ${data.waves || '-'}\n💨 Vento: ${data.windSpeed || '-'} ${data.windDir || ''}\n🌡️ Temp: ${data.temp || '-'}\n⏱️ Período: ${data.period || '-'}\n📊 Condição: ${data.condition || '-'}\n\nBora surfar? 🤙`;
+            // Try native share API first (mobile), fallback to WhatsApp
             if (navigator.share) {
                 navigator.share({ title: 'Condições ASF', text: msg }).catch(() => {})();
             } else {
@@ -12952,6 +13111,7 @@ function getSessions() {
         }
 function saveSessions(sessions) {
             localStorage.setItem('asf-sessions', JSON.stringify(sessions));
+            // Also sync to surf-sessions for achievements
             localStorage.setItem('surf-sessions', JSON.stringify(sessions));
         }
 function saveSession() {
@@ -12970,6 +13130,7 @@ function saveSession() {
             const sessions = getSessions();
             sessions.unshift(session);
             saveSessions(sessions);
+            // Reset form
             document.getElementById('session-notes').value = '';
             document.querySelectorAll('.session-mood-btn').forEach(b => {
                 b.style.borderColor = 'var(--gray-200)';
@@ -12997,6 +13158,7 @@ function renderSessions() {
                 return;
             }
             stats.style.display = 'block';
+            // Render last 5 sessions
             list.innerHTML = sessions.slice(0, 5).map(s => {
                 const d = new Date(s.date);
                 const dateStr = d.toLocaleDateString('pt-BR', { day: '2-digit', month: 'short' })();
@@ -13014,24 +13176,29 @@ function renderSessions() {
                     </div>
                 </div>`;
             }).join('');
+            // Stats
             const totalMin = sessions.reduce((sum, s) => sum + s.duration, 0);
             const totalH = Math.floor(totalMin / 60);
             const extraMin = totalMin % 60;
             document.getElementById('stat-total').textContent = sessions.length;
             document.getElementById('stat-hours').textContent = totalH > 0 ? totalH + 'h' + (extraMin > 0 ? extraMin : '') : totalMin + 'min';
+            // Avg and longest session
             const durations = sessions.map(s => s.duration);
             const avgMin = Math.round(totalMin / sessions.length);
             const longestMin = Math.max(...durations);
+            // Fav beach
             const beachCount = {};
             sessions.forEach(s => { beachCount[s.beach] = (beachCount[s.beach] || 0) + 1; })();
             const favBeach = Object.entries(beachCount).sort((a, b) => b[1] - a[1])[0];
             document.getElementById('stat-fav-beach').textContent = favBeach ? favBeach[0] : '-';
+            // Fav mood
             const moodCount = {};
             sessions.forEach(s => { moodCount[s.mood] = (moodCount[s.mood] || 0) + 1; })();
             const favMood = Object.entries(moodCount).sort((a, b) => b[1] - a[1])[0];
             document.getElementById('stat-fav-mood').textContent = favMood ? favMood[0] : '-';
             document.getElementById('stat-longest').textContent = longestMin >= 60 ? Math.floor(longestMin / 60) + 'h' + (longestMin % 60 > 0 ? longestMin % 60 : '') : longestMin + 'min';
             document.getElementById('stat-avg').textContent = avgMin >= 60 ? Math.floor(avgMin / 60) + 'h' + (avgMin % 60 > 0 ? avgMin % 60 : '') : avgMin + 'min';
+            // Streak
             let streak = 0;
             const today = new Date(); today.setHours(0, 0, 0, 0);
             for (let i = 0; i < 30; i++) {
@@ -13040,6 +13207,7 @@ function renderSessions() {
                 if (sessions.some(s => s.date.split('T')[0] === dateStr)) { streak++; } else { break; }
             }
             document.getElementById('stat-streak').textContent = streak;
+            // Heatmap
             const heatmapEl = document.getElementById('session-heatmap');
             if (heatmapEl) {
                 let heatHTML = '';
@@ -13059,6 +13227,7 @@ function renderSessions() {
             }
         }
 function updateBrandTimer() {
+            // Countdown: 7 dias a partir de agora
             const endDate = new Date();
             endDate.setDate(endDate.getDate() + 7);
             
@@ -13083,6 +13252,7 @@ function loadBadges() {
           const saved = localStorage.getItem('asf-badges');
           if (saved) {
             const earnedBadges = JSON.parse(saved);
+            // Merge with current badge definitions
             BRAND_BADGES.forEach(badge => {
               const earned = earnedBadges.find(e => e.id === badge.id);
               if (earned) {
@@ -13104,11 +13274,13 @@ function updateBadgeProgress() {
 
           BRAND_BADGES.forEach(badge => {
             if (!badge.earned && badge.type === 'usage') {
+              // Count sessions with matching brand
               let count = 0;
               sessions.forEach(s => {
                 if (s.boardBrand && s.boardBrand.toLowerCase().includes(badge.brand.toLowerCase().split(' ')[0])) {
                   count++;
                 }
+                // Also check equipment notes
                 if (s.notes && s.notes.toLowerCase().includes(badge.brand.toLowerCase().split(' ')[0])) {
                   count++;
                 }
@@ -13192,6 +13364,7 @@ ${badge.earned ? '✅ Ganho em: ' + badge.earnedAt : '🔒 Continue evoluindo!'}
           showToast(message);
         }
 function showBadgeEarnedAnimation(badge) {
+          // Create floating badge element
           const badgeEl = document.createElement('div');
           badgeEl.innerHTML = `${badge.icon}`;
           badgeEl.style.cssText = `
@@ -13202,6 +13375,7 @@ function showBadgeEarnedAnimation(badge) {
           `;
           document.body.appendChild(badgeEl);
 
+          // Add CSS animation
           if (!document.getElementById('badge-anim-style')) {
             const style = document.createElement('style');
             style.id = 'badge-anim-style';
@@ -13272,30 +13446,33 @@ function initChecklist() {
             updateChecklistStatus();
         }
 function showDica(index) {
-            const d = window.dicas[index];
+            const d = dicas[index];
             const container = document.getElementById('dica-do-dia');
+            // Fade out
             container.style.opacity = '0';
             container.style.transform = 'translateY(10px)';
             setTimeout(() => {
                 document.getElementById('dica-text').textContent = d.text;
                 document.getElementById('dica-category').textContent = d.category;
                 document.getElementById('dica-emoji').textContent = d.emoji;
+                // Render comentários
                 if(typeof renderDicaComments==='function')renderDicaComments(index);
+                // Fade in
                 container.style.opacity = '1';
                 container.style.transform = 'translateY(0)';
             }, 200);
         }
 function nextDica() {
-let idx = Math.floor(Math.random() * window.dicas.length);
+            let idx = Math.floor(Math.random() * dicas.length);
             // Avoid repeat
             const current = document.getElementById('dica-text').textContent;
-            while (window.dicas[idx].text === current && window.dicas.length > 1) idx = Math.floor(Math.random() * window.dicas.length);
+            while (dicas[idx].text === current && dicas.length > 1) idx = Math.floor(Math.random() * dicas.length);
             showDica(idx);
         }
 function initDica() {
             const now = new Date();
             const dayOfYear = Math.floor((now - new Date(now.getFullYear(), 0, 0)) / 86400000);
-            showDica(dayOfYear % window.dicas.length);
+            showDica(dayOfYear % dicas.length);
         }
 function filterBeaches(region) {
             if (!beachCards) beachCards = document.querySelectorAll('.beach-card');
@@ -13303,6 +13480,7 @@ function filterBeaches(region) {
             beachCards.forEach(card => {
                 card.style.display = (showAll || card.dataset.region === region) ? '' : 'none';
             })();
+            // Update filter buttons
             document.querySelectorAll('[id^="beach-filter-"]').forEach(btn => {
                 btn.className = 'btn btn-secondary';
             })();
@@ -13390,8 +13568,10 @@ function votePoll(btn, pollId, option) {
             const key = 'asf-poll-' + pollId;
             if (localStorage.getItem(key)) { showToast('Você já votou! 🗳️'); return; }
             localStorage.setItem(key, option);
+            // Mark this button
             btn.style.background = '#27AE60';
             btn.style.color = 'white';
+            // Disable all siblings
             btn.parentElement.querySelectorAll('button').forEach(b => b.style.pointerEvents = 'none');
             showToast('Voto registrado! 🗳️ +5 pts');
             earnPoints('dica', 5);
@@ -13506,6 +13686,7 @@ function openAffiliateLink(url, productId) {
   localStorage.setItem('asf-affiliate-clicks', JSON.stringify(clicks));
   console.log('Click afiliado:', productId);
   window.open(url, '_blank', 'noopener,noreferrer');
+  // GA4 tracking
   if (typeof gtag !== 'undefined') {
     gtag('event', 'affiliate_click', {
       event_category: 'monetization',
@@ -13514,6 +13695,7 @@ function openAffiliateLink(url, productId) {
     })();
   }
 }
+// Newsletter
 function subscribeNewsletter(){const e=document.getElementById('newsletter-email'),t=e?e.value.trim():'';if(!t||!t.includes('@'))return showToast('❌ Email inválido!','error');const o=JSON.parse(localStorage.getItem('asf-newsletter')||'[]');o.push({email:t,date:new Date().toISOString()}),localStorage.setItem('asf-newsletter',JSON.stringify(o)),showToast('✅ Inscrita! Você receberá dicas toda semana.','success'),e&&(e.value=''),typeof gtag!=='undefined'&&gtag('event','newsletter_signup',{event_category:'engagement',value:1})}
 function showPremiumModal(){document.getElementById('premium-modal').style.display='flex',trackEvent('premium','modal_view'),typeof gtag!=='undefined'&&gtag('event','premium_modal_view',{event_category:'monetization',value:1})}
 function hidePremiumModal(){document.getElementById('premium-modal').style.display='none'}
@@ -13689,6 +13871,7 @@ button:focus-visible,a:focus-visible{outline:2px solid var(--primary)!important;
         </div>
         <div style="padding:0 16px;" id="member-card-content"></div>
     </div>
+</body>
 
 </script>
 <!-- =============================================
@@ -13839,8 +14022,11 @@ const textEl=document.getElementById('brand-home-text');
 const ctaEl=document.getElementById('brand-home-cta');
 if(!logosDiv||!rotatorDiv)return;
 const b=BRANDS[_current%BRANDS.length];
+// Texto principal
 textEl.textContent=b.tagline;
+// CTA
 ctaEl.innerHTML='<a href="'+b.url+'" onclick="showSection(\'brandhub\');return false" style="display:inline-block;padding:8px 20px;border-radius:20px;background:linear-gradient(135deg,'+b.color+','+(b.color||'#0EA5E9').replace('#','cc')+');color:white;font-size:13px;font-weight:600;cursor:pointer;text-decoration:none;letter-spacing:0.2px">'+b.cta+'</a>';
+// Rotator de logos
 rotatorDiv.innerHTML='';
 BRANDS.forEach(brd=>{
 const dot=document.createElement('div');
@@ -13849,6 +14035,7 @@ dot.title=brd.name;
 dot.onclick=()=>{ASF_BRAND_HOME.show(brd.name)};
 rotatorDiv.appendChild(dot);
 });
+// Logo strip
 logosDiv.innerHTML=BRANDS.map(brd=>\`
 <div style="display:flex;flex-direction:column;align-items:center;gap:2px;min-width:64px;cursor:pointer;padding:6px 10px;border-radius:10px;transition:all 0.2s"
   title="\${brd.name}"
@@ -13896,10 +14083,12 @@ getStreak(){return ASF_QUIZ.getStreak()},
     const emoji=ok?'✅':'❌';
     const title=ok?this.randPickC():this.randPickE();
     const msg=ok?'+15 XP | Streak: '+ns+' seguidos! 🧠':'Resposta correta: '+String.fromCharCode(65+this.Q.a)+'. Continue tentando!';
+    // Feedback visual das opções
     const opts=document.querySelectorAll('#quiz-home-options > div');
     opts.forEach((el,i)=>{
       el.style.pointerEvents='none';
       if(i===idx){el.style.background=ok?'rgba(39,174,96,0.1)':'rgba(231,76,60,0.1)';el.style.borderColor=ok?'#27ae60':'#e74c3c';const sp=el.querySelector('span');sp.style.background=ok?'#27ae60':'#e74c3c';sp.style.color='white'}else if(i===this.Q.a&&!ok){const sp=el.querySelector('span');sp.style.background='#27ae60';sp.style.color='white';el.style.borderColor='#27ae60'}if(!ok&&i===idx)el.style.animation='shake 0.4s ease'});
+    // Mensagem de resultado estilizada
     r.style.display='block';
     r.style.cssText='padding:16px;border-radius:12px;margin-top:16px;background:'+(ok?'rgba(39,174,96,0.12)':'rgba(231,76,60,0.12)')+';color:'+(ok?'#27ae60':'#e74c3c')+';text-align:center;animation:fadeSlideIn 0.3s ease';
     r.innerHTML=emoji+' <strong style="font-size:16px">'+title+'</strong><br><span style="font-size:13px;opacity:0.85">'+msg+'</span>';
@@ -13943,6 +14132,7 @@ reset(){
 
 window.updateXPBar=function(){const xp=parseInt(localStorage.getItem('asf-xp')||'0'),lvl=Math.floor(xp/100)+1,xi=xp%100;const p=document.querySelector('.profile-info p')||document.querySelector('.level-text');if(p)p.textContent='Nível '+lvl+' • '+xp+' pontos';const b=document.querySelector('.level-progress-bar');if(b){b.style.width=xi+'%';b.style.transition='width 0.5s ease'}const lt=document.querySelector('.level-text');if(lt)lt.textContent=xi+'/100 para Nível '+(lvl+1)};
 if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',function(){window.ASFAutoInit&&ASFAutoInit();window.updateXPBar&&updateXPBar();
+// Brand Partners Data
 const ASF_BRANDS_DATA=[
 {id:'rip-curl',name:'Rip Curl',logo:'🏄',tagline:'Onda por onda desde 1969',color:'#0066A1',bg:'rgba(0,102,161,0.08)',discount:'ASF15',category:'roupas',verified:true,established:'1969 · Austrália',desc:'A marca que nasceu na onda e cresceu com a comunidade feminina de surf.'},
 {id:'billabong',name:'Billabong',logo:'🌊',tagline:'Surf é vida, vida é surf',color:'#E87722',bg:'rgba(232,119,34,0.08)',discount:'ASF20',category:'roupas',verified:true,established:'1973 · Austrália',desc:'Do skate ao surf, representa a alma livre da mulher que surfa.'},
@@ -13986,6 +14176,9 @@ if(window.ASF_QUIZ)ASF_QUIZ.render();if(window.ASF_QUIZ_HOME)ASF_QUIZ_HOME.init(
 })}
 
 
+// =============================================
+// 🎯 ASF — METAS DE SURF
+// =============================================
 const ASF_METAS = {
   categorias: ['Geral', 'Iniciante', 'Intermediario', 'Avancado'],
   metasPredefinidas: [
@@ -14014,7 +14207,6 @@ const ASF_METAS = {
     const el = document.getElementById('meta-pd-' + id);
     if(el) el.innerHTML = m.feita ? '<span style="font-size:16px">✅</span>' : '<span style="font-size:16px">⬜</span>';
     if(typeof showToast === 'function') showToast(m.feita ? '✅ Meta cumprida!' : '⬜ Meta desmarcada', 'success');
-    if(typeof this.mostrarSalvar === 'function') this.mostrarSalvar(m.feita ? 'cumpriu' : 'removeu');
     this.salvarMetasPessoais();
   },
   adicionarMeta(titulo, nivel){
@@ -14023,38 +14215,14 @@ const ASF_METAS = {
     this.salvarMetasPessoais();
     this.renderMetasPessoais();
     if(typeof showToast === 'function') showToast('✨ Nova meta adicionada!', 'success');
-    if(typeof this.mostrarSalvar === 'function') this.mostrarSalvar('adicionou');
   },
-  mostrarSalvar(acao){
-    const mensagens = {
-      cumpriu: [
-        '🏆 Parabéns! Meta cumprida com sucesso!',
-        '🌟 Arrasou! Continue assim!',
-        '💪 Força de surfista!',
-        '✨ Meta concluída — inspiração pura!',
-        '🎯 Você é incrível!'
-      ],
-      removeu: [
-        '🧹 Tarefa limpa! Próximo desafio?',
-        '🔄 Rota atualizada — vamos em frente!',
-        '📝 Meta ajustada, foco mantido!',
-        '➖ Menos uma, mais orgulho!',
-        '✅ Organização em dia!'
-      ],
-      adicionou: [
-        '🚀 Nova meta adicionada! Vamos nessa!',
-        '⭐ Mais uma para sua lista de conquistas!',
-        '🌊 Pronta pra surfar essa nova meta!',
-        '✨ Adicionada! Sua jornada continua!',
-        '🎯 Meta nova, energia renovada!'
-      ]
-    };
-    const msgs = mensagens[acao] || mensagens.adicionou;
-    const msg = msgs[Math.floor(Math.random() * msgs.length)];
-    if(typeof showToast === 'function') showToast(msg, 'success');
+  adicionarMeta(titulo, nivel){
+    if(!titulo.trim()) return;
+    this.metasPessoais.push({id:'mp' + Date.now(), texto:titulo, nivel: nivel || 'Geral', icone:'✨', cor:'#00A8CC', feita:0});
+    this.salvarMetasPessoais();
+    this.renderMetasPessoais();
   },
-
-  renderMetasPessoais({
+  renderMetasPessoais(){
     const el = document.getElementById('metas-pessoais');
     if(!el) return;
     if(!this.metasPessoais.length){
@@ -14127,6 +14295,9 @@ const ASF_METAS = {
   }
 };
 
+// =============================================
+// 🏄 ASF — REGRAS DE CAMPANHA & TERMOS DE USO
+// =============================================
 const ASF_CAMPAIGN_RULES={
   nome:'Campanha ASF — Regras Oficiais',
   versao:'1.0',
@@ -14163,6 +14334,7 @@ const ASF_IMAGE_TERMS={
   LGPD_link:'/privacidade'
 };
 
+// Show campaign rules modal
 function showCampaignModal(){
   const modal=document.getElementById('campaign-modal')||createCampaignModal();
   const regras=ASF_CAMPAIGN_RULES.regras.map(r=>'<li style="font-size:13px;color:var(--gray-700);margin:4px 0">'+r+'</li>').join('');
@@ -14178,6 +14350,7 @@ function showCampaignModal(){
   modal.style.display='flex'
 }
 
+// Show image terms modal
 function showImageTermsModal(){
   const modal=document.getElementById('campaign-modal')||createCampaignModal();
   const t=ASF_IMAGE_TERMS;
@@ -14205,6 +14378,7 @@ function showImageTermsModal(){
   modal.style.display='flex'
 }
 
+// Create campaign modal if not exists
 function createCampaignModal(){
   let modal=document.getElementById('campaign-modal');
   if(modal)return modal;
@@ -14220,6 +14394,9 @@ function createCampaignModal(){
   return modal
 }
 
+// =============================================
+// 💬 SISTEMA DE COMENTÁRIOS NAS DICAS
+// =============================================
 function renderDicaComments(dicaIdx){
   const section=document.getElementById('dica-community-section');
   if(!section)return;
@@ -14256,12 +14433,19 @@ function postDicaComment(dicaIdx){
   trackSafe('dica_comment','dica_id',dicaIdx)
 }
 
+// Helper
 function escapeHtml(str){const d=document.createElement('div');d.textContent=str;return d.innerHTML}
 
 function trackSafe(cat,lbl,val){try{console.log('[track]',cat,lbl,val)}catch(e){}}
 
+// =============================================
+// 🌊 ASF — NOTÍCIAS + GUIA PRAIAS + DESAFIOS + PERFIL — COLLECTED
+// =============================================
 function asfEscape(str){const d=document.createElement('div');d.textContent=str;return d.innerHTML}
 
+// =============================================
+// ✅ CHECKLIST PÓS-SURF
+// =============================================
 const ASF_POS_SURF={
   items:[{id:'lavar-prancha',text:'Lavar prancha com água doce',icon:'🧹'},{id:'secar-lycra',text:'Secar lycra/roupa de borracha',icon:'🌞'},{id:'guardar-equip',text:'Guardar equipamento no local adequado',icon:'📦'},{id:'beber-agua',text:'Beber água e comer algo leve',icon:'🥥'},{id:'alongar-depois',text:'Fazer alongamento pós-surf (5 min)',icon:'🧘'},{id:'colocar-solar',text:'Aplicar protetor se necessário',icon:'🧴'}],
   getDone(){return JSON.parse(localStorage.getItem('asf-pos-surf-done')||'[]')},
@@ -14282,7 +14466,9 @@ function asfInitFeatures(){
 }
 if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',function(){
   asfInitFeatures();
+  // Pós-surf checklist
   const ps=document.getElementById('pos-surf-items');if(ps){ASF_POS_SURF.render('pos-surf-items')}
+  // Surf conditions no home
   const sw=document.getElementById('surf-conditions-wrapper');if(sw)loadSurfConditions();
 })}else{document.addEventListener('DOMContentLoaded',function(){
   asfInitFeatures();
@@ -14290,13 +14476,21 @@ if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded'
   const sw=document.getElementById('surf-conditions-wrapper');if(sw)loadSurfConditions();
 })}
 
+// =============================================
+// 🌊 ASF — NOTÍCIAS DE SURF (10 artigos — RSS-ready)
+// =============================================
 const ASF_NEWS={artigos:[{t:'Guia Completo: Como Escolher Sua Primeira Prancha',f:'ASF',d:'2025-05-20',c:'Equipamento',e:'🏄',r:'Tamanho, volume, tipo de prancha — tudo o que uma iniciante precisa saber antes de comprar.'},{t:'5 Dicas de Alongamento Pré-Surf para Evitar Lesões',f:'ASF',d:'2025-05-19',c:'Saúde',e:'🧘',r:'Sequência de 5 minutos que todo surfista deve fazer antes de entrar na água.'},{t:'A Importância da Maré: Como Ler o Boletim Marinho',f:'ASF',d:'2025-05-18',c:'Condições',e:'🌊',r:'Entenda como a tábua de maré afeta a qualidade das ondas no seu pico favorito.'},{t:'Lycra Sustentável: Marcas que Usam Plástico Reciclado',f:'ASF',d:'2025-05-17',c:'Sustentabilidade',e:'🌿',r:'Conheça marcas comprometidas com o meio ambiente e escolha sua lycra consciente.'},{t:'Como Tratar um Wipeout e Evitar Acidentes Graves',f:'ASF',d:'2025-05-16',c:'Segurança',e:'🛟',r:'Técnicas de queda segura e como se proteger de impactos com o fundo.'},{t:'O Guia Definitivo do Surf Feminino no Brasil',f:'ASF',d:'2025-05-15',c:'Comunidade',e:'👩',r:'Das praias de SP às competições mundiais — a história do surf feminino brasileiro.'},{t:'Como Usar a Tábua de Wax: Guia por Tipo de Onda',f:'ASF',d:'2025-05-14',c:'Equipamento',e:'🪔',r:'Wax base, top coat, temperatura — descubra qual combina com cada condição de onda.'},{t:'Surf Terapêutico: Como o Mar Ajuda na Saúde Mental',f:'ASF',d:'2025-05-13',c:'Saúde Mental',e:'🧠',r:'Estudos confirmam: o surf reduz ansiedade e melhora o bem-estar.'},{t:'Melhores Praias para Surfar em São Paulo',f:'ASF',d:'2025-05-12',c:'Destinos',e:'📍',r:'De Maresias a Itamambuca — o guia completo das praias surfistas de SP.'},{t:'O que é Swell e Como Ele Afeta Suas Sessões',f:'ASF',d:'2025-05-11',c:'Condições',e:'📈',r:'Swell de grounding, período e direção — entenda o que os boletins estão dizendo.'}],render(id){const el=document.getElementById(id);if(!el)return;const t=this.artigos.slice(0,6);el.innerHTML='<h3 style="font-size:17px;font-weight:700;color:var(--secondary);margin:0 0 12px;padding:0 4px"><span style="font-size:20px">📰</span> Notícias & Artigos</h3>'+t.map((a,i)=>'<div class="card" style="padding:14px 16px;margin-bottom:10px;border-left:3px solid '+(i%2===0?'var(--primary)':'var(--accent)')+';cursor:pointer" onclick="asfToastNews('+JSON.stringify(a.t)+')"><div style="display:flex;justify-content:space-between;align-items:flex-start;gap:8px"><div style="flex:1"><p style="font-size:13px;font-weight:700;color:var(--secondary);margin:0 0 4px">'+a.e+' '+a.t+'</p><p style="font-size:12px;color:var(--gray-600);margin:0;line-height:1.4;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden">'+a.r+'</p></div><span style="font-size:11px;color:var(--gray-400);white-space:nowrap">'+a.d.split('-').reverse().join('/')+'</span></div><div style="display:flex;gap:6px;margin-top:8px"><span style="font-size:11px;padding:2px 8px;border-radius:10px;background:rgba(0,168,204,0.1);color:var(--primary);font-weight:600">'+a.c+'</span><span style="font-size:11px;color:var(--gray-400)">'+a.f+'</span></div></div>').join('')+'<button onclick="showToast('📰 Em breve: feed RSS completo!')" style="width:100%;padding:10px;border-radius:10px;border:1.5px dashed var(--gray-300);background:transparent;color:var(--gray-500);font-size:13px;font-weight:600;cursor:pointer;margin-top:4px">🔗 Ver todas as notícias</button>'},renderChangelog(id){const el=document.getElementById(id);if(!el)return;el.innerHTML='<h3 style="font-size:17px;font-weight:700;color:var(--secondary);margin-bottom:14px;padding:0 4px"><span style="font-size:20px">📋</span> Changelog do ASF App</h3>'+this.artigos.slice().reverse().map(a=>'<div style="padding:8px 12px;margin-bottom:6px;background:var(--gray-50);border-radius:8px;border-left:2px solid var(--primary)"><div style="display:flex;justify-content:space-between"><p style="font-size:13px;font-weight:600;color:var(--secondary);margin:0">'+a.e+' '+a.t+'</p><span style="font-size:11px;color:var(--gray-400);white-space:nowrap">'+a.d.split('-').reverse().join('/')+'</span></div></div>').join('')+'<p style="font-size:12px;color:var(--gray-400);text-align:center;margin-top:8px">📢 Total: '+this.artigos.length+' artigos no app</p>')}};
 function asfToastNews(t){showToast('📰 '+t+' — em breve: ler artigo completo!')}
 
+// === Surf Conditions Renderer ===
 function loadSurfConditions(){const el=document.getElementById('asf-surf-data');if(!el)return;ASF_SURF_CONDITIONS.fetchConditions().then(d=>{el.innerHTML='<div style="text-align:center"><span style="font-size:18px">🌊</span><p style="font-size:18px;font-weight:700;color:var(--primary);margin:1px 0">'+d.altura+'m</p><p style="font-size:10px;color:var(--gray-400)">Altura</p></div><div style="text-align:center"><span style="font-size:18px">⏱️</span><p style="font-size:18px;font-weight:700;color:var(--accent);margin:1px 0">'+d.periodo+'s</p><p style="font-size:10px;color:var(--gray-400)">Período</p></div><div style="text-align:center"><span style="font-size:18px">💨</span><p style="font-size:18px;font-weight:700;color:var(--purple);margin:1px 0">'+d.ventoKmh+' km/h</p><p style="font-size:10px;color:var(--gray-400)">'+d.ventoDir+'</p></div>';const ee=document.getElementById('asf-surf-extra');if(ee)ee.innerHTML='<p style="font-size:13px;color:var(--gray-500);text-align:center;margin-bottom:8px">'+d.condicao+' · '+d.temp+'°C · '+'⭐'.repeat(Math.max(0,d.rating))+'☆'.repeat(5-Math.max(0,d.rating))+'</p><button onclick="loadSurfConditions()" style="flex:1;padding:8px;border-radius:8px;border:1.5px solid var(--primary);background:transparent;color:var(--primary);font-size:13px;font-weight:600;cursor:pointer">🔄 Atualizar</button><button onclick="showToast('📍 Guia de Praias em breve!')" style="flex:1;padding:8px;border-radius:8px;border:none;background:var(--primary);color:white;font-size:13px;font-weight:600;cursor:pointer">📍 Guia</button>'}).catch(()=>{const el=document.getElementById('asf-surf-data');if(el)el.innerHTML='<p style="font-size:13px;color:var(--gray-400);text-align:center;padding:16px">⚠️ Dados indisponíveis — tente novamente</p>'})}
 
 
+// =============================================
+// ASF EVOLUTION - NOVOS MODULOS
+// =============================================
 
+// CALENDARIO INTELIGENTE DE EVENTOS
 const ASF_CALENDAR = {
 view: 'month',
 currentMonth: new Date().getMonth(),
@@ -14366,6 +14560,7 @@ document.getElementById('calendar-upcoming').style.display='block';
 };
 (function(){const saved=localStorage.getItem('asf-calendar-events');if(saved){try{ASF_CALENDAR.events=JSON.parse(saved)}catch(e){}}});
 
+// MAPA DE PRAIAS COM SEGURANCA
 const ASF_BEACH_MAP = {
 praias:[
 {id:'maresias',nome:'Maresias',lat:-23.7869,lng:-45.5769,nivel:'Intermediario',swell:'Sudeste',melhorHorario:'6h-9h',estacionamento:true,salvaVidas:true,seguraMulher:true,horarioSeguro:'Todo horario',pontosEncontro:['Estacionamento principal','Quiosque do Ze'],policiaAmbulante:true,descSeguranca:'Area segura durante todo o dia com iluminacao noturna'},
@@ -14392,6 +14587,7 @@ el.innerHTML=html;
 }
 };
 
+// ASSISTENTE CHAT ASF
 const ASF_CHATBOT = {
 knowledgeBase:[
 {q:['melhor praia','iniciante','onde comecar','praia para comecar','primeira praia'],a:'&#x1F947; Para comecar — Praia Verde (SP): ondas pequenas e mansas. Maresias e perfeita para nivel intermediario. Tombo e Guaruja Centro tem ondas consistentes para todos os niveis! Todos sao &#x1F6E1;&#xFE0F; Safe Spots na plataforma ASF.'},
@@ -14427,6 +14623,7 @@ return '&#x1F914; Nao tenho essa informacao ainda! Tente perguntar sobre: praias
 esc(str){const d=document.createElement('div');d.textContent=str;return d.innerHTML}
 };
 
+// GAMIFICACAO + RANKING
 const ASF_GAMIFICATION = {
 BADGES:[
 {id:'primeira-onda',icon:'&#x1F30A;',title:'Primeira Onda',req:()=> parseInt(localStorage.getItem('asf-xp')||'0')>=10, desc:'Complete seu primeiro desafio'},
@@ -14474,6 +14671,7 @@ el.innerHTML=html;
 showToast(msg){showToast(msg)}
 };
 
+// NOTIFICACOES INTELIGENTES
 const ASF_NOTIFICATIONS = {
 pending:{},
 pedirPermissao(){
@@ -14520,6 +14718,7 @@ if(notifyAt>new Date()) this.agendar(e.id,e.title,notifyAt.toISOString());
 }
 };
 
+// CARTEIRINHA DIGITAL
 const ASF_MEMBER_CARD = {
 beneficios:['Desconto 15% em lojas parceiras','Inscricao prioritaria em eventos','Acesso a aulas exclusivas','Newsletter semanal com dicas especiais','Acesso ao ranking interno da comunidade'],
 gerar(){
@@ -14550,6 +14749,7 @@ this.beneficios.map(b=>'<div style="display:flex;align-items:center;gap:8px;padd
 }
 };
 
+// CONTEUDO ASF
 const ASF_CONTEUDO = {
 categorias:[
 {id:'tecnica',icon:'&#x1F3C4;',cor:'var(--primary)',artigos:[
@@ -14616,6 +14816,7 @@ return cat.artigos.map((a,i)=>
 }
 };
 
+// LOJA ASF
 const ASF_SHOP = {
 produtos:[
 {id:1,nome:'Lycra ASF Pro UV50+',preco:129.90,categoria:'roupas',desc:'Lycra UV50+ de garrafas PET recicladas',img:'https://images.unsplash.com/photo-1551698618-1dfe5d97d256?w=300&h=200&fit=crop',icon:'&#x1F455;'},
@@ -14719,8 +14920,8 @@ ASF_CONTEUDO.categorias.forEach(cat=>{cat.artigos.forEach(a=>{if(saved.includes(
 }catch(e){}
 })();
 
+// Init badge check on page actions
 window.checkASFBadges=function(){if(typeof ASF_GAMIFICATION!=='undefined')ASF_GAMIFICATION.checkAll()};
 </script>
 
-</body>
 </html>
