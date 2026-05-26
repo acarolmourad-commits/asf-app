@@ -12,10 +12,10 @@
 
 
 ## Last Completed Check
-**Time**: 7:47 UTC (2026-05-26)
+**Time**: 9:17 UTC (2026-05-26)
 - **Status**: ✅ Complete — +JSON-LD + preconnets + decoding=async
-- **Commit**: dd62613
-- **Notes**: quiet-hours check 07:47 UTC (2026-05-26) — stable
+- **Commit**: 35c2bed
+- **Notes**: active-hours check 09:17 UTC (2026-05-26) — stable
 
 ---
 - **Notes**: Site LIVE at https://acarolmourad-commits.github.io/asf-app/ — HTTP 200 ✅, 1,131,171 bytes.
