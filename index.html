@@ -54,11 +54,14 @@
       var infolinks_pid = 3269653;
       var infolinks_wsid = 1;
     </script>
-    <script type="text/javascript" src="https://resources.infolinks.com/js/infolinks_main.js"></script>
+    <style> html{scroll-behavior:smooth;
+    /* ─── Tip of the Day ─── */
+    #dica-do-dia{padding:0 16px;margin:16px auto 20px;max-width:800px;}
+    #dica-do-dia .dica-card{background:linear-gradient(135deg,rgba(0,168,204,0.10) 0%,rgba(155,89,182,0.08) 100%);border:1.5px solid rgba(0,168,204,0.22);border-radius:20px;padding:20px 22px;display:flex;gap:18px;align-items:flex-start;box-shadow:0 4px 24px rgba(0,168,204,0.12);transition:box-shadow 0.3s ease;}
+    #dica-do-dia .dica-card:hover{box-shadow:0 8px 32px rgba(0,168,204,0.22);}
+    </style>
+<script type="text/javascript" src="https://resources.infolinks.com/js/infolinks_main.js"></script>
     
-    #dica-emoji.dica-emoji-large{font-size:44px;line-height:1;flex-shrink:0;filter:drop-shadow(0 2px 8px rgba(0,168,204,0.25));}
-    #dica-content{flex:1;}
-    .dica-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;gap:8px;}
     .dica-badge-filled{font-size:12px;font-weight:700;color:#fff;background:linear-gradient(135deg,var(--primary),var(--primary-dark,#0088A8));padding:5px 14px;border-radius:20px;letter-spacing:0.3px;white-space:nowrap;}
     .dica-refresh-lg{background:rgba(255,255,255,0.85);border:1.5px solid rgba(0,168,204,0.3);border-radius:16px;padding:6px 14px;font-size:12px;font-weight:600;cursor:pointer;color:var(--primary);transition:all 0.25s ease;white-space:nowrap;}
     .dica-refresh-lg:hover{background:#fff;border-color:var(--primary);transform:translateY(-1px) scale(1.04);box-shadow:0 4px 12px rgba(0,168,204,0.25);}
@@ -139,73 +142,11 @@
     @media(prefers-reduced-motion:reduce){*{-webkit-animation-duration:0.01ms!important;animation-duration:0.01ms!important;transition-duration:0.01ms!important;}}
 
     @media(max-width:768px){#dica-do-dia{padding:0 12px;}}
-
-/* Hide visible descriptions - requested by Carol */
-
-
 /* Hide visible descriptions - requested by Carol */
 .offer-description, .product-description, .badge-description,
 .dica-desc, .post-desc {
   display: none !important;
 }
-
-/* DEFINITIVE hide - Carol's request */
-header, #header, .header, 
-footer, #footer, .footer,
-.dica-desc, .post-desc,
-.text-description, .offer-description, 
-.product-description, .badge-description,
-[style*="font-size: 13px"][style*="margin: 0 0 8px 0"],
-.hero h1, .hero p, 
-.section-title, h2, h3, h4,
-.notif-badge, .wave-forecast {
-  display: none !important;
-}
-
-
-/* Hide header text elements */
-.logo-text, .logo-text span, 
-.icon-btn[title], button[title] { 
-  display: none !important; 
-}
-
-/* ==== DEFINITIVE HIDE - Carol's requirement ==== */
-/* Hide ALL descriptive text elements */
-header, footer, 
-.hero, .hero-content, .hero-text,
-.section-title, .section-header,
-.card h3, .card p, .card h4,
-.card-meta, .post-content, .post-info,
-.dica-desc, .dica-text, #dica-text,
-.tip-content, .tip-text,
-.description, .desc,
-[style*="font-size: 13px"],
-[style*="font-size: 14px"],
-[style*="font-size: 16px"],
-.notifications, .wave-forecast,
-.beach-card p, .beach-card h3,
-.trip-detail, .trip-details,
-.post-time, .post-author,
-.activity-content, .activity-text,
-.daily-tip-content, .daily-tip,
-.newsletter-content, .newsletter-text,
-.community-content, .community-text,
-.progress-content, .progress-text,
-.stats, .stat-card, .stat-value,
-.hero h1, .hero p, .hero h2,
-.hero-badge, .hero-cta,
-.profile-info, .profile-stats, .profile-stat,
-.surf-bar, .surf-condition-badge, .surf-bar-item,
-.utilities-grid, .utility-btn, .utility-card,
-.tabs, .tab,
-.search-results, .search-result-item,
-.toast, .scroll-progress,
-#notif-badge { display: none !important; }
-
-/* Hide descriptive paragraphs */
-p[style*="font-size"], 
-div[style*="font-size: 13px"],
-div[style*="font-size: 14px"] { display: none !important; }
 
 /* Modern Glassmorphism */
 .glass-card {
@@ -3290,7 +3231,7 @@ t Section -->
             
 
             <!--  Iniciar countdown ao carregar -->
-            document.addEventListener('DOMContentLoaded', initVotingCountdown);
+            <script>document.addEventListener('DOMContentLoaded', initVotingCountdown);</script>
             
 
             <!-- Surftrip Voting -->
@@ -4835,12 +4776,11 @@ t Section -->
     <!-- 🌊 Ondas / Condições (desktop home) -->
     <div class="section" id="surf-conditions"><p style="text-align:center;padding:32px;font-size:14px;color:var(--gray-400)">🌊 Carregando condições do mar…</p>
       <div class="section-header"><h2 class="section-title">🌊 Condições das Ondas</h2></div>
-      <div id="surf-conditions-container" style="padding:0 16px;"></div>
+      <div id="surf-conditions-container-2" style="padding:0 16px;"></div>
     </div>
     <div class="section" id="desafios">
       <div class="section-header">
         <h2 class="section-title">🏆 Desafios & Ranking</h2>
-      </div>
       <div style="padding: 0 16px;">
         <div id="challenges-summary" style="margin-bottom:16px"></div>
         <div id="challenges-list"></div>
@@ -4868,12 +4808,12 @@ t Section -->
       </div>
       <div id="surfer-profile-content" style="padding: 0 16px;"></div>
     </div>
-        <div class="section" id="surf-news">
+<div class="section" id="surf-news-2">
             <div class="section-header">
                 <h2 class="section-title">📰 Surf News & Updates</h2>
         </div>
         
-        <div id="surf-news-container" style="padding: 0 16px;">
+        <div id="surf-news-container-2" style="padding: 0 16px;">
             <!-- News will be rendered by surf-news.js -->
             <div class="card" style="background: linear-gradient(135deg, rgba(0,168,204,0.05), rgba(155,89,182,0.05));">
                 <div style="text-align: center; padding: 20px;">
@@ -5595,7 +5535,7 @@ t Section -->
                 <div style="font-size: 24px;">🏄</div>
                 <p style="font-size: 10px;">1 Session</p>
             </div>
-            <div id="badge-quiz" onclick="checkBadge('quiz')" style="background: rgba(255,255,255,0.1); padding: 12px; border-radius: 10px; cursor: pointer;">
+            <div id="badge-quiz-2" onclick="checkBadge('quiz')" style="background: rgba(255,255,255,0.1); padding: 12px; border-radius: 10px; cursor: pointer;">
                 <div style="font-size: 24px;">📝</div>
                 <p style="font-size: 10px;">5 Quizzes</p>
             </div>
@@ -5603,7 +5543,7 @@ t Section -->
                 <div style="font-size: 24px;">🔥</div>
                 <p style="font-size: 10px;">3 Dias</p>
             </div>
-            <div id="badge-veterana" onclick="checkBadge('veterana')" style="background: rgba(255,255,255,0.1); padding: 12px; border-radius: 10px; cursor: pointer;">
+            <div id="badge-veterana-2" onclick="checkBadge('veterana')" style="background: rgba(255,255,255,0.1); padding: 12px; border-radius: 10px; cursor: pointer;">
                 <div style="font-size: 24px;">🦈</div>
                 <p style="font-size: 10px;">5 Sessions</p>
             </div>
@@ -11131,11 +11071,11 @@ window.ASFMonetization={trackEvent,getStats};const a=document.createElement('sty
   </div>
   </div>
 
-  <!-- Footer -->
-  >
+<!-- Footer -->
 
   <!-- Cookie Consent Banner -->
   
+  <script>
   (function() {
     const COOKIE_CONSENT = 'asf-cookie-consent';
     const banner = document.getElementById('cookie-consent-banner');
@@ -11153,6 +11093,7 @@ window.ASFMonetization={trackEvent,getStats};const a=document.createElement('sty
       }, 2000);
     }
   })();
+  </script>
   
 
   <!-- Infolinks (Free Ads) - DISABLED -->
@@ -11201,7 +11142,7 @@ window.ASFMonetization={trackEvent,getStats};const a=document.createElement('sty
 
 
   <!-- Cookie Consent Banner -->
-  <div id="cookie-consent-banner" style="
+<div id="cookie-consent-banner-2" style="
     position: fixed;
     bottom: 0;
     left: 0;
