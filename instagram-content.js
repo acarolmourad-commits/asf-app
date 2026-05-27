@@ -3,15 +3,15 @@ const InstagramContent = {
   posts: [
     {
       id: 1,
-      title: "POSE DE GROSSURA PERFEITA",
+      title: "POSE DE DROP PERFEITA",
       emoji: "🏄‍♀️",
       category: "Técnica",
-      content: `A grossura é a base de tudo! Para fazer a grossura correta:
+      content: `A drop é a base de tudo! Para fazer a drop correta:
 ✅ Fique de costas à onda
 ✅ Flexione levemente os joelhos
 ✅ Distribua o peso igualmente
 ✅ Olhe para a prancha, não para a areia!`,
-      hashtags: "#surffeminino #grossura #técnicas #bertioga #surfbrasil #mulhersurfista #asf #dicasdesurf"
+      hashtags: "#surffeminino #drop #técnicas #bertioga #surfbrasil #mulhersurfista #asf #dicasdesurf"
     },
     {
       id: 2,
