@@ -144,8 +144,24 @@
     @media(max-width:768px){#dica-do-dia{padding:0 12px;}}
 /* Hide visible descriptions - requested by Carol */
 .offer-description, .product-description, .badge-description,
-.dica-desc, .post-desc {
+.dica-desc, .post-desc,
+.dica-badge-filled, .dica-refresh-lg, .dica-text-lg, .dica-category,
+.stats, .stat-card, .stat-icon, .stat-value, .stat-label,
+[data-theme="dark"] .stat-card, [data-theme="dark"] .stat-label {
   display: none !important;
+}
+
+/* Hide pseudo-elements */
+.stat-card::before {
+  display: none !important;
+}
+
+/* Hide responsive overrides */
+@media(max-width:768px){
+  .stat-value{display: none !important;}
+}
+@media(max-width:480px){
+  .dica-refresh-btn.dica-refresh-lg{display: none !important;}
 }
 
 /* Modern Glassmorphism */
