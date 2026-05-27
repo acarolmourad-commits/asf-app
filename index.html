@@ -268,6 +268,13 @@ t Section -->
                 <button class="icon-btn" onclick="showCampaignModal()" title="Regras de Campanha" style="font-size:16px;width:44px;height:44px;" aria-label="Regras de Campanha">📋</button>
 
                 <button class="icon-btn" onclick="showBrandSupport()" title="Apoie o App" style="background: linear-gradient(135deg,#FFD700,#FFA500); color: #0E2439; border-radius: 10px; font-weight: 700;">🤝</button>
+                <div class="language-selector">
+                    <select id="languageSelect" onchange="changeLanguage(this.value)" style="background: none; border: none; color: white; font-size: 16px; cursor: pointer; padding: 0;">
+                        <option value="pt-BR">🇧🇷</option>
+                        <option value="en">🇺🇸</option>
+                        <option value="es">🇪🇸</option>
+                    </select>
+                </div>
             </div>
         </div>
     </header>
@@ -415,7 +422,7 @@ t Section -->
             <div id="dica-emoji" class="dica-emoji-large">💡</div>
             <div id="dica-content">
                 <div class="dica-header">
-                    <span class="dica-badge dica-badge-filled">✨ Dica do Dia</span>
+                    <span class="dica-badge dica-badge-filled" data-i18n="dailyTip">✨ Dica do Dia</span>
                     <div style="display:flex;gap:8px;align-items:center">
                     <button onclick="renderDicaComments(window.dicas.findIndex(d=>d.text===document.getElementById('dica-text').textContent))" class="dica-refresh-btn dica-refresh-lg" title="Comentários das manas">💬</button>
                     <button onclick="nextDica()" class="dica-refresh-btn dica-refresh-lg">↻ Nova dica</button>
@@ -14651,6 +14658,210 @@ ASF_CONTEUDO.categorias.forEach(cat=>{cat.artigos.forEach(a=>{if(saved.includes(
 })();
 
 window.checkASFBadges=function(){if(typeof ASF_GAMIFICATION!=='undefined')ASF_GAMIFICATION.checkAll()};
+
+// Language Translation System
+const translations = {
+    'pt-BR': {
+        // Header
+        'darkModeToggle': 'Modo Noturno',
+        'notifications': 'Notificações',
+        'shopCart': 'Carrinho',
+        'whatsapp': 'Fale com a gente no WhatsApp',
+        'campaignModal': 'Regras de Campanha',
+        'brandSupport': 'Apoie o App',
+        // Main sections
+        'dailyTip': 'Dica do Dia',
+        'refresh': 'Atualizar',
+        'searchPlaceholder': 'Buscar dicas, lojas, treinos...',
+        'searchClear': 'Limpar busca',
+        'campaignActive': 'CAMPANHA ATIVA',
+        'summerChallenge': 'Desafio: 30 dias de surf consecutivos!',
+        'participate': 'Participar',
+        'until': 'Até',
+        // Profile bar
+        'level': 'Nível',
+        'points': 'pontos',
+        'lessons': 'Aulas',
+        'trips': 'Trips',
+        'achievements': 'Conquistas',
+        // Utilities
+        'waves': 'Ondas',
+        'school': 'Escola',
+        'shop': 'Loja',
+        'premium': 'Premium',
+        'news': 'Notícias',
+        'tripsTab': 'Trips',
+        'profile': 'Perfil',
+        'settings': 'Configurações',
+        'logbook': 'Diário de Bordo',
+        // Buttons and labels throughout
+        'readMore': 'Ler mais',
+        'share': 'Compartilhar',
+        'like': 'Curtir',
+        'comment': 'Comentário',
+        'save': 'Salvar',
+        'remove': 'Remover',
+        'close': 'Fechar',
+        'open': 'Abrir',
+        'cancel': 'Cancelar',
+        'confirm': 'Confirmar',
+        'yes': 'Sim',
+        'no': 'Não'
+    },
+    'en': {
+        // Header
+        'darkModeToggle': 'Dark Mode',
+        'notifications': 'Notifications',
+        'shopCart': 'Cart',
+        'whatsapp': 'Talk to us on WhatsApp',
+        'campaignModal': 'Campaign Rules',
+        'brandSupport': 'Support the App',
+        // Main sections
+        'dailyTip': 'Tip of the Day',
+        'refresh': 'Refresh',
+        'searchPlaceholder': 'Search tips, shops, training...',
+        'searchClear': 'Clear search',
+        'campaignActive': 'ACTIVE CAMPAIGN',
+        'summerChallenge': 'Challenge: 30 consecutive days of surfing!',
+        'participate': 'Participate',
+        'until': 'Until',
+        // Profile bar
+        'level': 'Level',
+        'points': 'points',
+        'lessons': 'Lessons',
+        'trips': 'Trips',
+        'achievements': 'Achievements',
+        // Utilities
+        'waves': 'Waves',
+        'school': 'School',
+        'shop': 'Shop',
+        'premium': 'Premium',
+        'news': 'News',
+        'tripsTab': 'Trips',
+        'profile': 'Profile',
+        'settings': 'Settings',
+        'logbook': 'Logbook',
+        // Buttons and labels throughout
+        'readMore': 'Read more',
+        'share': 'Share',
+        'like': 'Like',
+        'comment': 'Comment',
+        'save': 'Save',
+        'remove': 'Remove',
+        'close': 'Close',
+        'open': 'Open',
+        'cancel': 'Cancel',
+        'confirm': 'Confirm',
+        'yes': 'Yes',
+        'no': 'No'
+    },
+    'es': {
+        // Header
+        'darkModeToggle': 'Modo Oscuro',
+        'notifications': 'Notificaciones',
+        'shopCart': 'Carrito',
+        'whatsapp': 'Hablar con nosotros por WhatsApp',
+        'campaignModal': 'Reglas de la Campaña',
+        'brandSupport': 'Apoya la App',
+        // Main sections
+        'dailyTip': 'Consejo del Día',
+        'refresh': 'Actualizar',
+        'searchPlaceholder': 'Buscar consejos, tiendas, entrenamiento...',
+        'searchClear': 'Limpiar búsqueda',
+        'campaignActive': 'CAMPAÑA ACTIVA',
+        'summerChallenge': 'Desafío: 30 días consecutivos de surf!',
+        'participate': 'Participar',
+        'until': 'Hasta',
+        // Profile bar
+        'level': 'Nivel',
+        'points': 'puntos',
+        'lessons': 'Lecciones',
+        'trips': 'Viajes',
+        'achievements': 'Logros',
+        // Utilities
+        'waves': 'Olas',
+        'school': 'Escuela',
+        'shop': 'Tienda',
+        'premium': 'Premium',
+        'news': 'Noticias',
+        'tripsTab': 'Viajes',
+        'profile': 'Perfil',
+        'settings': 'Ajustes',
+        'logbook': 'Bitácora',
+        // Buttons and labels throughout
+        'readMore': 'Leer más',
+        'share': 'Compartir',
+        'like': 'Me gusta',
+        'comment': 'Comentario',
+        'save': 'Guardar',
+        'remove': 'Eliminar',
+        'close': 'Cerrar',
+        'open': 'Abrir',
+        'cancel': 'Cancelar',
+        'confirm': 'Confirmar',
+        'yes': 'Sí',
+        'no': 'No'
+    }
+};
+
+function changeLanguage(lang) {
+    // Save preference
+    localStorage.setItem('asf-language', lang);
+    
+    // Update selector
+    document.getElementById('languageSelect').value = lang;
+    
+    // Apply translations
+    applyTranslations(lang);
+}
+
+function applyTranslations(lang) {
+    const dict = translations[lang] || translations['pt-BR'];
+    
+    // Translate elements with data-i18n attribute
+    document.querySelectorAll('[data-i18n]').forEach(element => {
+        const key = element.getAttribute('data-i18n');
+        if (dict[key]) {
+            // Handle input placeholders separately
+            if (element.placeholder !== undefined) {
+                element.placeholder = dict[key];
+            } else if (element.tagName === 'INPUT' && element.type === 'button') {
+                element.value = dict[key];
+            } else {
+                element.textContent = dict[key];
+            }
+        }
+    });
+    
+    // Translate specific elements by ID or class
+    // Header buttons titles
+    const darkModeBtn = document.getElementById('darkModeToggle');
+    if (darkModeBtn) darkModeBtn.title = dict['darkModeToggle'];
+    
+    const notifyBtn = document.querySelector('.icon-btn[title="Notificações"]');
+    if (notifyBtn) notifyBtn.title = dict['notifications'];
+    
+    const shopCartBtn = document.getElementById('shop-cart-btn');
+    if (shopCartBtn) shopCartBtn.title = dict['shopCart'];
+    
+    const whatsappLink = document.querySelector('a[title="Fale com a gente no WhatsApp"]');
+    if (whatsappLink) whatsappLink.title = dict['whatsapp'];
+    
+    const campaignBtn = document.querySelector('.icon-btn[title="Regras de Campanha"]');
+    if (campaignBtn) campaignBtn.title = dict['campaignModal'];
+    
+    const supportBtn = document.querySelector('.icon-btn[title="Apoie o App"]');
+    if (supportBtn) supportBtn.title = dict['brandSupport'];
+    
+    // Translate static text that's harder to target with data-i18n
+    // We'll handle this by adding data-i18n attributes to elements in the HTML
+}
+
+// Initialize language on page load
+document.addEventListener('DOMContentLoaded', function() {
+    const savedLang = localStorage.getItem('asf-language') || 'pt-BR';
+    changeLanguage(savedLang);
+});
 </script>
 
 </body>
