@@ -267,21 +267,21 @@ t Section -->
                         <circle cx="50" cy="50" r="4" fill="white"/></circle>
                     </svg>
                 </div>
-                <div class="logo-text" style="display: none;">ASF</div>
+                <div class="logo-text" style="display: none !important;">ASF</div>
             </div>
             <div class="header-actions">
-                <button class="icon-btn" id="darkModeToggle" onclick="var d=document.documentElement,w=localStorage,t=d.getAttribute('data-theme');if(t==='dark'){d.removeAttribute('data-theme');w.setItem('asf-theme','light');this.textContent='🌙'}else{d.setAttribute('data-theme','dark');w.setItem('asf-theme','dark');this.textContent='☀️'}" title="Modo Noturno" style="font-size:22px;width:48px;height:48px;">🌙</button>
-                <button class="icon-btn" onclick="toggleNotifications()" title="Notificações" style="position: relative;">
+                <button class="icon-btn" id="darkModeToggle" onclick="var d=document.documentElement,w=localStorage,t=d.getAttribute('data-theme');if(t==='dark'){d.removeAttribute('data-theme');w.setItem('asf-theme','light');this.textContent='🌙'}else{d.setAttribute('data-theme','dark');w.setItem('asf-theme','dark');this.textContent='☀️'}"  style="font-size:22px;width:48px;height:48px;">🌙</button>
+                <button class="icon-btn" onclick="toggleNotifications()"  style="position: relative;">
                     🔔
-                    <span id="notif-badge" style="position: absolute; top: -5px; right: -5px; background: #E74C3C; color: white; font-size: 10px; width: 18px; height: 18px; border-radius: 50%; display: flex; align-items: center; justify-content: center; display: none;">0</span>
+                    <span id="notif-badge" style="position: absolute; top: -5px; right: -5px; background: #E74C3C; color: white; font-size: 10px; width: 18px; height: 18px; border-radius: 50%; display: none;">0</span>
                 </button>
-                <button class="icon-btn" id="shop-cart-btn" onclick="if(typeof ASF_SHOP!=='undefined'){openLojaShop(this)}" title="Carrinho" style="position:relative;font-size:20px;width:48px;height:48px;">🛒
-                    <span id="shop-cart-badge" style="position:absolute;top:-5px;right:-5px;background:#25D366;color:white;font-size:10px;width:18px;height:18px;border-radius:50%;display:flex;align-items:center;justify-content:center;display:none;">0</span>
+                <button class="icon-btn" id="shop-cart-btn" onclick="if(typeof ASF_SHOP!=='undefined'){openLojaShop(this)}"  style="position:relative;font-size:20px;width:48px;height:48px;">🛒
+                    <span id="shop-cart-badge" style="position:absolute;top:-5px;right:-5px;background:#25D366;color:white;font-size:10px;width:18px;height:18px;border-radius:50%;display:none;">0</span>
                 </button>
-                <a href="https://wa.me/5511954346288" target="_blank" class="icon-btn" title="Fale com a gente no WhatsApp" style="color: white; text-decoration: none;">
+                <a href="https://wa.me/5511954346288" target="_blank" class="icon-btn"  style="color: white; text-decoration: none;">
                     💬
                 </a>
-                <button class="icon-btn" onclick="showCampaignModal()" title="Regras de Campanha" style="font-size:16px;width:44px;height:44px;" aria-label="Regras de Campanha">📋</button>
+                <button class="icon-btn" onclick="showCampaignModal()"  style="font-size:16px;width:44px;height:44px;" aria-label="Regras de Campanha">📋</button>
 
                 <button class="icon-btn" onclick="showBrandSupport()" title="Apoie o App" style="background: linear-gradient(135deg,#FFD700,#FFA500); color: #0E2439; border-radius: 10px; font-weight: 700;">🤝</button>
                 <div class="language-selector">
@@ -3476,7 +3476,7 @@ t Section -->
         
 <!-- Brand Hub Section -->
 <div class="section" 
-<div class="section" id="loja" style="display: none;">
+<div class="section" id="loja" style="display: none !important;">
   <div class="section-header">
     <h2 class="section-title">🛒 Loja ASF</h2>
     <p class="section-subtitle">Produtos recomendados para surfistas. Comprando aqui, você apoia a ASF! 💙</p>
@@ -3887,7 +3887,7 @@ t Section -->
             📲 Falar com a Carol
         </button>
         <!-- Badges Section -->
-    <div class="section" id="badges" style="display: none;">
+    <div class="section" id="badges" style="display: none !important;">
         <div class="section-header">
             <h2 class="section-title">🏆 Minhas Conquistas</h2>
         </div>
@@ -4058,7 +4058,7 @@ t Section -->
             <div style="display: flex; gap: 8px; margin-bottom: 16px; flex-wrap: wrap;">
                 <button class="btn btn-secondary" style="flex: 1; min-width: 140px; padding: 12px 8px; font-size: 13px;" onclick="exportData()" title="Salvar seus dados">💾 Backup Dados</button>
                 <button class="btn btn-primary" style="flex: 1; min-width: 140px; padding: 12px 8px; font-size: 13px;" onclick="document.getElementById('importFile').click()" title="Carregar seus dados">📂 Restaurar</button>
-                <input type="file" id="importFile" accept=".json" style="display: none;" onchange="importData(this)">
+                <input type="file" id="importFile" accept=".json" style="display: none !important;" onchange="importData(this)">
             </div>
             
             
@@ -5513,7 +5513,7 @@ t Section -->
         </button>
 
     <!-- Hidden sections for compatibility -->
-    <div class="section" id="comunidade-hidden" style="display: none;"></div>
+    <div class="section" id="comunidade-hidden" style="display: none !important;"></div>
 
     <!-- Parceiros - Cadastro -->
     <div class="section" id="parceiros" style="display:block;">
@@ -14854,16 +14854,16 @@ function applyTranslations(lang) {
     const darkModeBtn = document.getElementById('darkModeToggle');
     if (darkModeBtn) darkModeBtn.title = dict['darkModeToggle'];
     
-    const notifyBtn = document.querySelector('.icon-btn[title="Notificações"]');
+    const notifyBtn = document.querySelector('.icon-btn[]');
     if (notifyBtn) notifyBtn.title = dict['notifications'];
     
     const shopCartBtn = document.getElementById('shop-cart-btn');
     if (shopCartBtn) shopCartBtn.title = dict['shopCart'];
     
-    const whatsappLink = document.querySelector('a[title="Fale com a gente no WhatsApp"]');
+    const whatsappLink = document.querySelector('a[]');
     if (whatsappLink) whatsappLink.title = dict['whatsapp'];
     
-    const campaignBtn = document.querySelector('.icon-btn[title="Regras de Campanha"]');
+    const campaignBtn = document.querySelector('.icon-btn[]');
     if (campaignBtn) campaignBtn.title = dict['campaignModal'];
     
     const supportBtn = document.querySelector('.icon-btn[title="Apoie o App"]');
