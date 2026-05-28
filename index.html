@@ -142,6 +142,11 @@
     @media(prefers-reduced-motion:reduce){*{-webkit-animation-duration:0.01ms!important;animation-duration:0.01ms!important;transition-duration:0.01ms!important;}}
 
     @media(max-width:768px){#dica-do-dia{padding:0 12px;}}
+    /* Ensure header text is hidden - requested by Carol */
+    .logo-text,
+    .language-selector {
+        display: none !important;
+    }
 /* Hide visible descriptions - requested by Carol */
 .offer-description, .product-description, .badge-description,
 .dica-desc, .post-desc,
