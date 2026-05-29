@@ -2324,6 +2324,13 @@ function renderMetas() {
 })();
 
 function initGoogleAnalytics(){console.log('📊 Analytics enabled')}
+// Auto-render achievements init
+(function(){
+    if (typeof window.ACHIEVEMENTS_INIT !== "undefined") return;
+    window.ACHIEVEMENTS_INIT = true;
+    document.addEventListener("DOMContentLoaded", renderAchievements);
+    renderAchievements();
+})();
 function getConsent() { return localStorage.getItem(COOKIE_CONSENT); }
 function setConsent(level) {
       localStorage.setItem(COOKIE_CONSENT, level);
