@@ -168,23 +168,7 @@ const SurfCulture = {
         "Mulheres pescadoras eram as principais usuárias",
         "Técnica de pé único influenciou o surf moderno"
       ]
-    }
-    },
-    {
-      id: 11,
-      title: "As Primeiras Ondas: O Surf nas Antigas Polinésia",
-      category: "Origens",
-      region: "Polinésia",
-      year: "século XII",
-      image: "🌺",
-      content: "O surf originou-se na antiga Polinésia há mais de 1000 anos, muito antes de chegar ao Havaí. Não era apenas um esporte, mas uma prática espiritual profunda - um meio de conectar-se com os deuses do oceano e demonstrar respeito pela natureza. Os chefes polinésios (ali'i) demonstravam seu mana (poder divino) através de habilidades no surf, e pranchas sagradas eram esculpidas com rituais específicos. Quando os polinésios chegaram ao Havaí por volta do século IV, levaram essa tradição consigo, onde o surf se tornou ainda mais central na cultura, com regras complexas (kapu) regulando quem poderia surfar onde e quando. O princípio permanece o mesmo: o surf é uma conversa sagrada entre o ser humano e o oceano.",
-      facts: [
-        "Na Polinésia antiga, o surf era chamado de \"he'e nalu\" (deslizar sobre uma onda)",
-        "Pranchas sagradas eram feitas de árvores específicas como koa e wiliwili, com rituais de corte e agradecimento",
-        "Só a realeza e guerreiros de alto escalão podiam surfar nas melhores ondas em muitos territórios polinésios",
-        "O conhecimento do shape das pranchas era transmitido oralmente de geração em geração por mestres shapers (kahuna kalai' papa)"
-      ]
-    },
+      }
   ],
 
   // Render stories
