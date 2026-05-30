@@ -54,16 +54,14 @@
       var infolinks_pid = 3269653;
       var infolinks_wsid = 1;
     </script>
-<script type="text/javascript" src="https://resources.infolinks.com/js/infolinks_main.js"></script>
-    
     <style> html{scroll-behavior:smooth;
     /* ─── Tip of the Day ─── */
     #dica-do-dia{padding:0 16px;margin:16px auto 20px;max-width:800px;}
     #dica-do-dia .dica-card{background:linear-gradient(135deg,rgba(0,168,204,0.10) 0%,rgba(155,89,182,0.08) 100%);border:1.5px solid rgba(0,168,204,0.22);border-radius:20px;padding:20px 22px;display:flex;gap:18px;align-items:flex-start;box-shadow:0 4px 24px rgba(0,168,204,0.12);transition:box-shadow 0.3s ease;}
     #dica-do-dia .dica-card:hover{box-shadow:0 8px 32px rgba(0,168,204,0.22);}
-    #dica-emoji.dica-emoji-large{font-size:44px;line-height:1;flex-shrink:0;filter:drop-shadow(0 2px 8px rgba(0,168,204,0.25));}
-    #dica-content{flex:1;}
-    .dica-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;gap:8px;}
+    </style>
+<script type="text/javascript" src="https://resources.infolinks.com/js/infolinks_main.js"></script>
+    
     .dica-badge-filled{font-size:12px;font-weight:700;color:#fff;background:linear-gradient(135deg,var(--primary),var(--primary-dark,#0088A8));padding:5px 14px;border-radius:20px;letter-spacing:0.3px;white-space:nowrap;}
     .dica-refresh-lg{background:rgba(255,255,255,0.85);border:1.5px solid rgba(0,168,204,0.3);border-radius:16px;padding:6px 14px;font-size:12px;font-weight:600;cursor:pointer;color:var(--primary);transition:all 0.25s ease;white-space:nowrap;}
     .dica-refresh-lg:hover{background:#fff;border-color:var(--primary);transform:translateY(-1px) scale(1.04);box-shadow:0 4px 12px rgba(0,168,204,0.25);}
@@ -144,10 +142,31 @@
     @media(prefers-reduced-motion:reduce){*{-webkit-animation-duration:0.01ms!important;animation-duration:0.01ms!important;transition-duration:0.01ms!important;}}
 
     @media(max-width:768px){#dica-do-dia{padding:0 12px;}}
+    /* Ensure header text is hidden - requested by Carol */
+    .logo-text,
+    .language-selector {
+        display: none !important;
+    }
 /* Hide visible descriptions - requested by Carol */
 .offer-description, .product-description, .badge-description,
-.dica-desc, .post-desc {
+.dica-desc, .post-desc,
+.dica-badge-filled, .dica-refresh-lg, .dica-text-lg, .dica-category,
+.stats, .stat-card, .stat-icon, .stat-value, .stat-label,
+[data-theme="dark"] .stat-card, [data-theme="dark"] .stat-label {
   display: none !important;
+}
+
+/* Hide pseudo-elements */
+.stat-card::before {
+  display: none !important;
+}
+
+/* Hide responsive overrides */
+@media(max-width:768px){
+  .stat-value{display: none !important;}
+}
+@media(max-width:480px){
+  .dica-refresh-btn.dica-refresh-lg{display: none !important;}
 }
 
 /* Modern Glassmorphism */
@@ -253,23 +272,30 @@ t Section -->
                         <circle cx="50" cy="50" r="4" fill="white"/></circle>
                     </svg>
                 </div>
-                <div class="logo-text">ASF</div>
+                <div class="logo-text" style="display: none !important;">ASF</div>
             </div>
             <div class="header-actions">
-                <button class="icon-btn" id="darkModeToggle" onclick="var d=document.documentElement,w=localStorage,t=d.getAttribute('data-theme');if(t==='dark'){d.removeAttribute('data-theme');w.setItem('asf-theme','light');this.textContent='🌙'}else{d.setAttribute('data-theme','dark');w.setItem('asf-theme','dark');this.textContent='☀️'}" title="Modo Noturno" style="font-size:22px;width:48px;height:48px;">🌙</button>
-                <button class="icon-btn" onclick="toggleNotifications()" title="Notificações" style="position: relative;">
+                <button class="icon-btn" id="darkModeToggle" onclick="var d=document.documentElement,w=localStorage,t=d.getAttribute('data-theme');if(t==='dark'){d.removeAttribute('data-theme');w.setItem('asf-theme','light');this.textContent='🌙'}else{d.setAttribute('data-theme','dark');w.setItem('asf-theme','dark');this.textContent='☀️'}"  style="font-size:22px;width:48px;height:48px;">🌙</button>
+                <button class="icon-btn" onclick="toggleNotifications()"  style="position: relative;">
                     🔔
-                    <span id="notif-badge" style="position: absolute; top: -5px; right: -5px; background: #E74C3C; color: white; font-size: 10px; width: 18px; height: 18px; border-radius: 50%; display: flex; align-items: center; justify-content: center; display: none;">0</span>
+                    <span id="notif-badge" style="position: absolute; top: -5px; right: -5px; background: #E74C3C; color: white; font-size: 10px; width: 18px; height: 18px; border-radius: 50%; display: none;">0</span>
                 </button>
-                <button class="icon-btn" id="shop-cart-btn" onclick="if(typeof ASF_SHOP!=='undefined'){openLojaShop(this)}" title="Carrinho" style="position:relative;font-size:20px;width:48px;height:48px;">🛒
-                    <span id="shop-cart-badge" style="position:absolute;top:-5px;right:-5px;background:#25D366;color:white;font-size:10px;width:18px;height:18px;border-radius:50%;display:flex;align-items:center;justify-content:center;display:none;">0</span>
+                <button class="icon-btn" id="shop-cart-btn" onclick="if(typeof ASF_SHOP!=='undefined'){openLojaShop(this)}"  style="position:relative;font-size:20px;width:48px;height:48px;">🛒
+                    <span id="shop-cart-badge" style="position:absolute;top:-5px;right:-5px;background:#25D366;color:white;font-size:10px;width:18px;height:18px;border-radius:50%;display:none;">0</span>
                 </button>
-                <a href="https://wa.me/5511954346288" target="_blank" class="icon-btn" title="Fale com a gente no WhatsApp" style="color: white; text-decoration: none;">
+                <a href="https://wa.me/5511954346288" target="_blank" class="icon-btn"  style="color: white; text-decoration: none;">
                     💬
                 </a>
-                <button class="icon-btn" onclick="showCampaignModal()" title="Regras de Campanha" style="font-size:16px;width:44px;height:44px;" aria-label="Regras de Campanha">📋</button>
+                <button class="icon-btn" onclick="showCampaignModal()"  style="font-size:16px;width:44px;height:44px;" aria-label="Regras de Campanha">📋</button>
 
                 <button class="icon-btn" onclick="showBrandSupport()" title="Apoie o App" style="background: linear-gradient(135deg,#FFD700,#FFA500); color: #0E2439; border-radius: 10px; font-weight: 700;">🤝</button>
+                <div class="language-selector" style="display:none !important;">
+                    <select id="languageSelect" onchange="changeLanguage(this.value)" style="background: none; border: none; color: white; font-size: 16px; cursor: pointer; padding: 0;">
+                        <option value="pt-BR">🇧🇷</option>
+                        <option value="en">🇺🇸</option>
+                        <option value="es">🇪🇸</option>
+                    </select>
+                </div>
             </div>
         </div>
     </header>
@@ -417,7 +443,7 @@ t Section -->
             <div id="dica-emoji" class="dica-emoji-large">💡</div>
             <div id="dica-content">
                 <div class="dica-header">
-                    <span class="dica-badge dica-badge-filled">✨ Dica do Dia</span>
+                    <span class="dica-badge dica-badge-filled" data-i18n="dailyTip">✨ Dica do Dia</span>
                     <div style="display:flex;gap:8px;align-items:center">
                     <button onclick="renderDicaComments(window.dicas.findIndex(d=>d.text===document.getElementById('dica-text').textContent))" class="dica-refresh-btn dica-refresh-lg" title="Comentários das manas">💬</button>
                     <button onclick="nextDica()" class="dica-refresh-btn dica-refresh-lg">↻ Nova dica</button>
@@ -449,7 +475,7 @@ t Section -->
         <!-- Pergunta -->
         <div id="quiz-home-question-wrap" style="display:flex;flex-direction:column;gap:8px">
             <p id="quiz-home-progress" style="font-size:12px;font-weight:600;color:var(--primary)">Pergunta 1 de 5</p>
-            <p id="quiz-home-question" style="font-size:15px;font-weight:600;color:var(--secondary);margin:0">Carregando…</p>
+            <p id="quiz-home-question" style="font-size:15px;font-weight:600;color:var(--secondary);margin:0">Qual é a origem do surf?</p>
             <div id="quiz-home-options" style="display:flex;flex-direction:column;gap:6px"></div>
             <div id="quiz-home-result" style="display:none;padding:12px;border-radius:10px;text-align:center;font-size:14px;font-weight:600"></div>
         </div>
@@ -3143,7 +3169,7 @@ t Section -->
             <h3 style="margin: 20px 20px 10px; font-size: 16px; color: var(--secondary);">🏆 Conquistas</h3>
             <div class="cards-grid" id="achievements-grid">
                 <div class="card" style="text-align: center; padding: 20px;">
-                    <p style="color: var(--gray-400);">Carregando conquistas...</p>
+                    <p style="color: var(--gray-400);">Comece a usar o app para desbloquear conquistas! Complete quizzes, registre sessões de surf e muito mais.</p>
                 </div>
             </div>
 
@@ -3455,7 +3481,7 @@ t Section -->
         
 <!-- Brand Hub Section -->
 <div class="section" 
-<div class="section" id="loja" style="display: none;">
+<div class="section" id="loja" style="display: none !important;">
   <div class="section-header">
     <h2 class="section-title">🛒 Loja ASF</h2>
     <p class="section-subtitle">Produtos recomendados para surfistas. Comprando aqui, você apoia a ASF! 💙</p>
@@ -3866,7 +3892,7 @@ t Section -->
             📲 Falar com a Carol
         </button>
         <!-- Badges Section -->
-    <div class="section" id="badges" style="display: none;">
+    <div class="section" id="badges" style="display: none !important;">
         <div class="section-header">
             <h2 class="section-title">🏆 Minhas Conquistas</h2>
         </div>
@@ -4037,7 +4063,7 @@ t Section -->
             <div style="display: flex; gap: 8px; margin-bottom: 16px; flex-wrap: wrap;">
                 <button class="btn btn-secondary" style="flex: 1; min-width: 140px; padding: 12px 8px; font-size: 13px;" onclick="exportData()" title="Salvar seus dados">💾 Backup Dados</button>
                 <button class="btn btn-primary" style="flex: 1; min-width: 140px; padding: 12px 8px; font-size: 13px;" onclick="document.getElementById('importFile').click()" title="Carregar seus dados">📂 Restaurar</button>
-                <input type="file" id="importFile" accept=".json" style="display: none;" onchange="importData(this)">
+                <input type="file" id="importFile" accept=".json" style="display: none !important;" onchange="importData(this)">
             </div>
             
             
@@ -4051,7 +4077,7 @@ t Section -->
                     <div class="icon">🌊</div>
                     <h4>Condições do Mar</h4>
                     <div id="mar-data">
-                        <p style="font-size: 14px; color: var(--primary);">-- Carregando...</p>
+                        <p style="font-size: 14px; color: var(--primary);">Atualizando condições do mar em tempo real...</p>
                     </div>
                     <button class="btn btn-secondary" style="width: 100%; margin-top: 12px;" id="btn-mar-details" onclick="showMarDetails()">Ver Detalhes</button>
                 </div>
@@ -4061,7 +4087,7 @@ t Section -->
                     <div class="icon">🌡️</div>
                     <h4>Clima Agora</h4>
                     <div id="clima-data">
-                        <p style="font-size: 14px; color: var(--primary);">-- Carregando...</p>
+                        <p style="font-size: 14px; color: var(--primary);">Atualizando condições do mar em tempo real...</p>
                     </div>
                     <button class="btn btn-secondary" style="width: 100%; margin-top: 12px;" id="btn-clima-details" onclick="showClimaDetails()">Ver Previsão 7 dias</button>
                 </div>
@@ -4072,7 +4098,7 @@ t Section -->
                     <h4>Índice UV</h4>
                     <p>Radiação solar - Proteja sua pele!</p>
                     <div id="uv-data" style="text-align: center; margin: 12px 0;">
-                        <p style="font-size: 14px; color: var(--primary);">-- Carregando...</p>
+                        <p style="font-size: 14px; color: var(--primary);">Atualizando condições do mar em tempo real...</p>
                     </div>
                     <div id="uv-protection" style="background: var(--light); padding: 12px; border-radius: 12px; font-size: 12px;">
                         <p style="margin: 0;"><strong>☀️ Dica:</strong> Aplicar protetor FPS 30+ a cada 2h</p>
@@ -4094,7 +4120,7 @@ t Section -->
                         </svg>
                     </div>
                     <div id="mare-data">
-                        <p style="font-size: 18px; font-weight: 700; color: var(--primary);">🔴 Carregando...</p>
+                        <p style="font-size: 18px; font-weight: 700; color: var(--primary);">🔴 Aguardando dados da maré...</p>
                     </div>
                     <button class="btn btn-secondary" style="width: 100%; margin-top: 12px;" onclick="showMareDetails()">Ver Todos</button>
                 </div>
@@ -4649,7 +4675,7 @@ t Section -->
                 <div style="display: flex; align-items: center; gap: 14px; margin-top: 14px;">
                     <div style="width: 56px; height: 56px; background: rgba(255,255,255,0.2); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 28px;" id="mana-avatar">👩</div>
                     <div style="flex: 1;">
-                        <h3 style="font-size: 18px; margin-bottom: 2px;" id="mana-name">Carregando...</h3>
+                        <h3 style="font-size: 18px; margin-bottom: 2px;" id="mana-name">Conheça a mana da semana</h3>
                         <p style="font-size: 12px; opacity: 0.85;" id="mana-info"></p>
                     </div>
                 </div>
@@ -4984,7 +5010,7 @@ t Section -->
 
     <!-- 🏆 Desafios -->
     <!-- 🌊 Ondas / Condições (desktop home) -->
-    <div class="section" id="surf-conditions"><p style="text-align:center;padding:32px;font-size:14px;color:var(--gray-400)">🌊 Carregando condições do mar…</p>
+    <div class="section" id="surf-conditions"><p style="text-align:center;padding:32px;font-size:14px;color:var(--gray-400)">🌊 Verifique as condições antes de surfar: altura das ondas, período, direção do vento e maré.</p>
       <div class="section-header"><h2 class="section-title">🌊 Condições das Ondas</h2></div>
       <div id="surf-conditions-container-2" style="padding:0 16px;"></div>
     </div>
@@ -5028,7 +5054,7 @@ t Section -->
             <div class="card" style="background: linear-gradient(135deg, rgba(0,168,204,0.05), rgba(155,89,182,0.05));">
                 <div style="text-align: center; padding: 20px;">
                     <div style="font-size: 48px;">📰</div>
-                    <h4 style="font-size: 16px; margin: 10px 0;">Carregando notícias...</h4>
+                    <h4 style="font-size: 16px; margin: 10px 0;">Últimas notícias do mundo surf e eventos ASF</h4>
                     <p style="font-size: 13px; color: var(--gray-600);">Atualizações do mundo surf e eventos ASF</p>
                 </div>
             </div>
@@ -5700,7 +5726,7 @@ t Section -->
         </button>
 
     <!-- Hidden sections for compatibility -->
-    <div class="section" id="comunidade-hidden" style="display: none;"></div>
+    <div class="section" id="comunidade-hidden" style="display: none !important;"></div>
 
     <!-- Parceiros - Cadastro -->
     <div class="section" id="parceiros" style="display:block;">
@@ -11325,7 +11351,7 @@ window.ASFMonetization={trackEvent,getStats};const a=document.createElement('sty
     
     <div style="background: white; padding: 20px; border-radius: 16px; margin: 20px 0;">
       <div style="font-size: 13px; color: #666; margin-bottom: 8px;">Seu código de indicação:</div>
-      <div id="referral-code-display" style="font-size: 32px; font-weight: bold; color: #9B59B6; letter-spacing: 3px; margin-bottom: 16px; font-family: monospace;">CARREGANDO...</div>
+      <div id="referral-code-display" style="font-size: 32px; font-weight: bold; color: #9B59B6; letter-spacing: 3px; margin-bottom: 16px; font-family: monospace;">Compartilhe o ASF App e ganhe recompensas! Seu código único aparecerá aqui após o cadastro.</div>
       <button onclick="copyReferralCode()" style="background: #9B59B6; color: white; border: none; padding: 12px 24px; border-radius: 25px; font-weight: 600; cursor: pointer; font-size: 14px; width: 100%;">
         📋 Copiar Código
       </button>
@@ -13835,8 +13861,8 @@ function contactWhatsApp(){trackEvent('contact','whatsapp_click'),window.open('h
 function trackEvent(e,t,o){const n=JSON.parse(localStorage.getItem('asf-monetization-stats')||'{}');n.events||(n.events=[]),n.events.push({category:e,action:t,label:o,timestamp:Date.now()}),localStorage.setItem('asf-monetization-stats',JSON.stringify(n)),console.log('📊 Track:',e,t,o)}
 function getStats(){return JSON.parse(localStorage.getItem('asf-monetization-stats')||'{}')}
 function getCookieConsent(){return localStorage.getItem('asf-cookie-consent')}
-function acceptAllCookies(){localStorage.setItem('asf-cookie-consent','all');const b=document.getElementById('cookie-consent-banner');if(b){b.style.animation='slideDown 0.3s ease-out forwards';setTimeout(()=>b.remove(),300)}trackEvent('legal','cookie_consent','all');console.log('🍪 Cookie: all')}
-function essentialCookies(){localStorage.setItem('asf-cookie-consent','essential');const b=document.getElementById('cookie-consent-banner');if(b){b.style.animation='slideDown 0.3s ease-out forwards';setTimeout(()=>b.remove(),300)}trackEvent('legal','cookie_consent','essential');console.log('🍪 Cookie: essential')}
+function acceptAllCookies(){localStorage.setItem('asf-cookie-consent','all');const b=document.getElementById('cookie-consent-banner');if(b){b.style.animation='toastOut 0.3s ease-out forwards';setTimeout(()=>b.remove(),300)}trackEvent('legal','cookie_consent','all');console.log('🍪 Cookie: all')}
+function essentialCookies(){localStorage.setItem('asf-cookie-consent','essential');const b=document.getElementById('cookie-consent-banner');if(b){b.style.animation='toastOut 0.3s ease-out forwards';setTimeout(()=>b.remove(),300)}trackEvent('legal','cookie_consent','essential');console.log('🍪 Cookie: essential')}
 function showPixDonation(){const m=document.getElementById('pix-modal');if(m)m.style.display='flex';trackEvent('donation','pix_modal_view')}
 function showReferralModal(){const m=document.getElementById('referral-modal');if(m){m.style.display='flex';const codeDisplay=document.getElementById('referral-code-display');if(codeDisplay){const userCode=localStorage.getItem('asf-my-referral-code');if(userCode){codeDisplay.textContent=userCode}else{const newCode=generateReferralCode();localStorage.setItem('asf-my-referral-code',newCode);codeDisplay.textContent=newCode}}trackEvent('referral','modal_view')}}
 function hideReferralModal(){const m=document.getElementById('referral-modal');if(m)m.style.display='none'}
@@ -13878,7 +13904,7 @@ function walkTree(el) {
 </script>
 
     <!-- Surf Culture Section -->
-    <div class="section" id="surf-culture"><p style="text-align:center;padding:32px;font-size:14px;color:var(--gray-400)">🎨 Carregando cultura surf…</p>
+    <div class="section" id="surf-culture"><p style="text-align:center;padding:32px;font-size:14px;color:var(--gray-400)">🎨 Explore a rica história e cultura do surf, desde suas origens polinésias até os dias atuais.</p>
         <div class="section-header">
             <h2 class="section-title">🏛️ Histórias do Surf</h2>
         </div>
@@ -13894,7 +13920,7 @@ function walkTree(el) {
     </div>
 
   <!-- 🎯 Metas de Surf (nova seção) -->
-  <div class="section" id="metas" style="display:none"><p style="text-align:center;padding:32px;font-size:14px;color:var(--gray-400)">🎯 Carregando metas…</p>
+  <div class="section" id="metas" style="display:none"><p style="text-align:center;padding:32px;font-size:14px;color:var(--gray-400)">🎯 Defina e acompanhe suas metas de surf: desde melhorar técnicas até conquistar novas ondas.</p>
     <div class="section-header">
       <h2 class="section-title">🎯 Metas de Surf</h2>
     </div>
@@ -13915,7 +13941,7 @@ function walkTree(el) {
   </style>
 
     <!-- PONTOS FEMININOS - SEGURANCA -->
-    <div class="section" id="seguranca" style="display:none"><p style="text-align:center;padding:32px;font-size:14px;color:var(--gray-400)">🦺 Carregando guia de segurança…</p>
+    <div class="section" id="seguranca" style="display:none"><p style="text-align:center;padding:32px;font-size:14px;color:var(--gray-400)">🦺 Aprenda as diretrizes essenciais de segurança no surf: prioridade nas ondas, uso do leash e respeitando o ambiente marinho.</p>
         <div class="section-header">
             <h2 class="section-title" style="display:block">&#x1F93A; Pontos Femininos - Seguranca</h2>
         </div>
@@ -15033,6 +15059,210 @@ ASF_CONTEUDO.categorias.forEach(cat=>{cat.artigos.forEach(a=>{if(saved.includes(
 })();
 
 window.checkASFBadges=function(){if(typeof ASF_GAMIFICATION!=='undefined')ASF_GAMIFICATION.checkAll()};
+
+// Language Translation System
+const translations = {
+    'pt-BR': {
+        // Header
+        'darkModeToggle': 'Modo Noturno',
+        'notifications': 'Notificações',
+        'shopCart': 'Carrinho',
+        'whatsapp': 'Fale com a gente no WhatsApp',
+        'campaignModal': 'Regras de Campanha',
+        'brandSupport': 'Apoie o App',
+        // Main sections
+        'dailyTip': 'Dica do Dia',
+        'refresh': 'Atualizar',
+        'searchPlaceholder': 'Buscar dicas, lojas, treinos...',
+        'searchClear': 'Limpar busca',
+        'campaignActive': 'CAMPANHA ATIVA',
+        'summerChallenge': 'Desafio: 30 dias de surf consecutivos!',
+        'participate': 'Participar',
+        'until': 'Até',
+        // Profile bar
+        'level': 'Nível',
+        'points': 'pontos',
+        'lessons': 'Aulas',
+        'trips': 'Trips',
+        'achievements': 'Conquistas',
+        // Utilities
+        'waves': 'Ondas',
+        'school': 'Escola',
+        'shop': 'Loja',
+        'premium': 'Premium',
+        'news': 'Notícias',
+        'tripsTab': 'Trips',
+        'profile': 'Perfil',
+        'settings': 'Configurações',
+        'logbook': 'Diário de Bordo',
+        // Buttons and labels throughout
+        'readMore': 'Ler mais',
+        'share': 'Compartilhar',
+        'like': 'Curtir',
+        'comment': 'Comentário',
+        'save': 'Salvar',
+        'remove': 'Remover',
+        'close': 'Fechar',
+        'open': 'Abrir',
+        'cancel': 'Cancelar',
+        'confirm': 'Confirmar',
+        'yes': 'Sim',
+        'no': 'Não'
+    },
+    'en': {
+        // Header
+        'darkModeToggle': 'Dark Mode',
+        'notifications': 'Notifications',
+        'shopCart': 'Cart',
+        'whatsapp': 'Talk to us on WhatsApp',
+        'campaignModal': 'Campaign Rules',
+        'brandSupport': 'Support the App',
+        // Main sections
+        'dailyTip': 'Tip of the Day',
+        'refresh': 'Refresh',
+        'searchPlaceholder': 'Search tips, shops, training...',
+        'searchClear': 'Clear search',
+        'campaignActive': 'ACTIVE CAMPAIGN',
+        'summerChallenge': 'Challenge: 30 consecutive days of surfing!',
+        'participate': 'Participate',
+        'until': 'Until',
+        // Profile bar
+        'level': 'Level',
+        'points': 'points',
+        'lessons': 'Lessons',
+        'trips': 'Trips',
+        'achievements': 'Achievements',
+        // Utilities
+        'waves': 'Waves',
+        'school': 'School',
+        'shop': 'Shop',
+        'premium': 'Premium',
+        'news': 'News',
+        'tripsTab': 'Trips',
+        'profile': 'Profile',
+        'settings': 'Settings',
+        'logbook': 'Logbook',
+        // Buttons and labels throughout
+        'readMore': 'Read more',
+        'share': 'Share',
+        'like': 'Like',
+        'comment': 'Comment',
+        'save': 'Save',
+        'remove': 'Remove',
+        'close': 'Close',
+        'open': 'Open',
+        'cancel': 'Cancel',
+        'confirm': 'Confirm',
+        'yes': 'Yes',
+        'no': 'No'
+    },
+    'es': {
+        // Header
+        'darkModeToggle': 'Modo Oscuro',
+        'notifications': 'Notificaciones',
+        'shopCart': 'Carrito',
+        'whatsapp': 'Hablar con nosotros por WhatsApp',
+        'campaignModal': 'Reglas de la Campaña',
+        'brandSupport': 'Apoya la App',
+        // Main sections
+        'dailyTip': 'Consejo del Día',
+        'refresh': 'Actualizar',
+        'searchPlaceholder': 'Buscar consejos, tiendas, entrenamiento...',
+        'searchClear': 'Limpiar búsqueda',
+        'campaignActive': 'CAMPAÑA ACTIVA',
+        'summerChallenge': 'Desafío: 30 días consecutivos de surf!',
+        'participate': 'Participar',
+        'until': 'Hasta',
+        // Profile bar
+        'level': 'Nivel',
+        'points': 'puntos',
+        'lessons': 'Lecciones',
+        'trips': 'Viajes',
+        'achievements': 'Logros',
+        // Utilities
+        'waves': 'Olas',
+        'school': 'Escuela',
+        'shop': 'Tienda',
+        'premium': 'Premium',
+        'news': 'Noticias',
+        'tripsTab': 'Viajes',
+        'profile': 'Perfil',
+        'settings': 'Ajustes',
+        'logbook': 'Bitácora',
+        // Buttons and labels throughout
+        'readMore': 'Leer más',
+        'share': 'Compartir',
+        'like': 'Me gusta',
+        'comment': 'Comentario',
+        'save': 'Guardar',
+        'remove': 'Eliminar',
+        'close': 'Cerrar',
+        'open': 'Abrir',
+        'cancel': 'Cancelar',
+        'confirm': 'Confirmar',
+        'yes': 'Sí',
+        'no': 'No'
+    }
+};
+
+function changeLanguage(lang) {
+    // Save preference
+    localStorage.setItem('asf-language', lang);
+    
+    // Update selector
+    document.getElementById('languageSelect').value = lang;
+    
+    // Apply translations
+    applyTranslations(lang);
+}
+
+function applyTranslations(lang) {
+    const dict = translations[lang] || translations['pt-BR'];
+    
+    // Translate elements with data-i18n attribute
+    document.querySelectorAll('[data-i18n]').forEach(element => {
+        const key = element.getAttribute('data-i18n');
+        if (dict[key]) {
+            // Handle input placeholders separately
+            if (element.placeholder !== undefined) {
+                element.placeholder = dict[key];
+            } else if (element.tagName === 'INPUT' && element.type === 'button') {
+                element.value = dict[key];
+            } else {
+                element.textContent = dict[key];
+            }
+        }
+    });
+    
+    // Translate specific elements by ID or class
+    // Header buttons titles
+    const darkModeBtn = document.getElementById('darkModeToggle');
+    if (darkModeBtn) darkModeBtn.title = dict['darkModeToggle'];
+    
+    const notifyBtn = document.querySelector('.icon-btn[]');
+    if (notifyBtn) notifyBtn.title = dict['notifications'];
+    
+    const shopCartBtn = document.getElementById('shop-cart-btn');
+    if (shopCartBtn) shopCartBtn.title = dict['shopCart'];
+    
+    const whatsappLink = document.querySelector('a[]');
+    if (whatsappLink) whatsappLink.title = dict['whatsapp'];
+    
+    const campaignBtn = document.querySelector('.icon-btn[]');
+    if (campaignBtn) campaignBtn.title = dict['campaignModal'];
+    
+    const supportBtn = document.querySelector('.icon-btn[title="Apoie o App"]');
+    if (supportBtn) supportBtn.title = dict['brandSupport'];
+    
+    // Translate static text that's harder to target with data-i18n
+    // We'll handle this by adding data-i18n attributes to elements in the HTML
+}
+
+// Initialize language on page load
+document.addEventListener('DOMContentLoaded', function() {
+    const savedLang = localStorage.getItem('asf-language') || 'pt-BR';
+    changeLanguage(savedLang);
+});
 </script>
 
 </body>
