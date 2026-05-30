@@ -150,10 +150,7 @@
     }
 /* Hide visible descriptions - requested by Carol */
 .offer-description, .product-description, .badge-description,
-.dica-desc, .post-desc,
-.dica-badge-filled, .dica-refresh-lg, .dica-text-lg, .dica-category,
-.stats, .stat-card, .stat-icon, .stat-value, .stat-label,
-[data-theme="dark"] .stat-card, [data-theme="dark"] .stat-label {
+.dica-desc, .post-desc {
   display: none !important;
 }
 
@@ -5065,14 +5062,33 @@ t Section -->
     
                 <!-- Calculadora de Surf -->
                 <div class="card utility-card" id="card-calculator" onclick="showSurfCalculator()" style="cursor: pointer;">
-                    <div class="icon">🧮</div>
-                    <h4>Calculadora de Surf</h4>
-                    <p>Descubra volume ideal, tamanho de prancha e mais</p>
-                    <button class="btn btn-primary" style="width: 100%; margin-top: 12px; font-size: 13px;">Acessar Calculadora</button>
-                </div>
+                                    <div class="icon">🧮</div>
+                                    <h4>Calculadora de Surf</h4>
+                                    <p>Descubra volume ideal, tamanho de prancha e mais</p>
+                                    <button class="btn btn-primary" style="width: 100%; margin-top: 12px; font-size: 13px;">Acessar Calculadora</button>
+                                </div>
+                                <div class="card utility-card" onclick="openUtility('tides')">
+                                    <div class="icon">🌊</div>
+                                    <h4>Tábuas de Maré</h4>
+                                    <p>Consulte as marés do litoral para suas sessões</p>
+                                </div>
+                                <div class="card utility-card" onclick="openUtility('sunscreen')">
+                                    <div class="icon">☀️</div>
+                                    <h4>Protetor Solar</h4>
+                                    <p>Lembrete de passar filtro 30min antes de entrar na água</p>
+                                </div>
+                                <div class="card utility-card" onclick="openUtility('sessionlog')">
+                                    <div class="icon">📝</div>
+                                    <h4>Diário de Surf</h4>
+                                    <p>Registre cada sessão:ondas,local,condições</p>
+                                </div>
+                                <div class="card utility-card" onclick="openUtility('wetsuit')">
+                                    <div class="icon">🧤</div>
+                                    <h4>Guia de Wetsuit</h4>
+                                    <p>Qual roupa de borracha usar por temperatura</p>
+                                </div>
 
-
-<!-- Guia de Praias Section -->
+                <!-- Guia de Praias Section -->
     <div class="section" id="praias">
         <div class="section-header">
             <h2 class="section-title">🏖️ Guia de Praias - Litoral Paulista</h2><img loading="lazy" src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=600&h=150&fit=crop" alt="Praias" style="width:100%; border-radius:12px; margin-bottom:12px; object-fit:cover;" decoding="async">
