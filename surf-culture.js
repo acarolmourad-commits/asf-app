@@ -140,6 +140,34 @@ const SurfCulture = {
         "Surf Feminino Proibido até 1975",
         "7x campeão mundial Layne Beachley"
       ]
+    },
+    {
+      id: 11,
+      title: "As Primeiras Ondas: O Surf nas Antigas Polinésia",
+      category: "Origem",
+      region: "Polinésia",
+      year: "Antiguidade",
+      image: "🌊",
+      content: "O surf originated in ancient Polynesia over 3,000 years ago, where it was more than just a sport - it was a deeply spiritual practice. The earliest evidence comes from Hawaii, where petroglyphs depict people surfing. In Polynesian culture, surfing (or 'he'e nalu') was reserved for royalty and warriors, with special chants and rituals performed before entering the water. The first surfboards were made from native woods like koa and wiliwili, often exceeding 15 feet in length and weighing over 150 pounds.",
+      facts: [
+        "Surf was reserved for ali'i (royalty) in ancient Hawaii",
+        "Early surfboards weighed over 150 pounds and were 10-16 feet long",
+        "Surfing had spiritual significance with chants and rituals"
+      ]
+    },
+    {
+      id: 12,
+      title: "As Primeiras Surfistas Peruanas",
+      category: "Pioneira",
+      region: "Peru",
+      year: "1930s",
+      image: "👩‍🏄‍♀️",
+      content: "Nos anos 1930, enquanto Eduardo Arenas desenvolvia a primeira prancha de foam, mulheres peruanas das comunidades pesqueiras de Huanchaco já surfavam há séculos em **caballitos de totora** - embarcações de junco usadas para pesca. Mulheres como María Luisa Cáceres eram conhecidas por dominar essas pranchas artesanais, passando o conhecimento de geração em geração. Sua técnica de equilíbrio e leitura das ondas influenciou diretamente o desenvolvimento do surf moderno no Peru.",
+      facts: [
+        "Caballitos de totora usados há 3000 anos",
+        "Mulheres pescadoras eram as principais usuárias",
+        "Técnica de pé único influenciou o surf moderno"
+      ]
     }
     },
     {
