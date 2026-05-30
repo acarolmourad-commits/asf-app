@@ -4424,6 +4424,214 @@ t Section -->
                     <div id="checklist-status" style="margin-top: 12px; text-align: center; font-size: 13px; color: var(--gray-400);"></div>
                     <button class="btn btn-secondary" style="width: 100%; margin-top: 8px;" onclick="resetChecklist()">🔄 Reiniciar</button>
                 </div>
+
+                <!-- ████ IMÓVEIS NO LITORAL — 6 Cards ████ -->
+
+                <!-- 1. Simulador de Financiamento -->
+                <div class="card utility-card" style="border-left: 4px solid #27AE60;">
+                    <div class="icon">🏦</div>
+                    <h4>Simulador de Financiamento</h4>
+                    <p>Calcule parcelas e valore seu sonho no litoral</p>
+                    <div style="margin: 12px 0;">
+                        <label style="font-size: 12px; color: var(--gray-600);">Valor do imóvel (R$):</label>
+                        <input type="number" id="sim-valor" value="450000" min="50000" max="10000000" step="10000" style="width: 100%; padding: 8px; border: 1px solid var(--gray-200); border-radius: 8px; font-size: 14px; margin-top: 4px; font-family: 'Outfit';">
+                        <label style="font-size: 12px; color: var(--gray-600); margin-top: 8px; display: block;">Entrada (%):</label>
+                        <input type="number" id="sim-entrada" value="20" min="5" max="80" style="width: 100%; padding: 8px; border: 1px solid var(--gray-200); border-radius: 8px; font-size: 14px; margin-top: 4px; font-family: 'Outfit';">
+                        <label style="font-size: 12px; color: var(--gray-600); margin-top: 8px; display: block;">Prazo (anos):</label>
+                        <select id="sim-prazo" style="width: 100%; padding: 8px; border: 1px solid var(--gray-200); border-radius: 8px; font-size: 14px; margin-top: 4px; font-family: 'Outfit';">
+                            <option value="10">10 anos</option>
+                            <option value="15" selected>15 anos</option>
+                            <option value="20">20 anos</option>
+                            <option value="25">25 anos</option>
+                            <option value="30">30 anos</option>
+                        </select>
+                        <label style="font-size: 12px; color: var(--gray-600); margin-top: 8px; display: block;">Taxa CET (% ao ano):</label>
+                        <input type="number" id="sim-taxa" value="9.5" min="4" max="18" step="0.1" style="width: 100%; padding: 8px; border: 1px solid var(--gray-200); border-radius: 8px; font-size: 14px; margin-top: 4px; font-family: 'Outfit';">
+                    </div>
+                    <button class="btn btn-primary" style="width: 100%; background: #27AE60;" onclick="calcularFinanciamento()">Calcular Parcela</button>
+                    <div id="sim-resultado" style="margin-top: 12px; background: var(--light); padding: 12px; border-radius: 8px; text-align: center; display: none;">
+                        <p style="font-size: 12px; color: var(--gray-600); margin: 0 0 4px;">Parcela mensal estimada</p>
+                        <p style="font-size: 22px; font-weight: 800; color: #27AE60; margin: 0;" id="sim-parcela">R$ --</p>
+                        <p style="font-size: 11px; color: var(--gray-400); margin: 6px 0 0;">Valor financiado: <span id="sim-financiado">R$ --</span></p>
+                        <p style="font-size: 11px; color: var(--gray-400); margin: 2px 0 0;">Total pago: <span id="sim-total">R$ --</span></p>
+                    </div>
+                </div>
+
+                <!-- 2. Comparador de Cidades -->
+                <div class="card utility-card" style="border-left: 4px solid #8E44AD;">
+                    <div class="icon">🏙️</div>
+                    <h4>Comparador de Cidades</h4>
+                    <p>Compare custo de vida e infra entre praias do litoral</p>
+                    <div style="margin: 12px 0;">
+                        <label style="font-size: 12px; color: var(--gray-600);">Cidade 1:</label>
+                        <select id="comp-cidade1" style="width: 100%; padding: 8px; border: 1px solid var(--gray-200); border-radius: 8px; font-size: 14px; margin-top: 4px; font-family: 'Outfit';">
+                            <option value="bertioga">🏖️ Bertioga</option>
+                            <option value="santos">🌊 Santos</option>
+                            <option value="guaruja">🏝️ Guarujá</option>
+                            <option value="ubatuba">🏄 Ubatuba</option>
+                            <option value="ilhabela">⛵ Ilhabela</option>
+                            <option value="sao-sebastiao">🏖️ São Sebastião</option>
+                        </select>
+                        <label style="font-size: 12px; color: var(--gray-600); margin-top: 8px; display: block;">Cidade 2:</label>
+                        <select id="comp-cidade2" style="width: 100%; padding: 8px; border: 1px solid var(--gray-200); border-radius: 8px; font-size: 14px; margin-top: 4px; font-family: 'Outfit';">
+                            <option value="bertioga">🏖️ Bertioga</option>
+                            <option value="santos">🌊 Santos</option>
+                            <option value="guaruja" selected>🏝️ Guarujá</option>
+                            <option value="ubatuba">🏄 Ubatuba</option>
+                            <option value="ilhabela">⛵ Ilhabela</option>
+                            <option value="sao-sebastiao">🏖️ São Sebastião</option>
+                        </select>
+                    </div>
+                    <button class="btn btn-primary" style="width: 100%; background: #8E44AD;" onclick="compararCidades()">Comparar</button>
+                    <div id="comp-resultado" style="margin-top: 12px; display: none;">
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 6px;">
+                            <div style="background: var(--light); padding: 10px; border-radius: 8px; text-align: center;">
+                                <p style="font-size: 11px; color: var(--gray-600); margin: 0;" id="comp-nome1">Bertioga</p>
+                                <p style="font-size: 16px; font-weight: 700; color: #8E44AD; margin: 4px 0 0;">🏠 Aluguel médio</p>
+                                <p style="font-size: 13px; color: var(--primary); margin: 2px 0 0;" id="comp-aluguel1">R$ 2.200</p>
+                                <p style="font-size: 16px; font-weight: 700; color: #27AE60; margin: 8px 0 0;">🌊 Sazonalidade</p>
+                                <p style="font-size: 13px; color: var(--primary); margin: 2px 0 0;" id="comp-saz1">Alta temporada</p>
+                            </div>
+                            <div style="background: var(--light); padding: 10px; border-radius: 8px; text-align: center;">
+                                <p style="font-size: 11px; color: var(--gray-600); margin: 0;" id="comp-nome2">Guarujá</p>
+                                <p style="font-size: 16px; font-weight: 700; color: #8E44AD; margin: 4px 0 0;">🏠 Aluguel médio</p>
+                                <p style="font-size: 13px; color: var(--primary); margin: 2px 0 0;" id="comp-aluguel2">R$ 2.500</p>
+                                <p style="font-size: 16px; font-weight: 700; color: #27AE60; margin: 8px 0 0;">🌊 Sazonalidade</p>
+                                <p style="font-size: 13px; color: var(--primary); margin: 2px 0 0;" id="comp-saz2">Alta temporada</p>
+                            </div>
+                        </div>
+                        <div style="margin-top: 8px; padding: 8px; background: rgba(142,68,173,0.1); border-radius: 8px; text-align: center;">
+                            <p style="font-size: 12px; color: #8E44AD; margin: 0; font-weight: 600;" id="comp-veredicto">Veredicto aparece aqui</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 3. Checklist de Visita a Imóvel -->
+                <div class="card utility-card" style="border-left: 4px solid #E67E22;">
+                    <div class="icon">🔍</div>
+                    <h4>Checklist de Visita a Imóvel</h4>
+                    <p>Não esqueça nada ao visitar um imóvel na praia!</p>
+                    <div id="visita-checklist" style="margin: 12px 0; text-align: left;">
+                        <label style="display: flex; align-items: center; gap: 8px; padding: 8px; background: var(--light); border-radius: 8px; margin: 4px 0; cursor: pointer; font-size: 13px;">
+                            <input type="checkbox" style="width: 18px; height: 18px; accent-color: var(--primary);" onclick="saveVisitaChecklist()"> Documentação (IPTU, registro)
+                        </label>
+                        <label style="display: flex; align-items: center; gap: 8px; padding: 8px; background: var(--light); border-radius: 8px; margin: 4px 0; cursor: pointer; font-size: 13px;">
+                            <input type="checkbox" style="width: 18px; height: 18px; accent-color: var(--primary);" onclick="saveVisitaChecklist()"> Vazamentos nas paredes/teto
+                        </label>
+                        <label style="display: flex; align-items: center; gap: 8px; padding: 8px; background: var(--light); border-radius: 8px; margin: 4px 0; cursor: pointer; font-size: 13px;">
+                            <input type="checkbox" style="width: 18px; height: 18px; accent-color: var(--primary);" onclick="saveVisitaChecklist()"> Infiltração de maresia
+                        </label>
+                        <label style="display: flex; align-items: center; gap: 8px; padding: 8px; background: var(--light); border-radius: 8px; margin: 4px 0; cursor: pointer; font-size: 13px;">
+                            <input type="checkbox" style="width: 18px; height: 18px; accent-color: var(--primary);" onclick="saveVisitaChecklist()"> Esgoto e drenagem do terreno
+                        </label>
+                        <label style="display: flex; align-items: center; gap: 8px; padding: 8px; background: var(--light); border-radius: 8px; margin: 4px 0; cursor: pointer; font-size: 13px;">
+                            <input type="checkbox" style="width: 18px; height: 18px; accent-color: var(--primary);" onclick="saveVisitaChecklist()"> Pontos de luz e tomadas
+                        </label>
+                        <label style="display: flex; align-items: center; gap: 8px; padding: 8px; background: var(--light); border-radius: 8px; margin: 4px 0; cursor: pointer; font-size: 13px;">
+                            <input type="checkbox" style="width: 18px; height: 18px; accent-color: var(--primary);" onclick="saveVisitaChecklist()"> Pressão da água (torneiras/chuveiro)
+                        </label>
+                        <label style="display: flex; align-items: center; gap: 8px; padding: 8px; background: var(--light); border-radius: 8px; margin: 4px 0; cursor: pointer; font-size: 13px;">
+                            <input type="checkbox" style="width: 18px; height: 18px; accent-color: var(--primary);" onclick="saveVisitaChecklist()"> Acessibilidade à praia
+                        </label>
+                        <label style="display: flex; align-items: center; gap: 8px; padding: 8px; background: var(--light); border-radius: 8px; margin: 4px 0; cursor: pointer; font-size: 13px;">
+                            <input type="checkbox" style="width: 18px; height: 18px; accent-color: var(--primary);" onclick="saveVisitaChecklist()"> Ruído (rua, vizinhos, mar)
+                        </label>
+                        <label style="display: flex; align-items: center; gap: 8px; padding: 8px; background: var(--light); border-radius: 8px; margin: 4px 0; cursor: pointer; font-size: 13px;">
+                            <input type="checkbox" style="width: 18px; height: 18px; accent-color: var(--primary);" onclick="saveVisitaChecklist()"> Seguro/reserva de emergência
+                        </label>
+                        <label style="display: flex; align-items: center; gap: 8px; padding: 8px; background: var(--light); border-radius: 8px; margin: 4px 0; cursor: pointer; font-size: 13px;">
+                            <input type="checkbox" style="width: 18px; height: 18px; accent-color: var(--primary);" onclick="saveVisitaChecklist()"> Vistoria de móveis inclusos
+                        </label>
+                    </div>
+                    <div id="visita-progress" style="background: var(--light); padding: 8px; border-radius: 8px; text-align: center; margin-bottom: 8px;">
+                        <p style="font-size: 12px;">Revisados: <strong id="visita-count">0</strong>/10</p>
+                    </div>
+                    <button class="btn btn-secondary" style="width: 100%;" onclick="resetVisitaChecklist()">🔄 Resetar</button>
+                </div>
+
+                <!-- 4. Guia de Bairros por Cidade -->
+                <div class="card utility-card" style="background: linear-gradient(135deg, rgba(39,174,96,0.05), rgba(14,36,57,0.05));">
+                    <div class="icon">📍</div>
+                    <h4>Guia de Bairros por Cidade</h4>
+                    <p>Conheça os melhores bairros e praias para viver ou investir</p>
+                    <div style="margin: 12px 0;">
+                        <label style="font-size: 12px; color: var(--gray-600);">Selecione a cidade:</label>
+                        <select id="guia-cidade-select" onchange="mostrarGuiaBairros()" style="width: 100%; padding: 8px; border: 1px solid var(--gray-200); border-radius: 8px; font-size: 14px; margin-top: 4px; font-family: 'Outfit';">
+                            <option value="bertioga">🏖️ Bertioga</option>
+                            <option value="guaruja">🏝️ Guarujá</option>
+                            <option value="santos">🌊 Santos</option>
+                            <option value="ubatuba">🏄 Ubatuba</option>
+                            <option value="ilhabela">⛵ Ilhabela</option>
+                            <option value="sao-sebastiao">🏖️ São Sebastião</option>
+                            <option value="maresias">🏄 Maresias</option>
+                        </select>
+                    </div>
+                    <div id="guia-bairros-content">
+                        <div style="padding: 10px; background: var(--light); border-radius: 8px; margin-top: 8px;">
+                            <p style="font-size: 14px; font-weight: 700; color: var(--primary); margin: 0 0 8px;">🏖️ Bertioga</p>
+                            <p style="font-size: 12px; margin: 0 0 4px;"><strong>🇻 🇵</strong> Vista Linda — residencial familiar, ruas asfaltadas, próximo ao centro</p>
+                            <p style="font-size: 12px; margin: 0 0 4px;"><strong>🏘️</strong> Guaratuba — bairro novo, condomínios, mercado próximo</p>
+                            <p style="font-size: 12px; margin: 0 0 4px;"><strong>🌊</strong> Riviera de São Lourenço — alto padrão, segurança 24h, perto da praia</p>
+                            <p style="font-size: 12px; margin: 0 0 0;"><strong>💰</strong>Indicado para: quem busca sossego + natureza, famílias, investimento</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 5. Calendário Sazonal do Mercado -->
+                <div class="card utility-card" style="border-left: 4px solid #16A085;">
+                    <div class="icon">📅</div>
+                    <h4>Calendário Sazonal do Mercado</h4>
+                    <p>Saiba quando é o melhor momento para comprar, vender ou alugar</p>
+                    <div style="margin: 12px 0; text-align: left;">
+                        <div style="display: flex; gap: 6px; overflow-x: auto; padding: 4px 0;">
+                            <button class="btn btn-secondary" style="font-size: 11px; white-space: nowrap; padding: 8px 12px;" onclick="mostrarTemporada('alta')" id="tempo-btn-alta">🔥 Alta Temporada</button>
+                            <button class="btn btn-secondary" style="font-size: 11px; white-space: nowrap; padding: 8px 12px;" onclick="mostrarTemporada('media')" id="tempo-btn-media">⏳ Média Temporada</button>
+                            <button class="btn btn-secondary" style="font-size: 11px; white-space: nowrap; padding: 8px 12px;" onclick="mostrarTemporada('baixa')" id="tempo-btn-baixa">❄️ Baixa Temporada</button>
+                        </div>
+                    </div>
+                    <div id="temporada-content">
+                        <div style="background: rgba(231,76,60,0.1); padding: 12px; border-radius: 8px; border-left: 3px solid #E74C3C;">
+                            <p style="font-size: 13px; font-weight: 700; color: #E74C3C; margin: 0 0 6px;">🔥 Janeiro a Março — Alta Temporada</p>
+                            <p style="font-size: 12px; margin: 0 0 4px;">📈 <strong>Aluguel:</strong> +40 a 80% acima do normal</p>
+                            <p style="font-size: 12px; margin: 0 0 4px;">📈 <strong>Venda:</strong> mais interessados, preços firme</p>
+                            <p style="font-size: 12px; margin: 0 0 4px;">🏠 <strong>TIP:</strong> Melhor para VENDER — estoque limitado, demanda alta</p>
+                            <p style="font-size: 12px; margin: 0 0 0;">⚠️ <strong>CUIDADO:</strong> Sazonalidade extrema — verifique manutenção de condomínio</p>
+                        </div>
+                    </div>
+                    <div style="margin-top: 10px; text-align: center;">
+                        <p style="font-size: 11px; color: var(--gray-500); margin: 0;">📊 Dados baseados em tendências históricas do litoral norte de SP</p>
+                    </div>
+                </div>
+
+                <!-- 6. Contatos de Imobiliárias -->
+                <div class="card utility-card" style="border-left: 4px solid #2980B9;">
+                    <div class="icon">🏠</div>
+                    <h4>Imobiliárias e Corretores</h4>
+                    <p style="font-size: 13px;">Contatos úteis para quem busca imóveis no litoral</p>
+                    <div style="margin-top: 12px; text-align: left;">
+                        <div style="padding: 10px; background: var(--light); border-radius: 8px; margin-bottom: 8px;">
+                            <p style="font-size: 13px; font-weight: 600; margin: 0 0 4px;">🏠 Porto Norte Imobiliária — Bertioga</p>
+                            <p style="font-size: 12px; color: var(--gray-600); margin: 0 0 4px;">Aluguel e venda na Riviera e região</p>
+                            <a href="tel:13999999999" style="color: #2980B9; font-size: 12px; font-weight: 600;">📞 (13) 99999-9999</a>
+                        </div>
+                        <div style="padding: 10px; background: var(--light); border-radius: 8px; margin-bottom: 8px;">
+                            <p style="font-size: 13px; font-weight: 600; margin: 0 0 4px;">🏡 Coastal Realty — Guarujá</p>
+                            <p style="font-size: 12px; color: var(--gray-600); margin: 0 0 4px;">Alto padrão na Enseada e Pitangueiras</p>
+                            <a href="tel:13988888888" style="color: #2980B9; font-size: 12px; font-weight: 600;">📞 (13) 98888-8888</a>
+                        </div>
+                        <div style="padding: 10px; background: var(--light); border-radius: 8px; margin-bottom: 8px;">
+                            <p style="font-size: 13px; font-weight: 600; margin: 0 0 4px;">🌊 Litoral Imóveis — Ubatuba</p>
+                            <p style="font-size: 12px; color: var(--gray-600); margin: 0 0 4px;">Cobertura completa: centro a预报 de ondas</p>
+                            <a href="tel:12977777777" style="color: #2980B9; font-size: 12px; font-weight: 600;">📞 (12) 97777-7777</a>
+                        </div>
+                        <div style="padding: 10px; background: rgba(41,128,185,0.1); border-radius: 8px;">
+                            <p style="font-size: 12px; color: #2980B9; margin: 0;">💡 <strong>Dica:</strong> Sempre peça 3 orçamentos antes de fechar — negocie também oIPTU e condomínio</p>
+                        </div>
+                    </div>
+                    <button class="btn btn-secondary" style="width: 100%; margin-top: 12px;" onclick="alert('Em breve: envie seu contato para ser adicionado à lista!')">➕ Cadastrar Seu Imóvel</button>
+                </div>
+
+                <!-- Fim dos cards de imóveis -->
             </div>
         </div>
 
@@ -12467,6 +12675,178 @@ function resetChecklist() {
             document.querySelectorAll('.pre-surf-check').forEach(c => c.checked = false);
             updateChecklistStatus();
         }
+
+// ── UTILITÁRIOS IMOBILIÁRIOS ────────────────────────────────────────────
+
+// 1. Simulador de Financiamento
+function calcularFinanciamento() {
+    const valor = parseFloat(document.getElementById('sim-valor').value) || 450000;
+    const entradaPct = parseFloat(document.getElementById('sim-entrada').value) || 20;
+    const anos = parseInt(document.getElementById('sim-prazo').value) || 15;
+    const taxaMensal = (parseFloat(document.getElementById('sim-taxa').value) || 9.5) / 100 / 12;
+    const valorImovel = valor;
+    const entrada = valorImovel * (entradaPct / 100);
+    const financiado = valorImovel - entrada;
+    const n = anos * 12;
+    // SAC (amortização constante)
+    const amortizacao = financiado / n;
+    let totalPago = 0;
+    let saldo = financiado;
+    for (let i = 0; i < n; i++) {
+        const juros = saldo * taxaMensal;
+        totalPago += amortizacao + juros;
+        saldo -= amortizacao;
+    }
+    const parcelaPrimeira = amortizacao + (financiado * taxaMensal);
+    document.getElementById('sim-resultado').style.display = 'block';
+    document.getElementById('sim-parcela').textContent = 'R$ ' + parcelaPrimeira.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    document.getElementById('sim-financiado').textContent = 'R$ ' + Math.round(financiado).toLocaleString('pt-BR');
+    document.getElementById('sim-total').textContent = 'R$ ' + Math.round(totalPago).toLocaleString('pt-BR');
+}
+
+// 2. Comparador de Cidades
+const CIDADES_DATA = {
+    bertioga: { nome: '🏖️ Bertioga', aluguel: 'R$ 2.200', saz: 'Alta temporada', veredicto: 'Bertioga tem o melhor custo-benefício do Litoral Norte. A Riviera oferece estrutura de resort com preço mais acessível que Ilhabela. Ideal para quem trabalha remoto e quer viver no mar.' },
+    santos: { nome: '🌊 Santos', aluguel: 'R$ 1.800', saz: 'Todo o ano', veredicto: 'Santos é a cidade mais urbana e completa — comerc, saúde, transporte. Menor apelo de praia, mas custo de vida mais baixo e infraestrutura de metropolis.' },
+    guaruja: { nome: '🏝️ Guarujá', aluguel: 'R$ 2.500', saz: 'Alta temporada', veredicto: 'Guarujá divide-se entre o povão (Enseada) e o alto padrão (Pitangueiras/Astúrias). Boa opção para quem busca praia urbana com infraestrutura de apoio.' },
+    ubatuba: { nome: '🏄 Ubatuba', aluguel: 'R$ 2.800', saz: 'Feriados e verão', veredicto: 'Ubatuba é a capital do surf com mais de 70 praias. Mas a sazonalidade é forte — fora do verão a cidade fica quase vazia. Preço alto na alta.' },
+    ilhabela: { nome: '⛵ Ilhabela', aluguel: 'R$ 3.500', saz: 'Todo o ano (resort)', veredicto: 'Ilhabela é a opção mais premium e sofisticada. Feriado e fim de semana extendem a alta temporada. Acesso por balsa limita — excelente para quem tem flexibilidade.' },
+    'sao-sebastiao': { nome: '🏖️ São Sebastião', aluguel: 'R$ 2.400', saz: 'Alta temporada', veredicto: 'Porto Marechal / Maresias atrae famílias e surfistas. Boa estrutura e acesso por rodovia. Alternativa mais acessível que Ilhabela com sensação similar.' }
+};
+function compararCidades() {
+    const c1 = document.getElementById('comp-cidade1').value;
+    const c2 = document.getElementById('comp-cidade2').value;
+    const d1 = CIDADES_DATA[c1];
+    const d2 = CIDADES_DATA[c2];
+    document.getElementById('comp-nome1').textContent = d1.nome;
+    document.getElementById('comp-aluguel1').textContent = d1.aluguel;
+    document.getElementById('comp-saz1').textContent = d1.saz;
+    document.getElementById('comp-nome2').textContent = d2.nome;
+    document.getElementById('comp-aluguel2').textContent = d2.aluguel;
+    document.getElementById('comp-saz2').textContent = d2.saz;
+    document.getElementById('comp-resultado').style.display = 'block';
+    document.getElementById('comp-veredicto').textContent = d1.veredicto;
+}
+
+// 3. Checklist Visita a Imóvel
+function saveVisitaChecklist() {
+    const checks = Array.from(document.querySelectorAll('#visita-checklist input[type=checkbox]')).map(c => c.checked);
+    localStorage.setItem('asf-visita-checklist', JSON.stringify(checks));
+    document.getElementById('visita-count').textContent = checks.filter(Boolean).length;
+}
+function resetVisitaChecklist() {
+    localStorage.removeItem('asf-visita-checklist');
+    document.querySelectorAll('#visita-checklist input[type=checkbox]').forEach(c => c.checked = false);
+    document.getElementById('visita-count').textContent = '0';
+}
+(function() {
+    try {
+        const saved = JSON.parse(localStorage.getItem('asf-visita-checklist') || '[]');
+        const checks = document.querySelectorAll('#visita-checklist input[type=checkbox]');
+        saved.forEach((val, i) => { if (checks[i]) checks[i].checked = val; });
+        document.getElementById('visita-count').textContent = saved.filter(Boolean).length;
+    } catch(e) {}
+})();
+
+// 4. Guia de Bairros
+const BAIRROS_DATA = {
+    bertioga: { nome: '🏖️ Bertioga', bairros: [
+        { icon: '🇻 🇵', nome: 'Vista Linda', desc: 'Residencial familiar, ruas asfaltadas, próximo ao centro' },
+        { icon: '🏘️', nome: 'Guaratuba', desc: 'Bairro novo, condomínios, mercado próximo' },
+        { icon: '🌊', nome: 'Riviera de São Lourenço', desc: 'Alto padrão, segurança 24h, perto da praia' },
+        { icon: '💰', nome: 'Indicação', desc: 'Sossego + natureza, famílias, investimento' }
+    ]},
+    guaruja: { nome: '🏝️ Guarujá', bairros: [
+        { icon: '🌊', nome: 'Pitangueiras / Asturias', desc: 'Zona nobre, prédios novos, orla organizada' },
+        { icon: '🏖️', nome: 'Enseada', desc: 'Zona urbana com praia grande, comércio forte' },
+        { icon: '🏘️', nome: 'Morrinhos', desc: 'Bairro tranquilo, próximo à praia de Fora' },
+        { icon: '💰', nome: 'Indicação', desc: 'Casal sem filhos, investimento de médio prazo' }
+    ]},
+    santos: { nome: '🌊 Santos', bairros: [
+        { icon: '🏙️', nome: 'Pompéia / Ocian', desc: 'Região valorizada, próximo ao parque' },
+        { icon: '🏘️', nome: 'Campestre', desc: 'Bairro arborizado, casas familiares' },
+        { icon: '💰', nome: 'Indicação', desc: 'Infraestrutura urbana, famílias que precisam de emprego e escola' }
+    ]},
+    ubatuba: { nome: '🏄 Ubatuba', bairros: [
+        { icon: '🏄', nome: 'Centro / Itaguá', desc: 'Infraestrutura completa, mercado e farmácia' },
+        { icon: '🏖️', nome: 'Praia Grande', desc: 'Bairro de referência, acesso a várias praias' },
+        { icon: '🌊', nome: 'Lagoinha / Perequê-Açu', desc: 'Mais tranquilo, ideal para morar' },
+        { icon: '💰', nome: 'Indicação', desc: 'Surfistas, famílias, remote workers' }
+    ]},
+    ilhabela: { nome: '⛵ Ilhabela', bairros: [
+        { icon: '⛵', nome: 'Vila', desc: 'Centro histórico, fermentia, estrutura urbana' },
+        { icon: '🏘️', nome: 'Boracéia / Rio da Olaria', desc: 'Bairros residenciais, mais tranqui' },
+        { icon: '🌊', nome: 'Costa Norte (recomendada)', desc: 'Próximo às melhores praias, acesso de balsa direto' },
+        { icon: '💰', nome: 'Indicação', desc: 'Alto padrão, quem busca exclusividade o ano todo' }
+    ]},
+    'sao-sebastiao': { nome: '🏖️ São Sebastião', bairros: [
+        { icon: '🚢', nome: 'Porto Marechal / Centro', desc: 'Infraestrutura completa, porto e commer' },
+        { icon: '🏄', nome: 'Maresias', desc: 'Praia badalada, estrutura de resort' },
+        { icon: '🌊', nome: 'Juquehy / Barra do Sahy', desc: 'Mais tranquilo, praia familiar' },
+        { icon: '💰', nome: 'Indicação', desc: 'Famílias, surfistas, investimento na orla' }
+    ]},
+    maresias: { nome: '🏄 Maresias', bairros: [
+        { icon: '🏄', nome: 'Maresias Centro', desc: 'Praia badalada, surf, comercio local' },
+        { icon: '🏘️', nome: 'Bairros residenciais', desc: 'Casas de veraneio, condomínios de médio-alto padrão' },
+        { icon: '💰', nome: 'Indicação', desc: 'Surfistas, jovens, quem busca lifestyle praiano' }
+    ]}
+};
+function mostrarGuiaBairros() {
+    const cidade = document.getElementById('guia-cidade-select').value;
+    const data = BAIRROS_DATA[cidade];
+    if (!data) return;
+    const html = '<div style="padding: 10px; background: var(--light); border-radius: 8px; margin-top: 8px;">' +
+        '<p style="font-size: 14px; font-weight: 700; color: var(--primary); margin: 0 0 8px;">' + data.nome + '</p>' +
+        data.bairros.map(b => '<p style="font-size: 12px; margin: 0 0 4px;"><strong>' + b.icon + '</strong> <strong>' + b.nome + '</strong> — ' + b.desc + '</p>').join('') +
+        '</div>';
+    document.getElementById('guia-bairros-content').innerHTML = html;
+}
+
+// 5. Calendário Sazonal
+const TEMPORADAS = {
+    alta: {
+        cor: '#E74C3C', titulo: '🔥 Janeiro a Março — Alta Temporada',
+        pontos: [
+            { icon: '📈', texto: 'Aluguel: +40 a 80% acima do normal' },
+            { icon: '📈', texto: 'Venda: mais interessados, preços firme' },
+            { icon: '🏠', texto: 'TIP: Melhor para VENDER — estoque limitado, demanda alta' },
+            { icon: '⚠️', texto: 'CUIDADO: Sazonalidade extrema — verifique manutenção de condomínio' }
+        ]
+    },
+    media: {
+        cor: '#F39C12', titulo: '⏳ Abril a Junho / Outubro a Dezembro — Média Temporada',
+        pontos: [
+            { icon: '📊', texto: 'Aluguel: volta ao normal (value estável)' },
+            { icon: '🏖️', texto: 'Fim de semana prolongado puxa demanda' },
+            { icon: '🏠', texto: 'TIP: Melhor para COMPRAR — negociando, acha boas pechinchas' },
+            { icon: '✅', texto: 'Vantagem: verifica comportamento real do bairro antes de decide' }
+        ]
+    },
+    baixa: {
+        cor: '#2980B9', titulo: '❄️ Julho (férias escolares) / Novembro a Março fora de ponta',
+        pontos: [
+            { icon: '📉', texto: 'Aluguel: até 40% mais barato que alta' },
+            { icon: '🤝', texto: 'Venda: mais margem de negociação, prazo maior' },
+            { icon: '🏠', texto: 'TIP: Melhor para ALUGAR por temporada — 3 meses = economia real' },
+            { icon: '🔍', texto: 'Vantagem: avalia a cidade vazia, entende a comunidade local' }
+        ]
+    }
+};
+function mostrarTemporada(tipo) {
+    const t = TEMPORADAS[tipo];
+    const html = '<div style="background: rgba(' + hexToRgb(t.cor) + ',0.1); padding: 12px; border-radius: 8px; border-left: 3px solid ' + t.cor + ';">' +
+        '<p style="font-size: 13px; font-weight: 700; color: ' + t.cor + '; margin: 0 0 6px;">' + t.titulo + '</p>' +
+        t.pontos.map(p => '<p style="font-size: 12px; margin: 0 0 4px;">' + p.icon + ' <strong>' + p.texto + '</strong></p>').join('') +
+        '</div>';
+    document.getElementById('temporada-content').innerHTML = html;
+}
+function hexToRgb(hex) {
+    const r = parseInt(hex.slice(1,3),16);
+    const g = parseInt(hex.slice(3,5),16);
+    const b = parseInt(hex.slice(5,7),16);
+    return r + ',' + g + ',' + b;
+}
+
 function setTimerPreset(preset) {
             const workInput = document.getElementById('timer-work');
             const restInput = document.getElementById('timer-rest');
