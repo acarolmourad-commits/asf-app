@@ -14659,7 +14659,37 @@ const ASF_POS_SURF={
   isDone(id){return this.getDone().includes(id)},
   resetToday(){localStorage.setItem('asf-pos-surf-done','[]');this.render('pos-surf-items')},
   render(cid){const el=document.getElementById(cid);if(!el)return;el.innerHTML=this.items.map(i=>'<div style="display:flex;align-items:center;gap:10px;padding:8px 12px;background:var(--gray-50);border-radius:8px;cursor:pointer" onclick="ASF_POS_SURF.markDone(\''+i.id+'\')">'+'<span style="font-size:18px">'+i.icon+'</span>'+'<span style="font-size:13px;color:var(--secondary);flex:1">'+i.text+'</span>'+'<span style="font-size:15px;color:'+(this.isDone(i.id)?'var(--success)':'var(--gray-300)')+'">'+(this.isDone(i.id)?'✅':'⬜')+'</span>'+'</div>').join('')}
-};function resetPosSurf(){ASF_POS_SURF.resetToday();showToast('✅ Checklist pós-surf reiniciado!')};
+};
+
+const ASF_SURF_CONDITIONS={
+  fetchConditions: function() {
+    const beach = 'bertioga';
+    return new Promise((resolve, reject) => {
+      fetchWeather(beach).then(weather => {
+        fetchMarine(beach).then(marine => {
+          if (!weather || !marine || !weather.current || !marine.current) {
+            reject(new Error('Dados indisponíveis'));
+            return;
+          }
+          const w = weather.current;
+          const m = marine.current;
+          const rating = surfRating(m.wave_height);
+          resolve({
+            altura: m.wave_height.toFixed(1),
+            periodo: m.wave_period.toFixed(0),
+            ventoKmh: w.wind_speed_10m.toFixed(0),
+            ventoDir: windDir(w.wind_direction_10m),
+            condicao: weatherDescriptions[w.weather_code] || 'Condições variadas',
+            temp: w.temperature_2m.toFixed(0),
+            rating: rating.score || 0
+          });
+        }).catch(reject);
+      }).catch(reject);
+    });
+  }
+};
+
+function resetPosSurf(){ASF_POS_SURF.resetToday();showToast('✅ Checklist pós-surf reiniciado!')};
 function asfInitFeatures(){
   try{
     const nc=document.getElementById('surf-news-container');if(nc&&!nc.dataset.loaded){nc.dataset.loaded='1';if(typeof ASF_NEWS!=='undefined')ASF_NEWS.render('surf-news-container')}
