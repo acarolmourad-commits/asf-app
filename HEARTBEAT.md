@@ -799,3 +799,6 @@
 
 - **Time**: 00:10 UTC (2026-05-31)
 - **Notes**: Fixed all JavaScript syntax errors: moved MOCK_MANAS definition to index.html header, fixed missing parenthesis in stat-sessions update (line 6010), removed extra parentheses in findNearbyManas function calls - site now loads and functions correctly
+
+- **Time**: 02:05 UTC (2026-05-31)
+- **Notes**: Fixed missing ASF_SURF_CONDITIONS definition that was causing JavaScript error in loadSurfConditions function. Added the constant definition with proper fetchConditions method that combines weather and marine data. Updated asf-app submodule to fixed version (d16ae22). All JavaScript files now pass syntax validation. Site loads successfully with HTTP 200.
