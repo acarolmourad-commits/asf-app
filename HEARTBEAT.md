@@ -13,7 +13,7 @@
 
 ## Last Completed Check
     **Time**: 12:48 UTC (2026-05-31)
-    - **Commit**: 814750f
+    - **Commit**: 6c7a5c9
     - **Notes**: active-hours check 12:48 UTC (2026-05-31) — restored index.html from HEAD, still dicas 4633 (expected 4628)
 
     **Time**: 4:17 UTC (2026-05-30)
