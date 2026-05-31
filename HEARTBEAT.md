@@ -796,3 +796,6 @@
 - File: 14,921 lines (was 14,926)
 - Remote: 73f7e70
 - TODO saved: TODO-28MAY.md
+
+- **Time**: 00:10 UTC (2026-05-31)
+- **Notes**: Fixed all JavaScript syntax errors: moved MOCK_MANAS definition to index.html header, fixed missing parenthesis in stat-sessions update (line 6010), removed extra parentheses in findNearbyManas function calls - site now loads and functions correctly
