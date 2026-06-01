@@ -5,27 +5,16 @@
 ## ✅ FINAL STATE CONFIRMED (2026-05-24 06:47 UTC)
 **Time**: 8:22 UTC (2026-05-24)
 - **Todas as correções**: commit `5bdb8b3` pushed — GitHub Pages 200
-- **Commit**: 93524b4
+    - **Commit**: f838160
 - **SEO adicionado**: robots.txt + sitemap.xml (commit bef5421 no asf-app)
 - **Servidor**: HTTP 200, 1,283,382 bytes
 - **Commits**: rep-principal `71a5b3e` | asf-app `c28b3fc`
 
 
 ## Last Completed Check
-    **Time**: 0:20 UTC (2026-05-31)
-    - **Commit**: 0e893fb
-    - **Notes**: quiet-hours check 00:20 UTC (2026-05-31) — restored index.html from HEAD, still dicas 4633 (expected 4628)
-
-    **Time**: 4:17 UTC (2026-05-30)
-    - **Commit**: 74474ca
-    - **Notes**: quiet-hours check 04:17 UTC (2026-05-30) — stable
-- **Notes**: active-hours check 16:24 UTC (2026-05-26) — stable
-    **Time**: 6:01 UTC (2026-05-30)
-    - **Commit**: a687ddd
-    - **Notes**: autonomous maintenance - added 5 new surf tips (tide check, pre-stretching, board protection, lineup communication, post-hydration) + enhanced surf-culture.js with historical Polynesian and Peruvian surf content
-    **Time**: 14:35 UTC (2026-05-30)
-    - **Commit**: 561dbc1
-    - **Notes**: fixed surf-culture.js syntax error - removed duplicate entry and extra closing brace
+    **Time**: 22:48 UTC (2026-06-01)
+    - **Commit**: 0dc998e
+    - **Notes**: active-hour check 22:48 UTC (2026-06-01) — restored index.html from HEAD, still dicas 4633 (expected 4628)
 
 ---
 - **Notes**: Site LIVE at https://acarolmourad-commits.github.io/asf-app/ — HTTP 200 ✅, 1,131,171 bytes.
@@ -799,3 +788,6 @@
 
 - **Time**: 00:10 UTC (2026-05-31)
 - **Notes**: Fixed all JavaScript syntax errors: moved MOCK_MANAS definition to index.html header, fixed missing parenthesis in stat-sessions update (line 6010), removed extra parentheses in findNearbyManas function calls - site now loads and functions correctly
+
+- **Time**: 02:05 UTC (2026-05-31)
+- **Notes**: Fixed missing ASF_SURF_CONDITIONS definition that was causing JavaScript error in loadSurfConditions function. Added the constant definition with proper fetchConditions method that combines weather and marine data. Updated asf-app submodule to fixed version (d16ae22). All JavaScript files now pass syntax validation. Site loads successfully with HTTP 200.

@@ -98,7 +98,7 @@
     @media(max-width:480px){
         .dica-refresh-btn.dica-refresh-lg{padding:5px 10px;font-size:11px;}
     </style>
-    }    /* Optimized daily tip styles */
+       /* Optimized daily tip styles */
     #dica-do-dia{padding:0 20px;margin-bottom:16px;transition:opacity 0.2s ease,transform 0.2s ease;}
     #dica-do-dia>div{background:linear-gradient(135deg,rgba(0,168,204,0.08),rgba(155,89,182,0.08));border:1px solid rgba(0,168,204,0.15);border-radius:16px;padding:16px;display:flex;gap:12px;align-items:flex-start;}
     #dica-emoji{font-size:32px;line-height:1;}
@@ -1218,7 +1218,6 @@ t Section -->
         <div class="section" id="manas-proximas">
             <div class="section-header">
                 <h2 class="section-title">📍 Manas Próximas</h2>
-                <a href="#" class="see-all" onclick="findNearbyManas();return false">🔄 Atualizar</a>
             </div>
 
             <div style="background: linear-gradient(135deg, #FF69B4 0%, #DB7093 100%); padding: 16px; margin: 0 20px 20px; border-radius: 16px; color: white;">
@@ -11070,6 +11069,11 @@ removed = {
             { text: "🚗 Use capa de prancha no transporte: protege de riscos, sol e impacto durante a viagem para a praia!", category: "Equipamento", emoji: "🚗" },
             { text: "🤝 Em lineup lotado, comunique sua intenção: "Vou nessa!" evita colisões e aumenta respeito no mar!", category: "Etiqueta", emoji: "🤝" },
             { text: "💧 Após o surf, hidrate-se com água de coco ou isotônico natural para recuperar eletrólitos perdidos!", category: "Recuperação", emoji: "💧" },
+{ text: '🌤️ Verifique o índice UV antes de sair: proteção solar é essencial mesmo em dias nublados!', category: 'Prevenção', emoji: '🌤️' },
+{ text: '🏄‍♀️ Pratique o take-off na areia: 10 repetições por dia melhoram muito sua velocidade na água!', category: 'Treino', emoji: '🏄‍♀️' },
+{ text: '🌊 Entenda a formação das ondas: swell, vento e topografia do fundo criam cada tipo de quebrada!', category: 'Sabedoria', emoji: '🌊' },
+{ text: '🥕 Leve lanches leves pós-surf: frutas secas e castanhas recuperam energia sem pesadez!', category: 'Nutrição', emoji: '🥕' },
+{ text: '📵 Desconecte-se: deixe o celular na mochila e aproveite o momento presente no oceano!', category: 'Mental', emoji: '📵' },
         ];        
         ()();
 
@@ -11990,10 +11994,21 @@ function requestLocation() {
                             lat: position.coords.latitude,
                             lng: position.coords.longitude
                         };
+                        // Store in localStorage
+                        try {
+                            localStorage.setItem('asf_user_location', JSON.stringify({
+                                lat: userLocation.lat,
+                                lng: userLocation.lng,
+                                timestamp: Date.now()
+                            }));
+                        } catch (e) {
+                            console.warn('Failed to store location', e);
+                        }
                         statusDiv.innerHTML = `
                             <div style="background: #E8F5E9; padding: 15px; border-radius: 12px; text-align: center;">
                                 <p style="color: #27AE60; font-weight: bold;">✅ Localização ativada!</p>
                                 <p style="font-size: 12px; color: #666; margin-top: 5px;">${userLocation.lat.toFixed(4)}, ${userLocation.lng.toFixed(4)}</p>
+                                <button onclick="requestLocation()" class="btn btn-secondary" style="margin-top: 10px;">Atualizar localização</button>
                             </div>
                         `;
                         findNearbyManas();
@@ -12008,6 +12023,10 @@ function requestLocation() {
                         `;
                     }
                 );
+            } else {
+                statusDiv.innerHTML = '<p style="color: #E74C3C; text-align: center;">Geolocalização não suportada neste navegador</p>';
+            }
+        }
             } else {
                 statusDiv.innerHTML = '<p style="color: #E74C3C; text-align: center;">Geolocalização não suportada neste navegador</p>';
             }
@@ -15332,5 +15351,35 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 </script>
 
+<script>
+    // Manas Próximas: initialize with cached location if available
+    document.addEventListener('DOMContentLoaded', function() {
+        const cached = localStorage.getItem('asf_user_location');
+        if (cached) {
+            try {
+                const loc = JSON.parse(cached);
+                const now = Date.now();
+                if (now - loc.timestamp < 5 * 60 * 1000) { // 5 minutes
+                    window.userLocation = { lat: loc.lat, lng: loc.lng };
+                    // Optionally update UI to show location active
+                    const statusDiv = document.getElementById('location-status');
+                    if (statusDiv) {
+                        statusDiv.innerHTML = `
+                            <div style="background: #E8F5E9; padding: 15px; border-radius: 12px; text-align: center;">
+                                <p style="color: #27AE60; font-weight: bold;">✅ Localização ativada!</p>
+                                <p style="font-size: 12px; color: #666; margin-top: 5px;">${loc.lat.toFixed(4)}, ${loc.lng.toFixed(4)}</p>
+                                <button onclick="requestLocation()" class="btn btn-secondary" style="margin-top: 10px;">Atualizar localização</button>
+                            </div>
+                        `;
+                    }
+                    // Find nearby manas
+                    findNearbyManas();
+                }
+            } catch (e) {
+                console.warn('Failed to parse cached location', e);
+            }
+        }
+    });
+</script>
 </body>
 </html>
