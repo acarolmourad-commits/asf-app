@@ -11204,7 +11204,7 @@ window.ASFMonetization = { trackEvent, getStats };
 
 
 
-setTimeout(()=>{if(!getCookieConsent()){const b=document.getElementById('cookie-consent-banner');if(b)b.style.display='block'}},2000);
+setTimeout(()=>{const b=document.getElementById("cookie-consent-banner");if(b){if(!getCookieConsent()){b.style.display="block";}else{b.style.display="none";}}},2000);
 
 
 
@@ -15363,5 +15363,8 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 </script>
+    <style>
+    @keyframes toastOut{from{opacity:1;transform:translateY(0);}to{opacity:0;transform:translateY(20px);}}
+    </style>
 </body>
 </html>
