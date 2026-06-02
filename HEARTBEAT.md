@@ -12,9 +12,9 @@
 
 
 ## Last Completed Check
-    **Time**: 
-    - **Commit**: 
-    - **Notes**: 
+    **Time**: 23:45 UTC (2026-06-02)
+    - **Commit**: 191100a
+    - **Notes**: active-hour check 23:45 UTC (2026-06-02) — restored index.html from HEAD, still dicas 4638 (expected 4628)
 
 ---
 - **Notes**: Site LIVE at https://acarolmourad-commits.github.io/asf-app/ — HTTP 200 ✅, 1,131,171 bytes.
@@ -814,3 +814,12 @@
   - ✅ Fixed cookie consent banner: hide on load if consent exists
   - ✅ Ensured toastOut animation defined (added style tag)
   - ✅ Banner now properly hides after accepting cookies
+-e 
+## Checkpoint: 23:54 UTC (Jun 02)
+- **Status**: ✅ Complete
+- **Commit**: 26291fb
+- **Items Completed:**
+  - ✅ Fixed cookie consent banner: removed duplicate banner-2
+  - ✅ Fixed cookie consent banner: removed display:none in click handlers, keeping only animation
+  - ✅ Banner now hides on load if consent exists
+  - ✅ Banner animates out and disappears after accepting cookies
