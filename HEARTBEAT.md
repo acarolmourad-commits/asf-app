@@ -791,3 +791,11 @@
 
 - **Time**: 02:05 UTC (2026-05-31)
 - **Notes**: Fixed missing ASF_SURF_CONDITIONS definition that was causing JavaScript error in loadSurfConditions function. Added the constant definition with proper fetchConditions method that combines weather and marine data. Updated asf-app submodule to fixed version (d16ae22). All JavaScript files now pass syntax validation. Site loads successfully with HTTP 200.
+## Checkpoint: 13:10 UTC (Jun 02)
+- **Status**: ✅ Complete
+- **Commit**: 46e7bc2
+- **Items Completed:**
+  - ✅ Removed Instagram section and associated script as requested
+  - ✅ Removed Instagram tab button from navigation
+  - ✅ Removed instagram-content.js file
+  - ✅ Removed Instagram share option from shareReferral function
