@@ -806,7 +806,6 @@
   - ✅ Fixed cookie consent banner animation: replaced undefined slideDown animation with toastOut animation
   - ✅ Added missing @keyframes toastOut definition
   - ✅ Banner now properly animates out and disappears after accepting cookies
--e 
 ## Checkpoint: 22:31 UTC (Jun 02)
 - **Status**: ✅ Complete
 - **Commit**: 39529e3
@@ -814,7 +813,6 @@
   - ✅ Fixed cookie consent banner: hide on load if consent exists
   - ✅ Ensured toastOut animation defined (added style tag)
   - ✅ Banner now properly hides after accepting cookies
--e 
 ## Checkpoint: 23:54 UTC (Jun 02)
 - **Status**: ✅ Complete
 - **Commit**: 26291fb
