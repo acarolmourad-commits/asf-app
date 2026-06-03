@@ -821,3 +821,11 @@
   - ✅ Fixed cookie consent banner: removed display:none in click handlers, keeping only animation
   - ✅ Banner now hides on load if consent exists
   - ✅ Banner animates out and disappears after accepting cookies
+-e 
+## Checkpoint: 01:19 UTC (2026-06-03)
+- **Status**: ✅ Complete
+- **Commit**: dc90751
+- **Items Completed:**
+  - ✅ Removed unused functions: notifyPoints, notifyWorkout, notifyWaves (dead code cleanup)
+  - ✅ Improved code maintainability by eliminating dead code
+
