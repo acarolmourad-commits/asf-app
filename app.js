@@ -433,15 +433,6 @@ function clearNotifications() {
             renderNotifications();
             updateNotificationBadge();
         }
-function notifyPoints(points, action) {
-            addNotification('pontos', '🎯', `+${points} Pontos!`, action);
-        }
-function notifyWorkout(name) {
-            addNotification('treino', '💪', 'Treino Completo!', `Você terminou: ${name}`);
-        }
-function notifyWaves(beach, height) {
-            addNotification('ondas', '🌊', 'Ondas Boas!', `${beach}: ${height}m - Hora de surfar!`);
-        }
 function toggleSharePanel() {
             const panel = document.getElementById('share-panel');
             panel.style.display = panel.style.display === 'none' ? 'block' : 'none';
