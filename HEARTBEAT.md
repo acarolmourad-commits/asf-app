@@ -12,9 +12,9 @@
 
 
 ## Last Completed Check
-    **Time**: 8:21 UTC (2026-06-03)
-    - **Commit**: ca7416a
-    - **Notes**: active-hour check 8:21 UTC (2026-06-03) — restored index.html from HEAD, still dicas 4638 (expected 4628)
+    **Time**: 08:50 UTC (2026-06-03)
+    - **Commit**: 28a5919
+    - **Notes**: active-hour check 08:50 UTC (2026-06-03) — restored index.html from HEAD, still dicas 4638 (expected 4628)
 
 ---
 - **Notes**: Site LIVE at https://acarolmourad-commits.github.io/asf-app/ — HTTP 200 ✅, 1,131,171 bytes.
