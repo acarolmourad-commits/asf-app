@@ -13,7 +13,7 @@
     <meta property="og:type" content="website">
     <meta property="og:title" content="ASF - Associação de Surf Feminino">
     <meta property="og:description" content="Conectando mulheres surfistas. Dicas, comunidade, surftrips e muito mais! 🏄‍♀️">
-    <meta property="og:image" content="https://images.unsplash.com/photo-1502680390469-be75c86b636f?w=1200&h=630&fit=crop">
+    <meta property="og:image" content="assets/images/hero-mermaid-surf.jpg">
     <meta property="og:url" content="https://acarolmourad-commits.github.io/asf-app/">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="ASF - Associação de Surf Feminino">
@@ -281,7 +281,7 @@ t Section -->
                 <a href="https://wa.me/5511954346288" target="_blank" class="icon-btn"  style="color: white; text-decoration: none;">
                     💬
                 </a>
-                <button class="icon-btn" onclick="showCampaignModal()"  style="font-size:16px;width:44px;height:44px;" aria-label="Regras de Campanha">📋</button>
+                <button class="icon-btn" onclick="showCampaignModal()"  style="font-size:16px;width:44px;height:44px;" aria-label="Regras de Incentivos">📋</button>
 
                 <button class="icon-btn" onclick="showBrandSupport()" title="Apoie o App" style="background: linear-gradient(135deg,#FFD700,#FFA500); color: #0E2439; border-radius: 10px; font-weight: 700;">🤝</button>
                 <div class="language-selector" style="display:none !important;">
@@ -319,15 +319,16 @@ t Section -->
         <div class="search-results" id="searchResults"></div>
     </div>
 
-    <!-- Campanha: Verão ASF 2026 -->
-    <div class="card" style="background: linear-gradient(135deg, #00A8CC, #FFD700); border-radius: 16px; margin: 16px 20px; padding: 0; overflow: hidden;">
+    <!-- Incentivos de União das Manas -->
+    <div class="card" style="background: linear-gradient(135deg, #00A8CC, #9b59b6); border-radius: 16px; margin: 16px 20px; padding: 0; overflow: hidden;">
         <div style="padding: 20px; color: white; text-align: center;">
-            <div style="font-size: 12px; opacity: 0.9; margin-bottom: 4px;">🏆 CAMPANHA ATIVA</div>
-            <h3 style="font-size: 20px; margin: 0 0 8px; color: white;">🌞 Verão ASF 2026</h3>
-            <p style="font-size: 13px; margin: 0 0 12px; opacity: 0.95;">Desafio: 30 dias de surf consecutivos!</p>
-            <div style="display: flex; gap: 8px; justify-content: center;">
-                <a href="https://instagram.com/associacaosurffeminino" target="_blank" style="background: white; color: #00A8CC; padding: 8px 16px; border-radius: 20px; font-size: 12px; font-weight: 600; text-decoration: none;">📷 Participar</a>
-                <span style="background: rgba(255,255,255,0.3); padding: 8px 12px; border-radius: 20px; font-size: 11px;">📅 Até 30/12/2026</span>
+            <div style="font-size: 12px; opacity: 0.9; margin-bottom: 4px;">💙 INCENTIVOS DE UNIÃO</div>
+            <h3 style="font-size: 20px; margin: 0 0 8px; color: white;">🌊 Surf Mais Juntas, Mais Fortes</h3>
+            <p style="font-size: 13px; margin: 0 0 12px; opacity: 0.95;">Ganhe pontos extras surfando com suas manas!</p>
+            <div style="display: flex; gap: 8px; justify-content: center; flex-wrap: wrap;">
+                <span style="background: rgba(255,255,255,0.3); padding: 8px 12px; border-radius: 20px; font-size: 11px;">👯‍♀️ +20pts por sessão em grupo</span>
+                <span style="background: rgba(255,255,255,0.3); padding: 8px 12px; border-radius: 20px; font-size: 11px;">🏆 Badge "Manas Unidas"</span>
+                <span style="background: rgba(255,255,255,0.3); padding: 8px 12px; border-radius: 20px; font-size: 11px;">🎁 Sorteio mensal de prancha</span>
             </div>
         </div>
     </div>
@@ -389,7 +390,7 @@ t Section -->
         <h1>Conectando <span>Mulheres Surfistas</span></h1>
         <p>Dicas, comunidade, surftrips e muito mais. Juntas somos mais fortes!</p>
         <img loading="lazy" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 80 80'%3E%3Ccircle cx='40' cy='40' r='38' fill='%2300A8CC'/%3E%3Ctext x='40' y='56' text-anchor='middle' font-size='36'%3E🏄‍♀️%3C/text%3E%3C/svg%3E" alt="Fundadora ASF" style="width:80px; height:80px; border-radius:50%; margin-top:12px; object-fit:cover; border: 3px solid white; box-shadow: 0 4px 12px rgba(0,0,0,0.2);" decoding="async">
-        <img loading="lazy" src="https://images.unsplash.com/photo-1502680390469-be75c86b636f?w=400&h=200&fit=crop" alt="Mulheres surfando" loading="lazy" style="width:100%; border-radius:12px; margin-top:12px; object-fit:cover; max-height:150px;" decoding="async">
+        <img loading="lazy" src="assets/images/hero-mermaid-surf.jpg" alt="Sereias felizes nadando ao lado de pranchas de surf - ASF" style="width:100%; border-radius:12px; margin-top:12px; object-fit:cover; max-height:150px;" decoding="async">
         <div class="hero-cta">
             <button class="btn btn-primary" onclick="showSection('dicas')">
                 📚 Ver Dicas
@@ -14464,23 +14465,25 @@ const ASF_METAS = {
 };
 
 const ASF_CAMPAIGN_RULES={
-  nome:'Campanha ASF — Regras Oficiais',
+  nome:'Incentivos de União das Manas',
   versao:'1.0',
   regras:[
-    '1. Todo material da ASF (logo, cores, tipografia) é de uso exclusivo da associação.',
-    '2. Crédito obrigatório: @asf.surffeminino no Instagram e "ASF" na legenda.',
-    '3. Uso comercial de fotos/artes requer autorização por e-mail: asf@asf-surf.org.',
-    '4. Divulgação de produtos parceiros deve incluir o cupom oficial da marca.',
-    '5. Todo conteúdo gerado pela comunidade (UGC) pode ser usado pela ASF em redes sociais desde que com crédito @asf.surffeminino.',
-    '6. Não é permitido usar a marca ASF em produtos vendidos por terceiros sem contrato.',
-    '7. A ASF pode remover qualquer conteúdo que infrinja diretrizes ou a LGPD.',
-    '8. Ao participar de campanhas, você concorda com estes termos automaticamente.'
+    '1. Surfar com manas gera pontos extras e fortalece nossa comunidade.',
+    '2. Sessões em grupo de 2+ manas ganham +20 pontos por surfista.',
+    '3. Manas que surfem juntas 5+ vezes ganham o badge "Manas Unidas".',
+    '4. Todo mês, um sorteio é feito entre manas que surfaram em grupo.',
+    '5. Prêmios incluem pranchas, aulas, equipamentos e experiências de surf.',
+    '6. O objetivo é criar conexões reais e duradouras entre surfistas.',
+    '7. Incentivos são válidos para todas as praias do litoral paulista.',
+    '8. Participar é automático - basta surfar e marcar sua localização no app.'
   ],
   comoParticipar:[
-    '1. Escolha uma dica da semana e pratique!',
-    '2. Tire uma foto/vídeo e marque @asf.surffeminino no Instagram.',
-    '3. Use a hashtag #ASFNosMares nas redes sociais.',
-    '4. As melhores publicações são destaque no app toda semana!'
+    '1. Surfe com pelo menos uma mana (amiga surfista).',
+    '2. Ative a localização no app para registrar sua sessão.',
+    '3. O app detecta automaticamente quando manas estão próximas.',
+    '4. Pontos e badges são adicionados ao seu perfil após cada sessão.',
+    '5. Quanto mais você surfar com manas, maiores os rewards!',
+    '6. Compartilhe suas sessões com #ManasUnidasASF para inspirar outras.'
   ],
   mostrarRegras(){showCampaignModal()},
   mostrarTermosImagem(){showImageTermsModal()}
@@ -15095,17 +15098,17 @@ const translations = {
         'notifications': 'Notificações',
         'shopCart': 'Carrinho',
         'whatsapp': 'Fale com a gente no WhatsApp',
-        'campaignModal': 'Regras de Campanha',
+        'campaignModal': 'Regras de Incentivos',
         'brandSupport': 'Apoie o App',
         // Main sections
         'dailyTip': 'Dica do Dia',
         'refresh': 'Atualizar',
         'searchPlaceholder': 'Buscar dicas, lojas, treinos...',
         'searchClear': 'Limpar busca',
-        'campaignActive': 'CAMPANHA ATIVA',
-        'summerChallenge': 'Desafio: 30 dias de surf consecutivos!',
-        'participate': 'Participar',
-        'until': 'Até',
+        'campaignActive': 'INCENTIVOS DE UNIÃO',
+        'summerChallenge': 'Ganhe pontos extras surfando com suas manas!',
+        'participate': 'Surf com Manas',
+        'until': 'Valido até',
         // Profile bar
         'level': 'Nível',
         'points': 'pontos',
@@ -15142,17 +15145,17 @@ const translations = {
         'notifications': 'Notifications',
         'shopCart': 'Cart',
         'whatsapp': 'Talk to us on WhatsApp',
-        'campaignModal': 'Campaign Rules',
+        'campaignModal': 'Incentives Rules',
         'brandSupport': 'Support the App',
         // Main sections
         'dailyTip': 'Tip of the Day',
         'refresh': 'Refresh',
         'searchPlaceholder': 'Search tips, shops, training...',
         'searchClear': 'Clear search',
-        'campaignActive': 'ACTIVE CAMPAIGN',
-        'summerChallenge': 'Challenge: 30 consecutive days of surfing!',
-        'participate': 'Participate',
-        'until': 'Until',
+        'campaignActive': 'INCENTIVES ACTIVE',
+        'summerChallenge': 'Earn extra points surfing with your manas!',
+        'participate': 'Surf with Manas',
+        'until': 'Valid until',
         // Profile bar
         'level': 'Level',
         'points': 'points',
@@ -15189,7 +15192,7 @@ const translations = {
         'notifications': 'Notificaciones',
         'shopCart': 'Carrito',
         'whatsapp': 'Hablar con nosotros por WhatsApp',
-        'campaignModal': 'Reglas de la Campaña',
+        'campaignModal': 'Reglas de Incentivos',
         'brandSupport': 'Apoya la App',
         // Main sections
         'dailyTip': 'Consejo del Día',
@@ -15197,8 +15200,8 @@ const translations = {
         'searchPlaceholder': 'Buscar consejos, tiendas, entrenamiento...',
         'searchClear': 'Limpiar búsqueda',
         'campaignActive': 'CAMPAÑA ACTIVA',
-        'summerChallenge': 'Desafío: 30 días consecutivos de surf!',
-        'participate': 'Participar',
+        'summerChallenge': 'Ganá puntos extras surfando con tus manas!',
+        'participate': 'Surf com Manas',
         'until': 'Hasta',
         // Profile bar
         'level': 'Nivel',
