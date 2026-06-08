@@ -11718,6 +11718,7 @@ function callLua() {
     showToast("🌙 Lua está verificando o app... aguarde!");
 }
 function showBrandSupport() { document.getElementById('brand-support').style.display = 'block'; document.body.style.overflow = 'hidden'; }
+function hideBrandSupport(){document.getElementById("brand-support").style.display="none";document.body.style.overflow=""}
 function sendSupport(valor) {
         var msg = 'Olá Carol! Quero apoiar o ASF App. Escolhi: ' + valor + '. Apoio o surf feminino! Me envia o PIX:';
         window.open('https://wa.me/5511954346288?text=' + encodeURIComponent(msg), '_blank');
@@ -13867,6 +13868,7 @@ function hideReferralModal(){const m=document.getElementById('referral-modal');i
 function copyReferralCode(){const code=localStorage.getItem('asf-my-referral-code')||generateReferralCode();navigator.clipboard.writeText(code).then(()=>showToast('✅ Código copiado!','success')).catch(()=>showToast('❌ Erro ao copiar','error'));trackEvent('referral','code_copy')}
 function shareReferral(platform){const code=localStorage.getItem('asf-my-referral-code')||generateReferralCode();const url=`https://acarolmourad-commits.github.io/asf-app/?ref=${code}`;let shareUrl='';switch(platform){case'whatsapp':shareUrl=`https://wa.me/?text=Olá! Quero te convidar para o app ASF - Dicas de surf gratuitas! Baixe aqui: ${url}`;break;case'instagram':shareUrl=`https://www.instagram.com/associacaosurffeminino/`;break;case'copy':shareUrl=url;break}shareUrl&&window.open(shareUrl,'_blank');trackEvent('referral','share',platform)}
 function hidePixDonation(){const m=document.getElementById('pix-modal');if(m){m.style.display='none';document.body.style.overflow='';}}
+function hideCampaignModal(){const m=document.getElementById('campaign-modal');if(m){m.style.display='none';document.body.style.overflow='';}}
 function copyPixKey(){
   const pix = 'asf@asf-surf.org';
   navigator.clipboard.writeText(pix).then(()=>{
@@ -14515,6 +14517,7 @@ function showCampaignModal(){
     +'<ol style="padding-left:18px;margin-bottom:24px;border-left:3px solid var(--accent);padding-left:18px">'+como+'</ol>'
     +'<button onclick="showImageTermsModal()" style="width:100%;padding:12px;border-radius:10px;border:1.5px solid var(--gray-300);background:white;font-size:14px;font-weight:600;cursor:pointer;margin-top:8px">📷 Ver Termos de Uso de Imagem</button>';
   modal.style.display='flex'
+  document.body.style.overflow='hidden';
 }
 
 function showImageTermsModal(){
@@ -14542,6 +14545,7 @@ function showImageTermsModal(){
     +'<p style="font-size:12px;color:var(--gray-500);font-style:italic;margin-bottom:20px">Dúvidas? asf@asf-surf.org</p>'
     +'<button onclick="showCampaignModal()" style="padding:10px 20px;border-radius:8px;border:none;background:var(--primary);color:white;font-size:14px;font-weight:600;cursor:pointer">← Voltar às Regras</button>';
   modal.style.display='flex'
+  document.body.style.overflow='hidden';
 }
 
 function createCampaignModal(){
