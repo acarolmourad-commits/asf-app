@@ -272,7 +272,7 @@ t Section -->
                         <circle cx="50" cy="50" r="4" fill="white"/></circle>
                     </svg>
                 </div>
-                <div class="logo-text" style="display: none !important;">ASF</div>
+                
             </div>
             <div class="header-actions">
                 <button class="icon-btn" id="darkModeToggle" onclick="var d=document.documentElement,w=localStorage,t=d.getAttribute('data-theme');if(t==='dark'){d.removeAttribute('data-theme');w.setItem('asf-theme','light');this.textContent='🌙'}else{d.setAttribute('data-theme','dark');w.setItem('asf-theme','dark');this.textContent='☀️'}"  style="font-size:22px;width:48px;height:48px;">🌙</button>
@@ -11481,7 +11481,7 @@ window.ASFMonetization={trackEvent,getStats};const a=document.createElement('sty
 
 
 <!-- REFERRAL MODAL -->
-<div id="referral-modal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.85); z-index:99999; align-items:center; justify-content:center; backdrop-filter: blur(8px); padding: 20px;">
+<div id="referral-modal" role="dialog" aria-modal="true" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.85); z-index:99999; align-items:center; justify-content:center; backdrop-filter: blur(8px); padding: 20px;">
   <div style="background: linear-gradient(135deg, #9B59B6 0%, #8E44AD 100%); padding: 32px; border-radius: 24px; max-width: 420px; width: 100%; text-align: center; position: relative;">
     <button onclick="hideReferralModal()" style="position: absolute; top: 12px; right: 18px; background: none; border: none; font-size: 28px; cursor: pointer; color: white; opacity: 0.8;">×</button>
     
@@ -11835,7 +11835,8 @@ function trackShare() {
 function callLua() {
     showToast("🌙 Lua está verificando o app... aguarde!");
 }
-function showBrandSupport() { document.getElementById('brand-support').style.display = 'block'; }
+function showBrandSupport() { document.getElementById('brand-support').style.display = 'block'; document.body.style.overflow = 'hidden'; }
+function hideBrandSupport(){document.getElementById("brand-support").style.display="none";document.body.style.overflow=""}
 function sendSupport(valor) {
         var msg = 'Olá Carol! Quero apoiar o ASF App. Escolhi: ' + valor + '. Apoio o surf feminino! Me envia o PIX:';
         window.open('https://wa.me/5511954346288?text=' + encodeURIComponent(msg), '_blank');
@@ -13970,8 +13971,8 @@ function openAffiliateLink(url, productId) {
   }
 }
 function subscribeNewsletter(){const e=document.getElementById('newsletter-email'),t=e?e.value.trim():'';if(!t||!t.includes('@'))return showToast('❌ Email inválido!','error');const o=JSON.parse(localStorage.getItem('asf-newsletter')||'[]');o.push({email:t,date:new Date().toISOString()}),localStorage.setItem('asf-newsletter',JSON.stringify(o)),showToast('✅ Inscrita! Você receberá dicas toda semana.','success'),e&&(e.value=''),typeof gtag!=='undefined'&&gtag('event','newsletter_signup',{event_category:'engagement',value:1})}
-function showPremiumModal(){document.getElementById('premium-modal').style.display='flex',trackEvent('premium','modal_view'),typeof gtag!=='undefined'&&gtag('event','premium_modal_view',{event_category:'monetization',value:1})}
-function hidePremiumModal(){document.getElementById('premium-modal').style.display='none'}
+function showPremiumModal(){document.getElementById('premium-modal').style.display='flex';document.body.style.overflow='hidden';trackEvent('premium','modal_view'),typeof gtag!=='undefined'&&gtag('event','premium_modal_view',{event_category:'monetization',value:1})}
+function hidePremiumModal(){document.getElementById('premium-modal').style.display='none';document.body.style.overflow=''}
 function startPayment(){trackEvent('premium','payment_start'),showToast('🚀 Redirecionando para Mercado Pago...','info'),typeof gtag!=='undefined'&&gtag('event','payment_start',{event_category:'monetization',event_label:'premium_subscription',value:19.9}),setTimeout(()=>{showToast('💳 Integração com Mercado Pago em breve!','info')},1500)}
 function contactWhatsApp(){trackEvent('contact','whatsapp_click'),window.open('https://wa.me/5511954346288','_blank')}
 function trackEvent(e,t,o){const n=JSON.parse(localStorage.getItem('asf-monetization-stats')||'{}');n.events||(n.events=[]),n.events.push({category:e,action:t,label:o,timestamp:Date.now()}),localStorage.setItem('asf-monetization-stats',JSON.stringify(n)),console.log('📊 Track:',e,t,o)}
@@ -13979,12 +13980,13 @@ function getStats(){return JSON.parse(localStorage.getItem('asf-monetization-sta
 function getCookieConsent(){return localStorage.getItem('asf-cookie-consent')}
 function acceptAllCookies(){localStorage.setItem("asf-cookie-consent","all");const b=document.getElementById("cookie-consent-banner");if(b){b.style.display="none";b.remove();}trackEvent("legal","cookie_consent","all");console.log("🍪 Cookie: all")}
 function essentialCookies(){localStorage.setItem("asf-cookie-consent","essential");const b=document.getElementById("cookie-consent-banner");if(b){b.style.display="none";b.remove();}trackEvent("legal","cookie_consent","essential");console.log("🍪 Cookie: essential")}
-function showPixDonation(){const m=document.getElementById('pix-modal');if(m)m.style.display='flex';trackEvent('donation','pix_modal_view')}
-function showReferralModal(){const m=document.getElementById('referral-modal');if(m){m.style.display='flex';const codeDisplay=document.getElementById('referral-code-display');if(codeDisplay){const userCode=localStorage.getItem('asf-my-referral-code');if(userCode){codeDisplay.textContent=userCode}else{const newCode=generateReferralCode();localStorage.setItem('asf-my-referral-code',newCode);codeDisplay.textContent=newCode}}trackEvent('referral','modal_view')}}
-function hideReferralModal(){const m=document.getElementById('referral-modal');if(m)m.style.display='none'}
+function showPixDonation(){const m=document.getElementById('pix-modal');if(m){m.style.display='flex';document.body.style.overflow='hidden';}trackEvent('donation','pix_modal_view')}
+function showReferralModal(){const m=document.getElementById('referral-modal');if(m){m.style.display='flex';document.body.style.overflow='hidden';const codeDisplay=document.getElementById('referral-code-display');if(codeDisplay){const userCode=localStorage.getItem('asf-my-referral-code');if(userCode){codeDisplay.textContent=userCode}else{const newCode=generateReferralCode();localStorage.setItem('asf-my-referral-code',newCode);codeDisplay.textContent=newCode}}trackEvent('referral','modal_view')}
+function hideReferralModal(){const m=document.getElementById('referral-modal');if(m){m.style.display='none';document.body.style.overflow='';}}
 function copyReferralCode(){const code=localStorage.getItem('asf-my-referral-code')||generateReferralCode();navigator.clipboard.writeText(code).then(()=>showToast('✅ Código copiado!','success')).catch(()=>showToast('❌ Erro ao copiar','error'));trackEvent('referral','code_copy')}
 function shareReferral(platform){const code=localStorage.getItem('asf-my-referral-code')||generateReferralCode();const url=`https://acarolmourad-commits.github.io/asf-app/?ref=${code}`;let shareUrl='';switch(platform){case'whatsapp':shareUrl=`https://wa.me/?text=Olá! Quero te convidar para o app ASF - Dicas de surf gratuitas! Baixe aqui: ${url}`;break;case'instagram':shareUrl=`https://www.instagram.com/associacaosurffeminino/`;break;case'copy':shareUrl=url;break}shareUrl&&window.open(shareUrl,'_blank');trackEvent('referral','share',platform)}
-function hidePixDonation(){const m=document.getElementById('pix-modal');if(m)m.style.display='none'}
+function hidePixDonation(){const m=document.getElementById('pix-modal');if(m){m.style.display='none';document.body.style.overflow='';}}
+function hideCampaignModal(){const m=document.getElementById('campaign-modal');if(m){m.style.display='none';document.body.style.overflow='';}}
 function copyPixKey(){
   const pix = 'asf@asf-surf.org';
   navigator.clipboard.writeText(pix).then(()=>{
@@ -14633,6 +14635,7 @@ function showCampaignModal(){
     +'<ol style="padding-left:18px;margin-bottom:24px;border-left:3px solid var(--accent);padding-left:18px">'+como+'</ol>'
     +'<button onclick="showImageTermsModal()" style="width:100%;padding:12px;border-radius:10px;border:1.5px solid var(--gray-300);background:white;font-size:14px;font-weight:600;cursor:pointer;margin-top:8px">📷 Ver Termos de Uso de Imagem</button>';
   modal.style.display='flex'
+  document.body.style.overflow='hidden';
 }
 
 function showImageTermsModal(){
@@ -14660,6 +14663,7 @@ function showImageTermsModal(){
     +'<p style="font-size:12px;color:var(--gray-500);font-style:italic;margin-bottom:20px">Dúvidas? asf@asf-surf.org</p>'
     +'<button onclick="showCampaignModal()" style="padding:10px 20px;border-radius:8px;border:none;background:var(--primary);color:white;font-size:14px;font-weight:600;cursor:pointer">← Voltar às Regras</button>';
   modal.style.display='flex'
+  document.body.style.overflow='hidden';
 }
 
 function createCampaignModal(){
@@ -15446,5 +15450,21 @@ document.addEventListener('DOMContentLoaded', function() {
     <style>
     @keyframes toastOut{from{opacity:1;transform:translateY(0);}to{opacity:0;transform:translateY(20px);}}
     </style>
+    <script>
+function closeAllModals(){
+  document.getElementById('premium-modal')?.style.display='none';
+  document.getElementById('pix-modal')?.style.display='none';
+  document.getElementById('referral-modal')?.style.display='none';
+  document.getElementById('brand-support')?.style.display='none';
+  const campaign = document.getElementById('campaign-modal');
+  if(campaign) campaign.style.display='none';
+  document.body.style.overflow='';
+}
+document.addEventListener('keydown', function(e){
+  if(e.key === 'Escape'){
+    closeAllModals();
+  }
+});
+</script>
 </body>
 </html>
