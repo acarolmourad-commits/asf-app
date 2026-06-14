@@ -144,6 +144,7 @@
 
     @media(max-width:768px){#dica-do-dia{padding:0 12px;}}
     /* Ensure header text is hidden - requested by Carol */
+.dica-badge{display:none !important;}
 
 /* Hide responsive overrides */
 @media(max-width:768px){
@@ -220,6 +221,10 @@
         };
     </script>
     <link rel="stylesheet" href="subscriber-styles.css">
+    <style>
+    .hero-badge { display: none !important; }
+    .hero h1 { display: none !important; }
+    </style>
 </head><body>
     <!-- Skip to content for accessibility -->
     <!-- Link skip to content movido para script -->
@@ -298,7 +303,7 @@ t Section -->
     <!-- Chatbot Panel -->
     <div id="chatbot-panel" style="display:none; position:fixed; bottom:80px; right:20px; width:320px; max-height:400px; background:white; border-radius:16px; box-shadow:0 10px40px rgba(0,0,0,0.2); z-index:1000; padding:16px; overflow-y:auto;">
         <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
-            <strong style="color:#0E2439;">🤖 Assistente ASF</strong>
+            <strong style="color:#0E2439; display: none !important;">🤖 Assistente ASF</strong>
             <button onclick="toggleChatbot()" style="background:none; border:none; font-size:20px; cursor:pointer;">✕</button>
         </div>
         <div id="chatbot-messages" style="min-height:200px; max-height:300px; overflow-y:auto;"></div>
@@ -11057,7 +11062,120 @@ removed = {
 { text: '🌊 Entenda a formação das ondas: swell, vento e topografia do fundo criam cada tipo de quebrada!', category: 'Sabedoria', emoji: '🌊' },
 { text: '🥕 Leve lanches leves pós-surf: frutas secas e castanhas recuperam energia sem pesadez!', category: 'Nutrição', emoji: '🥕' },
 { text: '📵 Desconecte-se: deixe o celular na mochila e aproveite o momento presente no oceano!', category: 'Mental', emoji: '📵' },
-        ];        
+        
+            { text: "Mantenha a prancha em sombra quando não estiver usando para evitar danos por UV.", category: 'Técnica', emoji: '🏄' },
+            { text: "Antes de surfar, verifique se há sinalizações de segurança na praia.", category: 'Segurança', emoji: '⚠️' },
+            { text: "Use um tênis de água quente para melhorar a circulação nos pés em dias frios.", category: 'Equipamento', emoji: '🔗' },
+            { text: "Pratique a respiração diafragmática para aumentar a capacidade pulmonar.", category: 'Prevenção', emoji: '🏃' },
+            { text: "Leve sempre um saco de lixo para deixar a praia mais limpa do que encontrou.", category: 'Nutrição', emoji: '🥗' },
+            { text: "Se sentir tontura ao remar, pare e repouse — pode ser sinal de desidratação.", category: 'Condições', emoji: '🌊' },
+            { text: "Use uma touca de neoprene fina para proteger a cabeça do vento sem perder audição.", category: 'Saúde', emoji: '🌬️' },
+            { text: "Após cada sessão, enxágue o leash com água doce para remover sal e areia.", category: 'Mental', emoji: '🌊' },
+            { text: "Não compartilhe protetor solar — cada pessoa deve aplicar a quantidade adequada.", category: 'Comunidade', emoji: '💜' },
+            { text: "Observem as aves marinhas; elas frequentemente indicam onde há cardumes de peixes.", category: 'Etiqueta', emoji: '🤝' },
+
+            { text: "Mantenha a prancha em sombra quando não estiver usando para evitar danos por UV.", category: 'Técnica', emoji: '🏄' },
+            { text: "Antes de surfar, verifique se há sinalizações de segurança na praia.", category: 'Segurança', emoji: '⚠️' },
+            { text: "Use um tênis de água quente para melhorar a circulação nos pés em dias frios.", category: 'Equipamento', emoji: '🔗' },
+            { text: "Pratique a respiração diafragmática para aumentar a capacidade pulmonar.", category: 'Prevenção', emoji: '🏃' },
+            { text: "Leve sempre um saco de lixo para deixar a praia mais limpa do que encontrou.", category: 'Nutrição', emoji: '🥗' },
+            { text: "Se sentir tontura ao remar, pare e repouse — pode ser sinal de desidratação.", category: 'Condições', emoji: '🌊' },
+            { text: "Use uma touca de neoprene fina para proteger a cabeça do vento sem perder audição.", category: 'Saúde', emoji: '🌬️' },
+            { text: "Após cada sessão, enxágue o leash com água doce para remover sal e areia.", category: 'Mental', emoji: '🌊' },
+            { text: "Não compartilhe protetor solar — cada pessoa deve aplicar a quantidade adequada.", category: 'Comunidade', emoji: '💜' },
+            { text: "Observem as aves marinhas; elas frequentemente indicam onde há cardumes de peixes.", category: 'Etiqueta', emoji: '🤝' },
+            { text: "Quando o vento estiver offshore, as ondas tendem a ser mais limpas e organizadas.", category: 'Treino', emoji: '🏋️' },
+            { text: "Não surfe logo após uma refeição pesada; aguarde pelo menos 1 hora.", category: 'Cultura', emoji: '🏛️' },
+            { text: "Use protetor labial com FPS para proteger os lábios do sol e do vento.", category: 'Sustentabilidade', emoji: '🌍' },
+            { text: "Se sua prancha tiver um amassado, repare com resina epóxi apropriada antes de surfar.", category: 'Competição', emoji: '🔥' },
+            { text: "Mantenha os ombros relaxados ao paddlar para evitar tensão muscular.", category: 'ASF', emoji: '✨' },
+            { text: "Pratique o pop-up na areia antes de entrar na água para melhorar a velocidade.", category: 'Recuperação', emoji: '😌' },
+            { text: "Use uma capa de prancha ao transportar para evitar riscos e impactos.", category: 'Imóveis', emoji: '💰' },
+            { text: "Hidrate-se com água de coco após o surf para repor eletrólitos naturais.", category: 'Técnica', emoji: '📚' },
+            { text: "Evite surfar perto de áreas de pesca para não interferir nas linhas de pesca.", category: 'Segurança', emoji: '👀' },
+            { text: "Aprenda a identificar diferentes tipos de quebrada: beach break, point break, reef break.", category: 'Equipamento', emoji: '🎒' },
+            { text: "Quando houver forte correnteza, navegue em zig-zag para conservar energia.", category: 'Prevenção', emoji: '🧘' },
+            { text: "Use um relógio à prova d’água para monitorar o tempo na água.", category: 'Nutrição', emoji: '🥤' },
+            { text: "Após o surf, alongue os músculos das costas e das pernas para evitar rigidez.", category: 'Condições', emoji: '🌙' },
+            { text: "Se estiver aprendendo, escolha uma prancha de espuma macia (soft top) para mais estabilidade.", category: 'Saúde', emoji: '🧊' },
+            { text: "Verifique o regulador da sua prancha (se for inflável) antes de cada sessão.", category: 'Mental', emoji: '🙏' },
+            { text: "Não deixe objetos de valor na areia; leve somente o essencial para a praia.", category: 'Comunidade', emoji: '💙' },
+            { text: "Use um boné ou chapéu com aba larga para proteção solar fora da água.", category: 'Etiqueta', emoji: '🏄' },
+            { text: "Quando o mar estiver calmo, pratique o equilíbrio em pé na prancha na areia.", category: 'Treino', emoji: '🤸' },
+            { text: "Aprenda a fazer o duck dive eficiente para passar ondas grandes sem perder a prancha.", category: 'Cultura', emoji: '⚡' },
+            { text: "Mantenha as unhas dos pés aparadas para evitar desconforto dentro da meia de neoprene.", category: 'Sustentabilidade', emoji: '🐢' },
+            { text: "Use uma toalha de microfibra para secar rapidamente após o surf.", category: 'Competição', emoji: '🏆' },
+            { text: "Se sentir cólica após o surf, hidrate-se e repouse; pode ser devido à ingestão de água do mar.", category: 'ASF', emoji: '💙' },
+            { text: "Evite surfar perto de saídas de esgoto ou áreas com qualidade duvidosa da água.", category: 'Recuperação', emoji: '💤' },
+            { text: "Aprenda a ler a tabela de marés e como ela afeta o seu pico favorito.", category: 'Imóveis', emoji: '🌅' },
+            { text: "Quando houver veleiro ou kitesurf na área, mantenha distância de segurança.", category: 'Técnica', emoji: '🔄' },
+            { text: "Use uma prancha com shape adequado ao seu peso e nível de habilidade.", category: 'Segurança', emoji: '🛟' },
+            { text: "Pratique a remada com um braço de cada vez para melhorar a técnica assimétrica.", category: 'Equipamento', emoji: '🕯️' },
+            { text: "Após o surf, enxágue o traje de neoprene com água doce e sabão neutro.", category: 'Prevenção', emoji: '💧' },
+            { text: "Não surfe em áreas de preservação ambiental sem autorização.", category: 'Nutrição', emoji: '🍉' },
+            { text: "Mantenha um kit de primeiros socorros simples na sua mochila de praia.", category: 'Condições', emoji: '🌤️' },
+            { text: "Use um aplicativo de previsão de ondas para planejar suas sessões com antecedência.", category: 'Saúde', emoji: '😴' },
+            { text: "Quando o vento mudar súbitamente, observe como isso afeta a formação das ondas.", category: 'Mental', emoji: '🎯' },
+            { text: "Pratique a respiração em caixa (box breathing) para acalmar a mente antes de entrar na água.", category: 'Comunidade', emoji: '👯' },
+            { text: "Se sua prancha tiver um cheiro forte, deixe-a ao sol por algumas horas para arejar.", category: 'Etiqueta', emoji: '🙌' },
+            { text: "Não deixe seu equipamento exposto ao sol por longos períodos; isso degrada os materiais.", category: 'Treino', emoji: '🔥' },
+            { text: "Aprenda a fazer o bottom turn com o peso bem distribuído entre os pés.", category: 'Cultura', emoji: '🌊' },
+            { text: "Quando houver muitos surfistas na linha, comunique sua intenção claramente antes de pegar a onda.", category: 'Sustentabilidade', emoji: '🌱' },
+            { text: "Use uma bracelete identificadora com seus dados de emergência ao surfar sozinho.", category: 'Competição', emoji: '🥅' },
+            { text: "Após cada mês, inspeccione o leash em busca de desgaste excessivo ou rachaduras.", category: 'ASF', emoji: '🏄‍♀️' },
+            { text: "Pratique a flexibilidade do tronco com torções suaves para melhorar o giro na prancha.", category: 'Recuperação', emoji: '🌿' },
+
+            { text: "Mantenha a prancha em sombra quando não estiver usando para evitar danos por UV.", category: 'Técnica', emoji: '🏄' },
+            { text: "Antes de surfar, verifique se há sinalizações de segurança na praia.", category: 'Segurança', emoji: '⚠️' },
+            { text: "Use um tênis de água quente para melhorar a circulação nos pés em dias frios.", category: 'Equipamento', emoji: '🔗' },
+            { text: "Pratique a respiração diafragmática para aumentar a capacidade pulmonar.", category: 'Prevenção', emoji: '🏃' },
+            { text: "Leve sempre um saco de lixo para deixar a praia mais limpa do que encontrou.", category: 'Nutrição', emoji: '🥗' },
+            { text: "Se sentir tontura ao remar, pare e repouse — pode ser sinal de desidratação.", category: 'Condições', emoji: '🌊' },
+            { text: "Use uma touca de neoprene fina para proteger a cabeça do vento sem perder audição.", category: 'Saúde', emoji: '🌬️' },
+            { text: "Após cada sessão, enxágue o leash com água doce para remover sal e areia.", category: 'Mental', emoji: '🌊' },
+            { text: "Não compartilhe protetor solar — cada pessoa deve aplicar a quantidade adequada.", category: 'Comunidade', emoji: '💜' },
+            { text: "Observem as aves marinhas; elas frequentemente indicam onde há cardumes de peixes.", category: 'Etiqueta', emoji: '🤝' },
+            { text: "Quando o vento estiver offshore, as ondas tendem a ser mais limpas e organizadas.", category: 'Treino', emoji: '🏋️' },
+            { text: "Não surfe logo após uma refeição pesada; aguarde pelo menos 1 hora.", category: 'Cultura', emoji: '🏛️' },
+            { text: "Use protetor labial com FPS para proteger os lábios do sol e do vento.", category: 'Sustentabilidade', emoji: '🌍' },
+            { text: "Se sua prancha tiver um amassado, repare com resina epóxi apropriada antes de surfar.", category: 'Competição', emoji: '🔥' },
+            { text: "Mantenha os ombros relaxados ao paddlar para evitar tensão muscular.", category: 'ASF', emoji: '✨' },
+            { text: "Pratique o pop-up na areia antes de entrar na água para melhorar a velocidade.", category: 'Recuperação', emoji: '😌' },
+            { text: "Use uma capa de prancha ao transportar para evitar riscos e impactos.", category: 'Imóveis', emoji: '💰' },
+            { text: "Hidrate-se com água de coco após o surf para repor eletrólitos naturais.", category: 'Técnica', emoji: '📚' },
+            { text: "Evite surfar perto de áreas de pesca para não interferir nas linhas de pesca.", category: 'Segurança', emoji: '👀' },
+            { text: "Aprenda a identificar diferentes tipos de quebrada: beach break, point break, reef break.", category: 'Equipamento', emoji: '🎒' },
+            { text: "Quando houver forte correnteza, navegue em zig-zag para conservar energia.", category: 'Prevenção', emoji: '🧘' },
+            { text: "Use um relógio à prova d’água para monitorar o tempo na água.", category: 'Nutrição', emoji: '🥤' },
+            { text: "Após o surf, alongue os músculos das costas e das pernas para evitar rigidez.", category: 'Condições', emoji: '🌙' },
+            { text: "Se estiver aprendendo, escolha uma prancha de espuma macia (soft top) para mais estabilidade.", category: 'Saúde', emoji: '🧊' },
+            { text: "Verifique o regulador da sua prancha (se for inflável) antes de cada sessão.", category: 'Mental', emoji: '🙏' },
+            { text: "Não deixe objetos de valor na areia; leve somente o essencial para a praia.", category: 'Comunidade', emoji: '💙' },
+            { text: "Use um boné ou chapéu com aba larga para proteção solar fora da água.", category: 'Etiqueta', emoji: '🏄' },
+            { text: "Quando o mar estiver calmo, pratique o equilíbrio em pé na prancha na areia.", category: 'Treino', emoji: '🤸' },
+            { text: "Aprenda a fazer o duck dive eficiente para passar ondas grandes sem perder a prancha.", category: 'Cultura', emoji: '⚡' },
+            { text: "Mantenha as unhas dos pés aparadas para evitar desconforto dentro da meia de neoprene.", category: 'Sustentabilidade', emoji: '🐢' },
+            { text: "Use uma toalha de microfibra para secar rapidamente após o surf.", category: 'Competição', emoji: '🏆' },
+            { text: "Se sentir cólica após o surf, hidrate-se e repouse; pode ser devido à ingestão de água do mar.", category: 'ASF', emoji: '💙' },
+            { text: "Evite surfar perto de saídas de esgoto ou áreas com qualidade duvidosa da água.", category: 'Recuperação', emoji: '💤' },
+            { text: "Aprenda a ler a tabela de marés e como ela afeta o seu pico favorito.", category: 'Imóveis', emoji: '🌅' },
+            { text: "Quando houver veleiro ou kitesurf na área, mantenha distância de segurança.", category: 'Técnica', emoji: '🔄' },
+            { text: "Use uma prancha com shape adequado ao seu peso e nível de habilidade.", category: 'Segurança', emoji: '🛟' },
+            { text: "Pratique a remada com um braço de cada vez para melhorar a técnica assimétrica.", category: 'Equipamento', emoji: '🕯️' },
+            { text: "Após o surf, enxágue o traje de neoprene com água doce e sabão neutro.", category: 'Prevenção', emoji: '💧' },
+            { text: "Não surfe em áreas de preservação ambiental sem autorização.", category: 'Nutrição', emoji: '🍉' },
+            { text: "Mantenha um kit de primeiros socorros simples na sua mochila de praia.", category: 'Condições', emoji: '🌤️' },
+            { text: "Use um aplicativo de previsão de ondas para planejar suas sessões com antecedência.", category: 'Saúde', emoji: '😴' },
+            { text: "Quando o vento mudar súbitamente, observe como isso afeta a formação das ondas.", category: 'Mental', emoji: '🎯' },
+            { text: "Pratique a respiração em caixa (box breathing) para acalmar a mente antes de entrar na água.", category: 'Comunidade', emoji: '👯' },
+            { text: "Se sua prancha tiver um cheiro forte, deixe-a ao sol por algumas horas para arejar.", category: 'Etiqueta', emoji: '🙌' },
+            { text: "Não deixe seu equipamento exposto ao sol por longos períodos; isso degrada os materiais.", category: 'Treino', emoji: '🔥' },
+            { text: "Aprenda a fazer o bottom turn com o peso bem distribuído entre os pés.", category: 'Cultura', emoji: '🌊' },
+            { text: "Quando houver muitos surfistas na linha, comunique sua intenção claramente antes de pegar a onda.", category: 'Sustentabilidade', emoji: '🌱' },
+            { text: "Use uma bracelete identificadora com seus dados de emergência ao surfar sozinho.", category: 'Competição', emoji: '🥅' },
+            { text: "Após cada mês, inspeccione o leash em busca de desgaste excessivo ou rachaduras.", category: 'ASF', emoji: '🏄‍♀️' },
+            { text: "Pratique a flexibilidade do tronco com torções suaves para melhorar o giro na prancha.", category: 'Recuperação', emoji: '🌿' },
+];        
         ()();
 
         let beachCards = null;
@@ -13859,8 +13977,8 @@ function contactWhatsApp(){trackEvent('contact','whatsapp_click'),window.open('h
 function trackEvent(e,t,o){const n=JSON.parse(localStorage.getItem('asf-monetization-stats')||'{}');n.events||(n.events=[]),n.events.push({category:e,action:t,label:o,timestamp:Date.now()}),localStorage.setItem('asf-monetization-stats',JSON.stringify(n)),console.log('📊 Track:',e,t,o)}
 function getStats(){return JSON.parse(localStorage.getItem('asf-monetization-stats')||'{}')}
 function getCookieConsent(){return localStorage.getItem('asf-cookie-consent')}
-function acceptAllCookies(){localStorage.setItem('asf-cookie-consent','all');const b=document.getElementById('cookie-consent-banner');if(b){b.style.animation='toastOut 0.3s ease-out forwards';setTimeout(()=>b.remove(),300)}trackEvent('legal','cookie_consent','all');console.log('🍪 Cookie: all')}
-function essentialCookies(){localStorage.setItem('asf-cookie-consent','essential');const b=document.getElementById('cookie-consent-banner');if(b){b.style.animation='toastOut 0.3s ease-out forwards';setTimeout(()=>b.remove(),300)}trackEvent('legal','cookie_consent','essential');console.log('🍪 Cookie: essential')}
+function acceptAllCookies(){localStorage.setItem("asf-cookie-consent","all");const b=document.getElementById("cookie-consent-banner");if(b){b.style.display="none";b.remove();}trackEvent("legal","cookie_consent","all");console.log("🍪 Cookie: all")}
+function essentialCookies(){localStorage.setItem("asf-cookie-consent","essential");const b=document.getElementById("cookie-consent-banner");if(b){b.style.display="none";b.remove();}trackEvent("legal","cookie_consent","essential");console.log("🍪 Cookie: essential")}
 function showPixDonation(){const m=document.getElementById('pix-modal');if(m)m.style.display='flex';trackEvent('donation','pix_modal_view')}
 function showReferralModal(){const m=document.getElementById('referral-modal');if(m){m.style.display='flex';const codeDisplay=document.getElementById('referral-code-display');if(codeDisplay){const userCode=localStorage.getItem('asf-my-referral-code');if(userCode){codeDisplay.textContent=userCode}else{const newCode=generateReferralCode();localStorage.setItem('asf-my-referral-code',newCode);codeDisplay.textContent=newCode}}trackEvent('referral','modal_view')}}
 function hideReferralModal(){const m=document.getElementById('referral-modal');if(m)m.style.display='none'}
