@@ -129,3 +129,27 @@ document.addEventListener('DOMContentLoaded', function () {
     s.insertBefore(p, s.firstChild);
   }
 });
+
+// Hermes hotfix 2026-09-15 (ver docs/editorial-log.md):
+// 1) Link do Google Forms de cadastro retornava 404 -> redirecionado para o WhatsApp oficial da ASF.
+// 2) Checkout da loja usava numero placeholder 5511999999999 -> corrigido para o numero oficial.
+(function () {
+  var ASF_WA = '5511954346288';
+  document.addEventListener('DOMContentLoaded', function () {
+    document.querySelectorAll('a[href*="forms/d/e/1fJhfaiNyYSSq9bKElew69y6GZ6_pxLz05HR26klIsSA"]').forEach(function (a) {
+      a.href = 'https://wa.me/' + ASF_WA + '?text=' + encodeURIComponent('Ol\u00E1! Quero me associar \u00E0 ASF \uD83C\uDFC4\u200D\u2640\uFE0F');
+      if (!a.querySelector('.asf-hotfix-note')) {
+        var s = document.createElement('span');
+        s.className = 'asf-hotfix-note';
+        s.style.cssText = 'font-size:11px;opacity:.85;margin-left:6px';
+        s.textContent = '(via WhatsApp)';
+        a.appendChild(s);
+      }
+    });
+  });
+  var _open = window.open;
+  window.open = function (u, n, f) {
+    if (typeof u === 'string') u = u.split('5511999999999').join(ASF_WA);
+    return _open.call(this, u, n, f);
+  };
+})();
