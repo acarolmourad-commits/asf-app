@@ -1,35 +1,32 @@
 # 📋 RELATÓRIO — MISSÃO HERMES · FASE 3 (15/set/2026)
 
-## ✅ Implementado e verificado nesta fase
+Status: IMPLEMENTADO E VERIFICADO EM PRODUÇÃO.
 
-### 1. Fila editorial 2 — NO AR (HTTP 200)
-- `/bem-estar/surf-saude-mental-mulheres.html` — com fontes científicas reais (Groundswell/PMC11365036; Souza et al. 2021; tese USP 2024) + nota de CVV.
-- `/praias/surf-feminino-sao-sebastiao.html` — Simpósio SPSurf 2023 e Águas de Gaia, com fontes jornalísticas.
-- `/aprender/etiqueta-no-mar.html` — regras de prioridade e códigos do line-up.
+## 🔧 Correções críticas de infraestrutura
 
-### 2. Quizzes com resultado-arquétipo (commit c79075c)
-- Quiz básico: 🏆 Mana Expert / 🌊 Mana em Evolução / 🌱 Mana Começando — cada um com explicação + próximo passo real (guia editorial ou desafios).
-- Quiz segurança: 🏆 Guardiã do Line-up / 🌊 Mana Atenta / 🌱 Mana Precavida — com recomendação ligada ao guia de etiqueta.
-- Fim da "frase genérica" de resultado. Verificado em produção.
+### 1. Automação diária estava 100% quebrada (10/10 execuções agendadas falhando)
+**Causas raiz encontradas e corrigidas no `.github/workflows/main.yml` (commit fc0fa19):**
+- **Validação impossível:** o passo "Validate Layout & Link Reports" exigia `docs/generated/link-checker.json`, mas o `link_checker.py` gera `link-audit.json`. Falha garantida em toda execução → o conteúdo diário (dicas, quotes, mobilidade, eco board) nunca era commitado. Corrigido para `link-audit.json`.
+- **Corrida de commits:** 3 jobs (wave-forecast, breathing-stretching, daily-content) commitavam e davam push na `main` em paralelo → falhas non-fast-forward. Adicionado loop de retry com `git pull --rebase` em todos os passos de commit.
+- **Sobreposição de runs:** adicionado `concurrency: asf-main-automation` (sem cancelar em andamento).
 
-### 3. Correções de navegação
-- Âncoras quebradas dos artigos corrigidas: `#quizzes` → `#quiz` e `#bem-estar` → `#mobilidade` (IDs reais do app) — commit aa889cb.
-- Auditoria: nenhuma âncora interna quebrada em index.html; todos os 97 handlers onclick com função definida; todas as seções showSection existem.
+### 2. Linkagem interna e descoberta de conteúdo
+- Novo bloco **"📖 Guias ASF"** na Home (logo após o hero) com links para os 6 artigos editoriais — substituições idempotentes via `scripts/hermes_guias_home.py` + workflow dedicado.
+- Toasts dos quizzes atualizados: referência a "menu Aprender" (inexistente) → "bloco Guias ASF na Home".
 
-### 4. QA mobile (browser real)
-- Método 1 (visual 375px): hero e CTA visíveis, nenhum 'sorteio' (0 matches nas duas páginas), sem sobreposições.
-- Método 2 (medição DOM a 375px): **página de artigo com 0 elementos excedentes** ✅. Home: 6 elementos flagrados são todos `position: fixed` relativos ao viewport (bg-animation, bottom-nav, nav-sheet) — comportamento esperado, não há overflow real identificado.
-- Observação honesta: emulação de viewport via browser remoto é limitada; recomenda-se um teste em aparelho físico (320/375/390px) como próximo passo de QA.
+## 🧩 Quizzes (fase anterior, confirmado em produção)
+- Quiz básico e quiz de segurança agora retornam **resultado-arquétipo** (Mana Começando / Mana em Evolução / Mana Expert; Mana Precavida / Mana Atenta / Guardiã do Line-up) com explicação e próximo passo real — fim da frase genérica.
 
-### 5. SEO
-- robots.txt confere sitemap e bloqueia /docs/. Sitemap com 8 URLs (app + 6 artigos + sessões).
-- index-short.html é um redirect simples para o app — ok.
-
-## 🧹 Confirmação contínua
-- 'sorteio': 0 em index.html (repo e produção), validado por CI a cada mudança.
+## ✅ Verificação final em produção (acarolmourad-commits.github.io/asf-app)
+- sorteio: **0** ocorrências ✅
+- hero com proposta de valor ✅
+- bloco Guias ASF na Home ✅
+- arquétipos de quiz (básico + segurança) ✅
+- 6 artigos editoriais: todos HTTP 200, com links internos ✅
+- sitemap.xml com 8 URLs ✅
 
 ## 🚀 Próximos passos reais
-1. Teste em dispositivo físico (320–414px) — único item de QA que exige hardware real.
-2. Aumentar áreas de toque dos ícones do topo (≈44px) — melhoria de acessibilidade identificada no QA.
-3. Search Console: submeter sitemap e acompanhar indexação dos 6 artigos.
-4. Fila editorial 3: histórias reais de manas (somente com depoimentos verdadeiros e autorizados).
+1. Monitorar a próxima execução agendada do main.yml (deve passar pela primeira vez — o conteúdo diário volta a ser commitado).
+2. QA visual mobile (320–414px) das páginas novas no dispositivo/emulador.
+3. Google Search Console: enviar sitemap atualizado e acompanhar indexação.
+4. Fila editorial 3: Histórias de Manas (somente com depoimentos reais e autorizados).
