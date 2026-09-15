@@ -1,0 +1,44 @@
+name: 🌊 MISSÃO-MESTRA ASF - Camada temporal + consolidação
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/asf-master-cleanup.yml'
+      - 'scripts/asf_master_cleanup.py'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  actions: write
+
+jobs:
+  cleanup:
+    name: Aplicar transformações e validar
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+      - name: 🌊 Executar transformações
+        run: python3 scripts/asf_master_cleanup.py
+      - name: ✅ Validações
+        run: |
+          ! grep -E 'id="praias-guia"|id="surf-news-2"|id="comunidade-hidden"|id="mobilidade-extra"|WQS 5000|Copa Litoral Paulista|Etapa Municipal Bertioga|calendario-2025' index.html && echo "✅ index.html limpo"
+          python3 -c "import json; json.load(open('data/events.json'))" && echo "✅ events.json válido"
+          test "$(grep -c '<style' index.html)" = "$(grep -c '</style>' index.html)" && echo "✅ styles balanceados"
+      - name: 💾 Commit e push
+        run: |
+          git config user.name "ASF Bot"
+          git config user.email "bot@asf-app.com"
+          if git diff --quiet; then
+            echo "📭 Sem alterações"
+          else
+            git add index.html
+            git commit -m "🌊 MISSÃO-MESTRA: camada temporal (data/events.json) + remove seções duplicadas (praias-guia, surf-news-2, comunidade-hidden, mobilidade-extra) + eventos expirados"
+            git push
+            echo "✅ Publicado"
+          fi
+      - name: 🚀 Disparar deploy (GitHub Pages)
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: gh workflow run main.yml && echo "✅ Deploy disparado"
