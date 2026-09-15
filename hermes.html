@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Painel Hermes - ASF</title>
+<meta name="description" content="Painel operacional da automação editorial da ASF: status de links, eventos e rotinas diárias.">
+<meta name="robots" content="noindex,follow">
+<style>
+body{font-family:-apple-system,'Segoe UI',sans-serif;background:#F8F9FA;color:#0E2439;margin:0;padding:24px}
+.wrap{max-width:860px;margin:0 auto}
+h1{font-size:22px} .card{background:#fff;border-radius:14px;padding:18px 20px;margin:14px 0;box-shadow:0 2px 10px rgba(0,0,0,.06)}
+.ok{color:#27ae60;font-weight:700}.bad{color:#e74c3c;font-weight:700}.skip{color:#95a5a6}
+.row{display:flex;justify-content:space-between;gap:10px;padding:6px 0;border-bottom:1px solid #eee;font-size:13px;word-break:break-all}
+small{color:#9A9A9A}
+a{color:#00A8CC}
+</style>
+</head>
+<body>
+<div class="wrap">
+<h1>🌊 Painel Hermes — Operação Editorial ASF</h1>
+<small>Atualizado automaticamente pelas rotinas diárias. Fontes: auditoria de links (9h) e status temporal de eventos (6h).</small>
+
+<div class="card" id="links-card"><strong>🔗 Links</strong><div id="links">carregando…</div></div>
+<div class="card" id="events-card"><strong>📅 Eventos</strong><div id="events">carregando…</div></div>
+<div class="card"><strong>🤖 Rotinas diárias</strong>
+<div class="row"><span>06h — Status temporal de eventos</span><span class="ok">ATIVA</span></div>
+<div class="row"><span>07h — Previsão de ondas</span><span class="ok">ATIVA</span></div>
+<div class="row"><span>08h — Conteúdo diário (dicas/posts)</span><span class="ok">ATIVA</span></div>
+<div class="row"><span>a cada 6h — Respiração &amp; alongamento</span><span class="ok">ATIVA</span></div>
+<div class="row"><span>09h — Auditoria de links (real)</span><span class="ok">ATIVA</span></div>
+</div>
+<div class="card"><strong>📓 Governança</strong>
+<div class="row"><span>Registro editorial</span><span><a href="https://github.com/acarolmourad-commits/asf-app/blob/main/docs/editorial-log.md">editorial-log.md</a></span></div>
+<div class="row"><span>Regra central</span><span>Em dúvida → preservar. Nada é inventado; fonte obrigatória.</span></div>
+</div>
+</div>
+<script>
+fetch('docs/generated/link-audit.json').then(r=>r.json()).then(d=>{
+  document.getElementById('links').innerHTML =
+    '<div class="row"><span>Última auditoria</span><span>'+d.date.slice(0,10)+'</span></div>'+
+    '<div class="row"><span>Verificados</span><span>'+d.total+'</span></div>'+
+    '<div class="row"><span>OK</span><span class="ok">'+d.ok+'</span></div>'+
+    '<div class="row"><span>Quebrados</span><span class="'+(d.broken_count?'bad':'ok')+'">'+d.broken_count+'</span></div>'+
+    (d.broken||[]).map(b=>'<div class="row"><span>'+b+'</span><span class="bad">BROKEN</span></div>').join('')+
+    '<div class="row"><span>Não verificáveis (rate-limit)</span><span class="skip">'+d.skipped+'</span></div>';
+}).catch(()=>{document.getElementById('links').textContent='Relatório indisponível no momento.';});
+fetch('data/events.json').then(r=>r.json()).then(d=>{
+  document.getElementById('events').innerHTML = (d.eventos||[]).map(e=>
+    '<div class="row"><span>'+e.titulo+' — '+e.inicio+'</span><span class="'+(e.status==='ENCERRADO'?'skip':'ok')+'">'+(e.status||'—')+'</span></div>').join('')
+    + '<div class="row"><span>Atualizado em</span><span>'+(d.updated||'—')+'</span></div>';
+}).catch(()=>{document.getElementById('events').textContent='Dados de eventos indisponíveis.';});
+</script>
+</body>
+</html>
