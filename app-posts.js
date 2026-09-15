@@ -67,3 +67,111 @@ function hideCreateMenu() {
 
 // Load posts on page load
 document.addEventListener('DOMContentLoaded', loadUserPosts);
+
+/* ===== ASF Navigation Enhancement ===== */
+/* Collapses the 11-item bottom nav into 5 primary shortcuts
+   + a "Menu" button that opens an accessible bottom sheet
+   with the remaining sections. Sheet items proxy the original
+   buttons' click behavior, so no handler changes are needed. */
+(function () {
+    'use strict';
+
+    var PRIMARY_COUNT = 5; // Dicas, Próximas, Saúde, Pontos, Trips stay in the bar
+
+    function init() {
+        var nav = document.querySelector('.bottom-nav');
+        if (!nav) return;
+        var items = Array.prototype.slice.call(nav.querySelectorAll('.nav-item'));
+        if (items.length <= PRIMARY_COUNT + 1) return;
+
+        var overflow = items.slice(PRIMARY_COUNT);
+
+        var backdrop = document.createElement('div');
+        backdrop.className = 'asf-nav-sheet-backdrop';
+        backdrop.setAttribute('aria-hidden', 'true');
+
+        var sheet = document.createElement('div');
+        sheet.className = 'asf-nav-sheet';
+        sheet.setAttribute('role', 'dialog');
+        sheet.setAttribute('aria-modal', 'true');
+        sheet.setAttribute('aria-label', 'Menu completo');
+
+        var handle = document.createElement('div');
+        handle.className = 'sheet-handle';
+        var title = document.createElement('div');
+        title.className = 'sheet-title';
+        title.textContent = 'Todas as seções';
+        var grid = document.createElement('div');
+        grid.className = 'sheet-grid';
+
+        overflow.forEach(function (btn) {
+            var icon = btn.querySelector('.icon');
+            var label = btn.querySelector('.label');
+            var item = document.createElement('button');
+            item.className = 'sheet-item';
+            item.innerHTML =
+                '<span class="icon">' + (icon ? icon.textContent : '•') + '</span>' +
+                '<span>' + (label ? label.textContent : (btn.getAttribute('aria-label') || 'Seção')) + '</span>';
+            item.addEventListener('click', function () {
+                closeSheet();
+                btn.click(); // proxy to original handler (handleNavTap / showPremiumModal)
+                if (btn.classList.contains('nav-item') && btn.getAttribute('onclick') &&
+                    btn.getAttribute('onclick').indexOf('handleNavTap') === 0) {
+                    menuBtn.classList.add('active');
+                }
+            });
+            grid.appendChild(item);
+            btn.style.display = 'none'; // hide from the bar
+        });
+
+        sheet.appendChild(handle);
+        sheet.appendChild(title);
+        sheet.appendChild(grid);
+
+        var menuBtn = document.createElement('button');
+        menuBtn.className = 'nav-item';
+        menuBtn.setAttribute('aria-label', 'Abrir menu completo');
+        menuBtn.setAttribute('aria-haspopup', 'dialog');
+        menuBtn.innerHTML = '<span class="icon">☰</span><span class="label">Menu</span>';
+
+        var anchor = items[PRIMARY_COUNT - 1];
+        anchor.parentNode.insertBefore(menuBtn, anchor.nextSibling);
+
+        function openSheet() {
+            backdrop.classList.add('open');
+            sheet.classList.add('open');
+            backdrop.style.display = 'block';
+            sheet.style.display = 'block';
+            document.body.style.overflow = 'hidden';
+            var first = sheet.querySelector('.sheet-item');
+            if (first) first.focus();
+        }
+        function closeSheet() {
+            backdrop.classList.remove('open');
+            sheet.classList.remove('open');
+            document.body.style.overflow = '';
+            menuBtn.classList.remove('active');
+        }
+
+        menuBtn.addEventListener('click', function () {
+            sheet.classList.contains('open') ? closeSheet() : openSheet();
+        });
+        backdrop.addEventListener('click', closeSheet);
+        document.addEventListener('keydown', function (e) {
+            if (e.key === 'Escape') closeSheet();
+        });
+
+        items.slice(0, PRIMARY_COUNT).forEach(function (btn) {
+            btn.addEventListener('click', function () { menuBtn.classList.remove('active'); });
+        });
+
+        document.body.appendChild(backdrop);
+        document.body.appendChild(sheet);
+    }
+
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', init);
+    } else {
+        init();
+    }
+})();
