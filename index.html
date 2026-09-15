@@ -55,6 +55,228 @@
       var infolinks_wsid = 1;
     </script>
     <style> html{scroll-behavior:smooth;
+        :root {
+            --primary: #00A8CC;
+            --primary-dark: #0088A8;
+            --primary-light: #4DC8E0;
+            --secondary: #0E2439;
+            --secondary-light: #1A3A5C;
+            --accent: #F4D03F;
+            --success: #2ECC71;
+            --purple: #9B59B6;
+            --coral: #FF6B9D;
+            --light: #F8F9FA;
+            --white: #FFFFFF;
+            --gray: #999;
+            --gray-100: #F1F1F1;
+            --gray-200: #E5E5E5;
+            --gray-300: #D4D4D4;
+            --gray-400: #9A9A9A;
+            --gray-500: #7A7A7A;
+            --gray-600: #5A5A5A;
+            --radius-sm: 6px;
+            --radius-md: 10px;
+            --radius-lg: 16px;
+            --radius-xl: 20px;
+            --shadow-sm: 0 2px 8px rgba(0,0,0,0.06);
+            --shadow-md: 0 4px 16px rgba(0,0,0,0.08);
+            --shadow-lg: 0 8px 32px rgba(0,0,0,0.12);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--light);
+            padding-bottom: 70px;
+            color: var(--secondary);
+        }
+        /* ─── Scroll Progress ─── */
+        .scroll-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 3px;
+            background: var(--primary);
+            transform-origin: left;
+            z-index: 1000;
+        }
+        /* ─── Background Animation ─── */
+        .bg-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 20% 80%, rgba(0,168,204,0.03) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 20%, rgba(155,89,182,0.03) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: 0;
+        }
+        /* ─── Header ─── */
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 999;
+            background: linear-gradient(135deg, var(--secondary) 0%, var(--primary) 100%);
+            padding: 12px 20px;
+            color: var(--white);
+            box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+        }
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .logo-icon {
+            width: 36px;
+            height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .logo-text {
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--white);
+        }
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .icon-btn {
+            background: rgba(255,255,255,0.15);
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 12px;
+            width: 44px;
+            height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            color: var(--white);
+            text-decoration: none;
+        }
+        .icon-btn:hover {
+            background: rgba(255,255,255,0.25);
+            transform: translateY(-2px);
+        }
+        .header-actions .icon-btn[style*="background: linear-gradient"] {
+            background: linear-gradient(135deg, #FFD700, #FFA500) !important;
+            color: var(--secondary) !important;
+        }
+        /* ─── Search Bar ─── */
+        .search-container {
+            padding: 16px 20px;
+            background: var(--white);
+            position: sticky;
+            top: 72px;
+            z-index: 100;
+        }
+        .search-bar {
+            display: flex;
+            align-items: center;
+            background: var(--gray-100);
+            border-radius: 16px;
+            padding: 0 16px;
+            height: 48px;
+            border: 1px solid var(--gray-200);
+        }
+        .search-icon {
+            margin-right: 12px;
+            font-size: 18px;
+            color: var(--gray-400);
+        }
+        #searchInput {
+            flex: 1;
+            border: none;
+            outline: none;
+            background: transparent;
+            font-size: 15px;
+            width: 100%;
+        }
+        .search-clear {
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            color: var(--gray-400);
+        }
+        .search-results {
+            position: absolute;
+            top: 100%;
+            left: 20px;
+            right: 20px;
+            background: var(--white);
+            border-radius: 12px;
+            box-shadow: var(--shadow-lg);
+            max-height: 300px;
+            overflow-y: auto;
+            z-index: 100;
+            display: none;
+        }
+        /* ─── Bottom Navigation ─── */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: var(--white);
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            padding: 8px 12px;
+            height: 70px;
+            border-top: 1px solid var(--gray-200);
+            box-shadow: 0 -2px 12px rgba(0,0,0,0.06);
+            z-index: 999;
+            overflow-x: auto;
+        }
+        .bottom-nav::-webkit-scrollbar {
+            display: none;
+        }
+        .bottom-nav .nav-item {
+            flex: 1;
+            min-width: 60px;
+            height: 56px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 4px;
+            border: none;
+            background: transparent;
+            border-radius: 12px;
+            cursor: pointer;
+            font-size: 12px;
+            color: var(--gray-400);
+            transition: all 0.2s ease;
+            margin: 2px;
+        }
+        .bottom-nav .nav-item:hover {
+            color: var(--primary);
+            background: rgba(0,168,204,0.08);
+            transform: translateY(-2px);
+        }
+        .bottom-nav .nav-item.active {
+            color: var(--primary);
+            background: rgba(0,168,204,0.12);
+        }
+        .bottom-nav .nav-item .icon {
+            font-size: 20px;
+        }
+        .nav-item.active .icon {
+            font-size: 22px;
+        }
+    </style>
     /* ─── Tip of the Day ─── */
     #dica-do-dia{padding:0 16px;margin:16px auto 20px;max-width:800px;}
     #dica-do-dia .dica-card{background:linear-gradient(135deg,rgba(0,168,204,0.10) 0%,rgba(155,89,182,0.08) 100%);border:1.5px solid rgba(0,168,204,0.22);border-radius:20px;padding:20px 22px;display:flex;gap:18px;align-items:flex-start;box-shadow:0 4px 24px rgba(0,168,204,0.12);transition:box-shadow 0.3s ease;}
@@ -5709,26 +5931,16 @@ t Section -->
             <span class="label">Trips</span>
         </button>
         <button class="nav-item" aria-label="Utilitários do surf" onclick="handleNavTap(this, 'utilities')">
-        <button class="nav-item" aria-label="Tornar-se Premium" onclick="showPremiumModal()">
-          <span class="icon">⭐</span>
-          <span class="label">Premium</span>
+            <span class="icon">⚙️</span>
+            <span class="label">Mais</span>
         </button>
         <button class="nav-item" aria-label="Tornar-se Premium" onclick="showPremiumModal()">
             <span class="icon">⭐</span>
             <span class="label">Premium</span>
         </button>
-
-            <span class="icon">⚙️</span>
-            <span class="label">Mais</span>
-        </button>
         <button class="nav-item" aria-label="Manas e comunidade" onclick="handleNavTap(this, 'manas')">
             <span class="icon">💬</span>
             <span class="label">Manas</span>
-        </button>
-    </div>
-        <button class="nav-item" aria-label="Loja e ofertas" onclick="handleNavTap(this, 'loja')">
-          <span class="icon">🛒</span>
-          <span class="label">Loja</span>
         </button>
         <button class="nav-item" aria-label="Loja e ofertas" onclick="handleNavTap(this, 'loja')">
             <span class="icon">🛒</span>
@@ -5742,6 +5954,7 @@ t Section -->
             <span class="icon">🏆</span>
             <span class="label">Badges</span>
         </button>
+    </div>
 
     <!-- Hidden sections for compatibility -->
     <div class="section" id="comunidade-hidden" style="display: none !important;"></div>
