@@ -650,6 +650,21 @@ t Section -->
         </div>
     </section>
 
+
+    <!-- Guias ASF - Conteudo editorial -->
+    <div class="card" style="margin: 4px 20px 16px; padding: 18px 20px; border-radius: 16px;">
+        <h3 style="margin: 0 0 4px; font-size: 16px; color: var(--secondary, #0E2439);">📖 Guias ASF</h3>
+        <p style="font-size: 12.5px; margin: 0 0 12px; opacity: 0.8;">Conteúdo confiável para aprender, evoluir e curtir o mar com segurança.</p>
+        <div style="display: grid; gap: 8px;">
+            <a href="aprender/como-comecar-a-surfar-mulheres.html" style="display:block; padding: 12px 14px; border-radius: 12px; background: rgba(0,168,204,0.08); text-decoration:none; color: inherit; font-size: 13.5px;">🏄‍♀️ <strong>Como começar a surfar</strong> — guia completo para mulheres</a>
+            <a href="aprender/primeira-prancha-de-surf.html" style="display:block; padding: 12px 14px; border-radius: 12px; background: rgba(0,168,204,0.08); text-decoration:none; color: inherit; font-size: 13.5px;">🏄 <strong>Sua primeira prancha</strong> — como escolher sem errar</a>
+            <a href="aprender/etiqueta-no-mar.html" style="display:block; padding: 12px 14px; border-radius: 12px; background: rgba(0,168,204,0.08); text-decoration:none; color: inherit; font-size: 13.5px;">🤝 <strong>Etiqueta no mar</strong> — regras de prioridade sem tecnicismo</a>
+            <a href="praias/melhores-praias-iniciantes-litoral-norte-sp.html" style="display:block; padding: 12px 14px; border-radius: 12px; background: rgba(155,89,182,0.08); text-decoration:none; color: inherit; font-size: 13.5px;">🗺️ <strong>Praias para iniciantes</strong> — litoral norte de SP</a>
+            <a href="praias/surf-feminino-sao-sebastiao.html" style="display:block; padding: 12px 14px; border-radius: 12px; background: rgba(155,89,182,0.08); text-decoration:none; color: inherit; font-size: 13.5px;">📍 <strong>Surf feminino em São Sebastião</strong> — comunidade e projetos</a>
+            <a href="bem-estar/surf-saude-mental-mulheres.html" style="display:block; padding: 12px 14px; border-radius: 12px; background: rgba(155,89,182,0.08); text-decoration:none; color: inherit; font-size: 13.5px;">🧘 <strong>Surf e bem-estar</strong> — o que o mar faz pela mente</a>
+        </div>
+    </div>
+
     <!-- Live Surf Conditions -->
     <div class="surf-bar" id="surfBar">
         <div style="display:flex;align-items:center;gap:12px;font-size:13px;padding:10px 16px;background:var(--light);border-radius:12px;margin:0 20px 12px;justify-content:space-between;">
@@ -10797,7 +10812,7 @@ function submitQuiz() {
                 ? {e:'🏆', t:'Mana Expert', d:'Você domina a base do surf! Próximo passo: desafios e metas no app.'}
                 : pct >= 50
                 ? {e:'🌊', t:'Mana em Evolução', d:'Boa base! Reforce com o guia de etiqueta no mar e siga praticando.'}
-                : {e:'🌱', t:'Mana Começando', d:'Todo mundo começa do zero! Leia o guia Como começar a surfar (menu Aprender) e tente de novo.'};
+                : {e:'🌱', t:'Mana Começando', d:'Todo mundo começa do zero! Leia o guia Como começar a surfar (bloco Guias ASF na Home) e tente de novo.'};
             showToast(`${arq.e} ${arq.t} — ${correct}/${total} acertos (${pct}%)! +${pts} pontos\n${arq.d}`);
             earnPoints('quiz', pts);
         }
@@ -10815,7 +10830,7 @@ function submitQuizSeguranca() {
                 ? {e:'🏆', t:'Guardiã do Line-up', d:'Segurança em dia! Compartilhe o guia de etiqueta com uma mana iniciante.'}
                 : pct >= 50
                 ? {e:'🌊', t:'Mana Atenta', d:'Quase lá! Revise prioridade de onda e queda segura no guia de etiqueta.'}
-                : {e:'🌱', t:'Mana Precavida', d:'Antes da próxima sessão, leia Etiqueta no mar (menu Aprender) e refaça o quiz.'};
+                : {e:'🌱', t:'Mana Precavida', d:'Antes da próxima sessão, leia Etiqueta no mar (bloco Guias ASF na Home) e refaça o quiz.'};
             showToast(`${arqSeg.e} ${arqSeg.t} — Segurança: ${correct}/${total} acertos (${pct}%)! +${pts} pontos\n${arqSeg.d}`);
             earnPoints('quiz', pts);
             document.getElementById('quiz-seguranca').style.display = 'none';
