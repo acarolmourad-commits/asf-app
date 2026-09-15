@@ -157,3 +157,59 @@ document.addEventListener('DOMContentLoaded', function () {
     return _open.call(this, u, n, f);
   };
 })();
+
+// === ASF Enhancements loader + navegacao (Hermes, 2026-09-15) ===
+// Carrega a camada visual e melhora a navegacao sem editar o index.html.
+(function () {
+  // 1) CSS de melhorias
+  if (!document.getElementById('asf-enhancements-css')) {
+    var l = document.createElement('link');
+    l.id = 'asf-enhancements-css';
+    l.rel = 'stylesheet';
+    l.href = 'asf-enhancements.css';
+    document.head.appendChild(l);
+  }
+
+  document.addEventListener('DOMContentLoaded', function () {
+    // 2) Indicador de secao ativa na bottom nav
+    try {
+      var items = Array.prototype.slice.call(document.querySelectorAll('.bottom-nav .nav-item'));
+      var map = {}; // sectionId -> navItem
+      items.forEach(function (it) {
+        var oc = it.getAttribute('onclick') || '';
+        var m = oc.match(/showSection\('([^']+)'\)/);
+        if (m) map[m[1]] = it;
+      });
+      var sections = Object.keys(map)
+        .map(function (id) { return document.getElementById(id); })
+        .filter(Boolean);
+      if ('IntersectionObserver' in window && sections.length) {
+        var io = new IntersectionObserver(function (entries) {
+          entries.forEach(function (en) {
+            if (en.isIntersecting) {
+              items.forEach(function (i) { i.classList.remove('asf-active'); });
+              var it = map[en.target.id];
+              if (it) it.classList.add('asf-active');
+            }
+          });
+        }, { rootMargin: '-40% 0px -55% 0px' });
+        sections.forEach(function (s) { io.observe(s); });
+      }
+    } catch (e) { /* navegacao segue funcional sem o indicador */ }
+
+    // 3) Botao flutuante "voltar ao topo"
+    if (!document.getElementById('asf-back-top')) {
+      var b = document.createElement('button');
+      b.id = 'asf-back-top';
+      b.setAttribute('aria-label', 'Voltar ao topo');
+      b.textContent = '\u2191';
+      b.onclick = function () { window.scrollTo({ top: 0, behavior: 'smooth' }); };
+      document.body.appendChild(b);
+      var onScroll = function () {
+        b.classList.toggle('asf-visible', window.scrollY > 600);
+      };
+      window.addEventListener('scroll', onScroll, { passive: true });
+      onScroll();
+    }
+  });
+})();

@@ -1,0 +1,64 @@
+/* ASF Enhancements - Hermes (carregado dinamicamente; nao altera index.html)
+   Melhorias visuais e de navegacao, seguras e reversiveis. */
+
+/* Acessibilidade: foco visivel em elementos interativos */
+a:focus-visible, button:focus-visible, [onclick]:focus-visible, input:focus-visible, textarea:focus-visible {
+  outline: 2px solid var(--primary, #00A8CC);
+  outline-offset: 2px;
+  border-radius: 6px;
+}
+
+/* Bottom nav: blur, safe-area (iOS), item ativo */
+.bottom-nav {
+  background: rgba(255,255,255,0.92);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  padding-bottom: max(8px, env(safe-area-inset-bottom));
+  height: auto;
+  min-height: 70px;
+}
+.bottom-nav .nav-item { transition: color .2s ease, background .2s ease, transform .15s ease; }
+.bottom-nav .nav-item:active { transform: scale(0.94); }
+.bottom-nav .nav-item.asf-active {
+  color: var(--primary, #00A8CC);
+  background: rgba(0,168,204,0.10);
+  font-weight: 600;
+}
+
+/* Titulos de secao: respiro consistente */
+.section-title { letter-spacing: -0.01em; }
+.section { scroll-margin-top: 12px; }
+
+/* Cards: cantos e sombra consistentes onde nao ha estilo inline */
+.card { border-radius: 16px; }
+
+/* Imagens suavizadas */
+img { border-radius: 8px; }
+
+/* Botao voltar ao topo */
+#asf-back-top {
+  position: fixed;
+  right: 16px;
+  bottom: calc(86px + env(safe-area-inset-bottom));
+  width: 44px; height: 44px;
+  border-radius: 50%;
+  border: none;
+  background: var(--primary, #00A8CC);
+  color: #fff;
+  font-size: 20px;
+  cursor: pointer;
+  box-shadow: 0 4px 14px rgba(0,168,204,0.35);
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(8px);
+  transition: opacity .25s ease, transform .25s ease;
+  z-index: 998;
+}
+#asf-back-top.asf-visible { opacity: 1; pointer-events: auto; transform: translateY(0); }
+#asf-back-top:hover { background: var(--secondary, #0E2439); }
+
+/* Desktop: limita largura da bottom nav para nao esticar demais */
+@media (min-width: 900px) {
+  .bottom-nav { justify-content: center; gap: 8px; }
+  .bottom-nav .nav-item { flex: 0 1 auto; min-width: 84px; padding: 0 14px; }
+}
