@@ -1,135 +1,136 @@
 #!/usr/bin/env python3
 """
-ASF Link Checker & Content Improver
-Verifica links e gera relatório
+ASF Link Checker (REAL) - Hermes
+Extrai links de index.html e verifica de verdade (HTTP HEAD/GET).
+Nunca simula resultados. Se um link nao pode ser verificado (ex.: rate-limit),
+ele e marcado como "skipped", nunca como "ok".
+Saida: docs/generated/link-audit.json + docs/generated/link-audit-dashboard.html
 """
 
+import os
 import re
 import json
-import random
-from datetime import datetime
+from datetime import datetime, timezone
 
-EXTERNAL_LINKS = [
-    {"name": "Surf World", "url": "https://surfworld.com.br"},
-    {"name": "Mar e Sol", "url": "https://maresolsurf.com.br"},
-    {"name": "Praia Surf", "url": "https://praiasurf.com.br"},
-    {"name": "ASF Instagram", "url": "https://instagram.com/associacaosurffeminino"},
-    {"name": "ASF TikTok", "url": "https://tiktok.com/@Cahrol.asf"},
-]
+import urllib.request
+import urllib.error
+import ssl
 
-IMPROVEMENTS = [
-    {"type": "content", "title": "Adicionar mais dicas", "priority": "high"},
-    {"type": "feature", "title": "Sistema de login", "priority": "medium"},
-    {"type": "content", "title": "Criar blog", "priority": "medium"},
-]
+BASE_URL = "https://acarolmourad-commits.github.io/asf-app/"
+RAW_INDEX = "https://raw.githubusercontent.com/acarolmourad-commits/asf-app/main/index.html"
 
-NEW_CONTENT = [
-    {"category": "Dicas", "title": "Como escolher wax", "content": "Escolha wax certo para temperatura da água.", "language": "pt"},
-    {"category": "Segurança", "title": "Etiqueta no mar", "content": "Respeite a prioridade. Não furar fila!", "language": "pt"},
-]
+# Dominios sensiveis a rate-limit/bloqueio de bots: reportar como skipped
+SKIP_DOMAINS = ("instagram.com", "tiktok.com", "facebook.com", "wa.me", "api.whatsapp.com")
+# URLs de preconnect/tecnica que nao sao links navegaveis
+TECHNICAL_PREFIXES = ("https://fonts.googleapis.com", "https://fonts.gstatic.com",
+                      "https://www.googletagmanager.com", "https://pagead2.googlesyndication.com",
+                      "https://resources.infolinks.com", "https://api.open-meteo.com",
+                      "https://marine-api.open-meteo.com")
 
-def check_links():
-    """Verifica se os links estão acessíveis (simulado)"""
-    results = []
-    for link in EXTERNAL_LINKS:
-        # Simulação - em produção usaria requests
-        results.append({
-            "name": link["name"],
-            "url": link["url"],
-            "status": "ok",
-            "last_check": datetime.now().isoformat()
-        })
-    return results
+CTX = ssl.create_default_context()
+HEADERS = {"User-Agent": "Mozilla/5.0 (compatible; ASF-LinkChecker/1.0)"}
 
-def generate_report():
-    """Gera relatório completo"""
-    report = {
-        "date": datetime.now().strftime("%Y-%m-%d"),
-        "links_checked": check_links(),
-        "improvements": random.sample(IMPROVEMENTS, min(2, len(IMPROVEMENTS))),
-        "new_content": NEW_CONTENT,
-        "summary": {
-            "total_links": len(EXTERNAL_LINKS),
-            "all_ok": True,
-            "suggestions_count": len(IMPROVEMENTS)
-        }
-    }
-    return report
+
+def fetch(url):
+    req = urllib.request.Request(url, headers=HEADERS)
+    with urllib.request.urlopen(req, timeout=20, context=CTX) as r:
+        return r.read().decode("utf-8", errors="replace")
+
+
+def check(url):
+    """Retorna (status, http_code). status: ok | broken | skipped"""
+    if any(url.startswith(p) for p in TECHNICAL_PREFIXES):
+        return "skipped", None
+    if any(d in url for d in SKIP_DOMAINS):
+        return "skipped", None
+    for method in ("HEAD", "GET"):
+        try:
+            req = urllib.request.Request(url, headers=HEADERS, method=method)
+            with urllib.request.urlopen(req, timeout=15, context=CTX) as r:
+                code = r.getcode()
+                return ("ok", code) if code < 400 else ("broken", code)
+        except urllib.error.HTTPError as e:
+            if method == "HEAD" and e.code in (403, 405, 429):
+                continue  # tenta GET
+            return "broken", e.code
+        except Exception as e:
+            if method == "HEAD":
+                continue
+            return "broken", str(type(e).__name__)
+    return "skipped", None
+
 
 def main():
-    """Executa auditoria completa"""
-    print("🔍 ASF Link Checker & Content Improver")
-    print("=" * 50)
+    print("ASF Link Checker (real) - Hermes")
+    html = fetch(RAW_INDEX)
+    hrefs = set(re.findall(r"""href=["']([^"']+)["']""", html)) | set(re.findall(r"""src=["']([^"']+)["']""", html))
+    ext = sorted({h for h in hrefs if h.startswith("http") and "${" not in h})
+    loc = sorted({h.split("#")[0].split("?")[0] for h in hrefs
+                  if not h.startswith(("http", "#", "javascript", "data:", "mailto:", "tel:")) and "${" not in h and h.split("#")[0]})
 
-    report = generate_report()
+    results, broken = [], []
+    for u in ext:
+        status, code = check(u)
+        results.append({"url": u, "status": status, "http": code})
+        if status == "broken":
+            broken.append(u)
+        print(f"  [{status:7}] {code or '-'} {u}")
+    for l in loc:
+        u = BASE_URL + l
+        try:
+            req = urllib.request.Request(u, headers=HEADERS, method="HEAD")
+            with urllib.request.urlopen(req, timeout=15, context=CTX) as r:
+                code = r.getcode()
+        except Exception as e:
+            code = getattr(e, "code", str(type(e).__name__))
+        ok = isinstance(code, int) and code < 400
+        results.append({"url": l, "status": "ok" if ok else "broken", "http": code, "local": True})
+        if not ok:
+            broken.append(l)
+        print(f"  [{'ok' if ok else 'broken':7}] {code} {l} (local)")
 
-    # Salva relatório
-    output_path = "docs/generated/link-audit.json"
-    os.makedirs(os.path.dirname(output_path), exist_ok=True)
-
-    with open(output_path, 'w', encoding='utf-8') as f:
+    report = {
+        "date": datetime.now(timezone.utc).isoformat(),
+        "total": len(results),
+        "ok": sum(1 for r in results if r["status"] == "ok"),
+        "skipped": sum(1 for r in results if r["status"] == "skipped"),
+        "broken_count": len(broken),
+        "broken": broken,
+        "results": results,
+    }
+    os.makedirs("docs/generated", exist_ok=True)
+    with open("docs/generated/link-audit.json", "w", encoding="utf-8") as f:
         json.dump(report, f, indent=2, ensure_ascii=False)
 
-    print(f"✅ Relatório salvo em: {output_path}")
-    print(f"📊 Total de links verificados: {report['summary']['total_links']}")
-    print(f"💡 Sugestões de melhoria: {report['summary']['suggestions_count']}")
+    rows = "".join(
+        f'<div class="link-item"><span style="word-break:break-all">{r["url"]}</span>'
+        f'<span class="status-{r["status"]}">{r["status"].upper()} {r["http"] or ""}</span></div>'
+        for r in results)
+    dash = f"""<!DOCTYPE html>
+<html lang="pt-BR"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ASF Link Audit</title><style>
+body{{font-family:-apple-system,sans-serif;padding:20px;background:#f5f5f5}}
+.container{{max-width:900px;margin:0 auto;background:#fff;padding:30px;border-radius:16px;box-shadow:0 4px 20px rgba(0,0,0,.1)}}
+h1{{color:#0E2439}} .link-item{{display:flex;justify-content:space-between;gap:12px;padding:8px 0;border-bottom:1px solid #eee;font-size:13px}}
+.status-ok{{color:#27ae60;font-weight:700}} .status-broken{{color:#e74c3c;font-weight:700}} .status-skipped{{color:#95a5a6}}
+</style></head><body><div class="container">
+<h1>ASF Link Audit (Hermes)</h1>
+<p>{report["date"]} - Total: {report["total"]} | OK: {report["ok"]} | Quebrados: {report["broken_count"]} | Ignorados: {report["skipped"]}</p>
+{rows}</div></body></html>"""
+    with open("docs/generated/link-audit-dashboard.html", "w", encoding="utf-8") as f:
+        f.write(dash)
 
-    # Gera também dashboard HTML
-    generate_dashboard_html(report)
+    print(f"Relatorio: {report['ok']} ok, {report['broken_count']} quebrados, {report['skipped']} ignorados")
+    if broken:
+        print("LINKS QUEBRADOS:")
+        for b in broken:
+            print("  -", b)
+        with open(os.environ.get("GITHUB_OUTPUT", "/dev/stdout"), "a") as f:
+            f.write(f"broken_count={len(broken)}\n")
+    else:
+        with open(os.environ.get("GITHUB_OUTPUT", "/dev/stdout"), "a") as f:
+            f.write("broken_count=0\n")
 
-    print("✅ Auditoria concluída!")
-    return report
-
-def generate_dashboard_html(report):
-    """Cria dashboard HTML visual"""
-    html = f"""<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ASF Link Audit Dashboard</title>
-    <style>
-        body {{ font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; padding: 20px; background: #f5f5f5; }}
-        .container {{ max-width: 800px; margin: 0 auto; background: white; padding: 30px; border-radius: 16px; box-shadow: 0 4px 20px rgba(0,0,0,0.1); }}
-        h1 {{ color: #0E2439; margin-bottom: 10px; }}
-        .date {{ color: #666; margin-bottom: 30px; }}
-        .section {{ margin: 25px 0; padding: 20px; background: #f9f9f9; border-radius: 12px; }}
-        .link-item {{ display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid #eee; }}
-        .status-ok {{ color: #27ae60; font-weight: bold; }}
-        .badge {{ display: inline-block; padding: 4px 12px; border-radius: 20px; font-size: 12px; font-weight: 600; }}
-        .badge-high {{ background: #e74c3c; color: white; }}
-        .badge-medium {{ background: #f39c12; color: white; }}
-    </style>
-</head>
-<body>
-    <div class="container">
-        <h1>🔍 ASF Link Audit</h1>
-        <div class="date">📅 {report['date']}</div>
-
-        <div class="section">
-            <h2>📋 Status dos Links</h2>
-            {''.join(f'<div class="link-item"><span>{l["name"]}</span><span class="status-ok">✅ {l["status"].upper()}</span></div>' for l in report['links_checked'])}
-        </div>
-
-        <div class="section">
-            <h2>💡 Sugestões de Melhoria</h2>
-            {''.join(f'<div class="link-item"><span>{i["title"]}</span><span class="badge badge-{i["priority"]}">{i["priority"].upper()}</span></div>' for i in report['improvements'])}
-        </div>
-
-        <div class="section">
-            <h2>📝 Novo Conteúdo Sugerido</h2>
-            {''.join(f'<div class="link-item"><strong>{c["title"]}</strong><br><small>{c["content"]}</small></div>' for c in report['new_content'])}
-        </div>
-    </div>
-</body>
-</html>"""
-
-    dashboard_path = "docs/generated/link-audit-dashboard.html"
-    with open(dashboard_path, 'w', encoding='utf-8') as f:
-        f.write(html)
-
-    print(f"📊 Dashboard gerado: {dashboard_path}")
 
 if __name__ == "__main__":
-    import os
     main()

@@ -1,0 +1,37 @@
+name: ASF Link Audit (daily)
+
+on:
+  schedule:
+    - cron: '0 12 * * *'  # 9h BRT
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  link-audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Run real link checker
+        id: audit
+        run: python3 scripts/link_checker.py
+      - name: Commit report
+        run: |
+          git config user.name "ASF Bot"
+          git config user.email "bot@asf-app.com"
+          git add docs/generated/link-audit.json docs/generated/link-audit-dashboard.html
+          if git diff --cached --quiet; then
+            echo "Sem alteracoes"
+          else
+            git commit -m "🔍 Link audit - $(date +%Y-%m-%d) (quebrados: ${{ steps.audit.outputs.broken_count }})"
+            git push
+          fi
+      - name: Warn if broken links found
+        if: steps.audit.outputs.broken_count != '0'
+        run: |
+          echo "::warning::${{ steps.audit.outputs.broken_count }} links quebrados - ver docs/generated/link-audit.json"
