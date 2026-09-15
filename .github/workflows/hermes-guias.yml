@@ -1,0 +1,39 @@
+name: 📚 MISSÃO HERMES — Guias na Home
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/hermes-guias.yml'
+      - 'scripts/hermes_guias_home.py'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  guias:
+    name: Inserir bloco Guias ASF na Home
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - name: 📚 Aplicar bloco de guias
+        run: python3 scripts/hermes_guias_home.py
+      - name: ✅ Validação
+        run: |
+          ! grep -in 'sorteio' index.html && echo "✅ sem sorteio"
+          grep -c 'Guias ASF' index.html
+      - name: 💾 Commit e push
+        run: |
+          git config user.name "ASF Bot"
+          git config user.email "bot@asf-app.com"
+          git add index.html
+          if git diff --cached --quiet; then
+            echo "Sem alterações"
+          else
+            git commit -m "📚 Home: bloco Guias ASF com links internos para artigos (MISSÃO HERMES)"
+            for i in 1 2 3 4 5; do
+              git pull --rebase origin main && git push && break || { echo "retry $i"; sleep $((i*5)); git fetch origin main; }
+            done
+          fi
