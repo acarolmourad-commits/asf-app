@@ -379,3 +379,41 @@ a:focus-visible {
         font-size: 15px !important;
     }
 }
+
+/* ===== Global overflow & cookie banner fixes ===== */
+/* Kill horizontal page scroll from oversized inline content (tables, fixed-width rows).
+   'clip' (not 'hidden') so sticky header keeps working. */
+html, body { overflow-x: clip; }
+
+/* Wide tables scroll internally instead of breaking the page */
+.content table, .section table, main table {
+    display: block;
+    max-width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+/* Any media inside content can never exceed viewport */
+img, video, svg, iframe { max-width: 100%; }
+
+/* Cookie banner must not cover the bottom nav */
+#cookie-consent-banner {
+    bottom: calc(78px + env(safe-area-inset-bottom, 0px)) !important;
+    left: 8px !important;
+    right: 8px !important;
+    width: auto !important;
+    max-width: 560px;
+    margin: 0 auto;
+    border-radius: 16px;
+    z-index: 997 !important;
+}
+@media (min-width: 900px) {
+    #cookie-consent-banner { bottom: 100px !important; }
+}
+
+/* Bottom nav: prevent 28px overflow on narrow phones */
+@media (max-width: 480px) {
+    .bottom-nav { padding-left: 4px; padding-right: 4px; gap: 0; }
+    .bottom-nav .nav-item { min-width: 46px; flex: 1 1 0; }
+    .bottom-nav .nav-item .label { font-size: 10px; }
+}
