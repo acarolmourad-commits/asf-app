@@ -1,3 +1,6 @@
+/* Carrega a camada de polish existente (asf-enhancements.css), que estava órfã */
+@import url("asf-enhancements.css");
+
 /* Subscriber Section Styles */
 .subscriber-header {
   text-align: center;
@@ -428,3 +431,48 @@ img, video, svg, iframe { max-width: 100%; }
     .bottom-nav .nav-item .label { font-size: 9px; }
     .bottom-nav .nav-item .icon { font-size: 17px; }
 }
+
+/* ===== ASF Visual Design Pass 2 — hierarchy, rhythm & readability ===== */
+/* Complementa a camada de navegação: tipografia, espaçamento de seções,
+   alvos de toque e consistência visual. Não altera cores da marca. */
+
+/* Seleção de texto com a cor da marca */
+::selection { background: rgba(0, 168, 204, 0.25); }
+
+/* Ritmo tipográfico: h2 consistentes em todas as seções */
+h2, .section-title {
+  color: var(--secondary, #0E2439);
+  font-weight: 700;
+  letter-spacing: -0.015em;
+  line-height: 1.25;
+}
+h2 { font-size: clamp(20px, 4.5vw, 26px); margin: 0 0 12px; }
+
+/* Respiração vertical consistente entre seções */
+section, .section { margin-bottom: 28px; }
+section > p, .section > p { max-width: 65ch; }
+
+/* Leitura confortável em desktop: conteúdo centralizado com largura máxima */
+@media (min-width: 1024px) {
+  main, .content { max-width: 1100px; margin-left: auto; margin-right: auto; }
+  section, .section { margin-bottom: 40px; }
+}
+
+/* Alvos de toque mínimos de 44px (WCAG) sem quebrar botões pequenos existentes */
+@media (pointer: coarse) {
+  button, .btn, [role="button"] { min-height: 44px; }
+}
+
+/* Links de conteúdo: affordance clara */
+.content a, .section a { text-decoration-thickness: 1px; text-underline-offset: 3px; }
+.content a:hover, .section a:hover { color: var(--primary-dark, #0088A8); }
+
+/* Cards: canto alinhado aos tokens do app */
+.card { border-radius: 16px; }
+
+/* Scroll suave respeitando movimento reduzido (reforço global) */
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+
+/* Dark theme: títulos legíveis */
+[data-theme="dark"] h2, [data-theme="dark"] .section-title { color: #E8ECF0; }
