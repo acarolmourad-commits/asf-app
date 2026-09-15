@@ -1,41 +1,71 @@
-/* ASF Enhancements - Hermes (carregado dinamicamente; nao altera index.html)
-   Melhorias visuais e de navegacao, seguras e reversiveis. */
+/* ASF Polish — camada de design/layout/navegação (Hermes, 2026-09-15)
+   Aditiva: não altera identidade visual (cores, logo). Foco em legibilidade,
+   navegação, acessibilidade e responsividade. */
 
-/* Acessibilidade: foco visivel em elementos interativos */
-a:focus-visible, button:focus-visible, [onclick]:focus-visible, input:focus-visible, textarea:focus-visible {
-  outline: 2px solid var(--primary, #00A8CC);
-  outline-offset: 2px;
-  border-radius: 6px;
-}
+html { scroll-behavior: smooth; }
+body { -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; }
 
-/* Bottom nav: blur, safe-area (iOS), item ativo */
+/* Leitura mais confortável */
+p, li { line-height: 1.6; }
+
+/* ─── Bottom nav: mais ergonômica e segura em telas com notch ─── */
 .bottom-nav {
-  background: rgba(255,255,255,0.92);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
   padding-bottom: max(8px, env(safe-area-inset-bottom));
-  height: auto;
-  min-height: 70px;
+  height: calc(70px + env(safe-area-inset-bottom));
+  backdrop-filter: blur(10px);
+  background: rgba(255,255,255,0.92);
+  scroll-behavior: smooth;
 }
-.bottom-nav .nav-item { transition: color .2s ease, background .2s ease, transform .15s ease; }
+.bottom-nav .nav-item {
+  border-radius: 12px;
+  transition: background .2s ease, transform .15s ease;
+  position: relative;
+}
 .bottom-nav .nav-item:active { transform: scale(0.94); }
-.bottom-nav .nav-item.asf-active {
-  color: var(--primary, #00A8CC);
-  background: rgba(0,168,204,0.10);
-  font-weight: 600;
+
+/* Compensar altura da bottom nav no conteúdo (evita corte do fim da página) */
+body { padding-bottom: calc(78px + env(safe-area-inset-bottom)); }
+
+/* ─── Cards: hierarquia e toque ─── */
+.card {
+  border-radius: 16px;
+  box-shadow: 0 2px 10px rgba(14,36,57,0.06);
+  transition: box-shadow .2s ease, transform .2s ease;
+}
+@media (hover: hover) {
+  .card:hover { box-shadow: 0 6px 22px rgba(14,36,57,0.12); }
 }
 
-/* Titulos de secao: respiro consistente */
+/* ─── Títulos de seção com respiro consistente ─── */
 .section-title { letter-spacing: -0.01em; }
-.section { scroll-margin-top: 12px; }
+.section { scroll-margin-top: 16px; }
 
-/* Cards: cantos e sombra consistentes onde nao ha estilo inline */
-.card { border-radius: 16px; }
+/* ─── Transição suave ao trocar de seção ─── */
+@keyframes asfFadeUp { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+.asf-section-enter { animation: asfFadeUp .25s ease-out; }
 
-/* Imagens suavizadas */
-img { border-radius: 8px; }
+/* ─── Acessibilidade ─── */
+:focus-visible {
+  outline: 3px solid rgba(0,168,204,0.55);
+  outline-offset: 2px;
+  border-radius: 8px;
+}
+button, a, [onclick] { touch-action: manipulation; }
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .asf-section-enter, .card, .bottom-nav .nav-item { animation: none !important; transition: none !important; }
+}
 
-/* Botao voltar ao topo */
+/* ─── Desktop: contenção de largura para leitura ─── */
+@media (min-width: 1024px) {
+  .bottom-nav {
+    left: 50%; right: auto; transform: translateX(-50%);
+    max-width: 720px; border-radius: 20px 20px 0 0;
+    border: 1px solid var(--gray-200); border-bottom: none;
+  }
+}
+
+/* ─── Botão "voltar ao topo" ─── */
 #asf-back-top {
   position: fixed;
   right: 16px;
@@ -45,20 +75,25 @@ img { border-radius: 8px; }
   border: none;
   background: var(--primary, #00A8CC);
   color: #fff;
-  font-size: 20px;
+  font-size: 18px;
+  box-shadow: 0 4px 14px rgba(0,168,204,0.4);
   cursor: pointer;
-  box-shadow: 0 4px 14px rgba(0,168,204,0.35);
+  z-index: 998;
   opacity: 0;
   pointer-events: none;
   transform: translateY(8px);
   transition: opacity .25s ease, transform .25s ease;
-  z-index: 998;
 }
-#asf-back-top.asf-visible { opacity: 1; pointer-events: auto; transform: translateY(0); }
-#asf-back-top:hover { background: var(--secondary, #0E2439); }
+#asf-back-top.asf-visible { opacity: 1; pointer-events: auto; transform: none; }
+#asf-back-top:active { transform: scale(0.92); }
 
-/* Desktop: limita largura da bottom nav para nao esticar demais */
-@media (min-width: 900px) {
-  .bottom-nav { justify-content: center; gap: 8px; }
-  .bottom-nav .nav-item { flex: 0 1 auto; min-width: 84px; padding: 0 14px; }
+/* Estado ativo da bottom nav (usado pelo indicador do loader) */
+.bottom-nav .nav-item.asf-active {
+  background: rgba(0,168,204,0.12);
+  border-radius: 12px;
+}
+.bottom-nav .nav-item.asf-active span,
+.bottom-nav .nav-item.asf-active {
+  color: var(--primary-dark, #0088A8) !important;
+  font-weight: 700;
 }

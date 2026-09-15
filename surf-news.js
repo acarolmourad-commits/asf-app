@@ -213,3 +213,19 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   });
 })();
+
+
+// ASF Polish extra (Hermes): transicao suave ao trocar de secao via showSection.
+document.addEventListener('DOMContentLoaded', function () {
+  if (typeof window.showSection === 'function' && !window.showSection._asfPolished) {
+    var orig = window.showSection;
+    var polished = function (id) {
+      var r = orig.apply(this, arguments);
+      var el = document.getElementById(id);
+      if (el) { el.classList.remove('asf-section-enter'); void el.offsetWidth; el.classList.add('asf-section-enter'); }
+      return r;
+    };
+    polished._asfPolished = true;
+    window.showSection = polished;
+  }
+});
