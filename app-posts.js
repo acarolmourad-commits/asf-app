@@ -119,6 +119,7 @@ document.addEventListener('DOMContentLoaded', loadUserPosts);
                     btn.getAttribute('onclick').indexOf('handleNavTap') === 0) {
                     menuBtn.classList.add('active');
                 }
+                syncAriaCurrent();
             });
             grid.appendChild(item);
             btn.style.display = 'none'; // hide from the bar
@@ -136,6 +137,17 @@ document.addEventListener('DOMContentLoaded', loadUserPosts);
 
         var anchor = items[PRIMARY_COUNT - 1];
         anchor.parentNode.insertBefore(menuBtn, anchor.nextSibling);
+
+        // Accessibility: keep aria-current in sync with the active item
+        function syncAriaCurrent() {
+            var all = items.concat([menuBtn]);
+            all.forEach(function (b) {
+                if (b.classList.contains('active')) b.setAttribute('aria-current', 'page');
+                else b.removeAttribute('aria-current');
+            });
+        }
+        items.forEach(function (b) { b.addEventListener('click', syncAriaCurrent); });
+        syncAriaCurrent();
 
         function openSheet() {
             backdrop.classList.add('open');
@@ -157,6 +169,21 @@ document.addEventListener('DOMContentLoaded', loadUserPosts);
             sheet.classList.contains('open') ? closeSheet() : openSheet();
         });
         backdrop.addEventListener('click', closeSheet);
+        // Touch: swipe down on the sheet to dismiss
+        var touchStartY = null;
+        sheet.addEventListener('touchstart', function (e) { touchStartY = e.touches[0].clientY; }, {passive: true});
+        sheet.addEventListener('touchmove', function (e) {
+            if (touchStartY === null) return;
+            var dy = e.touches[0].clientY - touchStartY;
+            if (dy > 0) sheet.style.transform = 'translateY(' + dy + 'px)';
+        }, {passive: true});
+        sheet.addEventListener('touchend', function (e) {
+            if (touchStartY === null) return;
+            var dy = e.changedTouches[0].clientY - touchStartY;
+            sheet.style.transform = '';
+            if (dy > 80) closeSheet();
+            touchStartY = null;
+        });
         document.addEventListener('keydown', function (e) {
             if (e.key === 'Escape') closeSheet();
         });

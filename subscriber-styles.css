@@ -333,3 +333,6 @@ a:focus-visible {
 .fab-share:hover { transform: translateY(-2px); }
 .fab-share:active { transform: scale(0.94); }
 #back-to-top { right: 28px !important; bottom: 212px !important; }
+
+/* Sheet drag feedback: disable slide transition while dragging */
+.asf-nav-sheet[style*="translateY"] { transition: none; }
