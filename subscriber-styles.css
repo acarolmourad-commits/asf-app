@@ -421,3 +421,10 @@ img, video, svg, iframe { max-width: 100%; }
     .bottom-nav .nav-item { min-width: 46px; flex: 1 1 0; }
     .bottom-nav .nav-item .label { font-size: 10px; }
 }
+
+/* Very narrow phones (<=360px): shrink nav items further */
+@media (max-width: 360px) {
+    .bottom-nav .nav-item { min-width: 40px; padding: 6px 1px; }
+    .bottom-nav .nav-item .label { font-size: 9px; }
+    .bottom-nav .nav-item .icon { font-size: 17px; }
+}
