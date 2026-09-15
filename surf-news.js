@@ -1,5 +1,6 @@
 // ASF Surf News - Dynamic surf news and updates
-const SURF_NEWS = [
+const SURF_NEWS = []; // ASF editorial: itens anteriores removidos por falta de fonte confirmável (ver docs/editorial-log.md). Novas notícias exigem fonte verificável.
+const SURF_NEWS_LEGACY = [
   {
     id: 1,
     titulo: "WSL Women's Tour 2026 - Bertioga Confirmado!",
@@ -68,7 +69,10 @@ const SURF_NEWS = [
 function renderSurfNews() {
   const container = document.getElementById('surf-news-container');
   if (!container) return;
-  
+  if (!SURF_NEWS.length) {
+    container.innerHTML = '<div class="card" style="text-align:center;padding:20px"><p style="font-size:14px;color:var(--gray-600);margin:0">📰 Nenhuma notícia confirmada no momento.</p><p style="font-size:12px;color:var(--gray-400);margin:8px 0 0">Publicamos apenas novidades com fonte verificável. Acompanhe o Instagram <a href="https://instagram.com/asf.surffeminino" target="_blank" style="color:var(--primary)">@asf.surffeminino</a>.</p></div>';
+    return;
+  }
   container.innerHTML = SURF_NEWS.map(news => `
     <div class="news-card card" style="margin-bottom: 12px; cursor: pointer;" onclick="showNewsDetail(${news.id})">
       <div style="display: flex; gap: 12px; align-items: flex-start;">
@@ -112,3 +116,16 @@ function showNewsDetail(id) {
 
 // Auto-render when DOM is loaded
 document.addEventListener('DOMContentLoaded', renderSurfNews);
+
+// ASF — Aviso de conteúdo demonstrativo na vitrine de marcas (Brand Hub).
+// Motivo: cupons/parcerias exibidos sem convênio confirmado (regra anti-conteúdo-fake). Ver docs/editorial-log.md.
+document.addEventListener('DOMContentLoaded', function () {
+  var s = document.getElementById('brand-showcase');
+  if (s && !document.getElementById('brand-demo-disclaimer')) {
+    var p = document.createElement('p');
+    p.id = 'brand-demo-disclaimer';
+    p.style.cssText = 'font-size:12px;color:#B45309;background:#FEF3C7;border:1px solid #FCD34D;border-radius:8px;padding:8px 12px;margin:0 0 12px';
+    p.textContent = '\u26A0\uFE0F Conte\u00FAdo demonstrativo \u2014 as marcas e cupons abaixo s\u00E3o exemplos ilustrativos e n\u00E3o representam parcerias vigentes da ASF. Parcerias oficiais ser\u00E3o anunciadas nos canais oficiais.';
+    s.insertBefore(p, s.firstChild);
+  }
+});
