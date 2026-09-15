@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 # 🚨 MISSÃO HERMES — P0: Remover promessa inexistente de sorteio mensal de prancha.
 # A ASF não possui programa de sorteio mensal. Esta correção remove a informação
-# de index.html e valida que nenhum arquivo publicado menciona sorteio.
-import io, re, sys
+# de index.html e valida que nenhum arquivo publicado promete sorteio.
+import io, os, re, sys
 
 TARGET = 'index.html'
 
@@ -40,16 +40,20 @@ if src != original:
 else:
     print('ℹ️ index.html sem alterações necessárias')
 
-# Validação: nenhum termo de sorteio/premiação promocional nos arquivos publicados
+# Validação: nenhuma promessa de sorteio/prêmio inexistente nos arquivos publicados.
+# NOTA: menções editoriais legítimas (ex.: premiação de campeonatos de surf nas
+# dicas de busca) não são ofertas da ASF e não são bloqueadas aqui.
 PUBLISHED = [
     'index.html', 'index-short.html', 'sessoes-interativas.html',
     'espacos-logo-app.html', 'hermes.html', 'app.js', 'app-posts.js',
     'tips.js', 'surf-calculator.js', 'surf-culture.js', 'surf-goals.js',
     'surf-news.js', 'manifest.json', 'data/events.json', 'sitemap.xml',
 ]
-BANNED = re.compile(r'sorteio|premiação|premiacao|prêmios incluem|premios incluem', re.IGNORECASE)
+BANNED = re.compile(
+    r'sorteio|pr[êe]mios incluem|ganhe uma prancha|ganhe prancha',
+    re.IGNORECASE,
+)
 violations = []
-import os
 for path in PUBLISHED:
     if not os.path.exists(path):
         continue
@@ -59,7 +63,7 @@ for path in PUBLISHED:
                 violations.append(f'{path}:{i}: {line.strip()[:100]}')
 
 if violations:
-    print('❌ AINDA HÁ MENÇÕES A SORTEIO/PREMIAÇÃO:')
+    print('❌ AINDA HÁ PROMESSAS DE SORTEIO/PRÊMIO INEXISTENTE:')
     print('\n'.join(violations))
     sys.exit(1)
-print('✅ Validação P0: nenhuma menção a sorteio/premiação nos arquivos publicados')
+print('✅ Validação P0: nenhuma promessa de sorteio nos arquivos publicados')
