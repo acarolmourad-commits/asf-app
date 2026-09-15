@@ -1,66 +1,242 @@
 {
-  "date": "2026-04-29",
-  "links_checked": [
-    {
-      "name": "Surf World",
-      "url": "https://surfworld.com.br",
-      "status": "ok",
-      "last_check": "2026-04-29T01:04:56.729232"
-    },
-    {
-      "name": "Mar e Sol",
-      "url": "https://maresolsurf.com.br",
-      "status": "ok",
-      "last_check": "2026-04-29T01:04:56.729250"
-    },
-    {
-      "name": "Praia Surf",
-      "url": "https://praiasurf.com.br",
-      "status": "ok",
-      "last_check": "2026-04-29T01:04:56.729252"
-    },
-    {
-      "name": "ASF Instagram",
-      "url": "https://instagram.com/associacaosurffeminino",
-      "status": "ok",
-      "last_check": "2026-04-29T01:04:56.729253"
-    },
-    {
-      "name": "ASF TikTok",
-      "url": "https://tiktok.com/@Cahrol.asf",
-      "status": "ok",
-      "last_check": "2026-04-29T01:04:56.729255"
-    }
+  "date": "2026-09-15T18:54:18.020654+00:00",
+  "total": 44,
+  "ok": 20,
+  "skipped": 23,
+  "broken_count": 1,
+  "broken": [
+    "https://docs.google.com/forms/d/e/1fJhfaiNyYSSq9bKElew69y6GZ6_pxLz05HR26klIsSA/viewform"
   ],
-  "improvements": [
+  "results": [
     {
-      "type": "feature",
-      "title": "Sistema de login",
-      "priority": "medium"
+      "url": "https://acarolmourad-commits.github.io/asf-app/",
+      "status": "ok",
+      "http": 200
     },
     {
-      "type": "content",
-      "title": "Criar blog",
-      "priority": "medium"
-    }
-  ],
-  "new_content": [
-    {
-      "category": "Dicas",
-      "title": "Como escolher wax",
-      "content": "Escolha wax certo para temperatura da água.",
-      "language": "pt"
+      "url": "https://api.open-meteo.com",
+      "status": "skipped",
+      "http": null
     },
     {
-      "category": "Segurança",
-      "title": "Etiqueta no mar",
-      "content": "Respeite a prioridade. Não furar fila!",
-      "language": "pt"
+      "url": "https://app.surfdaycheck.com.br/auth",
+      "status": "ok",
+      "http": 200
+    },
+    {
+      "url": "https://docs.google.com/forms/d/e/1fJhfaiNyYSSq9bKElew69y6GZ6_pxLz05HR26klIsSA/viewform",
+      "status": "broken",
+      "http": 404
+    },
+    {
+      "url": "https://fonts.googleapis.com",
+      "status": "skipped",
+      "http": null
+    },
+    {
+      "url": "https://fonts.gstatic.com",
+      "status": "skipped",
+      "http": null
+    },
+    {
+      "url": "https://images.unsplash.com",
+      "status": "ok",
+      "http": 200
+    },
+    {
+      "url": "https://images.unsplash.com/photo-1502680390469-be75c86b636f?w=600&h=180&fit=crop",
+      "status": "ok",
+      "http": 200
+    },
+    {
+      "url": "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=600&h=150&fit=crop",
+      "status": "ok",
+      "http": 200
+    },
+    {
+      "url": "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=800&h=400&fit=crop",
+      "status": "ok",
+      "http": 200
+    },
+    {
+      "url": "https://images.unsplash.com/photo-1552196563-55cd4e45efb3?w=600&h=150&fit=crop",
+      "status": "ok",
+      "http": 200
+    },
+    {
+      "url": "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&h=150&fit=crop",
+      "status": "ok",
+      "http": 200
+    },
+    {
+      "url": "https://instagram.com/aguadomarsurfshop",
+      "status": "skipped",
+      "http": null
+    },
+    {
+      "url": "https://instagram.com/asf.surffeminino",
+      "status": "skipped",
+      "http": null
+    },
+    {
+      "url": "https://instagram.com/hawaiisurfpoint",
+      "status": "skipped",
+      "http": null
+    },
+    {
+      "url": "https://instagram.com/litoralsurfoficial",
+      "status": "skipped",
+      "http": null
+    },
+    {
+      "url": "https://instagram.com/sthillsurf",
+      "status": "skipped",
+      "http": null
+    },
+    {
+      "url": "https://instagram.com/surftripoficial",
+      "status": "skipped",
+      "http": null
+    },
+    {
+      "url": "https://instagram.com/surftrunk",
+      "status": "skipped",
+      "http": null
+    },
+    {
+      "url": "https://instagram.com/tenansurfboards",
+      "status": "skipped",
+      "http": null
+    },
+    {
+      "url": "https://instagram.com/tribo_surf_oficial",
+      "status": "skipped",
+      "http": null
+    },
+    {
+      "url": "https://instagram.com/volpem_surf",
+      "status": "skipped",
+      "http": null
+    },
+    {
+      "url": "https://marine-api.open-meteo.com",
+      "status": "skipped",
+      "http": null
+    },
+    {
+      "url": "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3811729023785282",
+      "status": "skipped",
+      "http": null
+    },
+    {
+      "url": "https://resources.infolinks.com",
+      "status": "skipped",
+      "http": null
+    },
+    {
+      "url": "https://resources.infolinks.com/js/infolinks_main.js",
+      "status": "skipped",
+      "http": null
+    },
+    {
+      "url": "https://wa.me",
+      "status": "skipped",
+      "http": null
+    },
+    {
+      "url": "https://wa.me/5511954346288",
+      "status": "skipped",
+      "http": null
+    },
+    {
+      "url": "https://www.googletagmanager.com",
+      "status": "skipped",
+      "http": null
+    },
+    {
+      "url": "https://www.instagram.com/associacaosurffeminino",
+      "status": "skipped",
+      "http": null
+    },
+    {
+      "url": "https://www.instagram.com/spsurfoficial/",
+      "status": "skipped",
+      "http": null
+    },
+    {
+      "url": "https://www.spsurf.com.br",
+      "status": "ok",
+      "http": 200
+    },
+    {
+      "url": "https://www.spsurf.com.br/",
+      "status": "ok",
+      "http": 200
+    },
+    {
+      "url": "https://www.tiktok.com/@Cahrol.asf",
+      "status": "skipped",
+      "http": null
+    },
+    {
+      "url": "app-posts.js",
+      "status": "ok",
+      "http": 200,
+      "local": true
+    },
+    {
+      "url": "assets/images/hero-mermaid-surf.jpg",
+      "status": "ok",
+      "http": 200,
+      "local": true
+    },
+    {
+      "url": "docs/privacy-policy.html",
+      "status": "ok",
+      "http": 200,
+      "local": true
+    },
+    {
+      "url": "manifest.json",
+      "status": "ok",
+      "http": 200,
+      "local": true
+    },
+    {
+      "url": "sessoes-interativas.html",
+      "status": "ok",
+      "http": 200,
+      "local": true
+    },
+    {
+      "url": "subscriber-styles.css",
+      "status": "ok",
+      "http": 200,
+      "local": true
+    },
+    {
+      "url": "surf-calculator.js",
+      "status": "ok",
+      "http": 200,
+      "local": true
+    },
+    {
+      "url": "surf-culture.js",
+      "status": "ok",
+      "http": 200,
+      "local": true
+    },
+    {
+      "url": "surf-goals.js",
+      "status": "ok",
+      "http": 200,
+      "local": true
+    },
+    {
+      "url": "surf-news.js",
+      "status": "ok",
+      "http": 200,
+      "local": true
     }
-  ],
-  "summary": {
-    "total_links": 5,
-    "all_ok": true,
-    "suggestions_count": 3
-  }
+  ]
 }

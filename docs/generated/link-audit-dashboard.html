@@ -1,41 +1,11 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ASF Link Audit Dashboard</title>
-    <style>
-        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; padding: 20px; background: #f5f5f5; }
-        .container { max-width: 800px; margin: 0 auto; background: white; padding: 30px; border-radius: 16px; box-shadow: 0 4px 20px rgba(0,0,0,0.1); }
-        h1 { color: #0E2439; margin-bottom: 10px; }
-        .date { color: #666; margin-bottom: 30px; }
-        .section { margin: 25px 0; padding: 20px; background: #f9f9f9; border-radius: 12px; }
-        .link-item { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid #eee; }
-        .status-ok { color: #27ae60; font-weight: bold; }
-        .badge { display: inline-block; padding: 4px 12px; border-radius: 20px; font-size: 12px; font-weight: 600; }
-        .badge-high { background: #e74c3c; color: white; }
-        .badge-medium { background: #f39c12; color: white; }
-    </style>
-</head>
-<body>
-    <div class="container">
-        <h1>🔍 ASF Link Audit</h1>
-        <div class="date">📅 2026-04-29</div>
-
-        <div class="section">
-            <h2>📋 Status dos Links</h2>
-            <div class="link-item"><span>Surf World</span><span class="status-ok">✅ OK</span></div><div class="link-item"><span>Mar e Sol</span><span class="status-ok">✅ OK</span></div><div class="link-item"><span>Praia Surf</span><span class="status-ok">✅ OK</span></div><div class="link-item"><span>ASF Instagram</span><span class="status-ok">✅ OK</span></div><div class="link-item"><span>ASF TikTok</span><span class="status-ok">✅ OK</span></div>
-        </div>
-
-        <div class="section">
-            <h2>💡 Sugestões de Melhoria</h2>
-            <div class="link-item"><span>Sistema de login</span><span class="badge badge-medium">MEDIUM</span></div><div class="link-item"><span>Criar blog</span><span class="badge badge-medium">MEDIUM</span></div>
-        </div>
-
-        <div class="section">
-            <h2>📝 Novo Conteúdo Sugerido</h2>
-            <div class="link-item"><strong>Como escolher wax</strong><br><small>Escolha wax certo para temperatura da água.</small></div><div class="link-item"><strong>Etiqueta no mar</strong><br><small>Respeite a prioridade. Não furar fila!</small></div>
-        </div>
-    </div>
-</body>
-</html>
+<html lang="pt-BR"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ASF Link Audit</title><style>
+body{font-family:-apple-system,sans-serif;padding:20px;background:#f5f5f5}
+.container{max-width:900px;margin:0 auto;background:#fff;padding:30px;border-radius:16px;box-shadow:0 4px 20px rgba(0,0,0,.1)}
+h1{color:#0E2439} .link-item{display:flex;justify-content:space-between;gap:12px;padding:8px 0;border-bottom:1px solid #eee;font-size:13px}
+.status-ok{color:#27ae60;font-weight:700} .status-broken{color:#e74c3c;font-weight:700} .status-skipped{color:#95a5a6}
+</style></head><body><div class="container">
+<h1>ASF Link Audit (Hermes)</h1>
+<p>2026-09-15T18:54:18.020654+00:00 - Total: 44 | OK: 20 | Quebrados: 1 | Ignorados: 23</p>
+<div class="link-item"><span style="word-break:break-all">https://acarolmourad-commits.github.io/asf-app/</span><span class="status-ok">OK 200</span></div><div class="link-item"><span style="word-break:break-all">https://api.open-meteo.com</span><span class="status-skipped">SKIPPED </span></div><div class="link-item"><span style="word-break:break-all">https://app.surfdaycheck.com.br/auth</span><span class="status-ok">OK 200</span></div><div class="link-item"><span style="word-break:break-all">https://docs.google.com/forms/d/e/1fJhfaiNyYSSq9bKElew69y6GZ6_pxLz05HR26klIsSA/viewform</span><span class="status-broken">BROKEN 404</span></div><div class="link-item"><span style="word-break:break-all">https://fonts.googleapis.com</span><span class="status-skipped">SKIPPED </span></div><div class="link-item"><span style="word-break:break-all">https://fonts.gstatic.com</span><span class="status-skipped">SKIPPED </span></div><div class="link-item"><span style="word-break:break-all">https://images.unsplash.com</span><span class="status-ok">OK 200</span></div><div class="link-item"><span style="word-break:break-all">https://images.unsplash.com/photo-1502680390469-be75c86b636f?w=600&h=180&fit=crop</span><span class="status-ok">OK 200</span></div><div class="link-item"><span style="word-break:break-all">https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=600&h=150&fit=crop</span><span class="status-ok">OK 200</span></div><div class="link-item"><span style="word-break:break-all">https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=800&h=400&fit=crop</span><span class="status-ok">OK 200</span></div><div class="link-item"><span style="word-break:break-all">https://images.unsplash.com/photo-1552196563-55cd4e45efb3?w=600&h=150&fit=crop</span><span class="status-ok">OK 200</span></div><div class="link-item"><span style="word-break:break-all">https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&h=150&fit=crop</span><span class="status-ok">OK 200</span></div><div class="link-item"><span style="word-break:break-all">https://instagram.com/aguadomarsurfshop</span><span class="status-skipped">SKIPPED </span></div><div class="link-item"><span style="word-break:break-all">https://instagram.com/asf.surffeminino</span><span class="status-skipped">SKIPPED </span></div><div class="link-item"><span style="word-break:break-all">https://instagram.com/hawaiisurfpoint</span><span class="status-skipped">SKIPPED </span></div><div class="link-item"><span style="word-break:break-all">https://instagram.com/litoralsurfoficial</span><span class="status-skipped">SKIPPED </span></div><div class="link-item"><span style="word-break:break-all">https://instagram.com/sthillsurf</span><span class="status-skipped">SKIPPED </span></div><div class="link-item"><span style="word-break:break-all">https://instagram.com/surftripoficial</span><span class="status-skipped">SKIPPED </span></div><div class="link-item"><span style="word-break:break-all">https://instagram.com/surftrunk</span><span class="status-skipped">SKIPPED </span></div><div class="link-item"><span style="word-break:break-all">https://instagram.com/tenansurfboards</span><span class="status-skipped">SKIPPED </span></div><div class="link-item"><span style="word-break:break-all">https://instagram.com/tribo_surf_oficial</span><span class="status-skipped">SKIPPED </span></div><div class="link-item"><span style="word-break:break-all">https://instagram.com/volpem_surf</span><span class="status-skipped">SKIPPED </span></div><div class="link-item"><span style="word-break:break-all">https://marine-api.open-meteo.com</span><span class="status-skipped">SKIPPED </span></div><div class="link-item"><span style="word-break:break-all">https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3811729023785282</span><span class="status-skipped">SKIPPED </span></div><div class="link-item"><span style="word-break:break-all">https://resources.infolinks.com</span><span class="status-skipped">SKIPPED </span></div><div class="link-item"><span style="word-break:break-all">https://resources.infolinks.com/js/infolinks_main.js</span><span class="status-skipped">SKIPPED </span></div><div class="link-item"><span style="word-break:break-all">https://wa.me</span><span class="status-skipped">SKIPPED </span></div><div class="link-item"><span style="word-break:break-all">https://wa.me/5511954346288</span><span class="status-skipped">SKIPPED </span></div><div class="link-item"><span style="word-break:break-all">https://www.googletagmanager.com</span><span class="status-skipped">SKIPPED </span></div><div class="link-item"><span style="word-break:break-all">https://www.instagram.com/associacaosurffeminino</span><span class="status-skipped">SKIPPED </span></div><div class="link-item"><span style="word-break:break-all">https://www.instagram.com/spsurfoficial/</span><span class="status-skipped">SKIPPED </span></div><div class="link-item"><span style="word-break:break-all">https://www.spsurf.com.br</span><span class="status-ok">OK 200</span></div><div class="link-item"><span style="word-break:break-all">https://www.spsurf.com.br/</span><span class="status-ok">OK 200</span></div><div class="link-item"><span style="word-break:break-all">https://www.tiktok.com/@Cahrol.asf</span><span class="status-skipped">SKIPPED </span></div><div class="link-item"><span style="word-break:break-all">app-posts.js</span><span class="status-ok">OK 200</span></div><div class="link-item"><span style="word-break:break-all">assets/images/hero-mermaid-surf.jpg</span><span class="status-ok">OK 200</span></div><div class="link-item"><span style="word-break:break-all">docs/privacy-policy.html</span><span class="status-ok">OK 200</span></div><div class="link-item"><span style="word-break:break-all">manifest.json</span><span class="status-ok">OK 200</span></div><div class="link-item"><span style="word-break:break-all">sessoes-interativas.html</span><span class="status-ok">OK 200</span></div><div class="link-item"><span style="word-break:break-all">subscriber-styles.css</span><span class="status-ok">OK 200</span></div><div class="link-item"><span style="word-break:break-all">surf-calculator.js</span><span class="status-ok">OK 200</span></div><div class="link-item"><span style="word-break:break-all">surf-culture.js</span><span class="status-ok">OK 200</span></div><div class="link-item"><span style="word-break:break-all">surf-goals.js</span><span class="status-ok">OK 200</span></div><div class="link-item"><span style="word-break:break-all">surf-news.js</span><span class="status-ok">OK 200</span></div></div></body></html>
