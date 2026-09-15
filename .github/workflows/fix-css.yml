@@ -1,0 +1,34 @@
+name: 🔧 One-time fix - broken style blocks in index.html
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/fix-css.yml'
+      - 'scripts/fix_broken_style.py'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  fix-css:
+    name: Fix raw CSS rendering bug
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - name: 🔧 Apply fix
+        run: python3 scripts/fix_broken_style.py
+      - name: 💾 Commit if changed
+        run: |
+          git config user.name "ASF Bot"
+          git config user.email "bot@asf-app.com"
+          if git diff --quiet; then
+            echo "📭 No changes (already fixed)"
+          else
+            git add index.html
+            git commit -m "🐛 Fix: close @media block and remove premature </style> (raw CSS was rendering as text)"
+            git push
+            echo "✅ Fixed and pushed"
+          fi
