@@ -183,8 +183,12 @@ body { padding-bottom: calc(70px + env(safe-area-inset-bottom, 0px)); }
     z-index: 1001;
     opacity: 0;
     transition: opacity 0.25s ease;
+    pointer-events: none;
 }
-.asf-nav-sheet-backdrop.open { opacity: 1; }
+.asf-nav-sheet-backdrop.open {
+    opacity: 1;
+    pointer-events: auto;
+}
 .asf-nav-sheet {
     position: fixed;
     left: 0;
