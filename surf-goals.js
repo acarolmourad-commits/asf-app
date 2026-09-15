@@ -1,13 +1,24 @@
 // ASF Surf Goals - Sistema de metas de surf
+
+// Escapa HTML para evitar injeção via campos do usuário (XSS)
+function esc(s) {
+  return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+}
+
 const SurfGoals = {
   goals: JSON.parse(localStorage.getItem('asf-goals') || '[]'),
   
   // Adicionar nova meta
   addGoal: function(title, target, category) {
+    const t = parseInt(target, 10);
+    if (!Number.isFinite(t) || t <= 0) {
+      if (typeof showToast === 'function') showToast('⚠️ Informe uma meta numérica maior que zero.');
+      return null;
+    }
     const goal = {
       id: Date.now(),
       title: title,
-      target: parseInt(target),
+      target: t,
       current: 0,
       category: category || 'geral',
       created: new Date().toISOString(),
@@ -64,8 +75,8 @@ const SurfGoals = {
     container.innerHTML = this.goals.map(goal => `
       <div class="card" style="margin-bottom: 12px;">
         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
-          <h4 style="font-size: 15px; margin: 0;">${goal.title}</h4>
-          <span style="font-size: 12px; color: var(--gray-400);">${goal.category}</span>
+          <h4 style="font-size: 15px; margin: 0;">${esc(goal.title)}</h4>
+          <span style="font-size: 12px; color: var(--gray-400);">${esc(goal.category)}</span>
         </div>
         <div style="background: var(--gray-200); height: 8px; border-radius: 4px; overflow: hidden; margin-bottom: 8px;">
           <div style="width: ${(goal.current / goal.target) * 100}%; background: var(--primary); height: 100%; transition: width 0.3s;"></div>
@@ -92,7 +103,7 @@ const SurfGoals = {
           </div>
           <div style="margin-bottom: 12px;">
             <label style="display: block; font-size: 14px; margin-bottom: 4px;">Meta (número)</label>
-            <input type="number" id="goal-target" placeholder="50" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 8px;">
+            <input type="number" id="goal-target" placeholder="50" min="1" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 8px;">
           </div>
           <div style="margin-bottom: 16px;">
             <label style="display: block; font-size: 14px; margin-bottom: 4px;">Categoria</label>
@@ -115,14 +126,16 @@ const SurfGoals = {
   },
   
   saveGoal: function() {
-    const title = document.getElementById('goal-title').value;
+    const title = document.getElementById('goal-title').value.trim();
     const target = document.getElementById('goal-target').value;
     const category = document.getElementById('goal-category').value;
     
     if (title && target) {
-      this.addGoal(title, target, category);
-      document.getElementById('goal-modal').remove();
-      this.render();
+      const goal = this.addGoal(title, target, category);
+      if (goal) {
+        document.getElementById('goal-modal').remove();
+        this.render();
+      }
     }
   }
 };
