@@ -69,6 +69,10 @@ const SURF_NEWS_LEGACY = [
 function renderSurfNews() {
   const container = document.getElementById('surf-news-container');
   if (!container) return;
+  // Hermes 2026-09-15: se o ASF_NEWS (guias evergreen do index.html) ja renderizou este
+  // container, nao sobrescrever. Noticias temporais com fonte entram apenas quando nao
+  // houver conteudo editorial carregado.
+  if (container.dataset.loaded === '1') return;
   if (!SURF_NEWS.length) {
     container.innerHTML = '<div class="card" style="text-align:center;padding:20px"><p style="font-size:14px;color:var(--gray-600);margin:0">📰 Nenhuma notícia confirmada no momento.</p><p style="font-size:12px;color:var(--gray-400);margin:8px 0 0">Publicamos apenas novidades com fonte verificável. Acompanhe o Instagram <a href="https://instagram.com/asf.surffeminino" target="_blank" style="color:var(--primary)">@asf.surffeminino</a>.</p></div>';
     return;

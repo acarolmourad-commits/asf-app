@@ -4,26 +4,38 @@ Toda alteração editorial automatizada é registrada aqui. Rollback via histór
 
 | Data/Hora (UTC) | Arquivo | Alteração | Motivo | Fonte | Prioridade | QA |
 |---|---|---|---|---|---|---|
-| 2026-09-15 17:20 | surf-news.js | 7 itens de news movidos para SURF_NEWS_LEGACY (não renderizados); lista ativa esvaziada com mensagem honesta de estado vazio | Notícias sem fonte confirmável — violação da regra anti-conteúdo-fake | Auditoria Hermes | P0 | Estado vazio renderiza corretamente |
-| 2026-09-15 17:20 | index.html (via injector em surf-news.js) | Aviso "Conteúdo demonstrativo" injetado na vitrine de Marcas Parceiras (Brand Hub) | Marcas reais com cupons ASF15/20/25 exibidos como parcerias verificadas sem convênio confirmado; remoção total exige controle humano | Auditoria Hermes | P0 | Aviso visível acima dos cards |
-| 2026-09-15 17:20 | data/events.json | Campos `status` (ENCERRADO) e `ultima_atualizacao` nos 3 eventos passados | Consciência temporal | spsurf.com.br | P1 | Renderer separa histórico; sem quebra |
-| 2026-09-15 17:20 | sitemap.xml | lastmod 2026-05-23 → 2026-09-15 | SEO | Auditoria Hermes | P3 | XML válido |
-| 2026-09-15 17:50 | index.html (via hotfix em surf-news.js) | Link do Google Forms de cadastro (404 confirmado) → WhatsApp oficial wa.me/5511954346288 | Link quebrado — formulário inexistente | Auditoria de links | P1 | GET confirmou 404 antes da troca |
-| 2026-09-15 17:50 | index.html (via hotfix em surf-news.js) | Checkout da loja usava wa.me/5511999999999 (placeholder) → corrigido para 5511954346288 | Número fictício — pedidos iriam para número errado | Auditoria Hermes | P1 | window.open interceptado; demais fluxos intactos |
-| 2026-09-15 17:50 | 12 arquivos deletados | index-local.html, index.html.corrupt, 3× .bak, asf-app-completo.tar.gz, redirect.html, test.html, clean_stats.txt, 3× __pycache__ | Arquivos mortos (~4 MB); recuperáveis via git | Auditoria Hermes | P2 | Nenhum referenciado pelo index.html |
-| 2026-09-15 18:40 | scripts/link_checker.py | Substituído checker SIMULADO (retornava "ok" sem verificar, usava random) por verificador real (HTTP HEAD/GET, marca não-verificáveis como skipped, nunca como ok) | Automação não pode fingir verificação | Auditoria Hermes | P1 | Executado no sandbox: 20 ok, 1 broken (Forms, já mitigado), 23 skipped |
-| 2026-09-15 18:40 | .github/workflows/link-audit.yml | Novo workflow diário (9h BRT): roda checker real, commita relatório em docs/generated/, alerta se houver quebrados | Rotina diária de auditoria de links | Auditoria Hermes | P2 | YAML válido; relatório commitado apenas se houver mudança |
+| 2026-09-15 17:20 | surf-news.js | 7 itens de news movidos para SURF_NEWS_LEGACY (não renderizados); lista ativa esvaziada | Notícias sem fonte confirmável — regra anti-conteúdo-fake | Auditoria Hermes | P0 | OK |
+| 2026-09-15 17:20 | index.html (via injector) | Aviso "Conteúdo demonstrativo" na vitrine de Marcas Parceiras | Cupons/parcerias sem convênio confirmado | Auditoria Hermes | P0 | Aviso confirmado no navegador (QA real) |
+| 2026-09-15 17:20 | data/events.json | `status` + `ultima_atualizacao` nos 3 eventos encerrados | Consciência temporal | spsurf.com.br | P1 | QA navegador: histórico com 3 eventos ✅ |
+| 2026-09-15 17:20 | sitemap.xml | lastmod → 2026-09-15 | SEO | Auditoria | P3 | OK |
+| 2026-09-15 17:50 | index.html (via hotfix) | Forms 404 → WhatsApp oficial; checkout placeholder 5511999999999 → número oficial | Links/número quebrados | Auditoria de links | P1 | 404 confirmado por GET |
+| 2026-09-15 17:50 | 12 arquivos deletados | Resíduos de dev (~4 MB) | Limpeza; recuperável via git | Auditoria | P2 | 404 confirmado pós-deploy |
+| 2026-09-15 18:40 | scripts/link_checker.py | Checker SIMULADO substituído por verificador real (HEAD/GET; não-verificável = skipped, nunca ok) | Automação não pode fingir verificação | Auditoria | P1 | Sandbox: 20 ok / 1 broken / 23 skipped |
+| 2026-09-15 18:40 | .github/workflows/link-audit.yml | Auditoria diária de links (9h BRT) com relatório commitado | Rotina diária | Hermes | P2 | OK |
+| 2026-09-15 19:00 | scripts/events_status.py + events-status.yml | Status temporal de eventos recalculado diariamente (6h BRT): PROXIMO/EM_ANDAMENTO/ENCERRADO. Data inválida → PRESERVA. Nunca cria eventos | Consciência temporal automática | Hermes | P1 | Testado: transições e fail-safe de data inválida |
+| 2026-09-15 19:10 | surf-news.js | Guard anti-colisão: se ASF_NEWS (guias evergreen do index.html) já renderizou o container, surf-news.js não sobrescreve | Dois sistemas escreviam no mesmo #surf-news-container; QA no navegador detectou | QA navegador | P1 | ASF_NEWS classificado como EVERGREEN legítimo (guias: prancha, maré, wax, segurança) — PRESERVADO |
+
+## Classificação editorial (resumo)
+- **ASF_NEWS (index.html)**: 10 guias EVERGREEN (prancha, alongamento, maré, lycra sustentável, wipeout, surf feminino, wax, surf terapêutico, praias SP, swell) — conteúdo editorial legítimo, preservado. Sugestão futura: rotular como "Guia" em vez de "Notícia" e revisar datas 2025-05.
+- **SURF_NEWS (surf-news.js)**: notícias temporais — exige fonte verificável; hoje vazio (itens antigos sem fonte).
+- **ASF_BRANDS_DATA (index.html)**: demonstrativo (marcado no site). Destino final = decisão humana.
+- **data/events.json**: temporal, com status automático diário.
 
 ## Notas sobre prospecção (docs/brand-*)
-- Materiais NÃO são publicados no site e docs/ está bloqueado no robots.txt.
-- E-mails de marcas são contatos públicos (SAC/B2B) — uso legítimo para prospecção manual.
-- ⚠️ Claim "500+ mulheres surfistas" nos e-mails NÃO é verificado — corrigir antes de qualquer envio.
-- Duplicidade: Smart Fit aparece 2× em brand-emails.json.
+- Não publicados; docs/ bloqueado no robots.txt. E-mails são contatos públicos (SAC/B2B).
+- ⚠️ Claim "500+ mulheres surfistas" NÃO verificado — corrigir antes de enviar. Smart Fit duplicado em brand-emails.json.
 - Envio de propostas = decisão humana (não automatizar).
 
-## Pendências (controle humano necessário)
-- [ ] Decidir destino da vitrine de marcas/cupons (remover ou substituir por parcerias reais).
-- [ ] Criar novo formulário de cadastro (o antigo foi excluído) ou manter WhatsApp como canal oficial. Enquanto isso, o link-audit diário continuará flagando o Forms 404 no HTML estático (o hotfix em JS já protege os usuários).
-- [ ] Definir fontes oficiais de notícias (SPSurf, WSL, ISA) para realimentar SURF_NEWS com verificação.
-- [ ] Corrigir claim "500+ surfistas" e duplicidade Smart Fit em docs/brand-emails.json antes de prospectar.
-- [ ] Links de Instagram/TikTok não verificáveis automaticamente (rate-limit) — checagem manual ocasional.
+## QA real em navegador (2026-09-15, browser automation)
+- ✅ Banner "Conteúdo demonstrativo" visível na vitrine de marcas
+- ✅ Eventos: "Nenhum evento futuro confirmado" + Histórico (3 encerrados)
+- ✅ Console sem erros críticos; layout sem quebras visuais
+- ✅ Seção News exibe os guias evergreen (após correção da colisão)
+
+## Pendências (controle humano)
+- [ ] Destino da vitrine de marcas/cupons.
+- [ ] Novo formulário de cadastro ou WhatsApp como canal oficial.
+- [ ] Fontes oficiais de notícias (SPSurf, WSL, ISA) para SURF_NEWS.
+- [ ] Corrigir claim "500+ surfistas" e duplicidade Smart Fit em docs/brand-emails.json.
+- [ ] Instagram/TikTok: checagem manual ocasional (rate-limit impede automação).
+- [ ] Incorporar hotfixes diretamente no index.html quando houver edição humana (remover injectors de surf-news.js depois).
