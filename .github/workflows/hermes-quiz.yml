@@ -1,0 +1,35 @@
+name: 🧩 MISSÃO HERMES — Quizzes arquétipo
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/hermes-quiz.yml'
+      - 'scripts/hermes_quiz_archetypes.py'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  quiz:
+    name: Aplicar resultados-arquétipo nos quizzes
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - name: 🧩 Aplicar upgrade dos quizzes
+        run: python3 scripts/hermes_quiz_archetypes.py
+      - name: ✅ Validação
+        run: ! grep -in 'sorteio' index.html && echo "✅ sem sorteio"
+      - name: 💾 Commit e push
+        run: |
+          git config user.name "ASF Bot"
+          git config user.email "bot@asf-app.com"
+          git add index.html
+          if git diff --cached --quiet; then
+            echo "Sem alterações"
+          else
+            git commit -m "🧩 Quizzes: resultado-arquétipo com recomendação real (MISSÃO HERMES)"
+            git push
+          fi
