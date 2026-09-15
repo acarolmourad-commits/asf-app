@@ -336,3 +336,46 @@ a:focus-visible {
 
 /* Sheet drag feedback: disable slide transition while dragging */
 .asf-nav-sheet[style*="translateY"] { transition: none; }
+
+/* ===== Header responsive fix ===== */
+/* Prevent the 6-button action row from overflowing on phones */
+.header-content {
+    gap: 8px;
+    flex-wrap: nowrap;
+    min-width: 0;
+}
+.logo { flex-shrink: 0; }
+.header-actions {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+    min-width: 0;
+    padding: 2px;
+}
+.header-actions::-webkit-scrollbar { display: none; }
+.header-actions .icon-btn { flex-shrink: 0; }
+
+@media (max-width: 600px) {
+    header { padding: 10px 12px; }
+    .logo-icon { width: 30px; height: 30px; }
+    .logo-icon svg { width: 28px; height: 28px; }
+    .header-actions { gap: 4px; }
+    .header-actions .icon-btn {
+        width: 38px !important;
+        height: 38px !important;
+        font-size: 17px !important;
+        border-radius: 10px;
+    }
+}
+
+@media (max-width: 380px) {
+    .header-actions .icon-btn {
+        width: 34px !important;
+        height: 34px !important;
+        font-size: 15px !important;
+    }
+}
