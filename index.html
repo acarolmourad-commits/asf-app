@@ -10793,8 +10793,12 @@ function submitQuiz() {
             }
             const pct = Math.round((correct / total) * 100);
             const pts = correct >= 8 ? 50 : correct >= 5 ? 30 : 10;
-            const emoji = pct >= 80 ? '🏆' : pct >= 50 ? '👍' : '📚';
-            showToast(`${emoji} ${correct}/${total} acertos (${pct}%)! +${pts} pontos`);
+            const arq = pct >= 80
+                ? {e:'🏆', t:'Mana Expert', d:'Você domina a base do surf! Próximo passo: desafios e metas no app.'}
+                : pct >= 50
+                ? {e:'🌊', t:'Mana em Evolução', d:'Boa base! Reforce com o guia de etiqueta no mar e siga praticando.'}
+                : {e:'🌱', t:'Mana Começando', d:'Todo mundo começa do zero! Leia o guia Como começar a surfar (menu Aprender) e tente de novo.'};
+            showToast(`${arq.e} ${arq.t} — ${correct}/${total} acertos (${pct}%)! +${pts} pontos\n${arq.d}`);
             earnPoints('quiz', pts);
         }
 function submitQuizSeguranca() {
@@ -10807,8 +10811,12 @@ function submitQuizSeguranca() {
             }
             const pct = Math.round((correct / total) * 100);
             const pts = correct >= 8 ? 50 : correct >= 5 ? 30 : 10;
-            const emoji = pct >= 80 ? '🏆' : pct >= 50 ? '👍' : '📚';
-            showToast(`${emoji} Segurança: ${correct}/${total} acertos (${pct}%)! +${pts} pontos`);
+            const arqSeg = pct >= 80
+                ? {e:'🏆', t:'Guardiã do Line-up', d:'Segurança em dia! Compartilhe o guia de etiqueta com uma mana iniciante.'}
+                : pct >= 50
+                ? {e:'🌊', t:'Mana Atenta', d:'Quase lá! Revise prioridade de onda e queda segura no guia de etiqueta.'}
+                : {e:'🌱', t:'Mana Precavida', d:'Antes da próxima sessão, leia Etiqueta no mar (menu Aprender) e refaça o quiz.'};
+            showToast(`${arqSeg.e} ${arqSeg.t} — Segurança: ${correct}/${total} acertos (${pct}%)! +${pts} pontos\n${arqSeg.d}`);
             earnPoints('quiz', pts);
             document.getElementById('quiz-seguranca').style.display = 'none';
             document.querySelector('button[onclick="startQuiz(\'seguranca\')"]').textContent = 'Refazer Quiz';
