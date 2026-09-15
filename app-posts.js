@@ -1,4 +1,10 @@
 // Post publishing and create menu functions
+
+// Escapa HTML para evitar injeção via texto do usuário (XSS)
+function escHtml(s) {
+    return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+}
+
 function publishPost() {
     const textarea = document.getElementById('new-post-text');
     const text = textarea.value.trim();
@@ -18,8 +24,15 @@ function publishPost() {
     });
     localStorage.setItem('asf-posts', JSON.stringify(posts));
     textarea.value = '';
-    if (typeof showToast === 'function') showToast('Post publicado! 🏄♀️');
+    if (typeof showToast === 'function') showToast('Post publicado! 🏄‍♀️');
     loadUserPosts();
+}
+
+function sharePostById(id) {
+    const posts = JSON.parse(localStorage.getItem('asf-posts') || '[]');
+    const p = posts.find(x => x.id === id);
+    if (!p) return;
+    if (typeof sharePost === 'function') sharePost(p.content);
 }
 
 function loadUserPosts() {
@@ -30,16 +43,16 @@ function loadUserPosts() {
     container.innerHTML = posts.map(p => `
         <div class="post" style="margin: 0 20px 16px;">
             <div class="post-header">
-                <div class="post-avatar">${p.avatar}</div>
+                <div class="post-avatar">${escHtml(p.avatar || '🟡')}</div>
                 <div class="post-info">
-                    <h4>${p.author} <span style="font-size:11px;color:var(--gray-400)">• agora</span></h4>
+                    <h4>${escHtml(p.author)} <span style="font-size:11px;color:var(--gray-400)">• agora</span></h4>
                 </div>
             </div>
-            <div class="post-content">${p.content}</div>
+            <div class="post-content">${escHtml(p.content)}</div>
             <div class="post-actions">
-                <button class="post-action"><span>🤍</span> ${p.likes}</button>
-                <button class="post-action"><span>💬</span> ${p.comments}</button>
-                <button class="post-action" onclick="sharePost('${p.content.replace(/'/g, "\\'")}')"><span>🔗</span> Compartilhar</button>
+                <button class="post-action"><span>🤍</span> ${Number(p.likes) || 0}</button>
+                <button class="post-action"><span>💬</span> ${Number(p.comments) || 0}</button>
+                <button class="post-action" onclick="sharePostById(${Number(p.id)})"><span>🔗</span> Compartilhar</button>
             </div>
         </div>
     `).join('');
