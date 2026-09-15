@@ -7,5 +7,10 @@ Sitemap: https://acarolmourad-commits.github.io/asf-app/sitemap.xml
 Disallow: /docs/
 Disallow: /_/
 
-# Permitir tudo o resto
+# Páginas internas/operacionais fora do índice
+Disallow: /hermes.html
+Disallow: /espacos-logo-app.html
+Disallow: /index-short.html
+
+# Permitir todo o resto
 Allow: /sessoes-interativas.html
