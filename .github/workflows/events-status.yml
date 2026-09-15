@@ -1,0 +1,32 @@
+name: ASF Events Temporal Status (daily)
+
+on:
+  schedule:
+    - cron: '0 9 * * *'  # 6h BRT
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  events-status:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Update events temporal status
+        run: python3 scripts/events_status.py
+      - name: Commit if changed
+        run: |
+          git config user.name "ASF Bot"
+          git config user.email "bot@asf-app.com"
+          git add data/events.json
+          if git diff --cached --quiet; then
+            echo "Sem mudancas temporais"
+          else
+            git commit -m "📅 Status temporal de eventos - $(date +%Y-%m-%d)"
+            git push
+          fi
