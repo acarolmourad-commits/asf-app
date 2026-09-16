@@ -215,3 +215,59 @@ document.addEventListener('DOMContentLoaded', loadUserPosts);
         init();
     }
 })();
+
+// ============================================================
+// ASF — Patch de conformidade Google AdSense (2026-09-16)
+// 1) Instagram oficial real (@asf.surffeminino — o antigo handle não existe)
+// 2) Estatísticas reais no lugar de números inventados
+// 3) Links legais visíveis no rodapé (exigência de navegação do AdSense)
+// 4) Correção do link da Política de Privacidade e do canal de contato
+// ============================================================
+document.addEventListener('DOMContentLoaded', function () {
+  try {
+    // 1. Instagram real
+    document.querySelectorAll('a[href*="associacaosurffeminino"]').forEach(function (a) {
+      a.href = 'https://www.instagram.com/asf.surffeminino';
+    });
+
+    // 2. Estatística real: 2,1 mil seguidoras no Instagram @asf.surffeminino
+    document.querySelectorAll('.stat-card .stat-label').forEach(function (el) {
+      if (el.textContent.trim() === 'Membros') {
+        var card = el.closest('.stat-card');
+        if (!card) return;
+        var v = card.querySelector('.stat-value');
+        var i = card.querySelector('.stat-icon');
+        if (v) v.textContent = '2,1 mil';
+        if (i) i.textContent = '📸';
+        el.textContent = 'Seguidoras no Instagram';
+      }
+    });
+    var sm = document.getElementById('stat-members');
+    if (sm && sm.parentElement) {
+      sm.parentElement.innerHTML = '📸 <span id="stat-members">2,1 mil</span> seguidoras no Instagram';
+    }
+
+    // 3. Links legais no rodapé
+    var footer = document.querySelector('footer');
+    if (footer && !document.getElementById('asf-legal-links')) {
+      var div = document.createElement('div');
+      div.id = 'asf-legal-links';
+      div.style.cssText = 'display:flex;flex-wrap:wrap;justify-content:center;gap:16px;margin:12px 0 10px;font-size:12px;';
+      div.innerHTML =
+        '<a href="sobre.html" style="color:white;text-decoration:underline;opacity:0.85;">Sobre</a>' +
+        '<a href="contato.html" style="color:white;text-decoration:underline;opacity:0.85;">Contato</a>' +
+        '<a href="privacidade.html" style="color:white;text-decoration:underline;opacity:0.85;">Política de Privacidade</a>' +
+        '<a href="termos-de-uso.html" style="color:white;text-decoration:underline;opacity:0.85;">Termos de Uso</a>';
+      var ps = footer.querySelectorAll('p');
+      var anchor = null;
+      ps.forEach(function (p) { if (p.textContent.indexOf('©') > -1 && !anchor) anchor = p; });
+      if (anchor) footer.insertBefore(div, anchor); else footer.appendChild(div);
+    }
+
+    // 4. Link LGPD e canal de contato real (e-mail asf@asf-surf.org não existe)
+    if (typeof ASF_IMAGE_TERMS !== 'undefined') {
+      ASF_IMAGE_TERMS.LGPD_link = 'privacidade.html';
+      ASF_IMAGE_TERMS.secao3_texto = 'Você pode solicitar a remoção de qualquer material seu da ASF a qualquer momento pelo WhatsApp oficial +55 11 95434-6288 ou pelo Instagram @asf.surffeminino, informando o link da publicação.';
+    }
+  } catch (e) { console.warn('ASF compliance patch:', e); }
+});
