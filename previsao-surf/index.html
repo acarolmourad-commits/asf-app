@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Previsão de Ondas ASF — Condições do Mar em Tempo Real</title>
+  <meta name="description" content="Previsão de ondas e vento para o litoral paulista em tempo real (Open-Meteo). Ferramenta gratuita da ASF — Associação de Surf Feminino.">
+  <meta name="robots" content="index,follow">
+  <link rel="canonical" href="https://acarolmourad-commits.github.io/asf-app/previsao-surf/">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Previsão de Ondas ASF">
+  <meta property="og:description" content="Condições do mar em tempo real para surfistas do litoral paulista.">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box}
+    body{font-family:'Outfit',sans-serif;background:#F8F9FA;color:#0E2439;min-height:100vh}
+    header{background:linear-gradient(135deg,#0E2439,#00A8CC);color:#fff;padding:28px 20px;text-align:center}
+    header h1{font-size:clamp(1.4rem,4vw,2rem)}
+    header p{opacity:.9;margin-top:6px;font-size:14px}
+    .wrap{max-width:860px;margin:0 auto;padding:20px 16px 48px}
+    select,button{font-family:inherit;font-size:15px;padding:12px 16px;border-radius:12px;border:1px solid #E4E6E9}
+    button{background:#00A8CC;color:#fff;border:none;font-weight:700;cursor:pointer}
+    .controls{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:18px}
+    .card{background:#fff;border-radius:16px;padding:18px;box-shadow:0 2px 10px rgba(0,0,0,.06);margin-bottom:14px}
+    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px}
+    .metric{background:#F8F9FA;border-radius:12px;padding:14px;text-align:center}
+    .metric .v{font-size:1.5rem;font-weight:800;color:#00A8CC}
+    .metric .l{font-size:12px;color:#666;margin-top:4px}
+    .badge{display:inline-block;padding:6px 14px;border-radius:999px;font-weight:700;font-size:13px}
+    .good{background:#DCFCE7;color:#14532D}.ok{background:#FEF9C3;color:#713F12}.bad{background:#FEE2E2;color:#7F1D1D}
+    .links{display:grid;gap:10px;margin-top:8px}
+    .links a{display:block;background:#fff;border:1px solid #E4E6E9;border-radius:12px;padding:14px 16px;text-decoration:none;color:#0E2439;font-weight:600}
+    .links a span{color:#00A8CC}
+    footer{text-align:center;color:#9A9A9A;font-size:12px;padding:20px}
+    #status{font-size:13px;color:#666;margin:10px 0}
+  </style>
+</head>
+<body>
+<header>
+  <h1>🌊 Previsão de Ondas ASF</h1>
+  <p>Condições do mar em tempo real para o litoral paulista — por Associação de Surf Feminino</p>
+</header>
+<div class="wrap">
+  <div class="card">
+    <div class="controls">
+      <select id="beach">
+        <option value="-23.85,-46.13">Bertioga</option>
+        <option value="-23.96,-46.33">Santos (Gonzaga)</option>
+        <option value="-23.99,-46.30">São Vicente</option>
+        <option value="-24.00,-46.41">Praia Grande</option>
+        <option value="-23.80,-46.40">Guarujá (Enseada)</option>
+        <option value="-23.82,-45.41">São Sebastião (Maresias)</option>
+        <option value="-23.43,-45.07">Ubatuba (Itamambuca)</option>
+      </select>
+      <button onclick="loadForecast()">Atualizar previsão</button>
+    </div>
+    <div id="status">Escolha a praia e clique em atualizar.</div>
+    <div class="grid" id="metrics"></div>
+    <div style="margin-top:14px" id="verdict"></div>
+  </div>
+
+  <div class="card">
+    <h2 style="font-size:17px;margin-bottom:10px">🔗 Explore mais</h2>
+    <div class="links">
+      <a href="../">🏄‍♀️ <span>ASF App</span> — dicas, comunidade e sessões de surf feminino</a>
+      <a href="../aprender/como-comecar-a-surfar-mulheres.html">📖 Como começar a surfar (guia para mulheres)</a>
+      <a href="../praias/melhores-praias-iniciantes-litoral-norte-sp.html">🏖️ Melhores praias para iniciantes no Litoral Norte</a>
+      <a href="../sessoes-interativas.html">💬 Sessões interativas da comunidade</a>
+      <a href="https://praia.digital/apps/simulador-roi-temporada/" target="_blank" rel="noopener">🧮 <span>Praia Digital</span> — simule o ROI de um imóvel de temporada no litoral</a>
+      <a href="https://praia.digital/" target="_blank" rel="noopener">🏠 Praia Digital — imóveis no litoral de SP</a>
+    </div>
+  </div>
+</div>
+<footer>ASF — Associação de Surf Feminino • Dados: Open-Meteo Marine API • <a href="../" style="color:#00A8CC">Voltar ao app</a></footer>
+
+<script>
+async function loadForecast(){
+  const [lat,lon] = document.getElementById('beach').value.split(',');
+  const status = document.getElementById('status');
+  status.textContent = 'Carregando...';
+  try{
+    const url = `https://marine-api.open-meteo.com/v1/marine?latitude=${lat}&longitude=${lon}&current=wave_height,wave_period,wave_direction,wind_wave_height&timezone=America%2FSao_Paulo`;
+    const r = await fetch(url);
+    const j = await r.json();
+    const c = j.current;
+    const h = c.wave_height, p = c.wave_period;
+    document.getElementById('metrics').innerHTML = `
+      <div class="metric"><div class="v">${h.toFixed(1)} m</div><div class="l">Altura das ondas</div></div>
+      <div class="metric"><div class="v">${p.toFixed(0)} s</div><div class="l">Período</div></div>
+      <div class="metric"><div class="v">${c.wave_direction.toFixed(0)}°</div><div class="l">Direção do swell</div></div>
+      <div class="metric"><div class="v">${c.wind_wave_height.toFixed(1)} m</div><div class="l">Onda de vento</div></div>`;
+    let cls, txt;
+    if(h < 0.5){ cls='bad'; txt='😐 Mar bem pequeno — dia de descanso ou longboard clássico.'; }
+    else if(h < 1.0){ cls='good'; txt='🌱 Ótimo para iniciantes! Ondas pequenas e amigáveis.'; }
+    else if(h < 1.8){ cls='good'; txt='🏄‍♀️ Condições boas! Diverte do iniciante ao intermediário.'; }
+    else { cls='ok'; txt='⚡ Mar grande — recomendado para surfistas experientes.'; }
+    document.getElementById('verdict').innerHTML = `<span class="badge ${cls}">${txt}</span>`;
+    status.textContent = 'Atualizado às ' + new Date().toLocaleTimeString('pt-BR');
+  }catch(e){
+    status.textContent = 'Não foi possível carregar agora. Tente novamente em instantes.';
+  }
+}
+loadForecast();
+</script>
+</body>
+</html>
