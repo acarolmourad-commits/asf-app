@@ -270,3 +270,35 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   });
 })();
+
+// ASF hotfix 2026-09-16 (v2): MODO ABAS — cada botao/tab mostra APENAS a secao escolhida.
+// Substitui o override anterior (scroll) por troca real de secao, como pedido.
+(function () {
+  function activateSection(sectionId) {
+    var el = document.getElementById(sectionId);
+    if (!el) return;
+    document.querySelectorAll('.section').forEach(function (s) {
+      s.classList.remove('active');
+      s.style.display = 'none';
+    });
+    document.querySelectorAll('.tab').forEach(function (t) {
+      var match = t.getAttribute('aria-controls') === sectionId;
+      t.classList.toggle('active', match);
+      t.setAttribute('aria-selected', match ? 'true' : 'false');
+    });
+    document.querySelectorAll('.nav-item').forEach(function (n) { n.classList.remove('active'); });
+    el.classList.add('active');
+    el.style.display = 'block';
+    el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    if (sectionId === 'loja' && typeof renderAffiliateStore === 'function') {
+      renderAffiliateStore();
+    }
+  }
+  window.showSection = activateSection;
+
+  // Estado inicial: exibe apenas a secao ativa (padrao: dicas).
+  document.addEventListener('DOMContentLoaded', function () {
+    var current = document.querySelector('.section.active') || document.getElementById('dicas');
+    if (current) activateSection(current.id);
+  });
+})();
