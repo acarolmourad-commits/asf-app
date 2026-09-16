@@ -12579,7 +12579,7 @@ MSG_CORRECT:["Acertou! 🎉","Perfeito! 🌟","Mandou bem! ⭐","Excelente! 🏆
 MSG_WRONG:["Quase! 💪","Não desista! 🌊","Tente de novo! 🏄‍♀️","Errou, mas aprendeu! 📚","Próxima dá certo! ✨","Wipeout não é fim! 🏄","O surf é paciência! 🐢","Nem todo drop dá certo! 🤙","Continue surfando! 🌊","Caiu? Levanta! 🚀"],
 getToday(){return new Date().toISOString().split('T')[0]},
 getDaySeed(){return this.hashDay(this.getToday())},
-getIndexoffset(){const seed=this.getDaySeed(),total=this.questions.length,pd=this.PER_DAY;return(seed*(pd+3))%(total-pd+1)},
+getIndexoffset(){const seed=this.getDaySeed(),total=this.questions.length,pd=this.PER_DAY;return Math.abs(seed*(pd+3))%(total-pd+1)},
 getIndices(){const offset=this.getIndexoffset(),pd=this.PER_DAY,indices=[];for(let i=0;i<pd;i++)indices.push((offset+i)%this.questions.length);return indices},
 getTodayQuestions(){return this.getIndices().map(i=>({...this.questions[i],_dayIndex:this.getIndices().indexOf(i)}))},
 getProgress(){const answered=parseInt(localStorage.getItem(this.STREAK_KEY+'_answered')||'0'),total=this.PER_DAY;return Math.min(answered,total)},
@@ -12760,8 +12760,17 @@ if(ctaBar)ctaBar.innerHTML=brands.length<ASF_BRANDS_DATA.length?'<p style="font-
 }
 function copyCoupon(code){navigator.clipboard.writeText(code).then(()=>showToast('Cupom '+code+' copiado! 🎉'))}
 
-if(window.ASF_QUIZ)ASF_QUIZ.render();if(window.ASF_QUIZ_HOME)ASF_QUIZ_HOME.init();if(window.ASF_BRAND_HOME)ASF_BRAND_HOME.init();if(window.ASF_METAS)ASF_METAS.init()
-})}
+})
+function asfSafeInit(){
+  if(window.__asfInitDone)return;window.__asfInitDone=true;
+  try{window.ASFAutoInit&&ASFAutoInit()}catch(e){console.error('ASFAutoInit',e)}
+  try{window.updateXPBar&&updateXPBar()}catch(e){console.error('updateXPBar',e)}
+  try{window.ASF_QUIZ&&ASF_QUIZ.render()}catch(e){console.error('ASF_QUIZ',e)}
+  try{window.ASF_QUIZ_HOME&&ASF_QUIZ_HOME.init()}catch(e){console.error('ASF_QUIZ_HOME',e)}
+  try{window.ASF_BRAND_HOME&&ASF_BRAND_HOME.init()}catch(e){console.error('ASF_BRAND_HOME',e)}
+  try{window.ASF_METAS&&ASF_METAS.init()}catch(e){console.error('ASF_METAS',e)}
+}
+if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',asfSafeInit)}else{asfSafeInit()}
 
 
 const ASF_METAS = {
