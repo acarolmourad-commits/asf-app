@@ -1,5 +1,5 @@
 {
-  "date": "2026-09-16T16:13:33.836428+00:00",
+  "date": "2026-09-16T20:32:04.114684+00:00",
   "total": 51,
   "ok": 27,
   "skipped": 23,
@@ -209,7 +209,7 @@
       "local": true
     },
     {
-      "url": "assets/images/hero-mermaid-surf.jpg",
+      "url": "assets/images/hero-surf.jpg",
       "status": "ok",
       "http": 200,
       "local": true
