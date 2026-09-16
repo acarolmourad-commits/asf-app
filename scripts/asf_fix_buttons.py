@@ -63,7 +63,7 @@ assert n == 1, 'calc card not found'
 
 # 3) Fill surf-conditions section with real content
 pat4 = re.compile(
-    r'<div class="section" id="surf-conditions"><p .*?</p>\s*'
+    r'<div class="section" id="surf-conditions">.*?</div>\s*'
     r'<div class="section-header"><h2 class="section-title">\U0001F30A Condi\u00E7\u00F5es das Ondas</h2></div>\s*'
     r'<div id="surf-conditions-container-2" style="padding:0 16px;"></div>\s*'
     r'</div>',
