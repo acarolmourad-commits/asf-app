@@ -302,3 +302,16 @@ document.addEventListener('DOMContentLoaded', function () {
     if (current) activateSection(current.id);
   });
 })();
+
+// ASF AdSense 2026-09-16: links institucionais no rodape (Privacidade/Sobre/Contato)
+// para facilitar a validacao do Google AdSense.
+document.addEventListener('DOMContentLoaded', function () {
+  if (document.getElementById('asf-legal-footer')) return;
+  var f = document.createElement('div');
+  f.id = 'asf-legal-footer';
+  f.style.cssText = 'text-align:center;padding:16px 12px 90px;font-size:12px;color:var(--gray-500,#667);';
+  f.innerHTML = '<a href="privacidade.html" style="color:var(--primary,#00A8CC);margin:0 8px;">Política de Privacidade</a>·' +
+    '<a href="sobre.html" style="color:var(--primary,#00A8CC);margin:0 8px;">Sobre</a>·' +
+    '<a href="contato.html" style="color:var(--primary,#00A8CC);margin:0 8px;">Contato</a>';
+  document.body.appendChild(f);
+});
