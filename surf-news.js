@@ -229,3 +229,11 @@ document.addEventListener('DOMContentLoaded', function () {
     window.showSection = polished;
   }
 });
+
+// ASF override: troca o banner da secao Lojas (Unsplash generico) por imagem de surf.
+document.addEventListener('DOMContentLoaded', function () {
+  document.querySelectorAll('img[src*="photo-1558618666-fcd25c85cd64"]').forEach(function (img) {
+    img.src = 'https://images.unsplash.com/photo-1502680390469-be75c86b636f?w=600&h=150&fit=crop';
+    img.alt = 'Surf';
+  });
+});
