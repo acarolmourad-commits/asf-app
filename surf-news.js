@@ -237,3 +237,36 @@ document.addEventListener('DOMContentLoaded', function () {
     img.alt = 'Surf';
   });
 });
+
+// ASF hotfix 2026-09-16: botoes utilitarios do topo (Ondas/Clima/Mares/Calculadora/Competicoes)
+// estavam "sem acao" porque showSection so alternava a classe .active (sem efeito visual),
+// e um listener global quebrava com TypeError por causa do #notifications-panel ausente.
+(function () {
+  // 1) Corrige showSection: rola suavemente ate a secao alvo e marca como ativa,
+  //    sem esconder as demais (a home e uma pagina longa com todas as secoes visiveis).
+  window.showSection = function (sectionId) {
+    document.querySelectorAll('.section').forEach(function (s) { s.classList.remove('active'); });
+    document.querySelectorAll('.tab').forEach(function (t) { t.classList.remove('active'); t.setAttribute('aria-selected', 'false'); });
+    document.querySelectorAll('.nav-item').forEach(function (n) { n.classList.remove('active'); });
+    var el = document.getElementById(sectionId);
+    if (!el) return;
+    el.classList.add('active');
+    if (el.style.display === 'none') el.style.display = 'block';
+    el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    if (sectionId === 'loja' && typeof renderAffiliateStore === 'function') {
+      renderAffiliateStore();
+    }
+  };
+
+  // 2) Cria o painel de notificacoes ausente (elimina o TypeError em todo clique
+  //    e faz o botao 🔔 funcionar).
+  document.addEventListener('DOMContentLoaded', function () {
+    if (!document.getElementById('notifications-panel')) {
+      var p = document.createElement('div');
+      p.id = 'notifications-panel';
+      p.style.cssText = 'display:none;position:fixed;top:70px;right:16px;background:#fff;border-radius:12px;box-shadow:0 8px 24px rgba(0,0,0,.15);padding:16px;z-index:9999;max-width:320px;';
+      p.innerHTML = '<h4 style="margin:0 0 8px;font-size:14px;">🔔 Notificações</h4><div id="notifications-list"><p style="font-size:13px;color:#666;margin:0;">Sem novas notificações no momento.</p></div>';
+      document.body.appendChild(p);
+    }
+  });
+})();
