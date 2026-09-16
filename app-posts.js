@@ -267,7 +267,28 @@ document.addEventListener('DOMContentLoaded', function () {
     // 4. Link LGPD e canal de contato real (e-mail asf@asf-surf.org não existe)
     if (typeof ASF_IMAGE_TERMS !== 'undefined') {
       ASF_IMAGE_TERMS.LGPD_link = 'privacidade.html';
-      ASF_IMAGE_TERMS.secao3_texto = 'Você pode solicitar a remoção de qualquer material seu da ASF a qualquer momento pelo WhatsApp oficial +55 11 95434-6288 ou pelo Instagram @asf.surffeminino, informando o link da publicação.';
+      ASF_IMAGE_TERMS.secao3_texto = 'Você pode solicitar a remoção de qualquer material seu da ASF a qualquer momento pelo e-mail asf.surffeminino@gmail.com, WhatsApp oficial +55 11 95434-6288 ou Instagram @asf.surffeminino, informando o link da publicação.';
     }
   } catch (e) { console.warn('ASF compliance patch:', e); }
+});
+
+// ============================================================
+// ASF - Banner de consentimento de cookies (LGPD / Google AdSense)
+// ============================================================
+document.addEventListener('DOMContentLoaded', function () {
+  try {
+    if (localStorage.getItem('asf-cookie-consent')) return;
+    var bar = document.createElement('div');
+    bar.id = 'asf-cookie-banner';
+    bar.style.cssText = 'position:fixed;left:0;right:0;bottom:0;background:#0E2439;color:#fff;padding:14px 16px;z-index:10001;display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:center;font-family:system-ui,sans-serif;font-size:13px;box-shadow:0 -2px 12px rgba(0,0,0,0.25)';
+    bar.innerHTML =
+      '<span style="max-width:640px">🍪 Usamos cookies para personalizar conteúdo e exibir anúncios (Google AdSense). Ao continuar, você concorda com nossa ' +
+      '<a href="privacidade.html" style="color:#7FD4EC;text-decoration:underline">Política de Privacidade</a>.</span>' +
+      '<button id="asf-cookie-accept" style="background:#00A8CC;color:#fff;border:none;padding:10px 18px;border-radius:8px;font-weight:600;cursor:pointer">Aceitar</button>';
+    document.body.appendChild(bar);
+    document.getElementById('asf-cookie-accept').addEventListener('click', function () {
+      localStorage.setItem('asf-cookie-consent', 'accepted');
+      bar.remove();
+    });
+  } catch (e) { console.warn('ASF cookie banner:', e); }
 });
