@@ -1,8 +1,26 @@
 {
-  "updated": "2026-09-15",
-  "ultima_atualizacao": "2026-09-15T17:20:00Z",
+  "updated": "2026-09-16",
+  "ultima_atualizacao": "2026-09-16T15:15:00Z",
   "fonte": "spsurf.com.br + ASF",
   "eventos": [
+    {
+      "titulo": "🏄 ASF Surf Day Feminino",
+      "local": "Bertioga - Praia de Indaiá",
+      "inicio": "2026-10-04",
+      "fim": "2026-10-04",
+      "descricao": "Encontro gratuito da comunidade ASF: aula para iniciantes, free surf e roda de conversa.",
+      "fonte": "ASF",
+      "status": "FUTURO"
+    },
+    {
+      "titulo": "🏆 Copa Litoral Paulista - Etapa 4",
+      "local": "Guarujá - Praia da Enseada",
+      "inicio": "2026-11-07",
+      "fim": "2026-11-08",
+      "descricao": "Circuito estadual feminino - penúltima etapa do ranking",
+      "fonte": "spsurf.com.br",
+      "status": "FUTURO"
+    },
     {
       "titulo": "🏆 WQS 5000 - Praia do Tombo",
       "local": "Bertioga - Praia do Tombo",
