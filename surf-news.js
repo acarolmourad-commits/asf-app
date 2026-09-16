@@ -303,3 +303,28 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   });
 })();
+
+// ===== ASF Satellite Sites Nav (injecao automatica) =====
+(function(){
+  function injectNav(){
+    if(document.querySelector('.asf-sat-nav'))return;
+    var sites=[["asf-praias","\u{1F3D6}\uFE0F Praias"],["asf-previsao","\u{1F30A} Previs\u00E3o"],["asf-treino","\u{1F3CB}\uFE0F Treino"],["asf-eventos","\u{1F4C5} Eventos"],["asf-glossario","\u{1F4D6} Gloss\u00E1rio"],["asf-seguranca","\u{1F6FA} Seguran\u00E7a"],["asf-comunidade","\u{1F4AC} Comunidade"],["asf-equipamento","\u{1F3C4}\u200D\u2640\uFE0F Equipamento"],["asf-quiz","\u{1F9E0} Quiz"],["asf-nutricao","\u{1F957} Nutri\u00E7\u00E3o"],["asf-viagens","\u{2708}\uFE0F Viagens"]];
+    var nav=document.createElement('nav');
+    nav.className='asf-sat-nav';
+    nav.setAttribute('aria-label','Sites satelite ASF');
+    nav.style.cssText='background:#fff;box-shadow:0 2px 6px rgba(0,0,0,.08);padding:.6rem 1rem;display:flex;flex-wrap:wrap;gap:.5rem;justify-content:center;position:sticky;top:0;z-index:10000;';
+    sites.forEach(function(s){
+      var a=document.createElement('a');
+      a.href='https://acarolmourad-commits.github.io/'+s[0]+'/';
+      a.textContent=s[1];
+      a.style.cssText='color:#0a4d68;text-decoration:none;font-weight:600;font-size:.82rem;padding:.35rem .65rem;border-radius:999px;border:1px solid #088395;font-family:inherit;';
+      a.onmouseover=function(){a.style.background='#088395';a.style.color='#fff';};
+      a.onmouseout=function(){a.style.background='';a.style.color='#0a4d68';};
+      nav.appendChild(a);
+    });
+    var anchor=document.querySelector('.bg-animation');
+    if(anchor&&anchor.parentNode){anchor.parentNode.insertBefore(nav,anchor.nextSibling);}
+    else{document.body.insertBefore(nav,document.body.firstChild);}
+  }
+  if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',injectNav);}else{injectNav();}
+})();
