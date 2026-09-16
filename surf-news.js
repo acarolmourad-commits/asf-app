@@ -312,6 +312,7 @@ document.addEventListener('DOMContentLoaded', function () {
   f.style.cssText = 'text-align:center;padding:16px 12px 90px;font-size:12px;color:var(--gray-500,#667);';
   f.innerHTML = '<a href="privacidade.html" style="color:var(--primary,#00A8CC);margin:0 8px;">Política de Privacidade</a>·' +
     '<a href="sobre.html" style="color:var(--primary,#00A8CC);margin:0 8px;">Sobre</a>·' +
-    '<a href="contato.html" style="color:var(--primary,#00A8CC);margin:0 8px;">Contato</a>';
+    '<a href="contato.html" style="color:var(--primary,#00A8CC);margin:0 8px;">Contato</a> · ' +
+    '<a href="termos.html" style="color:var(--primary,#00A8CC);margin:0 8px;">Termos de Uso</a>';
   document.body.appendChild(f);
 });
