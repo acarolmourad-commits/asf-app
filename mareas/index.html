@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Guia de Marés ASF — Tábua de Marés do Litoral Paulista</title>
+  <meta name="description" content="Entenda as marés do litoral paulista e como elas afetam o surf: maré cheia, vazante, lua e os melhores horários. Guia educativo gratuito da ASF.">
+  <meta name="robots" content="index,follow">
+  <link rel="canonical" href="https://acarolmourad-commits.github.io/asf-app/mareas/">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Guia de Marés ASF">
+  <meta property="og:description" content="Aprenda a ler as marés e escolher o melhor horário para surfar.">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box}
+    body{font-family:'Outfit',sans-serif;background:#F8F9FA;color:#0E2439}
+    header{background:linear-gradient(135deg,#0E2439,#9B59B6);color:#fff;padding:28px 20px;text-align:center}
+    header h1{font-size:clamp(1.4rem,4vw,2rem)}
+    header p{opacity:.9;margin-top:6px;font-size:14px}
+    .wrap{max-width:820px;margin:0 auto;padding:20px 16px 48px}
+    .card{background:#fff;border-radius:16px;padding:20px;box-shadow:0 2px 10px rgba(0,0,0,.06);margin-bottom:14px}
+    .card h2{font-size:18px;margin-bottom:8px;color:#0E2439}
+    .card p,.card li{font-size:14px;line-height:1.7;color:#444}
+    .card ul{padding-left:20px;margin-top:6px}
+    .moon{text-align:center;padding:10px 0}
+    .moon .icon{font-size:3rem}
+    .moon .name{font-weight:800;color:#9B59B6;font-size:1.2rem}
+    .moon .desc{font-size:13px;color:#666;margin-top:4px}
+    .tip{background:#FEF9C3;border-left:4px solid #F4D03F;padding:12px 16px;border-radius:8px;font-size:13px;margin-top:12px}
+    .links{display:grid;gap:10px;margin-top:8px}
+    .links a{display:block;background:#fff;border:1px solid #E4E6E9;border-radius:12px;padding:14px 16px;text-decoration:none;color:#0E2439;font-weight:600}
+    .links a span{color:#00A8CC}
+    footer{text-align:center;color:#9A9A9A;font-size:12px;padding:20px}
+  </style>
+</head>
+<body>
+<header>
+  <h1>🌙 Guia de Marés ASF</h1>
+  <p>Aprenda a ler as marés e surfe no horário certo — Associação de Surf Feminino</p>
+</header>
+<div class="wrap">
+  <div class="card">
+    <h2>Fase da lua agora</h2>
+    <div class="moon">
+      <div class="icon" id="moonIcon">🌙</div>
+      <div class="name" id="moonName"></div>
+      <div class="desc" id="moonDesc"></div>
+    </div>
+    <div class="tip">💡 Luas <strong>cheia</strong> e <strong>nova</strong> = marés de sizígia (mais amplitude, correntes mais fortes). Luas de <strong>quarto</strong> = marés de quadratura (mais suaves, ótimas para iniciantes).</div>
+  </div>
+
+  <div class="card">
+    <h2>🌊 Maré e surf: o básico</h2>
+    <ul>
+      <li><strong>Maré enchente (subindo):</strong> geralmente melhora bancos de areia rasos e point breaks; ondas ganham força.</li>
+      <li><strong>Maré cheia (alta):</strong> algumas praias "afogam" (ondas quebram fracas); outras ficam perfeitas.</li>
+      <li><strong>Maré vazante (descendo):</strong> expõe bancos; beach breaks podem fechar mais (ondas ocas).</li>
+      <li><strong>Maré seca (baixa):</strong> cuidado com pedras e bancos rasos empicados.</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h2>🏖️ Dicas por praia (litoral SP)</h2>
+    <ul>
+      <li><strong>Santos/São Vicente:</strong> maré média enchendo costuma formar as melhores esquerdas no canal.</li>
+      <li><strong>Maresias:</strong> funciona em quase todas as marés; na seca fica mais rápida e tubular.</li>
+      <li><strong>Itamambuca (Ubatuba):</strong> maré baixa a média, swell de leste/sudeste.</li>
+      <li><strong>Bertioga:</strong> maré enchente com swell de sudeste deixa as ondas mais cheias e macias — ideal para iniciantes.</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h2>🔗 Explore mais</h2>
+    <div class="links">
+      <a href="../">🏄‍♀️ <span>ASF App</span> — home da comunidade</a>
+      <a href="../previsao-surf/">🌊 Previsão de ondas em tempo real</a>
+      <a href="../aprender/etiqueta-no-mar.html">🤝 Etiqueta no mar — regras de convivência</a>
+      <a href="../aprender/primeira-prancha-de-surf.html">🏄 Primeira prancha — guia de compra</a>
+      <a href="https://praia.digital/apps/simulador-roi-temporada/" target="_blank" rel="noopener">🧮 <span>Praia Digital</span> — simulador de ROI de temporada</a>
+    </div>
+  </div>
+</div>
+<footer>ASF — Associação de Surf Feminino • <a href="../" style="color:#00A8CC">Voltar ao app</a></footer>
+<script>
+(function(){
+  // Fase lunar aproximada (ciclo 29.53 dias, referência: lua nova 2000-01-06)
+  const ref = new Date('2000-01-06T18:14:00Z');
+  const days = (Date.now() - ref.getTime())/86400000;
+  const age = days % 29.53;
+  const phases = [
+    [1.84,'🌑','Lua Nova','Marés de sizígia — amplitude máxima, correntes fortes.'],
+    [5.53,'🌒','Lua Crescente','Amplitude diminuindo — condições se acalmando.'],
+    [9.22,'🌓','Quarto Crescente','Marés de quadratura — suaves, boas para iniciantes.'],
+    [12.91,'🌔','Gibosa Crescente','Amplitude aumentando rumo à cheia.'],
+    [16.61,'🌕','Lua Cheia','Marés de sizígia — amplitude máxima, correntes fortes.'],
+    [20.30,'🌖','Gibosa Minguante','Amplitude diminuindo.'],
+    [23.99,'🌗','Quarto Minguante','Marés de quadratura — suaves, boas para iniciantes.'],
+    [27.68,'🌘','Lua Minguante','Amplitude aumentando rumo à nova.'],
+    [29.53,'🌑','Lua Nova','Marés de sizígia — amplitude máxima, correntes fortes.']
+  ];
+  for(const [lim,icon,name,desc] of phases){
+    if(age < lim){
+      document.getElementById('moonIcon').textContent = icon;
+      document.getElementById('moonName').textContent = name;
+      document.getElementById('moonDesc').textContent = desc;
+      break;
+    }
+  }
+})();
+</script>
+</body>
+</html>
