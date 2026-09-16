@@ -271,16 +271,18 @@ document.addEventListener('DOMContentLoaded', function () {
   });
 })();
 
-// ASF hotfix 2026-09-16 (v2): MODO ABAS — cada botao/tab mostra APENAS a secao escolhida.
-// Substitui o override anterior (scroll) por troca real de secao, como pedido.
+// ASF hotfix 2026-09-16 (v3): MODO PADRAO para validacao do Google AdSense.
+// Todas as secoes ficam visiveis (pagina longa) para o rastreador do Google ver o conteudo.
+// Os botoes/tabs navegam rolando suavemente ate a secao correspondente.
 (function () {
-  function activateSection(sectionId) {
+  window.showSection = function (sectionId) {
     var el = document.getElementById(sectionId);
     if (!el) return;
+    // Garante que TODAS as secoes estao visiveis (padrao AdSense-friendly).
     document.querySelectorAll('.section').forEach(function (s) {
-      s.classList.remove('active');
-      s.style.display = 'none';
+      if (s.id !== 'quiz') s.style.display = 'block';
     });
+    document.querySelectorAll('.section').forEach(function (s) { s.classList.remove('active'); });
     document.querySelectorAll('.tab').forEach(function (t) {
       var match = t.getAttribute('aria-controls') === sectionId;
       t.classList.toggle('active', match);
@@ -288,43 +290,16 @@ document.addEventListener('DOMContentLoaded', function () {
     });
     document.querySelectorAll('.nav-item').forEach(function (n) { n.classList.remove('active'); });
     el.classList.add('active');
-    el.style.display = 'block';
     el.scrollIntoView({ behavior: 'smooth', block: 'start' });
     if (sectionId === 'loja' && typeof renderAffiliateStore === 'function') {
       renderAffiliateStore();
     }
-  }
-  window.showSection = activateSection;
+  };
 
-  // Estado inicial: exibe apenas a secao ativa (padrao: dicas).
+  // Estado inicial: todas as secoes visiveis, 'dicas' marcada como ativa.
   document.addEventListener('DOMContentLoaded', function () {
-    var current = document.querySelector('.section.active') || document.getElementById('dicas');
-    if (current) activateSection(current.id);
+    document.querySelectorAll('.section').forEach(function (s) {
+      if (s.id !== 'quiz') s.style.display = 'block';
+    });
   });
 })();
-
-// ASF AdSense 2026-09-16: links institucionais no rodape (Privacidade/Sobre/Contato)
-// para facilitar a validacao do Google AdSense.
-document.addEventListener('DOMContentLoaded', function () {
-  if (document.getElementById('asf-legal-footer')) return;
-  var f = document.createElement('div');
-  f.id = 'asf-legal-footer';
-  f.style.cssText = 'text-align:center;padding:16px 12px 90px;font-size:12px;color:var(--gray-500,#667);';
-  f.innerHTML = '<a href="privacidade.html" style="color:var(--primary,#00A8CC);margin:0 8px;">Política de Privacidade</a>·' +
-    '<a href="sobre.html" style="color:var(--primary,#00A8CC);margin:0 8px;">Sobre</a>·' +
-    '<a href="contato.html" style="color:var(--primary,#00A8CC);margin:0 8px;">Contato</a>';
-  document.body.appendChild(f);
-});
-
-// ASF: inclui link de Termos de Uso no rodape legal (validacao AdSense).
-document.addEventListener('DOMContentLoaded', function () {
-  var f = document.getElementById('asf-legal-footer');
-  if (f && !f.querySelector('a[href="termos-de-uso.html"]')) {
-    var a = document.createElement('a');
-    a.href = 'termos-de-uso.html';
-    a.textContent = 'Termos de Uso';
-    a.style.cssText = 'color:var(--primary,#00A8CC);margin:0 8px;';
-    f.appendChild(document.createTextNode('·'));
-    f.appendChild(a);
-  }
-});
