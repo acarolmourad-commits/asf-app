@@ -530,3 +530,16 @@ h4 { font-size: 15px; font-weight: 600; color: var(--secondary, #0E2439); }
     transition-duration: 0.01ms !important;
   }
 }
+
+/* ─── Apps Dropdown: menu de apps compacto ─── */
+.tabs{display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
+.tabs > .tab{flex:0 0 auto;}
+.apps-dropdown{position:relative;display:inline-block;}
+.apps-dropdown-toggle{white-space:nowrap;}
+.apps-dropdown-menu{display:none;position:absolute;top:calc(100% + 8px);left:0;z-index:2000;background:var(--white,#fff);border-radius:14px;box-shadow:0 12px 32px rgba(14,36,57,.22);padding:8px;min-width:230px;max-height:65vh;overflow-y:auto;border:1px solid rgba(14,36,57,.08);}
+.apps-dropdown-menu.open{display:block;}
+.apps-dropdown-menu .tab{display:flex;align-items:center;gap:10px;width:100%;padding:10px 12px;margin:0;border:none;background:transparent;border-radius:10px;font-size:14px;font-weight:500;color:var(--secondary,#0E2439);cursor:pointer;text-align:left;white-space:nowrap;box-shadow:none;}
+.apps-dropdown-menu .tab:hover,.apps-dropdown-menu .tab:focus{background:rgba(0,168,204,.1);color:var(--primary,#00A8CC);outline:none;}
+[data-theme="dark"] .apps-dropdown-menu{background:#1E2128;border-color:#333A47;}
+[data-theme="dark"] .apps-dropdown-menu .tab{color:#E8ECF0;}
+@media(max-width:480px){.apps-dropdown-menu{position:fixed;left:12px;right:12px;top:120px;min-width:0;max-height:60vh;}}
