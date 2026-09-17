@@ -237,17 +237,12 @@ function enviarCadastroParceiro() {
             var insta = document.getElementById("parceiro-insta").value.trim();
             var site = document.getElementById("parceiro-site").value.trim();
             var logo = document.getElementById("parceiro-logo").value.trim();
-            var comprovante = document.getElementById("parceiro-comprovante").value.trim();
             if (!nome) {
                 alert("Preencha o nome da marca!");
                 return;
             }
-            if (!comprovante) {
-                alert("Anexe o comprovante do PIX!");
-                return;
-            }
             // Save registration
-            var parceiro = { nome: nome, insta: insta, site: site, logo: logo, comprovante: comprovante, data: new Date().toISOString() };
+            var parceiro = { nome: nome, insta: insta, site: site, logo: logo, data: new Date().toISOString() };
             localStorage.setItem("asf-parceiros", JSON.stringify(parceiro));
             // Send to Carol
             var msg = "🏄♀️ NOVO CADASTRO DE PARCEIRO!\n\n";
@@ -291,10 +286,7 @@ function callLua() {
     showToast("🌙 Lua está verificando o app... aguarde!");
 }
 function showBrandSupport() { document.getElementById('brand-support').style.display = 'block'; }
-function sendSupport(valor) {
-        var msg = 'Olá Carol! Quero apoiar o ASF App. Escolhi: ' + valor + '. Apoio o surf feminino! Me envia o PIX:';
-        window.open('https://wa.me/5511954346288?text=' + encodeURIComponent(msg), '_blank');
-    }
+function sendSupport(valor) {/* removido: sem cobranças */}
 function showSection(sectionId) {
             document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
             document.querySelectorAll('.tab').forEach(t => { t.classList.remove('active'); t.setAttribute('aria-selected', 'false'); });
@@ -1919,18 +1911,7 @@ function initBadges() {
           updateBadgeProgress();
           renderBadges();
         }
-function unlockPremium(id) {
-            const preview = document.getElementById('premium-' + id + '-preview');
-            const full = document.getElementById('premium-' + id + '-full');
-            if (full.style.display === 'none') {
-                full.style.display = 'block';
-                preview.querySelector('button').textContent = '📖 Recolher';
-                showToast('✨ Conteúdo liberado!');
-            } else {
-                full.style.display = 'none';
-                preview.querySelector('button').textContent = '🔓 Ler Conteúdo Completo';
-            }
-        }
+function unlockPremium(id) {/* conteúdo liberado para todas */}
 function updateChecklistStatus() {
             const checks = document.querySelectorAll('.pre-surf-check');
             const checked = document.querySelectorAll('.pre-surf-check:checked').length;
@@ -2211,34 +2192,26 @@ function openAffiliateLink(url, productId) {
 }
 // Newsletter
 function subscribeNewsletter(){const e=document.getElementById('newsletter-email'),t=e?e.value.trim():'';if(!t||!t.includes('@'))return showToast('❌ Email inválido!','error');const o=JSON.parse(localStorage.getItem('asf-newsletter')||'[]');o.push({email:t,date:new Date().toISOString()}),localStorage.setItem('asf-newsletter',JSON.stringify(o)),showToast('✅ Inscrita! Você receberá dicas toda semana.','success'),e&&(e.value=''),typeof gtag!=='undefined'&&gtag('event','newsletter_signup',{event_category:'engagement',value:1})}
-function showPremiumModal(){document.getElementById('premium-modal').style.display='flex',trackEvent('premium','modal_view'),typeof gtag!=='undefined'&&gtag('event','premium_modal_view',{event_category:'monetization',value:1})}
-function hidePremiumModal(){document.getElementById('premium-modal').style.display='none'}
-function startPayment(){trackEvent('premium','payment_start'),showToast('🚀 Redirecionando para Mercado Pago...','info'),typeof gtag!=='undefined'&&gtag('event','payment_start',{event_category:'monetization',event_label:'premium_subscription',value:19.9}),setTimeout(()=>{showToast('💳 Integração com Mercado Pago em breve!','info')},1500)}
+function showPremiumModal(){/* removido: sem área premium */}
+function hidePremiumModal(){/* removido */}
+function startPayment(){/* removido: sem pagamentos */}
 function contactWhatsApp(){trackEvent('contact','whatsapp_click'),window.open('https://wa.me/5511954346288','_blank')}
 function trackEvent(e,t,o){const n=JSON.parse(localStorage.getItem('asf-monetization-stats')||'{}');n.events||(n.events=[]),n.events.push({category:e,action:t,label:o,timestamp:Date.now()}),localStorage.setItem('asf-monetization-stats',JSON.stringify(n)),console.log('📊 Track:',e,t,o)}
 function getStats(){return JSON.parse(localStorage.getItem('asf-monetization-stats')||'{}')}
 function getCookieConsent(){return localStorage.getItem('asf-cookie-consent')}
 function acceptAllCookies(){localStorage.setItem('asf-cookie-consent','all');const b=document.getElementById('cookie-consent-banner');if(b){console.log('acceptAllCookies called');b.style.animation='toastOut 0.3s ease-out forwards';setTimeout(()=>b.remove(),300)}trackEvent('legal','cookie_consent','all');console.log('🍪 Cookie: all')}
 function essentialCookies(){localStorage.setItem('asf-cookie-consent','essential');const b=document.getElementById('cookie-consent-banner');if(b){console.log('essentialCookies called');b.style.animation='toastOut 0.3s ease-out forwards';setTimeout(()=>b.remove(),300)}trackEvent('legal','cookie_consent','essential');console.log('🍪 Cookie: essential')}
-function showPixDonation(){const m=document.getElementById('pix-modal');if(m)m.style.display='flex';trackEvent('donation','pix_modal_view')}
+function showPixDonation(){/* removido */}
 function showReferralModal(){const m=document.getElementById('referral-modal');if(m){m.style.display='flex';const codeDisplay=document.getElementById('referral-code-display');if(codeDisplay){const userCode=localStorage.getItem('asf-my-referral-code');if(userCode){codeDisplay.textContent=userCode}else{const newCode=generateReferralCode();localStorage.setItem('asf-my-referral-code',newCode);codeDisplay.textContent=newCode}}trackEvent('referral','modal_view')}}
 function hideReferralModal(){const m=document.getElementById('referral-modal');if(m)m.style.display='none'}
 function copyReferralCode(){const code=localStorage.getItem('asf-my-referral-code')||generateReferralCode();navigator.clipboard.writeText(code).then(()=>showToast('✅ Código copiado!','success')).catch(()=>showToast('❌ Erro ao copiar','error'));trackEvent('referral','code_copy')}
 function shareReferral(platform){const code=localStorage.getItem('asf-my-referral-code')||generateReferralCode();const url=`https://acarolmourad-commits.github.io/asf-app/?ref=${code}`;let shareUrl='';switch(platform){case'whatsapp':shareUrl=`https://wa.me/?text=Olá! Quero te convidar para o app ASF - Dicas de surf gratuitas! Baixe aqui: ${url}`;break;case'copy':shareUrl=url;break}shareUrl&&window.open(shareUrl,'_blank');trackEvent('referral','share',platform)}
-function hidePixDonation(){const m=document.getElementById('pix-modal');if(m)m.style.display='none'}
-function copyPixKey(){
-  const pix = 'asf@asf-surf.org';
-  navigator.clipboard.writeText(pix).then(()=>{
-    showToast('✅ Chave Pix copiada!', 'success');
-  }).catch(()=>{
-    showToast('❌ Erro ao copiar', 'error');
-  });
-  trackEvent('donation','pix_copy');
-}
+function hidePixDonation(){/* removido */}
+function copyPixKey(){/* removido: sem doações via Pix */}
 function getUserId(){try{let uid=localStorage.getItem('asf-user-id');if(!uid){uid='user_'+Math.random().toString(36).substring(7);localStorage.setItem('asf-user-id',uid)}return uid}catch(e){return 'user_anon'}}
 function generateReferralCode(){const userId=getUserId();const code=btoa(`${userId}:${Date.now()}`).substring(0,8);localStorage.setItem(`asf-referral-${code}`,userId);return code}
 function trackReferral(code,targetEmail){const referrerId=localStorage.getItem(`asf-referral-${code}`);if(referrerId){const r=JSON.parse(localStorage.getItem('asf-referrals')||'[]');r.push({code,targetEmail,timestamp:Date.now(),rewardGranted:false});localStorage.setItem('asf-referrals',JSON.stringify(r));trackEvent('referral','code_used',code);console.log('📨 Referral tracked:',code)}}
-function buyEbook(){const isPremium=localStorage.getItem('asf-premium-status')==='active';const price=isPremium?(29.90*0.7):29.90;trackEvent('ebook','purchase_click',{price,premium_user:isPremium});showToast('🚀 Redirecionando para pagamento...','info');setTimeout(()=>{showToast('📦 Ebook disponível em breve!','info')},1500)}
+function buyEbook(){/* removido: sem vendas */}
 function submitUGC(){const fileInput=document.getElementById('ugc-photo');if(!fileInput||!fileInput.files[0])return showToast('📷 Selecione uma foto primeiro','error');showToast('✅ Foto enviada! Em análise.','success');trackEvent('ugc','photo_submitted');fileInput.value=''}
 
 // ─── Metas de Surf ────────────────────────────────────
