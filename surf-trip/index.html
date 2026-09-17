@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Surf Trip Planner ASF — Planeje sua Viagem de Surf</title>
+  <meta name="description" content="Planeje sua surf trip: orçamento por destino, checklist de prancha e viagem, custos de gasolina e hospedagem. Gratuito, da ASF — Associação de Surf Feminino.">
+  <meta name="robots" content="index,follow">
+  <link rel="canonical" href="https://acarolmourad-commits.github.io/asf-app/surf-trip/">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Surf Trip Planner ASF">
+  <meta property="og:description" content="Planeje sua surf trip: orçamento, checklist e dicas por destino.">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box}
+    body{font-family:'Outfit',sans-serif;background:#F8F9FA;color:#0E2439}
+    header{background:linear-gradient(135deg,#0E2439,#2ECC71);color:#fff;padding:28px 20px;text-align:center}
+    header h1{font-size:clamp(1.4rem,4vw,2rem)}
+    .wrap{max-width:820px;margin:0 auto;padding:20px 16px 48px}
+    .card{background:#fff;border-radius:16px;padding:20px;box-shadow:0 2px 10px rgba(0,0,0,.06);margin-bottom:14px}
+    .card h2{font-size:17px;margin-bottom:10px}
+    label{font-size:13px;font-weight:600;display:block;margin:8px 0 3px}
+    input,select{width:100%;padding:10px;border:1px solid #E4E6E9;border-radius:10px;font-size:14px;font-family:inherit}
+    button{background:#2ECC71;color:#fff;border:none;padding:13px 24px;border-radius:12px;font-size:15px;font-weight:700;cursor:pointer;width:100%;margin-top:12px}
+    .row{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid #F0F2F5;font-size:14px}
+    .row strong{color:#0E2439}
+    .total{font-size:1.5rem;font-weight:800;color:#2ECC71;text-align:center;margin-top:12px}
+    .check{display:flex;align-items:center;gap:10px;padding:9px 0;border-bottom:1px solid #F0F2F5;font-size:14px;cursor:pointer}
+    .check input{width:auto}
+    .check.done span{text-decoration:line-through;color:#9A9A9A}
+    .dest{background:#F8F9FA;border-radius:12px;padding:14px;margin-bottom:10px}
+    .dest b{color:#00A8CC}
+    .links{display:grid;gap:10px;margin-top:8px}
+    .links a{display:block;background:#fff;border:1px solid #E4E6E9;border-radius:12px;padding:14px 16px;text-decoration:none;color:#0E2439;font-weight:600}
+    .links a span{color:#00A8CC}
+    footer{text-align:center;color:#9A9A9A;font-size:12px;padding:20px}
+    .prog{height:8px;background:#E4E6E9;border-radius:4px;margin-top:10px}
+    .prog i{display:block;height:100%;background:#2ECC71;border-radius:4px;transition:width .3s}
+  </style>
+</head>
+<body>
+<header>
+  <h1>🚐 Surf Trip Planner</h1>
+  <p>Orçamento + checklist + destinos — planeje sua próxima aventura • ASF</p>
+</header>
+<div class="wrap">
+  <div class="card">
+    <h2>💰 Calculadora de orçamento</h2>
+    <label>Destino (distância ida+volta)</label>
+    <select id="fDest">
+      <option value="160">Maresias / São Sebastião (~160 km de SP)</option>
+      <option value="220">Ubatuba (~220 km)</option>
+      <option value="180">Ilhabela (~180 km + balsa)</option>
+      <option value="600">Florianópolis (~600 km)</option>
+      <option value="900">Rio de Janeiro (~900 km)</option>
+      <option value="0">✏️ Distância personalizada</option>
+    </select>
+    <div id="customKm" style="display:none"><label>Distância ida+volta (km)</label><input type="number" id="fKm" value="300"></div>
+    <label>Pessoas dividindo o carro</label><input type="number" id="fPessoas" value="4" min="1">
+    <label>Dias de viagem</label><input type="number" id="fDias" value="2" min="1">
+    <label>Hospedagem por noite (R$ por pessoa)</label><input type="number" id="fHosp" value="80">
+    <label>Alimentação por dia (R$ por pessoa)</label><input type="number" id="fFood" value="70">
+    <button onclick="calc()">Calcular orçamento 🧮</button>
+    <div id="res" style="display:none;margin-top:14px">
+      <div class="row"><span>⛽ Combustível (ida+volta, ÷ pessoas)</span><strong id="rGas"></strong></div>
+      <div class="row"><span>🛏️ Hospedagem total</span><strong id="rHosp"></strong></div>
+      <div class="row"><span>🍽️ Alimentação total</span><strong id="rFood"></strong></div>
+      <div class="row"><span>🛣️ Pedágios estimados</span><strong id="rPed"></strong></div>
+      <div class="total" id="rTotal"></div>
+      <div class="row" style="margin-top:8px"><span>por pessoa</span><strong id="rPP"></strong></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>✅ Checklist da trip <span id="pct" style="font-size:13px;color:#2ECC71"></span></h2>
+    <div class="prog"><i id="bar" style="width:0%"></i></div>
+    <div id="checks" style="margin-top:10px"></div>
+  </div>
+
+  <div class="card">
+    <h2>🏄‍♀️ Destinos favoritos das manas</h2>
+    <div class="dest"><b>Maresias</b> — 2h de SP. Ondas consistentes o ano todo, vida noturna. Melhor: maré baixa a média, swell SE.</div>
+    <div class="dest"><b>Ubatuba (Itamambuca)</b> — 3h. Point break clássico, vibe tranquila. Melhor: abril–setembro.</div>
+    <div class="dest"><b>Ilhabela</b> — balsa gratuita, ondas na Castelhanos (4x4) ou Bonete. Aventura raiz!</div>
+    <div class="dest"><b>Floripa (Joaquina)</b> — trip grande. Ondas de excelência, campeonatos, berçário do surf BR.</div>
+  </div>
+
+  <div class="card">
+    <h2>🔗 Explore mais</h2>
+    <div class="links">
+      <a href="../previsao-surf/">🌊 Previsão de ondas — confira antes de sair!</a>
+      <a href="../mareas/">🌙 Guia de marés</a>
+      <a href="../diario/">📓 Diário de surf — registre a trip depois</a>
+      <a href="../">🏄‍♀️ <span>ASF App</span> — home</a>
+      <a href="https://praia.digital/apps/" target="_blank" rel="noopener">🏠 <span>Praia Digital Apps</span> — pensando em morar perto do mar?</a>
+    </div>
+  </div>
+</div>
+<footer>ASF — Associação de Surf Feminino • <a href="../" style="color:#00A8CC">Voltar ao app</a></footer>
+<script>
+const sel = document.getElementById('fDest');
+sel.addEventListener('change', () => {
+  document.getElementById('customKm').style.display = sel.value==='0' ? 'block':'none';
+});
+function fmt(v){ return 'R$ ' + Math.round(v).toLocaleString('pt-BR'); }
+function calc(){
+  const km = sel.value==='0' ? (parseFloat(document.getElementById('fKm').value)||0) : parseFloat(sel.value);
+  const pessoas = Math.max(1, parseInt(document.getElementById('fPessoas').value)||1);
+  const dias = Math.max(1, parseInt(document.getElementById('fDias').value)||1);
+  const hosp = parseFloat(document.getElementById('fHosp').value)||0;
+  const food = parseFloat(document.getElementById('fFood').value)||0;
+  const gas = (km/12) * 5.80 / pessoas; // 12 km/l, R$5,80/l
+  const ped = Math.round(km/100)*12 / pessoas;
+  const hospT = hosp*(dias-1>0?dias-1:1);
+  const foodT = food*dias;
+  const total = gas + ped + hospT + foodT;
+  document.getElementById('rGas').textContent = fmt(gas);
+  document.getElementById('rHosp').textContent = fmt(hospT);
+  document.getElementById('rFood').textContent = fmt(foodT);
+  document.getElementById('rPed').textContent = fmt(ped);
+  document.getElementById('rTotal').textContent = 'Total: ' + fmt(total);
+  document.getElementById('rPP').textContent = fmt(total) + ' por pessoa';
+  document.getElementById('res').style.display = 'block';
+}
+const ITEMS = ['🏄‍♀️ Prancha + leash + parafina','🩱 Roupa de neoprene / lycra UV','🧴 Protetor solar + zinco','💊 Kit primeiros socorros','💧 Garrafa de água + snacks','🔧 Kit reparo de prancha','📱 Carregador + documentos','🛏️ Reserva de hospedagem confirmada','⛽ Tanque cheio + cartão de pedágio','🌊 Conferir previsão (link abaixo!)','👯‍♀️ Avisar as manas / compartilhar localização'];
+const CK = 'asf-trip-checklist';
+const state = JSON.parse(localStorage.getItem(CK)||'{}');
+function renderChecks(){
+  const el = document.getElementById('checks');
+  el.innerHTML = ITEMS.map((t,i)=>`<label class="check ${state[i]?'done':''}"><input type="checkbox" ${state[i]?'checked':''} onchange="toggle(${i})"><span>${t}</span></label>`).join('');
+  const done = ITEMS.filter((_,i)=>state[i]).length;
+  const pct = Math.round(done/ITEMS.length*100);
+  document.getElementById('pct').textContent = pct+'% pronto';
+  document.getElementById('bar').style.width = pct+'%';
+}
+function toggle(i){ state[i] = !state[i]; localStorage.setItem(CK, JSON.stringify(state)); renderChecks(); }
+renderChecks();
+</script>
+</body>
+</html>
