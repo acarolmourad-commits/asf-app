@@ -1,8 +1,5 @@
 name: ASF - Atualiza fontes do calendário
 on:
-  push:
-    paths:
-      - .github/workflows/update-events-sources.yml
   workflow_dispatch:
 permissions:
   contents: write
@@ -13,7 +10,7 @@ jobs:
       - uses: actions/checkout@v4
       - name: Baixar e aplicar patch
         run: |
-          curl -sL "https://backend.composio.dev/api/v3/sl/FONTESURL" -o /tmp/fonte.patch
+          curl -sL "https://backend.composio.dev/api/v3/sl/pz6Z1Q9h8s" -o /tmp/fonte.patch
           git apply /tmp/fonte.patch
       - name: Commit e push
         run: |
