@@ -1,96 +1,114 @@
 {
   "updated": "2026-09-17",
-  "ultima_atualizacao": "2026-09-17T11:00:00Z",
-  "fonte": "Federações estaduais (SPSurf, Fecasurf, FEPESurf) + Surf Brasil/CBSurf + WSL",
+  "ultima_atualizacao": "2026-09-17T12:00:00Z",
+  "fonte": "spsurf.com.br + surfbrasil.com.br (CBSurf) + fecasurf.com.br + feserj.org.br + ASF",
   "eventos": [
     {
-      "titulo": "🏄 Surf Kids – Geração Futuro Ano XII (2ª etapa)",
-      "local": "Olinda - Pico do Zé Pequeno (PE)",
+      "titulo": "🏄 ASF Surf Day Feminino",
+      "local": "Bertioga - Praia de Indaiá (SP)",
+      "inicio": "2026-10-04",
+      "fim": "2026-10-04",
+      "descricao": "Encontro gratuito da comunidade ASF: aula para iniciantes, free surf e roda de conversa.",
+      "fonte": "ASF",
+      "status": "FUTURO"
+    },
+    {
+      "titulo": "🏆 Hang Loose Surf Attack 2026 - Final (Circuito Paulista de Base)",
+      "local": "Maresias, São Sebastião (SP)",
+      "inicio": "2026-09-17",
+      "fim": "2026-09-19",
+      "descricao": "3ª e última etapa do Circuito Paulista de Base da SPSurf. Vale 1.500 pontos e define os campeões do ranking paulista de base.",
+      "fonte": "spsurf.com.br",
+      "status": "ATIVO"
+    },
+    {
+      "titulo": "🏆 Circuito Catarinense Pro 2026 - Etapa Governador Celso Ramos",
+      "local": "Governador Celso Ramos (SC)",
       "inicio": "2026-09-18",
       "fim": "2026-09-20",
-      "descricao": "Categorias masculina e feminina Sub-06 a Sub-14. Inclui aula de demonstração de surf para PCDs (projeto Escola de Surf Mar de Cores).",
-      "fonte": "FEPESurf - Federação Pernambucana de Surf",
-      "link": "https://ricosurf.com.br/campeonato/olinda-recebe-o-evento-jisk-pernambuco-de-surfe-2026",
-      "status": "FUTURO"
+      "descricao": "2ª etapa do Circuito Catarinense de Surf Pro 2026 (Fecasurf/Fesporte).",
+      "fonte": "fecasurf.com.br",
+      "status": "ATIVO"
     },
     {
-      "titulo": "🏆 Circuito Catarinense de Surf Pro 2026 (2ª etapa)",
-      "local": "Praia de Palmas, Governador Celso Ramos (SC)",
-      "inicio": "2026-09-18",
-      "fim": "2026-09-20",
-      "descricao": "Categorias masculina e feminina. Estreia de Governador Celso Ramos no circuito estadual mais antigo do país. Transmissão ao vivo pelo site da Fecasurf.",
-      "fonte": "Fecasurf - Federação Catarinense de Surf",
-      "link": "https://www.fecasurf.com.br/fesporte-apresenta-o-circuito-catarinense-de-surf-pro-2026/",
-      "status": "FUTURO"
-    },
-    {
-      "titulo": "🏆 Circuito Pernambucano de Surf 2026 (2ª etapa)",
-      "local": "Olinda (PE)",
-      "inicio": "2026-09-25",
-      "fim": "2026-09-27",
-      "descricao": "Categorias Open, Feminino, Sub-16, Sub-18, 40+, 50+, 60+, Parasurf e SUP Surf.",
-      "fonte": "FEPESurf - Federação Pernambucana de Surf",
-      "link": "https://ricosurf.com.br/campeonato/olinda-recebe-o-evento-jisk-pernambuco-de-surfe-2026",
-      "status": "FUTURO"
-    },
-    {
-      "titulo": "🌎 WSL Challenger Series - Banco do Brasil São Sebastião Pro",
-      "local": "São Sebastião (SP)",
-      "inicio": "2026-09-26",
-      "fim": "2026-10-03",
-      "descricao": "Primeira etapa do Challenger Series da WSL em São Paulo! 80 homens e 48 mulheres competindo por vagas na elite mundial. Evento com shows e atividades gratuitas.",
-      "fonte": "WSL - World Surf League",
-      "link": "https://ricosurf.com.br/surf/wsl-anuncia-challenger-series-2026-em-sao-sebastiao-e-leva-o-surfe-mundial-para-sao-paulo",
-      "status": "FUTURO"
-    },
-    {
-      "titulo": "🏆 Circuito Catarinense de Surf Pro 2026 (3ª etapa - Final)",
-      "local": "Prainha, São Francisco do Sul (SC)",
+      "titulo": "🏆 Circuito Catarinense Pro 2026 - Etapa São Francisco do Sul",
+      "local": "São Francisco do Sul (SC)",
       "inicio": "2026-10-30",
       "fim": "2026-11-02",
-      "descricao": "Etapa final do circuito estadual, nas categorias masculina e feminina.",
-      "fonte": "Fecasurf - Federação Catarinense de Surf",
-      "link": "https://www.fecasurf.com.br/fesporte-apresenta-o-circuito-catarinense-de-surf-pro-2026/",
+      "descricao": "3ª etapa do Circuito Catarinense de Surf Pro 2026 (Fecasurf/Fesporte).",
+      "fonte": "fecasurf.com.br",
       "status": "FUTURO"
     },
     {
-      "titulo": "🇧🇷 Surf Brasil Pro 2026 (4ª etapa)",
-      "local": "Santa Catarina (cidade a confirmar)",
+      "titulo": "🇧🇷 Surf Brasil Pro 2026 - 4ª Etapa",
+      "local": "Santa Catarina (SC)",
       "inicio": "2026-11-07",
       "fim": "2026-11-15",
-      "descricao": "Etapa decisiva do título brasileiro profissional masculino e feminino. Calendário oficial Surf Brasil / CBSurf.",
-      "fonte": "Surf Brasil - Confederação Brasileira de Surf",
-      "link": "https://ricosurf.com.br/surf/surf-brasil-apresenta-o-seu-calendario-de-competicoes-para-2026",
+      "descricao": "Etapa final do circuito profissional nacional da Confederação Brasileira de Surf (Surf Brasil). Define os títulos brasileiros profissionais.",
+      "fonte": "surfbrasil.com.br",
       "status": "FUTURO"
     },
     {
-      "titulo": "🏆 Circuito Catarinense de Surf Pro 2026 (1ª etapa)",
-      "local": "Praia do Mar Grosso, Laguna (SC)",
-      "inicio": "2026-07-30",
-      "fim": "2026-08-02",
-      "descricao": "Etapa de abertura do circuito estadual, categorias masculina e feminina.",
-      "fonte": "Fecasurf - Federação Catarinense de Surf",
-      "link": "https://www.fecasurf.com.br/fesporte-apresenta-o-circuito-catarinense-de-surf-pro-2026/",
+      "titulo": "🏆 Tríplice Coroa 2026 (Circuito Estadual FESERJ)",
+      "local": "Saquarema (RJ)",
+      "inicio": "2026-11-24",
+      "fim": "2026-11-25",
+      "descricao": "Etapa do Circuito Estadual do Rio de Janeiro, organizada pela ASS Saquarema (FESERJ).",
+      "fonte": "feserj.org.br",
+      "status": "FUTURO"
+    },
+    {
+      "titulo": "🏆 Hang Loose Surf Attack 2026 - Etapa 1",
+      "local": "Guarujá - Praia do Tombo (SP)",
+      "inicio": "2026-05-22",
+      "fim": "2026-05-24",
+      "descricao": "Abertura do Circuito Paulista de Base da SPSurf.",
+      "fonte": "spsurf.com.br",
       "status": "ENCERRADO"
     },
     {
-      "titulo": "🇧🇷 Surf Brasil Pro 2026 (3ª etapa)",
+      "titulo": "🏆 Longboard Paulista Pro 2026",
+      "local": "Peruíbe (SP)",
+      "inicio": "2026-06-13",
+      "fim": "2026-06-13",
+      "descricao": "Etapa estadual de longboard da SPSurf.",
+      "fonte": "spsurf.com.br",
+      "status": "ENCERRADO"
+    },
+    {
+      "titulo": "🏆 Hang Loose Surf Attack 2026 - Etapa 2",
+      "local": "Ubatuba (SP)",
+      "inicio": "2026-07-10",
+      "fim": "2026-07-12",
+      "descricao": "2ª etapa do Circuito Paulista de Base da SPSurf.",
+      "fonte": "spsurf.com.br",
+      "status": "ENCERRADO"
+    },
+    {
+      "titulo": "🇧🇷 Surf Brasil Pro 2026 - Etapa Itamambuca",
       "local": "Praia de Itamambuca, Ubatuba (SP)",
       "inicio": "2026-07-18",
       "fim": "2026-07-26",
-      "descricao": "Etapa paulista do circuito brasileiro profissional, com categorias masculina e feminina.",
-      "fonte": "Surf Brasil - Confederação Brasileira de Surf",
-      "link": "https://ricosurf.com.br/surf/surf-brasil-apresenta-o-seu-calendario-de-competicoes-para-2026",
+      "descricao": "3ª etapa do circuito profissional nacional (Surf Brasil/CBSurf) em solo paulista.",
+      "fonte": "surfbrasil.com.br",
       "status": "ENCERRADO"
     },
     {
-      "titulo": "🇧🇷 Surf Brasil Base - Final Nacional",
-      "local": "Santa Catarina",
-      "inicio": "2026-09-09",
-      "fim": "2026-09-13",
-      "descricao": "Final nacional das categorias Sub-12, Sub-14, Sub-16 e Sub-18.",
-      "fonte": "Surf Brasil - Confederação Brasileira de Surf",
-      "link": "https://ricosurf.com.br/surf/surf-brasil-apresenta-o-seu-calendario-de-competicoes-para-2026",
+      "titulo": "🏆 Circuito Catarinense Pro 2026 - Etapa Laguna",
+      "local": "Laguna (SC)",
+      "inicio": "2026-07-30",
+      "fim": "2026-08-02",
+      "descricao": "Abertura do Circuito Catarinense de Surf Pro 2026 (Fecasurf/Fesporte).",
+      "fonte": "fecasurf.com.br",
+      "status": "ENCERRADO"
+    },
+    {
+      "titulo": "🏄 Rio Surf Pro 2026",
+      "local": "Arpoador, Rio de Janeiro (RJ)",
+      "inicio": "2026-07-04",
+      "fim": "2026-07-05",
+      "descricao": "Abertura do Circuito Estadual Profissional do Rio de Janeiro (FESERJ).",
+      "fonte": "feserj.org.br",
       "status": "ENCERRADO"
     }
   ]
