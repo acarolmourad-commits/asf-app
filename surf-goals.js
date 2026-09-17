@@ -151,7 +151,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 /* ─── ASF Menu Dropdown ───
-   Transforma o menu principal (.tabs) em drop-down compacto */
+   Transforma o menu principal (.tabs) em drop-down compacto,
+   fixado no topo da página */
 (function () {
   function initMenuDropdown() {
     var tabs = document.querySelector('.tabs');
@@ -159,12 +160,13 @@ document.addEventListener('DOMContentLoaded', function() {
 
     var style = document.createElement('style');
     style.textContent =
-      '.tabs.asf-dropdown{display:none;flex-direction:column;gap:6px;padding:12px;margin:4px 16px 20px;background:var(--white,#fff);border:1px solid var(--gray-200,#e5e5e5);border-radius:16px;box-shadow:0 10px 28px rgba(0,0,0,0.14);max-height:70vh;overflow-y:auto;position:relative;z-index:998;}' +
+      '.tabs.asf-dropdown{display:none;flex-direction:column;gap:6px;padding:12px;margin:0;background:var(--white,#fff);border:1px solid var(--gray-200,#e5e5e5);border-radius:0 0 16px 16px;box-shadow:0 10px 28px rgba(0,0,0,0.14);max-height:calc(100vh - 64px);overflow-y:auto;position:fixed;top:56px;left:0;right:0;z-index:998;}' +
       '.tabs.asf-dropdown.open{display:flex;}' +
-      '.tabs.asf-dropdown .tab{display:flex;align-items:center;gap:10px;width:100%;text-align:left;padding:11px 14px;border:none;background:transparent;border-radius:10px;cursor:pointer;font-size:14px;color:var(--secondary,#0E2439);}' +
+      '.tabs.asf-dropdown .tab{display:flex;align-items:center;gap:10px;width:100%;text-align:left;padding:11px 18px;border:none;background:transparent;border-radius:10px;cursor:pointer;font-size:14px;color:var(--secondary,#0E2439);}' +
       '.tabs.asf-dropdown .tab:hover{background:rgba(0,168,204,0.08);}' +
       '.tabs.asf-dropdown .tab.active{background:rgba(0,168,204,0.12);color:var(--primary,#00A8CC);font-weight:600;}' +
-      '#asf-menu-toggle{display:flex;align-items:center;justify-content:center;gap:10px;width:calc(100% - 32px);margin:8px 16px 4px;padding:13px;border:1.5px solid rgba(0,168,204,0.35);background:var(--white,#fff);border-radius:14px;font-size:15px;font-weight:600;color:var(--primary,#00A8CC);cursor:pointer;box-shadow:0 2px 10px rgba(0,0,0,0.06);font-family:inherit;}';
+      '#asf-menu-toggle{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;margin:0;padding:13px 16px;border:none;border-bottom:1.5px solid rgba(0,168,204,0.25);background:var(--white,#fff);font-size:15px;font-weight:600;color:var(--primary,#00A8CC);cursor:pointer;box-shadow:0 2px 10px rgba(0,0,0,0.08);font-family:inherit;position:fixed;top:0;left:0;right:0;z-index:999;height:56px;}' +
+      'body{padding-top:56px !important;}';
     document.head.appendChild(style);
 
     // Corrige o item "Posts" (HTML quebrado no index) ligando-o à seção Comunidade,
@@ -197,7 +199,7 @@ document.addEventListener('DOMContentLoaded', function() {
     btn.setAttribute('aria-expanded', 'false');
     btn.setAttribute('aria-controls', tabs.id);
     btn.textContent = '☰ Menu';
-    tabs.parentNode.insertBefore(btn, tabs);
+    document.body.insertBefore(btn, document.body.firstChild);
 
     function setOpen(open) {
       tabs.classList.toggle('open', open);
