@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Prancha Ideal ASF — Descubra a Litragem Perfeita pra Você</title>
+  <meta name="description" content="Descubra qual prancha de surf é ideal para você: calculadora de litragem por peso, altura e nível. Funboard, longboard ou shortboard? Ferramenta gratuita da ASF.">
+  <meta name="robots" content="index,follow">
+  <link rel="canonical" href="https://acarolmourad-commits.github.io/asf-app/prancha-ideal/">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Prancha Ideal ASF">
+  <meta property="og:description" content="Calculadora de litragem de prancha por peso e nível de surf.">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box}
+    body{font-family:'Outfit',sans-serif;background:#F8F9FA;color:#0E2439}
+    header{background:linear-gradient(135deg,#0E2439,#9B59B6);color:#fff;padding:28px 20px;text-align:center}
+    header h1{font-size:clamp(1.4rem,4vw,2rem)}
+    .wrap{max-width:820px;margin:0 auto;padding:20px 16px 48px}
+    .card{background:#fff;border-radius:16px;padding:20px;box-shadow:0 2px 10px rgba(0,0,0,.06);margin-bottom:14px}
+    .card h2{font-size:17px;margin-bottom:10px}
+    label{font-size:13px;font-weight:600;display:block;margin:8px 0 3px}
+    input,select{width:100%;padding:10px;border:1px solid #E4E6E9;border-radius:10px;font-size:14px;font-family:inherit}
+    .levels{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:6px 0}
+    .lvl{border:2px solid #E4E6E9;border-radius:12px;padding:12px;text-align:center;cursor:pointer;font-size:13px;font-weight:600;background:#fff}
+    .lvl.on{border-color:#9B59B6;background:#F5EEF8;color:#6C3483}
+    button.calc{background:#9B59B6;color:#fff;border:none;padding:14px;border-radius:12px;font-size:16px;font-weight:700;cursor:pointer;width:100%;margin-top:14px}
+    .result{display:none;margin-top:16px;text-align:center}
+    .board{font-size:3rem}
+    .bname{font-size:1.3rem;font-weight:800;color:#9B59B6}
+    .litros{font-size:2.2rem;font-weight:800;color:#0E2439;margin:8px 0}
+    .dims{background:#F8F9FA;border-radius:12px;padding:12px;font-size:14px;margin-top:8px}
+    .why{font-size:13px;color:#666;margin-top:10px;line-height:1.6;text-align:left}
+    .links{display:grid;gap:10px;margin-top:8px}
+    .links a{display:block;background:#fff;border:1px solid #E4E6E9;border-radius:12px;padding:14px 16px;text-decoration:none;color:#0E2439;font-weight:600}
+    .links a span{color:#00A8CC}
+    footer{text-align:center;color:#9A9A9A;font-size:12px;padding:20px}
+    .tip{background:#FEF9C3;border-left:4px solid #F4D03F;padding:12px 16px;border-radius:8px;font-size:13px;margin-top:12px;text-align:left}
+  </style>
+</head>
+<body>
+<header>
+  <h1>🏄‍♀️ Prancha Ideal</h1>
+  <p>Descubra a litragem e o modelo perfeito para o seu momento • ASF</p>
+</header>
+<div class="wrap">
+  <div class="card">
+    <h2>Conta pra gente</h2>
+    <label>Seu peso (kg)</label><input type="number" id="peso" value="60" min="30" max="150">
+    <label>Sua altura (cm)</label><input type="number" id="altura" value="165" min="130" max="210">
+    <label>Seu nível</label>
+    <div class="levels">
+      <div class="lvl on" data-f="1.0" onclick="pick(this)">🌱 Iniciante<br><small>nunca surfei / primeiras ondas</small></div>
+      <div class="lvl" data-f="0.75" onclick="pick(this)">🌊 Em evolução<br><small>já pego onda e faço base</small></div>
+      <div class="lvl" data-f="0.55" onclick="pick(this)">⚡ Intermediária<br><small>dropo, boto na parede</small></div>
+      <div class="lvl" data-f="0.42" onclick="pick(this)">🔥 Avançada<br><small>manobras e cavadas</small></div>
+    </div>
+    <button class="calc" onclick="calc()">Descobrir minha prancha ✨</button>
+    <div class="result" id="res">
+      <div class="board" id="bIcon">🏄‍♀️</div>
+      <div class="bname" id="bName"></div>
+      <div class="litros" id="bLitros"></div>
+      <div class="dims" id="bDims"></div>
+      <div class="why" id="bWhy"></div>
+      <div class="tip">💡 Litragem é o volume da prancha: mais litros = mais flutuação = mais fácil de remar e pegar onda. Na dúvida, comece com mais volume!</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>🔗 Explore mais</h2>
+    <div class="links">
+      <a href="../aprender/primeira-prancha-de-surf.html">🛒 Guia completo: comprando sua primeira prancha</a>
+      <a href="../previsao-surf/">🌊 Previsão de ondas em tempo real</a>
+      <a href="../diario/">📓 Diário de surf — acompanhe sua evolução</a>
+      <a href="../surf-trip/">🚐 Surf Trip Planner</a>
+      <a href="../">🏄‍♀️ <span>ASF App</span> — home</a>
+      <a href="https://praia.digital/apps/" target="_blank" rel="noopener">🏠 <span>Praia Digital Apps</span> — ferramentas do litoral</a>
+    </div>
+  </div>
+</div>
+<footer>ASF — Associação de Surf Feminino • <a href="../" style="color:#00A8CC">Voltar ao app</a></footer>
+<script>
+let fator = 1.0;
+function pick(el){
+  document.querySelectorAll('.lvl').forEach(e=>e.classList.remove('on'));
+  el.classList.add('on');
+  fator = parseFloat(el.dataset.f);
+}
+function calc(){
+  const peso = parseFloat(document.getElementById('peso').value)||60;
+  const altura = parseFloat(document.getElementById('altura').value)||165;
+  const litros = Math.round(peso * fator);
+  let icon, name, dims, why;
+  if (fator >= 1.0){
+    icon='🛹'; name='Longboard ou Funboard 8\'0"–9\'0"';
+    dims = `Comprimento: 8'0"–9'0" • Largura: 22"–23" • Volume: ~${Math.max(litros,60)}–${litros+15}L`;
+    why = 'Para quem está começando, volume é tudo: facilita a remada, dá estabilidade na hora de ficar em pé e acelera o aprendizado. Longboards e funboards de soft-top (espuma) são ainda mais seguras.';
+  } else if (fator >= 0.75){
+    icon='🏄‍♀️'; name='Funboard 7\'0"–7\'6"';
+    dims = `Comprimento: 7'0"–7'6" • Largura: 21"–22" • Volume: ~${litros}–${litros+10}L`;
+    why = 'Você já pega onda e quer mais mobilidade. A funboard mantém boa flutuação mas já permite começar a trabalhar a base de baixo e as primeiras curvas.';
+  } else if (fator >= 0.55){
+    icon='⚡'; name='Evolutiva / Hybrid 6\'4"–6\'10"';
+    dims = `Comprimento: 6'4"–6'10" • Largura: 20"–21" • Volume: ~${litros}–${litros+6}L`;
+    why = 'Pranchas híbridas ou fish são o caminho: mais curtas e responsivas, mas com volume suficiente para não sofrer na remada. Ideal para consolidar drops e cavadas.';
+  } else {
+    icon='🔥'; name='Shortboard ' + Math.round(altura/100*3.28*10)/10 + '\' de altura';
+    dims = `Comprimento: ~${(altura/30.48-0.3).toFixed(1)}'–${(altura/30.48+0.2).toFixed(1)}' • Volume: ~${litros}–${litros+4}L`;
+    why = 'Nível avançado = prancha de performance. Litragem justa ao peso para máxima resposta. Considere um quiver: uma daily driver + uma para mar grande.';
+  }
+  document.getElementById('bIcon').textContent = icon;
+  document.getElementById('bName').textContent = name;
+  document.getElementById('bLitros').textContent = '~' + litros + ' litros';
+  document.getElementById('bDims').textContent = dims;
+  document.getElementById('bWhy').textContent = why;
+  document.getElementById('res').style.display = 'block';
+  document.getElementById('res').scrollIntoView({behavior:'smooth'});
+}
+</script>
+</body>
+</html>
