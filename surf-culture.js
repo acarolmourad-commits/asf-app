@@ -223,3 +223,44 @@ const SurfCulture = {
 document.addEventListener('DOMContentLoaded', function() {
   setTimeout(() => SurfCulture.render('surf-culture-container'), 1000);
 });
+
+/* ─── Apps Dropdown: organiza as opções de apps em um dropdown ao lado do menu principal ─── */
+(function(){
+  function initAppsDropdown(){
+    var tabs=document.querySelector('.tabs');
+    if(!tabs||tabs.querySelector('.apps-dropdown'))return;
+    var buttons=Array.prototype.slice.call(tabs.querySelectorAll('.tab'));
+    if(buttons.length<=2)return;
+    var first=buttons[0];
+    var rest=buttons.slice(1);
+    var dd=document.createElement('div');
+    dd.className='apps-dropdown';
+    var btn=document.createElement('button');
+    btn.type='button';
+    btn.className='tab apps-dropdown-toggle';
+    btn.setAttribute('aria-haspopup','true');
+    btn.setAttribute('aria-expanded','false');
+    btn.innerHTML='<span class="tab-icon">\uD83D\uDCF1</span> Apps \u25BE';
+    var menu=document.createElement('div');
+    menu.className='apps-dropdown-menu';
+    menu.setAttribute('role','menu');
+    menu.setAttribute('aria-label','Apps ASF');
+    function close(){menu.classList.remove('open');btn.setAttribute('aria-expanded','false');}
+    rest.forEach(function(b){
+      menu.appendChild(b);
+      b.setAttribute('role','menuitem');
+      b.addEventListener('click',close);
+    });
+    btn.addEventListener('click',function(e){
+      e.stopPropagation();
+      var open=menu.classList.toggle('open');
+      btn.setAttribute('aria-expanded',open?'true':'false');
+    });
+    dd.appendChild(btn);
+    dd.appendChild(menu);
+    if(first.nextSibling){tabs.insertBefore(dd,first.nextSibling);}else{tabs.appendChild(dd);}
+    document.addEventListener('click',function(e){if(!e.target.closest('.apps-dropdown'))close();});
+    document.addEventListener('keydown',function(e){if(e.key==='Escape')close();});
+  }
+  if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',initAppsDropdown);}else{initAppsDropdown();}
+})();
