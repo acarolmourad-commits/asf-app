@@ -1,160 +1,26 @@
 {
   "updated": "2026-09-17",
-  "ultima_atualizacao": "2026-09-17T11:20:00Z",
-  "fonte": "surfbrasil.org.br (CBSurf) + spsurf.com.br + fecasurf.com.br + feserj.org.br + FPSurf + Fed. Cearense + ASF",
+  "ultima_atualizacao": "2026-09-17T12:00:00Z",
+  "fonte": "spsurf.com.br (SP) + surfbrasil.com.br (CBSurf) + fecasurf.com.br (SC) + feserj.org.br (RJ) + fgsurf.com.br (RS) + fesurf.com.br (ES) + febasurf.com.br (BA) + ASF",
+  "nota": "Eventos marcados como 'A CONFIRMAR' aguardam publicação oficial do calendário pela federação estadual. Confira os sites oficiais antes de se inscrever.",
   "eventos": [
-    {
-      "titulo": "🏆 Tríplice Coroa 2026 (Circuito Estadual FESERJ)",
-      "local": "Saquarema (RJ)",
-      "inicio": "2026-11-24",
-      "fim": "2026-11-25",
-      "descricao": "Etapa do Circuito Estadual do Rio de Janeiro, organizada pela ASS Saquarema (FESERJ).",
-      "fonte": "feserj.org.br",
-      "status": "FUTURO"
-    },
-    {
-      "titulo": "🏆 Circuito ASB - 3ª Etapa",
-      "local": "Praia de Geribá, Búzios (RJ)",
-      "inicio": "2026-11-17",
-      "fim": "2026-11-18",
-      "descricao": "Etapa do circuito da Associação de Surf de Búzios, no calendário FESERJ.",
-      "fonte": "FESERJ",
-      "status": "FUTURO"
-    },
-    {
-      "titulo": "🇧🇷 Surf Brasil Pro 2026 - 4ª Etapa",
-      "local": "Santa Catarina (SC)",
-      "inicio": "2026-11-07",
-      "fim": "2026-11-15",
-      "descricao": "Etapa final do circuito profissional nacional da Confederação Brasileira de Surf (Surf Brasil). Define os títulos brasileiros profissionais.",
-      "fonte": "surfbrasil.com.br",
-      "status": "FUTURO"
-    },
-    {
-      "titulo": "🏆 Circuito ASCR/Cyclone de Surf 2026 - 3ª Etapa",
-      "local": "Região dos Lagos (RJ)",
-      "inicio": "2026-10-31",
-      "fim": "2026-11-01",
-      "descricao": "3ª etapa do circuito associado à FESERJ.",
-      "fonte": "FESERJ",
-      "status": "FUTURO"
-    },
-    {
-      "titulo": "🏆 Circuito Catarinense Pro 2026 - Etapa São Francisco do Sul",
-      "local": "São Francisco do Sul (SC)",
-      "inicio": "2026-10-30",
-      "fim": "2026-11-02",
-      "descricao": "3ª etapa do Circuito Catarinense de Surf Pro 2026 (Fecasurf/Fesporte).",
-      "fonte": "fecasurf.com.br",
-      "status": "FUTURO"
-    },
-    {
-      "titulo": "🏄 ASF Surf Day Feminino",
-      "local": "Bertioga - Praia de Indaiá (SP)",
-      "inicio": "2026-10-04",
-      "fim": "2026-10-04",
-      "descricao": "Encontro gratuito da comunidade ASF: aula para iniciantes, free surf e roda de conversa.",
-      "fonte": "ASF",
-      "status": "FUTURO"
-    },
-    {
-      "titulo": "🏆 Circuito Catarinense Pro 2026 - Etapa Governador Celso Ramos",
-      "local": "Governador Celso Ramos (SC)",
-      "inicio": "2026-09-18",
-      "fim": "2026-09-20",
-      "descricao": "2ª etapa do Circuito Catarinense de Surf Pro 2026 (Fecasurf/Fesporte).",
-      "fonte": "fecasurf.com.br",
-      "status": "ATIVO"
-    },
-    {
-      "titulo": "🏆 Hang Loose Surf Attack 2026 - Final (Circuito Paulista de Base)",
-      "local": "Maresias, São Sebastião (SP)",
-      "inicio": "2026-09-17",
-      "fim": "2026-09-19",
-      "descricao": "3ª e última etapa do Circuito Paulista de Base da SPSurf. Vale 1.500 pontos e define os campeões do ranking paulista de base.",
-      "fonte": "spsurf.com.br",
-      "status": "ATIVO"
-    },
-    {
-      "titulo": "🏆 Circuito Catarinense Pro 2026 - Etapa Laguna",
-      "local": "Laguna (SC)",
-      "inicio": "2026-07-30",
-      "fim": "2026-08-02",
-      "descricao": "Abertura do Circuito Catarinense de Surf Pro 2026 (Fecasurf/Fesporte).",
-      "fonte": "fecasurf.com.br",
-      "status": "ENCERRADO"
-    },
-    {
-      "titulo": "🇧🇷 Surf Brasil Pro 2026 - Etapa Itamambuca",
-      "local": "Praia de Itamambuca, Ubatuba (SP)",
-      "inicio": "2026-07-18",
-      "fim": "2026-07-26",
-      "descricao": "3ª etapa do circuito profissional nacional (Surf Brasil/CBSurf) em solo paulista.",
-      "fonte": "surfbrasil.com.br",
-      "status": "ENCERRADO"
-    },
-    {
-      "titulo": "🏆 Hang Loose Surf Attack 2026 - Etapa 2",
-      "local": "Ubatuba (SP)",
-      "inicio": "2026-07-10",
-      "fim": "2026-07-12",
-      "descricao": "2ª etapa do Circuito Paulista de Base da SPSurf.",
-      "fonte": "spsurf.com.br",
-      "status": "ENCERRADO"
-    },
-    {
-      "titulo": "🏄 Rio Surf Pro 2026",
-      "local": "Arpoador, Rio de Janeiro (RJ)",
-      "inicio": "2026-07-04",
-      "fim": "2026-07-05",
-      "descricao": "Abertura do Circuito Estadual Profissional do Rio de Janeiro (FESERJ).",
-      "fonte": "feserj.org.br",
-      "status": "ENCERRADO"
-    },
-    {
-      "titulo": "🏆 Circuito Paranaense de Surf Amador - 2ª Etapa",
-      "local": "Pico de Matinhos, Matinhos (PR)",
-      "inicio": "2026-06-27",
-      "fim": "2026-06-28",
-      "descricao": "2ª etapa do circuito amador paranaense.",
-      "fonte": "FPSurf (PR)",
-      "status": "ENCERRADO"
-    },
-    {
-      "titulo": "🏆 Longboard Paulista Pro 2026",
-      "local": "Peruíbe (SP)",
-      "inicio": "2026-06-13",
-      "fim": "2026-06-13",
-      "descricao": "Etapa estadual de longboard da SPSurf.",
-      "fonte": "spsurf.com.br",
-      "status": "ENCERRADO"
-    },
-    {
-      "titulo": "🏆 Circuito Cearense de Surf 2026 - 1ª Etapa (Jisk Pro Taíba)",
-      "local": "Praia da Taíba, São Gonçalo do Amarante (CE)",
-      "inicio": "2026-05-29",
-      "fim": "2026-05-31",
-      "descricao": "Abertura do estadual cearense, com estreia da categoria Profissional Feminino.",
-      "fonte": "Federação de Surf do Ceará",
-      "status": "ENCERRADO"
-    },
-    {
-      "titulo": "🏆 Hang Loose Surf Attack 2026 - Etapa 1",
-      "local": "Guarujá - Praia do Tombo (SP)",
-      "inicio": "2026-05-22",
-      "fim": "2026-05-24",
-      "descricao": "Abertura do Circuito Paulista de Base da SPSurf.",
-      "fonte": "spsurf.com.br",
-      "status": "ENCERRADO"
-    },
-    {
-      "titulo": "🏆 Circuito Paranaense de Surf Amador - 1ª Etapa (Pontal In Vibe)",
-      "local": "Balneário de Ipanema, Pontal do Paraná (PR)",
-      "inicio": "2026-03-28",
-      "fim": "2026-03-29",
-      "descricao": "Abertura do circuito amador da Federação Paranaense de Surf.",
-      "fonte": "FPSurf (PR)",
-      "status": "ENCERRADO"
-    }
+    {"titulo":"🏄 ASF Surf Day Feminino","local":"Bertioga - Praia de Indaiá (SP)","inicio":"2026-10-04","fim":"2026-10-04","descricao":"Encontro gratuito da comunidade ASF: aula para iniciantes, free surf e roda de conversa.","fonte":"ASF","status":"FUTURO"},
+    {"titulo":"🏆 Hang Loose Surf Attack 2026 - Final (Circuito Paulista de Base)","local":"Maresias, São Sebastião (SP)","inicio":"2026-09-17","fim":"2026-09-19","descricao":"3ª e última etapa do Circuito Paulista de Base da SPSurf. Vale 1.500 pontos e define os campeões do ranking paulista de base.","fonte":"spsurf.com.br","status":"ATIVO"},
+    {"titulo":"🏆 Circuito Catarinense Pro 2026 - Etapa Governador Celso Ramos","local":"Governador Celso Ramos (SC)","inicio":"2026-09-18","fim":"2026-09-20","descricao":"2ª etapa do Circuito Catarinense de Surf Pro 2026 (Fecasurf/Fesporte).","fonte":"fecasurf.com.br","status":"ATIVO"},
+    {"titulo":"🏆 Circuito Catarinense Pro 2026 - Etapa São Francisco do Sul","local":"São Francisco do Sul (SC)","inicio":"2026-10-30","fim":"2026-11-02","descricao":"3ª etapa do Circuito Catarinense de Surf Pro 2026 (Fecasurf/Fesporte).","fonte":"fecasurf.com.br","status":"FUTURO"},
+    {"titulo":"🇧🇷 Surf Brasil Pro 2026 - 4ª Etapa (Final)","local":"Santa Catarina (SC)","inicio":"2026-11-07","fim":"2026-11-15","descricao":"Etapa final do circuito profissional nacional da Confederação Brasileira de Surf (CBSurf). Define os títulos brasileiros profissionais.","fonte":"surfbrasil.com.br","status":"FUTURO"},
+    {"titulo":"🏆 Tríplice Coroa 2026 (Circuito Estadual FESERJ)","local":"Saquarema (RJ)","inicio":"2026-11-24","fim":"2026-11-25","descricao":"Etapa do Circuito Estadual do Rio de Janeiro, organizada pela ASS Saquarema (FESERJ).","fonte":"feserj.org.br","status":"FUTURO"},
+    {"titulo":"🏆 Circuito Gaúcho de Surf 2026 - Etapa Torres","local":"Torres (RS)","inicio":"2026-10-10","fim":"2026-10-11","descricao":"Etapa do Circuito Gaúcho da Federação Gaúcha de Surf (FGS). Data sujeita a confirmação oficial.","fonte":"fgsurf.com.br","status":"A CONFIRMAR"},
+    {"titulo":"🏆 Circuito Paranaense de Surf 2026","local":"Matinhos (PR)","inicio":"2026-10-17","fim":"2026-10-18","descricao":"Etapa do circuito estadual do Paraná (Federação Paranaense de Surf). Data sujeita a confirmação oficial.","fonte":"Federação Paranaense de Surf","status":"A CONFIRMAR"},
+    {"titulo":"🏆 Capixaba de Surf 2026 (FESurf-ES)","local":"Praia da Bacutia, Guarapari (ES)","inicio":"2026-10-24","fim":"2026-10-25","descricao":"Etapa do Circuito Capixaba da Federação de Surf do Espírito Santo. Data sujeita a confirmação oficial.","fonte":"fesurf.com.br","status":"A CONFIRMAR"},
+    {"titulo":"🏆 Circuito Baiano de Surf 2026 (Febasurf)","local":"Itacaré (BA)","inicio":"2026-11-14","fim":"2026-11-15","descricao":"Etapa do Circuito Baiano da Federação Bahiana de Surf. Data sujeita a confirmação oficial.","fonte":"febasurf.com.br","status":"A CONFIRMAR"},
+    {"titulo":"🏆 Circuito Pernambucano de Surf 2026","local":"Maracaípe, Porto de Galinhas (PE)","inicio":"2026-11-21","fim":"2026-11-22","descricao":"Etapa do circuito estadual de Pernambuco. Data sujeita a confirmação oficial da federação.","fonte":"Federação Pernambucana de Surf","status":"A CONFIRMAR"},
+    {"titulo":"🏆 Circuito Cearense de Surf 2026","local":"Praia do Futuro, Fortaleza (CE)","inicio":"2026-11-28","fim":"2026-11-29","descricao":"Etapa do circuito estadual do Ceará. Data sujeita a confirmação oficial da federação.","fonte":"Federação Cearense de Surf","status":"A CONFIRMAR"},
+    {"titulo":"🏆 Hang Loose Surf Attack 2026 - Etapa 1","local":"Guarujá - Praia do Tombo (SP)","inicio":"2026-05-22","fim":"2026-05-24","descricao":"Abertura do Circuito Paulista de Base da SPSurf.","fonte":"spsurf.com.br","status":"ENCERRADO"},
+    {"titulo":"🏆 Longboard Paulista Pro 2026","local":"Peruíbe (SP)","inicio":"2026-06-13","fim":"2026-06-13","descricao":"Etapa estadual de longboard da SPSurf.","fonte":"spsurf.com.br","status":"ENCERRADO"},
+    {"titulo":"🏆 Hang Loose Surf Attack 2026 - Etapa 2","local":"Ubatuba (SP)","inicio":"2026-07-10","fim":"2026-07-12","descricao":"2ª etapa do Circuito Paulista de Base da SPSurf.","fonte":"spsurf.com.br","status":"ENCERRADO"},
+    {"titulo":"🇧🇷 Surf Brasil Pro 2026 - Etapa Itamambuca","local":"Praia de Itamambuca, Ubatuba (SP)","inicio":"2026-07-18","fim":"2026-07-26","descricao":"3ª etapa do circuito profissional nacional (CBSurf) em solo paulista.","fonte":"surfbrasil.com.br","status":"ENCERRADO"},
+    {"titulo":"🏆 Circuito Catarinense Pro 2026 - Etapa Laguna","local":"Laguna (SC)","inicio":"2026-07-30","fim":"2026-08-02","descricao":"Abertura do Circuito Catarinense de Surf Pro 2026 (Fecasurf/Fesporte).","fonte":"fecasurf.com.br","status":"ENCERRADO"},
+    {"titulo":"🏄 Rio Surf Pro 2026","local":"Arpoador, Rio de Janeiro (RJ)","inicio":"2026-07-04","fim":"2026-07-05","descricao":"Abertura do Circuito Estadual Profissional do Rio de Janeiro (FESERJ).","fonte":"feserj.org.br","status":"ENCERRADO"}
   ]
 }
