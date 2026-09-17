@@ -102,7 +102,7 @@ const SurfGoals = {
     const goal = {
       id: Date.now(),
       title: title,
-      target: target,
+      target: t,
       current: 0,
       category: category || 'geral',
       created: new Date().toISOString(),
