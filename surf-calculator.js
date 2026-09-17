@@ -132,3 +132,43 @@ window.SurfCalculator = SurfCalculator;
   document.body.appendChild(btn);
   document.body.appendChild(panel);
 })();
+
+// ─── ASF Apps Dropdown: converte as abas de apps em dropdown ao lado do menu ───
+(function(){
+  function initAppsDropdown(){
+    var tabs = document.querySelector('.tabs');
+    if (!tabs || document.getElementById('apps-dropdown-nav')) return;
+    var btns = Array.prototype.slice.call(tabs.querySelectorAll('button.tab'));
+    if (!btns.length) return;
+    var nav = document.createElement('div');
+    nav.id = 'apps-dropdown-nav';
+    nav.style.cssText = 'display:flex;align-items:center;gap:10px;padding:10px 20px;background:#fff;border-bottom:1px solid #eee;';
+    var label = document.createElement('label');
+    label.htmlFor = 'apps-dropdown';
+    label.textContent = '\uD83D\uDCF1 Apps:';
+    label.style.cssText = 'font-size:14px;font-weight:700;color:#0E2439;white-space:nowrap;';
+    var sel = document.createElement('select');
+    sel.id = 'apps-dropdown';
+    sel.setAttribute('aria-label', 'Navegação principal');
+    sel.style.cssText = 'flex:1;min-width:0;padding:10px 14px;border-radius:12px;border:1.5px solid #e5e7eb;font-size:14px;font-weight:600;color:#0E2439;background:#fff;cursor:pointer;';
+    btns.forEach(function(b, i){
+      var opt = document.createElement('option');
+      opt.textContent = b.textContent.trim().replace(/\s+/g, ' ');
+      opt.value = String(i);
+      opt.dataset.action = b.getAttribute('onclick') || '';
+      if (b.classList.contains('active')) opt.selected = true;
+      sel.appendChild(opt);
+    });
+    sel.addEventListener('change', function(){
+      var action = sel.options[sel.selectedIndex].dataset.action;
+      if (action) { try { new Function(action)(); } catch(e){ console.error(e); } }
+    });
+    nav.appendChild(label);
+    nav.appendChild(sel);
+    tabs.parentNode.insertBefore(nav, tabs);
+    tabs.style.display = 'none';
+  }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initAppsDropdown);
+  } else { initAppsDropdown(); }
+})();
