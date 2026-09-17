@@ -1,0 +1,24 @@
+name: ASF - Atualiza fontes do calendário
+on:
+  push:
+    paths:
+      - .github/workflows/update-events-sources.yml
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  apply:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Baixar e aplicar patch
+        run: |
+          curl -sL "https://backend.composio.dev/api/v3/sl/FONTESURL" -o /tmp/fonte.patch
+          git apply /tmp/fonte.patch
+      - name: Commit e push
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add index.html
+          git diff --cached --quiet || git commit -m "Calendário: cita fontes oficiais (Surf Brasil, SPSurf, Fecasurf, FESERJ)"
+          git push
