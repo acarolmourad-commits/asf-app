@@ -111,13 +111,13 @@ window.SurfCalculator = SurfCalculator;
     ['Nutrição','asf-nutricao'],['Viagens','asf-viagens'],['História','asf-historia'],
     ['Bem-estar','asf-bemestar'],['Diário','asf-diario'],['Eco','asf-eco'],
     ['Mental','asf-mental'],['Kids','asf-kids'],['SOS','asf-sos'],
-    ['Yoga','asf-yoga'],['Volume','asf-volume'],['Respira','asf-respira'],['Ranking','asf-ranking'],
-    ['Mercado','asf-mercado'],['Mapa','asf-mapa'],['Maré','asf-mare'],
-    ['Carona','asf-carona'],['Apneia','asf-apnea'],['Golden Hour','asf-goldenhour'],
-    ['Alerta','asf-alerta'],['Manobras','asf-manobras'],['Galeria','asf-galeria'],
-    ['Parceiras','asf-parceiras'],['Mentorias','asf-mentorias'],['Pop-up','asf-popup'],
-    ['Desafio 30','asf-desafio'],['Leitura de Mar','asf-leitura'],
-    ['Ponto','asf-ponto'],['Clube','asf-clube'],['Sonhos','asf-sonhos']
+    ['Yoga','asf-yoga'],['Volume','asf-volume'],['Respira','asf-respira'],
+    ['Ranking','asf-ranking'],['Mercado','asf-mercado'],['Mapa','asf-mapa'],
+    ['Maré','asf-mare'],['Carona','asf-carona'],['Apneia','asf-apnea'],
+    ['Golden Hour','asf-goldenhour'],['Alerta','asf-alerta'],['Manobras','asf-manobras'],
+    ['Galeria','asf-galeria'],['Parceiras','asf-parceiras'],['Mentorias','asf-mentorias'],
+    ['Pop-up','asf-popup'],['Desafio 30','asf-desafio'],['Leitura de Mar','asf-leitura'],
+    ['Ponto','asf-ponto'],['Clube','asf-clube'],['Sonhos','asf-sonhos'],['Memória','asf-memoria']
   ];
   var btn = document.createElement('button');
   btn.id = 'asf-sat-nav';
