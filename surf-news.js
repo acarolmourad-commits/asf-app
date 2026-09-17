@@ -308,7 +308,7 @@ document.addEventListener('DOMContentLoaded', function () {
 (function(){
   function injectNav(){
     if(document.querySelector('.asf-sat-nav'))return;
-    var sites=[["asf-praias","\u{1F3D6}\uFE0F Praias"],["asf-previsao","\u{1F30A} Previs\u00E3o"],["asf-treino","\u{1F3CB}\uFE0F Treino"],["asf-eventos","\u{1F4C5} Eventos"],["asf-glossario","\u{1F4D6} Gloss\u00E1rio"],["asf-seguranca","\u{1F6FA} Seguran\u00E7a"],["asf-comunidade","\u{1F4AC} Comunidade"],["asf-equipamento","\u{1F3C4}\u200D\u2640\uFE0F Equipamento"],["asf-quiz","\u{1F9E0} Quiz"],["asf-nutricao","\u{1F957} Nutri\u00E7\u00E3o"],["asf-viagens","\u{2708}\uFE0F Viagens"],["asf-historia","\u{1F3C6} Hist\u00F3ria"],["asf-bemestar","\u{1F9D8}\u200D\u2640\uFE0F Bem-estar"],["asf-ranking","\u{1F947} Ranking"],["asf-diario","\u{1F4D3} Di\u00E1rio"]];
+    var sites=[["asf-praias","\u{1F3D6}\uFE0F Praias"],["asf-previsao","\u{1F30A} Previs\u00E3o"],["asf-treino","\u{1F3CB}\uFE0F Treino"],["asf-eventos","\u{1F4C5} Eventos"],["asf-glossario","\u{1F4D6} Gloss\u00E1rio"],["asf-seguranca","\u{1F6FA} Seguran\u00E7a"],["asf-comunidade","\u{1F4AC} Comunidade"],["asf-equipamento","\u{1F3C4}\u200D\u2640\uFE0F Equipamento"],["asf-quiz","\u{1F9E0} Quiz"],["asf-nutricao","\u{1F957} Nutri\u00E7\u00E3o"],["asf-viagens","\u{2708}\uFE0F Viagens"],["asf-bemestar","\u{1F9D8} Bem-Estar"],["asf-diario","\u{1F4D3} Di\u00E1rio"],["asf-apnea","\u{1FAC1} Apneia"],["asf-carona","\u{1F697} Carona"]];
     var nav=document.createElement('nav');
     nav.className='asf-sat-nav';
     nav.setAttribute('aria-label','Sites satelite ASF');
