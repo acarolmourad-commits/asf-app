@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quiz do Surf ASF — Qual é o seu Perfil de Surfista?</title>
+  <meta name="description" content="Descubra seu arquétipo de surfista em 6 perguntas: Alma do Mar, Caçadora de Ondas, Aventureira ou Equilíbrio? Quiz gratuito da ASF com recomendações personalizadas.">
+  <meta name="robots" content="index,follow">
+  <link rel="canonical" href="https://acarolmourad-commits.github.io/asf-app/quiz/">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Quiz do Surf ASF — Qual surfista você é?">
+  <meta property="og:description" content="6 perguntas, 4 arquétipos. Descubra o seu e ganhe recomendações personalizadas.">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box}
+    body{font-family:'Outfit',sans-serif;background:#F8F9FA;color:#0E2439}
+    header{background:linear-gradient(135deg,#0E2439,#FF6B6B);color:#fff;padding:28px 20px;text-align:center}
+    header h1{font-size:clamp(1.4rem,4vw,2rem)}
+    .wrap{max-width:720px;margin:0 auto;padding:20px 16px 48px}
+    .card{background:#fff;border-radius:16px;padding:24px;box-shadow:0 2px 10px rgba(0,0,0,.06);margin-bottom:14px}
+    .q{font-size:1.15rem;font-weight:700;margin-bottom:14px}
+    .opt{display:block;width:100%;text-align:left;background:#F8F9FA;border:2px solid #E4E6E9;border-radius:12px;padding:14px 16px;font-size:14px;margin-bottom:8px;cursor:pointer;font-family:inherit;transition:all .15s}
+    .opt:hover{border-color:#FF6B6B;transform:translateX(4px)}
+    .prog{height:8px;background:#E4E6E9;border-radius:4px;margin-bottom:18px}
+    .prog i{display:block;height:100%;background:#FF6B6B;border-radius:4px;transition:width .3s}
+    .step{font-size:12px;color:#9A9A9A;margin-bottom:6px}
+    .result{display:none;text-align:center}
+    .rIcon{font-size:4rem}
+    .rName{font-size:1.6rem;font-weight:800;color:#FF6B6B;margin:6px 0}
+    .rDesc{font-size:14px;color:#444;line-height:1.7;text-align:left;margin:10px 0}
+    .rRecs{text-align:left;background:#F8F9FA;border-radius:12px;padding:14px;font-size:14px}
+    .rRecs b{color:#0E2439}
+    .share{display:block;background:#25D366;color:#fff;text-align:center;padding:14px;border-radius:12px;text-decoration:none;font-weight:700;margin-top:14px}
+    .again{display:block;background:#fff;border:2px solid #FF6B6B;color:#FF6B6B;text-align:center;padding:12px;border-radius:12px;font-weight:700;margin-top:8px;cursor:pointer;width:100%;font-size:14px}
+    .links{display:grid;gap:10px;margin-top:8px}
+    .links a{display:block;background:#fff;border:1px solid #E4E6E9;border-radius:12px;padding:14px 16px;text-decoration:none;color:#0E2439;font-weight:600}
+    .links a span{color:#00A8CC}
+    footer{text-align:center;color:#9A9A9A;font-size:12px;padding:20px}
+  </style>
+</head>
+<body>
+<header>
+  <h1>🌊 Quiz do Surf</h1>
+  <p>Qual é o seu perfil de surfista? 6 perguntas, 1 minuto • ASF</p>
+</header>
+<div class="wrap">
+  <div class="card" id="game">
+    <div class="prog"><i id="bar" style="width:0%"></i></div>
+    <div class="step" id="step"></div>
+    <div class="q" id="q"></div>
+    <div id="opts"></div>
+  </div>
+  <div class="card result" id="result">
+    <div class="rIcon" id="rIcon"></div>
+    <div class="rName" id="rName"></div>
+    <div class="rDesc" id="rDesc"></div>
+    <div class="rRecs" id="rRecs"></div>
+    <a class="share" id="share" target="_blank" rel="noopener">📲 Compartilhar resultado no WhatsApp</a>
+    <button class="again" onclick="restart()">↺ Fazer de novo</button>
+  </div>
+
+  <div class="card">
+    <h2 style="font-size:17px;margin-bottom:10px">🔗 Explore mais</h2>
+    <div class="links">
+      <a href="../prancha-ideal/">🏄‍♀️ Prancha ideal — ache a litragem certa</a>
+      <a href="../previsao-surf/">🌊 Previsão de ondas</a>
+      <a href="../diario/">📓 Diário de surf</a>
+      <a href="../surf-trip/">🚐 Surf trip planner</a>
+      <a href="../">🏄‍♀️ <span>ASF App</span> — home</a>
+      <a href="https://praia.digital/apps/" target="_blank" rel="noopener">🏠 <span>Praia Digital Apps</span> — ferramentas do litoral</a>
+    </div>
+  </div>
+</div>
+<footer>ASF — Associação de Surf Feminino • <a href="../" style="color:#00A8CC">Voltar ao app</a></footer>
+<script>
+const Qs = [
+  {q:'Sábado de manhã, mar perfeito. Você:', a:[['Já estou na água desde as 6h 🌅','alma'],['Chamo as manas e organizo o rolê 👯‍♀️','aventura'],['Vejo a previsão, preparo tudo com calma 📋','equilibrio'],['Estudo as ondas e escolho o melhor pico 🎯','cacadora']]},
+  {q:'Sua relação com o mar:', a:[['É meu lugar de paz e terapia 🧘‍♀️','alma'],['É onde eu me supero e evoluo 💪','cacadora'],['É diversão com as amigas 🎉','aventura'],['É equilíbrio entre vida e natureza ⚖️','equilibrio']]},
+  {q:'Escolha uma prancha:', a:[['Longboard clássica, estilo e calma 🛹','alma'],['Shortboard de performance 🔥','cacadora'],['Funboard versátil pra tudo 🌈','aventura'],['A que a condição do dia pedir 📊','equilibrio']]},
+  {q:'Uma onda grande vem na sua direção. Você:', a:[['Surfo ela com presença total, sem medo 🌊','alma'],['É pra isso que eu treino! Vai! ⚡','cacadora'],['Grito de alegria e vou com as manas 😄','aventura'],['Avalio rápido: posição, canal, decisão consciente 🧠','equilibrio']]},
+  {q:'Depois da sessão perfeita:', a:[['Gratidão silenciosa olhando o mar 🙏','alma'],['Já penso na próxima manobra a treinar 📈','cacadora'],['Foto, stories e risadas na areia 📸','aventura'],['Anoto os aprendizados no diário 📓','equilibrio']]},
+  {q:'Seu sonho de surf:', a:[['Surf trip solitária numa praia paradisíaca 🏝️','alma'],['Competir ou surfar ondas grandes 🏆','cacadora'],['Viajar o mundo surfando com as amigas ✈️','aventura'],['Surfar a vida inteira, com saúde e constância 🌱','equilibrio']]}
+];
+const TYPES = {
+  alma: {icon:'🧜‍♀️', name:'Alma do Mar', desc:'Você surfa por conexão, não por performance. O mar é sua terapia, seu templo. Sua presença contagia — e você provavelmente é a pessoa que acalma o line-up.', recs:'<b>Recomendado para você:</b><br>• Diário de Surf: registre suas sensações e evolução<br>• Guia de Marés: aprenda a ler o oceano<br>• Artigo: Surf e Saúde Mental'},
+  cacadora: {icon:'⚡', name:'Caçadora de Ondas', desc:'Você é movida a desafio. Treina, estuda, evolui. Ondas grandes não te assustam — te motivam. Cuidado só para não esquecer de se divertir no caminho!', recs:'<b>Recomendado para você:</b><br>• Previsão de Ondas: monitore o swell em tempo real<br>• Prancha Ideal: evolua seu quiver<br>• Diário de Surf: trackeie suas sessões de treino'},
+  aventura: {icon:'🌈', name:'Aventureira', desc:'Surf para você é celebração e amizade. O rolê começa no carro e termina no pôr do sol. Você é a cola que mantém a comunidade unida!', recs:'<b>Recomendado para você:</b><br>• Surf Trip Planner: organize o próximo rolê<br>• Sessões Interativas: conecte-se com as manas<br>• Quiz: compartilhe seu resultado!'},
+  equilibrio: {icon:'⚖️', name:'Equilíbrio', desc:'Você surfa com inteligência e constância. Planeja, observa, respeita seus limites — e por isso vai surfar por muitas décadas. O line-up precisa de mais gente como você.', recs:'<b>Recomendado para você:</b><br>• Guia de Marés: otimize cada sessão<br>• Previsão de Ondas: planeje a semana<br>• Prancha Ideal: equipamento certo para cada fase'}
+};
+let i = 0, scores = {alma:0, cacadora:0, aventura:0, equilibrio:0};
+function render(){
+  document.getElementById('bar').style.width = (i/Qs.length*100)+'%';
+  document.getElementById('step').textContent = `Pergunta ${i+1} de ${Qs.length}`;
+  document.getElementById('q').textContent = Qs[i].q;
+  document.getElementById('opts').innerHTML = Qs[i].a.map(([t,k],j)=>`<button class="opt" onclick="answer('${k}')">${t}</button>`).join('');
+}
+function answer(k){
+  scores[k]++;
+  i++;
+  if (i < Qs.length) render(); else finish();
+}
+function finish(){
+  const winner = Object.entries(scores).sort((a,b)=>b[1]-a[1])[0][0];
+  const t = TYPES[winner];
+  document.getElementById('game').style.display = 'none';
+  document.getElementById('result').style.display = 'block';
+  document.getElementById('rIcon').textContent = t.icon;
+  document.getElementById('rName').textContent = t.name;
+  document.getElementById('rDesc').textContent = t.desc;
+  document.getElementById('rRecs').innerHTML = t.recs;
+  const msg = encodeURIComponent(`Fiz o Quiz do Surf da ASF e meu perfil é: ${t.icon} ${t.name}! 🌊 Faça você também: https://acarolmourad-commits.github.io/asf-app/quiz/`);
+  document.getElementById('share').href = 'https://wa.me/?text=' + msg;
+}
+function restart(){ i=0; scores={alma:0,cacadora:0,aventura:0,equilibrio:0}; document.getElementById('result').style.display='none'; document.getElementById('game').style.display='block'; render(); }
+render();
+</script>
+</body>
+</html>
