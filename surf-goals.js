@@ -148,3 +148,51 @@ function showAddGoalModal() {
 document.addEventListener('DOMContentLoaded', function() {
   setTimeout(SurfGoals.render, 1000);
 });
+
+
+/* ─── ASF Menu Dropdown ───
+   Transforma o menu principal (.tabs) em drop-down compacto */
+(function () {
+  function initMenuDropdown() {
+    var tabs = document.querySelector('.tabs');
+    if (!tabs || document.getElementById('asf-menu-toggle')) return;
+
+    var style = document.createElement('style');
+    style.textContent =
+      '.tabs.asf-dropdown{display:none;flex-direction:column;gap:6px;padding:12px;margin:4px 16px 20px;background:var(--white,#fff);border:1px solid var(--gray-200,#e5e5e5);border-radius:16px;box-shadow:0 10px 28px rgba(0,0,0,0.14);max-height:70vh;overflow-y:auto;position:relative;z-index:998;}' +
+      '.tabs.asf-dropdown.open{display:flex;}' +
+      '.tabs.asf-dropdown .tab{display:flex;align-items:center;gap:10px;width:100%;text-align:left;padding:11px 14px;border:none;background:transparent;border-radius:10px;cursor:pointer;font-size:14px;color:var(--secondary,#0E2439);}' +
+      '.tabs.asf-dropdown .tab:hover{background:rgba(0,168,204,0.08);}' +
+      '.tabs.asf-dropdown .tab.active{background:rgba(0,168,204,0.12);color:var(--primary,#00A8CC);font-weight:600;}' +
+      '#asf-menu-toggle{display:flex;align-items:center;justify-content:center;gap:10px;width:calc(100% - 32px);margin:8px 16px 4px;padding:13px;border:1.5px solid rgba(0,168,204,0.35);background:var(--white,#fff);border-radius:14px;font-size:15px;font-weight:600;color:var(--primary,#00A8CC);cursor:pointer;box-shadow:0 2px 10px rgba(0,0,0,0.06);font-family:inherit;}';
+    document.head.appendChild(style);
+
+    tabs.classList.add('asf-dropdown');
+    tabs.id = tabs.id || 'asf-main-tabs';
+
+    var btn = document.createElement('button');
+    btn.id = 'asf-menu-toggle';
+    btn.type = 'button';
+    btn.setAttribute('aria-expanded', 'false');
+    btn.setAttribute('aria-controls', tabs.id);
+    btn.textContent = '☰ Menu';
+    tabs.parentNode.insertBefore(btn, tabs);
+
+    function setOpen(open) {
+      tabs.classList.toggle('open', open);
+      btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+      btn.textContent = open ? '✕ Fechar menu' : '☰ Menu';
+    }
+    btn.addEventListener('click', function () { setOpen(!tabs.classList.contains('open')); });
+    tabs.addEventListener('click', function (e) { if (e.target.closest('.tab')) setOpen(false); });
+    document.addEventListener('click', function (e) {
+      if (!tabs.classList.contains('open')) return;
+      if (!e.target.closest('.tabs') && !e.target.closest('#asf-menu-toggle')) setOpen(false);
+    });
+  }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initMenuDropdown);
+  } else {
+    initMenuDropdown();
+  }
+})();
