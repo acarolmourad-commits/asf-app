@@ -167,6 +167,27 @@ document.addEventListener('DOMContentLoaded', function() {
       '#asf-menu-toggle{display:flex;align-items:center;justify-content:center;gap:10px;width:calc(100% - 32px);margin:8px 16px 4px;padding:13px;border:1.5px solid rgba(0,168,204,0.35);background:var(--white,#fff);border-radius:14px;font-size:15px;font-weight:600;color:var(--primary,#00A8CC);cursor:pointer;box-shadow:0 2px 10px rgba(0,0,0,0.06);font-family:inherit;}';
     document.head.appendChild(style);
 
+    // Corrige o item "Posts" (HTML quebrado no index) ligando-o à seção Comunidade,
+    // onde ficam o feed e a publicação de posts
+    Array.prototype.slice.call(tabs.children).forEach(function (el) {
+      if (el.classList && el.classList.contains('tab-icon') && !el.closest('.tab')) {
+        var fix = document.createElement('button');
+        fix.className = 'tab';
+        fix.setAttribute('role', 'tab');
+        fix.setAttribute('aria-selected', 'false');
+        fix.setAttribute('aria-controls', 'comunidade');
+        fix.setAttribute('onclick', "showSection('comunidade')");
+        tabs.insertBefore(fix, el);
+        fix.appendChild(el);
+        var txt = fix.nextSibling;
+        if (txt && txt.nodeType === 3) {
+          fix.appendChild(txt);
+        } else {
+          fix.appendChild(document.createTextNode(' Posts'));
+        }
+      }
+    });
+
     tabs.classList.add('asf-dropdown');
     tabs.id = tabs.id || 'asf-main-tabs';
 
