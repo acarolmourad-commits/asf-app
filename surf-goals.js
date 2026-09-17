@@ -1,3 +1,83 @@
+/* ─── ASF Menu Dropdown ───
+   Menu principal (.tabs) em drop-down, com botão fixo no topo da página */
+(function () {
+  function initMenuDropdown() {
+    var tabs = document.querySelector('.tabs');
+    if (!tabs || document.getElementById('asf-menu-toggle')) return;
+
+    var style = document.createElement('style');
+    style.textContent =
+      'body{padding-top:64px !important;}' +
+      '.tabs.asf-dropdown{display:none;flex-direction:column;gap:6px;padding:12px;margin:0;background:var(--white,#fff);border:1px solid var(--gray-200,#e5e5e5);border-radius:16px;box-shadow:0 10px 28px rgba(0,0,0,0.14);max-height:calc(100vh - 76px);overflow-y:auto;position:fixed;top:64px;left:16px;right:16px;z-index:1001;}' +
+      '.tabs.asf-dropdown.open{display:flex;}' +
+      '.tabs.asf-dropdown .tab{display:flex;align-items:center;gap:10px;width:100%;text-align:left;padding:11px 14px;border:none;background:transparent;border-radius:10px;cursor:pointer;font-size:14px;color:var(--secondary,#0E2439);}' +
+      '.tabs.asf-dropdown .tab:hover{background:rgba(0,168,204,0.08);}' +
+      '.tabs.asf-dropdown .tab.active{background:rgba(0,168,204,0.12);color:var(--primary,#00A8CC);font-weight:600;}' +
+      '#asf-menu-toggle{display:flex;align-items:center;justify-content:center;gap:10px;position:fixed;top:8px;left:16px;right:16px;width:auto;margin:0;padding:13px;border:1.5px solid rgba(0,168,204,0.35);background:var(--white,#fff);border-radius:14px;font-size:15px;font-weight:600;color:var(--primary,#00A8CC);cursor:pointer;box-shadow:0 2px 12px rgba(0,0,0,0.10);font-family:inherit;z-index:1002;}';
+    document.head.appendChild(style);
+
+    // Corrige o item "Posts" (HTML quebrado no index) ligando-o à seção Comunidade,
+    // onde ficam o feed e a publicação de posts
+    Array.prototype.slice.call(tabs.children).forEach(function (el) {
+      if (el.classList && el.classList.contains('tab-icon') && !el.closest('.tab')) {
+        var fix = document.createElement('button');
+        fix.className = 'tab';
+        fix.setAttribute('role', 'tab');
+        fix.setAttribute('aria-selected', 'false');
+        fix.setAttribute('aria-controls', 'comunidade');
+        fix.setAttribute('onclick', "showSection('comunidade')");
+        tabs.insertBefore(fix, el);
+        fix.appendChild(el);
+        var txt = fix.nextSibling;
+        if (txt && txt.nodeType === 3) {
+          fix.appendChild(txt);
+        } else {
+          fix.appendChild(document.createTextNode(' Posts'));
+        }
+      }
+    });
+
+    tabs.classList.add('asf-dropdown');
+    tabs.id = tabs.id || 'asf-main-tabs';
+
+    var btn = document.createElement('button');
+    btn.id = 'asf-menu-toggle';
+    btn.type = 'button';
+    btn.setAttribute('aria-expanded', 'false');
+    btn.setAttribute('aria-controls', tabs.id);
+    btn.textContent = '☰ Menu';
+    document.body.appendChild(btn);
+
+    function setOpen(open) {
+      tabs.classList.toggle('open', open);
+      btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+      btn.textContent = open ? '✕ Fechar menu' : '☰ Menu';
+    }
+    btn.addEventListener('click', function () { setOpen(!tabs.classList.contains('open')); });
+    tabs.addEventListener('click', function (e) { if (e.target.closest('.tab')) setOpen(false); });
+    document.addEventListener('click', function (e) {
+      if (!tabs.classList.contains('open')) return;
+      if (!e.target.closest('.tabs') && !e.target.closest('#asf-menu-toggle')) setOpen(false);
+    });
+  }
+  var tries = 0;
+  function boot() {
+    var tabs = document.querySelector('.tabs');
+    if (!tabs && tries < 40) { tries++; setTimeout(boot, 250); return; }
+    initMenuDropdown();
+    // Reforço: se outro script recriar o menu, reaplica o dropdown
+    setTimeout(initMenuDropdown, 1000);
+    setTimeout(initMenuDropdown, 3000);
+  }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', boot);
+    window.addEventListener('load', boot);
+  } else {
+    boot();
+  }
+})();
+
+
 // ASF Surf Goals - Sistema de metas de surf
 
 // Escapa HTML para evitar injeção via campos do usuário (XSS)
@@ -5,8 +85,12 @@ function esc(s) {
   return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 }
 
+function asfSafeParse(key, fallback) {
+  try { return JSON.parse((window.localStorage && localStorage.getItem(key)) || '' ) || fallback; } catch (e) { return fallback; }
+}
+
 const SurfGoals = {
-  goals: JSON.parse(localStorage.getItem('asf-goals') || '[]'),
+  goals: asfSafeParse('asf-goals', []),
   
   // Adicionar nova meta
   addGoal: function(title, target, category) {
@@ -18,7 +102,7 @@ const SurfGoals = {
     const goal = {
       id: Date.now(),
       title: title,
-      target: t,
+      target: target,
       current: 0,
       category: category || 'geral',
       created: new Date().toISOString(),
@@ -52,7 +136,7 @@ const SurfGoals = {
   
   // Salvar no localStorage
   save: function() {
-    localStorage.setItem('asf-goals', JSON.stringify(this.goals));
+    try { localStorage.setItem('asf-goals', JSON.stringify(this.goals)); } catch (e) {}
   },
   
   // Renderizar metas
@@ -148,73 +232,3 @@ function showAddGoalModal() {
 document.addEventListener('DOMContentLoaded', function() {
   setTimeout(SurfGoals.render, 1000);
 });
-
-
-/* ─── ASF Menu Dropdown ───
-   Menu principal (.tabs) em drop-down, com botão fixo no topo da página */
-(function () {
-  function initMenuDropdown() {
-    var tabs = document.querySelector('.tabs');
-    if (!tabs || document.getElementById('asf-menu-toggle')) return;
-
-    var style = document.createElement('style');
-    style.textContent =
-      'body{padding-top:64px !important;}' +
-      '.tabs.asf-dropdown{display:none;flex-direction:column;gap:6px;padding:12px;margin:0;background:var(--white,#fff);border:1px solid var(--gray-200,#e5e5e5);border-radius:16px;box-shadow:0 10px 28px rgba(0,0,0,0.14);max-height:calc(100vh - 76px);overflow-y:auto;position:fixed;top:64px;left:16px;right:16px;z-index:1001;}' +
-      '.tabs.asf-dropdown.open{display:flex;}' +
-      '.tabs.asf-dropdown .tab{display:flex;align-items:center;gap:10px;width:100%;text-align:left;padding:11px 14px;border:none;background:transparent;border-radius:10px;cursor:pointer;font-size:14px;color:var(--secondary,#0E2439);}' +
-      '.tabs.asf-dropdown .tab:hover{background:rgba(0,168,204,0.08);}' +
-      '.tabs.asf-dropdown .tab.active{background:rgba(0,168,204,0.12);color:var(--primary,#00A8CC);font-weight:600;}' +
-      '#asf-menu-toggle{display:flex;align-items:center;justify-content:center;gap:10px;position:fixed;top:8px;left:16px;right:16px;width:auto;margin:0;padding:13px;border:1.5px solid rgba(0,168,204,0.35);background:var(--white,#fff);border-radius:14px;font-size:15px;font-weight:600;color:var(--primary,#00A8CC);cursor:pointer;box-shadow:0 2px 12px rgba(0,0,0,0.10);font-family:inherit;z-index:1002;}';
-    document.head.appendChild(style);
-
-    // Corrige o item "Posts" (HTML quebrado no index) ligando-o à seção Comunidade,
-    // onde ficam o feed e a publicação de posts
-    Array.prototype.slice.call(tabs.children).forEach(function (el) {
-      if (el.classList && el.classList.contains('tab-icon') && !el.closest('.tab')) {
-        var fix = document.createElement('button');
-        fix.className = 'tab';
-        fix.setAttribute('role', 'tab');
-        fix.setAttribute('aria-selected', 'false');
-        fix.setAttribute('aria-controls', 'comunidade');
-        fix.setAttribute('onclick', "showSection('comunidade')");
-        tabs.insertBefore(fix, el);
-        fix.appendChild(el);
-        var txt = fix.nextSibling;
-        if (txt && txt.nodeType === 3) {
-          fix.appendChild(txt);
-        } else {
-          fix.appendChild(document.createTextNode(' Posts'));
-        }
-      }
-    });
-
-    tabs.classList.add('asf-dropdown');
-    tabs.id = tabs.id || 'asf-main-tabs';
-
-    var btn = document.createElement('button');
-    btn.id = 'asf-menu-toggle';
-    btn.type = 'button';
-    btn.setAttribute('aria-expanded', 'false');
-    btn.setAttribute('aria-controls', tabs.id);
-    btn.textContent = '☰ Menu';
-    document.body.appendChild(btn);
-
-    function setOpen(open) {
-      tabs.classList.toggle('open', open);
-      btn.setAttribute('aria-expanded', open ? 'true' : 'false');
-      btn.textContent = open ? '✕ Fechar menu' : '☰ Menu';
-    }
-    btn.addEventListener('click', function () { setOpen(!tabs.classList.contains('open')); });
-    tabs.addEventListener('click', function (e) { if (e.target.closest('.tab')) setOpen(false); });
-    document.addEventListener('click', function (e) {
-      if (!tabs.classList.contains('open')) return;
-      if (!e.target.closest('.tabs') && !e.target.closest('#asf-menu-toggle')) setOpen(false);
-    });
-  }
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initMenuDropdown);
-  } else {
-    initMenuDropdown();
-  }
-})();
