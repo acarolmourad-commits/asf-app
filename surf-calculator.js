@@ -108,7 +108,10 @@ window.SurfCalculator = SurfCalculator;
     ['Treino','asf-treino'],['Eventos','asf-eventos'],['Glossário','asf-glossario'],
     ['Segurança','asf-seguranca'],['Comunidade','asf-comunidade'],
     ['Equipamento','asf-equipamento'],['Quiz','asf-quiz'],
-    ['Nutrição','asf-nutricao'],['Viagens','asf-viagens'],['História','asf-historia']
+    ['Nutrição','asf-nutricao'],['Viagens','asf-viagens'],['História','asf-historia'],
+    ['Bem-estar','asf-bemestar'],['Diário','asf-diario'],['Eco','asf-eco'],
+    ['Mental','asf-mental'],['Kids','asf-kids'],['SOS','asf-sos'],
+    ['Yoga','asf-yoga'],['Volume','asf-volume'],['Respira','asf-respira'],['Ranking','asf-ranking']
   ];
   var btn = document.createElement('button');
   btn.id = 'asf-sat-nav';
