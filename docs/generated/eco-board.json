@@ -1,18 +1,18 @@
 {
-  "date": "2026-09-16",
+  "date": "2026-09-17",
   "board_tip": {
-    "title": "Fish: Para ondas pequenas",
-    "content": "Shape com outline curto e largo. Perfeita para ondas fracas! Twin ou quad fin para mais speed.",
+    "title": "Shortboard: Performance",
+    "content": "Shortboards (5'6\"-6'6\") são para performance. Requer técnica e condicionamento.",
     "tags": [
-      "Fish",
-      "Speed"
+      "Shortboard",
+      "Performance"
     ]
   },
   "eco_tip": {
-    "title": "Por que escolher ecológico?",
-    "content": "Quando a prancha chegar ao fim, o bloco pode ser reciclado ou se degrada naturalmente!",
-    "category": "Consumo Consciente"
+    "title": "Benefícios do Bloco Ecológico",
+    "content": "1. ♻️ 100% reciclável 2. 🌿 Biodegradável 3. 🧊 Livre de CFC 4. 💧 Menor consumo de água",
+    "category": "Meio Ambiente"
   },
   "daily_message": "Alongue ombros e costas antes de entrar na água!",
-  "generated_at": "2026-09-16T20:32:01.850636"
+  "generated_at": "2026-09-17T02:04:07.223542"
 }

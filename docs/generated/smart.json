@@ -1,18 +1,18 @@
 {
-  "date": "2026-09-16",
+  "date": "2026-09-17",
   "new_tip": {
-    "category": "Técnica",
-    "title": "Como fazer o bottom turn",
-    "content": "O bottom turn é a base. Transfira o peso para o pé da frente e gire a prancha.",
+    "category": "Equipamento",
+    "title": "Qual leash escolher",
+    "content": "Use leash do mesmo tamanho ou ligeiramente menor que a prancha.",
     "tags": [
-      "Técnica",
-      "Manobras"
+      "Equipamento",
+      "Leash"
     ]
   },
   "new_utility": {
-    "name": "Previsão de Ondas",
-    "description": "7 dias de previsão",
-    "icon": "🌊"
+    "name": "Calculadora de Prancha",
+    "description": "Volume ideal",
+    "icon": "🧮"
   },
   "improvements": [
     {
@@ -26,5 +26,5 @@
       "priority": "high"
     }
   ],
-  "generated_at": "2026-09-16T20:32:01.793862"
+  "generated_at": "2026-09-17T02:04:07.169647"
 }
