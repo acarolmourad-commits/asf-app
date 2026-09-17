@@ -1,7 +1,7 @@
 {
-  "date": "2026-09-17T10:32:45.603604+00:00",
-  "total": 51,
-  "ok": 27,
+  "date": "2026-09-17T14:46:55.375420+00:00",
+  "total": 53,
+  "ok": 29,
   "skipped": 23,
   "broken_count": 1,
   "broken": [
@@ -149,6 +149,11 @@
       "http": null
     },
     {
+      "url": "https://www.fecasurf.com.br/",
+      "status": "ok",
+      "http": 200
+    },
+    {
       "url": "https://www.googletagmanager.com",
       "status": "skipped",
       "http": null
@@ -170,6 +175,11 @@
     },
     {
       "url": "https://www.spsurf.com.br/",
+      "status": "ok",
+      "http": 200
+    },
+    {
+      "url": "https://www.surfbrasil.org.br/",
       "status": "ok",
       "http": 200
     },
