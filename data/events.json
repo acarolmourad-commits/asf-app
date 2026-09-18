@@ -1,5 +1,5 @@
 {
-  "updated": "2026-09-17",
+  "updated": "2026-09-18",
   "ultima_atualizacao": "2026-09-17T12:00:00Z",
   "fonte": "spsurf.com.br (SP) + surfbrasil.org.br (CBSurf) + fecasurf.com.br (SC) + feserj.org.br (RJ) + fgsurf.org.br (RS) + fpsurfpr (PR) + WSL",
   "nota": "Datas conferidas em 17/09/2026 nos sites oficiais das federações. Federações estaduais de BA, PE e CE ainda não publicaram calendário oficial 2026 - acompanhe os sites das federações. O status (Acontecendo agora / Confirmado / Encerrado) é calculado automaticamente pela data.",
@@ -29,7 +29,7 @@
       "fim": "2026-09-20",
       "descricao": "Etapa final do Circuito Paulista de Surfe de Base da SPSurf. Define os campeões do ranking paulista de base.",
       "fonte": "spsurf.com.br",
-      "status": "PROXIMO"
+      "status": "EM_ANDAMENTO"
     },
     {
       "titulo": "🏆 Circuito Gaúcho de Surf 2026 - 1ª Etapa",
