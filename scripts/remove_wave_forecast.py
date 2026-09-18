@@ -2,8 +2,7 @@
 # Limpeza e integração da página principal (index.html):
 # 1) Remove seções migradas para apps dedicados
 # 2) Redireciona cliques da home para os apps relacionados
-# 3) Oculta widgets dinâmicos alimentados por JS (surf-bar e dica do dia),
-#    mantendo os elementos no DOM para não quebrar o JavaScript
+# 3) Oculta widgets dinâmicos alimentados por JS (surf-bar e dica do dia)
 import io, re, sys
 
 TARGET = 'index.html'
@@ -19,7 +18,7 @@ BLOCKS = [
     ('Quiz do Dia (Home Card)', r'\n?[ \t]*<!-- Quiz do Dia \(Home Card\) -->.*?\n[ \t]*</div>\n(?=\n)'),
     ('Tip of the Day', r'\n?[ \t]*<!-- Tip of the Day -->.*?<!-- End Tip of the Day -->\n?'),
     ('Feminine Tips Section', r'\n?[ \t]*<!-- Feminine Tips Section -->.*?<!-- End Feminine Tips -->\n?'),
-    ('Stats', r'\n?[ \t]*<!-- Stats -->\n[ \t]*<div class="stats">.*?\n[ \t]*</div>\n(?=\n)'),
+    ('Stats (Dicas/Lojas/Surftrips/Membros)', r'\n?[ \t]*<!-- Stats -->\n[ \t]*<div class="stats">.*?</div>\s*</div>\s*</div>\s*</div>\s*</div>\n'),
 ]
 
 for name, pat in BLOCKS:
