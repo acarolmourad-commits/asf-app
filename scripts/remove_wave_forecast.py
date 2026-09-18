@@ -2,8 +2,8 @@
 # Limpeza e integração da página principal (index.html):
 # 1) Remove seções migradas para apps dedicados
 # 2) Redireciona cliques da home para os apps relacionados
-# 3) Remove a barra de condições ao vivo (surfBar) e o card dinâmico Dica do Dia
-# 4) Blinda app.js contra referências aos elementos removidos
+# 3) Oculta widgets dinâmicos alimentados por JS
+# 4) Remove seções internas duplicadas (inalcansáveis após redirects)
 import io, re, sys
 
 TARGET = 'index.html'
@@ -13,21 +13,36 @@ with io.open(TARGET, encoding='utf-8') as f:
 
 original = src
 
-# --- 1) Blocos removidos ---
+# --- 1) Blocos removidos (comentário-delimitados) ---
 BLOCKS = [
     ('Wave Forecast', r'\n?[ \t]*<!-- Wave Forecast -->.*?<!-- End Wave Forecast -->\n?'),
     ('Quiz do Dia (Home Card)', r'\n?[ \t]*<!-- Quiz do Dia \(Home Card\) -->.*?\n[ \t]*</div>\n(?=\n)'),
     ('Tip of the Day', r'\n?[ \t]*<!-- Tip of the Day -->.*?<!-- End Tip of the Day -->\n?'),
     ('Feminine Tips Section', r'\n?[ \t]*<!-- Feminine Tips Section -->.*?<!-- End Feminine Tips -->\n?'),
     ('Stats', r'\n?[ \t]*<!-- Stats -->\n[ \t]*<div class="stats">.*?\n[ \t]*</div>\n(?=\n)'),
-    ('Live Surf Conditions', r'\n?[ \t]*<!-- Live Surf Conditions -->\n[ \t]*<div class="surf-bar" id="surfBar".*?</div>\n[ \t]*</div>\n'),
-    ('Dica do Dia (dinâmico)', r'\n?[ \t]*<!-- Dica do Dia \(2417\) -->\n[ \t]*<div id="surf-conditions-wrapper".*?</div>\n[ \t]*<div id="dica-do-dia".*?\n[ \t]*</div>\n[ \t]*</div>\n'),
-    ('Comentários da Dica', r'\n?[ \t]*<!-- 💬 Comentários da Dica do Dia -->\n[ \t]*<div id="dica-community-section".*?</div>\n'),
 ]
 
 for name, pat in BLOCKS:
     src, n = re.compile(pat, re.DOTALL).subn('\n', src)
     print(f'✅ {name} removido ({n}).' if n else f'⚠️ {name} não encontrado (ok).')
+
+# --- 4) Seções internas duplicadas (conteúdo morto após redirects) ---
+SECTIONS = [
+    ('Seção Quiz interna', '<!--     <!-- Quiz Diário -->', '<div id="welcome-card"'),
+    ('Seção Trips interna', '<!-- Trips Section - Interactive Questions -->', '<!-- Manas Section - WhatsApp Groups -->'),
+    ('Seção surf-conditions interna', '<!-- 🌊 Ondas / Condições (desktop home) -->', '<div class="section" id="desafios">'),
+    ('Card Maré (utilities)', '<div class="card utility-card" id="card-mare">', '<div class="card utility-card">'),
+    ('Card Calculadora (utilities)', '<div class="card utility-card" id="card-calc">', '<div class="card utility-card" style="margin-top: 15px;">'),
+]
+
+for name, start, end in SECTIONS:
+    i = src.find(start)
+    j = src.find(end, i + len(start)) if i >= 0 else -1
+    if i >= 0 and j > i:
+        src = src[:i] + src[j:]
+        print(f'✅ {name} removida ({j - i} chars).')
+    else:
+        print(f'⚠️ {name} não encontrada (ok se já removida).')
 
 # Menção no card de boas-vindas
 welcome_old = '🌊 Previsão de ondas • 💪 Treinos • 📚 Dicas • 💬 Grupos'
@@ -55,42 +70,31 @@ for old, new, label in LINKS:
     if cnt:
         src = src.replace(old, new)
         print(f'✅ Link: {label} ({cnt}).')
+    else:
+        print(f'⚠️ Link não encontrado: {label} (ok).')
+
+# --- 3) Ocultar widgets dinâmicos ---
+HIDE = [
+    ('<div class="surf-bar" id="surfBar">',
+     '<div class="surf-bar" id="surfBar" style="display:none !important">', 'Surf bar'),
+    ('<div id="dica-do-dia">',
+     '<div id="dica-do-dia" style="display:none !important">', 'Dica do Dia dinâmica'),
+    ('<div id="dica-community-section" style="max-width:800px;margin:0 auto 24px;padding:0 16px">',
+     '<div id="dica-community-section" style="display:none !important;max-width:800px;margin:0 auto 24px;padding:0 16px">', 'Comentários da Dica'),
+    ('<div id="surf-conditions-wrapper" style="padding:0 16px;max-width:800px;margin:0 auto 12px">',
+     '<div id="surf-conditions-wrapper" style="display:none !important;padding:0 16px;max-width:800px;margin:0 auto 12px">', 'Wrapper de condições'),
+]
+
+for old, new, label in HIDE:
+    if old in src:
+        src = src.replace(old, new)
+        print(f'✅ Oculto: {label}.')
+    else:
+        print(f'⚠️ Não encontrado para ocultar: {label} (ok).')
 
 if src != original:
     with io.open(TARGET, 'w', encoding='utf-8') as f:
         f.write(src)
     print(f'📮 index.html atualizado: {len(original)} -> {len(src)} chars')
 else:
-    print('⚠️ index.html sem alterações.')
-
-# --- 3) Blindar app.js contra elementos removidos ---
-try:
-    with io.open('app.js', encoding='utf-8') as f:
-        js = f.read()
-    js_orig = js
-    GUARDS = [
-        ("async function loadSurfBar() {\n            const bar = document.getElementById('surfBar');",
-         "async function loadSurfBar() {\n            const bar = document.getElementById('surfBar');\n            if (!bar) return;"),
-        ("function shareSurfConditions() {\n            const bar = document.getElementById('surfBar');",
-         "function shareSurfConditions() {\n            const bar = document.getElementById('surfBar');\n            if (!bar) return;"),
-        ("            const container = document.getElementById('dica-do-dia');\n",
-         "            const container = document.getElementById('dica-do-dia');\n            if (!container) return;\n"),
-        ("            const current = document.getElementById('dica-text').textContent;",
-         "            const dicaEl = document.getElementById('dica-text');\n            if (!dicaEl) return;\n            const current = dicaEl.textContent;"),
-    ]
-    for old, new in GUARDS:
-        if new in js:
-            continue
-        if old in js:
-            js = js.replace(old, new)
-            print(f'✅ app.js: guarda adicionada ({old.strip()[:50]}...)')
-        else:
-            print(f'⚠️ app.js: padrão não encontrado ({old.strip()[:50]}...)')
-    if js != js_orig:
-        with io.open('app.js', 'w', encoding='utf-8') as f:
-            f.write(js)
-        print('📮 app.js atualizado')
-    else:
-        print('⚠️ app.js sem alterações.')
-except FileNotFoundError:
-    print('⚠️ app.js não encontrado.')
+    print('⚠️ Nenhuma alteração necessária.')
