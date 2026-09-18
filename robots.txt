@@ -1,30 +1,3 @@
 User-agent: *
 Allow: /
-
 Sitemap: https://acarolmourad-commits.github.io/asf-app/sitemap.xml
-Sitemap: https://acarolmourad-commits.github.io/asf-praias/sitemap.xml
-Sitemap: https://acarolmourad-commits.github.io/asf-previsao/sitemap.xml
-Sitemap: https://acarolmourad-commits.github.io/asf-treino/sitemap.xml
-Sitemap: https://acarolmourad-commits.github.io/asf-eventos/sitemap.xml
-Sitemap: https://acarolmourad-commits.github.io/asf-glossario/sitemap.xml
-Sitemap: https://acarolmourad-commits.github.io/asf-comunidade/sitemap.xml
-Sitemap: https://acarolmourad-commits.github.io/asf-seguranca/sitemap.xml
-Sitemap: https://acarolmourad-commits.github.io/asf-equipamento/sitemap.xml
-Sitemap: https://acarolmourad-commits.github.io/asf-quiz/sitemap.xml
-Sitemap: https://acarolmourad-commits.github.io/asf-diario/sitemap.xml
-Sitemap: https://acarolmourad-commits.github.io/asf-yoga/sitemap.xml
-Sitemap: https://acarolmourad-commits.github.io/asf-sos/sitemap.xml
-Sitemap: https://acarolmourad-commits.github.io/asf-eco/sitemap.xml
-
-# Bloquear páginas sensíveis (nenhuma atualmente)
-Disallow: /docs/
-Disallow: /_/
-
-# Páginas internas/operacionais fora do índice
-Disallow: /hermes.html
-Disallow: /espacos-logo-app.html
-Disallow: /index-short.html
-
-# Permitir todo o resto
-Allow: /sessoes-interativas.html
-Allow: /rede.html
