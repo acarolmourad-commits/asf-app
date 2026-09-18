@@ -5,6 +5,7 @@
 # 3) Card "Quiz do Dia" da home (quiz segue na aba Quiz)
 # 4) Card "Dica do Dia" estático (Tip of the Day)
 # 5) Seção "Dicas Femininas" da home
+# 6) Barra de estatísticas (Dicas / Lojas / Surftrips / Seguidoras no Instagram)
 import io, re, sys
 
 TARGET = 'index.html'
@@ -19,6 +20,7 @@ BLOCKS = [
     ('Quiz do Dia (Home Card)', r'\n?[ \t]*<!-- Quiz do Dia \(Home Card\) -->.*?\n[ \t]*</div>\n(?=\n)'),
     ('Tip of the Day', r'\n?[ \t]*<!-- Tip of the Day -->.*?<!-- End Tip of the Day -->\n?'),
     ('Feminine Tips Section', r'\n?[ \t]*<!-- Feminine Tips Section -->.*?<!-- End Feminine Tips -->\n?'),
+    ('Stats', r'\n?[ \t]*<!-- Stats -->\n[ \t]*<div class="stats">.*?\n[ \t]*</div>\n(?=\n)'),
 ]
 
 for name, pat in BLOCKS:
