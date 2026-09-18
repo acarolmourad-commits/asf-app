@@ -11,7 +11,7 @@ with io.open(TARGET, encoding='utf-8') as f:
 
 original = src
 
-# 1) Remove o bloco completo da seção Wave Forecast
+# 1) Remove bloco completo da seção Wave Forecast
 pattern = re.compile(
     r'\n?[ \t]*<!-- Wave Forecast -->.*?<!-- End Wave Forecast -->\n?',
     re.DOTALL,
@@ -22,23 +22,18 @@ if n:
 else:
     print('⚠️ Seção Wave Forecast não encontrada (talvez já removida).')
 
-# 2) Remove a menção no card de boas-vindas
-WELCOME_REPLACEMENTS = [
-    ('🌊 Previsão de ondas • 💪 Treinos • 📚 Dicas • 💬 Grupos',
-     '💪 Treinos • 📚 Dicas • 💬 Grupos'),
-    ('🌊 Previsão de ondas • ', ''),
-]
-for old, new in WELCOME_REPLACEMENTS:
-    if old in src:
-        src = src.replace(old, new)
-        print(f'✅ Welcome card: removido "{old.strip()[:50]}"')
-        break
+# 2) Remove menção no card de boas-vindas
+welcome_old = '🌊 Previsão de ondas • 💪 Treinos • 📚 Dicas • 💬 Grupos'
+welcome_new = '💪 Treinos • 📚 Dicas • 💬 Grupos'
+if welcome_old in src:
+    src = src.replace(welcome_old, welcome_new)
+    print('✅ Menção no card de boas-vindas removida.')
 else:
-    print('⚠️ Menção no welcome card não encontrada (ok se já removida).')
+    print('⚠️ Menção de boas-vindas não encontrada (ok se já removida).')
 
 if src != original:
     with io.open(TARGET, 'w', encoding='utf-8') as f:
         f.write(src)
-    print(f'📮 index.html atualizado ({len(original)} -> {len(src)} chars)')
+    print(f'📮 index.html atualizado: {len(original)} -> {len(src)} chars')
 else:
-    print('⚠️ index.html sem alterações necessárias')
+    print('⚠️ Nenhuma alteração necessária.')
