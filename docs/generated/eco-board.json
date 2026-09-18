@@ -1,18 +1,18 @@
 {
-  "date": "2026-09-17",
+  "date": "2026-09-18",
   "board_tip": {
-    "title": "Fish: Para ondas pequenas",
-    "content": "Shape com outline curto e largo. Perfeita para ondas fracas! Twin ou quad fin para mais speed.",
+    "title": "Funboard: A versátil",
+    "content": "Funboards (7'0\"-8'6\") são ideais para evolução. Mais ágil que longboard, mantém estabilidade.",
     "tags": [
-      "Fish",
-      "Speed"
+      "Funboard",
+      "Evolução"
     ]
   },
   "eco_tip": {
-    "title": "Bloco Phenix Teccel",
-    "content": "Núcleo EPS ecológico. Pode ser 100% reciclado ou biodegradado. Menor impacto ambiental.",
-    "category": "Sustentabilidade"
+    "title": "Por que escolher ecológico?",
+    "content": "Quando a prancha chegar ao fim, o bloco pode ser reciclado ou se degrada naturalmente!",
+    "category": "Consumo Consciente"
   },
   "daily_message": "Protetor solar: reaplique a cada 2 horas!",
-  "generated_at": "2026-09-17T20:39:08.727540"
+  "generated_at": "2026-09-18T01:51:35.152690"
 }
