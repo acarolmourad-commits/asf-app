@@ -172,3 +172,28 @@ window.SurfCalculator = SurfCalculator;
     document.addEventListener('DOMContentLoaded', initAppsDropdown);
   } else { initAppsDropdown(); }
 })();
+
+
+// 🏄‍♀️ ASF Manas - Substitui o formulário de cadastro pelo botão direto de WhatsApp
+(function(){
+  function initManasWhatsApp(){
+    var section = document.getElementById('manas');
+    if (!section) return;
+    if (document.getElementById('manas-wa-btn')) return;
+    var input = document.getElementById('whatsapp-input');
+    if (!input) return;
+    var formBox = input.closest('div[style]');
+    while (formBox && formBox.parentElement !== section) { formBox = formBox.parentElement; }
+    if (!formBox) return;
+    var wrapper = document.createElement('div');
+    wrapper.style.cssText = 'background: var(--light); padding: 20px; margin: 0 20px 20px; border-radius: 16px; text-align: center;';
+    wrapper.innerHTML = '<h4 style="margin-bottom: 10px; color: var(--secondary);">📱 Cadastre-se no Grupo</h4>' +
+      '<p style="font-size: 13px; color: var(--gray-600); margin-bottom: 15px;">Toque no botão abaixo e envie sua mensagem — uma saudação automática já vai pronta pedindo seu nome! 🌊</p>' +
+      '<a id="manas-wa-btn" href="https://wa.me/5511954346288?text=Ol%C3%A1!%20%F0%9F%8F%84%E2%80%8D%E2%99%80%EF%B8%8F%20Quero%20entrar%20no%20grupo%20de%20surftrip%20com%20as%20amigas!%20Meu%20nome%20%C3%A9%3A%20" target="_blank" rel="noopener" ' +
+      'style="display: inline-block; width: 100%; background: #25D366; color: #fff; font-weight: bold; font-size: 15px; padding: 14px 28px; border-radius: 50px; text-decoration: none; box-shadow: 0 4px 12px rgba(37,211,102,0.35); box-sizing: border-box;">📱 Entrar no Grupo pelo WhatsApp</a>';
+    formBox.parentNode.replaceChild(wrapper, formBox);
+  }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initManasWhatsApp);
+  } else { initManasWhatsApp(); }
+})();
