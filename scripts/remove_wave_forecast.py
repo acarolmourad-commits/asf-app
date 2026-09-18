@@ -2,6 +2,8 @@
 # Limpeza e integração da página principal (index.html):
 # 1) Remove seções migradas para apps dedicados
 # 2) Redireciona cliques da home para os apps relacionados
+# 3) Oculta widgets dinâmicos alimentados por JS (surf-bar e dica do dia),
+#    mantendo os elementos no DOM para não quebrar o JavaScript
 import io, re, sys
 
 TARGET = 'index.html'
@@ -33,19 +35,14 @@ if welcome_old in src:
 
 # --- 2) Links da home -> apps dedicados ---
 LINKS = [
-    # Botão/aba Ondas -> app Previsão de Ondas
     ('onclick="showSection(\'surf-conditions\')"',
      'onclick="location.href=\'previsao-surf/\'"', 'Ondas -> previsao-surf'),
-    # Botão Marés -> app Guia de Marés
     ('onclick="showSection(\'utilities\');setTimeout(function(){var el=document.getElementById(\'card-mare\');if(el)el.scrollIntoView({behavior:\'smooth\',block:\'start\'});},80)"',
      'onclick="location.href=\'mareas/\'"', 'Marés -> mareas'),
-    # Botão Calculadora -> app Prancha Ideal
     ('onclick="showSection(\'utilities\');setTimeout(function(){var el=document.getElementById(\'card-calc\');if(el)el.scrollIntoView({behavior:\'smooth\',block:\'start\'});},80)"',
      'onclick="location.href=\'prancha-ideal/\'"', 'Calculadora -> prancha-ideal'),
-    # Aba Quiz -> app Quiz do Surf
     ('aria-controls="quiz" onclick="showSection(\'quiz\')"',
      'aria-controls="quiz" onclick="location.href=\'quiz/\'"', 'Quiz -> quiz'),
-    # Aba Trips -> app Surf Trip Planner
     ('aria-controls="trips" onclick="showSection(\'trips\')"',
      'aria-controls="trips" onclick="location.href=\'surf-trip/\'"', 'Trips -> surf-trip'),
 ]
@@ -54,9 +51,28 @@ for old, new, label in LINKS:
     cnt = src.count(old)
     if cnt:
         src = src.replace(old, new)
-        print(f'✅ Link: {label} ({cnt} ocorrência(s)).')
+        print(f'✅ Link: {label} ({cnt}).')
     else:
-        print(f'⚠️ Link não encontrado: {label} (ok se já aplicado).')
+        print(f'⚠️ Link não encontrado: {label} (ok).')
+
+# --- 3) Ocultar widgets dinâmicos (JS continua funcionando sem erro) ---
+HIDE = [
+    ('<div class="surf-bar" id="surfBar">',
+     '<div class="surf-bar" id="surfBar" style="display:none !important">', 'Surf bar (condições ao vivo)'),
+    ('<div id="dica-do-dia">',
+     '<div id="dica-do-dia" style="display:none !important">', 'Dica do Dia dinâmica'),
+    ('<div id="dica-community-section" style="max-width:800px;margin:0 auto 24px;padding:0 16px">',
+     '<div id="dica-community-section" style="display:none !important;max-width:800px;margin:0 auto 24px;padding:0 16px">', 'Comentários da Dica do Dia'),
+    ('<div id="surf-conditions-wrapper" style="padding:0 16px;max-width:800px;margin:0 auto 12px">',
+     '<div id="surf-conditions-wrapper" style="display:none !important;padding:0 16px;max-width:800px;margin:0 auto 12px">', 'Wrapper de condições'),
+]
+
+for old, new, label in HIDE:
+    if old in src:
+        src = src.replace(old, new)
+        print(f'✅ Oculto: {label}.')
+    else:
+        print(f'⚠️ Não encontrado para ocultar: {label} (ok).')
 
 if src != original:
     with io.open(TARGET, 'w', encoding='utf-8') as f:
