@@ -1,0 +1,38 @@
+name: 🌊 Remover seção Previsão de Ondas da home
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/remove-wave-forecast.yml'
+      - 'scripts/remove_wave_forecast.py'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  remove-wave-forecast:
+    name: Remover seção de previsão de ondas e validar
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - name: 🌊 Remover seção Wave Forecast
+        run: python3 scripts/remove_wave_forecast.py
+      - name: ✅ Validações de integridade
+        run: |
+          ! grep -n 'Previsão de Ondas - Litoral Paulista' index.html && echo "✅ sem seção de previsão de ondas"
+          ! grep -n 'Open-Meteo Marine API' index.html && echo "✅ sem fonte Open-Meteo"
+          test "$(grep -c '<style' index.html)" = "$(grep -c '</style>' index.html)" && echo "✅ styles balanceados"
+      - name: 📮 Commit e push
+        run: |
+          git config user.name "ASF Bot"
+          git config user.email "bot@asf-app.com"
+          git add index.html
+          if git diff --cached --quiet; then
+            echo "Sem alterações"
+          else
+            git commit -m "🌊 Remover seção Previsão de Ondas da home (já existe app dedicado de previsões)"
+            git push
+          fi
