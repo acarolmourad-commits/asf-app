@@ -1377,6 +1377,7 @@ function showTimerHistory() {
         }
 async function loadSurfBar() {
             const bar = document.getElementById('surfBar');
+            if (!bar) return;
             try {
                 const [weather, marine] = await Promise.all([fetchWeather('bertioga'), fetchMarine('bertioga')]);
                 const w = weather?.current;
@@ -1582,6 +1583,7 @@ function initCadastro() {
         }
 function shareSurfConditions() {
             const bar = document.getElementById('surfBar');
+            if (!bar) return;
             const items = bar.querySelectorAll('.surf-bar-item');
             let data = {};
             items.forEach(item => {
@@ -1949,6 +1951,7 @@ function initChecklist() {
 function showDica(index) {
             const d = dicas[index];
             const container = document.getElementById('dica-do-dia');
+            if (!container) return;
             // Fade out
             container.style.opacity = '0';
             container.style.transform = 'translateY(10px)';
@@ -1964,7 +1967,9 @@ function showDica(index) {
 function nextDica() {
             let idx = Math.floor(Math.random() * dicas.length);
             // Avoid repeat
-            const current = document.getElementById('dica-text').textContent;
+            const dicaEl = document.getElementById('dica-text');
+            if (!dicaEl) return;
+            const current = dicaEl.textContent;
             while (dicas[idx].text === current && dicas.length > 1) idx = Math.floor(Math.random() * dicas.length);
             showDica(idx);
         }
