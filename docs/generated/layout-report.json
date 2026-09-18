@@ -1,8 +1,8 @@
 {
   "date": "2026-09-18",
-  "issues_found": 5,
+  "issues_found": 1,
   "improvements_available": 4,
-  "score": 91,
+  "score": 89,
   "suggested": [
     {
       "type": "css",
@@ -10,10 +10,10 @@
       "impact": "high"
     },
     {
-      "type": "css",
-      "change": "Hover animation on cards",
+      "type": "js",
+      "change": "Lazy loading images",
       "impact": "high"
     }
   ],
-  "timestamp": "2026-09-18T14:14:01.572309"
+  "timestamp": "2026-09-18T14:48:33.776907"
 }

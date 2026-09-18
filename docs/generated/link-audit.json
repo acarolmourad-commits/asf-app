@@ -1,11 +1,12 @@
 {
-  "date": "2026-09-18T14:14:09.561873+00:00",
+  "date": "2026-09-18T14:48:38.581279+00:00",
   "total": 53,
-  "ok": 29,
+  "ok": 28,
   "skipped": 23,
-  "broken_count": 1,
+  "broken_count": 2,
   "broken": [
-    "https://docs.google.com/forms/d/e/1fJhfaiNyYSSq9bKElew69y6GZ6_pxLz05HR26klIsSA/viewform"
+    "https://docs.google.com/forms/d/e/1fJhfaiNyYSSq9bKElew69y6GZ6_pxLz05HR26klIsSA/viewform",
+    "https://www.surfbrasil.org.br/"
   ],
   "results": [
     {
@@ -180,8 +181,8 @@
     },
     {
       "url": "https://www.surfbrasil.org.br/",
-      "status": "ok",
-      "http": 200
+      "status": "broken",
+      "http": "URLError"
     },
     {
       "url": "https://www.tiktok.com/@Cahrol.asf",
