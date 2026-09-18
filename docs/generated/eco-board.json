@@ -1,11 +1,11 @@
 {
   "date": "2026-09-18",
   "board_tip": {
-    "title": "Funboard: A versátil",
-    "content": "Funboards (7'0\"-8'6\") são ideais para evolução. Mais ágil que longboard, mantém estabilidade.",
+    "title": "Longboard: O clássico",
+    "content": "Longboards (9'0\"+) são perfeitas para ondas pequenas e estabilidade.",
     "tags": [
-      "Funboard",
-      "Evolução"
+      "Longboard",
+      "Clássico"
     ]
   },
   "eco_tip": {
@@ -13,6 +13,6 @@
     "content": "Quando a prancha chegar ao fim, o bloco pode ser reciclado ou se degrada naturalmente!",
     "category": "Consumo Consciente"
   },
-  "daily_message": "Protetor solar: reaplique a cada 2 horas!",
-  "generated_at": "2026-09-18T01:51:35.152690"
+  "daily_message": "Maré baixa às 11:45 hoje - melhor para iniciantes!",
+  "generated_at": "2026-09-18T10:09:17.807356"
 }
