@@ -1,8 +1,10 @@
 #!/usr/bin/env python3
-# Remove da página principal:
+# Limpeza da página principal (index.html):
 # 1) Seção "Previsão de Ondas - Litoral Paulista" (já existe app dedicado)
 # 2) Menção "🌊 Previsão de ondas" do card de boas-vindas
-# 3) Card "Quiz do Dia" da home (quiz segue disponível na aba Quiz)
+# 3) Card "Quiz do Dia" da home (quiz segue na aba Quiz)
+# 4) Card "Dica do Dia" estático (Tip of the Day)
+# 5) Seção "Dicas Femininas" da home
 import io, re, sys
 
 TARGET = 'index.html'
@@ -12,15 +14,18 @@ with io.open(TARGET, encoding='utf-8') as f:
 
 original = src
 
-# 1) Bloco completo da seção Wave Forecast
-pattern = re.compile(
-    r'\n?[ \t]*<!-- Wave Forecast -->.*?<!-- End Wave Forecast -->\n?',
-    re.DOTALL,
-)
-src, n = pattern.subn('\n', src)
-print(f'✅ Seção Wave Forecast removida ({n}).' if n else '⚠️ Wave Forecast não encontrada (ok).')
+BLOCKS = [
+    ('Wave Forecast', r'\n?[ \t]*<!-- Wave Forecast -->.*?<!-- End Wave Forecast -->\n?'),
+    ('Quiz do Dia (Home Card)', r'\n?[ \t]*<!-- Quiz do Dia \(Home Card\) -->.*?\n[ \t]*</div>\n(?=\n)'),
+    ('Tip of the Day', r'\n?[ \t]*<!-- Tip of the Day -->.*?<!-- End Tip of the Day -->\n?'),
+    ('Feminine Tips Section', r'\n?[ \t]*<!-- Feminine Tips Section -->.*?<!-- End Feminine Tips -->\n?'),
+]
 
-# 2) Menção no card de boas-vindas
+for name, pat in BLOCKS:
+    src, n = re.compile(pat, re.DOTALL).subn('\n', src)
+    print(f'✅ {name} removido ({n}).' if n else f'⚠️ {name} não encontrado (ok).')
+
+# Menção no card de boas-vindas
 welcome_old = '🌊 Previsão de ondas • 💪 Treinos • 📚 Dicas • 💬 Grupos'
 welcome_new = '💪 Treinos • 📚 Dicas • 💬 Grupos'
 if welcome_old in src:
@@ -28,14 +33,6 @@ if welcome_old in src:
     print('✅ Menção no card de boas-vindas removida.')
 else:
     print('⚠️ Menção de boas-vindas não encontrada (ok).')
-
-# 3) Card Quiz do Dia da home
-quiz_pattern = re.compile(
-    r'\n?[ \t]*<!-- Quiz do Dia \(Home Card\) -->.*?\n[ \t]*</div>\n(?=\n)',
-    re.DOTALL,
-)
-src, nq = quiz_pattern.subn('\n', src)
-print(f'✅ Card Quiz do Dia removido ({nq}).' if nq else '⚠️ Card Quiz do Dia não encontrado (ok).')
 
 if src != original:
     with io.open(TARGET, 'w', encoding='utf-8') as f:
