@@ -676,14 +676,6 @@ t Section -->
         </div>
     </div>
 
-    <!-- Live Surf Conditions -->
-    <div class="surf-bar" id="surfBar" style="display:none !important">
-        <div style="display:flex;align-items:center;gap:12px;font-size:13px;padding:10px 16px;background:var(--light);border-radius:12px;margin:0 20px 12px;justify-content:space-between;">
-    <span><span style="font-size:16px;">🌊</span> <strong style="color:var(--primary);">0.92m</strong></span>
-    <span>🕐 7-8s</span>
-    <span>🧭 SE</span>
-</div>
-    </div>
 
     <!-- Melhor Dia da Semana -->
     <div id="best-day-widget" class="p-h-20 m-b-12" style=" display: none;">
@@ -707,27 +699,12 @@ t Section -->
         </div>
     </div>
 
-    <!-- Dica do Dia (2417) -->
-    <div id="surf-conditions-wrapper" style="display:none !important;padding:0 16px;max-width:800px;margin:0 auto 12px"></div>
-    <div id="dica-do-dia" style="display:none !important">
-        <div class="dica-card">
-            <div id="dica-emoji" class="dica-emoji-large">💡</div>
-            <div id="dica-content">
-                <div class="dica-header">
-                    <span class="dica-badge dica-badge-filled" data-i18n="dailyTip">✨ Dica do Dia</span>
-                    <div style="display:flex;gap:8px;align-items:center">
-                    <button onclick="renderDicaComments(window.dicas.findIndex(d=>d.text===document.getElementById('dica-text').textContent))" class="dica-refresh-btn dica-refresh-lg" title="Comentários das manas">💬</button>
-                    <button onclick="nextDica()" class="dica-refresh-btn dica-refresh-lg">↻ Nova dica</button>
-                    </div>
-                </div>
                 <p id="dica-text" class="dica-text-lg"></p>
                 <p id="dica-category" class="dica-category"></p>
             </div>
         </div>
     </div>
 
-    <!-- 💬 Comentários da Dica do Dia -->
-    <div id="dica-community-section" style="display:none !important;max-width:800px;margin:0 auto 24px;padding:0 16px"></div>
 
 
 
