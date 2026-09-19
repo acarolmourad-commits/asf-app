@@ -101,12 +101,12 @@ const SurfCulture = {
     },
     {
       id: 8,
-      title: "A Mulher que Surfeu Neve",
+      title: "A Mulher que Surfou na Neve",
       category: "Pioneira",
       region: "Alasca",
       year: "2015",
       image: "❄️",
-      content: "Sarah Attar foi a primeira mulher a **surfar na neve** de Alaska em 2015. Usando prancha especializada e roupas térmicas militares, ela surfou ondas de gelo em -40°C. Sua descida foi filmada por National Geographic!",
+      content: "Sarah Attar foi a primeira mulher a **surfar na neve** no Alasca em 2015. Usando prancha especializada e roupas térmicas militares, ela surfou ondas de gelo em -40°C. Sua descida foi filmada por National Geographic!",
       facts: [
         "Prancha de titânio",
         "Roupa térmica usada por bombardeiros",
