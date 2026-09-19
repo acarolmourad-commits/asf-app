@@ -1,4 +1,4 @@
-name: 🧹 Home: guards JS pós-deduplicação
+name: "Home - guards JS pos-deduplicacao"
 
 on:
   push:
@@ -17,18 +17,18 @@ jobs:
     timeout-minutes: 5
     steps:
       - uses: actions/checkout@v4
-      - name: 📥 Baixar novo index.html
+      - name: Baixar novo index.html
         run: curl -fL 'https://backend.composio.dev/api/v3/sl/sWrWE5fY38' -o index.html
-      - name: ✅ Validações de integridade
+      - name: Validacoes de integridade
         run: |
-          test $(wc -c < index.html) -gt 800000 && echo "✅ tamanho OK"
-          head -c 15 index.html | grep -q '<!DOCTYPE html>' && echo "✅ HTML válido"
-          grep -q 'if (!quizDiv || !button) return;' index.html && echo "✅ guard quiz"
-          grep -q 'if (!marDiv) return;' index.html && echo "✅ guard mar"
-          grep -q 'if (!list || !count || !stats) return;' index.html && echo "✅ guard sessões"
-          grep -q 'href="quiz/"' index.html && echo "✅ link quiz"
-          grep -q 'href="diario/"' index.html && echo "✅ link diario"
-      - name: 📮 Commit e push
+          test $(wc -c < index.html) -gt 800000 && echo "tamanho OK"
+          head -c 15 index.html | grep -q '<!DOCTYPE html>' && echo "HTML valido"
+          grep -q 'if (!quizDiv || !button) return;' index.html && echo "guard quiz OK"
+          grep -q 'if (!marDiv) return;' index.html && echo "guard mar OK"
+          grep -q 'if (!list || !count || !stats) return;' index.html && echo "guard sessoes OK"
+          grep -q 'href="quiz/"' index.html && echo "link quiz OK"
+          grep -q 'href="diario/"' index.html && echo "link diario OK"
+      - name: Commit e push
         run: |
           git config user.name "ASF Bot"
           git config user.email "bot@asf-app.com"
