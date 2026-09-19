@@ -191,3 +191,22 @@ if(document.readyState === "loading"){
 setTimeout(asfFixesBoot, 1500);
 
 })();
+
+/* ============================================================
+   MENU: link "Apps" para o hub de apps e sites satélites
+============================================================ */
+(function(){
+  function addAppsTab(){
+    var tabs=document.querySelector('.tabs');
+    if(!tabs||tabs.querySelector('.apps-hub-tab'))return;
+    var btn=document.createElement('button');
+    btn.className='tab apps-hub-tab';
+    btn.setAttribute('role','tab');
+    btn.setAttribute('aria-selected','false');
+    btn.setAttribute('aria-controls','apps-hub');
+    btn.onclick=function(){location.href='apps/'};
+    btn.innerHTML='<span class="tab-icon">\u{1F6F0}\uFE0F</span> Apps';
+    tabs.appendChild(btn);
+  }
+  if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',addAppsTab);}else{addAppsTab();}
+})();
