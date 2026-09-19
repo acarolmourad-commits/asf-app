@@ -306,7 +306,7 @@ document.addEventListener('DOMContentLoaded', function () {
     a.href = 'https://acarolmourad-commits.github.io/asf-treino/';
     a.style.cssText = 'display:block;text-decoration:none;background:linear-gradient(135deg,#E74C3C 0%,#C0392B 100%);padding:16px;margin:0 20px 20px;border-radius:16px;color:white;';
     a.innerHTML = '<p style="font-size:14px;font-weight:600;">🏄‍♀️ Treinos de mobilidade para surfistas</p>' +
-                  '<p style="font-size:12px;opacity:0.9;margin-top:4px;">Os exercícios de mobilidade e prevenção agora estão no app ASF Treino. Toque para abrir →</p>';
+                  '<p style="font-size:12px;opacity:0.9;margin-top:4px;">Exercícios para melhorar performance e prevenir lesões! Toque para abrir o app ASF Treino →</p>';
     sec.appendChild(a);
   }
   if (document.readyState === 'loading') {
