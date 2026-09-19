@@ -1,3 +1,0 @@
-// ASF Fixes — Chatbot unificado (ManaBot 2.0), botão flutuante, saudação e calendário
-// Publicado em 19/09/2026
-// NOTA: bloco de swap da hero removido — assets/images/hero-surf.jpg agora já é a logo ASF

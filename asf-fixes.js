@@ -213,8 +213,6 @@ setTimeout(asfFixesBoot, 1500);
 
 /* ============================================================
    HOME: revive sessões Metas, Segurança e Calendário
-   (asfSafeInit roda antes das declarações const e nunca
-   popula #metas-container, #seguranca-content e #calendar-content)
 ============================================================ */
 document.addEventListener('DOMContentLoaded', function(){
   try{ if(typeof ASF_METAS!=='undefined') ASF_METAS.init(); }catch(e){console.error('ASF_METAS init',e);}
@@ -240,23 +238,4 @@ document.addEventListener('DOMContentLoaded', function(){
     }
   }
   if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',addCnpjFooter);}else{addCnpjFooter();}
-})();
-
-/* ============================================================
-   HOME: substitui a imagem hero pela logo oficial da ASF
-============================================================ */
-(function(){
-  function swapHeroLogo(){
-    var imgs = document.querySelectorAll('img[src*="hero-surf.jpg"]');
-    for (var i = 0; i < imgs.length; i++){
-      imgs[i].src = 'assets/images/asf-logo.png';
-      imgs[i].alt = 'Logo oficial da ASF - Associação de Surf Feminino';
-      imgs[i].style.objectFit = 'contain';
-      imgs[i].style.background = 'linear-gradient(135deg,#4DC8E0,#0E2439)';
-      imgs[i].style.padding = '8px';
-    }
-    var og = document.querySelector('meta[property="og:image"]');
-    if (og) og.setAttribute('content', 'assets/images/asf-logo.png');
-  }
-  if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',swapHeroLogo);}else{swapHeroLogo();}
 })();
