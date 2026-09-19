@@ -288,15 +288,20 @@ function callLua() {
 function showBrandSupport() { document.getElementById('brand-support').style.display = 'block'; }
 function sendSupport(valor) {/* removido: sem cobranças */}
 function showSection(sectionId) {
-            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+            // Redireciona secoes desativadas
+            if (sectionId === 'loja') sectionId = 'lojas';
+            if (sectionId === 'badges') sectionId = 'progresso';
+            document.querySelectorAll('.section').forEach(s => { s.classList.remove('active'); s.style.setProperty('display', 'none', 'important'); });
             document.querySelectorAll('.tab').forEach(t => { t.classList.remove('active'); t.setAttribute('aria-selected', 'false'); });
             document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
             // Show selected section
-            document.getElementById(sectionId).classList.add('active');
-            // Render affiliate store if loja section
-            if (sectionId === 'loja' && typeof renderAffiliateStore === 'function') {
-                renderAffiliateStore();
-            }
+            const sec = document.getElementById(sectionId);
+            if (!sec) return;
+            sec.classList.add('active');
+            sec.style.setProperty('display', 'block', 'important');
+            const tab = document.querySelector('.tab[aria-controls="' + sectionId + '"]');
+            if (tab) { tab.classList.add('active'); tab.setAttribute('aria-selected', 'true'); }
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 function handleNavTap(btn, sectionId) {
             if (btn.classList.contains('active')) {
