@@ -1,7 +1,9 @@
 /* ─── ASF Fixes: Calendário e ManaBot ─────────────────────
    1) Calendário: carrega os eventos reais de data/events.json
       e renderiza automaticamente ao abrir a aba.
-   2) ManaBot: mostra mensagem de boas-vindas ao abrir a aba. */
+   2) ManaBot: mostra mensagem de boas-vindas ao abrir a aba.
+   3) ManaBot: novos conhecimentos (eventos, carteirinha,
+      segurança, metas). */
 
 /* 1) CALENDÁRIO — carrega eventos reais */
 ASF_CALENDAR.open = async function () {
@@ -47,10 +49,24 @@ ASF_CHATBOT.welcome = function () {
     '<strong style="color:var(--primary)">&#x1F916; ManaBot:</strong><br>' +
     'Oi, mana! &#x1F30A; Eu sou a ManaBot, a assistente da comunidade ASF. ' +
     'Posso te ajudar com dicas de praias para o seu nível, tamanho de prancha, ' +
-    'melhor horário para surfar, temperatura do wax e muito mais. ' +
+    'melhor horário para surfar, temperatura do wax, eventos, carteirinha e muito mais. ' +
     'Toca numa sugestão abaixo ou escreve sua pergunta!' +
     '</div></div>';
 };
+
+/* 3) MANABOT — novos conhecimentos */
+ASF_CHATBOT.knowledgeBase.push(
+  { q: ['evento', 'eventos', 'calendario', 'calendário', 'competicao', 'competição', 'campeonato', 'encontro', 'quando tem'],
+    a: '&#x1F4C5; Na aba <strong>Calendário de Eventos</strong> você vê todos os rolês da comunidade e do circuito: encontros ASF, etapas WSL, copas e clínicas! Dá para ver por mês ou em lista e confirmar presença. Toca no ícone &#x1F4C5; no menu!' },
+  { q: ['carteirinha', 'associada', 'associação', 'associacao', 'membro', 'cadastro', 'identidade', 'desconto', 'parceria'],
+    a: '&#x1FAAA; A <strong>Carteirinha ASF</strong> é gratuita e personalizada: você cria com seu nome, nível e foto, e recebe um número único com QR Code de verificação. Em breve ela vai valer benefícios em lojas de surf, agências de viagens e pousadas parceiras! Cria a sua na aba &#x1FAAA; do menu.' },
+  { q: ['leash', 'prioridade', 'etiqueta', 'regra', 'regras', 'respeito', 'cadeia', 'quem tem prioridade'],
+    a: '&#x1F6DF; Regras de ouro no mar: 1) Quem está mais perto do pico tem prioridade; 2) Nunca solte a prancha — o leash é obrigatório; 3) Não drope a onda de outra surfista; 4) Respeite o ambiente marinho. Na aba &#x1F6DF; <strong>Segurança no Surf</strong> tem o guia completo!' },
+  { q: ['meta', 'metas', 'objetivo', 'objetivos', 'evoluir', 'evolução', 'evolucao', 'progresso', 'aprender'],
+    a: '&#x1F3AF; Na aba <strong>Metas de Surf</strong> você define e acompanha seus objetivos: melhorar a remada, dropar a primeira onda verde, fazer a primeira manobra... cada conquista vale XP na comunidade! &#x1F3C4;' },
+  { q: ['wetsuit', 'roupa de neoprene', 'neoprene', 'roupa de borracha', 'frio', 'lycra'],
+    a: '&#x1F9CD; Wetsuit: no verão paulista um short john ou lycra UV já resolve (água 22-28C). No inverno, long john 3/2mm é o ideal. Ajuste deve ser justo sem apertar o pescoço, e enxágue com água doce depois de cada sessão!' }
+);
 
 /* Dispara ao clicar nas abas correspondentes */
 (function () {
