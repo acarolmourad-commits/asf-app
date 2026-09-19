@@ -1,9 +1,24 @@
-/* ─── ASF Fixes: Calendário e ManaBot ─────────────────────
+/* ─── ASF Fixes: Calendário, ManaBot e navegação ──────────
+   0) Navegação: no carregamento, exibe apenas a seção ativa
+      (evita home gigante com seções duplicadas/sobrepostas).
    1) Calendário: carrega os eventos reais de data/events.json
       e renderiza automaticamente ao abrir a aba.
    2) ManaBot: mostra mensagem de boas-vindas ao abrir a aba.
    3) ManaBot: novos conhecimentos (eventos, carteirinha,
-      segurança, metas). */
+      segurança, metas, wetsuit). */
+
+/* 0) ESTADO INICIAL — só a seção ativa visível */
+(function () {
+  function fixSections() {
+    const ativa = document.querySelector('.section.active') || document.getElementById('dicas');
+    document.querySelectorAll('.section').forEach(s => {
+      if (s === ativa) s.style.setProperty('display', 'block', 'important');
+      else s.style.setProperty('display', 'none', 'important');
+    });
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', fixSections);
+  else fixSections();
+})();
 
 /* 1) CALENDÁRIO — carrega eventos reais */
 ASF_CALENDAR.open = async function () {
