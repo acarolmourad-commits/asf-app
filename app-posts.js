@@ -292,3 +292,26 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   } catch (e) { console.warn('ASF cookie banner:', e); }
 });
+
+
+// --- ASF: treinos de mobilidade movidos para o app ASF Treino (evita duplicação na home) ---
+(function () {
+  function replaceMobilidade() {
+    var sec = document.getElementById('mobilidade');
+    if (!sec) return;
+    var header = sec.querySelector('.section-header');
+    sec.innerHTML = '';
+    if (header) sec.appendChild(header);
+    var a = document.createElement('a');
+    a.href = 'https://acarolmourad-commits.github.io/asf-treino/';
+    a.style.cssText = 'display:block;text-decoration:none;background:linear-gradient(135deg,#E74C3C 0%,#C0392B 100%);padding:16px;margin:0 20px 20px;border-radius:16px;color:white;';
+    a.innerHTML = '<p style="font-size:14px;font-weight:600;">🏄‍♀️ Treinos de mobilidade para surfistas</p>' +
+                  '<p style="font-size:12px;opacity:0.9;margin-top:4px;">Os exercícios de mobilidade e prevenção agora estão no app ASF Treino. Toque para abrir →</p>';
+    sec.appendChild(a);
+  }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', replaceMobilidade);
+  } else {
+    replaceMobilidade();
+  }
+})();
