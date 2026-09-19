@@ -294,39 +294,34 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 
-// --- ASF: treinos de mobilidade movidos para o app ASF Treino (evita duplicação na home) ---
+// --- ASF: seções de conteúdo movidas para apps dedicados (evita duplicação na home) ---
 (function () {
-  function replaceMobilidade() {
-    var sec = document.getElementById('mobilidade');
+  function slimSection(id, href, bg, title, subtitle) {
+    var sec = document.getElementById(id);
     if (!sec) return;
     var header = sec.querySelector('.section-header');
     sec.innerHTML = '';
     if (header) sec.appendChild(header);
     var a = document.createElement('a');
-    a.href = 'https://acarolmourad-commits.github.io/asf-treino/';
-    a.style.cssText = 'display:block;text-decoration:none;background:linear-gradient(135deg,#E74C3C 0%,#C0392B 100%);padding:16px;margin:0 20px 20px;border-radius:16px;color:white;';
-    a.innerHTML = '<p style="font-size:14px;font-weight:600;">🏄‍♀️ Treinos de mobilidade para surfistas</p>' +
-                  '<p style="font-size:12px;opacity:0.9;margin-top:4px;">Exercícios para melhorar performance e prevenir lesões! Toque para abrir o app ASF Treino →</p>';
+    a.href = href;
+    a.style.cssText = 'display:block;text-decoration:none;background:' + bg + ';padding:16px;margin:0 20px 20px;border-radius:16px;color:white;';
+    a.innerHTML = '<p style="font-size:14px;font-weight:600;">' + title + '</p>' +
+                  '<p style="font-size:12px;opacity:0.9;margin-top:4px;">' + subtitle + '</p>';
     sec.appendChild(a);
   }
-  function replaceAlimentacao() {
-    var sec = document.getElementById('alimentacao');
-    if (!sec) return;
-    var header = sec.querySelector('.section-header');
-    sec.innerHTML = '';
-    if (header) sec.appendChild(header);
-    var a = document.createElement('a');
-    a.href = 'https://acarolmourad-commits.github.io/asf-nutricao/';
-    a.style.cssText = 'display:block;text-decoration:none;background:linear-gradient(135deg,#27AE60 0%,#1E8449 100%);padding:16px;margin:0 20px 20px;border-radius:16px;color:white;';
-    a.innerHTML = '<p style="font-size:14px;font-weight:600;">🥑 Alimentação para Surfistas</p>' +
-                  '<p style="font-size:12px;opacity:0.9;margin-top:4px;">Dicas de nutrição para render mais no surf! Toque para abrir o app ASF Nutrição →</p>';
-    sec.appendChild(a);
+  function apply() {
+    slimSection('mobilidade', 'https://acarolmourad-commits.github.io/asf-treino/',
+      'linear-gradient(135deg,#E74C3C 0%,#C0392B 100%)',
+      '🏄‍♀️ Treinos de mobilidade para surfistas',
+      'Exercícios para melhorar performance e prevenir lesões! Toque para abrir o app ASF Treino →');
+    slimSection('alimentacao', 'https://acarolmourad-commits.github.io/asf-nutricao/',
+      'linear-gradient(135deg,#27AE60 0%,#1E8449 100%)',
+      '🥑 Alimentação para Surfistas',
+      'Dicas de nutrição para render mais no surf! Toque para abrir o app ASF Nutrição →');
   }
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', replaceMobilidade);
-    document.addEventListener('DOMContentLoaded', replaceAlimentacao);
+    document.addEventListener('DOMContentLoaded', apply);
   } else {
-    replaceMobilidade();
-    replaceAlimentacao();
+    apply();
   }
 })();
