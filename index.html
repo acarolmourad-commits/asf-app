@@ -763,9 +763,7 @@ t Section -->
         <button class="tab" role="tab" aria-selected="false" aria-controls="conteudo" onclick="showSection('conteudo')">
             <span class="tab-icon">📖</span> Conteúdo
         </button>
-        <button class="tab" role="tab" aria-selected="false" aria-controls="carteirinha" onclick="showSection('carteirinha')">
-            <span class="tab-icon">📝</span> Associadas
-        </button>
+        
         <button class="tab" role="tab" aria-selected="false" aria-controls="seguranca" onclick="showSection('seguranca')">
             <span class="tab-icon">🚺</span> Segurança
         </button>
@@ -10464,10 +10462,11 @@ function walkTree(el) {
     </div>
 
   <!-- 🎯 Metas de Surf (nova seção) -->
-  <div class="section" id="metas" style="display:none"><p style="text-align:center;padding:32px;font-size:14px;color:var(--gray-400)">🎯 Defina e acompanhe suas metas de surf: desde melhorar técnicas até conquistar novas ondas.</p>
+  <div class="section" id="metas" style="display:none">
     <div class="section-header">
       <h2 class="section-title">🎯 Metas de Surf</h2>
     </div>
+    <p style="text-align:center;padding:4px 16px 16px;font-size:14px;color:var(--gray-400);margin:0">Defina e acompanhe suas metas de surf: desde melhorar técnicas até conquistar novas ondas.</p>
     <div id="metas-container" style="padding: 0 16px;"></div>
   </div>
 
@@ -10486,10 +10485,11 @@ function walkTree(el) {
   </style>
 
     <!-- PONTOS FEMININOS - SEGURANCA -->
-    <div class="section" id="seguranca" style="display:none"><p style="text-align:center;padding:32px;font-size:14px;color:var(--gray-400)">🦺 Aprenda as diretrizes essenciais de segurança no surf: prioridade nas ondas, uso do leash e respeitando o ambiente marinho.</p>
+    <div class="section" id="seguranca" style="display:none">
         <div class="section-header">
             <h2 class="section-title" style="display:block">&#x1F6DF; Segurança no Surf</h2>
         </div>
+        <p style="text-align:center;padding:4px 16px 16px;font-size:14px;color:var(--gray-400);margin:0">Aprenda as diretrizes essenciais de segurança no surf: prioridade nas ondas, uso do leash e respeito ao ambiente marinho.</p>
         <div style="padding: 0 16px;" id="seguranca-content"></div>
     </div>
 
@@ -10566,13 +10566,7 @@ button:focus-visible,a:focus-visible{outline:2px solid var(--primary)!important;
         <div style="padding:0 16px;" id="conteudo-content"></div>
     </div>
 
-    <!-- CARTEIRINHA DIGITAL DE ASSOCIADAS -->
-    <div class="section" id="carteirinha" style="display:none">
-        <div class="section-header">
-            <h2 class="section-title" style="display:block">&#x1F4DD; Carteirinha ASF</h2>
-        </div>
-        <div style="padding:0 16px;" id="member-card-content"></div>
-    </div>
+    
 
 </script>
 <!-- =============================================
@@ -11478,35 +11472,7 @@ if(notifyAt>new Date()) this.agendar(e.id,e.title,notifyAt.toISOString());
 }
 };
 
-const ASF_MEMBER_CARD = {
-beneficios:['Desconto 15% em lojas parceiras','Inscricao prioritaria em eventos','Acesso a aulas exclusivas','Newsletter semanal com dicas especiais','Acesso ao ranking interno da comunidade'],
-gerar(){
-const num='ASF-'+Date.now().toString(36).toUpperCase()+Math.random().toString(36).substr(2,3).toUpperCase();
-const hoje=new Date();hoje.setFullYear(hoje.getFullYear()+1);
-const validade=hoje.toLocaleDateString('pt-BR');
-localStorage.setItem('asf-member-number',num);
-localStorage.setItem('asf-member-validade',validade);
-localStorage.setItem('asf-member-since',new Date().toLocaleDateString('pt-BR'));
-localStorage.setItem('asf-member-status','active');
-showToast('Carteirinha gerada! &#x1F4DD;');
-return{numero:num,validade:validade};
-},
-getData(){return{numero:localStorage.getItem('asf-member-number'),validade:localStorage.getItem('asf-member-validade'),desde:localStorage.getItem('asf-member-since')}},
-render(containerId){
-const el=document.getElementById(containerId);if(!el)return;
-const d=this.getData();
-const isMember=!!d.numero;
-if(!isMember){
-el.innerHTML='<div style="max-width:480px;margin:0 auto"><div class="card" style="margin-bottom:16px;background:linear-gradient(135deg,rgba(0,168,204,0.06),rgba(155,89,182,0.08));border:2px dashed rgba(0,168,204,0.3)"><div style="text-align:center;padding:24px"><span style="font-size:48px;display:block;margin-bottom:8px">&#x1F3C4;&#x200D;&#x2640;&#xFE0F;</span><p style="font-size:18px;font-weight:700;color:var(--secondary);margin:0 0 8px">Torne-se Associada ASF</p><p style="font-size:14px;color:var(--gray-600);margin:0 0 20px">Junte-se a maior comunidade de surf feminino do Brasil!</p><div style="text-align:left;margin-bottom:20px;background:var(--white);border-radius:12px;padding:16px;font-size:13px;color:var(--secondary)">'+
-this.beneficios.map(b=>'<div style="display:flex;align-items:center;gap:8px;padding:6px 0;border-bottom:1px solid var(--gray-100)"><span style="color:var(--success);font-size:16px">&#x2705;</span>'+b+'</div>').join('')+
-'</div><button onclick="ASF_MEMBER_CARD.gerar();ASF_MEMBER_CARD.render(\'member-card-content\');ASF_GAMIFICATION.checkAll()" style="padding:14px 24px;border-radius:12px;border:none;background:linear-gradient(135deg,var(--primary),var(--primary-dark));color:white;font-size:16px;font-weight:700;cursor:pointer;width:100%">&#x1FAAA; Gerar Carteirinha Grátis</button></div></div></div>';
-return;
-}
-el.innerHTML='<div style="max-width:480px;margin:0 auto"><div style="background:linear-gradient(135deg,var(--secondary) 0%,var(--secondary-light) 100%);border-radius:24px;padding:24px;color:white;position:relative;overflow:hidden;box-shadow:var(--shadow-lg);margin-bottom:16px"><div style="position:absolute;top:-40px;right:-40px;width:160px;height:160px;background:radial-gradient(circle,rgba(0,168,204,0.2),transparent 70%);border-radius:50%"></div><div style="position:absolute;bottom:-40px;left:-40px;width:160px;height:160px;background:radial-gradient(circle,rgba(255,107,107,0.15),transparent 70%);border-radius:50%"></div><div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;position:relative"><div style="display:flex;align-items:center;gap:10px"><span style="font-size:36px">&#x1F3C4;&#x200D;&#x2640;&#xFE0F;</span><div><p style="font-size:20px;font-weight:800;margin:0;letter-spacing:1px">ASF</p><p style="font-size:11px;opacity:0.7;margin:0">ASSOCIACAO DE SURF FEMININO</p></div></div><div style="text-align:right"><span style="font-size:12px;opacity:0.6">Valida ate</span><p style="font-size:14px;font-weight:600;margin:0">'+d.validade+'</p></div></div><div style="background:rgba(255,255,255,0.08);border-radius:16px;padding:20px;text-align:center;position:relative"><p style="font-size:11px;opacity:0.5;margin:0 0 8px;letter-spacing:2px;text-transform:uppercase">Numero da Associada</p><p style="font-size:22px;font-weight:800;letter-spacing:2px;margin:0;font-family:monospace">'+d.numero+'</p></div></div><div style="background:var(--white);border-radius:16px;padding:20px;box-shadow:var(--shadow-sm);margin-bottom:16px"><h4 style="font-size:15px;font-weight:700;color:var(--secondary);margin:0 0 12px">&#x2705; Seus Beneficios</h4>'+
-this.beneficios.map(b=>'<div style="display:flex;align-items:center;gap:8px;padding:8px 0;border-bottom:1px solid var(--gray-100);font-size:13px;color:var(--gray-700)"><span style="font-size:16px">&#x2705;</span>'+b+'</div>').join('')+
-'</div><p style="font-size:11px;color:var(--gray-400);text-align:center;margin:0">Associada desde '+(d.desde||'Hoje')+'. Sob recadastro anual.</p></div>';
-}
-};
+
 
 const ASF_CONTEUDO = {
 categorias:[
