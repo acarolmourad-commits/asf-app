@@ -1,5 +1,5 @@
 {
-  "updated": "2026-09-18",
+  "updated": "2026-09-19",
   "ultima_atualizacao": "2026-09-17T12:00:00Z",
   "fonte": "spsurf.com.br (SP) + surfbrasil.org.br (CBSurf) + fecasurf.com.br (SC) + feserj.org.br (RJ) + fgsurf.org.br (RS) + fpsurfpr (PR) + WSL",
   "nota": "Datas conferidas em 17/09/2026 nos sites oficiais das federações. Federações estaduais de BA, PE e CE ainda não publicaram calendário oficial 2026 - acompanhe os sites das federações. O status (Acontecendo agora / Confirmado / Encerrado) é calculado automaticamente pela data.",
@@ -38,7 +38,7 @@
       "fim": "2026-09-20",
       "descricao": "Abertura do Circuito Gaúcho da Federação Gaúcha de Surf (FGS). O circuito terá 5 etapas. Inscrições pelo WhatsApp do Tour Manager (51) 99968-5817.",
       "fonte": "fgsurf.org.br",
-      "status": "PROXIMO"
+      "status": "EM_ANDAMENTO"
     },
     {
       "titulo": "🏆 Circuito Catarinense de Surf Pro 2026 - 2ª Etapa",
