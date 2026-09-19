@@ -763,6 +763,9 @@ t Section -->
         <button class="tab" role="tab" aria-selected="false" aria-controls="conteudo" onclick="showSection('conteudo')">
             <span class="tab-icon">📖</span> Conteúdo
         </button>
+        <button class="tab" role="tab" aria-selected="false" aria-controls="carteirinha" onclick="showSection('carteirinha');ASF_CARD.init()">
+            <span class="tab-icon">🪪</span> Carteirinha
+        </button>
         
         <button class="tab" role="tab" aria-selected="false" aria-controls="seguranca" onclick="showSection('seguranca')">
             <span class="tab-icon">🚺</span> Segurança
@@ -10566,6 +10569,15 @@ button:focus-visible,a:focus-visible{outline:2px solid var(--primary)!important;
         <div style="padding:0 16px;" id="conteudo-content"></div>
     </div>
 
+    <!-- CARTEIRINHA DIGITAL -->
+    <div class="section" id="carteirinha" style="display:none">
+        <div class="section-header">
+            <h2 class="section-title" style="display:block">🪪 Carteirinha ASF</h2>
+        </div>
+        <p style="text-align:center;padding:4px 16px 16px;font-size:14px;color:var(--gray-400);margin:0">Sua identidade de surfista: gratuita, digital e personalizada.</p>
+        <div style="padding:0 16px;" id="carteirinha-content"></div>
+    </div>
+
     
 
 </script>
@@ -10626,6 +10638,7 @@ window.asfInitFeatures=function(){
 <script src="surf-goals.js"></script>
 <script src="app-posts.js"></script>
 <script src="surf-culture.js"></script>
+<script src="carteirinha.js"></script>
 
 <!-- QUIZ + XP BAR JS -->
 <script>
