@@ -1,11 +1,11 @@
 {
   "date": "2026-09-19",
   "board_tip": {
-    "title": "Shortboard: Performance",
-    "content": "Shortboards (5'6\"-6'6\") são para performance. Requer técnica e condicionamento.",
+    "title": "Funboard: A versátil",
+    "content": "Funboards (7'0\"-8'6\") são ideais para evolução. Mais ágil que longboard, mantém estabilidade.",
     "tags": [
-      "Shortboard",
-      "Performance"
+      "Funboard",
+      "Evolução"
     ]
   },
   "eco_tip": {
@@ -13,6 +13,6 @@
     "content": "1. ♻️ 100% reciclável 2. 🌿 Biodegradável 3. 🧊 Livre de CFC 4. 💧 Menor consumo de água",
     "category": "Meio Ambiente"
   },
-  "daily_message": "Protetor solar: reaplique a cada 2 horas!",
-  "generated_at": "2026-09-19T14:56:24.631728"
+  "daily_message": "Alongue ombros e costas antes de entrar na água!",
+  "generated_at": "2026-09-19T19:41:27.638831"
 }
