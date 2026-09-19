@@ -314,6 +314,10 @@ document.addEventListener('DOMContentLoaded', function () {
       'linear-gradient(135deg,#E74C3C 0%,#C0392B 100%)',
       '🏄‍♀️ Treinos de mobilidade para surfistas',
       'Exercícios para melhorar performance e prevenir lesões! Toque para abrir o app ASF Treino →');
+    slimSection('saude', 'https://acarolmourad-commits.github.io/asf-treino/',
+      'linear-gradient(135deg,#E74C3C 0%,#C0392B 100%)',
+      '💪 Treino de 20 minutos por dia',
+      'Melhore sua performance no surf! Toque para abrir o app ASF Treino →');
     slimSection('alimentacao', 'https://acarolmourad-commits.github.io/asf-nutricao/',
       'linear-gradient(135deg,#27AE60 0%,#1E8449 100%)',
       '🥑 Alimentação para Surfistas',
