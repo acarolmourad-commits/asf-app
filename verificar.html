@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verificação de Carteirinha — ASF</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', system-ui, sans-serif; }
+        body { min-height: 100vh; display: flex; align-items: center; justify-content: center; background: linear-gradient(135deg, #0E2439, #007A99, #00A8CC); padding: 20px; }
+        .card { background: white; border-radius: 24px; padding: 32px 24px; max-width: 420px; width: 100%; text-align: center; box-shadow: 0 20px 60px rgba(0,0,0,0.3); }
+        .logo { font-size: 48px; margin-bottom: 8px; }
+        h1 { font-size: 20px; color: #0E2439; margin-bottom: 4px; }
+        .sub { font-size: 13px; color: #666; margin-bottom: 24px; }
+        .status { border-radius: 16px; padding: 20px; margin-bottom: 16px; }
+        .valida { background: #e8f8ee; border: 2px solid #27ae60; }
+        .invalida { background: #fdecea; border: 2px solid #e74c3c; }
+        .status .icone { font-size: 40px; }
+        .status .titulo { font-size: 17px; font-weight: 700; margin: 8px 0 4px; }
+        .valida .titulo { color: #1e8449; }
+        .invalida .titulo { color: #c0392b; }
+        .status .numero { font-family: monospace; font-size: 16px; font-weight: 700; color: #0E2439; }
+        .nota { font-size: 12px; color: #888; line-height: 1.5; }
+        a.voltar { display: inline-block; margin-top: 20px; color: #00A8CC; text-decoration: none; font-size: 14px; font-weight: 600; }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <div class="logo">🏄‍♀️</div>
+        <h1>Verificação de Carteirinha</h1>
+        <p class="sub">ASF — Associação de Surf Feminino</p>
+        <div id="resultado"></div>
+        <p class="nota">Parceiro: confira se o número exibido no app da associada é idêntico ao verificado aqui. Em caso de dúvida, fale com a ASF.</p>
+        <a class="voltar" href="index.html">← Voltar para o app</a>
+    </div>
+    <script>
+        const params = new URLSearchParams(location.search);
+        const numero = (params.get('numero') || '').trim().toUpperCase();
+        const el = document.getElementById('resultado');
+        const formatoOk = /^ASF-[A-Z0-9]{6,12}$/.test(numero);
+        if (formatoOk) {
+            el.innerHTML =
+                '<div class="status valida">' +
+                '<div class="icone">✅</div>' +
+                '<p class="titulo">Carteirinha válida</p>' +
+                '<p class="numero">' + numero + '</p>' +
+                '</div>' +
+                '<p class="nota">Número em formato oficial ASF. A associada pode utilizar os benefícios de parceiros.</p>';
+        } else {
+            el.innerHTML =
+                '<div class="status invalida">' +
+                '<div class="icone">⚠️</div>' +
+                '<p class="titulo">Carteirinha não reconhecida</p>' +
+                (numero ? '<p class="numero">' + numero.replace(/[<>&]/g, '') + '</p>' : '<p class="numero">Nenhum número informado</p>') +
+                '</div>' +
+                '<p class="nota">Este número não segue o padrão oficial ASF. Peça para a associada abrir a carteirinha no app e apresentar o QR novamente.</p>';
+        }
+    </script>
+</body>
+</html>

@@ -81,9 +81,14 @@ const ASF_CARD = {
     this.render('carteirinha-content', d);
   },
 
+  verificacaoUrl(numero) {
+    return location.origin + location.pathname.replace(/[^/]*$/, '') +
+           'verificar.html?numero=' + encodeURIComponent(numero);
+  },
+
   qrUrl(numero) {
     return 'https://api.qrserver.com/v1/create-qr-code/?size=120x120&margin=4&data=' +
-           encodeURIComponent('ASF-CARD:' + numero);
+           encodeURIComponent(this.verificacaoUrl(numero));
   },
 
   avatarHtml(d, size) {
@@ -135,7 +140,7 @@ const ASF_CARD = {
       '<div><p style="font-size:10px;opacity:0.6;margin:0;letter-spacing:2px;text-transform:uppercase">Nº da associada</p>' +
       '<p style="font-size:17px;font-weight:800;letter-spacing:1px;margin:2px 0 8px;font-family:monospace">' + d.numero + '</p>' +
       '<p style="font-size:11px;opacity:0.75;margin:0">Associada desde ' + d.desde + ' · Válida até ' + d.validade + '</p></div>' +
-      '<img src="' + this.qrUrl(d.numero) + '" alt="QR de verificação" style="width:76px;height:76px;border-radius:10px;background:white;padding:4px">' +
+      '<a href="' + this.verificacaoUrl(d.numero) + '" target="_blank" rel="noopener"><img src="' + this.qrUrl(d.numero) + '" alt="QR de verificação" style="width:76px;height:76px;border-radius:10px;background:white;padding:4px"></a>' +
       '</div></div>' +
       '<div style="display:flex;gap:8px;margin-bottom:16px">' +
       '<button onclick="ASF_CARD.baixar()" class="btn btn-secondary" style="flex:1;font-size:13px">⬇️ Baixar PNG</button>' +
@@ -150,7 +155,7 @@ const ASF_CARD = {
   parceriasHtml() {
     return '<div class="card" style="background:linear-gradient(135deg,rgba(0,168,204,0.05),rgba(155,89,182,0.06));border:1.5px dashed rgba(0,168,204,0.3)">' +
       '<p style="font-size:14px;font-weight:700;color:var(--secondary);margin:0 0 4px">🤝 Em breve: rede de parceiros ASF</p>' +
-      '<p style="font-size:12px;color:var(--gray-600);margin:0 0 10px">Sua carteirinha terá QR de verificação para valer benefícios em:</p>' +
+      '<p style="font-size:12px;color:var(--gray-600);margin:0 0 10px">Sua carteirinha tem QR de verificação para valer benefícios em:</p>' +
       this.parcerias.map(p =>
         '<div style="display:flex;gap:10px;align-items:center;padding:6px 0;border-top:1px solid var(--gray-100)">' +
         '<span style="font-size:20px">' + p.icon + '</span>' +
