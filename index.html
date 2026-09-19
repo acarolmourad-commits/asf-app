@@ -10831,7 +10831,7 @@ reset(){
 };
 
 window.updateXPBar=function(){const xp=parseInt(localStorage.getItem('asf-xp')||'0'),lvl=Math.floor(xp/100)+1,xi=xp%100;const p=document.querySelector('.profile-info p')||document.querySelector('.level-text');if(p)p.textContent='Nível '+lvl+' • '+xp+' pontos';const b=document.querySelector('.level-progress-bar');if(b){b.style.width=xi+'%';b.style.transition='width 0.5s ease'}const lt=document.querySelector('.level-text');if(lt)lt.textContent=xi+'/100 para Nível '+(lvl+1)};
-if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',function(){window.ASFAutoInit&&ASFAutoInit();window.updateXPBar&&updateXPBar();
+if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',function(){window.ASFAutoInit&&ASFAutoInit();window.updateXPBar&&updateXPBar();});}else{window.ASFAutoInit&&ASFAutoInit();window.updateXPBar&&updateXPBar();}
 const ASF_BRANDS_DATA=[
 {id:'rip-curl',name:'Rip Curl',logo:'🏄',tagline:'Onda por onda desde 1969',color:'#0066A1',bg:'rgba(0,102,161,0.08)',discount:'ASF15',category:'roupas',verified:true,established:'1969 · Austrália',desc:'A marca que nasceu na onda e cresceu com a comunidade feminina de surf.'},
 {id:'billabong',name:'Billabong',logo:'🌊',tagline:'Surf é vida, vida é surf',color:'#E87722',bg:'rgba(232,119,34,0.08)',discount:'ASF20',category:'roupas',verified:true,established:'1973 · Austrália',desc:'Do skate ao surf, representa a alma livre da mulher que surfa.'},
@@ -10871,7 +10871,6 @@ if(ctaBar)ctaBar.innerHTML=brands.length<ASF_BRANDS_DATA.length?'<p style="font-
 }
 function copyCoupon(code){navigator.clipboard.writeText(code).then(()=>showToast('Cupom '+code+' copiado! 🎉'))}
 
-})
 function asfSafeInit(){
   if(window.__asfInitDone)return;window.__asfInitDone=true;
   try{window.ASFAutoInit&&ASFAutoInit()}catch(e){console.error('ASFAutoInit',e)}
@@ -11329,7 +11328,7 @@ document.getElementById('calendar-content').style.display='none';
 document.getElementById('calendar-upcoming').style.display='block';
 }
 };
-(function(){const saved=localStorage.getItem('asf-calendar-events');if(saved){try{ASF_CALENDAR.events=JSON.parse(saved)}catch(e){}}});
+(function(){const saved=localStorage.getItem('asf-calendar-events');if(saved){try{ASF_CALENDAR.events=JSON.parse(saved)}catch(e){}}})();
 
 const ASF_BEACH_MAP = {
 praias:[
