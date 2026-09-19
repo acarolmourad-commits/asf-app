@@ -1,7 +1,7 @@
 {
-  "date": "2026-09-19T09:50:06.709730+00:00",
-  "total": 58,
-  "ok": 33,
+  "date": "2026-09-19T14:12:30.929854+00:00",
+  "total": 59,
+  "ok": 34,
   "skipped": 23,
   "broken_count": 2,
   "broken": [
@@ -176,6 +176,12 @@
     },
     {
       "url": "app-posts.js",
+      "status": "ok",
+      "http": 200,
+      "local": true
+    },
+    {
+      "url": "app.js",
       "status": "ok",
       "http": 200,
       "local": true
