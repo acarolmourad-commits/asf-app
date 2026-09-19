@@ -326,6 +326,10 @@ document.addEventListener('DOMContentLoaded', function () {
       'linear-gradient(135deg,#9B59B6 0%,#8E44AD 100%)',
       '🧘 Técnicas para acalmar a mente',
       'Dicas de respiração e relaxamento para surfistas! Toque para abrir o app ASF Mental →');
+    slimSection('tecnica', 'https://acarolmourad-commits.github.io/asf-manobras/',
+      'linear-gradient(135deg,#3498DB 0%,#2980B9 100%)',
+      '🏄‍♀️ Domine a técnica do surf',
+      'Aprenda a remar, posicionar e executar manobras! Toque para abrir o app ASF Manobras →');
   }
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', apply);
