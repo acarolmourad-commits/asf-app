@@ -382,3 +382,83 @@ document.addEventListener('click', function (ev) {
     if (t && t.getAttribute('aria-controls') === 'assistente') setTimeout(bindEnter, 100);
   });
 })();
+
+/* ─── Reparo do chatbot flutuante (chatbot-panel) ─────────────
+   O painel flutuante usava a variavel "chatbotFAQs", que nao estava
+   definida em nenhum lugar — sendChatbotMessage() quebrava com
+   ReferenceError e a conversa morria. Aqui definimos as FAQs e
+   unificamos o painel com o cerebro da ManaBot (43 topicos). ─── */
+
+if (typeof window.chatbotFAQs === 'undefined') {
+  window.chatbotFAQs = {
+    'previsao': '\uD83C\uDF0A Para previsao de ondas, vento e mare em tempo real, use o ASF Previsao e o ASF Vento (links na home)!',
+    'pontos': '\u26A1 Voce ganha pontos (XP) completando desafios, quiz diario, checklists e lendo conteudos. Veja o ASF Ranking!',
+    'eventos': '\uD83D\uDCC5 Todos os eventos estao na secao Calendario de Eventos da home e no app ASF Eventos!',
+    'contato': '\uD83D\uDCE9 Fale com a ASF pelo Instagram @asf.surffeminino ou pela pagina de Contato no rodape.',
+    'participar': '\uD83E\uDD1D Para participar: crie sua Carteirinha ASF gratuita na home, entre nos eventos e conecte-se com as manas no ASF Parceiras!',
+    'ajuda': '\uD83D\uDCAC Posso ajudar com: previsao, pontos, eventos, contatos e como participar. Pergunta ainda mais detalhada? Use a secao Assistente Virtual ASF na home!'
+  };
+}
+
+(function () {
+  function greetFloating() {
+    const msgs = document.getElementById('chatbot-messages');
+    if (!msgs || msgs.dataset.greeted) return;
+    msgs.dataset.greeted = '1';
+    msgs.innerHTML = '<div style="background:#E0F7FA;padding:8px;border-radius:8px;margin:4px 0"><strong>\uD83E\uDD16 ManaBot:</strong> Oi, mana! \uD83C\uDF0A Pergunte sobre previsao, eventos, pontos, praias, equipamentos... estou aqui para ajudar!</div>';
+  }
+
+  /* Envia com o cerebro da ManaBot; cai para chatbotFAQs se ela nao existir */
+  window.sendChatbotMessage = function () {
+    const input = document.getElementById('chatbot-input');
+    const msgs = document.getElementById('chatbot-messages');
+    if (!input || !msgs) return;
+    const raw = input.value.trim();
+    if (!raw) return;
+    const BOTX = window.ASF_CHATBOT;
+    const esc = (BOTX && BOTX.esc) ? BOTX.esc(raw) : raw;
+    msgs.innerHTML += '<div style="background:#eee;padding:8px;border-radius:8px;margin:4px 0"><strong>Voce:</strong> ' + esc + '</div>';
+    input.value = '';
+    const tid = 'float-typing-' + Date.now();
+    msgs.innerHTML += '<div id="' + tid + '" style="background:#E0F7FA;padding:8px;border-radius:8px;margin:4px 0;color:#7f8c8d;font-size:12px"><strong>\uD83E\uDD16 ManaBot</strong> digitando...</div>';
+    msgs.scrollTop = msgs.scrollHeight;
+    setTimeout(function () {
+      const t = document.getElementById(tid);
+      if (t) t.remove();
+      let response;
+      if (BOTX && typeof BOTX.respond === 'function') {
+        response = BOTX.respond(raw);
+      } else {
+        response = 'Desculpe, nao entendi. Tente: previsao, pontos, eventos, contatos ou como participar! \uD83E\uDD16';
+        const m = raw.toLowerCase();
+        for (const key of Object.keys(window.chatbotFAQs || {})) {
+          if (m.includes(key)) { response = window.chatbotFAQs[key]; break; }
+        }
+      }
+      msgs.innerHTML += '<div style="background:#E0F7FA;padding:8px;border-radius:8px;margin:4px 0"><strong>\uD83E\uDD16 ManaBot:</strong> ' + response + '</div>';
+      msgs.scrollTop = msgs.scrollHeight;
+    }, 600 + Math.random() * 400);
+  };
+
+  /* Enter envia + boas-vindas ao abrir o painel */
+  function bindFloating() {
+    const inp = document.getElementById('chatbot-input');
+    if (inp && !inp.dataset.enterBound) {
+      inp.dataset.enterBound = '1';
+      inp.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter') { e.preventDefault(); window.sendChatbotMessage(); }
+      });
+    }
+    greetFloating();
+  }
+
+  const _toggle = window.toggleChatbot;
+  window.toggleChatbot = function () {
+    if (typeof _toggle === 'function') _toggle();
+    setTimeout(bindFloating, 50);
+  };
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', bindFloating);
+  } else { bindFloating(); }
+})();
