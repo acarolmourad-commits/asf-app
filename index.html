@@ -9146,6 +9146,7 @@ function createPost() {
 function startQuiz(quizName) {
             const quizDiv = document.getElementById('quiz-' + quizName);
             const button = event.target;
+            if (!quizDiv || !button) return;
 
             if (quizDiv.style.display === 'none') {
                 quizDiv.style.display = 'block';
@@ -9328,6 +9329,7 @@ async function loadLiveData(beach) {
             const [weather, marine] = await Promise.all([fetchWeather(beach), fetchMarine(beach)]);
 
             const marDiv = document.getElementById('mar-data');
+            if (!marDiv) return;
             if (marine && marine.current) {
                 const c = marine.current;
                 const rating = surfRating(c.wave_height);
@@ -10153,6 +10155,7 @@ function renderSessions() {
             const list = document.getElementById('sessions-list');
             const count = document.getElementById('session-count');
             const stats = document.getElementById('session-stats');
+            if (!list || !count || !stats) return;
             count.textContent = sessions.length + ' sessão' + (sessions.length !== 1 ? 'ões' : '');
             if (sessions.length === 0) {
                 list.innerHTML = '<p style="text-align: center; color: var(--gray-400); font-size: 13px; padding: 20px;">Nenhuma sessão registrada ainda. Bora surfar! 🏄‍♀️</p>';
