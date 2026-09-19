@@ -1,0 +1,23 @@
+name: ASF - corrige textos da secao final
+on:
+  push:
+    paths:
+      - scripts/fix_final_texts.py
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Apply patch
+        run: python3 scripts/fix_final_texts.py
+      - name: Commit and push
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add index.html
+          git diff --cached --quiet && echo "no changes" || (git commit -m "fix: acentuacao e titulos da secao final (Seguranca no Surf, Calendario, Conteudo ASF, Carteirinha)" && git push)
