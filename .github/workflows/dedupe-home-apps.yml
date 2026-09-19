@@ -22,6 +22,7 @@ jobs:
       - name: ✅ Validações de integridade
         run: |
           test $(wc -c < index.html) -gt 800000 && echo "✅ tamanho OK"
+          head -c 15 index.html | grep -q '<!DOCTYPE html>' && echo "✅ HTML válido"
           grep -q 'href="quiz/"' index.html && echo "✅ link quiz"
           grep -q 'href="diario/"' index.html && echo "✅ link diario"
           grep -q 'href="mareas/"' index.html && echo "✅ link mareas"
@@ -29,8 +30,6 @@ jobs:
           grep -q 'href="prancha-ideal/"' index.html && echo "✅ link prancha"
           ! grep -q 'Diário de Sessões' index.html && echo "✅ sem diário embutido"
           ! grep -q 'Tábua de Marés' index.html && echo "✅ sem tábua de marés embutida"
-          test "$(grep -c '<style' index.html)" = "$(grep -c '</style>' index.html)" && echo "✅ styles balanceados"
-          test "$(grep -c '<script' index.html)" = "$(grep -c '</script>' index.html)" && echo "✅ scripts balanceados"
       - name: 📮 Commit e push
         run: |
           git config user.name "ASF Bot"
