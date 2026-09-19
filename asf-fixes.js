@@ -210,3 +210,14 @@ setTimeout(asfFixesBoot, 1500);
   }
   if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',addAppsTab);}else{addAppsTab();}
 })();
+
+/* ============================================================
+   HOME: revive sessões Metas, Segurança e Calendário
+   (asfSafeInit roda antes das declarações const e nunca
+   popula #metas-container, #seguranca-content e #calendar-content)
+============================================================ */
+document.addEventListener('DOMContentLoaded', function(){
+  try{ if(typeof ASF_METAS!=='undefined') ASF_METAS.init(); }catch(e){console.error('ASF_METAS init',e);}
+  try{ if(typeof ASF_BEACH_MAP!=='undefined') ASF_BEACH_MAP.render('seguranca-content'); }catch(e){console.error('ASF_BEACH_MAP init',e);}
+  try{ if(typeof ASF_CALENDAR!=='undefined') ASF_CALENDAR.render('calendar-content'); }catch(e){console.error('ASF_CALENDAR init',e);}
+});
