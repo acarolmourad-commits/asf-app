@@ -318,6 +318,10 @@ document.addEventListener('DOMContentLoaded', function () {
       'linear-gradient(135deg,#27AE60 0%,#1E8449 100%)',
       '🥑 Alimentação para Surfistas',
       'Dicas de nutrição para render mais no surf! Toque para abrir o app ASF Nutrição →');
+    slimSection('mental', 'https://acarolmourad-commits.github.io/asf-mental/',
+      'linear-gradient(135deg,#9B59B6 0%,#8E44AD 100%)',
+      '🧘 Técnicas para acalmar a mente',
+      'Dicas de respiração e relaxamento para surfistas! Toque para abrir o app ASF Mental →');
   }
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', apply);
