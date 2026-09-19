@@ -1,0 +1,23 @@
+name: ASF - onda 3 (remove carteirinha, corrige duplicacao)
+on:
+  push:
+    paths:
+      - scripts/fix_wave3.py
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Apply patch
+        run: python3 scripts/fix_wave3.py
+      - name: Commit and push
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add index.html
+          git diff --cached --quiet && echo "no changes" || (git commit -m "fix: remove secao Carteirinha ASF e elimina duplicacao visual em Metas/Seguranca" && git push)
