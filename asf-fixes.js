@@ -221,3 +221,23 @@ document.addEventListener('DOMContentLoaded', function(){
   try{ if(typeof ASF_BEACH_MAP!=='undefined') ASF_BEACH_MAP.render('seguranca-content'); }catch(e){console.error('ASF_BEACH_MAP init',e);}
   try{ if(typeof ASF_CALENDAR!=='undefined') ASF_CALENDAR.render('calendar-content'); }catch(e){console.error('ASF_CALENDAR init',e);}
 });
+
+/* ============================================================
+   RODAPÉ: exibe o CNPJ oficial da ASF
+============================================================ */
+(function(){
+  function addCnpjFooter(){
+    var ps = document.querySelectorAll('footer p');
+    for (var i = 0; i < ps.length; i++){
+      if (ps[i].textContent.indexOf('Associação de Surf Feminino') !== -1 && !document.getElementById('asf-cnpj-footer')){
+        var p = document.createElement('p');
+        p.id = 'asf-cnpj-footer';
+        p.style.marginTop = '4px';
+        p.textContent = 'CNPJ 44.948.200/0001-46';
+        ps[i].parentNode.insertBefore(p, ps[i].nextSibling);
+        break;
+      }
+    }
+  }
+  if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',addCnpjFooter);}else{addCnpjFooter();}
+})();
