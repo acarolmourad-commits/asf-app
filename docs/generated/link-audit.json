@@ -1,7 +1,7 @@
 {
-  "date": "2026-09-19T01:56:46.843138+00:00",
-  "total": 56,
-  "ok": 31,
+  "date": "2026-09-19T09:50:06.709730+00:00",
+  "total": 58,
+  "ok": 33,
   "skipped": 23,
   "broken_count": 2,
   "broken": [
@@ -205,6 +205,12 @@
       "local": true
     },
     {
+      "url": "asf-fixes.js",
+      "status": "ok",
+      "http": 200,
+      "local": true
+    },
+    {
       "url": "assets/images/hero-surf.jpg",
       "status": "ok",
       "http": 200,
@@ -212,6 +218,12 @@
     },
     {
       "url": "bem-estar/surf-saude-mental-mulheres.html",
+      "status": "ok",
+      "http": 200,
+      "local": true
+    },
+    {
+      "url": "carteirinha.js",
       "status": "ok",
       "http": 200,
       "local": true
