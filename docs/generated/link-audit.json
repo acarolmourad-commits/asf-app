@@ -1,12 +1,11 @@
 {
-  "date": "2026-09-20T15:32:13.616392+00:00",
-  "total": 59,
+  "date": "2026-09-20T19:53:48.433506+00:00",
+  "total": 58,
   "ok": 33,
   "skipped": 23,
-  "broken_count": 3,
+  "broken_count": 2,
   "broken": [
     "https://docs.google.com/forms/d/e/1fJhfaiNyYSSq9bKElew69y6GZ6_pxLz05HR26klIsSA/viewform",
-    "https://www.fecasurf.com.br/",
     "https://www.surfbrasil.org.br/"
   ],
   "results": [
@@ -137,8 +136,8 @@
     },
     {
       "url": "https://www.fecasurf.com.br/",
-      "status": "broken",
-      "http": "URLError"
+      "status": "ok",
+      "http": 200
     },
     {
       "url": "https://www.googletagmanager.com",
@@ -213,12 +212,6 @@
     },
     {
       "url": "asf-fixes.js",
-      "status": "ok",
-      "http": 200,
-      "local": true
-    },
-    {
-      "url": "assets/images/hero-surf.jpg",
       "status": "ok",
       "http": 200,
       "local": true
