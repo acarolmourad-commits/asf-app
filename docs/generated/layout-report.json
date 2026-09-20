@@ -5,15 +5,15 @@
   "score": 84,
   "suggested": [
     {
-      "type": "seo",
-      "change": "Meta tags optimization",
-      "impact": "medium"
+      "type": "css",
+      "change": "Better header gradient",
+      "impact": "high"
     },
     {
-      "type": "css",
-      "change": "Hover animation on cards",
+      "type": "js",
+      "change": "Lazy loading images",
       "impact": "high"
     }
   ],
-  "timestamp": "2026-09-20T14:35:29.954319"
+  "timestamp": "2026-09-20T14:59:33.925012"
 }
