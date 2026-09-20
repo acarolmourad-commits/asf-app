@@ -1,0 +1,27 @@
+name: fix-home-logo
+on:
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  fix:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Baixar hero-surf.jpg corrigido
+        run: curl -sL "https://backend.composio.dev/api/v3/sl/0q9SEnCnF2" -o assets/images/hero-surf.jpg && file assets/images/hero-surf.jpg
+      - name: Corrigir SVG da logo no index.html
+        run: |
+          python3 - <<'PYEOF'
+          import re
+          p = 'index.html'
+          s = open(p, encoding='utf-8').read()
+          s = s.replace('</lineargradient>', '</linearGradient>')
+          s = re.sub(r'/>(</(?:stop|circle|ellipse)>)', '/>', s)
+          open(p, 'w', encoding='utf-8').write(s)
+          print('index.html corrigido')
+          PYEOF
+      - name: Commit das correcoes
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "fix: substitui hero-surf.jpg corrompido (quadrado branco na home) e corrige tag SVG da logo"
