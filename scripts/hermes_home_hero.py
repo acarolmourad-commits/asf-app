@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 # MISSÃO HERMES — Home: hero responde 'o que é / para quem / o que fazer' e
 # conecta a Home aos novos guias editoriais. Substituições exatas e idempotentes.
+# UPDATE: remove o banner hero-surf.jpg da home (pedido da usuária).
 import io, sys
 
 TARGET = 'index.html'
@@ -17,6 +18,17 @@ if OLD_P in src:
     print('✅ proposta de valor atualizada')
 else:
     print('ℹ️ parágrafo do hero já atualizado')
+
+# --- Remover banner hero-surf.jpg da home ---
+BANNER = ('        <img loading="lazy" src="assets/images/hero-surf.jpg" '
+          'alt="Surfista feminina em ação no mar - ASF" '
+          'style="width:100%; border-radius:12px; margin-top:12px; object-fit:cover; max-height:150px;" '
+          'decoding="async">\n')
+if BANNER in src:
+    src = src.replace(BANNER, '', 1)
+    print('✅ banner hero-surf removido da home')
+else:
+    print('ℹ️ banner hero-surf já removido ou estrutura alterada')
 
 ANCHOR = ("            <button class=\"btn btn-secondary\" onclick=\"showSection('comunidade')\">\n"
           "                👥 Comunidade\n"
