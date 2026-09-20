@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # MISSÃO HERMES — Home: hero responde 'o que é / para quem / o que fazer' e
 # conecta a Home aos novos guias editoriais. Substituições exatas e idempotentes.
-# UPDATE 5: remove header do topo e protege refs JS ao botao de tema removido.
+# UPDATE 6: adiciona logo oficial ASF pequena (64px) no hero, sem sobrepor conteúdo.
 import io, sys
 
 TARGET = 'index.html'
@@ -39,6 +39,18 @@ if n:
     print(f'✅ {n} acessos ao darkModeToggle protegidos')
 else:
     print('ℹ️ nenhum acesso desprotegido ao darkModeToggle')
+
+# --- Adicionar logo oficial ASF pequena no hero ---
+H1 = '<h1>Conectando <span>Mulheres Surfistas</span></h1>'
+LOGO = ('        <img loading="lazy" src="assets/images/asf-logo-small.png" '
+        'alt="Logo oficial ASF - Associação de Surf Feminino" '
+        'style="width:64px; height:auto; display:block; margin:16px auto 8px;" '
+        'decoding="async">\n')
+if 'asf-logo-small.png' not in src and H1 in src:
+    src = src.replace(H1, LOGO + H1, 1)
+    print('✅ logo ASF pequena adicionada ao hero')
+else:
+    print('ℹ️ logo já presente ou H1 não encontrado')
 
 if src != original:
     with io.open(TARGET, 'w', encoding='utf-8') as f:
