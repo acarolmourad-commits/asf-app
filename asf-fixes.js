@@ -256,3 +256,20 @@ document.addEventListener('DOMContentLoaded', function(){
   }
   if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',swapHeroLogo);}else{swapHeroLogo();}
 })();
+
+/* ============================================================
+   HEADER: substitui o ícone SVG pela logo oficial (PNG)
+============================================================ */
+(function(){
+  function swapHeaderLogo(){
+    var icons = document.querySelectorAll('.logo-icon');
+    for (var i = 0; i < icons.length; i++){
+      if (icons[i].querySelector('img.asf-logo-img')) continue;
+      icons[i].innerHTML = '<img class="asf-logo-img" src="assets/images/asf-logo.png" alt="Logo oficial da ASF - Associação de Surf Feminino" style="width:44px; height:auto; display:block;">';
+      icons[i].style.width = 'auto';
+      icons[i].style.height = 'auto';
+    }
+  }
+  if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',swapHeaderLogo);}else{swapHeaderLogo();}
+  setTimeout(swapHeaderLogo, 1500);
+})();
