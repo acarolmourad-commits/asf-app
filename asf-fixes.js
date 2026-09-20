@@ -241,20 +241,28 @@ document.addEventListener('DOMContentLoaded', function(){
 })();
 
 /* ============================================================
-   HOME: banner hero com a logo oficial da ASF (PNG)
+   HOME: banner hero com a logo oficial da ASF (PNG, completa)
 ============================================================ */
 (function(){
   function swapHeroLogo(){
-    var imgs = document.querySelectorAll('img[src*="hero-surf.jpg"]');
+    var imgs = document.querySelectorAll('img[src*="hero-surf.jpg"], img[src*="asf-logo.png"]');
     for (var i = 0; i < imgs.length; i++){
-      imgs[i].src = 'assets/images/asf-logo.png';
+      if (imgs[i].src.indexOf('asf-logo.png') === -1) imgs[i].src = 'assets/images/asf-logo.png';
       imgs[i].alt = 'Logo oficial da ASF - Associação de Surf Feminino';
       imgs[i].style.objectFit = 'contain';
+      imgs[i].style.maxHeight = 'none';
+      imgs[i].style.height = 'auto';
+      imgs[i].style.width = 'auto';
+      imgs[i].style.maxWidth = '240px';
+      imgs[i].style.display = 'block';
+      imgs[i].style.margin = '12px auto';
+      imgs[i].style.background = 'transparent';
     }
     var og = document.querySelector('meta[property="og:image"]');
     if (og) og.setAttribute('content', 'https://acarolmourad-commits.github.io/asf-app/assets/images/asf-logo.png');
   }
   if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',swapHeroLogo);}else{swapHeroLogo();}
+  setTimeout(swapHeroLogo, 1500);
 })();
 
 /* ============================================================
