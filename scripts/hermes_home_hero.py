@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # MISSÃO HERMES — Home: hero responde 'o que é / para quem / o que fazer' e
 # conecta a Home aos novos guias editoriais. Substituições exatas e idempotentes.
-# UPDATE 4: remove o header (logo ASF + icones) do topo da home, a pedido da usuária.
+# UPDATE 5: remove header do topo e protege refs JS ao botao de tema removido.
 import io, sys
 
 TARGET = 'index.html'
@@ -29,6 +29,16 @@ if START_MARK in src and END_MARK in src:
     print('✅ header (logo + icones) removido do topo da home')
 else:
     print('ℹ️ header não encontrado ou já removido')
+
+# --- Proteger acessos JS ao darkModeToggle removido ---
+UNSAFE = "document.getElementById('darkModeToggle').textContent"
+SAFE = "(document.getElementById('darkModeToggle')||{textContent:''}).textContent"
+n = src.count(UNSAFE)
+if n:
+    src = src.replace(UNSAFE, SAFE)
+    print(f'✅ {n} acessos ao darkModeToggle protegidos')
+else:
+    print('ℹ️ nenhum acesso desprotegido ao darkModeToggle')
 
 if src != original:
     with io.open(TARGET, 'w', encoding='utf-8') as f:
