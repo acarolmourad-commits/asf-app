@@ -1,18 +1,18 @@
 {
   "date": "2026-09-20",
   "board_tip": {
-    "title": "Shortboard: Performance",
-    "content": "Shortboards (5'6\"-6'6\") são para performance. Requer técnica e condicionamento.",
+    "title": "Fish: Para ondas pequenas",
+    "content": "Shape com outline curto e largo. Perfeita para ondas fracas! Twin ou quad fin para mais speed.",
     "tags": [
-      "Shortboard",
-      "Performance"
+      "Fish",
+      "Speed"
     ]
   },
   "eco_tip": {
-    "title": "Por que escolher ecológico?",
-    "content": "Quando a prancha chegar ao fim, o bloco pode ser reciclado ou se degrada naturalmente!",
-    "category": "Consumo Consciente"
+    "title": "Benefícios do Bloco Ecológico",
+    "content": "1. ♻️ 100% reciclável 2. 🌿 Biodegradável 3. 🧊 Livre de CFC 4. 💧 Menor consumo de água",
+    "category": "Meio Ambiente"
   },
-  "daily_message": "Hidrate-se: 500ml de água antes de surfar!",
-  "generated_at": "2026-09-20T10:12:03.438009"
+  "daily_message": "Você sabia? O bloco Phenix Teccel pode ser reciclado!",
+  "generated_at": "2026-09-20T14:35:29.893289"
 }
