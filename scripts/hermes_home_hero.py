@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # MISSÃO HERMES — Home: hero responde 'o que é / para quem / o que fazer' e
 # conecta a Home aos novos guias editoriais. Substituições exatas e idempotentes.
-# UPDATE: remove o banner hero-surf.jpg da home (pedido da usuária).
+# UPDATE 2: remove TODAS as imagens do hero da home (banner + emoji fundadora).
 import io, sys
 
 TARGET = 'index.html'
@@ -29,6 +29,16 @@ if BANNER in src:
     print('✅ banner hero-surf removido da home')
 else:
     print('ℹ️ banner hero-surf já removido ou estrutura alterada')
+
+# --- Remover imagem emoji da fundadora do hero ---
+import re
+EMOJI = re.compile(r'[ \t]*<img loading="lazy" src="data:image/svg+xml[^>]*alt="Fundadora ASF"[^>]*>\n?')
+src2, n = EMOJI.subn('', src, count=1)
+if n:
+    src = src2
+    print('✅ imagem emoji da fundadora removida do hero')
+else:
+    print('ℹ️ imagem emoji da fundadora não encontrada ou já removida')
 
 ANCHOR = ("            <button class=\"btn btn-secondary\" onclick=\"showSection('comunidade')\">\n"
           "                👥 Comunidade\n"
