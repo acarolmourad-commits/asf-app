@@ -29,5 +29,6 @@ jobs:
             echo "Sem alterações"
           else
             git commit -m "🏠 Home: proposta de valor clara + CTA para guia editorial (MISSÃO HERMES)"
+            git pull --rebase origin main
             git push
           fi
