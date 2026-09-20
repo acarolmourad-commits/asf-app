@@ -1,0 +1,32 @@
+name: fix-hero-img
+on:
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  fix:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Gerar hero-surf.jpg valido (gradiente da marca)
+        run: |
+          pip install pillow -q
+          python3 - <<'PY'
+          from PIL import Image, ImageDraw
+          W,H=1200,400
+          top=(0,168,204); bot=(14,36,57)
+          im=Image.new('RGB',(W,H)); d=ImageDraw.Draw(im)
+          for y in range(H):
+              t=y/(H-1)
+              d.line([(0,y),(W,y)],fill=tuple(int(top[i]+(bot[i]-top[i])*t) for i in range(3)))
+          im.save('assets/images/hero-surf.jpg','JPEG',quality=82,optimize=True)
+          print('gerado OK')
+          PY
+          python3 -c "from PIL import Image; im=Image.open('assets/images/hero-surf.jpg'); im.load(); print('validado', im.size)"
+      - name: Commit
+        run: |
+          git config user.name "asf-bot"
+          git config user.email "asf.surffeminino@gmail.com"
+          git add assets/images/hero-surf.jpg
+          git diff --cached --quiet || git commit -m "fix: regenerate hero-surf.jpg (previous file was a truncated JPEG rendering as white block)"
+          git push
