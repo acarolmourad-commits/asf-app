@@ -4609,7 +4609,7 @@ removed = {
             const savedTheme = localStorage.getItem('asf-theme');
             if (savedTheme === 'dark') {
                 document.documentElement.setAttribute('data-theme', 'dark');
-                document.getElementById('darkModeToggle').textContent = '☀️';
+                (document.getElementById('darkModeToggle')||{textContent:''}).textContent = '☀️';
             }
             const savedName = localStorage.getItem('asf-name');
             renderSessions();
@@ -9960,7 +9960,7 @@ function initDarkMode() {
             const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
             if (saved === 'dark' || (!saved && prefersDark)) {
                 document.documentElement.setAttribute('data-theme', 'dark');
-                document.getElementById('darkModeToggle').textContent = '☀️';
+                (document.getElementById('darkModeToggle')||{textContent:''}).textContent = '☀️';
                 document.querySelector('meta[name="theme-color"]').content = '#1A1D23';
             }
         }
@@ -9970,12 +9970,12 @@ function toggleDarkMode() {
             if (isDark) {
                 document.documentElement.removeAttribute('data-theme');
                 localStorage.setItem('asf-theme', 'light');
-                document.getElementById('darkModeToggle').textContent = '🌙';
+                (document.getElementById('darkModeToggle')||{textContent:''}).textContent = '🌙';
                 document.querySelector('meta[name="theme-color"]').content = '#00A8CC';
             } else {
                 document.documentElement.setAttribute('data-theme', 'dark');
                 localStorage.setItem('asf-theme', 'dark');
-                document.getElementById('darkModeToggle').textContent = '☀️';
+                (document.getElementById('darkModeToggle')||{textContent:''}).textContent = '☀️';
                 document.querySelector('meta[name="theme-color"]').content = '#1A1D23';
             }
             setTimeout(() => document.documentElement.style.transition = '', 300);
