@@ -9,7 +9,9 @@ const ASF_CARD = {
 
   /* futuras parcerias — exibido como "em breve" na carteirinha */
   parcerias: [
-    { icon: '🛒', tipo: 'Lojas de surf', desc: 'descontos em pranchas, wax e acessórios' },
+    { icon: '🛒', tipo: 'Lojas de surf parceiras', desc: 'descontos em pranchas, wax, lycras e acessórios ao apresentar a carteirinha' },
+    { icon: '🏄‍♀️', tipo: 'Eventos ASF', desc: 'acesso prioritário a Surf Days, mutirões e encontros da comunidade' },
+    { icon: '🏆', tipo: 'Campeonatos e clinics', desc: 'inscrições com condições especiais para associadas' },
     { icon: '✈️', tipo: 'Agências de viagens', desc: 'surf trips com tarifa de associada' },
     { icon: '🏡', tipo: 'Pousadas parceiras', desc: 'hospedagem com benefícios perto dos picos' },
   ],
@@ -115,6 +117,7 @@ const ASF_CARD = {
         '<span style="font-size:44px">🏄‍♀️</span>' +
         '<p style="font-size:18px;font-weight:700;color:var(--secondary);margin:8px 0 4px">Crie sua Carteirinha ASF</p>' +
         '<p style="font-size:13px;color:var(--gray-600);margin:0">Gratuita, digital e só sua. Em breve valendo benefícios em parceiros!</p></div>' +
+        this.passoAPassoHtml() +
         '<label style="font-size:12px;font-weight:600;color:var(--gray-600)">Nome de surfista</label>' +
         '<input id="card-nome" type="text" maxlength="40" placeholder="Ex.: Ana Mar" value="' + (p.nome || '') + '" style="width:100%;padding:12px;border-radius:10px;border:1.5px solid var(--gray-200);margin:4px 0 12px;font-family:inherit">' +
         '<label style="font-size:12px;font-weight:600;color:var(--gray-600)">Nível</label>' +
@@ -152,15 +155,33 @@ const ASF_CARD = {
       '</div>';
   },
 
+  passoAPassoHtml() {
+    const passos = [
+      { n: '1', t: 'Preencha seus dados', d: 'nome de surfista, nível e praia do coração' },
+      { n: '2', t: 'Adicione sua foto', d: 'opcional — deixa a carteirinha com a sua cara' },
+      { n: '3', t: 'Receba seu número único', d: 'com QR code de verificação, válido por 1 ano' },
+      { n: '4', t: 'Apresente nos parceiros', d: 'o parceiro escaneia o QR e confirma seu benefício' },
+    ];
+    return '<div class="card" style="margin-bottom:16px">' +
+      '<p style="font-size:14px;font-weight:700;color:var(--secondary);margin:0 0 10px">📋 Como funciona</p>' +
+      passos.map(s =>
+        '<div style="display:flex;gap:10px;align-items:flex-start;padding:6px 0;border-top:1px solid var(--gray-100)">' +
+        '<span style="min-width:24px;height:24px;border-radius:50%;background:var(--primary);color:white;font-size:12px;font-weight:800;display:flex;align-items:center;justify-content:center">' + s.n + '</span>' +
+        '<div><p style="font-size:13px;font-weight:600;margin:0;color:var(--secondary)">' + s.t + '</p>' +
+        '<p style="font-size:12px;margin:0;color:var(--gray-600)">' + s.d + '</p></div></div>').join('') +
+      '</div>';
+  },
+
   parceriasHtml() {
     return '<div class="card" style="background:linear-gradient(135deg,rgba(0,168,204,0.05),rgba(155,89,182,0.06));border:1.5px dashed rgba(0,168,204,0.3)">' +
-      '<p style="font-size:14px;font-weight:700;color:var(--secondary);margin:0 0 4px">🤝 Em breve: rede de parceiros ASF</p>' +
-      '<p style="font-size:12px;color:var(--gray-600);margin:0 0 10px">Sua carteirinha tem QR de verificação para valer benefícios em:</p>' +
+      '<p style="font-size:14px;font-weight:700;color:var(--secondary);margin:0 0 4px">🤝 Em breve: rede de benefícios ASF</p>' +
+      '<p style="font-size:12px;color:var(--gray-600);margin:0 0 10px">Estamos fechando parcerias! Sua carteirinha terá QR de verificação para valer benefícios em:</p>' +
       this.parcerias.map(p =>
         '<div style="display:flex;gap:10px;align-items:center;padding:6px 0;border-top:1px solid var(--gray-100)">' +
         '<span style="font-size:20px">' + p.icon + '</span>' +
         '<div><p style="font-size:13px;font-weight:600;margin:0;color:var(--secondary)">' + p.tipo + '</p>' +
         '<p style="font-size:12px;margin:0;color:var(--gray-600)">' + p.desc + '</p></div></div>').join('') +
+      '<p style="font-size:12px;color:var(--gray-600);margin:10px 0 0;text-align:center">💜 Crie a sua agora e garanta seu número de associada — os benefícios chegam primeiro para quem já tem carteirinha!</p>' +
       '</div>';
   },
 
