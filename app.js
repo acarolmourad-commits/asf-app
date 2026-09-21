@@ -2183,13 +2183,11 @@ function renderAffiliateStore() {
       </div>
     </div>
   `).join('');
-  console.log('Loja renderizada');
 }
 function openAffiliateLink(url, productId) {
   const clicks = JSON.parse(localStorage.getItem('asf-affiliate-clicks') || '[]');
   clicks.push({productId, timestamp: new Date().toISOString()});
   localStorage.setItem('asf-affiliate-clicks', JSON.stringify(clicks));
-  console.log('Click afiliado:', productId);
   window.open(url, '_blank', 'noopener,noreferrer');
   // GA4 tracking
   if (typeof gtag !== 'undefined') {
@@ -2206,11 +2204,11 @@ function showPremiumModal(){/* removido: sem área premium */}
 function hidePremiumModal(){/* removido */}
 function startPayment(){/* removido: sem pagamentos */}
 function contactWhatsApp(){trackEvent('contact','whatsapp_click'),window.open('https://wa.me/5511954346288','_blank')}
-function trackEvent(e,t,o){const n=JSON.parse(localStorage.getItem('asf-monetization-stats')||'{}');n.events||(n.events=[]),n.events.push({category:e,action:t,label:o,timestamp:Date.now()}),localStorage.setItem('asf-monetization-stats',JSON.stringify(n)),console.log('📊 Track:',e,t,o)}
+function trackEvent(e,t,o){const n=JSON.parse(localStorage.getItem('asf-monetization-stats')||'{}');n.events||(n.events=[]),n.events.push({category:e,action:t,label:o,timestamp:Date.now()}),localStorage.setItem('asf-monetization-stats',JSON.stringify(n))}
 function getStats(){return JSON.parse(localStorage.getItem('asf-monetization-stats')||'{}')}
 function getCookieConsent(){return localStorage.getItem('asf-cookie-consent')}
-function acceptAllCookies(){localStorage.setItem('asf-cookie-consent','all');const b=document.getElementById('cookie-consent-banner');if(b){console.log('acceptAllCookies called');b.style.animation='toastOut 0.3s ease-out forwards';setTimeout(()=>b.remove(),300)}trackEvent('legal','cookie_consent','all');console.log('🍪 Cookie: all')}
-function essentialCookies(){localStorage.setItem('asf-cookie-consent','essential');const b=document.getElementById('cookie-consent-banner');if(b){console.log('essentialCookies called');b.style.animation='toastOut 0.3s ease-out forwards';setTimeout(()=>b.remove(),300)}trackEvent('legal','cookie_consent','essential');console.log('🍪 Cookie: essential')}
+function acceptAllCookies(){localStorage.setItem('asf-cookie-consent','all');const b=document.getElementById('cookie-consent-banner');if(b){b.style.animation='toastOut 0.3s ease-out forwards';setTimeout(()=>b.remove(),300)}trackEvent('legal','cookie_consent','all');}
+function essentialCookies(){localStorage.setItem('asf-cookie-consent','essential');const b=document.getElementById('cookie-consent-banner');if(b){b.style.animation='toastOut 0.3s ease-out forwards';setTimeout(()=>b.remove(),300)}trackEvent('legal','cookie_consent','essential');}
 function showPixDonation(){/* removido */}
 function showReferralModal(){const m=document.getElementById('referral-modal');if(m){m.style.display='flex';const codeDisplay=document.getElementById('referral-code-display');if(codeDisplay){const userCode=localStorage.getItem('asf-my-referral-code');if(userCode){codeDisplay.textContent=userCode}else{const newCode=generateReferralCode();localStorage.setItem('asf-my-referral-code',newCode);codeDisplay.textContent=newCode}}trackEvent('referral','modal_view')}}
 function hideReferralModal(){const m=document.getElementById('referral-modal');if(m)m.style.display='none'}
@@ -2220,7 +2218,7 @@ function hidePixDonation(){/* removido */}
 function copyPixKey(){/* removido: sem doações via Pix */}
 function getUserId(){try{let uid=localStorage.getItem('asf-user-id');if(!uid){uid='user_'+Math.random().toString(36).substring(7);localStorage.setItem('asf-user-id',uid)}return uid}catch(e){return 'user_anon'}}
 function generateReferralCode(){const userId=getUserId();const code=btoa(`${userId}:${Date.now()}`).substring(0,8);localStorage.setItem(`asf-referral-${code}`,userId);return code}
-function trackReferral(code,targetEmail){const referrerId=localStorage.getItem(`asf-referral-${code}`);if(referrerId){const r=JSON.parse(localStorage.getItem('asf-referrals')||'[]');r.push({code,targetEmail,timestamp:Date.now(),rewardGranted:false});localStorage.setItem('asf-referrals',JSON.stringify(r));trackEvent('referral','code_used',code);console.log('📨 Referral tracked:',code)}}
+function trackReferral(code,targetEmail){const referrerId=localStorage.getItem(`asf-referral-${code}`);if(referrerId){const r=JSON.parse(localStorage.getItem('asf-referrals')||'[]');r.push({code,targetEmail,timestamp:Date.now(),rewardGranted:false});localStorage.setItem('asf-referrals',JSON.stringify(r));trackEvent('referral','code_used',code);}}
 function buyEbook(){/* removido: sem vendas */}
 function submitUGC(){const fileInput=document.getElementById('ugc-photo');if(!fileInput||!fileInput.files[0])return showToast('📷 Selecione uma foto primeiro','error');showToast('✅ Foto enviada! Em análise.','success');trackEvent('ugc','photo_submitted');fileInput.value=''}
 
@@ -2297,7 +2295,7 @@ function renderMetas() {
     renderMetas();
 })();
 
-function initGoogleAnalytics(){console.log('📊 Analytics enabled')}
+function initGoogleAnalytics(){}
 // Auto-render achievements init
 (function(){
     if (typeof window.ACHIEVEMENTS_INIT !== "undefined") return;
@@ -2310,7 +2308,6 @@ function setConsent(level) {
       localStorage.setItem(COOKIE_CONSENT, level);
       if (banner) banner.remove();
       trackEvent('legal', 'cookie_consent', level);
-      console.log('🍪 Cookie consent:', level);
     }
 function walkTree(el) {
         if (el.nodeType === 3 && el.textContent.trim().length > 2 && !el.parentElement.classList.contains('icon')) {
