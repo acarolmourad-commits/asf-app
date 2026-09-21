@@ -1,0 +1,41 @@
+name: ux-overlay-install
+# Insere asf-ux.css e asf-ux.js no index.html (camada ADITIVA).
+# Execucao MANUAL. Validacoes: tags inseridas exatamente 1x, HTML parseia, arquivos existem.
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  install:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Insere referencias com validacao
+        run: |
+          test -f asf-ux.css && test -f asf-ux.js || { echo 'arquivos asf-ux ausentes'; exit 1; }
+          cp index.html index.html.bak
+          python3 - <<'EOF'
+          import re
+          from html.parser import HTMLParser
+          s = open('index.html', encoding='utf8').read()
+          assert 'asf-ux.css' not in s and 'asf-ux.js' not in s, 'ja instalado - nada a fazer'
+          assert s.count('</head>') == 1 and s.count('</body>') == 1, 'estrutura inesperada'
+          s = s.replace('</head>', '    <link rel="stylesheet" href="asf-ux.css">\n</head>')
+          s = s.replace('</body>', '    <script src="asf-ux.js" defer></script>\n</body>')
+          assert s.count('asf-ux.css') == 1 and s.count('asf-ux.js') == 1
+          class P(HTMLParser): pass
+          P().feed(s)
+          open('index.html', 'w', encoding='utf8').write(s)
+          print('OK: camada UX instalada')
+          EOF
+      - name: Commit
+        run: |
+          rm -f index.html.bak
+          if git diff --quiet; then echo "Nada a commitar"; exit 0; fi
+          git config user.name "asf-bot"
+          git config user.email "asf-bot@users.noreply.github.com"
+          git add index.html
+          git commit -m "feat(ux): instala camada aditiva asf-ux (jornada, conexoes, fontes)"
+          git push
