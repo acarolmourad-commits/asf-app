@@ -1,5 +1,3 @@
-/* Extraído de index.html — bloco inline #9 (ordem preservada) */
-
     // Manas Próximas: initialize with cached location if available
     document.addEventListener('DOMContentLoaded', function() {
         const cached = localStorage.getItem('asf_user_location');

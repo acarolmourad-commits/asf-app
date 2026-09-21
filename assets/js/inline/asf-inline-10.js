@@ -1,5 +1,3 @@
-/* Extraído de index.html — bloco inline #10 (ordem preservada) */
-
 function closeAllModals(){
   {const m=document.getElementById('premium-modal');if(m)m.style.display='none';}
   {const m2=document.getElementById('pix-modal');if(m2)m2.style.display='none';}

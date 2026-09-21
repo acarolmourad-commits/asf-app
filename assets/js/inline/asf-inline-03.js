@@ -1,5 +1,3 @@
-/* Extraído de index.html — bloco inline #3 (ordem preservada) */
-
     (function () {
       var KEY = 'asf-cookie-consent';
       function getConsent() { try { return localStorage.getItem(KEY); } catch (e) { return null; } }
