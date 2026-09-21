@@ -320,3 +320,19 @@ document.addEventListener('DOMContentLoaded', function(){
   setTimeout(removeFakeOffers, 1500);
   setTimeout(removeFakeOffers, 4000);
 })();
+
+/* ============================================================
+   REMOVE: linha "Patrocinado por STHILL SURF" no Desafio da
+   Semana (marca ilustrativa, não é parceria vigente da ASF)
+============================================================ */
+(function(){
+  function removeFakeSponsor(){
+    var sp = document.getElementById('brand-sponsor');
+    if (sp && sp.parentNode && sp.parentNode.parentNode){
+      sp.parentNode.parentNode.removeChild(sp.parentNode);
+    }
+  }
+  if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',removeFakeSponsor);}else{removeFakeSponsor();}
+  setTimeout(removeFakeSponsor, 1500);
+  setTimeout(removeFakeSponsor, 4000);
+})();
