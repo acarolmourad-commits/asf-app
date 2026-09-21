@@ -338,32 +338,40 @@ document.addEventListener('DOMContentLoaded', function(){
 })();
 
 /* ============================================================
-   VITRINE: substitui marcas ilustrativas por convite à
-   primeira parceria real (Brand Hub + card da home)
+   SUBSTITUI: grade de Marcas Parceiras ilustrativas (Rip Curl,
+   Billabong, Quiksilver, Granado, Onda Livre, STHILL) por card
+   "Em breve" com CTA para a página oficial de parcerias ASF
 ============================================================ */
 (function(){
-  var CTA = '<div style="text-align:center;padding:24px 16px">'
-    + '<div style="font-size:40px;margin-bottom:8px">💙</div>'
-    + '<p style="font-size:15px;font-weight:600;color:#0E2439;margin:0 0 6px">Seja a primeira marca parceira da ASF!</p>'
-    + '<p style="font-size:13px;color:#666;margin:0 0 14px">Apoie o surf feminino brasileiro e ganhe visibilidade na nossa comunidade. Parcerias oficiais serão anunciadas nos canais oficiais da ASF.</p>'
-    + '<button onclick="showBrandContact()" style="background:#00A8CC;color:#fff;border:none;padding:12px 24px;border-radius:50px;font-size:14px;font-weight:600;cursor:pointer">🤝 Quero ser parceira</button>'
-    + '</div>';
-  function replaceFakeBrands(){
-    var showcase = document.getElementById('brand-showcase');
-    if (showcase && !showcase.dataset.asfReplaced){
-      showcase.dataset.asfReplaced = '1';
-      showcase.innerHTML = '<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px"><div>'
-        + '<h3 style="font-size:18px;font-weight:700;color:#0E2439;margin:0">🏆 Marcas Parceiras</h3>'
-        + '<p style="font-size:13px;color:#666;margin:4px 0 0">Quem apoia o surf feminino brasileiro</p></div></div>'
-        + '<div style="background:#fff;border-radius:16px;border:1px solid rgba(0,168,204,0.15);box-shadow:0 2px 10px rgba(0,0,0,0.05)">' + CTA + '</div>';
-    }
+  var CTA_URL = 'https://acarolmourad-commits.github.io/asf-patrocinio/';
+  function fixPartnerSections(){
+    try{ window.rotateBrands = function(){}; }catch(e){}
+    try{ window.renderBrands = function(){}; }catch(e){}
     var homeCard = document.getElementById('brand-home-card');
-    if (homeCard && !homeCard.dataset.asfReplaced){
-      homeCard.dataset.asfReplaced = '1';
-      homeCard.innerHTML = CTA;
+    if (homeCard && !homeCard.dataset.asfFixed){
+      homeCard.dataset.asfFixed = '1';
+      homeCard.innerHTML = '<div style="text-align:center;padding:8px 4px">'
+        + '<p style="font-size:13px;font-weight:600;color:var(--primary);margin:0 0 6px;letter-spacing:0.3px">🤝 MARCAS PARCEIRAS</p>'
+        + '<p style="font-size:13px;color:#666;margin:0 0 10px">Em breve: as primeiras marcas parceiras oficiais da ASF! 💙</p>'
+        + '<a href="' + CTA_URL + '" style="display:inline-block;padding:8px 20px;border-radius:20px;background:linear-gradient(135deg,#00A8CC,#9B59B6);color:#fff;font-size:13px;font-weight:600;text-decoration:none">Quero ser parceira →</a>'
+        + '</div>';
+    }
+    var filter = document.getElementById('brand-filter');
+    if (filter) filter.innerHTML = '';
+    var grid = document.getElementById('brand-grid');
+    if (grid && !grid.dataset.asfFixed){
+      grid.dataset.asfFixed = '1';
+      grid.innerHTML = '<div style="grid-column:1/-1;background:linear-gradient(135deg,rgba(0,168,204,0.08),rgba(155,89,182,0.08));border:1px dashed #00A8CC;border-radius:16px;padding:28px;text-align:center">'
+        + '<div style="font-size:40px;margin-bottom:10px">💙</div>'
+        + '<h4 style="margin:0 0 8px;color:#0E2439">Em breve: marcas parceiras oficiais</h4>'
+        + '<p style="font-size:13px;color:#666;margin:0 0 14px">Estamos fechando as primeiras parcerias para trazer benefícios exclusivos às manas. Sua marca quer apoiar o surf feminino brasileiro?</p>'
+        + '<a href="' + CTA_URL + '" style="display:inline-block;background:#00A8CC;color:#fff;padding:10px 22px;border-radius:50px;font-size:14px;text-decoration:none;font-weight:600">🤝 Quero ser parceira</a>'
+        + '</div>';
     }
   }
-  if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',replaceFakeBrands);}else{replaceFakeBrands();}
-  setTimeout(replaceFakeBrands, 1500);
-  setTimeout(replaceFakeBrands, 4000);
+  if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',fixPartnerSections);}else{fixPartnerSections();}
+  setTimeout(fixPartnerSections, 1500);
+  setTimeout(fixPartnerSections, 4000);
+  var tries = 0;
+  var iv = setInterval(function(){ tries++; fixPartnerSections(); if(tries>=5) clearInterval(iv); }, 2000);
 })();
