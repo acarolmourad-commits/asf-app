@@ -17,34 +17,7 @@ jobs:
 
       - name: Remove Infolinks do index.html
         run: |
-          python3 - <<'EOF'
-          p = 'index.html'
-          t = open(p, encoding='utf-8').read()
-          before = len(t)
-          t = t.replace('    <link rel="preconnect" href="https://resources.infolinks.com">\n', '')
-          t = t.replace('''    <!-- Infolinks (free ad network, no min traffic) -->
-          <script type="text/javascript">
-            var infolinks_pid = 3269653;
-            var infolinks_wsid = 1;
-          </script>
-          ''', '')
-          t = t.replace('<script type="text/javascript" src="https://resources.infolinks.com/js/infolinks_main.js"></script>\n', '')
-          t = t.replace('<!-- Infolinks (Free Ads) - DISABLED -->', '<!-- Monetização consolidada no Google AdSense (auditoria P3) -->')
-          open(p, 'w', encoding='utf-8').write(t)
-          print(f'Removed {before - len(t)} bytes')
-          assert 'resources.infolinks.com' not in t, 'infolinks ainda presente!'
-          assert 'infolinks_pid' not in t, 'config infolinks ainda presente!'
-          EOF
-
-      - name: Valida HTML básico
-        run: |
-          python3 - <<'EOF'
-          import re
-          t = open('index.html', encoding='utf-8').read()
-          assert 'adsbygoogle.js?client=ca-pub-3811729023785282' in t, 'AdSense removido por engano!'
-          print('div open/close:', len(re.findall(r'<div\b', t)), len(re.findall(r'</div>', t)))
-          print('AdSense OK, Infolinks removido.')
-          EOF
+          python3 .github/scripts/p3_remove_infolinks.py
 
       - name: Commit e push
         run: |
