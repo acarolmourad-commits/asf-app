@@ -1,7 +1,7 @@
 {
-  "date": "2026-09-20T19:53:48.433506+00:00",
-  "total": 58,
-  "ok": 33,
+  "date": "2026-09-21T02:00:43.740563+00:00",
+  "total": 59,
+  "ok": 34,
   "skipped": 23,
   "broken_count": 2,
   "broken": [
@@ -212,6 +212,12 @@
     },
     {
       "url": "asf-fixes.js",
+      "status": "ok",
+      "http": 200,
+      "local": true
+    },
+    {
+      "url": "assets/images/asf-logo-small.png",
       "status": "ok",
       "http": 200,
       "local": true
