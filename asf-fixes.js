@@ -299,3 +299,24 @@ document.addEventListener('DOMContentLoaded', function(){
   if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',removeSponsoredBadges);}else{removeSponsoredBadges();}
   setTimeout(removeSponsoredBadges, 1500);
 })();
+
+/* ============================================================
+   REMOVE: seção "Ofertas Exclusivas para Manas ASF" (cupons e
+   marcas ilustrativos, não representam parcerias vigentes da ASF)
+============================================================ */
+(function(){
+  function removeFakeOffers(){
+    var hs = document.querySelectorAll('h3');
+    for (var i = 0; i < hs.length; i++){
+      if (hs[i].textContent.indexOf('Ofertas Exclusivas') !== -1){
+        var box = hs[i].closest('div');
+        if (box && box.parentNode) box.parentNode.removeChild(box);
+      }
+    }
+    var grid = document.getElementById('brand-offers');
+    if (grid && grid.parentNode) grid.parentNode.removeChild(grid);
+  }
+  if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',removeFakeOffers);}else{removeFakeOffers();}
+  setTimeout(removeFakeOffers, 1500);
+  setTimeout(removeFakeOffers, 4000);
+})();
