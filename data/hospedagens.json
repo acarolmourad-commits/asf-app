@@ -1,0 +1,5 @@
+{
+  "updated": "2026-09-21",
+  "nota": "Lista de hospedagens parceiras CONFIRMADAS pela ASF. Vazia ate a primeira parceria oficial. Formato: {nome, tipo (Hotel|Pousada|Hostel|Surf Camp), cidade, pais, site, lat, lon}",
+  "parceiros": []
+}
