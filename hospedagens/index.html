@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hospedagens Parceiras pelo Mundo — ASF</title>
+<meta name="description" content="Mapa mundial de hotéis, pousadas, hostels e surf camps que apoiam o surf feminino. Parcerias verificadas pela ASF — Associação de Surf Feminino.">
+<link rel="icon" href="../assets/icons/favicon-32.png" type="image/png">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+      integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
+<style>
+  :root{--primary:#00A8CC;--dark:#0E2439;--light:#E8F4F8;--gray:#5B7285}
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:var(--light);color:var(--dark);line-height:1.55}
+  header{background:linear-gradient(135deg,var(--dark),#1A3A5C);color:#fff;text-align:center;padding:36px 16px}
+  header h1{font-size:24px;margin-bottom:6px}
+  header p{opacity:.85;font-size:14px;max-width:560px;margin:0 auto}
+  .wrap{max-width:900px;margin:0 auto;padding:20px 16px}
+  .card{background:#fff;border-radius:16px;padding:20px;margin-bottom:18px;box-shadow:0 2px 10px rgba(0,0,0,.06)}
+  #map{height:340px;border-radius:12px;margin-top:12px}
+  select,button{font:inherit}
+  .controls{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
+  select{flex:1;min-width:180px;padding:10px;border:1px solid #cfe3ec;border-radius:10px;background:#fff}
+  .btn{display:inline-block;background:var(--primary);color:#fff;border:none;padding:12px 22px;border-radius:10px;font-weight:600;cursor:pointer;text-decoration:none;font-size:14px}
+  .btn.secondary{background:var(--dark)}
+  .empty{text-align:center;padding:28px 12px;color:var(--gray)}
+  .empty .big{font-size:40px;margin-bottom:8px}
+  ul.rules{padding-left:20px;font-size:14px;color:var(--gray)}
+  ul.rules li{margin-bottom:6px}
+  .badge{display:inline-block;background:var(--light);color:var(--dark);font-size:11px;font-weight:700;padding:3px 10px;border-radius:999px;margin-bottom:8px}
+  footer{text-align:center;font-size:12px;color:var(--gray);padding:24px 16px}
+  footer a{color:var(--primary)}
+  @media(max-width:600px){#map{height:260px}header h1{font-size:20px}}
+</style>
+</head>
+<body>
+<header>
+  <h1>🏨 Hospedagens Parceiras pelo Mundo</h1>
+  <p>Hotéis, pousadas, hostels e surf camps que apoiam o surf feminino — verificados pela ASF, com contato e site oficiais.</p>
+</header>
+<div class="wrap">
+
+  <div class="card">
+    <span class="badge">🗺️ MAPA MUNDIAL</span>
+    <h2 style="font-size:17px">Explore os destinos</h2>
+    <div class="controls">
+      <select id="f-pais" aria-label="Filtrar por país">
+        <option value="">🌍 Todos os países</option>
+      </select>
+      <select id="f-tipo" aria-label="Filtrar por tipo de hospedagem">
+        <option value="">🏨 Todos os tipos</option>
+        <option value="hotel">Hotel</option>
+        <option value="pousada">Pousada</option>
+        <option value="hostel">Hostel</option>
+        <option value="surfcamp">Surf camp</option>
+      </select>
+    </div>
+    <div id="map" role="application" aria-label="Mapa de hospedagens parceiras"></div>
+  </div>
+
+  <div class="card">
+    <span class="badge">📋 PARCEIROS CONFIRMADOS</span>
+    <h2 style="font-size:17px;margin-bottom:8px">Lista de hospedagens</h2>
+    <div id="lista"></div>
+  </div>
+
+  <div class="card" style="background:var(--dark);color:#fff">
+    <h2 style="font-size:17px;margin-bottom:8px">🤝 Tem uma hospedagem e quer apoiar o surf feminino?</h2>
+    <p style="font-size:14px;opacity:.85;margin-bottom:14px">Cadastre sua proposta de parceria. A ASF analisa cada pedido antes de publicar — nenhuma hospedagem é exibida sem confirmação.</p>
+    <a class="btn" href="../contato.html">Quero ser parceiro</a>
+  </div>
+
+  <div class="card">
+    <h2 style="font-size:15px;margin-bottom:8px">ℹ️ Como funciona</h2>
+    <ul class="rules">
+      <li>Só aparecem aqui hospedagens com parceria <strong>confirmada</strong> pela ASF.</li>
+      <li>Cada parceiro informa descrição, benefício, regras de uso e validade.</li>
+      <li>Associadas ASF apresentam a <strong>Carteirinha Digital</strong> para resgatar benefícios.</li>
+      <li>Dúvidas ou denúncias: fale com a ASF pela página de contato.</li>
+    </ul>
+  </div>
+
+</div>
+<footer>
+  ASF — Associação de Surf Feminino • <a href="../">Voltar ao app</a> • <a href="../privacidade.html">Privacidade</a>
+</footer>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+        integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+<script>
+/* Parceiros confirmados pela ASF. Nenhuma hospedagem é exibida sem confirmação.
+   Formato: {nome, tipo, pais, cidade, lat, lon, site, beneficio, regras, validade} */
+const HOSPEDAGENS = [];
+
+const map = L.map('map').setView([-15, -10], 2);
+L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+  maxZoom: 18, attribution: '&copy; OpenStreetMap'
+}).addTo(map);
+
+let markers = [];
+function render() {
+  const pais = document.getElementById('f-pais').value;
+  const tipo = document.getElementById('f-tipo').value;
+  const filtradas = HOSPEDAGENS.filter(h =>
+    (!pais || h.pais === pais) && (!tipo || h.tipo === tipo));
+
+  markers.forEach(m => map.removeLayer(m)); markers = [];
+  filtradas.forEach(h => {
+    const m = L.marker([h.lat, h.lon]).addTo(map)
+      .bindPopup(`<b>${h.nome}</b><br>${h.cidade}, ${h.pais}<br>${h.beneficio}<br><a href="${h.site}" target="_blank" rel="noopener">Site oficial</a>`);
+    markers.push(m);
+  });
+
+  const lista = document.getElementById('lista');
+  if (!filtradas.length) {
+    lista.innerHTML = `<div class="empty"><div class="big">🌊</div>
+      <p><strong>Nenhuma hospedagem parceira confirmada ainda.</strong></p>
+      <p style="margin-top:6px;font-size:13px">Estamos mapeando hotéis, pousadas, hostels e surf camps que apoiem o surf feminino. Volte em breve — ou cadastre sua hospedagem abaixo.</p></div>`;
+    return;
+  }
+  lista.innerHTML = filtradas.map(h => `
+    <div style="border:1px solid #e3eef4;border-radius:12px;padding:14px;margin-bottom:10px">
+      <b>${h.nome}</b> <span style="font-size:12px;color:var(--gray)">— ${h.cidade}, ${h.pais}</span>
+      <p style="font-size:13px;margin:6px 0">${h.beneficio}</p>
+      <p style="font-size:12px;color:var(--gray)">Regras: ${h.regras} • Validade: ${h.validade}</p>
+      <a href="${h.site}" target="_blank" rel="noopener" style="color:var(--primary);font-size:13px">Site oficial ↗</a>
+    </div>`).join('');
+}
+
+document.getElementById('f-pais').addEventListener('change', render);
+document.getElementById('f-tipo').addEventListener('change', render);
+render();
+</script>
+</body>
+</html>
