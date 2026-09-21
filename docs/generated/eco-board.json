@@ -1,11 +1,11 @@
 {
   "date": "2026-09-21",
   "board_tip": {
-    "title": "Longboard: O clássico",
-    "content": "Longboards (9'0\"+) são perfeitas para ondas pequenas e estabilidade.",
+    "title": "Shortboard: Performance",
+    "content": "Shortboards (5'6\"-6'6\") são para performance. Requer técnica e condicionamento.",
     "tags": [
-      "Longboard",
-      "Clássico"
+      "Shortboard",
+      "Performance"
     ]
   },
   "eco_tip": {
@@ -14,5 +14,5 @@
     "category": "Meio Ambiente"
   },
   "daily_message": "Você sabia? O bloco Phenix Teccel pode ser reciclado!",
-  "generated_at": "2026-09-21T11:16:13.263990"
+  "generated_at": "2026-09-21T16:50:13.331692"
 }
