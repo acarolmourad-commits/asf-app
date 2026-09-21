@@ -1,0 +1,38 @@
+name: cleanup-console-logs
+# Remove console.log de producao do app.js de forma segura.
+# Execucao MANUAL (workflow_dispatch) — rode quando quiser, revise o commit gerado.
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  clean:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Remove console.log com validacao de sintaxe
+        run: |
+          cp app.js app.js.bak
+          python3 - <<'EOF'
+          import re
+          s = open('app.js', encoding='utf8').read()
+          s = re.sub(r',?\s*console\.log\([^;]*?\);?', '', s)
+          s = re.sub(r',\s*}', '}', s)
+          s = re.sub(r',\s*\)', ')', s)
+          open('app.js', 'w', encoding='utf8').write(s)
+          EOF
+          node --check app.js
+          if grep -c 'console.log' app.js | grep -q '^0$'; then echo "OK: 0 console.log"; else echo "AINDA HA LOGS"; fi
+      - name: Commit apenas se houver mudanca e sintaxe valida
+        run: |
+          if git diff --quiet; then
+            echo "Nada a commitar"; exit 0
+          fi
+          git config user.name "asf-bot"
+          git config user.email "asf-bot@users.noreply.github.com"
+          rm -f app.js.bak
+          git add app.js
+          git commit -m "chore: remove console.log de producao (app.js)"
+          git push
