@@ -1,0 +1,20 @@
+name: ASF - remover conteudo da secao de lojas
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Aplicar remocao do conteudo da secao #lojas
+        run: python3 scripts/remove_lojas_section.py
+      - name: Commit and push
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add index.html
+          git diff --cached --quiet && echo "sem alteracoes" || (git commit -m "chore: remove conteudo da secao #lojas (CTA de parceria mantido para futuras marcas)" && git push)
