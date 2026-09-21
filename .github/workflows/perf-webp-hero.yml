@@ -1,0 +1,47 @@
+name: perf-webp-hero
+# Converte a imagem hero para WebP e atualiza as referencias nos HTMLs.
+# A imagem .jpg original eh MANTIDA como fallback. Execucao MANUAL.
+# So commita se o WebP ficar menor que o JPG e nenhuma referencia quebrar.
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  webp:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Converte hero para WebP e atualiza referencias
+        run: |
+          pip install pillow -q
+          python3 - <<'EOF'
+          import os, re, glob
+          from PIL import Image
+          src = 'assets/images/hero-mermaid-surf.jpg'
+          dst = 'assets/images/hero-mermaid-surf.webp'
+          Image.open(src).save(dst, 'WEBP', quality=75, method=6)
+          a, b = os.path.getsize(src), os.path.getsize(dst)
+          print(f'JPG: {a} bytes | WebP: {b} bytes')
+          assert b < a, 'WebP nao ficou menor - abortando'
+          total = 0
+          for f in glob.glob('**/*.html', recursive=True) + glob.glob('**/*.css', recursive=True) + glob.glob('*.js'):
+              if '.git' in f: continue
+              s = open(f, encoding='utf8').read()
+              n = s.count('hero-mermaid-surf.jpg')
+              if n:
+                  open(f, 'w', encoding='utf8').write(s.replace('hero-mermaid-surf.jpg', 'hero-mermaid-surf.webp'))
+                  total += n
+                  print(f'{f}: {n} ref(s)')
+          assert total > 0, 'nenhuma referencia atualizada'
+          print(f'Total: {total} referencias atualizadas')
+          EOF
+      - name: Commit
+        run: |
+          if git diff --quiet && [ -z "$(git status --porcelain)" ]; then echo "Nada a commitar"; exit 0; fi
+          git config user.name "asf-bot"
+          git config user.email "asf-bot@users.noreply.github.com"
+          git add -A
+          git commit -m "perf: hero em WebP (jpg mantido como fallback)"
+          git push
