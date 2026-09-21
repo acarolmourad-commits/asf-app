@@ -1,0 +1,38 @@
+name: Dedupe carteirinha home card
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  edit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Remove duplicate carteirinha card
+        run: |
+          python3 << 'PYEOF'
+          import re
+          h = open('index.html', encoding='utf-8').read()
+          orig = h
+          n1 = h.count('id="card-carteirinha-home"')
+          n2 = h.count('id="carteirinha-home-card"')
+          print('cards:', n1, n2)
+          if n1 and n2:
+            # remove a linha inteira do card duplicado (gradiente)
+            h = re.sub(r'\n[ \t]*<a href="#carteirinha" id="card-carteirinha-home".*?</a>', '', h, count=1)
+          assert h.count('id="card-carteirinha-home"') == 0
+          assert h.count('id="carteirinha-home-card"') == 1
+          if h != orig:
+            open('index.html', 'w', encoding='utf-8').write(h)
+            print('duplicata removida')
+          else:
+            print('nada a fazer')
+          PYEOF
+      - name: Commit changes
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "fix: remove card duplicado da Carteirinha na home"
+          file_pattern: index.html
