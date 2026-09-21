@@ -1,5 +1,3 @@
-/* Extraído de index.html — bloco inline #1 (ordem preservada) */
-
         const MOCK_MANAS = {
             bertioga: [
                 { name: "Marina S.", level: "Intermediária", beach: "Riviera", distance: 0.5, avatar: "🏄♀️" },

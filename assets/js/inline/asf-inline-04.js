@@ -1,5 +1,3 @@
-/* Extraído de index.html — bloco inline #4 (ordem preservada) */
-
 (function(){
   var MESES=['janeiro','fevereiro','março','abril','maio','junho','julho','agosto','setembro','outubro','novembro','dezembro'];
   function fmt(d){var p=d.split('-');return String(parseInt(p[2],10))+' '+MESES[parseInt(p[1],10)-1]+' '+p[0];}
