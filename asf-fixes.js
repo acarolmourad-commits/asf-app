@@ -369,3 +369,89 @@ document.addEventListener('DOMContentLoaded', function(){
   setTimeout(neutralizeBrands, 1500);
   setTimeout(neutralizeBrands, 4000);
 })();
+
+
+/* ============================================================
+   3) UTILITIES — openUtility() (cards da home) + acessibilidade
+   Corrige ReferenceError: openUtility is not defined
+============================================================ */
+(function(){
+  "use strict";
+
+  function utilityModal(title, bodyHtml){
+    var old = document.getElementById('asf-utility-modal');
+    if(old) old.remove();
+    var ov = document.createElement('div');
+    ov.id = 'asf-utility-modal';
+    ov.setAttribute('role','dialog');
+    ov.setAttribute('aria-modal','true');
+    ov.setAttribute('aria-label', title);
+    ov.style.cssText = 'position:fixed;inset:0;background:rgba(14,36,57,.55);z-index:9999;display:flex;align-items:center;justify-content:center;padding:20px;';
+    ov.innerHTML = '<div style="background:#fff;border-radius:16px;max-width:420px;width:100%;padding:24px;box-shadow:0 10px 40px rgba(0,0,0,.25);position:relative;">'
+      + '<button type="button" aria-label="Fechar" style="position:absolute;top:10px;right:12px;border:none;background:none;font-size:22px;cursor:pointer;color:#666;" id="asf-utility-close">×</button>'
+      + '<h3 style="margin:0 0 12px;color:#0E2439;">' + title + '</h3>'
+      + '<div style="font-size:14px;line-height:1.6;color:#333;">' + bodyHtml + '</div>'
+      + '</div>';
+    document.body.appendChild(ov);
+    function close(){ ov.remove(); document.removeEventListener('keydown', onKey); }
+    function onKey(e){ if(e.key==='Escape') close(); }
+    ov.addEventListener('click', function(e){ if(e.target===ov) close(); });
+    ov.querySelector('#asf-utility-close').addEventListener('click', close);
+    document.addEventListener('keydown', onKey);
+    ov.querySelector('#asf-utility-close').focus();
+  }
+
+  window.openUtility = function(key){
+    switch(key){
+      case 'tides':
+        if (typeof window.showMareDetails === 'function') { window.showMareDetails(); return; }
+        window.location.href = 'mareas/';
+        return;
+      case 'sunscreen':
+        utilityModal('☀️ Protetor Solar',
+          '<p>☀️ <strong>Passe protetor FPS 50+ 30 minutos antes</strong> de entrar na água e reaplique a cada 2 horas.</p>'
+          + '<p>• Prefira protetor <strong>reef-safe</strong> (sem oxibenzona) para proteger o mar 🌊</p>'
+          + '<p>• Não esqueça orelhas, pescoço e dorso dos pés!</p>'
+          + '<p>• Zinc stick no rosto segura melhor durante a sessão.</p>');
+        return;
+      case 'sessionlog':
+        utilityModal('📝 Diário de Surf',
+          '<p>Registre cada sessão: ondas, local, condições e sensações. Acompanhe sua evolução ao longo do tempo!</p>'
+          + '<p style="margin-top:12px;"><a href="diario/" style="display:inline-block;background:#00A8CC;color:#fff;padding:10px 18px;border-radius:10px;text-decoration:none;font-weight:bold;">Abrir Diário de Surf →</a></p>');
+        return;
+      case 'wetsuit':
+        utilityModal('🧤 Guia de Wetsuit',
+          '<p><strong>Água acima de 22°C:</strong> biquíni/licra.<br>'
+          + '<strong>19–22°C:</strong> short john ou 2mm.<br>'
+          + '<strong>Abaixo de 19°C:</strong> long john 3/2mm.</p>'
+          + '<p>No litoral norte de SP, um long john 3/2mm cobre o inverno e uma 2mm o resto do ano. 🤙</p>');
+        return;
+      default:
+        if (typeof window.showToast === 'function') window.showToast('Em breve! 💜');
+    }
+  };
+
+  /* Acessibilidade: cards clicáveis viram "botões" de verdade */
+  function a11yCards(){
+    document.querySelectorAll('.utility-card[onclick]').forEach(function(card){
+      if (card.getAttribute('role')) return;
+      card.setAttribute('role','button');
+      card.setAttribute('tabindex','0');
+      card.addEventListener('keydown', function(e){
+        if(e.key==='Enter'||e.key===' '){ e.preventDefault(); card.click(); }
+      });
+    });
+  }
+  if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',a11yCards);}else{a11yCards();}
+  setTimeout(a11yCards, 2000);
+})();
+
+/* Fix: botão da enquete tinha atributo class duplicado no HTML (o segundo era ignorado) */
+(function(){
+  function fixPollBtn(){
+    var b=document.querySelector('[data-poll-key="destino-Ilhabela"]');
+    if(b && !b.classList.contains('poll-voted')) b.classList.add('poll-voted');
+  }
+  if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',fixPollBtn);}else{fixPollBtn();}
+  setTimeout(fixPollBtn, 2000);
+})();
