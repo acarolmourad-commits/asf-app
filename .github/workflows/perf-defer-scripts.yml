@@ -1,0 +1,45 @@
+name: perf-defer-scripts
+# Adiciona 'defer' em <script src> do index.html que nao tem async/defer.
+# Execucao MANUAL. Valida antes de commitar: nenhuma tag script pode ser perdida.
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  defer:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Aplica defer com validacao
+        run: |
+          cp index.html index.html.bak
+          python3 - <<'EOF'
+          import re
+          from html.parser import HTMLParser
+          s = open('index.html', encoding='utf8').read()
+          before = len(re.findall(r'<script', s))
+          def add_defer(m):
+              tag = m.group(0)
+              if 'async' in tag or 'defer' in tag:
+                  return tag
+              return tag.replace('<script', '<script defer', 1)
+          s = re.sub(r'<script\s+[^>]*src="[^"]+"[^>]*>', add_defer, s)
+          after = len(re.findall(r'<script', s))
+          assert before == after, f'tags script mudaram: {before} -> {after}'
+          class P(HTMLParser):
+              pass
+          P().feed(s)  # valida parse HTML
+          open('index.html', 'w', encoding='utf8').write(s)
+          print(f'OK: {before} tags script preservadas, defer aplicado onde faltava')
+          EOF
+      - name: Commit apenas se houver mudanca
+        run: |
+          rm -f index.html.bak
+          if git diff --quiet; then echo "Nada a commitar"; exit 0; fi
+          git config user.name "asf-bot"
+          git config user.email "asf-bot@users.noreply.github.com"
+          git add index.html
+          git commit -m "perf: defer em scripts nao criticos do index.html"
+          git push
