@@ -1,4 +1,4 @@
-name: ASF Mission Fixes (auditoria 2026-09)
+name: ASF Mission Fixes (one-shot)
 
 on:
   workflow_dispatch:
@@ -7,7 +7,7 @@ permissions:
   contents: write
 
 jobs:
-  fixes:
+  mission-fixes:
     runs-on: ubuntu-latest
     timeout-minutes: 5
     steps:
@@ -25,6 +25,6 @@ jobs:
           if git diff --cached --quiet; then
             echo "Sem mudancas"
           else
-            git commit -m "fix: remove sorteio de surftrip, corrige link de privacidade do banner de cookies e ativa botoes sem acao"
+            git commit -m "fix: remove sorteio inexistente, corrige botoes mortos e link de privacidade do banner de cookies"
             git push
           fi
