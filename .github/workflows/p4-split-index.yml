@@ -1,0 +1,43 @@
+name: P4 — Refatora index.html em assets externos (branch + validação)
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - '.github/workflows/p4-split-index.yml'
+      - '.github/scripts/p4_split_index.py'
+
+permissions:
+  contents: write
+
+jobs:
+  split:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Executa refatoração com validação round-trip
+        run: python3 .github/scripts/p4_split_index.py
+
+      - name: Valida sintaxe JS extraída
+        run: |
+          sudo apt-get install -y nodejs >/dev/null 2>&1 || true
+          for f in assets/js/inline/*.js app.js app-posts.js asf-fixes.js; do
+            node --check "$f" && echo "OK $f" || { echo "SYNTAX ERROR $f"; exit 1; }
+          done
+
+      - name: Cria branch e commita
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git checkout -B refactor/external-assets origin/main
+          git add index.html assets/css/asf-inline.css assets/js/inline/
+          git diff --cached --quiet && echo "Nada a commitar" && exit 0
+          git commit -m "refactor: extrai CSS/JS inline do index.html para assets cacheáveis (940KB -> 276KB)
+
+- assets/css/asf-inline.css: 7 blocos <style> concatenados em ordem
+- assets/js/inline/asf-inline-01..10.js: scripts inline em ordem de execução
+- fix: fecha regra html{} que engolia :root (variáveis CSS)
+- fix: remove </div> órfão pré-existente após Resultados Recentes
+- validação: round-trip byte a byte (markup, JS, CSS) + node --check"
+          git push -u origin refactor/external-assets --force
