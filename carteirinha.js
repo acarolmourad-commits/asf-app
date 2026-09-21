@@ -241,7 +241,10 @@ const ASF_CARD = {
    1) updateNotificationBadge() é chamada antes de existir (linha ~4323)
       -> mata o script que define 'beaches' -> renderSurfConditions quebra.
    2) LEVELS nunca foi definido -> getLevel() quebra conquistas/pontos.
-   3) auto-init da carteirinha: evita a seção vazia (quadrado branco). */
+   3) auto-init da carteirinha: evita a seção vazia (quadrado branco).
+   4) FIX 2026-09-21b: usar window.X em vez de var X — o index.html declara
+      'const beaches' global; 'var beaches' aqui causava SyntaxError de
+      redeclaração e derrubava ESTE ARQUIVO INTEIRO (seção morta). */
 
 /* stub seguro: se a função real existir depois, ela sobrescreve via hoisting no próprio script */
 if (typeof window.updateNotificationBadge !== 'function') {
@@ -253,9 +256,9 @@ if (typeof window.updateNotificationBadge !== 'function') {
   };
 }
 
-/* praias (espelha a tabela original do index.html) */
-if (typeof beaches === 'undefined') {
-  var beaches = {
+/* praias (espelha a tabela original do index.html) — sem 'var', evita conflito com const do index */
+if (!window.beaches) {
+  window.beaches = {
     bertioga: { name: 'Bertioga', lat: -23.85, lon: -46.14 },
     santos:   { name: 'Santos',   lat: -23.96, lon: -46.33 },
     guaruja:  { name: 'Guarujá',  lat: -23.99, lon: -46.25 },
@@ -270,8 +273,8 @@ if (typeof beaches === 'undefined') {
 }
 
 /* níveis de gamificação (usados por getLevel no app.js) */
-if (typeof LEVELS === 'undefined') {
-  var LEVELS = [
+if (!window.LEVELS) {
+  window.LEVELS = [
     { level: 1, name: 'Gotinha',      minPoints: 0 },
     { level: 2, name: 'Maré Leve',    minPoints: 100 },
     { level: 3, name: 'Onda Boa',     minPoints: 300 },
