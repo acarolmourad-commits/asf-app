@@ -1,18 +1,18 @@
 {
   "date": "2026-09-21",
   "new_tip": {
-    "category": "Saúde",
-    "title": "Treino de força",
-    "content": "Foque em exercícios compostos: remada com elástico, agachamentos, plank. 2-3x/semana.",
+    "category": "Técnica",
+    "title": "Como fazer o bottom turn",
+    "content": "O bottom turn é a base. Transfira o peso para o pé da frente e gire a prancha.",
     "tags": [
-      "Saúde",
-      "Treino"
+      "Técnica",
+      "Manobras"
     ]
   },
   "new_utility": {
-    "name": "Previsão de Ondas",
-    "description": "7 dias de previsão",
-    "icon": "🌊"
+    "name": "Calculadora de Maré",
+    "description": "Horários de maré",
+    "icon": "🗓️"
   },
   "improvements": [
     {
@@ -21,10 +21,10 @@
       "priority": "high"
     },
     {
-      "type": "layout",
-      "title": "Modo escuro",
-      "priority": "medium"
+      "type": "feature",
+      "title": "Medidor de condições do mar",
+      "priority": "high"
     }
   ],
-  "generated_at": "2026-09-21T02:00:38.954474"
+  "generated_at": "2026-09-21T11:16:13.197552"
 }
