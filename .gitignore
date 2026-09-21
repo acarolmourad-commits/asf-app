@@ -1,0 +1,6 @@
+# Resíduos de runtime de agentes de IA — não commitar
+.openclaw/
+memory/
+__pycache__/
+*.log
+.env
