@@ -336,3 +336,34 @@ document.addEventListener('DOMContentLoaded', function(){
   setTimeout(removeFakeSponsor, 1500);
   setTimeout(removeFakeSponsor, 4000);
 })();
+
+/* ============================================================
+   VITRINE: substitui marcas ilustrativas por convite à
+   primeira parceria real (Brand Hub + card da home)
+============================================================ */
+(function(){
+  var CTA = '<div style="text-align:center;padding:24px 16px">'
+    + '<div style="font-size:40px;margin-bottom:8px">💙</div>'
+    + '<p style="font-size:15px;font-weight:600;color:#0E2439;margin:0 0 6px">Seja a primeira marca parceira da ASF!</p>'
+    + '<p style="font-size:13px;color:#666;margin:0 0 14px">Apoie o surf feminino brasileiro e ganhe visibilidade na nossa comunidade. Parcerias oficiais serão anunciadas nos canais oficiais da ASF.</p>'
+    + '<button onclick="showBrandContact()" style="background:#00A8CC;color:#fff;border:none;padding:12px 24px;border-radius:50px;font-size:14px;font-weight:600;cursor:pointer">🤝 Quero ser parceira</button>'
+    + '</div>';
+  function replaceFakeBrands(){
+    var showcase = document.getElementById('brand-showcase');
+    if (showcase && !showcase.dataset.asfReplaced){
+      showcase.dataset.asfReplaced = '1';
+      showcase.innerHTML = '<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px"><div>'
+        + '<h3 style="font-size:18px;font-weight:700;color:#0E2439;margin:0">🏆 Marcas Parceiras</h3>'
+        + '<p style="font-size:13px;color:#666;margin:4px 0 0">Quem apoia o surf feminino brasileiro</p></div></div>'
+        + '<div style="background:#fff;border-radius:16px;border:1px solid rgba(0,168,204,0.15);box-shadow:0 2px 10px rgba(0,0,0,0.05)">' + CTA + '</div>';
+    }
+    var homeCard = document.getElementById('brand-home-card');
+    if (homeCard && !homeCard.dataset.asfReplaced){
+      homeCard.dataset.asfReplaced = '1';
+      homeCard.innerHTML = CTA;
+    }
+  }
+  if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',replaceFakeBrands);}else{replaceFakeBrands();}
+  setTimeout(replaceFakeBrands, 1500);
+  setTimeout(replaceFakeBrands, 4000);
+})();
