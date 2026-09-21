@@ -1,20 +1,40 @@
-name: ASF - remover conteudo da secao de lojas
+name: 🛒 Remover seção de lojas da home (preparar para marcas parceiras)
+
 on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/remove-lojas-section.yml'
+      - 'scripts/remove_lojas_section.py'
   workflow_dispatch:
 
 permissions:
   contents: write
 
 jobs:
-  patch:
+  remove-lojas-section:
+    name: Remover listagem de lojas e manter placeholder de parceiros
     runs-on: ubuntu-latest
+    timeout-minutes: 5
     steps:
       - uses: actions/checkout@v4
-      - name: Aplicar remocao do conteudo da secao #lojas
+      - name: 🛒 Aplicar remoção da seção #lojas
         run: python3 scripts/remove_lojas_section.py
-      - name: Commit and push
+      - name: ✅ Validações de integridade
         run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
+          ! grep -in 'Sthill' index.html && echo "✅ sem cards de lojas"
+          ! grep -in 'aguadomarsurfshop' index.html && echo "✅ sem instagrams de lojas"
+          test "$(grep -c 'id=\"lojas\"' index.html)" = "1" && echo "✅ seção #lojas preservada (placeholder)"
+          grep -q 'Quero ser parceiro' index.html && echo "✅ CTA de parceria mantido"
+          test "$(grep -c '<style' index.html)" = "$(grep -c '</style>' index.html)" && echo "✅ styles balanceados"
+      - name: 💾 Commit e push
+        run: |
+          git config user.name "ASF Bot"
+          git config user.email "bot@asf-app.com"
           git add index.html
-          git diff --cached --quiet && echo "sem alteracoes" || (git commit -m "chore: remove conteudo da secao #lojas (CTA de parceria mantido para futuras marcas)" && git push)
+          if git diff --cached --quiet; then
+            echo "Sem alterações"
+          else
+            git commit -m "🛒 Remover listagem de lojas da home; manter placeholder para futuras marcas parceiras"
+            git push
+          fi
