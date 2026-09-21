@@ -281,3 +281,21 @@ document.addEventListener('DOMContentLoaded', function(){
   if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',swapHeaderLogo);}else{swapHeaderLogo();}
   setTimeout(swapHeaderLogo, 1500);
 })();
+
+/* ============================================================
+   REMOVE: seção "Badges Patrocinados" (marcas ilustrativas,
+   não representam parcerias vigentes da ASF)
+============================================================ */
+(function(){
+  function removeSponsoredBadges(){
+    var hs = document.querySelectorAll('h3');
+    for (var i = 0; i < hs.length; i++){
+      if (hs[i].textContent.indexOf('Badges Patrocinados') !== -1){
+        var box = hs[i].closest('div');
+        if (box && box.parentNode) box.parentNode.removeChild(box);
+      }
+    }
+  }
+  if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',removeSponsoredBadges);}else{removeSponsoredBadges();}
+  setTimeout(removeSponsoredBadges, 1500);
+})();
