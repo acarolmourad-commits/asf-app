@@ -235,3 +235,58 @@ const ASF_CARD = {
 
   init() { this.render('carteirinha-content'); }
 };
+
+/* ─── ASF HOTFIX 2026-09-21 ─────────────────────────────────
+   Repara cascata de erros do index.html sem precisar editá-lo:
+   1) updateNotificationBadge() é chamada antes de existir (linha ~4323)
+      -> mata o script que define 'beaches' -> renderSurfConditions quebra.
+   2) LEVELS nunca foi definido -> getLevel() quebra conquistas/pontos.
+   3) auto-init da carteirinha: evita a seção vazia (quadrado branco). */
+
+/* stub seguro: se a função real existir depois, ela sobrescreve via hoisting no próprio script */
+if (typeof window.updateNotificationBadge !== 'function') {
+  window.updateNotificationBadge = function () {
+    try {
+      var badge = document.getElementById('notif-badge');
+      if (badge) badge.style.display = 'none';
+    } catch (e) {}
+  };
+}
+
+/* praias (espelha a tabela original do index.html) */
+if (typeof beaches === 'undefined') {
+  var beaches = {
+    bertioga: { name: 'Bertioga', lat: -23.85, lon: -46.14 },
+    santos:   { name: 'Santos',   lat: -23.96, lon: -46.33 },
+    guaruja:  { name: 'Guarujá',  lat: -23.99, lon: -46.25 },
+    ubatuba:  { name: 'Ubatuba',  lat: -23.43, lon: -45.08 },
+    ilhabela: { name: 'Ilhabela', lat: -23.78, lon: -45.36 },
+    maresias: { name: 'Maresias', lat: -23.79, lon: -45.36 },
+    baleia:   { name: 'Praia da Baleia', lat: -23.82, lon: -45.45 },
+    'sao-sebastiao': { name: 'São Sebastião', lat: -23.80, lon: -45.44 },
+    itamambuca: { name: 'Itamambuca', lat: -23.45, lon: -45.05 },
+    cambraia: { name: 'Cambraia', lat: -23.77, lon: -45.50 }
+  };
+}
+
+/* níveis de gamificação (usados por getLevel no app.js) */
+if (typeof LEVELS === 'undefined') {
+  var LEVELS = [
+    { level: 1, name: 'Gotinha',      minPoints: 0 },
+    { level: 2, name: 'Maré Leve',    minPoints: 100 },
+    { level: 3, name: 'Onda Boa',     minPoints: 300 },
+    { level: 4, name: 'Surfista',     minPoints: 500 },
+    { level: 5, name: 'Onda Grande',  minPoints: 800 },
+    { level: 6, name: 'Maresia',      minPoints: 1200 },
+    { level: 7, name: 'Tubulosa',     minPoints: 1700 },
+    { level: 8, name: 'Lenda do Mar', minPoints: 2300 }
+  ];
+}
+
+/* auto-init: renderiza a carteirinha assim que o DOM estiver pronto,
+   mesmo sem clique — a seção nunca fica em branco. */
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', function () { ASF_CARD.init(); });
+} else {
+  ASF_CARD.init();
+}
