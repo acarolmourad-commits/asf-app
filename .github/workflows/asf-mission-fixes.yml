@@ -19,14 +19,15 @@ jobs:
         run: |
           python3 scripts/asf_mission_fixes.py
           python3 scripts/asf_fix_posts_tab.py
+          python3 scripts/asf_add_hospedagens_links.py
       - name: Commit if changed
         run: |
           git config user.name "ASF Bot"
           git config user.email "bot@asf-app.com"
-          git add index.html
+          git add index.html sitemap.xml surf-trip/index.html previsao-surf/index.html
           if git diff --cached --quiet; then
             echo "Sem mudancas"
           else
-            git commit -m "fix: remove fragmento orfao da aba Posts (secao instagram ja removida)"
+            git commit -m "feat: links para Estadias Parceiras (sitemap, surf-trip, previsao-surf)"
             git push
           fi
