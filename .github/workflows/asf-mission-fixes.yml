@@ -16,7 +16,9 @@ jobs:
         with:
           python-version: '3.11'
       - name: Apply mission fixes
-        run: python3 scripts/asf_mission_fixes.py
+        run: |
+          python3 scripts/asf_mission_fixes.py
+          python3 scripts/asf_fix_posts_tab.py
       - name: Commit if changed
         run: |
           git config user.name "ASF Bot"
@@ -25,6 +27,6 @@ jobs:
           if git diff --cached --quiet; then
             echo "Sem mudancas"
           else
-            git commit -m "fix: remove sorteio inexistente, corrige botoes mortos e link de privacidade do banner de cookies"
+            git commit -m "fix: remove fragmento orfao da aba Posts (secao instagram ja removida)"
             git push
           fi
