@@ -1,0 +1,30 @@
+name: ASF Mission Fixes (auditoria 2026-09)
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  fixes:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Apply mission fixes
+        run: python3 scripts/asf_mission_fixes.py
+      - name: Commit if changed
+        run: |
+          git config user.name "ASF Bot"
+          git config user.email "bot@asf-app.com"
+          git add index.html
+          if git diff --cached --quiet; then
+            echo "Sem mudancas"
+          else
+            git commit -m "fix: remove sorteio de surftrip, corrige link de privacidade do banner de cookies e ativa botoes sem acao"
+            git push
+          fi
