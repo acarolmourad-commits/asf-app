@@ -76,7 +76,7 @@
     <!-- Rooms List View -->
     <div id="rooms-view">
         <div class="chat-header">
-            <button class="back-btn" onclick="location.href='index.html'">←</button>
+            <button aria-label="←" class="back-btn" onclick="location.href='index.html'">←</button>
             <div class="chat-title">Sessões Interativas</div>
             <div class="online-dot"></div>
         </div>
@@ -147,7 +147,7 @@
     <!-- Chat Room View -->
     <div id="chat-view" class="hidden">
         <div class="chat-header">
-            <button class="back-btn" onclick="showRoomsList()">←</button>
+            <button aria-label="←" class="back-btn" onclick="showRoomsList()">←</button>
             <div class="chat-title" id="room-title">Sala</div>
             <div class="online-dot"></div>
         </div>
@@ -158,7 +158,7 @@
         
         <div class="chat-input-area">
             <textarea id="message-input" class="chat-input" placeholder="Digite sua mensagem..." rows="1"></textarea>
-            <button class="send-btn" onclick="sendMessage()">➤</button>
+            <button aria-label="➤" class="send-btn" onclick="sendMessage()">➤</button>
         </div>
     </div>
 

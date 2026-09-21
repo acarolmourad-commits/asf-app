@@ -506,7 +506,7 @@ t Section -->
     <div id="chatbot-panel" style="display:none; position:fixed; bottom:80px; right:20px; width:320px; max-height:400px; background:white; border-radius:16px; box-shadow:0 10px40px rgba(0,0,0,0.2); z-index:1000; padding:16px; overflow-y:auto;">
         <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
             <strong style="color:#0E2439; display: none !important;">🤖 Assistente ASF</strong>
-            <button onclick="toggleChatbot()" style="background:none; border:none; font-size:20px; cursor:pointer;">✕</button>
+            <button aria-label="✕" onclick="toggleChatbot()" style="background:none; border:none; font-size:20px; cursor:pointer;">✕</button>
         </div>
         <div id="chatbot-messages" style="min-height:200px; max-height:300px; overflow-y:auto;"></div>
         <div style="display:flex; gap:8px; margin-top:12px;">
@@ -521,7 +521,7 @@ t Section -->
         <div class="search-bar">
             <span class="search-icon">🔍</span>
             <input type="text" id="searchInput" placeholder="Buscar dicas, lojas, treinos..." oninput="debouncedSearch(this.value)" onfocus="showRecentSearches()">
-            <button class="search-clear" id="searchClear" onclick="clearSearch()">✕</button>
+            <button aria-label="✕" class="search-clear" id="searchClear" onclick="clearSearch()">✕</button>
         </div>
         <div class="search-results" id="searchResults"></div>
     </div>
@@ -723,7 +723,7 @@ t Section -->
 
     <div id="welcome-card" style="padding: 20px; display: none !important;">
         <div style="background: linear-gradient(135deg, #00A8CC 0%, #0E2439 100%); padding: 25px; border-radius: 20px; color: white; position: relative; overflow: hidden;">
-            <button onclick="closeWelcome()" style="position: absolute; top: 10px; right: 15px; background: rgba(255,255,255,0.2); border: none; color: white; width: 30px; height: 30px; border-radius: 50%; font-size: 16px; cursor: pointer;">✕</button>
+            <button aria-label="✕" onclick="closeWelcome()" style="position: absolute; top: 10px; right: 15px; background: rgba(255,255,255,0.2); border: none; color: white; width: 30px; height: 30px; border-radius: 50%; font-size: 16px; cursor: pointer;">✕</button>
             <div style="font-size: 60px; margin-bottom: 15px;">🏄‍♀️</div>
             <h2 style="font-size: 24px; margin-bottom: 10px;">Bem-vinda ao ASF!</h2>
             <p style="font-size: 14px; opacity: 0.9; line-height: 1.6; margin-bottom: 20px;">
@@ -2101,7 +2101,7 @@ t Section -->
                     <h3>💧 Você bebeu água hoje?</h3>
                     <p>Controle sua hidratação diária.</p>
                     <div style="display: flex; align-items: center; gap: 12px; margin-top: 12px;">
-                        <button onclick="addWater(-1)" style="width: 36px; height: 36px; border-radius: 50%; border: 2px solid var(--gray-200); background: white; font-size: 18px; cursor: pointer;">-</button>
+                        <button aria-label="-" onclick="addWater(-1)" style="width: 36px; height: 36px; border-radius: 50%; border: 2px solid var(--gray-200); background: white; font-size: 18px; cursor: pointer;">-</button>
                         <div style="flex: 1; text-align: center;">
                             <div style="font-size: 24px; font-weight: 700; color: var(--primary);" id="water-count">0</div>
                             <div style="font-size: 11px; color: var(--gray-400);" id="water-label">de 8 copos</div>
@@ -2109,7 +2109,7 @@ t Section -->
                                 <div id="water-bar" style="height: 100%; width: 0%; background: var(--primary); border-radius: 3px; transition: width 0.3s;"></div>
                             </div>
                         </div>
-                        <button onclick="addWater(1)" style="width: 36px; height: 36px; border-radius: 50%; border: none; background: var(--primary); color: white; font-size: 18px; cursor: pointer;">+</button>
+                        <button aria-label="+" onclick="addWater(1)" style="width: 36px; height: 36px; border-radius: 50%; border: none; background: var(--primary); color: white; font-size: 18px; cursor: pointer;">+</button>
                     </div>
                 </div>
             </div>
@@ -3029,8 +3029,8 @@ t Section -->
                     Gurias, aula de sábado confirmada! 7h na praia de Bertioga. Quem vai? 🏄‍♀️
                 </div>
                 <div class="post-actions">
-                    <button class="post-action" onclick="toggleLike(this)" data-count="12"><span>🤍</span> 12</button>
-                    <button class="post-action"><span>💬</span> 5</button>
+                    <button aria-label="🤍 12" class="post-action" onclick="toggleLike(this)" data-count="12"><span>🤍</span> 12</button>
+                    <button aria-label="💬 5" class="post-action"><span>💬</span> 5</button>
                     <button class="post-action" onclick="sharePost('Gurias, aula de sábado confirmada! 7h na praia de Bertioga. Quem vai? 🏄‍♀️')"><span>🔗</span> Compartilhar</button>
                 </div>
             </div>
@@ -3046,8 +3046,8 @@ t Section -->
                     Alguém quer pegar uma onda domingo? Estou pensando em ir pra praia!
                 </div>
                 <div class="post-actions">
-                    <button class="post-action" onclick="toggleLike(this)" data-count="8"><span>🤍</span> 8</button>
-                    <button class="post-action"><span>💬</span> 3</button>
+                    <button aria-label="🤍 8" class="post-action" onclick="toggleLike(this)" data-count="8"><span>🤍</span> 8</button>
+                    <button aria-label="💬 3" class="post-action"><span>💬</span> 3</button>
                     <button class="post-action" onclick="sharePost('Alguém quer pegar uma onda domingo? 🏄‍♀️')"><span>🔗</span> Compartilhar</button>
                 </div>
             </div>
@@ -3063,8 +3063,8 @@ t Section -->
                     Consegui desconto em lycras! Quem quiser, me chama no direct! 💙
                 </div>
                 <div class="post-actions">
-                    <button class="post-action" onclick="toggleLike(this)" data-count="15"><span>🤍</span> 15</button>
-                    <button class="post-action"><span>💬</span> 7</button>
+                    <button aria-label="🤍 15" class="post-action" onclick="toggleLike(this)" data-count="15"><span>🤍</span> 15</button>
+                    <button aria-label="💬 7" class="post-action"><span>💬</span> 7</button>
                     <button class="post-action" onclick="sharePost('Desconto em lycras de surf! 💙')"><span>🔗</span> Compartilhar</button>
                 </div>
             </div>
@@ -3899,26 +3899,26 @@ t Section -->
     </div>
 
     <!-- Floating Action Buttons -->
-    <button class="fab" onclick="showCreateMenu()">+</button>
-    <button class="fab-share" onclick="toggleSharePanel()" title="Compartilhar">📤</button>
-    <button id="back-to-top" onclick="scrollToTop()" style="display: none; position: fixed; bottom: 160px; right: 24px; width: 45px; height: 45px; background: rgba(0,168,204,0.9); border: none; color: white; border-radius: 50%; font-size: 20px; cursor: pointer; z-index: 99; box-shadow: 0 4px 15px rgba(0,0,0,0.2);">⬆️</button>
+    <button aria-label="+" class="fab" onclick="showCreateMenu()">+</button>
+    <button aria-label="📤" class="fab-share" onclick="toggleSharePanel()" title="Compartilhar">📤</button>
+    <button aria-label="⬆️" id="back-to-top" onclick="scrollToTop()" style="display: none; position: fixed; bottom: 160px; right: 24px; width: 45px; height: 45px; background: rgba(0,168,204,0.9); border: none; color: white; border-radius: 50%; font-size: 20px; cursor: pointer; z-index: 99; box-shadow: 0 4px 15px rgba(0,0,0,0.2);">⬆️</button>
 
     <!-- Share Panel -->
     <div id="share-panel" style="display: none; position: fixed; bottom: 90px; right: 90px; background: white; border-radius: 16px; box-shadow: 0 10px 40px rgba(0,0,0,0.2); z-index: 1000; padding: 20px; min-width: 280px;">
         <h4 style="margin-bottom: 15px; color: #0E2439;">📤 Compartilhar ASF</h4>
 
         <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px; margin-bottom: 20px;">
-            <button onclick="shareToWhatsApp()" style="background: #25D366; border: none; color: white; width: 50px; height: 50px; border-radius: 50%; font-size: 24px; cursor: pointer;" title="WhatsApp">💬</button>
-            <button onclick="shareToInstagram()" style="background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); border: none; color: white; width: 50px; height: 50px; border-radius: 50%; font-size: 24px; cursor: pointer;" title="Instagram">📸</button>
-            <button onclick="shareToFacebook()" style="background: #1877F2; border: none; color: white; width: 50px; height: 50px; border-radius: 50%; font-size: 24px; cursor: pointer;" title="Facebook">👍</button>
-            <button onclick="shareToTwitter()" style="background: #1DA1F2; border: none; color: white; width: 50px; height: 50px; border-radius: 50%; font-size: 24px; cursor: pointer;" title="Twitter">🐦</button>
+            <button aria-label="💬" onclick="shareToWhatsApp()" style="background: #25D366; border: none; color: white; width: 50px; height: 50px; border-radius: 50%; font-size: 24px; cursor: pointer;" title="WhatsApp">💬</button>
+            <button aria-label="📸" onclick="shareToInstagram()" style="background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); border: none; color: white; width: 50px; height: 50px; border-radius: 50%; font-size: 24px; cursor: pointer;" title="Instagram">📸</button>
+            <button aria-label="👍" onclick="shareToFacebook()" style="background: #1877F2; border: none; color: white; width: 50px; height: 50px; border-radius: 50%; font-size: 24px; cursor: pointer;" title="Facebook">👍</button>
+            <button aria-label="🐦" onclick="shareToTwitter()" style="background: #1DA1F2; border: none; color: white; width: 50px; height: 50px; border-radius: 50%; font-size: 24px; cursor: pointer;" title="Twitter">🐦</button>
         </div>
 
         <div style="background: #f8f9fa; padding: 12px; border-radius: 10px;">
             <p style="font-size: 12px; color: #666; margin-bottom: 8px;">Link para compartilhar:</p>
             <div style="display: flex; gap: 8px;">
                 <input type="text" value="https://acarolmourad-commits.github.io/asf-app/" id="share-link" style="flex: 1; padding: 8px; border: 1px solid #ddd; border-radius: 8px; font-size: 12px;" readonly>
-                <button onclick="copyShareLink()" style="background: #00A8CC; border: none; color: white; padding: 8px 12px; border-radius: 8px; font-size: 12px; cursor: pointer;">📋</button>
+                <button aria-label="📋" onclick="copyShareLink()" style="background: #00A8CC; border: none; color: white; padding: 8px 12px; border-radius: 8px; font-size: 12px; cursor: pointer;">📋</button>
             </div>
         </div>
 
@@ -8275,7 +8275,7 @@ window.ASFMonetization={trackEvent,getStats};const a=document.createElement('sty
 <!-- REFERRAL MODAL -->
 <div id="referral-modal" role="dialog" aria-modal="true" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.85); z-index:99999; align-items:center; justify-content:center; backdrop-filter: blur(8px); padding: 20px;">
   <div style="background: linear-gradient(135deg, #9B59B6 0%, #8E44AD 100%); padding: 32px; border-radius: 24px; max-width: 420px; width: 100%; text-align: center; position: relative;">
-    <button onclick="hideReferralModal()" style="position: absolute; top: 12px; right: 18px; background: none; border: none; font-size: 28px; cursor: pointer; color: white; opacity: 0.8;">×</button>
+    <button aria-label="×" onclick="hideReferralModal()" style="position: absolute; top: 12px; right: 18px; background: none; border: none; font-size: 28px; cursor: pointer; color: white; opacity: 0.8;">×</button>
     
     <div style="font-size: 56px; margin-bottom: 8px;">🎁</div>
     <h2 style="margin: 0 0 8px 0; color: white; font-size: 24px;">Indique e Ganhe!</h2>
@@ -10069,7 +10069,7 @@ function renderSessions() {
                                 <p style="font-size: 12px; color: var(--gray-400);">${dateStr} • ${s.duration}min ${s.notes ? '• ' + s.notes : ''}</p>
                             </div>
                         </div>
-                        <button onclick="deleteSession(${s.id})" style="background: none; border: none; font-size: 16px; cursor: pointer; opacity: 0.4;">✕</button>
+                        <button aria-label="✕" onclick="deleteSession(${s.id})" style="background: none; border: none; font-size: 16px; cursor: pointer; opacity: 0.4;">✕</button>
                     </div>
                 </div>`;
             }).join('');
@@ -11008,7 +11008,7 @@ function createCampaignModal(){
   modal.style.cssText='display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.85);z-index:99998;align-items:center;justify-content:center;backdrop-filter:blur(8px);padding:20px';
   modal.innerHTML=''
     +'<div style="background:white;border-radius:20px;max-width:560px;width:100%;max-height:85vh;overflow-y:auto;padding:28px;position:relative">'
-    +'<button onclick="this.closest(\'[id*=campaign]\').style.display=\'none\'" style="position:absolute;top:12px;right:16px;background:none;border:none;font-size:22px;cursor:pointer;color:var(--gray-400)">×</button>'
+    +'<button aria-label="×" onclick="this.closest(\'[id*=campaign]\').style.display=\'none\'" style="position:absolute;top:12px;right:16px;background:none;border:none;font-size:22px;cursor:pointer;color:var(--gray-400)">×</button>'
     +'<div class="modal-body"></div>'
     +'</div>';
   document.body.appendChild(modal);
@@ -11534,7 +11534,7 @@ const ci=cart.find(c=>c.id===p.id);
 const inCart=!!ci;
 return'<div class="card" style="padding:0;margin-bottom:10px;overflow:hidden"><div style="height:110px;background:url('+p.img+') center/cover;display:flex;align-items:center;justify-content:center;font-size:44px"><span>'+p.icon+'</span></div><div style="padding:12px 14px"><p style="font-size:14px;font-weight:700;color:var(--secondary);margin:0 0 4px">'+p.nome+'</p><p style="font-size:12px;color:var(--gray-500);margin:0 0 10px">'+p.desc+'</p><div style="display:flex;justify-content:space-between;align-items:center">'+
 '<p style="font-size:18px;font-weight:800;color:var(--success);margin:0">R$ '+p.preco.toFixed(2).replace('.',',')+'</p>'+
-(inCart?'<div style="display:flex;align-items:center;gap:4px;background:rgba(0,168,204,0.1);border-radius:8px;padding:2px 4px"><button onclick="ASF_SHOP.updateQty('+p.id+',-1)" style="width:26px;height:26px;border:none;background:none;cursor:pointer;color:var(--primary)">-</button><span style="font-size:13px;font-weight:700;color:var(--secondary);min-width:16px;text-align:center">'+ci.qty+'</span><button onclick="ASF_SHOP.updateQty('+p.id+',1)" style="width:26px;height:26px;border:none;background:none;cursor:pointer;color:var(--primary)">+</button></div>':'<button onclick="ASF_SHOP.addToCart('+p.id+')" style="padding:8px 14px;border-radius:10px;border:none;background:var(--primary);color:white;font-size:12px;font-weight:600;cursor:pointer">&#x1F6D2; Adicionar</button>')
+(inCart?'<div style="display:flex;align-items:center;gap:4px;background:rgba(0,168,204,0.1);border-radius:8px;padding:2px 4px"><button aria-label="-" onclick="ASF_SHOP.updateQty('+p.id+',-1)" style="width:26px;height:26px;border:none;background:none;cursor:pointer;color:var(--primary)">-</button><span style="font-size:13px;font-weight:700;color:var(--secondary);min-width:16px;text-align:center">'+ci.qty+'</span><button aria-label="+" onclick="ASF_SHOP.updateQty('+p.id+',1)" style="width:26px;height:26px;border:none;background:none;cursor:pointer;color:var(--primary)">+</button></div>':'<button onclick="ASF_SHOP.addToCart('+p.id+')" style="padding:8px 14px;border-radius:10px;border:none;background:var(--primary);color:white;font-size:12px;font-weight:600;cursor:pointer">&#x1F6D2; Adicionar</button>')
 +'</div></div></div>';
 }).join('');
 }

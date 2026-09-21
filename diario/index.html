@@ -129,7 +129,7 @@ function render(){
   document.getElementById('badges').innerHTML = BADGES.map(b =>
     `<span class="badge ${b.test(d)?'on':''}">${b.icon} ${b.name}</span>`).join('');
   document.getElementById('entries').innerHTML = d.length ? d.slice(0,10).map((e,i) =>
-    `<div class="entry"><button class="del" onclick="del(${d.indexOf(e)})" title="Excluir">✕</button>
+    `<div class="entry"><button aria-label="✕" class="del" onclick="del(${d.indexOf(e)})" title="Excluir">✕</button>
      <b>${e.praia}</b> — ${e.mar}<div class="meta">${new Date(e.data+'T12:00').toLocaleDateString('pt-BR')} • ${e.dur} min${e.notas ? ' • '+e.notas : ''}</div></div>`
   ).join('') : '<div class="empty">Nenhuma sessão ainda. Registre a primeira! 🌊</div>';
 }
