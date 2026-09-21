@@ -8,7 +8,7 @@
 .asf-journey a .j-ico{font-size:22px}
 .asf-journey a .j-step{font-size:9px;color:#00A8CC;font-weight:700;letter-spacing:.4px;text-transform:uppercase}
 
-/* Selo de conteudo demonstrativo (regra: nunca apresentar mock como real) */
+/* Selo de conteudo demonstrativo */
 .asf-demo-badge{display:inline-block;background:#FFF4D6;color:#8a6d00;border:1px solid #F0DFA0;font-size:11px;font-weight:600;padding:4px 10px;border-radius:20px;margin:4px 0}
 
 /* Faixa de conexoes entre secoes */
@@ -20,3 +20,23 @@
 
 /* Nota de fonte de dados */
 .asf-source{font-size:10px;color:#8a94a6;margin-top:6px;display:block}
+
+/* FASE 2 — Acoes rapidas na Home */
+.asf-quick{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin:0 20px 18px}
+.asf-quick a,.asf-quick button{display:flex;align-items:center;gap:10px;background:#fff;border:1.5px solid #E0F2F7;border-radius:14px;padding:13px 14px;font-size:13px;font-weight:600;color:#0E2439;text-decoration:none;cursor:pointer;text-align:left;font-family:inherit}
+.asf-quick a:hover,.asf-quick button:hover{border-color:#00A8CC}
+.asf-quick .q-ico{font-size:24px}
+.asf-quick small{display:block;font-weight:400;color:#66707f;font-size:11px}
+
+/* FASE 2 — Micro-explicacoes nos cabecalhos de secao */
+.asf-subtitle{font-size:12px;color:#66707f;margin:2px 20px 10px;line-height:1.4}
+
+/* FASE 3 — Cartao de identidade na Carteirinha */
+.asf-idcard{margin:0 20px 16px;background:linear-gradient(135deg,#0E2439,#00A8CC);border-radius:16px;padding:16px;color:#fff}
+.asf-idcard h4{margin:0 0 2px;font-size:15px}
+.asf-idcard .id-level{font-size:12px;opacity:.9;margin-bottom:10px}
+.asf-idcard .id-stats{display:flex;gap:14px;flex-wrap:wrap}
+.asf-idcard .id-stat{background:rgba(255,255,255,.14);border-radius:10px;padding:8px 12px;text-align:center;min-width:64px}
+.asf-idcard .id-stat b{display:block;font-size:18px}
+.asf-idcard .id-stat span{font-size:10px;opacity:.85}
+@media (prefers-reduced-motion:reduce){.asf-journey a{transition:none}}
