@@ -1,0 +1,40 @@
+name: Perf — Divide index.html em assets externos (branch perf/split-index)
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - perf/split-index
+    paths:
+      - '.github/workflows/split-index.yml'
+      - '.github/scripts/split_index.py'
+
+permissions:
+  contents: write
+
+jobs:
+  split:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Extrai CSS/JS inline e valida
+        run: python3 .github/scripts/split_index.py
+
+      - name: Syntax check dos JS extraídos
+        run: |
+          sudo apt-get install -y nodejs >/dev/null 2>&1 || true
+          ok=1
+          for f in assets/js/inline/*.js; do
+            node --check "$f" || ok=0
+          done
+          [ "$ok" = "1" ] && echo "Todos os JS válidos"
+
+      - name: Commit e push na branch
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html assets/css/asf-inline.css assets/js/inline/
+          git diff --cached --quiet && echo "Nada a commitar" && exit 0
+          git commit -m "perf: divide index.html em CSS/JS externos cacheáveis (markup idêntico, validado)"
+          git push
