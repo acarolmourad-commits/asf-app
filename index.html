@@ -457,7 +457,7 @@ t Section -->
     <div id="cookie-consent-banner" style="position: fixed; bottom: 0; left: 0; right: 0; background: #1A3A5C; color: white; padding: 16px 20px; display: none; align-items: center; justify-content: space-between; gap: 12px; z-index: 9999; box-shadow: 0 -4px 20px rgba(0,0,0,0.3); font-size: 13px;">
       <div style="flex: 1;">
         <strong>🍪 Cookies</strong> — Usamos cookies essenciais para funcionar e analytics (Google) para melhorar o app. Ao continuar, você aceita nossa
-        <a href="docs/privacy-policy.html" target="_blank" style="color: #00A8CC; text-decoration: underline;">Política de Privacidade</a>.
+        <a href="privacidade.html" target="_blank" style="color: #00A8CC; text-decoration: underline;">Política de Privacidade</a>.
       </div>
       <div style="display: flex; gap: 8px; flex-shrink: 0;">
         <button onclick="essentialCookies()" style="background: rgba(255,255,255,0.15); color: white; border: none; padding: 8px 16px; border-radius: 8px; cursor: pointer; font-size: 12px; font-weight: 600;">Essenciais</button>
@@ -1996,7 +1996,7 @@ t Section -->
 
             <div style="text-align: center; margin-top: 20px; padding: 20px; background: var(--light); border-radius: 16px;">
                 <p style="font-size: 14px; color: var(--gray-600);">Sua loja não está aqui? <strong style="color: var(--primary);">Cadastre-se!</strong></p>
-                <button class="btn btn-secondary" style="margin-top: 10px;">Quero ser parceiro</button>
+                <button class="btn btn-secondary" style="margin-top: 10px;" onclick="window.location.href='contato.html'">Quero ser parceiro</button>
             </div>
         </div>
 
@@ -2094,7 +2094,7 @@ t Section -->
                     <span class="card-tag purple">DIÁRIO</span>
                     <h3>☀️ Como foi seu surf hoje?</h3>
                     <p>Responda diariamente para ganhar pontos extras!</p>
-                    <button class="btn btn-secondary" style="width: 100%; margin-top: 12px;">Responder</button>
+                    <button class="btn btn-secondary" style="width: 100%; margin-top: 12px;" onclick="window.location.href='diario/'">Responder</button>
                 </div>
                 <div class="card">
                     <span class="card-tag purple">DIÁRIO</span>
@@ -2143,29 +2143,23 @@ t Section -->
                     <h3>🎥 Aula Particular (VÍDEO)</h3>
                     <p>Aula em vídeo com instrutora experiente, com correção de postura e técnica passo a passo</p>
                     <p style="margin-top: 8px; font-size: 12px; color: var(--gray-400);">🎯 Troque por 1000 pontos</p>
-                    <button class="btn btn-secondary" style="width: 100%; margin-top: 12px;">Ver Detalhes</button>
+                    <button class="btn btn-secondary" style="width: 100%; margin-top: 12px;" onclick="showToast('🎯 Troca de recompensas em breve! Continue acumulando pontos.')">Ver Detalhes</button>
                 </div>
                 <div class="card">
                     <span class="card-tag purple">🎯 RECOMPENSA</span>
                     <h3>🏆 Competições (INSCRIÇÃO)</h3>
                     <p>Garanta sua inscrição nos circuitos e eventos de surf feminino da ASF</p>
                     <p style="margin-top: 8px; font-size: 12px; color: var(--gray-400);">🎯 Troque por 500 pontos</p>
-                    <button class="btn btn-secondary" style="width: 100%; margin-top: 12px;">Ver Detalhes</button>
+                    <button class="btn btn-secondary" style="width: 100%; margin-top: 12px;" onclick="showToast('🎯 Troca de recompensas em breve! Continue acumulando pontos.')">Ver Detalhes</button>
                 </div>
                 <div class="card">
                     <span class="card-tag purple">🎯 RECOMPENSA</span>
                     <h3>🤝 Mentoria Personalizada</h3>
                     <p>Sessão individual com instrutora experiente para evoluir seu surf mais rápido</p>
                     <p style="margin-top: 8px; font-size: 12px; color: var(--gray-400);">🎯 Troque por 800 pontos</p>
-                    <button class="btn btn-secondary" style="width: 100%; margin-top: 12px;">Ver Detalhes</button>
+                    <button class="btn btn-secondary" style="width: 100%; margin-top: 12px;" onclick="showToast('🎯 Troca de recompensas em breve! Continue acumulando pontos.')">Ver Detalhes</button>
                 </div>
-                <div class="card">
-                    <span class="card-tag purple">🎯 RECOMPENSA</span>
-                    <h3>🌍 Viagem Internacional</h3>
-                    <p>Participe do sorteio de surftrip para Bali, Portugal ou Indonésia</p>
-                    <p style="margin-top: 8px; font-size: 12px; color: var(--gray-400);">🎯 Troque por 2000 pontos</p>
-                    <button class="btn btn-secondary" style="width: 100%; margin-top: 12px;">Ver Detalhes</button>
-                </div>
+                
             </div>
 
             <!-- Pontuação summary -->
@@ -3030,7 +3024,7 @@ t Section -->
                 </div>
                 <div class="post-actions">
                     <button aria-label="🤍 12" class="post-action" onclick="toggleLike(this)" data-count="12"><span>🤍</span> 12</button>
-                    <button aria-label="💬 5" class="post-action"><span>💬</span> 5</button>
+                    <button aria-label="💬 5" class="post-action" onclick="showToast('💬 Comentários em breve na comunidade ASF!')"><span>💬</span> 5</button>
                     <button class="post-action" onclick="sharePost('Gurias, aula de sábado confirmada! 7h na praia de Bertioga. Quem vai? 🏄‍♀️')"><span>🔗</span> Compartilhar</button>
                 </div>
             </div>
@@ -3047,7 +3041,7 @@ t Section -->
                 </div>
                 <div class="post-actions">
                     <button aria-label="🤍 8" class="post-action" onclick="toggleLike(this)" data-count="8"><span>🤍</span> 8</button>
-                    <button aria-label="💬 3" class="post-action"><span>💬</span> 3</button>
+                    <button aria-label="💬 3" class="post-action" onclick="showToast('💬 Comentários em breve na comunidade ASF!')"><span>💬</span> 3</button>
                     <button class="post-action" onclick="sharePost('Alguém quer pegar uma onda domingo? 🏄‍♀️')"><span>🔗</span> Compartilhar</button>
                 </div>
             </div>
@@ -3064,7 +3058,7 @@ t Section -->
                 </div>
                 <div class="post-actions">
                     <button aria-label="🤍 15" class="post-action" onclick="toggleLike(this)" data-count="15"><span>🤍</span> 15</button>
-                    <button aria-label="💬 7" class="post-action"><span>💬</span> 7</button>
+                    <button aria-label="💬 7" class="post-action" onclick="showToast('💬 Comentários em breve na comunidade ASF!')"><span>💬</span> 7</button>
                     <button class="post-action" onclick="sharePost('Desconto em lycras de surf! 💙')"><span>🔗</span> Compartilhar</button>
                 </div>
             </div>
@@ -8893,7 +8887,7 @@ function findNearbyManas() {
                                     <p style="font-size: 12px; color: var(--gray-600);">${mana.level} • ${mana.beach}</p>
                                     <p style="font-size: 11px; color: var(--primary); font-weight: bold;">📍 ${mana.distance} km</p>
                                 </div>
-                                <button class="btn btn-primary" style="font-size: 12px; padding: 8px 12px;">Conectar</button>
+                                <button class="btn btn-primary" style="font-size: 12px; padding: 8px 12px;" onclick="showToast('🤝 Conexões entre surfistas em breve!')">Conectar</button>
                             </div>
                         </div>
                     `).join('')}
@@ -8924,7 +8918,7 @@ function showBeachManas(beach) {
                                 <p style="font-size: 12px; color: var(--gray-600);">${mana.level} • ${mana.beach}</p>
                                 <p style="font-size: 11px; color: var(--primary); font-weight: bold;">📍 ${mana.distance} km</p>
                             </div>
-                            <button class="btn btn-primary" style="font-size: 12px; padding: 8px 12px;">Conectar</button>
+                            <button class="btn btn-primary" style="font-size: 12px; padding: 8px 12px;" onclick="showToast('🤝 Conexões entre surfistas em breve!')">Conectar</button>
                         </div>
                     </div>
                 `).join('')}
