@@ -1,0 +1,22 @@
+/* ASF UX Overlay — camada ADITIVA. Nao sobrescreve nada existente. */
+
+/* Faixa de jornada na Home */
+.asf-journey{display:flex;gap:8px;overflow-x:auto;padding:4px 20px 14px;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+.asf-journey::-webkit-scrollbar{display:none}
+.asf-journey a{flex:0 0 auto;display:flex;flex-direction:column;align-items:center;gap:2px;min-width:74px;padding:10px 8px;background:#fff;border:1.5px solid #E0F2F7;border-radius:14px;text-decoration:none;color:#0E2439;font-size:11px;font-weight:600;box-shadow:0 1px 3px rgba(0,0,0,.05);transition:transform .15s,border-color .15s}
+.asf-journey a:hover,.asf-journey a:focus{border-color:#00A8CC;transform:translateY(-2px);outline:none}
+.asf-journey a .j-ico{font-size:22px}
+.asf-journey a .j-step{font-size:9px;color:#00A8CC;font-weight:700;letter-spacing:.4px;text-transform:uppercase}
+
+/* Selo de conteudo demonstrativo (regra: nunca apresentar mock como real) */
+.asf-demo-badge{display:inline-block;background:#FFF4D6;color:#8a6d00;border:1px solid #F0DFA0;font-size:11px;font-weight:600;padding:4px 10px;border-radius:20px;margin:4px 0}
+
+/* Faixa de conexoes entre secoes */
+.asf-related{margin:18px 20px;padding:14px;background:#F4FBFD;border:1px solid #DBF0F6;border-radius:14px}
+.asf-related p{margin:0 0 8px;font-size:11px;font-weight:700;color:#0a7aa8;text-transform:uppercase;letter-spacing:.5px}
+.asf-related .rel-links{display:flex;flex-wrap:wrap;gap:8px}
+.asf-related button,.asf-related a{background:#fff;border:1.5px solid #00A8CC;color:#0a7aa8;font-size:12px;font-weight:600;padding:7px 12px;border-radius:20px;cursor:pointer;text-decoration:none}
+.asf-related button:hover,.asf-related a:hover{background:#00A8CC;color:#fff}
+
+/* Nota de fonte de dados */
+.asf-source{font-size:10px;color:#8a94a6;margin-top:6px;display:block}
