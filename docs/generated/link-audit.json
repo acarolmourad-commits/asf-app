@@ -1,12 +1,11 @@
 {
-  "date": "2026-09-21T17:18:12.225574+00:00",
+  "date": "2026-09-21T17:54:55.202515+00:00",
   "total": 49,
-  "ok": 32,
+  "ok": 33,
   "skipped": 14,
-  "broken_count": 3,
+  "broken_count": 2,
   "broken": [
     "https://docs.google.com/forms/d/e/1fJhfaiNyYSSq9bKElew69y6GZ6_pxLz05HR26klIsSA/viewform",
-    "https://www.fecasurf.com.br/",
     "https://www.surfbrasil.org.br/"
   ],
   "results": [
@@ -87,8 +86,8 @@
     },
     {
       "url": "https://www.fecasurf.com.br/",
-      "status": "broken",
-      "http": "URLError"
+      "status": "ok",
+      "http": 200
     },
     {
       "url": "https://www.googletagmanager.com",
