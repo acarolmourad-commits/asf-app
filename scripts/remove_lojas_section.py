@@ -1,53 +1,40 @@
 #!/usr/bin/env python3
-"""Remove o conteúdo da seção #lojas da home e deixa placeholder para futuras marcas parceiras."""
-import sys
+"""Esvazia a secao #lojas do index.html (titulo, filtros e cards de lojas),
+deixando um placeholder 'Marcas Parceiras - em breve' e mantendo o CTA
+'Sua loja nao esta aqui? Cadastre-se! / Quero ser parceiro'."""
+import io, sys
 
-with open('index.html', encoding='utf-8') as f:
-    html = f.read()
+path = "index.html"
+with io.open(path, encoding="utf-8") as f:
+    text = f.read()
 
-start_marker = '        <div class="section" id="lojas">'
-end_marker = '        <!-- Progresso Section - Gamification -->'
+start_marker = '<div class="section" id="lojas">'
+cta_marker = '<div style="text-align: center; margin-top: 20px; padding: 20px; background: var(--light); border-radius: 16px;">'
 
-if start_marker not in html or end_marker not in html:
-    print('Marcadores não encontrados; nada a fazer.')
-    sys.exit(0)
+start = text.find(start_marker)
+if start == -1:
+    sys.exit("secao #lojas nao encontrada")
+body_start = text.index("\n", start) + 1
+end = text.find(cta_marker, body_start)
+if end == -1:
+    sys.exit("bloco CTA nao encontrado")
+end = text.rfind("\n", body_start, end) + 1
 
-start = html.index(start_marker)
-end = html.index(end_marker)
-
-new_section = '''        <div class="section" id="lojas">
+placeholder = '''            <!-- Marcas parceiras: secao reservada para futuras parcerias. Listagem de lojas removida. -->
             <div class="section-header">
-                <h2 class="section-title">🤝 Marcas Parceiras</h2>
+                <h2 class="section-title">\U0001F91D Marcas Parceiras</h2>
             </div>
 
-            <!-- Placeholder: futuras marcas parceiras serão exibidas aqui.
-                 Para adicionar um parceiro, copie o template abaixo dentro de .cards-grid:
-
-                 <div class="card">
-                     <span class="card-tag green">PARCEIRO</span>
-                     <h3>NOME DA MARCA</h3>
-                     <p>Descrição curta da marca</p>
-                     <p style="font-size: 13px; color: var(--gray-600);">📍 Cidade • Categorias</p>
-                     <div style="display: flex; gap: 8px; margin-top: 10px;">
-                         <a href="LINK" target="_blank" class="btn btn-secondary" style="flex: 1; font-size: 12px; text-align: center; text-decoration: none; display: inline-block;">CTA</a>
-                     </div>
-                 </div>
-            -->
-            <div class="cards-grid">
-                <!-- Em breve: marcas parceiras ASF -->
+            <div style="text-align: center; padding: 30px 20px; margin: 0 20px; background: var(--light); border-radius: 16px;">
+                <p style="font-size: 32px; margin-bottom: 10px;">\U0001F30A</p>
+                <p style="font-size: 15px; font-weight: 600; color: var(--gray-800);">Em breve: marcas parceiras da ASF!</p>
+                <p style="font-size: 13px; color: var(--gray-600); margin-top: 6px;">Estamos preparando um espa\u00e7o especial para lojas e marcas que apoiam o surf feminino.</p>
             </div>
-
-            <div style="text-align: center; margin-top: 20px; padding: 20px; background: var(--light); border-radius: 16px;">
-                <p style="font-size: 14px; color: var(--gray-600);">Sua loja não está aqui? <strong style="color: var(--primary);">Cadastre-se!</strong></p>
-                <button class="btn btn-secondary" style="margin-top: 10px;">Quero ser parceiro</button>
-            </div>
-        </div>
 
 '''
-
-html2 = html[:start] + new_section + html[end:]
-
-with open('index.html', 'w', encoding='utf-8') as f:
-    f.write(html2)
-
-print(f'OK: {len(html)} -> {len(html2)} bytes')
+new_text = text[:body_start] + placeholder + text[end:]
+if new_text == text:
+    print("Nada a alterar."); sys.exit(0)
+with io.open(path, "w", encoding="utf-8") as f:
+    f.write(new_text)
+print("Secao #lojas esvaziada com sucesso.")
