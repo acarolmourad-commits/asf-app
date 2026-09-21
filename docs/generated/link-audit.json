@@ -1,12 +1,12 @@
 {
-  "date": "2026-09-21T17:54:55.202515+00:00",
+  "date": "2026-09-21T21:18:04.796015+00:00",
   "total": 49,
-  "ok": 33,
-  "skipped": 14,
+  "ok": 34,
+  "skipped": 13,
   "broken_count": 2,
   "broken": [
     "https://docs.google.com/forms/d/e/1fJhfaiNyYSSq9bKElew69y6GZ6_pxLz05HR26klIsSA/viewform",
-    "https://www.surfbrasil.org.br/"
+    "https://www.googletagservices.com"
   ],
   "results": [
     {
@@ -60,17 +60,12 @@
       "http": null
     },
     {
+      "url": "https://pagead2.googlesyndication.com",
+      "status": "skipped",
+      "http": null
+    },
+    {
       "url": "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3811729023785282",
-      "status": "skipped",
-      "http": null
-    },
-    {
-      "url": "https://resources.infolinks.com",
-      "status": "skipped",
-      "http": null
-    },
-    {
-      "url": "https://resources.infolinks.com/js/infolinks_main.js",
       "status": "skipped",
       "http": null
     },
@@ -95,6 +90,11 @@
       "http": null
     },
     {
+      "url": "https://www.googletagservices.com",
+      "status": "broken",
+      "http": 404
+    },
+    {
       "url": "https://www.instagram.com/associacaosurffeminino",
       "status": "skipped",
       "http": null
@@ -116,8 +116,8 @@
     },
     {
       "url": "https://www.surfbrasil.org.br/",
-      "status": "broken",
-      "http": "URLError"
+      "status": "ok",
+      "http": 200
     },
     {
       "url": "https://www.tiktok.com/@Cahrol.asf",
