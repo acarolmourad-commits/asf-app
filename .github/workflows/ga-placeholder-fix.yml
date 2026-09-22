@@ -1,0 +1,25 @@
+name: ASF Fix GA Placeholder
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ['scripts/asf_ga_placeholder_fix.py']
+permissions:
+  contents: write
+jobs:
+  fix:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Run fix
+        run: python scripts/asf_ga_placeholder_fix.py
+      - name: Commit and push
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html
+          git diff --cached --quiet || git commit -m "ASF fix: remove placeholder G-XXXXXXXXXX do Google Analytics"
+          git push
