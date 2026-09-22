@@ -1,0 +1,29 @@
+name: ASF - Fix GA placeholder e logo schema.org
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  fix-ga-schema:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Corrige placeholder GA4 e logo schema.org em index.html
+        run: python .github/scripts/asf_ga_schema_fix.py
+      - name: Commit se houver mudanca
+        run: |
+          if [[ -n $(git status --porcelain) ]]; then
+            git config user.name "asf-bot"
+            git config user.email "asf.surffeminino@gmail.com"
+            git add index.html
+            git commit -m "fix: remove placeholder GA4 (G-XXXXXXXXXX) e corrige logo do schema.org para logo oficial ASF"
+            git push
+          else
+            echo "Sem mudancas."
+          fi
