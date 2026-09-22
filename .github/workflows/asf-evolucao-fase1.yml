@@ -1,0 +1,33 @@
+name: ASF Evolucao Fase 1 (one-shot)
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - 'scripts/asf_evolucao_fase1.py'
+
+permissions:
+  contents: write
+
+jobs:
+  evolucao-fase1:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Apply index.html cleanup + parceiros/beneficios positioning
+        run: python3 scripts/asf_evolucao_fase1.py
+      - name: Commit if changed
+        run: |
+          git config user.name "ASF Bot"
+          git config user.email "bot@asf-app.com"
+          git add index.html
+          if git diff --cached --quiet; then
+            echo "Sem mudancas"
+          else
+            git commit -m "fix: remove metricas ficticias e adiciona posicionamento Parceiros & Beneficios ASF"
+            git push
+          fi

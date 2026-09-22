@@ -42,6 +42,9 @@ const ASF_CARD = {
     const nome = document.getElementById('card-nome').value.trim();
     const nivel = document.getElementById('card-nivel').value;
     const praia = document.getElementById('card-praia').value.trim();
+    const elApe = document.getElementById('card-apelido');
+    const elCid = document.getElementById('card-cidade');
+    const elIns = document.getElementById('card-insta');
     if (nome.length < 2) { showToast('Conta pra gente o seu nome! 🏄‍♀️'); return; }
     const consentEl = document.getElementById('card-lgpd');
     const atual = this.load() || {};
@@ -53,6 +56,9 @@ const ASF_CARD = {
       nome: nome,
       nivel: nivel,
       praia: praia,
+      apelido: elApe ? elApe.value.trim() : (atual.apelido || ''),
+      cidade: elCid ? elCid.value.trim() : (atual.cidade || ''),
+      insta: elIns ? elIns.value.trim() : (atual.insta || ''),
       foto: atual.foto || null,
       numero: atual.numero || this.gerarNumero(),
       desde: atual.desde || new Date().toLocaleDateString('pt-BR'),
@@ -137,6 +143,12 @@ const ASF_CARD = {
         '</select>' +
         '<label style="font-size:12px;font-weight:600;color:var(--gray-600)">Praia do coração (opcional)</label>' +
         '<input id="card-praia" type="text" maxlength="40" placeholder="Ex.: Maresias" value="' + (p.praia || '') + '" style="width:100%;padding:12px;border-radius:10px;border:1.5px solid var(--gray-200);margin:4px 0 16px;font-family:inherit">' +
+        '<label style="font-size:12px;font-weight:600;color:var(--gray-600)">Nome/apelido público (opcional)</label>' +
+        '<input id="card-apelido" type="text" maxlength="30" placeholder="Como você aparece para as manas" value="' + (p.apelido || '') + '" style="width:100%;padding:12px;border-radius:10px;border:1.5px solid var(--gray-200);margin:4px 0 12px;font-family:inherit">' +
+        '<label style="font-size:12px;font-weight:600;color:var(--gray-600)">Cidade (opcional)</label>' +
+        '<input id="card-cidade" type="text" maxlength="40" placeholder="Ex.: São Sebastião/SP" value="' + (p.cidade || '') + '" style="width:100%;padding:12px;border-radius:10px;border:1.5px solid var(--gray-200);margin:4px 0 12px;font-family:inherit">' +
+        '<label style="font-size:12px;font-weight:600;color:var(--gray-600)">Instagram (opcional)</label>' +
+        '<input id="card-insta" type="text" maxlength="30" placeholder="@seuperfil" value="' + (p.insta || '') + '" style="width:100%;padding:12px;border-radius:10px;border:1.5px solid var(--gray-200);margin:4px 0 16px;font-family:inherit">' +
         '<label style="display:flex;gap:8px;align-items:flex-start;font-size:12px;color:var(--gray-600);margin:0 0 14px;line-height:1.5">' +
         '<input id="card-lgpd" type="checkbox" style="margin-top:2px;flex:none">' +
         '<span>Autorizo o armazenamento <strong>apenas neste dispositivo</strong> dos dados acima (nome, nível, praia e foto) para gerar minha carteirinha digital, conforme a <a href="privacidade.html" target="_blank" rel="noopener" style="color:var(--primary);font-weight:600">Política de Privacidade</a> (LGPD — Lei 13.709/2018). Posso apagar tudo a qualquer momento em "Editar dados".</span></label>' +
@@ -152,7 +164,7 @@ const ASF_CARD = {
       '<div style="display:flex;align-items:center;gap:12px;margin-bottom:16px;position:relative">' +
       this.avatarHtml(d, 64) +
       '<div><p style="font-size:18px;font-weight:800;margin:0">' + d.nome + '</p>' +
-      '<p style="font-size:12px;opacity:0.8;margin:2px 0 0">' + d.nivel + (d.praia ? ' · 📍 ' + d.praia : '') + '</p></div></div>' +
+      '<p style="font-size:12px;opacity:0.8;margin:2px 0 0">' + d.nivel + (d.praia ? ' · 📍 ' + d.praia : '') + (d.cidade ? ' · ' + d.cidade : '') + '</p></div></div>' +
       '<div style="display:flex;justify-content:space-between;align-items:flex-end;position:relative">' +
       '<div><p style="font-size:10px;opacity:0.6;margin:0;letter-spacing:2px;text-transform:uppercase">Nº da associada</p>' +
       '<p style="font-size:17px;font-weight:800;letter-spacing:1px;margin:2px 0 8px;font-family:monospace">' + d.numero + '</p>' +
