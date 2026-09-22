@@ -24,8 +24,13 @@ const ASF_CARD = {
   save(d) { localStorage.setItem(this.KEY, JSON.stringify(d)); },
 
   gerarNumero() {
-    return 'ASF-' + Date.now().toString(36).toUpperCase() +
-           Math.random().toString(36).substr(2, 3).toUpperCase();
+    /* número único e não previsível (crypto) — padrão ASF-XXXXXXXXXX */
+    const abc = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789'; // sem I,O,0,1 para evitar confusão
+    const rnd = new Uint32Array(10);
+    crypto.getRandomValues(rnd);
+    let s = '';
+    for (let i = 0; i < 10; i++) s += abc[rnd[i] % abc.length];
+    return 'ASF-' + s;
   },
 
   initials(nome) {
@@ -38,7 +43,12 @@ const ASF_CARD = {
     const nivel = document.getElementById('card-nivel').value;
     const praia = document.getElementById('card-praia').value.trim();
     if (nome.length < 2) { showToast('Conta pra gente o seu nome! 🏄‍♀️'); return; }
+    const consentEl = document.getElementById('card-lgpd');
     const atual = this.load() || {};
+    if (!atual.lgpdConsent && consentEl && !consentEl.checked) {
+      showToast('Precisamos do seu consentimento (LGPD) para gerar a carteirinha 💙');
+      return;
+    }
     const d = {
       nome: nome,
       nivel: nivel,
@@ -46,6 +56,7 @@ const ASF_CARD = {
       foto: atual.foto || null,
       numero: atual.numero || this.gerarNumero(),
       desde: atual.desde || new Date().toLocaleDateString('pt-BR'),
+      lgpdConsent: atual.lgpdConsent || new Date().toISOString(),
     };
     const val = new Date(); val.setFullYear(val.getFullYear() + 1);
     d.validade = val.toLocaleDateString('pt-BR');
@@ -126,6 +137,9 @@ const ASF_CARD = {
         '</select>' +
         '<label style="font-size:12px;font-weight:600;color:var(--gray-600)">Praia do coração (opcional)</label>' +
         '<input id="card-praia" type="text" maxlength="40" placeholder="Ex.: Maresias" value="' + (p.praia || '') + '" style="width:100%;padding:12px;border-radius:10px;border:1.5px solid var(--gray-200);margin:4px 0 16px;font-family:inherit">' +
+        '<label style="display:flex;gap:8px;align-items:flex-start;font-size:12px;color:var(--gray-600);margin:0 0 14px;line-height:1.5">' +
+        '<input id="card-lgpd" type="checkbox" style="margin-top:2px;flex:none">' +
+        '<span>Autorizo o armazenamento <strong>apenas neste dispositivo</strong> dos dados acima (nome, nível, praia e foto) para gerar minha carteirinha digital, conforme a <a href="privacidade.html" target="_blank" rel="noopener" style="color:var(--primary);font-weight:600">Política de Privacidade</a> (LGPD — Lei 13.709/2018). Posso apagar tudo a qualquer momento em "Editar dados".</span></label>' +
         '<button onclick="ASF_CARD.salvar()" class="btn btn-primary" style="width:100%">🪪 Gerar minha carteirinha</button>' +
         '</div>' + this.parceriasHtml() + '</div>';
       return;

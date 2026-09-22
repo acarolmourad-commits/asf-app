@@ -1,0 +1,32 @@
+name: ASF - Remover AdSense (sem fins lucrativos)
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: [index.html]
+
+permissions:
+  contents: write
+
+jobs:
+  remove-adsense:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Remove AdSense de index.html
+        run: python .github/scripts/remove_adsense.py
+      - name: Commit se houver mudanca
+        run: |
+          if [[ -n $(git status --porcelain) ]]; then
+            git config user.name "asf-bot"
+            git config user.email "asf.surffeminino@gmail.com"
+            git add index.html
+            git commit -m "chore: remove Google AdSense (ASF sem fins lucrativos, sem publicidade)"
+            git push
+          else
+            echo "Sem mudancas."
+          fi
