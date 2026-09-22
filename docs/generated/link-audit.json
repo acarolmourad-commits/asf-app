@@ -1,7 +1,7 @@
 {
-  "date": "2026-09-21T21:18:04.796015+00:00",
-  "total": 49,
-  "ok": 34,
+  "date": "2026-09-22T02:07:09.896166+00:00",
+  "total": 53,
+  "ok": 38,
   "skipped": 13,
   "broken_count": 2,
   "broken": [
@@ -167,6 +167,18 @@
       "local": true
     },
     {
+      "url": "asf-ux.css",
+      "status": "ok",
+      "http": 200,
+      "local": true
+    },
+    {
+      "url": "asf-ux.js",
+      "status": "ok",
+      "http": 200,
+      "local": true
+    },
+    {
       "url": "assets/images/asf-logo-small.png",
       "status": "ok",
       "http": 200,
@@ -185,13 +197,19 @@
       "local": true
     },
     {
+      "url": "contato.html",
+      "status": "ok",
+      "http": 200,
+      "local": true
+    },
+    {
       "url": "diario/",
       "status": "ok",
       "http": 200,
       "local": true
     },
     {
-      "url": "docs/privacy-policy.html",
+      "url": "hospedagens/",
       "status": "ok",
       "http": 200,
       "local": true
@@ -228,6 +246,12 @@
     },
     {
       "url": "previsao-surf/",
+      "status": "ok",
+      "http": 200,
+      "local": true
+    },
+    {
+      "url": "privacidade.html",
       "status": "ok",
       "http": 200,
       "local": true

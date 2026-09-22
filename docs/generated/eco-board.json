@@ -1,18 +1,18 @@
 {
-  "date": "2026-09-21",
+  "date": "2026-09-22",
   "board_tip": {
-    "title": "Funboard: A versátil",
-    "content": "Funboards (7'0\"-8'6\") são ideais para evolução. Mais ágil que longboard, mantém estabilidade.",
+    "title": "Fish: Para ondas pequenas",
+    "content": "Shape com outline curto e largo. Perfeita para ondas fracas! Twin ou quad fin para mais speed.",
     "tags": [
-      "Funboard",
-      "Evolução"
+      "Fish",
+      "Speed"
     ]
   },
   "eco_tip": {
-    "title": "Por que escolher ecológico?",
-    "content": "Quando a prancha chegar ao fim, o bloco pode ser reciclado ou se degrada naturalmente!",
-    "category": "Consumo Consciente"
+    "title": "Benefícios do Bloco Ecológico",
+    "content": "1. ♻️ 100% reciclável 2. 🌿 Biodegradável 3. 🧊 Livre de CFC 4. 💧 Menor consumo de água",
+    "category": "Meio Ambiente"
   },
-  "daily_message": "Protetor solar: reaplique a cada 2 horas!",
-  "generated_at": "2026-09-21T21:17:58.371828"
+  "daily_message": "Maré baixa às 11:45 hoje - melhor para iniciantes!",
+  "generated_at": "2026-09-22T02:06:59.987649"
 }
