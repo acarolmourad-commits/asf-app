@@ -1,6 +1,10 @@
 /* ASF UX Overlay — camada ADITIVA. Nao sobrescreve nada existente. */
 
-/* Faixa de jornada na Home */
+/* Faixa de jornada na Home (breadcrumbs) */
+.asf-journey{align-items:center}
+.asf-journey-logo{flex:0 0 auto;display:flex;flex-direction:column;align-items:center;gap:2px;padding:6px 10px;font-size:9px;font-weight:700;letter-spacing:.4px;text-transform:uppercase;color:#00A8CC}
+.asf-journey-logo img{width:34px;height:34px;object-fit:contain;display:block}
+
 .asf-journey{display:flex;gap:8px;overflow-x:auto;padding:4px 20px 14px;-webkit-overflow-scrolling:touch;scrollbar-width:none}
 .asf-journey::-webkit-scrollbar{display:none}
 .asf-journey a{flex:0 0 auto;display:flex;flex-direction:column;align-items:center;gap:2px;min-width:74px;padding:10px 8px;background:#fff;border:1.5px solid #E0F2F7;border-radius:14px;text-decoration:none;color:#0E2439;font-size:11px;font-weight:600;box-shadow:0 1px 3px rgba(0,0,0,.05);transition:transform .15s,border-color .15s}
@@ -51,3 +55,4 @@
 .asf-challenge button{background:#FFD700;color:#0E2439;border:none;font-weight:700;font-size:13px;padding:9px 16px;border-radius:10px;cursor:pointer;font-family:inherit}
 .asf-challenge button:disabled{background:rgba(255,255,255,.3);color:rgba(255,255,255,.8);cursor:default}
 .asf-challenge .ch-done{background:#27AE60;color:#fff;font-size:12px;font-weight:700;padding:6px 12px;border-radius:20px}
+
