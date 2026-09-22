@@ -7,6 +7,7 @@
   function el(html) { var d = document.createElement('div'); d.innerHTML = html.trim(); return d.firstChild; }
   function ready(fn) { document.readyState !== 'loading' ? fn() : document.addEventListener('DOMContentLoaded', fn); }
   function go(id) { return "showSection('" + id + "');return false;"; }
+  function ls(k, d) { try { return JSON.parse(localStorage.getItem(k)) || d; } catch (e) { return d; } }
 
   /* ---------- FASE 1 ---------- */
 
@@ -122,7 +123,6 @@
   function idCard() {
     var sec = document.getElementById('carteirinha');
     if (!sec || sec.querySelector('.asf-idcard')) return;
-    function ls(k, d) { try { return JSON.parse(localStorage.getItem(k)) || d; } catch (e) { return d; } }
     var pts = ls('asf_points', { total: 0 });
     var sessions = ls('surf-sessions', []);
     var quizzes = ls('quizzes-done', []);
@@ -142,8 +142,67 @@
     header ? header.parentNode.insertBefore(card, header.nextSibling) : sec.insertBefore(card, sec.firstChild);
   }
 
+  /* ---------- FASE 4 — Gamificacao ligada a acoes reais ---------- */
+
+  function weekKey() {
+    var d = new Date();
+    var onejan = new Date(d.getFullYear(), 0, 1);
+    var week = Math.ceil((((d - onejan) / 86400000) + onejan.getDay() + 1) / 7);
+    return d.getFullYear() + '-W' + week;
+  }
+
+  function sessionsThisWeek() {
+    var sessions = ls('surf-sessions', []);
+    var now = Date.now();
+    return sessions.filter(function (s) {
+      var t = new Date(s.date || s.data || 0).getTime();
+      return t && (now - t) < 7 * 86400000;
+    }).length;
+  }
+
+  window.ASF_UX_CLAIM_CHALLENGE = function () {
+    var key = 'asf-challenge-' + weekKey();
+    if (localStorage.getItem(key)) return;
+    if (sessionsThisWeek() < 3) return;
+    localStorage.setItem(key, 'done');
+    if (typeof earnPoints === 'function') earnPoints('treino', 50);
+    else {
+      var p = ls('asf_points', { total: 0 }); p.total = (p.total || 0) + 50;
+      localStorage.setItem('asf_points', JSON.stringify(p));
+    }
+    if (typeof showToast === 'function') showToast('🏆 Desafio semanal completo! +50 pontos');
+    weeklyChallenge();
+  };
+
+  function weeklyChallenge() {
+    var sec = document.getElementById('desafios');
+    if (!sec) return;
+    var old = sec.querySelector('.asf-challenge');
+    if (old) old.remove();
+    var count = sessionsThisWeek();
+    var goal = 3;
+    var pct = Math.min(100, Math.round(count / goal * 100));
+    var claimed = !!localStorage.getItem('asf-challenge-' + weekKey());
+    var done = count >= goal;
+    var action = claimed
+      ? '<span class="ch-done">✅ Resgatado esta semana</span>'
+      : done
+        ? '<button type="button" onclick="ASF_UX_CLAIM_CHALLENGE()">Resgatar +50 pontos</button>'
+        : '<button type="button" disabled>Faltam ' + (goal - count) + ' sessao(oes)</button>';
+    var card = el('<div class="asf-challenge">'
+      + '<h4>🏆 Desafio da semana</h4>'
+      + '<p class="ch-desc">Registre ' + goal + ' sessoes de surf em 7 dias (via Diario) e ganhe 50 pontos.</p>'
+      + '<div class="ch-bar" role="progressbar" aria-valuenow="' + pct + '" aria-valuemin="0" aria-valuemax="100"><div class="ch-fill" style="width:' + pct + '%"></div></div>'
+      + '<div class="ch-meta"><span>' + count + '/' + goal + ' sessoes</span>' + action + '</div>'
+      + '</div>');
+    var header = sec.querySelector('.section-header');
+    var anchor = header || sec.firstChild;
+    if (anchor && anchor.parentNode) anchor.parentNode.insertBefore(card, anchor.nextSibling);
+    else sec.insertBefore(card, sec.firstChild);
+  }
+
   /* ---------- init ---------- */
   ready(function () {
-    try { journey(); quickActions(); subtitles(); demoLabels(); related(); sources(); idCard(); } catch (e) { console.error('asf-ux:', e); }
+    try { journey(); quickActions(); subtitles(); demoLabels(); related(); sources(); idCard(); weeklyChallenge(); } catch (e) { console.error('asf-ux:', e); }
   });
 })();

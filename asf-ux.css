@@ -40,3 +40,14 @@
 .asf-idcard .id-stat b{display:block;font-size:18px}
 .asf-idcard .id-stat span{font-size:10px;opacity:.85}
 @media (prefers-reduced-motion:reduce){.asf-journey a{transition:none}}
+
+/* FASE 4 — Desafio semanal */
+.asf-challenge{margin:0 20px 16px;background:linear-gradient(135deg,#9B59B6,#00A8CC);border-radius:16px;padding:16px;color:#fff}
+.asf-challenge h4{margin:0 0 4px;font-size:15px}
+.asf-challenge .ch-desc{font-size:12px;opacity:.92;margin:0 0 10px}
+.asf-challenge .ch-bar{height:10px;background:rgba(255,255,255,.25);border-radius:6px;overflow:hidden;margin-bottom:8px}
+.asf-challenge .ch-fill{height:100%;background:#FFD700;border-radius:6px;transition:width .4s}
+.asf-challenge .ch-meta{display:flex;justify-content:space-between;align-items:center;font-size:12px}
+.asf-challenge button{background:#FFD700;color:#0E2439;border:none;font-weight:700;font-size:13px;padding:9px 16px;border-radius:10px;cursor:pointer;font-family:inherit}
+.asf-challenge button:disabled{background:rgba(255,255,255,.3);color:rgba(255,255,255,.8);cursor:default}
+.asf-challenge .ch-done{background:#27AE60;color:#fff;font-size:12px;font-weight:700;padding:6px 12px;border-radius:20px}
