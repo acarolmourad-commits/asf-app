@@ -42,7 +42,7 @@
       "sport": "Surf",
       "audience": {"@type": "Audience", "description": "Mulheres surfistas de todos os níveis"},
       "knowsAbout": ["surf", "treino surf", "ondas", "marés", "equipamento surf", "segurança no mar"],
-      "logo": "https://images.unsplash.com/photo-1502680390469-be75c86b636f?w=200&h=200&fit=crop",
+      "logo": "https://acarolmourad-commits.github.io/asf-app/assets/images/asf-logo.png",
       "sameAs": [
         "https://instagram.com/asf.surffeminino"
       ]
@@ -463,7 +463,7 @@ t Section -->
     <div id="cookie-consent-banner" style="position: fixed; bottom: 0; left: 0; right: 0; background: #1A3A5C; color: white; padding: 16px 20px; display: none; align-items: center; justify-content: space-between; gap: 12px; z-index: 9999; box-shadow: 0 -4px 20px rgba(0,0,0,0.3); font-size: 13px;">
       <div style="flex: 1;">
         <strong>🍪 Cookies</strong> — Usamos cookies essenciais para funcionar e analytics (Google) para melhorar o app. Ao continuar, você aceita nossa
-        <a href="privacidade.html" target="_blank" style="color: #00A8CC; text-decoration: underline;">Política de Privacidade</a>.
+        <a href="privacidade.html" target="_blank" style="color: #00A8CC; text-decoration: underline;">Política de Privacidade</a> &middot; <a href="cookies.html" target="_blank" style="color: #00A8CC; text-decoration: underline;">Política de Cookies</a>.
       </div>
       <div style="display: flex; gap: 8px; flex-shrink: 0;">
         <button onclick="essentialCookies()" style="background: rgba(255,255,255,0.15); color: white; border: none; padding: 8px 16px; border-radius: 8px; cursor: pointer; font-size: 12px; font-weight: 600;">Essenciais</button>
@@ -8145,14 +8145,18 @@ window.ASFMonetization={trackEvent,getStats};const a=document.createElement('sty
   var savedLang = localStorage.getItem('asf-lang');
   if (savedLang) setLanguage(savedLang);
   
+  // ASF: Google Analytics desativado ate configurar um ID real (G-...).
+  var ASF_GA_ID = '';
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-XXXXXXXXXX', {
-    page_title: document.title,
-    page_location: window.location.href,
-    user_id: getUserId ? getUserId() : undefined
-  });
+  if (ASF_GA_ID) {
+    gtag('js', new Date());
+    gtag('config', ASF_GA_ID, {
+      page_title: document.title,
+      page_location: window.location.href,
+      user_id: getUserId ? getUserId() : undefined
+    });
+  }
   window.trackGAEvent = function(action, label, value) {
     gtag('event', action, {
       event_label: label,

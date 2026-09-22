@@ -2,14 +2,18 @@
   var savedLang = localStorage.getItem('asf-lang');
   if (savedLang) setLanguage(savedLang);
   // Google Analytics 4 initialization
+  // ASF: Google Analytics desativado ate configurar um ID real (G-...).
+  var ASF_GA_ID = '';
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-XXXXXXXXXX', {
-    page_title: document.title,
-    page_location: window.location.href,
-    user_id: getUserId ? getUserId() : undefined
-  });
+  if (ASF_GA_ID) {
+    gtag('js', new Date());
+    gtag('config', ASF_GA_ID, {
+      page_title: document.title,
+      page_location: window.location.href,
+      user_id: getUserId ? getUserId() : undefined
+    });
+  }
   window.trackGAEvent = function(action, label, value) {
     gtag('event', action, {
       event_label: label,
