@@ -1,0 +1,33 @@
+name: ASF Nonprofit Cleanup (one-shot)
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - 'scripts/asf_nonprofit_cleanup.py'
+
+permissions:
+  contents: write
+
+jobs:
+  nonprofit-cleanup:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Apply nonprofit cleanup
+        run: python3 scripts/asf_nonprofit_cleanup.py
+      - name: Commit if changed
+        run: |
+          git config user.name "ASF Bot"
+          git config user.email "bot@asf-app.com"
+          git add index.html
+          if git diff --cached --quiet; then
+            echo "Sem mudancas"
+          else
+            git commit -m "feat: limpeza nao-lucrativa - remove metricas ficticias, parceiros ilustrativos e checkout proprio; adiciona Beneficios ASF e Campanhas Especiais"
+            git push
+          fi
