@@ -1,12 +1,11 @@
 {
-  "date": "2026-09-22T02:07:09.896166+00:00",
-  "total": 53,
-  "ok": 38,
-  "skipped": 13,
-  "broken_count": 2,
+  "date": "2026-09-22T10:27:16.512963+00:00",
+  "total": 54,
+  "ok": 42,
+  "skipped": 11,
+  "broken_count": 1,
   "broken": [
-    "https://docs.google.com/forms/d/e/1fJhfaiNyYSSq9bKElew69y6GZ6_pxLz05HR26klIsSA/viewform",
-    "https://www.googletagservices.com"
+    "https://docs.google.com/forms/d/e/1fJhfaiNyYSSq9bKElew69y6GZ6_pxLz05HR26klIsSA/viewform"
   ],
   "results": [
     {
@@ -60,16 +59,6 @@
       "http": null
     },
     {
-      "url": "https://pagead2.googlesyndication.com",
-      "status": "skipped",
-      "http": null
-    },
-    {
-      "url": "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3811729023785282",
-      "status": "skipped",
-      "http": null
-    },
-    {
       "url": "https://wa.me",
       "status": "skipped",
       "http": null
@@ -88,11 +77,6 @@
       "url": "https://www.googletagmanager.com",
       "status": "skipped",
       "http": null
-    },
-    {
-      "url": "https://www.googletagservices.com",
-      "status": "broken",
-      "http": 404
     },
     {
       "url": "https://www.instagram.com/associacaosurffeminino",
@@ -132,6 +116,12 @@
     },
     {
       "url": "app.js",
+      "status": "ok",
+      "http": 200,
+      "local": true
+    },
+    {
+      "url": "aprender/",
       "status": "ok",
       "http": 200,
       "local": true
@@ -227,6 +217,12 @@
       "local": true
     },
     {
+      "url": "parcerias/",
+      "status": "ok",
+      "http": 200,
+      "local": true
+    },
+    {
       "url": "praias/melhores-praias-iniciantes-litoral-norte-sp.html",
       "status": "ok",
       "http": 200,
@@ -269,6 +265,12 @@
       "local": true
     },
     {
+      "url": "sobre.html",
+      "status": "ok",
+      "http": 200,
+      "local": true
+    },
+    {
       "url": "subscriber-styles.css",
       "status": "ok",
       "http": 200,
@@ -300,6 +302,12 @@
     },
     {
       "url": "surf-trip/",
+      "status": "ok",
+      "http": 200,
+      "local": true
+    },
+    {
+      "url": "termos-de-uso.html",
       "status": "ok",
       "http": 200,
       "local": true
