@@ -1,30 +1,30 @@
 {
-  "date": "2026-09-22",
+  "date": "2026-09-23",
   "new_tip": {
-    "category": "Técnica",
-    "title": "Como fazer o bottom turn",
-    "content": "O bottom turn é a base. Transfira o peso para o pé da frente e gire a prancha.",
+    "category": "Saúde",
+    "title": "Treino de força",
+    "content": "Foque em exercícios compostos: remada com elástico, agachamentos, plank. 2-3x/semana.",
     "tags": [
-      "Técnica",
-      "Manobras"
+      "Saúde",
+      "Treino"
     ]
   },
   "new_utility": {
-    "name": "Previsão de Ondas",
-    "description": "7 dias de previsão",
-    "icon": "🌊"
+    "name": "Calculadora de Maré",
+    "description": "Horários de maré",
+    "icon": "🗓️"
   },
   "improvements": [
+    {
+      "type": "layout",
+      "title": "Modo escuro",
+      "priority": "medium"
+    },
     {
       "type": "content",
       "title": "Mais dicas técnicas avançadas",
       "priority": "high"
-    },
-    {
-      "type": "feature",
-      "title": "Medidor de condições do mar",
-      "priority": "high"
     }
   ],
-  "generated_at": "2026-09-22T20:34:24.865397"
+  "generated_at": "2026-09-23T02:06:04.684315"
 }

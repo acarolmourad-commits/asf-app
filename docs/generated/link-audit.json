@@ -1,7 +1,7 @@
 {
-  "date": "2026-09-22T20:34:39.172845+00:00",
-  "total": 54,
-  "ok": 42,
+  "date": "2026-09-23T02:06:16.161191+00:00",
+  "total": 55,
+  "ok": 43,
   "skipped": 11,
   "broken_count": 1,
   "broken": [
@@ -188,6 +188,12 @@
     },
     {
       "url": "contato.html",
+      "status": "ok",
+      "http": 200,
+      "local": true
+    },
+    {
+      "url": "cookies.html",
       "status": "ok",
       "http": 200,
       "local": true
