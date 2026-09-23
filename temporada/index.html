@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ASF Temporada — Calendário de Swells e Melhores Meses para Surfar</title>
+  <meta name="description" content="ASF Temporada: calendário interativo das temporadas de surf no litoral norte de SP — melhores meses, swells, ventos e multidões mês a mês.">
+  <meta name="robots" content="index,follow">
+  <link rel="canonical" href="https://acarolmourad-commits.github.io/asf-app/temporada/">
+  <meta property="og:title" content="ASF Temporada — Quando surfar no litoral norte de SP">
+  <meta property="og:description" content="Calendário mês a mês: swells, ventos, temperatura e movimento nos picos.">
+  <meta property="og:type" content="website">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box}
+    body{font-family:'Outfit',sans-serif;background:#F8F9FA;color:#0E2439;line-height:1.6}
+    header{background:linear-gradient(135deg,#0E2439,#00A8CC);color:#fff;padding:40px 20px;text-align:center}
+    header h1{font-size:2rem;margin:10px 0 6px}
+    header p{opacity:.92;max-width:640px;margin:0 auto}
+    .badge{display:inline-block;background:rgba(255,255,255,.15);border-radius:999px;padding:4px 14px;font-size:.8rem}
+    .wrap{max-width:860px;margin:0 auto;padding:24px 16px 56px}
+    h2{font-size:1.4rem;margin:28px 0 12px;color:#0E2439}
+    .months{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:12px}
+    .month{background:#fff;border-radius:14px;padding:16px;box-shadow:0 2px 10px rgba(0,0,0,.06)}
+    .month b{display:block;font-size:1.05rem;margin-bottom:4px}
+    .stars{color:#F5A623;font-size:.9rem}
+    .month small{color:#5A6B7B;display:block;margin-top:4px}
+    .top{border-left:4px solid #00A8CC}
+    .card{background:#fff;border-radius:16px;padding:20px;margin:14px 0;box-shadow:0 2px 10px rgba(0,0,0,.06)}
+    .apps{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:10px;margin-top:10px}
+    .app{display:flex;gap:10px;align-items:center;background:#fff;border:1px solid #E4EAF0;border-radius:12px;padding:12px;text-decoration:none;color:#0E2439;transition:transform .15s}
+    .app:hover{transform:translateY(-2px);border-color:#00A8CC}
+    .app b{font-size:.92rem}
+    .app small{display:block;color:#5A6B7B;font-size:.78rem}
+    footer{background:#0E2439;color:#B8C7D4;text-align:center;padding:28px 16px;font-size:.85rem}
+    footer a{color:#7FD4E8;text-decoration:none}
+    .cta{display:inline-block;background:#00A8CC;color:#fff;text-decoration:none;border-radius:12px;padding:12px 22px;font-weight:700;margin-top:10px}
+  </style>
+</head>
+<body>
+<header>
+  <span class="badge">🌊 Rede de Apps ASF</span>
+  <h1>ASF Temporada</h1>
+  <p>Calendário interativo das temporadas de surf no litoral norte de São Paulo: quando vem swell, como fica o vento, a temperatura da água e o movimento nos picos — mês a mês.</p>
+</header>
+<div class="wrap">
+
+  <h2>📅 Melhores meses para surfar</h2>
+  <div class="months">
+    <div class="month"><b>Janeiro</b><span class="stars">★★★☆☆</span><small>Ondas menores, mar lotado, vento NE. Ótimo para iniciantes.</small></div>
+    <div class="month"><b>Fevereiro</b><span class="stars">★★★☆☆</span><small>Swells de verão irregulares; sessões cedo rendem mais.</small></div>
+    <div class="month top"><b>Março</b><span class="stars">★★★★★</span><small>Começam os swells de outono. Pouca gente, água quente.</small></div>
+    <div class="month top"><b>Abril</b><span class="stars">★★★★★</span><small>Um dos melhores meses: swells consistentes e vento terral.</small></div>
+    <div class="month top"><b>Maio</b><span class="stars">★★★★★</span><small>Outono clássico: ondas limpas, picos vazios, água ainda agradável.</small></div>
+    <div class="month"><b>Junho</b><span class="stars">★★★★☆</span><small>Swells de inverno chegando; wetsuit 3/2 recomendada.</small></div>
+    <div class="month"><b>Julho</b><span class="stars">★★★★☆</span><small>Maior consistência do ano, mas frio e vento sul forte.</small></div>
+    <div class="month"><b>Agosto</b><span class="stars">★★★★☆</span><small>Ondas grandes e picos de inverno; atenção à segurança.</small></div>
+    <div class="month"><b>Setembro</b><span class="stars">★★★☆☆</span><small>Transição: ainda há swell, mas vento irregular.</small></div>
+    <div class="month"><b>Outubro</b><span class="stars">★★★☆☆</span><small>Primavera instável; bons dias alternam com mar flat.</small></div>
+    <div class="month"><b>Novembro</b><span class="stars">★★★☆☆</span><small>Ondas médias voltando; água aquecendo.</small></div>
+    <div class="month"><b>Dezembro</b><span class="stars">★★★☆☆</span><small>Verão começando; mar cheio nos feriados.</small></div>
+  </div>
+
+  <h2>🏆 A melhor janela do ano</h2>
+  <div class="card">
+    <b>Março a maio</b> é a temporada de ouro no litoral norte de SP: os primeiros swells de outono entram com consistência, os ventos terrais deixam o mar limpo pela manhã, a água ainda está quente (23–25°C) e os picos esvaziam depois do verão. Para progressão no surf, é o período ideal para evoluir manobras e ganhar confiança em ondas maiores.
+  </div>
+
+  <h2>🧰 Combine com os outros apps da rede ASF</h2>
+  <div class="apps">
+    <a class="app" href="https://acarolmourad-commits.github.io/asf-previsao/" target="_blank" rel="noopener"><span>🌊</span><span><b>ASF Previsão</b><small>Ondas, vento e maré ao vivo</small></span></a>
+    <a class="app" href="https://acarolmourad-commits.github.io/asf-mare/" target="_blank" rel="noopener"><span>🌙</span><span><b>ASF Maré</b><small>Tábua de marés e fases da lua</small></span></a>
+    <a class="app" href="https://acarolmourad-commits.github.io/asf-vento/" target="_blank" rel="noopener"><span>💨</span><span><b>ASF Vento</b><small>Vento ao vivo nas praias</small></span></a>
+    <a class="app" href="https://acarolmourad-commits.github.io/asf-praias/" target="_blank" rel="noopener"><span>🏖️</span><span><b>ASF Praias</b><small>Guia de praias do litoral norte</small></span></a>
+    <a class="app" href="https://acarolmourad-commits.github.io/asf-mapa/" target="_blank" rel="noopener"><span>🗺️</span><span><b>ASF Mapa</b><small>Picos de surf interativos</small></span></a>
+    <a class="app" href="https://acarolmourad-commits.github.io/asf-mala/" target="_blank" rel="noopener"><span>🎒</span><span><b>ASF Mala</b><small>Checklist por tipo de sessão</small></span></a>
+    <a class="app" href="https://acarolmourad-commits.github.io/asf-checklist/" target="_blank" rel="noopener"><span>✅</span><span><b>ASF Checklist</b><small>Pré-surf: equipamento e segurança</small></span></a>
+    <a class="app" href="https://acarolmourad-commits.github.io/asf-viagens/" target="_blank" rel="noopener"><span>✈️</span><span><b>ASF Viagens</b><small>Roteiros de surf trips</small></span></a>
+    <a class="app" href="https://acarolmourad-commits.github.io/asf-treino/" target="_blank" rel="noopener"><span>🏄‍♀️</span><span><b>ASF Treino</b><small>Progressão de surf para mulheres</small></span></a>
+    <a class="app" href="https://acarolmourad-commits.github.io/asf-diario/" target="_blank" rel="noopener"><span>📓</span><span><b>ASF Diário</b><small>Registre suas sessões</small></span></a>
+  </div>
+
+  <div class="card" style="text-align:center;margin-top:24px">
+    <b>Ver todos os 54 apps da rede ASF</b>
+    <p style="color:#5A6B7B;font-size:.9rem;margin:6px 0">Quiz, ranking, mentorias, glossário, emergência SOS e muito mais — tudo gratuito.</p>
+    <a class="cta" href="https://acarolmourad-commits.github.io/asf-app/apps/">Abrir o hub de apps →</a>
+  </div>
+
+  <div class="card" style="text-align:center">
+    <b>🏡 Procurando casa de surf (ou de temporada) no litoral?</b>
+    <p style="color:#5A6B7B;font-size:.9rem;margin:6px 0">A Praia Digital analisa imóveis no litoral paulista com dados e inteligência artificial.</p>
+    <a class="cta" href="https://praia.digital/" target="_blank" rel="noopener" style="background:#0E2439">Conhecer a Praia Digital →</a>
+  </div>
+</div>
+<footer>
+  <p><b>ASF</b> — Associação de Surf Feminino · Feito com 💙 no litoral norte de SP</p>
+  <p style="margin-top:6px"><a href="https://acarolmourad-commits.github.io/asf-app/">App principal</a> · <a href="https://acarolmourad-commits.github.io/asf-app/apps/">Todos os apps</a> · <a href="https://acarolmourad-commits.github.io/asf-app/privacidade.html">Privacidade</a> · <a href="https://acarolmourad-commits.github.io/asf-app/termos-de-uso.html">Termos</a></p>
+</footer>
+</body>
+</html>
