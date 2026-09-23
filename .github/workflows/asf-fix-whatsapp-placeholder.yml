@@ -1,0 +1,21 @@
+name: ASF fix WhatsApp placeholder
+on:
+  push:
+    branches: [fix/whatsapp-oficial]
+    paths:
+      - scripts/asf_fix_whatsapp_placeholder.py
+permissions:
+  contents: write
+jobs:
+  fix:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: python scripts/asf_fix_whatsapp_placeholder.py
+      - name: Commit se necessário
+        run: |
+          git config user.name "ASF Bot"
+          git config user.email "bot@asf-app.com"
+          git add index.html scripts/asf_fix_whatsapp_placeholder.py .github/workflows/asf-fix-whatsapp-placeholder.yml
+          git diff --cached --quiet || git commit -m "fix: substitui whatsapp placeholder pelo numero oficial ASF"
+          git push
