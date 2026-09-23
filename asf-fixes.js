@@ -423,7 +423,7 @@ document.addEventListener('DOMContentLoaded', function(){
         utilityModal('🧤 Guia de Wetsuit',
           '<p><strong>Água acima de 22°C:</strong> biquíni/licra.<br>'
           + '<strong>19–22°C:</strong> short john ou 2mm.<br>'
-          + '<strong>Abaixo de 19°C:</strong> long john 3/2mm.</p>'
+          + '<strong>Abaixo de 19°C:</strong> long john 3/2mm.</p></p>'
           + '<p>No litoral norte de SP, um long john 3/2mm cobre o inverno e uma 2mm o resto do ano. 🤙</p>');
         return;
       default:
@@ -490,9 +490,27 @@ document.addEventListener('DOMContentLoaded', function(){
       html += '<a href="https://acarolmourad-commits.github.io/'+a[0]+'/" style="display:block;background:#fff;border-radius:14px;padding:16px;text-decoration:none;color:#0e2439;box-shadow:0 2px 10px rgba(0,0,0,.07);border-top:3px solid #00a8cc">' +
         '<span style="font-size:26px">'+a[1]+'</span><h3 style="margin:6px 0 2px;font-size:15px">'+a[2]+'</h3><p style="font-size:12px;color:#567;margin:0">'+a[3]+'</p></a>';
     });
-    html += '</div><p style="margin-top:16px"><a href="satellites.html" style="color:#00a8cc;font-weight:700">Ver todos os 52 apps →</a> · <a href="rede.html" style="color:#00a8cc;font-weight:700">Mapa da rede</a></p>';
+    html += '</div><p style="margin-top:16px"><a href="satellites.html" style="color:#00a8cc;font-weight:700">Ver todos os 52 apps →</a> · <a href="rede.html" style="color:#00a8cc;font-weight:700">Mapa da rede</a> · <a href="novidades.html" style="color:#00a8cc;font-weight:700">📰 Novidades</a></p>';
     sec.innerHTML = html;
     footer.parentNode.insertBefore(sec, footer);
   }
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", build); else build();
+})();
+
+/* ============================================================
+   7) BANNER NOVIDADES DA REDE — anuncia novidades.html no topo da home
+   Inserido em 23/09/2026
+============================================================ */
+(function(){
+  function mountBanner(){
+    if(document.getElementById("asf-novidades-banner"))return;
+    var b=document.createElement("div");
+    b.id="asf-novidades-banner";
+    b.style.cssText="background:linear-gradient(90deg,#00a8cc,#0e2439);color:#fff;text-align:center;padding:10px 14px;font-size:14px;font-family:system-ui,sans-serif";
+    b.innerHTML='📰 <strong>Novidade:</strong> a ASF agora tem 53 apps gratuitos de surf feminino! '+
+      '<a href="https://acarolmourad-commits.github.io/asf-app/novidades.html" style="color:#f4d03f;font-weight:700;text-decoration:underline">Conheça a rede completa</a>'+
+      ' · <a href="https://acarolmourad-commits.github.io/asf-app/satellites.html" style="color:#f4d03f;font-weight:700;text-decoration:underline">Constelação ASF</a>';
+    document.body.insertBefore(b,document.body.firstChild);
+  }
+  if(document.readyState==="loading"){document.addEventListener("DOMContentLoaded",mountBanner);}else{mountBanner();}
 })();
