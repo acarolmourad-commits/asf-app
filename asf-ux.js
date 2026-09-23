@@ -38,7 +38,7 @@
       var sec = document.getElementById(id);
       if (!sec || sec.querySelector('.asf-demo-badge')) return;
       var header = sec.querySelector('.section-header') || sec.firstChild;
-      var badge = el('<span class="asf-demo-badge">🧪 Conteudo demonstrativo — perfis de exemplo</span>');
+      var badge = el('<span class="asf-demo-badge">🧪 Conteúdo demonstrativo — perfis de exemplo</span>');
       header && header.parentNode ? header.parentNode.insertBefore(badge, header.nextSibling) : sec.insertBefore(badge, sec.firstChild);
     });
   }
@@ -126,7 +126,7 @@
     if (!sec || sec.querySelector('.asf-idcard')) return;
     var pts = ls('asf_points', { total: 0 });
     var sessions = ls('surf-sessions', []);
-    var quizzes = ls('quizzes-done', []);
+    var quizzes = lq('quizzes-done', []);
     var profile = ls('asf-profile', null);
     var nome = profile && profile.name ? profile.name : 'Surfista ASF';
     var nivel = (typeof getLevel === 'function') ? getLevel(pts.total || 0) : null;
