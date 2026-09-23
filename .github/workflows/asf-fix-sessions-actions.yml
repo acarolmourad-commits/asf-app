@@ -1,0 +1,21 @@
+name: ASF fix sessões interativas
+on:
+  push:
+    branches: [fix/sessoes-interativas]
+    paths:
+      - scripts/asf_fix_sessions_actions.py
+permissions:
+  contents: write
+jobs:
+  fix:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: python scripts/asf_fix_sessions_actions.py
+      - name: Commit se necessário
+        run: |
+          git config user.name "ASF Bot"
+          git config user.email "bot@asf-app.com"
+          git add sessoes-interativas.html scripts/asf_fix_sessions_actions.py .github/workflows/asf-fix-sessions-actions.yml
+          git diff --cached --quiet || git commit -m "fix(comunidade): acoes reais nas sessoes interativas"
+          git push
