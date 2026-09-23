@@ -455,3 +455,44 @@ document.addEventListener('DOMContentLoaded', function(){
   if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',fixPollBtn);}else{fixPollBtn();}
   setTimeout(fixPollBtn, 2000);
 })();
+
+/* ============================================================
+   2) REDE DE APPS ASF — anúncio dos 52 apps satélite na página inicial
+   Publicado em 23/09/2026
+============================================================ */
+(function(){
+  if (window.__ASF_REDE_BANNER__) return; window.__ASF_REDE_BANNER__ = true;
+  var apps = [
+    ["asf-previsao","🌊","ASF Previsão","Ondas, vento e maré em tempo real"],
+    ["asf-praias","🏖️","ASF Praias","Guia de praias do litoral norte"],
+    ["asf-mare","🌙","ASF Maré","Tábua de marés e fases da lua"],
+    ["asf-mapa","🗺️","ASF Mapa","Mapa interativo dos picos"],
+    ["asf-alerta","🚨","ASF Alerta","Alertas de condições do mar"],
+    ["asf-ponto","📍","ASF Ponto","Check-in ao vivo nos picos"],
+    ["asf-treino","💪","ASF Treino","Treinos de surf para mulheres"],
+    ["asf-manobras","🏄‍♀️","ASF Manobras","Trilha de progressão com XP"],
+    ["asf-diario","📖","ASF Diário","Diário de sessões de surf"],
+    ["asf-comunidade","🤝","ASF Comunidade","Histórias e rede de apoio"],
+    ["asf-eventos","📅","ASF Eventos","Calendário de competições"],
+    ["asf-sos","🆘","ASF SOS","Emergência com geolocalização"]
+  ];
+  function build(){
+    if (document.getElementById("asf-rede-apps")) return;
+    var footer = document.querySelector("footer");
+    if (!footer) return;
+    var sec = document.createElement("section");
+    sec.id = "asf-rede-apps";
+    sec.style.cssText = "max-width:1100px;margin:40px auto;padding:0 16px;text-align:center";
+    var html = '<h2 style="font-size:26px;color:#0e2439">🌐 Rede de Apps ASF</h2>' +
+      '<p style="color:#567;max-width:640px;margin:8px auto 20px">Conheça nossa constelação de 52 aplicativos gratuitos feitos para surfistas: previsão, treino, segurança, comunidade e muito mais.</p>' +
+      '<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px">';
+    apps.forEach(function(a){
+      html += '<a href="https://acarolmourad-commits.github.io/'+a[0]+'/" style="display:block;background:#fff;border-radius:14px;padding:16px;text-decoration:none;color:#0e2439;box-shadow:0 2px 10px rgba(0,0,0,.07);border-top:3px solid #00a8cc">' +
+        '<span style="font-size:26px">'+a[1]+'</span><h3 style="margin:6px 0 2px;font-size:15px">'+a[2]+'</h3><p style="font-size:12px;color:#567;margin:0">'+a[3]+'</p></a>';
+    });
+    html += '</div><p style="margin-top:16px"><a href="satellites.html" style="color:#00a8cc;font-weight:700">Ver todos os 52 apps →</a> · <a href="rede.html" style="color:#00a8cc;font-weight:700">Mapa da rede</a></p>';
+    sec.innerHTML = html;
+    footer.parentNode.insertBefore(sec, footer);
+  }
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", build); else build();
+})();
