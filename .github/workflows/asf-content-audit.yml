@@ -1,0 +1,29 @@
+name: ASF Content Audit
+
+on:
+  push:
+    paths:
+      - "**.html"
+      - "sitemap.xml"
+      - "robots.txt"
+  schedule:
+    - cron: "0 9 * * 1"  # segunda-feira 09:00 UTC
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Run content audit
+        run: python3 scripts/content_audit.py
+      - name: Upload audit report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: content-audit-report
+          path: docs/generated/content-audit.json
+          retention-days: 30
