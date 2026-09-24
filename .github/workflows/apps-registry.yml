@@ -1,0 +1,28 @@
+name: ASF Apps Registry Sync (Fase 9)
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "data/apps.json"
+      - "asf-network.js"
+      - "satellites.html"
+      - "guia-apps.html"
+      - "rede.html"
+      - "novidades.html"
+      - "apps/index.html"
+      - "scripts/sync_apps_registry.py"
+      - ".github/workflows/apps-registry.yml"
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validar registry vs consumidores
+        run: python3 scripts/sync_apps_registry.py

@@ -1,0 +1,267 @@
+{
+  "hub": "https://acarolmourad-commits.github.io/asf-app/",
+  "version": 1,
+  "updated": "2026-09-24",
+  "apps": [
+    {
+      "slug": "asf-previsao",
+      "name": "🌊 ASF Previsão",
+      "url": "https://acarolmourad-commits.github.io/asf-previsao/"
+    },
+    {
+      "slug": "asf-praias",
+      "name": "🏖️ ASF Praias",
+      "url": "https://acarolmourad-commits.github.io/asf-praias/"
+    },
+    {
+      "slug": "asf-mare",
+      "name": "🌙 ASF Maré",
+      "url": "https://acarolmourad-commits.github.io/asf-mare/"
+    },
+    {
+      "slug": "asf-mapa",
+      "name": "🗺️ ASF Mapa",
+      "url": "https://acarolmourad-commits.github.io/asf-mapa/"
+    },
+    {
+      "slug": "asf-atlas",
+      "name": "🧭 ASF Atlas",
+      "url": "https://acarolmourad-commits.github.io/asf-atlas/"
+    },
+    {
+      "slug": "asf-alerta",
+      "name": "🚨 ASF Alerta",
+      "url": "https://acarolmourad-commits.github.io/asf-alerta/"
+    },
+    {
+      "slug": "asf-ponto",
+      "name": "📍 ASF Ponto",
+      "url": "https://acarolmourad-commits.github.io/asf-ponto/"
+    },
+    {
+      "slug": "asf-leitura",
+      "name": "👁️ ASF Leitura de Mar",
+      "url": "https://acarolmourad-commits.github.io/asf-leitura/"
+    },
+    {
+      "slug": "asf-goldenhour",
+      "name": "🌅 ASF Golden Hour",
+      "url": "https://acarolmourad-commits.github.io/asf-goldenhour/"
+    },
+    {
+      "slug": "asf-vento",
+      "name": "💨 ASF Vento",
+      "url": "https://acarolmourad-commits.github.io/asf-vento/"
+    },
+    {
+      "slug": "asf-treino",
+      "name": "🏋️ ASF Treino",
+      "url": "https://acarolmourad-commits.github.io/asf-treino/"
+    },
+    {
+      "slug": "asf-manobras",
+      "name": "⚡ ASF Manobras",
+      "url": "https://acarolmourad-commits.github.io/asf-manobras/"
+    },
+    {
+      "slug": "asf-popup",
+      "name": "⏱️ ASF Pop-up",
+      "url": "https://acarolmourad-commits.github.io/asf-popup/"
+    },
+    {
+      "slug": "asf-apnea",
+      "name": "🫁 ASF Apneia",
+      "url": "https://acarolmourad-commits.github.io/asf-apnea/"
+    },
+    {
+      "slug": "asf-respira",
+      "name": "🌬️ ASF Respira",
+      "url": "https://acarolmourad-commits.github.io/asf-respira/"
+    },
+    {
+      "slug": "asf-yoga",
+      "name": "🧘 ASF Yoga",
+      "url": "https://acarolmourad-commits.github.io/asf-yoga/"
+    },
+    {
+      "slug": "asf-volume",
+      "name": "🏄 ASF Volume",
+      "url": "https://acarolmourad-commits.github.io/asf-volume/"
+    },
+    {
+      "slug": "asf-comunidade",
+      "name": "💬 ASF Comunidade",
+      "url": "https://acarolmourad-commits.github.io/asf-comunidade/"
+    },
+    {
+      "slug": "asf-parceiras",
+      "name": "🤝 ASF Parceiras",
+      "url": "https://acarolmourad-commits.github.io/asf-parceiras/"
+    },
+    {
+      "slug": "asf-mentorias",
+      "name": "🎓 ASF Mentorias",
+      "url": "https://acarolmourad-commits.github.io/asf-mentorias/"
+    },
+    {
+      "slug": "asf-carona",
+      "name": "🛖 ASF Carona",
+      "url": "https://acarolmourad-commits.github.io/asf-carona/"
+    },
+    {
+      "slug": "asf-eventos",
+      "name": "📅 ASF Eventos",
+      "url": "https://acarolmourad-commits.github.io/asf-eventos/"
+    },
+    {
+      "slug": "asf-galeria",
+      "name": "📸 ASF Galeria",
+      "url": "https://acarolmourad-commits.github.io/asf-galeria/"
+    },
+    {
+      "slug": "asf-mercado",
+      "name": "🛒 ASF Mercado",
+      "url": "https://acarolmourad-commits.github.io/asf-mercado/"
+    },
+    {
+      "slug": "asf-eco",
+      "name": "🌱 ASF Eco",
+      "url": "https://acarolmourad-commits.github.io/asf-eco/"
+    },
+    {
+      "slug": "asf-viagens",
+      "name": "✈️ ASF Viagens",
+      "url": "https://acarolmourad-commits.github.io/asf-viagens/"
+    },
+    {
+      "slug": "asf-patrocinio",
+      "name": "💛 ASF Patrocínio",
+      "url": "https://acarolmourad-commits.github.io/asf-patrocinio/"
+    },
+    {
+      "slug": "asf-loja",
+      "name": "🛍️ ASF Loja",
+      "url": "https://acarolmourad-commits.github.io/asf-loja/"
+    },
+    {
+      "slug": "asf-glossario",
+      "name": "📖 ASF Glossário",
+      "url": "https://acarolmourad-commits.github.io/asf-glossario/"
+    },
+    {
+      "slug": "asf-historia",
+      "name": "📜 ASF História",
+      "url": "https://acarolmourad-commits.github.io/asf-historia/"
+    },
+    {
+      "slug": "asf-kids",
+      "name": "🧒 ASF Kids",
+      "url": "https://acarolmourad-commits.github.io/asf-kids/"
+    },
+    {
+      "slug": "asf-checklist",
+      "name": "✅ ASF Checklist",
+      "url": "https://acarolmourad-commits.github.io/asf-checklist/"
+    },
+    {
+      "slug": "asf-quiz",
+      "name": "🧠 ASF Quiz",
+      "url": "https://acarolmourad-commits.github.io/asf-quiz/"
+    },
+    {
+      "slug": "asf-ranking",
+      "name": "🏆 ASF Ranking",
+      "url": "https://acarolmourad-commits.github.io/asf-ranking/"
+    },
+    {
+      "slug": "asf-desafio",
+      "name": "🗓️ ASF Desafio 30",
+      "url": "https://acarolmourad-commits.github.io/asf-desafio/"
+    },
+    {
+      "slug": "asf-memoria",
+      "name": "🏏 ASF Memória",
+      "url": "https://acarolmourad-commits.github.io/asf-memoria/"
+    },
+    {
+      "slug": "asf-diario",
+      "name": "📓 ASF Diário",
+      "url": "https://acarolmourad-commits.github.io/asf-diario/"
+    },
+    {
+      "slug": "asf-mala",
+      "name": "🎒 ASF Mala",
+      "url": "https://acarolmourad-commits.github.io/asf-mala/"
+    },
+    {
+      "slug": "asf-seguranca",
+      "name": "🛟 ASF Segurança",
+      "url": "https://acarolmourad-commits.github.io/asf-seguranca/"
+    },
+    {
+      "slug": "asf-sos",
+      "name": "🆘 ASF SOS",
+      "url": "https://acarolmourad-commits.github.io/asf-sos/"
+    },
+    {
+      "slug": "asf-sono",
+      "name": "😴 ASF Sono",
+      "url": "https://acarolmourad-commits.github.io/asf-sono/"
+    },
+    {
+      "slug": "asf-bemestar",
+      "name": "💖 ASF Bem-Estar",
+      "url": "https://acarolmourad-commits.github.io/asf-bemestar/"
+    },
+    {
+      "slug": "asf-mental",
+      "name": "🧠 ASF Mental",
+      "url": "https://acarolmourad-commits.github.io/asf-mental/"
+    },
+    {
+      "slug": "asf-nutricao",
+      "name": "🥗 ASF Nutrição",
+      "url": "https://acarolmourad-commits.github.io/asf-nutricao/"
+    },
+    {
+      "slug": "asf-equipamento",
+      "name": "🏄‍♀️ ASF Equipamento",
+      "url": "https://acarolmourad-commits.github.io/asf-equipamento/"
+    },
+    {
+      "slug": "asf-desafios",
+      "name": "🎯 ASF Desafios",
+      "url": "https://acarolmourad-commits.github.io/asf-desafios/"
+    },
+    {
+      "slug": "asf-filmes",
+      "name": "🎬 ASF Filmes",
+      "url": "https://acarolmourad-commits.github.io/asf-filmes/"
+    },
+    {
+      "slug": "asf-podcast",
+      "name": "🎧 ASF Podcast",
+      "url": "https://acarolmourad-commits.github.io/asf-podcast/"
+    },
+    {
+      "slug": "asf-inspiracao",
+      "name": "✨ ASF Inspiração",
+      "url": "https://acarolmourad-commits.github.io/asf-inspiracao/"
+    },
+    {
+      "slug": "asf-sonhos",
+      "name": "🌠 ASF Sonhos",
+      "url": "https://acarolmourad-commits.github.io/asf-sonhos/"
+    },
+    {
+      "slug": "asf-clube",
+      "name": "💳 ASF Clube",
+      "url": "https://acarolmourad-commits.github.io/asf-clube/"
+    },
+    {
+      "slug": "asf-achados",
+      "name": "🔍 ASF Achados",
+      "url": "https://acarolmourad-commits.github.io/asf-achados/"
+    }
+  ]
+}
