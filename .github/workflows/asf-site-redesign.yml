@@ -1,0 +1,65 @@
+name: ASF Site Redesign
+on:
+  push:
+    branches: [main]
+    paths: [.github/workflows/asf-site-redesign.yml]
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  redesign:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Apply shared visual and navigation layer
+        run: |
+          cat > asf-site-redesign.css <<'CSS'
+          /* ASF site redesign — shared polish for the app and satellite pages. */
+          :root{--asf-primary:#00A8CC;--asf-primary-dark:#007C99;--asf-primary-soft:#E6F7FB;--asf-ink:#0E2439;--asf-muted:#5E7180;--asf-surface:#FFFFFF;--asf-line:#DCECF1;--asf-radius:18px;--asf-shadow:0 12px 32px rgba(14,36,57,.10)}
+          html{scroll-behavior:smooth;scroll-padding-top:92px}
+          body{min-height:100vh;color:var(--asf-ink);background:radial-gradient(circle at 12% 0%,rgba(0,168,204,.08),transparent 32rem),radial-gradient(circle at 88% 18%,rgba(255,107,157,.07),transparent 30rem),#F7FAFB;text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased}
+          ::selection{background:rgba(0,168,204,.24)}
+          .asf-skip-link{position:fixed;left:14px;top:-80px;z-index:2000;background:var(--asf-ink);color:#fff;padding:10px 14px;border-radius:999px;text-decoration:none;font-weight:700;transition:top .18s ease}.asf-skip-link:focus{top:12px}
+          .asf-site-nav{position:sticky;top:0;z-index:990;display:flex;align-items:center;gap:6px;max-width:1120px;margin:12px auto 0;padding:8px;background:rgba(255,255,255,.88);backdrop-filter:blur(16px) saturate(1.25);-webkit-backdrop-filter:blur(16px) saturate(1.25);border:1px solid rgba(220,236,241,.95);border-radius:999px;box-shadow:0 8px 24px rgba(14,36,57,.08);width:calc(100% - 24px);box-sizing:border-box;overflow-x:auto;scrollbar-width:none}.asf-site-nav::-webkit-scrollbar{display:none}
+          .asf-site-brand{display:inline-flex;align-items:center;gap:8px;flex:0 0 auto;margin-right:8px;padding:8px 12px;border-radius:999px;background:linear-gradient(135deg,var(--asf-ink),var(--asf-primary));color:#fff!important;text-decoration:none;font-weight:800;font-size:13px;letter-spacing:.02em}.asf-site-brand img{width:22px;height:22px;object-fit:contain;border-radius:50%;background:#fff;padding:1px}
+          .asf-site-nav a:not(.asf-site-brand){flex:0 0 auto;display:inline-flex;align-items:center;gap:5px;padding:9px 12px;border-radius:999px;color:var(--asf-muted);text-decoration:none;font-size:13px;font-weight:700;transition:background .18s ease,color .18s ease,transform .18s ease}.asf-site-nav a:not(.asf-site-brand):hover,.asf-site-nav a:not(.asf-site-brand):focus-visible{background:var(--asf-primary-soft);color:var(--asf-primary-dark);transform:translateY(-1px)}
+          header:not(.hero){max-width:1120px;margin:24px auto;padding:32px 24px;border:1px solid rgba(220,236,241,.8);border-radius:0 0 28px 28px;background:linear-gradient(135deg,rgba(255,255,255,.96),rgba(230,247,251,.88));box-shadow:var(--asf-shadow)}header.hero{margin-top:16px;border-radius:28px;max-width:1120px}main,.wrap{max-width:1120px;margin-inline:auto}footer{border-top:1px solid var(--asf-line)}
+          a{color:var(--asf-primary-dark)}a:hover{color:var(--asf-primary)}
+          .card,.g,.app,.subscriber-card,.beach-card,.hero-card,.hero-app{position:relative;overflow:hidden;border:1px solid rgba(220,236,241,.9)!important;border-radius:var(--asf-radius)!important;background:rgba(255,255,255,.92);box-shadow:0 4px 18px rgba(14,36,57,.06);transition:transform .2s ease,box-shadow .2s ease,border-color .2s ease}@media(hover:hover){.card:hover,.g:hover,.app:hover,.subscriber-card:hover,.beach-card:hover,.hero-card:hover,.hero-app:hover{transform:translateY(-4px);box-shadow:var(--asf-shadow);border-color:rgba(0,168,204,.35)!important}}
+          button,a,input,select,textarea{touch-action:manipulation}button:not(.nav-item),.btn,.subscriber-btn{transition:transform .18s ease,box-shadow .18s ease}@media(hover:hover){button:not(.nav-item):hover,.btn:hover,.subscriber-btn:hover{transform:translateY(-2px)}}
+          :focus-visible{outline:3px solid rgba(0,168,204,.55)!important;outline-offset:3px;border-radius:10px}
+          .bottom-nav{gap:4px;padding:8px 10px calc(8px + env(safe-area-inset-bottom));background:rgba(255,255,255,.92);backdrop-filter:blur(18px) saturate(1.25);-webkit-backdrop-filter:blur(18px) saturate(1.25);border-top:1px solid rgba(220,236,241,.9);box-shadow:0 -10px 30px rgba(14,36,57,.12)}.bottom-nav .nav-item{min-width:58px;border-radius:16px;color:#667B8A}.bottom-nav .nav-item.active,.bottom-nav .nav-item.asf-active{color:var(--asf-primary-dark);background:linear-gradient(180deg,var(--asf-primary-soft),rgba(230,247,251,.55));box-shadow:inset 0 0 0 1px rgba(0,168,204,.16)}
+          .asf-more-menu{position:fixed;right:12px;bottom:calc(82px + env(safe-area-inset-bottom));z-index:1001;display:grid;grid-template-columns:repeat(2,minmax(120px,1fr));gap:8px;width:min(320px,calc(100vw - 24px));padding:12px;border:1px solid rgba(220,236,241,.95);border-radius:22px;background:rgba(255,255,255,.96);box-shadow:0 18px 48px rgba(14,36,57,.22);backdrop-filter:blur(18px);opacity:0;visibility:hidden;transform:translateY(12px);transition:opacity .2s ease,transform .2s ease,visibility .2s}.asf-more-menu.open{opacity:1;visibility:visible;transform:none}.asf-more-menu .nav-item{display:flex;flex-direction:row;justify-content:flex-start!important;gap:8px!important;min-height:44px;padding:10px;border:1px solid var(--asf-line);background:#fff;color:var(--asf-ink)}
+          @media(min-width:900px){.asf-more-menu{grid-template-columns:repeat(2,1fr)}.bottom-nav{left:50%;right:auto;transform:translateX(-50%);width:min(760px,100%);border-radius:24px 24px 0 0;border-inline:1px solid rgba(220,236,241,.9)}}
+          @media(max-width:640px){.asf-site-nav{margin-top:8px;border-radius:20px}.asf-site-nav a:not(.asf-site-brand){padding:8px 10px;font-size:12px}header:not(.hero){margin-top:12px;padding:26px 18px;border-radius:0 0 22px 22px}.asf-more-menu{grid-template-columns:1fr}.bottom-nav .label{font-size:11px}}
+          @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important;transition-duration:.01ms!important}}
+          CSS
+          sed -i 's/^[[:space:]]\{10\}//' asf-site-redesign.css
+          cat > asf-redesign.js <<'JS'
+          (function(){'use strict';function ready(fn){document.readyState==='loading'?document.addEventListener('DOMContentLoaded',fn):fn()}ready(function(){var main=document.querySelector('main')||document.querySelector('.content')||document.body;if(main&&!document.querySelector('.asf-skip-link')){var skip=document.createElement('a');skip.className='asf-skip-link';skip.href='#asf-main';skip.textContent='Pular para o conteúdo';document.body.prepend(skip);if(!main.id)main.id='asf-main'}if(!document.querySelector('.bottom-nav')&&!document.querySelector('.asf-site-nav')){var nav=document.createElement('nav');nav.className='asf-site-nav';nav.setAttribute('aria-label','Navegação principal ASF');nav.innerHTML='<a class="asf-site-brand" href="/asf-app/"><img src="/asf-app/assets/images/asf-logo-breadcrumb.png" alt="" loading="lazy">ASF</a><a href="/asf-app/aprender/">📚 Aprender</a><a href="/asf-app/previsao-surf/">🌊 Previsão</a><a href="/asf-app/quiz/">🏄 Quiz</a><a href="/asf-app/guia-apps.html">🧰 Apps</a><a href="/asf-app/sobre.html">Sobre</a>';document.body.prepend(nav)}var top=document.querySelector('nav.top');if(top&&!top.classList.contains('asf-enhanced')){top.classList.add('asf-enhanced');[['🌊 Previsão','/asf-app/previsao-surf/'],['🧰 Apps','/asf-app/guia-apps.html']].forEach(function(x){if(!top.querySelector('a[href="'+x[1]+'"]')){var a=document.createElement('a');a.href=x[1];a.textContent=x[0];top.appendChild(a)}})}var bottom=document.querySelector('.bottom-nav');if(bottom&&!bottom.dataset.asfOverflow){bottom.dataset.asfOverflow='1';var items=[].slice.call(bottom.querySelectorAll(':scope > .nav-item'));if(items.length>6){var more=document.createElement('button');more.type='button';more.className='nav-item asf-more-toggle';more.setAttribute('aria-label','Abrir menu completo');more.setAttribute('aria-expanded','false');more.innerHTML='<span class="icon">☰</span><span class="label">Mais</span>';var menu=document.createElement('div');menu.className='asf-more-menu';menu.setAttribute('aria-label','Mais seções');items.slice(5).forEach(function(item){menu.appendChild(item)});bottom.appendChild(more);document.body.appendChild(menu);more.addEventListener('click',function(){var open=menu.classList.toggle('open');more.setAttribute('aria-expanded',open?'true':'false')});menu.addEventListener('click',function(e){if(e.target.closest('.nav-item')){menu.classList.remove('open');more.setAttribute('aria-expanded','false')}});document.addEventListener('click',function(e){if(!menu.contains(e.target)&&!more.contains(e.target)){menu.classList.remove('open');more.setAttribute('aria-expanded','false')}})}}});})();
+          JS
+          sed -i 's/^[[:space:]]\{10\}//' asf-redesign.js
+          python3 - <<'PY'
+          from pathlib import Path
+          public=[p for p in Path('.').rglob('*.html') if p.parts[0] not in {'docs','meta-integration'}]
+          css='    <link rel="stylesheet" href="/asf-app/asf-site-redesign.css">\n'
+          js='    <script src="/asf-app/asf-redesign.js" defer></script>\n'
+          for p in public:
+              s=p.read_text()
+              if p.name=='index.html':
+                  continue
+              if '/asf-app/asf-site-redesign.css' not in s and '</head>' in s: s=s.replace('</head>',css+'</head>',1)
+              if '/asf-app/asf-redesign.js' not in s and '</body>' in s: s=s.replace('</body>',js+'</body>',1)
+              p.write_text(s)
+          p=Path('subscriber-styles.css'); s=p.read_text()
+          if 'asf-site-redesign.css' not in s: p.write_text(s.replace('@import url("asf-enhancements.css");','@import url("asf-enhancements.css");\n@import url("asf-site-redesign.css");',1))
+          p=Path('asf-ux.js'); s=p.read_text(); overlay=Path('asf-redesign.js').read_text()
+          if 'asf-more-menu' not in s: p.write_text(s.rstrip()+'\n\n/* ASF redesign navigation enhancements */\n'+overlay)
+          PY
+      - name: Commit redesign
+        run: |
+          git config user.name "ASF Bot"
+          git config user.email "acarolmourad-commits@users.noreply.github.com"
+          git add asf-site-redesign.css asf-redesign.js subscriber-styles.css asf-ux.js $(find . -path './docs' -prune -o -name '*.html' -print)
+          git diff --cached --quiet || git commit -m "Redesign ASF site layout and navigation"
+          git push
