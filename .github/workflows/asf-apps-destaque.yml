@@ -1,0 +1,24 @@
+name: ASF Apps Destaque Homepage
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ['.github/workflows/asf-apps-destaque.yml']
+permissions:
+  contents: write
+jobs:
+  fix:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Add apps-em-destaque card to homepage
+        run: |
+          echo "IyBBU0Y6IGNhcmQgIkFwcHMgZW0gRGVzdGFxdWUiIG5hIGhvbWVwYWdlIChpZGVtcG90ZW50ZSkKcCA9ICJpbmRleC5odG1sIgpoID0gb3BlbihwLCBlbmNvZGluZz0idXRmLTgiKS5yZWFkKCkKaWYgImFwcHMtZW0tZGVzdGFxdWUuaHRtbCIgaW4gaDoKICAgIHByaW50KCJjYXJkIGphIGV4aXN0ZTsgbmFkYSBhIGZhemVyIikKZWxpZiAiZ3VpYS1hcHBzLmh0bWwiIG5vdCBpbiBoOgogICAgcHJpbnQoImFuY29yYSBndWlhLWFwcHMgbmFvIGVuY29udHJhZGE7IHB1bGFuZG8iKQplbHNlOgogICAgY2FyZCA9ICgiXG4gICAgPGEgaHJlZj1cImFwcHMtZW0tZGVzdGFxdWUuaHRtbFwiIHN0eWxlPVwiZGlzcGxheTpmbGV4O2dhcDoxNHB4O2FsaWduLWl0ZW1zOmNlbnRlcjtiYWNrZ3JvdW5kOmxpbmVhci1ncmFkaWVudCgxMzVkZWcsI2ZmNGQ4ZCwjN2IyZmY3KTtib3JkZXItcmFkaXVzOjE2cHg7cGFkZGluZzoxOHB4O21hcmdpbjoxMnB4IDIwcHg7dGV4dC1kZWNvcmF0aW9uOm5vbmU7Y29sb3I6I2ZmZjtib3gtc2hhZG93OjAgNHB4IDE0cHggcmdiYSgxMjMsNDcsMjQ3LC4zKVwiPjxzcGFuIHN0eWxlPVwiZm9udC1zaXplOjJyZW1cIj7wn5OjPC9zcGFuPjxzcGFuPjxiIHN0eWxlPVwiZGlzcGxheTpibG9ja1wiPkFwcHMgZW0gRGVzdGFxdWUgZGEgU2VtYW5hPC9iPjxzbWFsbCBzdHlsZT1cImNvbG9yOnJnYmEoMjU1LDI1NSwyNTUsLjkpXCI+UHJldmlzYW8sIG1hcmUsIHZlbnRvLCBzZWd1cmFuY2EsIHRyZWlub3MgZSBjb211bmlkYWRlIOKAlCBvcyBhcHBzIGRhIHJlZGUgcGFyYSBhIHN1YSBwcm94aW1hIHNlc3Nhbzwvc21hbGw+PC9zcGFuPjwvYT4iKQogICAgaSA9IGguZmluZCgiZ3VpYS1hcHBzLmh0bWwiKQogICAgZW5kID0gaC5maW5kKCI8L2E+IiwgaSkgKyA0CiAgICBoID0gaFs6ZW5kXSArIGNhcmQgKyBoW2VuZDpdCiAgICBvcGVuKHAsICJ3IiwgZW5jb2Rpbmc9InV0Zi04Iikud3JpdGUoaCkKICAgIHByaW50KCJjYXJkIGFwcHMtZW0tZGVzdGFxdWUgYWRpY2lvbmFkbyIpCg==" | base64 -d > /tmp/patch.py
+          python3 /tmp/patch.py
+      - name: Commit and push
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html
+          git diff --cached --quiet || git commit -m "ASF: card Apps em Destaque na homepage"
+          git push
