@@ -1,0 +1,24 @@
+name: ASF Guia Apps Highlight
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ['.github/workflows/asf-guia-apps-highlight.yml']
+permissions:
+  contents: write
+jobs:
+  fix:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Add guia-apps highlight card to homepage
+        run: |
+          echo "IyBBU0YgZ3VpYS1hcHBzIGhpZ2hsaWdodCBuYSBob21lcGFnZSAoaWRlbXBvdGVudGUpCnAgPSAiaW5kZXguaHRtbCIKaCA9IG9wZW4ocCwgZW5jb2Rpbmc9InV0Zi04IikucmVhZCgpCmlmICJndWlhLWFwcHMuaHRtbCIgaW4gaDoKICAgIHByaW50KCJsaW5rIGRvIGd1aWEtYXBwcyBqYSBleGlzdGU7IG5hZGEgYSBmYXplciIpCmVsaWYgJ2lkPSJjYXJ0ZWlyaW5oYS1ob21lLWNhcmQiJyBub3QgaW4gaDoKICAgIHByaW50KCJhbmNvcmEgY2FydGVpcmluaGEgbmFvIGVuY29udHJhZGE7IHB1bGFuZG8iKQplbHNlOgogICAgY2FyZCA9ICgiXG4gICAgPGEgaHJlZj1cImd1aWEtYXBwcy5odG1sXCIgc3R5bGU9XCJkaXNwbGF5OmZsZXg7Z2FwOjE0cHg7YWxpZ24taXRlbXM6Y2VudGVyO2JhY2tncm91bmQ6bGluZWFyLWdyYWRpZW50KDEzNWRlZywjMEUyNDM5LCMwMEE4Q0MpO2JvcmRlci1yYWRpdXM6MTZweDtwYWRkaW5nOjE4cHg7bWFyZ2luOjEycHggMjBweDt0ZXh0LWRlY29yYXRpb246bm9uZTtjb2xvcjojZmZmO2JveC1zaGFkb3c6MCA0cHggMTRweCByZ2JhKDE0LDM2LDU3LC4yOCk7Ym9yZGVyOjJweCBzb2xpZCAjMDBBOENDXCI+PHNwYW4gc3R5bGU9XCJmb250LXNpemU6MnJlbVwiPvCfl7rvuI88L3NwYW4+PHNwYW4+PGIgc3R5bGU9XCJkaXNwbGF5OmJsb2NrXCI+R3VpYSBkZSBBcHBzIEFTRiA8c3BhbiBzdHlsZT1cImJhY2tncm91bmQ6I2Y0ZDAzZjtjb2xvcjojMEUyNDM5O2ZvbnQtc2l6ZToxMHB4O3BhZGRpbmc6MnB4IDhweDtib3JkZXItcmFkaXVzOjEwcHg7dmVydGljYWwtYWxpZ246bWlkZGxlO21hcmdpbi1sZWZ0OjZweFwiPk5PVk88L3NwYW4+PC9iPjxzbWFsbCBzdHlsZT1cImNvbG9yOnJnYmEoMjU1LDI1NSwyNTUsLjkpXCI+VG9kb3Mgb3MgNTIgYXBwcyBncmF0dWl0b3MgZGEgcmVkZSBkZSBzdXJmIGZlbWluaW5vLCBvcmdhbml6YWRvcyBwb3IgY2F0ZWdvcmlhIOKAlCBlbmNvbnRyZSBvIGFwcCBjZXJ0byBwYXJhIGNhZGEgbW9tZW50bzwvc21hbGw+PC9zcGFuPjwvYT4iKQogICAgaSA9IGguZmluZCgnaWQ9ImNhcnRlaXJpbmhhLWhvbWUtY2FyZCInKQogICAgZW5kID0gaC5maW5kKCI8L2E+IiwgaSkgKyA0CiAgICBoID0gaFs6ZW5kXSArIGNhcmQgKyBoW2VuZDpdCiAgICBvcGVuKHAsICJ3IiwgZW5jb2Rpbmc9InV0Zi04Iikud3JpdGUoaCkKICAgIHByaW50KCJjYXJkIGRlIGRlc3RhcXVlIGRvIGd1aWEtYXBwcyBhZGljaW9uYWRvIikK" | base64 -d > /tmp/patch.py
+          python3 /tmp/patch.py
+      - name: Commit and push
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html
+          git diff --cached --quiet || git commit -m "ASF: destaque do Guia de Apps na homepage"
+          git push
