@@ -63,6 +63,8 @@ def check(url):
 def main():
     print("ASF Link Checker (real) - Hermes")
     html = fetch(RAW_INDEX)
+    # Ignora links dentro de comentarios HTML (ex.: form desativado) — nao sao links ativos
+    html = re.sub(r"<!--.*?-->", "", html, flags=re.DOTALL)
     hrefs = set(re.findall(r"""href=["']([^"']+)["']""", html)) | set(re.findall(r"""src=["']([^"']+)["']""", html))
     ext = sorted({h for h in hrefs if h.startswith("http") and "${" not in h})
     loc = sorted({h.split("#")[0].split("?")[0] for h in hrefs
