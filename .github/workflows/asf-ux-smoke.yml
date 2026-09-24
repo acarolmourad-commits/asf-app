@@ -1,0 +1,37 @@
+name: ASF UX Smoke Test
+on:
+  schedule:
+    - cron: '30 12 * * *'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check redesigned pages and shared assets
+        run: |
+          python3 - <<'PY'
+          import requests, sys
+          base='https://acarolmourad-commits.github.io/asf-app/'
+          pages=['','aprender/','previsao-surf/','quiz/','apps/','diario/','mareas/','prancha-ideal/','hospedagens/','guia-apps.html','sobre.html']
+          failures=[]
+          css=requests.get(base+'asf-site-redesign.css',timeout=20)
+          js=requests.get(base+'asf-redesign.js',timeout=20)
+          if css.status_code!=200 or 'header:not(.hero) h1' not in css.text: failures.append('shared CSS missing contrast/layout rules')
+          if js.status_code!=200 or 'asf-site-nav' not in js.text: failures.append('shared JS missing navigation enhancement')
+          for page in pages:
+              r=requests.get(base+page,timeout=25)
+              if r.status_code!=200:
+                  failures.append(f'{page or "home"}: HTTP {r.status_code}')
+                  continue
+              if page:
+                  if 'asf-site-redesign.css' not in r.text or 'asf-redesign.js' not in r.text:
+                      failures.append(f'{page}: shared redesign assets not linked')
+              else:
+                  if 'subscriber-styles.css' not in r.text or 'asf-ux.js' not in r.text:
+                      failures.append('home: redesign entry points missing')
+          if failures:
+              print('\n'.join('FAIL: '+x for x in failures)); sys.exit(1)
+          print(f'PASS: {len(pages)} pages and 2 shared assets are healthy')
+          PY
