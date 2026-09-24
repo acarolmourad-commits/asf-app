@@ -1,18 +1,18 @@
 {
-  "date": "2026-09-23",
+  "date": "2026-09-24",
   "board_tip": {
-    "title": "Longboard: O clássico",
-    "content": "Longboards (9'0\"+) são perfeitas para ondas pequenas e estabilidade.",
+    "title": "Funboard: A versátil",
+    "content": "Funboards (7'0\"-8'6\") são ideais para evolução. Mais ágil que longboard, mantém estabilidade.",
     "tags": [
-      "Longboard",
-      "Clássico"
+      "Funboard",
+      "Evolução"
     ]
   },
   "eco_tip": {
-    "title": "Por que escolher ecológico?",
-    "content": "Quando a prancha chegar ao fim, o bloco pode ser reciclado ou se degrada naturalmente!",
-    "category": "Consumo Consciente"
+    "title": "Bloco Phenix Teccel",
+    "content": "Núcleo EPS ecológico. Pode ser 100% reciclado ou biodegradado. Menor impacto ambiental.",
+    "category": "Sustentabilidade"
   },
-  "daily_message": "Hidrate-se: 500ml de água antes de surfar!",
-  "generated_at": "2026-09-23T20:45:24.001941"
+  "daily_message": "Maré baixa às 11:45 hoje - melhor para iniciantes!",
+  "generated_at": "2026-09-24T01:53:51.654596"
 }
