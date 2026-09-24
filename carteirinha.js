@@ -1,9 +1,13 @@
-/* ─── ASF Carteirinha Digital v2 ─────────────────────────────
+/* ─── ASF Carteirinha Digital v2 ────────────────────────────
    Carteirinha personalizada de cada usuária.
    Preparada para futuras parcerias (lojas, agências, pousadas):
    cada carteirinha tem número único + QR code de verificação. */
 const ASF_CARD = {
   KEY: 'asf-card-v2',
+
+  /* URL do registro de associadas (Apps Script docs/ASF_Carteirinhas_Registry.gs).
+     Vazio = registro desativado. */
+  REGISTRY_URL: '',
 
   niveis: ['Iniciante', 'Intermediária', 'Avançada'],
 
@@ -22,6 +26,31 @@ const ASF_CARD = {
   },
 
   save(d) { localStorage.setItem(this.KEY, JSON.stringify(d)); },
+
+  /* Registro opcional (opt-in LGPD) no controle de associadas */
+  registrar(d) {
+    try {
+      if (!this.REGISTRY_URL) return;
+      const cb = document.getElementById('card-registrar');
+      const quer = (cb && cb.checked) || d.registrada;
+      if (!quer) return;
+      const params = 'numero=' + encodeURIComponent(d.numero) +
+        '&nome=' + encodeURIComponent(d.nome) +
+        '&apelido=' + encodeURIComponent(d.apelido || '') +
+        '&nivel=' + encodeURIComponent(d.nivel) +
+        '&praia=' + encodeURIComponent(d.praia || '') +
+        '&cidade=' + encodeURIComponent(d.cidade || '') +
+        '&insta=' + encodeURIComponent(d.insta || '');
+      const url = this.REGISTRY_URL + '?' + params;
+      if (navigator.sendBeacon) { navigator.sendBeacon(url); }
+      else { fetch(url, { method: 'POST', mode: 'no-cors' }).catch(function(){}); }
+      if (!d.registrada) {
+        d.registrada = new Date().toISOString();
+        this.save(d);
+        if (typeof showToast === 'function') showToast('📇 Carteirinha registrada na rede ASF!');
+      }
+    } catch (e) {}
+  },
 
   gerarNumero() {
     /* número único e não previsível (crypto) — padrão ASF-XXXXXXXXXX */
@@ -67,6 +96,7 @@ const ASF_CARD = {
     const val = new Date(); val.setFullYear(val.getFullYear() + 1);
     d.validade = val.toLocaleDateString('pt-BR');
     this.save(d);
+    this.registrar(d);
     showToast('Carteirinha gerada! 🪪');
     this.render('carteirinha-content');
     if (typeof ASF_GAMIFICATION !== 'undefined') ASF_GAMIFICATION.checkAll();
@@ -152,6 +182,9 @@ const ASF_CARD = {
         '<label style="display:flex;gap:8px;align-items:flex-start;font-size:12px;color:var(--gray-600);margin:0 0 14px;line-height:1.5">' +
         '<input id="card-lgpd" type="checkbox" style="margin-top:2px;flex:none">' +
         '<span>Autorizo o armazenamento <strong>apenas neste dispositivo</strong> dos dados acima (nome, nível, praia e foto) para gerar minha carteirinha digital, conforme a <a href="privacidade.html" target="_blank" rel="noopener" style="color:var(--primary);font-weight:600">Política de Privacidade</a> (LGPD — Lei 13.709/2018). Posso apagar tudo a qualquer momento em "Editar dados".</span></label>' +
+        '<label style="display:flex;gap:8px;align-items:flex-start;font-size:12px;color:var(--gray-600);margin:0 0 14px;line-height:1.5">' +
+        '<input id="card-registrar" type="checkbox" style="margin-top:2px;flex:none">' +
+        '<span>Quero constar no <strong>registro de associadas ASF</strong> (opcional): meu nome de surfista, nível, praia e número da carteirinha entram no controle da rede. Posso sair a qualquer momento em "Editar dados".</span></label>' +
         '<button onclick="ASF_CARD.salvar()" class="btn btn-primary" style="width:100%">🪪 Gerar minha carteirinha</button>' +
         '</div>' + this.parceriasHtml() + '</div>';
       return;
@@ -262,7 +295,7 @@ const ASF_CARD = {
   init() { this.render('carteirinha-content'); }
 };
 
-/* ─── ASF HOTFIX 2026-09-21 ─────────────────────────────────
+/* ─── ASF HOTFIX 2026-09-21 ────────────────────────────────
    Repara cascata de erros do index.html sem precisar editá-lo:
    1) updateNotificationBadge() é chamada antes de existir (linha ~4323)
       -> mata o script que define 'beaches' -> renderSurfConditions quebra.
