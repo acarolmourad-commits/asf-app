@@ -45,3 +45,20 @@ permanecem somente validados pelo CI.
 1. Editar `data/apps.json` (único arquivo).
 2. `python3 scripts/sync_apps_registry.py --write` — regenera os 3 consumidores.
 3. Atualizar manualmente guia-apps/rede/novidades (CI bloqueia até estar em sync).
+
+---
+
+## Etapa 3 (2026-09-24) — dados inline do index.html centralizados
+
+`index.html` (~975 KB) tinha dois blocos de dados inline: `MOCK_MANAS` (linha ~416) e
+`translations` (linha ~11355). Como o arquivo é grande demais para edição via API,
+a extração é feita por `scripts/centralize_index_data.py` (idempotente), executado pelo
+workflow `centralize-index-data.yml` (push no script ou dispatch manual):
+
+- `MOCK_MANAS` → `data/mock-manas.js`
+- `translations` → `data/translations.js`
+
+O `index.html` passa a carregá-los via `<script src="data/...">` nas posições corretas
+de ordem de execução (mock-manas.js no lugar do script original; translations.js antes
+do script que consome `translations`; `app.js` é `defer`, executa por último).
+Sintaxe dos arquivos gerados validada com `node --check`.

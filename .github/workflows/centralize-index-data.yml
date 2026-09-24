@@ -1,0 +1,34 @@
+name: ASF Centralize Index Data (Fase 9, one-shot)
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'scripts/centralize_index_data.py'
+
+permissions:
+  contents: write
+
+jobs:
+  centralize:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Extrair MOCK_MANAS e translations para data/
+        run: python3 scripts/centralize_index_data.py
+      - name: Commit if changed
+        run: |
+          git config user.name "ASF Bot"
+          git config user.email "bot@asf-app.com"
+          git add index.html data/mock-manas.js data/translations.js
+          if git diff --cached --quiet; then
+            echo "Sem mudancas"
+          else
+            git commit -m "refactor(data): Fase 9 etapa 3 — MOCK_MANAS e translations extraidos de index.html para data/"
+            git push
+          fi
