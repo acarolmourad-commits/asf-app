@@ -1,19 +1,19 @@
 {
   "date": "2026-09-24",
-  "issues_found": 1,
+  "issues_found": 4,
   "improvements_available": 4,
-  "score": 89,
+  "score": 75,
   "suggested": [
-    {
-      "type": "css",
-      "change": "Better header gradient",
-      "impact": "high"
-    },
     {
       "type": "css",
       "change": "Hover animation on cards",
       "impact": "high"
+    },
+    {
+      "type": "js",
+      "change": "Lazy loading images",
+      "impact": "high"
     }
   ],
-  "timestamp": "2026-09-24T15:44:10.424783"
+  "timestamp": "2026-09-24T16:00:48.071573"
 }

@@ -1,12 +1,12 @@
 {
   "date": "2026-09-24",
   "new_tip": {
-    "category": "Técnica",
-    "title": "Como fazer o bottom turn",
-    "content": "O bottom turn é a base. Transfira o peso para o pé da frente e gire a prancha.",
+    "category": "Saúde",
+    "title": "Treino de força",
+    "content": "Foque em exercícios compostos: remada com elástico, agachamentos, plank. 2-3x/semana.",
     "tags": [
-      "Técnica",
-      "Manobras"
+      "Saúde",
+      "Treino"
     ]
   },
   "new_utility": {
@@ -26,5 +26,5 @@
       "priority": "high"
     }
   ],
-  "generated_at": "2026-09-24T15:44:10.278287"
+  "generated_at": "2026-09-24T16:00:47.940257"
 }
