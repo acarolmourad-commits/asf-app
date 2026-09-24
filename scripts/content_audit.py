@@ -1,8 +1,10 @@
 #!/usr/bin/env python3
 """ASF Content Audit — validação automática pré-publicação.
-Detecta: títulos duplicados, canonicals duplicados/ausentes, páginas internas
-indexáveis, meta descriptions duplicadas. Gera relatório:
-OK | DUPLICADO | CONFLITO | OBSOLETO | PENDÊNCIA
+Detecta: títulos duplicados em páginas indexáveis, canonicals conflitantes,
+páginas internas indexáveis, meta descriptions duplicadas.
+Relatório: OK | DUPLICADO | CONFLITO | OBSOLETO | PENDÊNCIA
+Regras: canonical apontando para OUTRA página é consolidação legítima;
+conflito só ocorre quando DUAS páginas reivindicam a MESMA canonical própria.
 """
 import os, re, sys, json
 
@@ -11,7 +13,8 @@ BASE = "https://acarolmourad-commits.github.io/asf-app/"
 INTERNAL_DIRS = ("docs/", "scripts/", "meta-integration/", ".github/")
 
 report = []
-titles, canonicals, descriptions = {}, {}, {}
+titles, descriptions = {}, {}
+self_canonical = {}  # canonical url -> path que a reivindica como própria
 
 def add(path, status, msg):
     report.append({"arquivo": path, "status": status, "detalhe": msg})
@@ -37,26 +40,29 @@ for path in sorted(html_files):
         add(path, "OBSOLETO", "Página interna/teste sem noindex — deve ser noindex ou sair do ar")
         continue
 
-    if title:
+    # Títulos duplicados só importam entre páginas indexáveis
+    if title and not noindex:
         if title in titles:
             add(path, "DUPLICADO", f"Título idêntico ao de {titles[title]}: '{title[:60]}'")
         else:
             titles[title] = path
-    elif not is_internal:
+    elif not title and not is_internal and not noindex:
         add(path, "PENDÊNCIA", "Página pública sem <title>")
 
+    # Canonical: conflito só se duas páginas reivindicam a mesma canonical como própria
     if canon:
-        if canon in canonicals and canonicals[canon] != path:
-            other = canonicals[canon]
-            # canonical apontando para outra página é legítimo (consolidação)
-            if canon.endswith(path.split("/")[-1]) or canon.endswith(path + "/"):
-                add(path, "CONFLITO", f"Canonical idêntico ao de {other}: {canon}")
-        else:
-            canonicals.setdefault(canon, path)
+        page_url = BASE + path
+        is_self = canon.rstrip("/") in (page_url.rstrip("/"), page_url.replace("index.html", "").rstrip("/"))
+        if is_self:
+            if canon in self_canonical:
+                add(path, "CONFLITO", f"Canonical própria também reivindicada por {self_canonical[canon]}: {canon}")
+            else:
+                self_canonical[canon] = path
+        # canonical para outra página = consolidação intencional, OK
     elif not is_internal and not noindex:
         add(path, "PENDÊNCIA", "Página pública indexável sem rel=canonical")
 
-    if desc:
+    if desc and not noindex:
         if desc in descriptions:
             add(path, "DUPLICADO", f"Meta description idêntica à de {descriptions[desc]}")
         else:
@@ -82,6 +88,5 @@ os.makedirs(os.path.join(ROOT, "docs", "generated"), exist_ok=True)
 with open(os.path.join(ROOT, "docs", "generated", "content-audit.json"), "w", encoding="utf-8") as f:
     json.dump({"total": len(html_files), "resumo": counts, "itens": report}, f, ensure_ascii=False, indent=2)
 
-# Falha o job se houver DUPLICADO ou CONFLITO em páginas públicas
 blocking = [r for r in report if r["status"] in ("DUPLICADO", "CONFLITO")]
 sys.exit(1 if blocking else 0)
