@@ -1,24 +1,56 @@
 name: ASF Carteirinha Registry
 on:
   workflow_dispatch:
+    inputs:
+      registry_url:
+        description: Deployment URL do Apps Script (opcional; ativa o registro em producao)
+        required: false
+        type: string
   push:
     branches: [main]
-    paths: ['.github/workflows/asf-carteirinha-registry.yml']
+    paths: [.github/workflows/asf-carteirinha-registry.yml]
 permissions:
   contents: write
 jobs:
-  fix:
+  registry:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Add opt-in registry to carteirinha.js
+      - name: Validate and optionally activate opt-in registry
         run: |
-          echo "IyBBU0Y6IHJlZ2lzdHJvIG9wdC1pbiBkZSBjYXJ0ZWlyaW5oYXMgKGlkZW1wb3RlbnRlKQppbXBvcnQgaW8KcCA9ICJjYXJ0ZWlyaW5oYS5qcyIKaCA9IGlvLm9wZW4ocCwgZW5jb2Rpbmc9InV0Zi04IikucmVhZCgpCmlmICJyZWdpc3RyYXIoZCkiIGluIGggb3IgImNhcmQtcmVnaXN0cmFyIiBpbiBoOgogICAgcHJpbnQoInJlZ2lzdHJvIGphIHByZXNlbnRlOyBuYWRhIGEgZmF6ZXIiKQplbHNlOgogICAgIyAxKSBVUkwgZG8gcmVnaXN0cm8gKGNvbmZpZ3VyYXIgY29tIGEgRGVwbG95bWVudCBVUkwgZG8gQXBwcyBTY3JpcHQpCiAgICBoID0gaC5yZXBsYWNlKCIgIEtFWTogJ2FzZi1jYXJkLXYyJywiLAogICAgICAiICBLRVk6ICdhc2YtY2FyZC12MicsXG5cbiAgLyogVVJMIGRvIHJlZ2lzdHJvIGRlIGFzc29jaWFkYXMgKEFwcHMgU2NyaXB0IGRvY3MvQVNGX0NhcnRlaXJpbmhhc19SZWdpc3RyeS5ncykuXG4gICAgIFZhemlvID0gcmVnaXN0cm8gZGVzYXRpdmFkby4gKi9cbiAgUkVHSVNUUllfVVJMOiAnJywiLCAxKQogICAgIyAyKSBtZXRvZG8gcmVnaXN0cmFyKCkgYXBvcyBzYXZlKCkKICAgIGggPSBoLnJlcGxhY2UoIiAgc2F2ZShkKSB7IGxvY2FsU3RvcmFnZS5zZXRJdGVtKHRoaXMuS0VZLCBKU09OLnN0cmluZ2lmeShkKSk7IH0sIiwKICAgICAgIiAgc2F2ZShkKSB7IGxvY2FsU3RvcmFnZS5zZXRJdGVtKHRoaXMuS0VZLCBKU09OLnN0cmluZ2lmeShkKSk7IH0sXG5cbiAgLyogUmVnaXN0cm8gb3BjaW9uYWwgKG9wdC1pbiBMR1BEKSBubyBjb250cm9sZSBkZSBhc3NvY2lhZGFzICovXG4gIHJlZ2lzdHJhcihkKSB7XG4gICAgdHJ5IHtcbiAgICAgIGlmICghdGhpcy5SRUdJU1RSWV9VUkwpIHJldHVybjtcbiAgICAgIGNvbnN0IGNiID0gZG9jdW1lbnQuZ2V0RWxlbWVudEJ5SWQoJ2NhcmQtcmVnaXN0cmFyJyk7XG4gICAgICBjb25zdCBxdWVyID0gKGNiICYmIGNiLmNoZWNrZWQpIHx8IGQucmVnaXN0cmFkYTtcbiAgICAgIGlmICghcXVlciggcmV0dXJuO1xuICAgICAgY29uc3QgcGFyYW1zID0gJ251bWVybz0nICsgZW5jb2RlVVJJQ29tcG9uZW50KGQubnVtZXJvKSArXG4gICAgICAgICcmbm9tZT0nICsgZW5jb2RlVVJJQ29tcG9uZW50KGQubm9tZSkgK1xuICAgICAgICAnJmFwZWxpZG89JyArIGVuY29kZVVSSUNvbXBvbmVudChkLmFwZWxpZG8gfHwgJycpICtcbiAgICAgICAgJyZuaXZlbD0nICsgZW5jb2RlVVJJQ29tcG9uZW50KGQubml2ZWwpICtcbiAgICAgICAgJyZwcmFpYT0nICsgZW5jb2RlVVJJQ29tcG9uZW50KGQucHJhaWEgfHwgJycpICtcbiAgICAgICAgJyZjaWRhZGU9JyArIGVuY29kZVVSSUNvbXBvbmVudChkLmNpZGFkZSB8fCAnJykgK1xuICAgICAgICAnJmluc3RhPScgKyBlbmNvZGVVUklDb21wb25lbnQoZC5pbnN0YSB8fCAnJyk7XG4gICAgICBjb25zdCB1cmwgPSB0aGlzLlJFR0lTVFJZX1VSTCArICc/JyArIHBhcmFtcztcbiAgICAgIGlmIChuYXZpZ2F0b3Iuc2VuZEJlYWNvbikgeyBuYXZpZ2F0b3Iuc2VuZEJlYWNvbih1cmwpOyB9XG4gICAgICBlbHNlIHsgZmV0Y2godXJsLCB7IG1ldGhvZDogJ1BPU1QnLCBtb2RlOiAnbm8tY29ycycgfSkuY2F0Y2goZnVuY3Rpb24oKXt9KTsgfVxuICAgICAgaWYgKCFkLnJlZ2lzdHJhZGEpIHtcbiAgICAgICAgZC5yZWdpc3RyYWRhID0gbmV3IERhdGUoKS50b0lTT1N0cmluZygpO1xuICAgICAgICB0aGlzLnNhdmUoZCk7XG4gICAgICAgIGlmICh0eXBlb2Ygc2hvd1RvYXN0ID09PSAnZnVuY3Rpb24nKSBzaG93VG9hc3QoJ1xcdXsxRjRDN30gQ2FydGVpcmluaGEgcmVnaXN0cmFkYSBuYSByZWRlIEFTRiEnKTtcbiAgICAgIH1cbiAgICB9IGNhdGNoIChlKSB7fVxuICB9LCIsIDEpCiAgICAjIDMpIGNoYW1hIHJlZ2lzdHJhciBhcG9zIHNhbHZhcgogICAgaCA9IGgucmVwbGFjZSgiICAgIHRoaXMuc2F2ZShkKTtcbiAgICBzaG93VG9hc3QoJ0NhcnRlaXJpbmhhIGdlcmFkYSEgXFUwMDAxRkFBQScpOyIsCiAgICAgICIgICAgdGhpcy5zYXZlKGQpO1xuICAgIHRoaXMucmVnaXN0cmFyKGQpO1xuICAgIHNob3dUb2FzdCgnQ2FydGVpcmluaGEgZ2VyYWRhISBcVTAwMDFGQUFBJyk7IiwgMSkKICAgICMgNCkgY2hlY2tib3ggb3B0LWluIGFwb3MgbyBjb25zZW50aW1lbnRvIExHUEQKICAgIGFuY2hvciA9ICdQb3NzbyBhcGFnYXIgdHVkbyBhIHF1YWxxdWVyIG1vbWVudG8gZW0gXFwiRWRpdGFyIGRhZG9zXFwiLjwvc3Bhbj48L2xhYmVsPlwnICsnCiAgICBub3ZvID0gYW5jaG9yICsgIlxuICAgICAgICAnPGxhYmVsIHN0eWxlPVwiZGlzcGxheTpmbGV4O2dhcDo4cHg7YWxpZ24taXRlbXM6ZmxleC1zdGFydDtmb250LXNpemU6MTJweDtjb2xvcjp2YXIoLS1ncmF5LTYwMCk7bWFyZ2luOjAgMCAxNHB4O2xpbmUtaGVpZ2h0OjEuNVwiPicgK1xuICAgICAgICAnPGlucHV0IGlkPVwiY2FyZC1yZWdpc3RyYXJcIiB0eXBlPVwiY2hlY2tib3hcIiBzdHlsZT1cIm1hcmdpbi10b3A6MnB4O2ZsZXg6bm9uZVwiPicgK1xuICAgICAgICAnPHNwYW4+UXVlcm8gY29uc3RhciBubyA8c3Ryb25nPnJlZ2lzdHJvIGRlIGFzc29jaWFkYXMgQVNGPC9zdHJvbmc+IChvcGNpb25hbCk6IG1ldSBub21lIGRlIHN1cmZpc3RhLCBuw612ZWwsIHByYWlhIGUgbsO6bWVybyBkYSBjYXJ0ZWlyaW5oYSBlbnRyYW0gbm8gY29udHJvbGUgZGEgcmVkZS4gUG9zc28gc2FpciBhIHF1YWxxdWVyIG1vbWVudG8gZW0gXCJFZGl0YXIgZGFkb3NcIi48L3NwYW4+PC9sYWJlbD4nICsiCiAgICBhc3NlcnQgYW5jaG9yIGluIGgsICJhbmNob3IgTEdQRCBuYW8gZW5jb250cmFkbyIKICAgIGggPSBoGnJlcGxhY2UoYW5jaG9yLCBub3ZvLCAxKQogICAgaW8ub3BlbihwLCAidyIsIGVuY29kaW5nPSJ1dGYtOCIpLndyaXRlKGgpCiAgICBwcmludCgiY2FydGVpcmluaGEuanM6IHJlZ2lzdHJvIG9wdC1pbiBhZGljaW9uYWRvIikK" | base64 -d > /tmp/patch.py
-          python3 /tmp/patch.py
-      - name: Commit and push
+          python3 - <<'PY'
+          from pathlib import Path
+          import re, sys
+          js = Path('carteirinha.js')
+          gs = Path('docs/ASF_Carteirinhas_Registry.gs')
+          panel = Path('carteirinhas.html')
+          for p in (js, gs, panel):
+              if not p.exists():
+                  raise SystemExit(f'Missing required file: {p}')
+          text = js.read_text(encoding='utf-8')
+          required = ['REGISTRY_URL', 'registrar(d)', 'card-registrar', 'sendBeacon', 'registrada']
+          missing = [x for x in required if x not in text]
+          if missing:
+              raise SystemExit('carteirinha.js integration incomplete: ' + ', '.join(missing))
+          registry_url = '''${{ github.event.inputs.registry_url }}'''.strip()
+          if registry_url:
+              if not (registry_url.startswith('https://script.google.com/') and registry_url.endswith('/exec')):
+                  raise SystemExit('registry_url must be an Apps Script /exec URL')
+              text, count = re.subn(r"REGISTRY_URL:\s*'[^']*'", "REGISTRY_URL: '" + registry_url + "'", text, count=1)
+              if count != 1:
+                  raise SystemExit('Could not update REGISTRY_URL')
+              js.write_text(text, encoding='utf-8')
+              print('REGISTRY_URL configured')
+          else:
+              print('Registry integration validated; production URL not provided')
+          if "TROQUE-POR-UM-SEGREDO" in gs.read_text(encoding='utf-8'):
+              print('::notice::Apps Script TOKEN still uses the documented placeholder; configure it during Google deployment.')
+          PY
+      - name: Commit registry URL when provided
+        if: ${{ github.event.inputs.registry_url != '' }}
         run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git config user.name "ASF Bot"
+          git config user.email "acarolmourad-commits@users.noreply.github.com"
           git add carteirinha.js
-          git diff --cached --quiet || git commit -m "ASF: registro opt-in de carteirinhas (controle de associadas)"
+          git diff --cached --quiet || git commit -m "Activate carteirinha registry endpoint"
           git push
