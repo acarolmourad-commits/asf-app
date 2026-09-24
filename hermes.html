@@ -15,6 +15,7 @@ h1{font-size:22px} .card{background:#fff;border-radius:14px;padding:18px 20px;ma
 small{color:#9A9A9A}
 a{color:#00A8CC}
 </style>
+    <link rel="stylesheet" href="/asf-app/asf-site-redesign.css">
 </head>
 <body>
 <div class="wrap">
@@ -51,5 +52,6 @@ fetch('data/events.json').then(r=>r.json()).then(d=>{
     + '<div class="row"><span>Atualizado em</span><span>'+(d.updated||'—')+'</span></div>';
 }).catch(()=>{document.getElementById('events').textContent='Dados de eventos indisponíveis.';});
 </script>
+    <script src="/asf-app/asf-redesign.js" defer></script>
 </body>
 </html>

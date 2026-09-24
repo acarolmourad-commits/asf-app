@@ -1,5 +1,6 @@
 /* Carrega a camada de polish existente (asf-enhancements.css), que estava órfã */
 @import url("asf-enhancements.css");
+@import url("asf-site-redesign.css");
 
 /* Subscriber Section Styles */
 .subscriber-header {
