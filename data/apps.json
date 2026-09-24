@@ -1,267 +1,699 @@
 {
   "hub": "https://acarolmourad-commits.github.io/asf-app/",
-  "version": 1,
+  "version": 2,
   "updated": "2026-09-24",
   "apps": [
     {
       "slug": "asf-previsao",
       "name": "🌊 ASF Previsão",
-      "url": "https://acarolmourad-commits.github.io/asf-previsao/"
+      "url": "https://acarolmourad-commits.github.io/asf-previsao/",
+      "icon": "🌊",
+      "title": "ASF Previsão",
+      "category": "🌊 Mar & Condições",
+      "desc": "Ondas, vento e maré em tempo real",
+      "icon_apps": "🌊",
+      "name_apps": "ASF Previsão",
+      "desc_apps": "Previsão de ondas, vento e maré para surfistas"
     },
     {
       "slug": "asf-praias",
       "name": "🏖️ ASF Praias",
-      "url": "https://acarolmourad-commits.github.io/asf-praias/"
+      "url": "https://acarolmourad-commits.github.io/asf-praias/",
+      "icon": "🏖️",
+      "title": "ASF Praias",
+      "category": "🌊 Mar & Condições",
+      "desc": "Guia de praias do litoral norte de SP",
+      "icon_apps": "🏖️",
+      "name_apps": "ASF Praias",
+      "desc_apps": "Guia interativo de praias para surfistas no litoral norte de SP"
     },
     {
       "slug": "asf-mare",
       "name": "🌙 ASF Maré",
-      "url": "https://acarolmourad-commits.github.io/asf-mare/"
+      "url": "https://acarolmourad-commits.github.io/asf-mare/",
+      "icon": "🌙",
+      "title": "ASF Maré",
+      "category": "🌊 Mar & Condições",
+      "desc": "Tábua de marés e fases da lua",
+      "icon_apps": "🌙",
+      "name_apps": "ASF Maré",
+      "desc_apps": "Calculadora de tábua de marés e fases da lua para surfistas"
     },
     {
       "slug": "asf-mapa",
       "name": "🗺️ ASF Mapa",
-      "url": "https://acarolmourad-commits.github.io/asf-mapa/"
+      "url": "https://acarolmourad-commits.github.io/asf-mapa/",
+      "icon": "🗺️",
+      "title": "ASF Mapa",
+      "category": "🌊 Mar & Condições",
+      "desc": "Mapa interativo dos picos de surf",
+      "icon_apps": "🗺️",
+      "name_apps": "ASF Mapa",
+      "desc_apps": "Mapa interativo dos picos de surf do litoral norte de SP"
     },
     {
       "slug": "asf-atlas",
       "name": "🧭 ASF Atlas",
-      "url": "https://acarolmourad-commits.github.io/asf-atlas/"
+      "url": "https://acarolmourad-commits.github.io/asf-atlas/",
+      "icon": "🧭",
+      "title": "ASF Atlas",
+      "category": "🌊 Mar & Condições",
+      "desc": "Atlas dos picos do litoral norte de SP",
+      "icon_apps": "🗺️",
+      "name_apps": "ASF Atlas",
+      "desc_apps": "Mapa interativo dos picos de surf do litoral norte de SP"
     },
     {
       "slug": "asf-alerta",
       "name": "🚨 ASF Alerta",
-      "url": "https://acarolmourad-commits.github.io/asf-alerta/"
+      "url": "https://acarolmourad-commits.github.io/asf-alerta/",
+      "icon": "🚨",
+      "title": "ASF Alerta",
+      "category": "🌊 Mar & Condições",
+      "desc": "Alertas de condições da comunidade",
+      "icon_apps": "🚨",
+      "name_apps": "ASF Alerta",
+      "desc_apps": "Alertas de condições do mar e avisos da comunidade"
     },
     {
       "slug": "asf-ponto",
       "name": "📍 ASF Ponto",
-      "url": "https://acarolmourad-commits.github.io/asf-ponto/"
+      "url": "https://acarolmourad-commits.github.io/asf-ponto/",
+      "icon": "📍",
+      "title": "ASF Ponto",
+      "category": "🌊 Mar & Condições",
+      "desc": "Check-in ao vivo: quem está em qual pico",
+      "icon_apps": "📍",
+      "name_apps": "ASF Ponto",
+      "desc_apps": "Check-in ao vivo: quem está em qual pico agora"
     },
     {
       "slug": "asf-leitura",
       "name": "👁️ ASF Leitura de Mar",
-      "url": "https://acarolmourad-commits.github.io/asf-leitura/"
+      "url": "https://acarolmourad-commits.github.io/asf-leitura/",
+      "icon": "👁️",
+      "title": "ASF Leitura de Mar",
+      "category": "🌊 Mar & Condições",
+      "desc": "Identifique correntes e canais olhando a praia",
+      "icon_apps": "👁️",
+      "name_apps": "ASF Leitura de Mar",
+      "desc_apps": "Treinador interativo para identificar correntes e canais olhando a praia"
     },
     {
       "slug": "asf-goldenhour",
       "name": "🌅 ASF Golden Hour",
-      "url": "https://acarolmourad-commits.github.io/asf-goldenhour/"
+      "url": "https://acarolmourad-commits.github.io/asf-goldenhour/",
+      "icon": "🌅",
+      "title": "ASF Golden Hour",
+      "category": "🌊 Mar & Condições",
+      "desc": "Nascer/pôr do sol para a sessão perfeita",
+      "icon_apps": "🌅",
+      "name_apps": "ASF Golden Hour",
+      "desc_apps": "Nascer/pôr do sol ao vivo e contagem regressiva para fotos de surf"
     },
     {
       "slug": "asf-vento",
       "name": "💨 ASF Vento",
-      "url": "https://acarolmourad-commits.github.io/asf-vento/"
+      "url": "https://acarolmourad-commits.github.io/asf-vento/",
+      "icon": "💨",
+      "title": "ASF Vento",
+      "category": "🌊 Mar & Condições",
+      "desc": "Vento e temperatura ao vivo nas praias",
+      "icon_apps": "💨",
+      "name_apps": "ASF Vento",
+      "desc_apps": "Vento, direção e temperatura ao vivo nas praias do litoral norte de SP"
     },
     {
       "slug": "asf-treino",
       "name": "🏋️ ASF Treino",
-      "url": "https://acarolmourad-commits.github.io/asf-treino/"
+      "url": "https://acarolmourad-commits.github.io/asf-treino/",
+      "icon": "🏋️",
+      "title": "ASF Treino",
+      "category": "🏄‍♀️ Performance & Treino",
+      "desc": "Treinos e progressão no surf",
+      "icon_apps": "💪",
+      "name_apps": "ASF Treino",
+      "desc_apps": "Treinos e progressão de surf para mulheres"
     },
     {
       "slug": "asf-manobras",
       "name": "⚡ ASF Manobras",
-      "url": "https://acarolmourad-commits.github.io/asf-manobras/"
+      "url": "https://acarolmourad-commits.github.io/asf-manobras/",
+      "icon": "⚡",
+      "title": "ASF Manobras",
+      "category": "🏄‍♀️ Performance & Treino",
+      "desc": "Trilha de manobras com XP",
+      "icon_apps": "🤙",
+      "name_apps": "ASF Manobras",
+      "desc_apps": "Trilha de progressão de manobras do surf com checklist e XP"
     },
     {
       "slug": "asf-popup",
       "name": "⏱️ ASF Pop-up",
-      "url": "https://acarolmourad-commits.github.io/asf-popup/"
+      "url": "https://acarolmourad-commits.github.io/asf-popup/",
+      "icon": "⏱️",
+      "title": "ASF Pop-up",
+      "category": "🏄‍♀️ Performance & Treino",
+      "desc": "Cronômetro de treino de pop-up com voz",
+      "icon_apps": "⏱️",
+      "name_apps": "ASF Pop-up",
+      "desc_apps": "Cronômetro de treino de pop-up com séries guiadas e contagem por voz"
     },
     {
       "slug": "asf-apnea",
       "name": "🫁 ASF Apneia",
-      "url": "https://acarolmourad-commits.github.io/asf-apnea/"
+      "url": "https://acarolmourad-commits.github.io/asf-apnea/",
+      "icon": "🫁",
+      "title": "ASF Apneia",
+      "category": "🏄‍♀️ Performance & Treino",
+      "desc": "Treinador de apneia para wipeouts",
+      "icon_apps": "🫁",
+      "name_apps": "ASF Apneia",
+      "desc_apps": "Treinador de apneia e respiração para segurança em wipeouts"
     },
     {
       "slug": "asf-respira",
       "name": "🌬️ ASF Respira",
-      "url": "https://acarolmourad-commits.github.io/asf-respira/"
+      "url": "https://acarolmourad-commits.github.io/asf-respira/",
+      "icon": "🌬️",
+      "title": "ASF Respira",
+      "category": "🏄‍♀️ Performance & Treino",
+      "desc": "Treinador de respiração 4-4-4",
+      "icon_apps": "😮‍💨",
+      "name_apps": "ASF Respira",
+      "desc_apps": "Treinador interativo de respiração 4-4-4 e apneia para surfistas"
     },
     {
       "slug": "asf-yoga",
       "name": "🧘 ASF Yoga",
-      "url": "https://acarolmourad-commits.github.io/asf-yoga/"
+      "url": "https://acarolmourad-commits.github.io/asf-yoga/",
+      "icon": "🧘",
+      "title": "ASF Yoga",
+      "category": "🏄‍♀️ Performance & Treino",
+      "desc": "Yoga guiado com timer",
+      "icon_apps": "🧘‍♀️",
+      "name_apps": "ASF Yoga",
+      "desc_apps": "Aquecimento e yoga guiado para surfistas com timer"
     },
     {
       "slug": "asf-volume",
       "name": "🏄 ASF Volume",
-      "url": "https://acarolmourad-commits.github.io/asf-volume/"
+      "url": "https://acarolmourad-commits.github.io/asf-volume/",
+      "icon": "🏄",
+      "title": "ASF Volume",
+      "category": "🏄‍♀️ Performance & Treino",
+      "desc": "Calculadora de volume de prancha",
+      "icon_apps": "📐",
+      "name_apps": "ASF Volume",
+      "desc_apps": "Calculadora interativa de volume ideal de prancha por peso e nível"
     },
     {
       "slug": "asf-comunidade",
       "name": "💬 ASF Comunidade",
-      "url": "https://acarolmourad-commits.github.io/asf-comunidade/"
+      "url": "https://acarolmourad-commits.github.io/asf-comunidade/",
+      "icon": "💬",
+      "title": "ASF Comunidade",
+      "category": "💜 Vida & Comunidade",
+      "desc": "Histórias, mentorias e rede de apoio",
+      "icon_apps": "🤝",
+      "name_apps": "ASF Comunidade",
+      "desc_apps": "Histórias, mentorias e rede de apoio do surf feminino"
     },
     {
       "slug": "asf-parceiras",
       "name": "🤝 ASF Parceiras",
-      "url": "https://acarolmourad-commits.github.io/asf-parceiras/"
+      "url": "https://acarolmourad-commits.github.io/asf-parceiras/",
+      "icon": "🤝",
+      "title": "ASF Parceiras",
+      "category": "💜 Vida & Comunidade",
+      "desc": "Encontre sua dupla de surf",
+      "icon_apps": "👭",
+      "name_apps": "ASF Parceiras",
+      "desc_apps": "Encontre parceiras de surf por nível, praia e horário"
     },
     {
       "slug": "asf-mentorias",
       "name": "🎓 ASF Mentorias",
-      "url": "https://acarolmourad-commits.github.io/asf-mentorias/"
+      "url": "https://acarolmourad-commits.github.io/asf-mentorias/",
+      "icon": "🎓",
+      "title": "ASF Mentorias",
+      "category": "💜 Vida & Comunidade",
+      "desc": "Mentorias entre experientes e iniciantes",
+      "icon_apps": "🎓",
+      "name_apps": "ASF Mentorias",
+      "desc_apps": "Quadro de mentorias entre surfistas experientes e iniciantes"
     },
     {
       "slug": "asf-carona",
       "name": "🛖 ASF Carona",
-      "url": "https://acarolmourad-commits.github.io/asf-carona/"
+      "url": "https://acarolmourad-commits.github.io/asf-carona/",
+      "icon": "🛖",
+      "title": "ASF Carona",
+      "category": "💜 Vida & Comunidade",
+      "desc": "Carona solidária para praias e eventos",
+      "icon_apps": "🚗",
+      "name_apps": "ASF Carona",
+      "desc_apps": "Carona solidária para praias e eventos de surf"
     },
     {
       "slug": "asf-eventos",
       "name": "📅 ASF Eventos",
-      "url": "https://acarolmourad-commits.github.io/asf-eventos/"
+      "url": "https://acarolmourad-commits.github.io/asf-eventos/",
+      "icon": "📅",
+      "title": "ASF Eventos",
+      "category": "💜 Vida & Comunidade",
+      "desc": "Calendário de competições e encontros",
+      "icon_apps": "📅",
+      "name_apps": "ASF Eventos",
+      "desc_apps": "Calendário de competições e eventos de surf feminino"
     },
     {
       "slug": "asf-galeria",
       "name": "📸 ASF Galeria",
-      "url": "https://acarolmourad-commits.github.io/asf-galeria/"
+      "url": "https://acarolmourad-commits.github.io/asf-galeria/",
+      "icon": "📸",
+      "title": "ASF Galeria",
+      "category": "💜 Vida & Comunidade",
+      "desc": "Mural de momentos do surf feminino",
+      "icon_apps": "📸",
+      "name_apps": "ASF Galeria",
+      "desc_apps": "Mural colaborativo de fotos de surf feminino"
     },
     {
       "slug": "asf-mercado",
       "name": "🛒 ASF Mercado",
-      "url": "https://acarolmourad-commits.github.io/asf-mercado/"
+      "url": "https://acarolmourad-commits.github.io/asf-mercado/",
+      "icon": "🛒",
+      "title": "ASF Mercado",
+      "category": "💜 Vida & Comunidade",
+      "desc": "Troca de equipamentos usados",
+      "icon_apps": "♻️",
+      "name_apps": "ASF Mercado",
+      "desc_apps": "Troca e venda de equipamentos usados entre surfistas"
     },
     {
       "slug": "asf-eco",
       "name": "🌱 ASF Eco",
-      "url": "https://acarolmourad-commits.github.io/asf-eco/"
+      "url": "https://acarolmourad-commits.github.io/asf-eco/",
+      "icon": "🌱",
+      "title": "ASF Eco",
+      "category": "💜 Vida & Comunidade",
+      "desc": "Sustentabilidade e limpeza de praias",
+      "icon_apps": "🌱",
+      "name_apps": "ASF Eco",
+      "desc_apps": "Sustentabilidade, limpeza de praias e surf ecológico"
     },
     {
       "slug": "asf-viagens",
       "name": "✈️ ASF Viagens",
-      "url": "https://acarolmourad-commits.github.io/asf-viagens/"
+      "url": "https://acarolmourad-commits.github.io/asf-viagens/",
+      "icon": "✈️",
+      "title": "ASF Viagens",
+      "category": "💜 Vida & Comunidade",
+      "desc": "Roteiros de surf trips e expedições",
+      "icon_apps": "✈️",
+      "name_apps": "ASF Viagens",
+      "desc_apps": "Roteiros de surf trips e expedições para mulheres"
     },
     {
       "slug": "asf-patrocinio",
       "name": "💛 ASF Patrocínio",
-      "url": "https://acarolmourad-commits.github.io/asf-patrocinio/"
+      "url": "https://acarolmourad-commits.github.io/asf-patrocinio/",
+      "icon": "💛",
+      "title": "ASF Patrocínio",
+      "category": "💜 Vida & Comunidade",
+      "desc": "Cotas de patrocínio e parcerias de marcas",
+      "icon_apps": "💜",
+      "name_apps": "ASF Patrocínio",
+      "desc_apps": "Apoie o surf feminino: cotas de patrocínio e parcerias de marcas"
     },
     {
       "slug": "asf-loja",
       "name": "🛍️ ASF Loja",
-      "url": "https://acarolmourad-commits.github.io/asf-loja/"
+      "url": "https://acarolmourad-commits.github.io/asf-loja/",
+      "icon": "🛍️",
+      "title": "ASF Loja",
+      "category": "💜 Vida & Comunidade",
+      "desc": "Marcas parceiras e cupons exclusivos",
+      "icon_apps": "🛍️",
+      "name_apps": "ASF Loja",
+      "desc_apps": "Marcas parceiras e cupons exclusivos para a comunidade"
     },
     {
       "slug": "asf-glossario",
       "name": "📖 ASF Glossário",
-      "url": "https://acarolmourad-commits.github.io/asf-glossario/"
+      "url": "https://acarolmourad-commits.github.io/asf-glossario/",
+      "icon": "📖",
+      "title": "ASF Glossário",
+      "category": "🏆 Aprendizado & Jogos",
+      "desc": "Dicionário de termos do surf",
+      "icon_apps": "📖",
+      "name_apps": "ASF Glossário",
+      "desc_apps": "Dicionário de termos do surf para iniciantes"
     },
     {
       "slug": "asf-historia",
       "name": "📜 ASF História",
-      "url": "https://acarolmourad-commits.github.io/asf-historia/"
+      "url": "https://acarolmourad-commits.github.io/asf-historia/",
+      "icon": "📜",
+      "title": "ASF História",
+      "category": "🏆 Aprendizado & Jogos",
+      "desc": "A história do surf feminino",
+      "icon_apps": "📜",
+      "name_apps": "ASF História",
+      "desc_apps": "A história do surf feminino no Brasil e no mundo"
     },
     {
       "slug": "asf-kids",
       "name": "🧒 ASF Kids",
-      "url": "https://acarolmourad-commits.github.io/asf-kids/"
+      "url": "https://acarolmourad-commits.github.io/asf-kids/",
+      "icon": "🧒",
+      "title": "ASF Kids",
+      "category": "🏆 Aprendizado & Jogos",
+      "desc": "Iniciação ao surf para meninas",
+      "icon_apps": "👧",
+      "name_apps": "ASF Kids",
+      "desc_apps": "Iniciação ao surf para meninas, com segurança e diversão"
     },
     {
       "slug": "asf-checklist",
       "name": "✅ ASF Checklist",
-      "url": "https://acarolmourad-commits.github.io/asf-checklist/"
+      "url": "https://acarolmourad-commits.github.io/asf-checklist/",
+      "icon": "✅",
+      "title": "ASF Checklist",
+      "category": "🏆 Aprendizado & Jogos",
+      "desc": "Checklist pré-surf: equipamento e segurança",
+      "icon_apps": "✅",
+      "name_apps": "ASF Checklist",
+      "desc_apps": "Checklist pré-surf: equipamento, condições e segurança"
     },
     {
       "slug": "asf-quiz",
       "name": "🧠 ASF Quiz",
-      "url": "https://acarolmourad-commits.github.io/asf-quiz/"
+      "url": "https://acarolmourad-commits.github.io/asf-quiz/",
+      "icon": "🧠",
+      "title": "ASF Quiz",
+      "category": "🏆 Aprendizado & Jogos",
+      "desc": "Quiz do dia com XP e streak 🔥",
+      "icon_apps": "❓",
+      "name_apps": "ASF Quiz",
+      "desc_apps": "Quiz diário de conhecimento do surf com XP e streak"
     },
     {
       "slug": "asf-ranking",
       "name": "🏆 ASF Ranking",
-      "url": "https://acarolmourad-commits.github.io/asf-ranking/"
+      "url": "https://acarolmourad-commits.github.io/asf-ranking/",
+      "icon": "🏆",
+      "title": "ASF Ranking",
+      "category": "🏆 Aprendizado & Jogos",
+      "desc": "Ranking gamificado da comunidade",
+      "icon_apps": "🏅",
+      "name_apps": "ASF Ranking",
+      "desc_apps": "Ranking gamificado da comunidade com XP integrado aos apps ASF"
     },
     {
       "slug": "asf-desafio",
       "name": "🗓️ ASF Desafio 30",
-      "url": "https://acarolmourad-commits.github.io/asf-desafio/"
+      "url": "https://acarolmourad-commits.github.io/asf-desafio/",
+      "icon": "🗓️",
+      "title": "ASF Desafio 30",
+      "category": "🏆 Aprendizado & Jogos",
+      "desc": "Desafio de 30 dias de evolucão no surf",
+      "icon_apps": "📆",
+      "name_apps": "ASF Desafio 30",
+      "desc_apps": "Tracker de desafio de 30 dias de evolução no surf com grade de progresso"
     },
     {
       "slug": "asf-memoria",
       "name": "🏏 ASF Memória",
-      "url": "https://acarolmourad-commits.github.io/asf-memoria/"
+      "url": "https://acarolmourad-commits.github.io/asf-memoria/",
+      "icon": "🏏",
+      "title": "ASF Memória",
+      "category": "🏆 Aprendizado & Jogos",
+      "desc": "Jogo da memória com os termos do surf",
+      "icon_apps": "🧠",
+      "name_apps": "ASF Memória",
+      "desc_apps": "Jogo da memória com os termos do surf para aprender brincando"
     },
     {
       "slug": "asf-diario",
       "name": "📓 ASF Diário",
-      "url": "https://acarolmourad-commits.github.io/asf-diario/"
+      "url": "https://acarolmourad-commits.github.io/asf-diario/",
+      "icon": "📓",
+      "title": "ASF Diário",
+      "category": "🏆 Aprendizado & Jogos",
+      "desc": "Diário de sessões com estatísticas",
+      "icon_apps": "📓",
+      "name_apps": "ASF Diário",
+      "desc_apps": "Diário de surf com registro de sessões, ondas e evolução"
     },
     {
       "slug": "asf-mala",
       "name": "🎒 ASF Mala",
-      "url": "https://acarolmourad-commits.github.io/asf-mala/"
+      "url": "https://acarolmourad-commits.github.io/asf-mala/",
+      "icon": "🎒",
+      "title": "ASF Mala",
+      "category": "🏆 Aprendizado & Jogos",
+      "desc": "Checklist inteligente de praia por tipo de sessão",
+      "icon_apps": "🎒",
+      "name_apps": "ASF Mala",
+      "desc_apps": "Checklist inteligente de praia gerado por tipo de sessão"
     },
     {
       "slug": "asf-seguranca",
       "name": "🛟 ASF Segurança",
-      "url": "https://acarolmourad-commits.github.io/asf-seguranca/"
+      "url": "https://acarolmourad-commits.github.io/asf-seguranca/",
+      "icon": "🛟",
+      "title": "ASF Segurança",
+      "category": "🛟 Saúde & Segurança",
+      "desc": "Segurança no mar e etiqueta no pico",
+      "icon_apps": "🛡️",
+      "name_apps": "ASF Segurança",
+      "desc_apps": "Segurança no mar, etiqueta no pico e primeiros socorros para surfistas"
     },
     {
       "slug": "asf-sos",
       "name": "🆘 ASF SOS",
-      "url": "https://acarolmourad-commits.github.io/asf-sos/"
+      "url": "https://acarolmourad-commits.github.io/asf-sos/",
+      "icon": "🆘",
+      "title": "ASF SOS",
+      "category": "🛟 Saúde & Segurança",
+      "desc": "Botão de emergência com geolocalização",
+      "icon_apps": "🆘",
+      "name_apps": "ASF SOS",
+      "desc_apps": "Botão de emergência com geolocalização para surfistas"
     },
     {
       "slug": "asf-sono",
       "name": "😴 ASF Sono",
-      "url": "https://acarolmourad-commits.github.io/asf-sono/"
+      "url": "https://acarolmourad-commits.github.io/asf-sono/",
+      "icon": "😴",
+      "title": "ASF Sono",
+      "category": "🛟 Saúde & Segurança",
+      "desc": "Rastreador de sono e recuperação",
+      "icon_apps": "😴",
+      "name_apps": "ASF Sono",
+      "desc_apps": "Rastreador de sono e recuperação para performance no surf"
     },
     {
       "slug": "asf-bemestar",
       "name": "💖 ASF Bem-Estar",
-      "url": "https://acarolmourad-commits.github.io/asf-bemestar/"
+      "url": "https://acarolmourad-commits.github.io/asf-bemestar/",
+      "icon": "💖",
+      "title": "ASF Bem-Estar",
+      "category": "🛟 Saúde & Segurança",
+      "desc": "Yoga, alongamento e autocuidado",
+      "icon_apps": "💆‍♀️",
+      "name_apps": "ASF Bem-estar",
+      "desc_apps": "Saúde, yoga e autocuidado para surfistas"
     },
     {
       "slug": "asf-mental",
       "name": "🧠 ASF Mental",
-      "url": "https://acarolmourad-commits.github.io/asf-mental/"
+      "url": "https://acarolmourad-commits.github.io/asf-mental/",
+      "icon": "🧠",
+      "title": "ASF Mental",
+      "category": "🛟 Saúde & Segurança",
+      "desc": "Mindset e psicologia do esporte",
+      "icon_apps": "🧘",
+      "name_apps": "ASF Mental",
+      "desc_apps": "Mindset, respiração e psicologia do esporte para surfistas"
     },
     {
       "slug": "asf-nutricao",
       "name": "🥗 ASF Nutrição",
-      "url": "https://acarolmourad-commits.github.io/asf-nutricao/"
+      "url": "https://acarolmourad-commits.github.io/asf-nutricao/",
+      "icon": "🥗",
+      "title": "ASF Nutrição",
+      "category": "🛟 Saúde & Segurança",
+      "desc": "Alimentação e hidratação para surfistas",
+      "icon_apps": "🥜",
+      "name_apps": "ASF Nutrição",
+      "desc_apps": "Alimentação e hidratação para surfistas"
     },
     {
       "slug": "asf-equipamento",
       "name": "🏄‍♀️ ASF Equipamento",
-      "url": "https://acarolmourad-commits.github.io/asf-equipamento/"
+      "url": "https://acarolmourad-commits.github.io/asf-equipamento/",
+      "icon": "🏄‍♀️",
+      "title": "ASF Equipamento",
+      "category": "🛟 Saúde & Segurança",
+      "desc": "Pranchas, wetsuits e acessórios",
+      "icon_apps": "🏄‍♀️",
+      "name_apps": "ASF Equipamento",
+      "desc_apps": "Guia de pranchas, wetsuits e acessórios para surfistas"
     },
     {
       "slug": "asf-desafios",
       "name": "🎯 ASF Desafios",
-      "url": "https://acarolmourad-commits.github.io/asf-desafios/"
+      "url": "https://acarolmourad-commits.github.io/asf-desafios/",
+      "icon": "🎯",
+      "title": "ASF Desafios",
+      "category": "🎨 Cultura & Utilidades",
+      "desc": "Desafios semanais com XP e níveis",
+      "icon_apps": "🏆",
+      "name_apps": "ASF Desafios",
+      "desc_apps": "Desafios semanais da comunidade com XP e níveis"
     },
     {
       "slug": "asf-filmes",
       "name": "🎬 ASF Filmes",
-      "url": "https://acarolmourad-commits.github.io/asf-filmes/"
+      "url": "https://acarolmourad-commits.github.io/asf-filmes/",
+      "icon": "🎬",
+      "title": "ASF Filmes",
+      "category": "🎨 Cultura & Utilidades",
+      "desc": "Cinema do surf feminino",
+      "icon_apps": "🎬",
+      "name_apps": "ASF Filmes",
+      "desc_apps": "Guia de filmes e documentários sobre mulheres no surf"
     },
     {
       "slug": "asf-podcast",
       "name": "🎧 ASF Podcast",
-      "url": "https://acarolmourad-commits.github.io/asf-podcast/"
+      "url": "https://acarolmourad-commits.github.io/asf-podcast/",
+      "icon": "🎧",
+      "title": "ASF Podcast",
+      "category": "🎨 Cultura & Utilidades",
+      "desc": "Surf feminino em áudio",
+      "icon_apps": "🎙️",
+      "name_apps": "ASF Podcast",
+      "desc_apps": "Episódios em áudio sobre surf feminino"
     },
     {
       "slug": "asf-inspiracao",
       "name": "✨ ASF Inspiração",
-      "url": "https://acarolmourad-commits.github.io/asf-inspiracao/"
+      "url": "https://acarolmourad-commits.github.io/asf-inspiracao/",
+      "icon": "✨",
+      "title": "ASF Inspiração",
+      "category": "🎨 Cultura & Utilidades",
+      "desc": "Frase do dia e histórias inspiradoras",
+      "icon_apps": "✨",
+      "name_apps": "ASF Inspiração",
+      "desc_apps": "Frase do dia e histórias inspiradoras do surf feminino"
     },
     {
       "slug": "asf-sonhos",
       "name": "🌠 ASF Sonhos",
-      "url": "https://acarolmourad-commits.github.io/asf-sonhos/"
+      "url": "https://acarolmourad-commits.github.io/asf-sonhos/",
+      "icon": "🌠",
+      "title": "ASF Sonhos",
+      "category": "🎨 Cultura & Utilidades",
+      "desc": "Vision board de metas e sonhos de surf",
+      "icon_apps": "🌠",
+      "name_apps": "ASF Sonhos",
+      "desc_apps": "Vision board de metas e sonhos de surf"
     },
     {
       "slug": "asf-clube",
       "name": "💳 ASF Clube",
-      "url": "https://acarolmourad-commits.github.io/asf-clube/"
+      "url": "https://acarolmourad-commits.github.io/asf-clube/",
+      "icon": "💳",
+      "title": "ASF Clube",
+      "category": "🎨 Cultura & Utilidades",
+      "desc": "Carteirinha digital e benefícios",
+      "icon_apps": "🪪",
+      "name_apps": "ASF Clube",
+      "desc_apps": "Carteirinha digital e benefícios da associada ASF"
     },
     {
       "slug": "asf-achados",
       "name": "🔍 ASF Achados",
-      "url": "https://acarolmourad-commits.github.io/asf-achados/"
+      "url": "https://acarolmourad-commits.github.io/asf-achados/",
+      "icon": "🔍",
+      "title": "ASF Achados",
+      "category": "🎨 Cultura & Utilidades",
+      "desc": "Achados e perdidos do pico",
+      "icon_apps": "🔎",
+      "name_apps": "ASF Achados",
+      "desc_apps": "Achados e perdidos do pico: quilhas, leashes, chaves"
+    }
+  ],
+  "categories": [
+    "🌊 Mar & Condições",
+    "🏄‍♀️ Performance & Treino",
+    "💜 Vida & Comunidade",
+    "🏆 Aprendizado & Jogos",
+    "🛟 Saúde & Segurança",
+    "🎨 Cultura & Utilidades"
+  ],
+  "apps_index_order": [
+    "asf-achados",
+    "asf-alerta",
+    "asf-apnea",
+    "asf-atlas",
+    "asf-bemestar",
+    "asf-carona",
+    "asf-checklist",
+    "asf-clube",
+    "asf-comunidade",
+    "asf-desafios",
+    "asf-desafio",
+    "asf-diario",
+    "asf-eco",
+    "asf-equipamento",
+    "asf-eventos",
+    "asf-filmes",
+    "asf-galeria",
+    "asf-glossario",
+    "asf-goldenhour",
+    "asf-historia",
+    "asf-inspiracao",
+    "asf-kids",
+    "asf-leitura",
+    "asf-loja",
+    "asf-mala",
+    "asf-manobras",
+    "asf-mapa",
+    "asf-mare",
+    "asf-memoria",
+    "asf-mental",
+    "asf-mentorias",
+    "asf-mercado",
+    "asf-nutricao",
+    "asf-parceiras",
+    "asf-patrocinio",
+    "asf-podcast",
+    "asf-ponto",
+    "asf-popup",
+    "asf-praias",
+    "asf-previsao",
+    "asf-quiz",
+    "asf-ranking",
+    "asf-respira",
+    "asf-seguranca",
+    "asf-sonhos",
+    "asf-sono",
+    "asf-sos",
+    "asf-treino",
+    "asf-vento",
+    "asf-viagens",
+    "asf-volume",
+    "asf-yoga"
+  ],
+  "extras_satellites": [
+    {
+      "after_slug": "asf-patrocinio",
+      "html": "<a class=\"card\" href=\"https://acarolmourad-commits.github.io/asf-patrocinio/media-kit.html\"><span class=\"ic\">📊</span><h3>ASF Media Kit</h3><p>Mídia kit e dados da rede para marcas parceiras</p></a>"
     }
   ]
 }
