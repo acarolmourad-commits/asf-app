@@ -412,34 +412,7 @@
 
 <!-- Schema.org JSON-LD for SEO -->
     <script type="application/ld+json">{}</script>
-    <script type="text/javascript">
-        const MOCK_MANAS = {
-            bertioga: [
-                { name: "Marina S.", level: "Intermediária", beach: "Riviera", distance: 0.5, avatar: "🏄♀️" },
-                { name: "Julia R.", level: "Iniciante", beach: "Riviera", distance: 1.2, avatar: "🌊" },
-                { name: "Ana P.", level: "Avançada", beach: "Jardim", distance: 2.3, avatar: "🦈" },
-                { name: "Carla M.", level: "Intermediária", beach: "Centro", distance: 3.1, avatar: "🏄" },
-            ],
-            santos: [
-                { name: "Beatriz L.", level: "Avançada", beach: "Gonzaga", distance: 0.3, avatar: "🏆" },
-                { name: "Fernanda T.", level: "Intermediária", beach: "Embaré", distance: 0.8, avatar: "🏄♀️" },
-                { name: "Lucia A.", level: "Iniciante", beach: "Praia Grande", distance: 1.5, avatar: "🌊" },
-                { name: "Patricia O.", level: "Intermediária", beach: "Boqueirão", distance: 2.1, avatar: "🏄" },
-                { name: "Renata G.", level: "Avançada", beach: "José Menino", distance: 2.8, avatar: "🦈" },
-            ],
-            guaruja: [
-                { name: "Camila V.", level: "Intermediária", beach: "Pitangueiras", distance: 0.7, avatar: "🏄♀️" },
-                { name: "Isabela M.", level: "Iniciante", beach: "Enseada", distance: 1.4, avatar: "🌊" },
-                { name: "Thais R.", level: "Avançada", beach: "Tombo", distance: 2.0, avatar: "🦈" },
-            ],
-            ubatuba: [
-                { name: "Daniela S.", level: "Avançada", beach: "Itamambuca", distance: 0.2, avatar: "🏆" },
-                { name: "Gabriela F.", level: "Intermediária", beach: "Praia Grande", distance: 0.9, avatar: "🏄♀️" },
-                { name: "Larissa C.", level: "Intermediária", beach: "Vermelha", distance: 1.6, avatar: "🏄" },
-                { name: "Melissa P.", level: "Iniciante", beach: "Itamambuca", distance: 2.4, avatar: "🌊" },
-            ]
-        };
-    </script>
+    <script src="data/mock-manas.js"></script>
     <link rel="stylesheet" href="subscriber-styles.css">
     <style>
     .hero-badge { display: none !important; }
@@ -10348,6 +10321,7 @@ window.asfInitFeatures=function(){
 <script defer src="asf-fixes.js"></script>
 
 <!-- QUIZ + XP BAR JS -->
+<script src="data/translations.js"></script>
 <script>
 const ASF_QUIZ={questions:[
 {q:"Qual é a origem do surf?",opts:["Havaí, Polinésia","Austrália","África do Sul","Califórnia"],a:0,cat:"historia"},
@@ -11352,149 +11326,7 @@ ASF_CONTEUDO.categorias.forEach(cat=>{cat.artigos.forEach(a=>{if(saved.includes(
 window.checkASFBadges=function(){if(typeof ASF_GAMIFICATION!=='undefined')ASF_GAMIFICATION.checkAll()};
 
 // Language Translation System
-const translations = {
-    'pt-BR': {
-        // Header
-        'darkModeToggle': 'Modo Noturno',
-        'notifications': 'Notificações',
-        'shopCart': 'Carrinho',
-        'whatsapp': 'Fale com a gente no WhatsApp',
-        'campaignModal': 'Regras de Incentivos',
-        'brandSupport': 'Apoie o App',
-        // Main sections
-        'dailyTip': 'Dica do Dia',
-        'refresh': 'Atualizar',
-        'searchPlaceholder': 'Buscar dicas, lojas, treinos...',
-        'searchClear': 'Limpar busca',
-        'campaignActive': 'INCENTIVOS DE UNIÃO',
-        'summerChallenge': 'Ganhe pontos extras surfando com suas manas!',
-        'participate': 'Surf com Manas',
-        'until': 'Valido até',
-        // Profile bar
-        'level': 'Nível',
-        'points': 'pontos',
-        'lessons': 'Aulas',
-        'trips': 'Trips',
-        'achievements': 'Conquistas',
-        // Utilities
-        'waves': 'Ondas',
-        'school': 'Escola',
-        'shop': 'Loja',
-        'premium': 'Conteúdo',
-        'news': 'Notícias',
-        'tripsTab': 'Trips',
-        'profile': 'Perfil',
-        'settings': 'Configurações',
-        'logbook': 'Diário de Bordo',
-        // Buttons and labels throughout
-        'readMore': 'Ler mais',
-        'share': 'Compartilhar',
-        'like': 'Curtir',
-        'comment': 'Comentário',
-        'save': 'Salvar',
-        'remove': 'Remover',
-        'close': 'Fechar',
-        'open': 'Abrir',
-        'cancel': 'Cancelar',
-        'confirm': 'Confirmar',
-        'yes': 'Sim',
-        'no': 'Não'
-    },
-    'en': {
-        // Header
-        'darkModeToggle': 'Dark Mode',
-        'notifications': 'Notifications',
-        'shopCart': 'Cart',
-        'whatsapp': 'Talk to us on WhatsApp',
-        'campaignModal': 'Incentives Rules',
-        'brandSupport': 'Support the App',
-        // Main sections
-        'dailyTip': 'Tip of the Day',
-        'refresh': 'Refresh',
-        'searchPlaceholder': 'Search tips, shops, training...',
-        'searchClear': 'Clear search',
-        'campaignActive': 'INCENTIVES ACTIVE',
-        'summerChallenge': 'Earn extra points surfing with your manas!',
-        'participate': 'Surf with Manas',
-        'until': 'Valid until',
-        // Profile bar
-        'level': 'Level',
-        'points': 'points',
-        'lessons': 'Lessons',
-        'trips': 'Trips',
-        'achievements': 'Achievements',
-        // Utilities
-        'waves': 'Waves',
-        'school': 'School',
-        'shop': 'Shop',
-        'premium': 'Content',
-        'news': 'News',
-        'tripsTab': 'Trips',
-        'profile': 'Profile',
-        'settings': 'Settings',
-        'logbook': 'Logbook',
-        // Buttons and labels throughout
-        'readMore': 'Read more',
-        'share': 'Share',
-        'like': 'Like',
-        'comment': 'Comment',
-        'save': 'Save',
-        'remove': 'Remove',
-        'close': 'Close',
-        'open': 'Open',
-        'cancel': 'Cancel',
-        'confirm': 'Confirm',
-        'yes': 'Yes',
-        'no': 'No'
-    },
-    'es': {
-        // Header
-        'darkModeToggle': 'Modo Oscuro',
-        'notifications': 'Notificaciones',
-        'shopCart': 'Carrito',
-        'whatsapp': 'Hablar con nosotros por WhatsApp',
-        'campaignModal': 'Reglas de Incentivos',
-        'brandSupport': 'Apoya la App',
-        // Main sections
-        'dailyTip': 'Consejo del Día',
-        'refresh': 'Actualizar',
-        'searchPlaceholder': 'Buscar consejos, tiendas, entrenamiento...',
-        'searchClear': 'Limpiar búsqueda',
-        'campaignActive': 'CAMPAÑA ACTIVA',
-        'summerChallenge': 'Ganá puntos extras surfando con tus manas!',
-        'participate': 'Surf com Manas',
-        'until': 'Hasta',
-        // Profile bar
-        'level': 'Nivel',
-        'points': 'puntos',
-        'lessons': 'Lecciones',
-        'trips': 'Viajes',
-        'achievements': 'Logros',
-        // Utilities
-        'waves': 'Olas',
-        'school': 'Escuela',
-        'shop': 'Tienda',
-        'premium': 'Contenido',
-        'news': 'Noticias',
-        'tripsTab': 'Viajes',
-        'profile': 'Perfil',
-        'settings': 'Ajustes',
-        'logbook': 'Bitácora',
-        // Buttons and labels throughout
-        'readMore': 'Leer más',
-        'share': 'Compartir',
-        'like': 'Me gusta',
-        'comment': 'Comentario',
-        'save': 'Guardar',
-        'remove': 'Eliminar',
-        'close': 'Cerrar',
-        'open': 'Abrir',
-        'cancel': 'Cancelar',
-        'confirm': 'Confirmar',
-        'yes': 'Sí',
-        'no': 'No'
-    }
-};
+/* translations -> data/translations.js */
 
 function changeLanguage(lang) {
     // Save preference
