@@ -1,0 +1,30 @@
+name: ASF Unify Glossary (one-shot)
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  unify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Unificar glossario da home com o app asf-glossario
+        run: python3 scripts/unify_glossary.py
+      - name: Commit if changed
+        run: |
+          git config user.name "ASF Bot"
+          git config user.email "bot@asf-app.com"
+          git add index.html
+          if git diff --cached --quiet; then
+            echo "Sem mudancas"
+          else
+            git commit -m "refactor(home): glossario da home unificado com o app ASF Glossario (remove 82 entradas inline duplicadas)"
+            git push
+          fi
