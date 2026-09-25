@@ -26,3 +26,50 @@
     document.addEventListener('DOMContentLoaded', fixCount);
   } else { fixCount(); }
 })();
+
+// 3) Conquistas: badge "Estudiosa" pede 3 quizzes no rótulo, mas o código exigia 5.
+//    Wrap de checkBadge alinha o critério para 3.
+// 4) Conquistas Secretas: botão "Desbloquear" desbloqueava sem critério.
+//    Agora o 1º toque explica o requisito e o 2º confirma a conquista.
+(function () {
+  function patchBadges() {
+    if (typeof window.checkBadge === 'function' && !window.checkBadge.__asfPatched) {
+      var origCheck = window.checkBadge;
+      var wrapped = function (type) {
+        if (type === 'quiz') {
+          var quizzes = (JSON.parse(localStorage.getItem('quizzes-done') || '[]')).length;
+          if (quizzes >= 3) { if (typeof showToast === 'function') showToast('📚 Badge Estudiosa desbloqueado! 🎉'); }
+          else if (typeof showToast === 'function') showToast('📚 Progresso: ' + quizzes + '/3 quizzes (faça o ASF Quiz!)');
+          return;
+        }
+        return origCheck.apply(this, arguments);
+      };
+      wrapped.__asfPatched = true;
+      window.checkBadge = wrapped;
+    }
+    if (typeof window.unlockConquista === 'function' && !window.unlockConquista.__asfPatched) {
+      var reqs = {
+        'longboard-wave': 'Surfar 5 ondas em longboard',
+        'tide-timing': 'Surfar em 3 marés diferentes',
+        'wax-wizard': 'Usar a parafina correta 5x',
+        'sun-guardian': 'Usar protetor solar 7 dias seguidos'
+      };
+      var origUnlock = window.unlockConquista;
+      var armed = {};
+      var wrappedU = function (type, btn) {
+        if (!armed[type]) {
+          armed[type] = true;
+          var r = reqs[type] || 'Complete a atividade';
+          if (typeof showToast === 'function') showToast('🔓 ' + r + '. Toque de novo para confirmar que completou!');
+          btn.textContent = 'Confirmar ✅';
+          return;
+        }
+        return origUnlock.apply(this, arguments);
+      };
+      wrappedU.__asfPatched = true;
+      window.unlockConquista = wrappedU;
+    }
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', patchBadges);
+  else patchBadges();
+})();
