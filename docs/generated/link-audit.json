@@ -1,12 +1,10 @@
 {
-  "date": "2026-09-24T20:51:33.374479+00:00",
-  "total": 57,
-  "ok": 45,
+  "date": "2026-09-25T02:10:37.875265+00:00",
+  "total": 58,
+  "ok": 47,
   "skipped": 11,
-  "broken_count": 1,
-  "broken": [
-    "https://docs.google.com/forms/d/e/1fJhfaiNyYSSq9bKElew69y6GZ6_pxLz05HR26klIsSA/viewform"
-  ],
+  "broken_count": 0,
+  "broken": [],
   "results": [
     {
       "url": "https://acarolmourad-commits.github.io/asf-app/",
@@ -17,11 +15,6 @@
       "url": "https://api.open-meteo.com",
       "status": "skipped",
       "http": null
-    },
-    {
-      "url": "https://docs.google.com/forms/d/e/1fJhfaiNyYSSq9bKElew69y6GZ6_pxLz05HR26klIsSA/viewform",
-      "status": "broken",
-      "http": 404
     },
     {
       "url": "https://fonts.googleapis.com",
@@ -200,6 +193,18 @@
     },
     {
       "url": "cookies.html",
+      "status": "ok",
+      "http": 200,
+      "local": true
+    },
+    {
+      "url": "data/mock-manas.js",
+      "status": "ok",
+      "http": 200,
+      "local": true
+    },
+    {
+      "url": "data/translations.js",
       "status": "ok",
       "http": 200,
       "local": true

@@ -1,5 +1,5 @@
 {
-  "date": "2026-09-24",
+  "date": "2026-09-25",
   "new_tip": {
     "category": "Saúde",
     "title": "Treino de força",
@@ -16,15 +16,15 @@
   },
   "improvements": [
     {
-      "type": "layout",
-      "title": "Modo escuro",
-      "priority": "medium"
-    },
-    {
       "type": "feature",
       "title": "Medidor de condições do mar",
       "priority": "high"
+    },
+    {
+      "type": "content",
+      "title": "Mais dicas técnicas avançadas",
+      "priority": "high"
     }
   ],
-  "generated_at": "2026-09-24T20:51:22.107636"
+  "generated_at": "2026-09-25T02:10:29.702385"
 }
