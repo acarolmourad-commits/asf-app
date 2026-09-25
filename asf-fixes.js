@@ -73,3 +73,32 @@
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', patchBadges);
   else patchBadges();
 })();
+
+// 5) Carteirinha unificada (25/09/2026): a seção interativa #carteirinha ficava
+//    visível no fim da home, duplicando o card "Carteirinha ASF" do topo.
+//    Agora a seção só aparece quando aberta (pelo card do topo ou menu).
+(function () {
+  function fixCarteirinha() {
+    var sec = document.getElementById('carteirinha');
+    if (!sec || sec.__asfUnified) return;
+    sec.__asfUnified = true;
+    // Esconde a seção na home até ser aberta explicitamente
+    if (!sec.classList.contains('active')) {
+      sec.style.setProperty('display', 'none', 'important');
+    }
+    // Garante que o card do topo abre a seção e rola para o topo dela
+    var card = document.getElementById('carteirinha-home-card');
+    if (card && !card.__asfUnified) {
+      card.__asfUnified = true;
+      card.addEventListener('click', function () {
+        setTimeout(function () {
+          sec.classList.add('active');
+          sec.style.removeProperty('display');
+          sec.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }, 60);
+      });
+    }
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', fixCarteirinha);
+  else fixCarteirinha();
+})();
