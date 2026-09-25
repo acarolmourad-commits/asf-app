@@ -1,7 +1,7 @@
 {
   "hub": "https://acarolmourad-commits.github.io/asf-app/",
   "version": 2,
-  "updated": "2026-09-24",
+  "updated": "2026-09-25",
   "apps": [
     {
       "slug": "asf-previsao",
@@ -626,6 +626,18 @@
       "icon_apps": "🔎",
       "name_apps": "ASF Achados",
       "desc_apps": "Achados e perdidos do pico: quilhas, leashes, chaves"
+    },
+    {
+      "slug": "asf-matematica",
+      "name": "🔢 ASF Matemática",
+      "url": "https://acarolmourad-commits.github.io/asf-matematica/",
+      "icon": "🔢",
+      "title": "ASF Matemática",
+      "category": "🏄‍♀️ Performance & Treino",
+      "desc": "Ondas, remada e prancha em números",
+      "icon_apps": "🔢",
+      "name_apps": "ASF Matemática",
+      "desc_apps": "Calculadoras de matemática do surf: ondas, remada e prancha"
     }
   ],
   "categories": [
@@ -665,6 +677,7 @@
     "asf-manobras",
     "asf-mapa",
     "asf-mare",
+    "asf-matematica",
     "asf-memoria",
     "asf-mental",
     "asf-mentorias",
