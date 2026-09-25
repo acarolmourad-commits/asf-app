@@ -104,20 +104,24 @@ window.SurfCalculator = SurfCalculator;
 (function(){
   if (document.getElementById('asf-sat-nav')) return;
   var sites = [
-    ['ASF App','asf-app'],['Praias','asf-praias'],['Previsão','asf-previsao'],
-    ['Treino','asf-treino'],['Eventos','asf-eventos'],['Glossário','asf-glossario'],
-    ['Segurança','asf-seguranca'],['Comunidade','asf-comunidade'],
-    ['Equipamento','asf-equipamento'],['Quiz','asf-quiz'],
-    ['Nutrição','asf-nutricao'],['Viagens','asf-viagens'],['História','asf-historia'],
-    ['Bem-estar','asf-bemestar'],['Diário','asf-diario'],['Eco','asf-eco'],
-    ['Mental','asf-mental'],['Kids','asf-kids'],['SOS','asf-sos'],
-    ['Yoga','asf-yoga'],['Volume','asf-volume'],['Respira','asf-respira'],
-    ['Ranking','asf-ranking'],['Mercado','asf-mercado'],['Mapa','asf-mapa'],
-    ['Maré','asf-mare'],['Carona','asf-carona'],['Apneia','asf-apnea'],
-    ['Golden Hour','asf-goldenhour'],['Alerta','asf-alerta'],['Manobras','asf-manobras'],
-    ['Galeria','asf-galeria'],['Parceiras','asf-parceiras'],['Mentorias','asf-mentorias'],
-    ['Pop-up','asf-popup'],['Desafio 30','asf-desafio'],['Leitura de Mar','asf-leitura'],
-    ['Ponto','asf-ponto'],['Clube','asf-clube'],['Sonhos','asf-sonhos'],['Memória','asf-memoria']
+    ['ASF App','asf-app'],['Previsão','asf-previsao'],['Praias','asf-praias'],
+    ['Maré','asf-mare'],['Mapa','asf-mapa'],['Atlas','asf-atlas'],
+    ['Alerta','asf-alerta'],['Ponto','asf-ponto'],['Leitura de Mar','asf-leitura'],
+    ['Golden Hour','asf-goldenhour'],['Vento','asf-vento'],['Treino','asf-treino'],
+    ['Manobras','asf-manobras'],['Pop-up','asf-popup'],['Apneia','asf-apnea'],
+    ['Respira','asf-respira'],['Yoga','asf-yoga'],['Volume','asf-volume'],
+    ['Comunidade','asf-comunidade'],['Parceiras','asf-parceiras'],['Mentorias','asf-mentorias'],
+    ['Carona','asf-carona'],['Eventos','asf-eventos'],['Galeria','asf-galeria'],
+    ['Mercado','asf-mercado'],['Eco','asf-eco'],['Viagens','asf-viagens'],
+    ['Patrocínio','asf-patrocinio'],['Loja','asf-loja'],['Glossário','asf-glossario'],
+    ['História','asf-historia'],['Kids','asf-kids'],['Checklist','asf-checklist'],
+    ['Quiz','asf-quiz'],['Ranking','asf-ranking'],['Desafio 30','asf-desafio'],
+    ['Desafios','asf-desafios'],['Memória','asf-memoria'],['Diário','asf-diario'],
+    ['Mala','asf-mala'],['Segurança','asf-seguranca'],['SOS','asf-sos'],
+    ['Sono','asf-sono'],['Bem-estar','asf-bemestar'],['Mental','asf-mental'],
+    ['Nutrição','asf-nutricao'],['Equipamento','asf-equipamento'],['Filmes','asf-filmes'],
+    ['Podcast','asf-podcast'],['Inspiração','asf-inspiracao'],['Sonhos','asf-sonhos'],
+    ['Clube','asf-clube'],['Achados','asf-achados']
   ];
   var btn = document.createElement('button');
   btn.id = 'asf-sat-nav';
