@@ -1,12 +1,10 @@
 {
-  "date": "2026-09-25T16:02:25.245672+00:00",
+  "date": "2026-09-25T16:39:51.237053+00:00",
   "total": 58,
-  "ok": 46,
+  "ok": 47,
   "skipped": 11,
-  "broken_count": 1,
-  "broken": [
-    "https://www.fecasurf.com.br/"
-  ],
+  "broken_count": 0,
+  "broken": [],
   "results": [
     {
       "url": "https://acarolmourad-commits.github.io/asf-app/",
@@ -65,8 +63,8 @@
     },
     {
       "url": "https://www.fecasurf.com.br/",
-      "status": "broken",
-      "http": "URLError"
+      "status": "ok",
+      "http": 200
     },
     {
       "url": "https://www.googletagmanager.com",
