@@ -1,0 +1,34 @@
+name: ASF Fix Brand Challenge (one-shot)
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'scripts/fix_appjs_brand_challenge.py'
+
+permissions:
+  contents: write
+
+jobs:
+  fix:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Remover promessa de premio falso de app.js
+        run: python3 scripts/fix_appjs_brand_challenge.py
+      - name: Commit if changed
+        run: |
+          git config user.name "ASF Bot"
+          git config user.email "bot@asf-app.com"
+          git add app.js
+          if git diff --cached --quiet; then
+            echo "Sem mudancas"
+          else
+            git commit -m "fix(conteudo): remover premio falso R$500 do desafio em app.js — alinhado ao texto honesto do index.html"
+            git push
+          fi
