@@ -18,7 +18,7 @@ function mount(){
   var h='<div style="font-weight:800;font-size:15px;margin-bottom:10px">🌐 Explore a Rede ASF — 53 apps gratuitos de surf feminino</div>';
   h+='<div style="display:flex;flex-wrap:wrap;gap:8px;justify-content:center">';
   h+='<a href="'+HUB+'" style="background:#00A8CC;color:#fff;padding:6px 12px;border-radius:999px;font-size:12px;text-decoration:none;font-weight:700">🏄‍♀️ App ASF (hub)</a>';
-  h+='<a href="'+HUB+'satellites.html" style="background:#F4D03F;color:#0E2439;padding:6px 12px;border-radius:999px;font-size:12px;text-decoration:none;font-weight:700">⭐ Todos os 52 apps</a>';
+  h+='<a href="'+HUB+'guia-apps.html" style="background:#F4D03F;color:#0E2439;padding:6px 12px;border-radius:999px;font-size:12px;text-decoration:none;font-weight:700">⭐ Guia: todos os 52 apps</a>';
   h+='<a href="'+HUB+'novidades.html" style="background:#ffffff22;color:#fff;padding:6px 12px;border-radius:999px;font-size:12px;text-decoration:none;font-weight:700">📰 Novidades</a>';
   picks.forEach(function(a){h+='<a href="'+a.u+'" style="background:#ffffff14;color:#fff;padding:6px 12px;border-radius:999px;font-size:12px;text-decoration:none">'+a.n+'</a>';});
   h+='</div>';
