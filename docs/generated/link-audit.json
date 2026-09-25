@@ -1,13 +1,18 @@
 {
-  "date": "2026-09-25T16:39:51.237053+00:00",
-  "total": 58,
-  "ok": 47,
+  "date": "2026-09-25T20:48:46.682914+00:00",
+  "total": 59,
+  "ok": 48,
   "skipped": 11,
   "broken_count": 0,
   "broken": [],
   "results": [
     {
       "url": "https://acarolmourad-commits.github.io/asf-app/",
+      "status": "ok",
+      "http": 200
+    },
+    {
+      "url": "https://acarolmourad-commits.github.io/asf-glossario/",
       "status": "ok",
       "http": 200
     },

@@ -10,21 +10,21 @@
     ]
   },
   "new_utility": {
-    "name": "Calculadora de Maré",
-    "description": "Horários de maré",
-    "icon": "🗓️"
+    "name": "Previsão de Ondas",
+    "description": "7 dias de previsão",
+    "icon": "🌊"
   },
   "improvements": [
-    {
-      "type": "content",
-      "title": "Mais dicas técnicas avançadas",
-      "priority": "high"
-    },
     {
       "type": "feature",
       "title": "Medidor de condições do mar",
       "priority": "high"
+    },
+    {
+      "type": "content",
+      "title": "Mais dicas técnicas avançadas",
+      "priority": "high"
     }
   ],
-  "generated_at": "2026-09-25T16:01:17.819499"
+  "generated_at": "2026-09-25T20:48:34.652335"
 }
