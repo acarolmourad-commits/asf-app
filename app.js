@@ -201,7 +201,7 @@ function renderBrandHub() {
     }
 }
 function showBrandChallenge() {
-            alert('🏆 DESAFIO DA SEMANA\n\n📸 Tema: "Melhor foto com prancha na praia"\n🏅 Prêmio: R$500 em produtos\n📅 Prazo: 7 dias\n\nComo participar:\n1. Tire sua foto\n2. Poste no Instagram marcando @associacaosurffeminino\n3. Use #ASFChallenge\n4. Compartilhe no app!\n\nBoa sorte! 🏄‍♀️');
+            alert('📸 CAMPANHAS ASF\n\nAs campanhas com brindes serão anunciadas aqui quando houver parceria ativa. Brindes vêm de doações de lojas parceiras e são vinculados à pontuação da carteirinha ASF — tudo gratuito.\n\nAcompanhe o app! 🏄‍♀️');
         }
 function showBrandContact() {
             window.open('https://wa.me/5511954346288?text=Olá!%20Quero%20anunciar%20no%20ASF%20Brand%20Lab.%20Meu%20nome:%20[MARCA]', '_blank');

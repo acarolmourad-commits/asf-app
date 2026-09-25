@@ -4017,7 +4017,6 @@ t Section -->
 
     <div id="app-stats" style="display:flex; justify-content:center; gap:20px; margin-bottom:10px; font-size:12px;">
                 <span>📱 <span id="stat-opens">0</span> acessos</span>
-                <span>👥 <span id="stat-members">500+</span> sócias</span>
                 <span>🌊 <span id="stat-sessions">0</span> sessions</span>
             </div>
             <p>© 2026 ASF - Associação de Surf Feminino</p>
@@ -8669,6 +8668,7 @@ function findNearbyManas() {
                 const closest = allManas.slice(0, 5);
 
                 nearbyDiv.innerHTML = `
+                    <p style="text-align:center;font-size:11px;color:#b0392e;background:#fdecea;border:1px solid #f5c6cb;border-radius:8px;padding:8px;margin:0 0 12px">⚠️ Demonstração: perfis fictícios. Perfis reais aparecerão aqui quando o recurso de comunidade estiver ativo.</p>
                     <h4 style="color: var(--secondary); margin-bottom: 15px;">📍 Manas mais próximas</h4>
                     ${closest.map(mana => `
                         <div class="card" style="margin-bottom: 15px; cursor: pointer;" onclick="connectManas('${mana.name}')">
@@ -8700,6 +8700,7 @@ function showBeachManas(beach) {
             };
 
             listDiv.innerHTML = `
+                <p style="text-align:center;font-size:11px;color:#b0392e;background:#fdecea;border:1px solid #f5c6cb;border-radius:8px;padding:8px;margin:0 0 12px">⚠️ Demonstração: perfis fictícios. Perfis reais aparecerão aqui quando o recurso de comunidade estiver ativo.</p>
                 <h4 style="color: var(--secondary); margin-bottom: 15px;">🏖️ Manas em ${beachNames[beach]}</h4>
                 ${manas.map(mana => `
                     <div class="card" style="margin-bottom: 15px; cursor: pointer;" onclick="connectManas('${mana.name}')">
