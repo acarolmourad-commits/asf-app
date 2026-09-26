@@ -1,7 +1,7 @@
 {
-  "date": "2026-09-25T20:48:46.682914+00:00",
-  "total": 59,
-  "ok": 48,
+  "date": "2026-09-26T02:16:13.970798+00:00",
+  "total": 74,
+  "ok": 63,
   "skipped": 11,
   "broken_count": 0,
   "broken": [],
@@ -12,7 +12,62 @@
       "http": 200
     },
     {
+      "url": "https://acarolmourad-commits.github.io/asf-bemestar/",
+      "status": "ok",
+      "http": 200
+    },
+    {
+      "url": "https://acarolmourad-commits.github.io/asf-checklist/",
+      "status": "ok",
+      "http": 200
+    },
+    {
+      "url": "https://acarolmourad-commits.github.io/asf-eventos/",
+      "status": "ok",
+      "http": 200
+    },
+    {
       "url": "https://acarolmourad-commits.github.io/asf-glossario/",
+      "status": "ok",
+      "http": 200
+    },
+    {
+      "url": "https://acarolmourad-commits.github.io/asf-historia/",
+      "status": "ok",
+      "http": 200
+    },
+    {
+      "url": "https://acarolmourad-commits.github.io/asf-manobras/",
+      "status": "ok",
+      "http": 200
+    },
+    {
+      "url": "https://acarolmourad-commits.github.io/asf-mental/",
+      "status": "ok",
+      "http": 200
+    },
+    {
+      "url": "https://acarolmourad-commits.github.io/asf-nutricao/",
+      "status": "ok",
+      "http": 200
+    },
+    {
+      "url": "https://acarolmourad-commits.github.io/asf-praias/",
+      "status": "ok",
+      "http": 200
+    },
+    {
+      "url": "https://acarolmourad-commits.github.io/asf-quiz/",
+      "status": "ok",
+      "http": 200
+    },
+    {
+      "url": "https://acarolmourad-commits.github.io/asf-seguranca/",
+      "status": "ok",
+      "http": 200
+    },
+    {
+      "url": "https://acarolmourad-commits.github.io/asf-sonhos/",
       "status": "ok",
       "http": 200
     },
@@ -228,6 +283,30 @@
     },
     {
       "url": "hospedagens/",
+      "status": "ok",
+      "http": 200,
+      "local": true
+    },
+    {
+      "url": "js/home-articles.js",
+      "status": "ok",
+      "http": 200,
+      "local": true
+    },
+    {
+      "url": "js/home-conquistas.js",
+      "status": "ok",
+      "http": 200,
+      "local": true
+    },
+    {
+      "url": "js/home-main.js",
+      "status": "ok",
+      "http": 200,
+      "local": true
+    },
+    {
+      "url": "js/home-quiz-i18n.js",
       "status": "ok",
       "http": 200,
       "local": true

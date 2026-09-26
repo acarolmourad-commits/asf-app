@@ -1,18 +1,18 @@
 {
-  "date": "2026-09-25",
+  "date": "2026-09-26",
   "board_tip": {
-    "title": "Longboard: O clássico",
-    "content": "Longboards (9'0\"+) são perfeitas para ondas pequenas e estabilidade.",
+    "title": "Fish: Para ondas pequenas",
+    "content": "Shape com outline curto e largo. Perfeita para ondas fracas! Twin ou quad fin para mais speed.",
     "tags": [
-      "Longboard",
-      "Clássico"
+      "Fish",
+      "Speed"
     ]
   },
   "eco_tip": {
-    "title": "Benefícios do Bloco Ecológico",
-    "content": "1. ♻️ 100% reciclável 2. 🌿 Biodegradável 3. 🧊 Livre de CFC 4. 💧 Menor consumo de água",
-    "category": "Meio Ambiente"
+    "title": "Bloco Phenix Teccel",
+    "content": "Núcleo EPS ecológico. Pode ser 100% reciclado ou biodegradado. Menor impacto ambiental.",
+    "category": "Sustentabilidade"
   },
-  "daily_message": "Maré baixa às 11:45 hoje - melhor para iniciantes!",
-  "generated_at": "2026-09-25T20:48:34.703930"
+  "daily_message": "Hidrate-se: 500ml de água antes de surfar!",
+  "generated_at": "2026-09-26T02:16:01.491534"
 }
