@@ -431,6 +431,49 @@ t Section -->
     <!-- Loading Screen REMOVED -->
     <!-- Animated Background -->
     <div class="bg-animation"></div>
+    <!-- Header com menu único -->
+    <header>
+        <div class="header-content">
+            <a href="#" class="logo" onclick="showSection('dicas');asfMenuGo();return false" aria-label="ASF - voltar ao início" style="text-decoration:none;">
+                <span class="logo-icon" aria-hidden="true"></span>
+                <span class="logo-text">ASF</span>
+            </a>
+            <div class="apps-dropdown">
+                <button id="asf-menu-toggle" class="apps-dropdown-toggle" aria-haspopup="true" aria-expanded="false" aria-controls="asf-menu" onclick="toggleAsfMenu()" style="background:rgba(255,255,255,0.15);border:1px solid rgba(255,255,255,0.25);color:#fff;padding:10px 18px;border-radius:12px;font-size:15px;font-weight:600;cursor:pointer;">☰ Menu</button>
+                <div class="apps-dropdown-menu" id="asf-menu" role="menu" aria-label="Menu principal">
+          <button class="tab" role="menuitem" aria-controls="dicas" onclick="showSection('dicas');asfMenuGo()">📚 Dicas</button>
+          <button class="tab" role="menuitem" aria-controls="mobilidade" onclick="showSection('mobilidade');asfMenuGo()">🧘 Mobilidade</button>
+          <button class="tab" role="menuitem" aria-controls="lojas" onclick="showSection('lojas');asfMenuGo()">🛒 Lojas</button>
+          <button class="tab" role="menuitem" aria-controls="praias" onclick="showSection('praias');asfMenuGo()">🏖️ Praias</button>
+          <button class="tab" role="menuitem" aria-controls="surf-news" onclick="showSection('surf-news');asfMenuGo()">📰 News</button>
+          <button class="tab" role="menuitem" aria-controls="metas" onclick="showSection('metas');asfMenuGo()">🎯 Metas</button>
+          <button class="tab" role="menuitem" aria-controls="surf-culture" onclick="showSection('surf-culture');asfMenuGo()">🏛️ Cultura</button>
+          <button class="tab" role="menuitem" aria-controls="surf-conditions" onclick="location.href='previsao-surf/';asfMenuGo()">🌊 Ondas</button>
+          <button class="tab" role="menuitem" aria-controls="desafios" onclick="showSection('desafios');asfMenuGo()">🏆 Desafios</button>
+          <button class="tab" role="menuitem" aria-controls="surfer-profile" onclick="showSection('surfer-profile');asfMenuGo()">🏄 Perfil</button>
+          <button class="tab" role="menuitem" aria-controls="trips" onclick="location.href='surf-trip/';asfMenuGo()">🚗 Surftrips</button>
+          <button class="tab" role="menuitem" aria-controls="utilities" onclick="showSection('utilities');asfMenuGo()">🌊 Utilitários</button>
+          <button class="tab" role="menuitem" aria-controls="comunidade" onclick="showSection('comunidade');asfMenuGo()">👥 Comunidade</button>
+          <button class="tab" role="menuitem" aria-controls="sessoes" onclick="window.location.href='sessoes-interativas.html';asfMenuGo()">💬 Sessões</button>
+          <button class="tab" role="menuitem" aria-controls="competicoes" onclick="showSection('competicoes');asfMenuGo()">🏆 Competições</button>
+          <button class="tab" role="menuitem" aria-controls="quiz" onclick="location.href='quiz/';asfMenuGo()">🧠 Quiz</button>
+          <button class="tab" role="menuitem" aria-controls="assinantes" onclick="showSection('assinantes');asfMenuGo()">🌟 Destaques</button>
+          <button class="tab" role="menuitem" aria-controls="premium" onclick="showSection('premium');asfMenuGo()">⭐ Guias</button>
+          <button class="tab" role="menuitem" aria-controls="eventos" onclick="showSection('eventos');asfMenuGo()">📅 Eventos</button>
+          <button class="tab" role="menuitem" aria-controls="assistente" onclick="showSection('assistente');asfMenuGo()">🤖 Assistente</button>
+          <button class="tab" role="menuitem" aria-controls="conteudo" onclick="showSection('conteudo');asfMenuGo()">📖 Conteúdo</button>
+          <button class="tab" role="menuitem" aria-controls="carteirinha" onclick="showSection('carteirinha');ASF_CARD.init();asfMenuGo()">🪪 Carteirinha</button>
+          <button class="tab" role="menuitem" aria-controls="seguranca" onclick="showSection('seguranca');asfMenuGo()">🚺 Segurança</button>
+          <button class="tab" role="menuitem" aria-controls="manas-proximas" onclick="showSection('manas-proximas');asfMenuGo()">📍 Manas Próximas</button>
+          <button class="tab" role="menuitem" aria-controls="saude" onclick="showSection('saude');asfMenuGo()">💪 Saúde</button>
+          <button class="tab" role="menuitem" aria-controls="progresso" onclick="showSection('progresso');asfMenuGo()">🎯 Pontos</button>
+          <button class="tab" role="menuitem" aria-controls="manas" onclick="showSection('manas');asfMenuGo()">💬 Manas</button>
+          <button class="tab" role="menuitem" aria-controls="brandhub" onclick="showSection('brandhub');asfMenuGo()">🏢 Marcas</button>
+                </div>
+            </div>
+        </div>
+    </header>
+
 
     <!-- Cookie Consent Banner (LGPD) -->
     <div id="cookie-consent-banner" style="position: fixed; bottom: 0; left: 0; right: 0; background: #1A3A5C; color: white; padding: 16px 20px; display: none; align-items: center; justify-content: space-between; gap: 12px; z-index: 9999; box-shadow: 0 -4px 20px rgba(0,0,0,0.3); font-size: 13px;">
@@ -626,79 +669,7 @@ t Section -->
     </div>
 
     <!-- Navigation Tabs -->
-    <div class="tabs" role="tablist" aria-label="Navegação principal">
-        <button class="tab active" role="tab" aria-selected="true" aria-controls="dicas" onclick="showSection('dicas')">
-            <span class="tab-icon">📚</span> Dicas
-        </button>
-        <button class="tab" role="tab" aria-selected="false" aria-controls="mobilidade" onclick="showSection('mobilidade')">
-            <span class="tab-icon">🧘</span> Mobilidade
-        </button>
-        <button class="tab" role="tab" aria-selected="false" aria-controls="lojas" onclick="showSection('lojas')">
-            <span class="tab-icon">🛒</span> Lojas
-        </button>
-        <button class="tab" role="tab" aria-selected="false" aria-controls="praias" onclick="showSection('praias')">
-            <span class="tab-icon">🏖️</span> Praias
-        </button>
-        <button class="tab" role="tab" aria-selected="false" aria-controls="surf-news" onclick="showSection('surf-news')">
-            <span class="tab-icon">📰</span> News
-        </button>
-        <button class="tab" role="tab" aria-selected="false" aria-controls="metas" onclick="showSection('metas')">
-            <span class="tab-icon">🎯</span> Metas
-        </button>
-        <button class="tab" role="tab" aria-selected="false" aria-controls="surf-culture" onclick="showSection('surf-culture')">
-            <span class="tab-icon">🏛️</span> Cultura
-        </button>
-        <button class="tab" role="tab" aria-selected="false" aria-controls="surf-conditions" onclick="location.href='previsao-surf/'">
-            <span class="tab-icon">🌊</span> Ondas
-        </button>
-        
-        <button class="tab" role="tab" aria-selected="false" aria-controls="desafios" onclick="showSection('desafios')">
-            <span class="tab-icon">🏆</span> Desafios
-        </button>
-        <button class="tab" role="tab" aria-selected="false" aria-controls="surfer-profile" onclick="showSection('surfer-profile')">
-            <span class="tab-icon">🏄</span> Perfil
-        </button>
-        <button class="tab" role="tab" aria-selected="false" aria-controls="trips" onclick="location.href='surf-trip/'">
-            <span class="tab-icon">🚗</span> Surftrips
-        </button>
-        <button class="tab" role="tab" aria-selected="false" aria-controls="utilities" onclick="showSection('utilities')">
-            <span class="tab-icon">🌊</span> Utilitários
-        </button>
-        <button class="tab" role="tab" aria-selected="false" aria-controls="comunidade" onclick="showSection('comunidade')">
-            <span class="tab-icon">👥</span> Comunidade
-        </button>
-        <button class="tab" role="tab" aria-selected="false" aria-controls="sessoes" onclick="window.location.href='sessoes-interativas.html'">
-            <span class="tab-icon">💬</span> Sessões
-        </button>
-        <button class="tab" role="tab" aria-selected="false" aria-controls="competicoes" onclick="showSection('competicoes')">
-            <span class="tab-icon">🏆</span> Competições
-        </button>
-        <button class="tab" role="tab" aria-selected="false" aria-controls="quiz" onclick="location.href='quiz/'">
-            <span class="tab-icon">🧠</span> Quiz
-        </button>
-        <button class="tab" role="tab" aria-selected="false" aria-controls="assinantes" onclick="showSection('assinantes')">
-            <span class="tab-icon">🌟</span> Destaques
-        </button>
-        <button class="tab" role="tab" aria-selected="false" aria-controls="premium" onclick="showSection('premium')">
-            <span class="tab-icon">⭐</span> Guias
-        </button>
-        <button class="tab" role="tab" aria-selected="false" aria-controls="eventos" onclick="showSection('eventos')">
-            <span class="tab-icon">📅</span> Eventos
-        </button>
-        <button class="tab" role="tab" aria-selected="false" aria-controls="assistente" onclick="showSection('assistente')">
-            <span class="tab-icon">🤖</span> Assistente
-        </button>
-        <button class="tab" role="tab" aria-selected="false" aria-controls="conteudo" onclick="showSection('conteudo')">
-            <span class="tab-icon">📖</span> Conteúdo
-        </button>
-        <button class="tab" role="tab" aria-selected="false" aria-controls="carteirinha" onclick="showSection('carteirinha');ASF_CARD.init()">
-            <span class="tab-icon">🪪</span> Carteirinha
-        </button>
-        
-        <button class="tab" role="tab" aria-selected="false" aria-controls="seguranca" onclick="showSection('seguranca')">
-            <span class="tab-icon">🚺</span> Segurança
-        </button>
-    </div>
+    
 
     <div id="welcome-card" style="padding: 20px; display: none !important;">
         <div style="background: linear-gradient(135deg, #00A8CC 0%, #0E2439 100%); padding: 25px; border-radius: 20px; color: white; position: relative; overflow: hidden;">
@@ -2342,50 +2313,6 @@ t Section -->
         <p style="font-size: 11px; color: #999; margin-top: 12px; text-align: center;">🌊 Juntas, surfando mais forte!</p>
     </div>
 
-    <!-- Bottom Navigation -->
-    <div class="bottom-nav" role="navigation" aria-label="Menu inferior">
-        <button class="nav-item active" aria-label="Dicas de surf" onclick="handleNavTap(this, 'dicas')">
-            <span class="icon">📚</span>
-            <span class="label">Dicas</span>
-        </button>
-        <button class="nav-item" aria-label="Manas próximas" onclick="handleNavTap(this, 'manas-proximas')">
-            <span class="icon">📍</span>
-            <span class="label">Próximas</span>
-        </button>
-        <button class="nav-item" aria-label="Saúde e bem-estar" onclick="handleNavTap(this, 'saude')">
-            <span class="icon">💪</span>
-            <span class="label">Saúde</span>
-        </button>
-        <button class="nav-item" aria-label="Pontos e progresso" onclick="handleNavTap(this, 'progresso')">
-            <span class="icon">🎯</span>
-            <span class="label">Pontos</span>
-        </button>
-        <button class="nav-item" aria-label="Surftrips e Votações" onclick="handleNavTap(this, 'trips')">
-            <span class="icon">🌊</span>
-            <span class="label">Trips</span>
-        </button>
-        <button class="nav-item" aria-label="Utilitários do surf" onclick="handleNavTap(this, 'utilities')">
-            <span class="icon">⚙️</span>
-            <span class="label">Mais</span>
-        </button>
-        <button class="nav-item" aria-label="Manas e comunidade" onclick="handleNavTap(this, 'manas')">
-            <span class="icon">💬</span>
-            <span class="label">Manas</span>
-        </button>
-        <button class="nav-item" aria-label="Loja e ofertas" onclick="handleNavTap(this, 'loja')">
-            <span class="icon">🛒</span>
-            <span class="label">Loja</span>
-        </button>
-        <button class="nav-item" aria-label="Marcas e ofertas" onclick="handleNavTap(this, 'brandhub')">
-            <span class="icon">🏢</span>
-            <span class="label">Marcas</span>
-        </button>
-        <button class="nav-item" aria-label="Minhas conquistas" onclick="handleNavTap(this, 'badges')">
-            <span class="icon">🏆</span>
-            <span class="label">Badges</span>
-        </button>
-    </div>
-
     <!-- Hidden sections for compatibility -->
         <!-- Parceiros - Cadastro -->
     <div class="section" id="parceiros" style="display:block;">
@@ -2973,5 +2900,12 @@ document.addEventListener('keydown', function(e){
             <p style="margin-top: 24px; padding-top: 16px; border-top: 1px solid rgba(255,255,255,0.15); opacity: 0.6; text-align: center;">© 2026 ASF – Associação de Surf Feminino. Feito com 🌊 por mulheres que surfam.</p>
         </div>
     </footer>
+
+<script>
+function toggleAsfMenu(){var m=document.getElementById('asf-menu');var b=document.getElementById('asf-menu-toggle');if(!m)return;var open=m.classList.toggle('open');if(b)b.setAttribute('aria-expanded',open?'true':'false');}
+function asfMenuGo(){var m=document.getElementById('asf-menu');var b=document.getElementById('asf-menu-toggle');if(m)m.classList.remove('open');if(b)b.setAttribute('aria-expanded','false');}
+document.addEventListener('click',function(e){var m=document.getElementById('asf-menu');if(!m||!m.classList.contains('open'))return;if(!e.target.closest('.apps-dropdown'))asfMenuGo();});
+document.addEventListener('keydown',function(e){if(e.key==='Escape')asfMenuGo();});
+</script>
 </body>
 </html>
