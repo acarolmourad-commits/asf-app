@@ -142,8 +142,28 @@ function showQ(){
     return '<button class="qopt" onclick="ans(this,'+j+')">'+o+'</button>';
   }).join('');
 }
+function recordAnswer(qtext,ok){
+  try{
+    var h=JSON.parse(localStorage.getItem('asf-quiz-history')||'[]');
+    h.unshift({question:qtext,correct:ok,date:new Date().toISOString().slice(0,10)});
+    localStorage.setItem('asf-quiz-history',JSON.stringify(h.slice(0,100)));
+  }catch(e){}
+}
+function bumpStreak(){
+  try{
+    var today=new Date().toISOString().slice(0,10);
+    var last=localStorage.getItem('asf-last-quiz-date');
+    var s=parseInt(localStorage.getItem('asf-quiz-streak')||'0');
+    if(last===today){return;}
+    var y=new Date(Date.now()-864e5).toISOString().slice(0,10);
+    s=(last===y)?s+1:1;
+    localStorage.setItem('asf-quiz-streak',String(s));
+    localStorage.setItem('asf-last-quiz-date',today);
+  }catch(e){}
+}
 function ans(btn,j){
   var x=LEVELS[cur].qs[qi];
+  recordAnswer(x.q, j===x.a);
   if(j===x.a){ btn.classList.add('certa'); document.getElementById('g-fb').textContent='✅ Certo!'; }
   else { btn.classList.add('errada'); document.getElementById('g-fb').textContent='❌ Resposta certa: '+x.o[x.a]; }
   var opts=document.getElementById('g-opts').querySelectorAll('button');
@@ -154,6 +174,7 @@ function ans(btn,j){
   },1400);
 }
 function finish(){
+  bumpStreak();
   var total=addPoints();
   var nu=Math.min(unlocked()+1, LEVELS.length+1);
   localStorage.setItem(KEY, nu);
