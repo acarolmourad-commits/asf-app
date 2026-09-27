@@ -23,8 +23,7 @@
       { ico: '📈', t: 'Evoluir', s: 'Progresso', act: go('progresso') },
       { ico: '💬', t: 'Voltar', s: 'Comunidade', act: go('comunidade') }
     ];
-    var logo = '<span class="asf-journey-logo"><img src="assets/images/asf-logo-breadcrumb.png" alt="ASF" width="34" height="34"><span>ASF</span></span>';
-    var html = '<nav class="asf-journey" aria-label="Jornada ASF">' + logo + steps.map(function (x) {
+    var html = '<nav class="asf-journey" aria-label="Jornada ASF">' + steps.map(function (x) {
       return x.href
         ? '<a href="' + x.href + '"><span class="j-ico">' + x.ico + '</span><span class="j-step">' + x.t + '</span><span>' + x.s + '</span></a>'
         : '<a href="#" onclick="' + x.act + '"><span class="j-ico">' + x.ico + '</span><span class="j-step">' + x.t + '</span><span>' + x.s + '</span></a>';
