@@ -1,18 +1,13 @@
 {
-  "date": "2026-09-26T20:17:03.189275+00:00",
-  "total": 74,
-  "ok": 63,
-  "skipped": 11,
+  "date": "2026-09-27T02:10:18.008459+00:00",
+  "total": 78,
+  "ok": 68,
+  "skipped": 10,
   "broken_count": 0,
   "broken": [],
   "results": [
     {
       "url": "https://acarolmourad-commits.github.io/asf-app/",
-      "status": "ok",
-      "http": 200
-    },
-    {
-      "url": "https://acarolmourad-commits.github.io/asf-bemestar/",
       "status": "ok",
       "http": 200
     },
@@ -57,7 +52,22 @@
       "http": 200
     },
     {
+      "url": "https://acarolmourad-commits.github.io/asf-previsao/",
+      "status": "ok",
+      "http": 200
+    },
+    {
       "url": "https://acarolmourad-commits.github.io/asf-quiz/",
+      "status": "ok",
+      "http": 200
+    },
+    {
+      "url": "https://acarolmourad-commits.github.io/asf-ranking/",
+      "status": "ok",
+      "http": 200
+    },
+    {
+      "url": "https://acarolmourad-commits.github.io/asf-respira/",
       "status": "ok",
       "http": 200
     },
@@ -68,6 +78,21 @@
     },
     {
       "url": "https://acarolmourad-commits.github.io/asf-sonhos/",
+      "status": "ok",
+      "http": 200
+    },
+    {
+      "url": "https://acarolmourad-commits.github.io/asf-sos/",
+      "status": "ok",
+      "http": 200
+    },
+    {
+      "url": "https://acarolmourad-commits.github.io/asf-treino/",
+      "status": "ok",
+      "http": 200
+    },
+    {
+      "url": "https://acarolmourad-commits.github.io/asf-yoga/",
       "status": "ok",
       "http": 200
     },
@@ -92,16 +117,6 @@
       "http": 200
     },
     {
-      "url": "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=600&h=150&fit=crop",
-      "status": "ok",
-      "http": 200
-    },
-    {
-      "url": "https://images.unsplash.com/photo-1552196563-55cd4e45efb3?w=600&h=150&fit=crop",
-      "status": "ok",
-      "http": 200
-    },
-    {
       "url": "https://instagram.com/asf.surffeminino",
       "status": "skipped",
       "http": null
@@ -113,11 +128,6 @@
     },
     {
       "url": "https://wa.me",
-      "status": "skipped",
-      "http": null
-    },
-    {
-      "url": "https://wa.me/5511954346288",
       "status": "skipped",
       "http": null
     },
@@ -160,6 +170,12 @@
       "url": "https://www.tiktok.com/@Cahrol.asf",
       "status": "skipped",
       "http": null
+    },
+    {
+      "url": "./",
+      "status": "ok",
+      "http": 200,
+      "local": true
     },
     {
       "url": "app-posts.js",
@@ -223,6 +239,12 @@
     },
     {
       "url": "asf-ux.js",
+      "status": "ok",
+      "http": 200,
+      "local": true
+    },
+    {
+      "url": "assets/asf-logo-512.png",
       "status": "ok",
       "http": 200,
       "local": true
