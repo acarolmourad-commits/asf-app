@@ -1,0 +1,23 @@
+name: ASF Slim Home (one-shot)
+on:
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  slim:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Replace index.html with slim version
+        run: |
+          curl -fSL 'https://backend.composio.dev/api/v3/sl/9r-ytXtqTW' -o index_new.html
+          test -s index_new.html
+          head -c 15 index_new.html | grep -q '<!DOCTYPE html>'
+          mv index_new.html index.html
+      - name: Commit
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email 'github-actions[bot]@users.noreply.github.com'
+          git add index.html
+          git commit -m 'home: slim inline sections (praias, utilitarios, competicoes, mobilidade, saude) with links to satellite apps'
+          git push
