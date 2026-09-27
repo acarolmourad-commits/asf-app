@@ -431,48 +431,70 @@ t Section -->
     <!-- Loading Screen REMOVED -->
     <!-- Animated Background -->
     <div class="bg-animation"></div>
-    <!-- Header com menu único -->
+
     <header>
         <div class="header-content">
-            <a href="#" class="logo" onclick="showSection('dicas');asfMenuGo();return false" aria-label="ASF - voltar ao início" style="text-decoration:none;">
-                <span class="logo-icon" aria-hidden="true"></span>
+            <a class="logo" href="./" style="text-decoration:none;">
+                <img src="assets/asf-logo-512.png" alt="ASF" class="logo-icon" style="border-radius:50%;">
                 <span class="logo-text">ASF</span>
             </a>
-            <div class="apps-dropdown">
-                <button id="asf-menu-toggle" class="apps-dropdown-toggle" aria-haspopup="true" aria-expanded="false" aria-controls="asf-menu" onclick="toggleAsfMenu()" style="background:rgba(255,255,255,0.15);border:1px solid rgba(255,255,255,0.25);color:#fff;padding:10px 18px;border-radius:12px;font-size:15px;font-weight:600;cursor:pointer;">☰ Menu</button>
-                <div class="apps-dropdown-menu" id="asf-menu" role="menu" aria-label="Menu principal">
-          <button class="tab" role="menuitem" aria-controls="dicas" onclick="showSection('dicas');asfMenuGo()">📚 Dicas</button>
-          <button class="tab" role="menuitem" aria-controls="mobilidade" onclick="showSection('mobilidade');asfMenuGo()">🧘 Mobilidade</button>
-          <button class="tab" role="menuitem" aria-controls="lojas" onclick="showSection('lojas');asfMenuGo()">🛒 Lojas</button>
-          <button class="tab" role="menuitem" aria-controls="praias" onclick="showSection('praias');asfMenuGo()">🏖️ Praias</button>
-          <button class="tab" role="menuitem" aria-controls="surf-news" onclick="showSection('surf-news');asfMenuGo()">📰 News</button>
-          <button class="tab" role="menuitem" aria-controls="metas" onclick="showSection('metas');asfMenuGo()">🎯 Metas</button>
-          <button class="tab" role="menuitem" aria-controls="surf-culture" onclick="showSection('surf-culture');asfMenuGo()">🏛️ Cultura</button>
-          <button class="tab" role="menuitem" aria-controls="surf-conditions" onclick="location.href='previsao-surf/';asfMenuGo()">🌊 Ondas</button>
-          <button class="tab" role="menuitem" aria-controls="desafios" onclick="showSection('desafios');asfMenuGo()">🏆 Desafios</button>
-          <button class="tab" role="menuitem" aria-controls="surfer-profile" onclick="showSection('surfer-profile');asfMenuGo()">🏄 Perfil</button>
-          <button class="tab" role="menuitem" aria-controls="trips" onclick="location.href='surf-trip/';asfMenuGo()">🚗 Surftrips</button>
-          <button class="tab" role="menuitem" aria-controls="utilities" onclick="showSection('utilities');asfMenuGo()">🌊 Utilitários</button>
-          <button class="tab" role="menuitem" aria-controls="comunidade" onclick="showSection('comunidade');asfMenuGo()">👥 Comunidade</button>
-          <button class="tab" role="menuitem" aria-controls="sessoes" onclick="window.location.href='sessoes-interativas.html';asfMenuGo()">💬 Sessões</button>
-          <button class="tab" role="menuitem" aria-controls="competicoes" onclick="showSection('competicoes');asfMenuGo()">🏆 Competições</button>
-          <button class="tab" role="menuitem" aria-controls="quiz" onclick="location.href='quiz/';asfMenuGo()">🧠 Quiz</button>
-          <button class="tab" role="menuitem" aria-controls="assinantes" onclick="showSection('assinantes');asfMenuGo()">🌟 Destaques</button>
-          <button class="tab" role="menuitem" aria-controls="premium" onclick="showSection('premium');asfMenuGo()">⭐ Guias</button>
-          <button class="tab" role="menuitem" aria-controls="eventos" onclick="showSection('eventos');asfMenuGo()">📅 Eventos</button>
-          <button class="tab" role="menuitem" aria-controls="assistente" onclick="showSection('assistente');asfMenuGo()">🤖 Assistente</button>
-          <button class="tab" role="menuitem" aria-controls="conteudo" onclick="showSection('conteudo');asfMenuGo()">📖 Conteúdo</button>
-          <button class="tab" role="menuitem" aria-controls="carteirinha" onclick="showSection('carteirinha');ASF_CARD.init();asfMenuGo()">🪪 Carteirinha</button>
-          <button class="tab" role="menuitem" aria-controls="seguranca" onclick="showSection('seguranca');asfMenuGo()">🚺 Segurança</button>
-          <button class="tab" role="menuitem" aria-controls="manas-proximas" onclick="showSection('manas-proximas');asfMenuGo()">📍 Manas Próximas</button>
-          <button class="tab" role="menuitem" aria-controls="saude" onclick="showSection('saude');asfMenuGo()">💪 Saúde</button>
-          <button class="tab" role="menuitem" aria-controls="progresso" onclick="showSection('progresso');asfMenuGo()">🎯 Pontos</button>
-          <button class="tab" role="menuitem" aria-controls="manas" onclick="showSection('manas');asfMenuGo()">💬 Manas</button>
-          <button class="tab" role="menuitem" aria-controls="brandhub" onclick="showSection('brandhub');asfMenuGo()">🏢 Marcas</button>
-                </div>
+            <div class="header-actions">
+                <button class="icon-btn" id="menu-toggle" aria-label="Abrir menu" aria-expanded="false" aria-controls="header-menu" onclick="toggleMenu(event)">☰</button>
             </div>
         </div>
+        <nav id="header-menu" role="menu" aria-label="Menu principal">
+        <button class="menu-item" role="menuitem" onclick="showSection('dicas');closeMenu()"><span>📚</span> Dicas</button>
+        <button class="menu-item" role="menuitem" onclick="showSection('mobilidade');closeMenu()"><span>🧘</span> Mobilidade</button>
+        <button class="menu-item" role="menuitem" onclick="showSection('lojas');closeMenu()"><span>🛒</span> Lojas</button>
+        <button class="menu-item" role="menuitem" onclick="showSection('praias');closeMenu()"><span>🏖️</span> Praias</button>
+        <button class="menu-item" role="menuitem" onclick="showSection('surf-news');closeMenu()"><span>📰</span> News</button>
+        <button class="menu-item" role="menuitem" onclick="showSection('metas');closeMenu()"><span>🎯</span> Metas</button>
+        <button class="menu-item" role="menuitem" onclick="showSection('surf-culture');closeMenu()"><span>🏛️</span> Cultura</button>
+        <button class="menu-item" role="menuitem" onclick="location.href='previsao-surf/';closeMenu()"><span>🌊</span> Ondas</button>
+        <button class="menu-item" role="menuitem" onclick="showSection('desafios');closeMenu()"><span>🏆</span> Desafios</button>
+        <button class="menu-item" role="menuitem" onclick="showSection('surfer-profile');closeMenu()"><span>🏄</span> Perfil</button>
+        <button class="menu-item" role="menuitem" onclick="location.href='surf-trip/';closeMenu()"><span>🚗</span> Surftrips</button>
+        <button class="menu-item" role="menuitem" onclick="showSection('utilities');closeMenu()"><span>🌊</span> Utilitários</button>
+        <button class="menu-item" role="menuitem" onclick="showSection('comunidade');closeMenu()"><span>👥</span> Comunidade</button>
+        <button class="menu-item" role="menuitem" onclick="window.location.href='sessoes-interativas.html';closeMenu()"><span>💬</span> Sessões</button>
+        <button class="menu-item" role="menuitem" onclick="showSection('competicoes');closeMenu()"><span>🏆</span> Competições</button>
+        <button class="menu-item" role="menuitem" onclick="location.href='quiz/';closeMenu()"><span>🧠</span> Quiz</button>
+        <button class="menu-item" role="menuitem" onclick="showSection('assinantes');closeMenu()"><span>🌟</span> Destaques</button>
+        <button class="menu-item" role="menuitem" onclick="showSection('premium');closeMenu()"><span>⭐</span> Guias</button>
+        <button class="menu-item" role="menuitem" onclick="showSection('eventos');closeMenu()"><span>📅</span> Eventos</button>
+        <button class="menu-item" role="menuitem" onclick="showSection('assistente');closeMenu()"><span>🤖</span> Assistente</button>
+        <button class="menu-item" role="menuitem" onclick="showSection('conteudo');closeMenu()"><span>📖</span> Conteúdo</button>
+        <button class="menu-item" role="menuitem" onclick="showSection('carteirinha');ASF_CARD.init();closeMenu()"><span>🪪</span> Carteirinha</button>
+        <button class="menu-item" role="menuitem" onclick="showSection('seguranca');closeMenu()"><span>🚺</span> Segurança</button>
+        </nav>
     </header>
+    <style>
+        #header-menu { display:none; position:absolute; top:100%; right:12px; z-index:1000; background:var(--white,#fff); border-radius:14px; box-shadow:0 12px 32px rgba(14,36,57,.25); padding:8px; min-width:230px; max-height:70vh; overflow-y:auto; border:1px solid rgba(14,36,57,.08); }
+        #header-menu.open { display:block; }
+        #header-menu .menu-item { display:flex; align-items:center; gap:10px; width:100%; padding:11px 12px; margin:0; border:none; background:transparent; border-radius:10px; font-size:14px; font-weight:500; color:var(--secondary,#0E2439); cursor:pointer; text-align:left; white-space:nowrap; }
+        #header-menu .menu-item:hover, #header-menu .menu-item:focus { background:rgba(0,168,204,.1); color:var(--primary,#00A8CC); outline:none; }
+        [data-theme="dark"] #header-menu { background:#1E2128; border-color:#333A47; }
+        [data-theme="dark"] #header-menu .menu-item { color:#E8ECF0; }
+        @media(max-width:480px){ #header-menu { position:fixed; left:12px; right:12px; top:76px; min-width:0; } }
+    </style>
+    <script>
+    function toggleMenu(e) {
+        e.stopPropagation();
+        var m = document.getElementById('header-menu');
+        var open = m.classList.toggle('open');
+        document.getElementById('menu-toggle').setAttribute('aria-expanded', open ? 'true' : 'false');
+        document.getElementById('menu-toggle').textContent = open ? '✕' : '☰';
+    }
+    function closeMenu() {
+        var m = document.getElementById('header-menu');
+        if (m && m.classList.contains('open')) toggleMenu(new Event('click'));
+    }
+    document.addEventListener('click', function(e) {
+        var m = document.getElementById('header-menu');
+        if (m && m.classList.contains('open') && !m.contains(e.target) && e.target.id !== 'menu-toggle') closeMenu();
+    });
+    document.addEventListener('keydown', function(e) { if (e.key === 'Escape') closeMenu(); });
+    </script>
 
 
     <!-- Cookie Consent Banner (LGPD) -->
@@ -668,7 +690,6 @@ t Section -->
         <div id="brand-home-cta" style="text-align:center;margin-top:12px"></div>
     </div>
 
-    <!-- Navigation Tabs -->
     
 
     <div id="welcome-card" style="padding: 20px; display: none !important;">
@@ -2313,6 +2334,8 @@ t Section -->
         <p style="font-size: 11px; color: #999; margin-top: 12px; text-align: center;">🌊 Juntas, surfando mais forte!</p>
     </div>
 
+    
+
     <!-- Hidden sections for compatibility -->
         <!-- Parceiros - Cadastro -->
     <div class="section" id="parceiros" style="display:block;">
@@ -2900,12 +2923,5 @@ document.addEventListener('keydown', function(e){
             <p style="margin-top: 24px; padding-top: 16px; border-top: 1px solid rgba(255,255,255,0.15); opacity: 0.6; text-align: center;">© 2026 ASF – Associação de Surf Feminino. Feito com 🌊 por mulheres que surfam.</p>
         </div>
     </footer>
-
-<script>
-function toggleAsfMenu(){var m=document.getElementById('asf-menu');var b=document.getElementById('asf-menu-toggle');if(!m)return;var open=m.classList.toggle('open');if(b)b.setAttribute('aria-expanded',open?'true':'false');}
-function asfMenuGo(){var m=document.getElementById('asf-menu');var b=document.getElementById('asf-menu-toggle');if(m)m.classList.remove('open');if(b)b.setAttribute('aria-expanded','false');}
-document.addEventListener('click',function(e){var m=document.getElementById('asf-menu');if(!m||!m.classList.contains('open'))return;if(!e.target.closest('.apps-dropdown'))asfMenuGo();});
-document.addEventListener('keydown',function(e){if(e.key==='Escape')asfMenuGo();});
-</script>
 </body>
 </html>
