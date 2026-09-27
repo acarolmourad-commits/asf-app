@@ -11,27 +11,6 @@
 
   /* ---------- FASE 1 ---------- */
 
-  function journey() {
-    var home = document.getElementById('dicas');
-    if (!home || home.querySelector('.asf-journey')) return;
-    var steps = [
-      { ico: '🏖️', t: 'Encontrar', s: 'Praias', act: go('praias') },
-      { ico: '🌊', t: 'Explorar', s: 'Mar e clima', href: 'previsao-surf/' },
-      { ico: '📚', t: 'Aprender', s: 'Guias', href: 'aprender/' },
-      { ico: '🏄', t: 'Surfar', s: 'Eventos', act: go('eventos') },
-      { ico: '✍️', t: 'Registrar', s: 'Diario', href: 'diario/' },
-      { ico: '📈', t: 'Evoluir', s: 'Progresso', act: go('progresso') },
-      { ico: '💬', t: 'Voltar', s: 'Comunidade', act: go('comunidade') }
-    ];
-    var html = '<nav class="asf-journey" aria-label="Jornada ASF">' + steps.map(function (x) {
-      return x.href
-        ? '<a href="' + x.href + '"><span class="j-ico">' + x.ico + '</span><span class="j-step">' + x.t + '</span><span>' + x.s + '</span></a>'
-        : '<a href="#" onclick="' + x.act + '"><span class="j-ico">' + x.ico + '</span><span class="j-step">' + x.t + '</span><span>' + x.s + '</span></a>';
-    }).join('') + '</nav>';
-    var header = home.querySelector('.section-header');
-    (header && header.nextSibling) ? home.insertBefore(el(html), header.nextSibling) : home.insertBefore(el(html), home.firstChild);
-  }
-
   function demoLabels() {
     ['manas', 'manas-proximas'].forEach(function (id) {
       var sec = document.getElementById(id);
@@ -92,8 +71,7 @@
       + '<a href="previsao-surf/"><span class="q-ico">🌊</span><span>Previsao do mar<small>Ondas, vento e UV</small></span></a>'
       + '<button type="button" onclick="showSection(\'progresso\')"><span class="q-ico">📈</span><span>Meu progresso<small>Pontos e evolucao</small></span></button>'
       + '</div>';
-    var j = home.querySelector('.asf-journey');
-    j ? j.parentNode.insertBefore(el(html), j.nextSibling) : home.insertBefore(el(html), home.firstChild);
+    home.insertBefore(el(html), home.firstChild);
   }
 
   var SUBTITLES = {
@@ -203,9 +181,9 @@
 
   /* ---------- init ---------- */
   ready(function () {
-    try { journey(); quickActions(); subtitles(); demoLabels(); related(); sources(); idCard(); weeklyChallenge(); } catch (e) { console.error('asf-ux:', e); }
+    try { quickActions(); subtitles(); demoLabels(); related(); sources(); idCard(); weeklyChallenge(); } catch (e) { console.error('asf-ux:', e); }
   });
 })();
 
-/* ASF redesign navigation enhancements (fixed 2026-09-27: skip nav injection when breadcrumb nav.top or site header exists; no longer appends links into breadcrumbs) */
+/* ASF redesign navigation enhancements: skip nav injection when site header exists */
 (function(){'use strict';function ready(fn){document.readyState==='loading'?document.addEventListener('DOMContentLoaded',fn):fn()}ready(function(){var main=document.querySelector('main')||document.querySelector('.content')||document.body;if(main&&!document.querySelector('.asf-skip-link')){var skip=document.createElement('a');skip.className='asf-skip-link';skip.href='#asf-main';skip.textContent='Pular para o conteúdo';document.body.prepend(skip);if(!main.id)main.id='asf-main'}var bottom=document.querySelector('.bottom-nav');if(bottom&&!bottom.dataset.asfOverflow){bottom.dataset.asfOverflow='1';var items=[].slice.call(bottom.querySelectorAll(':scope > .nav-item'));if(items.length>6){var more=document.createElement('button');more.type='button';more.className='nav-item asf-more-toggle';more.setAttribute('aria-label','Abrir menu completo');more.setAttribute('aria-expanded','false');more.innerHTML='<span class="icon">☰</span><span class="label">Mais</span>';var menu=document.createElement('div');menu.className='asf-more-menu';menu.setAttribute('aria-label','Mais seções');items.slice(5).forEach(function(item){menu.appendChild(item)});bottom.appendChild(more);document.body.appendChild(menu);more.addEventListener('click',function(){var open=menu.classList.toggle('open');more.setAttribute('aria-expanded',open?'true':'false')});menu.addEventListener('click',function(e){if(e.target.closest('.nav-item')){menu.classList.remove('open');more.setAttribute('aria-expanded','false')}});document.addEventListener('click',function(e){if(!menu.contains(e.target)&&!more.contains(e.target)){menu.classList.remove('open');more.setAttribute('aria-expanded','false')}})}}});})();
