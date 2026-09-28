@@ -129,11 +129,23 @@ window.SurfCalculator = SurfCalculator;
   btn.style.cssText = 'position:fixed;bottom:16px;left:16px;z-index:99998;background:#0a4d68;color:#fff;border:none;border-radius:999px;padding:10px 16px;font-weight:700;cursor:pointer;box-shadow:0 4px 12px rgba(0,0,0,.3);';
   var panel = document.createElement('div');
   panel.id = 'asf-sat-nav-panel';
+  var satStyle = document.createElement('style');
+  satStyle.textContent = '@media (max-width:520px){#asf-sat-nav-panel{left:16px !important;right:16px;max-width:none !important;}} #asf-sat-nav-panel a:focus-visible{outline:2px solid #00A8CC;outline-offset:1px;}';
+  document.head.appendChild(satStyle);
   panel.style.cssText = 'position:fixed;bottom:64px;left:16px;z-index:99999;background:#fff;border-radius:12px;padding:12px;box-shadow:0 8px 24px rgba(0,0,0,.25);display:none;max-width:min(260px,calc(100vw - 32px));max-height:calc(100dvh - 140px);overflow-y:auto;-webkit-overflow-scrolling:touch;overscroll-behavior:contain;';
-  panel.innerHTML = '<b style="color:#0a4d68;font-size:13px;">Sites da Rede ASF</b><br>' + sites.map(function(s){
+  panel.innerHTML = '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px;"><b style="color:#0a4d68;font-size:13px;">Sites da Rede ASF</b><button type="button" aria-label="Fechar menu" style="background:none;border:none;font-size:16px;cursor:pointer;color:#0a4d68;padding:2px 6px;" onclick="document.getElementById(\'asf-sat-nav-backdrop\').click();">\u2715</button></div>' + sites.map(function(s){
     return '<a href="https://acarolmourad-commits.github.io/' + s[1] + '/" style="display:inline-block;margin:4px 4px 0 0;padding:5px 10px;border:1px solid #088395;border-radius:999px;color:#0a4d68;text-decoration:none;font-size:12px;font-weight:600;">' + s[0] + '</a>';
   }).join('');
-  btn.onclick = function(){ panel.style.display = panel.style.display === 'none' ? 'block' : 'none'; };
+  var backdrop = document.createElement('div');
+  backdrop.id = 'asf-sat-nav-backdrop';
+  backdrop.style.cssText = 'position:fixed;top:0;left:0;right:0;bottom:0;z-index:99997;background:rgba(14,36,57,0.45);display:none;';
+  function closePanel(){ panel.style.display = 'none'; backdrop.style.display = 'none'; }
+  function openPanel(){ panel.style.display = 'block'; backdrop.style.display = 'block'; }
+  btn.onclick = function(e){ e.stopPropagation(); if (panel.style.display === 'none' || !panel.style.display) { openPanel(); } else { closePanel(); } };
+  backdrop.onclick = function(){ closePanel(); };
+  panel.addEventListener('click', function(e){ if (e.target && e.target.tagName === 'A') closePanel(); });
+  document.addEventListener('keydown', function(e){ if (e.key === 'Escape') closePanel(); });
+  document.body.appendChild(backdrop);
   document.body.appendChild(btn);
   document.body.appendChild(panel);
 })();
