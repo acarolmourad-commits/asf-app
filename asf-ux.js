@@ -278,8 +278,8 @@
       var id = sec.id;
       var titleEl = sec.querySelector('.section-title, h2, h3');
       var title = titleEl ? titleEl.textContent.trim() : id;
-      var iconMatch = title.match(/^(\p{Extended_Pictographic}|\S{1,2})\s/u);
-      var icon = iconMatch ? iconMatch[1] : '🔎';
+      var firstToken = title.split(/\s+/)[0] || '';
+      var icon = /^[\w\d]/.test(firstToken) ? '🔎' : (firstToken || '🔎');
       // itens de lista/cards dentro da secao viram entradas individuais
       var entries = sec.querySelectorAll('li, .card, .dica-card, h3, h4');
       if (entries.length) {
