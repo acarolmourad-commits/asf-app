@@ -17,7 +17,7 @@ header{padding:6px 16px}
 .asf-related p{margin:0 0 8px;font-size:11px;font-weight:700;color:#0a7aa8;text-transform:uppercase;letter-spacing:.5px}
 .asf-related .rel-links{display:flex;flex-wrap:wrap;gap:8px}
 .asf-related button,.asf-related a{background:#fff;border:1.5px solid #00A8CC;color:#0a7aa8;font-size:12px;font-weight:600;padding:7px 12px;border-radius:20px;cursor:pointer;text-decoration:none}
-.asf-related button:hover,.asf-related a:hover{background:#00A8CC;color:#fff}
+.asf-related button:hover,.asf-related a:hover,.asf-related a:hover{background:#00A8CC;color:#fff}
 
 /* Nota de fonte de dados */
 .asf-source{font-size:10px;color:#8a94a6;margin-top:6px;display:block}
@@ -53,3 +53,23 @@ header{padding:6px 16px}
 .asf-challenge .ch-done{background:#27AE60;color:#fff;font-size:12px;font-weight:700;padding:6px 12px;border-radius:20px}
 
 @media (prefers-reduced-motion:reduce){.asf-quick a,.asf-quick button{transition:none}}
+
+/* FASE 6 — Polish visual (28/09/2026, revisao visual via browser) — camada aditiva */
+
+/* 1) Busca: remove sticky que flutuava sobre o conteudo e criava vazio visual */
+.search-container{position:static;box-shadow:0 1px 0 rgba(14,36,57,.06)}
+
+/* 2) Guias Completos: respiro nos cards (paredes de texto) */
+#premium div[style*="border-radius"]{padding:24px !important}
+#premium p,#premium li{line-height:1.6}
+#premium p+p{margin-top:8px}
+
+/* 3) Painel do chatbot nao cobre mais o FAB (+) */
+#chatbot-panel{bottom:160px !important;box-shadow:0 10px 40px rgba(0,0,0,.2)}
+
+/* 4) 'Continue sua jornada' mais presente */
+.asf-related{background:linear-gradient(135deg,#F4FBFD,#E8F6F9);box-shadow:0 2px 10px rgba(14,36,57,.05)}
+.asf-related p{font-size:12px}
+
+/* 5) Header sticky nao cobre o topo das secoes em rolagens nativas */
+.section{scroll-margin-top:80px}
