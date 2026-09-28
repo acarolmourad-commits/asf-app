@@ -317,3 +317,60 @@
 
   ready(buildSearchIndex);
 })();
+
+
+/* ---------- FASE 7.1c — Busca: bypass do TDZ (28/09/2026) ----------
+   js/home-conquistas.js chama updateNotificationBadge() no top-level ANTES de
+   js/home-main.js definir a funcao -> o script morre na linha 68 e as declaracoes
+   top-level `const normalizedSearchIndex` e `let _searchTimer` ficam em TDZ para
+   sempre. Como const/let top-level criam bindings lexicos globais, eles fazem
+   shadow de window.* e QUALQUER referencia bare (dentro de handleSearch etc.)
+   lanca ReferenceError. Solucao: sobrescrever as FUNCOES (bindings de window,
+   reatribuiveis) para usar window.normalizedSearchIndex explicitamente. */
+(function () {
+  function norm(s) {
+    return (s || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+  }
+
+  window.handleSearch = function (query) {
+    var resultsDiv = document.getElementById('searchResults');
+    var clearBtn = document.getElementById('searchClear');
+    if (!resultsDiv) return;
+
+    if (!query || query.length < 2) {
+      resultsDiv.classList.remove('active');
+      if (clearBtn) clearBtn.style.display = 'none';
+      return;
+    }
+
+    if (clearBtn) clearBtn.style.display = 'block';
+    var q = norm(query);
+    var index = window.normalizedSearchIndex || [];
+    var results = index.filter(function (item) {
+      return item._titleNorm.indexOf(q) !== -1 || item._textNorm.indexOf(q) !== -1 || item._sectionNorm.indexOf(q) !== -1;
+    }).slice(0, 8);
+
+    if (results.length === 0) {
+      resultsDiv.innerHTML = '<div class="search-no-results"><span class="emoji">\ud83c\udfc4\u200d\u2640\ufe0f</span>Nenhum resultado para "' + query + '"<br><small>Tente outro termo</small></div>';
+    } else {
+      resultsDiv.innerHTML = results.map(function (item) {
+        var preview = item.text.length > 80 ? item.text.substring(0, 80) + '...' : item.text;
+        var highlighted = preview.replace(new RegExp('(' + query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + ')', 'gi'), '<mark>$1</mark>');
+        return '<div class="search-result-item" onclick="goToSection(\'' + item.sectionId + '\', this)">' +
+          '<div class="result-title">' + item.icon + ' ' + item.title + '</div>' +
+          '<div class="result-section">' + item.section + '</div>' +
+          '<div class="result-preview">' + highlighted + '</div></div>';
+      }).join('');
+    }
+
+    resultsDiv.classList.add('active');
+    if (query.length >= 3 && typeof window.saveRecentSearch === 'function') {
+      try { window.saveRecentSearch(query); } catch (e) {}
+    }
+  };
+
+  window.debouncedSearch = function (q) {
+    clearTimeout(window._searchTimer);
+    window._searchTimer = setTimeout(function () { window.handleSearch(q); }, 150);
+  };
+})();
