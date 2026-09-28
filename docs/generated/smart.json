@@ -1,5 +1,5 @@
 {
-  "date": "2026-09-27",
+  "date": "2026-09-28",
   "new_tip": {
     "category": "Equipamento",
     "title": "Qual leash escolher",
@@ -16,15 +16,15 @@
   },
   "improvements": [
     {
-      "type": "content",
-      "title": "Mais dicas técnicas avançadas",
-      "priority": "high"
-    },
-    {
       "type": "feature",
       "title": "Medidor de condições do mar",
       "priority": "high"
+    },
+    {
+      "type": "content",
+      "title": "Mais dicas técnicas avançadas",
+      "priority": "high"
     }
   ],
-  "generated_at": "2026-09-27T20:31:14.394546"
+  "generated_at": "2026-09-28T02:14:57.979513"
 }
