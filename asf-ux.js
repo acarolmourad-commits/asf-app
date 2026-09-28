@@ -188,7 +188,7 @@
 /* ASF redesign navigation enhancements: skip nav injection when site header exists */
 (function(){'use strict';function ready(fn){document.readyState==='loading'?document.addEventListener('DOMContentLoaded',fn):fn()}ready(function(){var main=document.querySelector('main')||document.querySelector('.content')||document.body;if(main&&!document.querySelector('.asf-skip-link')){var skip=document.createElement('a');skip.className='asf-skip-link';skip.href='#asf-main';skip.textContent='Pular para o conteúdo';document.body.prepend(skip);if(!main.id)main.id='asf-main'}var bottom=document.querySelector('.bottom-nav');if(bottom&&!bottom.dataset.asfOverflow){bottom.dataset.asfOverflow='1';var items=[].slice.call(bottom.querySelectorAll(':scope > .nav-item'));if(items.length>6){var more=document.createElement('button');more.type='button';more.className='nav-item asf-more-toggle';more.setAttribute('aria-label','Abrir menu completo');more.setAttribute('aria-expanded','false');more.innerHTML='<span class="icon">☰</span><span class="label">Mais</span>';var menu=document.createElement('div');menu.className='asf-more-menu';menu.setAttribute('aria-label','Mais seções');items.slice(5).forEach(function(item){menu.appendChild(item)});bottom.appendChild(more);document.body.appendChild(menu);more.addEventListener('click',function(){var open=menu.classList.toggle('open');more.setAttribute('aria-expanded',open?'true':'false')});menu.addEventListener('click',function(e){if(e.target.closest('.nav-item')){menu.classList.remove('open');more.setAttribute('aria-expanded','false')}});document.addEventListener('click',function(e){if(!menu.contains(e.target)&&!more.contains(e.target)){menu.classList.remove('open');more.setAttribute('aria-expanded','false')}})}}});})();
 
-/* ---------- FASE 5 — Menu principal auto-contido + header sem logo (28/09/2026) ----------
+/* ---------- FASE 5.1 — Menu principal auto-contido + header sem logo (28/09/2026) ----------
    Motivo: o menu da home dependia de showSection() do app.js (defer, 132KB); se app.js
    falhasse/atrasasse, todos os cliques morriam silenciosamente ("menu morto").
    Aqui o menu fica auto-contido (fallback proprio) e a logo do header e removida,
@@ -196,24 +196,20 @@
 (function () {
   function ready(fn) { document.readyState !== 'loading' ? fn() : document.addEventListener('DOMContentLoaded', fn); }
 
-  function showSectionLocal(id) {
-    document.querySelectorAll('.section').forEach(function (s) {
-      s.classList.remove('active');
-      s.style.setProperty('display', 'none', 'important');
-    });
+  // Navega por ROLAGEM: nunca esconde secoes (combinado: conteudos nao sao modificados/ocultados).
+  window.asfNav = function (id) {
     var sec = document.getElementById(id);
     if (sec) {
       sec.classList.add('active');
-      sec.style.setProperty('display', 'block', 'important');
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+      sec.style.removeProperty('display');
+      if (window.getComputedStyle(sec).display === 'none') {
+        sec.style.setProperty('display', 'block', 'important');
+      }
+      var header = document.querySelector('header');
+      var offset = (header ? header.offsetHeight : 0) + 8;
+      var y = sec.getBoundingClientRect().top + (window.pageYOffset || 0) - offset;
+      window.scrollTo({ top: Math.max(0, y), behavior: 'smooth' });
     }
-  }
-
-  window.asfNav = function (id) {
-    try {
-      if (typeof window.showSection === 'function') window.showSection(id);
-      else showSectionLocal(id);
-    } catch (e) { showSectionLocal(id); }
     if (typeof window.closeMenu === 'function') { try { window.closeMenu(); } catch (e) {} }
     else { var m = document.getElementById('header-menu'); if (m) m.classList.remove('open'); }
   };
