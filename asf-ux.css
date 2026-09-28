@@ -57,7 +57,7 @@ header{padding:6px 16px}
 /* FASE 6 — Polish visual (28/09/2026, revisao visual via browser) — camada aditiva */
 
 /* 1) Busca: remove sticky que flutuava sobre o conteudo e criava vazio visual */
-.search-container{position:static;box-shadow:0 1px 0 rgba(14,36,57,.06)}
+.search-container{position:static !important;box-shadow:0 1px 0 rgba(14,36,57,.06)}
 
 /* 2) Guias Completos: respiro nos cards (paredes de texto) */
 #premium div[style*="border-radius"]{padding:24px !important}
