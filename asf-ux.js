@@ -256,3 +256,64 @@
   }
   ready(fixMenu);
 })();
+
+/* ---------- FASE 7.1 — Busca revive (28/09/2026) ----------
+   A barra de pesquisa estava morta: debouncedSearch/handleSearch (js/home-main.js)
+   dependem de _searchTimer, normalizedSearchIndex e showSection, que viviam no
+   app.js (nao carregado mais na home). Aqui definimos essas dependencias:
+   - _searchTimer: timer do debounce
+   - normalizedSearchIndex: indice construido do DOM (.section com id)
+   - showSection: shim de rolagem via asfNav (nunca esconde secoes) */
+(function () {
+  function ready(fn) { document.readyState !== 'loading' ? fn() : document.addEventListener('DOMContentLoaded', fn); }
+
+  function norm(s) {
+    return (s || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+  }
+
+  function buildSearchIndex() {
+    if (window.normalizedSearchIndex && window.normalizedSearchIndex.length) return; // ja existe
+    var items = [];
+    document.querySelectorAll('.section[id]').forEach(function (sec) {
+      var id = sec.id;
+      var titleEl = sec.querySelector('.section-title, h2, h3');
+      var title = titleEl ? titleEl.textContent.trim() : id;
+      var iconMatch = title.match(/^(\p{Extended_Pictographic}|\S{1,2})\s/u);
+      var icon = iconMatch ? iconMatch[1] : '🔎';
+      // itens de lista/cards dentro da secao viram entradas individuais
+      var entries = sec.querySelectorAll('li, .card, .dica-card, h3, h4');
+      if (entries.length) {
+        entries.forEach(function (el) {
+          var t = el.textContent.replace(/\s+/g, ' ').trim();
+          if (t.length < 4) return;
+          items.push({
+            sectionId: id, section: title, icon: icon,
+            title: t.length > 60 ? t.substring(0, 60) + '…' : t,
+            text: t,
+            _titleNorm: norm(t), _textNorm: norm(t), _sectionNorm: norm(title)
+          });
+        });
+      } else {
+        var t = sec.textContent.replace(/\s+/g, ' ').trim();
+        items.push({
+          sectionId: id, section: title, icon: icon, title: title,
+          text: t.substring(0, 200),
+          _titleNorm: norm(title), _textNorm: norm(t), _sectionNorm: norm(title)
+        });
+      }
+    });
+    window.normalizedSearchIndex = items;
+  }
+
+  // timer do debounce usado por debouncedSearch()
+  if (typeof window._searchTimer === 'undefined') window._searchTimer = null;
+
+  // shim de navegacao para goToSection() e handlers antigos
+  if (typeof window.showSection !== 'function') {
+    window.showSection = function (id) {
+      if (typeof window.asfNav === 'function') window.asfNav(id);
+    };
+  }
+
+  ready(buildSearchIndex);
+})();
