@@ -126,9 +126,10 @@ window.SurfCalculator = SurfCalculator;
   var btn = document.createElement('button');
   btn.id = 'asf-sat-nav';
   btn.textContent = '🌊 Rede ASF';
-  btn.style.cssText = 'position:fixed;bottom:16px;left:16px;z-index:99999;background:#0a4d68;color:#fff;border:none;border-radius:999px;padding:10px 16px;font-weight:700;cursor:pointer;box-shadow:0 4px 12px rgba(0,0,0,.3);';
+  btn.style.cssText = 'position:fixed;bottom:16px;left:16px;z-index:99998;background:#0a4d68;color:#fff;border:none;border-radius:999px;padding:10px 16px;font-weight:700;cursor:pointer;box-shadow:0 4px 12px rgba(0,0,0,.3);';
   var panel = document.createElement('div');
-  panel.style.cssText = 'position:fixed;bottom:64px;left:16px;z-index:99999;background:#fff;border-radius:12px;padding:12px;box-shadow:0 8px 24px rgba(0,0,0,.25);display:none;max-width:260px;';
+  panel.id = 'asf-sat-nav-panel';
+  panel.style.cssText = 'position:fixed;bottom:64px;left:16px;z-index:99999;background:#fff;border-radius:12px;padding:12px;box-shadow:0 8px 24px rgba(0,0,0,.25);display:none;max-width:min(260px,calc(100vw - 32px));max-height:calc(100dvh - 140px);overflow-y:auto;-webkit-overflow-scrolling:touch;overscroll-behavior:contain;';
   panel.innerHTML = '<b style="color:#0a4d68;font-size:13px;">Sites da Rede ASF</b><br>' + sites.map(function(s){
     return '<a href="https://acarolmourad-commits.github.io/' + s[1] + '/" style="display:inline-block;margin:4px 4px 0 0;padding:5px 10px;border:1px solid #088395;border-radius:999px;color:#0a4d68;text-decoration:none;font-size:12px;font-weight:600;">' + s[0] + '</a>';
   }).join('');
