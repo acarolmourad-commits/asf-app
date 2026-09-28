@@ -1,48 +1,9 @@
-/* ASF UX Overlay — camada ADITIVA. Nao sobrescreve nada existente. */
-
-/* Remove faixa de atalhos nao estilizada no topo da home (parecia breadcrumb quebrado no desktop) */
-.utilities-grid{display:none}
-
-/* Header mais compacto (home) */
-header{padding:6px 16px}
-.logo-icon{width:28px;height:28px}
-.logo-text{font-size:17px}
-.header-actions .icon-btn{width:36px;height:36px;border-radius:10px;font-size:16px}
-
-/* Selo de conteudo demonstrativo */
-.asf-demo-badge{display:inline-block;background:#FFF4D6;color:#8a6d00;border:1px solid #F0DFA0;font-size:11px;font-weight:600;padding:4px 10px;border-radius:20px;margin:4px 0}
-
-/* Faixa de conexoes entre secoes */
-.asf-related{margin:18px 20px;padding:14px;background:#F4FBFD;border:1px solid #DBF0F6;border-radius:14px}
-.asf-related p{margin:0 0 8px;font-size:11px;font-weight:700;color:#0a7aa8;text-transform:uppercase;letter-spacing:.5px}
-.asf-related .rel-links{display:flex;flex-wrap:wrap;gap:8px}
-.asf-related button,.asf-related a{background:#fff;border:1.5px solid #00A8CC;color:#0a7aa8;font-size:12px;font-weight:600;padding:7px 12px;border-radius:20px;cursor:pointer;text-decoration:none}
-.asf-related button:hover,.asf-related a:hover{background:#00A8CC;color:#fff}
-
-/* Nota de fonte de dados */
-.asf-source{font-size:10px;color:#8a94a6;margin-top:6px;display:block}
-
-/* FASE 2 — Acoes rapidas na Home */
-.asf-quick{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin:0 20px 18px}
-.asf-quick a,.asf-quick button{display:flex;align-items:center;gap:10px;background:#fff;border:1.5px solid #E0F2F7;border-radius:14px;padding:13px 14px;font-size:13px;font-weight:600;color:#0E2439;text-decoration:none;cursor:pointer;text-align:left;font-family:inherit}
-.asf-quick a:hover,.asf-quick button:hover{border-color:#00A8CC}
-.asf-quick .q-ico{font-size:24px}
-.asf-quick small{display:block;font-weight:400;color:#66707f;font-size:11px}
-
-/* FASE 2 — Micro-explicacoes nos cabecalhos de secao */
-.asf-subtitle{font-size:12px;color:#66707f;margin:2px 20px 10px;line-height:1.4}
-
-/* FASE 3 — Cartao de identidade na Carteirinha */
-.asf-idcard{margin:0 20px 16px;background:linear-gradient(135deg,#0E2439,#00A8CC);border-radius:16px;padding:16px;color:#fff}
-.asf-idcard h4{margin:0 0 2px;font-size:15px}
-.asf-idcard .id-level{font-size:12px;opacity:.9;margin-bottom:10px}
-.asf-idcard .id-stats{display:flex;gap:14px;flex-wrap:wrap}
-.asf-idcard .id-stat{background:rgba(255,255,255,.14);border-radius:10px;padding:8px 12px;text-align:center;min-width:64px}
-.asf-idcard .id-stat b{display:block;font-size:18px}
-.asf-idcard .id-stat span{font-size:10px;opacity:.85}
-
-/* FASE 4 — Desafio semanal */
-.asf-challenge{margin:0 20px 16px;background:linear-gradient(135deg,#9B59B6,#00A8CC);border-radius:16px;padding:16px;color:#fff}
+/* ASF UX - camada aditiva */
+.asf-quick{display:flex;flex-wrap:wrap;gap:10px;margin:12px 0}
+.asf-quick a,.asf-quick button{display:inline-flex;align-items:center;gap:8px;padding:10px 14px;border-radius:12px;border:1px solid rgba(14,36,57,.12);background:#fff;color:#0E2439;font-size:13px;font-weight:600;text-decoration:none;cursor:pointer;transition:transform .2s,box-shadow .2s}
+.asf-quick a:hover,.asf-quick button:hover{transform:translateY(-1px);box-shadow:0 4px 12px rgba(14,36,57,.12)}
+.asf-subtitle{font-size:13px;color:rgba(14,36,57,.6);margin:-6px 0 12px}
+.asf-challenge{background:linear-gradient(135deg,#0E2439,#00A8CC);color:#fff;border-radius:16px;padding:18px;margin:12px 0}
 .asf-challenge h4{margin:0 0 4px;font-size:15px}
 .asf-challenge .ch-desc{font-size:12px;opacity:.92;margin:0 0 10px}
 .asf-challenge .ch-bar{height:10px;background:rgba(255,255,255,.25);border-radius:6px;overflow:hidden;margin-bottom:8px}
@@ -73,3 +34,11 @@ header{padding:6px 16px}
 
 /* 5) Header sticky nao cobre o topo das secoes em rolagens nativas */
 .section{scroll-margin-top:80px}
+
+/* FASE 7 — Remove a barra fixa do topo; menu vira botao flutuante na home (28/09/2026, pedido do usuario) */
+header{position:static !important;height:0 !important;padding:0 !important;background:none !important;box-shadow:none !important;overflow:visible !important}
+header .header-content{padding:0 !important;height:0 !important;overflow:visible !important}
+header .logo{display:none !important}
+#menu-toggle{position:fixed !important;top:16px;right:16px;z-index:1001;width:48px;height:48px;border-radius:50%;background:linear-gradient(135deg,#0E2439,#00A8CC) !important;color:#fff !important;box-shadow:0 4px 16px rgba(14,36,57,.3);display:flex;align-items:center;justify-content:center}
+#header-menu{position:fixed !important;top:76px !important;right:16px !important}
+.section{scroll-margin-top:16px}
