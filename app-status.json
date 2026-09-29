@@ -1,0 +1,392 @@
+{
+  "summary": {
+    "github_io_ok": [
+      "asf-app",
+      "asf-vento",
+      "asf-previsao",
+      "asf-alerta",
+      "asf-praias",
+      "asf-mare",
+      "asf-goldenhour",
+      "asf-atlas",
+      "asf-leitura",
+      "asf-ponto",
+      "asf-mapa",
+      "asf-treino",
+      "asf-popup",
+      "asf-yoga",
+      "asf-manobras",
+      "asf-apnea",
+      "asf-respira",
+      "asf-volume",
+      "asf-bemestar",
+      "asf-mentorias",
+      "asf-mental",
+      "asf-sono",
+      "asf-nutricao",
+      "asf-inspiracao",
+      "asf-sonhos",
+      "asf-seguranca",
+      "asf-sos",
+      "asf-checklist",
+      "asf-mala",
+      "asf-comunidade",
+      "asf-parceiras",
+      "asf-carona",
+      "asf-galeria",
+      "asf-eventos",
+      "asf-ranking",
+      "asf-clube",
+      "asf-achados",
+      "asf-quiz",
+      "asf-desafio",
+      "asf-desafios",
+      "asf-memoria",
+      "asf-matematica",
+      "asf-glossario",
+      "asf-diario",
+      "asf-historia",
+      "asf-kids",
+      "asf-filmes",
+      "asf-podcast",
+      "asf-viagens",
+      "asf-eco",
+      "asf-equipamento",
+      "asf-loja",
+      "asf-patrocinio",
+      "asf-mercado"
+    ],
+    "asf_surf_ok": [],
+    "both_ok": [],
+    "gh_only": [
+      "asf-app",
+      "asf-vento",
+      "asf-previsao",
+      "asf-alerta",
+      "asf-praias",
+      "asf-mare",
+      "asf-goldenhour",
+      "asf-atlas",
+      "asf-leitura",
+      "asf-ponto",
+      "asf-mapa",
+      "asf-treino",
+      "asf-popup",
+      "asf-yoga",
+      "asf-manobras",
+      "asf-apnea",
+      "asf-respira",
+      "asf-volume",
+      "asf-bemestar",
+      "asf-mentorias",
+      "asf-mental",
+      "asf-sono",
+      "asf-nutricao",
+      "asf-inspiracao",
+      "asf-sonhos",
+      "asf-seguranca",
+      "asf-sos",
+      "asf-checklist",
+      "asf-mala",
+      "asf-comunidade",
+      "asf-parceiras",
+      "asf-carona",
+      "asf-galeria",
+      "asf-eventos",
+      "asf-ranking",
+      "asf-clube",
+      "asf-achados",
+      "asf-quiz",
+      "asf-desafio",
+      "asf-desafios",
+      "asf-memoria",
+      "asf-matematica",
+      "asf-glossario",
+      "asf-diario",
+      "asf-historia",
+      "asf-kids",
+      "asf-filmes",
+      "asf-podcast",
+      "asf-viagens",
+      "asf-eco",
+      "asf-equipamento",
+      "asf-loja",
+      "asf-patrocinio",
+      "asf-mercado"
+    ],
+    "surf_only": [],
+    "both_404": []
+  },
+  "details": [
+    {
+      "app": "asf-app",
+      "github_io": 200,
+      "asf_surf": "ERR_DOWN"
+    },
+    {
+      "app": "asf-vento",
+      "github_io": 200,
+      "asf_surf": "ERR_DOWN"
+    },
+    {
+      "app": "asf-previsao",
+      "github_io": 200,
+      "asf_surf": "ERR_DOWN"
+    },
+    {
+      "app": "asf-alerta",
+      "github_io": 200,
+      "asf_surf": "ERR_DOWN"
+    },
+    {
+      "app": "asf-praias",
+      "github_io": 200,
+      "asf_surf": "ERR_DOWN"
+    },
+    {
+      "app": "asf-mare",
+      "github_io": 200,
+      "asf_surf": "ERR_DOWN"
+    },
+    {
+      "app": "asf-goldenhour",
+      "github_io": 200,
+      "asf_surf": "ERR_DOWN"
+    },
+    {
+      "app": "asf-atlas",
+      "github_io": 200,
+      "asf_surf": "ERR_DOWN"
+    },
+    {
+      "app": "asf-leitura",
+      "github_io": 200,
+      "asf_surf": "ERR_DOWN"
+    },
+    {
+      "app": "asf-ponto",
+      "github_io": 200,
+      "asf_surf": "ERR_DOWN"
+    },
+    {
+      "app": "asf-mapa",
+      "github_io": 200,
+      "asf_surf": "ERR_DOWN"
+    },
+    {
+      "app": "asf-treino",
+      "github_io": 200,
+      "asf_surf": "ERR_DOWN"
+    },
+    {
+      "app": "asf-popup",
+      "github_io": 200,
+      "asf_surf": "ERR_DOWN"
+    },
+    {
+      "app": "asf-yoga",
+      "github_io": 200,
+      "asf_surf": "ERR_DOWN"
+    },
+    {
+      "app": "asf-manobras",
+      "github_io": 200,
+      "asf_surf": "ERR_DOWN"
+    },
+    {
+      "app": "asf-apnea",
+      "github_io": 200,
+      "asf_surf": "ERR_DOWN"
+    },
+    {
+      "app": "asf-respira",
+      "github_io": 200,
+      "asf_surf": "ERR_DOWN"
+    },
+    {
+      "app": "asf-volume",
+      "github_io": 200,
+      "asf_surf": "ERR_DOWN"
+    },
+    {
+      "app": "asf-bemestar",
+      "github_io": 200,
+      "asf_surf": "ERR_DOWN"
+    },
+    {
+      "app": "asf-mentorias",
+      "github_io": 200,
+      "asf_surf": "ERR_DOWN"
+    },
+    {
+      "app": "asf-mental",
+      "github_io": 200,
+      "asf_surf": "ERR_DOWN"
+    },
+    {
+      "app": "asf-sono",
+      "github_io": 200,
+      "asf_surf": "ERR_DOWN"
+    },
+    {
+      "app": "asf-nutricao",
+      "github_io": 200,
+      "asf_surf": "ERR_DOWN"
+    },
+    {
+      "app": "asf-inspiracao",
+      "github_io": 200,
+      "asf_surf": "ERR_DOWN"
+    },
+    {
+      "app": "asf-sonhos",
+      "github_io": 200,
+      "asf_surf": "ERR_DOWN"
+    },
+    {
+      "app": "asf-seguranca",
+      "github_io": 200,
+      "asf_surf": "ERR_DOWN"
+    },
+    {
+      "app": "asf-sos",
+      "github_io": 200,
+      "asf_surf": "ERR_DOWN"
+    },
+    {
+      "app": "asf-checklist",
+      "github_io": 200,
+      "asf_surf": "ERR_DOWN"
+    },
+    {
+      "app": "asf-mala",
+      "github_io": 200,
+      "asf_surf": "ERR_DOWN"
+    },
+    {
+      "app": "asf-comunidade",
+      "github_io": 200,
+      "asf_surf": "ERR_DOWN"
+    },
+    {
+      "app": "asf-parceiras",
+      "github_io": 200,
+      "asf_surf": "ERR_DOWN"
+    },
+    {
+      "app": "asf-carona",
+      "github_io": 200,
+      "asf_surf": "ERR_DOWN"
+    },
+    {
+      "app": "asf-galeria",
+      "github_io": 200,
+      "asf_surf": "ERR_DOWN"
+    },
+    {
+      "app": "asf-eventos",
+      "github_io": 200,
+      "asf_surf": "ERR_DOWN"
+    },
+    {
+      "app": "asf-ranking",
+      "github_io": 200,
+      "asf_surf": "ERR_DOWN"
+    },
+    {
+      "app": "asf-clube",
+      "github_io": 200,
+      "asf_surf": "ERR_DOWN"
+    },
+    {
+      "app": "asf-achados",
+      "github_io": 200,
+      "asf_surf": "ERR_DOWN"
+    },
+    {
+      "app": "asf-quiz",
+      "github_io": 200,
+      "asf_surf": "ERR_DOWN"
+    },
+    {
+      "app": "asf-desafio",
+      "github_io": 200,
+      "asf_surf": "ERR_DOWN"
+    },
+    {
+      "app": "asf-desafios",
+      "github_io": 200,
+      "asf_surf": "ERR_DOWN"
+    },
+    {
+      "app": "asf-memoria",
+      "github_io": 200,
+      "asf_surf": "ERR_DOWN"
+    },
+    {
+      "app": "asf-matematica",
+      "github_io": 200,
+      "asf_surf": "ERR_DOWN"
+    },
+    {
+      "app": "asf-glossario",
+      "github_io": 200,
+      "asf_surf": "ERR_DOWN"
+    },
+    {
+      "app": "asf-diario",
+      "github_io": 200,
+      "asf_surf": "ERR_DOWN"
+    },
+    {
+      "app": "asf-historia",
+      "github_io": 200,
+      "asf_surf": "ERR_DOWN"
+    },
+    {
+      "app": "asf-kids",
+      "github_io": 200,
+      "asf_surf": "ERR_DOWN"
+    },
+    {
+      "app": "asf-filmes",
+      "github_io": 200,
+      "asf_surf": "ERR_DOWN"
+    },
+    {
+      "app": "asf-podcast",
+      "github_io": 200,
+      "asf_surf": "ERR_DOWN"
+    },
+    {
+      "app": "asf-viagens",
+      "github_io": 200,
+      "asf_surf": "ERR_DOWN"
+    },
+    {
+      "app": "asf-eco",
+      "github_io": 200,
+      "asf_surf": "ERR_DOWN"
+    },
+    {
+      "app": "asf-equipamento",
+      "github_io": 200,
+      "asf_surf": "ERR_DOWN"
+    },
+    {
+      "app": "asf-loja",
+      "github_io": 200,
+      "asf_surf": "ERR_DOWN"
+    },
+    {
+      "app": "asf-patrocinio",
+      "github_io": 200,
+      "asf_surf": "ERR_DOWN"
+    },
+    {
+      "app": "asf-mercado",
+      "github_io": 200,
+      "asf_surf": "ERR_DOWN"
+    }
+  ]
+}

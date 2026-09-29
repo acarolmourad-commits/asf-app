@@ -1,0 +1,223 @@
+{
+  "generated": "2026-09-24T08:28:00Z",
+  "description": "Mapeamento dinamico de apps entre github.io e asf.surf. app.js usa isso para resolver links com fallback automatico.",
+  "domain_priority": ["https://asf.surf/", "https://acarolmourad-commits.github.io/"],
+  "apps": {
+    "asf-app": {
+      "github_io": "https://acarolmourad-commits.github.io/asf-app/",
+      "asf_surf": "https://asf.surf/"
+    },
+    "asf-previsao": {
+      "github_io": "https://acarolmourad-commits.github.io/asf-previsao/",
+      "asf_surf": "https://asf.surf/previsao-surf/"
+    },
+    "asf-mare": {
+      "github_io": "https://acarolmourad-commits.github.io/asf-mare/",
+      "asf_surf": "https://asf.surf/mare/"
+    },
+    "asf-vento": {
+      "github_io": "https://acarolmourad-commits.github.io/asf-vento/",
+      "asf_surf": "https://asf.surf/vento/"
+    },
+    "asf-alerta": {
+      "github_io": "https://acarolmourad-commits.github.io/asf-alerta/",
+      "asf_surf": "https://asf.surf/alerta/"
+    },
+    "asf-praias": {
+      "github_io": "https://acarolmourad-commits.github.io/asf-praias/",
+      "asf_surf": "https://asf.surf/praias/"
+    },
+    "asf-atlas": {
+      "github_io": "https://acarolmourad-commits.github.io/asf-atlas/",
+      "asf_surf": "https://asf.surf/atlas/"
+    },
+    "asf-mapa": {
+      "github_io": "https://acarolmourad-commits.github.io/asf-mapa/",
+      "asf_surf": "https://asf.surf/mapa/"
+    },
+    "asf-goldenhour": {
+      "github_io": "https://acarolmourad-commits.github.io/asf-goldenhour/",
+      "asf_surf": "https://asf.surf/goldenhour/"
+    },
+    "asf-leitura": {
+      "github_io": "https://acarolmourad-commits.github.io/asf-leitura/",
+      "asf_surf": "https://asf.surf/leitura/"
+    },
+    "asf-ponto": {
+      "github_io": "https://acarolmourad-commits.github.io/asf-ponto/",
+      "asf_surf": "https://asf.surf/ponto/"
+    },
+    "asf-treino": {
+      "github_io": "https://acarolmourad-commits.github.io/asf-treino/",
+      "asf_surf": "https://asf.surf/treino/"
+    },
+    "asf-popup": {
+      "github_io": "https://acarolmourad-commits.github.io/asf-popup/",
+      "asf_surf": "https://asf.surf/popup/"
+    },
+    "asf-yoga": {
+      "github_io": "https://acarolmourad-commits.github.io/asf-yoga/",
+      "asf_surf": "https://asf.surf/yoga/"
+    },
+    "asf-manobras": {
+      "github_io": "https://acarolmourad-commits.github.io/asf-manobras/",
+      "asf_surf": "https://asf.surf/manobras/"
+    },
+    "asf-apnea": {
+      "github_io": "https://acarolmourad-commits.github.io/asf-apnea/",
+      "asf_surf": "https://asf.surf/apnea/"
+    },
+    "asf-respira": {
+      "github_io": "https://acarolmourad-commits.github.io/asf-respira/",
+      "asf_surf": "https://asf.surf/respira/"
+    },
+    "asf-volume": {
+      "github_io": "https://acarolmourad-commits.github.io/asf-volume/",
+      "asf_surf": "https://asf.surf/volume/"
+    },
+    "asf-mentorias": {
+      "github_io": "https://acarolmourad-commits.github.io/asf-mentorias/",
+      "asf_surf": "https://asf.surf/mentorias/"
+    },
+    "asf-bemestar": {
+      "github_io": "https://acarolmourad-commits.github.io/asf-bemestar/",
+      "asf_surf": "https://asf.surf/bemestar/"
+    },
+    "asf-mental": {
+      "github_io": "https://acarolmourad-commits.github.io/asf-mental/",
+      "asf_surf": "https://asf.surf/mental/"
+    },
+    "asf-sono": {
+      "github_io": "https://acarolmourad-commits.github.io/asf-sono/",
+      "asf_surf": "https://asf.surf/sono/"
+    },
+    "asf-nutricao": {
+      "github_io": "https://acarolmourad-commits.github.io/asf-nutricao/",
+      "asf_surf": "https://asf.surf/nutricao/"
+    },
+    "asf-inspiracao": {
+      "github_io": "https://acarolmourad-commits.github.io/asf-inspiracao/",
+      "asf_surf": "https://asf.surf/inspiracao/"
+    },
+    "asf-sonhos": {
+      "github_io": "https://acarolmourad-commits.github.io/asf-sonhos/",
+      "asf_surf": "https://asf.surf/sonhos/"
+    },
+    "asf-seguranca": {
+      "github_io": "https://acarolmourad-commits.github.io/asf-seguranca/",
+      "asf_surf": "https://asf.surf/seguranca/"
+    },
+    "asf-sos": {
+      "github_io": "https://acarolmourad-commits.github.io/asf-sos/",
+      "asf_surf": "https://asf.surf/sos/"
+    },
+    "asf-checklist": {
+      "github_io": "https://acarolmourad-commits.github.io/asf-checklist/",
+      "asf_surf": "https://asf.surf/checklist/"
+    },
+    "asf-mala": {
+      "github_io": "https://acarolmourad-commits.github.io/asf-mala/",
+      "asf_surf": "https://asf.surf/mala/"
+    },
+    "asf-comunidade": {
+      "github_io": "https://acarolmourad-commits.github.io/asf-comunidade/",
+      "asf_surf": "https://asf.surf/comunidade/"
+    },
+    "asf-parceiras": {
+      "github_io": "https://acarolmourad-commits.github.io/asf-parceiras/",
+      "asf_surf": "https://asf.surf/parceiras/"
+    },
+    "asf-carona": {
+      "github_io": "https://acarolmourad-commits.github.io/asf-carona/",
+      "asf_surf": "https://asf.surf/carona/"
+    },
+    "asf-eventos": {
+      "github_io": "https://acarolmourad-commits.github.io/asf-eventos/",
+      "asf_surf": "https://asf.surf/eventos/"
+    },
+    "asf-galeria": {
+      "github_io": "https://acarolmourad-commits.github.io/asf-galeria/",
+      "asf_surf": "https://asf.surf/galeria/"
+    },
+    "asf-clube": {
+      "github_io": "https://acarolmourad-commits.github.io/asf-clube/",
+      "asf_surf": "https://asf.surf/clube/"
+    },
+    "asf-achados": {
+      "github_io": "https://acarolmourad-commits.github.io/asf-achados/",
+      "asf_surf": "https://asf.surf/achados/"
+    },
+    "asf-ranking": {
+      "github_io": "https://acarolmourad-commits.github.io/asf-ranking/",
+      "asf_surf": "https://asf.surf/ranking/"
+    },
+    "asf-quiz": {
+      "github_io": "https://acarolmourad-commits.github.io/asf-quiz/",
+      "asf_surf": "https://asf.surf/quiz/"
+    },
+    "asf-desafio": {
+      "github_io": "https://acarolmourad-commits.github.io/asf-desafio/",
+      "asf_surf": "https://asf.surf/desafio/"
+    },
+    "asf-desafios": {
+      "github_io": "https://acarolmourad-commits.github.io/asf-desafios/",
+      "asf_surf": "https://asf.surf/desafios/"
+    },
+    "asf-memoria": {
+      "github_io": "https://acarolmourad-commits.github.io/asf-memoria/",
+      "asf_surf": "https://asf.surf/memoria/"
+    },
+    "asf-matematica": {
+      "github_io": "https://acarolmourad-commits.github.io/asf-matematica/",
+      "asf_surf": "https://asf.surf/matematica/"
+    },
+    "asf-glossario": {
+      "github_io": "https://acarolmourad-commits.github.io/asf-glossario/",
+      "asf_surf": "https://asf.surf/glossario/"
+    },
+    "asf-diario": {
+      "github_io": "https://acarolmourad-commits.github.io/asf-diario/",
+      "asf_surf": "https://asf.surf/diario/"
+    },
+    "asf-kids": {
+      "github_io": "https://acarolmourad-commits.github.io/asf-kids/",
+      "asf_surf": "https://asf.surf/kids/"
+    },
+    "asf-historia": {
+      "github_io": "https://acarolmourad-commits.github.io/asf-historia/",
+      "asf_surf": "https://asf.surf/historia/"
+    },
+    "asf-filmes": {
+      "github_io": "https://acarolmourad-commits.github.io/asf-filmes/",
+      "asf_surf": "https://asf.surf/filmes/"
+    },
+    "asf-podcast": {
+      "github_io": "https://acarolmourad-commits.github.io/asf-podcast/",
+      "asf_surf": "https://asf.surf/podcast/"
+    },
+    "asf-viagens": {
+      "github_io": "https://acarolmourad-commits.github.io/asf-viagens/",
+      "asf_surf": "https://asf.surf/viagens/"
+    },
+    "asf-eco": {
+      "github_io": "https://acarolmourad-commits.github.io/asf-eco/",
+      "asf_surf": "https://asf.surf/eco/"
+    },
+    "asf-equipamento": {
+      "github_io": "https://acarolmourad-commits.github.io/asf-equipamento/",
+      "asf_surf": "https://asf.surf/equipamento/"
+    },
+    "asf-mercado": {
+      "github_io": "https://acarolmourad-commits.github.io/asf-mercado/",
+      "asf_surf": "https://asf.surf/mercado/"
+    },
+    "asf-loja": {
+      "github_io": "https://acarolmourad-commits.github.io/asf-loja/",
+      "asf_surf": "https://asf.surf/loja/"
+    },
+    "asf-patrocinio": {
+      "github_io": "https://acarolmourad-commits.github.io/asf-patrocinio/",
+      "asf_surf": "https://asf.surf/patrocinio/"
+    }
+  }
+}

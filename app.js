@@ -20,6 +20,45 @@
       value: value
     });
   };
+  // Dynamic App Link Resolver (ASF migration to asf.surf)
+  // Carrega app-links.json e resolve URLs. Fallback: github.io. Nunca inventa dados.
+  window.ASF_LINKS = null;
+  window.ASF_BASE_URL = 'https://acarolmourad-commits.github.io/'; // default fallback
+
+  async function initAppLinks() {
+    try {
+      var resp = await fetch('data/app-links.json', { cache: 'no-cache' });
+      if (resp.ok) {
+        window.ASF_LINKS = await resp.json();
+        // Probe asf.surf with timeout — only switch if reachable
+        try {
+          var ctrl = new AbortController();
+          setTimeout(() => ctrl.abort(), 800);
+          await fetch('https://asf.surf/previsao-surf/', { mode: 'no-cors', signal: ctrl.signal });
+          window.ASF_BASE_URL = 'https://asf.surf/';
+        } catch(e) { /* asf.surf offline, keep github.io */ }
+      }
+    } catch(err) {
+      console.warn('ASF Links: using github.io defaults');
+    }
+  }
+
+  function resolveUrl(appName, path) {
+    var base = window.ASF_BASE_URL;
+    var suffix = appName === 'asf-app' ? '' : appName + (path ? '/' + path : '/');
+    return base + suffix;
+  }
+
+  // Apply dynamic links on DOM ready
+  document.addEventListener('DOMContentLoaded', async function() {
+    await initAppLinks();
+    // Resolve data-app links
+    document.querySelectorAll('a[data-app]').forEach(function(link) {
+      var appName = link.getAttribute('data-app');
+      var path = link.getAttribute('data-path') || '';
+      link.href = resolveUrl(appName, path);
+    });
+  });
 function setLanguage(lang) {
     localStorage.setItem('asf-lang', lang);
     document.querySelectorAll('button[onclick^="setLanguage"]').forEach(function(b) {
@@ -2018,7 +2057,7 @@ function toggleLike(btn) {
             btn.lastChild.textContent = ' ' + count;
         }
 function sharePost(text) {
-            const msg = `🏄‍♀️ ASF - Associação de Surf Feminino\n\n"${text}"\n\n🔗 https://acarolmourad-commits.github.io/asf-app/`;
+            const msg = `🏄‍♀️ ASF - Associação de Surf Feminino\n\n"${text}"\n\n🔗 ${window.ASF_BASE_URL}`;
             if (navigator.share) {
                 navigator.share({ title: 'ASF', text: msg }).catch(() => {});
             } else if (navigator.clipboard) {
@@ -2217,7 +2256,7 @@ function showPixDonation(){/* removido */}
 function showReferralModal(){const m=document.getElementById('referral-modal');if(m){m.style.display='flex';const codeDisplay=document.getElementById('referral-code-display');if(codeDisplay){const userCode=localStorage.getItem('asf-my-referral-code');if(userCode){codeDisplay.textContent=userCode}else{const newCode=generateReferralCode();localStorage.setItem('asf-my-referral-code',newCode);codeDisplay.textContent=newCode}}trackEvent('referral','modal_view')}}
 function hideReferralModal(){const m=document.getElementById('referral-modal');if(m)m.style.display='none'}
 function copyReferralCode(){const code=localStorage.getItem('asf-my-referral-code')||generateReferralCode();navigator.clipboard.writeText(code).then(()=>showToast('✅ Código copiado!','success')).catch(()=>showToast('❌ Erro ao copiar','error'));trackEvent('referral','code_copy')}
-function shareReferral(platform){const code=localStorage.getItem('asf-my-referral-code')||generateReferralCode();const url=`https://acarolmourad-commits.github.io/asf-app/?ref=${code}`;let shareUrl='';switch(platform){case'whatsapp':shareUrl=`https://wa.me/?text=Olá! Quero te convidar para o app ASF - Dicas de surf gratuitas! Baixe aqui: ${url}`;break;case'copy':shareUrl=url;break}shareUrl&&window.open(shareUrl,'_blank');trackEvent('referral','share',platform)}
+function shareReferral(platform){const code=localStorage.getItem('asf-my-referral-code')||generateReferralCode();const url=`${window.ASF_BASE_URL}?ref=${code}`;let shareUrl='';switch(platform){case'whatsapp':shareUrl=`https://wa.me/?text=Olá! Quero te convidar para o app ASF - Dicas de surf gratuitas! Baixe aqui: ${url}`;break;case'copy':shareUrl=url;break}shareUrl&&window.open(shareUrl,'_blank');trackEvent('referral','share',platform)}
 function hidePixDonation(){/* removido */}
 function copyPixKey(){/* removido: sem doações via Pix */}
 function getUserId(){try{let uid=localStorage.getItem('asf-user-id');if(!uid){uid='user_'+Math.random().toString(36).substring(7);localStorage.setItem('asf-user-id',uid)}return uid}catch(e){return 'user_anon'}}
