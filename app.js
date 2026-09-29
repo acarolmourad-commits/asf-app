@@ -803,6 +803,40 @@ function updateCountdown() {
                 }
             }
         }
+// === Search Index Initialization ===
+// Build the search index from page content at load time
+var normalizedSearchIndex = [];
+function buildSearchIndex() {
+    var index = [];
+    // Index all content sections visible on the page
+    document.querySelectorAll('h1, h2, h3, h4, p, section').forEach(function(el) {
+        var text = el.textContent.trim();
+        if (text.length < 3) return;
+        var rect = el.getBoundingClientRect();
+        // Only index visible elements
+        if (rect.width === 0 && rect.height === 0) return;
+        
+        index.push({
+            title: el.textContent.trim().substring(0, 100),
+            text: text.substring(0, 500),
+            section: el.closest('section') ? el.closest('section').id || 'content' : 'content',
+            _titleNorm: el.textContent.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, ''),
+            _textNorm: text.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, ''),
+            _sectionNorm: (el.closest('section') ? el.closest('section').id : 'content').toLowerCase()
+        });
+    });
+    return index;
+}
+
+// Initialize search index when DOM is ready
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', function() {
+        normalizedSearchIndex = buildSearchIndex();
+    });
+} else {
+    normalizedSearchIndex = buildSearchIndex();
+}
+
 function debouncedSearch(q) { clearTimeout(_searchTimer); _searchTimer = setTimeout(() => handleSearch(q), 150); }
 function handleSearch(query) {
             const resultsDiv = document.getElementById('searchResults');
