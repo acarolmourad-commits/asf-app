@@ -16,7 +16,7 @@
     <meta property="og:url" content="https://acarolmourad-commits.github.io/asf-app/">
     <meta name="twitter:title" content="ASF - Associação de Surf Feminino">
     <meta name="twitter:description" content="Conectando mulheres surfistas 🏄‍♀️">
-    <link rel="canonical" data-app="asf-app" href="https://acarolmourad-commits.github.io/asf-app/">
+    <link rel="canonical" data-app="asf-app" data-app="app" href="https://acarolmourad-commits.github.io/asf-app/">
     <link rel="manifest" href="manifest.json">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -411,7 +411,7 @@
 <!-- Schema.org JSON-LD for SEO -->
     <script type="application/ld+json">{}</script>
     <script src="data/mock-manas.js"></script>
-    <link rel="stylesheet" href="subscriber-styles.css">
+    <link rel="stylesheet" href="subscriber-styles.css"><link rel="preload" href="data/app-links.json" as="fetch" crossorigin="anonymous">
     <style>
     .hero-badge { display: none !important; }
     .hero h1 { display: none !important; }
@@ -971,7 +971,7 @@ t Section -->
                         <div style="padding: 4px 0; border-bottom: 1px solid var(--gray-100);"><strong>Marolinha</strong> — onda pequena e fraca, perfeita para o primeiro dia de surf</div>
                         <div style="padding: 4px 0;"><strong>Vaca</strong> — cair da prancha e ser revolvida pela onda (faz parte!)</div>
                     </div>
-                    <p style="margin-top: 12px;"><a href="https://acarolmourad-commits.github.io/asf-glossario/" style="color: var(--primary); font-weight: 700;">📖 Ver o dicionário completo com 30 termos e busca no ASF Glossário →</a></p>
+                    <p style="margin-top: 12px;"><a data-app="glossario" href="https://acarolmourad-commits.github.io/asf-glossario/" style="color: var(--primary); font-weight: 700;">📖 Ver o dicionário completo com 30 termos e busca no ASF Glossário →</a></p>
                 </div>
             </div>
         </div>
@@ -983,9 +983,9 @@ t Section -->
             </div>
             <div style="margin: 0 20px 20px;">
                 <p style="font-size: 14px; color: var(--text);">Rotinas completas de mobilidade, yoga e respiração para surfistas estão nos apps dedicados da rede ASF:</p>
-                <a href="https://acarolmourad-commits.github.io/asf-yoga/" style="display:block; text-align:center; background: linear-gradient(135deg, #00b4d8, #0077b6); color: white; padding: 12px; border-radius: 12px; text-decoration: none; font-weight: 600; margin-top: 8px;">🧘 ASF Yoga — mobilidade guiada →</a>
-                <a href="https://acarolmourad-commits.github.io/asf-respira/" style="display:block; text-align:center; background: linear-gradient(135deg, #00b4d8, #0077b6); color: white; padding: 12px; border-radius: 12px; text-decoration: none; font-weight: 600; margin-top: 8px;">🌬️ ASF Respira — breathing & apnea →</a>
-                <a href="https://acarolmourad-commits.github.io/asf-treino/" style="display:block; text-align:center; background: linear-gradient(135deg, #00b4d8, #0077b6); color: white; padding: 12px; border-radius: 12px; text-decoration: none; font-weight: 600; margin-top: 8px;">🏋️ ASF Treino — rotinas funcionais →</a>
+                <a data-app="yoga" href="https://acarolmourad-commits.github.io/asf-yoga/" style="display:block; text-align:center; background: linear-gradient(135deg, #00b4d8, #0077b6); color: white; padding: 12px; border-radius: 12px; text-decoration: none; font-weight: 600; margin-top: 8px;">🧘 ASF Yoga — mobilidade guiada →</a>
+                <a data-app="respira" href="https://acarolmourad-commits.github.io/asf-respira/" style="display:block; text-align:center; background: linear-gradient(135deg, #00b4d8, #0077b6); color: white; padding: 12px; border-radius: 12px; text-decoration: none; font-weight: 600; margin-top: 8px;">🌬️ ASF Respira — breathing & apnea →</a>
+                <a data-app="treino" data-app="treino" data-app="treino" href="https://acarolmourad-commits.github.io/asf-treino/" style="display:block; text-align:center; background: linear-gradient(135deg, #00b4d8, #0077b6); color: white; padding: 12px; border-radius: 12px; text-decoration: none; font-weight: 600; margin-top: 8px;">🏋️ ASF Treino — rotinas funcionais →</a>
             </div>
         </div>
 
@@ -993,7 +993,7 @@ t Section -->
         <div class="section" id="alimentacao">
             <div class="section-header">
                 <h2 class="section-title">🥗 Alimentação & Nutrição</h2>
-<p style="text-align:center;margin:6px 0 0"><a href="https://acarolmourad-commits.github.io/asf-nutricao/" style="display:inline-block;background:linear-gradient(90deg,#00A8CC,#0E2439);color:#fff;padding:6px 14px;border-radius:999px;font-size:12.5px;font-weight:700;text-decoration:none">🚀 Versão completa no app ASF Nutrição →</a></p>
+<p style="text-align:center;margin:6px 0 0"><a data-app="nutricao" data-app="nutricao" href="https://acarolmourad-commits.github.io/asf-nutricao/" style="display:inline-block;background:linear-gradient(90deg,#00A8CC,#0E2439);color:#fff;padding:6px 14px;border-radius:999px;font-size:12.5px;font-weight:700;text-decoration:none">🚀 Versão completa no app ASF Nutrição →</a></p>
                 <a href="#" class="see-all" onclick="event.preventDefault();return false">Ver todas →</a>
             </div>
 
@@ -1093,7 +1093,7 @@ t Section -->
         <div class="section" id="tecnica">
             <div class="section-header">
                 <h2 class="section-title">🏄‍♀️ Técnica de Surf</h2>
-<p style="text-align:center;margin:6px 0 0"><a href="https://acarolmourad-commits.github.io/asf-manobras/" style="display:inline-block;background:linear-gradient(90deg,#00A8CC,#0E2439);color:#fff;padding:6px 14px;border-radius:999px;font-size:12.5px;font-weight:700;text-decoration:none">🚀 Versão completa no app ASF Manobras →</a></p>
+<p style="text-align:center;margin:6px 0 0"><a data-app="manobras" href="https://acarolmourad-commits.github.io/asf-manobras/" style="display:inline-block;background:linear-gradient(90deg,#00A8CC,#0E2439);color:#fff;padding:6px 14px;border-radius:999px;font-size:12.5px;font-weight:700;text-decoration:none">🚀 Versão completa no app ASF Manobras →</a></p>
                 <a href="#" class="see-all" onclick="event.preventDefault();return false">Ver todas →</a>
             </div>
 
@@ -1197,7 +1197,7 @@ t Section -->
         <div class="section" id="mental">
             <div class="section-header">
                 <h2 class="section-title">🧠 Mental & Calmaria</h2>
-<p style="text-align:center;margin:6px 0 0"><a href="https://acarolmourad-commits.github.io/asf-mental/" style="display:inline-block;background:linear-gradient(90deg,#00A8CC,#0E2439);color:#fff;padding:6px 14px;border-radius:999px;font-size:12.5px;font-weight:700;text-decoration:none">🚀 Versão completa no app ASF Mental →</a></p>
+<p style="text-align:center;margin:6px 0 0"><a data-app="mental" href="https://acarolmourad-commits.github.io/asf-mental/" style="display:inline-block;background:linear-gradient(90deg,#00A8CC,#0E2439);color:#fff;padding:6px 14px;border-radius:999px;font-size:12.5px;font-weight:700;text-decoration:none">🚀 Versão completa no app ASF Mental →</a></p>
                 <a href="#" class="see-all" onclick="event.preventDefault();return false">Ver todas →</a>
             </div>
 
@@ -1424,7 +1424,7 @@ t Section -->
             </div>
             <p style="font-size: 12px; color: var(--gray-400); text-align: center; margin: 0 20px 20px;">Toque em uma conquista para ver detalhes</p>
 
-            <a href="quiz/" style="display:flex;gap:14px;align-items:center;background:#fff;border-radius:16px;padding:18px;margin:12px 20px;text-decoration:none;color:#0E2439;box-shadow:0 2px 10px rgba(0,0,0,.06);border:1px solid rgba(0,168,204,0.15)"><span style="font-size:2rem">🌊</span><span><b style="display:block">Quiz do Surf 🧠 Trilha de Conhecimento</b><small style="color:#666">5 níveis sequenciais, +50 pts por nível. 🌟 É o 1º quiz que desbloqueia suas conquistas!</small></span></a><p style="font-size:12px;color:#5A6B7A;margin:0 20px 8px;text-align:center">🏆 <b>Como funcionam as conquistas de quiz:</b> 🌟 Primeira Onda (1 quiz), 📚 Estudiosa (5 quizzes) e 🏄 Surfista Completa (10 quizzes) ficam <b>bloqueadas 🔒 aguardando sua primeira resposta</b>. Comece pelo <a href="quiz/" style="color:#00A8CC;font-weight:700">Quiz do Surf (trilha de 5 níveis)</a> e continue no <a href="https://acarolmourad-commits.github.io/asf-quiz/" style="color:#00A8CC;font-weight:700">Quiz Diário</a> — cada quiz concluído soma pontos e desbloqueia o próximo nível!</p>
+            <a href="quiz/" style="display:flex;gap:14px;align-items:center;background:#fff;border-radius:16px;padding:18px;margin:12px 20px;text-decoration:none;color:#0E2439;box-shadow:0 2px 10px rgba(0,0,0,.06);border:1px solid rgba(0,168,204,0.15)"><span style="font-size:2rem">🌊</span><span><b style="display:block">Quiz do Surf 🧠 Trilha de Conhecimento</b><small style="color:#666">5 níveis sequenciais, +50 pts por nível. 🌟 É o 1º quiz que desbloqueia suas conquistas!</small></span></a><p style="font-size:12px;color:#5A6B7A;margin:0 20px 8px;text-align:center">🏆 <b>Como funcionam as conquistas de quiz:</b> 🌟 Primeira Onda (1 quiz), 📚 Estudiosa (5 quizzes) e 🏄 Surfista Completa (10 quizzes) ficam <b>bloqueadas 🔒 aguardando sua primeira resposta</b>. Comece pelo <a href="quiz/" style="color:#00A8CC;font-weight:700">Quiz do Surf (trilha de 5 níveis)</a> e continue no <a data-app="quiz" href="https://acarolmourad-commits.github.io/asf-quiz/" style="color:#00A8CC;font-weight:700">Quiz Diário</a> — cada quiz concluído soma pontos e desbloqueia o próximo nível!</p>
             <!-- Questionários Diários -->
             <h3 style="margin: 20px 20px 10px; font-size: 16px; color: var(--secondary);">📋 Questionários Diários (+10 pts)</h3>
             <div class="cards-grid">
@@ -1952,9 +1952,9 @@ t Section -->
             </div>
             <div style="margin: 0 20px 20px;">
                 <p style="font-size: 14px; color: var(--text);">Checklist, cronômetro de treino e contatos de emergência estão nos apps dedicados:</p>
-                <a href="https://acarolmourad-commits.github.io/asf-checklist/" style="display:block; text-align:center; background: linear-gradient(135deg, #00b4d8, #0077b6); color: white; padding: 12px; border-radius: 12px; text-decoration: none; font-weight: 600; margin-top: 8px;">✅ ASF Checklist — pré e pós-surf →</a>
+                <a data-app="checklist" data-app="checklist" href="https://acarolmourad-commits.github.io/asf-checklist/" style="display:block; text-align:center; background: linear-gradient(135deg, #00b4d8, #0077b6); color: white; padding: 12px; border-radius: 12px; text-decoration: none; font-weight: 600; margin-top: 8px;">✅ ASF Checklist — pré e pós-surf →</a>
                 <a href="https://acarolmourad-commits.github.io/asf-treino/" style="display:block; text-align:center; background: linear-gradient(135deg, #00b4d8, #0077b6); color: white; padding: 12px; border-radius: 12px; text-decoration: none; font-weight: 600; margin-top: 8px;">⏱️ ASF Treino — cronômetro de treino →</a>
-                <a href="https://acarolmourad-commits.github.io/asf-sos/" style="display:block; text-align:center; background: linear-gradient(135deg, #e74c3c, #c0392b); color: white; padding: 12px; border-radius: 12px; text-decoration: none; font-weight: 600; margin-top: 8px;">🆘 ASF SOS — emergência e segurança →</a>
+                <a data-app="sos" href="https://acarolmourad-commits.github.io/asf-sos/" style="display:block; text-align:center; background: linear-gradient(135deg, #e74c3c, #c0392b); color: white; padding: 12px; border-radius: 12px; text-decoration: none; font-weight: 600; margin-top: 8px;">🆘 ASF SOS — emergência e segurança →</a>
             </div>
         </div>
 
@@ -2095,8 +2095,8 @@ t Section -->
             </div>
             
             <div style="margin: 0 20px 20px;">
-                <a href="https://acarolmourad-commits.github.io/asf-eventos/" style="display:block; text-align:center; background: linear-gradient(135deg, #00b4d8, #0077b6); color: white; padding: 12px; border-radius: 12px; text-decoration: none; font-weight: 600; margin-top: 8px;">📅 ASF Eventos — calendário completo →</a>
-                <a href="https://acarolmourad-commits.github.io/asf-ranking/" style="display:block; text-align:center; background: linear-gradient(135deg, #00b4d8, #0077b6); color: white; padding: 12px; border-radius: 12px; text-decoration: none; font-weight: 600; margin-top: 8px;">🏆 ASF Ranking — desafios e resultados →</a>
+                <a data-app="eventos" data-app="eventos" href="https://acarolmourad-commits.github.io/asf-eventos/" style="display:block; text-align:center; background: linear-gradient(135deg, #00b4d8, #0077b6); color: white; padding: 12px; border-radius: 12px; text-decoration: none; font-weight: 600; margin-top: 8px;">📅 ASF Eventos — calendário completo →</a>
+                <a data-app="ranking" href="https://acarolmourad-commits.github.io/asf-ranking/" style="display:block; text-align:center; background: linear-gradient(135deg, #00b4d8, #0077b6); color: white; padding: 12px; border-radius: 12px; text-decoration: none; font-weight: 600; margin-top: 8px;">🏆 ASF Ranking — desafios e resultados →</a>
             </div>
         </div>
         </div>
@@ -2188,8 +2188,8 @@ t Section -->
             </div>
             <div style="margin: 0 20px 20px;">
                 <p style="font-size: 14px; color: var(--text);">O guia completo das praias (Ubatuba, Bertioga, Guarujá, Maresias e mais), com filtro por região, características e dicas de segurança, agora está no app dedicado:</p>
-                <a href="https://acarolmourad-commits.github.io/asf-praias/" style="display:block; text-align:center; background: linear-gradient(135deg, #00b4d8, #0077b6); color: white; padding: 12px; border-radius: 12px; text-decoration: none; font-weight: 600; margin-top: 8px;">🏖️ ASF Praias — guia completo →</a>
-                <a href="https://acarolmourad-commits.github.io/asf-previsao/" style="display:block; text-align:center; background: linear-gradient(135deg, #00b4d8, #0077b6); color: white; padding: 12px; border-radius: 12px; text-decoration: none; font-weight: 600; margin-top: 8px;">🌊 ASF Previsão — condições do mar →</a>
+                <a data-app="praias" href="https://acarolmourad-commits.github.io/asf-praias/" style="display:block; text-align:center; background: linear-gradient(135deg, #00b4d8, #0077b6); color: white; padding: 12px; border-radius: 12px; text-decoration: none; font-weight: 600; margin-top: 8px;">🏖️ ASF Praias — guia completo →</a>
+                <a data-app="previsao" href="https://acarolmourad-commits.github.io/asf-previsao/" style="display:block; text-align:center; background: linear-gradient(135deg, #00b4d8, #0077b6); color: white; padding: 12px; border-radius: 12px; text-decoration: none; font-weight: 600; margin-top: 8px;">🌊 ASF Previsão — condições do mar →</a>
             </div>
         </div>
 
@@ -2687,7 +2687,7 @@ t Section -->
     <div class="section" id="surf-culture"><p style="text-align:center;padding:32px;font-size:14px;color:var(--gray-400)">🎨 Explore a rica história e cultura do surf, desde suas origens polinésias até os dias atuais.</p>
         <div class="section-header">
             <h2 class="section-title">🏛️ Histórias do Surf</h2>
-<p style="text-align:center;margin:6px 0 0"><a href="https://acarolmourad-commits.github.io/asf-historia/" style="display:inline-block;background:linear-gradient(90deg,#00A8CC,#0E2439);color:#fff;padding:6px 14px;border-radius:999px;font-size:12.5px;font-weight:700;text-decoration:none">🚀 Versão completa no app ASF História →</a></p>
+<p style="text-align:center;margin:6px 0 0"><a data-app="historia" href="https://acarolmourad-commits.github.io/asf-historia/" style="display:inline-block;background:linear-gradient(90deg,#00A8CC,#0E2439);color:#fff;padding:6px 14px;border-radius:999px;font-size:12.5px;font-weight:700;text-decoration:none">🚀 Versão completa no app ASF História →</a></p>
         </div>
         
         <div style="padding: 0 16px 80px;">
@@ -2704,7 +2704,7 @@ t Section -->
   <div class="section" id="metas" style="display:none">
     <div class="section-header">
       <h2 class="section-title">🎯 Metas de Surf</h2>
-<p style="text-align:center;margin:6px 0 0"><a href="https://acarolmourad-commits.github.io/asf-sonhos/" style="display:inline-block;background:linear-gradient(90deg,#00A8CC,#0E2439);color:#fff;padding:6px 14px;border-radius:999px;font-size:12.5px;font-weight:700;text-decoration:none">🚀 Versão completa no app ASF Sonhos →</a></p>
+<p style="text-align:center;margin:6px 0 0"><a data-app="sonhos" href="https://acarolmourad-commits.github.io/asf-sonhos/" style="display:inline-block;background:linear-gradient(90deg,#00A8CC,#0E2439);color:#fff;padding:6px 14px;border-radius:999px;font-size:12.5px;font-weight:700;text-decoration:none">🚀 Versão completa no app ASF Sonhos →</a></p>
     </div>
     <p style="text-align:center;padding:4px 16px 16px;font-size:14px;color:var(--gray-400);margin:0">Defina e acompanhe suas metas de surf: desde melhorar técnicas até conquistar novas ondas.</p>
     <div id="metas-container" style="padding: 0 16px;"></div>
@@ -2728,7 +2728,7 @@ t Section -->
     <div class="section" id="seguranca" style="display:none">
         <div class="section-header">
             <h2 class="section-title" style="display:block">&#x1F6DF; Segurança no Surf</h2>
-<p style="text-align:center;margin:6px 0 0"><a href="https://acarolmourad-commits.github.io/asf-seguranca/" style="display:inline-block;background:linear-gradient(90deg,#00A8CC,#0E2439);color:#fff;padding:6px 14px;border-radius:999px;font-size:12.5px;font-weight:700;text-decoration:none">🚀 Versão completa no app ASF Segurança →</a></p>
+<p style="text-align:center;margin:6px 0 0"><a data-app="seguranca" href="https://acarolmourad-commits.github.io/asf-seguranca/" style="display:inline-block;background:linear-gradient(90deg,#00A8CC,#0E2439);color:#fff;padding:6px 14px;border-radius:999px;font-size:12.5px;font-weight:700;text-decoration:none">🚀 Versão completa no app ASF Segurança →</a></p>
         </div>
         <p style="text-align:center;padding:4px 16px 16px;font-size:14px;color:var(--gray-400);margin:0">Aprenda as diretrizes essenciais de segurança no surf: prioridade nas ondas, uso do leash e respeito ao ambiente marinho.</p>
         <div style="padding: 0 16px;" id="seguranca-content"></div>
