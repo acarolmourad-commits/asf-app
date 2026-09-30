@@ -39,10 +39,10 @@
         <a class="voltar" href="index.html">↖ Voltar para o app</a>
     </div>
     <script>
-        /* ─── Registro central (Supabase) — preencher APÓS rotacionar as credenciais.
-           Vazio = verificação offline (só formato). NUNCA commitar chave exposta. ─── */
-        const SUPABASE_URL = '';      /* ex.: 'https://SEU-REF.supabase.co' */
-        const SUPABASE_ANON_KEY = ''; /* nova anon key (pós-rotação) */
+        /* ─── Registro central (Supabase) — chave publishable (pública por design).
+           Dados protegidos por RLS; acesso só via RPC verificar_carteirinha. ─── */
+        const SUPABASE_URL = 'https://qktabrzbgdfndklytwub.supabase.co';
+        const SUPABASE_ANON_KEY = 'sb_publishable_qIvPxh6DavCPtntfflaRLw_QI_pZJih';
 
         const params = new URLSearchParams(location.search);
         const numero = (params.get('numero') || '').trim().toUpperCase();
