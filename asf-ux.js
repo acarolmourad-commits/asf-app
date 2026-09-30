@@ -374,3 +374,17 @@
     window._searchTimer = setTimeout(function () { window.handleSearch(q); }, 150);
   };
 })();
+
+/* ASF Galeria — botão flutuante para o mural colaborativo */
+(function(){
+  if (document.getElementById('asf-galeria-btn')) return;
+  function mount(){
+    if (document.getElementById('asf-galeria-btn')) return;
+    var d=document.createElement('div');
+    d.id='asf-galeria-btn';
+    d.style.cssText='position:fixed;bottom:18px;right:18px;z-index:99999;';
+    d.innerHTML='<a href="https://galeria.asf.surf/" style="display:inline-block;background:linear-gradient(135deg,#00A8CC,#0E2439);color:#fff;text-decoration:none;font-weight:700;font-size:15px;padding:13px 22px;border-radius:50px;box-shadow:0 4px 14px rgba(0,0,0,.35);font-family:Outfit,system-ui,sans-serif;">\uD83D\uDCF8 Galeria das Manas</a>';
+    document.body.appendChild(d);
+  }
+  if (document.body) mount(); else document.addEventListener('DOMContentLoaded', mount);
+})();
