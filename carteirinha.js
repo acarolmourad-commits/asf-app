@@ -6,10 +6,10 @@ const ASF_CARD = {
   KEY: 'asf-card-v2',
   HIST_KEY: 'asf-card-history', /* controle de 1 emissão por ano (fallback local) */
 
-  /* ─── Registro central (Supabase) ─── Preencher APÓS rotacionar as credenciais.
-     URL vazia = modo offline (fallback localStorage). NUNCA commitar chave exposta. */
-  SUPABASE_URL: '',      /* ex.: 'https://SEU-REF.supabase.co' */
-  SUPABASE_ANON_KEY: '', /* nova anon key (pós-rotação) */
+  /* ─── Registro central (Supabase) — chave publishable (pública por design).
+     Dados protegidos por RLS; acesso só via RPCs. NUNCA usar chave secret aqui. ─── */
+  SUPABASE_URL: 'https://qktabrzbgdfndklytwub.supabase.co',
+  SUPABASE_ANON_KEY: 'sb_publishable_qIvPxh6DavCPtntfflaRLw_QI_pZJih',
   get supabaseOn() { return !!this.SUPABASE_URL && !!this.SUPABASE_ANON_KEY; },
 
   async sha256(t) {
