@@ -1,9 +1,43 @@
-/* ─── ASF Carteirinha Digital v2 ────────────────────────────
+/* ─── ASF Carteirinha Digital v2 ───────────────────────────
    Carteirinha personalizada de cada usuária.
    Preparada para futuras parcerias (lojas, agências, pousadas):
    cada carteirinha tem número único + QR code de verificação. */
 const ASF_CARD = {
   KEY: 'asf-card-v2',
+  HIST_KEY: 'asf-card-history', /* controle de 1 emissão por ano */
+
+  /* --- controle anual de emissão --- */
+  parseDataBR(s) {
+    if (!s) return null;
+    const m = String(s).match(/(\d{2})\/(\d{2})\/(\d{4})/);
+    if (!m) { const t = new Date(s); return isNaN(t) ? null : t; }
+    return new Date(+m[3], +m[2] - 1, +m[1]);
+  },
+  expirada(d) {
+    const v = d && this.parseDataBR(d.validade);
+    return v ? v.getTime() < Date.now() : true;
+  },
+  diasParaExpirar(d) {
+    const v = d && this.parseDataBR(d.validade);
+    return v ? Math.ceil((v.getTime() - Date.now()) / 86400000) : -1;
+  },
+  historico() {
+    try { return JSON.parse(localStorage.getItem(this.HIST_KEY)) || { emissoes: [] }; }
+    catch (e) { return { emissoes: [] }; }
+  },
+  registrarEmissao(numero) {
+    const h = this.historico();
+    h.emissoes.push({ numero: numero, em: new Date().toISOString() });
+    localStorage.setItem(this.HIST_KEY, JSON.stringify(h));
+  },
+  proximaEmissaoLiberada() {
+    /* retorna null se já pode emitir, senão a Date da próxima liberação */
+    const h = this.historico();
+    if (!h.emissoes.length) return null;
+    const ultima = new Date(h.emissoes[h.emissoes.length - 1].em);
+    const livre = new Date(ultima); livre.setFullYear(livre.getFullYear() + 1);
+    return livre.getTime() > Date.now() ? livre : null;
+  },
 
   /* URL do registro de associadas (Apps Script docs/ASF_Carteirinhas_Registry.gs).
      Vazio = registro desativado. */
@@ -93,11 +127,38 @@ const ASF_CARD = {
       desde: atual.desde || new Date().toLocaleDateString('pt-BR'),
       lgpdConsent: atual.lgpdConsent || new Date().toISOString(),
     };
-    const val = new Date(); val.setFullYear(val.getFullYear() + 1);
-    d.validade = val.toLocaleDateString('pt-BR');
+    /* ── controle de 1 emissão por ano ─────────────────────────
+       a) já tem carteirinha VÁLIDA -> só atualiza dados, validade travada
+       b) expirada (ou faltando <=30 dias) -> RENOVAÇÃO: mesmo número, +1 ano
+       c) primeira emissão -> histórico não pode ter emissão < 1 ano  */
+    let msg = 'Carteirinha gerada! 🪪';
+    if (atual.numero && atual.validade) {
+      const dias = this.diasParaExpirar(atual);
+      if (dias > 30) {
+        d.validade = atual.validade; /* trava: nada de estender a validade */
+        msg = 'Dados atualizados! Validade mantida até ' + d.validade + ' 💙';
+      } else {
+        const val = new Date(); val.setFullYear(val.getFullYear() + 1);
+        d.validade = val.toLocaleDateString('pt-BR');
+        this.registrarEmissao(d.numero);
+        msg = dias < 0
+          ? 'Carteirinha renovada! Nova validade: ' + d.validade + ' 🔄'
+          : 'Renovação antecipada feita! Válida até ' + d.validade + ' 🔄';
+      }
+    } else {
+      const livre = this.proximaEmissaoLiberada();
+      if (livre) {
+        showToast('⚠️ Este dispositivo já emitiu uma carteirinha. Nova emissão liberada em ' +
+                  livre.toLocaleDateString('pt-BR') + '.');
+        return;
+      }
+      const val = new Date(); val.setFullYear(val.getFullYear() + 1);
+      d.validade = val.toLocaleDateString('pt-BR');
+      this.registrarEmissao(d.numero);
+    }
     this.save(d);
     this.registrar(d);
-    showToast('Carteirinha gerada! 🪪');
+    showToast(msg);
     this.render('carteirinha-content');
     if (typeof ASF_GAMIFICATION !== 'undefined') ASF_GAMIFICATION.checkAll();
   },
@@ -125,9 +186,12 @@ const ASF_CARD = {
   },
 
   editar() {
+    /* não apaga mais a carteirinha: edita dados preservando número e validade */
     const d = this.load() || {};
-    localStorage.removeItem(this.KEY);
-    this.render('carteirinha-content', d);
+    if (d.numero) {
+      showToast('Editando dados — número e validade são mantidos ✏️');
+    }
+    this.render('carteirinha-content', d, true);
   },
 
   verificacaoUrl(numero) {
@@ -151,13 +215,17 @@ const ASF_CARD = {
       'px;font-weight:800;color:white">' + this.initials(d.nome) + '</div>';
   },
 
-  render(containerId, prefill) {
+  render(containerId, prefill, forceForm) {
     const el = document.getElementById(containerId);
     if (!el) return;
     const d = this.load();
 
-    if (!d || !d.numero) {
-      const p = prefill || {};
+    if (forceForm && d && d.numero) { this.renderForm(el, d); return; }
+    if (!d || !d.numero) { this.renderForm(el, prefill || {}); return; }
+    this.renderCard(el, d);
+  },
+
+  renderForm(el, p) {
       el.innerHTML =
         '<div style="max-width:480px;margin:0 auto"><div class="card" style="margin-bottom:16px">' +
         '<div style="text-align:center;padding:8px 0 16px">' +
@@ -185,11 +253,15 @@ const ASF_CARD = {
         '<label style="display:flex;gap:8px;align-items:flex-start;font-size:12px;color:var(--gray-600);margin:0 0 14px;line-height:1.5">' +
         '<input id="card-registrar" type="checkbox" style="margin-top:2px;flex:none">' +
         '<span>Quero constar no <strong>registro de associadas ASF</strong> (opcional): meu nome de surfista, nível, praia e número da carteirinha entram no controle da rede. Posso sair a qualquer momento em "Editar dados".</span></label>' +
-        '<button onclick="ASF_CARD.salvar()" class="btn btn-primary" style="width:100%">🪪 Gerar minha carteirinha</button>' +
+        '<button onclick="ASF_CARD.salvar()" class="btn btn-primary" style="width:100%">' +
+        (p.numero
+          ? (this.expirada(p) || this.diasParaExpirar(p) <= 30 ? '🔄 Renovar carteirinha (mesmo número)' : '💾 Salvar dados (validade mantida)')
+          : '🪪 Gerar minha carteirinha') + '</button>' +
+        (p.numero ? '<button onclick="ASF_CARD.init()" class="btn btn-secondary" style="width:100%;margin-top:8px">← Voltar à carteirinha</button>' : '') +
         '</div>' + this.parceriasHtml() + '</div>';
-      return;
-    }
+  },
 
+  renderCard(el, d) {
     el.innerHTML =
       '<div style="max-width:480px;margin:0 auto">' +
       '<div id="asf-card-visual" style="background:linear-gradient(135deg,var(--secondary) 0%,var(--primary-dark) 60%,var(--primary) 100%);border-radius:24px;padding:22px;color:white;box-shadow:var(--shadow-lg);margin-bottom:12px;position:relative;overflow:hidden">' +
@@ -204,6 +276,13 @@ const ASF_CARD = {
       '<p style="font-size:11px;opacity:0.75;margin:0">Associada desde ' + d.desde + ' · Válida até ' + d.validade + '</p></div>' +
       '<a href="' + this.verificacaoUrl(d.numero) + '" target="_blank" rel="noopener"><img src="' + this.qrUrl(d.numero) + '" alt="QR de verificação" style="width:76px;height:76px;border-radius:10px;background:white;padding:4px"></a>' +
       '</div></div>' +
+      '<div style="text-align:center;margin:0 0 12px;font-size:13px;font-weight:700">' +
+      (this.expirada(d)
+        ? '<span style="background:#E74C3C;color:#fff;padding:6px 14px;border-radius:20px">🔴 Expirada — clique em ✏️ Editar e salve para renovar</span>'
+        : this.diasParaExpirar(d) <= 30
+          ? '<span style="background:#F39C12;color:#fff;padding:6px 14px;border-radius:20px">🟡 Expira em ' + this.diasParaExpirar(d) + ' dias — já pode renovar em ✏️ Editar</span>'
+          : '<span style="background:#27AE60;color:#fff;padding:6px 14px;border-radius:20px">🟢 Válida até ' + d.validade + '</span>') +
+      '</div>' +
       '<div style="display:flex;gap:8px;margin-bottom:16px">' +
       '<button onclick="ASF_CARD.baixar()" class="btn btn-secondary" style="flex:1;font-size:13px">⬇️ Baixar PNG</button>' +
       '<button onclick="document.getElementById(\'card-foto-input\').click()" class="btn btn-secondary" style="flex:1;font-size:13px">📷 ' + (d.foto ? 'Trocar foto' : 'Adicionar foto') + '</button>' +
@@ -295,7 +374,7 @@ const ASF_CARD = {
   init() { this.render('carteirinha-content'); }
 };
 
-/* ─── ASF HOTFIX 2026-09-21 ────────────────────────────────
+/* ─── ASF HOTFIX 2026-09-21 ───────────────────────────────
    Repara cascata de erros do index.html sem precisar editá-lo:
    1) updateNotificationBadge() é chamada antes de existir (linha ~4323)
       -> mata o script que define 'beaches' -> renderSurfConditions quebra.
