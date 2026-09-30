@@ -388,3 +388,119 @@
   }
   if (document.body) mount(); else document.addEventListener('DOMContentLoaded', mount);
 })();
+
+/* ---------- FASE 8 — Menu dropdown sem sobreposição (30/09/2026) ----------
+   O #header-menu (filho do header sticky, z-index 999) ficava preso no contexto
+   de empilhamento do header: ao rolar a página, seções posicionadas cobriam os
+   itens do dropdown. Correção ADITIVA: injeta CSS que sobe o header para
+   z-index 1001 e torna o menu fixed com z-index 10001, posicionado logo abaixo
+   do header; o menu também fecha automaticamente ao rolar a página. */
+(function () {
+  function ready(fn) { document.readyState !== 'loading' ? fn() : document.addEventListener('DOMContentLoaded', fn); }
+  ready(function () {
+    var menu = document.getElementById('header-menu');
+    if (!menu) return; // só na home
+
+    var st = document.createElement('style');
+    st.id = 'asf-menu-fix';
+    st.textContent =
+      'header{z-index:1001!important;}' +
+      '#header-menu{position:fixed!important;top:76px;right:12px;z-index:10001!important;max-height:calc(100vh - 90px)!important;}' +
+      '@media(max-width:480px){#header-menu{top:76px!important;left:12px;right:12px;}}';
+    document.head.appendChild(st);
+
+    function placeMenu() {
+      var h = document.querySelector('header');
+      if (h) menu.style.top = (Math.round(h.getBoundingClientRect().bottom) + 4) + 'px';
+    }
+    var t = document.getElementById('menu-toggle');
+    if (t) t.addEventListener('click', function () { setTimeout(placeMenu, 0); });
+
+    // fecha o menu ao rolar (evita dropdown flutuando sobre conteúdo)
+    window.addEventListener('scroll', function () {
+      if (!menu.classList.contains('open')) return;
+      menu.classList.remove('open');
+      if (t) { t.setAttribute('aria-expanded', 'false'); t.textContent = '\u2630'; }
+    }, { passive: true });
+  });
+})();
+
+/* ---------- FASE 8.1 — Busca full-site (30/09/2026) ----------
+   Além das seções da home (índice do DOM), indexa as páginas estáticas do site
+   (ondas, quiz, surftrips, glossário, galeria etc.) com palavras-chave.
+   Itens com `href` abrem a página; itens com `sectionId` rolam até a seção.
+   Sobrescreve handleSearch para renderizar os dois tipos. */
+(function () {
+  function ready(fn) { document.readyState !== 'loading' ? fn() : document.addEventListener('DOMContentLoaded', fn); }
+  function norm(s) { return (s || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, ''); }
+
+  var ASF_PAGES = [
+    { icon: '🌊', title: 'Previsão das Ondas', desc: 'Altura de ondas, swell, vento e maré ao vivo', href: 'previsao-surf/', kw: 'ondas previsao swell mare vento surf forecast mar' },
+    { icon: '📸', title: 'Galeria das Manas', desc: 'Mural colaborativo de fotos e stokes da comunidade', href: 'https://galeria.asf.surf/', kw: 'galeria mural fotos stokes manas comunidade posts' },
+    { icon: '🧠', title: 'Quiz de Surf', desc: 'Teste seus conhecimentos e ganhe pontos', href: 'quiz/', kw: 'quiz perguntas conhecimento pontos desafio' },
+    { icon: '🚗', title: 'Surftrips', desc: 'Planeje viagens de surf com as manas', href: 'surf-trip/', kw: 'viagem trip surftrip roteiro estrada' },
+    { icon: '📖', title: 'Glossário do Surf', desc: 'Dicionário com 30 termos de surf explicados', href: 'https://acarolmourad-commits.github.io/asf-glossario/', kw: 'glossario dicionario termos significado palavras' },
+    { icon: '💬', title: 'Sessões Interativas', desc: 'Conversas e atividades guiadas da comunidade', href: 'sessoes-interativas.html', kw: 'sessoes interativas chat atividades' },
+    { icon: '🏄‍♀️', title: 'Prancha Ideal', desc: 'Descubra o tamanho e tipo de prancha para você', href: 'prancha-ideal/', kw: 'prancha tamanho volume iniciante board' },
+    { icon: '🎓', title: 'Guias e Aprendizado', desc: 'Tutoriais e guias para evoluir no surf', href: 'aprender/', kw: 'aprender guias tutoriais aulas como surfar' },
+    { icon: '✍️', title: 'Diário de Surf', desc: 'Registre suas sessões e acompanhe sua evolução', href: 'diario/', kw: 'diario registro sessao sessoes historico' },
+    { icon: '📈', title: 'Progresso', desc: 'Seus pontos, nível e evolução no app', href: 'progresso', kw: 'progresso pontos nivel evolucao ranking' }
+  ];
+
+  function extendIndex() {
+    var idx = window.normalizedSearchIndex;
+    if (!idx || !idx.length) return;
+    if (idx.some(function (i) { return i.href; })) return; // já estendido
+    ASF_PAGES.forEach(function (p) {
+      idx.push({
+        href: p.href, icon: p.icon,
+        title: p.title, section: '🌐 Página do site',
+        text: p.title + ' — ' + p.desc + '. ' + p.kw,
+        _titleNorm: norm(p.title), _textNorm: norm(p.desc + ' ' + p.kw), _sectionNorm: norm('pagina site')
+      });
+    });
+  }
+
+  // re-render: suporta itens com href (páginas) além de sectionId (seções)
+  window.handleSearch = function (query) {
+    var resultsDiv = document.getElementById('searchResults');
+    var clearBtn = document.getElementById('searchClear');
+    if (!resultsDiv) return;
+
+    if (!query || query.length < 2) {
+      resultsDiv.classList.remove('active');
+      if (clearBtn) clearBtn.style.display = 'none';
+      return;
+    }
+
+    if (clearBtn) clearBtn.style.display = 'block';
+    var q = norm(query);
+    var index = window.normalizedSearchIndex || [];
+    var results = index.filter(function (item) {
+      return item._titleNorm.indexOf(q) !== -1 || item._textNorm.indexOf(q) !== -1 || item._sectionNorm.indexOf(q) !== -1;
+    }).slice(0, 8);
+
+    if (results.length === 0) {
+      resultsDiv.innerHTML = '<div class="search-no-results"><span class="emoji">🏄‍♀️</span>Nenhum resultado para "' + query + '"<br><small>Tente outro termo</small></div>';
+    } else {
+      resultsDiv.innerHTML = results.map(function (item) {
+        var preview = item.text.length > 80 ? item.text.substring(0, 80) + '...' : item.text;
+        var highlighted = preview.replace(new RegExp('(' + query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + ')', 'gi'), '<mark>$1</mark>');
+        var action = item.href
+          ? 'onclick="window.location.href=\'' + item.href + '\'"'
+          : 'onclick="goToSection(\'' + item.sectionId + '\', this)"';
+        return '<div class="search-result-item" ' + action + '>' +
+          '<div class="result-title">' + item.icon + ' ' + item.title + '</div>' +
+          '<div class="result-section">' + item.section + '</div>' +
+          '<div class="result-preview">' + highlighted + '</div></div>';
+      }).join('');
+    }
+
+    resultsDiv.classList.add('active');
+    if (query.length >= 3 && typeof window.saveRecentSearch === 'function') {
+      try { window.saveRecentSearch(query); } catch (e) {}
+    }
+  };
+
+  ready(extendIndex);
+})();
