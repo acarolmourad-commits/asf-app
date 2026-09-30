@@ -1,7 +1,7 @@
 {
-  "date": "2026-09-29T21:35:18.864347+00:00",
-  "total": 78,
-  "ok": 68,
+  "date": "2026-09-30T02:42:00.692954+00:00",
+  "total": 79,
+  "ok": 69,
   "skipped": 10,
   "broken_count": 0,
   "broken": [],
@@ -275,6 +275,12 @@
     },
     {
       "url": "cookies.html",
+      "status": "ok",
+      "http": 200,
+      "local": true
+    },
+    {
+      "url": "data/app-links.json",
       "status": "ok",
       "http": 200,
       "local": true
