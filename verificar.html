@@ -16,11 +16,14 @@
         .status { border-radius: 16px; padding: 20px; margin-bottom: 16px; }
         .valida { background: #e8f8ee; border: 2px solid #27ae60; }
         .invalida { background: #fdecea; border: 2px solid #e74c3c; }
+        .pendente { background: #fef6e0; border: 2px solid #f39c12; }
         .status .icone { font-size: 40px; }
         .status .titulo { font-size: 17px; font-weight: 700; margin: 8px 0 4px; }
         .valida .titulo { color: #1e8449; }
         .invalida .titulo { color: #c0392b; }
+        .pendente .titulo { color: #b7791f; }
         .status .numero { font-family: monospace; font-size: 16px; font-weight: 700; color: #0E2439; }
+        .status .detalhe { font-size: 13px; color: #555; margin-top: 4px; }
         .nota { font-size: 12px; color: #888; line-height: 1.5; }
         a.voltar { display: inline-block; margin-top: 20px; color: #00A8CC; text-decoration: none; font-size: 14px; font-weight: 600; }
     </style>
@@ -33,30 +36,71 @@
         <p class="sub">ASF — Associação de Surf Feminino</p>
         <div id="resultado"></div>
         <p class="nota">Parceiro: confira se o número exibido no app da associada é idêntico ao verificado aqui. Em caso de dúvida, fale com a ASF.</p>
-        <a class="voltar" href="index.html">← Voltar para o app</a>
+        <a class="voltar" href="index.html">↖ Voltar para o app</a>
     </div>
     <script>
+        /* ─── Registro central (Supabase) — preencher APÓS rotacionar as credenciais.
+           Vazio = verificação offline (só formato). NUNCA commitar chave exposta. ─── */
+        const SUPABASE_URL = '';      /* ex.: 'https://SEU-REF.supabase.co' */
+        const SUPABASE_ANON_KEY = ''; /* nova anon key (pós-rotação) */
+
         const params = new URLSearchParams(location.search);
         const numero = (params.get('numero') || '').trim().toUpperCase();
         const el = document.getElementById('resultado');
         const formatoOk = /^ASF-[A-Z0-9]{6,12}$/.test(numero);
-        if (formatoOk) {
+        const numSeguro = numero.replace(/[<>&]/g, '');
+
+        function bloco(cls, icone, titulo, detalhe) {
             el.innerHTML =
-                '<div class="status valida">' +
-                '<div class="icone">✅</div>' +
-                '<p class="titulo">Carteirinha válida</p>' +
-                '<p class="numero">' + numero + '</p>' +
-                '</div>' +
-                '<p class="nota">Número em formato oficial ASF. A associada pode utilizar os benefícios de parceiros.</p>';
-        } else {
-            el.innerHTML =
-                '<div class="status invalida">' +
-                '<div class="icone">⚠️</div>' +
-                '<p class="titulo">Carteirinha não reconhecida</p>' +
-                (numero ? '<p class="numero">' + numero.replace(/[<>&]/g, '') + '</p>' : '<p class="numero">Nenhum número informado</p>') +
-                '</div>' +
-                '<p class="nota">Este número não segue o padrão oficial ASF. Peça para a associada abrir a carteirinha no app e apresentar o QR novamente.</p>';
+                '<div class="status ' + cls + '">' +
+                '<div class="icone">' + icone + '</div>' +
+                '<p class="titulo">' + titulo + '</p>' +
+                '<p class="numero">' + (numSeguro || 'Nenhum número informado') + '</p>' +
+                (detalhe ? '<p class="detalhe">' + detalhe + '</p>' : '') +
+                '</div>';
         }
+
+        function offline() {
+            if (formatoOk) {
+                bloco('pendente', '⏳', 'Formato válido — verificação online indisponível',
+                      'Número em formato oficial ASF, mas o registro central está offline. Confira a validade impressa na carteirinha.');
+            } else {
+                bloco('invalida', '⚠️', 'Carteirinha não reconhecida',
+                      'Este número não segue o padrão oficial ASF.');
+            }
+        }
+
+        (async function () {
+            if (!numero) { offline(); return; }
+            if (!SUPABASE_URL || !SUPABASE_ANON_KEY) { offline(); return; }
+            try {
+                const r = await fetch(SUPABASE_URL + '/rest/v1/rpc/verificar_carteirinha', {
+                    method: 'POST',
+                    headers: {
+                        'apikey': SUPABASE_ANON_KEY,
+                        'Authorization': 'Bearer ' + SUPABASE_ANON_KEY,
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ p_numero: numero }),
+                });
+                if (!r.ok) { offline(); return; }
+                const rows = await r.json();
+                const c = rows && rows[0];
+                if (!c) {
+                    bloco('invalida', '⚠️', 'Carteirinha não encontrada',
+                          'Este número não consta no registro oficial ASF. Peça para a associada abrir a carteirinha no app e apresentar o QR novamente.');
+                } else if (c.valida) {
+                    bloco('valida', '✅', 'Carteirinha válida',
+                          (c.nivel ? 'Nível: ' + c.nivel + ' · ' : '') +
+                          'Válida até ' + String(c.validade).split('-').reverse().join('/') +
+                          '. A associada pode utilizar os benefícios de parceiros.');
+                } else {
+                    bloco('invalida', '🔴', c.ativo ? 'Carteirinha expirada' : 'Carteirinha inativa',
+                          'Validade encerrada em ' + String(c.validade).split('-').reverse().join('/') +
+                          '. A associada precisa renovar no app.');
+                }
+            } catch (e) { offline(); }
+        })();
     </script>
     <script src="/asf-app/asf-redesign.js" defer></script>
 </body>
