@@ -405,9 +405,15 @@
     st.id = 'asf-menu-fix';
     st.textContent =
       'header{z-index:1001!important;}' +
-      '#header-menu{position:fixed!important;top:76px;right:12px;z-index:10001!important;max-height:calc(100vh - 90px)!important;}' +
+      '#header-menu{position:fixed!important;top:76px;right:12px;z-index:10001!important;max-height:calc(100vh - 90px)!important;background:var(--white,#fff);border-radius:14px;box-shadow:0 12px 32px rgba(14,36,57,.25);padding:8px;min-width:230px;border:1px solid rgba(14,36,57,.08);overflow-y:auto;}' +
       '@media(max-width:480px){#header-menu{top:76px!important;left:12px;right:12px;}}';
     document.head.appendChild(st);
+
+    // move o menu para o <body>: o header sticky tem altura colapsada (2px) e seu
+    // contexto de empilhamento quebrado fazia os cards cobrirem o dropdown
+    if (menu.parentElement && menu.parentElement.tagName !== 'BODY') {
+      document.body.appendChild(menu);
+    }
 
     function placeMenu() {
       var h = document.querySelector('header');
@@ -503,4 +509,35 @@
   };
 
   ready(extendIndex);
+})();
+
+/* ---------- FASE 8.2 — Menu: mover para o <body> (30/09/2026) ----------
+   Mesmo com z-index alto, o #header-menu (filho do header) perdia o hit-test
+   para o card "Incentivos de União" (position:relative logo abaixo da busca).
+   Correção definitiva e ADITIVA: move o nav para o <body> (raiz), como fixed
+   com z-index 999999 — nada mais na página o cobre. O toggle por id e os
+   bindings já existentes continuam funcionando (usam getElementById/ref). */
+(function () {
+  function ready(fn) { document.readyState !== 'loading' ? fn() : document.addEventListener('DOMContentLoaded', fn); }
+  ready(function () {
+    var menu = document.getElementById('header-menu');
+    if (!menu || menu.__asfMoved) return;
+    menu.__asfMoved = true;
+
+    var st = document.createElement('style');
+    st.id = 'asf-menu-fix2';
+    st.textContent = '#header-menu{z-index:999999!important;}';
+    document.head.appendChild(st);
+
+    function placeMenu() {
+      var h = document.querySelector('header');
+      if (h) menu.style.top = (Math.round(h.getBoundingClientRect().bottom) + 4) + 'px';
+    }
+    placeMenu();
+    document.body.appendChild(menu); // raiz: fora do contexto do header
+
+    var t = document.getElementById('menu-toggle');
+    if (t) t.addEventListener('click', function () { setTimeout(placeMenu, 0); });
+    window.addEventListener('resize', placeMenu, { passive: true });
+  });
 })();
