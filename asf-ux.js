@@ -541,3 +541,31 @@
     window.addEventListener('resize', placeMenu, { passive: true });
   });
 })();
+
+/* ---------- FASE 9 — Comunidade real: remove conteúdo demo (30/09/2026) ----------
+   A seção #comunidade exibia posts fictícios (Carol/Grazielle/Márcia) e o card
+   placeholder "Mana da Semana". A comunidade real vive na Galeria das Manas
+   (galeria.asf.surf). Aqui substituímos o conteúdo da seção por um card de
+   entrada para a Galeria e mantemos stubs ocultos (mana-avatar, user-posts)
+   para não quebrar js/home-main.js. */
+(function () {
+  function ready(fn) { document.readyState !== 'loading' ? fn() : document.addEventListener('DOMContentLoaded', fn); }
+  ready(function () {
+    var sec = document.getElementById('comunidade');
+    if (!sec || sec.__asfReal) return;
+    sec.__asfReal = true;
+    sec.innerHTML =
+      '<div class="section-header">' +
+        '<h2 class="section-title">👥 Comunidade</h2>' +
+        '<a href="https://galeria.asf.surf/" class="see-all">Ver todos →</a>' +
+      '</div>' +
+      '<div class="card" style="text-align:center; padding: 28px 20px; margin: 0 20px 20px;">' +
+        '<div style="font-size: 42px; margin-bottom: 8px;">📸</div>' +
+        '<h3 style="margin: 0 0 8px; color: var(--secondary);">Galeria das Manas</h3>' +
+        '<p style="font-size: 14px; color: var(--gray-500); margin: 0 0 16px;">O mural oficial da comunidade ASF: posts, fotos e stokes reais das manas. Venha fazer parte! 🏄‍♀️</p>' +
+        '<a href="https://galeria.asf.surf/" style="display:inline-block; background: linear-gradient(135deg, #00A8CC, #0E2439); color: white; padding: 12px 28px; border-radius: 24px; font-weight: 700; font-size: 14px; text-decoration: none;">Abrir a Galeria →</a>' +
+      '</div>' +
+      '<span id="mana-avatar" style="display:none">👩</span>' +
+      '<div id="user-posts" style="display:none"></div>';
+  });
+})();
