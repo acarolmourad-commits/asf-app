@@ -1,8 +1,8 @@
 {
-  "date": "2026-10-01T11:57:03.365655+00:00",
-  "total": 83,
-  "ok": 72,
-  "skipped": 10,
+  "date": "2026-10-01T17:17:55.745265+00:00",
+  "total": 89,
+  "ok": 79,
+  "skipped": 9,
   "broken_count": 1,
   "broken": [
     "https://acarolmourad-commits.github.io/asf-swell/"
@@ -139,11 +139,6 @@
       "http": 200
     },
     {
-      "url": "https://instagram.com/asf.surffeminino",
-      "status": "skipped",
-      "http": null
-    },
-    {
       "url": "https://marine-api.open-meteo.com",
       "status": "skipped",
       "http": null
@@ -272,7 +267,49 @@
       "local": true
     },
     {
+      "url": "assets/css/asf-inline.css",
+      "status": "ok",
+      "http": 200,
+      "local": true
+    },
+    {
       "url": "assets/images/asf-logo-small.png",
+      "status": "ok",
+      "http": 200,
+      "local": true
+    },
+    {
+      "url": "assets/js/inline/asf-inline-01.js",
+      "status": "ok",
+      "http": 200,
+      "local": true
+    },
+    {
+      "url": "assets/js/inline/asf-inline-02.js",
+      "status": "ok",
+      "http": 200,
+      "local": true
+    },
+    {
+      "url": "assets/js/inline/asf-inline-03.js",
+      "status": "ok",
+      "http": 200,
+      "local": true
+    },
+    {
+      "url": "assets/js/inline/asf-inline-04.js",
+      "status": "ok",
+      "http": 200,
+      "local": true
+    },
+    {
+      "url": "assets/js/inline/asf-inline-05.js",
+      "status": "ok",
+      "http": 200,
+      "local": true
+    },
+    {
+      "url": "assets/js/inline/asf-inline-06.js",
       "status": "ok",
       "http": 200,
       "local": true
