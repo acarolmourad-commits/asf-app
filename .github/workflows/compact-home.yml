@@ -1,0 +1,20 @@
+name: Home compacta (fase 2) — esconde seções SPA secundárias no load
+on:
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  compact:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Aplica patch (com asserts)
+        run: python3 .github/scripts/compact_home.py
+      - name: Publica branch feat/home-compact
+        run: |
+          git config user.name "ASF Bot"
+          git config user.email "asf.surffeminino@gmail.com"
+          git checkout -b feat/home-compact
+          git add index.html js/home-compact.js
+          git commit -m "feat: home compacta — seções SPA secundárias ocultas no load inicial (nada removido)"
+          git push -u origin feat/home-compact
