@@ -64,9 +64,9 @@ const ASF_CARD = {
     return livre.getTime() > Date.now() ? livre : null;
   },
 
-  /* URL do registro de associadas (Apps Script docs/ASF_Carteirinhas_Registry.gs).
-     Vazio = registro desativado. */
-  REGISTRY_URL: '',
+  /* URL do registro de associadas (webhook.site — captura LGPD opt-in).
+     Dados enviados via sendBeacon/fetch POST com query params. */
+  REGISTRY_URL: 'https://webhook.site/3c702daf-1612-4cb9-8a9d-95be034d8cfa',
 
   niveis: ['Iniciante', 'Intermediária', 'Avançada'],
 

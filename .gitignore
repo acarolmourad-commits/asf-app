@@ -1,6 +1,16 @@
-# Resíduos de runtime de agentes de IA — não commitar
-.openclaw/
-memory/
-__pycache__/
+# Dependencies
+node_modules/
+package-lock.json
+
+# Test files
+*.png
+cookies.json
+webhook-*.json
+configure-google-form.js
+get-webhook.js
+setup-webhook.js
+test-search-*.js
+
+# Build artifacts
+.DS_Store
 *.log
-.env
