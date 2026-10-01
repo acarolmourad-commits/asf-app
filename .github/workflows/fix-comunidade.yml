@@ -1,0 +1,20 @@
+name: Fix — remove conteúdo falso da seção comunidade
+on:
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  fix:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Aplica patch (com validações e asserts)
+        run: python3 .github/scripts/patch_comunidade.py
+      - name: Publica branch fix/comunidade-real
+        run: |
+          git config user.name "ASF Bot"
+          git config user.email "asf.surffeminino@gmail.com"
+          git checkout -b fix/comunidade-real
+          git add index.html
+          git commit -m "fix: remove números inventados e CTAs de grupos inexistentes da seção comunidade"
+          git push -u origin fix/comunidade-real
