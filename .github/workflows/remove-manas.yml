@@ -1,0 +1,21 @@
+name: Fix — remove seção Manas/grupos da home
+on:
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  fix:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: fix/comunidade-real
+      - name: Aplica remoção (com validações)
+        run: python3 .github/scripts/patch_remove_manas.py
+      - name: Commit na branch fix/comunidade-real
+        run: |
+          git config user.name "ASF Bot"
+          git config user.email "asf.surffeminino@gmail.com"
+          git add index.html
+          git commit -m "fix: remove seção Manas/grupos da home (sem divulgação de grupos)"
+          git push
