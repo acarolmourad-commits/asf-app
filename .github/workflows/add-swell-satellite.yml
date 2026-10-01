@@ -1,0 +1,32 @@
+name: ASF Add Swell Satellite (one-shot)
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  add:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Registrar asf-swell no data/apps.json
+        run: python3 scripts/add_swell_registry.py
+      - name: Regenerar consumidores do registry
+        run: python3 scripts/sync_apps_registry.py --write
+      - name: Commit if changed
+        run: |
+          git config user.name "ASF Bot"
+          git config user.email "bot@asf-app.com"
+          git add data/apps.json asf-network.js satellites.html apps/index.html scripts/add_swell_registry.py
+          if git diff --cached --quiet; then
+            echo "Sem mudancas"
+          else
+            git commit -m "feat(registry): asf-swell adicionado como 53o satelite (Mar & Condicoes) + consumidores regenerados"
+            git push
+          fi
