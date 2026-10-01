@@ -1,7 +1,7 @@
 {
-  "date": "2026-09-30T21:35:44.506161+00:00",
-  "total": 79,
-  "ok": 69,
+  "date": "2026-10-01T02:46:45.296468+00:00",
+  "total": 83,
+  "ok": 73,
   "skipped": 10,
   "broken_count": 0,
   "broken": [],
@@ -12,17 +12,22 @@
       "http": 200
     },
     {
+      "url": "https://acarolmourad-commits.github.io/asf-atlas/",
+      "status": "ok",
+      "http": 200
+    },
+    {
       "url": "https://acarolmourad-commits.github.io/asf-checklist/",
       "status": "ok",
       "http": 200
     },
     {
-      "url": "https://acarolmourad-commits.github.io/asf-eventos/",
+      "url": "https://acarolmourad-commits.github.io/asf-glossario/",
       "status": "ok",
       "http": 200
     },
     {
-      "url": "https://acarolmourad-commits.github.io/asf-glossario/",
+      "url": "https://acarolmourad-commits.github.io/asf-goldenhour/",
       "status": "ok",
       "http": 200
     },
@@ -33,6 +38,16 @@
     },
     {
       "url": "https://acarolmourad-commits.github.io/asf-manobras/",
+      "status": "ok",
+      "http": 200
+    },
+    {
+      "url": "https://acarolmourad-commits.github.io/asf-mapa/",
+      "status": "ok",
+      "http": 200
+    },
+    {
+      "url": "https://acarolmourad-commits.github.io/asf-mare/",
       "status": "ok",
       "http": 200
     },
@@ -83,6 +98,11 @@
     },
     {
       "url": "https://acarolmourad-commits.github.io/asf-sos/",
+      "status": "ok",
+      "http": 200
+    },
+    {
+      "url": "https://acarolmourad-commits.github.io/asf-swell/",
       "status": "ok",
       "http": 200
     },
