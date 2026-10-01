@@ -1520,8 +1520,6 @@ t Section -->
             </div>
         </div>
 
-        <!-- Manas Section - WhatsApp Groups -->
-        
 <!-- Brand Hub Section -->
 <div class="section" 
 <div class="section" id="loja" style="display: none !important;">
@@ -1796,104 +1794,7 @@ t Section -->
     </div>
 </div>
 
-<div class="section" id="manas">
-            <div class="section-header">
-                <h2 class="section-title">💬 Manas - Grupos de Surf</h2>
-                            </div>
-
-            <div style="background: linear-gradient(135deg, #25D366 0%, #128C7E 100%); padding: 16px; margin: 0 20px 20px; border-radius: 16px; color: white;">
-                <p style="font-size: 14px; font-weight: 600;">👩‍👩‍👧 Surftrip com as amigas!</p>
-                <p style="font-size: 12px; opacity: 0.9; margin-top: 4px;">Os grupos de WhatsApp estão sendo formados — deixe seu interesse abaixo e avisaremos quando o da sua região abrir.</p>
-            </div>
-
-            <!-- Contact Form -->
-            <div style="background: var(--light); padding: 20px; margin: 0 20px 20px; border-radius: 16px;">
-                <h4 style="margin-bottom: 15px; color: var(--secondary);">📱 Entre na lista de interesse</h4>
-
-                <div style="margin-bottom: 15px;">
-                    <label style="font-size: 12px; color: var(--gray-600);">Seu WhatsApp:</label>
-                    <input type="tel" placeholder="(XX) XXXXX-XXXX" style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 10px; font-size: 14px; margin-top: 5px;" id="whatsapp-input">
-                </div>
-
-                <div style="margin-bottom: 15px;">
-                    <label style="font-size: 12px; color: var(--gray-600);">Seu nome:</label>
-                    <input type="text" placeholder="Seu nome completo" style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 10px; font-size: 14px; margin-top: 5px;" id="name-input">
-                </div>
-
-                <div style="margin-bottom: 15px;">
-                    <label style="font-size: 12px; color: var(--gray-600);">Sua cidade:</label>
-                    <input type="text" placeholder="Ex: Bertioga, Santos, Guarujá..." style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 10px; font-size: 14px; margin-top: 5px;" id="city-input">
-                </div>
-
-                <div style="margin-bottom: 15px;">
-                    <label style="font-size: 12px; color: var(--gray-600);">Nível de surf:</label>
-                    <select style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 10px; font-size: 14px; margin-top: 5px; background: white;">
-                        <option>Iniciante (primeiro contato)</option>
-                        <option>Iniciante (já pega onda)</option>
-                        <option>Intermediária</option>
-                        <option>Avançada</option>
-                    </select>
-                </div>
-
-                <button class="btn btn-primary" style="width: 100%; background: #25D360; border: none; font-weight: bold; font-size: 14px;" onclick="showToast('✅ Interesse registrado!\n\n📱 Quando o grupo da sua região for criado, avisaremos pelo WhatsApp.\n\nEnquanto isso, fale com a Carol na aba Contato! 🌊🏄‍♀️')">Registrar Interesse</button>
-            </div>
-
-            <!-- Groups -->
-            <h3 id="grupos-ativos" style="margin: 20px 20px 10px; font-size: 16px; color: var(--secondary);">🏖️ Grupos em formação</h3>
-            <div class="cards-grid">
-                <div class="card" style="display:none">
-<span class="card-tag green">ATIVO</span>
-                    <h3>🏖️ Bertioga Surf Girls</h3>
-                    <p>Encontros semanais (domingos)</p>
-                    <p style="font-size: 12px; color: var(--gray-400); margin-top: 5px;">📍 Riviera de São Lourenço</p>
-                    <p style="font-size: 12px; color: var(--gray-400);">🏄 Todos os níveis</p>
-                </div>
-                <div class="card" style="display:none">
-<span class="card-tag green">ATIVO</span>
-                    <h3>🏝️ Guarujá & Santos Surf</h3>
-                    <p>Encontros semanais (sábados)</p>
-                    <p style="font-size: 12px; color: var(--gray-400); margin-top: 5px;">📍 Guarujá - Praia das Pitangueiras</p>
-                    <p style="font-size: 12px; color: var(--gray-400);">🏄 Todos os níveis</p>
-                </div>
-                <div class="card" style="display:none">
-<span class="card-tag green">ATIVO</span>
-                    <h3>🌊 Ubatuba Surf Girls</h3>
-                    <p>Encontros em feriados</p>
-                    <p style="font-size: 12px; color: var(--gray-400); margin-top: 5px;">📍 Ubatuba - Itamambuca</p>
-                    <p style="font-size: 12px; color: var(--gray-400);">🏄 Todos os níveis</p>
-                </div>
-            </div>
-
-            <!-- Stats -->
-            <div style="background: var(--light); padding: 20px; margin: 20px; border-radius: 16px; text-align: center;">
-                <p style="font-size: 14px; color: var(--gray-600);">🌱 Comunidade em formação — os números reais aparecerão aqui quando os primeiros grupos forem criados. Sem dados inventados.</p>
-            </div>
-
-            <!-- Quick Questions -->
-            <h3 style="margin: 20px 20px 10px; font-size: 16px; color: var(--secondary);">🌊 Responda Rápido</h3>
-            <div class="cards-grid">
-                <div class="card">
-                    <span class="card-tag purple">ENQUETE</span>
-                    <h3>🏖️ Onde você gostaria de surfar?</h3>
-                    <div style="margin-top: 10px;">
-                        <button class="btn btn-secondary" style="width: 100%; margin: 5px 0; text-align: left;" onclick="votePoll(this, 'destino', 'Ilhabela')" class="poll-voted" data-poll-key="destino-Ilhabela">🏝️ Ilhabela</button>
-                        <button class="btn btn-secondary" style="width: 100%; margin: 5px 0; text-align: left;" onclick="votePoll(this, 'destino-favorito', 'ubatuba')">🌊 Ubatuba</button>
-                        <button class="btn btn-secondary" style="width: 100%; margin: 5px 0; text-align: left;" onclick="votePoll(this, 'destino-favorito', 'bertioga')">🏖️ Bertioga</button>
-                    </div>
-                </div>
-                <div class="card">
-                    <span class="card-tag purple">ENQUETE</span>
-                    <h3>🚤 Faria uma barca com as manas?</h3>
-                    <div style="margin-top: 10px;">
-                        <button class="btn btn-secondary" style="width: 100%; margin: 5px 0; text-align: left;" onclick="votePoll(this, 'surftrip-2026', 'sim')">😍 SIM!</button>
-                        <button class="btn btn-secondary" style="width: 100%; margin: 5px 0; text-align: left;" onclick="votePoll(this, 'surftrip-2026', 'talvez')">🤔 Talvez</button>
-                        <button class="btn btn-secondary" style="width: 100%; margin: 5px 0; text-align: left;" onclick="votePoll(this, 'surftrip-2026', 'aprender')">😅 Preciso aprender primeiro</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Utilities Section -->
+<!-- Utilities Section -->
         <div class="section" id="utilities">
             <div class="section-header">
                 <h2 class="section-title">🌊 Utilitários</h2>
