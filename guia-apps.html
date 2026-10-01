@@ -48,6 +48,7 @@ footer{text-align:center;font-size:12.5px;color:var(--g);padding:24px;border-top
 </style>
     <link rel="stylesheet" href="/asf-app/asf-site-redesign.css">
     <script src="data/apps-count.js"></script>
+  <link rel="stylesheet" href="./asf-mural.css">
 </head>
 <body>
 <nav>
@@ -194,5 +195,57 @@ function filtra(q){q=q.trim().toLowerCase();let n=0;document.querySelectorAll('.
 </script>
 <script src="https://acarolmourad-commits.github.io/asf-app/asf-network.js" defer></script>
     <script src="/asf-app/asf-redesign.js" defer></script>
+  <!-- ASF Hub Filter: chips de categoria + busca sobre data/apps.json (aditivo) -->
+  <script defer src="./asf-bottomnav.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", async () => {
+      const grid = document.querySelector("#apps-grid, .apps-grid, main");
+      if (!grid || !window.asfHubFilter) return;
+      try {
+        const data = await (await fetch("./data/apps.json")).json();
+        const apps = data.apps.map(a => ({ id: a.slug, nome: a.title || a.name,
+          url: a.url, icon: a.icon, cat: a.category }));
+        const wrap = document.createElement("div");
+        wrap.id = "asf-hub-filter";
+        wrap.innerHTML = '<input type="search" id="asf-hub-busca" placeholder="Buscar app..." ' +
+          'aria-label="Buscar mini-app" style="width:100%;padding:.6rem;border-radius:10px;' +
+          'border:1px solid #ccc;margin-bottom:.5rem"><div id="asf-hub-chips"></div>' +
+          '<div id="asf-hub-result"></div>';
+        grid.parentNode.insertBefore(wrap, grid);
+        const CATS = [...new Set(apps.map(a => a.cat).filter(Boolean))];
+        const chipsEl = wrap.querySelector("#asf-hub-chips");
+        const resEl = wrap.querySelector("#asf-hub-result");
+        const input = wrap.querySelector("#asf-hub-busca");
+        const render = lista => {
+          resEl.innerHTML = lista.map(a =>
+            `<a class="mural-card" style="display:block;text-decoration:none;color:inherit" href="${a.url}">${a.icon || ""} <strong>${a.nome}</strong></a>`).join("");
+        };
+        let catAtiva = "Todos";
+        chipsEl.innerHTML = ["Todos", ...CATS].map(c =>
+          `<button class="chip" data-cat="${c}">${c}</button>`).join("");
+        const apply = () => {
+          const q = input.value.trim().toLowerCase();
+          render(apps.filter(a =>
+            (catAtiva === "Todos" || a.cat === catAtiva) &&
+            (!q || a.nome.toLowerCase().includes(q))));
+        };
+        chipsEl.addEventListener("click", e => {
+          if (!e.target.matches(".chip")) return;
+          chipsEl.querySelectorAll(".chip").forEach(c => c.classList.remove("ativo"));
+          e.target.classList.add("ativo");
+          catAtiva = e.target.dataset.cat;
+          apply();
+        });
+        input.addEventListener("input", apply);
+        render(apps); // mostra todos por padrao; grid original permanece intacto abaixo
+      } catch (e) { /* mantem pagina original se apps.json falhar */ }
+    });
+  </script>
+  <script>
+    if ("serviceWorker" in navigator) {
+      window.addEventListener("load", () =>
+        navigator.serviceWorker.register("./sw.js").catch(() => {}));
+    }
+  </script>
 </body>
 </html>

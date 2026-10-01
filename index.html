@@ -72,6 +72,7 @@
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://acarolmourad-commits.github.io/thumbnails/asf-app.jpg">
+  <link rel="stylesheet" href="./asf-mural.css">
 </head><body>
     <!-- Skip to content for accessibility -->
     <!-- Link skip to content movido para script -->
@@ -2307,5 +2308,14 @@ t Section -->
             <p style="margin-top: 24px; padding-top: 16px; border-top: 1px solid rgba(255,255,255,0.15); opacity: 0.6; text-align: center;">© 2026 ASF – Associação de Surf Feminino. Feito com 🌊 por mulheres que surfam.</p>
         </div>
     </footer>
+  <!-- ASF Mural/BottomNav/SW includes (aditivo, 01/10/2026) -->
+  <script defer src="./asf-bottomnav.js"></script>
+  <script defer src="./asf-mural.js"></script>
+  <script>
+    if ("serviceWorker" in navigator) {
+      window.addEventListener("load", () =>
+        navigator.serviceWorker.register("./sw.js").catch(() => {}));
+    }
+  </script>
 </body>
 </html>
