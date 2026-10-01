@@ -1,0 +1,20 @@
+name: Fix busca — regra .search-results.active ausente
+on:
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  fix:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Aplica patch (com asserts)
+        run: python3 .github/scripts/fix_search_css.py
+      - name: Publica branch fix/search-results-css
+        run: |
+          git config user.name "ASF Bot"
+          git config user.email "asf.surffeminino@gmail.com"
+          git checkout -b fix/search-results-css
+          git add assets/css/asf-inline.css
+          git commit -m "fix: busca da home — .search-results.active{display:block} (resultados invisíveis)"
+          git push -u origin fix/search-results-css
