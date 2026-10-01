@@ -1,11 +1,11 @@
 {
   "date": "2026-10-01",
   "board_tip": {
-    "title": "Fish: Para ondas pequenas",
-    "content": "Shape com outline curto e largo. Perfeita para ondas fracas! Twin ou quad fin para mais speed.",
+    "title": "Funboard: A versátil",
+    "content": "Funboards (7'0\"-8'6\") são ideais para evolução. Mais ágil que longboard, mantém estabilidade.",
     "tags": [
-      "Fish",
-      "Speed"
+      "Funboard",
+      "Evolução"
     ]
   },
   "eco_tip": {
@@ -13,6 +13,6 @@
     "content": "Núcleo EPS ecológico. Pode ser 100% reciclado ou biodegradado. Menor impacto ambiental.",
     "category": "Sustentabilidade"
   },
-  "daily_message": "Hidrate-se: 500ml de água antes de surfar!",
-  "generated_at": "2026-10-01T02:46:24.571245"
+  "daily_message": "Você sabia? O bloco Phenix Teccel pode ser reciclado!",
+  "generated_at": "2026-10-01T11:56:41.966401"
 }

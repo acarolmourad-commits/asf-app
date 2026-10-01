@@ -1,10 +1,12 @@
 {
-  "date": "2026-10-01T02:46:45.296468+00:00",
+  "date": "2026-10-01T11:57:03.365655+00:00",
   "total": 83,
-  "ok": 73,
+  "ok": 72,
   "skipped": 10,
-  "broken_count": 0,
-  "broken": [],
+  "broken_count": 1,
+  "broken": [
+    "https://acarolmourad-commits.github.io/asf-swell/"
+  ],
   "results": [
     {
       "url": "https://acarolmourad-commits.github.io/asf-app/",
@@ -103,8 +105,8 @@
     },
     {
       "url": "https://acarolmourad-commits.github.io/asf-swell/",
-      "status": "ok",
-      "http": 200
+      "status": "broken",
+      "http": "URLError"
     },
     {
       "url": "https://acarolmourad-commits.github.io/asf-treino/",
