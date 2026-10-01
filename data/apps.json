@@ -1,7 +1,7 @@
 {
   "hub": "https://acarolmourad-commits.github.io/asf-app/",
   "version": 2,
-  "updated": "2026-09-25",
+  "updated": "2026-10-01",
   "apps": [
     {
       "slug": "asf-previsao",
@@ -254,18 +254,6 @@
       "icon_apps": "🚗",
       "name_apps": "ASF Carona",
       "desc_apps": "Carona solidária para praias e eventos de surf"
-    },
-    {
-      "slug": "asf-eventos",
-      "name": "📅 ASF Eventos",
-      "url": "https://acarolmourad-commits.github.io/asf-eventos/",
-      "icon": "📅",
-      "title": "ASF Eventos",
-      "category": "💜 Vida & Comunidade",
-      "desc": "Calendário de competições e encontros",
-      "icon_apps": "📅",
-      "name_apps": "ASF Eventos",
-      "desc_apps": "Calendário de competições e eventos de surf feminino"
     },
     {
       "slug": "asf-galeria",
@@ -663,7 +651,6 @@
     "asf-diario",
     "asf-eco",
     "asf-equipamento",
-    "asf-eventos",
     "asf-filmes",
     "asf-galeria",
     "asf-glossario",
