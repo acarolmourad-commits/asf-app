@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Mural das Manas - ASF</title>
+  <link rel="stylesheet" href="../asf-mural.css">
+</head>
+<body style="font-family:sans-serif;max-width:720px;margin:0 auto;padding:1rem">
+  <header>
+    <p><a href="../index.html">&larr; App ASF</a></p>
+    <h1>Mural das Manas</h1>
+    <p>Compartilhe suas sessoes, apoie as manas e vote na Foto do Mes!</p>
+  </header>
+  <div id="mural-manas"></div>
+  <script src="../asf-mural.js"></script>
+  <script>
+    // Bottom nav com base relativa a raiz
+    fetch("../asf-bottomnav.js").then(r => r.text()).then(t => {
+      const s = document.createElement("script");
+      s.textContent = t.replaceAll("./index.html", "../index.html")
+        .replaceAll("./previsao-surf/", "../previsao-surf/")
+        .replaceAll("./mural/", "./")
+        .replaceAll("./diario/", "../diario/")
+        .replaceAll("./carteirinhas.html", "../carteirinhas.html");
+      document.body.appendChild(s);
+    });
+  </script>
+</body>
+</html>

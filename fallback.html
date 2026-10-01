@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Em manutencao - ASF</title>
+  <link rel="stylesheet" href="./asf-mural.css">
+</head>
+<body style="display:grid;place-items:center;min-height:80vh;text-align:center;font-family:sans-serif">
+  <main>
+    <h1>Ops, mare mexida!</h1>
+    <p id="msg">Este mini-app esta em manutencao. Voltamos ja ja!</p>
+    <p><a href="./index.html">Voltar ao App ASF</a></p>
+  </main>
+  <script src="./asf-bottomnav.js"></script>
+  <script>
+    const app = new URLSearchParams(location.search).get("app");
+    if (app) document.getElementById("msg").textContent =
+      'O app "' + app + '" esta em manutencao. Voltamos ja ja!';
+  </script>
+</body>
+</html>

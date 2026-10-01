@@ -1,0 +1,39 @@
+/* ASF Mural + Bottom Nav + Hub Filter + Card Previsao (mobile-first, dark mode) */
+.asf-bottom-nav{position:fixed;bottom:0;left:0;right:0;z-index:1000;display:flex;
+  justify-content:space-around;background:var(--asf-bg,#fff);
+  border-top:1px solid rgba(0,0,0,.08);padding:.4rem 0 calc(.4rem + env(safe-area-inset-bottom))}
+.asf-bottom-nav a{display:flex;flex-direction:column;align-items:center;gap:2px;
+  text-decoration:none;color:inherit;font-size:.7rem;opacity:.7}
+.asf-bottom-nav a.ativo{opacity:1;color:var(--asf-primary,#0b7fab)}
+body{padding-bottom:64px}
+
+.mural-foto-mes{background:linear-gradient(135deg,#0b7fab,#14b8d4);color:#fff;
+  border-radius:16px;padding:1rem;margin-bottom:1rem}
+.mural-top3{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:.75rem}
+.mural-card{background:var(--asf-bg,#fff);border-radius:14px;padding:.75rem;
+  box-shadow:0 2px 8px rgba(0,0,0,.08);position:relative;margin-bottom:1rem}
+.mural-card img{width:100%;border-radius:10px;object-fit:cover}
+.mural-card .avatar{width:32px;height:32px;border-radius:50%}
+.mural-card header{display:flex;align-items:center;gap:.5rem;padding:.5rem 0}
+.badge{background:#ffd166;color:#5b4500;border-radius:999px;padding:1px 8px;font-size:.65rem}
+.btn-apoiar,.btn-votar{width:100%;margin-top:.5rem;border:0;border-radius:10px;
+  padding:.55rem;background:#e0f4f9;color:#075e78;font-weight:600;cursor:pointer}
+.medalha{position:absolute;top:.5rem;right:.5rem;font-weight:700;color:#fff;
+  background:rgba(0,0,0,.35);border-radius:999px;padding:2px 8px;font-size:.75rem}
+.form-comentario{display:flex;gap:.4rem;margin-top:.5rem}
+.form-comentario input{flex:1;border:1px solid #ddd;border-radius:8px;padding:.4rem}
+
+.chip{border:1px solid #ccc;border-radius:999px;padding:.35rem .9rem;background:none;
+  cursor:pointer;margin:.2rem;color:inherit}
+.chip:hover,.chip.ativo{background:var(--asf-primary,#0b7fab);color:#fff;border-color:transparent}
+
+.card-previsao{border-radius:16px;padding:1rem;color:#fff}
+.status-verde{background:#1e9e6a}.status-amarelo{background:#e0a100}.status-azul{background:#0b7fab}
+.status-tag{background:rgba(255,255,255,.25);border-radius:999px;padding:2px 10px;font-size:.7rem}
+.card-previsao ul{list-style:none;padding:0;display:flex;gap:1rem}
+.card-previsao a{color:#fff}
+
+@media (prefers-color-scheme:dark){
+  .mural-card{--asf-bg:#16232b}
+  .asf-bottom-nav{--asf-bg:#0e1a21;border-top-color:rgba(255,255,255,.1)}
+}
