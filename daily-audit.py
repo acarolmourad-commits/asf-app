@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """ASF Daily Audit Script - Executado diariamente às 8:25 UTC-3
-Verifica: app, 54 sites, carteirinha, busca, asf.surf, webhook"""
+Verifica: app, 53 sites, carteirinha, busca, asf.surf, webhook"""
 
 import urllib.request, json, re, time
 from datetime import datetime
@@ -55,8 +55,8 @@ if __name__ == "__main__":
     except Exception as e:
         print(f"  Error: {e}")
 
-    # 3. 54 apps
-    print("\n🌐 SITES SATÉLITES (54 apps)")
+    # 3. 53 apps
+    print("\n🌐 SITES SATÉLITES (53 apps)")
     req = urllib.request.Request("https://acarolmourad-commits.github.io/asf-app/data/app-links.json")
     data = json.loads(urllib.request.urlopen(req, timeout=15).read().decode('utf-8'))
     apps = data.get('apps', {})
@@ -83,7 +83,7 @@ if __name__ == "__main__":
     print("\n" + "=" * 60)
     print("RESUMO:")
     print(f"  • App principal: Online ✅ | Busca funcionando ✅ | Carteirinha ✅")
-    print(f"  • Sites satélites: {working}/54 online ✅")
+    print(f"  • Sites satélites: {working}/53 online ✅")
     print(f"  • Carteirinha: Registro ativado ✅ | Webhook ativo ✅")
     print(f"  • asf.surf: HTTPS {'✅' if surf['ok'] else '❌'}")
     print(f"  • Próxima auditoria: amanhã às 8:25 UTC-3")
