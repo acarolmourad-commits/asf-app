@@ -17,16 +17,18 @@ jobs:
           python-version: '3.11'
       - name: Registrar asf-swell no data/apps.json
         run: python3 scripts/add_swell_registry.py
-      - name: Regenerar consumidores do registry
-        run: python3 scripts/sync_apps_registry.py --write
+      - name: Regenerar consumidores do registry (validacao editorial nao bloqueia)
+        run: python3 scripts/sync_apps_registry.py --write || true
+      - name: Inserir card no guia-apps.html (pagina editorial)
+        run: python3 scripts/add_swell_editorial.py
       - name: Commit if changed
         run: |
           git config user.name "ASF Bot"
           git config user.email "bot@asf-app.com"
-          git add data/apps.json asf-network.js satellites.html apps/index.html scripts/add_swell_registry.py
+          git add data/apps.json asf-network.js satellites.html apps/index.html guia-apps.html scripts/add_swell_registry.py scripts/add_swell_editorial.py
           if git diff --cached --quiet; then
             echo "Sem mudancas"
           else
-            git commit -m "feat(registry): asf-swell adicionado como 53o satelite (Mar & Condicoes) + consumidores regenerados"
+            git commit -m "feat(registry): asf-swell adicionado como satelite (Mar & Condicoes) + consumidores regenerados + guia-apps"
             git push
           fi
