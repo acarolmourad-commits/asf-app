@@ -63,6 +63,7 @@
 <!-- Schema.org JSON-LD for SEO -->
     <script type="application/ld+json">{}</script>
     <script src="data/mock-manas.js"></script>
+    <script src="data/apps-count.js"></script>
     <link rel="stylesheet" href="subscriber-styles.css"><link rel="preload" href="data/app-links.json" as="fetch" crossorigin="anonymous">
     
     <link rel="stylesheet" href="asf-ux.css">
@@ -240,22 +241,61 @@ t Section -->
         <p>A comunidade digital das mulheres que surfam no Brasil: aprenda, evolua, encontre manas e descubra as melhores praias — do primeiro banho de mar ao free surf. Juntas somos mais fortes!</p>
 
         <div class="hero-cta">
-            <button class="btn btn-primary" onclick="showSection('dicas')">
-                📚 Ver Dicas
-            </button>
-            <button class="btn btn-secondary" onclick="showSection('comunidade')">
-                👥 Comunidade
-            </button>
-            <a class="btn btn-secondary" href="aprender/como-comecar-a-surfar-mulheres.html" style="display:inline-flex;align-items:center;text-decoration:none;">
-                📖 Guia: como começar
+            <a class="btn btn-primary" href="#comecar" style="text-decoration:none;">
+                🏄‍♀️ Começar agora
+            </a>
+            <a class="btn btn-secondary" href="guia-apps.html" style="text-decoration:none;">
+                🗺️ Explorar a ASF
             </a>
         </div>
     </section>
 
+    <!-- BLOCO 2 - Por onde voce quer comecar? -->
+    <nav id="comecar" aria-label="Caminhos principais" style="margin: 8px 20px 24px;">
+        <h2 class="section-title" style="text-align:center;">Por onde você quer começar?</h2>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+            <a href="previsao-surf/" style="display:block;background:#fff;border-radius:16px;padding:18px;text-decoration:none;color:#0E2439;box-shadow:0 2px 10px rgba(0,0,0,.06);border:1px solid rgba(0,168,204,0.15)"><span style="font-size:1.8rem" aria-hidden="true">🌊</span><b style="display:block;margin:6px 0 2px">Quero Surfar</b><small style="color:#666">Previsão, praias, marés, condições e segurança.</small></a>
+            <a href="aprender/index.html" style="display:block;background:#fff;border-radius:16px;padding:18px;text-decoration:none;color:#0E2439;box-shadow:0 2px 10px rgba(0,0,0,.06);border:1px solid rgba(0,168,204,0.15)"><span style="font-size:1.8rem" aria-hidden="true">🏄</span><b style="display:block;margin:6px 0 2px">Quero Evoluir</b><small style="color:#666">Técnica, treino, yoga, nutrição e bem-estar.</small></a>
+            <a href="sessoes-interativas.html" style="display:block;background:#fff;border-radius:16px;padding:18px;text-decoration:none;color:#0E2439;box-shadow:0 2px 10px rgba(0,0,0,.06);border:1px solid rgba(0,168,204,0.15)"><span style="font-size:1.8rem" aria-hidden="true">👭</span><b style="display:block;margin:6px 0 2px">Quero Conhecer Manas</b><small style="color:#666">Comunidade, diário, eventos e conquistas.</small></a>
+            <a href="surf-trip/" style="display:block;background:#fff;border-radius:16px;padding:18px;text-decoration:none;color:#0E2439;box-shadow:0 2px 10px rgba(0,0,0,.06);border:1px solid rgba(0,168,204,0.15)"><span style="font-size:1.8rem" aria-hidden="true">🌎</span><b style="display:block;margin:6px 0 2px">Quero Explorar</b><small style="color:#666">Surf trips, hospedagens, cultura e destinos.</small></a>
+        </div>
+    </nav>
+
+    <!-- BLOCO 3 - Comece sua jornada -->
+    <div class="card" style="margin: 0 20px 20px; padding: 18px 20px; border-radius: 16px;">
+        <h2 class="section-title">Comece sua jornada</h2>
+        <ol style="margin:0;padding-left:20px;line-height:2;font-size:14px;">
+            <li><a href="sobre.html" style="color:var(--primary,#00A8CC);text-decoration:none;font-weight:600">Conheça a ASF</a></li>
+            <li><a href="#carteirinha" onclick="showSection('carteirinha');if(typeof ASF_CARD!=='undefined')ASF_CARD.init();return false" style="color:var(--primary,#00A8CC);text-decoration:none;font-weight:600">Crie sua identidade ASF (Carteirinha gratuita)</a></li>
+            <li><a href="previsao-surf/" style="color:var(--primary,#00A8CC);text-decoration:none;font-weight:600">Descubra seu surf</a></li>
+            <li><a href="https://acarolmourad-commits.github.io/asf-diario/" style="color:var(--primary,#00A8CC);text-decoration:none;font-weight:600">Registre suas sessões no Diário</a></li>
+            <li><a href="sessoes-interativas.html" style="color:var(--primary,#00A8CC);text-decoration:none;font-weight:600">Encontre suas manas</a></li>
+            <li><a href="aprender/index.html" style="color:var(--primary,#00A8CC);text-decoration:none;font-weight:600">Evolua com os guias</a></li>
+        </ol>
+    </div>
+
+    <!-- BLOCO 4 - A Rede ASF -->
+    <div class="card" style="margin: 0 20px 20px; padding: 18px 20px; border-radius: 16px;">
+        <h2 class="section-title">A Rede ASF</h2>
+        <p style="font-size:13px;margin:0 0 12px;color:#666;">Todos os <span data-asf-apps-count>54</span> apps gratuitos da rede de surf feminino, organizados por categoria:</p>
+        <div style="display:flex;flex-wrap:wrap;gap:8px;font-size:13px;">
+            <span style="background:rgba(0,168,204,0.08);padding:6px 12px;border-radius:20px;">🌊 Mar &amp; Condições</span>
+            <span style="background:rgba(0,168,204,0.08);padding:6px 12px;border-radius:20px;">🏄 Corpo &amp; Treino</span>
+            <span style="background:rgba(0,168,204,0.08);padding:6px 12px;border-radius:20px;">🧠 Mente &amp; Bem-estar</span>
+            <span style="background:rgba(0,168,204,0.08);padding:6px 12px;border-radius:20px;">🛟 Segurança</span>
+            <span style="background:rgba(0,168,204,0.08);padding:6px 12px;border-radius:20px;">👭 Comunidade</span>
+            <span style="background:rgba(0,168,204,0.08);padding:6px 12px;border-radius:20px;">🏆 Gamificação</span>
+            <span style="background:rgba(0,168,204,0.08);padding:6px 12px;border-radius:20px;">🌎 Cultura &amp; Viagens</span>
+            <span style="background:rgba(0,168,204,0.08);padding:6px 12px;border-radius:20px;">🎒 Equipamentos &amp; Parcerias</span>
+        </div>
+        <a href="guia-apps.html" style="display:block;text-align:center;margin-top:14px;background:linear-gradient(135deg,#0E2439,#00A8CC);color:#fff;padding:12px;border-radius:12px;text-decoration:none;font-weight:600;">🗺️ Explorar todos os apps →</a>
+    </div>
+
+
 
     <!-- Guias ASF - Conteúdo editorial -->
     <div class="card" style="margin: 4px 20px 16px; padding: 18px 20px; border-radius: 16px;">
-        <h3 style="margin: 0 0 4px; font-size: 16px; color: var(--secondary, #0E2439);">📖 Guias ASF</h3>
+        <h3 style="margin: 0 0 4px; font-size: 16px; color: var(--secondary, #0E2439);">📚 Aprenda e Evolua</h3>
         <p style="font-size: 12.5px; margin: 0 0 12px; opacity: 0.8;">Conteúdo confiável para aprender, evoluir e curtir o mar com segurança.</p>
         <div style="display: grid; gap: 8px;">
             <a href="aprender/como-comecar-a-surfar-mulheres.html" style="display:block; padding: 12px 14px; border-radius: 12px; background: rgba(0,168,204,0.08); text-decoration:none; color: inherit; font-size: 13.5px;">🏄‍♀️ <strong>Como começar a surfar</strong> — guia completo para mulheres</a>
@@ -264,13 +304,14 @@ t Section -->
             <a href="praias/melhores-praias-iniciantes-litoral-norte-sp.html" style="display:block; padding: 12px 14px; border-radius: 12px; background: rgba(155,89,182,0.08); text-decoration:none; color: inherit; font-size: 13.5px;">🗺️ <strong>Praias para iniciantes</strong> — litoral norte de SP</a>
             <a href="praias/surf-feminino-sao-sebastiao.html" style="display:block; padding: 12px 14px; border-radius: 12px; background: rgba(155,89,182,0.08); text-decoration:none; color: inherit; font-size: 13.5px;">📍 <strong>Surf feminino em São Sebastião</strong> — comunidade e projetos</a>
             <a href="bem-estar/surf-saude-mental-mulheres.html" style="display:block; padding: 12px 14px; border-radius: 12px; background: rgba(155,89,182,0.08); text-decoration:none; color: inherit; font-size: 13.5px;">🧘 <strong>Surf e bem-estar</strong> — o que o mar faz pela mente</a>
+            <a href="aprender/index.html" style="display:block; padding: 12px 14px; border-radius: 12px; background: linear-gradient(135deg,#0E2439,#00A8CC); text-decoration:none; color: #fff; font-size: 13.5px; font-weight:600; text-align:center;">Ver todos os guias →</a>
         </div>
     </div>
 
 
     <a href="previsao-surf/" style="display:flex;gap:14px;align-items:center;background:#fff;border-radius:16px;padding:18px;margin:12px 20px;text-decoration:none;color:#0E2439;box-shadow:0 2px 10px rgba(0,0,0,.06);border:1px solid rgba(0,168,204,0.15)"><span style="font-size:2rem">🌊</span><span><b style="display:block">Previsão de Ondas</b><small style="color:#666">Altura, período e direção do swell em tempo real</small></span></a>
     <a href="#carteirinha" id="carteirinha-home-card" onclick="showSection('carteirinha');if(typeof ASF_CARD!=='undefined')ASF_CARD.init();return false" style="display:flex;gap:14px;align-items:center;background:#fff;border-radius:16px;padding:18px;margin:12px 20px;text-decoration:none;color:#0E2439;box-shadow:0 2px 10px rgba(0,0,0,.06);border:1px solid rgba(0,168,204,0.15)"><span style="font-size:2rem">🪪</span><span><b style="display:block">Carteirinha ASF</b><small style="color:#666">Sua identidade de surfista: gratuita, digital e personalizada</small></span></a>
-    <a href="guia-apps.html" style="display:flex;gap:14px;align-items:center;background:linear-gradient(135deg,#0E2439,#00A8CC);border-radius:16px;padding:18px;margin:12px 20px;text-decoration:none;color:#fff;box-shadow:0 4px 14px rgba(14,36,57,.28);border:2px solid #00A8CC"><span style="font-size:2rem">🗺️</span><span><b style="display:block">Guia de Apps ASF <span style="background:#f4d03f;color:#0E2439;font-size:10px;padding:2px 8px;border-radius:10px;vertical-align:middle;margin-left:6px">NOVO</span></b><small style="color:rgba(255,255,255,.9)">Todos os 52 apps gratuitos da rede de surf feminino, organizados por categoria — encontre o app certo para cada momento</small></span></a>
+    <a href="guia-apps.html" style="display:flex;gap:14px;align-items:center;background:linear-gradient(135deg,#0E2439,#00A8CC);border-radius:16px;padding:18px;margin:12px 20px;text-decoration:none;color:#fff;box-shadow:0 4px 14px rgba(14,36,57,.28);border:2px solid #00A8CC"><span style="font-size:2rem">🗺️</span><span><b style="display:block">Guia de Apps ASF <span style="background:#f4d03f;color:#0E2439;font-size:10px;padding:2px 8px;border-radius:10px;vertical-align:middle;margin-left:6px">NOVO</span></b><small style="color:rgba(255,255,255,.9)">Todos os <span data-asf-apps-count>54</span> apps gratuitos da rede de surf feminino, organizados por categoria — encontre o app certo para cada momento</small></span></a>
     <a href="apps-em-destaque.html" style="display:flex;gap:14px;align-items:center;background:linear-gradient(135deg,#ff4d8d,#7b2ff7);border-radius:16px;padding:18px;margin:12px 20px;text-decoration:none;color:#fff;box-shadow:0 4px 14px rgba(123,47,247,.3)"><span style="font-size:2rem">📣</span><span><b style="display:block">Apps em Destaque da Semana</b><small style="color:rgba(255,255,255,.9)">Previsao, mare, vento, seguranca, treinos e comunidade — os apps da rede para a sua proxima sessao</small></span></a>
     <!-- Home Card de Marcas Parceiras -->
     <div id="brand-home-card" style="background:linear-gradient(135deg,rgba(255,255,255,0.95),rgba(240,248,255,0.9));border-radius:16px;padding:20px 20px 16px;margin-bottom:20px;box-shadow:0 4px 20px rgba(0,0,0,0.06);border:1px solid rgba(0,168,204,0.12)">
@@ -2222,6 +2263,13 @@ t Section -->
     
     <script src="assets/js/inline/asf-inline-06.js"></script>
     <script src="asf-ux.js" defer></script>
+
+    <!-- BLOCO 11 - Sobre a ASF -->
+    <div class="card" style="margin: 0 20px 24px; padding: 18px 20px; border-radius: 16px;">
+        <h2 class="section-title">Sobre a ASF</h2>
+        <p style="font-size:13.5px;margin:0 0 12px;color:#444;line-height:1.6;">A ASF – Associação de Surf Feminino conecta mulheres ao surf, à comunidade e à evolução dentro do esporte — do primeiro banho de mar ao free surf.</p>
+        <a href="sobre.html" style="display:block;text-align:center;background:#fff;border:1px solid rgba(0,168,204,0.3);color:var(--primary,#00A8CC);padding:12px;border-radius:12px;text-decoration:none;font-weight:600;">Conheça a ASF →</a>
+    </div>
 
     <footer role="contentinfo" style="background: var(--secondary); color: rgba(255,255,255,0.85); padding: 32px 20px 24px; margin-top: 40px; font-size: 13px;">
         <div style="max-width: 900px; margin: 0 auto;">
