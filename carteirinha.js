@@ -199,7 +199,11 @@ const ASF_CARD = {
         d.validade = atual.validade; /* trava: nada de estender a validade */
         msg = 'Dados atualizados! Validade mantida até ' + d.validade + ' 💙';
       } else {
-        const val = new Date(); val.setFullYear(val.getFullYear() + 1);
+        /* renovacao soma 1 ano sobre a validade vigente (nao perde dias na antecipada) */
+        const antiga = this.parseDataBR(atual.validade);
+        const agora = new Date();
+        const base = antiga && antiga > agora ? antiga : agora;
+        const val = new Date(base.getTime()); val.setFullYear(val.getFullYear() + 1);
         d.validade = val.toLocaleDateString('pt-BR');
         this.registrarEmissao(d.numero);
         msg = dias < 0
