@@ -1,0 +1,24 @@
+name: Perf — Split index.html (re-run sobre main atual)
+on:
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  split:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Pega script da branch original
+        run: git checkout origin/perf/split-index -- .github/scripts/split_index.py
+      - name: Executa split (idempotente, com validações)
+        run: python3 .github/scripts/split_index.py
+      - name: Publica branch perf/split-index-v2
+        run: |
+          git config user.name "ASF Bot"
+          git config user.email "asf.surffeminino@gmail.com"
+          git checkout -b perf/split-index-v2
+          git add index.html assets/ .github/scripts/split_index.py
+          git commit -m "perf: divide index.html em CSS/JS externos cacheáveis (re-run sobre main atual, via PR #8 adaptada)"
+          git push -u origin perf/split-index-v2
