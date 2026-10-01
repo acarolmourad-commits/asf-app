@@ -1,11 +1,11 @@
 {
   "date": "2026-10-01",
   "board_tip": {
-    "title": "Longboard: O clássico",
-    "content": "Longboards (9'0\"+) são perfeitas para ondas pequenas e estabilidade.",
+    "title": "Fish: Para ondas pequenas",
+    "content": "Shape com outline curto e largo. Perfeita para ondas fracas! Twin ou quad fin para mais speed.",
     "tags": [
-      "Longboard",
-      "Clássico"
+      "Fish",
+      "Speed"
     ]
   },
   "eco_tip": {
@@ -13,6 +13,6 @@
     "content": "Quando a prancha chegar ao fim, o bloco pode ser reciclado ou se degrada naturalmente!",
     "category": "Consumo Consciente"
   },
-  "daily_message": "Alongue ombros e costas antes de entrar na água!",
-  "generated_at": "2026-10-01T17:17:33.717614"
+  "daily_message": "Hidrate-se: 500ml de água antes de surfar!",
+  "generated_at": "2026-10-01T17:46:52.025234"
 }
