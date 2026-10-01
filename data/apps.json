@@ -124,6 +124,18 @@
       "desc_apps": "Vento, direção e temperatura ao vivo nas praias do litoral norte de SP"
     },
     {
+      "slug": "asf-swell",
+      "name": "🌊 ASF Swell",
+      "url": "https://acarolmourad-commits.github.io/asf-swell/",
+      "icon": "🌊",
+      "title": "ASF Swell",
+      "category": "🌊 Mar & Condições",
+      "desc": "Direção de swell, ângulo de quebra e janela de pico por spot",
+      "icon_apps": "🌊",
+      "name_apps": "ASF Swell",
+      "desc_apps": "Direção e período do swell por spot, com janela de pico do dia"
+    },
+    {
       "slug": "asf-treino",
       "name": "🏋️ ASF Treino",
       "url": "https://acarolmourad-commits.github.io/asf-treino/",
