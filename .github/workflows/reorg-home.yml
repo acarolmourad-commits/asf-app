@@ -1,0 +1,20 @@
+name: Reorganizar home ASF (hierarquia clara, fonte única de apps)
+on:
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  reorg:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Aplica reorganização (com validações e asserts)
+        run: python3 .github/scripts/reorg_home.py
+      - name: Publica branch feat/home-reorg
+        run: |
+          git config user.name "ASF Bot"
+          git config user.email "asf.surffeminino@gmail.com"
+          git checkout -b feat/home-reorg
+          git add index.html guia-apps.html apps-em-destaque.html
+          git commit -m "feat: reorganiza home em hierarquia clara (caminhos, jornada, Rede ASF) + fonte única do número de apps"
+          git push -u origin feat/home-reorg
