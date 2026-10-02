@@ -1,0 +1,48 @@
+name: SEO & Indexacao - monitor semanal
+
+on:
+  schedule:
+    - cron: '0 10 * * 1'   # segunda-feira 07h BRT (10h UTC)
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  seo-check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verificar sitemaps, homepages e metadados dos 55 sites
+        run: |
+          HOSTS="asf.surf achados alerta apnea atlas bemestar carona checklist clube comunidade desafio desafios diario eco equipamento eventos filmes galeria glossario goldenhour historia inspiracao kids leitura loja mala manobras mapa mare matematica memoria mental mentorias mercado nutricao parceiras patrocinio podcast ponto popup praias previsao quiz ranking respira seguranca sonhos sono sos swell treino vento viagens volume yoga"
+          R="SEO_REPORT.md"
+          echo "# 📊 Relatorio SEO Semanal — rede ASF" > $R
+          echo "" >> $R
+          echo "_Gerado em $(date -u '+%d/%m/%Y %H:%M UTC') pelo workflow seo-monitor_" >> $R
+          echo "" >> $R
+          echo "| Site | Homepage | Sitemap | Title | Meta description |" >> $R
+          echo "|------|----------|---------|-------|------------------|" >> $R
+          for h in $HOSTS; do
+            if [ "$h" = "asf.surf" ]; then url="https://asf.surf"; else url="https://$h.asf.surf"; fi
+            code=$(curl -s -o /tmp/p.html -w '%{http_code}' --max-time 20 "$url/")
+            sm=$(curl -s -o /dev/null -w '%{http_code}' --max-time 15 "$url/sitemap.xml")
+            title=$(grep -oi '<title>[^<]*' /tmp/p.html | head -1 | sed 's/<title>//I' | cut -c1-40)
+            desc=$(grep -ci 'name="description"' /tmp/p.html)
+            [ -z "$title" ] && title="-"
+            descok="✅"; [ "$desc" = "0" ] && descok="❌"
+            smok="✅"; [ "$sm" != "200" ] && smok="❌ ($sm)"
+            echo "| $h | $code | $smok | $title | $descok |" >> $R
+          done
+          echo "" >> $R
+          echo "## Proximos passos" >> $R
+          echo "- Numeros de indexacao/cliques: verificar no Google Search Console (sc-domain:asf.surf)" >> $R
+          echo "- Plano de conteudo: docs/PLANO-CONTEUDO.md" >> $R
+          cat $R
+      - name: Commit relatorio
+        run: |
+          git config user.name "ASF Bot"
+          git config user.email "asf.surffeminino@gmail.com"
+          git add SEO_REPORT.md
+          git commit -m "chore(seo): relatorio semanal $(date -u +%Y-%m-%d)" || echo "sem mudancas"
+          git push
