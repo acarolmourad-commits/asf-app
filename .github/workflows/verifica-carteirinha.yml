@@ -1,0 +1,61 @@
+name: Verifica Carteirinha ASF (Supabase)
+
+# Verificacao constante do controle de emissao de carteirinhas:
+#  - RPC emitir_carteirinha acessivel via chave publishable (SECURITY DEFINER)
+#  - Trava 1 carteirinha por pessoa (email_hash) funcionando
+#  - Renovacao preserva o mesmo numero
+# Usa uma sonda idempotente (hash fixo) — nao cria registros novos apos a 1a execucao.
+
+on:
+  schedule:
+    - cron: '15 9 * * *'   # diariamente ~06:15 BRT
+  workflow_dispatch:
+
+jobs:
+  verifica:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Sonda 1 - emitir/obter carteirinha de verificacao
+        id: s1
+        run: |
+          resp=$(curl -s -w '\n%{http_code}' -X POST \
+            'https://qktabrzbgdfndklytwub.supabase.co/rest/v1/rpc/emitir_carteirinha' \
+            -H 'apikey: sb_publishable_qIvPxh6DavCPtntfflaRLw_QI_pZJih' \
+            -H 'Authorization: Bearer sb_publishable_qIvPxh6DavCPtntfflaRLw_QI_pZJih' \
+            -H 'Content-Type: application/json' \
+            -d '{"p_numero":"SONDA-001","p_email_hash":"sonda_verificacao_carteirinha_v1","p_nome":"Sonda Verificacao"}')
+          echo "$resp"
+          code=$(echo "$resp" | tail -n1)
+          body=$(echo "$resp" | head -n -1)
+          if [ "$code" != "200" ]; then
+            echo '::error::RPC emitir_carteirinha falhou (HTTP '"$code"'). Possivel perda de SECURITY DEFINER/GRANT.'
+            exit 1
+          fi
+          numero=$(echo "$body" | jq -r '.[0].numero')
+          status=$(echo "$body" | jq -r '.[0].status')
+          echo "numero=$numero" >> "$GITHUB_OUTPUT"
+          case "$status" in
+            emitida|existente|renovada) echo "Status OK: $status" ;;
+            *) echo "::error::Status inesperado: $status"; exit 1 ;;
+          esac
+
+      - name: Sonda 2 - mesmo email_hash NAO pode gerar nova carteirinha
+        run: |
+          resp=$(curl -s -X POST \
+            'https://qktabrzbgdfndklytwub.supabase.co/rest/v1/rpc/emitir_carteirinha' \
+            -H 'apikey: sb_publishable_qIvPxh6DavCPtntfflaRLw_QI_pZJih' \
+            -H 'Authorization: Bearer sb_publishable_qIvPxh6DavCPtntfflaRLw_QI_pZJih' \
+            -H 'Content-Type: application/json' \
+            -d '{"p_numero":"SONDA-999","p_email_hash":"sonda_verificacao_carteirinha_v1","p_nome":"Sonda Verificacao"}')
+          echo "$resp"
+          numero=$(echo "$resp" | jq -r '.[0].numero')
+          status=$(echo "$resp" | jq -r '.[0].status')
+          if [ "$numero" != "${{ steps.s1.outputs.numero }}" ]; then
+            echo '::error::TRAVA QUEBRADA: mesmo email_hash gerou numero diferente ('"$numero"' vs ${{ steps.s1.outputs.numero }})'
+            exit 1
+          fi
+          if [ "$status" != "existente" ] && [ "$status" != "renovada" ]; then
+            echo '::error::TRAVA QUEBRADA: 2a emissao para o mesmo hash retornou status='"$status"
+            exit 1
+          fi
+          echo "Trava 1-carteirinha-por-pessoa OK (numero $numero, status $status)"
