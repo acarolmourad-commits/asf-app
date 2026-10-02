@@ -161,3 +161,27 @@
     document.addEventListener('click',function(){setTimeout(apply,300);},true);
   });
 })();
+
+/* ---------- FIX FLOATING BUTTONS x BOTTOM NAV (02/10/2026) ----------
+   Botoes flutuantes (Rede ASF #asf-sat-nav, Galeria #asf-galeria-btn e similares)
+   ficavam sobre o menu inferior .asf-bottom-nav. Agora sobem para cima da barra. */
+(function () {
+  function ready(fn){document.readyState!=='loading'?fn():document.addEventListener('DOMContentLoaded',fn);}
+  ready(function(){
+    function apply(){
+      var bn=document.querySelector('.asf-bottom-nav');
+      var bnH=(bn && getComputedStyle(bn).position==='fixed') ? bn.offsetHeight : 0;
+      var base=(bnH>0? bnH+12 : 16)+'px';
+      ['asf-sat-nav','asf-galeria-btn'].forEach(function(id){
+        var el=document.getElementById(id);
+        if(!el) return;
+        var st=getComputedStyle(el);
+        if(st.position!=='fixed') return;
+        el.style.setProperty('bottom',base,'important');
+      });
+    }
+    apply();
+    window.addEventListener('resize',apply);
+    new MutationObserver(apply).observe(document.body,{childList:true});
+  });
+})();
