@@ -1,0 +1,73 @@
+name: AdSense Approval Monitor (diario)
+
+on:
+  schedule:
+    - cron: '0 11 * * *'   # todo dia 08h BRT (11h UTC)
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  issues: write
+
+jobs:
+  adsense-status:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checar status de aprovacao do AdSense
+        env:
+          GSC_CLIENT_ID: ${{ secrets.GSC_CLIENT_ID }}
+          GSC_CLIENT_SECRET: ${{ secrets.GSC_CLIENT_SECRET }}
+          GSC_REFRESH_TOKEN: ${{ secrets.GSC_REFRESH_TOKEN }}
+          ADSENSE_ACCOUNT: ${{ secrets.ADSENSE_ACCOUNT_ID }}  # ex: accounts/pub-1643806355443576
+        run: |
+          R="relatorio-adsense.txt"
+          echo "ASF AdSense Approval Monitor - $(date -u '+%Y-%m-%d %H:%M UTC')" > $R
+          echo "=====================================================" >> $R
+
+          # 1. Checagem basica: ads.txt continua no ar
+          if curl -s https://asf.surf/ads.txt | grep -q "pub-1643806355443576"; then
+            echo "OK   ads.txt ativo em asf.surf" >> $R
+          else
+            echo "FALHA ads.txt fora do ar!" >> $R
+          fi
+
+          # 2. Sinal pratico de aprovacao: Google comeca a servir ads.txt no rastreador
+          #    e o snippet passa a retornar anuncios. Checamos a resposta do ad tag:
+          ADRESP=$(curl -s -o /dev/null -w '%{http_code}' "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1643806355443576")
+          echo "adsbygoogle.js HTTP $ADRESP" >> $R
+
+          # 3. Se houver credenciais OAuth, consulta oficial na AdSense Management API
+          APPROVED="unknown"
+          if [ -n "$GSC_REFRESH_TOKEN" ] && [ -n "$ADSENSE_ACCOUNT" ]; then
+            TOKEN=$(curl -s -X POST https://oauth2.googleapis.com/token \
+              -d "client_id=$GSC_CLIENT_ID&client_secret=$GSC_CLIENT_SECRET&refresh_token=$GSC_REFRESH_TOKEN&grant_type=refresh_token" \
+              | grep -o '"access_token": *"[^"]*"' | cut -d'"' -f4)
+            if [ -n "$TOKEN" ]; then
+              STATE=$(curl -s -H "Authorization: Bearer $TOKEN" \
+                "https://adsense.googleapis.com/v2/$ADSENSE_ACCOUNT/sites")
+              echo "$STATE" | grep -q '"state": *"READY"' && APPROVED="yes"
+              echo "$STATE" | grep -q '"state": *"NEEDS_ATTENTION"' && APPROVED="no"
+              echo "API AdSense sites: $STATE" >> $R
+            fi
+          else
+            echo "(sem credenciais OAuth - usando apenas heuristicas)" >> $R
+          fi
+          echo "STATUS_APROVACAO=$APPROVED" >> $R
+          cat $R
+          echo "approved=$APPROVED" >> $GITHUB_OUTPUT
+
+      - name: Abrir issue quando aprovado
+        if: success()
+        run: |
+          if grep -q 'STATUS_APROVACAO=yes' relatorio-adsense.txt; then
+            EXISTS=$(gh issue list --state open --search "AdSense aprovado" --json number --jq length 2>/dev/null || echo 0)
+            if [ "$EXISTS" = "0" ]; then
+              gh issue create --title "🎉 AdSense aprovado - proximos passos" \
+                --body "A AdSense Management API reportou o site como READY. Proximos passos: 1) verificar exibicao real de anuncios nos apps; 2) acompanhar RPM no painel; 3) considerar Auto Ads vs blocos manuais."
+            fi
+          fi
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Falhar se ads.txt caiu
+        run: grep -q "FALHA" relatorio-adsense.txt && exit 1 || echo "tudo ok"
