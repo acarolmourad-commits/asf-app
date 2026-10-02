@@ -1,0 +1,22 @@
+name: asf-restore-ux
+on:
+  push:
+    paths:
+      - "scripts/restore_ux.py"
+permissions:
+  contents: write
+jobs:
+  restore:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - run: python3 scripts/restore_ux.py
+      - name: Commit se houve mudanca
+        run: |
+          git config user.name "asf-bot"
+          git config user.email "asf-bot@users.noreply.github.com"
+          git add asf-ux.js
+          git diff --cached --quiet || git commit -m "fix: restaura asf-ux.js completo do historico + FASE 8 (menu/busca/carteirinha)"
+          git push

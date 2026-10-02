@@ -1,3 +1,0 @@
-/* ASF UX Overlay — camada ADITIVA e defensiva.
-   Regras: nao remove, nao oculta, nao desativa nada. So adiciona.
-   Cada bloco verifica se o alvo existe antes de agir. */
