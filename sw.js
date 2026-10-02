@@ -1,4 +1,4 @@
-const CACHE = "asf-v3";
+const CACHE = "asf-v4";
 const OFFLINE_PAGES = [
   "./index.html",
   "./praias/",
@@ -10,6 +10,9 @@ const OFFLINE_PAGES = [
   "./aprender/etiqueta-no-mar.html",
   "./aprender/primeira-prancha-de-surf.html",
   "./aprender/remada-tecnica-e-treinos.html",
+  "./bem-estar/",
+  "./bem-estar/presenca-no-mar-beneficios-da-pratica.html",
+  "./bem-estar/surf-saude-mental-mulheres.html",
   "./diario/",
   "./mural/",
   "./asf-mural.css",
