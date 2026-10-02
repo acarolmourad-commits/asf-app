@@ -1,8 +1,8 @@
 {
-  "date": "2026-10-02T17:31:51.139619+00:00",
-  "total": 96,
+  "date": "2026-10-02T21:30:51.582954+00:00",
+  "total": 97,
   "ok": 86,
-  "skipped": 9,
+  "skipped": 10,
   "broken_count": 1,
   "broken": [
     "https://acarolmourad-commits.github.io/asf-swell/"
@@ -145,6 +145,11 @@
     },
     {
       "url": "https://marine-api.open-meteo.com",
+      "status": "skipped",
+      "http": null
+    },
+    {
+      "url": "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1643806355443576",
       "status": "skipped",
       "http": null
     },
