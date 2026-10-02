@@ -4,4 +4,4 @@ Disallow: /docs/
 Disallow: /scripts/
 Disallow: /meta-integration/
 
-Sitemap: https://acarolmourad-commits.github.io/asf-app/sitemap.xml
+Sitemap: https://asf.surf/sitemap.xml
