@@ -1,0 +1,38 @@
+name: SSL Cert Watch (diario) - ativa HTTPS quando o certificado sair
+
+on:
+  schedule:
+    - cron: '0 13 * * *'   # todo dia 10h BRT (13h UTC)
+  workflow_dispatch:
+
+permissions:
+  pages: write
+  contents: read
+
+jobs:
+  ssl-watch:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checar HTTPS nos subdominios e ativar enforce quando o cert existir
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          OK=0; PENDENTES=""
+          for line in $(curl -s "https://api.github.com/users/acarolmourad-commits/repos?per_page=100" | grep -o '"name": "asf-[^"]*"' | cut -d'"' -f4 | grep -v '^asf-app$' | grep -v '^asf-eventos$'); do
+            sub=${line#asf-}
+            host="$sub.asf.surf"
+            code=$(curl -s -o /dev/null -w '%{http_code}' --max-time 15 "https://$host/" || echo 000)
+            if [ "$code" = "200" ]; then
+              OK=$((OK+1))
+              ENFORCED=$(curl -s -H "Authorization: Bearer $GH_TOKEN" "https://api.github.com/repos/acarolmourad-commits/$line/pages" | grep -o '"https_enforced": *[a-z]*' | cut -d: -f2 | tr -d ' ')
+              if [ "$ENFORCED" != "true" ]; then
+                curl -s -X PUT -H "Authorization: Bearer $GH_TOKEN" -H 'Content-Type: application/json' \
+                  "https://api.github.com/repos/acarolmourad-commits/$line/pages" \
+                  -d '{"https_enforced":true}' > /dev/null && echo "HTTPS enforce ativado: $host"
+              fi
+            else
+              PENDENTES="$PENDENTES $host($code)"
+            fi
+          done
+          echo "Com HTTPS valido: $OK"
+          [ -n "$PENDENTES" ] && echo "Pendentes (cert ainda nao emitido):$PENDENTES"
