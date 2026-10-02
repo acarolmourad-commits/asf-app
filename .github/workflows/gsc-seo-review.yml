@@ -1,0 +1,98 @@
+name: Search Console SEO Review (semanal + marco 10 semanas)
+
+on:
+  schedule:
+    - cron: '0 12 * * 1'   # segunda-feira 09h BRT (12h UTC), logo apos o seo-monitor
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  issues: write
+
+jobs:
+  gsc-review:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Coletar dados do Search Console (sitemaps + search analytics)
+        env:
+          GSC_CLIENT_ID: ${{ secrets.GSC_CLIENT_ID }}
+          GSC_CLIENT_SECRET: ${{ secrets.GSC_CLIENT_SECRET }}
+          GSC_REFRESH_TOKEN: ${{ secrets.GSC_REFRESH_TOKEN }}
+        run: |
+          mkdir -p docs
+          R="docs/SEO-GSC-REVIEW.md"
+          echo "# 📈 Revisao SEO — Google Search Console" > $R
+          echo "" >> $R
+          echo "_Gerado em $(date -u '+%d/%m/%Y %H:%M UTC') pelo workflow gsc-seo-review_" >> $R
+
+          if [ -z "$GSC_REFRESH_TOKEN" ]; then
+            echo "" >> $R
+            echo "⚠️ Secrets GSC_CLIENT_ID / GSC_CLIENT_SECRET / GSC_REFRESH_TOKEN nao configurados." >> $R
+            echo "Configure em Settings > Secrets para ativar a coleta automatica." >> $R
+            cat $R
+            exit 0
+          fi
+
+          TOKEN=$(curl -s -X POST https://oauth2.googleapis.com/token \
+            -d "client_id=$GSC_CLIENT_ID&client_secret=$GSC_CLIENT_SECRET&refresh_token=$GSC_REFRESH_TOKEN&grant_type=refresh_token" \
+            | grep -o '"access_token": *"[^"]*"' | cut -d'"' -f4)
+          SITE="sc-domain:asf.surf"
+
+          echo "" >> $R
+          echo "## Sitemaps submetidos" >> $R
+          echo "" >> $R
+          echo "| Sitemap | Status | Erros | Indexadas |" >> $R
+          echo "|---------|--------|-------|-----------|" >> $R
+          for sm in asf.surf goldenhour praias mare previsao nutricao yoga seguranca equipamento historia manobras vento sono; do
+            if [ "$sm" = "asf.surf" ]; then FEED="https://asf.surf/sitemap.xml"; else FEED="https://$sm.asf.surf/sitemap.xml"; fi
+            RESP=$(curl -s -H "Authorization: Bearer $TOKEN" \
+              "https://www.googleapis.com/webmasters/v3/sites/$(python3 -c "import urllib.parse;print(urllib.parse.quote('$SITE',safe=''))")/sitemaps/$(python3 -c "import urllib.parse;print(urllib.parse.quote('$FEED',safe=''))")")
+            ERR=$(echo "$RESP" | grep -o '"errors": *"[0-9]*"' | cut -d'"' -f4)
+            IDX=$(echo "$RESP" | grep -o '"indexed": *"[0-9]*"' | tail -1 | cut -d'"' -f4)
+            PEND=$(echo "$RESP" | grep -o '"isPending": *true' | head -1)
+            ST="ok"; [ -n "$PEND" ] && ST="pendente"; echo "$RESP" | grep -q '"error"' && ST="erro API"
+            echo "| $sm | $ST | ${ERR:-0} | ${IDX:--} |" >> $R
+          done
+
+          echo "" >> $R
+          echo "## Top 20 consultas (ultimos 28 dias)" >> $R
+          echo "" >> $R
+          END=$(date -u -d '3 days ago' +%F); START=$(date -u -d '31 days ago' +%F)
+          ANALYTICS=$(curl -s -X POST -H "Authorization: Bearer $TOKEN" -H 'Content-Type: application/json' \
+            "https://www.googleapis.com/webmasters/v3/sites/$(python3 -c "import urllib.parse;print(urllib.parse.quote('$SITE',safe=''))")/searchAnalytics/query" \
+            -d "{\"startDate\":\"$START\",\"endDate\":\"$END\",\"dimensions\":[\"query\"],\"rowLimit\":20}")
+          echo "| Consulta | Cliques | Impressoes | CTR | Posicao |" >> $R
+          echo "|----------|---------|------------|-----|---------|" >> $R
+          echo "$ANALYTICS" | python3 -c "
+          import sys, json
+          try:
+              d = json.load(sys.stdin)
+              for r in d.get('rows', []):
+                  print(f\"| {r['keys'][0]} | {r['clicks']} | {r['impressions']} | {r['ctr']*100:.1f}% | {r['position']:.1f} |\")
+          except Exception as e:
+              print(f'| (sem dados ainda) | - | - | - | - |')
+          " >> $R
+          cat $R
+
+      - name: Marco das 10 semanas - abrir issue de revisao
+        run: |
+          # Plano iniciado em 02/10/2026 -> revisao apos 10 semanas = 11/12/2026
+          if [ "$(date -u +%F)" \u003e= "2026-12-11" ]; then
+            EXISTS=$(gh issue list --state open --search "Revisao SEO 10 semanas" --json number --jq length 2>/dev/null || echo 0)
+            if [ "$EXISTS" = "0" ]; then
+              gh issue create --title "📊 Revisao SEO das 10 semanas (plano de conteudo)" \
+                --body "Chegou o marco das 10 semanas do plano de conteudo. Verificar em docs/SEO-GSC-REVIEW.md e no Search Console: quais palavras-chave geraram impressoes/cliques e dobrar a aposta nos temas vencedores, conforme docs/PLANO-CONTEUDO.md."
+            fi
+          fi
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Commit relatorio
+        run: |
+          git config user.name "ASF Bot"
+          git config user.email "asf.surffeminino@gmail.com"
+          git add docs/SEO-GSC-REVIEW.md
+          git commit -m "chore(seo): revisao GSC $(date -u +%Y-%m-%d)" || echo "sem mudancas"
+          git push
