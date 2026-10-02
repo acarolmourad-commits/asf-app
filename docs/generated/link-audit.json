@@ -1,7 +1,7 @@
 {
-  "date": "2026-10-02T16:32:54.200614+00:00",
-  "total": 95,
-  "ok": 85,
+  "date": "2026-10-02T16:55:51.283932+00:00",
+  "total": 96,
+  "ok": 86,
   "skipped": 9,
   "broken_count": 1,
   "broken": [
@@ -411,6 +411,12 @@
     },
     {
       "url": "js/home-articles.js",
+      "status": "ok",
+      "http": 200,
+      "local": true
+    },
+    {
+      "url": "js/home-compact.js",
       "status": "ok",
       "http": 200,
       "local": true
