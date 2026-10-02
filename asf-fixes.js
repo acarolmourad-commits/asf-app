@@ -194,45 +194,53 @@
   });
 })();
 
-/* ---------- FIX FAB STACK + OVERFLOW-X (02/10/2026) ----------
-   1) O fix anterior subia todos os botoes flutuantes para o MESMO bottom
-      (bnH+12). Resultado: a pilula "Galeria das Manas" (bottom 53, altura ~45,
-      ocupa 53-98) colidia com o FAB "+" (bottom 88, ocupa 88-144).
-      Agora os botoes fixos pequenos do canto DIREITO sao empilhados em
-      "slots" com 10px de folga: Galeria (base) -> FAB -> fab-share -> back-to-top.
-   2) Overflow horizontal: algum conteudo extrapolava a viewport em telas
-      estreitas (scroll horizontal acidental). Guarda defensiva overflow-x. */
+/* -------------- FIX STACK FABs + OVERFLOW-X (02/10/2026) --------------
+   1) Os botoes flutuantes do canto direito (Galeria das Manas, FAB +, share,
+      back-to-top) colidiam ENTRE SI: o fix anterior subia todos para o mesmo
+      bottom (bnH+12), mas .fab (56px de altura, bottom:88px) nao era tocado e
+      cobria o botao da Galeria. Agora os botoes visiveis sao empilhados
+      dinamicamente: cada um acima do anterior, 12px de respiro, tudo acima da
+      .asf-bottom-nav.
+   2) Guarda anti-overflow horizontal: nenhum elemento pode estourar a largura
+      da viewport (fonte do scroll horizontal de ~1500px em mobile). */
 (function () {
   function ready(fn){document.readyState!=='loading'?fn():document.addEventListener('DOMContentLoaded',fn);}
-  ready(function(){
-    // 2) guarda anti overflow horizontal
+  ready(function () {
+    // 1) Empilhamento dinamico dos FABs
+    var applying=false;
+    function stack(){
+      if(applying) return;
+      applying=true;
+      try{
+        var bn=document.querySelector('.asf-bottom-nav');
+        var bnH=(bn && getComputedStyle(bn).position==='fixed') ? bn.offsetHeight : 0;
+        var nextBottom=(bnH||0)+12; // base: logo acima da barra inferior
+        var sels=['#asf-galeria-btn','.fab','.fab-share','#back-to-top'];
+        var els=[];
+        sels.forEach(function(s){
+          document.querySelectorAll(s).forEach(function(el){
+            if(el.offsetHeight>0 && getComputedStyle(el).position==='fixed') els.push(el);
+          });
+        });
+        // ordem desejada de baixo para cima: galeria, fab, share, back-to-top
+        els.sort(function(a,b){return sels.findIndex(function(s){return a.matches(s);})-sels.findIndex(function(s){return b.matches(s);});});
+        els.forEach(function(el){
+          el.style.bottom=nextBottom+'px';
+          nextBottom+=el.offsetHeight+12;
+        });
+      }catch(e){console.warn('asf stack fabs:',e);}
+      finally{setTimeout(function(){applying=false;},50);}
+    }
+    stack();
+    window.addEventListener('resize',stack);
+    new MutationObserver(function(){stack();}).observe(document.body,{childList:true,attributes:true,subtree:true,attributeFilter:['style','class']});
+
+    // 2) Guarda anti-overflow horizontal
     var st=document.createElement('style');
     st.id='asf-overflow-guard';
-    st.textContent='html,body{overflow-x:hidden;max-width:100vw;}';
+    st.textContent='html,body{overflow-x:hidden;max-width:100vw;}'+
+      'img,video,table,canvas,iframe{max-width:100%;height:auto;}'+
+      '*[style*="width:"]{max-width:100vw;}';
     document.head.appendChild(st);
-
-    // 1) pilha vertical de FABs no canto direito
-    function stack(){
-      var bn=document.querySelector('.asf-bottom-nav');
-      var bnH=(bn && getComputedStyle(bn).position==='fixed') ? bn.offsetHeight : 0;
-      if(!bnH) return;
-      var base=bnH+12;
-      // ordem de baixo para cima
-      var order=['#asf-galeria-btn','button.fab[aria-label="+"]','.fab-share','#back-to-top'];
-      var y=base;
-      order.forEach(function(sel){
-        var el=document.querySelector(sel);
-        if(!el) return;
-        var cs=getComputedStyle(el);
-        if(cs.position!=='fixed' || cs.display==='none') return;
-        el.style.bottom=y+'px';
-        y+=el.offsetHeight+10;
-      });
-    }
-    // roda depois do fix anterior (que homogeneiza o bottom) e re-aplica
-    setTimeout(stack,50);
-    setTimeout(stack,400);
-    window.addEventListener('resize',stack);
-    new MutationObserver(function(){stack();}).observe(document.body,{childList:true});
   });
 })();
