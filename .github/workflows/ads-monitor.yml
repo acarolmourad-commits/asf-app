@@ -1,0 +1,59 @@
+name: AdSense Health Monitor (diario)
+
+on:
+  schedule:
+    - cron: '0 9 * * *'   # todo dia 06h BRT (09h UTC)
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Verificar ads.txt e codigo AdSense nas paginas
+        run: |
+          PUB="ca-pub-1643806355443576"
+          REPORT="relatorio-ads.txt"
+          echo "ASF AdSense Health - $(date -u '+%Y-%m-%d %H:%M UTC')" > $REPORT
+          echo "======================================" >> $REPORT
+
+          # 1. ads.txt na raiz
+          ADSTXT=$(curl -s https://asf.surf/ads.txt)
+          if echo "$ADSTXT" | grep -q "pub-1643806355443576"; then
+            echo "OK   ads.txt (asf.surf)" >> $REPORT
+          else
+            echo "FALHA ads.txt ausente ou incorreto!" >> $REPORT
+          fi
+
+          # 2. snippet no site principal
+          for url in "https://asf.surf/" "https://asf.surf/sobre.html"; do
+            if curl -s "$url" | grep -q "$PUB"; then
+              echo "OK   $url" >> $REPORT
+            else
+              echo "FALHA $url sem codigo AdSense" >> $REPORT
+            fi
+          done
+
+          # 3. snippet no codigo-fonte de cada app satelite
+          OK=0; FALHAS=""
+          for repo in $(curl -s "https://api.github.com/users/acarolmourad-commits/repos?per_page=100" | grep -o '"name": "asf-[^"]*"' | cut -d'"' -f4 | grep -v '^asf-app$'); do
+            if curl -s "https://raw.githubusercontent.com/acarolmourad-commits/$repo/main/index.html" | grep -q "$PUB"; then
+              OK=$((OK+1))
+            else
+              FALHAS="$FALHAS $repo"
+            fi
+          done
+          echo "" >> $REPORT
+          echo "Apps com codigo AdSense: $OK" >> $REPORT
+          [ -n "$FALHAS" ] && echo "Apps SEM codigo:$FALHAS" >> $REPORT
+          echo "======================================" >> $REPORT
+          cat $REPORT
+
+      - name: Falhar se houver problema
+        run: |
+          if grep -q "FALHA\|SEM codigo" relatorio-ads.txt; then
+            echo "::error::Problemas na monetizacao detectados - ver relatorio-ads.txt"
+            exit 1
+          fi
