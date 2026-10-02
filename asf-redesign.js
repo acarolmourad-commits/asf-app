@@ -4,7 +4,7 @@
 (function(){'use strict';function ready(fn){document.readyState==='loading'?document.addEventListener('DOMContentLoaded',fn):fn()}ready(function(){
   if(document.getElementById('header-menu')||document.querySelector('.bottom-nav')||document.querySelector('.asf-back-pill'))return;
   var a=document.createElement('a');
-  a.className='asf-back-pill';a.href='/asf-app/';a.setAttribute('aria-label','Voltar ao app ASF');
+  a.className='asf-back-pill';a.href=(location.pathname.indexOf('/asf-app')===0?'/asf-app/':'/');a.setAttribute('aria-label','Voltar ao app ASF');
   a.textContent='\u2190 App ASF';
   document.body.appendChild(a);
 });})();
