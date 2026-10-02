@@ -1,11 +1,12 @@
 {
-  "date": "2026-10-01T22:04:33.600888+00:00",
-  "total": 89,
-  "ok": 79,
+  "date": "2026-10-02T02:51:02.856561+00:00",
+  "total": 95,
+  "ok": 84,
   "skipped": 9,
-  "broken_count": 1,
+  "broken_count": 2,
   "broken": [
-    "https://acarolmourad-commits.github.io/asf-swell/"
+    "https://acarolmourad-commits.github.io/asf-swell/",
+    "https://www.fecasurf.com.br/"
   ],
   "results": [
     {
@@ -20,6 +21,11 @@
     },
     {
       "url": "https://acarolmourad-commits.github.io/asf-checklist/",
+      "status": "ok",
+      "http": 200
+    },
+    {
+      "url": "https://acarolmourad-commits.github.io/asf-diario/",
       "status": "ok",
       "http": 200
     },
@@ -150,8 +156,8 @@
     },
     {
       "url": "https://www.fecasurf.com.br/",
-      "status": "ok",
-      "http": 200
+      "status": "broken",
+      "http": "URLError"
     },
     {
       "url": "https://www.googletagmanager.com",
@@ -190,6 +196,30 @@
     },
     {
       "url": "./",
+      "status": "ok",
+      "http": 200,
+      "local": true
+    },
+    {
+      "url": "./asf-bottomnav.js",
+      "status": "ok",
+      "http": 200,
+      "local": true
+    },
+    {
+      "url": "./asf-mural.css",
+      "status": "ok",
+      "http": 200,
+      "local": true
+    },
+    {
+      "url": "./asf-mural.js",
+      "status": "ok",
+      "http": 200,
+      "local": true
+    },
+    {
+      "url": "./asf-previsao-card.js",
       "status": "ok",
       "http": 200,
       "local": true
@@ -340,6 +370,12 @@
     },
     {
       "url": "data/app-links.json",
+      "status": "ok",
+      "http": 200,
+      "local": true
+    },
+    {
+      "url": "data/apps-count.js",
       "status": "ok",
       "http": 200,
       "local": true
