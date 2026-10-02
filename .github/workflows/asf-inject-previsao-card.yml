@@ -1,0 +1,21 @@
+name: asf-inject-previsao-card
+on:
+  push:
+    paths:
+      - ".github/workflows/asf-inject-previsao-card.yml"
+      - "scripts/inject_previsao_card.py"
+permissions:
+  contents: write
+jobs:
+  inject:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: python3 scripts/inject_previsao_card.py
+      - name: Commit se houve mudanca
+        run: |
+          git config user.name "asf-bot"
+          git config user.email "asf-bot@users.noreply.github.com"
+          git add index.html
+          git diff --cached --quiet || git commit -m "chore: inclui asf-previsao-card.js na home (aditivo)"
+          git push
