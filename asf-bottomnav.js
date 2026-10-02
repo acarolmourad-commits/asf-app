@@ -1,13 +1,13 @@
-/* ASF Bottom Nav + Hub Filter + Card Previsao - v2 base-aware (zero 404) */
+/* ASF Bottom Nav + Hub Filter + Card Previsao - v3 (02/10/2026): 5o icone = Carteirinha 🪪 (zero 404, base-aware) */
 (function () {
   "use strict";
   var base = window.ASF_BASE || (location.pathname.indexOf('/asf-app') === 0 ? '/asf-app/' : '/');
   const NAV = [
-    { label: "Inicio",   icon: "\u{1F3E0}", href: base + "index.html" },
-    { label: "Previsao", icon: "\u{1F30A}", href: base + "previsao-surf/" },
-    { label: "Mural",    icon: "\u{1F4F8}", href: base + "mural/" },
-    { label: "Diario",   icon: "\u{1F4D3}", href: base + "diario/" },
-    { label: "Perfil",   icon: "\u{1F464}", href: base + "carteirinhas.html" },
+    { label: "Inicio",      icon: "\u{1F3E0}", href: base + "index.html" },
+    { label: "Previsao",    icon: "\u{1F30A}", href: base + "previsao-surf/" },
+    { label: "Mural",       icon: "\u{1F4F8}", href: base + "mural/" },
+    { label: "Diario",      icon: "\u{1F4D3}", href: base + "diario/" },
+    { label: "Carteirinha", icon: "\u{1FAAA}", href: base + "carteirinhas.html" },
   ];
   const CATEGORIAS = {
     "Mar/Vento": ["asf-mare", "asf-vento", "asf-swell", "asf-previsao", "asf-atlas", "asf-alerta"],

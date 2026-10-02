@@ -37,3 +37,23 @@ body{padding-bottom:64px}
   .mural-card{--asf-bg:#16232b}
   .asf-bottom-nav{--asf-bg:#0e1a21;border-top-color:rgba(255,255,255,.1)}
 }
+
+/* ─── Mural v3: upload, badge de nível e contador de votos ─── */
+.mural-upload{background:var(--asf-bg,#fff);border-radius:16px;padding:1rem;margin-bottom:1rem;
+  box-shadow:0 2px 8px rgba(0,0,0,.08);display:grid;gap:.6rem}
+.mural-upload h2{margin:0;font-size:1.05rem}
+.mural-upload input[type=text],.mural-upload textarea,.mural-upload input[type=file]{
+  border:1px solid #ddd;border-radius:10px;padding:.55rem;font:inherit;width:100%;box-sizing:border-box}
+.mural-upload small{opacity:.7}
+.mural-upload .mural-concurso{display:flex;align-items:center;gap:.4rem;font-size:.9rem}
+.mural-upload button{border:0;border-radius:10px;padding:.7rem;font-weight:700;cursor:pointer;
+  background:var(--asf-primary,#0b7fab);color:#fff}
+.mural-upload button:disabled{opacity:.6;cursor:wait}
+.badge-nivel{background:#e0f4f9;color:#075e78;border-radius:999px;padding:1px 8px;
+  font-size:.65rem;font-weight:700;vertical-align:middle}
+.votos-count{font-weight:700}
+.mural-card.rank{border:2px solid var(--asf-primary,#0b7fab)}
+@media (prefers-color-scheme:dark){
+  .mural-upload{--asf-bg:#16232b}
+  .mural-upload input[type=text],.mural-upload textarea{background:#0e1a21;color:#eee;border-color:#2a3d47}
+}

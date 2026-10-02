@@ -1,9 +1,11 @@
-/* ASF Mural das Manas v2 (02/10/2026) - integrado ao Supabase (mesma base da Galeria).
-   Posts reais compartilhados entre galeria.asf.surf e /mural/. XP continua local (asf_xp). */
+/* ASF Mural das Manas v3 (02/10/2026) — Supabase: mural_fotos + mural_votos + bucket mural-fotos.
+   Compressão WebP no navegador (Canvas, máx 1200px, q0.8), TOP 3 em tempo real (Realtime),
+   voto único (UNIQUE user_id+foto_id), XP na Carteirinha ASF. */
 (function () {
   "use strict";
   var SUPABASE_URL = "https://qktabrzbgdfndklytwub.supabase.co";
   var SUPABASE_ANON_KEY = "sb_publishable_qIvPxh6DavCPtntfflaRLw_QI_pZJih";
+  var BUCKET = "mural-fotos";
   var LS_XP = "asf_xp";
   var TEMA_MES = "Melhor Por do Sol";
 
@@ -19,8 +21,24 @@
       localStorage.setItem(LS_XP, JSON.stringify(xp));
     } catch (e) {}
   }
+  function toast(msg) {
+    if (typeof showToast === "function") showToast(msg); else alert(msg);
+  }
 
-  var sb = null;
+  /* Identidade da usuária: carteirinha local (numero) ou device-id anônimo */
+  function identidade() {
+    var card = null;
+    try { card = JSON.parse(localStorage.getItem("asf-card-v2")); } catch (e) {}
+    var dev = localStorage.getItem("asf_device_id");
+    if (!dev) { dev = "dev-" + Math.random().toString(36).slice(2, 12); localStorage.setItem("asf_device_id", dev); }
+    return {
+      user_id: card && card.numero ? card.numero : dev,
+      nome: card && card.nome ? card.nome : "Mana",
+      nivel: card && card.nivel ? card.nivel : null
+    };
+  }
+
+  var sb = null, canal = null;
   function client() {
     if (!sb && window.supabase) sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
     return sb;
@@ -36,92 +54,149 @@
 
   function mesAtual() { return new Date().toISOString().slice(0, 7); }
 
-  function render(root, posts, comments) {
-    var doMes = posts.filter(function (p) { return (p.created_at || "").slice(0, 7) === mesAtual(); });
-    var top3 = doMes.slice().sort(function (a, b) { return (b.stoke || 0) - (a.stoke || 0); }).slice(0, 3);
-    var medalhas = ["\u{1F947}", "\u{1F948}", "\u{1F949}"];
+  /* ── Compressão WebP pré-upload (Canvas, sem dependências) ── */
+  function comprimirWebP(file) {
+    return new Promise(function (resolve, reject) {
+      if (!file || !/^image\//.test(file.type)) return reject(new Error("Arquivo não é imagem"));
+      var url = URL.createObjectURL(file);
+      var img = new Image();
+      img.onload = function () {
+        var escala = Math.min(1, 1200 / img.width);
+        var cv = document.createElement("canvas");
+        cv.width = Math.round(img.width * escala);
+        cv.height = Math.round(img.height * escala);
+        cv.getContext("2d").drawImage(img, 0, 0, cv.width, cv.height);
+        URL.revokeObjectURL(url);
+        cv.toBlob(function (b) { b ? resolve(b) : reject(new Error("Falha ao converter WebP")); },
+          "image/webp", 0.8);
+      };
+      img.onerror = function () { URL.revokeObjectURL(url); reject(new Error("Imagem inválida")); };
+      img.src = url;
+    });
+  }
+
+  function contagemVotos(votos) {
+    var m = {};
+    (votos || []).forEach(function (v) { m[v.foto_id] = (m[v.foto_id] || 0) + 1; });
+    return m;
+  }
+
+  function cardFoto(f, votos, medalha) {
+    return '<article class="mural-card' + (medalha ? " rank" : "") + '">' +
+      '<img src="' + esc(f.foto_url) + '" alt="Foto de ' + esc(f.autor_nome) + '" loading="lazy">' +
+      "<header><div><strong>" + esc(f.autor_nome) + "</strong>" +
+      (f.autor_nivel ? ' <span class="badge-nivel">' + esc(f.autor_nivel) + "</span>" : "") +
+      "<small> 🏖️ " + esc(f.praia || "") + "</small></div></header>" +
+      (f.legenda ? "<p>" + esc(f.legenda) + "</p>" : "") +
+      '<button class="btn-votar" data-id="' + f.id + '">🤙 Apoiar · <b class="votos-count">' + (votos[f.id] || 0) + "</b></button>" +
+      (medalha ? '<span class="medalha">' + medalha + "</span>" : "") +
+      "</article>";
+  }
+
+  function render(root, fotos, votosMap, top3) {
+    var medalhas = ["🥇", "🥈", "🥉"];
     root.innerHTML =
-      '<section class="mural-foto-mes"><h2>\u{1F4F8} Foto do Mes - ' + esc(TEMA_MES) + '</h2>' +
+      '<section class="mural-foto-mes"><h2>📸 Foto do Mês — ' + esc(TEMA_MES) + "</h2>" +
+      "<p>Poste marcando “Participar do concurso” e mobilize as manas para votar. TOP 3 em tempo real!</p>" +
       '<div class="mural-top3">' +
-      (top3.length ? top3.map(function (p, i) {
-        return '<article class="mural-card rank-' + (i + 1) + '">' +
-          (p.img_url ? '<img src="' + esc(p.img_url) + '" alt="Foto de ' + esc(p.nome) + '" loading="lazy">' : "") +
-          "<header><strong>" + esc(p.nome) + "</strong> - " + esc(p.pico || "") + "</header>" +
-          '<button class="btn-votar" data-id="' + p.id + '" data-stoke="' + (p.stoke || 0) + '">\u{1F30A} Votar (' + (p.stoke || 0) + ")</button>" +
-          '<span class="medalha">' + medalhas[i] + "</span></article>";
-      }).join("") : "<p>Seja a primeira a publicar este mes!</p>") +
+      (top3.length ? top3.map(function (f, i) { return cardFoto(f, votosMap, medalhas[i]); }).join("")
+        : "<p>Seja a primeira a concorrer este mês!</p>") +
       "</div></section>" +
       '<section class="mural-feed">' +
-      posts.map(function (p) {
-        var cs = comments.filter(function (c) { return c.post_id === p.id; });
-        return '<article class="mural-card">' +
-          "<header><div><strong>" + esc(p.nome) + "</strong><small> \u{1F3D6}\uFE0F " + esc(p.pico || "") + "</small></div></header>" +
-          (p.img_url ? '<img src="' + esc(p.img_url) + '" alt="Sessao de ' + esc(p.nome) + '" loading="lazy">' : "") +
-          (p.cap ? "<p>" + esc(p.cap) + "</p>" : "") +
-          '<button class="btn-apoiar" data-id="' + p.id + '" data-stoke="' + (p.stoke || 0) + '">\u{1F919} Juntas no Mar (' + (p.stoke || 0) + ")</button>" +
-          '<div class="comentarios">' +
-          cs.map(function (c) { return "<p><strong>" + esc(c.nome) + ":</strong> " + esc(c.texto) + "</p>"; }).join("") +
-          '<form class="form-comentario" data-id="' + p.id + '">' +
-          '<input type="text" name="nome" placeholder="Seu nome" maxlength="60" required style="max-width:120px">' +
-          '<input type="text" name="texto" placeholder="Comentar..." maxlength="200" required>' +
-          '<button type="submit">Enviar</button></form></div></article>';
-      }).join("") + "</section>";
+      (fotos.length ? fotos.map(function (f) { return cardFoto(f, votosMap, null); }).join("")
+        : "<p>O mural está esperando a sua sessão 🌊</p>") +
+      "</section>";
   }
 
   function carregar(root) {
     var c = client();
     Promise.all([
-      c.from("posts").select("*").order("created_at", { ascending: false }),
-      c.from("comments").select("*").order("created_at")
+      c.from("mural_fotos").select("*").order("criado_em", { ascending: false }),
+      c.from("mural_votos").select("foto_id,user_id"),
+      c.from("mural_top3").select("*")
     ]).then(function (rs) {
       if (rs[0].error) { root.innerHTML = "<p>Erro ao carregar o mural: " + esc(rs[0].error.message) + "</p>"; return; }
-      render(root, rs[0].data || [], rs[1].data || []);
+      var fotos = rs[0].data || [];
+      var votosMap = contagemVotos(rs[1].data);
+      var idsTop = (rs[2].data || []).map(function (t) { return t.id; });
+      var top3 = idsTop.map(function (id) { return fotos.find(function (f) { return f.id === id; }); }).filter(Boolean);
+      render(root, fotos, votosMap, top3);
     }).catch(function () {
-      root.innerHTML = "<p>Sem conexao agora. Tente novamente em instantes \u{1F30A}</p>";
+      root.innerHTML = "<p>Sem conexão agora. Tente novamente em instantes 🌊</p>";
+    });
+  }
+
+  /* Tempo real: novos votos/fotos atualizam contadores e TOP 3 */
+  function assinarTempoReal(root) {
+    var c = client();
+    if (!c || canal) return;
+    canal = c.channel("mural-rt")
+      .on("postgres_changes", { event: "*", schema: "public", table: "mural_votos" }, function () { carregar(root); })
+      .on("postgres_changes", { event: "INSERT", schema: "public", table: "mural_fotos" }, function () { carregar(root); })
+      .subscribe();
+  }
+
+  function votar(root, fotoId, btn) {
+    var me = identidade();
+    btn.disabled = true;
+    client().from("mural_votos").insert({ foto_id: fotoId, user_id: me.user_id })
+      .then(function (r) {
+        if (r.error && r.error.code === "23505") { toast("Você já apoiou esta foto 🌊"); btn.disabled = false; return; }
+        if (r.error) { toast("Não consegui registrar o voto 😢"); btn.disabled = false; return; }
+        addXP(1, "Apoiou uma mana no Mural");
+        carregar(root);
+      });
+  }
+
+  function publicar(form) {
+    var me = identidade();
+    var file = form.foto.files[0];
+    if (!file) { toast("Escolha uma foto 📸"); return; }
+    var btn = form.querySelector("button[type=submit]");
+    btn.disabled = true; btn.textContent = "Comprimindo e enviando…";
+    comprimirWebP(file).then(function (webp) {
+      var path = me.user_id.replace(/[^a-zA-Z0-9\-_]/g, "_") + "/" + Date.now() + ".webp";
+      var c = client();
+      return c.storage.from(BUCKET).upload(path, webp, { contentType: "image/webp" }).then(function (up) {
+        if (up.error) throw new Error(up.error.message);
+        return c.from("mural_fotos").insert({
+          user_id: me.user_id, autor_nome: me.nome, autor_nivel: me.nivel,
+          foto_url: SUPABASE_URL + "/storage/v1/object/public/" + BUCKET + "/" + path,
+          legenda: form.legenda.value.trim(), praia: form.praia.value.trim(),
+          concurso_mes: form.concurso.checked ? mesAtual() : null
+        });
+      });
+    }).then(function (r) {
+      btn.disabled = false; btn.textContent = "Publicar no Mural";
+      if (r && r.error) { toast("Erro ao publicar: " + r.error.message); return; }
+      addXP(5, "Publicou foto no Mural das Manas");
+      form.reset();
+      toast("Publicado! +5 XP na sua carteirinha 🌊");
+      carregar(document.getElementById("mural-manas"));
+    }).catch(function (e) {
+      btn.disabled = false; btn.textContent = "Publicar no Mural";
+      toast(e.message || "Falha no upload");
     });
   }
 
   function bind(root) {
     root.addEventListener("click", function (e) {
-      var btn = e.target.closest(".btn-apoiar, .btn-votar");
-      if (!btn) return;
-      btn.disabled = true;
-      client().from("posts").update({ stoke: parseInt(btn.dataset.stoke, 10) + 1 }).eq("id", btn.dataset.id)
-        .then(function () { carregar(root); });
+      var btn = e.target.closest(".btn-votar");
+      if (btn) votar(root, btn.dataset.id, btn);
     });
-    root.addEventListener("submit", function (e) {
-      if (!e.target.matches(".form-comentario")) return;
-      e.preventDefault();
-      var nome = e.target.nome.value.trim(), texto = e.target.texto.value.trim();
-      if (!nome || !texto) return;
-      client().from("comments").insert({ post_id: e.target.dataset.id, nome: nome, texto: texto })
-        .then(function () { carregar(root); });
-    });
+    var form = document.getElementById("mural-upload");
+    if (form) form.addEventListener("submit", function (e) { e.preventDefault(); publicar(form); });
   }
 
-  window.asfMuralPublicar = function (dados, file) {
-    var c = client();
-    function inserir(img_url) {
-      return c.from("posts").insert({ nome: dados.nome, pico: dados.pico, cap: dados.cap, img_url: img_url })
-        .then(function (r) { if (!r.error) addXP(5, "Publicou foto no Mural das Manas"); return r; });
-    }
-    if (file) {
-      var path = Date.now() + "-" + file.name.replace(/[^a-zA-Z0-9.\-_]/g, "_");
-      return c.storage.from("fotos").upload(path, file).then(function (up) {
-        if (up.error) return up;
-        return inserir(SUPABASE_URL + "/storage/v1/object/public/fotos/" + path);
-      });
-    }
-    return inserir(null);
-  };
+  /* Premia a vencedora do mês (chamada ao encerrar o concurso) */
   window.asfMuralPremiarVencedora = function () {
-    addXP(50, "Venceu a Foto do Mes: " + TEMA_MES);
+    addXP(50, "Venceu a Foto do Mês: " + TEMA_MES);
   };
 
   document.addEventListener("DOMContentLoaded", function () {
     var root = document.getElementById("mural-manas");
     if (!root) return;
-    root.innerHTML = "<p>Carregando o mural...</p>";
-    loadSupabase(function () { carregar(root); bind(root); });
+    root.innerHTML = "<p>Carregando o mural…</p>";
+    loadSupabase(function () { carregar(root); bind(root); assinarTempoReal(root); });
   });
 })();

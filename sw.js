@@ -1,13 +1,22 @@
-const CACHE = "asf-v2";
+const CACHE = "asf-v3";
 const OFFLINE_PAGES = [
   "./index.html",
   "./praias/",
+  "./praias/melhores-praias-iniciantes-litoral-norte-sp.html",
+  "./praias/surf-feminino-sao-sebastiao.html",
   "./aprender/",
+  "./aprender/como-comecar-a-surfar-mulheres.html",
+  "./aprender/correntes-de-retorno-seguranca.html",
+  "./aprender/etiqueta-no-mar.html",
+  "./aprender/primeira-prancha-de-surf.html",
+  "./aprender/remada-tecnica-e-treinos.html",
   "./diario/",
   "./mural/",
   "./asf-mural.css",
   "./asf-mural.js",
   "./asf-bottomnav.js",
+  "./carteirinhas.html",
+  "./carteirinha.js",
   "./fallback.html",
 ];
 self.addEventListener("install", e =>
@@ -17,6 +26,8 @@ self.addEventListener("activate", e =>
     Promise.all(ks.filter(k => k !== CACHE).map(k => caches.delete(k)))).then(() => self.clients.claim())));
 self.addEventListener("fetch", e => {
   if (e.request.method !== "GET") return;
+  // Nunca cachear API do Supabase (dados sempre frescos; votos/fotos sao online)
+  if (e.request.url.indexOf("supabase.co") !== -1) return;
   e.respondWith(
     fetch(e.request).then(r => {
       const clone = r.clone();
