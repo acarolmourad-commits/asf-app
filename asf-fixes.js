@@ -211,6 +211,22 @@
     a.href = base + 'bem-estar/presenca-no-mar-beneficios-da-pratica.html';
     a.style.cssText = 'display:flex;gap:14px;align-items:center;background:linear-gradient(135deg,#0E2439,#00A8CC);border-radius:16px;padding:18px;margin:12px 20px;text-decoration:none;color:#fff;box-shadow:0 4px 14px rgba(0,168,204,.3)';
     a.innerHTML = '<span style="font-size:2rem">\u{1F305}</span><span><b style="display:block">Presen\u00e7a no Mar <span style="background:#f4d03f;color:#0E2439;font-size:10px;padding:2px 8px;border-radius:10px;vertical-align:middle;margin-left:6px">NOVO</span></b><small style="color:rgba(255,255,255,.9)">\u00c1gua com sal, sol nascendo no line-up, vida marinha ao lado \u2014 por que a pr\u00e1tica \u00e9 o que manda na evolu\u00e7\u00e3o</small></span>';
-    ref.insertAdjacentElement('afterend', a);
+  ref.insertAdjacentElement('afterend', a);
+  });
+})();
+
+/* ---------- FIX SEARCH RESULTS VISIBILITY (02/10/2026) ----------
+   Issue #38: .search-results tem display:none mas faltava a regra
+   .search-results.active { display: block } para mostrar resultados
+*/
+(function() {
+  function ready(fn) { document.readyState !== 'loading' ? fn() : document.addEventListener('DOMContentLoaded', fn); }
+  ready(function() {
+    if (document.getElementById('asf-search-fix')) return;
+    var st = document.createElement('style');
+    st.id = 'asf-search-fix';
+    st.textContent = '.search-results.active{display:block!important}' +
+      '.search-results{display:none}';
+    document.head.appendChild(st);
   });
 })();
