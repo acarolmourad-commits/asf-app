@@ -195,7 +195,7 @@
   ready(function () {
     if (document.getElementById('asf-fase8')) return;
     var m = document.createElement('meta'); m.id = 'asf-fase8'; m.name = 'asf-fase8'; document.head.appendChild(m);
-    window.ASF_BASE = window.ASF_BASE || '/asf-app/';
+    window.ASF_BASE = window.ASF_BASE || (location.pathname.indexOf('/asf-app') === 0 ? '/asf-app/' : '/');
     var base = window.ASF_BASE;
     if (!document.querySelector('link[href*="asf-mural.css"]')) {
       var l = document.createElement('link'); l.rel = 'stylesheet'; l.href = base + 'asf-mural.css'; document.head.appendChild(l);

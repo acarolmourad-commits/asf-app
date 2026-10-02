@@ -1,7 +1,7 @@
 /* ASF Bottom Nav + Hub Filter + Card Previsao - v2 base-aware (zero 404) */
 (function () {
   "use strict";
-  var base = window.ASF_BASE || "./";
+  var base = window.ASF_BASE || (location.pathname.indexOf('/asf-app') === 0 ? '/asf-app/' : '/');
   const NAV = [
     { label: "Inicio",   icon: "\u{1F3E0}", href: base + "index.html" },
     { label: "Previsao", icon: "\u{1F30A}", href: base + "previsao-surf/" },
