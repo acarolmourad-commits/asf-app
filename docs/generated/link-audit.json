@@ -1,12 +1,11 @@
 {
-  "date": "2026-10-02T02:51:02.856561+00:00",
+  "date": "2026-10-02T11:28:23.137178+00:00",
   "total": 95,
-  "ok": 84,
+  "ok": 85,
   "skipped": 9,
-  "broken_count": 2,
+  "broken_count": 1,
   "broken": [
-    "https://acarolmourad-commits.github.io/asf-swell/",
-    "https://www.fecasurf.com.br/"
+    "https://acarolmourad-commits.github.io/asf-swell/"
   ],
   "results": [
     {
@@ -156,8 +155,8 @@
     },
     {
       "url": "https://www.fecasurf.com.br/",
-      "status": "broken",
-      "http": "URLError"
+      "status": "ok",
+      "http": 200
     },
     {
       "url": "https://www.googletagmanager.com",
