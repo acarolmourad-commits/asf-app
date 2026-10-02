@@ -15,7 +15,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Coletar dados do Search Console (sitemaps + search analytics)
+      - name: Coletar dados (Search Console API ou fallback HTTP)
         env:
           GSC_CLIENT_ID: ${{ secrets.GSC_CLIENT_ID }}
           GSC_CLIENT_SECRET: ${{ secrets.GSC_CLIENT_SECRET }}
@@ -23,57 +23,82 @@ jobs:
         run: |
           mkdir -p docs
           R="docs/SEO-GSC-REVIEW.md"
-          echo "# 📈 Revisao SEO — Google Search Console" > $R
+          echo "# 📈 Revisao SEO Semanal — rede ASF" > $R
           echo "" >> $R
           echo "_Gerado em $(date -u '+%d/%m/%Y %H:%M UTC') pelo workflow gsc-seo-review_" >> $R
 
-          if [ -z "$GSC_REFRESH_TOKEN" ]; then
-            echo "" >> $R
-            echo "⚠️ Secrets GSC_CLIENT_ID / GSC_CLIENT_SECRET / GSC_REFRESH_TOKEN nao configurados." >> $R
-            echo "Configure em Settings > Secrets para ativar a coleta automatica." >> $R
-            cat $R
-            exit 0
+          HOSTS="asf.surf goldenhour praias mare previsao nutricao yoga seguranca equipamento historia manobras vento sono"
+
+          TOKEN=""
+          if [ -n "$GSC_REFRESH_TOKEN" ]; then
+            TOKEN=$(curl -s -X POST https://oauth2.googleapis.com/token \
+              -d "client_id=$GSC_CLIENT_ID&client_secret=$GSC_CLIENT_SECRET&refresh_token=$GSC_REFRESH_TOKEN&grant_type=refresh_token" \
+              | grep -o '"access_token": *"[^"]*"' | cut -d'"' -f4)
           fi
 
-          TOKEN=$(curl -s -X POST https://oauth2.googleapis.com/token \
-            -d "client_id=$GSC_CLIENT_ID&client_secret=$GSC_CLIENT_SECRET&refresh_token=$GSC_REFRESH_TOKEN&grant_type=refresh_token" \
-            | grep -o '"access_token": *"[^"]*"' | cut -d'"' -f4)
-          SITE="sc-domain:asf.surf"
+          echo "" >> $R
+          echo "## Sitemaps (13 propriedades-chave)" >> $R
+          echo "" >> $R
+
+          if [ -n "$TOKEN" ]; then
+            echo "| Sitemap | Status API | Erros | Indexadas |" >> $R
+            echo "|---------|-----------|-------|-----------|" >> $R
+            SITE=$(python3 -c "import urllib.parse;print(urllib.parse.quote('sc-domain:asf.surf',safe=''))")
+            for h in $HOSTS; do
+              FEED="https://$h/sitemap.xml"; [ "$h" != "asf.surf" ] && FEED="https://$h.asf.surf/sitemap.xml" && FEED="https://$h/sitemap.xml"
+              FEED="https://$h/sitemap.xml"; if [ "$h" != "asf.surf" ]; then FEED="https://${h/asf.surf/}"; FEED="https://$h/sitemap.xml"; fi
+              # monta feed corretamente
+              if [ "$h" = "asf.surf" ]; then FEED="https://asf.surf/sitemap.xml"; else FEED="https://$h.asf.surf/sitemap.xml"; fi
+              ENC=$(python3 -c "import urllib.parse,sys;print(urllib.parse.quote('$FEED',safe=''))")
+              RESP=$(curl -s -H "Authorization: Bearer $TOKEN" "https://www.googleapis.com/webmasters/v3/sites/$SITE/sitemaps/$ENC")
+              ERR=$(echo "$RESP" | grep -o '"errors": *"[0-9]*"' | head -1 | cut -d'"' -f4)
+              IDX=$(echo "$RESP" | grep -o '"indexed": *"[0-9]*"' | tail -1 | cut -d'"' -f4)
+              ST="ok"; echo "$RESP" | grep -q '"isPending": *true' && ST="pendente"
+              echo "$RESP" | grep -q '"error"' && ST="erro API"
+              echo "| $h | $ST | ${ERR:-0} | ${IDX:--} |" >> $R
+            done
+          else
+            echo "_Modo HTTP (sem credenciais OAuth — configure os secrets para dados de indexacao reais; ver docs/GSC-SETUP.md)_" >> $R
+            echo "" >> $R
+            echo "| Sitemap | HTTP | Conteudo valido |" >> $R
+            echo "|---------|------|-----------------|" >> $R
+            for h in $HOSTS; do
+              if [ "$h" = "asf.surf" ]; then FEED="https://asf.surf/sitemap.xml"; else FEED="https://$h.asf.surf/sitemap.xml"; fi
+              CODE=$(curl -s -o /tmp/sm.xml -w '%{http_code}' --max-time 20 "$FEED")
+              VALID="✅"; grep -q '<urlset' /tmp/sm.xml || VALID="❌"
+              echo "| $h | $CODE | $VALID |" >> $R
+            done
+          fi
+
+          if [ -n "$TOKEN" ]; then
+            echo "" >> $R
+            echo "## Top 20 consultas (ultimos 28 dias)" >> $R
+            echo "" >> $R
+            echo "| Consulta | Cliques | Impressoes | CTR | Posicao |" >> $R
+            echo "|----------|---------|------------|-----|---------|" >> $R
+            SITE=$(python3 -c "import urllib.parse;print(urllib.parse.quote('sc-domain:asf.surf',safe=''))")
+            END=$(date -u -d '3 days ago' +%F); START=$(date -u -d '31 days ago' +%F)
+            curl -s -X POST -H "Authorization: Bearer $TOKEN" -H 'Content-Type: application/json' \
+              "https://www.googleapis.com/webmasters/v3/sites/$SITE/searchAnalytics/query" \
+              -d "{\"startDate\":\"$START\",\"endDate\":\"$END\",\"dimensions\":[\"query\"],\"rowLimit\":20}" \
+            | python3 -c "
+            import sys, json
+            try:
+                d = json.load(sys.stdin)
+                rows = d.get('rows', [])
+                if not rows: print('| (sem dados ainda) | - | - | - | - |')
+                for r in rows:
+                    print(f\"| {r['keys'][0]} | {r['clicks']} | {r['impressions']} | {r['ctr']*100:.1f}% | {r['position']:.1f} |\")
+            except Exception:
+                print('| (erro ao ler API) | - | - | - | - |')
+            " >> $R
+          fi
 
           echo "" >> $R
-          echo "## Sitemaps submetidos" >> $R
-          echo "" >> $R
-          echo "| Sitemap | Status | Erros | Indexadas |" >> $R
-          echo "|---------|--------|-------|-----------|" >> $R
-          for sm in asf.surf goldenhour praias mare previsao nutricao yoga seguranca equipamento historia manobras vento sono; do
-            if [ "$sm" = "asf.surf" ]; then FEED="https://asf.surf/sitemap.xml"; else FEED="https://$sm.asf.surf/sitemap.xml"; fi
-            RESP=$(curl -s -H "Authorization: Bearer $TOKEN" \
-              "https://www.googleapis.com/webmasters/v3/sites/$(python3 -c "import urllib.parse;print(urllib.parse.quote('$SITE',safe=''))")/sitemaps/$(python3 -c "import urllib.parse;print(urllib.parse.quote('$FEED',safe=''))")")
-            ERR=$(echo "$RESP" | grep -o '"errors": *"[0-9]*"' | cut -d'"' -f4)
-            IDX=$(echo "$RESP" | grep -o '"indexed": *"[0-9]*"' | tail -1 | cut -d'"' -f4)
-            PEND=$(echo "$RESP" | grep -o '"isPending": *true' | head -1)
-            ST="ok"; [ -n "$PEND" ] && ST="pendente"; echo "$RESP" | grep -q '"error"' && ST="erro API"
-            echo "| $sm | $ST | ${ERR:-0} | ${IDX:--} |" >> $R
-          done
-
-          echo "" >> $R
-          echo "## Top 20 consultas (ultimos 28 dias)" >> $R
-          echo "" >> $R
-          END=$(date -u -d '3 days ago' +%F); START=$(date -u -d '31 days ago' +%F)
-          ANALYTICS=$(curl -s -X POST -H "Authorization: Bearer $TOKEN" -H 'Content-Type: application/json' \
-            "https://www.googleapis.com/webmasters/v3/sites/$(python3 -c "import urllib.parse;print(urllib.parse.quote('$SITE',safe=''))")/searchAnalytics/query" \
-            -d "{\"startDate\":\"$START\",\"endDate\":\"$END\",\"dimensions\":[\"query\"],\"rowLimit\":20}")
-          echo "| Consulta | Cliques | Impressoes | CTR | Posicao |" >> $R
-          echo "|----------|---------|------------|-----|---------|" >> $R
-          echo "$ANALYTICS" | python3 -c "
-          import sys, json
-          try:
-              d = json.load(sys.stdin)
-              for r in d.get('rows', []):
-                  print(f\"| {r['keys'][0]} | {r['clicks']} | {r['impressions']} | {r['ctr']*100:.1f}% | {r['position']:.1f} |\")
-          except Exception as e:
-              print(f'| (sem dados ainda) | - | - | - | - |')
-          " >> $R
+          echo "## Links rapidos" >> $R
+          echo "- Search Console: https://search.google.com/search-console?resource_id=sc-domain:asf.surf" >> $R
+          echo "- Plano de conteudo: docs/PLANO-CONTEUDO.md" >> $R
+          echo "- Setup de credenciais: docs/GSC-SETUP.md" >> $R
           cat $R
 
       - name: Marco das 10 semanas - abrir issue de revisao
@@ -83,7 +108,7 @@ jobs:
             EXISTS=$(gh issue list --state open --search "Revisao SEO 10 semanas" --json number --jq length 2>/dev/null || echo 0)
             if [ "$EXISTS" = "0" ]; then
               gh issue create --title "📊 Revisao SEO das 10 semanas (plano de conteudo)" \
-                --body "Chegou o marco das 10 semanas do plano de conteudo. Verificar em docs/SEO-GSC-REVIEW.md e no Search Console: quais palavras-chave geraram impressoes/cliques e dobrar a aposta nos temas vencedores, conforme docs/PLANO-CONTEUDO.md."
+                --body "Chegou o marco das 10 semanas do plano de conteudo. Verificar docs/SEO-GSC-REVIEW.md e o Search Console: quais palavras-chave geraram impressoes/cliques e dobrar a aposta nos temas vencedores, conforme docs/PLANO-CONTEUDO.md."
             fi
           fi
         env:
