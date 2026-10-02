@@ -1,12 +1,13 @@
-/* ASF Bottom Nav + Hub Filter + Card Previsao - links relativos apenas */
+/* ASF Bottom Nav + Hub Filter + Card Previsao - v2 base-aware (zero 404) */
 (function () {
   "use strict";
+  var base = window.ASF_BASE || "./";
   const NAV = [
-    { label: "Inicio",   icon: "🏠", href: "./index.html" },
-    { label: "Previsao", icon: "🌊", href: "./previsao-surf/" },
-    { label: "Mural",    icon: "📸", href: "./mural/" },
-    { label: "Diario",   icon: "📓", href: "./diario/" },
-    { label: "Perfil",   icon: "👤", href: "./carteirinhas.html" },
+    { label: "Inicio",   icon: "\u{1F3E0}", href: base + "index.html" },
+    { label: "Previsao", icon: "\u{1F30A}", href: base + "previsao-surf/" },
+    { label: "Mural",    icon: "\u{1F4F8}", href: base + "mural/" },
+    { label: "Diario",   icon: "\u{1F4D3}", href: base + "diario/" },
+    { label: "Perfil",   icon: "\u{1F464}", href: base + "carteirinhas.html" },
   ];
   const CATEGORIAS = {
     "Mar/Vento": ["asf-mare", "asf-vento", "asf-swell", "asf-previsao", "asf-atlas", "asf-alerta"],
@@ -22,7 +23,7 @@
       nav.setAttribute("aria-label", "Navegacao principal");
       const atual = location.pathname;
       nav.innerHTML = NAV.map(i =>
-        `<a href="${i.href}" class="${atual.includes(i.href.replace("./", "/")) ? "ativo" : ""}">
+        `<a href="${i.href}" class="${atual.indexOf(i.href) !== -1 ? "ativo" : ""}">
            <span>${i.icon}</span><small>${i.label}</small></a>`).join("");
       document.body.appendChild(nav);
     }
@@ -33,7 +34,7 @@
       const render = lista => {
         gridEl.innerHTML = lista.map(a =>
           `<a class="app-card" href="${a.url}" data-fallback>
-             <span class="app-icon">${a.icon || "🏄"}</span>${a.nome}</a>`).join("");
+             <span class="app-icon">${a.icon || "\u{1F3C4}"}</span>${a.nome}</a>`).join("");
       };
       chipsEl.innerHTML = ["Todos", ...Object.keys(CATEGORIAS)].map(c =>
         `<button class="chip" data-cat="${c}">${c}</button>`).join("");
@@ -63,7 +64,7 @@
         <li>Vento: <strong>${vento} km/h</strong></li>
         <li>Mare: <strong>${mare}</strong></li>
       </ul>
-      <a href="./previsao-surf/">Ver previsao completa</a>`;
+      <a href="${base}previsao-surf/">Ver previsao completa</a>`;
   };
 
   document.addEventListener("click", async e => {
@@ -73,7 +74,7 @@
       await fetch(a.href, { method: "HEAD", mode: "no-cors" });
     } catch {
       e.preventDefault();
-      location.href = "./fallback.html?app=" + encodeURIComponent(a.textContent.trim());
+      location.href = base + "fallback.html?app=" + encodeURIComponent(a.textContent.trim());
     }
   });
 })();

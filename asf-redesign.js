@@ -8,3 +8,28 @@
   a.textContent='\u2190 App ASF';
   document.body.appendChild(a);
 });})();
+
+
+/* ---------- FASE 8 - Mural das Manas / Bottom Nav / SW offline (01/10/2026) ----------
+   Injeta os modulos novos de forma aditiva: CSS do mural, bottom nav fixa,
+   asf-mural.js apenas se existir #mural-manas, e registra o Service Worker.
+   Nao remove nem altera nada existente. */
+(function () {
+  function ready(fn) { document.readyState !== 'loading' ? fn() : document.addEventListener('DOMContentLoaded', fn); }
+  ready(function () {
+    if (document.getElementById('asf-fase8')) return;
+    var m = document.createElement('meta'); m.id = 'asf-fase8'; m.name = 'asf-fase8'; document.head.appendChild(m);
+    window.ASF_BASE = window.ASF_BASE || '/asf-app/';
+    var base = window.ASF_BASE;
+    if (!document.querySelector('link[href*="asf-mural.css"]')) {
+      var l = document.createElement('link'); l.rel = 'stylesheet'; l.href = base + 'asf-mural.css'; document.head.appendChild(l);
+    }
+    if (!document.querySelector('script[src*="asf-bottomnav.js"]')) {
+      var s = document.createElement('script'); s.src = base + 'asf-bottomnav.js'; s.defer = true; document.body.appendChild(s);
+    }
+    if (document.getElementById('mural-manas') && !document.querySelector('script[src*="asf-mural.js"]')) {
+      var s2 = document.createElement('script'); s2.src = base + 'asf-mural.js'; s2.defer = true; document.body.appendChild(s2);
+    }
+    if ('serviceWorker' in navigator) navigator.serviceWorker.register(base + 'sw.js').catch(function () {});
+  });
+})();
