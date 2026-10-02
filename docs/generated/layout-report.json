@@ -2,7 +2,7 @@
   "date": "2026-10-02",
   "issues_found": 2,
   "improvements_available": 4,
-  "score": 81,
+  "score": 83,
   "suggested": [
     {
       "type": "seo",
@@ -10,10 +10,10 @@
       "impact": "medium"
     },
     {
-      "type": "css",
-      "change": "Better header gradient",
+      "type": "js",
+      "change": "Lazy loading images",
       "impact": "high"
     }
   ],
-  "timestamp": "2026-10-02T11:28:04.940107"
+  "timestamp": "2026-10-02T16:32:25.596291"
 }
