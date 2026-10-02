@@ -1,6 +1,11 @@
-// ASF Fixes — rede de apps (atualizado em 25/09/2026)
-// 1) Menu "Trips" estava morto (não existe seção #trips): redireciona para o guia Surf Trip.
-// 2) Home: corrige contagem da rede para 53 apps (52 satélites + hub).
+// ASF Fixes — rede de apps (atualizado em 02/10/2026)
+// 1) Menu "Trips" estava morto: redireciona para Surf Trip.
+// 2) Conta de apps na home para 53 (52 satélites + hub).
+// 3) Carteirinha unificada: seção só aparece quando clicada.
+// 4) Reorg home v2: agrupa seções com cabeçalhos.
+// 5) Fix footer overlap + FAB stacking + overflow-x guard.
+// 6) FIX SEARCH BAR: .search-results.active { display:block } (Issue #38).
+
 (function () {
   function patchTrips() {
     if (typeof window.showSection !== 'function') return;
@@ -27,66 +32,35 @@
   } else { fixCount(); }
 })();
 
-// 3) Conquistas: badge "Estudiosa" pede 3 quizzes no rótulo, mas o código exigia 5.
-//    Wrap de checkBadge alinha o critério para 3.
-// 4) Conquistas Secretas: botão "Desbloquear" desbloqueava sem critério.
-//    Agora o 1º toque explica o requisito e o 2º confirma a conquista.
+/* ---------- FIX SEARCH BAR (02/10/2026) ----------
+   Issue #38: .search-results tinha display:none, mas faltava
+   .search-results.active { display:block } — resultados
+   renderizavam invisíveis. */
 (function () {
-  function patchBadges() {
-    if (typeof window.checkBadge === 'function' && !window.checkBadge.__asfPatched) {
-      var origCheck = window.checkBadge;
-      var wrapped = function (type) {
-        if (type === 'quiz') {
-          var quizzes = (JSON.parse(localStorage.getItem('quizzes-done') || '[]')).length;
-          if (quizzes >= 3) { if (typeof showToast === 'function') showToast('📚 Badge Estudiosa desbloqueado! 🎉'); }
-          else if (typeof showToast === 'function') showToast('📚 Progresso: ' + quizzes + '/3 quizzes (faça o ASF Quiz!)');
-          return;
-        }
-        return origCheck.apply(this, arguments);
-      };
-      wrapped.__asfPatched = true;
-      window.checkBadge = wrapped;
-    }
-    if (typeof window.unlockConquista === 'function' && !window.unlockConquista.__asfPatched) {
-      var reqs = {
-        'longboard-wave': 'Surfar 5 ondas em longboard',
-        'tide-timing': 'Surfar em 3 marés diferentes',
-        'wax-wizard': 'Usar a parafina correta 5x',
-        'sun-guardian': 'Usar protetor solar 7 dias seguidos'
-      };
-      var origUnlock = window.unlockConquista;
-      var armed = {};
-      var wrappedU = function (type, btn) {
-        if (!armed[type]) {
-          armed[type] = true;
-          var r = reqs[type] || 'Complete a atividade';
-          if (typeof showToast === 'function') showToast('🔓 ' + r + '. Toque de novo para confirmar que completou!');
-          btn.textContent = 'Confirmar ✅';
-          return;
-        }
-        return origUnlock.apply(this, arguments);
-      };
-      wrappedU.__asfPatched = true;
-      window.unlockConquista = wrappedU;
-    }
+  function ready(fn) {
+    document.readyState !== 'loading' ? fn() : document.addEventListener('DOMContentLoaded', fn);
   }
-  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', patchBadges);
-  else patchBadges();
+  function apply() {
+    if (document.getElementById('asf-search-fix')) return;
+    var st = document.createElement('style');
+    st.id = 'asf-search-fix';
+    st.textContent =
+      '.search-results.active{display:block!important}\n' +
+      '.search-results{display:none}';
+    document.head.appendChild(st);
+  }
+  ready(apply);
 })();
 
-// 5) Carteirinha unificada (25/09/2026): a seção interativa #carteirinha ficava
-//    visível no fim da home, duplicando o card "Carteirinha ASF" do topo.
-//    Agora a seção só aparece quando aberta (pelo card do topo ou menu).
+/* ---------- FIX CARTCEIRINHA (25/09/2026) ---------- */
 (function () {
   function fixCarteirinha() {
     var sec = document.getElementById('carteirinha');
     if (!sec || sec.__asfUnified) return;
     sec.__asfUnified = true;
-    // Esconde a seção na home até ser aberta explicitamente
     if (!sec.classList.contains('active')) {
       sec.style.setProperty('display', 'none', 'important');
     }
-    // Garante que o card do topo abre a seção e rola para o topo dela
     var card = document.getElementById('carteirinha-home-card');
     if (card && !card.__asfUnified) {
       card.__asfUnified = true;
@@ -103,28 +77,22 @@
   else fixCarteirinha();
 })();
 
-/* ---------- REORG HOME v2 (01/10/2026) ----------
-   A home ja possui blocos Hero/Comecar/Jornada/Rede ASF/Sobre (commit anterior).
-   Este script apenas AGRUPA as secoes restantes com cabecalhos de grupo e
-   reordena: Aprender > Comunidade > Parceiros > Mundo. Nada e removido.
-   Idempotente: roda uma unica vez. */
+/* ---------- REORG HOME v2 (01/10/2026) ---------- */
 (function () {
   function ready(fn){document.readyState!=='loading'?fn():document.addEventListener('DOMContentLoaded',fn);}
   ready(function(){
     try{
-      if(document.querySelector('.asf-grupo-hdr')) return; // ja aplicado
+      if(document.querySelector('.asf-grupo-hdr')) return;
       var content=document.querySelector('div.content');
       if(!content) return;
       content.setAttribute('role','main');
       function hdr(t){var d=document.createElement('div');d.className='section-header asf-grupo-hdr';d.style.margin='36px 20px 0';d.innerHTML='<h2 class="section-title">'+t+'</h2>';return d;}
       function byId(id){return document.getElementById(id);}
       function move(parent,item){var n=(typeof item==='string')?byId(item):item;if(n)parent.appendChild(n);}
-      // .content: Aprender > Comunidade > Parceiros
       [hdr('📚 Aprenda e Evolua'),'dicas','tecnica','mobilidade','saude','alimentacao','mental',
        hdr('👭 Comunidade'),'manas-proximas','progresso','badges',
        hdr('🤝 Parceiros ASF'),'lojas','loja','brandhub']
         .forEach(function(x){move(content,x);});
-      // body: apos .content
       var anchor=content;
       [hdr('⭐ Guias & Praias'),'premium','praias',
        hdr('👭 Comunidade — continue explorando'),'comunidade','surfer-profile','pos-surf','desafios','competicoes','surf-news','metas',
@@ -138,9 +106,7 @@
   });
 })();
 
-/* ---------- FIX FOOTER OVERLAP (02/10/2026) ----------
-   Footer era sobreposto por elementos fixos (.asf-bottom-nav, #asf-cookie-banner).
-   Adiciona padding-bottom dinamico = soma das alturas das barras fixas no rodape. */
+/* ---------- FIX FOOTER OVERLAP (02/10/2026) ---------- */
 (function () {
   function ready(fn){document.readyState!=='loading'?fn():document.addEventListener('DOMContentLoaded',fn);}
   ready(function(){
@@ -156,15 +122,12 @@
     }
     apply();
     window.addEventListener('resize',apply);
-    // re-aplica quando o cookie banner for aceito/removido
     new MutationObserver(apply).observe(document.body,{childList:true});
     document.addEventListener('click',function(){setTimeout(apply,300);},true);
   });
 })();
 
-/* ---------- FIX FAB x BOTTOM NAV (02/10/2026) ----------
-   Botoes flutuantes (Rede ASF, Galeria das Manas etc.) ficavam sobrepostos
-   a barra inferior .asf-bottom-nav. Agora sobem para cima dela. */
+/* ---------- FIX FAB x BOTTOM NAV (02/10/2026) ---------- */
 (function () {
   function ready(fn){document.readyState!=='loading'?fn():document.addEventListener('DOMContentLoaded',fn);}
   ready(function(){
@@ -181,7 +144,7 @@
         var cs=getComputedStyle(el);
         if(cs.position!=='fixed') continue;
         var h=el.offsetHeight, w=el.offsetWidth;
-        if(!h||h>90) continue; // so botoes pequenos (FABs), nao paineis
+        if(!h||h>90) continue;
         var b=parseFloat(cs.bottom);
         if(isNaN(b)||b>=alvo-4) continue;
         if(cs.bottom==='auto') continue;
@@ -194,19 +157,10 @@
   });
 })();
 
-/* -------------- FIX STACK FABs + OVERFLOW-X (02/10/2026) --------------
-   1) Os botoes flutuantes do canto direito (Galeria das Manas, FAB +, share,
-      back-to-top) colidiam ENTRE SI: o fix anterior subia todos para o mesmo
-      bottom (bnH+12), mas .fab (56px de altura, bottom:88px) nao era tocado e
-      cobria o botao da Galeria. Agora os botoes visiveis sao empilhados
-      dinamicamente: cada um acima do anterior, 12px de respiro, tudo acima da
-      .asf-bottom-nav.
-   2) Guarda anti-overflow horizontal: nenhum elemento pode estourar a largura
-      da viewport (fonte do scroll horizontal de ~1500px em mobile). */
+/* ---------- FIX STACK FABs + OVERFLOW-X (02/10/2026) ---------- */
 (function () {
   function ready(fn){document.readyState!=='loading'?fn():document.addEventListener('DOMContentLoaded',fn);}
   ready(function () {
-    // 1) Empilhamento dinamico dos FABs
     var applying=false;
     function stack(){
       if(applying) return;
@@ -214,7 +168,7 @@
       try{
         var bn=document.querySelector('.asf-bottom-nav');
         var bnH=(bn && getComputedStyle(bn).position==='fixed') ? bn.offsetHeight : 0;
-        var nextBottom=(bnH||0)+12; // base: logo acima da barra inferior
+        var nextBottom=(bnH||0)+12;
         var sels=['#asf-galeria-btn','.fab','.fab-share','#back-to-top'];
         var els=[];
         sels.forEach(function(s){
@@ -222,7 +176,6 @@
             if(el.offsetHeight>0 && getComputedStyle(el).position==='fixed') els.push(el);
           });
         });
-        // ordem desejada de baixo para cima: galeria, fab, share, back-to-top
         els.sort(function(a,b){return sels.findIndex(function(s){return a.matches(s);})-sels.findIndex(function(s){return b.matches(s);});});
         els.forEach(function(el){
           el.style.bottom=nextBottom+'px';
@@ -235,7 +188,6 @@
     window.addEventListener('resize',stack);
     new MutationObserver(function(){stack();}).observe(document.body,{childList:true,attributes:true,subtree:true,attributeFilter:['style','class']});
 
-    // 2) Guarda anti-overflow horizontal
     var st=document.createElement('style');
     st.id='asf-overflow-guard';
     st.textContent='html,body{overflow-x:hidden;max-width:100vw;}'+
@@ -245,9 +197,7 @@
   });
 })();
 
-/* ------------ Destaque editorial: "Presenca no Mar" na home (02/10/2026) ------------
-   Injetado via asf-fixes.js (carregado com defer na home).
-   Aditivo e idempotente: so injeta o card na pagina inicial, sem tocar no HTML estatico. */
+/* ---------- Destaque editorial: "Presenca no Mar" (02/10/2026) ---------- */
 (function () {
   function ready(fn) { document.readyState !== 'loading' ? fn() : document.addEventListener('DOMContentLoaded', fn); }
   ready(function () {
