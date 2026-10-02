@@ -162,26 +162,34 @@
   });
 })();
 
-/* ---------- FIX FLOATING BUTTONS x BOTTOM NAV (02/10/2026) ----------
-   Botoes flutuantes (Rede ASF #asf-sat-nav, Galeria #asf-galeria-btn e similares)
-   ficavam sobre o menu inferior .asf-bottom-nav. Agora sobem para cima da barra. */
+/* ---------- FIX FAB x BOTTOM NAV (02/10/2026) ----------
+   Botoes flutuantes (Rede ASF, Galeria das Manas etc.) ficavam sobrepostos
+   a barra inferior .asf-bottom-nav. Agora sobem para cima dela. */
 (function () {
   function ready(fn){document.readyState!=='loading'?fn():document.addEventListener('DOMContentLoaded',fn);}
   ready(function(){
     function apply(){
       var bn=document.querySelector('.asf-bottom-nav');
       var bnH=(bn && getComputedStyle(bn).position==='fixed') ? bn.offsetHeight : 0;
-      var base=(bnH>0? bnH+12 : 16)+'px';
-      ['asf-sat-nav','asf-galeria-btn'].forEach(function(id){
-        var el=document.getElementById(id);
-        if(!el) return;
-        var st=getComputedStyle(el);
-        if(st.position!=='fixed') return;
-        el.style.setProperty('bottom',base,'important');
-      });
+      if(!bnH) return;
+      var alvo=bnH+12;
+      var all=document.querySelectorAll('body *');
+      for(var i=0;i<all.length;i++){
+        var el=all[i];
+        if(bn.contains(el)||el===bn) continue;
+        if(el.closest('#asf-cookie-banner,#cookie-consent-banner')) continue;
+        var cs=getComputedStyle(el);
+        if(cs.position!=='fixed') continue;
+        var h=el.offsetHeight, w=el.offsetWidth;
+        if(!h||h>90) continue; // so botoes pequenos (FABs), nao paineis
+        var b=parseFloat(cs.bottom);
+        if(isNaN(b)||b>=alvo-4) continue;
+        if(cs.bottom==='auto') continue;
+        el.style.bottom=alvo+'px';
+      }
     }
     apply();
     window.addEventListener('resize',apply);
-    new MutationObserver(apply).observe(document.body,{childList:true});
+    new MutationObserver(function(){apply();}).observe(document.body,{childList:true});
   });
 })();
