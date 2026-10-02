@@ -137,3 +137,27 @@
     }catch(e){console.error('reorg home v2:',e);}
   });
 })();
+
+/* ---------- FIX FOOTER OVERLAP (02/10/2026) ----------
+   Footer era sobreposto por elementos fixos (.asf-bottom-nav, #asf-cookie-banner).
+   Adiciona padding-bottom dinamico = soma das alturas das barras fixas no rodape. */
+(function () {
+  function ready(fn){document.readyState!=='loading'?fn():document.addEventListener('DOMContentLoaded',fn);}
+  ready(function(){
+    var f=document.querySelector('footer'); if(!f) return;
+    function apply(){
+      var pad=24;
+      var bn=document.querySelector('.asf-bottom-nav');
+      var bnH=(bn && getComputedStyle(bn).position==='fixed') ? bn.offsetHeight : 0;
+      var cb=document.getElementById('asf-cookie-banner');
+      var cbH=(cb && cb.offsetHeight>0 && getComputedStyle(cb).position==='fixed') ? cb.offsetHeight : 0;
+      pad=Math.max(pad, bnH+cbH+16);
+      f.style.paddingBottom=pad+'px';
+    }
+    apply();
+    window.addEventListener('resize',apply);
+    // re-aplica quando o cookie banner for aceito/removido
+    new MutationObserver(apply).observe(document.body,{childList:true});
+    document.addEventListener('click',function(){setTimeout(apply,300);},true);
+  });
+})();
