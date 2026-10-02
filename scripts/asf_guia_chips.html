@@ -1,0 +1,23 @@
+<script>
+/* Chips de categoria do Guia de Apps (aditivo; funciona junto com a busca filtra()) */
+(function(){
+  const hero=document.querySelector('.hero-card');
+  if(!hero) return;
+  const cats=[...document.querySelectorAll('.cat[data-cat]')];
+  if(!cats.length) return;
+  const bar=document.createElement('div');
+  bar.id='chips-cat';
+  bar.style.cssText='display:flex;flex-wrap:wrap;gap:6px;margin-top:10px';
+  const busca=document.getElementById('busca');
+  const cont=document.getElementById('cont');
+  const mk=(label,fn)=>{const b=document.createElement('button');b.type='button';b.className='chip';b.textContent=label;
+    b.addEventListener('click',()=>{bar.querySelectorAll('.chip').forEach(c=>c.classList.remove('ativo'));b.classList.add('ativo');
+      if(busca)busca.value=''; fn();});return b;};
+  bar.appendChild(mk('Todas',()=>{cats.forEach(c=>{c.style.display='';c.querySelectorAll('.app').forEach(a=>a.style.display='');});
+    if(cont)cont.textContent=document.querySelectorAll('.app').length;}));
+  cats.forEach(c=>{const t=c.querySelector('h2');if(!t)return;
+    bar.appendChild(mk(t.textContent.trim(),()=>{cats.forEach(x=>x.style.display=x===c?'':'none');
+      if(cont)cont.textContent=c.querySelectorAll('.app').length;}));});
+  hero.appendChild(bar);
+})();
+</script>

@@ -8,16 +8,18 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - name: Aplica FASE 8
-        run: python scripts/asf_fase8.py | tee fase8.log
+      - name: Restaura guia-apps.html
+        run: python scripts/asf_restore_guia.py | tee restore.log
       - name: Commit e push
         run: |
-          if grep -q NOTHING_TO_DO fase8.log; then echo 'Nada a fazer'; exit 0; fi
+          if grep -q NOTHING_TO_DO restore.log; then echo 'Nada a fazer'; exit 0; fi
           git config user.name 'asf-bot'
           git config user.email 'asf.surffeminino@gmail.com'
-          git add asf-ux.js asf-redesign.js asf-bottomnav.js guia-apps.html
-          git commit -m 'feat: FASE 8 - integra Mural das Manas, bottom nav, SW offline e chips no guia (aditivo)'
+          git add guia-apps.html
+          git commit -m 'fix: restaura guia-apps.html completo (53 apps) + chips de categoria'
           git push
