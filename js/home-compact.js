@@ -1,8 +1,5 @@
-/* Home compacta (fase 2): esconde as seções SPA secundárias no carregamento inicial.
-   A home passa a mostrar: hero + caminhos/jornada/rede + cards + seção ativa + parceiros.
-   Segurança: só age se o showSection real do app.js estiver disponível (ele reexibe
-   a seção escolhida ao navegar). Se apenas o shim de rolagem existir, não faz nada.
-   Nenhuma seção, funcionalidade ou URL é removida. */
+/* home-compact: oculta secoes SPA secundarias no load inicial */
+
 document.addEventListener('DOMContentLoaded', function () {
   try {
     if (typeof window.showSection !== 'function') return;
@@ -13,4 +10,18 @@ document.addEventListener('DOMContentLoaded', function () {
       }
     });
   } catch (e) { /* falha silenciosa: home segue como antes */ }
+});
+
+/* banner destaque: Nossa Historia (timeline + fotos reais do Instagram) */
+document.addEventListener('DOMContentLoaded', function () {
+  try {
+    var hero = document.querySelector('.hero');
+    if (!hero || document.getElementById('historia-banner')) return;
+    var a = document.createElement('a');
+    a.id = 'historia-banner';
+    a.href = 'sobre.html';
+    a.style.cssText = 'display:block;margin:0 20px 20px;padding:16px 18px;border-radius:16px;text-decoration:none;color:#fff;background:linear-gradient(135deg,#833AB4,#FD1D1D,#F77737);box-shadow:0 2px 10px rgba(0,0,0,.08)';
+    a.innerHTML = '<b style="display:block;font-size:15px">\uD83C\uDF0A Nossa Hist\u00F3ria \u2014 com fotos reais da ASF</b><small style="opacity:.95">Da funda\u00E7\u00E3o em 2017 aos campeonatos: reviva a jornada das manas \u2192</small>';
+    hero.parentNode.insertBefore(a, hero.nextSibling);
+  } catch (e) { /* falha silenciosa */ }
 });
