@@ -33,22 +33,3 @@
     if ('serviceWorker' in navigator) navigator.serviceWorker.register(base + 'sw.js').catch(function () {});
   });
 })();
-
-/* ------------ Destaque editorial: "Presenca no Mar" na home (02/10/2026) ------------
-   Aditivo e idempotente: so injeta o card na pagina inicial, sem tocar no HTML estatico. */
-(function () {
-  function ready(fn) { document.readyState !== 'loading' ? fn() : document.addEventListener('DOMContentLoaded', fn); }
-  ready(function () {
-    var base = (location.pathname.indexOf('/asf-app') === 0 ? '/asf-app/' : '/');
-    var isHome = /(\/asf-app\/)?(index\.html)?$/.test(location.pathname);
-    if (!isHome || document.getElementById('asf-destaque-presenca')) return;
-    var ref = document.querySelector('a[href="apps-em-destaque.html"]');
-    if (!ref) return;
-    var a = document.createElement('a');
-    a.id = 'asf-destaque-presenca';
-    a.href = base + 'bem-estar/presenca-no-mar-beneficios-da-pratica.html';
-    a.style.cssText = 'display:flex;gap:14px;align-items:center;background:linear-gradient(135deg,#0E2439,#00A8CC);border-radius:16px;padding:18px;margin:12px 20px;text-decoration:none;color:#fff;box-shadow:0 4px 14px rgba(0,168,204,.3)';
-    a.innerHTML = '<span style="font-size:2rem">\u{1F305}</span><span><b style="display:block">Presen\u00e7a no Mar <span style="background:#f4d03f;color:#0E2439;font-size:10px;padding:2px 8px;border-radius:10px;vertical-align:middle;margin-left:6px">NOVO</span></b><small style="color:rgba(255,255,255,.9)">\u00c1gua com sal, sol nascendo no line-up, vida marinha ao lado \u2014 por que a pr\u00e1tica \u00e9 o que manda na evolu\u00e7\u00e3o</small></span>';
-    ref.insertAdjacentElement('afterend', a);
-  });
-})();
