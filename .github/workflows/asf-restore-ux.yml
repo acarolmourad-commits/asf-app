@@ -2,7 +2,7 @@ name: asf-restore-ux
 on:
   push:
     paths:
-      - "scripts/restore_ux.py"
+      - ".github/workflows/asf-restore-ux.yml"
 permissions:
   contents: write
 jobs:
@@ -10,13 +10,19 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-      - run: python3 scripts/restore_ux.py
-      - name: Commit se houve mudanca
+      - name: Baixa asf-ux.js completo corrigido
+        run: |
+          curl -sL "https://backend.composio.dev/api/v3/sl/pbri-i5K10" -o asf-ux.js
+          grep -c "FASE 5.1" asf-ux.js
+          grep -c "FASE 7.1" asf-ux.js
+          grep -c "FASE 8" asf-ux.js
+          grep -c "FASE 9" asf-ux.js
+          grep -c "location.pathname.indexOf" asf-ux.js
+          wc -c asf-ux.js
+      - name: Commit
         run: |
           git config user.name "asf-bot"
           git config user.email "asf-bot@users.noreply.github.com"
           git add asf-ux.js
-          git diff --cached --quiet || git commit -m "fix: restaura asf-ux.js completo do historico + FASE 8 (menu/busca/carteirinha)"
+          git diff --cached --quiet || git commit -m "fix: restaura asf-ux.js completo (menu FASE 5.1, busca FASE 7.1, FASE 8/9) + ASF_BASE auto-detect"
           git push
