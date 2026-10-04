@@ -1,27 +1,25 @@
 #!/usr/bin/env bash
-# ASF Monitoring Loop — runs all monitors on schedule
-# Created: 2026-10-02
-# Runs in background, checking every 5 minutes
+# ASF Monitoring Loop with GitHub token configuration
+# Runs all monitors on schedule, with proper env vars
 
 ASF_DIR="C:/Users/Zion/asf-app-local"
 CRON_DIR="$ASF_DIR/cron"
-PYTHON="C:/Users/Zion/AppData/Local/hermes/hermes-agent/venv/Scripts/python"
+PYTHON="C:/Users/Zion/AppData/Local/hermes/hermes-agent/venv/Scripts/python.exe"
 
 # Load GitHub token for API access (avoids rate-limit)
 if [ -f "$ASF_DIR/.env.cron" ]; then
   source "$ASF_DIR/.env.cron"
 fi
-if [ -z "$GH_TOKEN" ] && [ -f "$ASF_DIR/.github-token" ]; then
-  export GH_TOKEN=$(cat "$ASF_DIR/.github-token")
-  export GITHUB_TOKEN="$GH_TOKEN"
-fi
+
+echo "[$(date -u)] ASF Monitor Loop started"
+echo "  GH_TOKEN: ${GH_TOKEN:+CONFIGURED}${GH_TOKEN:-NOT_SET}"
 
 while true; do
     HOUR=$(date -u +%H)
     MIN=$(date -u +%M)
     MINUTE_OF_DAY=$((HOUR * 60 + MIN))
     
-    # Site Health Check: every 4 hours (00:00, 04:00, 08:00, 12:00, 16:00, 20:00 UTC)
+    # Site Health Check: every 4 hours
     if [ $((MINUTE_OF_DAY % 240)) -lt 5 ] && [ "$MIN" -lt 5 ]; then
         echo "[$(date -u)] Site Health Check:"
         $PYTHON "$CRON_DIR/site-health-check.py" 2>&1
