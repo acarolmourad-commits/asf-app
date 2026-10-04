@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', function () {
   var cards = document.querySelectorAll('a[href="previsao-surf/"]');
   cards.forEach(function (a) {
     if (a.textContent.indexOf('Previsão de Ondas') !== -1 && !document.getElementById('matematica-surf-card')) {
-      a.insertAdjacentHTML('afterend', '<a id="matematica-surf-card" href="https://acarolmourad-commits.github.io/asf-matematica/" style="display:flex;gap:14px;align-items:center;background:#fff;border-radius:16px;padding:18px;margin:12px 20px;text-decoration:none;color:#0E2439;box-shadow:0 2px 10px rgba(0,0,0,.06);border:1px solid rgba(244,208,63,0.45)"><span style="font-size:2rem">📐</span><span><b style="display:block">A Matemática do Surf</b><small style="color:#666">Remada × velocidade da onda, pontos exatos de pressão na parede para cada manobra — a física do surf explicada com números</small></span></a>');
+      a.insertAdjacentHTML('afterend', '<a id="matematica-surf-card" href="https://acarolmourad-commits.github.io/asf-matematica/" style="display:flex;gap:14px;align-items:center;background:#fff;border-radius:16px;padding:18px;margin:12px 20px;text-decoration:none;color:#0E2439;box-shadow:0 2px 10px rgba(0,0,0,.06);border:1px solid rgba(244,208,63,0.45)"><span style="font-size:2rem">📐</span><span><b style="display:block">A Matemática do Surf</b><small style="color:#666">Velocidade de remada × onda, pontos de pressão na parede e ângulo de takeoff — a física do surf explicada com números</small></span></a>');
     }
   });
 });
