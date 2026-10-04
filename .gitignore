@@ -14,3 +14,7 @@ test-search-*.js
 # Build artifacts
 .DS_Store
 *.log
+
+# Cron environment (contains secrets)
+.env.cron
+.github-token
