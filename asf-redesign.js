@@ -33,3 +33,24 @@
     if ('serviceWorker' in navigator) navigator.serviceWorker.register(base + 'sw.js').catch(function () {});
   });
 })();
+
+/* asf-site-nav (04/10/2026): enhancement da navegacao principal — marca a nav com
+   .asf-site-nav, define role/aria-label e aria-current no link da pagina atual. */
+(function () {
+  'use strict';
+  function ready(fn) { document.readyState !== 'loading' ? fn() : document.addEventListener('DOMContentLoaded', fn); }
+  ready(function () {
+    var nav = document.querySelector('nav');
+    if (!nav || nav.classList.contains('asf-site-nav')) return;
+    nav.classList.add('asf-site-nav');
+    nav.setAttribute('role', 'navigation');
+    nav.setAttribute('aria-label', 'Navegacao principal ASF');
+    var path = location.pathname.replace(/\/$/, '');
+    nav.querySelectorAll('a').forEach(function (a) {
+      try {
+        var href = new URL(a.href).pathname.replace(/\/$/, '');
+        if (href === path) a.setAttribute('aria-current', 'page');
+      } catch (e) {}
+    });
+  });
+})();
