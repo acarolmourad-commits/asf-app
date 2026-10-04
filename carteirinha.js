@@ -64,9 +64,8 @@ const ASF_CARD = {
     return livre.getTime() > Date.now() ? livre : null;
   },
 
-  /* URL do registro de associadas (webhook.site — captura LGPD opt-in).
-     Dados enviados via sendBeacon/fetch POST com query params. */
-  REGISTRY_URL: 'https://webhook.site/3c702daf-1612-4cb9-8a9d-95be034d8cfa',
+  /* Registro de associadas via Supabase RPC (emitir_carteirinha).
+     Dados LGPD ficam no banco protegido por RLS. */
 
   niveis: ['Iniciante', 'Intermediária', 'Avançada'],
 
@@ -86,28 +85,25 @@ const ASF_CARD = {
 
   save(d) { localStorage.setItem(this.KEY, JSON.stringify(d)); },
 
-  /* Registro opcional (opt-in LGPD) no controle de associadas */
+  /* Registro opcional (opt-in LGPD) no controle de associadas — via Supabase RPC.
+     O fluxo principal de emissão já registra via emitir_carteirinha; esta função
+     cobre carteirinhas emitidas antes da migração (que têm emailHash salvo). */
   registrar(d) {
     try {
-      if (!this.REGISTRY_URL) return;
       const cb = document.getElementById('card-registrar');
       const quer = (cb && cb.checked) || d.registrada;
       if (!quer) return;
-      const params = 'numero=' + encodeURIComponent(d.numero) +
-        '&nome=' + encodeURIComponent(d.nome) +
-        '&apelido=' + encodeURIComponent(d.apelido || '') +
-        '&nivel=' + encodeURIComponent(d.nivel) +
-        '&praia=' + encodeURIComponent(d.praia || '') +
-        '&cidade=' + encodeURIComponent(d.cidade || '') +
-        '&insta=' + encodeURIComponent(d.insta || '');
-      const url = this.REGISTRY_URL + '?' + params;
-      if (navigator.sendBeacon) { navigator.sendBeacon(url); }
-      else { fetch(url, { method: 'POST', mode: 'no-cors' }).catch(function(){}); }
-      if (!d.registrada) {
+      if (!this.supabaseOn || !d.emailHash || d.registrada) return;
+      this.sbRpc('emitir_carteirinha', {
+        p_numero: d.numero,
+        p_email_hash: d.emailHash,
+        p_nome: d.nome, p_apelido: d.apelido || '', p_nivel: d.nivel,
+        p_praia: d.praia || '', p_cidade: d.cidade || '', p_insta: d.insta || '',
+      }).then(() => {
         d.registrada = new Date().toISOString();
         this.save(d);
         if (typeof showToast === 'function') showToast('📇 Carteirinha registrada na rede ASF!');
-      }
+      }).catch(function(){});
     } catch (e) {}
   },
 
