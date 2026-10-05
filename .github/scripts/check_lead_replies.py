@@ -3,8 +3,9 @@
 
 Secrets necessarios (repo Settings > Secrets):
   GMAIL_CLIENT_ID, GMAIL_CLIENT_SECRET, GMAIL_REFRESH_TOKEN
-Variavel de repo (Settings > Variables):
-  LEAD_EMAILS - lista separada por virgula com os e-mails dos leads ativos
+Fonte dos leads (ordem de prioridade):
+  1) Variavel de repo LEAD_EMAILS (lista separada por virgula)
+  2) Arquivo .github/lead-emails.txt (1 e-mail por linha, # = comentario)
 Saidas:
   lead_replies_report.md + HOT_REPLIES=true/false no GITHUB_ENV
 """
@@ -14,6 +15,7 @@ from googleapiclient.discovery import build
 
 HOT_KEYWORDS = ["interesse", "proposta", "orçamento", "orcamento", "reunião",
                 "reuniao", "vamos fechar", "quero", "negoci", "whatsapp", "quanto"]
+LEADS_FILE = os.environ.get("LEAD_EMAILS_FILE", ".github/lead-emails.txt")
 
 def gmail_service():
     creds = Credentials(
@@ -26,6 +28,16 @@ def gmail_service():
     )
     return build("gmail", "v1", credentials=creds, cache_discovery=False)
 
+def load_leads():
+    env = os.environ.get("LEAD_EMAILS", "").strip()
+    if env:
+        return [e.strip().lower() for e in env.split(",") if e.strip()]
+    if os.path.exists(LEADS_FILE):
+        with open(LEADS_FILE, encoding="utf-8") as f:
+            return [l.strip().lower() for l in f
+                    if l.strip() and not l.startswith("#")]
+    return []
+
 def get_body(payload):
     if payload.get("body", {}).get("data"):
         return base64.urlsafe_b64decode(payload["body"]["data"]).decode("utf-8", "ignore")
@@ -36,14 +48,14 @@ def get_body(payload):
     return ""
 
 def main():
-    leads = [e.strip().lower() for e in os.environ.get("LEAD_EMAILS", "").split(",") if e.strip()]
+    leads = load_leads()
     report_path = os.environ.get("REPORT_PATH", "lead_replies_report.md")
     now = datetime.datetime.now(datetime.timezone.utc)
     lines = [f"# 📬 Relatório de respostas de leads — {now:%d/%m/%Y %H:%M UTC}", ""]
     hot = False
 
     if not leads:
-        lines.append("⚠️ Variável `LEAD_EMAILS` não configurada no repositório.")
+        lines.append("⚠️ Nenhum lead configurado (variável LEAD_EMAILS ou .github/lead-emails.txt).")
     else:
         svc = gmail_service()
         query = "newer_than:1d in:inbox from:({})".format(" OR ".join(leads))
@@ -76,7 +88,7 @@ def main():
     with open(os.environ.get("GITHUB_ENV", "/dev/null"), "a") as f:
         f.write(f"HOT_REPLIES={'true' if hot else 'false'}\n")
 
-    print(f"Relatorio salvo em {report_path}. Hot replies: {hot}")
+    print(f"Relatorio salvo em {report_path}. Leads: {len(leads)}. Hot replies: {hot}")
 
 if __name__ == "__main__":
     sys.exit(main())
