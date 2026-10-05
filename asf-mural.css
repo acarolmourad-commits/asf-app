@@ -76,7 +76,6 @@ body{padding-bottom:64px}
 
 /* ═══════════════════════════════════════════════════════════════════
    05/10/2026 — FIX v2 GLOBAL: contraste no dark-mode
-   Este arquivo carrega POR ÚLTIMO no index.html → vence empates.
    ═══════════════════════════════════════════════════════════════════ */
 body.dark-mode .asfv2-band,
 body.dark-mode .asfv2-band h1, body.dark-mode .asfv2-band h2,
@@ -187,28 +186,57 @@ html, body { background: #FFFFFF !important; }
   body:not(.light-mode) .asfv2-band small { color: #5E7180 !important; }
 }
 
-/* ===== 05/10/2026 — REDESIGN: Campanhas Especiais ASF ===== */
-.asf-campanhas{margin:20px;border-radius:24px;overflow:hidden;background:#FFFFFF;
-  border:1px solid rgba(14,36,57,.08);box-shadow:0 8px 24px rgba(14,36,57,.10)}
-.asf-campanhas-head{background:linear-gradient(135deg,#00A8CC 0%,#9B59B6 100%);
-  color:#fff;text-align:center;padding:28px 20px 24px}
-.asf-campanhas-emoji{font-size:40px;margin-bottom:8px}
-.asf-campanhas-title{margin:0 0 10px;font-size:22px;font-weight:800;letter-spacing:.3px;color:#fff}
-.asf-campanhas-tag{display:inline-block;margin:0;font-size:14px;font-style:italic;
-  background:rgba(255,255,255,.18);padding:8px 16px;border-radius:999px;color:#fff}
-.asf-campanhas-quote{margin:20px;padding:18px 20px;background:#F0FAFD;
-  border-left:4px solid #00A8CC;border-radius:14px;text-align:left}
-.asf-campanhas-quote p{margin:0;font-size:14.5px;font-style:italic;line-height:1.6;color:#0E2439}
-.asf-campanhas-quote cite{display:block;margin-top:10px;font-size:12px;font-style:normal;
-  color:#5E7180;text-align:right}
-.asf-campanhas-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
-  gap:12px;margin:0 20px 20px}
-.asf-campanhas-item{display:flex;flex-direction:column;align-items:center;gap:8px;
-  background:#F8F9FA;border:1px solid rgba(14,36,57,.06);border-radius:14px;
-  padding:16px 12px;text-align:center}
-.asf-campanhas-ico{font-size:26px}
-.asf-campanhas-lbl{font-size:13px;font-weight:600;color:#0E2439;line-height:1.35}
-.asf-campanhas-cta{display:block;margin:0 auto 24px;background:#0E2439;color:#fff;
-  padding:14px 30px;border-radius:50px;font-size:15px;font-weight:600;border:none;
-  cursor:pointer;transition:transform .2s,box-shadow .2s}
-.asf-campanhas-cta:hover{transform:translateY(-2px);box-shadow:0 8px 20px rgba(14,36,57,.25)}
+/* ═══════════════════════════════════════════════════════════════════
+   05/10/2026 — REDESIGN via CSS: seção CAMPANHAS ESPECIAIS ASF
+   (card gradiente dentro de #brandhub). Organiza e dá legibilidade.
+   ═══════════════════════════════════════════════════════════════════ */
+#brandhub div[style*="#9B59B6 100%"] {
+  padding: 0 !important;
+  overflow: hidden;
+}
+/* Título e subtítulo da campanha com respiro */
+#brandhub div[style*="#9B59B6 100%"] > div[style*="font-size: 48px"] {
+  padding-top: 28px;
+}
+#brandhub div[style*="#9B59B6 100%"] > h3 {
+  margin: 0 20px 10px;
+  letter-spacing: .3px;
+}
+#brandhub div[style*="#9B59B6 100%"] > p[style*="italic"] {
+  margin: 0 24px 16px !important;
+  border-radius: 999px !important;
+  background: rgba(255,255,255,.2) !important;
+}
+/* Citação da comunidade: card branco legível, sem depender do gradiente */
+#brandhub div[style*="#9B59B6 100%"] div[style*="border-left: 4px solid #00A8CC"] {
+  background: #FFFFFF !important;
+  margin: 4px 24px 20px !important;
+  box-shadow: 0 4px 14px rgba(14,36,57,.18);
+}
+#brandhub div[style*="#9B59B6 100%"] div[style*="border-left: 4px solid #00A8CC"] p {
+  color: #0E2439 !important;
+}
+/* Grid de 3 itens: cartões brancos sólidos e responsivos */
+#brandhub div[style*="#9B59B6 100%"] div[style*="repeat(3, 1fr)"] {
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)) !important;
+  margin: 0 24px 24px !important;
+  gap: 12px !important;
+}
+#brandhub div[style*="#9B59B6 100%"] div[style*="repeat(3, 1fr)"] > div {
+  background: #FFFFFF !important;
+  color: #0E2439 !important;
+  padding: 16px 12px !important;
+  border-radius: 14px !important;
+  box-shadow: 0 2px 8px rgba(14,36,57,.12);
+}
+#brandhub div[style*="#9B59B6 100%"] div[style*="repeat(3, 1fr)"] > div div {
+  color: #0E2439 !important;
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.35;
+}
+/* Botão CTA com mais presença */
+#brandhub div[style*="#9B59B6 100%"] button.cta-button {
+  margin-bottom: 28px;
+  box-shadow: 0 6px 18px rgba(0,0,0,.3);
+}
