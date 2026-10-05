@@ -154,3 +154,75 @@ body.dark-mode .asfv2-band [style*="background: white"] small {
     color: #5A6B7A !important;
   }
 }
+
+/* ═══════════════════════════════════════════════════════════════════
+   05/10/2026 — TEMA CLARO FORÇADO (pedido do usuário)
+   A home ficava com fundo escuro e texto escuro/ilegível quando o
+   sistema estava em dark-mode ou quando body.dark-mode era aplicado.
+   Este bloco é o ÚLTIMO do ÚLTIMO CSS carregado → vence tudo.
+   Fundo sempre branco/claro; cores de gráficos e divisões preservadas.
+   ═══════════════════════════════════════════════════════════════════ */
+body.dark-mode, body {
+  background: #FFFFFF !important;
+  color: #0E2439;
+}
+body.dark-mode { --asf-ink:#0E2439; --asf-muted:#5E7180; --asf-bg:#FFFFFF; }
+
+/* Faixas temáticas: gradiente claro + texto escuro legível */
+body.dark-mode .asfv2-band[data-tint="a"],
+body.dark-mode .asfv2-band[data-tint="b"] { background: linear-gradient(180deg,#F4FBFD,#FFFFFF) !important; }
+body.dark-mode .asfv2-band,
+body.dark-mode .asfv2-band h1, body.dark-mode .asfv2-band h2,
+body.dark-mode .asfv2-band h3, body.dark-mode .asfv2-band h4,
+body.dark-mode .asfv2-band b, body.dark-mode .asfv2-band strong,
+body.dark-mode .asfv2-band div, body.dark-mode .asfv2-band label,
+body.dark-mode .asfv2-band td, body.dark-mode .asfv2-band th,
+body.dark-mode .asfv2-band em, body.dark-mode .asfv2-band i { color: #0E2439 !important; }
+body.dark-mode .asfv2-band p, body.dark-mode .asfv2-band li,
+body.dark-mode .asfv2-band span, body.dark-mode .asfv2-band small { color: #44515C !important; }
+body.dark-mode .asfv2-band-title { color: #0E2439 !important; }
+body.dark-mode .asfv2-band a { color: #0a7aa8 !important; }
+
+/* Nav de índice, chips, toggle e visão tabela claros */
+body.dark-mode .asfv2-nav { background: rgba(255,255,255,.92) !important; border-color: rgba(14,36,57,.08) !important; }
+body.dark-mode .asfv2-chip { background: #E8F6F9 !important; color: #0E2439 !important; border-color: rgba(0,168,204,.25) !important; }
+body.dark-mode .asfv2-toggle { background: #fff !important; color: #0E2439 !important; border-color: rgba(14,36,57,.2) !important; }
+body.dark-mode.asfv2-table .cards-grid > *,
+body.dark-mode.asfv2-table .cards-grid > * b,
+body.dark-mode.asfv2-table .cards-grid > * strong,
+body.dark-mode.asfv2-table .cards-grid > * span { background: #fff !important; border-color: rgba(14,36,57,.1) !important; color: #0E2439 !important; }
+body.dark-mode.asfv2-table .cards-grid > * small { color: #5E7180 !important; }
+
+/* Mural e bottom-nav sempre claros */
+body.dark-mode .mural-card, body.dark-mode .mural-upload { --asf-bg:#FFFFFF; background:#FFFFFF !important; color:#1c2b33 !important; box-shadow:0 2px 8px rgba(0,0,0,.08) !important; }
+body.dark-mode .mural-card a { color:#0b7fab !important; }
+body.dark-mode .asf-bottom-nav { --asf-bg:#FFFFFF; background:#FFFFFF !important; color:#1c2b33 !important; border-top-color: rgba(0,0,0,.08) !important; }
+
+/* Preferência do sistema em escuro: mesma correção */
+@media (prefers-color-scheme: dark) {
+  body:not(.light-mode) { background:#FFFFFF !important; color:#0E2439; --asf-ink:#0E2439; --asf-muted:#5E7180; --asf-bg:#FFFFFF; }
+  body:not(.light-mode) .asfv2-band[data-tint="a"],
+  body:not(.light-mode) .asfv2-band[data-tint="b"] { background: linear-gradient(180deg,#F4FBFD,#FFFFFF) !important; }
+  body:not(.light-mode) .asfv2-band,
+  body:not(.light-mode) .asfv2-band h1, body:not(.light-mode) .asfv2-band h2,
+  body:not(.light-mode) .asfv2-band h3, body:not(.light-mode) .asfv2-band h4,
+  body:not(.light-mode) .asfv2-band b, body:not(.light-mode) .asfv2-band strong,
+  body:not(.light-mode) .asfv2-band div, body:not(.light-mode) .asfv2-band label,
+  body:not(.light-mode) .asfv2-band td, body:not(.light-mode) .asfv2-band th,
+  body:not(.light-mode) .asfv2-band em, body:not(.light-mode) .asfv2-band i { color:#0E2439 !important; }
+  body:not(.light-mode) .asfv2-band p, body:not(.light-mode) .asfv2-band li,
+  body:not(.light-mode) .asfv2-band span, body:not(.light-mode) .asfv2-band small { color:#44515C !important; }
+  body:not(.light-mode) .asfv2-band-title { color:#0E2439 !important; }
+  body:not(.light-mode) .asfv2-band a { color:#0a7aa8 !important; }
+  body:not(.light-mode) .asfv2-nav { background: rgba(255,255,255,.92) !important; border-color: rgba(14,36,57,.08) !important; }
+  body:not(.light-mode) .asfv2-chip { background:#E8F6F9 !important; color:#0E2439 !important; border-color: rgba(0,168,204,.25) !important; }
+  body:not(.light-mode) .asfv2-toggle { background:#fff !important; color:#0E2439 !important; border-color: rgba(14,36,57,.2) !important; }
+  body:not(.light-mode).asfv2-table .cards-grid > *,
+  body:not(.light-mode).asfv2-table .cards-grid > * b,
+  body:not(.light-mode).asfv2-table .cards-grid > * strong,
+  body:not(.light-mode).asfv2-table .cards-grid > * span { background:#fff !important; border-color: rgba(14,36,57,.1) !important; color:#0E2439 !important; }
+  body:not(.light-mode).asfv2-table .cards-grid > * small { color:#5E7180 !important; }
+  body:not(.light-mode) .mural-card, body:not(.light-mode) .mural-upload { --asf-bg:#FFFFFF; background:#FFFFFF !important; color:#1c2b33 !important; box-shadow:0 2px 8px rgba(0,0,0,.08) !important; }
+  body:not(.light-mode) .mural-card a { color:#0b7fab !important; }
+  body:not(.light-mode) .asf-bottom-nav { --asf-bg:#FFFFFF; background:#FFFFFF !important; color:#1c2b33 !important; border-top-color: rgba(0,0,0,.08) !important; }
+}
