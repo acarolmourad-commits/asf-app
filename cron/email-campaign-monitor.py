@@ -5,7 +5,8 @@ import json, os
 ASF_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 def check_email_campaign():
-    today = os.popen('date -u +"%Y-%m-%d"').read().strip()
+    from datetime import datetime, timezone
+    today = datetime.now(timezone.utc).strftime("%Y-%m-%d")
     
     # Load brand emails data
     brand_path = os.path.join(ASF_DIR, "docs/brand-emails.json")
