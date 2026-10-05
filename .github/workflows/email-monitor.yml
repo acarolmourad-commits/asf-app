@@ -20,14 +20,12 @@ jobs:
           python-version: '3.12'
 
       - name: Install deps
-        run: pip install google-api-python-client google-auth
+        run: pip install requests
 
-      - name: Check lead replies on Gmail
+      - name: Check lead replies via Composio (Gmail OAuth gerenciado)
         env:
-          GMAIL_CLIENT_ID: ${{ secrets.GMAIL_CLIENT_ID }}
-          GMAIL_CLIENT_SECRET: ${{ secrets.GMAIL_CLIENT_SECRET }}
-          GMAIL_REFRESH_TOKEN: ${{ secrets.GMAIL_REFRESH_TOKEN }}
-          LEAD_EMAILS: ${{ vars.LEAD_EMAILS }}
+          COMPOSIO_API_KEY: ${{ secrets.COMPOSIO_API_KEY }}
+          LEAD_EMAILS: ${{ vars.LEAD_EMAILS }}   # opcional; fallback: .github/lead-emails.txt
           REPORT_PATH: lead_replies_report.md
         run: python .github/scripts/check_lead_replies.py
 
