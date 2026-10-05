@@ -594,3 +594,107 @@
     if ('serviceWorker' in navigator) navigator.serviceWorker.register(base + 'sw.js').catch(function () {});
   });
 })();
+
+/* ---------- FASE 10 — ASF Home v2 (05/10/2026) ----------
+   Organiza a home em faixas tematicas, adiciona nav de indice sticky
+   com chips, toggle "visao tabela" e grafico "Rede em numeros".
+   Aditivo e defensivo: se algo falhar, a pagina original permanece. */
+(function () {
+  function ready(fn) { document.readyState !== 'loading' ? fn() : document.addEventListener('DOMContentLoaded', fn); }
+  ready(function () {
+    try {
+      if (document.getElementById('asf-fase10')) return;
+      var titles = Array.prototype.slice.call(document.querySelectorAll('h2.section-title'));
+      if (titles.length < 4) return; // nao e a home
+      var m0 = document.createElement('meta'); m0.id = 'asf-fase10'; m0.name = 'asf-fase10'; document.head.appendChild(m0);
+      var base = window.ASF_BASE || (location.pathname.indexOf('/asf-app') === 0 ? '/asf-app/' : '/');
+
+      var THEMES = [
+        { id: 'asfv2-explorar',   label: '🌊 Explorar & Praias',   keys: ['por onde', 'jornada', 'praias', 'dicas', 'guias completos', 'historias', 'conteudo', 'rede asf'] },
+        { id: 'asfv2-corpo',      label: '💪 Corpo & Mente',       keys: ['mobilidade', 'nutri', 'treino', 'tecnica', 'mental', 'seguranca'] },
+        { id: 'asfv2-voce',       label: '🏄 Meu Surf',            keys: ['progresso', 'conquistas', 'checklist', 'perfil', 'metas', 'carteirinha', 'ranking', 'desafios'] },
+        { id: 'asfv2-comunidade', label: '👥 Comunidade & Eventos',keys: ['manas', 'comunidade', 'eventos', 'competi', 'noticias', 'destaques'] },
+        { id: 'asfv2-rede',       label: '🤝 Parceiros & Rede',    keys: ['parceir', 'brand hub', 'utilitarios', 'assistente', 'sobre'] }
+      ];
+      function themeOf(txt) {
+        var t = txt.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+        for (var i = 0; i < THEMES.length; i++)
+          for (var j = 0; j < THEMES[i].keys.length; j++)
+            if (t.indexOf(THEMES[i].keys[j]) !== -1) return THEMES[i];
+        return THEMES[THEMES.length - 1];
+      }
+
+      // Bloco de secao = ancestral que e filho direto do body
+      function blockOf(el) {
+        var n = el;
+        while (n.parentElement && n.parentElement !== document.body && n.parentElement.tagName !== 'MAIN') n = n.parentElement;
+        return n;
+      }
+
+      // Agrupa blocos consecutivos por tema em faixas
+      var seen = [], blocks = [];
+      titles.forEach(function (h) {
+        var b = blockOf(h);
+        if (!b || b === document.body || seen.indexOf(b) !== -1) return;
+        seen.push(b); blocks.push({ el: b, theme: themeOf(h.textContent || '') });
+      });
+      if (!blocks.length) return;
+
+      var anchor = blocks[0].el, parent = anchor.parentNode, bands = [], cur = null, tint = 0;
+      var marker = document.createComment('asfv2-bandas');
+      parent.insertBefore(marker, anchor);
+      blocks.forEach(function (b) {
+        if (!cur || cur.theme !== b.theme) {
+          cur = { theme: b.theme, el: document.createElement('div') };
+          cur.el.className = 'asfv2-band'; cur.el.id = b.theme.id;
+          cur.el.setAttribute('data-tint', tint % 2 === 0 ? 'a' : 'b'); tint++;
+          var h = document.createElement('h2'); h.className = 'asfv2-band-title'; h.textContent = b.theme.label;
+          cur.el.appendChild(h); bands.push(cur);
+          parent.insertBefore(cur.el, marker);
+        }
+        cur.el.appendChild(b.el);
+      });
+
+      // Nav de indice sticky com chips + toggle tabela
+      var nav = document.createElement('nav');
+      nav.className = 'asfv2-nav'; nav.setAttribute('aria-label', 'Indice da pagina');
+      bands.forEach(function (bd) {
+        var a = document.createElement('a');
+        a.className = 'asfv2-chip'; a.href = '#' + bd.theme.id; a.textContent = bd.theme.label;
+        nav.appendChild(a);
+      });
+      var tg = document.createElement('button');
+      tg.type = 'button'; tg.className = 'asfv2-toggle'; tg.textContent = '▦ Visão tabela';
+      tg.setAttribute('aria-pressed', 'false');
+      tg.addEventListener('click', function () {
+        var on = document.body.classList.toggle('asfv2-table');
+        tg.setAttribute('aria-pressed', on ? 'true' : 'false');
+        tg.textContent = on ? '▤ Visão cards' : '▦ Visão tabela';
+        try { localStorage.setItem('asfv2-view', on ? 'table' : 'cards'); } catch (e) {}
+      });
+      nav.appendChild(tg);
+      parent.insertBefore(nav, bands[0].el);
+      try { if (localStorage.getItem('asfv2-view') === 'table') tg.click(); } catch (e) {}
+
+      // Rede em numeros (apps por categoria, via app-links.json)
+      fetch(base + 'app-links.json').then(function (r) { return r.ok ? r.json() : null; }).then(function (data) {
+        if (!data) return;
+        var apps = Array.isArray(data) ? data : (data.apps || data.links || []);
+        if (!apps.length) return;
+        var cats = {};
+        apps.forEach(function (a) { var c = (a.categoria || a.category || 'Outros'); cats[c] = (cats[c] || 0) + 1; });
+        var max = Math.max.apply(null, Object.keys(cats).map(function (k) { return cats[k]; }));
+        var box = document.createElement('div'); box.className = 'asfv2-stats';
+        var rows = Object.keys(cats).sort(function (x, y) { return cats[y] - cats[x]; }).map(function (k) {
+          var pct = Math.round(cats[k] / max * 100);
+          return '<div class="asfv2-bar-row"><span>' + k + '</span><div class="asfv2-bar"><i data-w="' + pct + '"></i></div><b>' + cats[k] + '</b></div>';
+        }).join('');
+        box.innerHTML = '<h2>📊 Rede em números</h2><p>' + apps.length + ' apps e páginas da rede ASF, por categoria</p>' + rows;
+        parent.insertBefore(box, bands[0].el.nextSibling);
+        requestAnimationFrame(function () {
+          Array.prototype.forEach.call(box.querySelectorAll('i[data-w]'), function (i) { i.style.width = i.getAttribute('data-w') + '%'; });
+        });
+      }).catch(function () {});
+    } catch (e) { /* camada aditiva: falha silenciosa */ }
+  });
+})();
