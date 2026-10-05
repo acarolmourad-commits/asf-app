@@ -1,5 +1,5 @@
 {
-  "generated": "2026-10-04T22:12:00Z",
+  "generated": "2026-10-05T02:40:00Z",
   "description": "Mapeamento dinamico de apps entre github.io e asf.surf. app.js usa isso para resolver links com fallback automatico.",
   "domain_priority": [
     "https://asf.surf/",
@@ -16,11 +16,13 @@
     },
     "asf-mare": {
       "github_io": "https://acarolmourad-commits.github.io/asf-mare/",
-      "asf_surf": "https://asf.surf/mare/"
+      "asf_surf": "https://previsao.asf.surf/",
+      "note": "Unificado na ASF Previsão (subdomínio antigo é redirect)"
     },
     "asf-vento": {
       "github_io": "https://acarolmourad-commits.github.io/asf-vento/",
-      "asf_surf": "https://asf.surf/vento/"
+      "asf_surf": "https://previsao.asf.surf/",
+      "note": "Unificado na ASF Previsão (subdomínio antigo é redirect)"
     },
     "asf-alerta": {
       "github_io": "https://acarolmourad-commits.github.io/asf-alerta/",
@@ -220,7 +222,13 @@
     },
     "asf-swell": {
       "github_io": "https://acarolmourad-commits.github.io/asf-swell/",
-      "asf_surf": "https://swell.asf.surf/"
+      "asf_surf": "https://previsao.asf.surf/",
+      "note": "Unificado na ASF Previsão (subdomínio antigo é redirect)"
+    },
+    "asf-tempo": {
+      "github_io": "https://acarolmourad-commits.github.io/asf-tempo/",
+      "asf_surf": "https://tempo.asf.surf/",
+      "note": "Previsão do tempo 16 dias por cidade + alertas automáticos"
     }
   }
 }
