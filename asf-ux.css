@@ -37,7 +37,7 @@ header{padding:6px 16px}
 .asf-idcard h4{margin:0 0 2px;font-size:15px}
 .asf-idcard .id-level{font-size:12px;opacity:.9;margin-bottom:10px}
 .asf-idcard .id-stats{display:flex;gap:14px;flex-wrap:wrap}
-.asf-idcard .id-stat{background:rgba(255,255,255,.14);border-radius:10px;padding:8px 12px;text-align:center;min-width:64px}
+.asf-idcard .id-state{background:rgba(255,255,255,.14);border-radius:10px;padding:8px 12px;text-align:center;min-width:64px}
 .asf-idcard .id-stat b{display:block;font-size:18px}
 .asf-idcard .id-stat span{font-size:10px;opacity:.85}
 
@@ -83,7 +83,7 @@ header .logo{display:none !important}
 #header-menu{position:fixed !important;top:76px !important;right:16px !important}
 .section{scroll-margin-top:16px}
 
-/* ==========================================================================
+/* =========================================================================
    FASE 10 — ASF HOME v2 (05/10/2026): camada aditiva de organizacao da home.
    Faixas tematicas, nav de indice sticky com chips, toggle "visao tabela"
    e grafico "Rede em numeros". Nada existente e removido ou ocultado.
@@ -140,4 +140,56 @@ body.dark-mode.asfv2-table .cards-grid > *{background:#16222f !important;border-
   body:not(.light-mode) .asfv2-band[data-tint="a"]{background:linear-gradient(180deg,#101a26,#0d141d)}
   body:not(.light-mode) .asfv2-band[data-tint="b"]{background:linear-gradient(180deg,#0d141d,#12101a)}
   body:not(.light-mode) .asfv2-band-title{color:#e8f0f6}
+}
+
+/* ===== 05/10/2026 — FIX contraste dark-mode: texto claro sobre fundo escuro ===== */
+body.dark-mode {
+  --asf-ink: #E8F0F6;
+  --asf-muted: #9FB3C4;
+}
+body.dark-mode .asfv2-band { color: #E8F0F6; }
+body.dark-mode .asfv2-band p,
+body.dark-mode .asfv2-band li,
+body.dark-mode .asfv2-band span,
+body.dark-mode .asfv2-band small { color: #CFE0EA; }
+body.dark-mode .asfv2-band a { color: #7FDBFF; }
+body.dark-mode .asfv2-band [style*="color:#0E2439"],
+body.dark-mode .asfv2-band [style*="color: #0E2439"] { color: #E8F0F6 !important; }
+body.dark-mode .asfv2-band [style*="color:#666"],
+body.dark-mode .asfv2-band [style*="color: #666"],
+body.dark-mode .asfv2-band [style*="color:#444"],
+body.dark-mode .asfv2-band [style*="color: #444"],
+body.dark-mode .asfv2-band [style*="color:#5A6B7A"] { color: #9FB3C4 !important; }
+/* Cards claros mantem texto escuro (evita texto claro sobre card branco) */
+body.dark-mode .asfv2-band [style*="background:#fff"],
+body.dark-mode .asfv2-band [style*="background: #fff"],
+body.dark-mode .asfv2-band [style*="background: white"],
+body.dark-mode .asfv2-band [style*="background:white"] { color: #0E2439 !important; }
+body.dark-mode .asfv2-band [style*="background:#fff"] *,
+body.dark-mode .asfv2-band [style*="background: white"] * { color: inherit; }
+
+@media (prefers-color-scheme: dark) {
+  body:not(.light-mode) {
+    --asf-ink: #E8F0F6;
+    --asf-muted: #9FB3C4;
+  }
+  body:not(.light-mode) .asfv2-band { color: #E8F0F6; }
+  body:not(.light-mode) .asfv2-band p,
+  body:not(.light-mode) .asfv2-band li,
+  body:not(.light-mode) .asfv2-band span,
+  body:not(.light-mode) .asfv2-band small { color: #CFE0EA; }
+  body:not(.light-mode) .asfv2-band a { color: #7FDBFF; }
+  body:not(.light-mode) .asfv2-band [style*="color:#0E2439"],
+  body:not(.light-mode) .asfv2-band [style*="color: #0E2439"] { color: #E8F0F6 !important; }
+  body:not(.light-mode) .asfv2-band [style*="color:#666"],
+  body:not(.light-mode) .asfv2-band [style*="color: #666"],
+  body:not(.light-mode) .asfv2-band [style*="color:#444"],
+  body:not(.light-mode) .asfv2-band [style*="color: #444"],
+  body:not(.light-mode) .asfv2-band [style*="color:#5A6B7A"] { color: #9FB3C4 !important; }
+  body:not(.light-mode) .asfv2-band [style*="background:#fff"],
+  body:not(.light-mode) .asfv2-band [style*="background: #fff"],
+  body:not(.light-mode) .asfv2-band [style*="background: white"],
+  body:not(.light-mode) .asfv2-band [style*="background:white"] { color: #0E2439 !important; }
+  body:not(.light-mode) .asfv2-band [style*="background:#fff"] *,
+  body:not(.light-mode) .asfv2-band [style*="background: white"] * { color: inherit; }
 }
