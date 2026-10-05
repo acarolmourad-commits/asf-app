@@ -73,3 +73,84 @@ body{padding-bottom:64px}
   .asf-bottom-nav{--asf-bg:#0e1a21;color:#dfe9ee;border-top-color:rgba(255,255,255,.1)}
   .medalha{background:rgba(0,0,0,.55)}
 }
+
+/* ═══════════════════════════════════════════════════════════════════
+   05/10/2026 — FIX v2 GLOBAL: contraste no dark-mode
+   Problema: textos escuros (#0E2439, #444, #666) sobre fundos escuros
+   das bandas (.asfv2-band) ficavam quase ilegíveis, e o modo tabela
+   (.asfv2-table) forçava fundo #16222f mantendo texto escuro.
+   Este arquivo carrega POR ÚLTIMO no index.html → vence empates.
+   ═══════════════════════════════════════════════════════════════════ */
+body.dark-mode .asfv2-band,
+body.dark-mode .asfv2-band h1, body.dark-mode .asfv2-band h2,
+body.dark-mode .asfv2-band h3, body.dark-mode .asfv2-band h4,
+body.dark-mode .asfv2-band b, body.dark-mode .asfv2-band strong,
+body.dark-mode .asfv2-band div, body.dark-mode .asfv2-band label,
+body.dark-mode .asfv2-band td, body.dark-mode .asfv2-band th,
+body.dark-mode .asfv2-band em, body.dark-mode .asfv2-band i {
+  color: #E8F0F6;
+}
+/* Visão tabela em dark-mode: fundo escuro forçado exige texto claro */
+body.dark-mode.asfv2-table .cards-grid > *,
+body.dark-mode.asfv2-table .cards-grid > * b,
+body.dark-mode.asfv2-table .cards-grid > * strong,
+body.dark-mode.asfv2-table .cards-grid > * span {
+  color: #E8F0F6 !important;
+}
+body.dark-mode.asfv2-table .cards-grid > * small {
+  color: #9FB3C4 !important;
+}
+/* PRIORIDADE: cards claros (fundo branco inline) mantêm texto escuro */
+body.dark-mode .asfv2-band [style*="background:#fff"],
+body.dark-mode .asfv2-band [style*="background: #fff"],
+body.dark-mode .asfv2-band [style*="background:white"],
+body.dark-mode .asfv2-band [style*="background: white"],
+body.dark-mode .asfv2-band [style*="background:#fff"] *,
+body.dark-mode .asfv2-band [style*="background: #fff"] *,
+body.dark-mode .asfv2-band [style*="background:white"] *,
+body.dark-mode .asfv2-band [style*="background: white"] * {
+  color: #0E2439 !important;
+}
+body.dark-mode .asfv2-band [style*="background:#fff"] small,
+body.dark-mode .asfv2-band [style*="background: #fff"] small,
+body.dark-mode .asfv2-band [style*="background:white"] small,
+body.dark-mode .asfv2-band [style*="background: white"] small {
+  color: #5A6B7A !important;
+}
+
+@media (prefers-color-scheme: dark) {
+  body:not(.light-mode) .asfv2-band,
+  body:not(.light-mode) .asfv2-band h1, body:not(.light-mode) .asfv2-band h2,
+  body:not(.light-mode) .asfv2-band h3, body:not(.light-mode) .asfv2-band h4,
+  body:not(.light-mode) .asfv2-band b, body:not(.light-mode) .asfv2-band strong,
+  body:not(.light-mode) .asfv2-band div, body:not(.light-mode) .asfv2-band label,
+  body:not(.light-mode) .asfv2-band td, body:not(.light-mode) .asfv2-band th,
+  body:not(.light-mode) .asfv2-band em, body:not(.light-mode) .asfv2-band i {
+    color: #E8F0F6;
+  }
+  body:not(.light-mode).asfv2-table .cards-grid > *,
+  body:not(.light-mode).asfv2-table .cards-grid > * b,
+  body:not(.light-mode).asfv2-table .cards-grid > * strong,
+  body:not(.light-mode).asfv2-table .cards-grid > * span {
+    color: #E8F0F6 !important;
+  }
+  body:not(.light-mode).asfv2-table .cards-grid > * small {
+    color: #9FB3C4 !important;
+  }
+  body:not(.light-mode) .asfv2-band [style*="background:#fff"],
+  body:not(.light-mode) .asfv2-band [style*="background: #fff"],
+  body:not(.light-mode) .asfv2-band [style*="background:white"],
+  body:not(.light-mode) .asfv2-band [style*="background: white"],
+  body:not(.light-mode) .asfv2-band [style*="background:#fff"] *,
+  body:not(.light-mode) .asfv2-band [style*="background: #fff"] *,
+  body:not(.light-mode) .asfv2-band [style*="background:white"] *,
+  body:not(.light-mode) .asfv2-band [style*="background: white"] * {
+    color: #0E2439 !important;
+  }
+  body:not(.light-mode) .asfv2-band [style*="background:#fff"] small,
+  body:not(.light-mode) .asfv2-band [style*="background: #fff"] small,
+  body:not(.light-mode) .asfv2-band [style*="background:white"] small,
+  body:not(.light-mode) .asfv2-band [style*="background: white"] small {
+    color: #5A6B7A !important;
+  }
+}
