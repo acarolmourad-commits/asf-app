@@ -2,29 +2,57 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Mural das Manas - ASF</title>
+  <title>Mural das Manas — ASF</title>
+  <meta name="description" content="Mural colaborativo do surf feminino: compartilhe fotos das suas sessões, apoie as manas e vote na Foto do Mês.">
+  <meta name="theme-color" content="#0b7fab">
   <link rel="stylesheet" href="../asf-mural.css">
+  <style>
+    :root{--p:#0b7fab;--pd:#0e2439;--bg:#f4f9fb;--txt:#1c2b33;--mut:#5a6b7a}
+    *{box-sizing:border-box}
+    body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(--txt);margin:0;padding:0 0 80px}
+    .wrap{max-width:720px;margin:0 auto;padding:1rem}
+    .hero{background:linear-gradient(135deg,#0e2439,#0b7fab);color:#fff;padding:2rem 1rem 1.6rem;text-align:center}
+    .hero h1{margin:.2rem 0;font-size:1.7rem}
+    .hero p{opacity:.92;font-size:.95rem;max-width:460px;margin:.4rem auto 0}
+    .hero a.voltar{color:#bfeaf5;text-decoration:none;font-size:.85rem}
+    .regras{display:flex;gap:.6rem;flex-wrap:wrap;justify-content:center;margin:1rem 0}
+    .regras div{background:#fff;border-radius:12px;padding:.6rem .9rem;font-size:.8rem;color:var(--txt);box-shadow:0 1px 5px rgba(0,0,0,.06)}
+    .regras b{color:var(--p)}
+    #mural-manas{display:block;margin-top:1rem}
+    @media (prefers-color-scheme:dark){
+      :root{--bg:#0b141a;--txt:#eef4f7;--mut:#9db0bb}
+      .regras div{background:#16232b;box-shadow:0 1px 5px rgba(0,0,0,.4)}
+      .regras b{color:#4fc3e8}
+    }
+  </style>
 </head>
-<body style="font-family:sans-serif;max-width:720px;margin:0 auto;padding:1rem">
-  <header>
-    <p><a href="../index.html">&larr; App ASF</a></p>
-    <h1>Mural das Manas</h1>
-    <p>Compartilhe suas sessões, apoie as manas e vote na Foto do Mês!</p>
+<body>
+  <header class="hero">
+    <p><a class="voltar" href="../index.html">&larr; App ASF</a></p>
+    <h1>📸 Mural das Manas</h1>
+    <p>Compartilhe suas sessões, apoie as manas e vote na <strong>Foto do Mês</strong>!</p>
   </header>
+  <div class="wrap">
+    <div class="regras">
+      <div>📤 <b>Poste</b> sua sessão</div>
+      <div>💜 <b>Apoie</b> as manas</div>
+      <div>🏆 <b>Vote</b> na Foto do Mês</div>
+    </div>
 
-  <form id="mural-upload" class="mural-upload">
-    <h2>📤 Postar no Mural</h2>
-    <input type="file" name="foto" accept="image/*" required>
-    <input type="text" name="praia" placeholder="Praia / pico (ex: Maresias)" maxlength="80" required>
-    <textarea name="legenda" placeholder="Legenda da sessão…" maxlength="300" rows="2"></textarea>
-    <label class="mural-concurso">
-      <input type="checkbox" name="concurso"> Participar do concurso <strong>Foto do Mês</strong>
-    </label>
-    <small>Sua foto é comprimida para WebP (máx. 1200px) no próprio navegador antes do envio.</small>
-    <button type="submit">Publicar no Mural</button>
-  </form>
+    <form id="mural-upload" class="mural-upload">
+      <h2>📤 Postar no Mural</h2>
+      <input type="file" name="foto" accept="image/*" required>
+      <input type="text" name="praia" placeholder="Praia / pico (ex: Maresias)" maxlength="80" required>
+      <textarea name="legenda" placeholder="Legenda da sessão…" maxlength="300" rows="2"></textarea>
+      <label class="mural-concurso">
+        <input type="checkbox" name="concurso"> Participar do concurso <strong>Foto do Mês</strong>
+      </label>
+      <small>Sua foto é comprimida para WebP (máx. 1200px) no próprio navegador antes do envio.</small>
+      <button type="submit">Publicar no Mural</button>
+    </form>
 
-  <div id="mural-manas"></div>
+    <div id="mural-manas"></div>
+  </div>
   <script src="../asf-mural.js"></script>
   <script>
     // Bottom nav com base relativa a raiz
