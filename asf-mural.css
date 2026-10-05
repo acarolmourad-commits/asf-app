@@ -1,4 +1,4 @@
-/* ASF Mural + Bottom Nav + Hub Filter + Card Previsao (mobile-first, dark mode) */
+/* ASF Mural + Bottom Nav + Hub Filter + Card Previsao (mobile-first) */
 .asf-bottom-nav{position:fixed;bottom:0;left:0;right:0;z-index:1000;display:flex;
   justify-content:space-around;background:var(--asf-bg,#fff);
   border-top:1px solid rgba(0,0,0,.08);padding:.4rem 0 calc(.4rem + env(safe-area-inset-bottom))}
@@ -10,18 +10,23 @@ body{padding-bottom:64px}
 .mural-foto-mes{background:linear-gradient(135deg,#0b7fab,#14b8d4);color:#fff;
   border-radius:16px;padding:1rem;margin-bottom:1rem}
 .mural-top3{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:.75rem}
-.mural-card{background:var(--asf-bg,#fff);border-radius:14px;padding:.75rem;
+.mural-card{background:var(--asf-bg,#fff);color:#1c2b33;border-radius:14px;padding:.75rem;
   box-shadow:0 2px 8px rgba(0,0,0,.08);position:relative;margin-bottom:1rem}
 .mural-card img{width:100%;border-radius:10px;object-fit:cover}
 .mural-card .avatar{width:32px;height:32px;border-radius:50%}
-.mural-card header{display:flex;align-items:center;gap:.5rem;padding:.5rem 0}
+.mural-card header{display:flex;align-items:center;gap:.5rem;padding:.5rem 0;color:inherit}
+.mural-card p,.mural-card small,.mural-card span{color:inherit}
+.mural-card a{color:var(--asf-primary,#0b7fab)}
 .badge{background:#ffd166;color:#5b4500;border-radius:999px;padding:1px 8px;font-size:.65rem}
 .btn-apoiar,.btn-votar{width:100%;margin-top:.5rem;border:0;border-radius:10px;
   padding:.55rem;background:#e0f4f9;color:#075e78;font-weight:600;cursor:pointer}
 .medalha{position:absolute;top:.5rem;right:.5rem;font-weight:700;color:#fff;
   background:rgba(0,0,0,.35);border-radius:999px;padding:2px 8px;font-size:.75rem}
 .form-comentario{display:flex;gap:.4rem;margin-top:.5rem}
-.form-comentario input{flex:1;border:1px solid #ddd;border-radius:8px;padding:.4rem}
+.form-comentario input{flex:1;border:1px solid #ddd;border-radius:8px;padding:.4rem;background:#fff;color:#1c2b33}
+.form-comentario button{border:0;border-radius:8px;padding:.4rem .7rem;background:var(--asf-primary,#0b7fab);color:#fff;cursor:pointer}
+.mural-comentarios{font-size:.85rem;color:inherit}
+.mural-comentarios p{margin:.25rem 0;color:inherit}
 
 .chip{border:1px solid #ccc;border-radius:999px;padding:.35rem .9rem;background:none;
   cursor:pointer;margin:.2rem;color:inherit}
@@ -33,27 +38,38 @@ body{padding-bottom:64px}
 .card-previsao ul{list-style:none;padding:0;display:flex;gap:1rem}
 .card-previsao a{color:#fff}
 
-@media (prefers-color-scheme:dark){
-  .mural-card{--asf-bg:#16232b}
-  .asf-bottom-nav{--asf-bg:#0e1a21;border-top-color:rgba(255,255,255,.1)}
-}
-
 /* ─── Mural v3: upload, badge de nível e contador de votos ─── */
-.mural-upload{background:var(--asf-bg,#fff);border-radius:16px;padding:1rem;margin-bottom:1rem;
+.mural-upload{background:var(--asf-bg,#fff);color:#1c2b33;border-radius:16px;padding:1rem;margin-bottom:1rem;
   box-shadow:0 2px 8px rgba(0,0,0,.08);display:grid;gap:.6rem}
-.mural-upload h2{margin:0;font-size:1.05rem}
+.mural-upload h2{margin:0;font-size:1.05rem;color:inherit}
 .mural-upload input[type=text],.mural-upload textarea,.mural-upload input[type=file]{
-  border:1px solid #ddd;border-radius:10px;padding:.55rem;font:inherit;width:100%;box-sizing:border-box}
-.mural-upload small{opacity:.7}
-.mural-upload .mural-concurso{display:flex;align-items:center;gap:.4rem;font-size:.9rem}
+  border:1px solid #ddd;border-radius:10px;padding:.55rem;font:inherit;width:100%;box-sizing:border-box;
+  background:#fff;color:#1c2b33}
+.mural-upload input::placeholder,.mural-upload textarea::placeholder{color:#8a9aa5}
+.mural-upload small{opacity:.7;color:inherit}
+.mural-upload .mural-concurso{display:flex;align-items:center;gap:.4rem;font-size:.9rem;color:inherit}
 .mural-upload button{border:0;border-radius:10px;padding:.7rem;font-weight:700;cursor:pointer;
   background:var(--asf-primary,#0b7fab);color:#fff}
 .mural-upload button:disabled{opacity:.6;cursor:wait}
 .badge-nivel{background:#e0f4f9;color:#075e78;border-radius:999px;padding:1px 8px;
   font-size:.65rem;font-weight:700;vertical-align:middle}
-.votos-count{font-weight:700}
+.votos-count{font-weight:700;color:inherit}
 .mural-card.rank{border:2px solid var(--asf-primary,#0b7fab)}
+
+/* ─── v4: legibilidade no modo escuro (texto claro sobre fundo escuro) ─── */
 @media (prefers-color-scheme:dark){
-  .mural-upload{--asf-bg:#16232b}
-  .mural-upload input[type=text],.mural-upload textarea{background:#0e1a21;color:#eee;border-color:#2a3d47}
+  .mural-card{--asf-bg:#16232b;color:#eef4f7;box-shadow:0 2px 8px rgba(0,0,0,.4)}
+  .mural-card a{color:#4fc3e8}
+  .mural-upload{--asf-bg:#16232b;color:#eef4f7;box-shadow:0 2px 8px rgba(0,0,0,.4)}
+  .mural-upload input[type=text],.mural-upload textarea,.mural-upload input[type=file]{
+    background:#0e1a21;color:#eee;border-color:#2a3d47}
+  .mural-upload input::placeholder,.mural-upload textarea::placeholder{color:#7d8f9a}
+  .form-comentario input{background:#0e1a21;color:#eee;border-color:#2a3d47}
+  .form-comentario input::placeholder{color:#7d8f9a}
+  .btn-apoiar,.btn-votar{background:#0b3d4d;color:#bfeaf5}
+  .badge-nivel{background:#0b3d4d;color:#bfeaf5}
+  .chip{border-color:#3a4d58;color:#dfe9ee}
+  .chip:hover,.chip.ativo{background:var(--asf-primary,#0b7fab);color:#fff}
+  .asf-bottom-nav{--asf-bg:#0e1a21;color:#dfe9ee;border-top-color:rgba(255,255,255,.1)}
+  .medalha{background:rgba(0,0,0,.55)}
 }
