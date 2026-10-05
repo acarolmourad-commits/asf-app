@@ -595,7 +595,7 @@
   });
 })();
 
-/* ---------- FASE 10 — ASF Home v2 (05/10/2026) ----------
+/* ---------- FASE 10 — ASF Home v2 (05/10/2026, v2: faixa unica por tema) ----------
    Organiza a home em faixas tematicas, adiciona nav de indice sticky
    com chips, toggle "visao tabela" e grafico "Rede em numeros".
    Aditivo e defensivo: se algo falhar, a pagina original permanece. */
@@ -640,16 +640,17 @@
       });
       if (!blocks.length) return;
 
-      var anchor = blocks[0].el, parent = anchor.parentNode, bands = [], cur = null, tint = 0;
+      var anchor = blocks[0].el, parent = anchor.parentNode, bands = [], bandMap = {}, tint = 0;
       var marker = document.createComment('asfv2-bandas');
       parent.insertBefore(marker, anchor);
       blocks.forEach(function (b) {
-        if (!cur || cur.theme !== b.theme) {
+        var cur = bandMap[b.theme.id];
+        if (!cur) {
           cur = { theme: b.theme, el: document.createElement('div') };
           cur.el.className = 'asfv2-band'; cur.el.id = b.theme.id;
           cur.el.setAttribute('data-tint', tint % 2 === 0 ? 'a' : 'b'); tint++;
           var h = document.createElement('h2'); h.className = 'asfv2-band-title'; h.textContent = b.theme.label;
-          cur.el.appendChild(h); bands.push(cur);
+          cur.el.appendChild(h); bands.push(cur); bandMap[b.theme.id] = cur;
           parent.insertBefore(cur.el, marker);
         }
         cur.el.appendChild(b.el);
