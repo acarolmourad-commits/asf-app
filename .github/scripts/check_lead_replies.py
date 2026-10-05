@@ -17,7 +17,7 @@ import os, sys, datetime, time, requests
 API_KEY = os.environ["COMPOSIO_API_KEY"]
 BASE = "https://backend.composio.dev/api/v3/tools/execute/GMAIL_FETCH_EMAILS"
 HEADERS = {"x-api-key": API_KEY, "Content-Type": "application/json"}
-USER_ID = "asf.surffeminino@gmail.com"
+ENTITY_ID = os.environ.get("COMPOSIO_ENTITY_ID", "default_user")
 
 HOT_KEYWORDS = ["interesse", "proposta", "orçamento", "orcamento", "reunião",
                 "reuniao", "vamos fechar", "quero", "negoci", "whatsapp", "quanto"]
@@ -34,12 +34,12 @@ def load_leads():
     return []
 
 def gmail_fetch(query, page_token=None):
-    args = {"user_id": USER_ID, "query": query, "max_results": 100,
+    args = {"user_id": "me", "query": query, "max_results": 100,
             "verbose": False, "include_payload": False}
     if page_token:
         args["page_token"] = page_token
     r = requests.post(BASE, headers=HEADERS,
-                      json={"user_id": USER_ID, "arguments": args}, timeout=60)
+                      json={"user_id": ENTITY_ID, "arguments": args}, timeout=60)
     r.raise_for_status()
     data = r.json()
     if not data.get("successful", True):
