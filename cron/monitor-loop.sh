@@ -7,12 +7,18 @@ CRON_DIR="$ASF_DIR/cron"
 PYTHON="C:/Users/Zion/AppData/Local/hermes/hermes-agent/venv/Scripts/python.exe"
 
 # Load GitHub token for API access (avoids rate-limit)
+# Crie $ASF_DIR/.env.cron a partir de cron/.env.cron.example
 if [ -f "$ASF_DIR/.env.cron" ]; then
   source "$ASF_DIR/.env.cron"
 fi
 
+# Fallback (auditoria item 3): os scripts Python leem GITHUB_TOKEN;
+# espelha GH_TOKEN -> GITHUB_TOKEN quando so o primeiro estiver definido
+export GITHUB_TOKEN="${GITHUB_TOKEN:-$GH_TOKEN}"
+
 echo "[$(date -u)] ASF Monitor Loop started"
 echo "  GH_TOKEN: ${GH_TOKEN:+CONFIGURED}${GH_TOKEN:-NOT_SET}"
+echo "  GITHUB_TOKEN: ${GITHUB_TOKEN:+CONFIGURED}${GITHUB_TOKEN:-NOT_SET}"
 
 while true; do
     HOUR=$(date -u +%H)
