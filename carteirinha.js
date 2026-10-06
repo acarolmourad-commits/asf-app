@@ -94,16 +94,30 @@ const ASF_CARD = {
       const quer = (cb && cb.checked) || d.registrada;
       if (!quer) return;
       if (!this.supabaseOn || !d.emailHash || d.registrada) return;
-      this.sbRpc('emitir_carteirinha', {
+      const payload = {
         p_numero: d.numero,
         p_email_hash: d.emailHash,
         p_nome: d.nome, p_apelido: d.apelido || '', p_nivel: d.nivel,
         p_praia: d.praia || '', p_cidade: d.cidade || '', p_insta: d.insta || '',
-      }).then(() => {
+      };
+      const url = this.SUPABASE_URL + '/rest/v1/rpc/emitir_carteirinha?apikey=' + encodeURIComponent(this.SUPABASE_ANON_KEY);
+      const done = () => {
         d.registrada = new Date().toISOString();
         this.save(d);
         if (typeof showToast === 'function') showToast('📇 Carteirinha registrada na rede ASF!');
-      }).catch(function(){});
+      };
+      /* sendBeacon primeiro (sobrevive a fechamento de aba / offline parcial);
+         fallback para fetch via sbRpc se indisponivel ou recusado */
+      let sent = false;
+      if (typeof navigator !== 'undefined' && navigator.sendBeacon) {
+        try {
+          sent = navigator.sendBeacon(url, new Blob([JSON.stringify(payload)], { type: 'application/json' }));
+        } catch (e) { sent = false; }
+      }
+      if (sent) { done(); }
+      else {
+        this.sbRpc('emitir_carteirinha', payload).then(done).catch(function(){});
+      }
     } catch (e) {}
   },
 
