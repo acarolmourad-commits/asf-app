@@ -64,5 +64,11 @@ while true; do
         $PYTHON "$CRON_DIR/email-campaign-monitor.py" 2>&1
     fi
     
+    # Daily Site Audit: daily at 11:00 UTC
+    if [ "$HOUR" -eq 11 ] && [ "$MIN" -eq 0 ]; then
+        echo "[$(date -u)] Daily Site Audit:"
+        $PYTHON "$CRON_DIR/daily-site-audit.py" 2>&1
+    fi
+    
     sleep 300  # Check every 5 minutes
 done
