@@ -64,10 +64,19 @@ while true; do
         $PYTHON "$CRON_DIR/email-campaign-monitor.py" 2>&1
     fi
     
-    # Daily Site Audit: daily at 11:00 UTC
+# Daily Site Audit: daily at 11:00 UTC
     if [ "$HOUR" -eq 11 ] && [ "$MIN" -eq 0 ]; then
         echo "[$(date -u)] Daily Site Audit:"
         $PYTHON "$CRON_DIR/daily-site-audit.py" 2>&1
+    fi
+    
+    # Supabase-Sheets Sync: daily at 3:00 UTC
+    if [ "$HOUR" -eq 3 ] && [ "$MIN" -eq 0 ]; then
+        echo "[$(date -u)] Supabase-Sheets Sync:"
+        if [ -f "$ASF_DIR/.env.sync" ]; then
+            export $(grep -v '^#' "$ASF_DIR/.env.sync" | xargs) 2>/dev/null
+        fi
+        $PYTHON "$CRON_DIR/supabase-sheets-sync.py" 2>&1
     fi
     
     sleep 300  # Check every 5 minutes

@@ -1,0 +1,15 @@
+{
+  "entries": [
+    {
+      "timestamp": "2026-10-06 23:03:34 UTC",
+      "supabase_count": 0,
+      "sheets_count": 0,
+      "supabase_to_sheets": {
+        "action": "supabase_to_sheets",
+        "status": "skipped",
+        "reason": "GOOGLE_SCRIPT_URL not configured"
+      }
+    }
+  ],
+  "last_sync": "2026-10-06 23:03:34 UTC"
+}
