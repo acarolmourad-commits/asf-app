@@ -1,4 +1,4 @@
-const CACHE = "asf-v7";
+const CACHE = "asf-v8";
 const OFFLINE_PAGES = [
   "./index.html",
   "./praias/",
