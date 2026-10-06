@@ -12,6 +12,12 @@ const ASF_CARD = {
   SUPABASE_ANON_KEY: 'sb_publishable_qIvPxh6DavCPtntfflaRLw_QI_pZJih',
   get supabaseOn() { return !!this.SUPABASE_URL && !!this.SUPABASE_ANON_KEY; },
 
+  /* ─── Registro de associadas (Google Apps Script → Google Sheets) ───
+     Faz backup do controle de quem emitiu carteirinha.
+     A sincronização Supabase→Sheets não é automática; este é o backup opcional.
+     Deixe vazio se não usar Sheets (carteirinhas.html usará Supabase diretamente). */
+  REGISTRY_URL: '',
+
   async sha256(t) {
     const b = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(t.trim().toLowerCase()));
     return Array.from(new Uint8Array(b)).map(x => x.toString(16).padStart(2, '0')).join('');

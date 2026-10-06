@@ -49,23 +49,68 @@ footer a{color:var(--p);font-weight:700}
 </main>
 <footer><a href="https://acarolmourad-commits.github.io/asf-app/">← Voltar ao app ASF</a></footer>
 <script>
+// Carregar carteirinha.js dinamicamente (para ter acesso a ASF_CARD config)
+var script = document.createElement('script');
+script.src = '/asf-app/carteirinha.js';
+script.defer = true;
+document.head.appendChild(script);
+
 var S='https://script.google.com/';
 document.getElementById('url').value=localStorage.getItem('asf-reg-url')||'';
 document.getElementById('token').value=localStorage.getItem('asf-reg-token')||'';
+
+// Supabase como fallback quando REGISTRY_URL não configurado
+var SUPABASE_URL = 'https://qktabrzbgdfndklytwub.supabase.co';
+var SUPABASE_ANON_KEY = 'sb_publishable_qIvPxh6DavCPtntfflaRLw_QI_pZJih';
+var USE_SUPABASE = true;
+
 function carregar(){
   var url=document.getElementById('url').value.trim(), tok=document.getElementById('token').value.trim();
-  if(url.indexOf(S)!==0){alert('Cole a Deployment URL do Apps Script');return;}
-  localStorage.setItem('asf-reg-url',url); localStorage.setItem('asf-reg-token',tok);
-  fetch(url+'?action=list&token='+encodeURIComponent(tok)).then(function(r){return r.json()}).then(function(j){
-    if(j.status!=='OK'){alert(j.message||'Erro');return;}
-    document.getElementById('resumo').style.display='block';
-    document.getElementById('lista-card').style.display='block';
-    document.getElementById('total').textContent=j.total;
-    document.getElementById('att').textContent='· atualizado '+new Date().toLocaleTimeString('pt-BR');
-    document.getElementById('lista').innerHTML=j.carteirinhas.reverse().map(function(c){
-      return '<tr><td>'+c.data+'</td><td><code>'+c.numero+'</code></td><td><b>'+(c.nome||'—')+'</b>'+(c.apelido?' <i>('+c.apelido+')</i>':'')+'</td><td>'+c.nivel+'</td><td>'+(c.praia||'—')+'</td><td>'+(c.cidade||'—')+'</td><td>'+(c.insta||'—')+'</td></tr>';
-    }).join('');
-  }).catch(function(e){alert('Falha ao carregar: '+e)});
+  
+  // Supabase como fonte principal
+  if(USE_SUPABASE){
+    fetch(SUPABASE_URL+'/rest/v1/rpc/listar_carteirinhas?apikey='+encodeURIComponent(SUPABASE_ANON_KEY), {
+      method: 'POST',
+      headers: {'apikey': SUPABASE_ANON_KEY, 'Authorization': 'Bearer '+SUPABASE_ANON_KEY, 'Content-Type': 'application/json'},
+      body: JSON.stringify({})
+    })
+    .then(function(r){return r.json()})
+    .then(function(j){
+      var cartas = Array.isArray(j) ? j : (j.carteirinhas || []);
+      if(!cartas.length){
+        document.getElementById('resumo').style.display='block';
+        document.getElementById('total').textContent='0';
+        document.getElementById('lista-card').style.display='none';
+        document.getElementById('att').textContent='· atualizado '+new Date().toLocaleTimeString('pt-BR');
+        alert('Nenhuma carteirinha registrada no Supabase ainda. Emita uma no app ASF!');
+        return;
+      }
+      document.getElementById('resumo').style.display='block';
+      document.getElementById('lista-card').style.display='block';
+      document.getElementById('total').textContent=cartas.length;
+      document.getElementById('att').textContent='· atualizado '+new Date().toLocaleTimeString('pt-BR');
+      document.getElementById('lista').innerHTML=cartas.reverse().map(function(c){
+        return '<tr><td>'+c.data+'</td><td><code>'+(c.numero||'—')+'</code></td><td><b>'+(c.nome||'—')+'</b>'+(c.apelido?' <i>('+c.apelido+')</i>':'')+'</td><td>'+(c.nivel||'—')+'</td><td>'+(c.praia||'—')+'</td><td>'+(c.cidade||'—')+'</td><td>'+(c.insta||'—')+'</td></tr>';
+      }).join('');
+    })
+    .catch(function(e){
+      // Fallback: Google Apps Script se Supabase indisponível
+      if(url && url.indexOf(S)!==0){
+        fetch(url+'?action=list&token='+encodeURIComponent(tok)).then(function(r){return r.json()}).then(function(j){
+          if(j.status!=='OK'){alert(j.message||'Erro');return;}
+          document.getElementById('resumo').style.display='block';
+          document.getElementById('lista-card').style.display='block';
+          document.getElementById('total').textContent=j.total;
+          document.getElementById('att').textContent='· atualizado '+new Date().toLocaleTimeString('pt-BR');
+          document.getElementById('lista').innerHTML=j.carteirinhas.reverse().map(function(c){
+            return '<tr><td>'+c.data+'</td><td><code>'+c.numero+'</code></td><td><b>'+(c.nome||'—')+'</b>'+(c.apelido?' <i>('+c.apelido+')</i>':'')+'</td><td>'+c.nivel+'</td><td>'+(c.praia||'—')+'</td><td>'+(c.cidade||'—')+'</td><td>'+(c.insta||'—')+'</td></tr>';
+          }).join('');
+        }).catch(function(e2){alert('Supabase e Apps Script indisponíveis. Tente novamente mais tarde.');});
+      } else {
+        alert('Supabase indisponível e Apps Script não configurado.\\nConfigure a Deployment URL abaixo como backup.');
+      }
+    });
+  }
 }
 </script>
     <script src="/asf-app/asf-redesign.js" defer></script>
