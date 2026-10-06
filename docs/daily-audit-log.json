@@ -1,0 +1,75 @@
+{
+  "date": "2026-10-06",
+  "pages_audited": 70,
+  "total_issues": 58,
+  "issues": {
+    "missing_title": [
+      "/docs/cookie-consent.html",
+      "/docs/daily-tip.html",
+      "/docs/ebook-landing.html",
+      "/docs/generated/alongamento.html",
+      "/docs/generated/eco-board.html",
+      "/docs/generated/layout.html",
+      "/docs/generated/mobility.html",
+      "/docs/generated/post.html",
+      "/docs/generated/quote.html",
+      "/docs/generated/respiracao.html",
+      "/docs/generated/smart.html",
+      "/docs/generated/tip.html",
+      "/docs/wave-forecast.html",
+      "/scripts/asf_guia_chips.html"
+    ],
+    "missing_description": [
+      "/docs/cookie-consent.html",
+      "/docs/daily-tip.html",
+      "/docs/ebook-landing.html",
+      "/docs/generated/alongamento.html",
+      "/docs/generated/eco-board.html",
+      "/docs/generated/layout.html",
+      "/docs/generated/mobility.html",
+      "/docs/generated/post.html",
+      "/docs/generated/quote.html",
+      "/docs/generated/respiracao.html",
+      "/docs/generated/smart.html",
+      "/docs/generated/tip.html",
+      "/docs/wave-forecast.html",
+      "/scripts/asf_guia_chips.html"
+    ],
+    "missing_canonical": [
+      "/docs/cookie-consent.html",
+      "/docs/daily-tip.html",
+      "/docs/ebook-landing.html",
+      "/docs/generated/alongamento.html",
+      "/docs/generated/eco-board.html",
+      "/docs/generated/layout.html",
+      "/docs/generated/mobility.html",
+      "/docs/generated/post.html",
+      "/docs/generated/quote.html",
+      "/docs/generated/respiracao.html",
+      "/docs/generated/smart.html",
+      "/docs/generated/tip.html",
+      "/docs/wave-forecast.html",
+      "/scripts/asf_guia_chips.html"
+    ],
+    "missing_og": [
+      "/docs/cookie-consent.html",
+      "/docs/daily-tip.html",
+      "/docs/ebook-landing.html",
+      "/docs/generated/alongamento.html",
+      "/docs/generated/eco-board.html",
+      "/docs/generated/layout.html",
+      "/docs/generated/mobility.html",
+      "/docs/generated/post.html",
+      "/docs/generated/quote.html",
+      "/docs/generated/respiracao.html",
+      "/docs/generated/smart.html",
+      "/docs/generated/tip.html",
+      "/docs/wave-forecast.html",
+      "/scripts/asf_guia_chips.html"
+    ],
+    "empty_pages": [
+      "/docs/shops-template.html",
+      "/termos.html"
+    ]
+  }
+}
