@@ -1,0 +1,29 @@
+{
+  "campaign": "CRM Leads & Prospecção Outubro 2026",
+  "updated_at": "2026-10-06T12:15:00Z",
+  "metrics": {
+    "leads_mapped": 75,
+    "emails_sent": 54,
+    "unique_recipients": 46,
+    "bounces": 2,
+    "active_leads": 44,
+    "replies": 3,
+    "hot_leads": 3
+  },
+  "bounced": [
+    "contato@beachcamp.com.br",
+    "contato@vicentsurfboards.com"
+  ],
+  "hot": [
+    {"lead": "Surfside Maresias", "email": "surfsidemaresias@gmail.com", "status": "quente", "last_event": "2026-10-05T15:45:28Z", "note": "Adilson pediu mais informações — aguardando resposta ASF"},
+    {"lead": "TPM Todas Para o Mar", "email": "coletivo@todasparaomar.org", "status": "quente", "last_event": "2026-10-05T19:09:15Z", "note": "Reunião Meet proposta qui 16h — aguardando confirmação"},
+    {"lead": "Carve 1080 Graus", "email": "carve1080graus@gmail.com", "status": "quente", "last_event": "2026-10-05T16:21:36Z", "note": "Proposta completa enviada por e-mail (WhatsApp 41 99896-4679)"}
+  ],
+  "followups": {"FU1": "2026-10-12", "FU2": "2026-10-19"},
+  "monitoring": {
+    "workflow": ".github/workflows/email-monitor.yml",
+    "schedule": "0 */6 * * *",
+    "leads_file": ".github/lead-emails.txt",
+    "via": "Composio API (Gmail OAuth gerenciado)"
+  }
+}
