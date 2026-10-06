@@ -37,7 +37,7 @@ header{padding:6px 16px}
 .asf-idcard h4{margin:0 0 2px;font-size:15px}
 .asf-idcard .id-level{font-size:12px;opacity:.9;margin-bottom:10px}
 .asf-idcard .id-stats{display:flex;gap:14px;flex-wrap:wrap}
-.asf-idcard .id-stat{background:rgba(255,255,255,.14);border-radius:10px;padding:8px 12px;text-align:center;min-width:64px}
+.asf-idcard .id-state{background:rgba(255,255,255,.14);border-radius:10px;padding:8px 12px;text-align:center;min-width:64px}
 .asf-idcard .id-stat b{display:block;font-size:18px}
 .asf-idcard .id-stat span{font-size:10px;opacity:.85}
 
@@ -82,3 +82,172 @@ header .logo{display:none !important}
 #menu-toggle{position:fixed !important;top:16px;right:16px;z-index:1001;width:48px;height:48px;border-radius:50%;background:linear-gradient(135deg,#0E2439,#00A8CC) !important;color:#fff !important;box-shadow:0 4px 16px rgba(14,36,57,.3);display:flex;align-items:center;justify-content:center}
 #header-menu{position:fixed !important;top:76px !important;right:16px !important}
 .section{scroll-margin-top:16px}
+
+/* =========================================================================
+   FASE 10 — ASF HOME v2 (05/10/2026): camada aditiva de organizacao da home.
+   Faixas tematicas, nav de indice sticky com chips, toggle "visao tabela"
+   e grafico "Rede em numeros". Nada existente e removido ou ocultado.
+   ========================================================================== */
+
+/* 10.1 Nav de indice sticky com chips */
+.asfv2-nav{position:sticky;top:0;z-index:900;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border-bottom:1px solid rgba(14,36,57,.08);padding:8px 12px;display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;align-items:center}
+.asfv2-nav::-webkit-scrollbar{display:none}
+.asfv2-chip{flex:0 0 auto;display:inline-block;padding:6px 12px;border-radius:999px;background:#E8F6F9;color:#0E2439;font-size:12px;font-weight:600;text-decoration:none;border:1px solid rgba(0,168,204,.25);white-space:nowrap}
+.asfv2-chip:active,.asfv2-chip:hover{background:#00A8CC;color:#fff}
+.asfv2-toggle{flex:0 0 auto;margin-left:auto;padding:6px 12px;border-radius:999px;border:1px solid rgba(14,36,57,.2);background:#fff;color:#0E2439;font-size:12px;font-weight:600;cursor:pointer}
+body.asfv2-table .asfv2-toggle{background:#0E2439;color:#fff}
+
+/* 10.2 Faixas tematicas */
+.asfv2-band{padding:28px 0 8px}
+.asfv2-band + .asfv2-band{border-top:1px solid rgba(14,36,57,.06)}
+.asfv2-band[data-tint="a"]{background:linear-gradient(180deg,#F4FBFD,#FFFFFF)}
+.asfv2-band[data-tint="b"]{background:linear-gradient(180deg,#FFFFFF,#F7F4FB)}
+.asfv2-band-title{margin:0 20px 12px;font-size:20px;font-weight:800;color:#0E2439;display:flex;align-items:center;gap:8px}
+.asfv2-band-title::after{content:"";flex:1;height:2px;border-radius:2px;background:linear-gradient(90deg,#00A8CC,transparent)}
+.asfv2-band .section-title{scroll-margin-top:64px}
+
+/* 10.3 Toggle "visao tabela": cards-grid vira linhas compactas */
+body.asfv2-table .cards-grid{display:block !important}
+body.asfv2-table .cards-grid > *{display:grid !important;grid-template-columns:40px 1fr auto;align-items:center;gap:10px;padding:10px 14px !important;margin:0 20px 6px !important;border-radius:10px !important;border:1px solid rgba(14,36,57,.1) !important;box-shadow:none !important;background:#fff !important;min-height:0 !important}
+body.asfv2-table .cards-grid > * > span[aria-hidden="true"],
+body.asfv2-table .cards-grid > * > .card-icon{font-size:1.3rem !important;margin:0 !important}
+body.asfv2-table .cards-grid > * b,
+body.asfv2-table .cards-grid > * strong{display:inline !important;margin:0 !important;font-size:13px !important}
+body.asfv2-table .cards-grid > * small{grid-column:2;font-size:11px !important}
+body.asfv2-table .cards-grid > *::after{content:"→";grid-column:3;grid-row:1;color:#00A8CC;font-weight:700}
+
+/* 10.4 Rede em numeros (grafico de barras CSS) */
+.asfv2-stats{margin:0 20px 20px;padding:18px 20px;border-radius:16px;background:linear-gradient(135deg,#0E2439,#00A8CC);color:#fff}
+.asfv2-stats h2{margin:0 0 4px;font-size:18px;font-weight:800}
+.asfv2-stats p{margin:0 0 14px;font-size:12px;opacity:.85}
+.asfv2-bar-row{display:grid;grid-template-columns:120px 1fr 32px;align-items:center;gap:10px;margin-bottom:8px;font-size:12px}
+.asfv2-bar{height:14px;border-radius:7px;background:rgba(255,255,255,.18);overflow:hidden}
+.asfv2-bar i{display:block;height:100%;border-radius:7px;background:linear-gradient(90deg,#7FDBFF,#fff);width:0;transition:width .8s ease}
+.asfv2-bar-row b{text-align:right;font-variant-numeric:tabular-nums}
+
+/* 10.5 Dark mode (padrao mural v4: body.dark-mode + preferencia do sistema) */
+body.dark-mode .asfv2-nav{background:rgba(14,20,30,.92);border-color:rgba(255,255,255,.1)}
+body.dark-mode .asfv2-chip{background:#1b2a3a;color:#e8f0f6;border-color:rgba(127,219,255,.25)}
+body.dark-mode .asfv2-toggle{background:#1b2a3a;color:#e8f0f6;border-color:rgba(255,255,255,.2)}
+body.dark-mode .asfv2-band[data-tint="a"]{background:linear-gradient(180deg,#101a26,#0d141d)}
+body.dark-mode .asfv2-band[data-tint="b"]{background:linear-gradient(180deg,#0d141d,#12101a)}
+body.dark-mode .asfv2-band-title{color:#e8f0f6}
+body.dark-mode.asfv2-table .cards-grid > *{background:#16222f !important;border-color:rgba(255,255,255,.12) !important}
+@media (prefers-color-scheme:dark){
+  body:not(.light-mode) .asfv2-nav{background:rgba(14,20,30,.92);border-color:rgba(255,255,255,.1)}
+  body:not(.light-mode) .asfv2-chip{background:#1b2a3a;color:#e8f0f6}
+  body:not(.light-mode) .asfv2-toggle{background:#1b2a3a;color:#e8f0f6}
+  body:not(.light-mode) .asfv2-band[data-tint="a"]{background:linear-gradient(180deg,#101a26,#0d141d)}
+  body:not(.light-mode) .asfv2-band[data-tint="b"]{background:linear-gradient(180deg,#0d141d,#12101a)}
+  body:not(.light-mode) .asfv2-band-title{color:#e8f0f6}
+}
+
+/* ===== 05/10/2026 — FIX contraste dark-mode: texto claro sobre fundo escuro ===== */
+body.dark-mode {
+  --asf-ink: #E8F0F6;
+  --asf-muted: #9FB3C4;
+}
+body.dark-mode .asfv2-band { color: #E8F0F6; }
+body.dark-mode .asfv2-band p,
+body.dark-mode .asfv2-band li,
+body.dark-mode .asfv2-band span,
+body.dark-mode .asfv2-band small { color: #CFE0EA; }
+body.dark-mode .asfv2-band a { color: #7FDBFF; }
+body.dark-mode .asfv2-band [style*="color:#0E2439"],
+body.dark-mode .asfv2-band [style*="color: #0E2439"] { color: #E8F0F6 !important; }
+body.dark-mode .asfv2-band [style*="color:#666"],
+body.dark-mode .asfv2-band [style*="color: #666"],
+body.dark-mode .asfv2-band [style*="color:#444"],
+body.dark-mode .asfv2-band [style*="color: #444"],
+body.dark-mode .asfv2-band [style*="color:#5A6B7A"] { color: #9FB3C4 !important; }
+/* Cards claros mantem texto escuro (evita texto claro sobre card branco) */
+body.dark-mode .asfv2-band [style*="background:#fff"],
+body.dark-mode .asfv2-band [style*="background: #fff"],
+body.dark-mode .asfv2-band [style*="background: white"],
+body.dark-mode .asfv2-band [style*="background:white"] { color: #0E2439 !important; }
+body.dark-mode .asfv2-band [style*="background:#fff"] *,
+body.dark-mode .asfv2-band [style*="background: white"] * { color: inherit; }
+
+@media (prefers-color-scheme: dark) {
+  body:not(.light-mode) {
+    --asf-ink: #E8F0F6;
+    --asf-muted: #9FB3C4;
+  }
+  body:not(.light-mode) .asfv2-band { color: #E8F0F6; }
+  body:not(.light-mode) .asfv2-band p,
+  body:not(.light-mode) .asfv2-band li,
+  body:not(.light-mode) .asfv2-band span,
+  body:not(.light-mode) .asfv2-band small { color: #CFE0EA; }
+  body:not(.light-mode) .asfv2-band a { color: #7FDBFF; }
+  body:not(.light-mode) .asfv2-band [style*="color:#0E2439"],
+  body:not(.light-mode) .asfv2-band [style*="color: #0E2439"] { color: #E8F0F6 !important; }
+  body:not(.light-mode) .asfv2-band [style*="color:#666"],
+  body:not(.light-mode) .asfv2-band [style*="color: #666"],
+  body:not(.light-mode) .asfv2-band [style*="color:#444"],
+  body:not(.light-mode) .asfv2-band [style*="color: #444"],
+  body:not(.light-mode) .asfv2-band [style*="color:#5A6B7A"] { color: #9FB3C4 !important; }
+  body:not(.light-mode) .asfv2-band [style*="background:#fff"],
+  body:not(.light-mode) .asfv2-band [style*="background: #fff"],
+  body:not(.light-mode) .asfv2-band [style*="background: white"],
+  body:not(.light-mode) .asfv2-band [style*="background:white"] { color: #0E2439 !important; }
+  body:not(.light-mode) .asfv2-band [style*="background:#fff"] *,
+  body:not(.light-mode) .asfv2-band [style*="background: white"] * { color: inherit; }
+}
+
+/* ===== 05/10/2026 — HOME SEMPRE CLARA: fundo escuro eliminado (pedido do usuario) ===== */
+/* Faixas tematicas sempre com gradiente claro */
+body.dark-mode .asfv2-band[data-tint="a"],
+body.dark-mode .asfv2-band[data-tint="b"] { background: linear-gradient(180deg,#F4FBFD,#FFFFFF) !important; }
+/* Nav de indice, chips e toggle claros */
+body.dark-mode .asfv2-nav { background: rgba(255,255,255,.92) !important; border-color: rgba(14,36,57,.08) !important; }
+body.dark-mode .asfv2-chip { background: #E8F6F9 !important; color: #0E2439 !important; border-color: rgba(0,168,204,.25) !important; }
+body.dark-mode .asfv2-toggle { background: #fff !important; color: #0E2439 !important; border-color: rgba(14,36,57,.2) !important; }
+/* Visao tabela: linhas claras */
+body.dark-mode.asfv2-table .cards-grid > * { background: #fff !important; border-color: rgba(14,36,57,.1) !important; }
+/* Tipografia volta ao padrao claro ASF */
+body.dark-mode { --asf-ink: #0E2439; --asf-muted: #5E7180; }
+body.dark-mode .asfv2-band { color: #0E2439; }
+body.dark-mode .asfv2-band-title { color: #0E2439 !important; }
+body.dark-mode .asfv2-band p,
+body.dark-mode .asfv2-band li,
+body.dark-mode .asfv2-band span,
+body.dark-mode .asfv2-band small { color: #44515C; }
+body.dark-mode .asfv2-band a { color: #0a7aa8; }
+body.dark-mode .asfv2-band [style*="color:#0E2439"],
+body.dark-mode .asfv2-band [style*="color: #0E2439"] { color: #0E2439 !important; }
+body.dark-mode .asfv2-band [style*="color:#666"],
+body.dark-mode .asfv2-band [style*="color: #666"],
+body.dark-mode .asfv2-band [style*="color:#444"],
+body.dark-mode .asfv2-band [style*="color: #444"],
+body.dark-mode .asfv2-band [style*="color:#5A6B7A"] { color: #5E7180 !important; }
+body.dark-mode .asfv2-band [style*="background:#fff"],
+body.dark-mode .asfv2-band [style*="background: #fff"],
+body.dark-mode .asfv2-band [style*="background: white"],
+body.dark-mode .asfv2-band [style*="background:white"] { color: #0E2439 !important; }
+
+@media (prefers-color-scheme: dark) {
+  body:not(.light-mode) .asfv2-band[data-tint="a"],
+  body:not(.light-mode) .asfv2-band[data-tint="b"] { background: linear-gradient(180deg,#F4FBFD,#FFFFFF) !important; }
+  body:not(.light-mode) .asfv2-nav { background: rgba(255,255,255,.92) !important; border-color: rgba(14,36,57,.08) !important; }
+  body:not(.light-mode) .asfv2-chip { background: #E8F6F9 !important; color: #0E2439 !important; }
+  body:not(.light-mode) .asfv2-toggle { background: #fff !important; color: #0E2439 !important; }
+  body:not(.light-mode) { --asf-ink: #0E2439; --asf-muted: #5E7180; }
+  body:not(.light-mode) .asfv2-band { color: #0E2439; }
+  body:not(.light-mode) .asfv2-band-title { color: #0E2439 !important; }
+  body:not(.light-mode) .asfv2-band p,
+  body:not(.light-mode) .asfv2-band li,
+  body:not(.light-mode) .asfv2-band span,
+  body:not(.light-mode) .asfv2-band small { color: #44515C; }
+  body:not(.light-mode) .asfv2-band a { color: #0a7aa8; }
+  body:not(.light-mode) .asfv2-band [style*="color:#0E2439"],
+  body:not(.light-mode) .asfv2-band [style*="color: #0E2439"] { color: #0E2439 !important; }
+  body:not(.light-mode) .asfv2-band [style*="color:#666"],
+  body:not(.light-mode) .asfv2-band [style*="color: #666"],
+  body:not(.light-mode) .asfv2-band [style*="color:#444"],
+  body:not(.light-mode) .asfv2-band [style*="color: #444"],
+  body:not(.light-mode) .asfv2-band [style*="color:#5A6B7A"] { color: #5E7180 !important; }
+  body:not(.light-mode) .asfv2-band [style*="background:#fff"],
+  body:not(.light-mode) .asfv2-band [style*="background: #fff"],
+  body:not(.light-mode) .asfv2-band [style*="background: white"],
+  body:not(.light-mode) .asfv2-band [style*="background:white"] { color: #0E2439 !important; }
+}

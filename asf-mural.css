@@ -1,4 +1,4 @@
-/* ASF Mural + Bottom Nav + Hub Filter + Card Previsao (mobile-first, dark mode) */
+/* ASF Mural + Bottom Nav + Hub Filter + Card Previsao (mobile-first) */
 .asf-bottom-nav{position:fixed;bottom:0;left:0;right:0;z-index:1000;display:flex;
   justify-content:space-around;background:var(--asf-bg,#fff);
   border-top:1px solid rgba(0,0,0,.08);padding:.4rem 0 calc(.4rem + env(safe-area-inset-bottom))}
@@ -10,18 +10,23 @@ body{padding-bottom:64px}
 .mural-foto-mes{background:linear-gradient(135deg,#0b7fab,#14b8d4);color:#fff;
   border-radius:16px;padding:1rem;margin-bottom:1rem}
 .mural-top3{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:.75rem}
-.mural-card{background:var(--asf-bg,#fff);border-radius:14px;padding:.75rem;
+.mural-card{background:var(--asf-bg,#fff);color:#1c2b33;border-radius:14px;padding:.75rem;
   box-shadow:0 2px 8px rgba(0,0,0,.08);position:relative;margin-bottom:1rem}
 .mural-card img{width:100%;border-radius:10px;object-fit:cover}
 .mural-card .avatar{width:32px;height:32px;border-radius:50%}
-.mural-card header{display:flex;align-items:center;gap:.5rem;padding:.5rem 0}
+.mural-card header{display:flex;align-items:center;gap:.5rem;padding:.5rem 0;color:inherit}
+.mural-card p,.mural-card small,.mural-card span{color:inherit}
+.mural-card a{color:var(--asf-primary,#0b7fab)}
 .badge{background:#ffd166;color:#5b4500;border-radius:999px;padding:1px 8px;font-size:.65rem}
 .btn-apoiar,.btn-votar{width:100%;margin-top:.5rem;border:0;border-radius:10px;
   padding:.55rem;background:#e0f4f9;color:#075e78;font-weight:600;cursor:pointer}
 .medalha{position:absolute;top:.5rem;right:.5rem;font-weight:700;color:#fff;
   background:rgba(0,0,0,.35);border-radius:999px;padding:2px 8px;font-size:.75rem}
 .form-comentario{display:flex;gap:.4rem;margin-top:.5rem}
-.form-comentario input{flex:1;border:1px solid #ddd;border-radius:8px;padding:.4rem}
+.form-comentario input{flex:1;border:1px solid #ddd;border-radius:8px;padding:.4rem;background:#fff;color:#1c2b33}
+.form-comentario button{border:0;border-radius:8px;padding:.4rem .7rem;background:var(--asf-primary,#0b7fab);color:#fff;cursor:pointer}
+.mural-comentarios{font-size:.85rem;color:inherit}
+.mural-comentarios p{margin:.25rem 0;color:inherit}
 
 .chip{border:1px solid #ccc;border-radius:999px;padding:.35rem .9rem;background:none;
   cursor:pointer;margin:.2rem;color:inherit}
@@ -33,27 +38,205 @@ body{padding-bottom:64px}
 .card-previsao ul{list-style:none;padding:0;display:flex;gap:1rem}
 .card-previsao a{color:#fff}
 
-@media (prefers-color-scheme:dark){
-  .mural-card{--asf-bg:#16232b}
-  .asf-bottom-nav{--asf-bg:#0e1a21;border-top-color:rgba(255,255,255,.1)}
-}
-
 /* ─── Mural v3: upload, badge de nível e contador de votos ─── */
-.mural-upload{background:var(--asf-bg,#fff);border-radius:16px;padding:1rem;margin-bottom:1rem;
+.mural-upload{background:var(--asf-bg,#fff);color:#1c2b33;border-radius:16px;padding:1rem;margin-bottom:1rem;
   box-shadow:0 2px 8px rgba(0,0,0,.08);display:grid;gap:.6rem}
-.mural-upload h2{margin:0;font-size:1.05rem}
+.mural-upload h2{margin:0;font-size:1.05rem;color:inherit}
 .mural-upload input[type=text],.mural-upload textarea,.mural-upload input[type=file]{
-  border:1px solid #ddd;border-radius:10px;padding:.55rem;font:inherit;width:100%;box-sizing:border-box}
-.mural-upload small{opacity:.7}
-.mural-upload .mural-concurso{display:flex;align-items:center;gap:.4rem;font-size:.9rem}
+  border:1px solid #ddd;border-radius:10px;padding:.55rem;font:inherit;width:100%;box-sizing:border-box;
+  background:#fff;color:#1c2b33}
+.mural-upload input::placeholder,.mural-upload textarea::placeholder{color:#8a9aa5}
+.mural-upload small{opacity:.7;color:inherit}
+.mural-upload .mural-concurso{display:flex;align-items:center;gap:.4rem;font-size:.9rem;color:inherit}
 .mural-upload button{border:0;border-radius:10px;padding:.7rem;font-weight:700;cursor:pointer;
   background:var(--asf-primary,#0b7fab);color:#fff}
 .mural-upload button:disabled{opacity:.6;cursor:wait}
 .badge-nivel{background:#e0f4f9;color:#075e78;border-radius:999px;padding:1px 8px;
   font-size:.65rem;font-weight:700;vertical-align:middle}
-.votos-count{font-weight:700}
+.votos-count{font-weight:700;color:inherit}
 .mural-card.rank{border:2px solid var(--asf-primary,#0b7fab)}
+
+/* ─── v4: legibilidade no modo escuro (texto claro sobre fundo escuro) ─── */
 @media (prefers-color-scheme:dark){
-  .mural-upload{--asf-bg:#16232b}
-  .mural-upload input[type=text],.mural-upload textarea{background:#0e1a21;color:#eee;border-color:#2a3d47}
+  .mural-card{--asf-bg:#16232b;color:#eef4f7;box-shadow:0 2px 8px rgba(0,0,0,.4)}
+  .mural-card a{color:#4fc3e8}
+  .mural-upload{--asf-bg:#16232b;color:#eef4f7;box-shadow:0 2px 8px rgba(0,0,0,.4)}
+  .mural-upload input[type=text],.mural-upload textarea,.mural-upload input[type=file]{
+    background:#0e1a21;color:#eee;border-color:#2a3d47}
+  .mural-upload input::placeholder,.mural-upload textarea::placeholder{color:#7d8f9a}
+  .form-comentario input{background:#0e1a21;color:#eee;border-color:#2a3d47}
+  .form-comentario input::placeholder{color:#7d8f9a}
+  .btn-apoiar,.btn-votar{background:#0b3d4d;color:#bfeaf5}
+  .badge-nivel{background:#0b3d4d;color:#bfeaf5}
+  .chip{border-color:#3a4d58;color:#dfe9ee}
+  .chip:hover,.chip.ativo{background:var(--asf-primary,#0b7fab);color:#fff}
+  .asf-bottom-nav{--asf-bg:#0e1a21;color:#dfe9ee;border-top-color:rgba(255,255,255,.1)}
+  .medalha{background:rgba(0,0,0,.55)}
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   05/10/2026 — FIX v2 GLOBAL: contraste no dark-mode
+   ═══════════════════════════════════════════════════════════════════ */
+body.dark-mode .asfv2-band,
+body.dark-mode .asfv2-band h1, body.dark-mode .asfv2-band h2,
+body.dark-mode .asfv2-band h3, body.dark-mode .asfv2-band h4,
+body.dark-mode .asfv2-band b, body.dark-mode .asfv2-band strong,
+body.dark-mode .asfv2-band div, body.dark-mode .asfv2-band label,
+body.dark-mode .asfv2-band td, body.dark-mode .asfv2-band th,
+body.dark-mode .asfv2-band em, body.dark-mode .asfv2-band i {
+  color: #E8F0F6;
+}
+body.dark-mode.asfv2-table .cards-grid > *,
+body.dark-mode.asfv2-table .cards-grid > * b,
+body.dark-mode.asfv2-table .cards-grid > * strong,
+body.dark-mode.asfv2-table .cards-grid > * span {
+  color: #E8F0F6 !important;
+}
+body.dark-mode.asfv2-table .cards-grid > * small {
+  color: #9FB3C4 !important;
+}
+body.dark-mode .asfv2-band [style*="background:#fff"],
+body.dark-mode .asfv2-band [style*="background: #fff"],
+body.dark-mode .asfv2-band [style*="background:white"],
+body.dark-mode .asfv2-band [style*="background: white"],
+body.dark-mode .asfv2-band [style*="background:#fff"] *,
+body.dark-mode .asfv2-band [style*="background: #fff"] *,
+body.dark-mode .asfv2-band [style*="background:white"] *,
+body.dark-mode .asfv2-band [style*="background: white"] * {
+  color: #0E2439 !important;
+}
+body.dark-mode .asfv2-band [style*="background:#fff"] small,
+body.dark-mode .asfv2-band [style*="background: #fff"] small,
+body.dark-mode .asfv2-band [style*="background:white"] small,
+body.dark-mode .asfv2-band [style*="background: white"] small {
+  color: #5A6B7A !important;
+}
+
+@media (prefers-color-scheme: dark) {
+  body:not(.light-mode) .asfv2-band,
+  body:not(.light-mode) .asfv2-band h1, body:not(.light-mode) .asfv2-band h2,
+  body:not(.light-mode) .asfv2-band h3, body:not(.light-mode) .asfv2-band h4,
+  body:not(.light-mode) .asfv2-band b, body:not(.light-mode) .asfv2-band strong,
+  body:not(.light-mode) .asfv2-band div, body:not(.light-mode) .asfv2-band label,
+  body:not(.light-mode) .asfv2-band td, body:not(.light-mode) .asfv2-band th,
+  body:not(.light-mode) .asfv2-band em, body:not(.light-mode) .asfv2-band i {
+    color: #E8F0F6;
+  }
+  body:not(.light-mode).asfv2-table .cards-grid > *,
+  body:not(.light-mode).asfv2-table .cards-grid > * b,
+  body:not(.light-mode).asfv2-table .cards-grid > * strong,
+  body:not(.light-mode).asfv2-table .cards-grid > * span {
+    color: #E8F0F6 !important;
+  }
+  body:not(.light-mode).asfv2-table .cards-grid > * small {
+    color: #9FB3C4 !important;
+  }
+  body:not(.light-mode) .asfv2-band [style*="background:#fff"],
+  body:not(.light-mode) .asfv2-band [style*="background: #fff"],
+  body:not(.light-mode) .asfv2-band [style*="background:white"],
+  body:not(.light-mode) .asfv2-band [style*="background: white"],
+  body:not(.light-mode) .asfv2-band [style*="background:#fff"] *,
+  body:not(.light-mode) .asfv2-band [style*="background: #fff"] *,
+  body:not(.light-mode) .asfv2-band [style*="background:white"] *,
+  body:not(.light-mode) .asfv2-band [style*="background: white"] * {
+    color: #0E2439 !important;
+  }
+  body:not(.light-mode) .asfv2-band [style*="background:#fff"] small,
+  body:not(.light-mode) .asfv2-band [style*="background: #fff"] small,
+  body:not(.light-mode) .asfv2-band [style*="background:white"] small,
+  body:not(.light-mode) .asfv2-band [style*="background: white"] small {
+    color: #5A6B7A !important;
+  }
+}
+
+
+/* ===== 05/10/2026 — TEMA CLARO FORÇADO (global): fundo sempre branco ===== */
+html, body { background: #FFFFFF !important; }
+[data-theme="dark"] { --light: #F8F9FA; --white: #FFFFFF; --secondary: #0E2439; }
+[data-theme="dark"] body { background: #F8F9FA !important; color: #0E2439 !important; }
+[data-theme="dark"] .card,
+[data-theme="dark"] .stat-card,
+[data-theme="dark"] .glass-card,
+[data-theme="dark"] .subscriber-card,
+[data-theme="dark"] .mural-card,
+[data-theme="dark"] .mural-upload { background: #FFFFFF !important; color: #0E2439 !important; border-color: #E3EDF2 !important; }
+[data-theme="dark"] h2, [data-theme="dark"] h3, [data-theme="dark"] h4,
+[data-theme="dark"] .section-title { color: #0E2439 !important; }
+[data-theme="dark"] #header-menu { background: #FFFFFF !important; border-color: #E3EDF2 !important; }
+[data-theme="dark"] #header-menu .menu-item { color: #0E2439 !important; }
+[data-theme="dark"] .apps-dropdown-menu { background: #FFFFFF !important; border-color: #E3EDF2 !important; }
+[data-theme="dark"] .apps-dropdown-menu .tab { color: #0E2439 !important; }
+[data-theme="dark"] .bottom-nav { background: #FFFFFF !important; border-top-color: #E3EDF2 !important; }
+[data-theme="dark"] .asf-nav-sheet { background: #FFFFFF !important; }
+[data-theme="dark"] .asf-nav-sheet .sheet-item { background: #F4FBFD !important; border-color: #E3EDF2 !important; color: #0E2439 !important; }
+[data-theme="dark"] #dica-do-dia .dica-card { background: #F4FBFD !important; border-color: #DBF0F6 !important; }
+[data-theme="dark"] #dica-do-dia .dica-text-lg { color: #0E2439 !important; }
+[data-theme="dark"] .dica-refresh-lg { background: #E8F6F9 !important; color: #0a7aa8 !important; border-color: rgba(0,168,204,.35) !important; }
+
+@media (prefers-color-scheme: dark) {
+  .mural-card, .mural-upload { --asf-bg: #FFFFFF; background: #FFFFFF !important; color: #0E2439 !important; box-shadow: 0 2px 8px rgba(14,36,57,.08) !important; }
+  .mural-card a { color: #0a7aa8 !important; }
+  body:not(.light-mode), body:not(.light-mode) .asfv2-band { color: #0E2439 !important; }
+  body:not(.light-mode) .asfv2-band p, body:not(.light-mode) .asfv2-band li,
+  body:not(.light-mode) .asfv2-band span, body:not(.light-mode) .asfv2-band div,
+  body:not(.light-mode) .asfv2-band b, body:not(.light-mode) .asfv2-band strong,
+  body:not(.light-mode) .asfv2-band td, body:not(.light-mode) .asfv2-band th,
+  body:not(.light-mode) .asfv2-band h1, body:not(.light-mode) .asfv2-band h2,
+  body:not(.light-mode) .asfv2-band h3, body:not(.light-mode) .asfv2-band h4 { color: #0E2439 !important; }
+  body:not(.light-mode) .asfv2-band small { color: #5E7180 !important; }
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   05/10/2026 — REDESIGN via CSS: seção CAMPANHAS ESPECIAIS ASF
+   (card gradiente dentro de #brandhub). Organiza e dá legibilidade.
+   ═══════════════════════════════════════════════════════════════════ */
+#brandhub div[style*="#9B59B6 100%"] {
+  padding: 0 !important;
+  overflow: hidden;
+}
+/* Título e subtítulo da campanha com respiro */
+#brandhub div[style*="#9B59B6 100%"] > div[style*="font-size: 48px"] {
+  padding-top: 28px;
+}
+#brandhub div[style*="#9B59B6 100%"] > h3 {
+  margin: 0 20px 10px;
+  letter-spacing: .3px;
+}
+#brandhub div[style*="#9B59B6 100%"] > p[style*="italic"] {
+  margin: 0 24px 16px !important;
+  border-radius: 999px !important;
+  background: rgba(255,255,255,.2) !important;
+}
+/* Citação da comunidade: card branco legível, sem depender do gradiente */
+#brandhub div[style*="#9B59B6 100%"] div[style*="border-left: 4px solid #00A8CC"] {
+  background: #FFFFFF !important;
+  margin: 4px 24px 20px !important;
+  box-shadow: 0 4px 14px rgba(14,36,57,.18);
+}
+#brandhub div[style*="#9B59B6 100%"] div[style*="border-left: 4px solid #00A8CC"] p {
+  color: #0E2439 !important;
+}
+/* Grid de 3 itens: cartões brancos sólidos e responsivos */
+#brandhub div[style*="#9B59B6 100%"] div[style*="repeat(3, 1fr)"] {
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)) !important;
+  margin: 0 24px 24px !important;
+  gap: 12px !important;
+}
+#brandhub div[style*="#9B59B6 100%"] div[style*="repeat(3, 1fr)"] > div {
+  background: #FFFFFF !important;
+  color: #0E2439 !important;
+  padding: 16px 12px !important;
+  border-radius: 14px !important;
+  box-shadow: 0 2px 8px rgba(14,36,57,.12);
+}
+#brandhub div[style*="#9B59B6 100%"] div[style*="repeat(3, 1fr)"] > div div {
+  color: #0E2439 !important;
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.35;
+}
+/* Botão CTA com mais presença */
+#brandhub div[style*="#9B59B6 100%"] button.cta-button {
+  margin-bottom: 28px;
+  box-shadow: 0 6px 18px rgba(0,0,0,.3);
 }

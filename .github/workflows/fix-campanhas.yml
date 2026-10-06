@@ -1,0 +1,32 @@
+name: Fix - Layout Campanhas Especiais
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Apply layout patch
+        run: python .github/scripts/fix_campanhas_layout.py
+
+      - name: Commit changes
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          if git diff --quiet; then
+            echo "Nenhuma alteracao necessaria"
+          else
+            git add index.html sw.js
+            git commit -m "fix: enquadramento da secao Campanhas Especiais ASF (layout responsivo + SW bump)"
+            git push
+          fi

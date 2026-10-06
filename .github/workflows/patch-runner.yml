@@ -1,0 +1,42 @@
+name: Patch Runner (generico)
+
+on:
+  workflow_dispatch:
+    inputs:
+      script:
+        description: 'Script em .github/scripts/ a executar (ex: fix_sendbeacon.py)'
+        required: true
+        type: string
+      commit_message:
+        description: 'Mensagem do commit'
+        required: false
+        type: string
+        default: 'chore: apply patch script'
+
+permissions:
+  contents: write
+
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Run patch script
+        run: python ".github/scripts/${{ inputs.script }}"
+
+      - name: Commit changes
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          if git diff --quiet; then
+            echo "Nenhuma alteracao necessaria"
+          else
+            git add -A
+            git commit -m "${{ inputs.commit_message }}"
+            git push
+          fi
