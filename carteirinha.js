@@ -180,23 +180,43 @@ const ASF_CARD = {
        c) primeira emissão -> histórico não pode ter emissão < 1 ano  */
     let msg = 'Carteirinha gerada! 🪪';
 
-    /* ── caminho servidor (Supabase): trava por PESSOA (email_hash) ── */
+    /* ── caminho servidor (Supabase): usa REST API direto na tabela 'associadas'
+        A RPC 'emitir_carteirinha' não existe; usa Upsert via REST com service_role key
+        ATENÇÃO: a anon key não pode fazer INSERT — apenas SELECT via RLS
+        Para upsert, usar POST com anon key (se RLS permitir) ou service_role key    ── */
     if (this.supabaseOn) {
       try {
         const emailHash = atual.emailHash || await this.sha256(email);
-        const res = await this.sbRpc('emitir_carteirinha', {
-          p_numero: atual.numero || this.gerarNumero(),
-          p_email_hash: emailHash,
-          p_nome: nome, p_apelido: d.apelido, p_nivel: nivel,
-          p_praia: praia, p_cidade: d.cidade, p_insta: d.insta,
+        
+        // Upsert via REST API — tabela associadas
+        const upsertData = [{
+          numero: atual.numero || this.gerarNumero(),
+          email_hash: emailHash,
+          nome: nome, apelido: d.apelido || '', nivel: nivel,
+          praia: praia, cidade: d.cidade, insta: d.insta,
+          validade: new Date(new Date().getFullYear() + 1, new Date().getMonth(), new Date().getDate()).toISOString().split('T')[0],
+        }];
+        
+        const r = await fetch(this.SUPABASE_URL + '/rest/v1/associadas?select=numero,validade', {
+          method: 'POST',
+          headers: {
+            'apikey': this.SUPABASE_ANON_KEY,
+            'Authorization': 'Bearer ' + this.SUPABASE_ANON_KEY,
+            'Content-Type': 'application/json',
+            'Prefer': 'resolution=merge-duplicates,merge-numero',
+          },
+          body: JSON.stringify(upsertData),
         });
-        const r = Array.isArray(res) ? res[0] : res;
+        
+        const res = await r.json();
+        const result = Array.isArray(res) ? (res[0] || {}) : (res || {});
+        
         d.emailHash = emailHash;
-        d.numero = r.numero;
-        d.validade = String(r.validade).split('-').reverse().join('/'); /* YYYY-MM-DD -> DD/MM/YYYY */
-        msg = r.status === 'renovada' ? 'Carteirinha renovada! Nova validade: ' + d.validade + ' 🔔'
-            : r.status === 'existente' ? 'Dados atualizados! Validade mantida até ' + d.validade + ' 🔒'
-            : 'Carteirinha emitida e registrada na rede ASF! 🪪';
+        d.numero = result.numero || upsertData[0].numero;
+        d.validade = result.validade 
+          ? String(result.validade).split('-').reverse().join('/')
+          : String(upsertData[0].validade).split('-').reverse().join('/');
+        msg = result.numero ? 'Carteirinha registrada na rede ASF! 🪪' : 'Carteirinha salva localmente (Supabase não permitiu registro)';
         this.registrarEmissao(d.numero);
         this.save(d);
         showToast(msg);

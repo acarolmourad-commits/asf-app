@@ -65,52 +65,69 @@ var SUPABASE_ANON_KEY = 'sb_publishable_qIvPxh6DavCPtntfflaRLw_QI_pZJih';
 var USE_SUPABASE = true;
 
 function carregar(){
-  var url=document.getElementById('url').value.trim(), tok=document.getElementById('token').value.trim();
-  
-  // Supabase como fonte principal
-  if(USE_SUPABASE){
-    fetch(SUPABASE_URL+'/rest/v1/rpc/listar_carteirinhas?apikey='+encodeURIComponent(SUPABASE_ANON_KEY), {
-      method: 'POST',
-      headers: {'apikey': SUPABASE_ANON_KEY, 'Authorization': 'Bearer '+SUPABASE_ANON_KEY, 'Content-Type': 'application/json'},
-      body: JSON.stringify({})
-    })
-    .then(function(r){return r.json()})
-    .then(function(j){
-      var cartas = Array.isArray(j) ? j : (j.carteirinhas || []);
-      if(!cartas.length){
-        document.getElementById('resumo').style.display='block';
-        document.getElementById('total').textContent='0';
-        document.getElementById('lista-card').style.display='none';
-        document.getElementById('att').textContent='· atualizado '+new Date().toLocaleTimeString('pt-BR');
-        alert('Nenhuma carteirinha registrada no Supabase ainda. Emita uma no app ASF!');
-        return;
-      }
-      document.getElementById('resumo').style.display='block';
-      document.getElementById('lista-card').style.display='block';
-      document.getElementById('total').textContent=cartas.length;
-      document.getElementById('att').textContent='· atualizado '+new Date().toLocaleTimeString('pt-BR');
-      document.getElementById('lista').innerHTML=cartas.reverse().map(function(c){
-        return '<tr><td>'+c.data+'</td><td><code>'+(c.numero||'—')+'</code></td><td><b>'+(c.nome||'—')+'</b>'+(c.apelido?' <i>('+c.apelido+')</i>':'')+'</td><td>'+(c.nivel||'—')+'</td><td>'+(c.praia||'—')+'</td><td>'+(c.cidade||'—')+'</td><td>'+(c.insta||'—')+'</td></tr>';
-      }).join('');
-    })
-    .catch(function(e){
-      // Fallback: Google Apps Script se Supabase indisponível
-      if(url && url.indexOf(S)!==0){
-        fetch(url+'?action=list&token='+encodeURIComponent(tok)).then(function(r){return r.json()}).then(function(j){
-          if(j.status!=='OK'){alert(j.message||'Erro');return;}
-          document.getElementById('resumo').style.display='block';
-          document.getElementById('lista-card').style.display='block';
-          document.getElementById('total').textContent=j.total;
-          document.getElementById('att').textContent='· atualizado '+new Date().toLocaleTimeString('pt-BR');
-          document.getElementById('lista').innerHTML=j.carteirinhas.reverse().map(function(c){
-            return '<tr><td>'+c.data+'</td><td><code>'+c.numero+'</code></td><td><b>'+(c.nome||'—')+'</b>'+(c.apelido?' <i>('+c.apelido+')</i>':'')+'</td><td>'+c.nivel+'</td><td>'+(c.praia||'—')+'</td><td>'+(c.cidade||'—')+'</td><td>'+(c.insta||'—')+'</td></tr>';
+  var url = document.getElementById('url').value.trim();
+  var tok = document.getElementById('token').value.trim();
+  var S = 'https://script.google.com/';
+
+  if (url) { localStorage.setItem('asf-reg-url', url); }
+  if (tok) { localStorage.setItem('asf-reg-token', tok); }
+
+  // Supabase REST API — fonte primária
+  // Tabela: associadas — colunas: numero, nome, apelido, nivel, praia, cidade, insta, validade
+  fetch(SUPABASE_URL + '/rest/v1/associadas?select=numero,nome,apelido,nivel,praia,cidade,insta,validade&order=validade.desc', {
+    method: 'GET',
+    headers: {
+      'apikey': SUPABASE_ANON_KEY,
+      'Authorization': 'Bearer ' + SUPABASE_ANON_KEY,
+      'Accept': 'application/json',
+      'Prefer': 'return=representation'
+    }
+  })
+  .then(function(r) {
+    if (!r.ok) throw new Error('HTTP ' + r.status + ': ' + (r.status === 401 ? 'RLS bloqueia — conceda SELECT a anon' : r.statusText));
+    return r.json();
+  })
+  .then(function(j) {
+    var cartas = Array.isArray(j) ? j : [];
+    if (!cartas.length) {
+      document.getElementById('resumo').style.display = 'block';
+      document.getElementById('total').textContent = '0';
+      document.getElementById('lista-card').style.display = 'none';
+      document.getElementById('att').textContent = '· atualizado ' + new Date().toLocaleTimeString('pt-BR');
+      alert('Nenhuma carteirinha registrada no Supabase ainda. Emita uma no app ASF!');
+      return;
+    }
+    document.getElementById('resumo').style.display = 'block';
+    document.getElementById('lista-card').style.display = 'block';
+    document.getElementById('total').textContent = cartas.length;
+    document.getElementById('att').textContent = '· atualizado ' + new Date().toLocaleTimeString('pt-BR');
+    document.getElementById('lista').innerHTML = cartas.reverse().map(function(c){
+      var validade = c.validade ? String(c.validade).split('-').reverse().join('/') : '—';
+      return '<tr><td>' + validade + '</td><td><code>' + (c.numero || '—') + '</code></td><td><b>' + (c.nome || '—') + '</b>' + (c.apelido ? ' <i>(' + c.apelido + ')</i>' : '') + '</td><td>' + (c.nivel || '—') + '</td><td>' + (c.praia || '—') + '</td><td>' + (c.cidade || '—') + '</td><td>' + (c.insta || '—') + '</td></tr>';
+    }).join('');
+  })
+  .catch(function(e) {
+    console.error('Supabase error:', e);
+    // Fallback: Google Apps Script (backup)
+    if (url && url.indexOf(S) !== -1) {
+      fetch(url + '?action=list&token=' + encodeURIComponent(tok))
+        .then(function(r){ return r.json(); })
+        .then(function(j) {
+          if (j.status !== 'OK') { alert(j.message || 'Erro ao carregar do Sheets'); return; }
+          document.getElementById('resumo').style.display = 'block';
+          document.getElementById('lista-card').style.display = 'block';
+          document.getElementById('total').textContent = j.total;
+          document.getElementById('att').textContent = '· atualizado (Sheets) ' + new Date().toLocaleTimeString('pt-BR');
+          document.getElementById('lista').innerHTML = j.carteirinhas.reverse().map(function(c){
+            var data = c.data || '—';
+            return '<tr><td>' + data + '</td><td><code>' + (c.numero || '—') + '</code></td><td><b>' + (c.nome || '—') + '</b>' + (c.apelido ? ' <i>(' + c.apelido + ')</i>' : '') + '</td><td>' + (c.nivel || '—') + '</td><td>' + (c.praia || '—') + '</td><td>' + (c.cidade || '—') + '</td><td>' + (c.insta || '—') + '</td></tr>';
           }).join('');
-        }).catch(function(e2){alert('Supabase e Apps Script indisponíveis. Tente novamente mais tarde.');});
-      } else {
-        alert('Supabase indisponível e Apps Script não configurado.\\nConfigure a Deployment URL abaixo como backup.');
-      }
-    });
-  }
+        })
+        .catch(function(e2) { alert('Supabase e Apps Script indisponíveis.'); });
+    } else {
+      alert('Supabase indisponível (RLS: conceda SELECT a anon na tabela associadas).\\n\\nComo corrigir no Supabase SQL Editor:\\n  GRANT SELECT ON TABLE public.associadas TO anon;\\n\\nOu configure o Deployment URL do Apps Script abaixo como backup.');
+    }
+  });
 }
 </script>
     <script src="/asf-app/asf-redesign.js" defer></script>
