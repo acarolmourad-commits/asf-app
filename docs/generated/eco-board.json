@@ -1,5 +1,5 @@
 {
-  "date": "2026-10-06",
+  "date": "2026-10-07",
   "board_tip": {
     "title": "Fish: Para ondas pequenas",
     "content": "Shape com outline curto e largo. Perfeita para ondas fracas! Twin ou quad fin para mais speed.",
@@ -9,10 +9,10 @@
     ]
   },
   "eco_tip": {
-    "title": "Por que escolher ecológico?",
-    "content": "Quando a prancha chegar ao fim, o bloco pode ser reciclado ou se degrada naturalmente!",
-    "category": "Consumo Consciente"
+    "title": "Benefícios do Bloco Ecológico",
+    "content": "1. ♻️ 100% reciclável 2. 🌿 Biodegradável 3. 🧊 Livre de CFC 4. 💧 Menor consumo de água",
+    "category": "Meio Ambiente"
   },
-  "daily_message": "Maré baixa às 11:45 hoje - melhor para iniciantes!",
-  "generated_at": "2026-10-06T17:03:47.055784"
+  "daily_message": "Você sabia? O bloco Phenix Teccel pode ser reciclado!",
+  "generated_at": "2026-10-07T02:59:11.301810"
 }
