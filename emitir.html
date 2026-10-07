@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="index,follow">
+<meta property="og:title" content="Emitir Carteirinha Digital — ASF | Associação Surf Feminino">
+<meta property="og:description" content="Emita sua carteirinha digital da Associação Surf Feminino. Acesso a parceiros, eventos e benefícios exclusivos para associadas.">
+<meta property="og:image" content="https://asf.surf/assets/images/asf-og-image.jpg">
+<meta property="og:url" content="https://asf.surf/emitir">
+<meta property="og:type" content="website">
+<link rel="canonical" href="https://asf.surf/emitir">
+<meta name="description" content="Emita sua carteirinha digital da Associação Surf Feminino. Gratuita, digital e só sua. Em breve valendo benefícios em parceiros!">
+<title>Emitir Carteirinha Digital — ASF | Associação Surf Feminino</title>
+<link rel="stylesheet" href="/asf-app/asf-site-redesign.css">
+<style>
+  :root{--primary:#00A8CC;--primary-dark:#007C99;--primary-soft:#E6F7FB;--ink:#0E2439;--muted:#5E7180;--surface:#FFFFFF;--line:#DCECF1;--accent:#FF6B9D;--radius:28px;--shadow:0 12px 32px rgba(14,36,57,.10)}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{min-height:100vh;color:var(--ink);font-family:system-ui,sans-serif;background:radial-gradient(circle at 12% 0%,rgba(0,168,204,.05),transparent 32rem),radial-gradient(circle at 88% 18%,rgba(255,107,157,.06),transparent 30rem),#F7FAFB;text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased}
+  ::selection{background:rgba(0,168,204,.24)}
+  .hero{position:relative;overflow:hidden;border-radius:0 0 var(--radius) var(--radius);max-width:1120px;margin:16px auto;background:linear-gradient(135deg,var(--ink),var(--primary-dark),var(--primary))}
+  .hero-inner{max-width:1120px;margin:auto;padding:60px 32px 80px;text-align:center;color:#fff}
+  .hero h1{font-size:42px;font-weight:800;margin-bottom:8px;font-family:'Outfit',system-ui,sans-serif}
+  .hero .subtitle{font-size:20px;opacity:.92;margin-bottom:4px;font-weight:400}
+  .hero .subnote{font-size:14px;opacity:.75;margin-top:12px}
+  .hero .badges{display:flex;gap:16px;justify-content:center;margin-top:24px;flex-wrap:wrap}
+  .badge{background:rgba(255,255,255,.15);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.2);border-radius:999px;padding:8px 18px;font-size:13px;font-weight:600;display:inline-flex;align-items:center;gap:6px}
+  .wave{display:inline-block;animation:bounce 2s ease-in-out infinite}
+  @keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+  main{max-width:1120px;margin:32px auto;padding:0 20px}
+  .card{background:rgba(255,255,255,.94);backdrop-filter:blur(12px);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:32px;margin-bottom:24px}
+  .card.compact{padding:24px}
+  .card>h2{font-size:22px;font-weight:700;color:var(--ink);margin-bottom:4px}
+  .card>h2~.subtitle{font-size:13px;color:var(--muted);margin-bottom:20px}
+  .form-group{margin-bottom:20px}
+  .form-row{display:flex;gap:16px;flex-wrap:wrap}
+  .form-row>div{flex:1;min-width:200px}
+  label{font-size:12px;font-weight:600;color:var(--muted);display:block;margin-bottom:6px;text-transform:uppercase;letter-spacing:.03em}
+  input,select{width:100%;padding:12px 14px;border:1.5px solid var(--line);border-radius:14px;font-size:15px;font-family:inherit;transition:border-color .2s,box-shadow .2s;background:#fafbfc}
+  input:focus,select:focus{outline:none;border-color:var(--primary);box-shadow:0 0 0 3px var(--primary-soft)}
+  input[type="checkbox"]{width:auto;height:18px;border-radius:5px;margin-right:8px}
+  .consent-box{display:flex;gap:10px;align-items:flex-start;padding:14px;background:var(--primary-soft);border-radius:14px;border:1px solid var(--line)}
+  .consent-box input{margin-top:2px;flex:none}
+  .consent-box label{margin-bottom:0;font-weight:500;color:var(--ink);font-size:13px}
+  .consent-box a{color:var(--primary-dark);font-weight:600;text-decoration:underline}
+  .btn{width:100%;padding:16px;border:none;border-radius:999px;font-size:17px;font-weight:800;cursor:pointer;transition:transform .18s,box-shadow .2s,background .2s;background:linear-gradient(135deg,var(--primary),var(--primary-dark));color:#fff;display:inline-flex;align-items:center;justify-content:center;gap:8px}
+  .btn:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,168,204,.30)}
+  .btn:active{transform:translateY(0)}
+  .btn.btn-secondary{background:linear-gradient(135deg,#f0f4f8,#e6f7fb);color:var(--ink);border:1px solid var(--line)}
+  .btn.btn-secondary:hover{box-shadow:0 4px 14px rgba(0,0,0,.06)}
+  .btn-group{display:flex;gap:12px;flex-wrap:wrap;margin-top:12px}
+  .btn-group .btn{flex:1}
+  .step-indicator{display:flex;justify-content:center;gap:8px;margin-bottom:20px}
+  .step-dot{width:28px;height:28px;border-radius:50%;background:var(--line);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:var(--muted);transition:all .2s}
+  .step-dot.active{background:var(--primary);color:#fff}
+  .step-dot.done{background:var(--primary);color:#fff}
+  .step-label{font-size:12px;color:var(--muted);text-align:center;flex:1}
+  .feature-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px;margin-top:16px}
+  .feature{background:#f8fafc;border-radius:14px;padding:20px;border:1px solid var(--line);transition:transform .2s,border-color .2s}
+  .feature:hover{transform:translateY(-2px);border-color:var(--primary)}
+  .feature .icon{font-size:32px;margin-bottom:10px}
+  .feature h3{font-size:15px;font-weight:700;margin-bottom:6px;color:var(--ink)}
+  .feature p{font-size:12px;color:var(--muted);line-height:1.5}
+  .preview-card{min-width:0;background:linear-gradient(135deg,var(--primary-dark),var(--primary),var(--ink));border-radius:20px;padding:24px;color:#fff;margin-top:8px}
+  .preview-card .num{font-family:monospace;font-size:22px;font-weight:800;letter-spacing:2px;background:rgba(255,255,255,.15);display:inline-block;padding:6px 14px;border-radius:8px}
+  .preview-card .name{font-size:22px;font-weight:800;margin:12px 0;font-family:'Outfit',sans-serif}
+  .preview-card .level{font-size:13px;opacity:.85}
+  .qr-wrap{display:flex;align-items:center;gap:12px;margin-top:16px;padding-top:16px;border-top:1px solid rgba(255,255,255,.2)}
+  .qr-wrap img{width:80px;height:80px;border-radius:8px;background:#fff;padding:4px}
+  .qr-wrap .qr-label{font-size:12px;opacity:.8}
+  .toast-fixed{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:var(--ink);color:#fff;padding:14px 28px;border-radius:999px;font-size:14px;font-weight:600;box-shadow:0 8px 32px rgba(0,0,0,.25);z-index:9999;opacity:0;pointer-events:none;transition:opacity .3s,transform .3s}
+  .toast-fixed.show{opacity:1;pointer-events:auto;transform:translateX(-50%) translateY(0)}
+  .toast-fixed.success{background:linear-gradient(135deg,#27ae60,#229954)}
+  @media(max-width:640px){.hero-inner{padding:48px 20px 60px}.hero h1{font-size:32px}.card{padding:20px}.hero .badges{gap:8px}}
+</style>
+</head>
+<body>
+<a href="/asf-app/" class="asf-back-pill">← Voltar ao ASF</a>
+
+<header class="hero">
+  <div class="hero-inner">
+    <div class="wave" style="font-size:44px">🏄‍♀️</div>
+    <h1>Emita sua Carteirinha Digital ASF</h1>
+    <p class="subtitle">Gratuita, digital e só sua. Em breve valendo benefícios em parceiros!</p>
+    <p class="subnote">Número único com QR de verificação • Válida por 1 ano • Compartilhe nas ondas</p>
+    <div class="badges">
+      <span class="badge">🪪 Carteirinha Única</span>
+      <span class="badge">🔐 Dados Protegidos (LGPD)</span>
+      <span class="badge">🌊 Salva Offline</span>
+      <span class="badge">🤝 Rede de Benefícios</span>
+    </div>
+  </div>
+</header>
+
+<main>
+  <!-- Step indicator -->
+  <div class="step-indicator">
+    <div class="step-dot active">1</div>
+    <div class="step-label">Seus Dados</div>
+    <div class="step-dot" id="step2-dot">2</div>
+    <div class="step-label">Visualize</div>
+    <div class="step-dot" id="step3-dot">3</div>
+    <div class="step-label">Compartilhe</div>
+  </div>
+
+  <!-- Form section -->
+  <div class="card" id="form-card">
+    <h2>Crie sua carteirinha em 3 passos</h2>
+    <p class="subtitle">Preencha seus dados abaixo e receba seu número único de associada com QR de verificação.</p>
+
+    <div class="form-group">
+      <label for="card-nome">Nome de surfista *</label>
+      <input type="text" id="card-nome" maxlength="40" placeholder="Ex.: Ana Mar" autocomplete="name">
+    </div>
+
+    <div class="form-row">
+      <div class="form-group" style="margin-bottom:0;flex:1">
+        <label for="card-email">E-mail *</label>
+        <input type="email" id="card-email" maxlength="80" placeholder="seu@email.com" autocomplete="email">
+        <p style="font-size:11px;color:var(--muted);margin-top:4px">Identifica sua carteirinha na rede. Nunca divulgado.</p>
+      </div>
+      <div class="form-group" style="margin-bottom:0;flex:1">
+        <label for="card-nivel">Nível *</label>
+        <select id="card-nivel">
+          <option value="Iniciante">🌊 Iniciante</option>
+          <option value="Intermediária">🏄‍♀️ Intermediária</option>
+          <option value="Avançada">🏆 Avançada</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="card-praia">Praia do coração</label>
+      <input type="text" id="card-praia" maxlength="40" placeholder="Ex.: Maresias, Boa Viagem, Itamaracima...">
+    </div>
+
+    <div class="form-row">
+      <div class="form-group" style="margin-bottom:0;flex:1">
+        <label for="card-apelido">Nome/apelido público</label>
+        <input type="text" id="card-apelido" maxlength="30" placeholder="Como você aparece para as manas">
+      </div>
+      <div class="form-group" style="margin-bottom:0;flex:1">
+        <label for="card-cidade">Cidade</label>
+        <input type="text" id="card-cidade" maxlength="40" placeholder="Ex.: São Sebastião/SP">
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="card-insta">Instagram</label>
+      <input type="text" id="card-insta" maxlength="30" placeholder="@seu_usuario">
+    </div>
+
+    <!-- LGPD consent -->
+    <div class="consent-box">
+      <input type="checkbox" id="card-lgpd">
+      <label for="card-lgpd">
+        Autorizo o armazenamento <strong>apenas neste dispositivo</strong> dos dados acima para gerar minha carteirinha digital, conforme a <a href="/asf-app/privacidade.html" target="_blank" rel="noopener">Política de Privacidade</a> (LGPD — Lei 13.709/2018). Posso apagar tudo a qualquer momento.
+      </label>
+    </div>
+
+    <!-- Opt-in para registro na rede -->
+    <div class="consent-box" style="margin-top:12px;background:linear-gradient(135deg,rgba(0,168,204,.08),rgba(255,107,157,.06))">
+      <input type="checkbox" id="card-registrar" checked>
+      <label for="card-registrar">
+        Quero constar no <strong>registro de associadas ASF</strong> (opcional mas recomendado): meu nome de surfista, nível, praia e número da carteirinha entram no controle da rede para eu aproveitar benefícios com parceiros. Posso sair a qualquer momento.
+      </label>
+    </div>
+
+    <button class="btn" onclick="ASF_CARD.salvar()" id="generate-btn">
+      🪪 Gerar minha carteirinha
+    </button>
+  </div>
+
+  <!-- Preview section (shown when card exists) -->
+  <div class="card" id="preview-card" style="display:none">
+    <h2>Sua Carteirinha Digital</h2>
+    <p class="subtitle">Compartilhe na onda ou apresente aos parceiros</p>
+    <div id="carteirinha-content"></div>
+    <div class="btn-group" style="margin-top:20px">
+      <button class="btn btn-secondary" onclick="ASF_CARD.baixar()">⬇️ Baixar PNG</button>
+      <button class="btn btn-secondary" onclick="document.getElementById('card-foto-input').click()">📷 Adicionar Foto</button>
+    </div>
+    <input id="card-foto-input" type="file" accept="image/*" style="display:none" onchange="ASF_CARD.uploadFoto(this)">
+  </div>
+
+  <!-- Features section -->
+  <div class="card">
+    <h2>Benefícios da Carteirinha ASF</h2>
+    <p class="subtitle">Parceiros emblemáticos oferecem descontos e experiências exclusivas</p>
+    <div class="feature-grid">
+      <div class="feature">
+        <div class="icon">🤝</div>
+        <h3>Parceiros Surf</h3>
+        <p>Pranchas, waxes e acessórios com condições especiais nas lojas parceiras.</p>
+      </div>
+      <div class="feature">
+        <div class="icon">🏄‍♀️</div>
+        <h3>Eventos Exclusivos</h3>
+        <p>Acesso prioritário a Surf Days, mutirões e encontros da comunidade.</p>
+      </div>
+      <div class="feature">
+        <div class="icon">🏆</div>
+        <h3>Campeonatos & Clinics</h3>
+        <p>Inscrições com condições especiais para associadas com carteirinha.</p>
+      </div>
+      <div class="feature">
+        <div class="icon">✈️</div>
+        <h3>Surf Trips</h3>
+        <p>Viagens com tarifa de associada para os melhores picos do Brasil.</p>
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer style="text-align:center;padding:32px;font-size:13px;color:var(--muted)">
+  <p>© 2026 Associação Surf Feminino — Dados protegidos por LGPD • Supabase (armazenamento seguro)</p>
+  <p style="margin-top:4px"><a href="/asf-app/">← Voltar ao site ASF</a></p>
+</footer>
+
+<!-- Toast notification -->
+<div class="toast-fixed" id="toast"></div>
+
+<!-- Carteirinha JS -->
+<script src="/asf-app/carteirinha.js"></script>
+
+<script>
+// Global showToast function used by carteirinha.js
+function showToast(msg, type) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.className = 'toast-fixed show' + (type === 'error' ? ' error' : '');
+  setTimeout(() => t.classList.remove('show'), 4000);
+}
+
+// Auto-init carteirinha
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', () => ASF_CARD.init());
+} else {
+  ASF_CARD.init();
+}
+</script>
+</body>
+</html>
