@@ -12,7 +12,7 @@
 <link rel="canonical" href="https://asf.surf/emitir">
 <meta name="description" content="Emita sua carteirinha digital da Associação Surf Feminino. Gratuita, digital e só sua. Em breve valendo benefícios em parceiros!">
 <title>Emitir Carteirinha Digital — ASF | Associação Surf Feminino</title>
-<link rel="stylesheet" href="/asf-app/asf-site-redesign.css">
+<link rel="stylesheet" href="/asf-site-redesign.css">
 <style>
   :root{--primary:#00A8CC;--primary-dark:#007C99;--primary-soft:#E6F7FB;--ink:#0E2439;--muted:#5E7180;--surface:#FFFFFF;--line:#DCECF1;--accent:#FF6B9D;--radius:28px;--shadow:0 12px 32px rgba(14,36,57,.10)}
   *{box-sizing:border-box;margin:0;padding:0}
@@ -75,7 +75,7 @@
 </style>
 </head>
 <body>
-<a href="/asf-app/" class="asf-back-pill">← Voltar ao ASF</a>
+<a href="/" class="asf-back-pill">← Voltar ao ASF</a>
 
 <header class="hero">
   <div class="hero-inner">
@@ -154,7 +154,7 @@
     <div class="consent-box">
       <input type="checkbox" id="card-lgpd">
       <label for="card-lgpd">
-        Autorizo o armazenamento <strong>apenas neste dispositivo</strong> dos dados acima para gerar minha carteirinha digital, conforme a <a href="/asf-app/privacidade.html" target="_blank" rel="noopener">Política de Privacidade</a> (LGPD — Lei 13.709/2018). Posso apagar tudo a qualquer momento.
+        Autorizo o armazenamento <strong>apenas neste dispositivo</strong> dos dados acima para gerar minha carteirinha digital, conforme a <a href="/privacidade.html" target="_blank" rel="noopener">Política de Privacidade</a> (LGPD — Lei 13.709/2018). Posso apagar tudo a qualquer momento.
       </label>
     </div>
 
@@ -214,29 +214,40 @@
 
 <footer style="text-align:center;padding:32px;font-size:13px;color:var(--muted)">
   <p>© 2026 Associação Surf Feminino — Dados protegidos por LGPD • Supabase (armazenamento seguro)</p>
-  <p style="margin-top:4px"><a href="/asf-app/">← Voltar ao site ASF</a></p>
+  <p style="margin-top:4px"><a href="/">← Voltar ao site ASF</a></p>
 </footer>
 
 <!-- Toast notification -->
 <div class="toast-fixed" id="toast"></div>
 
-<!-- Carteirinha JS -->
-<script src="carteirinha.js"></script>
-
 <script>
-// Global showToast function used by carteirinha.js
+// Global showToast function used by carteirinha.js — defined BEFORE the script loads
 function showToast(msg, type) {
-  const t = document.getElementById('toast');
+const t = document.getElementById('toast');
+if (t) {
   t.textContent = msg;
   t.className = 'toast-fixed show' + (type === 'error' ? ' error' : '');
   setTimeout(() => t.classList.remove('show'), 4000);
+} else {
+  console.log('Toast:', msg);
 }
+}
+// Also ensure ASF_GAMIFICATION doesn't break
+if (typeof window.ASF_GAMIFICATION === 'undefined') window.ASF_GAMIFICATION = { checkAll: () => {} };
+</script>
+<!-- Carteirinha JS -->
+<script src="/carteirinha.js"></script>
 
-// Auto-init carteirinha
+<script>
+// Auto-init carteirinha after script loads
+if (typeof ASF_CARD !== 'undefined') {
 if (document.readyState === 'loading') {
   document.addEventListener('DOMContentLoaded', () => ASF_CARD.init());
 } else {
   ASF_CARD.init();
+}
+} else {
+console.error('ASF_CARD not loaded — check script path');
 }
 </script>
 </body>
