@@ -1,4 +1,4 @@
-/* ─── ASF Carteirinha Digital v2 ───────────────────────────
+/* ─── ASF Carteirinha Digital v2 — privacidade 2026-10-07 ───────────────────────────
    Carteirinha personalizada de cada usuária.
    Preparada para futuras parcerias (lojas, agências, pousadas):
    cada carteirinha tem número único + QR code de verificação. */
@@ -15,7 +15,7 @@ const ASF_CARD = {
   /* ─── Registro de associadas (Google Apps Script → Google Sheets) ───
      Faz backup do controle de quem emitiu carteirinha.
      A sincronização Supabase→Sheets não é automática; este é o backup opcional.
-     Deixe vazio se não usar Sheets (carteirinhas.html usará Supabase diretamente). */
+     Deixe vazio se não usar Sheets. O controle interno fica no painel autenticado do Supabase. */
   REGISTRY_URL: '',
 
   async sha256(t) {
@@ -91,58 +91,11 @@ const ASF_CARD = {
 
   save(d) { localStorage.setItem(this.KEY, JSON.stringify(d)); },
 
-  /* Registro opcional (opt-in LGPD) no controle de associadas — via Supabase REST API.
-     O fluxo principal de emissão já registra via POST /rest/v1/associadas (upsert);
-     esta função cobre carteirinhas emitidas antes da migração (que têm emailHash salvo). */
-  registrar(d) {
-    try {
-      const cb = document.getElementById('card-registrar');
-      const quer = (cb && cb.checked) || d.registrada;
-      if (!quer) return;
-      if (!this.supabaseOn || !d.emailHash || d.registrada) return;
-      const payload = [{
-        numero: d.numero,
-        email_hash: d.emailHash,
-        nome: d.nome, apelido: d.apelido || '',
-        nivel: d.nivel, praia: d.praia || '',
-        cidade: d.cidade || '', insta: d.insta || '',
-        validade: d.validade ? String(d.validade).split('/').reverse().join('-') : undefined,
-      }];
-      const url = this.SUPABASE_URL + '/rest/v1/associadas';
-      const headers = {
-        'apikey': this.SUPABASE_ANON_KEY,
-        'Authorization': 'Bearer ' + this.SUPABASE_ANON_KEY,
-        'Content-Type': 'application/json',
-        'Prefer': 'resolution=merge-duplicates,merge-numero'
-      };
-      const done = () => {
-        d.registrada = new Date().toISOString();
-        this.save(d);
-        if (typeof showToast === 'function') showToast('📇 Carteirinha registrada na rede ASF!');
-      };
-      /* sendBeacon primeiro (sobrevive a fechamento de aba / offline parcial);
-         fallback para fetch via sbRpc se indisponivel ou recusado */
-      let sent = false;
-      if (typeof navigator !== 'undefined' && navigator.sendBeacon) {
-        try {
-          sent = navigator.sendBeacon(url, new Blob([JSON.stringify(payload)], { type: 'application/json' }));
-        } catch (e) { sent = false; }
-      }
-      if (sent) { done(); }
-      else {
-        /* Fallback: POST direto na tabela associadas (REST API, não RPC) */
-        fetch(this.SUPABASE_URL + '/rest/v1/associadas', {
-          method: 'POST',
-          headers: {
-            'apikey': this.SUPABASE_ANON_KEY,
-            'Authorization': 'Bearer ' + this.SUPABASE_ANON_KEY,
-            'Content-Type': 'application/json',
-            'Prefer': 'resolution=merge-duplicates,merge-numero'
-          },
-          body: JSON.stringify(payload),
-        }).then(function() { done(); }).catch(function() {});
-      }
-    } catch (e) {}
+  /* O registro central usa apenas a RPC existente; nunca consulta/lista associadas. */
+  registrar() { /* a sincronização confirmada acontece em salvar() */ },
+  escape(v) {
+    return String(v == null ? '' : v).replace(/[&<>"']/g,
+      c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
   },
 
   gerarNumero() {
@@ -161,125 +114,89 @@ const ASF_CARD = {
   },
 
   async salvar() {
-    const nome = document.getElementById('card-nome').value.trim();
-    const nivel = document.getElementById('card-nivel').value;
-    const praia = document.getElementById('card-praia').value.trim();
-    const elApe = document.getElementById('card-apelido');
-    const elCid = document.getElementById('card-cidade');
-    const elIns = document.getElementById('card-insta');
-    if (nome.length < 2) { showToast('Conta pra gente o seu nome! 🏄‍♀️'); return; }
-    const consentEl = document.getElementById('card-lgpd');
+    if (this._saving) return;
+    const value = id => { const el = document.getElementById(id); return el ? el.value.trim() : ''; };
     const atual = this.load() || {};
-    const elEmail = document.getElementById('card-email');
-    const email = elEmail ? elEmail.value.trim().toLowerCase() : '';
-    if (this.supabaseOn && !atual.emailHash && !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) {
-      showToast('Precisamos de um e-mail válido para registrar sua carteirinha 📧');
-      return;
-    }
-    if (!atual.lgpdConsent && consentEl && !consentEl.checked) {
-      showToast('Precisamos do seu consentimento (LGPD) para gerar a carteirinha 💙');
-      return;
+    const nome = value('card-nome');
+    const nivel = value('card-nivel');
+    const consent = document.getElementById('card-lgpd');
+    const optin = document.getElementById('card-registrar');
+    const central = !!(optin && optin.checked);
+    const email = value('card-email').toLowerCase();
+    if (nome.length < 2) { showToast('Informe seu nome de surfista.'); return; }
+    if (!this.niveis.includes(nivel)) { showToast('Selecione seu nível.'); return; }
+    if (!consent || !consent.checked) { showToast('Confirme o consentimento para gerar a carteirinha.'); return; }
+    if (central && !atual.emailHash && !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) {
+      showToast('Para registrar na ASF, informe um e-mail válido.'); return;
     }
     const d = {
-      nome: nome,
-      nivel: nivel,
-      praia: praia,
-      apelido: elApe ? elApe.value.trim() : (atual.apelido || ''),
-      cidade: elCid ? elCid.value.trim() : (atual.cidade || ''),
-      insta: elIns ? elIns.value.trim() : (atual.insta || ''),
-      foto: atual.foto || null,
+      nome, nivel, praia: value('card-praia'), apelido: value('card-apelido'),
+      cidade: value('card-cidade'), insta: value('card-insta'), foto: atual.foto || null,
       numero: atual.numero || this.gerarNumero(),
       desde: atual.desde || new Date().toLocaleDateString('pt-BR'),
       lgpdConsent: atual.lgpdConsent || new Date().toISOString(),
     };
-    /* ── controle de 1 emissão por ano ─────────────────────────
-       a) já tem carteirinha VÁLIDA -> só atualiza dados, validade travada
-       b) expirada (ou faltando <=30 dias) -> RENOVAÇÃO: mesmo número, +1 ano
-       c) primeira emissão -> histórico não pode ter emissão < 1 ano  */
-    let msg = 'Carteirinha gerada! 🪪';
-
-    /* ── caminho servidor (Supabase): usa REST API direto na tabela 'associadas'
-        A RPC 'emitir_carteirinha' não existe; usa Upsert via REST com service_role key
-        ATENÇÃO: a anon key não pode fazer INSERT — apenas SELECT via RLS
-        Para upsert, usar POST com anon key (se RLS permitir) ou service_role key    ── */
-    if (this.supabaseOn) {
-      try {
-        const emailHash = atual.emailHash || await this.sha256(email);
-        
-        // Upsert via REST API — tabela associadas
-        const upsertData = [{
-          numero: atual.numero || this.gerarNumero(),
-          email_hash: emailHash,
-          nome: nome, apelido: d.apelido || '', nivel: nivel,
-          praia: praia, cidade: d.cidade, insta: d.insta,
-          validade: new Date(new Date().getFullYear() + 1, new Date().getMonth(), new Date().getDate()).toISOString().split('T')[0],
-        }];
-        
-        const r = await fetch(this.SUPABASE_URL + '/rest/v1/associadas?select=numero,validade', {
-          method: 'POST',
-          headers: {
-            'apikey': this.SUPABASE_ANON_KEY,
-            'Authorization': 'Bearer ' + this.SUPABASE_ANON_KEY,
-            'Content-Type': 'application/json',
-            'Prefer': 'resolution=merge-duplicates,merge-numero',
-          },
-          body: JSON.stringify(upsertData),
-        });
-        
-        const res = await r.json();
-        const result = Array.isArray(res) ? (res[0] || {}) : (res || {});
-        
-        d.emailHash = emailHash;
-        d.numero = result.numero || upsertData[0].numero;
-        d.validade = result.validade 
-          ? String(result.validade).split('-').reverse().join('/')
-          : String(upsertData[0].validade).split('-').reverse().join('/');
-        msg = result.numero ? 'Carteirinha registrada na rede ASF! 🪪' : 'Carteirinha salva localmente (Supabase não permitiu registro)';
-        this.registrarEmissao(d.numero);
-        this.save(d);
-        showToast(msg);
-        this.render('carteirinha-content');
-        if (typeof ASF_GAMIFICATION !== 'undefined') ASF_GAMIFICATION.checkAll();
-        return;
-      } catch (e) {
-        showToast('Sem conexão com o registro — salvando localmente 🌊');
-        /* cai no fluxo local abaixo */
+    if (atual.emailHash) d.emailHash = atual.emailHash;
+    if (atual.registrada) d.registrada = atual.registrada;
+    this._saving = true;
+    const btn = document.getElementById('card-submit');
+    if (btn) { btn.disabled = true; btn.textContent = 'Gerando…'; }
+    try {
+      if (central && this.supabaseOn) {
+        try {
+          const hash = atual.emailHash || await this.sha256(email);
+          const rows = await this.sbRpc('emitir_carteirinha', {
+            p_numero: d.numero, p_email_hash: hash, p_nome: d.nome,
+            p_apelido: d.apelido, p_nivel: d.nivel, p_praia: d.praia,
+            p_cidade: d.cidade, p_insta: d.insta,
+          });
+          const r = Array.isArray(rows) && rows[0];
+          if (!r || !r.numero || !r.validade || !['emitida','existente','renovada'].includes(r.status)) {
+            throw new Error('Resposta de emissão inválida');
+          }
+          d.numero = r.numero;
+          d.validade = String(r.validade).split('-').reverse().join('/');
+          d.emailHash = hash;
+          d.registrada = new Date().toISOString();
+          if (r.status !== 'existente') this.registrarEmissao(d.numero);
+          this.save(d);
+          this.render('carteirinha-content');
+          showToast(r.status === 'existente' ? 'Carteirinha recuperada/atualizada. Validade mantida.' : 'Carteirinha registrada na ASF!');
+          if (typeof ASF_GAMIFICATION !== 'undefined') ASF_GAMIFICATION.checkAll();
+          return;
+        } catch (e) {
+          // Falha de rede/servidor não pode ser tratada como registro confirmado.
+          showToast('Registro indisponível. Sua carteirinha será salva neste dispositivo; tente registrar depois.');
+        }
       }
-    }
-
-    if (atual.numero && atual.validade) {
-      const dias = this.diasParaExpirar(atual);
-      if (dias > 30) {
-        d.validade = atual.validade; /* trava: nada de estender a validade */
-        msg = 'Dados atualizados! Validade mantida até ' + d.validade + ' 💙';
-      } else {
-        /* renovacao soma 1 ano sobre a validade vigente (nao perde dias na antecipada) */
+      if (atual.numero && atual.validade && this.diasParaExpirar(atual) > 30) {
+        d.validade = atual.validade;
+      } else if (atual.numero && atual.validade) {
         const antiga = this.parseDataBR(atual.validade);
         const agora = new Date();
-        const base = antiga && antiga > agora ? antiga : agora;
-        const val = new Date(base.getTime()); val.setFullYear(val.getFullYear() + 1);
+        const val = new Date(antiga && antiga > agora ? antiga : agora);
+        val.setFullYear(val.getFullYear() + 1);
         d.validade = val.toLocaleDateString('pt-BR');
         this.registrarEmissao(d.numero);
-        msg = dias < 0
-          ? 'Carteirinha renovada! Nova validade: ' + d.validade + ' 🔄'
-          : 'Renovação antecipada feita! Válida até ' + d.validade + ' 🔄';
+        // Uma renovação offline ainda não foi confirmada pela ASF.
+        delete d.registrada;
+      } else {
+        const livre = this.proximaEmissaoLiberada();
+        if (livre) { showToast('Nova emissão neste dispositivo liberada em ' + livre.toLocaleDateString('pt-BR') + '.'); return; }
+        const val = new Date(); val.setFullYear(val.getFullYear() + 1);
+        d.validade = val.toLocaleDateString('pt-BR');
+        this.registrarEmissao(d.numero);
       }
-    } else {
-      const livre = this.proximaEmissaoLiberada();
-      if (livre) {
-        showToast('⚠️ Este dispositivo já emitiu uma carteirinha. Nova emissão liberada em ' +
-                  livre.toLocaleDateString('pt-BR') + '.');
-        return;
-      }
-      const val = new Date(); val.setFullYear(val.getFullYear() + 1);
-      d.validade = val.toLocaleDateString('pt-BR');
-      this.registrarEmissao(d.numero);
+      this.save(d);
+      this.render('carteirinha-content');
+      if (!central) showToast('Carteirinha salva neste dispositivo. Baixe seu PNG!');
+      if (typeof ASF_GAMIFICATION !== 'undefined') ASF_GAMIFICATION.checkAll();
+    } catch (e) {
+      showToast('Não foi possível salvar neste navegador. Verifique o armazenamento e tente novamente.', 'error');
+    } finally {
+      this._saving = false;
+      if (btn && btn.isConnected) { btn.disabled = false; btn.textContent = atual.numero ? 'Salvar carteirinha' : 'Gerar minha carteirinha'; }
     }
-    this.save(d);
-    this.registrar(d);
-    showToast(msg);
-    this.render('carteirinha-content');
-    if (typeof ASF_GAMIFICATION !== 'undefined') ASF_GAMIFICATION.checkAll();
   },
 
   uploadFoto(input) {
@@ -345,44 +262,27 @@ const ASF_CARD = {
   },
 
   renderForm(el, p) {
-      el.innerHTML =
-        '<div style="max-width:480px;margin:0 auto"><div class="card" style="margin-bottom:16px">' +
-        '<div style="text-align:center;padding:8px 0 16px">' +
-        '<span style="font-size:44px">🏄‍♀️</span>' +
-        '<p style="font-size:18px;font-weight:700;color:var(--secondary);margin:8px 0 4px">Crie sua Carteirinha ASF</p>' +
-        '<p style="font-size:13px;color:var(--gray-600);margin:0">Gratuita, digital e só sua. Em breve valendo benefícios em parceiros!</p></div>' +
-        this.passoAPassoHtml() +
-        '<label style="font-size:12px;font-weight:600;color:var(--gray-600)">Nome de surfista</label>' +
-        '<input id="card-nome" type="text" maxlength="40" placeholder="Ex.: Ana Mar" value="' + (p.nome || '') + '" style="width:100%;padding:12px;border-radius:10px;border:1.5px solid var(--gray-200);margin:4px 0 12px;font-family:inherit">' +
-        '<label style="font-size:12px;font-weight:600;color:var(--gray-600)">E-mail (identifica você — não é divulgado)</label>' +
-        '<input id="card-email" type="email" maxlength="80" placeholder="Ex.: ana@email.com" value="" style="width:100%;padding:12px;border-radius:10px;border:1.5px solid var(--gray-200);margin:4px 0 12px;font-family:inherit">' +
-        '<label style="font-size:12px;font-weight:600;color:var(--gray-600)">Nível</label>' +
-        '<select id="card-nivel" style="width:100%;padding:12px;border-radius:10px;border:1.5px solid var(--gray-200);margin:4px 0 12px;font-family:inherit">' +
-        this.niveis.map(n => '<option' + (p.nivel === n ? ' selected' : '') + '>' + n + '</option>').join('') +
-        '</select>' +
-        '<label style="font-size:12px;font-weight:600;color:var(--gray-600)">Praia do coração (opcional)</label>' +
-        '<input id="card-praia" type="text" maxlength="40" placeholder="Ex.: Maresias" value="' + (p.praia || '') + '" style="width:100%;padding:12px;border-radius:10px;border:1.5px solid var(--gray-200);margin:4px 0 16px;font-family:inherit">' +
-        '<label style="font-size:12px;font-weight:600;color:var(--gray-600)">Nome/apelido público (opcional)</label>' +
-        '<input id="card-apelido" type="text" maxlength="30" placeholder="Como você aparece para as manas" value="' + (p.apelido || '') + '" style="width:100%;padding:12px;border-radius:10px;border:1.5px solid var(--gray-200);margin:4px 0 12px;font-family:inherit">' +
-        '<label style="font-size:12px;font-weight:600;color:var(--gray-600)">Cidade (opcional)</label>' +
-        '<input id="card-cidade" type="text" maxlength="40" placeholder="Ex.: São Sebastião/SP" value="' + (p.cidade || '') + '" style="width:100%;padding:12px;border-radius:10px;border:1.5px solid var(--gray-200);margin:4px 0 12px;font-family:inherit">' +
-        '<label style="font-size:12px;font-weight:600;color:var(--gray-600)">Instagram (opcional)</label>' +
-        '<input id="card-insta" type="text" maxlength="30" placeholder="@seuperfil" value="' + (p.insta || '') + '" style="width:100%;padding:12px;border-radius:10px;border:1.5px solid var(--gray-200);margin:4px 0 16px;font-family:inherit">' +
-        '<label style="display:flex;gap:8px;align-items:flex-start;font-size:12px;color:var(--gray-600);margin:0 0 14px;line-height:1.5">' +
-        '<input id="card-lgpd" type="checkbox" style="margin-top:2px;flex:none">' +
-        '<span>Autorizo o armazenamento <strong>apenas neste dispositivo</strong> dos dados acima (nome, nível, praia e foto) para gerar minha carteirinha digital, conforme a <a href="privacidade.html" target="_blank" rel="noopener" style="color:var(--primary);font-weight:600">Política de Privacidade</a> (LGPD — Lei 13.709/2018). Posso apagar tudo a qualquer momento em "Editar dados".</span></label>' +
-        '<label style="display:flex;gap:8px;align-items:flex-start;font-size:12px;color:var(--gray-600);margin:0 0 14px;line-height:1.5">' +
-        '<input id="card-registrar" type="checkbox" style="margin-top:2px;flex:none">' +
-        '<span>Quero constar no <strong>registro de associadas ASF</strong> (opcional): meu nome de surfista, nível, praia e número da carteirinha entram no controle da rede. Posso sair a qualquer momento em "Editar dados".</span></label>' +
-        '<button onclick="ASF_CARD.salvar()" class="btn btn-primary" style="width:100%">' +
-        (p.numero
-          ? (this.expirada(p) || this.diasParaExpirar(p) <= 30 ? '🔄 Renovar carteirinha (mesmo número)' : '💾 Salvar dados (validade mantida)')
-          : '🪪 Gerar minha carteirinha') + '</button>' +
-        (p.numero ? '<button onclick="ASF_CARD.init()" class="btn btn-secondary" style="width:100%;margin-top:8px">← Voltar à carteirinha</button>' : '') +
-        '</div>' + this.parceriasHtml() + '</div>';
+    const field = (id, label, max, val) => '<label for="'+id+'">'+label+'</label><input id="'+id+'" maxlength="'+max+'" value="'+this.escape(val)+'">';
+    el.innerHTML = '<div style="max-width:480px;margin:0 auto"><div class="card">' +
+      '<h2>'+(p.numero ? 'Editar sua carteirinha' : 'Crie sua Carteirinha ASF')+'</h2>' +
+      '<p>Preencha, gere e baixe sua carteirinha. Foto opcional após a emissão.</p>' +
+      field('card-nome','Nome de surfista *',40,p.nome) +
+      '<label for="card-nivel">Nível *</label><select id="card-nivel">'+this.niveis.map(n => '<option'+(p.nivel===n ? ' selected' : '')+'>'+n+'</option>').join('')+'</select>' +
+      field('card-praia','Praia do coração (opcional)',40,p.praia) +
+      '<details><summary>Mais dados (opcional)</summary>' +
+      field('card-apelido','Apelido',30,p.apelido) + field('card-cidade','Cidade',40,p.cidade) + field('card-insta','Instagram',30,p.insta) + '</details>' +
+      '<label class="card-consent"><input id="card-lgpd" type="checkbox"'+(p.lgpdConsent ? ' checked' : '')+'><span>Autorizo salvar minha carteirinha neste dispositivo. A foto fica neste navegador. <a href="privacidade.html" target="_blank" rel="noopener">Política de Privacidade</a>.</span></label>' +
+      '<label class="card-consent"><input id="card-registrar" type="checkbox"'+(p.registrada ? ' checked' : '')+'><span>Também autorizo o registro dos dados preenchidos, número e validade no controle interno ASF, para validar o QR na rede. Não será publicada uma lista de associadas. Opcional; desmarcar não exclui registros anteriores. Para exclusão, contate a ASF.</span></label>' +
+      '<label for="card-email">E-mail (necessário apenas para registrar na ASF)</label><input id="card-email" type="email" maxlength="80" autocomplete="email" placeholder="seu@email.com">' +
+      '<p style="font-size:12px">O registro usa um hash do e-mail, não o e-mail em texto. O QR confirma somente nível, validade e situação, sem nome ou contatos.</p>' +
+      '<button id="card-submit" onclick="ASF_CARD.salvar()" class="btn btn-primary">'+(p.numero ? 'Salvar carteirinha' : 'Gerar minha carteirinha')+'</button>' +
+      (p.numero ? '<button onclick="ASF_CARD.init()" class="btn btn-secondary">Voltar à carteirinha</button>' : '') + '</div></div>';
   },
 
   renderCard(el, d) {
+    d = Object.assign({}, d);
+    ['nome','nivel','praia','cidade','numero','desde','validade'].forEach(k => d[k] = this.escape(d[k]));
+    if (d.foto && !/^data:image\/(jpeg|png|webp);base64,/.test(d.foto)) d.foto = null;
     el.innerHTML =
       '<div style="max-width:480px;margin:0 auto">' +
       '<div id="asf-card-visual" style="background:linear-gradient(135deg,var(--secondary) 0%,var(--primary-dark) 60%,var(--primary) 100%);border-radius:24px;padding:22px;color:white;box-shadow:var(--shadow-lg);margin-bottom:12px;position:relative;overflow:hidden">' +
@@ -410,7 +310,7 @@ const ASF_CARD = {
       '<button onclick="ASF_CARD.editar()" class="btn btn-secondary" style="flex:1;font-size:13px">✏️ Editar</button>' +
       '<input id="card-foto-input" type="file" accept="image/*" style="display:none" onchange="ASF_CARD.uploadFoto(this)">' +
       '</div>' +
-      this.parceriasHtml() +
+      '<p style="font-size:12px;text-align:center">' + (d.registrada ? 'Registro ASF confirmado. O QR não mostra nome ou contatos.' : 'Salva neste dispositivo. Para validar o QR na rede, use Editar e autorize o registro ASF.') + '</p>' +
       '</div>';
   },
 
@@ -483,13 +383,14 @@ const ASF_CARD = {
     };
     const foto = d.foto ? new Image() : null;
     const qr = new Image(); qr.crossOrigin = 'anonymous';
-    let loaded = 0;
-    const total = (foto ? 1 : 0) + 1;
-    const done = () => { if (++loaded === total) draw(foto, qr); };
-    if (foto) { foto.onload = done; foto.src = d.foto; }
-    qr.onload = done;
-    qr.onerror = () => draw(foto, null);
+    let photo = null, qrImage = null, remaining = foto ? 2 : 1, finished = false;
+    const finish = () => { if (!finished && --remaining === 0) { finished = true; draw(photo, qrImage); } };
+    if (foto) { foto.onload = () => { photo = foto; finish(); }; foto.onerror = finish; foto.src = d.foto; }
+    qr.onload = () => { qrImage = qr; finish(); };
+    qr.onerror = finish;
     qr.src = this.qrUrl(d.numero);
+    // PNG continua disponível se o provedor de QR não responder.
+    setTimeout(() => { if (!finished) { finished = true; draw(photo, qrImage); } }, 7000);
   },
 
   init() { this.render('carteirinha-content'); }
@@ -521,7 +422,7 @@ if (!window.beaches) {
     bertioga: { name: 'Bertioga', lat: -23.85, lon: -46.14 },
     santos:   { name: 'Santos',   lat: -23.96, lon: -46.33 },
     guaruja:  { name: 'Guarujá',  lat: -23.99, lon: -46.25 },
-    ubatuba:  { name: 'Ubatuba',  lat: -23.43, lon: -45.08 },
+    ubatuba:  { name: 'Ubatuba', lat: -23.43, lon: -45.08 },
     ilhabela: { name: 'Ilhabela', lat: -23.78, lon: -45.36 },
     maresias: { name: 'Maresias', lat: -23.79, lon: -45.36 },
     baleia:   { name: 'Praia da Baleia', lat: -23.82, lon: -45.45 },
@@ -538,7 +439,7 @@ if (!window.LEVELS) {
     { level: 2, name: 'Maré Leve',    minPoints: 100 },
     { level: 3, name: 'Onda Boa',     minPoints: 300 },
     { level: 4, name: 'Surfista',     minPoints: 500 },
-    { level: 5, name: 'Onda Grande',  minPoints: 800 },
+    { level: 5, name: 'Tubulosa',     minPoints: 800 },
     { level: 6, name: 'Maresia',      minPoints: 1200 },
     { level: 7, name: 'Tubulosa',     minPoints: 1700 },
     { level: 8, name: 'Lenda do Mar', minPoints: 2300 }
@@ -551,4 +452,11 @@ if (document.readyState === 'loading') {
   document.addEventListener('DOMContentLoaded', function () { ASF_CARD.init(); });
 } else {
   ASF_CARD.init();
+}
+
+/* Estilos do formulário em qualquer entrada do app. */
+if (!document.getElementById('asf-card-form-style')) {
+  const style = document.createElement('style'); style.id = 'asf-card-form-style';
+  style.textContent = '#carteirinha-content label:not(.card-consent){display:block;margin:12px 0 5px;font-size:13px;font-weight:600}#carteirinha-content input:not([type=checkbox]):not([type=file]),#carteirinha-content select{width:100%;box-sizing:border-box;padding:12px;border:1px solid #ccd6df;border-radius:10px;background:white;color:#0e2439;font:inherit}#carteirinha-content .card-consent{display:flex;gap:10px;margin:16px 0;font-size:13px;line-height:1.5}#carteirinha-content .card-consent input{flex:none;width:18px;height:18px;margin-top:3px}#carteirinha-content details{margin:16px 0}#carteirinha-content .btn{margin-top:8px}';
+  document.head.appendChild(style);
 }

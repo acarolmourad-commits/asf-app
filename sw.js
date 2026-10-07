@@ -1,4 +1,4 @@
-const CACHE = "asf-v8";
+const CACHE = "asf-v9-card-privacy";
 const OFFLINE_PAGES = [
   "./index.html",
   "./praias/",
@@ -19,7 +19,9 @@ const OFFLINE_PAGES = [
   "./asf-mural.js",
   "./asf-bottomnav.js",
   "./carteirinhas.html",
+  "./emitir.html",
   "./carteirinha.js",
+  "./carteirinha.js?v=20261007-privacy",
   "./fallback.html",
 ];
 self.addEventListener("install", e =>
