@@ -1,15 +1,66 @@
 {
-  "entries": [
-    {
-      "timestamp": "2026-10-06 23:03:34 UTC",
-      "supabase_count": 0,
-      "sheets_count": 0,
-      "supabase_to_sheets": {
-        "action": "supabase_to_sheets",
-        "status": "skipped",
-        "reason": "GOOGLE_SCRIPT_URL not configured"
-      }
-    }
+  "date": "2026-10-06",
+  "supabase_status": {
+    "table_associadas": "EXISTS (RLS blocks anon SELECT)",
+    "table_carteirinhas": "NOT FOUND",
+    "rpc_emitir_carteirinha": "NOT FOUND (404) - replaced with REST API",
+    "rpc_listar_carteirinhas": "NOT FOUND (404) - replaced with REST API",
+    "columns_verified": [
+      "numero",
+      "nome",
+      "apelido",
+      "nivel",
+      "praia",
+      "cidade",
+      "insta",
+      "validade",
+      "email_hash",
+      "id"
+    ],
+    "anon_select": "BLOQUEADO (401 - precisa GRANT SELECT TO anon)",
+    "anon_insert": "BLOQUEADO (403 - precisa CREATE POLICY)"
+  },
+  "registration_flow": {
+    "step_1": "User fills form (nome, email, nivel, praia, insta)",
+    "step_2": "carteirinha.js generates numero (ASF-XXXXXXXXXX)",
+    "step_3": "Saves to localStorage (always works)",
+    "step_4": "If Supabase active: SHA-256(email) → email_hash → POST /rest/v1/associadas (upsert)",
+    "step_5": "If opt-in: sendBeacon POST /rest/v1/associadas",
+    "fallback": "If Supabase fails (401): save local + toast 'Sem conexão'"
+  },
+  "panel_flow": {
+    "step_1": "GET /rest/v1/associadas?select=numero,nome,apelido,nivel,praia,cidade,insta,validade",
+    "fallback_1": "Apps Script doGet (if Supabase 401/RLS)",
+    "fallback_2": "Error message with GRANT SELECT instructions"
+  },
+  "files_modified": [
+    "carteirinha.js",
+    "carteirinhas.html",
+    "cron/supabase-sheets-sync.py",
+    ".env.sync-template",
+    "docs/carteirinhas-sync.md",
+    "cron/monitor-loop-v2.sh"
   ],
-  "last_sync": "2026-10-06 23:03:34 UTC"
+  "pending_actions": [
+    {
+      "action": "GRANT SELECT ON TABLE public.associadas TO anon",
+      "owner": "Supabase Admin",
+      "priority": "high"
+    },
+    {
+      "action": "CREATE POLICY para INSERT na tabela associadas",
+      "owner": "Supabase Admin",
+      "priority": "high"
+    },
+    {
+      "action": "Configurar .env.sync (service_role key)",
+      "owner": "Carol",
+      "priority": "medium"
+    },
+    {
+      "action": "Publicar ASF_Carteirinhas_Registry.gs no Apps Script",
+      "owner": "Carol",
+      "priority": "medium"
+    }
+  ]
 }
