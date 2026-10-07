@@ -3,231 +3,238 @@
 <head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="robots" content="noindex,nofollow">
-<meta name="description" content="Emita sua carteirinha digital da Associação Surf Feminino e faça seu cadastro oficial. Gratuita, com número único e QR de verificação.">
-<title>Carteirinha Digital — ASF | Associação Surf Feminino</title>
+<meta property="og:title" content="Emitir Carteirinha Digital — ASF | Associação Surf Feminino">
+  <meta property="og:description" content="Emita sua carteirinha digital da Associação Surf Feminino. Aproveite os benefícios da comunidade e surf feminino no Brasil.">
+  <meta property="og:image" content="https://asf.surf/assets/images/asf-og-image.jpg">
+  <meta property="og:url" content="https://asf.surf/carteirinhas">
+  <meta property="og:type" content="website">
+  <link rel="canonical" href="https://asf.surf/carteirinhas">
+  <meta name="description" content="Emita sua carteirinha digital da Associação Surf Feminino. Aproveite os benefícios da comunidade e surf feminino no Brasil.">
+  <title>Emitir Carteirinha Digital — ASF | Associação Surf Feminino</title>
 <style>
-:root{--asf-primary:#00A8CC;--asf-primary-dark:#007C99;--asf-primary-soft:#E6F7FB;--asf-ink:#0E2439;--asf-muted:#5E7180;--asf-surface:#FFFFFF;--asf-line:#DCECF1;--asf-radius:18px;--asf-shadow:0 12px 32px rgba(14,36,57,.10)}
+:root{
+  --p:#00a8cc; --pd:#0e2439; --pd2:#123049;
+  --grad:linear-gradient(135deg,#0e2439 0%,#123f5e 55%,#00a8cc 100%);
+  --bg:#f2f7fa; --ink:#0e2439; --mut:#5b7283;
+  --card:#ffffff; --line:#e4edf3;
+  --sh:0 10px 34px rgba(14,36,57,.10);
+  --sh-sm:0 2px 10px rgba(14,36,57,.07);
+}
 *{box-sizing:border-box;margin:0}
-body{font-family:system-ui,sans-serif;color:var(--asf-ink)}
+body{font-family:system-ui,-apple-system,"Segoe UI",sans-serif;background:var(--bg);color:var(--ink);line-height:1.5;-webkit-font-smoothing:antialiased}
 
-/* hero */
-.hero{max-width:860px;margin:56px auto 0;padding:52px 28px;text-align:center;border-radius:28px;background:linear-gradient(135deg,#0E2439 0%,#0d5b73 55%,#00A8CC 100%);color:#fff;position:relative;overflow:hidden}
-.hero::after{content:"";position:absolute;right:-80px;top:-80px;width:280px;height:280px;border-radius:50%;background:rgba(255,255,255,.08)}
-.hero::before{content:"";position:absolute;left:-60px;bottom:-90px;width:220px;height:220px;border-radius:50%;background:rgba(0,168,204,.25)}
-.hero h1{font-size:clamp(24px,4vw,34px);letter-spacing:-.02em;position:relative;z-index:1}
-.hero p{opacity:.88;font-size:15px;margin-top:10px;position:relative;z-index:1}
-.hero .badge{display:inline-block;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.25);padding:6px 14px;border-radius:999px;font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;margin-bottom:16px;position:relative;z-index:1}
+/* ── HERO ────────────────────────── */
+header{
+  position:relative;overflow:hidden;
+  padding:56px 20px 88px;text-align:center;
+  background:var(--grad);color:#fff;
+}
+header::after{
+  content:"";position:absolute;inset:auto -10% -70% -10%;height:200%;
+  background:radial-gradient(ellipse at 50% 100%,rgba(0,168,204,.35),transparent 60%);
+  pointer-events:none;
+}
+header .badge{
+  display:inline-block;font-size:11px;font-weight:800;letter-spacing:.14em;
+  text-transform:uppercase;background:rgba(255,255,255,.14);
+  border:1px solid rgba(255,255,255,.25);border-radius:999px;
+  padding:6px 14px;margin-bottom:16px;backdrop-filter:blur(4px);
+}
+header h1{font-size:clamp(24px,4.5vw,36px);font-weight:800;letter-spacing:-.01em}
+header p{opacity:.85;font-size:14px;margin-top:10px;max-width:520px;margin-inline:auto}
 
-main{max-width:860px;margin:28px auto;padding:0 16px 40px}
+/* ── CONTEÚDO ─────────────────────── */
+main{max-width:920px;margin:-52px auto 40px;padding:0 16px;position:relative;z-index:1}
+.card{
+  background:var(--card);border:1px solid var(--line);border-radius:20px;
+  padding:26px;box-shadow:var(--sh);margin-bottom:18px;
+}
+.card h2{font-size:17px;font-weight:800;margin-bottom:4px;display:flex;align-items:center;gap:8px}
+.card .sub{font-size:13px;color:var(--mut);margin-bottom:16px}
 
-/* stepper */
-.stepper{display:flex;align-items:center;gap:10px;margin:0 6px 18px}
-.stepper .sp{display:flex;align-items:center;gap:10px;font-size:13px;font-weight:700;color:var(--asf-muted)}
-.stepper .sp .n{width:30px;height:30px;border-radius:50%;display:grid;place-items:center;background:#fff;border:2px solid var(--asf-line);color:var(--asf-muted);font-size:14px;flex:none}
-.stepper .sp.active{color:var(--asf-primary-dark)}
-.stepper .sp.active .n{background:var(--asf-primary);border-color:var(--asf-primary);color:#fff;box-shadow:0 4px 12px rgba(0,168,204,.4)}
-.stepper .line{flex:1;height:2px;background:var(--asf-line);border-radius:2px}
+/* alerta de configuração */
+.warn{
+  background:linear-gradient(135deg,#fff8e6,#fff2d6);
+  border:1px solid #f2d488;border-left:4px solid #eab308;
+  border-radius:14px;padding:14px 16px;font-size:13px;color:#6b5310;margin-bottom:18px;
+}
+code{background:#eef3f7;border:1px solid var(--line);padding:2px 7px;border-radius:7px;font-size:.92em}
 
-.card{background:rgba(255,255,255,.92);border:1px solid rgba(220,236,241,.9);border-radius:var(--asf-radius);padding:26px 24px;box-shadow:0 4px 18px rgba(14,36,57,.06);margin-bottom:20px}
-.card .card-head{display:flex;align-items:center;gap:12px;margin-bottom:6px}
-.card .card-head .ico{width:40px;height:40px;flex:none;border-radius:12px;display:grid;place-items:center;font-size:19px;background:var(--asf-primary-soft)}
-.card .card-head h2{font-size:18px;letter-spacing:-.01em}
-.card .card-head p{font-size:13px;color:var(--asf-muted);margin-top:2px}
+/* formulário */
+label{font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--mut);display:block;margin:14px 0 6px}
+input{
+  width:100%;padding:12px 14px;font-size:14px;color:var(--ink);
+  background:#fbfdfe;border:1.5px solid var(--line);border-radius:12px;
+  transition:border-color .15s, box-shadow .15s;
+}
+input:focus{outline:none;border-color:var(--p);box-shadow:0 0 0 3px rgba(0,168,204,.15)}
+button{
+  margin-top:20px;width:100%;padding:14px 20px;font-size:15px;font-weight:800;
+  color:#fff;background:var(--grad);border:none;border-radius:14px;cursor:pointer;
+  box-shadow:0 6px 18px rgba(0,168,204,.35);transition:transform .12s, box-shadow .12s;
+}
+button:hover{transform:translateY(-1px);box-shadow:0 10px 24px rgba(0,168,204,.45)}
+button:active{transform:translateY(0)}
 
-label{font-size:12px;font-weight:700;display:block;margin-top:14px;color:var(--asf-ink)}
-label .hint{font-weight:400;color:var(--asf-muted)}
-input,select{padding:12px 14px;border:1.5px solid var(--asf-line);border-radius:12px;font-size:15px;width:100%;margin:5px 0 2px;background:#fff;transition:border-color .15s ease,box-shadow .15s ease}
-input:focus,select:focus{border-color:var(--asf-primary);box-shadow:0 0 0 3px rgba(0,168,204,.15);outline:none}
-button{display:inline-flex;align-items:center;justify-content:center;gap:8px;background:var(--asf-primary);color:#fff;border:none;padding:13px 26px;border-radius:999px;font-weight:700;cursor:pointer;font-size:15px;box-shadow:0 6px 16px rgba(0,168,204,.32)}
-button.sec{background:#fff;color:var(--asf-primary-dark);border:1.5px solid var(--asf-line);box-shadow:none}
-button:disabled{opacity:.6;cursor:wait}
-.row2{display:grid;grid-template-columns:1fr 1fr;gap:0 14px}
-@media(max-width:560px){.row2{grid-template-columns:1fr}.hero{margin:44px 10px 0;padding:38px 20px}}
-.ok{background:#ECFBEF;border:1.5px solid #B9EBC4;border-radius:14px;padding:18px;font-size:14px}
-code{background:var(--asf-primary-soft);color:var(--asf-primary-dark);padding:2px 8px;border-radius:8px;font-weight:700}
-.num{font-family:ui-monospace,monospace;font-size:19px;font-weight:800;letter-spacing:1px;color:var(--asf-primary-dark)}
-.lgpd{font-size:12px;color:var(--asf-muted);margin-top:14px}
-footer{text-align:center;padding:28px;font-size:13px;color:var(--asf-muted)}
-footer a{color:var(--asf-primary-dark);font-weight:700;text-decoration:none}
-#asf-toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:#0E2439;color:#fff;padding:12px 18px;border-radius:12px;font-size:14px;z-index:9999;display:none;max-width:90vw;box-shadow:0 4px 16px rgba(0,0,0,.25)}
+/* resumo / contador */
+#resumo{display:flex;align-items:center;gap:18px;padding:22px 26px}
+.total{
+  font-size:44px;font-weight:800;line-height:1;
+  background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;
+}
+#resumo .lbl{font-size:13px;color:var(--mut)}
+#resumo .lbl b{display:block;font-size:15px;color:var(--ink)}
+#att{display:inline-block;margin-top:4px;font-size:11px;color:#7b94a5}
+
+/* tabela */
+#lista-card{padding:0;overflow:hidden}
+#lista-card .head{padding:18px 24px;border-bottom:1px solid var(--line);font-weight:800;font-size:15px}
+.tbl-wrap{overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-size:13px;min-width:680px}
+th,td{padding:12px 14px;border-bottom:1px solid var(--line);text-align:left;white-space:nowrap}
+th{
+  position:sticky;top:0;background:#f7fafc;color:var(--p);
+  font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.1em;
+}
+tbody tr:nth-child(even){background:#fbfdfe}
+tbody tr:hover{background:#eef7fa}
+td b{color:var(--pd)}
+td code{background:#e8f4f9;border-color:#d3e9f2;color:#0b6e8a;font-weight:700}
+
+/* footer */
+footer{text-align:center;padding:28px 16px;font-size:12px;color:#7b94a5}
+footer a{
+  display:inline-flex;align-items:center;gap:6px;color:var(--p);font-weight:800;
+  text-decoration:none;border:1.5px solid var(--line);background:#fff;
+  padding:10px 20px;border-radius:999px;box-shadow:var(--sh-sm);transition:border-color .15s;
+}
+footer a:hover{border-color:var(--p)}
+
+@media(max-width:560px){
+  header{padding:44px 16px 76px}
+  main{margin-top:-46px}
+  .card{padding:20px}
+  #resumo{padding:18px 20px}
+  .total{font-size:36px}
+}
 </style>
-    <link rel="stylesheet" href="/asf-site-redesign.css">
+    <link rel="stylesheet" href="/asf-app/asf-site-redesign.css">
 </head>
 <body>
-<a class="asf-back-pill" href="https://asf.surf/">← Voltar ao app ASF</a>
-
-<header class="hero">
-  <span class="badge">Associação Surf Feminino</span>
-  <h1>🪪 Carteirinha Digital</h1>
-  <p>Emita sua carteirinha gratuita e faça seu cadastro oficial — leva menos de 2 minutos.</p>
+<header>
+  <span class="badge">Painel interno</span>
+  <h1>🪪 Controle de Carteirinhas ASF</h1>
+  <p>Quem criou carteirinha no app — registro opt-in das associadas</p>
 </header>
-
 <main>
 
-<div class="stepper">
-  <div class="sp active"><span class="n">1</span> Emitir carteirinha</div>
-  <div class="line"></div>
-  <div class="sp"><span class="n">2</span> Cadastro oficial</div>
+<div class="card" id="setup">
+  <h2>⚙️ Configuração</h2>
+  <p class="sub">Defina uma única vez — fica salvo neste navegador.</p>
+<p class="warn">⚠️ <strong>Configuração necessária (1×):</strong> publique o Apps Script de <code>docs/ASF_Carteirinhas_Registry.gs</code> no Google Sheets, troque o <code>TOKEN</code> por um segredo e cole a <em>Deployment URL</em> abaixo e em <code>ASF_CARD.REGISTRY_URL</code> no <code>carteirinha.js</code>.</p>
+<label for="url">Deployment URL do Apps Script</label>
+<input id="url" placeholder="https://script.google.com/macros/s/.../exec">
+<label for="token">Token do painel</label>
+<input id="token" type="password" placeholder="segredo definido no .gs">
+<button onclick="carregar()">Carregar registros</button>
 </div>
 
-<!-- ▓▓▓ 1) CONFECÇÃO DA CARTEIRINHA ▓▓▓ -->
-<div class="card">
-  <div class="card-head">
-    <div class="ico">🪪</div>
-    <div><h2>Emita sua carteirinha</h2>
-    <p>Número único <code>ASF-XXXXXXXXXX</code> com QR de verificação, válido por 1 ano.</p></div>
-  </div>
-  <div id="carteirinha-content"></div>
+<div class="card" id="resumo" style="display:none">
+  <span class="total" id="total">0</span>
+  <div class="lbl"><b>carteirinhas registradas</b>na base oficial ASF <span id="att"></span></div>
 </div>
 
-<!-- ▓▓▓ 2) CADASTRO OFICIAL (controle interno) ▓▓▓ -->
-<div class="card" id="form-card">
-  <div class="card-head">
-    <div class="ico">📋</div>
-    <div><h2>Cadastro da minha carteirinha</h2>
-    <p>Seus dados <b>não são publicados</b> — ficam visíveis apenas para a nossa organização.</p></div>
+<div class="card" id="lista-card" style="display:none">
+  <div class="head">📋 Associadas com carteirinha</div>
+  <div class="tbl-wrap">
+<table><thead><tr><th>Data</th><th>Nº</th><th>Nome</th><th>Nível</th><th>Praia</th><th>Cidade</th><th>Instagram</th></tr></thead><tbody id="lista"></tbody></table>
   </div>
-  <p style="font-size:13px;color:var(--asf-muted)">O <b>número do cadastro</b> é o mesmo impresso na carteirinha e é validado no registro oficial antes de gravar.</p>
-
-  <label for="numero">Número do cadastro *</label>
-  <input id="numero" class="num" placeholder="ASF-XXXXXXXXXX" autocomplete="off" style="text-transform:uppercase">
-
-  <label for="nome">Nome completo *</label>
-  <input id="nome" placeholder="Seu nome completo" autocomplete="name">
-
-  <label for="email">E-mail * <span class="hint">(o mesmo usado na emissão da carteirinha)</span></label>
-  <input id="email" type="email" placeholder="seu@email.com" autocomplete="email">
-
-  <div class="row2">
-    <div>
-      <label for="apelido">Apelido</label>
-      <input id="apelido" placeholder="Como te chamam no pico">
-    </div>
-    <div>
-      <label for="nivel">Nível de surf *</label>
-      <select id="nivel">
-        <option value="">Selecione…</option>
-        <option>Iniciante</option>
-        <option>Intermediária</option>
-        <option>Avançada</option>
-        <option>Profissional</option>
-      </select>
-    </div>
-  </div>
-
-  <div class="row2">
-    <div>
-      <label for="praia">Praia habitual</label>
-      <input id="praia" placeholder="Ex.: Praia do Rosa">
-    </div>
-    <div>
-      <label for="cidade">Cidade/UF</label>
-      <input id="cidade" placeholder="Ex.: Florianópolis/SC">
-    </div>
-  </div>
-
-  <label for="insta">Instagram</label>
-  <input id="insta" placeholder="@seu.perfil" autocomplete="off">
-
-  <label style="display:flex;gap:10px;align-items:flex-start;font-weight:400;font-size:12.5px;margin-top:16px;color:var(--asf-muted)">
-    <input type="checkbox" id="consent" style="width:auto;margin:2px 0 0">
-    <span>Autorizo a ASF a armazenar estes dados no controle interno de associadas (LGPD — uso exclusivo da associação; nenhum dado, nome ou número é exibido publicamente no site). *</span>
-  </label>
-
-  <div style="margin-top:20px">
-    <button id="btn-enviar" onclick="enviar()">Enviar cadastro</button>
-  </div>
-  <p class="lgpd">* Campos obrigatórios: número do cadastro, nome, e-mail, nível e consentimento.</p>
 </div>
 
-<div class="card" id="ok-card" style="display:none">
-  <div class="ok">✅ <b>Cadastro recebido!</b><br>
-  Número do cadastro: <span class="num" id="ok-numero"></span><br>
-  <span style="font-size:12px;color:var(--asf-muted)">Guarde este número — ele é a sua identificação única na ASF, o mesmo da carteirinha digital.</span></div>
-  <div style="margin-top:14px"><button class="sec" onclick="location.reload()">Novo cadastro</button></div>
-</div>
 </main>
-<footer><a href="https://asf.surf/">🏄‍♀️ Voltar ao app ASF</a></footer>
-
-<div id="asf-toast"></div>
+<footer><a href="https://acarolmourad-commits.github.io/asf-app/">🏄‍♀️ Voltar ao app ASF</a></footer>
 <script>
-/* toast mínimo usado pelo carteirinha.js */
-function showToast(msg){var t=document.getElementById('asf-toast');t.textContent=msg;t.style.display='block';clearTimeout(t._h);t._h=setTimeout(function(){t.style.display='none'},3000);}
-</script>
-<script defer src="/carteirinha.js"></script>
-<script>
-/* Passo 2 grava direto no Supabase (tabela cadastros, INSERT publico sem LEITURA).
-   REGISTRY_URL Apps Script descontinuada. */
-var SB_URL='https://qktabrzbgdfndklytwub.supabase.co';
-var SB_KEY='sb_publishable_qIvPxh6DavCPtntfflaRLw_QI_pZJih'; /* publishable — pública por design, só RPCs e INSERT são públicos */
+// Carregar carteirinha.js dinamicamente (para ter acesso a ASF_CARD config)
+var script = document.createElement('script');
+script.src = '/asf-app/carteirinha.js';
+script.defer = true;
+document.head.appendChild(script);
 
-/* pré-preenche o cadastro com os dados da carteirinha emitida (?numero= ou localStorage do app) */
-(function(){
-  var q=new URLSearchParams(location.search).get('numero');
-  if(q){document.getElementById('numero').value=q.toUpperCase();}
-  try{
-    var d=JSON.parse(localStorage.getItem('asf-card-v2')||'null');
-    if(d){
-      if(!q&&d.numero)document.getElementById('numero').value=d.numero;
-      if(d.nome)document.getElementById('nome').value=d.nome;
-      if(d.apelido)document.getElementById('apelido').value=d.apelido;
-      if(d.nivel)document.getElementById('nivel').value=d.nivel;
-      if(d.praia)document.getElementById('praia').value=d.praia;
-      if(d.cidade)document.getElementById('cidade').value=d.cidade;
-      if(d.insta)document.getElementById('insta').value=d.insta;
+var S='https://script.google.com/';
+document.getElementById('url').value=localStorage.getItem('asf-reg-url')||'';
+document.getElementById('token').value=localStorage.getItem('asf-reg-token')||'';
+
+// Supabase como fallback quando REGISTRY_URL não configurado
+var SUPABASE_URL = 'https://qktabrzbgdfndklytwub.supabase.co';
+var SUPABASE_ANON_KEY = 'sb_publishable_qIvPxh6DavCPtntfflaRLw_QI_pZJih';
+var USE_SUPABASE = true;
+
+function carregar(){
+  var url = document.getElementById('url').value.trim();
+  var tok = document.getElementById('token').value.trim();
+  var S = 'https://script.google.com/';
+
+  if (url) { localStorage.setItem('asf-reg-url', url); }
+  if (tok) { localStorage.setItem('asf-reg-token', tok); }
+
+  // Supabase REST API — fonte primária
+  // Tabela: associadas — colunas: numero, nome, apelido, nivel, praia, cidade, insta, validade
+  fetch(SUPABASE_URL + '/rest/v1/associadas?select=numero,nome,apelido,nivel,praia,cidade,insta,validade&order=validade.desc', {
+    method: 'GET',
+    headers: {
+      'apikey': SUPABASE_ANON_KEY,
+      'Authorization': 'Bearer ' + SUPABASE_ANON_KEY,
+      'Accept': 'application/json',
+      'Prefer': 'return=representation'
     }
-  }catch(e){}
-})();
-
-function verificarNumero(numero){
-  return fetch(SB_URL+'/rest/v1/rpc/verificar_carteirinha',{
-    method:'POST',
-    headers:{'apikey':SB_KEY,'Authorization':'Bearer '+SB_KEY,'Content-Type':'application/json'},
-    body:JSON.stringify({p_numero:numero})
-  }).then(function(r){return r.json()}).then(function(rows){
-    var c=rows&&rows[0];
-    if(!c) return {ok:false,msg:'Número não encontrado no registro oficial ASF. Emita sua carteirinha no Passo 1 acima.'};
-    if(!c.ativo) return {ok:false,msg:'Esta carteirinha está inativa. Renove no app ASF.'};
-    if(!c.valida) return {ok:false,msg:'Carteirinha expirada em '+String(c.validade).split('-').reverse().join('/')+'. Renove antes de cadastrar.'};
-    return {ok:true};
-  }).catch(function(){return {ok:true};}); /* se a verificação falhar (offline), não bloqueie */
-}
-
-function enviar(){
-  var numero=document.getElementById('numero').value.trim().toUpperCase();
-  var nome=document.getElementById('nome').value.trim();
-  var email=document.getElementById('email').value.trim().toLowerCase();
-  var nivel=document.getElementById('nivel').value;
-  if(!/^ASF-[A-Z0-9]{6,12}$/.test(numero)){alert('Número do cadastro inválido. Formato: ASF-XXXXXXXXXX');return;}
-  if(!nome){alert('Informe seu nome completo.');return;}
-  if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)){alert('Informe um e-mail válido (o mesmo da carteirinha).');return;}
-  if(!nivel){alert('Selecione seu nível de surf.');return;}
-  if(!document.getElementById('consent').checked){alert('É preciso autorizar o armazenamento dos dados (LGPD).');return;}
-  var btn=document.getElementById('btn-enviar');
-  btn.disabled=true; btn.textContent='Verificando número…';
-  verificarNumero(numero).then(function(v){
-    if(!v.ok){btn.disabled=false;btn.textContent='Enviar cadastro';alert(v.msg);return;}
-    btn.textContent='Enviando…';
-    var reg={numero:numero, nome:nome, email:email,
-      apelido:document.getElementById('apelido').value.trim(),
-      nivel:nivel,
-      praia:document.getElementById('praia').value.trim(),
-      cidade:document.getElementById('cidade').value.trim(),
-      insta:document.getElementById('insta').value.trim(),
-      origem:'carteirinhas.html'};
-    fetch(SB_URL+'/rest/v1/cadastros',{method:'POST',
-      headers:{'apikey':SB_KEY,'Authorization':'Bearer '+SB_KEY,'Content-Type':'application/json','Prefer':'return=minimal'},
-      body:JSON.stringify(reg)}).then(function(r){
-      btn.disabled=false; btn.textContent='Enviar cadastro';
-      if(!r.ok){alert(r.status===409?'Este número já foi cadastrado.':'Erro ao registrar');return;}
-      document.getElementById('form-card').style.display='none';
-      document.getElementById('ok-numero').textContent=numero;
-      document.getElementById('ok-card').style.display='block';
-      window.scrollTo(0,0);
-    }).catch(function(e){btn.disabled=false;btn.textContent='Enviar cadastro';alert('Falha ao enviar: '+e)});
+  })
+  .then(function(r) {
+    if (!r.ok) throw new Error('HTTP ' + r.status + ': ' + (r.status === 401 ? 'RLS bloqueia — conceda SELECT a anon' : r.statusText));
+    return r.json();
+  })
+  .then(function(j) {
+    var cartas = Array.isArray(j) ? j : [];
+    if (!cartas.length) {
+      document.getElementById('resumo').style.display = 'block';
+      document.getElementById('total').textContent = '0';
+      document.getElementById('lista-card').style.display = 'none';
+      document.getElementById('att').textContent = '· atualizado ' + new Date().toLocaleTimeString('pt-BR');
+      alert('Nenhuma carteirinha registrada no Supabase ainda. Emita uma no app ASF!');
+      return;
+    }
+    document.getElementById('resumo').style.display = 'block';
+    document.getElementById('lista-card').style.display = 'block';
+    document.getElementById('total').textContent = cartas.length;
+    document.getElementById('att').textContent = '· atualizado ' + new Date().toLocaleTimeString('pt-BR');
+    document.getElementById('lista').innerHTML = cartas.reverse().map(function(c){
+      var validade = c.validade ? String(c.validade).split('-').reverse().join('/') : '—';
+      return '<tr><td>' + validade + '</td><td><code>' + (c.numero || '—') + '</code></td><td><b>' + (c.nome || '—') + '</b>' + (c.apelido ? ' <i>(' + c.apelido + ')</i>' : '') + '</td><td>' + (c.nivel || '—') + '</td><td>' + (c.praia || '—') + '</td><td>' + (c.cidade || '—') + '</td><td>' + (c.insta || '—') + '</td></tr>';
+    }).join('');
+  })
+  .catch(function(e) {
+    console.error('Supabase error:', e);
+    // Fallback: Google Apps Script (backup)
+    if (url && url.indexOf(S) !== -1) {
+      fetch(url + '?action=list&token=' + encodeURIComponent(tok))
+        .then(function(r){ return r.json(); })
+        .then(function(j) {
+          if (j.status !== 'OK') { alert(j.message || 'Erro ao carregar do Sheets'); return; }
+          document.getElementById('resumo').style.display = 'block';
+          document.getElementById('lista-card').style.display = 'block';
+          document.getElementById('total').textContent = j.total;
+          document.getElementById('att').textContent = '· atualizado (Sheets) ' + new Date().toLocaleTimeString('pt-BR');
+          document.getElementById('lista').innerHTML = j.carteirinhas.reverse().map(function(c){
+            var data = c.data || '—';
+            return '<tr><td>' + data + '</td><td><code>' + (c.numero || '—') + '</code></td><td><b>' + (c.nome || '—') + '</b>' + (c.apelido ? ' <i>(' + c.apelido + ')</i>' : '') + '</td><td>' + (c.nivel || '—') + '</td><td>' + (c.praia || '—') + '</td><td>' + (c.cidade || '—') + '</td><td>' + (c.insta || '—') + '</td></tr>';
+          }).join('');
+        })
+        .catch(function(e2) { alert('Supabase e Apps Script indisponíveis.'); });
+    } else {
+      alert('Supabase indisponível (RLS: conceda SELECT a anon na tabela associadas).\\n\\nComo corrigir no Supabase SQL Editor:\\n  GRANT SELECT ON TABLE public.associadas TO anon;\\n\\nOu configure o Deployment URL do Apps Script abaixo como backup.');
+    }
   });
 }
 </script>
-    <script src="/asf-redesign.js" defer></script>
+    <script src="/asf-app/asf-redesign.js" defer></script>
 </body>
 </html>
