@@ -2,18 +2,84 @@
 <html lang="pt-BR">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Minha Carteirinha — ASF</title>
-<meta name="description" content="Crie, visualize e baixe sua carteirinha digital ASF. Registro opcional no controle interno da associação.">
+<title>Cadastro e Carteirinha — ASF</title>
+<meta name="description" content="Cadastre-se na ASF e emita sua carteirinha digital. Dados cadastrais destinados ao controle interno da associação, sem lista pública.">
 <link rel="canonical" href="https://asf.surf/emitir.html">
 <style>
-:root{--primary:#00a8cc;--primary-dark:#007a99;--secondary:#0e2439;--gray-100:#eef3f6;--gray-200:#ccd6df;--gray-600:#526577;--shadow-lg:0 12px 30px #0e243922}*{box-sizing:border-box}body{margin:0;background:#f3f7fa;color:#0e2439;font:16px system-ui,sans-serif}header,main,footer{max-width:600px;margin:auto;padding:20px}header a,a{color:#007a99}h1{font-size:28px;margin:16px 0 8px}h2{font-size:21px}p{line-height:1.55}.card{background:#fff;padding:22px;border-radius:18px;box-shadow:0 4px 20px #0e243910}summary{cursor:pointer;font-weight:600}.btn{display:inline-block;border:0;border-radius:10px;padding:13px 16px;cursor:pointer;background:#007a99;color:white;font:600 14px system-ui}.btn-primary{width:100%}.btn-secondary{background:#e5f0f5;color:#0e2439}.btn:disabled{opacity:.6;cursor:wait}button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,summary:focus-visible{outline:3px solid #b679d0;outline-offset:3px}footer{font-size:12px;color:#526577}#toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);padding:14px 18px;border-radius:12px;background:#0e2439;color:white;max-width:calc(100% - 32px);width:max-content;z-index:100;display:none;font-size:14px}#toast.show{display:block}@media(max-width:480px){header,main,footer{padding:16px}.card{padding:18px}}
+:root{--primary:#00a8cc;--primary-dark:#007a99;--secondary:#0e2439;--gray-100:#eef3f6;--gray-200:#ccd6df;--gray-600:#526577;--shadow-lg:0 12px 30px #0e243922}*{box-sizing:border-box}[hidden]{display:none!important}body{margin:0;background:#f3f7fa;color:#0e2439;font:16px system-ui,sans-serif}header,main,footer{max-width:620px;margin:auto;padding:20px}a{color:#007a99}h1{font-size:28px;margin:18px 0 8px}h2{font-size:21px}p{line-height:1.55}.card{background:white;padding:22px;border-radius:18px;box-shadow:0 4px 20px #0e243910}label{display:block;font-weight:600;font-size:14px;margin:15px 0 6px}input:not([type=checkbox]):not([type=file]),select{width:100%;padding:12px;border:1px solid #ccd6df;border-radius:10px;font:inherit;background:white;color:#0e2439}.row{display:grid;grid-template-columns:1fr 1fr;gap:16px}.consent{display:flex;gap:10px;font-size:13px;font-weight:400;line-height:1.5;margin:20px 0}.consent input{flex:none;width:18px;height:18px;margin-top:3px}.btn{border:0;border-radius:10px;padding:14px 16px;background:#007a99;color:white;cursor:pointer;font:600 14px system-ui}.btn-primary{width:100%}.btn-secondary{background:#e5f0f5;color:#0e2439}.btn:disabled{opacity:.6;cursor:wait}.hint,footer{font-size:13px;color:#526577}.hint{margin:6px 0}#cadastro-status{padding:14px;border-radius:10px;line-height:1.5}#cadastro-status:not(:empty){background:#e5f0f5;margin:16px 0}#cadastro-status.error{background:#fdeaea;color:#a51d28}button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid #b679d0;outline-offset:3px}#toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);padding:14px 18px;background:#0e2439;color:white;border-radius:12px;max-width:calc(100% - 32px);width:max-content;z-index:100;display:none}#toast.show{display:block}@media(max-width:480px){header,main,footer{padding:16px}.card{padding:18px}.row{grid-template-columns:1fr;gap:0}}
 </style>
 </head>
 <body>
-<header><a href="./index.html">← Voltar ao ASF</a><h1>Sua Carteirinha ASF</h1><p>Crie sua carteirinha digital, adicione uma foto e baixe o PNG. Seus dados não aparecem em uma lista pública.</p></header>
-<main><div id="carteirinha-content" aria-label="Emissão e visualização da sua carteirinha"></div><noscript><p>Ative o JavaScript no navegador para gerar sua carteirinha.</p></noscript></main>
-<footer>O registro ASF é opcional e destinado ao controle interno. Os benefícios com parceiros estão em preparação. <a href="./privacidade.html">Privacidade</a>.</footer>
+<header><a href="./index.html">← Voltar ao ASF</a><h1>Cadastro e Carteirinha ASF</h1><p>Preencha seus dados para registrar seu cadastro na associação e emitir sua carteirinha digital.</p></header>
+<main>
+<section id="cadastro-section" class="card" aria-labelledby="cadastro-title">
+<h2 id="cadastro-title">Seu cadastro</h2>
+<p class="hint">Os dados são enviados ao controle interno da ASF no Supabase. Não há lista pública de usuárias.</p>
+<form id="cadastro-form">
+<label for="cad-nome">Nome completo *</label><input id="cad-nome" name="nome" required minlength="2" maxlength="40" autocomplete="name">
+<label for="cad-email">E-mail *</label><input id="cad-email" name="email" type="email" required maxlength="120" autocomplete="email">
+<p class="hint">Use sempre o mesmo e-mail. O registro atual mantém uma única carteirinha por e-mail informado; esta página não confirma a titularidade do e-mail.</p>
+<div class="row"><div><label for="cad-apelido">Nome de surfista / apelido</label><input id="cad-apelido" name="apelido" maxlength="30"></div><div><label for="cad-nivel">Nível no surf *</label><select id="cad-nivel" name="nivel" required><option value="">Selecione</option><option>Iniciante</option><option>Intermediária</option><option>Avançada</option></select></div></div>
+<label for="cad-praia">Praia do coração</label><input id="cad-praia" name="praia" maxlength="40">
+<div class="row"><div><label for="cad-cidade">Cidade / UF</label><input id="cad-cidade" name="cidade" maxlength="40" autocomplete="address-level2"></div><div><label for="cad-insta">Instagram</label><input id="cad-insta" name="insta" maxlength="30" placeholder="@seuperfil"></div></div>
+<label class="consent" for="cad-consent"><input id="cad-consent" type="checkbox" required><span>Autorizo o armazenamento dos dados preenchidos, número e validade da carteirinha no cadastro interno ASF, conforme a <a href="./privacidade.html" target="_blank" rel="noopener">Política de Privacidade</a>. Meu e-mail será representado por um hash no registro de carteirinhas. Os dados não serão publicados em uma lista de usuárias.</span></label>
+<button id="cad-submit" class="btn btn-primary" type="submit">Cadastrar e emitir minha carteirinha</button>
+<p class="hint">Primeira emissão válida por 1 ano. Se já houver cadastro com o mesmo e-mail, o servidor mantém o número e a validade vigente; a renovação segue a regra existente da ASF.</p>
+</form>
+</section>
+<div id="cadastro-status" role="status" aria-live="polite"></div>
+<section id="resultado-section" hidden aria-labelledby="resultado-title"><h2 id="resultado-title">Sua carteirinha</h2><div id="carteirinha-content"></div><p class="hint">A foto opcional fica somente neste dispositivo. Benefícios com novas parcerias estão em preparação. O QR verifica situação e validade, sem nome ou contatos.</p><button id="novo-cadastro" class="btn btn-secondary" type="button">Voltar ao cadastro</button></section>
+<noscript><p>Ative o JavaScript para registrar seu cadastro e emitir a carteirinha.</p></noscript>
+</main>
+<footer>ASF — Associação Surf Feminino. Controle de cadastros reservado à equipe interna.</footer>
 <div id="toast" role="status" aria-live="polite"></div>
 <script>let toastTimer;function showToast(msg){const t=document.getElementById('toast');t.textContent=msg;t.className='show';clearTimeout(toastTimer);toastTimer=setTimeout(()=>t.className='',6500);}</script>
 <script src="./carteirinha.js?v=20261007-privacy"></script>
+<script>
+(function(){
+'use strict';
+const form=document.getElementById('cadastro-form'),section=document.getElementById('cadastro-section'),result=document.getElementById('resultado-section'),status=document.getElementById('cadastro-status'),button=document.getElementById('cad-submit');
+let currentCard=null,busy=false;
+const feedback=(message,error)=>{status.textContent=message;status.className=error?'error':'';};
+if(typeof ASF_CARD==='undefined'){button.disabled=true;feedback('Não foi possível carregar a emissão. Atualize a página para tentar novamente.',true);return;}
+const originalLoad=ASF_CARD.load.bind(ASF_CARD),originalSave=ASF_CARD.save.bind(ASF_CARD);
+// Não exibir a carteirinha de outro cadastro salvo anteriormente neste navegador.
+ASF_CARD.load=()=>currentCard;
+ASF_CARD.save=function(d){currentCard=d;try{originalSave(d);}catch(e){showToast('Cadastro confirmado. Baixe o PNG: este navegador não permitiu salvar a cópia local.');}};
+ASF_CARD.init=function(){if(currentCard)this.renderCard(document.getElementById('carteirinha-content'),currentCard);};
+ASF_CARD.render=function(){this.init();};
+ASF_CARD.editar=function(){result.hidden=true;section.hidden=false;feedback('Confira seus dados e envie novamente. O servidor mantém a mesma carteirinha para o e-mail informado.');document.getElementById('cad-nome').focus();};
+document.getElementById('novo-cadastro').addEventListener('click',()=>{currentCard=null;result.hidden=true;section.hidden=false;form.reset();feedback('');document.getElementById('cad-nome').focus();});
+async function issue(payload){
+ const controller=new AbortController(),timer=setTimeout(()=>controller.abort(),20000);
+ try{
+  const response=await fetch(ASF_CARD.SUPABASE_URL+'/rest/v1/rpc/emitir_carteirinha',{method:'POST',headers:{apikey:ASF_CARD.SUPABASE_ANON_KEY,Authorization:'Bearer '+ASF_CARD.SUPABASE_ANON_KEY,'Content-Type':'application/json'},body:JSON.stringify(payload),signal:controller.signal});
+  const rows=await response.json();
+  if(!response.ok)throw new Error('registro indisponível');
+  const r=Array.isArray(rows)&&rows[0];
+  if(!r||!/^ASF-[A-Z0-9]{6,12}$/.test(r.numero)||!/^\d{4}-\d{2}-\d{2}$/.test(r.validade)||!['emitida','existente','renovada'].includes(r.status))throw new Error('resposta inválida');
+  return r;
+ }finally{clearTimeout(timer);}
+}
+form.addEventListener('submit',async event=>{
+ event.preventDefault();if(busy||!form.reportValidity())return;
+ const value=id=>document.getElementById(id).value.trim();
+ const nome=value('cad-nome'),email=value('cad-email').toLowerCase(),nivel=value('cad-nivel');
+ if(nome.length<2||!ASF_CARD.niveis.includes(nivel)){feedback('Confira seu nome e selecione seu nível.',true);return;}
+ busy=true;button.disabled=true;button.textContent='Registrando no Supabase…';feedback('Aguarde a confirmação do cadastro.');
+ try{
+  const emailHash=await ASF_CARD.sha256(email);
+  const payload={p_numero:ASF_CARD.gerarNumero(),p_email_hash:emailHash,p_nome:nome,p_apelido:value('cad-apelido'),p_nivel:nivel,p_praia:value('cad-praia'),p_cidade:value('cad-cidade'),p_insta:value('cad-insta')};
+  const r=await issue(payload),old=originalLoad()||{},same=old.emailHash===emailHash&&old.numero===r.numero;
+  const d={nome,nivel,praia:payload.p_praia,apelido:payload.p_apelido,cidade:payload.p_cidade,insta:payload.p_insta,numero:r.numero,validade:r.validade.split('-').reverse().join('/'),desde:same&&old.desde?old.desde:new Date().toLocaleDateString('pt-BR'),foto:same?old.foto||null:null,emailHash,lgpdConsent:new Date().toISOString(),registrada:new Date().toISOString()};
+  ASF_CARD.save(d);section.hidden=true;result.hidden=false;ASF_CARD.init();
+  feedback(r.status==='existente'?'Cadastro atualizado. Mesma carteirinha, com validade mantida até '+d.validade+'.':r.status==='renovada'?'Cadastro confirmado e carteirinha renovada até '+d.validade+'.':'Cadastro confirmado no Supabase. Carteirinha emitida até '+d.validade+'.');
+  result.scrollIntoView({behavior:'smooth',block:'start'});
+ }catch(e){
+  result.hidden=true;section.hidden=false;currentCard=null;
+  feedback('Não foi possível confirmar o cadastro. Nenhuma carteirinha será exibida sem confirmação do Supabase. Tente novamente com o mesmo e-mail para evitar outro cadastro.',true);
+ }finally{busy=false;button.disabled=false;button.textContent='Cadastrar e emitir minha carteirinha';}
+});
+})();
+</script>
 </body></html>
