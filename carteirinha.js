@@ -70,7 +70,7 @@ const ASF_CARD = {
     return livre.getTime() > Date.now() ? livre : null;
   },
 
-  /* Registro de associadas via Supabase RPC (emitir_carteirinha).
+  /* Registro de associadas via Supabase REST API (tabela: associadas).
      Dados LGPD ficam no banco protegido por RLS. */
 
   niveis: ['Iniciante', 'Intermediária', 'Avançada'],
