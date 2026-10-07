@@ -422,7 +422,7 @@ if (!window.beaches) {
     bertioga: { name: 'Bertioga', lat: -23.85, lon: -46.14 },
     santos:   { name: 'Santos',   lat: -23.96, lon: -46.33 },
     guaruja:  { name: 'Guarujá',  lat: -23.99, lon: -46.25 },
-    ubatuba:  { name: 'Ubatuba', lat: -23.43, lon: -45.08 },
+    ubatuba:  { name: 'Ubatuba',  lat: -23.43, lon: -45.08 },
     ilhabela: { name: 'Ilhabela', lat: -23.78, lon: -45.36 },
     maresias: { name: 'Maresias', lat: -23.79, lon: -45.36 },
     baleia:   { name: 'Praia da Baleia', lat: -23.82, lon: -45.45 },
@@ -439,7 +439,7 @@ if (!window.LEVELS) {
     { level: 2, name: 'Maré Leve',    minPoints: 100 },
     { level: 3, name: 'Onda Boa',     minPoints: 300 },
     { level: 4, name: 'Surfista',     minPoints: 500 },
-    { level: 5, name: 'Tubulosa',     minPoints: 800 },
+    { level: 5, name: 'Onda Grande',  minPoints: 800 },
     { level: 6, name: 'Maresia',      minPoints: 1200 },
     { level: 7, name: 'Tubulosa',     minPoints: 1700 },
     { level: 8, name: 'Lenda do Mar', minPoints: 2300 }
