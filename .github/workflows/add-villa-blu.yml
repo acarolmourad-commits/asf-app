@@ -1,0 +1,30 @@
+name: ASF Publica Beneficio Villa Blu (one-shot)
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Publicar beneficio Villa Blu no index.html
+        run: python3 scripts/add_villa_blu_beneficio.py
+      - name: Commit if changed
+        run: |
+          git config user.name "ASF Bot"
+          git config user.email "bot@asf-app.com"
+          git add index.html scripts/add_villa_blu_beneficio.py
+          if git diff --cached --quiet; then
+            echo "Sem mudancas"
+          else
+            git commit -m "feat: beneficio Villa Blu (cupom ASF5OFF, 5% off Maresias) na secao Beneficios ASF"
+            git push
+          fi
