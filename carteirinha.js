@@ -91,22 +91,30 @@ const ASF_CARD = {
 
   save(d) { localStorage.setItem(this.KEY, JSON.stringify(d)); },
 
-  /* Registro opcional (opt-in LGPD) no controle de associadas — via Supabase RPC.
-     O fluxo principal de emissão já registra via emitir_carteirinha; esta função
-     cobre carteirinhas emitidas antes da migração (que têm emailHash salvo). */
+  /* Registro opcional (opt-in LGPD) no controle de associadas — via Supabase REST API.
+     O fluxo principal de emissão já registra via POST /rest/v1/associadas (upsert);
+     esta função cobre carteirinhas emitidas antes da migração (que têm emailHash salvo). */
   registrar(d) {
     try {
       const cb = document.getElementById('card-registrar');
       const quer = (cb && cb.checked) || d.registrada;
       if (!quer) return;
       if (!this.supabaseOn || !d.emailHash || d.registrada) return;
-      const payload = {
-        p_numero: d.numero,
-        p_email_hash: d.emailHash,
-        p_nome: d.nome, p_apelido: d.apelido || '', p_nivel: d.nivel,
-        p_praia: d.praia || '', p_cidade: d.cidade || '', p_insta: d.insta || '',
+      const payload = [{
+        numero: d.numero,
+        email_hash: d.emailHash,
+        nome: d.nome, apelido: d.apelido || '',
+        nivel: d.nivel, praia: d.praia || '',
+        cidade: d.cidade || '', insta: d.insta || '',
+        validade: d.validade ? String(d.validade).split('/').reverse().join('-') : undefined,
+      }];
+      const url = this.SUPABASE_URL + '/rest/v1/associadas';
+      const headers = {
+        'apikey': this.SUPABASE_ANON_KEY,
+        'Authorization': 'Bearer ' + this.SUPABASE_ANON_KEY,
+        'Content-Type': 'application/json',
+        'Prefer': 'resolution=merge-duplicates,merge-numero'
       };
-      const url = this.SUPABASE_URL + '/rest/v1/rpc/emitir_carteirinha?apikey=' + encodeURIComponent(this.SUPABASE_ANON_KEY);
       const done = () => {
         d.registrada = new Date().toISOString();
         this.save(d);
@@ -122,7 +130,17 @@ const ASF_CARD = {
       }
       if (sent) { done(); }
       else {
-        this.sbRpc('emitir_carteirinha', payload).then(done).catch(function(){});
+        /* Fallback: POST direto na tabela associadas (REST API, não RPC) */
+        fetch(this.SUPABASE_URL + '/rest/v1/associadas', {
+          method: 'POST',
+          headers: {
+            'apikey': this.SUPABASE_ANON_KEY,
+            'Authorization': 'Bearer ' + this.SUPABASE_ANON_KEY,
+            'Content-Type': 'application/json',
+            'Prefer': 'resolution=merge-duplicates,merge-numero'
+          },
+          body: JSON.stringify(payload),
+        }).then(function() { done(); }).catch(function() {});
       }
     } catch (e) {}
   },
