@@ -13,6 +13,21 @@ jobs:
         run: |
           python3 - <<'PY'
           import requests, sys
+          from html.parser import HTMLParser
+          from urllib.parse import urlparse
+
+          class RedirectPage(HTMLParser):
+              def __init__(self):
+                  super().__init__()
+                  self.refreshes = []
+                  self.links = []
+              def handle_starttag(self, tag, attrs):
+                  attrs = dict(attrs)
+                  if tag == 'meta' and attrs.get('http-equiv', '').lower() == 'refresh':
+                      self.refreshes.append(attrs.get('content', ''))
+                  if tag == 'a':
+                      self.links.append(attrs.get('href', ''))
+
           base='https://acarolmourad-commits.github.io/asf-app/'
           pages=['','aprender/','previsao-surf/','quiz/','apps/','diario/','mareas/','prancha-ideal/','hospedagens/','guia-apps.html','sobre.html']
           failures=[]
@@ -21,17 +36,45 @@ jobs:
           if css.status_code!=200 or 'header:not(.hero) h1' not in css.text: failures.append('shared CSS missing contrast/layout rules')
           if js.status_code!=200 or 'asf-site-nav' not in js.text: failures.append('shared JS missing navigation enhancement')
           for page in pages:
-              r=requests.get(base+page,timeout=25)
-              if r.status_code!=200:
-                  failures.append(f'{page or "home"}: HTTP {r.status_code}')
-                  continue
-              if page:
-                  if 'asf-site-redesign.css' not in r.text or 'asf-redesign.js' not in r.text:
-                      failures.append(f'{page}: shared redesign assets not linked')
-              else:
-                  if 'subscriber-styles.css' not in r.text or 'asf-ux.js' not in r.text:
-                      failures.append('home: redesign entry points missing')
+              try:
+                  r=requests.get(base+page,timeout=25)
+                  if r.status_code!=200:
+                      failures.append(f'{page or "home"}: HTTP {r.status_code}')
+                      continue
+                  if page == 'previsao-surf/':
+                      # This route is intentionally a redirect, not a redesigned content page.
+                      expected='https://previsao.asf.surf/'
+                      parser=RedirectPage()
+                      parser.feed(r.text)
+                      targets=[]
+                      for refresh in parser.refreshes:
+                          delay, separator, target=refresh.partition(';')
+                          key, equals, value=target.strip().partition('=')
+                          if separator and equals and delay.strip() == '0' and key.strip().lower() == 'url':
+                              targets.append(value.strip().strip('\"\''))
+                      if expected not in targets or expected not in parser.links:
+                          failures.append(f'{page}: expected immediate redirect and fallback link missing')
+                          continue
+                      destination=requests.get(expected,timeout=25)
+                      final=urlparse(destination.url)
+                      if destination.status_code!=200:
+                          failures.append(f'{page}: destination HTTP {destination.status_code}')
+                      elif final.scheme!='https' or final.hostname!='previsao.asf.surf':
+                          failures.append(f'{page}: unexpected destination URL {destination.url}')
+                      elif 'text/html' not in destination.headers.get('Content-Type','').lower() or '<html' not in destination.text.lower():
+                          failures.append(f'{page}: destination is not an HTML application page')
+                      else:
+                          print(f'PASS: {page} redirects to healthy HTTPS destination {expected}')
+                      continue
+                  if page:
+                      if 'asf-site-redesign.css' not in r.text or 'asf-redesign.js' not in r.text:
+                          failures.append(f'{page}: shared redesign assets not linked')
+                  else:
+                      if 'subscriber-styles.css' not in r.text or 'asf-ux.js' not in r.text:
+                          failures.append('home: redesign entry points missing')
+              except requests.RequestException as exc:
+                  failures.append(f'{page or "home"}: network error {exc}')
           if failures:
               print('\n'.join('FAIL: '+x for x in failures)); sys.exit(1)
-          print(f'PASS: {len(pages)} pages and 2 shared assets are healthy')
+          print(f'PASS: {len(pages)} routes (including forecast redirect) and 2 shared assets are healthy')
           PY
