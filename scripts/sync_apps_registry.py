@@ -59,6 +59,10 @@ def gen_satellites_html(reg):
     with open(SATELLITES_HTML, encoding="utf-8") as f:
         src = f.read()
 
+    if re.search(r'http-equiv=[\"\']refresh[\"\']', src, re.I):
+        print("OK:", SATELLITES_HTML, "redirect preservado, sem regenerar cards")
+        return
+
     def block(cat):
         out = []
         for a in apps:
@@ -99,29 +103,75 @@ def gen_apps_index_html(reg):
 # ---------- validacao ----------
 
 def validate(reg):
+    from html.parser import HTMLParser
+    from urllib.parse import urlsplit
+
+    class Links(HTMLParser):
+        def __init__(self):
+            super().__init__()
+            self.hrefs = set()
+            self.refresh = []
+            self.canonical = []
+        def handle_starttag(self, tag, attrs):
+            attrs = dict(attrs)
+            if tag == "a" and attrs.get("href"):
+                self.hrefs.add(attrs["href"])
+            if tag == "link" and "canonical" in attrs.get("rel", "").split():
+                self.canonical.append(attrs.get("href", ""))
+            if tag == "meta" and attrs.get("http-equiv", "").lower() == "refresh":
+                value = attrs.get("content", "")
+                match = re.search(r"^\s*0\s*;\s*url\s*=\s*(.+)$", value, re.I)
+                self.refresh.append(match.group(1).strip().strip("\"'") if match else "")
+
     apps = reg["apps"]
-    urls = {a["url"] for a in apps}
     slugs = [a["slug"] for a in apps]
+    urls = [a["url"] for a in apps]
     ok = True
-    if len(slugs) != len(set(slugs)):
-        print("ERRO: slugs duplicados em", REGISTRY)
+    if len(slugs) != len(set(slugs)) or len(urls) != len(set(urls)):
+        print("ERRO: slugs ou URLs duplicados em", REGISTRY)
         ok = False
+    if any(urlsplit(u).scheme != "https" or not urlsplit(u).netloc for u in urls):
+        print("ERRO: URL insegura ou invalida no registry")
+        ok = False
+    consolidated = {"asf-previsao", "asf-mare", "asf-vento", "asf-swell"}
+    forecast = "https://previsao.asf.surf/"
+    legacy_forecast = BASE + "/asf-previsao/"
+    guide = reg["hub"].rstrip("/") + "/guia-apps.html"
+
     for path in VALIDATE_ONLY + [NETWORK_JS, SATELLITES_HTML, APPS_INDEX_HTML]:
         try:
-            with open(path, encoding="utf-8") as f:
-                content = f.read()
+            content = open(path, encoding="utf-8").read()
         except FileNotFoundError:
             print("ERRO: consumidor nao encontrado:", path)
             ok = False
             continue
-        missing = sorted(u for u in urls if u not in content)
-        if missing:
-            ok = False
-            print("DIVERGENCIA em %s — faltam %d URL(s):" % (path, len(missing)))
-            for u in missing:
-                print("   -", u)
+        if path == NETWORK_JS:
+            missing = [a["url"] for a in apps if a["url"] not in content]
         else:
-            print("OK:", path, "(%d apps)" % len(urls))
+            parsed = Links()
+            parsed.feed(content)
+            if path in {SATELLITES_HTML, "rede.html"}:
+                # Redirect pages deliberately do not duplicate the full catalog.
+                if parsed.refresh == [guide] and parsed.canonical == [guide] and guide in parsed.hrefs:
+                    print("OK:", path, "redirect canonical para guia validado separadamente")
+                else:
+                    print("ERRO: redirect/canonical/fallback divergente em", path)
+                    ok = False
+                continue
+            missing = []
+            for app in apps:
+                accepted = {app["url"]}
+                if app["slug"] in consolidated:
+                    accepted |= {forecast, legacy_forecast}
+                if not accepted.intersection(parsed.hrefs):
+                    missing.append(app["url"])
+        if missing:
+            print("DIVERGENCIA em %s — faltam %d URL(s):" % (path, len(missing)))
+            for url in sorted(missing):
+                print("   -", url)
+            ok = False
+        else:
+            print("OK:", path, "(%d entradas, aliases explicitos)" % len(apps))
     return ok
 
 
