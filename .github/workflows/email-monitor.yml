@@ -1,52 +1,36 @@
-name: Email Monitor - Leads CRM
+name: Email Monitor - Villa Blu (Private Notion)
 
 on:
   schedule:
-    - cron: '0 */6 * * *'   # a cada 6h (UTC)
-  workflow_dispatch:        # permite rodar manualmente
+    - cron: '0 */6 * * *'
+  workflow_dispatch:
 
 permissions:
-  issues: write
   contents: read
+
+concurrency:
+  group: asf-private-partnership-monitor
+  cancel-in-progress: false
 
 jobs:
   check-replies:
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     steps:
       - uses: actions/checkout@v4
-
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-
-      - name: Install deps
+      - name: Install runtime dependency
         run: pip install requests
-
-      - name: Check lead replies via Composio (Gmail OAuth gerenciado)
+      - name: Test privacy, deduplication and seven-day rule with synthetic data
+        run: python .github/scripts/check_lead_replies.py --self-test
+      - name: Check partnership and write minimal state to private Notion
         env:
           COMPOSIO_API_KEY: ${{ secrets.COMPOSIO_API_KEY }}
-          LEAD_EMAILS: ${{ vars.LEAD_EMAILS }}   # opcional; fallback: .github/lead-emails.txt
-          REPORT_PATH: lead_replies_report.md
+          GMAIL_ACCOUNT_ID: gmail_ponder-speiss
+          NOTION_ACCOUNT_ID: notion_otiant-milieu
+          NOTION_MONITOR_PAGE_ID: 3f3abe37-0d44-8158-bd94-f7cdf5e8378c
+          NOTION_STATUS_BLOCK_ID: b29ed947-1672-48f9-8132-39b1a0bdb02f
         run: python .github/scripts/check_lead_replies.py
-
-      - name: Upload report artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: lead-replies-report
-          path: lead_replies_report.md
-          retention-days: 30
-
-      - name: Open issue if hot replies found
-        if: env.HOT_REPLIES == 'true'
-        uses: actions/github-script@v7
-        with:
-          script: |
-            const fs = require('fs');
-            const body = fs.readFileSync('lead_replies_report.md', 'utf8');
-            await github.rest.issues.create({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              title: `🔥 Respostas quentes de leads — ${new Date().toISOString().slice(0,10)}`,
-              body,
-              labels: ['crm', 'leads']
-            });
+      # No public issues, email excerpts, uploaded reports, or automatic sends.
