@@ -28,8 +28,7 @@ jobs:
       - name: Check partnership and write minimal state to private Notion
         env:
           COMPOSIO_API_KEY: ${{ secrets.COMPOSIO_API_KEY }}
-          GMAIL_ACCOUNT_ID: gmail_ponder-speiss
-          NOTION_ACCOUNT_ID: notion_otiant-milieu
+          COMPOSIO_ENTITY_ID: ${{ vars.COMPOSIO_ENTITY_ID || 'default_user' }}
           NOTION_MONITOR_PAGE_ID: 3f3abe37-0d44-8158-bd94-f7cdf5e8378c
           NOTION_STATUS_BLOCK_ID: b29ed947-1672-48f9-8132-39b1a0bdb02f
         run: |
@@ -41,11 +40,10 @@ jobs:
           try:
               monitor.run()
           except monitor.MonitorError as exc:
-              # These messages are fixed, sanitized stage/status codes only.
               print('::error::' + str(exc))
               sys.exit(1)
           except Exception:
               print('::error::Private monitor unexpected failure; payload suppressed.')
               sys.exit(1)
           PY
-      # No public issues, email excerpts, uploaded reports, or automatic sends.
+      # No issues, uploaded reports, email excerpts, or automatic sends.
