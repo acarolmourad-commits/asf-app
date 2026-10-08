@@ -1,7 +1,7 @@
 {
-  "date": "2026-10-08T12:21:31.736924+00:00",
-  "total": 98,
-  "ok": 86,
+  "date": "2026-10-08T17:46:40.290544+00:00",
+  "total": 105,
+  "ok": 93,
   "skipped": 10,
   "broken_count": 2,
   "broken": [
@@ -45,6 +45,11 @@
       "http": 200
     },
     {
+      "url": "https://acarolmourad-commits.github.io/asf-leitura/",
+      "status": "ok",
+      "http": 200
+    },
+    {
       "url": "https://acarolmourad-commits.github.io/asf-manobras/",
       "status": "ok",
       "http": 200
@@ -66,6 +71,16 @@
     },
     {
       "url": "https://acarolmourad-commits.github.io/asf-nutricao/",
+      "status": "ok",
+      "http": 200
+    },
+    {
+      "url": "https://acarolmourad-commits.github.io/asf-parceiras/",
+      "status": "ok",
+      "http": 200
+    },
+    {
+      "url": "https://acarolmourad-commits.github.io/asf-popup/",
       "status": "ok",
       "http": 200
     },
@@ -116,6 +131,11 @@
     },
     {
       "url": "https://acarolmourad-commits.github.io/asf-treino/",
+      "status": "ok",
+      "http": 200
+    },
+    {
+      "url": "https://acarolmourad-commits.github.io/asf-viagens/",
       "status": "ok",
       "http": 200
     },
@@ -289,6 +309,12 @@
       "local": true
     },
     {
+      "url": "asf-journeys-review.css",
+      "status": "ok",
+      "http": 200,
+      "local": true
+    },
+    {
       "url": "asf-ux.css",
       "status": "ok",
       "http": 200,
@@ -415,6 +441,12 @@
       "local": true
     },
     {
+      "url": "guias/planejar-surf-trip/",
+      "status": "ok",
+      "http": 200,
+      "local": true
+    },
+    {
       "url": "hospedagens/",
       "status": "ok",
       "http": 200,
@@ -464,6 +496,12 @@
     },
     {
       "url": "parcerias/",
+      "status": "ok",
+      "http": 200,
+      "local": true
+    },
+    {
+      "url": "parcerias/villa-blu/",
       "status": "ok",
       "http": 200,
       "local": true
