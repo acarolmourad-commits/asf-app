@@ -1,18 +1,18 @@
 {
   "date": "2026-10-08",
   "board_tip": {
-    "title": "Shortboard: Performance",
-    "content": "Shortboards (5'6\"-6'6\") são para performance. Requer técnica e condicionamento.",
+    "title": "Funboard: A versátil",
+    "content": "Funboards (7'0\"-8'6\") são ideais para evolução. Mais ágil que longboard, mantém estabilidade.",
     "tags": [
-      "Shortboard",
-      "Performance"
+      "Funboard",
+      "Evolução"
     ]
   },
   "eco_tip": {
-    "title": "Bloco Phenix Teccel",
-    "content": "Núcleo EPS ecológico. Pode ser 100% reciclado ou biodegradado. Menor impacto ambiental.",
-    "category": "Sustentabilidade"
+    "title": "Por que escolher ecológico?",
+    "content": "Quando a prancha chegar ao fim, o bloco pode ser reciclado ou se degrada naturalmente!",
+    "category": "Consumo Consciente"
   },
-  "daily_message": "Protetor solar: reaplique a cada 2 horas!",
-  "generated_at": "2026-10-08T17:46:09.035846"
+  "daily_message": "Alongue ombros e costas antes de entrar na água!",
+  "generated_at": "2026-10-08T22:33:47.998604"
 }
