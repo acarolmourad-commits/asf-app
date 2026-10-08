@@ -35,7 +35,7 @@ jobs:
   breathing-stretching:
     name: 🧘 Breathing & Stretching
     runs-on: ubuntu-latest
-    if: github.event_name == 'schedule' || github.event_name == 'repository_dispatch'
+    if: github.event_name == 'schedule' || github.event_name == 'repository_dispatch' || github.event_name == 'workflow_dispatch'
     timeout-minutes: 10
     steps:
       - uses: actions/checkout@v4
@@ -95,7 +95,7 @@ jobs:
   daily-content:
     name: 📝 Daily Content Pack
     runs-on: ubuntu-latest
-    if: github.event_name == 'schedule' || github.event_name == 'repository_dispatch'
+    if: github.event_name == 'schedule' || github.event_name == 'repository_dispatch' || github.event_name == 'workflow_dispatch'
     timeout-minutes: 20
     steps:
       - uses: actions/checkout@v4
@@ -200,57 +200,3 @@ jobs:
             done
             echo "✅ All changes committed"
           fi
-
-  # ========================================
-  # 🚀 DEPLOY (on push only)
-  # ========================================
-  deploy:
-    name: 🚀 Deploy to GitHub Pages
-    runs-on: ubuntu-latest
-    if: github.event_name == 'push' || github.event_name == 'workflow_dispatch'
-    needs: []
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    steps:
-      - uses: actions/checkout@v4
-        with:
-          submodules: false
-          fetch-depth: 1
-      - name: 🔍 Validate App Structure
-        run: |
-          echo "🔍 Validating app structure..."
-          if [ ! -f index.html ]; then
-            echo "❌ index.html missing!"
-            exit 1
-          fi
-          lines=$(wc -l < index.html)
-          echo "✅ index.html: $lines lines"
-
-          # Check critical sections
-          grep -q "Brand Hub" index.html && echo "✅ Brand Hub section found"
-          grep -q "badges" index.html && echo "✅ Badges section found"
-          grep -q "Comunidade ASF" index.html && echo "✅ Community section found"
-          grep -q "🏆 Minhas Conquistas" index.html && echo "✅ Badges page found"
-      - name: 🧹 Cleanup nested submodules
-        run: |
-          echo "🧹 Removing nested asf-app submodule (not needed for deploy)..."
-          rm -rf asf-app
-          echo "✅ asf-app removed"
-      - name: 📄 Ensure .nojekyll present
-        run: |
-          touch .nojekyll
-          git add .nojekyll
-          echo "✅ .nojekyll added"
-      - uses: actions/configure-pages@v4
-        with:
-          enablement: true
-      - uses: actions/upload-pages-artifact@v3
-        with:
-          path: '.'
-      - uses: actions/deploy-pages@v4
-        id: deployment
-      - name: ✅ Deployment Success
-        run: |
-          echo "🎉 App deployed successfully!"
-          echo "🌐 URL: ${{ steps.deployment.outputs.page_url }}"
