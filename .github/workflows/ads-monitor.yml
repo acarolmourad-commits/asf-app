@@ -1,59 +1,115 @@
 name: AdSense Health Monitor (diario)
-
 on:
   schedule:
-    - cron: '0 9 * * *'   # todo dia 06h BRT (09h UTC)
+    - cron: '0 9 * * *'
   workflow_dispatch:
-
 permissions:
-  contents: write
-
+  contents: read
 jobs:
   check:
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     steps:
-      - name: Verificar ads.txt e codigo AdSense nas paginas
+      - name: Verificar monetizacao e redirecionamentos autorizados
         run: |
-          PUB="ca-pub-1643806355443576"
-          REPORT="relatorio-ads.txt"
-          echo "ASF AdSense Health - $(date -u '+%Y-%m-%d %H:%M UTC')" > $REPORT
-          echo "======================================" >> $REPORT
+          python3 - <<'PY'
+          import datetime, json, re, sys, time
+          from html.parser import HTMLParser
+          from urllib.error import HTTPError, URLError
+          from urllib.request import Request, urlopen
+          from urllib.parse import urlparse
+          from pathlib import Path
 
-          # 1. ads.txt na raiz
-          ADSTXT=$(curl -s https://asf.surf/ads.txt)
-          if echo "$ADSTXT" | grep -q "pub-1643806355443576"; then
-            echo "OK   ads.txt (asf.surf)" >> $REPORT
-          else
-            echo "FALHA ads.txt ausente ou incorreto!" >> $REPORT
-          fi
+          PUB = 'ca-pub-1643806355443576'
+          REDIRECTS = {
+              'asf-app-redirect': 'https://acarolmourad-commits.github.io/asf-app/',
+              'asf-mare': 'https://previsao.asf.surf/',
+              'asf-swell': 'https://previsao.asf.surf/',
+              'asf-vento': 'https://previsao.asf.surf/',
+          }
+          class Page(HTMLParser):
+              def __init__(self):
+                  super().__init__(); self.targets=[]; self.links=[]; self.canonicals=[]
+              def handle_starttag(self, tag, attrs):
+                  a=dict(attrs)
+                  if tag=='meta' and a.get('http-equiv','').lower()=='refresh':
+                      m=re.fullmatch(r'\s*(\d+)\s*;\s*url\s*=\s*(.+?)\s*',a.get('content',''),re.I)
+                      if m and int(m[1])<=5: self.targets.append(m[2].strip('\"\''))
+                  if tag=='a': self.links.append(a.get('href',''))
+                  if tag=='link' and 'canonical' in a.get('rel','').lower().split(): self.canonicals.append(a.get('href',''))
+          def get(url):
+              for attempt in range(3):
+                  try:
+                      with urlopen(Request(url,headers={'User-Agent':'ASF-AdSense-Health/2'}),timeout=25) as r:
+                          return r.read().decode('utf-8'),r.geturl(),r.headers.get('Content-Type','')
+                  except (HTTPError,URLError,TimeoutError) as exc:
+                      if isinstance(exc,HTTPError) and exc.code not in (429,500,502,503,504): raise
+                      if attempt==2: raise
+                      time.sleep(2**attempt)
+          def validate_redirect(source, expected):
+              p=Page(); p.feed(source)
+              if expected not in p.targets or expected not in p.links or expected not in p.canonicals:
+                  raise ValueError('redirecionamento/canonical/link de fallback divergente')
+              text,final,kind=get(expected)
+              parsed=urlparse(final)
+              expected_host=urlparse(expected).hostname
+              allowed={expected_host}
+              if expected_host=='acarolmourad-commits.github.io': allowed.add('asf.surf')
+              target=Page(); target.feed(text)
+              if parsed.scheme!='https' or parsed.hostname not in allowed:
+                  raise ValueError('destino HTTPS inesperado')
+              if 'text/html' not in kind.lower() or '<html' not in text.lower() or target.targets:
+                  raise ValueError('destino nao e uma pagina HTML final')
+              if PUB not in text: raise ValueError('destino final sem codigo AdSense')
+              return final
+          lines=['ASF AdSense Health - '+datetime.datetime.now(datetime.timezone.utc).isoformat()]
+          failures=[]; content_count=0; redirect_count=0
 
-          # 2. snippet no site principal
-          for url in "https://asf.surf/" "https://asf.surf/sobre.html"; do
-            if curl -s "$url" | grep -q "$PUB"; then
-              echo "OK   $url" >> $REPORT
-            else
-              echo "FALHA $url sem codigo AdSense" >> $REPORT
-            fi
-          done
-
-          # 3. snippet no codigo-fonte de cada app satelite
-          OK=0; FALHAS=""
-          for repo in $(curl -s "https://api.github.com/users/acarolmourad-commits/repos?per_page=100" | grep -o '"name": "asf-[^"]*"' | cut -d'"' -f4 | grep -v '^asf-app$'); do
-            if curl -s "https://raw.githubusercontent.com/acarolmourad-commits/$repo/main/index.html" | grep -q "$PUB"; then
-              OK=$((OK+1))
-            else
-              FALHAS="$FALHAS $repo"
-            fi
-          done
-          echo "" >> $REPORT
-          echo "Apps com codigo AdSense: $OK" >> $REPORT
-          [ -n "$FALHAS" ] && echo "Apps SEM codigo:$FALHAS" >> $REPORT
-          echo "======================================" >> $REPORT
-          cat $REPORT
-
-      - name: Falhar se houver problema
-        run: |
-          if grep -q "FALHA\|SEM codigo" relatorio-ads.txt; then
-            echo "::error::Problemas na monetizacao detectados - ver relatorio-ads.txt"
-            exit 1
-          fi
+          def check(label, operation):
+              try: lines.append('OK   '+label+' '+str(operation() or ''))
+              except Exception as exc:
+                  failures.append(label); lines.append('FALHA '+label+': '+type(exc).__name__+' '+str(exc))
+          def require(url, marker):
+              text,_,_=get(url)
+              if marker not in text: raise ValueError('marcador esperado ausente')
+          check('ads.txt',lambda:require('https://asf.surf/ads.txt','pub-1643806355443576'))
+          for url in ['https://asf.surf/','https://asf.surf/sobre.html']:
+              check(url,lambda url=url:require(url,PUB))
+          try:
+              repos=[]; page=1
+              while True:
+                  raw,_,_=get('https://api.github.com/users/acarolmourad-commits/repos?per_page=100&page='+str(page))
+                  batch=json.loads(raw)
+                  if not isinstance(batch,list): raise ValueError('inventario GitHub invalido')
+                  repos.extend(batch)
+                  if len(batch)<100: break
+                  page+=1
+              satellites=[r for r in repos if r['name'].startswith('asf-') and r['name']!='asf-app' and not r.get('archived') and not r.get('disabled')]
+              if not satellites: raise ValueError('inventario vazio; auditoria nao executada')
+              for repo in satellites:
+                  name=repo['name']
+                  try:
+                      source,_,_=get('https://raw.githubusercontent.com/'+repo['full_name']+'/'+repo['default_branch']+'/index.html')
+                      if name in REDIRECTS:
+                          final=validate_redirect(source,REDIRECTS[name]); redirect_count+=1
+                          lines.append('OK   redirect '+name+' -> '+final+' (AdSense verificado no destino)')
+                      elif PUB in source:
+                          content_count+=1; lines.append('OK   conteudo '+name)
+                      else: raise ValueError('pagina de conteudo sem codigo AdSense')
+                  except Exception as exc:
+                      failures.append(name); lines.append('FALHA '+name+': '+type(exc).__name__+' '+str(exc))
+              if not content_count: raise ValueError('nenhuma pagina de conteudo verificada')
+          except Exception as exc:
+              failures.append('inventario'); lines.append('FALHA inventario: '+type(exc).__name__+' '+str(exc))
+          lines.append(f'Conteudo: {content_count}; redirects verificados: {redirect_count}; falhas: {len(failures)}')
+          report='\n'.join(lines)+'\n'; Path('relatorio-ads.txt').write_text(report,encoding='utf-8'); print(report)
+          sys.exit(1 if failures else 0)
+          PY
+      - name: Guardar relatorio publico
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: ads-health-report
+          path: relatorio-ads.txt
+          if-no-files-found: error
+          retention-days: 14
