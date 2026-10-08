@@ -14,6 +14,9 @@ concurrency:
 
 jobs:
   check-replies:
+    # SAFETY HOLD: remove this gate only after live Notion integration passes.
+    # The six-hour schedule remains configured, but currently skips this job.
+    if: github.event_name == 'workflow_dispatch'
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
