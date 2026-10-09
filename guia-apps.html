@@ -65,7 +65,7 @@ footer{text-align:center;font-size:12.5px;color:var(--g);padding:24px;border-top
 <div class="hero-card">
 <h2 style="font-size:17px;margin-bottom:6px">🔍 Buscar app</h2>
 <input class="busca" id="busca" type="search" placeholder="Digite: previsão, yoga, segurança, quiz…" oninput="filtra(this.value)">
-<p style="font-size:12.5px;color:var(--g)"><span id="cont">51</span> apps · todos gratuitos · sem cadastro · seu XP vale em todos</p>
+<p style="font-size:12.5px;color:var(--g)"><span id="cont" aria-live="polite">51</span> destinos no catálogo · acesso pelo navegador</p>
 </div>
 
 <div class="cat" data-cat>
@@ -187,32 +187,47 @@ footer{text-align:center;font-size:12.5px;color:var(--g);padding:24px;border-top
 <p style="text-align:center;margin-top:18px;font-size:13.5px">Veja também: <a href="https://acarolmourad-commits.github.io/asf-app/novidades.html" style="color:var(--p);font-weight:700">✨ Novidades da rede</a> · <a href="https://acarolmourad-commits.github.io/asf-app/apps/" style="color:var(--p);font-weight:700">🧰 Mini-apps do hub</a> · <a href="https://acarolmourad-commits.github.io/asf-app/" style="color:var(--p);font-weight:700">🏄 App principal</a></p>
 </main>
 <footer>ASF — Associação de Surf Feminino · <a href="https://acarolmourad-commits.github.io/asf-app/privacidade.html">Privacidade</a> · <a href="https://acarolmourad-commits.github.io/asf-app/cookies.html">Cookies</a> · <a href="https://acarolmourad-commits.github.io/asf-app/termos-de-uso.html">Termos</a></footer>
-<script>
-function filtra(q){q=q.trim().toLowerCase();let n=0;document.querySelectorAll('.app').forEach(a=>{const ok=!q||a.textContent.toLowerCase().includes(q);a.style.display=ok?'':'none';if(ok)n++;});document.getElementById('cont').textContent=n;document.querySelectorAll('[data-cat]').forEach(c=>{c.style.display=[...c.querySelectorAll('.app')].some(a=>a.style.display!=='none')?'':'none';});}
-</script>
+
 <script src="https://acarolmourad-commits.github.io/asf-app/asf-network.js" defer></script>
     <script src="/asf-app/asf-redesign.js" defer></script>
 <script>
-/* Chips de categoria do Guia de Apps (aditivo; funciona junto com a busca filtra()) */
+/* Catalog-only counting; search and category filters compose without counting journey shortcuts. */
 (function(){
+  const cats=Array.from(document.querySelectorAll('.cat[data-cat]'));
+  const input=document.getElementById('busca');
+  const count=document.getElementById('cont');
   const hero=document.querySelector('.hero-card');
-  if(!hero) return;
-  const cats=[...document.querySelectorAll('.cat[data-cat]')];
-  if(!cats.length) return;
-  const bar=document.createElement('div');
-  bar.id='chips-cat';
+  if(!cats.length||!hero)return;
+  let selected=null;
+  const normalize=value=>value.normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().trim();
+  function apply(query){
+    const q=normalize(query||'');let visible=0;
+    cats.forEach(cat=>{
+      let matches=0;
+      cat.querySelectorAll('.app').forEach(card=>{
+        const show=(!selected||selected===cat)&&(!q||normalize(card.textContent).includes(q));
+        card.style.display=show?'':'none';if(show)matches++;
+      });
+      cat.style.display=matches?'':'none';visible+=matches;
+    });
+    if(count)count.textContent=String(visible);
+  }
+  window.filtra=apply;
+  const bar=document.createElement('div');bar.id='chips-cat';
   bar.style.cssText='display:flex;flex-wrap:wrap;gap:6px;margin-top:10px';
-  const busca=document.getElementById('busca');
-  const cont=document.getElementById('cont');
-  const mk=(label,fn)=>{const b=document.createElement('button');b.type='button';b.className='chip';b.textContent=label;
-    b.addEventListener('click',()=>{bar.querySelectorAll('.chip').forEach(c=>c.classList.remove('ativo'));b.classList.add('ativo');
-      if(busca)busca.value=''; fn();});return b;};
-  bar.appendChild(mk('Todas',()=>{cats.forEach(c=>{c.style.display='';c.querySelectorAll('.app').forEach(a=>a.style.display='');});
-    if(cont)cont.textContent=document.querySelectorAll('.app').length;}));
-  cats.forEach(c=>{const t=c.querySelector('h2');if(!t)return;
-    bar.appendChild(mk(t.textContent.trim(),()=>{cats.forEach(x=>x.style.display=x===c?'':'none');
-      if(cont)cont.textContent=c.querySelectorAll('.app').length;}));});
-  hero.appendChild(bar);
+  function chip(label,category){
+    const button=document.createElement('button');button.type='button';button.className='chip';button.textContent=label;
+    button.setAttribute('aria-pressed',category===null?'true':'false');
+    if(category===null)button.classList.add('ativo');
+    button.addEventListener('click',()=>{
+      selected=category;
+      bar.querySelectorAll('.chip').forEach(other=>{const active=other===button;other.classList.toggle('ativo',active);other.setAttribute('aria-pressed',String(active));});
+      apply(input?input.value:'');
+    });return button;
+  }
+  bar.appendChild(chip('Todas',null));
+  cats.forEach(cat=>{const heading=cat.querySelector('h2');if(heading)bar.appendChild(chip(heading.textContent.trim(),cat));});
+  hero.appendChild(bar);apply(input?input.value:'');
 })();
 </script>
 </body>
