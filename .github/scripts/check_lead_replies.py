@@ -89,16 +89,26 @@ def next_step(events):
 class Router:
     def __init__(self):
         self.key = os.environ.get('COMPOSIO_API_KEY')
-        self.user = os.environ.get('COMPOSIO_ENTITY_ID', 'default_user')
-        if not self.key:
-            raise MonitorError('Composio credential unavailable')
+        self.user = os.environ.get('COMPOSIO_USER_ID')
+        self.accounts = {name: os.environ.get('COMPOSIO_' + name + '_CONNECTED_ACCOUNT_ID')
+                         for name in ('NOTION', 'GMAIL')}
+        self.versions = {name: os.environ.get('COMPOSIO_' + name + '_TOOL_VERSION')
+                         for name in ('NOTION', 'GMAIL')}
+        if not self.key or not self.user:
+            raise MonitorError('Composio credential or explicit user configuration unavailable')
+        if not self.accounts['NOTION'] or not self.versions['NOTION']:
+            raise MonitorError('Explicit Notion account and tool version configuration unavailable')
     def call(self, slug, arguments):
         if slug not in ALLOWED:
             raise MonitorError('Action not permitted')
+        toolkit = slug.split('_', 1)[0]
+        if not self.accounts.get(toolkit) or not self.versions.get(toolkit):
+            raise MonitorError('Explicit account and version configuration unavailable for toolkit')
         try:
             response = requests.post('https://backend.composio.dev/api/v3/tools/execute/' + slug,
                 headers={'x-api-key': self.key, 'Content-Type': 'application/json'},
-                json={'user_id': self.user, 'arguments': arguments}, timeout=90)
+                json={'user_id': self.user, 'connected_account_id': self.accounts[toolkit],
+                      'version': self.versions[toolkit], 'arguments': arguments}, timeout=90)
             if response.status_code != 200:
                 raise MonitorError('Router HTTP ' + str(response.status_code) + ' for ' + slug)
             result = response.json()
@@ -154,6 +164,11 @@ def run():
         raise MonitorError('Notion target is not an active private page')
     blocks = blocks_from(router, page)
     end, pending = completion(blocks)
+    if '--preflight' in sys.argv:
+        if not any(b.get('id') == status_id for b in blocks):
+            raise MonitorError('Private status block unavailable')
+        print('Private Notion read-only preflight OK; mail and writes skipped.')
+        return
     checked = dt.datetime.now(UTC).isoformat()
     if end:
         router.call('NOTION_UPDATE_BLOCK', {'block_id': status_id, 'block_type': 'paragraph',
