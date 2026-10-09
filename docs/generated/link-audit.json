@@ -1,14 +1,12 @@
 {
-  "date": "2026-10-08T22:36:15.958755+00:00",
-  "total": 105,
-  "ok": 91,
+  "date": "2026-10-09T03:22:13.278361+00:00",
+  "total": 107,
+  "ok": 95,
   "skipped": 10,
-  "broken_count": 4,
+  "broken_count": 2,
   "broken": [
-    "https://www.fecasurf.com.br/",
     "https://www.spsurf.com.br",
-    "https://www.spsurf.com.br/",
-    "https://www.villablumaresias.com.br"
+    "https://www.spsurf.com.br/"
   ],
   "results": [
     {
@@ -172,9 +170,19 @@
       "http": null
     },
     {
+      "url": "https://mental.asf.surf/#mental-de-competidora",
+      "status": "ok",
+      "http": 200
+    },
+    {
       "url": "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1643806355443576",
       "status": "skipped",
       "http": null
+    },
+    {
+      "url": "https://treino.asf.surf/#plano-30-dias",
+      "status": "ok",
+      "http": 200
     },
     {
       "url": "https://wa.me",
@@ -183,8 +191,8 @@
     },
     {
       "url": "https://www.fecasurf.com.br/",
-      "status": "broken",
-      "http": "URLError"
+      "status": "ok",
+      "http": 200
     },
     {
       "url": "https://www.googletagmanager.com",
@@ -223,8 +231,8 @@
     },
     {
       "url": "https://www.villablumaresias.com.br",
-      "status": "broken",
-      "http": "URLError"
+      "status": "ok",
+      "http": 200
     },
     {
       "url": "./",

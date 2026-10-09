@@ -1,18 +1,18 @@
 {
-  "date": "2026-10-08",
+  "date": "2026-10-09",
   "new_tip": {
-    "category": "Equipamento",
-    "title": "Qual leash escolher",
-    "content": "Use leash do mesmo tamanho ou ligeiramente menor que a prancha.",
+    "category": "Saúde",
+    "title": "Treino de força",
+    "content": "Foque em exercícios compostos: remada com elástico, agachamentos, plank. 2-3x/semana.",
     "tags": [
-      "Equipamento",
-      "Leash"
+      "Saúde",
+      "Treino"
     ]
   },
   "new_utility": {
-    "name": "Calculadora de Maré",
-    "description": "Horários de maré",
-    "icon": "🗓️"
+    "name": "Previsão de Ondas",
+    "description": "7 dias de previsão",
+    "icon": "🌊"
   },
   "improvements": [
     {
@@ -26,5 +26,5 @@
       "priority": "high"
     }
   ],
-  "generated_at": "2026-10-08T22:33:47.933854"
+  "generated_at": "2026-10-09T03:21:52.806364"
 }
