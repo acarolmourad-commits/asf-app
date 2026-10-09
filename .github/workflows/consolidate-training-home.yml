@@ -1,0 +1,57 @@
+name: Consolidate home training guide
+on:
+  push:
+    branches: [main]
+    paths: ['.github/workflows/consolidate-training-home.yml']
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: consolidate-training-home
+  cancel-in-progress: false
+jobs:
+  consolidate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - name: Replace only the approved training guide card
+        shell: python
+        run: |
+          import pathlib, re
+          path = pathlib.Path('index.html')
+          old = path.read_text()
+          marker = '<!-- Premium Article 3: plano centralizado no ASF Treino -->'
+          if marker in old:
+              print('Home already consolidated; no change.')
+              raise SystemExit(0)
+          pattern = r'<!-- Premium Article 3 -->.*?(?=<!-- Unlock hint -->)'
+          assert len(re.findall(pattern, old, re.S)) == 1, 'Unexpected home markup; abort.'
+          replacement = '''<!-- Premium Article 3: plano centralizado no ASF Treino -->
+          <div class="card" style="margin-bottom:16px;border-left:4px solid #00A8CC;">
+            <span style="background:#00A8CC;color:#fff;padding:2px 8px;border-radius:12px;font-size:10px;font-weight:600;">📖 GUIA · ASF TREINO</span>
+            <h4 style="font-size:15px;margin-top:8px;">💪 Plano de Treino: 30 Dias para Surfar Melhor</h4>
+            <div id="premium-3-full" style="margin-top:12px;">
+              <p style="font-size:13px;color:var(--gray-600);line-height:1.8;">Organize sua prática em quatro semanas: base, força, controle e integração, com os dias 29 e 30 dedicados à revisão e ao próximo ciclo. O guia completo está no ASF Treino, junto ao checklist semanal e às rotinas de mobilidade. Adapte a prática ao seu nível e busque orientação qualificada; não há garantia de resultado em 30 dias.</p>
+              <a href="https://treino.asf.surf/#plano-30-dias" style="display:inline-block;margin-top:10px;padding:10px 16px;border-radius:999px;background:#00A8CC;color:#fff;text-decoration:none;font-weight:700;">Abrir plano no ASF Treino →</a>
+            </div>
+          </div>
+
+          '''
+          new = re.sub(pattern, lambda _: replacement, old, flags=re.S)
+          assert re.findall(r'<script\b.*?</script>', old, re.S) == re.findall(r'<script\b.*?</script>', new, re.S)
+          for tag in ('form', 'input', 'select', 'textarea', 'button'):
+              assert re.findall(r'<' + tag + r'\b[^>]*>', old) == re.findall(r'<' + tag + r'\b[^>]*>', new)
+          assert new.count('id="premium-3-full"') == old.count('id="premium-3-full"')
+          path.write_text(new)
+          print('Only the guide card changed; existing forms and scripts preserved.')
+      - name: Commit approved home summary only
+        run: |
+          if git diff --quiet -- index.html; then exit 0; fi
+          git config user.name 'ASF Publishing'
+          git config user.email 'asf.surffeminino@gmail.com'
+          git add index.html
+          git commit -m 'content: centralize training guide and link home to ASF Treino'
+          git push origin HEAD:main
