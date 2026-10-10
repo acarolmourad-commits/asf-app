@@ -1,155 +1,35 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Diário de Surf ASF — Registre suas Sessões e Evolua</title>
-  <meta name="description" content="Diário de surf gratuito: registre suas sessões, acompanhe sequência, ganhe badges e veja sua evolução. Dados ficam no seu aparelho. ASF — Associação de Surf Feminino.">
-  <meta name="robots" content="index,follow">
-  <link rel="canonical" href="https://acarolmourad-commits.github.io/asf-app/diario/">
-  <meta property="og:type" content="website">
-  <meta property="og:title" content="Diário de Surf ASF">
-  <meta property="og:description" content="Registre sessões, acompanhe streaks e ganhe badges de surf.">
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800&display=swap" rel="stylesheet">
-  <style>
-    *{margin:0;padding:0;box-sizing:border-box}
-    body{font-family:'Outfit',sans-serif;background:#F8F9FA;color:#0E2439}
-    header{background:linear-gradient(135deg,#0E2439,#FF6B6B);color:#fff;padding:28px 20px;text-align:center}
-    header h1{font-size:clamp(1.4rem,4vw,2rem)}
-    .wrap{max-width:820px;margin:0 auto;padding:20px 16px 48px}
-    .card{background:#fff;border-radius:16px;padding:20px;box-shadow:0 2px 10px rgba(0,0,0,.06);margin-bottom:14px}
-    .card h2{font-size:17px;margin-bottom:10px}
-    label{font-size:13px;font-weight:600;display:block;margin:8px 0 3px}
-    input,select,textarea{width:100%;padding:10px;border:1px solid #E4E6E9;border-radius:10px;font-size:14px;font-family:inherit}
-    button{background:#00A8CC;color:#fff;border:none;padding:13px 24px;border-radius:12px;font-size:15px;font-weight:700;cursor:pointer;width:100%;margin-top:12px}
-    .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(110px,1fr));gap:10px}
-    .stat{background:#F8F9FA;border-radius:12px;padding:14px;text-align:center}
-    .stat .v{font-size:1.5rem;font-weight:800;color:#00A8CC}
-    .stat .l{font-size:11px;color:#666;margin-top:3px}
-    .badges{display:flex;flex-wrap:wrap;gap:8px}
-    .badge{padding:8px 14px;border-radius:999px;font-size:13px;font-weight:600;background:#F0F2F5;color:#9A9A9A}
-    .badge.on{background:linear-gradient(135deg,#F4D03F,#FF6B6B);color:#fff}
-    .entry{background:#F8F9FA;border-radius:12px;padding:12px 14px;margin-bottom:8px;font-size:13px}
-    .entry b{color:#0E2439}
-    .entry .meta{color:#9A9A9A;font-size:12px;margin-top:2px}
-    .del{float:right;background:none;border:none;cursor:pointer;color:#FF6B6B;font-size:14px}
-    .links{display:grid;gap:10px;margin-top:8px}
-    .links a{display:block;background:#fff;border:1px solid #E4E6E9;border-radius:12px;padding:14px 16px;text-decoration:none;color:#0E2439;font-weight:600}
-    .links a span{color:#00A8CC}
-    footer{text-align:center;color:#9A9A9A;font-size:12px;padding:20px}
-    .empty{color:#9A9A9A;text-align:center;padding:16px;font-size:14px}
-    .priv{font-size:12px;color:#666;background:#DCFCE7;padding:10px 14px;border-radius:10px;margin-top:10px}
-  </style>
-    <link rel="stylesheet" href="/asf-app/asf-site-redesign.css">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Diário de Surf ASF — Registre sessões e aprendizados</title>
+<meta name="description" content="Organize sessões, aprendizados e próximos focos de surf. Diário local com edição, busca e backup JSON. Sem sincronização entre aparelhos.">
+<link rel="canonical" href="https://asf.surf/diario/">
+<style>
+*{box-sizing:border-box}body{margin:0;background:#f3f6f8;color:#0e2439;font-family:system-ui,sans-serif;line-height:1.6}header{background:#0e2439;color:white;padding:1.5rem}header a{color:#fff}main,header>div,footer{max-width:900px;margin:auto}main{padding:1rem}h1{font-size:clamp(1.5rem,4vw,2.2rem)}h2{font-size:1.3rem}h3{font-size:1.1rem;margin:0}section,.entry{background:white;border:1px solid #cbd5e1;border-radius:12px;padding:1.2rem;margin-bottom:1rem}.entry p{white-space:pre-wrap;overflow-wrap:anywhere}label{display:block;font-weight:600;margin-top:.8rem}input,select,textarea,button{font:inherit}input,select,textarea{width:100%;padding:.65rem;border:1px solid #64748b;border-radius:6px}textarea{min-height:80px;resize:vertical}button{margin:.6rem .4rem .2rem 0;padding:.65rem 1rem;border:1px solid #075b70;border-radius:6px;background:#075b70;color:white;cursor:pointer}button:disabled{cursor:default;background:#e2e8f0;color:#475569;border-color:#94a3b8}.danger{background:white;color:#9f1239;border-color:#9f1239}:focus-visible{outline:3px solid #b45309;outline-offset:3px}a{color:#075b70}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:1rem}.stats strong{display:block;font-size:1.6rem}.stats div{background:#eef5f8;padding:.8rem;border-radius:6px}#status{padding:1rem;background:#e0f2fe;border-left:4px solid #075b70;white-space:pre-wrap}.note{font-size:.9rem;color:#334155}.skip{position:absolute;top:-100px;padding:.6rem;background:white;z-index:10}.skip:focus{top:0}nav{display:flex;gap:1rem;flex-wrap:wrap}footer{padding:1rem}[hidden]{display:none!important}
+</style>
+<script defer src="./diario-core.js"></script>
+<script defer src="./diario.js"></script>
 </head>
 <body>
-<header>
-  <h1>🏄‍♀️ Diário de Surf</h1>
-  <p>Registre suas sessões, mantenha a sequência e evolua no mar • ASF</p>
-</header>
-<div class="wrap">
-  <div class="card">
-    <h2>📊 Sua evolução</h2>
-    <div class="stats">
-      <div class="stat"><div class="v" id="sTotal">0</div><div class="l">Sessões</div></div>
-      <div class="stat"><div class="v" id="sHoras">0h</div><div class="l">Horas no mar</div></div>
-      <div class="stat"><div class="v" id="sStreak">0</div><div class="l">Semanas seguidas</div></div>
-      <div class="stat"><div class="v" id="sPraias">0</div><div class="l">Praias diferentes</div></div>
-    </div>
-  </div>
-
-  <div class="card">
-    <h2>🏆 Badges</h2>
-    <div class="badges" id="badges"></div>
-  </div>
-
-  <div class="card">
-    <h2>✍️ Registrar sessão</h2>
-    <label>Data</label><input type="date" id="fData">
-    <label>Praia</label>
-    <select id="fPraia">
-      <option>Bertioga</option><option>Santos</option><option>São Vicente</option><option>Praia Grande</option>
-      <option>Guarujá</option><option>São Sebastião</option><option>Maresias</option><option>Ubatuba</option><option>Outra</option>
-    </select>
-    <label>Duração (minutos)</label><input type="number" id="fDur" value="60" min="5">
-    <label>Como estava o mar?</label>
-    <select id="fMar"><option>🌱 Pequeno e tranquilo</option><option>🌊 Perfeito</option><option>⚡ Grande e desafiador</option><option>💨 Ventando</option></select>
-    <label>Notas (manobras, sensações, aprendizados)</label>
-    <textarea id="fNotas" rows="2" placeholder="Ex: consegui ficar em pé 3x, drop na esquerda..."></textarea>
-    <button onclick="addEntry()">Salvar sessão 🌊</button>
-    <div class="priv">🔒 Seus dados ficam 100% no seu aparelho (localStorage). Nada é enviado para servidores.</div>
-  </div>
-
-  <div class="card">
-    <h2>📖 Sessões recentes</h2>
-    <div id="entries"></div>
-  </div>
-
-  <div class="card">
-    <h2>🔗 Explore mais</h2>
-    <div class="links">
-      <a href="../">🏄‍♀️ <span>ASF App</span> — home da comunidade</a>
-      <a href="../previsao-surf/">🌊 Previsão de ondas em tempo real</a>
-      <a href="../mareas/">🌙 Guia de marés e fases da lua</a>
-      <a href="../bem-estar/surf-saude-mental-mulheres.html">💆 Surf e saúde mental</a>
-      <a href="https://praia.digital/apps/" target="_blank" rel="noopener">🧮 <span>Praia Digital Apps</span> — simuladores imobiliários do litoral</a>
-    </div>
-  </div>
-</div>
-<footer>ASF — Associação de Surf Feminino • <a href="../" style="color:#00A8CC">Voltar ao app</a></footer>
-<script>
-const KEY = 'asf-diario-surf';
-const get = () => JSON.parse(localStorage.getItem(KEY) || '[]');
-const save = (d) => localStorage.setItem(KEY, JSON.stringify(d));
-document.getElementById('fData').valueAsDate = new Date();
-
-const BADGES = [
-  {id:'b1', icon:'🌊', name:'Primeira sessão', test: d => d.length >= 1},
-  {id:'b3', icon:'🏄‍♀️', name:'3 sessões', test: d => d.length >= 3},
-  {id:'b10', icon:'🔥', name:'10 sessões', test: d => d.length >= 10},
-  {id:'b25', icon:'💎', name:'25 sessões', test: d => d.length >= 25},
-  {id:'b5h', icon:'⏱️', name:'5 horas no mar', test: d => d.reduce((s,e)=>s+e.dur,0) >= 300},
-  {id:'bpraias', icon:'🗺️', name:'Exploradora (3 praias)', test: d => new Set(d.map(e=>e.praia)).size >= 3},
-  {id:'bstreak', icon:'📆', name:'4 semanas seguidas', test: d => streak(d) >= 4},
-];
-
-function streak(d){
-  if (!d.length) return 0;
-  const weeks = new Set(d.map(e => { const dt = new Date(e.data); const o = new Date(dt); o.setDate(dt.getDate()-dt.getDay()); return o.toDateString(); }));
-  let s = 0, cur = new Date(); cur.setDate(cur.getDate()-cur.getDay());
-  while (weeks.has(cur.toDateString())) { s++; cur.setDate(cur.getDate()-7); }
-  return s;
-}
-
-function render(){
-  const d = get().sort((a,b)=> b.data.localeCompare(a.data));
-  document.getElementById('sTotal').textContent = d.length;
-  document.getElementById('sHoras').textContent = (d.reduce((s,e)=>s+e.dur,0)/60).toFixed(1)+'h';
-  document.getElementById('sStreak').textContent = streak(d);
-  document.getElementById('sPraias').textContent = new Set(d.map(e=>e.praia)).size;
-  document.getElementById('badges').innerHTML = BADGES.map(b =>
-    `<span class="badge ${b.test(d)?'on':''}">${b.icon} ${b.name}</span>`).join('');
-  document.getElementById('entries').innerHTML = d.length ? d.slice(0,10).map((e,i) =>
-    `<div class="entry"><button aria-label="✕" class="del" onclick="del(${d.indexOf(e)})" title="Excluir">✕</button>
-     <b>${e.praia}</b> — ${e.mar}<div class="meta">${new Date(e.data+'T12:00').toLocaleDateString('pt-BR')} • ${e.dur} min${e.notas ? ' • '+e.notas : ''}</div></div>`
-  ).join('') : '<div class="empty">Nenhuma sessão ainda. Registre a primeira! 🌊</div>';
-}
-
-function addEntry(){
-  const data = document.getElementById('fData').value;
-  if (!data) { alert('Escolha a data!'); return; }
-  const d = get();
-  d.push({ data, praia: document.getElementById('fPraia').value,
-           dur: parseInt(document.getElementById('fDur').value)||60,
-           mar: document.getElementById('fMar').value,
-           notas: document.getElementById('fNotas').value.trim() });
-  save(d);
-  document.getElementById('fNotas').value = '';
-  render();
-}
-function del(i){ const d = get(); d.splice(i,1); save(d); render(); }
-render();
-</script>
-    <script src="/asf-app/asf-redesign.js" defer></script>
-</body>
-</html>
+<a class="skip" href="#main">Pular para o conteúdo</a>
+<header><div><nav aria-label="Navegação principal"><a href="../">App ASF</a><a href="../guia-apps.html">Guia de Apps</a></nav><h1>Diário de Surf</h1><p>Registre o que observou e leve uma pergunta para sua próxima aula.</p></div></header>
+<main id="main">
+<noscript>Este diário precisa de JavaScript para acessar o armazenamento local. Nenhum registro será apagado com JavaScript desativado.</noscript>
+<p id="status" role="status" aria-live="polite" aria-atomic="true">Carregando diário…</p>
+<section aria-labelledby="overview"><h2 id="overview">Seu histórico</h2><div class="grid stats"><div><strong id="sTotal">0</strong>Sessões</div><div><strong id="sHoras">0 h</strong>Tempo registrado</div><div><strong id="sPraias">0</strong>Praias ou picos</div><div><strong id="sRecent">0</strong>Sessões nos últimos 30 dias</div></div><p class="note">Resumo descritivo, não uma medida de desempenho ou recomendação de treino. Respeite descanso, condições locais e orientação profissional.</p></section>
+<section aria-labelledby="new"><h2 id="new">Registrar ou editar sessão</h2>
+<form id="session-form"><div class="grid"><div><label for="fData">Data</label><input id="fData" name="data" type="date" min="1900-01-01" required></div><div><label for="fPraia">Praia ou pico</label><input id="fPraia" name="praia" maxlength="120" required placeholder="Nome livre do local"></div></div>
+<label for="fDur">Duração (minutos)</label><input id="fDur" name="dur" type="number" min="1" max="1440" step="1" value="60" required>
+<label for="fMar">Condições observadas</label><input id="fMar" name="mar" maxlength="200" placeholder="Opcional: vento, ondas ou outras observações">
+<label for="fNotas">Notas (opcional)</label><textarea id="fNotas" name="notas" maxlength="4000"></textarea>
+<label for="fAprendizado">O que aprendi? (opcional)</label><textarea id="fAprendizado" name="aprendizado" maxlength="2000"></textarea>
+<label for="fFoco">Próximo foco ou pergunta (opcional)</label><textarea id="fFoco" name="proximoFoco" maxlength="2000"></textarea>
+<button id="save" type="submit" disabled>Salvar sessão</button><button id="cancel" type="button" hidden>Cancelar edição</button></form>
+<p class="note">Os registros são armazenados neste navegador, nesta origem (domínio e protocolo). Não há nuvem, criptografia, sincronização ou recuperação automática. A troca de aparelho ou domínio, limpeza do navegador ou modo privado pode afetar o acesso. Evite dados de terceiros e faça backups privados. Este módulo não transmite os registros; extensões e outros scripts na mesma origem podem ter acesso ao armazenamento.</p></section>
+<section aria-labelledby="history"><h2 id="history">Sessões e busca</h2><label for="search">Buscar praia, notas ou aprendizados</label><input id="search" type="search" maxlength="200"><div class="grid"><div><label for="from">Desde</label><input id="from" type="date"></div><div><label for="to">Até</label><input id="to" type="date"></div></div><div id="entries"></div><nav aria-label="Paginação"><button id="prev" type="button" disabled>Anterior</button><p id="page">Página 1 de 1</p><button id="next" type="button" disabled>Próxima</button></nav></section>
+<section aria-labelledby="backup"><h2 id="backup">Backup e recuperação</h2><button id="export" type="button" disabled>Baixar backup JSON</button><button id="raw" type="button">Baixar original RAW</button><button id="undo" type="button" disabled>Desfazer última alteração</button><button id="reload" type="button">Recarregar dados</button><p class="note">A primeira alteração preserva uma cópia do conteúdo original sem sobrescrever um backup existente. Não há importação nesta versão. RAW permite guardar o texto original quando o JSON está inválido. Se o armazenamento estiver indisponível, não será possível lê-lo nem baixá-lo. Um desfazer está disponível durante esta sessão; recarregar descarta esse histórico. Abas simultâneas têm detecção otimista de conflito, não um bloqueio transacional.</p></section>
+<section aria-labelledby="explore"><h2 id="explore">Continue com a ASF</h2><nav aria-label="Ferramentas relacionadas"><a href="../guia-apps.html">Escolher outra ferramenta</a><a href="../guias/planejar-surf-trip/">Planejar surf trip</a><a href="../previsao-surf/">Consultar previsão</a></nav><p class="note">Previsões são estimativas. Avalie condições locais, seu nível e orientações de profissionais antes de entrar no mar.</p></section>
+</main><footer>ASF — Associação de Surf Feminino · <a href="../">Voltar ao App</a></footer>
+</body></html>
