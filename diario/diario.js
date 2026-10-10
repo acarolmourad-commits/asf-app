@@ -2,8 +2,10 @@
 (function () {
   'use strict';
   const C = window.DiarioCore, $ = id => document.getElementById(id);
-  let store, editId = null, page = 1;
+  let store, editId = null, page = 1, cleanFormSnapshot = null;
   const fields = {data:'fData',praia:'fPraia',dur:'fDur',mar:'fMar',notas:'fNotas',aprendizado:'fAprendizado',proximoFoco:'fFoco'};
+  const formSnapshot = () => JSON.stringify(Object.values(fields).map(id => String($(id).value)));
+  const hasUnsavedInput = () => editId !== null || (cleanFormSnapshot !== null && formSnapshot() !== cleanFormSnapshot);
   const say = message => { $('status').textContent = message; };
   function node(tag, content, className) {
     const el = document.createElement(tag); el.textContent = content;
@@ -12,13 +14,20 @@
   function clear() {
     editId = null; $('session-form').reset(); $('fData').value = C.today();
     $('save').textContent = 'Salvar sessão'; $('cancel').hidden = true;
+    cleanFormSnapshot = formSnapshot();
   }
   function render() {
     if(!store) return;
     const entries = store.entries(), stats = C.summary(entries);
     $('sTotal').textContent = stats.total; $('sHoras').textContent = (stats.minutes/60).toFixed(1)+' h';
     $('sPraias').textContent = stats.beaches; $('sRecent').textContent = stats.recent;
-    const result = C.query(entries,{term:$('search').value,from:$('from').value,to:$('to').value,page}); page = result.page;
+    let result, filterNotice = '';
+    try { result = C.query(entries,{term:$('search').value,from:$('from').value,to:$('to').value,page}); }
+    catch(error) {
+      filterNotice = 'Filtro de datas inválido: mostrando a busca sem o intervalo. Corrija as datas.';
+      result = C.query(entries,{term:$('search').value,page});
+    }
+    page = result.page;
     $('entries').replaceChildren();
     if(!result.total) $('entries').append(node('p','Nenhuma sessão corresponde aos filtros.'));
     for(const entry of result.items) {
@@ -41,10 +50,11 @@
       });
       card.append(edit,del); $('entries').append(card);
     }
-    $('page').textContent='Página '+result.page+' de '+result.pages+' · '+result.total+' sessões';
+    $('page').textContent='Página '+result.page+' de '+result.pages+' · '+result.total+' sessões'+(filterNotice ? ' · '+filterNotice : '');
     $('prev').disabled=result.page===1; $('next').disabled=result.page===result.pages;
     $('undo').disabled=!store.canUndo();
     $('save').disabled=store.status().blocked; $('export').disabled=store.status().blocked;
+    return filterNotice;
   }
   function download(content, filename, type) {
     const url=URL.createObjectURL(new Blob([content],{type})), a=document.createElement('a');
@@ -54,7 +64,12 @@
   function boot() {
     clear(); $('fData').max=C.today();
     try {store=C.createStore(window.localStorage); store.load(); render(); say('Diário carregado. Faça backups periódicos.');}
-    catch(e) {say('Não foi possível carregar: '+e.message+' Nenhum dado foi apagado.'); $('save').disabled=true; $('export').disabled=true;}
+    catch(e) {
+      say('Não foi possível carregar: '+e.message+' Nenhum dado foi apagado.');
+      for(const id of ['save','export','undo','prev','next']) $(id).disabled=true;
+      $('entries').replaceChildren(); $('page').textContent='Dados indisponíveis; exporte o original RAW se possível.';
+      for(const id of ['sTotal','sHoras','sPraias','sRecent']) $(id).textContent='—';
+    }
   }
   $('session-form').addEventListener('submit',event=>{
     event.preventDefault();
@@ -65,10 +80,10 @@
   });
   $('cancel').addEventListener('click',()=>{clear(); say('Edição cancelada.');});
   $('undo').addEventListener('click',()=>{try{store.undo(); clear(); render(); say('Última alteração desfeita.');}catch(e){say(e.message);}});
-  for(const id of ['search','from','to']) $(id).addEventListener('input',()=>{page=1; try{render();}catch(e){say(e.message);}});
-  for(const [id,step] of [['prev',-1],['next',1]]) $(id).addEventListener('click',()=>{page+=step; try{render();}catch(e){say(e.message);}});
+  for(const id of ['search','from','to']) $(id).addEventListener('input',()=>{page=1; try{const notice=render(); if(notice) say(notice);}catch(e){say(e.message);}});
+  for(const [id,step] of [['prev',-1],['next',1]]) $(id).addEventListener('click',()=>{page+=step; try{const notice=render(); if(notice) say(notice);}catch(e){say(e.message);}});
   $('reload').addEventListener('click',()=>{
-    if(editId!==null && !window.confirm('Recarregar e descartar a edição ainda não salva?')) return;
+    if(hasUnsavedInput() && !window.confirm('Recarregar e descartar os dados ainda não salvos do formulário?')) return;
     boot();
   });
   $('export').addEventListener('click',()=>{try{download(store.exportJSON(),'asf-diario-'+C.today()+'.json','application/json'); say('Backup JSON gerado. Guarde-o em local privado.');}catch(e){say(e.message);}});

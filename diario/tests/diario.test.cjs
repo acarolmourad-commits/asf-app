@@ -44,7 +44,7 @@ test('ID gerado duplicado é rejeitado sem gravar',()=>{const s=storage(JSON.str
 test('HTML/interface usam módulos locais e textContent para registros',()=>{const fs=require('node:fs'),path=require('node:path');const html=fs.readFileSync(path.join(__dirname,'../index.html'),'utf8'),ui=fs.readFileSync(path.join(__dirname,'../diario.js'),'utf8');assert(!/\son\w+=/i.test(html));assert(!ui.includes('innerHTML'));assert(ui.includes('textContent'));assert(html.includes('aria-live="polite"'));assert(html.includes('src="./diario-core.js"'));assert(html.includes('src="./diario.js"'));});
 function uiHarness(raw=null) {
  const fs=require('node:fs'),vm=require('node:vm'),path=require('node:path');
- class El {constructor(tag='div'){this.tag=tag;this.children=[];this.handlers={};this.value='';this.disabled=false;this.hidden=false;this.textContent='';this.attrs={};}append(...els){this.children.push(...els);}replaceChildren(...els){this.children=els;}setAttribute(k,v){this.attrs[k]=v;}addEventListener(k,f){this.handlers[k]=f;}focus(){}remove(){}click(){if(this.handlers.click)this.handlers.click({preventDefault(){}});}reset(){for(const x of Object.values(els))x.value='';els.fDur.value='60';}}
+ class El {constructor(tag='div'){this.tag=tag;this.children=[];this.handlers={};this.value='';this.disabled=false;this.hidden=false;this.textContent='';this.attrs={};}append(...els){this.children.push(...els);}replaceChildren(...els){this.children=els;}setAttribute(k,v){this.attrs[k]=v;}addEventListener(k,f){this.handlers[k]=f;}focus(){}remove(){}click(){if(this.handlers.click)this.handlers.click({preventDefault(){}});}reset(){for(const id of ['fData','fPraia','fDur','fMar','fNotas','fAprendizado','fFoco'])els[id].value='';els.fDur.value='60';}}
  const ids=['status','session-form','fData','fPraia','fDur','fMar','fNotas','fAprendizado','fFoco','save','cancel','sTotal','sHoras','sPraias','sRecent','search','from','to','entries','page','prev','next','undo','export','raw','reload'];const els=Object.fromEntries(ids.map(x=>[x,new El()])),s=storage(raw),downloads=[];
  const doc={getElementById:id=>els[id],createElement:tag=>new El(tag),body:new El()};
  const win={DiarioCore:C,localStorage:s,confirm:()=>true,setTimeout:f=>f(),addEventListener(){}};
@@ -60,3 +60,28 @@ test('UI cancelamento da confirmação não exclui',()=>{const {els,s,win}=uiHar
 test('UI edição mantém uma única sessão',()=>{const {els,s,submit}=uiHarness(JSON.stringify([entry()]));els.entries.children[0].children.at(-2).click();submit({dur:120});assert.equal(JSON.parse(s.getItem(C.KEY)).length,1);assert.equal(JSON.parse(s.getItem(C.KEY))[0].dur,120);});
 test('UI corrupção bloqueia gravação e permite exportar RAW',()=>{const {els,s,downloads}=uiHarness('{bad');assert(els.save.disabled);assert(els.export.disabled);els.raw.click();assert.equal(downloads.length,1);assert.equal(s.getItem(C.KEY),'{bad');});
 test('UI paginação mostra próxima página de registros',()=>{const {els}=uiHarness(JSON.stringify(Array.from({length:11},(_,i)=>entry({id:'s'+i}))));assert.equal(els.entries.children.length,10);els.next.click();assert.equal(els.entries.children.length,1);assert.match(els.page.textContent,/Página 2 de 2/);});
+
+// Regressões: rascunho não salvo, filtros inválidos e recarga bloqueada.
+test('UI recarga de sessão nova pede confirmação e cancelar preserva formulário',()=>{
+ const {els,s,win}=uiHarness();els.fPraia.value='Rascunho não salvo';els.fNotas.value='Texto privado fictício';let calls=0;
+ win.confirm=()=>{calls++;return false;};els.reload.click();assert.equal(calls,1);assert.equal(els.fPraia.value,'Rascunho não salvo');assert.equal(els.fNotas.value,'Texto privado fictício');assert.equal(s.writes.length,0);
+});
+test('UI recarga confirmada descarta rascunho sem gravar',()=>{
+ const {els,s,win}=uiHarness();els.fPraia.value='Rascunho';let calls=0;win.confirm=()=>{calls++;return true;};els.reload.click();assert.equal(calls,1);assert.equal(els.fPraia.value,'');assert.equal(s.writes.length,0);
+});
+test('UI recarga de formulário limpo não pede confirmação',()=>{
+ const {els,win}=uiHarness();let calls=0;win.confirm=()=>{calls++;return false;};els.reload.click();assert.equal(calls,0);
+});
+test('UI salvar com intervalo inválido não relata falha após gravação',()=>{
+ const {els,s,submit}=uiHarness();els.from.value='2026-10-10';els.to.value='2026-10-01';submit();
+ assert.equal(JSON.parse(s.getItem(C.KEY)).length,1);assert.match(els.status.textContent,/Sessão salva/);assert.doesNotMatch(els.status.textContent,/Não foi possível salvar/);assert.match(els.page.textContent,/Filtro de datas inválido/);
+});
+test('UI filtro inválido mantém lista utilizável e anuncia problema',()=>{
+ const {els}=uiHarness(JSON.stringify([entry()]));els.from.value='2026-10-10';els.to.value='2026-10-01';els.to.handlers.input();assert.equal(els.entries.children.length,1);assert.match(els.page.textContent,/Filtro de datas inválido/);assert.match(els.status.textContent,/Filtro de datas inválido/);
+});
+test('UI desfazer com intervalo inválido mantém resultado e mensagem correta',()=>{
+ const {els,s,submit}=uiHarness();submit();els.from.value='2026-10-10';els.to.value='2026-10-01';els.undo.click();assert.equal(JSON.parse(s.getItem(C.KEY)).length,0);assert.match(els.status.textContent,/Última alteração desfeita/);
+});
+test('UI recarga corrompida remove ações obsoletas e desabilita mutações',()=>{
+ const {els,s,submit}=uiHarness();submit();assert(!els.undo.disabled);s.map.set(C.KEY,'{bad');els.reload.click();assert(els.undo.disabled);assert(els.save.disabled);assert(els.export.disabled);assert(els.prev.disabled);assert(els.next.disabled);assert.equal(els.entries.children.length,0);assert.equal(s.getItem(C.KEY),'{bad');
+});
