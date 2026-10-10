@@ -1,5 +1,5 @@
 {
-  "date": "2026-10-09",
+  "date": "2026-10-10",
   "new_tip": {
     "category": "Técnica",
     "title": "Como fazer o bottom turn",
@@ -10,9 +10,9 @@
     ]
   },
   "new_utility": {
-    "name": "Previsão de Ondas",
-    "description": "7 dias de previsão",
-    "icon": "🌊"
+    "name": "Calculadora de Prancha",
+    "description": "Volume ideal",
+    "icon": "🧮"
   },
   "improvements": [
     {
@@ -21,10 +21,10 @@
       "priority": "high"
     },
     {
-      "type": "content",
-      "title": "Mais dicas técnicas avançadas",
-      "priority": "high"
+      "type": "layout",
+      "title": "Modo escuro",
+      "priority": "medium"
     }
   ],
-  "generated_at": "2026-10-09T21:56:14.401233"
+  "generated_at": "2026-10-10T03:01:45.610098"
 }
