@@ -1,0 +1,39 @@
+name: unify-cutback-one-shot
+on:
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  edit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Replace inline cutback guide with summary card linking to ASF Manobras
+        run: |
+          python3 - <<'PYEOF'
+          h = open('index.html', encoding='utf-8').read()
+          start = h.find('        <!-- Premium Article 1 -->')
+          end = h.find('        <!-- Premium Article 2: guia centralizado no ASF Mental -->')
+          assert start > 0 and end > start, 'markers not found'
+          new_card = '''        <!-- Premium Article 1: guia centralizado no ASF Manobras -->
+          <div class="card" style="margin-bottom:16px;border-left:4px solid #f39c12;">
+            <span style="background:linear-gradient(135deg,#f39c12,#e67e22);color:#fff;padding:2px 8px;border-radius:12px;font-size:10px;font-weight:600;">📖 GUIA · ASF MANOBRAS</span>
+            <h4 style="font-size:15px;margin-top:8px;">🏄‍♀️ Guia Completo: Como Fazer o Cutback Perfeito</h4>
+            <div id="premium-1-full" style="margin-top:12px;">
+              <p style="font-size:13px;color:var(--gray-600);line-height:1.8;">Técnica avançada passo a passo: velocidade, olhar, peso na traseira e o retorno — com os erros mais comuns e um exercício no seco com skate. O guia completo está no ASF Manobras, na trilha de manobras com checklist e XP.</p>
+              <a href="https://acarolmourad-commits.github.io/asf-manobras/#cutback" style="display:inline-block;margin-top:10px;padding:10px 16px;border-radius:999px;background:#f39c12;color:#fff;text-decoration:none;font-weight:700;">Abrir guia no ASF Manobras →</a>
+            </div>
+          </div>
+
+          '''
+          h = h[:start] + new_card + h[end:]
+          open('index.html', 'w', encoding='utf-8').write(h)
+          print('home size:', len(h))
+          PYEOF
+      - name: Commit and push
+        run: |
+          git config user.name "acarolmourad-commits"
+          git config user.email "acarol.mourad@gmail.com"
+          git add index.html
+          git commit -m "refactor: guia cutback da home vira card-resumo -> ASF Manobras (conteúdo canônico unificado)"
+          git push
