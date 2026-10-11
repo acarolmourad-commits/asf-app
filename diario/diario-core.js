@@ -96,6 +96,7 @@
       raw: () => storage.getItem(KEY),
       exportJSON: () => {
         if (blocked) throw new Error('Use a exportação original RAW; os registros não puderam ser validados.');
+        if (storage.getItem(KEY) !== snapshot) throw new Error('Outra aba alterou o diário. Recarregue antes de exportar o backup JSON.');
         return JSON.stringify(state, null, 2);
       },
       canUndo: () => undoState !== null && !blocked,

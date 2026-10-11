@@ -85,3 +85,21 @@ test('UI desfazer com intervalo inválido mantém resultado e mensagem correta',
 test('UI recarga corrompida remove ações obsoletas e desabilita mutações',()=>{
  const {els,s,submit}=uiHarness();submit();assert(!els.undo.disabled);s.map.set(C.KEY,'{bad');els.reload.click();assert(els.undo.disabled);assert(els.save.disabled);assert(els.export.disabled);assert(els.prev.disabled);assert(els.next.disabled);assert.equal(els.entries.children.length,0);assert.equal(s.getItem(C.KEY),'{bad');
 });
+
+test('backup JSON recusa snapshot antigo; RAW atual e recarga preservam alterações de outra aba',()=>{
+  const {s,store}=setup(JSON.stringify([entry({id:'initial'})]));
+  const other=C.createStore(s,{day:()=>DAY,id:()=> 'other-tab'});
+  other.load(); other.upsert(entry({praia:'Guaiúba',notas:'registro mais recente'}));
+  const current=s.getItem(C.KEY), backup=s.getItem(C.BACKUP);
+  s.writes.length=0;
+  assert.throws(()=>store.exportJSON(),/Outra aba.*Recarregue/);
+  assert.equal(store.raw(),current);
+  assert.equal(s.getItem(C.BACKUP),backup);
+  assert.deepEqual(s.writes,[]);
+  assert.equal(store.entries().length,1);
+  store.load();
+  const exported=JSON.parse(store.exportJSON());
+  assert.equal(exported.length,2);
+  assert.equal(exported.find(x=>x.id==='other-tab').notas,'registro mais recente');
+  assert.deepEqual(s.writes,[]);
+});
