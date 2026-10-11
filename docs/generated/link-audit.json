@@ -1,7 +1,7 @@
 {
-  "date": "2026-10-10T20:48:11.400262+00:00",
-  "total": 107,
-  "ok": 95,
+  "date": "2026-10-11T02:32:52.257989+00:00",
+  "total": 109,
+  "ok": 97,
   "skipped": 10,
   "broken_count": 2,
   "broken": [
@@ -161,6 +161,11 @@
     },
     {
       "url": "https://images.unsplash.com",
+      "status": "ok",
+      "http": 200
+    },
+    {
+      "url": "https://manobras.asf.surf/#guia-cutback-completo",
       "status": "ok",
       "http": 200
     },
@@ -458,6 +463,12 @@
     },
     {
       "url": "hospedagens/",
+      "status": "ok",
+      "http": 200,
+      "local": true
+    },
+    {
+      "url": "js/asf-i18n.js",
       "status": "ok",
       "http": 200,
       "local": true
