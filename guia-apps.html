@@ -20,7 +20,7 @@
 {"@context":"https://schema.org","@type":"CollectionPage","name":"Guia de Apps ASF","url":"https://acarolmourad-commits.github.io/asf-app/guia-apps.html","inLanguage":"pt-BR","isPartOf":{"@type":"WebSite","name":"ASF — Associação Surf Feminino","url":"https://acarolmourad-commits.github.io/asf-app/"}}
 </script>
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Quantos apps tem a rede ASF?","acceptedAnswer":{"@type":"Answer","text":"A constelação ASF tem mais de 50 aplicativos web gratuitos, cobrindo previsão de ondas, previsão do tempo, treinos, segurança, bem-estar, comunidade, jogos educativos e ferramentas do dia a dia da surfista."}},{"@type":"Question","name":"Os apps ASF precisam de cadastro ou instalação?","acceptedAnswer":{"@type":"Answer","text":"Não. Todos os apps rodam direto no navegador, sem instalação e sem login. Seus dados e XP ficam salvos no seu próprio navegador (localStorage)."}},{"@type":"Question","name":"Como o XP funciona entre os apps?","acceptedAnswer":{"@type":"Answer","text":"Cada app distribui XP por ações (registrar sessão, completar treino, acertar quiz). O XP é compartilhado entre todos os apps e aparece no ASF Ranking com níveis de Beira-mar a Rainha do Pico."}}]}
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Quantos apps tem a rede ASF?","acceptedAnswer":{"@type":"Answer","text":"A constelação ASF tem mais de 50 aplicativos web gratuitos, cobrindo previsão de ondas, previsão do tempo, treinos, segurança, bem-estar, comunidade, jogos educativos e ferramentas do dia a dia da surfista."}},{"@type":"Question","name":"Os apps ASF precisam de cadastro ou instalação?","acceptedAnswer":{"@type":"Answer","text":"Os aplicativos web podem ser acessados no navegador. Cadastro, instalação opcional e armazenamento variam por recurso; confira as orientações e a política de privacidade do app escolhido. Não inclua dados pessoais sensíveis nos registros."}},{"@type":"Question","name":"Como o XP funciona entre os apps?","acceptedAnswer":{"@type":"Answer","text":"Os recursos de XP variam conforme o aplicativo. Dados locais pertencem à origem e ao navegador usados; não suponha sincronização automática entre apps, domínios ou aparelhos. Confira as orientações de cada app antes de trocar de dispositivo."}}]}
 </script>
 <style>
 :root{--p:#00A8CC;--d:#0E2439;--u:#9B59B6;--rosa:#ff4d8d;--bg:#F7FBFC;--g:#5A6B7A}
@@ -45,13 +45,14 @@ header p{opacity:.95;margin-top:8px;max-width:640px;margin-left:auto;margin-righ
 details{margin:.5rem 0;border:1px solid #E5EEF2;border-radius:10px;padding:.7rem 1rem;background:#fff}
 summary{cursor:pointer;font-weight:700;color:var(--u)}
 footer{text-align:center;font-size:12.5px;color:var(--g);padding:24px;border-top:1px solid #E5EEF2}
+nav a:focus-visible,main a:focus-visible{outline:3px solid var(--u);outline-offset:4px;border-radius:4px}
 </style>
     <link rel="stylesheet" href="/asf-app/asf-site-redesign.css">
     <script src="data/apps-count.js"></script>
 </head>
 <body>
 <nav>
-<a href="https://acarolmourad-commits.github.io/asf-app/">🏄 ASF App</a>
+<a href="https://asf.surf/">🏄 Início ASF</a>
 <a href="https://acarolmourad-commits.github.io/asf-app/novidades.html">✨ Novidades</a>
 <a href="https://acarolmourad-commits.github.io/asf-app/apps/">🧰 Mini-apps</a>
 <a href="https://acarolmourad-commits.github.io/asf-ranking/">🏆 Ranking</a>
@@ -167,6 +168,15 @@ footer{text-align:center;font-size:12.5px;color:var(--g);padding:24px;border-top
 <a class="app" href="https://acarolmourad-commits.github.io/asf-patrocinio/"><b>🤝 Patrocínio</b><span>Cotas de patrocínio e parcerias de marca</span></a>
 </div></div>
 
+<section class="hero-card" aria-labelledby="rotas-aprender" style="margin-top:20px">
+<h2 id="rotas-aprender" style="font-size:20px;margin-bottom:12px">💜 Um aplicativo para cada etapa da sua sessão</h2>
+<div class="grid">
+<div><h3>Prepare sua próxima sessão</h3><p>Consulte a previsão e organize o equipamento antes de sair. A previsão apoia a decisão, mas não substitui a observação no local, orientação qualificada e respeito aos próprios limites.</p><p><a href="https://previsao.asf.surf/">Consultar a previsão</a> · <a href="https://checklist.asf.surf/">Abrir o checklist</a></p></div>
+<div><h3>Aprenda uma manobra por vez</h3><p>Escolha um fundamento e explore a trilha no seu ritmo. O conteúdo é apoio educativo; procure orientação qualificada para a prática no mar.</p><p><a href="https://manobras.asf.surf/">Explorar as manobras</a></p></div>
+<div><h3>Entenda a linguagem do surf</h3><p>Encontrou um termo novo? Consulte o glossário e volte à sua trilha com mais contexto. Conhecer o vocabulário ajuda a formular perguntas e compartilhar aprendizados.</p><p><a href="https://glossario.asf.surf/">Abrir o glossário</a></p></div>
+</div>
+</section>
+
 <div class="hero-card" style="margin-top:26px;text-align:center">
 <h2 style="font-size:18px">🚀 Comece agora</h2>
 <p style="font-size:14px;color:var(--g);margin:6px 0 12px">Nunca usou a rede? Sugestão de primeira rota:</p>
@@ -180,11 +190,11 @@ footer{text-align:center;font-size:12.5px;color:var(--g);padding:24px;border-top
 <div class="hero-card" style="margin-top:16px">
 <h2 style="font-size:17px;margin-bottom:8px">❓ Perguntas frequentes</h2>
 <details><summary>Quantos apps tem a rede ASF?</summary><p>Mais de 50 aplicativos web gratuitos, cobrindo previsão de ondas, previsão do tempo, treinos, segurança, bem-estar, comunidade, jogos educativos e ferramentas do dia a dia da surfista.</p></details>
-<details><summary>Os apps ASF precisam de cadastro ou instalação?</summary><p>Não. Todos rodam direto no navegador, sem instalação e sem login. Seus dados e XP ficam salvos no seu próprio navegador.</p></details>
-<details><summary>Como o XP funciona entre os apps?</summary><p>Cada app distribui XP por ações (registrar sessão, completar treino, acertar quiz). O XP é compartilhado entre todos os apps e aparece no ASF Ranking, com níveis de Beira-mar a Rainha do Pico.</p></details>
+<details><summary>Os apps ASF precisam de cadastro ou instalação?</summary><p>Os aplicativos web podem ser acessados no navegador. Cadastro, instalação opcional e armazenamento variam por recurso; confira as orientações e a política de privacidade do app escolhido. Não inclua dados pessoais sensíveis nos registros.</p></details>
+<details><summary>Como o XP funciona entre os apps?</summary><p>Os recursos de XP variam conforme o aplicativo. Dados locais pertencem à origem e ao navegador usados; não suponha sincronização automática entre apps, domínios ou aparelhos. Confira as orientações de cada app antes de trocar de dispositivo.</p></details>
 </div>
 
-<p style="text-align:center;margin-top:18px;font-size:13.5px">Veja também: <a href="https://acarolmourad-commits.github.io/asf-app/novidades.html" style="color:var(--p);font-weight:700">✨ Novidades da rede</a> · <a href="https://acarolmourad-commits.github.io/asf-app/apps/" style="color:var(--p);font-weight:700">🧰 Mini-apps do hub</a> · <a href="https://acarolmourad-commits.github.io/asf-app/" style="color:var(--p);font-weight:700">🏄 App principal</a></p>
+<p style="text-align:center;margin-top:18px;font-size:13.5px">Veja também: <a href="https://acarolmourad-commits.github.io/asf-app/novidades.html" style="color:var(--p);font-weight:700">✨ Novidades da rede</a> · <a href="https://acarolmourad-commits.github.io/asf-app/apps/" style="color:var(--p);font-weight:700">🧰 Mini-apps do hub</a> · <a href="https://asf.surf/" style="color:var(--p);font-weight:700">🏄 Início ASF</a></p>
 </main>
 <footer>ASF — Associação de Surf Feminino · <a href="https://acarolmourad-commits.github.io/asf-app/privacidade.html">Privacidade</a> · <a href="https://acarolmourad-commits.github.io/asf-app/cookies.html">Cookies</a> · <a href="https://acarolmourad-commits.github.io/asf-app/termos-de-uso.html">Termos</a></footer>
 
