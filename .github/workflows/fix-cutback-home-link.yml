@@ -1,0 +1,47 @@
+name: ASF Cutback home deduplication
+on:
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: asf-cutback-home-fix
+  cancel-in-progress: false
+jobs:
+  fix:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - name: Replace duplicate inline tutorial with canonical guide link
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import re
+          p = Path('index.html')
+          text = p.read_text(encoding='utf-8')
+          pattern = r'<button\b[^>]*onclick="showToast\(\'🎯 CUTBACK PERFEITO.*?</button>'
+          link = '<a class="btn btn-primary" style="display:block; text-align:center; width:100%; margin-top:12px;" href="https://manobras.asf.surf/#guia-cutback-completo">Abrir guia completo no ASF Manobras →</a>'
+          matches = list(re.finditer(pattern, text, re.S))
+          if not matches and link in text:
+              print('Already applied; no changes.')
+          else:
+              assert len(matches) == 1, f'Expected one tutorial, found {len(matches)}; aborting.'
+              assert 'id="guia-cutback-unificado"' in text, 'Summary card missing; aborting.'
+              patched = text[:matches[0].start()] + link + text[matches[0].end():]
+              assert '🎯 CUTBACK PERFEITO' not in patched
+              assert patched.count('https://manobras.asf.surf/#guia-cutback-completo') >= 2
+              p.write_text(patched, encoding='utf-8')
+              print('Replaced one inline tutorial; preserved summary card and canonical link.')
+          PY
+      - name: Commit only the home page if changed
+        run: |
+          git config user.name 'ASF Bot'
+          git config user.email 'bot@asf-app.com'
+          git add index.html
+          if ! git diff --cached --quiet; then
+            git commit -m 'fix(home): replace duplicate Cutback tutorial with canonical guide link'
+            git push origin HEAD:main
+          fi
+          echo "Published source commit: $(git rev-parse HEAD)"
