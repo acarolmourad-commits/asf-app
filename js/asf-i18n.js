@@ -13,7 +13,7 @@
     'Dica do Dia':'Tip of the Day','Modo Noturno':'Dark Mode','Notificações':'Notifications','Carrinho':'Cart','Apoie o App':'Support the App','Configurações':'Settings','Nível':'Level','pontos':'points','Aulas':'Lessons','Diário de Bordo':'Logbook','Ler mais':'Read more','Curtir':'Like','Comentário':'Comment','Remover':'Remove','Abrir':'Open','Sim':'Yes','Não':'No'
   };
   var SKIP = 'script,style,noscript,textarea,input,select,[contenteditable], [data-i18n-skip],#asf-language-control,#user-posts,#chatbot-messages,#chatbot-messages-asf,#surfer-profile-content';
-  var originals = new WeakMap(), attrs = new WeakMap(), observer, queued = false;
+  var originals = new WeakMap(), attrs = new WeakMap(), observer, queued = false, mounted = false;
   function saved() { try { return localStorage.getItem('asf-language') || localStorage.getItem('asf-lang'); } catch (_) { return null; } }
   var lang = saved() === 'en' ? 'en' : 'pt-BR';
   function split(value) {
@@ -57,7 +57,7 @@
   }
   function observe() { if (observer) observer.observe(document.body,{subtree:true,childList:true,characterData:true,attributes:true,attributeFilter:['placeholder','title','aria-label','alt']}); }
   function apply() {
-    if (!document.body) return;
+    if (typeof document === 'undefined' || !document.body) return;
     if (observer) observer.disconnect();
     scan(document.body);
     document.documentElement.lang=lang;
@@ -80,6 +80,8 @@
   window.setLanguage=choose; window.changeLanguage=choose; window.applyTranslations=function(value){if(value==='en'||value==='pt'||value==='pt-BR'){lang=value==='en'?'en':'pt-BR';apply();}};
   window.ASF_I18N={version:'1.0.0',setLanguage:choose,getLanguage:function(){return lang;},dictionarySize:Object.keys(EN).length,coverage:'Home navigation and reviewed interface phrases; long-form content and satellites pending.'};
   function mount() {
+    if (mounted) return;
+    mounted = true;
     if (!document.getElementById('asf-language-control')) {
       var style=document.createElement('style');
       style.textContent='#asf-language-control{display:flex;gap:4px;align-items:center;flex-wrap:wrap}#asf-language-control button{border:1px solid #00a8cc;border-radius:8px;padding:6px 8px;background:#fff;color:#07546b;cursor:pointer;font:600 12px system-ui}#asf-language-control button[aria-pressed="true"]{background:#00a8cc;color:#fff}#asf-language-control button:focus-visible{outline:3px solid #ff4d8d;outline-offset:2px}@media(max-width:360px){#asf-language-control button{font-size:11px;padding:5px}}';

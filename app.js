@@ -1,6 +1,3 @@
-  // Initialize: load saved language
-  var savedLang = localStorage.getItem('asf-lang');
-  if (savedLang) setLanguage(savedLang);
   // Google Analytics 4 initialization
   // ASF: Google Analytics desativado ate configurar um ID real (G-...).
   var ASF_GA_ID = '';
@@ -59,20 +56,7 @@
       link.href = resolveUrl(appName, path);
     });
   });
-function setLanguage(lang) {
-    localStorage.setItem('asf-lang', lang);
-    document.querySelectorAll('button[onclick^="setLanguage"]').forEach(function(b) {
-        var isActive = b.textContent.indexOf(lang === 'en' ? 'EN' : lang === 'es' ? 'ES' : 'PT') >= 0;
-        b.style.background = isActive ? '#00A8CC' : 'rgba(255,255,255,0.2)';
-        b.style.color = 'white';
-    });
-    var terms = translations[lang];
-    if (!terms) return;
-    // Translate ALL visible text
-    
-    walkTree(document.body);
-    showToast('Idioma: ' + (lang === 'pt' ? 'Português' : lang === 'en' ? 'English' : 'Español') + ' 🌎');
-}
+// Language controls are implemented in js/asf-i18n.js.
 function toggleChatbot() {
             const panel = document.getElementById("chatbot-panel");
             panel.style.display = panel.style.display === "none" ? "block" : "none";
