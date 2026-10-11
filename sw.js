@@ -1,4 +1,4 @@
-const CACHE = "asf-v9-card-privacy";
+const CACHE = "asf-v10-card-privacy-diario";
 const OFFLINE_PAGES = [
   "./index.html",
   "./praias/",
@@ -14,6 +14,8 @@ const OFFLINE_PAGES = [
   "./bem-estar/presenca-no-mar-beneficios-da-pratica.html",
   "./bem-estar/surf-saude-mental-mulheres.html",
   "./diario/",
+  "./diario/diario-core.js",
+  "./diario/diario.js",
   "./mural/",
   "./asf-mural.css",
   "./asf-mural.js",
