@@ -1,0 +1,40 @@
+name: ASF optional English foundation
+on:
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: asf-i18n-install
+  cancel-in-progress: false
+jobs:
+  install:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Apply guarded language migration
+        run: python3 scripts/install-i18n.py
+      - name: Check JavaScript syntax
+        run: |
+          node --check js/asf-i18n.js
+          node --check app.js
+          node --check js/home-quiz-i18n.js
+      - name: Test optional language behavior and preserved state
+        run: |
+          npm install --prefix /tmp/asf-i18n-tests jsdom@24 --no-audit --no-fund
+          NODE_PATH=/tmp/asf-i18n-tests/node_modules node --test tests/i18n.test.cjs
+      - name: Publish only if every test passed
+        run: |
+          git config user.name 'ASF Bot'
+          git config user.email 'bot@asf-app.com'
+          git add index.html app.js js/home-quiz-i18n.js
+          if ! git diff --cached --quiet; then
+            git commit -m 'feat(home): enable explicit saved Portuguese and English interface choice'
+            git push origin HEAD:main
+          fi
+          echo "Source commit: $(git rev-parse HEAD)"
