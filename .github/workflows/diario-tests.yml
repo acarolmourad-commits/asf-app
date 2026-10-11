@@ -1,0 +1,30 @@
+name: ASF Diario tests
+on:
+  pull_request:
+    paths:
+      - 'diario/**'
+      - '.github/workflows/diario-tests.yml'
+permissions:
+  contents: read
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    strategy:
+      fail-fast: false
+      matrix:
+        timezone: [UTC, America/Sao_Paulo, Pacific/Auckland]
+    env:
+      TZ: ${{ matrix.timezone }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Check syntax
+        run: |
+          node --check diario/diario-core.js
+          node --check diario/diario.js
+          node --check diario/tests/diario.test.cjs
+      - name: Run diary tests
+        run: node --test diario/tests/diario.test.cjs
