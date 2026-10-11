@@ -32,7 +32,7 @@ jobs:
         run: |
           git config user.name 'ASF Bot'
           git config user.email 'bot@asf-app.com'
-          git add index.html app.js js/home-quiz-i18n.js
+          git add index.html app.js js/home-quiz-i18n.js js/asf-i18n.js
           if ! git diff --cached --quiet; then
             git commit -m 'feat(home): enable explicit saved Portuguese and English interface choice'
             git push origin HEAD:main

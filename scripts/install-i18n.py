@@ -2,6 +2,17 @@
 from pathlib import Path
 import re
 
+runtime_path=Path('js/asf-i18n.js')
+runtime=runtime_path.read_text(encoding='utf-8')
+for old,new in [
+    ('var originals = new WeakMap(), attrs = new WeakMap(), observer, queued = false;', 'var originals = new WeakMap(), attrs = new WeakMap(), observer, queued = false, mounted = false;'),
+    ('if (!document.body) return;', "if (typeof document === 'undefined' || !document.body) return;"),
+    ('function mount() {\n', 'function mount() {\n    if (mounted) return;\n    mounted = true;\n')
+]:
+    if new not in runtime:
+        assert runtime.count(old)==1, f'Unexpected lifecycle source: {old}'
+        runtime=runtime.replace(old,new,1)
+
 home_path=Path('index.html')
 app_path=Path('app.js')
 quiz_path=Path('js/home-quiz-i18n.js')
@@ -10,7 +21,8 @@ app=app_path.read_text(encoding='utf-8')
 quiz=quiz_path.read_text(encoding='utf-8')
 include='<script defer src="js/asf-i18n.js?v=1"></script>'
 if include in home:
-    print('Already installed; no changes.')
+    runtime_path.write_text(runtime,encoding='utf-8')
+    print('Already installed; lifecycle guards checked.')
     raise SystemExit(0)
 assert home.count('</body>')==1
 assert app.count('function setLanguage(lang) {')==1
@@ -28,8 +40,7 @@ assert 'function changeLanguage(lang)' in legacy
 assert legacy.rstrip().endswith('});'), 'Unexpected code after legacy language block'
 quiz=prefix+'// Optional language foundation: js/asf-i18n.js. Quiz and XP code above preserved.\n'
 home=home.replace('</body>',include+'\n</body>')
-# Validate all transformations before writing.
 assert 'guia-cutback-unificado' in home
 assert 'checkASFBadges' in quiz
-for path,text in [(home_path,home),(app_path,app),(quiz_path,quiz)]:path.write_text(text,encoding='utf-8')
-print('Installed PT/EN module; removed only two broken legacy language implementations.')
+for path,text in [(home_path,home),(app_path,app),(quiz_path,quiz),(runtime_path,runtime)]:path.write_text(text,encoding='utf-8')
+print('Installed PT/EN module with lifecycle guards; removed only broken legacy language code.')
