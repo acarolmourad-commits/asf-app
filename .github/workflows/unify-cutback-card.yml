@@ -1,0 +1,17 @@
+name: unify-cutback-card (one-shot)
+on:
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: python3 scripts/unify_cutback_card.py
+      - run: |
+          git config user.name "asf-bot"
+          git config user.email "asf.surffeminino@gmail.com"
+          git add index.html
+          git diff --cached --quiet || git commit -m "feat: guia do cutback unificado - card-resumo apontando para ASF Manobras"
+          git push
