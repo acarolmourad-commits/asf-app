@@ -84,7 +84,8 @@ jobs:
                   repos.extend(batch)
                   if len(batch)<100: break
                   page+=1
-              satellites=[r for r in repos if r['name'].startswith('asf-') and r['name']!='asf-app' and not r.get('archived') and not r.get('disabled')]
+              # PR #53 preview is not a production app; keep all real-app checks.
+              satellites=[r for r in repos if r['name'].startswith('asf-') and r['name'] not in ('asf-app', 'asf-pr53-preview') and not r.get('archived') and not r.get('disabled')]
               if not satellites: raise ValueError('inventario vazio; auditoria nao executada')
               for repo in satellites:
                   name=repo['name']
