@@ -25,10 +25,20 @@ jobs:
           echo "|------|----------|---------|-------|------------------|" >> $R
           for h in $HOSTS; do
             if [ "$h" = "asf.surf" ]; then url="https://asf.surf"; else url="https://$h.asf.surf"; fi
-            code=$(curl -s -o /tmp/p.html -w '%{http_code}' --max-time 20 "$url/")
-            sm=$(curl -s -o /dev/null -w '%{http_code}' --max-time 15 "$url/sitemap.xml")
-            title=$(grep -oi '<title>[^<]*' /tmp/p.html | head -1 | sed 's/<title>//I' | cut -c1-40)
-            desc=$(grep -ci 'name="description"' /tmp/p.html)
+            : > /tmp/p.html
+            if code=$(curl -s -o /tmp/p.html -w '%{http_code}' --max-time 20 "$url/"); then
+              :
+            else
+              code="${code:-000}"
+              : > /tmp/p.html
+            fi
+            if sm=$(curl -s -o /dev/null -w '%{http_code}' --max-time 15 "$url/sitemap.xml"); then
+              :
+            else
+              sm="${sm:-000}"
+            fi
+            title=$(grep -oi '<title>[^<]*' /tmp/p.html | head -1 | sed 's/<title>//I' | cut -c1-40 || true)
+            desc=$(grep -ci 'name="description"' /tmp/p.html || true)
             [ -z "$title" ] && title="-"
             descok="✅"; [ "$desc" = "0" ] && descok="❌"
             smok="✅"; [ "$sm" != "200" ] && smok="❌ ($sm)"
