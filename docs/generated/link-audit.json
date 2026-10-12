@@ -1,10 +1,11 @@
 {
-  "date": "2026-10-12T20:10:27.011854+00:00",
+  "date": "2026-10-12T20:57:55.683063+00:00",
   "total": 109,
-  "ok": 97,
+  "ok": 96,
   "skipped": 10,
-  "broken_count": 2,
+  "broken_count": 3,
   "broken": [
+    "https://acarolmourad-commits.github.io/asf-sonhos/",
     "https://www.spsurf.com.br",
     "https://www.spsurf.com.br/"
   ],
@@ -116,8 +117,8 @@
     },
     {
       "url": "https://acarolmourad-commits.github.io/asf-sonhos/",
-      "status": "ok",
-      "http": 200
+      "status": "broken",
+      "http": 503
     },
     {
       "url": "https://acarolmourad-commits.github.io/asf-sos/",
