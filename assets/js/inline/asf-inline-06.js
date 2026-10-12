@@ -47,8 +47,28 @@ document.addEventListener('keydown', function(e){
       '#dicas .cards-grid{display:grid!important;grid-template-columns:repeat(auto-fit,minmax(min(100%,250px),1fr))!important;gap:16px!important}'+
       '#dicas .cards-grid>.card{display:block!important;min-width:0!important;width:auto!important;max-width:100%!important;white-space:normal!important}'+
       '#dicas .cards-grid>.card h3,#dicas .cards-grid>.card p{min-width:0;max-width:100%;overflow-wrap:break-word}'+
+      '#dicas .hp-guide-banner{background:linear-gradient(135deg,#0e2439,#00576a)!important;color:#fff!important}'+
+      '#dicas .hp-guide-banner h3,#dicas .hp-guide-banner p,#dicas .hp-guide-banner span,#premium .hp-intro h3,#premium .hp-intro p,#premium .hp-intro .hp-tag,#praias .hp-intro h3,#praias .hp-intro p,#parceiros .hp-intro h3,#parceiros .hp-intro p{color:#fff!important;opacity:1!important}'+
+      '#dicas .hp-guide-banner a{background:#fff!important;color:#0e2439!important}'+
+      '#asfv2-rede>.hp-network-hub{margin:16px 20px;padding:24px;border:1px solid #dbe9ed;border-radius:20px;background:#f4fbfd;color:#0e2439}'+
+      '#asfv2-rede>.hp-network-hub h3,#asfv2-rede>.hp-network-hub p{color:#0e2439!important;line-height:1.6;opacity:1}'+
+      '#asfv2-rede>.hp-network-hub h3{font-size:22px;margin:0 0 12px}'+
+      '#asfv2-rede>.hp-network-hub p{font-size:15px;margin:0 0 16px}'+
+      '#asfv2-rede>.hp-network-hub nav{display:flex;flex-wrap:wrap;gap:12px}'+
+      '#asfv2-rede>.hp-network-hub a{flex:1 1 200px;display:block;border-radius:12px;background:#00576a;color:#fff!important;text-decoration:none;padding:14px;text-align:center;font-size:15px;line-height:1.5;font-weight:700}'+
+      '#asfv2-rede>.hp-network-hub a:focus-visible{outline:3px solid #9b3d68;outline-offset:4px}'+
       '@media(max-width:480px){#premium .hp-grid,#parceiros .hp-grid{grid-template-columns:1fr}#premium .hp-intro,#praias .hp-intro,#parceiros .hp-intro{padding:20px;margin:12px}#premium .hp-grid,#parceiros .hp-grid,#premium .hp-routes,#praias .hp-routes{margin:12px}}';
     document.head.appendChild(style);
+    var guideBannerTitle = Array.from(document.querySelectorAll('#dicas h3')).find(function (el) { return el.textContent.trim() === 'Aprenda a surfar com segurança'; });
+    if (guideBannerTitle && guideBannerTitle.parentElement) guideBannerTitle.parentElement.classList.add('hp-guide-banner');
+    var networkBand = document.getElementById('asfv2-rede');
+    var networkHeading = networkBand && networkBand.querySelector(':scope > .asfv2-band-title');
+    if (networkHeading && !networkBand.querySelector(':scope > .hp-network-hub')) {
+      var networkHub = document.createElement('div'); networkHub.className = 'hp-network-hub';
+      networkHub.innerHTML = '<h3>Parcerias e ferramentas, cada uma no seu lugar</h3><p>Consulte as iniciativas divulgadas pela ASF, encontre aplicativos para sua rotina de surf ou apresente uma proposta de colaboração. Condições de benefícios são informadas nas páginas de cada parceria.</p><nav aria-label="Parcerias e rede ASF"><a href="https://asf.surf/parcerias/">Conhecer as parcerias →</a><a href="https://asf.surf/guia-apps.html">Explorar os aplicativos →</a><a href="#parceiros">Apresentar uma proposta →</a></nav>';
+      networkHeading.insertAdjacentElement('afterend', networkHub);
+    }
+
     premium.innerHTML = '<div class="section-header"><h2 class="section-title">📚 Guias para evoluir no surf</h2></div>'+
       '<div class="hp-intro"><span class="hp-tag" style="color:#fff">CONTEUDO GRATUITO ASF</span><h3>Aprenda, evolua e prepare sua próxima sessão</h3><p>Explore guias gratuitos de técnica, preparação física e foco mental. Conheça praias e encontre os aplicativos que acompanham sua jornada no surf.</p></div>'+
       '<div class="hp-grid">'+
