@@ -10,21 +10,21 @@
     ]
   },
   "new_utility": {
-    "name": "Previsão de Ondas",
-    "description": "7 dias de previsão",
-    "icon": "🌊"
+    "name": "Calculadora de Prancha",
+    "description": "Volume ideal",
+    "icon": "🧮"
   },
   "improvements": [
-    {
-      "type": "content",
-      "title": "Mais dicas técnicas avançadas",
-      "priority": "high"
-    },
     {
       "type": "layout",
       "title": "Modo escuro",
       "priority": "medium"
+    },
+    {
+      "type": "feature",
+      "title": "Medidor de condições do mar",
+      "priority": "high"
     }
   ],
-  "generated_at": "2026-10-12T13:41:47.835679"
+  "generated_at": "2026-10-12T20:09:44.698280"
 }
