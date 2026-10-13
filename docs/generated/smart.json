@@ -1,12 +1,12 @@
 {
-  "date": "2026-10-12",
+  "date": "2026-10-13",
   "new_tip": {
-    "category": "Equipamento",
-    "title": "Qual leash escolher",
-    "content": "Use leash do mesmo tamanho ou ligeiramente menor que a prancha.",
+    "category": "Técnica",
+    "title": "Como fazer o bottom turn",
+    "content": "O bottom turn é a base. Transfira o peso para o pé da frente e gire a prancha.",
     "tags": [
-      "Equipamento",
-      "Leash"
+      "Técnica",
+      "Manobras"
     ]
   },
   "new_utility": {
@@ -26,5 +26,5 @@
       "priority": "high"
     }
   ],
-  "generated_at": "2026-10-12T23:52:58.328038"
+  "generated_at": "2026-10-13T04:11:42.521977"
 }
