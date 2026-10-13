@@ -117,7 +117,7 @@ const ASF_CARD = {
           'apikey': this.SUPABASE_ANON_KEY,
           'Authorization': 'Bearer ' + this.SUPABASE_ANON_KEY,
           'Content-Type': 'application/json',
-          'Prefer': 'resolution=merge-duplicates'
+          'Prefer': 'resolution=merge-duplicates,return=representation'
         },
         body: JSON.stringify([payload]),
       }).then(async (r) => {
@@ -210,7 +210,7 @@ const ASF_CARD = {
               'apikey': this.SUPABASE_ANON_KEY,
               'Authorization': 'Bearer ' + this.SUPABASE_ANON_KEY,
               'Content-Type': 'application/json',
-              'Prefer': 'resolution=merge-duplicates',
+              'Prefer': 'resolution=merge-duplicates,return=representation',
             },
             body: JSON.stringify(upsertData),
           });
