@@ -71,7 +71,7 @@ document.getElementById('novo-cadastro').addEventListener('click',()=>{currentCa
 async function issue(payload){
  const controller=new AbortController(),timer=setTimeout(()=>controller.abort(),20000);
  try{
-  const response=await fetch(ASF_CARD.SUPABASE_URL+'/rest/v1/associadas?select=*&on_conflict=email_hash',{method:'POST',headers:{apikey:ASF_CARD.SUPABASE_ANON_KEY,Authorization:'Bearer '+ASF_CARD.SUPABASE_ANON_KEY,'Prefer':'resolution=merge-duplicates','Content-Type':'application/json'},body:JSON.stringify([payload]),signal:controller.signal});
+  const response=await fetch(ASF_CARD.SUPABASE_URL+'/rest/v1/associadas?select=*&on_conflict=email_hash',{method:'POST',headers:{apikey:ASF_CARD.SUPABASE_ANON_KEY,Authorization:'Bearer '+ASF_CARD.SUPABASE_ANON_KEY,'Prefer':'resolution=merge-duplicates,return=representation','Content-Type':'application/json'},body:JSON.stringify([payload]),signal:controller.signal});
   const rows=await response.json();
   if(!response.ok){if(response.status===409)throw new Error('duplicata');throw new Error('registro indisponível: '+response.status);}
   const r=Array.isArray(rows)?rows[0]:rows;
