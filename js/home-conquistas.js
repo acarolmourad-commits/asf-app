@@ -1,3 +1,9 @@
+// New local reconstruction after sandbox interruption.
+function asfOnHomeReady(fn) {
+    if (document.readyState === "loading" || document.readyState === "interactive") document.addEventListener("DOMContentLoaded", fn, { once: true });
+    else setTimeout(fn, 0);
+}
+
 function unlockConquista(type, btn) {
     const statusEl = document.getElementById('status-' + type);
     if (statusEl) {
@@ -54,7 +60,7 @@ function unlockConquista(type, btn) {
         document.addEventListener('click', function(e) {
             const panel = document.getElementById('notifications-panel');
             const bell = e.target.closest('button[onclick="toggleNotifications()"]');
-            if (!panel.contains(e.target) && !bell) {
+            if (panel && !panel.contains(e.target) && !bell) {
                 panel.style.display = 'none';
             }
         });
@@ -65,7 +71,7 @@ function unlockConquista(type, btn) {
 
         
 
-        updateNotificationBadge();
+        asfOnHomeReady(function() { updateNotificationBadge(); });
 
 
         const APP_URL = 'https://acarolmourad-commits.github.io/asf-app/';
@@ -89,7 +95,7 @@ function unlockConquista(type, btn) {
             { title: 'Mindset Crescimento', icon: '💡', section: 'Mindset', sectionId: 'mental', text: 'Cada wipeout é dado, não falha - analise e evolua consistentemente.' },
             { title: 'Recuperação Ativa', icon: '♨️', section: 'Saúde', sectionId: 'saude', text: 'Banho alternando quente/frio após sessão pesada. Melhora circulação e reduz inflamação muscular.' },
         ];
-        const normalizedSearchIndex = searchIndex.map(item => ({
+        var normalizedSearchIndex = searchIndex.map(item => ({
             ...item,
             _titleNorm: item.title.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, ''),
             _textNorm: item.text.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, ''),
@@ -112,7 +118,7 @@ function unlockConquista(type, btn) {
 
         document.addEventListener('click', function(e) {
             if (!e.target.closest('.search-container')) {
-                document.getElementById('searchResults').classList.remove('active');
+                const results = document.getElementById('searchResults'); if (results) results.classList.remove('active');
             }
         });
 
@@ -156,45 +162,7 @@ function unlockConquista(type, btn) {
             return { text: '🔴 Expert only', color: 'var(--coral)' };
         };
 
-        async 
-
-        async 
-
-        
-
-        async 
-
-        
-
-        
-
-        
-
-        
-
-        
-
-        
-
-        
-
-        
-
-        
-
-        
-
-        (function() {
-            const init = () => {
-                loadLiveData('bertioga');
-                updateMoonPhase();
-            };
-            if (typeof requestIdleCallback === 'function') {
-                requestIdleCallback(init);
-            } else {
-                setTimeout(init, 0);
-            }
-        })();
+        asfOnHomeReady(function() { loadLiveData('bertioga'); updateMoonPhase(); });
 
         let timerInterval = null;
         let timerState = 'stopped'; // stopped, running, paused
@@ -206,35 +174,19 @@ function unlockConquista(type, btn) {
         let timerIsWork = true;
         let timerWorkoutHistory = JSON.parse(localStorage.getItem('asf_timer_history') || '[]');
 
-        
+        asfOnHomeReady(function() { loadSurfBar(); });
 
-        
+        asfOnHomeReady(function() { loadBestDay(); });
 
-        
+        asfOnHomeReady(function() { loadWeekStrip(); });
 
-        
 
-        
 
-        
-
-        
-
-        async 
-        loadSurfBar();
-
-        async 
-        loadBestDay();
-
-        async 
-        loadWeekStrip();
-
-        
-        
-        initDarkMode();
+        asfOnHomeReady(function() { initDarkMode(); });
 
         const scrollBar = document.getElementById('scrollProgress');
         window.addEventListener('scroll', () => {
+            if (!scrollBar) return;
             const scrollTop = window.scrollY;
             const docHeight = document.documentElement.scrollHeight - window.innerHeight;
             const progress = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
@@ -246,7 +198,7 @@ function unlockConquista(type, btn) {
         
         
         
-        initCadastro();
+        asfOnHomeReady(function() { initCadastro(); });
 
         
 
@@ -295,7 +247,7 @@ function unlockConquista(type, btn) {
             localStorage.setItem('asf-opens', appOpens);
             try { document.getElementById('stat-opens').textContent = appOpens; } catch(e) {}
             try { document.getElementById('stat-sessions').textContent = (JSON.parse(localStorage.getItem('surf-sessions') || '[]')).length; } catch(e) {}
-            showProfile();
+            if (typeof showProfile === 'function') showProfile(); else initCadastro();
             const savedTheme = localStorage.getItem('asf-theme');
             if (savedTheme === 'dark') {
                 document.documentElement.setAttribute('data-theme', 'dark');
@@ -715,27 +667,23 @@ function unlockConquista(type, btn) {
         
 
         
-        window.addEventListener('offline', updateConnectionStatus);
-        window.addEventListener('online', updateConnectionStatus);
-        updateConnectionStatus();
+        asfOnHomeReady(function() {
+            window.addEventListener('offline', updateConnectionStatus);
+            window.addEventListener('online', updateConnectionStatus);
+            updateConnectionStatus();
+        });
 
   const AFFILIATE_PRODUCTS = [/* vitrine em construção — somente produtos de parceiros confirmados serão listados aqui, com link para o canal oficial do parceiro */];
 
 
   
-  if (typeof gtag !== 'undefined') {
-    gtag('event', 'affiliate_click', {
-      event_category: 'monetization',
-      event_label: productId,
-      value: 1
-    });
-  }
+  // Affiliate events are tracked only by openAffiliateLink, not startup.
 
 
-window.ASFMonetization = { trackEvent, getStats };
+asfOnHomeReady(function() { window.ASFMonetization = { trackEvent, getStats }; });
 
 
 // cookie consent movido para script dedicado próximo ao banner
 
 
-window.ASFMonetization={trackEvent,getStats};const a=document.createElement('style');a.textContent="@keyframes toastIn{from{opacity:0;transform:translateX(-50%) translateY(20px)}to{opacity:1;transform:translateX(-50%) translateY(0)}}@keyframes toastOut{from{opacity:1;transform:translateX(-50%) translateY(0)}to{opacity:0;transform:translateX(-50%) translateY(20px)}}",document.head.appendChild(a);document.addEventListener('DOMContentLoaded',function(){console.log('✅ Monetization system initialized');const e=document.getElementById('loja');e&&getComputedStyle(e).display!=='none'&&setTimeout(renderAffiliateStore,100)});
+asfOnHomeReady(function() { window.ASFMonetization = { trackEvent, getStats }; });const a=document.createElement('style');a.textContent="@keyframes toastIn{from{opacity:0;transform:translateX(-50%) translateY(20px)}to{opacity:1;transform:translateX(-50%) translateY(0)}}@keyframes toastOut{from{opacity:1;transform:translateX(-50%) translateY(0)}to{opacity:0;transform:translateX(-50%) translateY(20px)}}",document.head.appendChild(a);document.addEventListener('DOMContentLoaded',function(){console.log('✅ Monetization system initialized');const e=document.getElementById('loja');e&&getComputedStyle(e).display!=='none'&&setTimeout(renderAffiliateStore,100)});
