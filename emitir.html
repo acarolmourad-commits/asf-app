@@ -71,11 +71,11 @@ document.getElementById('novo-cadastro').addEventListener('click',()=>{currentCa
 async function issue(payload){
  const controller=new AbortController(),timer=setTimeout(()=>controller.abort(),20000);
  try{
-  const response=await fetch(ASF_CARD.SUPABASE_URL+'/rest/v1/rpc/emitir_carteirinha',{method:'POST',headers:{apikey:ASF_CARD.SUPABASE_ANON_KEY,Authorization:'Bearer '+ASF_CARD.SUPABASE_ANON_KEY,'Content-Type':'application/json'},body:JSON.stringify(payload),signal:controller.signal});
+  const response=await fetch(ASF_CARD.SUPABASE_URL+'/rest/v1/associadas?select=*',{method:'POST',headers:{apikey:ASF_CARD.SUPABASE_ANON_KEY,Authorization:'Bearer '+ASF_CARD.SUPABASE_ANON_KEY,'Prefer':'resolution=merge-duplicates,merge-numero','Content-Type':'application/json'},body:JSON.stringify([payload]),signal:controller.signal});
   const rows=await response.json();
-  if(!response.ok)throw new Error('registro indisponível');
-  const r=Array.isArray(rows)&&rows[0];
-  if(!r||!/^ASF-[A-Z0-9]{6,12}$/.test(r.numero)||!/^\d{4}-\d{2}-\d{2}$/.test(r.validade)||!['emitida','existente','renovada'].includes(r.status))throw new Error('resposta inválida');
+  if(!response.ok){if(response.status===409)throw new Error('duplicata');throw new Error('registro indisponível: '+response.status);}
+  const r=Array.isArray(rows)?rows[0]:rows;
+  if(!r||!/^ASF-[A-Z0-9]{6,12}$/.test(r.numero)||!/^\d{4}-\d{2}-\d{2}$/.test(r.validade))throw new Error('resposta inválida');r.status='emitida';
   return r;
  }finally{clearTimeout(timer);}
 }
@@ -87,7 +87,7 @@ form.addEventListener('submit',async event=>{
  busy=true;button.disabled=true;button.textContent='Registrando no Supabase…';feedback('Aguarde a confirmação do cadastro.');
  try{
   const emailHash=await ASF_CARD.sha256(email);
-  const payload={p_numero:ASF_CARD.gerarNumero(),p_email_hash:emailHash,p_nome:nome,p_apelido:value('cad-apelido'),p_nivel:nivel,p_praia:value('cad-praia'),p_cidade:value('cad-cidade'),p_insta:value('cad-insta')};
+  const payload={numero:ASF_CARD.gerarNumero(),email_hash:emailHash,nome:nome,apelido:value('cad-apelido'),nivel:nivel,praia:value('cad-praia'),cidade:value('cad-cidade'),insta:value('cad-insta'),validade:new Date(new Date().getFullYear()+1,new Date().getMonth(),new Date().getDate()).toISOString().split('T')[0]};
   const r=await issue(payload),old=originalLoad()||{},same=old.emailHash===emailHash&&old.numero===r.numero;
   const d={nome,nivel,praia:payload.p_praia,apelido:payload.p_apelido,cidade:payload.p_cidade,insta:payload.p_insta,numero:r.numero,validade:r.validade.split('-').reverse().join('/'),desde:same&&old.desde?old.desde:new Date().toLocaleDateString('pt-BR'),foto:same?old.foto||null:null,emailHash,lgpdConsent:new Date().toISOString(),registrada:new Date().toISOString()};
   ASF_CARD.save(d);section.hidden=true;result.hidden=false;ASF_CARD.init();
