@@ -328,7 +328,6 @@
    lanca ReferenceError. Solucao: sobrescrever as FUNCOES (bindings de window,
    reatribuiveis) para usar window.normalizedSearchIndex explicitamente. */
 (function () {
-
   function norm(s) {
     return (s || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
   }
@@ -714,4 +713,3 @@
     } catch (e) { /* camada aditiva: falha silenciosa */ }
   });
 })();
-
