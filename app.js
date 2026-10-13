@@ -374,6 +374,7 @@ function updateNotificationBadge() {
             const notifs = loadNotifications();
             const unread = notifs.filter(n => !n.read).length;
             const badge = document.getElementById('notif-badge');
+            if (!badge) return;
             if (unread > 0) {
                 badge.style.display = 'flex';
                 badge.textContent = unread > 9 ? '9+' : unread;
@@ -800,13 +801,20 @@ function buildSearchIndex() {
         // Only index visible elements
         if (rect.width === 0 && rect.height === 0) return;
         
+        var sec = el.closest('.section[id], section[id]') || el.closest('[id]');
+        if (!sec || !sec.id) return;
+        var heading = sec.querySelector('.section-title, h2, h3');
+        var sectionTitle = heading ? heading.textContent.trim() : sec.id;
+        var token = sectionTitle.split(/\s+/)[0];
         index.push({
+            sectionId: sec.id,
+            icon: /^[\w\d]/.test(token) ? '🔎' : (token || '🔎'),
             title: el.textContent.trim().substring(0, 100),
             text: text.substring(0, 500),
-            section: el.closest('section') ? el.closest('section').id || 'content' : 'content',
+            section: sectionTitle,
             _titleNorm: el.textContent.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, ''),
             _textNorm: text.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, ''),
-            _sectionNorm: (el.closest('section') ? el.closest('section').id : 'content').toLowerCase()
+            _sectionNorm: sectionTitle.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '')
         });
     });
     return index;
@@ -929,7 +937,7 @@ async function loadLiveData(beach) {
             if (marine && marine.current) {
                 const c = marine.current;
                 const rating = surfRating(c.wave_height);
-                marDiv.innerHTML = `
+                if (marDiv) marDiv.innerHTML = `
                     <p style="font-size: 20px; font-weight: 700; color: var(--primary);">${c.wave_height.toFixed(1)}m</p>
                     <p style="font-size: 14px; color: ${rating.color}; font-weight: 600;">${rating.text}</p>
                     <div style="font-size: 13px; color: var(--gray-600); margin-top: 6px;">
@@ -938,7 +946,7 @@ async function loadLiveData(beach) {
                     </div>
                 `;
             } else {
-                marDiv.innerHTML = `<p style="font-size: 14px; color: var(--gray-400);">Dados indisponíveis no momento</p>`;
+                if (marDiv) marDiv.innerHTML = `<p style="font-size: 14px; color: var(--gray-400);">Dados indisponíveis no momento</p>`;
             }
             // Update Clima card
             const climaDiv = document.getElementById('clima-data');
@@ -947,7 +955,7 @@ async function loadLiveData(beach) {
                 const desc = weatherDescriptions[c.weather_code] || 'Condições variadas';
                 const sunrise = c.sunrise ? c.sunrise.slice(11, 16) : '--:--';
                 const sunset = c.sunset ? c.sunset.slice(11, 16) : '--:--';
-                climaDiv.innerHTML = `
+                if (climaDiv) climaDiv.innerHTML = `
                     <p style="font-size: 20px; font-weight: 700; color: var(--primary);">${c.temperature_2m.toFixed(0)}°C</p>
                     <p style="font-size: 14px; color: var(--gray-600);">${desc}</p>
                     <div style="font-size: 13px; color: var(--gray-600); margin-top: 6px;">
@@ -957,14 +965,14 @@ async function loadLiveData(beach) {
                     </div>
                 `;
             } else {
-                climaDiv.innerHTML = `<p style="font-size: 14px; color: var(--gray-400);">Dados indisponíveis no momento</p>`;
+                if (climaDiv) climaDiv.innerHTML = `<p style="font-size: 14px; color: var(--gray-400);">Dados indisponíveis no momento</p>`;
             }
             // Update Maré card (estimated based on location)
             const mareDiv = document.getElementById('mare-data');
             const now = new Date();
             const hour = now.getHours();
             const mareTimes = getEstimatedTides(beach, now);
-            mareDiv.innerHTML = `
+            if (mareDiv) mareDiv.innerHTML = `
                 <p style="font-size: 16px; font-weight: 700; color: var(--primary);">🔴 ${mareTimes.high}</p>
                 <p style="font-size: 14px; color: var(--success);">🟢 ${mareTimes.low}</p>
                 <p style="font-size: 12px; color: var(--gray-400); margin-top: 4px;">${mareTimes.tip}</p>
@@ -1000,7 +1008,7 @@ async function loadLiveData(beach) {
                     uvColor = '#8e44ad';
                     uvIcon = '⚠️';
                 }
-                uvDiv.innerHTML = `
+                if (uvDiv) uvDiv.innerHTML = `
                     <p style="font-size: 32px; font-weight: 700; color: ${uvColor};">${todayMaxUV.toFixed(0)}</p>
                     <p style="font-size: 14px; color: ${uvColor}; font-weight: 600;">${uvIcon} ${uvLevel}</p>
                     <p style="font-size: 12px; color: var(--gray-400); margin-top: 4px;">Máximo hoje</p>
@@ -1018,9 +1026,9 @@ async function loadLiveData(beach) {
                 } else {
                     protTip = '⚠️ Evitar sol entre 10h-16h!';
                 }
-                if (uvProt) uvProt.querySelector('p').innerHTML = `<strong>☀️ Dica:</strong> ${protTip}`;
+                if (uvProt && uvProt.querySelector('p')) uvProt.querySelector('p').innerHTML = `<strong>☀️ Dica:</strong> ${protTip}`;
             } else {
-                uvDiv.innerHTML = `<p style="font-size: 14px; color: var(--gray-400);">Dados indisponíveis</p>`;
+                if (uvDiv) uvDiv.innerHTML = `<p style="font-size: 14px; color: var(--gray-400);">Dados indisponíveis</p>`;
             }
         }
 function updateTideClock(tides, now) {
@@ -1224,11 +1232,11 @@ function updateMoonPhase() {
                 tideTipDesc = 'Menor variação de maré';
             }
             // Update the display
-            document.getElementById('moon-icon').textContent = moonIcon;
-            document.getElementById('moon-phase-name').textContent = phaseName;
-            document.getElementById('moon-age').textContent = moonAge.toFixed(1) + ' dias';
-            document.getElementById('tide-tip').textContent = surfTip;
-            document.getElementById('tide-tip-desc').textContent = tideTipDesc;
+            if (document.getElementById('moon-icon')) document.getElementById('moon-icon').textContent = moonIcon;
+            if (document.getElementById('moon-phase-name')) document.getElementById('moon-phase-name').textContent = phaseName;
+            if (document.getElementById('moon-age')) document.getElementById('moon-age').textContent = moonAge.toFixed(1) + ' dias';
+            if (document.getElementById('tide-tip')) document.getElementById('tide-tip').textContent = surfTip;
+            if (document.getElementById('tide-tip-desc')) document.getElementById('tide-tip-desc').textContent = tideTipDesc;
         }
 function calcularVolume() {
             const peso = parseFloat(document.getElementById('peso-input').value) || 65;
@@ -1641,10 +1649,10 @@ function editCadastro() {
 function initCadastro() {
             const profile = JSON.parse(localStorage.getItem('asf-profile') || '{}');
             if (profile.nome) {
-                document.getElementById('cadastro-form').style.display = 'none';
-                document.getElementById('cadastro-done').style.display = 'block';
+                if (document.getElementById('cadastro-form')) document.getElementById('cadastro-form').style.display = 'none';
+                if (document.getElementById('cadastro-done')) document.getElementById('cadastro-done').style.display = 'block';
                 const nivelLabel = { iniciante: '🌱 Iniciante', intermediario: '🏄 Intermediária', avancado: '🔥 Avançada' };
-                document.getElementById('cadastro-welcome').textContent = `${profile.nome} • ${nivelLabel[profile.nivel] || profile.nivel} • Praia de ${(profile.praia || '').charAt(0).toUpperCase() + (profile.praia || '').slice(1)}`;
+                if (document.getElementById('cadastro-welcome')) document.getElementById('cadastro-welcome').textContent = `${profile.nome} • ${nivelLabel[profile.nivel] || profile.nivel} • Praia de ${(profile.praia || '').charAt(0).toUpperCase() + (profile.praia || '').slice(1)}`;
             }
         }
 function shareSurfConditions() {
@@ -1746,6 +1754,7 @@ function renderSessions() {
             const list = document.getElementById('sessions-list');
             const count = document.getElementById('session-count');
             const stats = document.getElementById('session-stats');
+            if (!list || !count || !stats) return;
             count.textContent = sessions.length + ' sessão' + (sessions.length !== 1 ? 'ões' : '');
             if (sessions.length === 0) {
                 list.innerHTML = '<p style="text-align: center; color: var(--gray-400); font-size: 13px; padding: 20px;">Nenhuma sessão registrada ainda. Bora surfar! 🏄‍♀️</p>';
@@ -1844,6 +1853,7 @@ function updateBrandTimer() {
             setInterval(update, 60000); // Atualiza a cada minuto
         }
 function loadBadges() {
+          if (typeof BRAND_BADGES === "undefined" || !Array.isArray(BRAND_BADGES)) return;
           const saved = localStorage.getItem('asf-badges');
           if (saved) {
             const earnedBadges = JSON.parse(saved);
@@ -1859,11 +1869,13 @@ function loadBadges() {
           }
         }
 function saveBadges() {
+          if (typeof BRAND_BADGES === "undefined" || !Array.isArray(BRAND_BADGES)) return;
           const toSave = BRAND_BADGES.filter(b => b.earned);
           localStorage.setItem('asf-badges', JSON.stringify(toSave));
           updateBadgesUI();
         }
 function updateBadgeProgress() {
+          if (typeof BRAND_BADGES === "undefined" || !Array.isArray(BRAND_BADGES)) return;
           const sessions = JSON.parse(localStorage.getItem('surf-sessions') || '[]');
           let changed = false;
           BRAND_BADGES.forEach(badge => {
@@ -1895,14 +1907,19 @@ function updateBadgeProgress() {
 function renderBadges() {
           const container = document.getElementById('badges-container');
           const noBadges = document.getElementById('no-badges');
+          if (typeof BRAND_BADGES === 'undefined' || !Array.isArray(BRAND_BADGES)) {
+            if (container) container.style.display = 'none';
+            if (noBadges) { noBadges.style.display = 'block'; noBadges.textContent = 'Badges de parceiros ainda não configurados.'; }
+            return;
+          }
           if (!container) return;
           const earnedBadges = BRAND_BADGES.filter(b => b.earned);
           const allBadges = BRAND_BADGES; // Show all (locked/unlocked)
           if (earnedBadges.length === 0) {
-            noBadges.style.display = 'block';
+            if (noBadges) noBadges.style.display = 'block';
             container.style.display = 'none';
           } else {
-            noBadges.style.display = 'none';
+            if (noBadges) noBadges.style.display = 'none';
             container.style.display = 'grid';
             container.innerHTML = allBadges.map(badge => {
               const isEarned = badge.earned;
@@ -1933,6 +1950,7 @@ function renderBadges() {
           }
         }
 function showBadgeDetails(badgeId) {
+          if (typeof BRAND_BADGES === "undefined" || !Array.isArray(BRAND_BADGES)) return;
           const badge = BRAND_BADGES.find(b => b.id === badgeId);
           if (!badge) return;
           const message = `
@@ -1985,6 +2003,7 @@ function updateChecklistStatus() {
             const checked = document.querySelectorAll('.pre-surf-check:checked').length;
             const total = checks.length;
             const el = document.getElementById('checklist-status');
+            if (!el) return;
             if (checked === total) {
                 el.innerHTML = '<span style="color: var(--success, #27ae60); font-weight: 600;">🏄‍♀️ Tudo pronto! Bora surfar!</span>';
                 el.style.background = 'rgba(39, 174, 96, 0.08)';
@@ -2084,6 +2103,7 @@ function sharePost(text) {
         }
 function renderUserPosts() {
             const container = document.getElementById('user-posts');
+            if (!container) return;
             const posts = JSON.parse(localStorage.getItem('asf-user-posts') || '[]');
             if (!posts.length) { container.innerHTML = ''; return; }
             container.innerHTML = posts.map((p, i) => {
@@ -2124,6 +2144,7 @@ function addWater(delta) {
             if (count === 8) showToast('💧 Meta atingida! Hidratada! 🎉');
         }
 function updateWaterDisplay(count) {
+            if (!document.getElementById('water-count') || !document.getElementById('water-bar') || !document.getElementById('water-label')) return;
             document.getElementById('water-count').textContent = count;
             document.getElementById('water-bar').style.width = Math.min(100, (count / 8) * 100) + '%';
             if (count >= 8) {
@@ -2352,8 +2373,7 @@ function renderMetas() {
 (function(){
     if (typeof window.METAS_INIT !== 'undefined') return;
     window.METAS_INIT = true;
-    document.addEventListener('DOMContentLoaded', renderMetas);
-    renderMetas();
+    asfOnHomeReady(renderMetas);
 })();
 
 function initGoogleAnalytics(){}
@@ -2361,8 +2381,7 @@ function initGoogleAnalytics(){}
 (function(){
     if (typeof window.ACHIEVEMENTS_INIT !== "undefined") return;
     window.ACHIEVEMENTS_INIT = true;
-    document.addEventListener("DOMContentLoaded", renderAchievements);
-    renderAchievements();
+    asfOnHomeReady(renderAchievements);
 })();
 function getConsent() { return localStorage.getItem(COOKIE_CONSENT); }
 function setConsent(level) {
@@ -2380,3 +2399,66 @@ function walkTree(el) {
             Array.from(el.childNodes).forEach(walkTree);
         }
     }
+
+// Local reconstruction: install after deferred legacy shims; retain extended index.
+(function () {
+    function norm(value) { return String(value || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, ''); }
+    function node(tag, cls, text) {
+        var el = document.createElement(tag);
+        if (cls) el.className = cls;
+        if (text !== undefined) el.textContent = String(text);
+        return el;
+    }
+    function safeHref(value) {
+        if (typeof value !== 'string' || !value.trim()) return null;
+        try { var url = new URL(value, location.href); return /^(https?:)$/.test(url.protocol) ? url.href : null; }
+        catch (e) { return null; }
+    }
+    function install() {
+        window.handleSearch = function (query) {
+            var box = document.getElementById('searchResults'), clear = document.getElementById('searchClear');
+            if (!box) return;
+            query = String(query || '');
+            if (query.length < 2) { box.classList.remove('active'); if (clear) clear.style.display = 'none'; return; }
+            if (clear) clear.style.display = 'block';
+            var q = norm(query), index = Array.isArray(window.normalizedSearchIndex) ? window.normalizedSearchIndex : [];
+            var results = index.filter(function (item) {
+                return [item._titleNorm || norm(item.title), item._textNorm || norm(item.text), item._sectionNorm || norm(item.section)]
+                    .some(function (v) { return String(v).indexOf(q) !== -1; });
+            }).slice(0, 8);
+            box.replaceChildren();
+            if (!results.length) {
+                var empty = node('div', 'search-no-results', '🏄‍♀️ Nenhum resultado para "' + query + '"');
+                empty.appendChild(node('br')); empty.appendChild(node('small', '', 'Tente outro termo')); box.appendChild(empty);
+            }
+            results.forEach(function (item) {
+                var href = safeHref(item.href), sectionId = String(item.sectionId || item.section || '');
+                var row = node(href ? 'a' : 'button', 'search-result-item');
+                row.style.cssText = 'display:block;width:100%;text-align:left;box-sizing:border-box;border:0;background:transparent;color:inherit;font:inherit;text-decoration:none';
+                if (href) row.href = href;
+                else { row.type = 'button'; row.addEventListener('click', function () { if (document.getElementById(sectionId)) window.goToSection(sectionId, row); }); }
+                row.appendChild(node('div', 'result-title', (item.icon || '🔎') + ' ' + String(item.title || 'Conteúdo ASF')));
+                row.appendChild(node('div', 'result-section', item.section || 'Conteúdo ASF'));
+                var text = String(item.text || ''); row.appendChild(node('div', 'result-preview', text.length > 80 ? text.slice(0, 80) + '...' : text));
+                box.appendChild(row);
+            });
+            box.classList.add('active'); if (query.length >= 3) saveRecentSearch(query);
+        };
+        window.debouncedSearch = function (query) { clearTimeout(window._searchTimer); window._searchTimer = setTimeout(function () { window.handleSearch(query); }, 150); };
+        window.showRecentSearches = function () {
+            var box = document.getElementById('searchResults'), input = document.getElementById('searchInput');
+            if (!box || !input || input.value.length >= 2) return;
+            var recent = getRecentSearches(); if (!Array.isArray(recent) || !recent.length) return;
+            box.replaceChildren(node('div', '', 'Buscas recentes'));
+            recent.forEach(function (query) {
+                if (typeof query !== 'string') return;
+                var row = node('button', 'search-result-item', '🕐 ' + query); row.type = 'button';
+                row.style.cssText = 'display:block;width:100%;text-align:left;border:0;background:transparent;color:inherit;font:inherit';
+                row.addEventListener('click', function () { input.value = query; window.handleSearch(query); }); box.appendChild(row);
+            });
+            var clear = node('button', '', 'Limpar'); clear.type = 'button'; clear.addEventListener('click', function () { clearRecentSearches(); });
+            box.appendChild(clear); box.classList.add('active');
+        };
+    }
+    asfOnHomeReady(function () { setTimeout(install, 0); });
+})();

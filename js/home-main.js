@@ -1,5 +1,4 @@
-  var savedLang = localStorage.getItem('asf-lang');
-  if (savedLang) setLanguage(savedLang);
+  // Stored language is restored by the existing js/asf-i18n.js after dependencies load.
   
   // ASF: Google Analytics desativado ate configurar um ID real (G-...).
   var ASF_GA_ID = '';
@@ -338,6 +337,7 @@ function updateNotificationBadge() {
             const notifs = loadNotifications();
             const unread = notifs.filter(n => !n.read).length;
             const badge = document.getElementById('notif-badge');
+            if (!badge) return;
             if (unread > 0) {
                 badge.style.display = 'flex';
                 badge.textContent = unread > 9 ? '9+' : unread;
@@ -895,7 +895,7 @@ async function loadLiveData(beach) {
             if (marine && marine.current) {
                 const c = marine.current;
                 const rating = surfRating(c.wave_height);
-                marDiv.innerHTML = `
+                if (marDiv) marDiv.innerHTML = `
                     <p style="font-size: 20px; font-weight: 700; color: var(--primary);">${c.wave_height.toFixed(1)}m</p>
                     <p style="font-size: 14px; color: ${rating.color}; font-weight: 600;">${rating.text}</p>
                     <div style="font-size: 13px; color: var(--gray-600); margin-top: 6px;">
@@ -904,7 +904,7 @@ async function loadLiveData(beach) {
                     </div>
                 `;
             } else {
-                marDiv.innerHTML = `<p style="font-size: 14px; color: var(--gray-400);">Dados indisponíveis no momento</p>`;
+                if (marDiv) marDiv.innerHTML = `<p style="font-size: 14px; color: var(--gray-400);">Dados indisponíveis no momento</p>`;
             }
 
             const climaDiv = document.getElementById('clima-data');
@@ -913,7 +913,7 @@ async function loadLiveData(beach) {
                 const desc = weatherDescriptions[c.weather_code] || 'Condições variadas';
                 const sunrise = c.sunrise ? c.sunrise.slice(11, 16) : '--:--';
                 const sunset = c.sunset ? c.sunset.slice(11, 16) : '--:--';
-                climaDiv.innerHTML = `
+                if (climaDiv) climaDiv.innerHTML = `
                     <p style="font-size: 20px; font-weight: 700; color: var(--primary);">${c.temperature_2m.toFixed(0)}°C</p>
                     <p style="font-size: 14px; color: var(--gray-600);">${desc}</p>
                     <div style="font-size: 13px; color: var(--gray-600); margin-top: 6px;">
@@ -923,14 +923,14 @@ async function loadLiveData(beach) {
                     </div>
                 `;
             } else {
-                climaDiv.innerHTML = `<p style="font-size: 14px; color: var(--gray-400);">Dados indisponíveis no momento</p>`;
+                if (climaDiv) climaDiv.innerHTML = `<p style="font-size: 14px; color: var(--gray-400);">Dados indisponíveis no momento</p>`;
             }
 
             const mareDiv = document.getElementById('mare-data');
             const now = new Date();
             const hour = now.getHours();
             const mareTimes = getEstimatedTides(beach, now);
-            mareDiv.innerHTML = `
+            if (mareDiv) mareDiv.innerHTML = `
                 <p style="font-size: 16px; font-weight: 700; color: var(--primary);">🔴 ${mareTimes.high}</p>
                 <p style="font-size: 14px; color: var(--success);">🟢 ${mareTimes.low}</p>
                 <p style="font-size: 12px; color: var(--gray-400); margin-top: 4px;">${mareTimes.tip}</p>
@@ -966,7 +966,7 @@ async function loadLiveData(beach) {
                     uvIcon = '⚠️';
                 }
 
-                uvDiv.innerHTML = `
+                if (uvDiv) uvDiv.innerHTML = `
                     <p style="font-size: 32px; font-weight: 700; color: ${uvColor};">${todayMaxUV.toFixed(0)}</p>
                     <p style="font-size: 14px; color: ${uvColor}; font-weight: 600;">${uvIcon} ${uvLevel}</p>
                     <p style="font-size: 12px; color: var(--gray-400); margin-top: 4px;">Máximo hoje</p>
@@ -984,9 +984,9 @@ async function loadLiveData(beach) {
                 } else {
                     protTip = '⚠️ Evitar sol entre 10h-16h!';
                 }
-                if (uvProt) uvProt.querySelector('p').innerHTML = `<strong>☀️ Dica:</strong> ${protTip}`;
+                if (uvProt && uvProt.querySelector('p')) uvProt.querySelector('p').innerHTML = `<strong>☀️ Dica:</strong> ${protTip}`;
             } else {
-                uvDiv.innerHTML = `<p style="font-size: 14px; color: var(--gray-400);">Dados indisponíveis</p>`;
+                if (uvDiv) uvDiv.innerHTML = `<p style="font-size: 14px; color: var(--gray-400);">Dados indisponíveis</p>`;
             }
         }
 function updateTideClock(tides, now) {
@@ -1187,11 +1187,11 @@ function updateMoonPhase() {
                 tideTipDesc = 'Menor variação de maré';
             }
 
-            document.getElementById('moon-icon').textContent = moonIcon;
-            document.getElementById('moon-phase-name').textContent = phaseName;
-            document.getElementById('moon-age').textContent = moonAge.toFixed(1) + ' dias';
-            document.getElementById('tide-tip').textContent = surfTip;
-            document.getElementById('tide-tip-desc').textContent = tideTipDesc;
+            if (document.getElementById('moon-icon')) document.getElementById('moon-icon').textContent = moonIcon;
+            if (document.getElementById('moon-phase-name')) document.getElementById('moon-phase-name').textContent = phaseName;
+            if (document.getElementById('moon-age')) document.getElementById('moon-age').textContent = moonAge.toFixed(1) + ' dias';
+            if (document.getElementById('tide-tip')) document.getElementById('tide-tip').textContent = surfTip;
+            if (document.getElementById('tide-tip-desc')) document.getElementById('tide-tip-desc').textContent = tideTipDesc;
         }
 function calcularVolume() {
             const peso = parseFloat(document.getElementById('peso-input').value) || 65;
@@ -1617,10 +1617,10 @@ function editCadastro() {
 function initCadastro() {
             const profile = JSON.parse(localStorage.getItem('asf-profile') || '{}');
             if (profile.nome) {
-                document.getElementById('cadastro-form').style.display = 'none';
-                document.getElementById('cadastro-done').style.display = 'block';
+                if (document.getElementById('cadastro-form')) document.getElementById('cadastro-form').style.display = 'none';
+                if (document.getElementById('cadastro-done')) document.getElementById('cadastro-done').style.display = 'block';
                 const nivelLabel = { iniciante: '🌱 Iniciante', intermediario: '🏄 Intermediária', avancado: '🔥 Avançada' };
-                document.getElementById('cadastro-welcome').textContent = `${profile.nome} • ${nivelLabel[profile.nivel] || profile.nivel} • Praia de ${(profile.praia || '').charAt(0).toUpperCase() + (profile.praia || '').slice(1)}`;
+                if (document.getElementById('cadastro-welcome')) document.getElementById('cadastro-welcome').textContent = `${profile.nome} • ${nivelLabel[profile.nivel] || profile.nivel} • Praia de ${(profile.praia || '').charAt(0).toUpperCase() + (profile.praia || '').slice(1)}`;
             }
         }
 function shareSurfConditions() {
@@ -1808,6 +1808,7 @@ function updateBrandTimer() {
             setInterval(update, 60000); // Atualiza a cada minuto
         }
 function loadBadges() {
+          if (typeof BRAND_BADGES === "undefined" || !Array.isArray(BRAND_BADGES)) return;
           const saved = localStorage.getItem('asf-badges');
           if (saved) {
             const earnedBadges = JSON.parse(saved);
@@ -1822,11 +1823,13 @@ function loadBadges() {
           }
         }
 function saveBadges() {
+          if (typeof BRAND_BADGES === "undefined" || !Array.isArray(BRAND_BADGES)) return;
           const toSave = BRAND_BADGES.filter(b => b.earned);
           localStorage.setItem('asf-badges', JSON.stringify(toSave));
           updateBadgesUI();
         }
 function updateBadgeProgress() {
+          if (typeof BRAND_BADGES === "undefined" || !Array.isArray(BRAND_BADGES)) return;
           const sessions = JSON.parse(localStorage.getItem('surf-sessions') || '[]');
           let changed = false;
 
@@ -1859,6 +1862,11 @@ function updateBadgeProgress() {
 function renderBadges() {
           const container = document.getElementById('badges-container');
           const noBadges = document.getElementById('no-badges');
+          if (typeof BRAND_BADGES === 'undefined' || !Array.isArray(BRAND_BADGES)) {
+            if (container) container.style.display = 'none';
+            if (noBadges) { noBadges.style.display = 'block'; noBadges.textContent = 'Badges de parceiros ainda não configurados.'; }
+            return;
+          }
 
           if (!container) return;
 
@@ -1866,10 +1874,10 @@ function renderBadges() {
           const allBadges = BRAND_BADGES; // Show all (locked/unlocked)
 
           if (earnedBadges.length === 0) {
-            noBadges.style.display = 'block';
+            if (noBadges) noBadges.style.display = 'block';
             container.style.display = 'none';
           } else {
-            noBadges.style.display = 'none';
+            if (noBadges) noBadges.style.display = 'none';
             container.style.display = 'grid';
 
             container.innerHTML = allBadges.map(badge => {
@@ -1902,6 +1910,7 @@ function renderBadges() {
           }
         }
 function showBadgeDetails(badgeId) {
+          if (typeof BRAND_BADGES === "undefined" || !Array.isArray(BRAND_BADGES)) return;
           const badge = BRAND_BADGES.find(b => b.id === badgeId);
           if (!badge) return;
 
