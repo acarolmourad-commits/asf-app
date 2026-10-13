@@ -108,7 +108,7 @@ const ASF_CARD = {
         cidade: d.cidade || '', insta: d.insta || '',
         validade: d.validade ? String(d.validade).split('/').reverse().join('-') : undefined,
       }];
-      const url = this.SUPABASE_URL + '/rest/v1/associadas';
+      const url = this.SUPABASE_URL + '/rest/v1/associadas?select=*&on_conflict=email_hash';
       /* sendBeacon não envia headers — Supabase precisa de apikey/Authorization.
          Usa fetch direto com verificação de status. */
       fetch(url, {
@@ -117,9 +117,9 @@ const ASF_CARD = {
           'apikey': this.SUPABASE_ANON_KEY,
           'Authorization': 'Bearer ' + this.SUPABASE_ANON_KEY,
           'Content-Type': 'application/json',
-          'Prefer': 'resolution=merge-duplicates,merge-numero'
+          'Prefer': 'resolution=merge-duplicates'
         },
-        body: JSON.stringify(payload),
+        body: JSON.stringify([payload]),
       }).then(async (r) => {
         if (r.ok) {
           d.registrada = new Date().toISOString();
@@ -204,13 +204,13 @@ const ASF_CARD = {
             nivel: d.nivel, praia: d.praia, cidade: d.cidade, insta: d.insta,
             validade: validadeISO,
           }];
-          const r = await fetch(this.SUPABASE_URL + '/rest/v1/associadas?select=numero,validade', {
+          const r = await fetch(this.SUPABASE_URL + '/rest/v1/associadas?select=numero,validade&on_conflict=email_hash', {
             method: 'POST',
             headers: {
               'apikey': this.SUPABASE_ANON_KEY,
               'Authorization': 'Bearer ' + this.SUPABASE_ANON_KEY,
               'Content-Type': 'application/json',
-              'Prefer': 'resolution=merge-duplicates,merge-numero',
+              'Prefer': 'resolution=merge-duplicates',
             },
             body: JSON.stringify(upsertData),
           });
