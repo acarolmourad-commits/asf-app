@@ -91,8 +91,52 @@ const ASF_CARD = {
 
   save(d) { localStorage.setItem(this.KEY, JSON.stringify(d)); },
 
-  /* O registro central usa apenas a RPC existente; nunca consulta/lista associadas. */
-  registrar() { /* a sincronização confirmada acontece em salvar() */ },
+  /* Registro na rede ASF (Supabase REST API — tabela associadas).
+     Opt-in LGPD: registrada apenas se card-registrar estiver marcado.
+     emailHash já foi gerado em salvar() e salvo no localStorage. */
+  registrar(d) {
+    try {
+      const cb = document.getElementById('card-registrar');
+      const quer = (cb && cb.checked) || d.registrada;
+      if (!quer) return;
+      if (!this.supabaseOn || !d.emailHash || d.registrada) return;
+      const payload = [{
+        numero: d.numero,
+        email_hash: d.emailHash,
+        nome: d.nome, apelido: d.apelido || '',
+        nivel: d.nivel, praia: d.praia || '',
+        cidade: d.cidade || '', insta: d.insta || '',
+        validade: d.validade ? String(d.validade).split('/').reverse().join('-') : undefined,
+      }];
+      const url = this.SUPABASE_URL + '/rest/v1/associadas';
+      /* sendBeacon não envia headers — Supabase precisa de apikey/Authorization.
+         Usa fetch direto com verificação de status. */
+      fetch(url, {
+        method: 'POST',
+        headers: {
+          'apikey': this.SUPABASE_ANON_KEY,
+          'Authorization': 'Bearer ' + this.SUPABASE_ANON_KEY,
+          'Content-Type': 'application/json',
+          'Prefer': 'resolution=merge-duplicates,merge-numero'
+        },
+        body: JSON.stringify(payload),
+      }).then(async (r) => {
+        if (r.ok) {
+          d.registrada = new Date().toISOString();
+          this.save(d);
+          if (typeof showToast === 'function') showToast('📇 Carteirinha registrada na rede ASF!');
+        } else {
+          const txt = await r.text();
+          console.warn('Supabase registro falhou:', r.status, txt.substring(0, 200));
+          // Don't mark as registrada on failure — allow retry
+        }
+      }).catch((e) => {
+        console.warn('Supabase registro erro:', e.message);
+      });
+    } catch (e) {
+      console.warn('registrar() error:', e);
+    }
+  },
   escape(v) {
     return String(v == null ? '' : v).replace(/[&<>"']/g,
       c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -136,39 +180,64 @@ const ASF_CARD = {
       desde: atual.desde || new Date().toLocaleDateString('pt-BR'),
       lgpdConsent: atual.lgpdConsent || new Date().toISOString(),
     };
-    if (atual.emailHash) d.emailHash = atual.emailHash;
-    if (atual.registrada) d.registrada = atual.registrada;
+    /* ── controle de 1 emissão por ano ─────────────────────────
+       a) já tem carteirinha VÁLIDA -> só atualiza dados, validade travada
+       b) expirada (ou faltando <=30 dias) -> RENOVAÇÃO: mesmo número, +1 ano
+       c) primeira emissão -> histórico não pode ter emissão < 1 ano  */
+    let msg = 'Carteirinha gerada! 🪪';
     this._saving = true;
     const btn = document.getElementById('card-submit');
     if (btn) { btn.disabled = true; btn.textContent = 'Gerando…'; }
     try {
+      /* ── caminho servidor (Supabase): usa REST API direto na tabela 'associadas'
+          PostgREST upsert via REST — tabela: associadas
+          A RPC 'emitir_carteirinha' não existe (404) — usa POST merge-duplicates  ── */
       if (central && this.supabaseOn) {
         try {
-          const hash = atual.emailHash || await this.sha256(email);
-          const rows = await this.sbRpc('emitir_carteirinha', {
-            p_numero: d.numero, p_email_hash: hash, p_nome: d.nome,
-            p_apelido: d.apelido, p_nivel: d.nivel, p_praia: d.praia,
-            p_cidade: d.cidade, p_insta: d.insta,
+          const emailHash = atual.emailHash || await this.sha256(email);
+          d.emailHash = emailHash;
+          const validadeISO = new Date(new Date().getFullYear() + 1, new Date().getMonth(), new Date().getDate()).toISOString().split('T')[0];
+          const upsertData = [{
+            numero: d.numero,
+            email_hash: emailHash,
+            nome: d.nome, apelido: d.apelido || '',
+            nivel: d.nivel, praia: d.praia, cidade: d.cidade, insta: d.insta,
+            validade: validadeISO,
+          }];
+          const r = await fetch(this.SUPABASE_URL + '/rest/v1/associadas?select=numero,validade', {
+            method: 'POST',
+            headers: {
+              'apikey': this.SUPABASE_ANON_KEY,
+              'Authorization': 'Bearer ' + this.SUPABASE_ANON_KEY,
+              'Content-Type': 'application/json',
+              'Prefer': 'resolution=merge-duplicates,merge-numero',
+            },
+            body: JSON.stringify(upsertData),
           });
-          const r = Array.isArray(rows) && rows[0];
-          if (!r || !r.numero || !r.validade || !['emitida','existente','renovada'].includes(r.status)) {
-            throw new Error('Resposta de emissão inválida');
+          const res = await r.json();
+          const result = Array.isArray(res) ? (res[0] || {}) : (res || {});
+          if (r.ok && result.numero) {
+            d.numero = result.numero;
+            d.validade = result.validade
+              ? String(result.validade).split('-').reverse().join('/')
+              : upsertData[0].validade.split('-').reverse().join('/');
+            d.registrada = new Date().toISOString();
+            this.registrarEmissao(d.numero);
+            this.save(d);
+            this.render('carteirinha-content');
+            showToast('Carteirinha registrada na ASF! 🪪');
+            if (typeof ASF_GAMIFICATION !== 'undefined') ASF_GAMIFICATION.checkAll();
+            return;
+          } else {
+            throw new Error('Supabase upsert failed: ' + r.status);
           }
-          d.numero = r.numero;
-          d.validade = String(r.validade).split('-').reverse().join('/');
-          d.emailHash = hash;
-          d.registrada = new Date().toISOString();
-          if (r.status !== 'existente') this.registrarEmissao(d.numero);
-          this.save(d);
-          this.render('carteirinha-content');
-          showToast(r.status === 'existente' ? 'Carteirinha recuperada/atualizada. Validade mantida.' : 'Carteirinha registrada na ASF!');
-          if (typeof ASF_GAMIFICATION !== 'undefined') ASF_GAMIFICATION.checkAll();
-          return;
         } catch (e) {
           // Falha de rede/servidor não pode ser tratada como registro confirmado.
+          console.warn('Supabase registro erro:', e.message);
           showToast('Registro indisponível. Sua carteirinha será salva neste dispositivo; tente registrar depois.');
         }
       }
+      /* cai no fluxo local abaixo */
       if (atual.numero && atual.validade && this.diasParaExpirar(atual) > 30) {
         d.validade = atual.validade;
       } else if (atual.numero && atual.validade) {
