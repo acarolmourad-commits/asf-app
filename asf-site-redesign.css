@@ -22,3 +22,13 @@ button,a,input,select,textarea{touch-action:manipulation}button:not(.nav-item),.
 /* ASF back pill: nav global minima em paginas sem menu proprio (28/09/2026) */
 .asf-back-pill{position:fixed;top:12px;left:12px;z-index:1001;display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,.92);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);color:#0E2439;font-size:13px;font-weight:700;text-decoration:none;padding:8px 14px;border-radius:999px;border:1px solid rgba(14,36,57,.10);box-shadow:0 4px 14px rgba(14,36,57,.14)}
 .asf-back-pill:hover{background:#00A8CC;color:#fff}
+
+/* Home union incentive card: vivid blue with readable white text. */
+body > .card[style*="linear-gradient(135deg, #00A8CC, #9b59b6)"] { background: #005EA8 !important; color: #FFFFFF; }
+body > .card[style*="linear-gradient(135deg, #00A8CC, #9b59b6)"] > div,
+body > .card[style*="linear-gradient(135deg, #00A8CC, #9b59b6)"] h3,
+body > .card[style*="linear-gradient(135deg, #00A8CC, #9b59b6)"] p,
+body > .card[style*="linear-gradient(135deg, #00A8CC, #9b59b6)"] span { color: #FFFFFF !important; opacity: 1 !important; }
+body > .card[style*="linear-gradient(135deg, #00A8CC, #9b59b6)"] > div > div:first-child { opacity: 1 !important; }
+body > .card[style*="linear-gradient(135deg, #00A8CC, #9b59b6)"] span { background: #004B87 !important; }
+
