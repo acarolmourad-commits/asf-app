@@ -278,6 +278,16 @@ document.addEventListener('DOMContentLoaded', function () {
 document.addEventListener('DOMContentLoaded', function () {
   try {
     if (localStorage.getItem('asf-cookie-consent')) return;
+    // Mobile uses the existing banner with both consent choices. Never infer consent.
+    var mobileConsent = window.matchMedia('(max-width: 767px)');
+    function usePrimaryConsentOnMobile() {
+      if (!mobileConsent.matches || !document.getElementById('cookie-consent-banner')) return;
+      var duplicate = document.getElementById('asf-cookie-banner');
+      if (duplicate) duplicate.remove();
+    }
+    if (mobileConsent.addEventListener) mobileConsent.addEventListener('change', usePrimaryConsentOnMobile);
+    else if (mobileConsent.addListener) mobileConsent.addListener(usePrimaryConsentOnMobile);
+    if (mobileConsent.matches && document.getElementById('cookie-consent-banner')) return;
     var bar = document.createElement('div');
     bar.id = 'asf-cookie-banner';
     bar.style.cssText = 'position:fixed;left:0;right:0;bottom:0;background:#0E2439;color:#fff;padding:14px 16px;z-index:10001;display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:center;font-family:system-ui,sans-serif;font-size:13px;box-shadow:0 -2px 12px rgba(0,0,0,0.25)';
