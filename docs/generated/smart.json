@@ -1,5 +1,5 @@
 {
-  "date": "2026-10-14",
+  "date": "2026-10-15",
   "new_tip": {
     "category": "Equipamento",
     "title": "Qual leash escolher",
@@ -10,21 +10,21 @@
     ]
   },
   "new_utility": {
-    "name": "Calculadora de Prancha",
-    "description": "Volume ideal",
-    "icon": "🧮"
+    "name": "Previsão de Ondas",
+    "description": "7 dias de previsão",
+    "icon": "🌊"
   },
   "improvements": [
+    {
+      "type": "content",
+      "title": "Mais dicas técnicas avançadas",
+      "priority": "high"
+    },
     {
       "type": "layout",
       "title": "Modo escuro",
       "priority": "medium"
-    },
-    {
-      "type": "feature",
-      "title": "Medidor de condições do mar",
-      "priority": "high"
     }
   ],
-  "generated_at": "2026-10-14T21:02:27.448871"
+  "generated_at": "2026-10-15T02:05:43.201200"
 }
