@@ -2,7 +2,7 @@
   "date": "2026-10-15",
   "issues_found": 2,
   "improvements_available": 4,
-  "score": 97,
+  "score": 92,
   "suggested": [
     {
       "type": "css",
@@ -15,5 +15,5 @@
       "impact": "high"
     }
   ],
-  "timestamp": "2026-10-15T15:51:38.116118"
+  "timestamp": "2026-10-15T20:36:47.584114"
 }
