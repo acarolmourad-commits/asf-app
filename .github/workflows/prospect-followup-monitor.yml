@@ -1,0 +1,51 @@
+name: Prospect Follow-up Monitor - Surfland + Hurley (Private Notion)
+
+on:
+  schedule:
+    - cron: '0 12 * * *'
+    - cron: '0 0 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: asf-prospects-followup-monitor
+  cancel-in-progress: false
+
+jobs:
+  check-replies:
+    if: github.event_name == 'workflow_dispatch' || github.event_name == 'schedule'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install runtime dependency
+        run: pip install requests
+      - name: Test privacy, deduplication and follow-up windows with synthetic data
+        run: python .github/scripts/check_prospects_followup.py --self-test
+      - name: Check Surfland + Hurley replies and write minimal state to private Notion
+        env:
+          COMPOSIO_API_KEY: ${{ secrets.COMPOSIO_API_KEY }}
+          COMPOSIO_ENTITY_ID: ${{ vars.COMPOSIO_ENTITY_ID || 'default_user' }}
+          NOTION_MONITOR_PAGE_ID: 3fbabe37-0d44-816b-8adc-c217c5b00264
+          NOTION_STATUS_BLOCK_ID: b835760e-4c27-4ae2-896e-380524821399
+        run: |
+          python - <<'PY'
+          import importlib.util, sys
+          spec = importlib.util.spec_from_file_location('prospects_monitor', '.github/scripts/check_prospects_followup.py')
+          monitor = importlib.util.module_from_spec(spec)
+          spec.loader.exec_module(monitor)
+          try:
+              monitor.run()
+          except monitor.MonitorError as exc:
+              print('::error::' + str(exc))
+              sys.exit(1)
+          except Exception:
+              print('::error::Prospects monitor unexpected failure; payload suppressed.')
+              sys.exit(1)
+          PY
+      # No issues, uploaded email reports, email excerpts, or automatic sends / follow-ups.
