@@ -1,0 +1,82 @@
+name: ASF SEO canonical migration (manual, branch-only)
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  migrate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout SEO branch
+        uses: actions/checkout@v4
+        with:
+          ref: fix/seo-canonical-asf-surf-20261015
+          fetch-depth: 0
+
+      - name: Refuse to run on main
+        run: |
+          if [ "$GITHUB_REF_NAME" = "main" ]; then
+            echo "This workflow must run on the SEO feature branch, never main." >&2
+            exit 1
+          fi
+
+      - name: Apply head-only canonical migration
+        run: python3 scripts/asf_seo_canonical_migrate.py
+
+      - name: Verify only listed files changed and body is untouched
+        run: |
+          set -euo pipefail
+          git diff --name-only > /tmp/changed.txt
+          cat /tmp/changed.txt
+          python3 - <<'PY'
+          import subprocess
+          allowed = {
+              "index.html","sobre.html","privacidade.html","cookies.html",
+              "termos-de-uso.html","termos.html","aprender/index.html",
+              "aprender/como-comecar-a-surfar-mulheres.html",
+              "aprender/correntes-de-retorno-seguranca.html",
+              "aprender/etiqueta-no-mar.html",
+              "aprender/primeira-prancha-de-surf.html",
+              "aprender/remada-tecnica-e-treinos.html",
+              "bem-estar/index.html",
+              "bem-estar/presenca-no-mar-beneficios-da-pratica.html",
+              "bem-estar/surf-saude-mental-mulheres.html",
+              "praias/melhores-praias-iniciantes-litoral-norte-sp.html",
+              "praias/surf-feminino-sao-sebastiao.html","guia-apps.html",
+          }
+          changed = set(open("/tmp/changed.txt").read().split())
+          extra = changed - allowed
+          missing = allowed - changed
+          print("changed:", sorted(changed))
+          if extra:
+              raise SystemExit(f"unexpected files changed: {sorted(extra)}")
+          import re
+          head_re = re.compile(r"<head\b[^>]*>.*?</head>", re.I|re.S)
+          for path in sorted(changed):
+              before = subprocess.check_output(["git","show",f"HEAD:{path}"], text=True)
+              after = open(path, encoding="utf-8").read()
+              if head_re.sub("", before) != head_re.sub("", after):
+                  raise SystemExit(f"body changed outside <head>: {path}")
+              if after.count('rel="canonical"') != 1:
+                  raise SystemExit(f"canonical count != 1: {path}")
+              if "https://acarolmourad-commits.github.io/asf-app/" in after.split("</head>")[0]:
+                  raise SystemExit(f"legacy prefix remains in head: {path}")
+          print("body-preservation and canonical checks PASS; unchanged targets:", sorted(missing))
+          PY
+
+      - name: Commit on SEO branch only
+        run: |
+          set -euo pipefail
+          if git diff --quiet; then
+            echo "No changes to commit."
+            exit 0
+          fi
+          git config user.name "ASF Bot"
+          git config user.email "bot@asf-app.com"
+          git add -A
+          git commit -m "fix(seo): unifica canonical/OG/JSON-LD para asf.surf (18 HTML, somente head)"
+          git push origin HEAD:fix/seo-canonical-asf-surf-20261015
