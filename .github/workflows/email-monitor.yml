@@ -28,10 +28,14 @@ jobs:
         run: pip install requests
       - name: Test privacy, deduplication and seven-day rule with synthetic data
         run: python .github/scripts/check_lead_replies.py --self-test
-      - name: Check partnership and write minimal state to private Notion
+      - name: Read-only Notion routing preflight (no mail or writes)
         env:
           COMPOSIO_API_KEY: ${{ secrets.COMPOSIO_API_KEY }}
-          COMPOSIO_ENTITY_ID: ${{ vars.COMPOSIO_ENTITY_ID || 'default_user' }}
+          COMPOSIO_USER_ID: ${{ secrets.COMPOSIO_USER_ID }}
+          COMPOSIO_NOTION_CONNECTED_ACCOUNT_ID: ${{ secrets.COMPOSIO_NOTION_CONNECTED_ACCOUNT_ID }}
+          COMPOSIO_GMAIL_CONNECTED_ACCOUNT_ID: ${{ secrets.COMPOSIO_GMAIL_CONNECTED_ACCOUNT_ID }}
+          COMPOSIO_NOTION_TOOL_VERSION: ${{ secrets.COMPOSIO_NOTION_TOOL_VERSION }}
+          COMPOSIO_GMAIL_TOOL_VERSION: ${{ secrets.COMPOSIO_GMAIL_TOOL_VERSION }}
           NOTION_MONITOR_PAGE_ID: 3f3abe37-0d44-8158-bd94-f7cdf5e8378c
           NOTION_STATUS_BLOCK_ID: b29ed947-1672-48f9-8132-39b1a0bdb02f
         run: |
@@ -41,6 +45,7 @@ jobs:
           monitor = importlib.util.module_from_spec(spec)
           spec.loader.exec_module(monitor)
           try:
+              sys.argv.append('--preflight')
               monitor.run()
           except monitor.MonitorError as exc:
               print('::error::' + str(exc))
