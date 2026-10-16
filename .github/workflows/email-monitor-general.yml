@@ -1,0 +1,80 @@
+name: Email Monitor - General Inbox & Labels (Private Notion)
+
+on:
+  schedule:
+    - cron: '17 */6 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: asf-private-general-email-monitor
+  cancel-in-progress: false
+
+jobs:
+  check-inbox:
+    if: github.event_name == 'workflow_dispatch' || github.event_name == 'schedule'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install runtime dependency
+        run: pip install requests
+      - name: Test privacy, deduplication, reply and follow-up rules with synthetic data
+        run: python .github/scripts/check_all_emails.py --self-test
+      - name: Read-only Notion routing preflight (no mail or writes)
+        env:
+          COMPOSIO_API_KEY: ${{ secrets.COMPOSIO_API_KEY }}
+          COMPOSIO_USER_ID: ${{ secrets.COMPOSIO_USER_ID }}
+          COMPOSIO_NOTION_CONNECTED_ACCOUNT_ID: ${{ secrets.COMPOSIO_NOTION_CONNECTED_ACCOUNT_ID }}
+          COMPOSIO_GMAIL_CONNECTED_ACCOUNT_ID: ${{ secrets.COMPOSIO_GMAIL_CONNECTED_ACCOUNT_ID }}
+          COMPOSIO_NOTION_TOOL_VERSION: ${{ secrets.COMPOSIO_NOTION_TOOL_VERSION }}
+          COMPOSIO_GMAIL_TOOL_VERSION: ${{ secrets.COMPOSIO_GMAIL_TOOL_VERSION }}
+          NOTION_MONITOR_PAGE_ID: 3fbabe37-0d44-8116-bd4e-fa782fb3966a
+          NOTION_STATUS_BLOCK_ID: 3fbabe37-0d44-814f-a66b-ee859b24c93c
+        run: |
+          python - <<'PY'
+          import importlib.util, sys
+          spec = importlib.util.spec_from_file_location('general_monitor', '.github/scripts/check_all_emails.py')
+          monitor = importlib.util.module_from_spec(spec)
+          spec.loader.exec_module(monitor)
+          try:
+              sys.argv.append('--preflight')
+              monitor.run()
+          except monitor.MonitorError as exc:
+              print('::error::' + str(exc))
+              sys.exit(1)
+          except Exception:
+              print('::error::Private general monitor unexpected failure; payload suppressed.')
+              sys.exit(1)
+          PY
+      - name: Check all inbox labels and write minimal deduplicated state to private Notion
+        env:
+          COMPOSIO_API_KEY: ${{ secrets.COMPOSIO_API_KEY }}
+          COMPOSIO_USER_ID: ${{ secrets.COMPOSIO_USER_ID }}
+          COMPOSIO_NOTION_CONNECTED_ACCOUNT_ID: ${{ secrets.COMPOSIO_NOTION_CONNECTED_ACCOUNT_ID }}
+          COMPOSIO_GMAIL_CONNECTED_ACCOUNT_ID: ${{ secrets.COMPOSIO_GMAIL_CONNECTED_ACCOUNT_ID }}
+          COMPOSIO_NOTION_TOOL_VERSION: ${{ secrets.COMPOSIO_NOTION_TOOL_VERSION }}
+          COMPOSIO_GMAIL_TOOL_VERSION: ${{ secrets.COMPOSIO_GMAIL_TOOL_VERSION }}
+          NOTION_MONITOR_PAGE_ID: 3fbabe37-0d44-8116-bd4e-fa782fb3966a
+          NOTION_STATUS_BLOCK_ID: 3fbabe37-0d44-814f-a66b-ee859b24c93c
+        run: |
+          python - <<'PY'
+          import importlib.util, sys
+          spec = importlib.util.spec_from_file_location('general_monitor', '.github/scripts/check_all_emails.py')
+          monitor = importlib.util.module_from_spec(spec)
+          spec.loader.exec_module(monitor)
+          try:
+              monitor.run()
+          except monitor.MonitorError as exc:
+              print('::error::' + str(exc))
+              sys.exit(1)
+          except Exception:
+              print('::error::Private general monitor unexpected failure; payload suppressed.')
+              sys.exit(1)
+          PY
+      # No issues, uploaded email reports, email excerpts, addresses in logs, or automatic sends/follow-ups.
