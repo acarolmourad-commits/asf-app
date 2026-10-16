@@ -677,20 +677,34 @@
       parent.insertBefore(nav, bands[0].el);
       try { if (localStorage.getItem('asfv2-view') === 'table') tg.click(); } catch (e) {}
 
-      // Rede em numeros (apps por categoria, via app-links.json)
-      fetch(base + 'app-links.json').then(function (r) { return r.ok ? r.json() : null; }).then(function (data) {
-        if (!data) return;
-        var apps = Array.isArray(data) ? data : (data.apps || data.links || []);
-        if (!apps.length) return;
-        var cats = {};
-        apps.forEach(function (a) { var c = (a.categoria || a.category || 'Outros'); cats[c] = (cats[c] || 0) + 1; });
-        var max = Math.max.apply(null, Object.keys(cats).map(function (k) { return cats[k]; }));
+      // Estatisticas do catalogo: data/apps.json possui array e categorias.
+      // data/app-links.json permanece exclusivo do mapeamento de URLs.
+      fetch(base + 'data/apps.json').then(function (r) { return r.ok ? r.json() : null; }).then(function (data) {
+        var apps = data && Array.isArray(data.apps) ? data.apps : [];
+        if (!apps.length || document.querySelector('.asfv2-stats')) return;
+        var cats = Object.create(null), count = 0;
+        apps.forEach(function (a) {
+          if (!a || typeof a !== 'object' || Array.isArray(a)) return;
+          var c = typeof a.category === 'string' && a.category.trim() ? a.category.trim() : 'Outros';
+          cats[c] = (cats[c] || 0) + 1; count++;
+        });
+        if (!count) return;
+        var names = Object.keys(cats).sort(function (x, y) { return cats[y] - cats[x]; });
+        var max = Math.max.apply(null, names.map(function (k) { return cats[k]; }));
         var box = document.createElement('div'); box.className = 'asfv2-stats';
-        var rows = Object.keys(cats).sort(function (x, y) { return cats[y] - cats[x]; }).map(function (k) {
-          var pct = Math.round(cats[k] / max * 100);
-          return '<div class="asfv2-bar-row"><span>' + k + '</span><div class="asfv2-bar"><i data-w="' + pct + '"></i></div><b>' + cats[k] + '</b></div>';
-        }).join('');
-        box.innerHTML = '<h2>📊 Rede em números</h2><p>' + apps.length + ' apps e páginas da rede ASF, por categoria</p>' + rows;
+        var heading = document.createElement('h2'); heading.textContent = '📊 Rede em números'; box.appendChild(heading);
+        var description = document.createElement('p');
+        description.textContent = count + ' entradas do catálogo ASF, por categoria. O catálogo não comprova disponibilidade dos aplicativos.';
+        box.appendChild(description);
+        names.forEach(function (k) {
+          var row = document.createElement('div'); row.className = 'asfv2-bar-row';
+          var label = document.createElement('span'); label.textContent = k; row.appendChild(label);
+          var bar = document.createElement('div'); bar.className = 'asfv2-bar';
+          var fill = document.createElement('i'); fill.setAttribute('data-w', Math.round(cats[k] / max * 100));
+          bar.appendChild(fill); row.appendChild(bar);
+          var total = document.createElement('b'); total.textContent = String(cats[k]); row.appendChild(total);
+          box.appendChild(row);
+        });
         parent.insertBefore(box, bands[0].el.nextSibling);
         requestAnimationFrame(function () {
           Array.prototype.forEach.call(box.querySelectorAll('i[data-w]'), function (i) { i.style.width = i.getAttribute('data-w') + '%'; });
