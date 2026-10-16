@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: write
+  contents: read
 
 jobs:
   seo-check:
@@ -37,7 +37,7 @@ jobs:
             else
               sm="${sm:-000}"
             fi
-            title=$(grep -oi '<title>[^<]*' /tmp/p.html | head -1 | sed 's/<title>//I' | cut -c1-40 || true)
+            title=$(grep -oi '<title>[^<]*' /tmp/p.html | head -1 | sed 's/<title>//I' | cut -c1-40 || true); title="${title:-}"
             desc=$(grep -ci 'name="description"' /tmp/p.html || true)
             [ -z "$title" ] && title="-"
             descok="✅"; [ "$desc" = "0" ] && descok="❌"
@@ -51,8 +51,6 @@ jobs:
           cat $R
       - name: Commit relatorio
         run: |
-          git config user.name "ASF Bot"
-          git config user.email "asf.surffeminino@gmail.com"
-          git add SEO_REPORT.md
-          git commit -m "chore(seo): relatorio semanal $(date -u +%Y-%m-%d)" || echo "sem mudancas"
-          git push
+          # Relatorio somente-leitura: nao commita de volta em main (evita corrida com os deploys do app).
+          echo "Relatorio gerado em SEO_REPORT.md (artefato local do job; commit/push desativados)."
+          cat SEO_REPORT.md
