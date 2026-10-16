@@ -6,6 +6,8 @@ Garante que o app NAO reintroduza cobranca/paywall/conteudo pago.
 Falha (exit 1) se encontrar marcadores de monetizacao por usuario no index.html.
 Modelo de sustentacao: parcerias com lojas + doacoes para sorteios, eventos
 beneficentes e brindes vinculados a pontuacao da carteirinha (docs/MODELO-SUSTENTACAO.md).
+Anuncios AdSense (adsbygoogle) nao sao cobranca da usuaria e sao verificados
+separadamente pelo workflow ads-monitor; por isso nao entram nesta lista.
 """
 import sys
 
@@ -21,7 +23,6 @@ BANNED = [
     ("mercado pago", "gateway de pagamento"),
     ("paywall", "paywall"),
     ("conteudo exclusivo para assinantes", "promessa de conteudo pago"),
-    ("adsbygoogle", "adsense"),
     ("infolinks", "infolinks"),
 ]
 
