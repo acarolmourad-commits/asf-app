@@ -605,15 +605,15 @@
     },
     {
       "slug": "asf-clube",
-      "name": "💳 ASF Clube",
-      "url": "https://acarolmourad-commits.github.io/asf-clube/",
+      "name": "💳 ASF Clube → Carteirinha",
+      "url": "https://asf.surf/#carteirinha",
       "icon": "💳",
-      "title": "ASF Clube",
+      "title": "ASF Clube → Carteirinha",
       "category": "🎨 Cultura & Utilidades",
-      "desc": "Carteirinha digital e benefícios",
+      "desc": "Clube desativado; carteirinha digital e benefícios centralizados na hub ASF",
       "icon_apps": "🪪",
-      "name_apps": "ASF Clube",
-      "desc_apps": "Carteirinha digital e benefícios da associada ASF"
+      "name_apps": "ASF Clube → Carteirinha",
+      "desc_apps": "Clube desativado; acesse a carteirinha digital e os benefícios na hub ASF"
     },
     {
       "slug": "asf-achados",
