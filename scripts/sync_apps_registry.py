@@ -133,9 +133,10 @@ def validate(reg):
     if any(urlsplit(u).scheme != "https" or not urlsplit(u).netloc for u in urls):
         print("ERRO: URL insegura ou invalida no registry")
         ok = False
-    consolidated = {"asf-previsao", "asf-mare", "asf-vento", "asf-swell"}
+    consolidated = {"asf-previsao", "asf-mare", "asf-vento", "asf-swell", "asf-clube"}
     forecast = "https://previsao.asf.surf/"
     legacy_forecast = BASE + "/asf-previsao/"
+    carteirinha = "https://asf.surf/#carteirinha"
     guide = reg["hub"].rstrip("/") + "/guia-apps.html"
 
     for path in VALIDATE_ONLY + [NETWORK_JS, SATELLITES_HTML, APPS_INDEX_HTML]:
@@ -163,6 +164,8 @@ def validate(reg):
                 accepted = {app["url"]}
                 if app["slug"] in consolidated:
                     accepted |= {forecast, legacy_forecast}
+                if app["slug"] == "asf-clube":
+                    accepted.add(carteirinha)
                 if not accepted.intersection(parsed.hrefs):
                     missing.append(app["url"])
         if missing:
