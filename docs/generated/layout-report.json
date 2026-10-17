@@ -1,19 +1,19 @@
 {
   "date": "2026-10-17",
-  "issues_found": 2,
+  "issues_found": 1,
   "improvements_available": 4,
-  "score": 94,
+  "score": 78,
   "suggested": [
     {
       "type": "css",
-      "change": "Better header gradient",
+      "change": "Hover animation on cards",
       "impact": "high"
     },
     {
-      "type": "js",
-      "change": "Lazy loading images",
-      "impact": "high"
+      "type": "seo",
+      "change": "Meta tags optimization",
+      "impact": "medium"
     }
   ],
-  "timestamp": "2026-10-17T09:48:50.915451"
+  "timestamp": "2026-10-17T14:05:34.973516"
 }

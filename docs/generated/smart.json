@@ -21,10 +21,10 @@
       "priority": "high"
     },
     {
-      "type": "feature",
-      "title": "Medidor de condições do mar",
-      "priority": "high"
+      "type": "layout",
+      "title": "Modo escuro",
+      "priority": "medium"
     }
   ],
-  "generated_at": "2026-10-17T09:48:50.784059"
+  "generated_at": "2026-10-17T14:05:34.848019"
 }
