@@ -29,6 +29,12 @@ ALLOWED = {'GMAIL_FETCH_EMAILS', 'NOTION_RETRIEVE_PAGE', 'NOTION_FETCH_BLOCK_CON
 class MonitorError(Exception):
     pass
 
+def _missing_names(names):
+    return [name for name in names if not os.environ.get(name)]
+
+def _valid_version(value):
+    return isinstance(value, str) and bool(re.fullmatch(r'\d{8}_\d{2}', value))
+
 def text(block):
     value = block.get(block.get('type', ''), {})
     return ''.join(r.get('plain_text', r.get('text', {}).get('content', ''))
@@ -94,18 +100,37 @@ def next_step(events):
     return state, last_in, last_out
 
 class Router:
-    def __init__(self):
+    def __init__(self, require_gmail=True):
         self.key = os.environ.get('COMPOSIO_API_KEY')
-        self.user = os.environ.get('COMPOSIO_ENTITY_ID', 'default_user')
-        if not self.key:
-            raise MonitorError('Composio credential unavailable')
-    def call(self, slug, arguments):
+        self.user = os.environ.get('COMPOSIO_USER_ID')
+        self.accounts = {n: os.environ.get('COMPOSIO_' + n + '_CONNECTED_ACCOUNT_ID') for n in ('NOTION', 'GMAIL')}
+        self.versions = {n: os.environ.get('COMPOSIO_' + n + '_TOOL_VERSION') for n in ('NOTION', 'GMAIL')}
+        if not self.key or not self.user:
+            raise MonitorError('Missing explicit routing secret(s): COMPOSIO_API_KEY, COMPOSIO_USER_ID (values not logged)')
+        notion_missing = _missing_names(('COMPOSIO_NOTION_CONNECTED_ACCOUNT_ID', 'COMPOSIO_NOTION_TOOL_VERSION'))
+        if notion_missing:
+            raise MonitorError('Missing explicit Notion routing secret(s): ' + ', '.join(notion_missing) + ' (values not logged)')
+        if not _valid_version(self.versions.get('NOTION')):
+            raise MonitorError('Invalid explicit Notion toolkit version in COMPOSIO_NOTION_TOOL_VERSION; expected YYYYMMDD_NN (value not logged)')
+        if require_gmail:
+            gmail_missing = _missing_names(('COMPOSIO_GMAIL_CONNECTED_ACCOUNT_ID', 'COMPOSIO_GMAIL_TOOL_VERSION'))
+            if gmail_missing:
+                raise MonitorError('Missing explicit Gmail routing secret(s): ' + ', '.join(gmail_missing) + ' (values not logged)')
+            if not _valid_version(self.versions.get('GMAIL')):
+                raise MonitorError('Invalid explicit Gmail toolkit version in COMPOSIO_GMAIL_TOOL_VERSION; expected YYYYMMDD_NN (value not logged)')
+    def payload(self, slug, arguments):
         if slug not in ALLOWED:
             raise MonitorError('Action not permitted')
+        tk = slug.split('_', 1)[0]
+        if not self.accounts.get(tk) or not _valid_version(self.versions.get(tk)):
+            raise MonitorError('Explicit account and pinned toolkit version unavailable for toolkit')
+        return {'user_id': self.user, 'connected_account_id': self.accounts[tk], 'version': self.versions[tk], 'arguments': arguments}
+    def call(self, slug, arguments):
+        payload = self.payload(slug, arguments)
         try:
             response = requests.post('https://backend.composio.dev/api/v3/tools/execute/' + slug,
                 headers={'x-api-key': self.key, 'Content-Type': 'application/json'},
-                json={'user_id': self.user, 'arguments': arguments}, timeout=90)
+                json=payload, timeout=90)
             if response.status_code != 200:
                 raise MonitorError('Router HTTP ' + str(response.status_code) + ' for ' + slug)
             result = response.json()
@@ -208,7 +233,29 @@ def self_test():
     assert next_step({e['id']: e, reply['id']: reply})[0].startswith('RESPOSTA_RECEBIDA')
     controls = [{'id': i, 'type': 'to_do', 'to_do': {'checked': False}} for i in DONE | {STOP}]
     assert completion(controls) == (False, 0)
-    print('PASS: privacy, draft exclusion, duplicate state, seven-day interval and completion controls.')
+    import os as _os
+    _saved = dict(_os.environ)
+    try:
+        for _k in list(_os.environ):
+            if _k.startswith('COMPOSIO_'): del _os.environ[_k]
+        try: Router(); raise AssertionError('router should fail closed without API key')
+        except MonitorError as _e: assert 'COMPOSIO_API_KEY' in str(_e)
+        _os.environ.update({'COMPOSIO_API_KEY': 'synthetic', 'COMPOSIO_USER_ID': 'synthetic'})
+        try: Router(); raise AssertionError('notion routing should fail closed')
+        except MonitorError as _e: assert 'COMPOSIO_NOTION_CONNECTED_ACCOUNT_ID' in str(_e)
+        _os.environ.update({'COMPOSIO_NOTION_CONNECTED_ACCOUNT_ID': 'synthetic', 'COMPOSIO_NOTION_TOOL_VERSION': 'latest'})
+        try: Router(require_gmail=False); raise AssertionError('latest version should be rejected for direct v3 execution')
+        except MonitorError as _e: assert 'COMPOSIO_NOTION_TOOL_VERSION' in str(_e)
+        _os.environ['COMPOSIO_NOTION_TOOL_VERSION'] = '20250101_00'
+        Router(require_gmail=False)
+        try: Router(); raise AssertionError('gmail routing should fail closed')
+        except MonitorError as _e: assert 'COMPOSIO_GMAIL_CONNECTED_ACCOUNT_ID' in str(_e)
+        _os.environ.update({'COMPOSIO_GMAIL_CONNECTED_ACCOUNT_ID': 'synthetic', 'COMPOSIO_GMAIL_TOOL_VERSION': '20250101_00'})
+        _payload = Router().payload('NOTION_RETRIEVE_PAGE', {'page_id': '00000000-0000-0000-0000-000000000000'})
+        assert _payload['version'] == '20250101_00' and _payload['connected_account_id'] == 'synthetic' and _payload['user_id'] == 'synthetic'
+    finally:
+        _os.environ.clear(); _os.environ.update(_saved)
+    print('PASS: privacy, draft exclusion, duplicate state, seven-day interval, completion controls, and pinned Composio v3 payload (YYYYMMDD_NN, latest rejected).')
 
 if __name__ == '__main__':
     try:
