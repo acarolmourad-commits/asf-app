@@ -79,13 +79,19 @@ def followup_due(events,now=None):
 def partner_key(sender):
     addr=parseaddr(sender or '')[1].lower()
     return PARTNERS.get(addr) or PARTNER_DOMAINS.get(sdomain(addr))
+def _missing_names(names):
+    return [name for name in names if not os.environ.get(name)]
 class Router:
-    def __init__(self):
+    def __init__(self, require_gmail=False):
         self.key=os.environ.get('COMPOSIO_API_KEY'); self.user=os.environ.get('COMPOSIO_USER_ID')
         self.accounts={n:os.environ.get('COMPOSIO_'+n+'_CONNECTED_ACCOUNT_ID') for n in ('NOTION','GMAIL')}
         self.versions={n:os.environ.get('COMPOSIO_'+n+'_TOOL_VERSION') for n in ('NOTION','GMAIL')}
-        if not self.key or not self.user: raise MonitorError('Composio credential or explicit user configuration unavailable')
-        if not self.accounts['NOTION'] or not self.versions['NOTION']: raise MonitorError('Explicit Notion account and tool version configuration unavailable')
+        if not self.key or not self.user: raise MonitorError('Missing explicit routing secret(s): COMPOSIO_API_KEY, COMPOSIO_USER_ID (values not logged)')
+        notion_missing=_missing_names(('COMPOSIO_NOTION_CONNECTED_ACCOUNT_ID','COMPOSIO_NOTION_TOOL_VERSION'))
+        if notion_missing: raise MonitorError('Missing explicit Notion routing secret(s): '+', '.join(notion_missing)+' (values not logged)')
+        if require_gmail:
+            gmail_missing=_missing_names(('COMPOSIO_GMAIL_CONNECTED_ACCOUNT_ID','COMPOSIO_GMAIL_TOOL_VERSION'))
+            if gmail_missing: raise MonitorError('Missing explicit Gmail routing secret(s): '+', '.join(gmail_missing)+' (values not logged)')
     def call(self,slug,args):
         if slug not in ALLOWED: raise MonitorError('Action not permitted')
         tk=slug.split('_',1)[0]
@@ -125,11 +131,12 @@ def mail_from(router):
         if token in seen: raise MonitorError('Mail pagination incomplete')
         seen.add(token)
 def run():
-    router=Router(); page=os.environ['NOTION_MONITOR_PAGE_ID']; status_id=os.environ['NOTION_STATUS_BLOCK_ID']
+    preflight='--preflight' in sys.argv
+    router=Router(require_gmail=not preflight); page=os.environ['NOTION_MONITOR_PAGE_ID']; status_id=os.environ['NOTION_STATUS_BLOCK_ID']
     meta=router.call('NOTION_RETRIEVE_PAGE',{'page_id':page})
     if meta.get('id')!=page or meta.get('public_url') or meta.get('archived') or meta.get('in_trash'): raise MonitorError('Notion target is not an active private page')
     blocks=blocks_from(router,page); known_all,known_partners,known_replies,known_follow=events_from(blocks); end,pending=completion(blocks); checked=dt.datetime.now(UTC).isoformat()
-    if '--preflight' in sys.argv:
+    if preflight:
         if not any(b.get('id')==status_id for b in blocks): raise MonitorError('Private status block unavailable')
         print('Private Notion read-only preflight OK; mail and writes skipped.'); return
     if end:
@@ -169,7 +176,24 @@ def self_test():
     controls=[{'id':i,'type':'to_do','to_do':{'checked':False}} for i in DONE|{STOP}]; assert completion(controls)==(False,4)
     for c in controls:
         if c['id']==STOP: c['to_do']['checked']=True
-    assert completion(controls)[0]; print('PASS: privacy, spam/trash/draft exclusion, id length, dedupe, reply/followup rules, partner seeds and completion controls.')
+    assert completion(controls)[0]
+    import os as _os
+    _saved=dict(_os.environ)
+    try:
+        for _k in list(_os.environ):
+            if _k.startswith('COMPOSIO_'): del _os.environ[_k]
+        try: Router(require_gmail=False); raise AssertionError('preflight router should fail closed')
+        except MonitorError as _e: assert 'COMPOSIO_API_KEY' in str(_e)
+        _os.environ.update({'COMPOSIO_API_KEY':'synthetic','COMPOSIO_USER_ID':'synthetic'})
+        try: Router(require_gmail=False); raise AssertionError('notion routing should fail closed')
+        except MonitorError as _e: assert 'COMPOSIO_NOTION_CONNECTED_ACCOUNT_ID' in str(_e)
+        _os.environ.update({'COMPOSIO_NOTION_CONNECTED_ACCOUNT_ID':'synthetic','COMPOSIO_NOTION_TOOL_VERSION':'synthetic'})
+        Router(require_gmail=False)
+        try: Router(require_gmail=True); raise AssertionError('gmail routing should fail closed')
+        except MonitorError as _e: assert 'COMPOSIO_GMAIL_CONNECTED_ACCOUNT_ID' in str(_e)
+    finally:
+        _os.environ.clear(); _os.environ.update(_saved)
+    print('PASS: privacy, spam/trash/draft exclusion, id length, dedupe, reply/followup rules, partner seeds, completion controls and staged explicit routing (Notion preflight, Gmail full).')
 if __name__=='__main__':
     try: self_test() if '--self-test' in sys.argv else run()
     except (MonitorError,KeyError): print('::error::Private general monitor failed safely; provider payload suppressed.'); sys.exit(1)
