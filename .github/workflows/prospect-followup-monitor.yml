@@ -28,9 +28,14 @@ jobs:
       - name: Test privacy, deduplication and follow-up windows with synthetic data
         run: python .github/scripts/check_prospects_followup.py --self-test
       - name: Check Surfland + Hurley replies and write minimal state to private Notion
+        # Explicit Composio v3 routing only; no fallback user. Tool versions must be pinned YYYYMMDD_NN secrets.
         env:
           COMPOSIO_API_KEY: ${{ secrets.COMPOSIO_API_KEY }}
-          COMPOSIO_ENTITY_ID: ${{ vars.COMPOSIO_ENTITY_ID || 'default_user' }}
+          COMPOSIO_USER_ID: ${{ secrets.COMPOSIO_USER_ID }}
+          COMPOSIO_NOTION_CONNECTED_ACCOUNT_ID: ${{ secrets.COMPOSIO_NOTION_CONNECTED_ACCOUNT_ID }}
+          COMPOSIO_GMAIL_CONNECTED_ACCOUNT_ID: ${{ secrets.COMPOSIO_GMAIL_CONNECTED_ACCOUNT_ID }}
+          COMPOSIO_NOTION_TOOL_VERSION: ${{ secrets.COMPOSIO_NOTION_TOOL_VERSION }}
+          COMPOSIO_GMAIL_TOOL_VERSION: ${{ secrets.COMPOSIO_GMAIL_TOOL_VERSION }}
           NOTION_MONITOR_PAGE_ID: 3fbabe37-0d44-816b-8adc-c217c5b00264
           NOTION_STATUS_BLOCK_ID: b835760e-4c27-4ae2-896e-380524821399
         run: |
