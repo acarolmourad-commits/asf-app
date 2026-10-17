@@ -26,6 +26,7 @@ jobs:
         run: pip install requests
       - name: Test privacy, deduplication, reply and follow-up rules with synthetic data
         run: python .github/scripts/check_all_emails.py --self-test
+      # Preflight validates only Composio + Notion routing; Gmail routing is required only by the full check below.
       - name: Read-only Notion routing preflight (no mail or writes)
         env:
           COMPOSIO_API_KEY: ${{ secrets.COMPOSIO_API_KEY }}
