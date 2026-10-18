@@ -1,5 +1,5 @@
 {
-  "date": "2026-10-17",
+  "date": "2026-10-18",
   "new_tip": {
     "category": "Saúde",
     "title": "Treino de força",
@@ -16,9 +16,9 @@
   },
   "improvements": [
     {
-      "type": "content",
-      "title": "Mais dicas técnicas avançadas",
-      "priority": "high"
+      "type": "layout",
+      "title": "Modo escuro",
+      "priority": "medium"
     },
     {
       "type": "feature",
@@ -26,5 +26,5 @@
       "priority": "high"
     }
   ],
-  "generated_at": "2026-10-17T01:50:38.302735"
+  "generated_at": "2026-10-18T10:00:33.343561"
 }
