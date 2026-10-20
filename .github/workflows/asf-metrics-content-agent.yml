@@ -1,0 +1,45 @@
+name: ASF Metrics Content Agent
+
+on:
+  schedule:
+    - cron: "0 12 * * 1"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  weekly-briefs:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Open weekly briefs issue (deduplicated)
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          WEEK=$(date -u +%G-W%V)
+          TITLE="[Agente Métricas] Briefs semanais ${WEEK} — acompanhar buscas e gerar conteúdo"
+          EXISTING=$(gh issue list --repo "$GITHUB_REPOSITORY" --state open --search "$TITLE in:title" --json number --jq 'length')
+          if [ "$EXISTING" != "0" ]; then
+            echo "Issue semanal já existe para ${WEEK}; nada a fazer."
+            exit 0
+          fi
+          cat > /tmp/briefs-issue.md <<'EOF'
+          ## Missão desta semana
+          Rodar o **ASF — Agente de Métricas & Conteúdo** (`agents/asf-metrics-content-agent.md`):
+          acompanhar as buscas reais da rede ASF e gerar os briefs de conteúdo da semana.
+          Nenhum conteúdo é publicado automaticamente — briefs são para aprovação humana.
+          
+          ## Checklist
+          - [ ] Consultar Google Search Console (28 e 90 dias, lag de 2–3 dias): `sc-domain:asf.surf` e a home do `asf-app`
+          - [ ] Ranquear queries/páginas por impressões, posição (foco 11–50) e CTR = 0
+          - [ ] Priorizar o cluster nº 1 atual: **previsão de ondas** (baseline 57 impressões, posição ~46, https://previsao.asf.surf/)
+          - [ ] Gerar 3–5 briefs: query/cluster + dados GSC, título SEO, intenção, outline H1–H3, links internos ASF reais, CTA permitido
+          - [ ] Registrar o resumo aprovado em `agents/briefs/`
+          
+          ## Guardrails
+          - AdSense apenas na home principal (decisão 20/10/2026, sem paywall)
+          - Não expandir anúncios para páginas editoriais sem confirmação explícita "expandir AdSense para editoriais"
+          - Sem preços, sem dados confidenciais, sem métricas inventadas (sem linha no GSC = "sem dados")
+          EOF
+          gh issue create --repo "$GITHUB_REPOSITORY" --title "$TITLE" --body-file /tmp/briefs-issue.md
