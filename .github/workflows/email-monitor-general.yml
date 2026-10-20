@@ -27,7 +27,12 @@ jobs:
       - name: Test privacy, deduplication, reply and follow-up rules with synthetic data
         run: python .github/scripts/check_all_emails.py --self-test
       # Preflight validates only Composio + Notion routing; Gmail routing is required only by the full check below.
+      # Resilient (2026-10-20): a malformed pinned toolkit-version secret pauses the monitor with a warning
+      # instead of failing the workflow every 6h. Fix COMPOSIO_NOTION_TOOL_VERSION / COMPOSIO_GMAIL_TOOL_VERSION
+      # to YYYYMMDD_NN in repo secrets to re-enable automatically.
       - name: Read-only Notion routing preflight (no mail or writes)
+        id: preflight
+        continue-on-error: true
         env:
           COMPOSIO_API_KEY: ${{ secrets.COMPOSIO_API_KEY }}
           COMPOSIO_USER_ID: ${{ secrets.COMPOSIO_USER_ID }}
@@ -53,7 +58,14 @@ jobs:
               print('::error::Private general monitor unexpected failure; payload suppressed.')
               sys.exit(1)
           PY
+      - name: Report preflight failure as warning (monitor paused, no mail or writes)
+        if: steps.preflight.outcome != 'success'
+        run: |
+          echo '::warning::Email Monitor pausado: preflight falhou. Verifique os secrets COMPOSIO_* (versoes de toolkit no formato YYYYMMDD_NN). Nenhum e-mail foi lido e nada foi escrito no Notion nesta execucao.'
+          echo '## Email Monitor pausado' >> $GITHUB_STEP_SUMMARY
+          echo 'Preflight de roteamento falhou; monitor pausado sem leitura de e-mail nem escrita no Notion. Corrija os secrets COMPOSIO_NOTION_TOOL_VERSION / COMPOSIO_GMAIL_TOOL_VERSION (YYYYMMDD_NN).' >> $GITHUB_STEP_SUMMARY
       - name: Check all inbox labels and write minimal deduplicated state to private Notion
+        if: steps.preflight.outcome == 'success'
         env:
           COMPOSIO_API_KEY: ${{ secrets.COMPOSIO_API_KEY }}
           COMPOSIO_USER_ID: ${{ secrets.COMPOSIO_USER_ID }}

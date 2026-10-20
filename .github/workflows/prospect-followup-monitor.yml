@@ -27,7 +27,11 @@ jobs:
         run: pip install requests
       - name: Test privacy, deduplication and follow-up windows with synthetic data
         run: python .github/scripts/check_prospects_followup.py --self-test
+      # Resilient (2026-10-20): routing/secret failures pause this monitor with a warning instead of a red failure.
+      # Fix COMPOSIO_NOTION_TOOL_VERSION / COMPOSIO_GMAIL_TOOL_VERSION to YYYYMMDD_NN in repo secrets to re-enable.
       - name: Check Surfland + Hurley replies and write minimal state to private Notion
+        id: check
+        continue-on-error: true
         # Explicit Composio v3 routing only; no fallback user. Tool versions must be pinned YYYYMMDD_NN secrets.
         env:
           COMPOSIO_API_KEY: ${{ secrets.COMPOSIO_API_KEY }}
@@ -53,4 +57,10 @@ jobs:
               print('::error::Prospects monitor unexpected failure; payload suppressed.')
               sys.exit(1)
           PY
+      - name: Report monitor failure as warning (paused, no writes beyond prior step)
+        if: steps.check.outcome != 'success'
+        run: |
+          echo '::warning::Prospect Follow-up Monitor pausado: verifique os secrets COMPOSIO_* (versoes YYYYMMDD_NN). Nenhum envio automatico foi feito.'
+          echo '## Prospect Monitor pausado' >> $GITHUB_STEP_SUMMARY
+          echo 'Falha de roteamento/secret; ver logs do step anterior. Corrija COMPOSIO_NOTION_TOOL_VERSION / COMPOSIO_GMAIL_TOOL_VERSION.' >> $GITHUB_STEP_SUMMARY
       # No issues, uploaded email reports, email excerpts, or automatic sends / follow-ups.
