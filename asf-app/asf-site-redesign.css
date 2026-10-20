@@ -1,0 +1,5 @@
+/* ASF canonical-domain alias (fix/canonical-domain-assets-20261020)
+   Pages historicas referenciam /asf-app/asf-site-redesign.css, caminho valido no github.io
+   mas inexistente no dominio canonico asf.surf (raiz do repo). Este alias importa a fonte
+   unica /asf-site-redesign.css. NAO edite estilos aqui; edite o arquivo raiz. */
+@import url("/asf-site-redesign.css");
