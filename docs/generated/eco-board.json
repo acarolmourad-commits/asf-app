@@ -1,11 +1,11 @@
 {
   "date": "2026-10-21",
   "board_tip": {
-    "title": "Funboard: A versátil",
-    "content": "Funboards (7'0\"-8'6\") são ideais para evolução. Mais ágil que longboard, mantém estabilidade.",
+    "title": "Shortboard: Performance",
+    "content": "Shortboards (5'6\"-6'6\") são para performance. Requer técnica e condicionamento.",
     "tags": [
-      "Funboard",
-      "Evolução"
+      "Shortboard",
+      "Performance"
     ]
   },
   "eco_tip": {
@@ -14,5 +14,5 @@
     "category": "Consumo Consciente"
   },
   "daily_message": "Hidrate-se: 500ml de água antes de surfar!",
-  "generated_at": "2026-10-21T15:51:26.016775"
+  "generated_at": "2026-10-21T16:12:10.966250"
 }
