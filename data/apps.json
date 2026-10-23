@@ -1,7 +1,7 @@
 {
   "hub": "https://acarolmourad-commits.github.io/asf-app/",
   "version": 2,
-  "updated": "2026-10-01",
+  "updated": "2026-10-23",
   "apps": [
     {
       "slug": "asf-previsao",
@@ -638,6 +638,18 @@
       "icon_apps": "🔢",
       "name_apps": "ASF Matemática",
       "desc_apps": "Calculadoras de matemática do surf: ondas, remada e prancha"
+    },
+    {
+      "slug": "asf-tempo",
+      "name": "⛅ ASF Tempo",
+      "url": "https://acarolmourad-commits.github.io/asf-tempo/",
+      "icon": "⛅",
+      "title": "ASF Tempo",
+      "category": "🌊 Mar & Condições",
+      "desc": "Previsão do tempo detalhada do litoral norte de SP",
+      "icon_apps": "⛅",
+      "name_apps": "ASF Tempo",
+      "desc_apps": "Previsão do tempo detalhada do litoral norte de SP (16 dias, por cidade, com alertas)"
     }
   ],
   "categories": [
