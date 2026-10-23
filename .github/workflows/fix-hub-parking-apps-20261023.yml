@@ -1,0 +1,49 @@
+name: Fix hub parking and apps tempo 2026-10-23 (one-shot)
+on:
+  push:
+    branches: [main]
+    paths: ['.github/workflows/fix-hub-parking-apps-20261023.yml']
+permissions:
+  contents: write
+jobs:
+  fix:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Remove parking prices and add asf-tempo
+        run: |
+          python3 - <<'PY'
+          import pathlib, re, sys, json
+          p = pathlib.Path('index.html')
+          s = p.read_text(encoding='utf-8')
+          s2, n = re.subn(r'(Estacionamento:</strong>)\s*[^<]*', r'\1 confirme valores e regras atuais no local', s)
+          if n < 2:
+              print(f'expected at least 2 parking lines, found {n}'); sys.exit(1)
+          p.write_text(s2, encoding='utf-8')
+          ap = pathlib.Path('data/apps.json')
+          data = json.loads(ap.read_text(encoding='utf-8'))
+          data['updated'] = '2026-10-23'
+          if not any(a.get('slug') == 'asf-tempo' for a in data.get('apps', [])):
+              data['apps'].append({
+                  'slug': 'asf-tempo',
+                  'name': '⛅ ASF Tempo',
+                  'url': 'https://acarolmourad-commits.github.io/asf-tempo/',
+                  'icon': '⛅',
+                  'title': 'ASF Tempo',
+                  'category': '🌊 Mar & Condições',
+                  'desc': 'Previsão do tempo detalhada do litoral norte de SP',
+                  'icon_apps': '⛅',
+                  'name_apps': 'ASF Tempo',
+                  'desc_apps': 'Previsão do tempo detalhada do litoral norte de SP (16 dias, por cidade, com alertas)'
+              })
+          ap.write_text(json.dumps(data, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
+          print(f'parking lines fixed: {n}; apps total: {len(data["apps"])}')
+          PY
+      - name: Commit and push if changed
+        run: |
+          if git diff --quiet; then echo 'No changes'; exit 0; fi
+          git config user.name 'ASF Bot'
+          git config user.email 'bot@asf-app.com'
+          git add index.html data/apps.json
+          git commit -m 'fix(hub): remove precos de estacionamento e adiciona asf-tempo ao apps.json 2026-10-23'
+          git push
