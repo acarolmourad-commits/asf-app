@@ -1,12 +1,12 @@
 {
-  "date": "2026-10-24",
+  "date": "2026-10-25",
   "new_tip": {
-    "category": "Saúde",
-    "title": "Treino de força",
-    "content": "Foque em exercícios compostos: remada com elástico, agachamentos, plank. 2-3x/semana.",
+    "category": "Equipamento",
+    "title": "Qual leash escolher",
+    "content": "Use leash do mesmo tamanho ou ligeiramente menor que a prancha.",
     "tags": [
-      "Saúde",
-      "Treino"
+      "Equipamento",
+      "Leash"
     ]
   },
   "new_utility": {
@@ -21,10 +21,10 @@
       "priority": "medium"
     },
     {
-      "type": "content",
-      "title": "Mais dicas técnicas avançadas",
+      "type": "feature",
+      "title": "Medidor de condições do mar",
       "priority": "high"
     }
   ],
-  "generated_at": "2026-10-24T19:54:17.323986"
+  "generated_at": "2026-10-25T02:00:22.972977"
 }

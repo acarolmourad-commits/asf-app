@@ -1,14 +1,12 @@
 {
-  "date": "2026-10-24T19:54:51.971496+00:00",
+  "date": "2026-10-25T02:01:02.887943+00:00",
   "total": 109,
-  "ok": 95,
+  "ok": 97,
   "skipped": 10,
-  "broken_count": 4,
+  "broken_count": 2,
   "broken": [
-    "https://www.fecasurf.com.br/",
     "https://www.spsurf.com.br",
-    "https://www.spsurf.com.br/",
-    "https://www.villablumaresias.com.br"
+    "https://www.spsurf.com.br/"
   ],
   "results": [
     {
@@ -198,8 +196,8 @@
     },
     {
       "url": "https://www.fecasurf.com.br/",
-      "status": "broken",
-      "http": 403
+      "status": "ok",
+      "http": 200
     },
     {
       "url": "https://www.googletagmanager.com",
@@ -238,8 +236,8 @@
     },
     {
       "url": "https://www.villablumaresias.com.br",
-      "status": "broken",
-      "http": 403
+      "status": "ok",
+      "http": 200
     },
     {
       "url": "./",
