@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Painel Admin — Carteirinhas ASF</title>
+<style>
+:root{--ink:#0e2439;--sea:#007c96;--soft:#f5fafb;--line:#d7e4e8;--bad:#b42318;--ok:#146c43}
+*{box-sizing:border-box}body{margin:0;background:var(--soft);color:var(--ink);font:16px/1.6 system-ui,sans-serif}
+main,header,footer{max-width:1080px;margin:auto;padding:20px}header{background:linear-gradient(135deg,#0e2439,#007c96);color:#fff;max-width:none}header>*{max-width:1080px;margin:auto}
+.card{background:#fff;border:1px solid var(--line);border-radius:16px;padding:20px;margin:18px 0}
+label{display:block;font-weight:700;margin:12px 0 6px}input{width:100%;padding:12px;border:1px solid var(--line);border-radius:10px;font:inherit}
+button,.button{display:inline-block;background:var(--ink);color:#fff;border:0;border-radius:10px;padding:11px 16px;font:inherit;cursor:pointer;text-decoration:none}button[disabled]{opacity:.55;cursor:wait}
+table{width:100%;border-collapse:collapse;font-size:14px}th,td{text-align:left;padding:9px;border-bottom:1px solid var(--line);vertical-align:top}
+.badge{display:inline-block;padding:2px 9px;border-radius:999px;background:#e6f4ea;color:var(--ok);font-weight:700}.badge.off{background:#fdecea;color:var(--bad)}
+.muted{color:#5b7183;font-size:14px}.error{color:var(--bad);font-weight:700}.toolbar{display:flex;gap:10px;flex-wrap:wrap;align-items:end}.toolbar>div{flex:1;min-width:220px}
+</style>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body>
+<header><h1>Painel Admin — Carteirinhas ASF</h1><p>Área restrita, somente leitura. Nenhum dado é carregado antes do login de admin.</p></header>
+<main>
+  <section id="login-card" class="card">
+    <h2>Entrar como admin</h2>
+    <p class="muted">Use o e-mail autorizado. Você receberá um link mágico de acesso. Se o e-mail não estiver na allowlist, nenhum dado será exibido.</p>
+    <form id="login-form">
+      <label for="email">E-mail admin</label>
+      <input id="email" type="email" autocomplete="email" required placeholder="asf.surffeminino@gmail.com">
+      <p><button type="submit">Enviar link de acesso</button></p>
+    </form>
+    <p id="login-msg" role="status"></p>
+  </section>
+
+  <section id="admin-card" class="card" hidden>
+    <div class="toolbar">
+      <div><h2 style="margin:0">Carteirinhas registradas</h2><p id="session-info" class="muted" style="margin:4px 0"></p></div>
+      <button id="logout" type="button">Sair</button>
+    </div>
+    <p id="stats" class="muted">Carregando estatísticas…</p>
+    <div class="toolbar">
+      <div><label for="q">Buscar por número ou nome</label><input id="q" type="search" placeholder="ASF-… ou nome"></div>
+      <button id="search" type="button">Buscar</button>
+      <button id="prev" type="button">← Anterior</button>
+      <button id="next" type="button">Próxima →</button>
+    </div>
+    <p id="list-msg" role="status"></p>
+    <div style="overflow:auto"><table aria-label="Carteirinhas">
+      <thead><tr><th>Número</th><th>Nome / apelido</th><th>Nível</th><th>Praia / cidade</th><th>Instagram</th><th>Validade</th><th>Status</th><th>Hash</th></tr></thead>
+      <tbody id="rows"></tbody>
+    </table></div>
+  </section>
+</main>
+<footer class="muted">ASF — uso interno. Não compartilhe capturas com dados de associadas.</footer>
+<script>
+(function(){
+'use strict';
+var SUPABASE_URL='https://qktabrzbgdfndklytwub.supabase.co';
+var SUPABASE_KEY='sb_publishable_qIvPxh6DavCPtntfflaRLw_QI_pZJih';
+var PAGE=20, page=0, term='';
+var sb=window.supabase.createClient(SUPABASE_URL,SUPABASE_KEY);
+function esc(s){return String(s==null?'':s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
+function show(id,on){document.getElementById(id).hidden=!on;}
+function msg(id,text,bad){var e=document.getElementById(id);e.textContent=text||'';e.className=bad?'error':'';}
+async function isAdmin(user){
+  var r=await sb.from('admin_allowlist').select('user_id').eq('user_id',user.id).maybeSingle();
+  if(r.error) throw new Error('Allowlist admin ainda não configurada no banco. Aplique a migration da Fase 3 em ambiente de teste antes de usar este painel.');
+  return !!r.data;
+}
+async function loadStats(){
+  var el=document.getElementById('stats');
+  var r=await sb.rpc('carteirinhas_stats');
+  if(r.error){el.textContent='Estatísticas indisponíveis neste ambiente.';return;}
+  var d=r.data||{};
+  el.textContent='Total ativas: '+(d.total_ativas!=null?d.total_ativas:'—');
+}
+async function loadRows(){
+  var tbody=document.getElementById('rows');
+  msg('list-msg','Carregando…');
+  var q=sb.from('associadas').select('numero,nome,apelido,nivel,praia,cidade,insta,validade,ativo,email_hash,emitida_em',{count:'exact'}).order('emitida_em',{ascending:false}).range(page*PAGE,page*PAGE+PAGE-1);
+  if(term){var safe=term.replace(/[%_,()\\]/g,' ').trim(); if(safe) q=q.or('numero.ilike.%'+safe+'%,nome.ilike.%'+safe+'%');}
+  var r=await q;
+  if(r.error){msg('list-msg','Não foi possível carregar. Verifique se você é admin e se a migration foi aplicada.',true);tbody.innerHTML='';return;}
+  msg('list-msg','Registros: '+(r.count!=null?r.count:(r.data||[]).length)+' · Página '+(page+1));
+  tbody.innerHTML=(r.data||[]).map(function(a){
+    return '<tr><td>'+esc(a.numero)+'</td><td>'+esc(a.nome)+(a.apelido?' ('+esc(a.apelido)+')':'')+'</td><td>'+esc(a.nivel)+'</td><td>'+esc([a.praia,a.cidade].filter(Boolean).join(' / '))+'</td><td>'+esc(a.insta)+'</td><td>'+esc(a.validade)+'</td><td><span class="badge'+(a.ativo?'':' off')+'">'+(a.ativo?'ativa':'inativa')+'</span></td><td title="hash completo disponível apenas no banco">'+esc(String(a.email_hash||'').slice(0,8))+'…</td></tr>';
+  }).join('');
+  document.getElementById('prev').disabled=page===0;
+  document.getElementById('next').disabled=!r.data||r.data.length<PAGE;
+}
+async function refresh(){
+  var s=await sb.auth.getSession();
+  var user=s&&s.data&&s.data.session?s.data.session.user:null;
+  if(!user){show('login-card',true);show('admin-card',false);return;}
+  try{
+    if(!await isAdmin(user)){await sb.auth.signOut();show('login-card',true);show('admin-card',false);msg('login-msg','Este e-mail não está na allowlist de admin.',true);return;}
+  }catch(e){show('login-card',true);show('admin-card',false);msg('login-msg',e.message,true);return;}
+  document.getElementById('session-info').textContent='Sessão admin: '+(user.email||'');
+  show('login-card',false);show('admin-card',true);
+  loadStats(); loadRows();
+}
+document.getElementById('login-form').addEventListener('submit',async function(ev){
+  ev.preventDefault();
+  var email=document.getElementById('email').value.trim();
+  msg('login-msg','Enviando…');
+  var r=await sb.auth.signInWithOtp({email:email,options:{emailRedirectTo:window.location.origin+window.location.pathname}});
+  msg('login-msg',r.error?'Não foi possível enviar o link. Confira a configuração de Auth.':'Link enviado. Abra o e-mail e clique para entrar.',!!r.error);
+});
+document.getElementById('logout').addEventListener('click',async function(){await sb.auth.signOut();refresh();});
+document.getElementById('search').addEventListener('click',function(){term=document.getElementById('q').value;page=0;loadRows();});
+document.getElementById('prev').addEventListener('click',function(){if(page>0){page--;loadRows();}});
+document.getElementById('next').addEventListener('click',function(){page++;loadRows();});
+sb.auth.onAuthStateChange(function(){refresh();});
+refresh();
+})();
+</script>
+</body>
+</html>
