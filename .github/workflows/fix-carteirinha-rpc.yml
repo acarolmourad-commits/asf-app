@@ -1,0 +1,35 @@
+name: Fix - Carteirinha via RPC (Fase 1)
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Aplicar patch Fase 1 (RPC + higiene campanha/docs)
+        run: python .github/scripts/fix_carteirinha_rpc_phase1.py
+
+      - name: Validar sintaxe do carteirinha.js
+        run: node --check carteirinha.js
+
+      - name: Commit das alteracoes
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          if git diff --quiet; then
+            echo "Nenhuma alteracao necessaria"
+          else
+            git add carteirinha.js docs/brand-emails.json docs/brand-emails-confirmed.json docs/carteirinhas-sync.md docs/carteirinhas-sync-log.json
+            git commit -m "fix(carteirinha): emissao via RPC + higiene campanha/docs (Fase 1)"
+            git push
+          fi
