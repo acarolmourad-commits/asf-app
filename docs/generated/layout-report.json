@@ -1,13 +1,13 @@
 {
   "date": "2026-10-25",
-  "issues_found": 2,
+  "issues_found": 4,
   "improvements_available": 4,
-  "score": 75,
+  "score": 96,
   "suggested": [
     {
-      "type": "js",
-      "change": "Lazy loading images",
-      "impact": "high"
+      "type": "seo",
+      "change": "Meta tags optimization",
+      "impact": "medium"
     },
     {
       "type": "css",
@@ -15,5 +15,5 @@
       "impact": "high"
     }
   ],
-  "timestamp": "2026-10-25T14:53:24.887823"
+  "timestamp": "2026-10-25T15:08:59.919924"
 }
