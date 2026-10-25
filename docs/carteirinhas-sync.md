@@ -23,7 +23,7 @@
 | RPC `emitir_carteirinha` | ❌ Não existe (404) | **Substituído por REST Upsert** |
 | RPC `listar_carteirinhas` | ❌ Não existe | **Substituído por REST GET** |
 | Anon Key | ✅ Configurada | sb_publishable_qIvPx... |
-| SELECT na `associadas` | ⚠️ Bloqueado (401/RLS) | **Precisa: GRANT SELECT TO anon** |
+| SELECT na `associadas` | Aberto temporariamente (policy publica) | Apenas para o painel legado; fechar na Fase 3 com painel autenticado |
 
 ### Fluxo de Cadastro (Corrigido)
 
@@ -65,3 +65,17 @@
 `cron/supabase-sheets-sync.py` — Daily 3:00 UTC
 - Lê Supabase (associadas) → upsert no Sheets (via Apps Script)
 - Log: `docs/carteirinhas-sync-log.json`
+
+
+## Atualizacao 2026-10-25 - Fases 1 e 2 (Carteirinha + Supabase)
+
+- A RPC `emitir_carteirinha` EXISTE (SECURITY DEFINER, parametros `p_*`):
+  o 404 anterior era chamada sem o prefixo `p_`. Emissao/renovacao e
+  verificacao passam a ser feitas somente via RPC (`sbRpc`).
+- `carteirinha.js` nao acessa mais diretamente `/rest/v1/associadas`.
+- Fase 2 (2026-10-25): removidas as policies publicas de INSERT e UPDATE
+  em `associadas`. A RPC continua emitindo por ser SECURITY DEFINER.
+- SELECT publico permanece TEMPORARIAMENTE apenas porque o painel legado
+  `carteirinhas.html` lista associadas via anon. Fase 3: painel com
+  autenticacao de admin e remocao do SELECT publico.
+- Nada foi apagado: registros de associadas e emissoes preservados.

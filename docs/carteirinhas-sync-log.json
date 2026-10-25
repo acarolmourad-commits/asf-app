@@ -1,9 +1,9 @@
 {
-  "date": "2026-10-06",
+  "date": "2026-10-25",
   "supabase_status": {
     "table_associadas": "EXISTS (RLS blocks anon SELECT)",
     "table_carteirinhas": "NOT FOUND",
-    "rpc_emitir_carteirinha": "NOT FOUND (404) - replaced with REST API",
+    "rpc_emitir_carteirinha": "EXISTS (SECURITY DEFINER) - usado via POST /rest/v1/rpc/emitir_carteirinha com parametros p_*",
     "rpc_listar_carteirinhas": "NOT FOUND (404) - replaced with REST API",
     "columns_verified": [
       "numero",
@@ -17,8 +17,9 @@
       "email_hash",
       "id"
     ],
-    "anon_select": "BLOQUEADO (401 - precisa GRANT SELECT TO anon)",
-    "anon_insert": "BLOQUEADO (403 - precisa CREATE POLICY)"
+    "anon_select": "FUNCIONA (policy publica TEMPORARIA apenas para o painel legado; fechar na Fase 3 com painel autenticado)",
+    "anon_insert": "Policy removida na Fase 2 (2026-10-25); emissao via RPC",
+    "anon_update": "Policy removida na Fase 2 (2026-10-25); emissao via RPC"
   },
   "registration_flow": {
     "step_1": "User fills form (nome, email, nivel, praia, insta)",
@@ -43,12 +44,7 @@
   ],
   "pending_actions": [
     {
-      "action": "GRANT SELECT ON TABLE public.associadas TO anon",
-      "owner": "Supabase Admin",
-      "priority": "high"
-    },
-    {
-      "action": "CREATE POLICY para INSERT na tabela associadas",
+      "action": "Migrar painel carteirinhas.html para autenticacao de admin e remover o SELECT publico de associadas (Fase 3)",
       "owner": "Supabase Admin",
       "priority": "high"
     },

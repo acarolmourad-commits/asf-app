@@ -91,44 +91,36 @@ const ASF_CARD = {
 
   save(d) { localStorage.setItem(this.KEY, JSON.stringify(d)); },
 
-  /* Registro na rede ASF (Supabase REST API — tabela associadas).
+  /* Registro na rede ASF via RPC 'emitir_carteirinha' (SECURITY DEFINER).
+     A RPC existe e retorna apenas numero, validade e status; a tabela
+     'associadas' nao deve ser acessada diretamente pelo cliente anonimo.
      Opt-in LGPD: registrada apenas se card-registrar estiver marcado.
-     emailHash já foi gerado em salvar() e salvo no localStorage. */
+     emailHash ja foi gerado em salvar() e salvo no localStorage. */
   registrar(d) {
     try {
       const cb = document.getElementById('card-registrar');
       const quer = (cb && cb.checked) || d.registrada;
       if (!quer) return;
       if (!this.supabaseOn || !d.emailHash || d.registrada) return;
-      const payload = [{
-        numero: d.numero,
-        email_hash: d.emailHash,
-        nome: d.nome, apelido: d.apelido || '',
-        nivel: d.nivel, praia: d.praia || '',
-        cidade: d.cidade || '', insta: d.insta || '',
-        validade: d.validade ? String(d.validade).split('/').reverse().join('-') : undefined,
-      }];
-      const url = this.SUPABASE_URL + '/rest/v1/associadas?select=*&on_conflict=email_hash';
-      /* sendBeacon não envia headers — Supabase precisa de apikey/Authorization.
-         Usa fetch direto com verificação de status. */
-      fetch(url, {
-        method: 'POST',
-        headers: {
-          'apikey': this.SUPABASE_ANON_KEY,
-          'Authorization': 'Bearer ' + this.SUPABASE_ANON_KEY,
-          'Content-Type': 'application/json',
-          'Prefer': 'resolution=merge-duplicates,return=representation'
-        },
-        body: JSON.stringify([payload]),
-      }).then(async (r) => {
-        if (r.ok) {
+      this.sbRpc('emitir_carteirinha', {
+        p_numero: d.numero,
+        p_email_hash: d.emailHash,
+        p_nome: d.nome,
+        p_apelido: d.apelido || null,
+        p_nivel: d.nivel || null,
+        p_praia: d.praia || null,
+        p_cidade: d.cidade || null,
+        p_insta: d.insta || null,
+      }).then((res) => {
+        const result = Array.isArray(res) ? (res[0] || {}) : (res || {});
+        if (result && result.numero) {
+          d.numero = result.numero;
+          if (result.validade) d.validade = String(result.validade).split('-').reverse().join('/');
           d.registrada = new Date().toISOString();
           this.save(d);
-          if (typeof showToast === 'function') showToast('📇 Carteirinha registrada na rede ASF!');
+          if (typeof showToast === 'function') showToast('Carteirinha registrada na rede ASF!');
         } else {
-          const txt = await r.text();
-          console.warn('Supabase registro falhou:', r.status, txt.substring(0, 200));
-          // Don't mark as registrada on failure — allow retry
+          console.warn('Supabase registro sem retorno de carteirinha.');
         }
       }).catch((e) => {
         console.warn('Supabase registro erro:', e.message);
@@ -189,52 +181,41 @@ const ASF_CARD = {
     const btn = document.getElementById('card-submit');
     if (btn) { btn.disabled = true; btn.textContent = 'Gerando…'; }
     try {
-      /* ── caminho servidor (Supabase): usa REST API direto na tabela 'associadas'
-          PostgREST upsert via REST — tabela: associadas
-          A RPC 'emitir_carteirinha' não existe (404) — usa POST merge-duplicates  ── */
+      /* -- caminho servidor (Supabase): RPC 'emitir_carteirinha' (SECURITY DEFINER).
+          A RPC existe; emite/renova, registra em 'emissoes' e retorna apenas
+          numero, validade e status. Nunca acessar diretamente a tabela
+          'associadas' com a chave anonima neste fluxo. -- */
       if (central && this.supabaseOn) {
         try {
           const emailHash = atual.emailHash || await this.sha256(email);
           d.emailHash = emailHash;
-          const validadeISO = new Date(new Date().getFullYear() + 1, new Date().getMonth(), new Date().getDate()).toISOString().split('T')[0];
-          const upsertData = [{
-            numero: d.numero,
-            email_hash: emailHash,
-            nome: d.nome, apelido: d.apelido || '',
-            nivel: d.nivel, praia: d.praia, cidade: d.cidade, insta: d.insta,
-            validade: validadeISO,
-          }];
-          const r = await fetch(this.SUPABASE_URL + '/rest/v1/associadas?select=numero,validade&on_conflict=email_hash', {
-            method: 'POST',
-            headers: {
-              'apikey': this.SUPABASE_ANON_KEY,
-              'Authorization': 'Bearer ' + this.SUPABASE_ANON_KEY,
-              'Content-Type': 'application/json',
-              'Prefer': 'resolution=merge-duplicates,return=representation',
-            },
-            body: JSON.stringify(upsertData),
+          const res = await this.sbRpc('emitir_carteirinha', {
+            p_numero: d.numero,
+            p_email_hash: emailHash,
+            p_nome: d.nome,
+            p_apelido: d.apelido || null,
+            p_nivel: d.nivel || null,
+            p_praia: d.praia || null,
+            p_cidade: d.cidade || null,
+            p_insta: d.insta || null,
           });
-          const res = await r.json();
           const result = Array.isArray(res) ? (res[0] || {}) : (res || {});
-          if (r.ok && result.numero) {
+          if (result.numero) {
             d.numero = result.numero;
-            d.validade = result.validade
-              ? String(result.validade).split('-').reverse().join('/')
-              : upsertData[0].validade.split('-').reverse().join('/');
+            if (result.validade) d.validade = String(result.validade).split('-').reverse().join('/');
             d.registrada = new Date().toISOString();
             this.registrarEmissao(d.numero);
             this.save(d);
             this.render('carteirinha-content');
-            showToast('Carteirinha registrada na ASF! 🪪');
+            showToast('Carteirinha registrada na ASF!');
             if (typeof ASF_GAMIFICATION !== 'undefined') ASF_GAMIFICATION.checkAll();
             return;
           } else {
-            throw new Error('Supabase upsert failed: ' + r.status);
+            throw new Error('Supabase RPC emitir_carteirinha sem numero de retorno');
           }
         } catch (e) {
-          // Falha de rede/servidor não pode ser tratada como registro confirmado.
           console.warn('Supabase registro erro:', e.message);
-          showToast('Registro indisponível. Sua carteirinha será salva neste dispositivo; tente registrar depois.');
+          showToast('Registro indisponivel. Sua carteirinha sera salva neste dispositivo; tente registrar depois.');
         }
       }
       /* cai no fluxo local abaixo */
