@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="pt-BR"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Painel Carteirinhas (interno) — ASF</title>
+<style>body{font-family:system-ui,Arial,sans-serif;margin:16px;color:#122;background:#f7faf9}h1{font-size:20px}.card{background:#fff;border:1px solid #dbe7e2;border-radius:10px;padding:14px;margin:12px 0}input,button{font-size:15px;padding:9px;margin:4px 0}button{cursor:pointer;background:#0b6b4f;color:#fff;border:0;border-radius:7px}.secondary{background:#557}table{border-collapse:collapse;width:100%;font-size:13px}th,td{border:1px solid #dbe7e2;padding:6px;text-align:left}th{background:#eef6f2}.mut{color:#567;font-size:13px}.err{color:#a00}</style>
+<script src="./carteirinha.js?v=20261026-rpc-unico"></script></head>
+<body><h1>💳 Painel interno — Carteirinhas ASF</h1>
+<p class="mut">Acesso restrito. A lista só carrega após login e atualiza em tempo real a cada cadastro (Supabase Realtime). Fonte oficial: <b>associadas</b>. Planilha é apenas backup.</p>
+<div id="login" class="card"><h2>Entrar</h2><p class="mut">Link mágico para o e-mail admin autorizado.</p><input id="email" type="email" value="asf.surffeminino@gmail.com" size="34"><br><button id="send">Enviar link de acesso</button><p id="login-status" class="mut"></p></div>
+<div id="panel" class="card" hidden><p><span id="who"></span> <button id="out" class="secondary">Sair</button> <button id="refresh" class="secondary">Atualizar agora</button></p><p id="stats" class="mut">Carregando…</p><input id="q" type="search" placeholder="Filtrar por nome, número, praia, cidade, insta…" size="44"><p id="status" class="mut"></p><div style="overflow:auto"><table><thead><tr><th>Número</th><th>Nome</th><th>Apelido</th><th>Nível</th><th>Praia</th><th>Cidade</th><th>Insta</th><th>Validade</th><th>Emitida em</th><th>Ativa</th></tr></thead><tbody id="rows"></tbody></table></div></div>
+<script type="module">
+import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm';
+const cfg=window.ASF_CARD||{}; const el=id=>document.getElementById(id);
+if(!cfg.SUPABASE_URL||!cfg.SUPABASE_ANON_KEY){el('login-status').textContent='Configuração Supabase não carregada.';throw new Error('missing config');}
+const supabase=createClient(cfg.SUPABASE_URL,cfg.SUPABASE_ANON_KEY); let allRows=[];
+function render(){const q=(el('q').value||'').toLowerCase();const rows=allRows.filter(r=>!q||JSON.stringify(r).toLowerCase().includes(q));const tb=el('rows');tb.replaceChildren(...rows.map(r=>{const tr=document.createElement('tr');[r.numero,r.nome,r.apelido||'',r.nivel||'',r.praia||'',r.cidade||'',r.insta||'',r.validade||'',r.emitida_em?new Date(r.emitida_em).toLocaleString('pt-BR'):'',r.ativo?'sim':'não'].forEach(v=>{const td=document.createElement('td');td.textContent=String(v);tr.appendChild(td)});return tr}));el('status').textContent=rows.length+' de '+allRows.length+' registro(s) • '+new Date().toLocaleTimeString('pt-BR');}
+async function loadAll(){const [list,stats]=await Promise.all([supabase.from('associadas').select('numero,nome,apelido,nivel,praia,cidade,insta,validade,emitida_em,ativo').order('emitida_em',{ascending:false}).limit(500),supabase.rpc('carteirinhas_stats')]);if(list.error){el('status').textContent='Erro ao ler a lista: '+list.error.message;return}allRows=list.data||[];render();if(!stats.error&&stats.data)el('stats').textContent='Total ativas: '+(stats.data.total_ativas??'—')+' • por nível: '+JSON.stringify(stats.data.por_nivel||{});}
+async function boot(){const {data}=await supabase.auth.getSession();const s=data.session;el('login').hidden=!!s;el('panel').hidden=!s;if(!s)return;el('who').textContent='Conectada: '+(s.user.email||'');await loadAll();supabase.channel('carteirinhas-admin-realtime').on('postgres_changes',{event:'*',schema:'public',table:'associadas'},()=>loadAll()).subscribe();}
+el('send').onclick=async()=>{el('login-status').textContent='Enviando…';const {error}=await supabase.auth.signInWithOtp({email:el('email').value.trim(),options:{emailRedirectTo:location.href}});el('login-status').textContent=error?('Erro: '+error.message):'Link enviado. Abra o e-mail e clique para entrar.'};
+el('out').onclick=async()=>{await supabase.auth.signOut();location.reload()};el('refresh').onclick=loadAll;el('q').addEventListener('input',render);supabase.auth.onAuthStateChange(()=>boot());boot();
+</script></body></html>
