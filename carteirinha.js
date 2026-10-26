@@ -37,6 +37,14 @@ const ASF_CARD = {
     return r.json();
   },
 
+  async emitirCarteirinha(params) {
+    let lastError;
+    for (let attempt = 0; attempt < 3; attempt++) {
+      try { return await this.sbRpc('emitir_carteirinha', params); } catch (e) {
+        lastError = e; const msg = String((e && e.message) || e);
+        if (attempt < 2 && /409|23505|duplicate|associadas_numero/i.test(msg)) { params = Object.assign({}, params, { p_numero: this.gerarNumero() }); continue; }
+        throw e; } } throw lastError; },
+
   /* --- controle anual de emissão --- */
   parseDataBR(s) {
     if (!s) return null;
@@ -102,7 +110,7 @@ const ASF_CARD = {
       const quer = (cb && cb.checked) || d.registrada;
       if (!quer) return;
       if (!this.supabaseOn || !d.emailHash || d.registrada) return;
-      this.sbRpc('emitir_carteirinha', {
+      this.emitirCarteirinha({
         p_numero: d.numero,
         p_email_hash: d.emailHash,
         p_nome: d.nome,
@@ -189,7 +197,7 @@ const ASF_CARD = {
         try {
           const emailHash = atual.emailHash || await this.sha256(email);
           d.emailHash = emailHash;
-          const res = await this.sbRpc('emitir_carteirinha', {
+          const res = await this.emitirCarteirinha({
             p_numero: d.numero,
             p_email_hash: emailHash,
             p_nome: d.nome,
