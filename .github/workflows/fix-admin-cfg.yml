@@ -1,0 +1,22 @@
+name: Fix - Admin cfg ASF_CARD (one-shot)
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python .github/scripts/fix_admin_cfg.py
+      - name: Commit
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          if git diff --quiet; then echo "sem alteracao"; else git add carteirinhas-admin.html && git commit -m "fix(carteirinhas-admin): le ASF_CARD global (const), nao window.ASF_CARD" && git push; fi
