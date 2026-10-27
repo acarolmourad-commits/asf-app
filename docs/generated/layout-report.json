@@ -1,19 +1,19 @@
 {
   "date": "2026-10-27",
-  "issues_found": 2,
+  "issues_found": 3,
   "improvements_available": 4,
-  "score": 87,
+  "score": 78,
   "suggested": [
+    {
+      "type": "css",
+      "change": "Better header gradient",
+      "impact": "high"
+    },
     {
       "type": "seo",
       "change": "Meta tags optimization",
       "impact": "medium"
-    },
-    {
-      "type": "js",
-      "change": "Lazy loading images",
-      "impact": "high"
     }
   ],
-  "timestamp": "2026-10-27T16:14:48.481449"
+  "timestamp": "2026-10-27T16:56:40.690789"
 }
