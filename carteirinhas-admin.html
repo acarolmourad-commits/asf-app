@@ -11,7 +11,7 @@
 <div id="panel" class="card" hidden><p><span id="who" class="ok"></span> <button id="out" class="secondary" type="button">Sair</button> <button id="refresh" class="secondary" type="button">Atualizar agora</button></p><p id="stats" class="mut">Carregando…</p><input id="q" type="search" placeholder="Filtrar por nome, número, praia, cidade, insta…" size="44"><p id="status" class="mut"></p><div style="overflow:auto"><table><thead><tr><th>Número</th><th>Nome</th><th>Apelido</th><th>Nível</th><th>Praia</th><th>Cidade</th><th>Insta</th><th>Validade</th><th>Emitida em</th><th>Ativa</th></tr></thead><tbody id="rows"></tbody></table></div></div>
 <script>
 (function(){
-  var cfg = window.ASF_CARD || {};
+  var cfg = (typeof ASF_CARD !== 'undefined') ? ASF_CARD : (window.ASF_CARD || {});
   var SESSION_KEY = 'asf-admin-session-v2';
   var el = function(id){ return document.getElementById(id); };
   var allRows = [], timer = null, session = null;
