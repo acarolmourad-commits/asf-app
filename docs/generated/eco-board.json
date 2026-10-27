@@ -1,11 +1,11 @@
 {
-  "date": "2026-10-26",
+  "date": "2026-10-27",
   "board_tip": {
-    "title": "Longboard: O clássico",
-    "content": "Longboards (9'0\"+) são perfeitas para ondas pequenas e estabilidade.",
+    "title": "Funboard: A versátil",
+    "content": "Funboards (7'0\"-8'6\") são ideais para evolução. Mais ágil que longboard, mantém estabilidade.",
     "tags": [
-      "Longboard",
-      "Clássico"
+      "Funboard",
+      "Evolução"
     ]
   },
   "eco_tip": {
@@ -14,5 +14,5 @@
     "category": "Consumo Consciente"
   },
   "daily_message": "Hidrate-se: 500ml de água antes de surfar!",
-  "generated_at": "2026-10-26T21:59:20.063242"
+  "generated_at": "2026-10-27T02:39:17.024035"
 }
