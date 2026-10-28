@@ -1,8 +1,8 @@
 {
   "date": "2026-10-28",
-  "issues_found": 0,
+  "issues_found": 4,
   "improvements_available": 4,
-  "score": 95,
+  "score": 94,
   "suggested": [
     {
       "type": "css",
@@ -10,10 +10,10 @@
       "impact": "high"
     },
     {
-      "type": "seo",
-      "change": "Meta tags optimization",
-      "impact": "medium"
+      "type": "css",
+      "change": "Hover animation on cards",
+      "impact": "high"
     }
   ],
-  "timestamp": "2026-10-28T11:44:29.108391"
+  "timestamp": "2026-10-28T17:01:44.403808"
 }
