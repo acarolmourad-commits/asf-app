@@ -353,14 +353,16 @@ const ASF_CARD = {
       '<div><p style="font-size:10px;opacity:0.6;margin:0;letter-spacing:2px;text-transform:uppercase">Nº da associada</p>' +
       '<p style="font-size:17px;font-weight:800;letter-spacing:1px;margin:2px 0 8px;font-family:monospace">' + d.numero + '</p>' +
       '<p style="font-size:11px;opacity:0.75;margin:0">Associada desde ' + d.desde + ' · Válida até ' + d.validade + '</p></div>' +
-      '<a href="' + this.verificacaoUrl(d.numero) + '" target="_blank" rel="noopener"><img src="' + this.qrUrl(d.numero) + '" alt="QR de verificação" style="width:76px;height:76px;border-radius:10px;background:white;padding:4px"></a>' +
+      (d.registrada ? '<a href="' + this.verificacaoUrl(d.numero) + '" target="_blank" rel="noopener"><img src="' + this.qrUrl(d.numero) + '" alt="QR de verificação ASF confirmada" style="width:76px;height:76px;border-radius:10px;background:white;padding:4px"></a>' : '<div style="width:76px;height:76px;border-radius:10px;background:#ffffff20;display:flex;align-items:center;justify-content:center;text-align:center;font-size:10px;padding:5px">QR após confirmação</div>') +
       '</div></div>' +
       '<div style="text-align:center;margin:0 0 12px;font-size:13px;font-weight:700">' +
-      (this.expirada(d)
-        ? '<span style="background:#E74C3C;color:#fff;padding:6px 14px;border-radius:20px">🔴 Expirada — clique em ✏️ Editar e salve para renovar</span>'
-        : this.diasParaExpirar(d) <= 30
-          ? '<span style="background:#F39C12;color:#fff;padding:6px 14px;border-radius:20px">🟡 Expira em ' + this.diasParaExpirar(d) + ' dias — já pode renovar em ✏️ Editar</span>'
-          : '<span style="background:#27AE60;color:#fff;padding:6px 14px;border-radius:20px">🟢 Válida até ' + d.validade + '</span>') +
+      (!d.registrada
+        ? '<span style="background:#5B6470;color:#fff;padding:6px 14px;border-radius:20px">⚪ Carteirinha local — ainda não confirmada pela ASF</span>'
+        : this.expirada(d)
+          ? '<span style="background:#E74C3C;color:#fff;padding:6px 14px;border-radius:20px">🔴 Expirada — clique em ✏️ Editar e salve para renovar</span>'
+          : this.diasParaExpirar(d) <= 30
+            ? '<span style="background:#F39C12;color:#fff;padding:6px 14px;border-radius:20px">🟡 Expira em ' + this.diasParaExpirar(d) + ' dias — já pode renovar em ✏️ Editar</span>'
+            : '<span style="background:#27AE60;color:#fff;padding:6px 14px;border-radius:20px">🟢 ASF confirmou validade até ' + d.validade + '</span>') +
       '</div>' +
       '<div style="display:flex;gap:8px;margin-bottom:16px">' +
       '<button onclick="ASF_CARD.baixar()" class="btn btn-secondary" style="flex:1;font-size:13px">⬇️ Baixar PNG</button>' +
@@ -368,7 +370,7 @@ const ASF_CARD = {
       '<button onclick="ASF_CARD.editar()" class="btn btn-secondary" style="flex:1;font-size:13px">✏️ Editar</button>' +
       '<input id="card-foto-input" type="file" accept="image/*" style="display:none" onchange="ASF_CARD.uploadFoto(this)">' +
       '</div>' +
-      '<p style="font-size:12px;text-align:center">' + (d.registrada ? 'Registro ASF confirmado. O QR não mostra nome ou contatos.' : 'Salva neste dispositivo. Para validar o QR na rede, use Editar e autorize o registro ASF.') + '</p>' +
+      '<p style="font-size:12px;text-align:center">' + (d.registrada ? 'Registro ASF confirmado. O QR verifica a situação sem mostrar nome ou contatos.' : 'Esta é uma versão local e não comprova associação ativa. Para obter confirmação e QR verificável, edite e autorize o registro ASF; é necessária conexão.') + '</p>' +
       '</div>';
   },
 
@@ -440,13 +442,20 @@ const ASF_CARD = {
       showToast('Carteirinha baixada! 🪪');
     };
     const foto = d.foto ? new Image() : null;
-    const qr = new Image(); qr.crossOrigin = 'anonymous';
-    let photo = null, qrImage = null, remaining = foto ? 2 : 1, finished = false;
+    const qr = d.registrada ? new Image() : null;
+    if (qr) qr.crossOrigin = 'anonymous';
+    let photo = null, qrImage = null, remaining = (foto ? 1 : 0) + (qr ? 1 : 0), finished = false;
+    if (remaining === 0) remaining = 1;
     const finish = () => { if (!finished && --remaining === 0) { finished = true; draw(photo, qrImage); } };
     if (foto) { foto.onload = () => { photo = foto; finish(); }; foto.onerror = finish; foto.src = d.foto; }
-    qr.onload = () => { qrImage = qr; finish(); };
-    qr.onerror = finish;
-    qr.src = this.qrUrl(d.numero);
+    if (qr) {
+      qr.onload = () => { qrImage = qr; finish(); };
+      qr.onerror = finish;
+      qr.src = this.qrUrl(d.numero);
+    } else if (!foto) {
+      finished = true;
+      draw(null, null);
+    }
     // PNG continua disponível se o provedor de QR não responder.
     setTimeout(() => { if (!finished) { finished = true; draw(photo, qrImage); } }, 7000);
   },
