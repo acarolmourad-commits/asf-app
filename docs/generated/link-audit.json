@@ -1,7 +1,7 @@
 {
-  "date": "2026-10-29T03:10:29.102879+00:00",
-  "total": 109,
-  "ok": 97,
+  "date": "2026-10-29T11:53:17.301391+00:00",
+  "total": 111,
+  "ok": 99,
   "skipped": 10,
   "broken_count": 2,
   "broken": [
@@ -319,6 +319,18 @@
     },
     {
       "url": "asf-fixes.js",
+      "status": "ok",
+      "http": 200,
+      "local": true
+    },
+    {
+      "url": "asf-home-quality.css",
+      "status": "ok",
+      "http": 200,
+      "local": true
+    },
+    {
+      "url": "asf-home-quality.js",
       "status": "ok",
       "http": 200,
       "local": true
