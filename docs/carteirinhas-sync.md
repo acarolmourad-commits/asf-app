@@ -1,81 +1,42 @@
-# ASF Carteirinhas — Arquitetura de Cadastro e Registro
+# ASF Carteirinhas — arquitetura e histórico de sincronização
 
-## 🔍 Análise da Arquitetura (2026-10-06)
+## Arquitetura vigente (2026-10-29)
 
-### Componentes Envolvidos
+Este documento substitui instruções operacionais antigas abaixo que sugeriam escrita direta na tabela `associadas` com chave pública.
 
-| Componente | Função | Estado |
-|---|---|---|
-| `carteirinha.js` | Lógica de geração/registro no cliente | ✅ Corrigido (REST API) |
-| `carteirinhas.html` | Painel de controle de associadas | ✅ Corrigido (REST GET) |
-| `carteirinha.js (supabase.js)` | Integração Supabase no app principal | ✅ Carregado na index.html |
-| `ASF_Carteirinhas_Registry.gs` | Google Apps Script → Sheets | ✅ Criado (aguarda deploy) |
-| `cron/supabase-sheets-sync.py` | Sincroniza Supabase → Sheets | ✅ Criado (aguarda .env.sync) |
-| `cron/email-campaign-monitor.py` | Monitor de e-mails de parceiros | ✅ Ativo |
-| `cron/daily-site-audit.py` | Auditoria diária do site | ✅ Ativo |
+- Emissão/renovação oficial: RPC `emitir_carteirinha` por `ASF_CARD.emitirCarteirinha()`.
+- A interface pública não deve executar SELECT/INSERT/UPDATE direto em `public.associadas`.
+- Verificação do QR: RPC `verificar_carteirinha`, retornando somente os campos mínimos necessários à validação.
+- Painel interno: `carteirinhas-admin.html`, autenticação Supabase por link mágico e leitura conforme RLS/permissões administrativas.
+- Planilha Google: backup opcional; não é fonte oficial. `ASF_CARD.REGISTRY_URL` permanece vazia enquanto não houver endpoint Apps Script validado.
+- Chave publishable/anon no frontend é pública por definição. Nunca colocar chave `service_role`, token administrativo ou segredo de Apps Script no frontend ou no repositório.
+- O hash SHA-256 simples do e-mail não comprova titularidade e pode ser testado por dicionário; não deve ser tratado como credencial. Uma melhoria futura é usar identificador verificado/autenticação ou HMAC calculado exclusivamente no servidor.
+- Não executar testes automatizados de emissão contra produção. Testes de unicidade, idempotência e renovação devem usar um projeto Supabase de teste.
 
-### Status do Supabase
+## Componentes
 
-| Recurso | Status | Detalhes |
-|---|---|---|
-| Tabela `associadas` | ✅ Existe | Colunas: numero, nome, apelido, nivel, praia, cidade, insta, validade, email_hash, id |
-| Tabela `carteirinhas` | ❌ Não existe | Usar `associadas` em vez |
-| RPC `emitir_carteirinha` | ❌ Não existe (404) | **Substituído por REST Upsert** |
-| RPC `listar_carteirinhas` | ❌ Não existe | **Substituído por REST GET** |
-| Anon Key | ✅ Configurada | sb_publishable_qIvPx... |
-| SELECT na `associadas` | Aberto temporariamente (policy publica) | Apenas para o painel legado; fechar na Fase 3 com painel autenticado |
+| Componente | Função |
+|---|---|
+| `carteirinha.js` | Carteirinha local no app principal e chamada RPC quando a associada opta pelo registro central |
+| `emitir.html` | Cadastro público; só exibe a carteirinha após confirmação do Supabase |
+| `verificar.html` | Verificação do QR sem expor nome ou contato |
+| `carteirinhas-admin.html` | Painel administrativo autenticado |
+| `docs/ASF_Carteirinhas_Registry.gs` | Código opcional para cópia de segurança em Google Sheets |
+| `.github/workflows/verifica-carteirinha.yml` | Checagens read-only; não deve emitir carteirinhas reais |
 
-### Fluxo de Cadastro (Corrigido)
+## Histórico de incidentes/documentação
 
-```
-1. Usuária preenche formulário → carteirinha.js
-2. carteirinha.js salva no localStorage (sempre funciona)
-3. Se Supabase ativo:
-   a. Gera emailHash (SHA-256)
-   b. Chama POST /rest/v1/associadas (upsert por numero)
-   c. Se sucesso: marca como "registrada na rede ASF"
-   d. Se falha (401/403): fallback local, avisa usuário
-4. Se marcar "registrar" + REGISTRY_URL configurado:
-   - Envia via sendBeacon para Apps Script (Sheets)
-5. Painel (carteirinhas.html):
-   a. GET /rest/v1/associadas → lista associadas
-   b. Fallback: Apps Script doGet?action=list (com token)
-   c. Fallback: mensagem de erro com instruções
-```
+As seções abaixo refletem a evolução histórica do projeto e não são instruções vigentes quando contradizem a arquitetura acima.
 
-### Problemas Corrigidos
+- 2026-10-06: diagnóstico antigo registrou RPC como inexistente e sugeriu REST upsert/SELECT direto. Essa orientação foi superada em 2026-10-25.
+- 2026-10-25: confirmado uso da RPC `emitir_carteirinha` com parâmetros `p_*`; removidas políticas públicas de INSERT/UPDATE conforme documentação de mudança.
+- 2026-10-26: fluxo central único e painel administrativo com login por link mágico.
+- 2026-10-29: workflow de verificação alterado para evitar chamadas de emissão com dados de teste no banco de produção.
 
-| Problema | Correção | Arquivo |
-|---|---|---|
-| RPC emitir_carteirinha (404) | REST Upsert POST na tabela associadas | carteirinha.js |
-| RPC listar_carteirinhas (404) | REST GET na tabela associadas | carteirinhas.html |
-| carteirinhas.html não carregava carteirinha.js | Script injection dinâmico | carteirinhas.html |
-| carteirinhas.html sem fallback claro | Mensagem GRANT SELECT + instrucoes | carteirinhas.html |
-| REGISTRY_URL não definido | Campo adicionado (default: '') | carteirinha.js |
+## Verificações de produção seguras
 
-### Pendências
-
-1. **Supabase Admin**: Executar `GRANT SELECT ON TABLE public.associadas TO anon;`
-2. **Supabase Admin**: Criar política RLS para INSERT na tabela `associadas`
-3. **Carol**: Publicar `ASF_Carteirinhas_Registry.gs` no Apps Script → colar URL em `.env.sync`
-4. **Carol**: Configurar `.env.sync` com `SUPABASE_KEY` (service_role) + token
-
-### Cronjob de Sincronização
-
-`cron/supabase-sheets-sync.py` — Daily 3:00 UTC
-- Lê Supabase (associadas) → upsert no Sheets (via Apps Script)
-- Log: `docs/carteirinhas-sync-log.json`
-
-
-## Atualizacao 2026-10-25 - Fases 1 e 2 (Carteirinha + Supabase)
-
-- A RPC `emitir_carteirinha` EXISTE (SECURITY DEFINER, parametros `p_*`):
-  o 404 anterior era chamada sem o prefixo `p_`. Emissao/renovacao e
-  verificacao passam a ser feitas somente via RPC (`sbRpc`).
-- `carteirinha.js` nao acessa mais diretamente `/rest/v1/associadas`.
-- Fase 2 (2026-10-25): removidas as policies publicas de INSERT e UPDATE
-  em `associadas`. A RPC continua emitindo por ser SECURITY DEFINER.
-- SELECT publico permanece TEMPORARIAMENTE apenas porque o painel legado
-  `carteirinhas.html` lista associadas via anon. Fase 3: painel com
-  autenticacao de admin e remocao do SELECT publico.
-- Nada foi apagado: registros de associadas e emissoes preservados.
+- Validar sintaxe local: `node --check carteirinha.js`.
+- Fazer checks estáticos do contrato RPC e das proteções da interface.
+- Usar OPTIONS/preflight para verificar que o endpoint responde sem executar a função.
+- Confirmar deploy pelo workflow de GitHub Pages.
+- Não usar a RPC de emissão como health check: ela pode inserir/renovar registros persistentes.
