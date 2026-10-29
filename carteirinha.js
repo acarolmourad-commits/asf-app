@@ -78,8 +78,8 @@ const ASF_CARD = {
     return livre.getTime() > Date.now() ? livre : null;
   },
 
-  /* Registro de associadas via Supabase REST API (tabela: associadas).
-     Dados LGPD ficam no banco protegido por RLS. */
+  /* Cadastro central exclusivamente por RPC Supabase; não consultar nem gravar
+     diretamente a tabela associadas a partir do navegador. */
 
   niveis: ['Iniciante', 'Intermediária', 'Avançada'],
 
