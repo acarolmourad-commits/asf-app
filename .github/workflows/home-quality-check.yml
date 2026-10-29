@@ -1,0 +1,28 @@
+name: ASF home quality regression checks
+
+on:
+  pull_request:
+    paths:
+      - 'index.html'
+      - 'asf-home-quality.css'
+      - 'asf-home-quality.js'
+      - 'carteirinha.js'
+      - 'tests/home-quality-layer.test.cjs'
+      - '.github/workflows/home-quality-check.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  home-quality:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Validate JavaScript syntax
+        run: node --check asf-home-quality.js
+      - name: Run regression tests
+        run: node --test tests/home-quality-layer.test.cjs

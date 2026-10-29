@@ -1,0 +1,44 @@
+/* ASF home quality layer — additive and reversible. No card or member data is touched. */
+.skip-link {
+  position: fixed; left: 12px; top: 12px; z-index: 10000;
+  transform: translateY(-180%); padding: 12px 16px; border-radius: 10px;
+  background: #0e2439; color: #fff; font-weight: 700; text-decoration: none;
+  box-shadow: 0 4px 16px rgba(14,36,57,.25);
+}
+.skip-link:focus { transform: translateY(0); }
+a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible,
+textarea:focus-visible, [tabindex]:focus-visible {
+  outline: 3px solid #9b3d68 !important; outline-offset: 3px;
+}
+.hero { padding: clamp(24px, 5vw, 48px) 20px 28px; }
+.hero h1 { max-width: 760px; margin-inline: auto; line-height: 1.12; text-wrap: balance; }
+.hero > p { max-width: 680px; margin-inline: auto; line-height: 1.65; }
+.hero-cta { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; }
+.hero-cta .btn { min-height: 44px; display: inline-flex; align-items: center; justify-content: center; }
+#comecar { max-width: 1000px; margin-inline: auto; }
+#comecar > div { gap: 12px !important; }
+#comecar > div > a {
+  min-height: 124px; display: flex !important; flex-direction: column;
+  justify-content: center; transition: border-color .15s ease, box-shadow .15s ease;
+}
+#comecar > div > a:hover { border-color: #00a8cc !important; box-shadow: 0 5px 18px rgba(14,36,57,.09) !important; }
+#asf-home-search { position: relative; z-index: 2; margin: 0 20px 18px; }
+#asf-home-search .search-bar { min-height: 48px; }
+#asf-home-search input { min-height: 44px; font: inherit; }
+#asf-home-search .search-clear { min-width: 44px; min-height: 44px; }
+.asf-home-reordered-incentive { margin-top: 8px !important; }
+#searchResults[aria-live] { overflow-wrap: anywhere; }
+img { max-width: 100%; }
+@media (max-width: 480px) {
+  .hero { padding-inline: 16px; }
+  .hero h1 { font-size: clamp(28px, 8vw, 38px); }
+  .hero-cta { flex-direction: column; align-items: stretch; }
+  .hero-cta .btn { width: 100%; box-sizing: border-box; }
+  #comecar { margin-inline: 16px !important; }
+  #comecar > div { grid-template-columns: 1fr !important; }
+  #comecar > div > a { min-height: 0; padding: 16px !important; }
+  #asf-home-search { margin-inline: 16px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+}
