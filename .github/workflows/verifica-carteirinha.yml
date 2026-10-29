@@ -4,6 +4,14 @@ name: Verifica Carteirinha ASF (read-only)
 # nem renovar registros reais. Regras de unicidade/renovacao devem ser
 # testadas em ambiente Supabase de teste com fixtures descartaveis.
 on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/verifica-carteirinha.yml'
+      - 'carteirinha.js'
+      - 'emitir.html'
+      - 'carteirinhas-admin.html'
+      - 'docs/carteirinhas-privacy-2026-10-07.md'
   schedule:
     - cron: '15 9 * * *'
   workflow_dispatch:
