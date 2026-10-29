@@ -1,0 +1,61 @@
+name: Publish Surfmappers 2026-10-29 (one-shot)
+on:
+  push:
+    branches: [main]
+    paths: ['.github/workflows/publish-surfmappers-20261029.yml']
+permissions:
+  contents: write
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Publish Surfmappers page, sitemap, news and home link
+        run: |
+          python3 - <<'PY'
+          import pathlib, sys
+          # 1) Partnership page: approval -> published
+          p = pathlib.Path('parcerias/surfmappers/index.html')
+          s = p.read_text(encoding='utf-8')
+          old = 'Esta página está em aprovação pela Surfmappers.'
+          if old not in s:
+              print('approval anchor not found'); sys.exit(1)
+          s = s.replace(old, 'Página publicada após aprovação da Surfmappers em 29/10/2026.')
+          p.write_text(s, encoding='utf-8')
+          # 2) Sitemap entry
+          sm = pathlib.Path('sitemap.xml')
+          x = sm.read_text(encoding='utf-8')
+          if 'https://asf.surf/parcerias/surfmappers/' not in x:
+              entry = '  <url><loc>https://asf.surf/parcerias/surfmappers/</loc><lastmod>2026-10-29</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>\n'
+              if '</urlset>' not in x:
+                  print('sitemap anchor not found'); sys.exit(1)
+              x = x.replace('</urlset>', entry + '</urlset>')
+              sm.write_text(x, encoding='utf-8')
+          # 3) Novidades news block
+          n = pathlib.Path('novidades.html')
+          h = n.read_text(encoding='utf-8')
+          if 'parcerias/surfmappers' not in h:
+              block = '<div style="background:#fff;border-left:5px solid var(--p);border-radius:12px;padding:16px 18px;margin-bottom:8px;box-shadow:0 2px 10px rgba(0,0,0,.06)">\n<p style="font-size:12px;font-weight:700;color:var(--p);text-transform:uppercase;letter-spacing:.06em">📸 29 de outubro de 2026</p>\n<h2 style="margin-top:4px">Nova parceria: ASF × Surfmappers</h2>\n<p>Fechamos uma <strong>parceria de divulgação</strong> com a <a href="parcerias/surfmappers/"><strong>Surfmappers</strong></a>, a maior plataforma que conecta fotógrafos e surfistas. Também apresentamos o <strong>Surfmappers Experience</strong> — escolinhas de surf, fotógrafos, hospedagens e muito mais: tudo que você precisa para viver o surf em um só lugar. Parceiros da ASF contam com o cupom <strong>ASF10</strong> no Experience, nas condições do link oficial da página da parceria.</p>\n<p><a href="parcerias/surfmappers/"><strong>Conhecer a parceria ASF × Surfmappers →</strong></a></p>\n</div>\n'
+              if '<article>' not in h:
+                  print('novidades anchor not found'); sys.exit(1)
+              h = h.replace('<article>', '<article>\n' + block, 1)
+              n.write_text(h, encoding='utf-8')
+          # 4) Home link next to Villa Blu
+          i = pathlib.Path('index.html')
+          home = i.read_text(encoding='utf-8')
+          if 'parcerias/surfmappers/' not in home:
+              anchor = '<a href="parcerias/villa-blu/">Benefício de hospedagem Villa Blu × ASF</a>'
+              if anchor not in home:
+                  print('home anchor not found'); sys.exit(1)
+              home = home.replace(anchor, anchor + ' · <a href="parcerias/surfmappers/">Nova parceria: Surfmappers × ASF</a>', 1)
+              i.write_text(home, encoding='utf-8')
+          print('surfmappers publication edits applied')
+          PY
+      - name: Commit and push if changed
+        run: |
+          if git diff --quiet; then echo 'No changes'; exit 0; fi
+          git config user.name 'ASF Bot'
+          git config user.email 'bot@asf-app.com'
+          git add parcerias/surfmappers/index.html sitemap.xml novidades.html index.html
+          git commit -m 'feat(parcerias): publica pagina Surfmappers aprovada 2026-10-29'
+          git push
