@@ -22,7 +22,7 @@
     });
 
     // Keep all content, but put the main value proposition before search and gamification.
-    // DOM nodes are moved intact; no form data or localStorage keys are touched.
+    // DOM nodes are moved intact; form state remains untouched.
     if (start && search && search.parentNode && search !== start.nextElementSibling) {
       search.id = search.id || 'asf-home-search';
       start.insertAdjacentElement('afterend', search);
