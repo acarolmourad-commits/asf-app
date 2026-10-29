@@ -1,5 +1,4 @@
 /* ASF home quality layer — additive and reversible. No card or member data is touched. */
-:root { color-scheme: light; }
 .skip-link {
   position: fixed; left: 12px; top: 12px; z-index: 10000;
   transform: translateY(-180%); padding: 12px 16px; border-radius: 10px;
