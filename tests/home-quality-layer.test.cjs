@@ -39,3 +39,11 @@ test('existing content is rearranged, not removed', () => {
   assert.match(js, /insertAdjacentElement\('afterend'/);
   assert.doesNotMatch(js, /\.remove\(|innerHTML\s*=|outerHTML\s*=/);
 });
+
+test('institutional footer has explicit readable colors and visible link focus', () => {
+  assert.match(css, /footer\[role="contentinfo"\][\s\S]*?background:\s*#0E2439\s*!important/i);
+  assert.match(css, /footer\[role="contentinfo"\] p[\s\S]*?opacity:\s*1\s*!important/i);
+  assert.match(css, /footer\[role="contentinfo"\] nav a[\s\S]*?color:\s*#8BE3F7\s*!important/i);
+  assert.match(css, /footer\[role="contentinfo"\] nav a:focus-visible[\s\S]*?outline:\s*3px solid #FFD166/i);
+});
+
