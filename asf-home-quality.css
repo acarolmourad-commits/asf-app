@@ -42,3 +42,48 @@ img { max-width: 100%; }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
 }
+
+/* Footer institucional: contraste explícito e independente do tema global. */
+footer[role="contentinfo"] {
+  background: #0E2439 !important;
+  color: #EAF4F8 !important;
+  border-top: 1px solid #315066 !important;
+}
+footer[role="contentinfo"] > div { color: #EAF4F8 !important; }
+footer[role="contentinfo"] strong {
+  color: #FFFFFF !important;
+}
+footer[role="contentinfo"] p {
+  color: #DCEAF2 !important;
+  opacity: 1 !important;
+}
+footer[role="contentinfo"] nav a {
+  color: #8BE3F7 !important;
+  text-decoration: underline !important;
+  text-decoration-color: transparent !important;
+  text-underline-offset: 3px;
+}
+footer[role="contentinfo"] nav a:hover,
+footer[role="contentinfo"] nav a:focus-visible {
+  color: #FFFFFF !important;
+  text-decoration-color: currentColor !important;
+}
+footer[role="contentinfo"] nav a:focus-visible {
+  outline: 3px solid #FFD166 !important;
+  outline-offset: 3px;
+  border-radius: 3px;
+}
+@media (max-width: 640px) {
+  footer[role="contentinfo"] > div > div:first-child {
+    gap: 20px !important;
+  }
+  footer[role="contentinfo"] nav {
+    min-width: min(100%, 140px) !important;
+    flex: 1 1 140px;
+  }
+  footer[role="contentinfo"] > div > p {
+    line-height: 1.65;
+    padding-top: 16px;
+  }
+}
+
