@@ -65,10 +65,16 @@
                 '</div>';
         }
 
+        function escapeHtml(value) {
+            return String(value == null ? '' : value).replace(/[&<>"']/g, c => ({
+                '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
+            })[c]);
+        }
+
         function offline() {
             if (formatoOk) {
-                bloco('pendente', '⏳', 'Formato válido — verificação online indisponível',
-                      'Número em formato oficial ASF, mas o registro central está offline. Confira a validade impressa na carteirinha.');
+                bloco('pendente', '⏳', 'Não foi possível confirmar online',
+                      'O número tem formato compatível, mas a situação oficial não foi confirmada. Não considere a carteirinha válida até a consulta central responder.');
             } else {
                 bloco('invalida', '⚠️', 'Carteirinha não reconhecida',
                       'Este número não segue o padrão oficial ASF.');
@@ -96,12 +102,12 @@
                           'Este número não consta no registro oficial ASF. Peça para a associada abrir a carteirinha no app e apresentar o QR novamente.');
                 } else if (c.valida) {
                     bloco('valida', '✅', 'Carteirinha válida',
-                          (c.nivel ? 'Nível: ' + c.nivel + ' · ' : '') +
-                          'Válida até ' + String(c.validade).split('-').reverse().join('/') +
-                          '. A associada pode utilizar os benefícios de parceiros.');
+                          (c.nivel ? 'Nível: ' + escapeHtml(c.nivel) + ' · ' : '') +
+                          'Válida até ' + escapeHtml(String(c.validade).split('-').reverse().join('/')) +
+                          '. A situação foi confirmada pelo registro central ASF.');
                 } else {
                     bloco('invalida', '🔴', c.ativo ? 'Carteirinha expirada' : 'Carteirinha inativa',
-                          'Validade encerrada em ' + String(c.validade).split('-').reverse().join('/') +
+                          'Validade encerrada em ' + escapeHtml(String(c.validade).split('-').reverse().join('/')) +
                           '. A associada precisa renovar no app.');
                 }
             } catch (e) { offline(); }
