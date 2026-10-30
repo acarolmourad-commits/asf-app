@@ -7,8 +7,8 @@
 <script src="./carteirinha.js?v=20261027-admin-v2"></script></head>
 <body><h1>💳 Painel interno — Carteirinhas ASF</h1>
 <p class="mut">Acesso restrito (v2, sem CDN). A lista só carrega após login e atualiza automaticamente a cada 10 segundos. Fonte oficial: <b>associadas</b>. Planilha é apenas backup.</p>
-<div id="login" class="card"><h2>Entrar</h2><p class="mut">Link mágico para o e-mail admin autorizado.</p><input id="email" type="email" value="asf.surffeminino@gmail.com" size="34" autocomplete="email"><br><button id="send" type="button">Enviar link de acesso</button><p id="login-status" class="mut">Página carregada. Informe o e-mail e clique em enviar.</p></div>
-<div id="panel" class="card" hidden><p><span id="who" class="ok"></span> <button id="out" class="secondary" type="button">Sair</button> <button id="refresh" class="secondary" type="button">Atualizar agora</button></p><p id="stats" class="mut">Carregando…</p><input id="q" type="search" placeholder="Filtrar por nome, número, praia, cidade, insta…" size="44"><p id="status" class="mut"></p><div style="overflow:auto"><table><thead><tr><th>Número</th><th>Nome</th><th>Apelido</th><th>Nível</th><th>Praia</th><th>Cidade</th><th>Insta</th><th>Validade</th><th>Emitida em</th><th>Ativa</th></tr></thead><tbody id="rows"></tbody></table></div></div>
+<div id="login" class="card"><h2>Entrar</h2><p class="mut">Link mágico para a conta administrativa já cadastrada.</p><input id="email" type="email" value="asf.surffeminino@gmail.com" size="34" autocomplete="email"><br><button id="send" type="button">Enviar link de acesso</button><p id="login-status" class="mut">Página carregada. Informe o e-mail e clique em enviar.</p></div>
+<div id="panel" class="card" hidden><p><span id="who" class="ok"></span> <button id="out" class="secondary" type="button">Sair</button> <button id="refresh" class="secondary" type="button">Atualizar agora</button></p><p id="stats" class="mut">Carregando…</p><input id="q" type="search" placeholder="Filtrar por nome, número, praia, cidade, insta…" size="44"><p id="status" class="mut"></p><div style="overflow:auto"><table><thead><tr><th>Número</th><th>Nome</th><th>Apelido</th><th>Nível</th><th>Praia</th><th>Cidade</th><th>Insta</th><th>Validade</th><th>Emitida em</th><th>Situação</th></tr></thead><tbody id="rows"></tbody></table></div></div>
 <script>
 (function(){
   var cfg = (typeof ASF_CARD !== 'undefined') ? ASF_CARD : (window.ASF_CARD || {});
@@ -40,25 +40,39 @@
     if(r.status===401 && await refreshSession()){ opts.headers.Authorization='Bearer '+session.access_token; r=await fetch(cfg.SUPABASE_URL+path, opts); }
     return r;
   }
+  function todayISO(){
+    var now=new Date();
+    return now.getFullYear()+'-'+String(now.getMonth()+1).padStart(2,'0')+'-'+String(now.getDate()).padStart(2,'0');
+  }
   function render(){
+    var today=todayISO();
     var q=(el('q').value||'').toLowerCase();
     var rows=allRows.filter(function(r){ return !q || JSON.stringify(r).toLowerCase().indexOf(q)>=0; });
     var tb=el('rows'); tb.innerHTML='';
     rows.forEach(function(r){
       var tr=document.createElement('tr');
-      [r.numero,r.nome,r.apelido||'',r.nivel||'',r.praia||'',r.cidade||'',r.insta||'',r.validade||'',r.emitida_em?new Date(r.emitida_em).toLocaleString('pt-BR'):'',r.ativo?'sim':'não'].forEach(function(v){ var td=document.createElement('td'); td.textContent=String(v); tr.appendChild(td); });
+      [r.numero,r.nome,r.apelido||'',r.nivel||'',r.praia||'',r.cidade||'',r.insta||'',r.validade||'',r.emitida_em?new Date(r.emitida_em).toLocaleString('pt-BR'):'',(r.ativo===true && r.validade && String(r.validade)>=today)?'Ativa':(r.ativo===true && r.validade && String(r.validade)<today?'Vencida':'Inativa')].forEach(function(v){ var td=document.createElement('td'); td.textContent=String(v); tr.appendChild(td); });
       tb.appendChild(tr);
     });
     el('status').textContent=rows.length+' de '+allRows.length+' registro(s) • atualizado '+new Date().toLocaleTimeString('pt-BR');
+  }
+  function renderStats(){
+    var today=todayISO();
+    var active=allRows.filter(function(r){return r.ativo===true && r.validade && String(r.validade)>=today;});
+    var expired=allRows.filter(function(r){return r.ativo===true && r.validade && String(r.validade)<today;}).length;
+    var inactive=allRows.filter(function(r){return r.ativo!==true;}).length;
+    var missing=allRows.filter(function(r){return !r.validade;}).length;
+    var levels={};
+    active.forEach(function(r){var level=String(r.nivel||'Não informado');levels[level]=(levels[level]||0)+1;});
+    var byLevel=Object.keys(levels).sort().map(function(k){return k+': '+levels[k];}).join(' · ')||'—';
+    el('stats').textContent='Total: '+allRows.length+' • Ativas: '+active.length+' • Vencidas: '+expired+' • Inativas: '+inactive+' • Sem validade: '+missing+' • Ativas por nível: '+byLevel;
   }
   async function loadAll(){
     if(!session) return;
     try{
       var list=await api('/rest/v1/associadas?select=numero,nome,apelido,nivel,praia,cidade,insta,validade,emitida_em,ativo&order=emitida_em.desc&limit=500');
       if(!list.ok){ var t=await list.text(); el('status').textContent='Erro ao ler a lista ('+list.status+'): '+t.slice(0,180); return; }
-      allRows=await list.json(); render();
-      var st=await api('/rest/v1/rpc/carteirinhas_stats', {method:'POST', headers:{'Content-Type':'application/json'}, body:'{}'});
-      if(st.ok){ var d=await st.json(); if(d) el('stats').textContent='Total ativas: '+(d.total_ativas!=null?d.total_ativas:'—')+' • por nível: '+JSON.stringify(d.por_nivel||{}); }
+      allRows=await list.json(); render(); renderStats();
     }catch(e){ el('status').textContent='Erro de rede ao atualizar: '+e.message; }
   }
   async function boot(){
@@ -76,10 +90,10 @@
     try{
       var email=el('email').value.trim();
       var redirect=location.origin+location.pathname;
-      var r=await fetch(cfg.SUPABASE_URL+'/auth/v1/otp?redirect_to='+encodeURIComponent(redirect), {method:'POST', headers:{apikey:cfg.SUPABASE_ANON_KEY,'Content-Type':'application/json'}, body:JSON.stringify({email:email, create_user:true})});
+      var r=await fetch(cfg.SUPABASE_URL+'/auth/v1/otp?redirect_to='+encodeURIComponent(redirect), {method:'POST', headers:{apikey:cfg.SUPABASE_ANON_KEY,'Content-Type':'application/json'}, body:JSON.stringify({email:email, create_user:false})});
       var txt=await r.text(); var d={}; try{ d=JSON.parse(txt); }catch(e){}
       if(!r.ok){ setLoginStatus('Erro ('+r.status+'): '+(d.msg||d.message||d.error_description||d.error||txt.slice(0,180)||'tente novamente'), true); }
-      else { setLoginStatus('Link enviado para '+email+'. Abra o e-mail e clique em Sign in.'); }
+      else { setLoginStatus('Se a conta administrativa estiver autorizada, o link foi enviado para '+email+'. Abra o e-mail e clique em Sign in.'); }
     }catch(e){ setLoginStatus('Erro de rede: '+e.message, true); }
     btn.disabled=false;
   });
