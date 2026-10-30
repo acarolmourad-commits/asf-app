@@ -51,21 +51,25 @@
     var tb=el('rows'); tb.innerHTML='';
     rows.forEach(function(r){
       var tr=document.createElement('tr');
-      [r.numero,r.nome,r.apelido||'',r.nivel||'',r.praia||'',r.cidade||'',r.insta||'',r.validade||'',r.emitida_em?new Date(r.emitida_em).toLocaleString('pt-BR'):'',(r.ativo===true && r.validade && String(r.validade)>=today)?'Ativa':(r.ativo===true && r.validade && String(r.validade)<today?'Vencida':'Inativa')].forEach(function(v){ var td=document.createElement('td'); td.textContent=String(v); tr.appendChild(td); });
+      [r.numero,r.nome,r.apelido||'',r.nivel||'',r.praia||'',r.cidade||'',r.insta||'',r.validade||'',r.emitida_em?new Date(r.emitida_em).toLocaleString('pt-BR'):'',(/(test|sonda|^0{5,})/i.test(String(r.numero||'')))?'Teste (não contabilizar)':((r.ativo===true && r.validade && String(r.validade)>=today)?'Ativa':(r.ativo===true && r.validade && String(r.validade)<today?'Vencida':'Inativa'))].forEach(function(v){ var td=document.createElement('td'); td.textContent=String(v); tr.appendChild(td); });
       tb.appendChild(tr);
     });
     el('status').textContent=rows.length+' de '+allRows.length+' registro(s) • atualizado '+new Date().toLocaleTimeString('pt-BR');
   }
   function renderStats(){
     var today=todayISO();
-    var active=allRows.filter(function(r){return r.ativo===true && r.validade && String(r.validade)>=today;});
-    var expired=allRows.filter(function(r){return r.ativo===true && r.validade && String(r.validade)<today;}).length;
-    var inactive=allRows.filter(function(r){return r.ativo!==true;}).length;
-    var missing=allRows.filter(function(r){return !r.validade;}).length;
-    var levels={};
+    var productionRows=allRows.filter(function(r){return !/(test|sonda|^0{5,})/i.test(String(r.numero||''));});
+    var testCount=allRows.length-productionRows.length;
+    var active=productionRows.filter(function(r){return r.ativo===true && r.validade && String(r.validade)>=today;});
+    var expired=productionRows.filter(function(r){return r.ativo===true && r.validade && String(r.validade)<today;}).length;
+    var inactive=productionRows.filter(function(r){return r.ativo!==true;}).length;
+    var missing=productionRows.filter(function(r){return !r.validade;}).length;
+    var levels={},monthly={};
     active.forEach(function(r){var level=String(r.nivel||'Não informado');levels[level]=(levels[level]||0)+1;});
+    productionRows.filter(function(r){return r.ativo===true;}).forEach(function(r){var month=r.emitida_em?String(r.emitida_em).slice(0,7):'Sem data';monthly[month]=(monthly[month]||0)+1;});
     var byLevel=Object.keys(levels).sort().map(function(k){return k+': '+levels[k];}).join(' · ')||'—';
-    el('stats').textContent='Total: '+allRows.length+' • Ativas: '+active.length+' • Vencidas: '+expired+' • Inativas: '+inactive+' • Sem validade: '+missing+' • Ativas por nível: '+byLevel;
+    var byMonth=Object.keys(monthly).sort().map(function(k){return k+': '+monthly[k];}).join(' · ')||'—';
+    el('stats').textContent='Cadastros: '+allRows.length+' • Ativas: '+active.length+' • Vencidas: '+expired+' • Inativas: '+inactive+' • Testes: '+testCount+' • Sem validade: '+missing+' • Ativas por nível: '+byLevel+' • Emissões por mês: '+byMonth;
   }
   async function loadAll(){
     if(!session) return;
