@@ -1,7 +1,7 @@
 {
-  "date": "2026-10-29T22:07:11.107616+00:00",
-  "total": 112,
-  "ok": 100,
+  "date": "2026-10-30T03:14:01.218275+00:00",
+  "total": 113,
+  "ok": 101,
   "skipped": 10,
   "broken_count": 2,
   "broken": [
@@ -183,6 +183,11 @@
       "url": "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1643806355443576",
       "status": "skipped",
       "http": null
+    },
+    {
+      "url": "https://tempo.asf.surf/",
+      "status": "ok",
+      "http": 200
     },
     {
       "url": "https://treino.asf.surf/#plano-30-dias",
