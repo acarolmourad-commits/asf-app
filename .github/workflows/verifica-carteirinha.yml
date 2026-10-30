@@ -49,6 +49,9 @@ jobs:
               'valores retornados pela RPC escapados antes de inserir HTML': "escapeHtml(c.nivel)" in verificar and "escapeHtml(String(c.validade)" in verificar,
               'QR da carteirinha local nao e exibido como oficial': "d.registrada ? '<a href=\"" in js and "QR após confirmação" in js,
               'painel exige sessao antes de carregar registros': "if(!logged) return" in admin,
+              'painel calcula indicadores sem RPC ausente': "function renderStats()" in admin and "rpc/carteirinhas_stats" not in admin,
+              'painel diferencia carteirinha vencida': "'Vencida'" in admin,
+              'login administrativo nao cria novos usuarios': "create_user:false" in admin,
               'documentacao proibe SELECT publico': "Não conceder SELECT público" in privacy,
           }
           for name, ok in checks.items():
