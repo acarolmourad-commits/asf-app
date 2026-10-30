@@ -1,4 +1,4 @@
-const CACHE = "asf-v10-navigation-pwa";
+const CACHE = "asf-app-v11-navigation-safe";
 const OFFLINE_PAGES = [
   "./index.html",
   "./praias/",
@@ -26,9 +26,13 @@ const OFFLINE_PAGES = [
 ];
 self.addEventListener("install", e =>
   e.waitUntil(caches.open(CACHE).then(c => c.addAll(OFFLINE_PAGES)).then(() => self.skipWaiting())));
+// Remover somente o cache legado conhecido deste app. Outros apps no mesmo origin
+// podem possuir caches próprios; nunca apagá-los em uma ativação do ASF app.
+const LEGACY_CACHES = ["asf-v9-card-privacy", "asf-v10-navigation-pwa"];
 self.addEventListener("activate", e =>
   e.waitUntil(caches.keys().then(ks =>
-    Promise.all(ks.filter(k => k !== CACHE).map(k => caches.delete(k)))).then(() => self.clients.claim())));
+    Promise.all(ks.filter(k => LEGACY_CACHES.includes(k)).map(k => caches.delete(k))))
+    .then(() => self.clients.claim())));
 self.addEventListener("fetch", e => {
   if (e.request.method !== "GET") return;
   // Não armazenar endpoints nem respostas do Supabase: dados de carteirinhas devem permanecer atuais.
