@@ -1,4 +1,4 @@
-const CACHE = "asf-v9-card-privacy";
+const CACHE = "asf-v10-navigation-pwa";
 const OFFLINE_PAGES = [
   "./index.html",
   "./praias/",
@@ -31,12 +31,14 @@ self.addEventListener("activate", e =>
     Promise.all(ks.filter(k => k !== CACHE).map(k => caches.delete(k)))).then(() => self.clients.claim())));
 self.addEventListener("fetch", e => {
   if (e.request.method !== "GET") return;
-  // Nunca cachear API do Supabase (dados sempre frescos; votos/fotos sao online)
+  // Não armazenar endpoints nem respostas do Supabase: dados de carteirinhas devem permanecer atuais.
   if (e.request.url.indexOf("supabase.co") !== -1) return;
   e.respondWith(
     fetch(e.request).then(r => {
-      const clone = r.clone();
-      caches.open(CACHE).then(c => c.put(e.request, clone));
+      if (r && r.ok && new URL(e.request.url).origin === self.location.origin) {
+        const clone = r.clone();
+        caches.open(CACHE).then(c => c.put(e.request, clone));
+      }
       return r;
     }).catch(() => caches.match(e.request).then(m =>
       m || (e.request.mode === "navigate" ? caches.match("./fallback.html") : undefined)))
