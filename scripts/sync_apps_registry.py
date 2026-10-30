@@ -166,6 +166,9 @@ def validate(reg):
                     accepted |= {forecast, legacy_forecast}
                 if app["slug"] == "asf-clube":
                     accepted.add(carteirinha)
+                if app["slug"] == "asf-tempo":
+                    # O domínio oficial curto também é usado pelos consumidores editoriais.
+                    accepted.add("https://tempo.asf.surf/")
                 if not accepted.intersection(parsed.hrefs):
                     missing.append(app["url"])
         if missing:
