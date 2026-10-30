@@ -18,6 +18,14 @@
   const esc = value => String(value == null ? "" : value).replace(/[&<>"']/g, c => ({
     "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;"
   }[c]));
+  const safeHref = (value, fallback = "#") => {
+    const raw = String(value == null ? "" : value).trim();
+    try {
+      const parsed = new URL(raw, location.origin);
+      if (parsed.protocol !== "https:" && parsed.protocol !== "http:") return fallback;
+      return raw;
+    } catch (_) { return fallback; }
+  };
   const pathFor = href => {
     try { return new URL(href, location.origin).pathname.replace(/\/$/, ""); }
     catch (_) { return href.replace(/\/$/, ""); }
@@ -44,7 +52,7 @@
       if (!inputEl || !chipsEl || !gridEl || !Array.isArray(apps)) return;
       const render = lista => {
         gridEl.innerHTML = lista.map(a =>
-          `<a class="app-card" href="${esc(a.url)}" data-fallback>
+          `<a class="app-card" href="${esc(safeHref(a.url))}" data-fallback>
             <span class="app-icon" aria-hidden="true">${esc(a.icon || "\u{1F3C4}")}</span>${esc(a.nome)}</a>`).join("");
       };
       const categories = ["Todos", ...Object.keys(CATEGORIAS)];
