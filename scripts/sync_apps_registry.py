@@ -94,10 +94,16 @@ def gen_apps_index_html(reg):
         print("ERRO: bloco de apps nao encontrado em", APPS_INDEX_HTML)
         sys.exit(2)
     block_old = "\n".join(lines)
-    block_new = "\n".join(_app_line(by_slug[s]) for s in reg["apps_index_order"])
+    # Regenerate only the GitHub Pages satellite cards. Editorial cards using
+    # custom domains (for example ASF Clube at asf.surf) stay in their own slot.
+    generated_slugs = [
+        s for s in reg["apps_index_order"]
+        if by_slug[s]["url"].startswith(BASE + "/asf-")
+    ]
+    block_new = "\n".join(_app_line(by_slug[s]) for s in generated_slugs)
     with open(APPS_INDEX_HTML, "w", encoding="utf-8") as f:
         f.write(src.replace(block_old, block_new))
-    print("OK:", APPS_INDEX_HTML, "regenerado (%d apps)" % len(lines))
+    print("OK:", APPS_INDEX_HTML, "regenerado (%d apps)" % len(generated_slugs))
 
 
 # ---------- validacao ----------
@@ -166,6 +172,9 @@ def validate(reg):
                     accepted |= {forecast, legacy_forecast}
                 if app["slug"] == "asf-clube":
                     accepted.add(carteirinha)
+                if app["slug"] == "asf-tempo":
+                    # O domínio oficial curto também é usado pelos consumidores editoriais.
+                    accepted.add("https://tempo.asf.surf/")
                 if not accepted.intersection(parsed.hrefs):
                     missing.append(app["url"])
         if missing:
