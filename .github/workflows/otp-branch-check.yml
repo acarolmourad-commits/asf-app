@@ -1,0 +1,43 @@
+name: ASF OTP branch checks (read-only)
+on:
+  push:
+    branches: [security/verified-email-issuance]
+    paths:
+      - 'emitir.html'
+      - 'otp-emissao.js'
+      - 'docs/security/**'
+      - '.github/workflows/otp-branch-check.yml'
+  pull_request:
+    branches: [main]
+    paths:
+      - 'emitir.html'
+      - 'otp-emissao.js'
+      - 'docs/security/**'
+permissions:
+  contents: read
+jobs:
+  static-checks:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Check OTP JavaScript syntax
+        run: node --check otp-emissao.js
+      - name: Check OTP flow is wired and fail-closed
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          html = Path('emitir.html').read_text()
+          js = Path('otp-emissao.js').read_text()
+          assert './otp-emissao.js?v=20261030-otp1' in html
+          assert 'id="otp-form"' in html and 'id="otp-code"' in html
+          assert "authPost('otp'" in js
+          assert "authPost('verify'" in js
+          assert "Authorization:'Bearer '+accessToken" in js
+          assert 'verifiedEmail!==pendingPayload.email' in js
+          assert "'/rest/v1/rpc/emitir_carteirinha'" in js
+          assert 'localStorage.setItem' not in js and 'sessionStorage.setItem' not in js
+          print('OTP wiring checks passed')
+          PY
