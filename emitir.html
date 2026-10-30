@@ -44,6 +44,7 @@
 </fieldset>
 </form>
 </section>
+<section id="otp-section" class="card" hidden aria-labelledby="otp-title" style="margin-top:18px"><div class="form-heading"><span class="icon" aria-hidden="true">✉</span><div><h2 id="otp-title">Confirme seu e-mail</h2><span class="required-note">Enviamos um código de 8 dígitos para o endereço informado.</span></div></div><p class="form-caption">Digite o código recebido para confirmar que você tem acesso a este e-mail. Só depois da confirmação o cadastro será enviado para emissão.</p><form id="otp-form"><label for="otp-code">Código de verificação *</label><input id="otp-code" name="token" inputmode="numeric" autocomplete="one-time-code" pattern="[0-9]{8}" minlength="8" maxlength="8" required aria-describedby="otp-help"><p id="otp-help" class="hint">O código é temporário. Não compartilhe com ninguém.</p><button id="otp-verify" class="btn btn-primary" type="submit">Confirmar e emitir carteirinha</button><button id="otp-resend" class="btn btn-secondary" type="button" disabled style="width:100%;margin-top:10px">Reenviar código (60s)</button><button id="otp-back" class="btn btn-secondary" type="button" style="width:100%;margin-top:10px">Voltar e corrigir e-mail</button></form></section>
 <div id="cadastro-status" role="status" aria-live="polite"></div>
 <section id="resultado-section" hidden aria-labelledby="resultado-title"><h2 id="resultado-title">Sua carteirinha</h2><div id="carteirinha-content"></div><p class="hint">A foto opcional fica somente neste dispositivo. Benefícios com novas parcerias estão em preparação. O QR verifica situação e validade, sem nome ou contatos.</p><button id="novo-cadastro" class="btn btn-secondary" type="button">Voltar ao cadastro</button></section>
 <noscript><p>Ative o JavaScript para registrar seu cadastro e emitir a carteirinha.</p></noscript>
@@ -53,47 +54,5 @@
 <div id="toast" role="status" aria-live="polite"></div>
 <script>let toastTimer;function showToast(msg){const t=document.getElementById('toast');t.textContent=msg;t.className='show';clearTimeout(toastTimer);toastTimer=setTimeout(()=>t.className='',6500);}</script>
 <script src="./carteirinha.js?v=20261029-confirmed-status"></script>
-<script>
-(function(){
-'use strict';
-const form=document.getElementById('cadastro-form'),section=document.getElementById('cadastro-section'),result=document.getElementById('resultado-section'),status=document.getElementById('cadastro-status'),button=document.getElementById('cad-submit');
-let currentCard=null,busy=false;
-const feedback=(message,error)=>{status.textContent=message;status.className=error?'error':'';};
-if(typeof ASF_CARD==='undefined'){button.disabled=true;feedback('Não foi possível carregar a emissão. Atualize a página para tentar novamente.',true);return;}
-const originalLoad=ASF_CARD.load.bind(ASF_CARD),originalSave=ASF_CARD.save.bind(ASF_CARD);
-// Não exibir a carteirinha de outro cadastro salvo anteriormente neste navegador.
-ASF_CARD.load=()=>currentCard;
-ASF_CARD.save=function(d){currentCard=d;try{originalSave(d);}catch(e){showToast('Cadastro confirmado. Baixe o PNG: este navegador não permitiu salvar a cópia local.');}};
-ASF_CARD.init=function(){if(currentCard)this.renderCard(document.getElementById('carteirinha-content'),currentCard);};
-ASF_CARD.render=function(){this.init();};
-ASF_CARD.editar=function(){result.hidden=true;section.hidden=false;feedback('Confira seus dados e envie novamente. O servidor mantém a mesma carteirinha para o e-mail informado.');document.getElementById('cad-nome').focus();};
-document.getElementById('novo-cadastro').addEventListener('click',()=>{currentCard=null;result.hidden=true;section.hidden=false;form.reset();feedback('');document.getElementById('cad-nome').focus();});
-async function issue(payload){
-  // Caminho oficial unico: RPC emitir_carteirinha (SECURITY DEFINER).
-  const r0 = await ASF_CARD.emitirCarteirinha({p_numero: payload.numero, p_email_hash: payload.email_hash, p_nome: payload.nome, p_apelido: payload.apelido || null, p_nivel: payload.nivel || null, p_praia: payload.praia || null, p_cidade: payload.cidade || null, p_insta: payload.insta || null});
-  const r = Array.isArray(r0) ? r0[0] : r0;
-  if(!r||!/^ASF-[A-Z0-9]{6,12}$/.test(r.numero)||!/^\d{4}-\d{2}-\d{2}$/.test(r.validade)) throw new Error('resposta invalida');
-  return r;
-}
-form.addEventListener('submit',async event=>{
- event.preventDefault();if(busy||!form.reportValidity())return;
- const value=id=>document.getElementById(id).value.trim();
- const nome=value('cad-nome'),email=value('cad-email').toLowerCase(),nivel=value('cad-nivel');
- if(nome.length<2||!ASF_CARD.niveis.includes(nivel)){feedback('Confira seu nome e selecione seu nível.',true);return;}
- busy=true;button.disabled=true;button.textContent='Registrando no Supabase…';feedback('Aguarde a confirmação do cadastro.');
- try{
-  const emailHash=await ASF_CARD.sha256(email);
-  const payload={numero:ASF_CARD.gerarNumero(),email_hash:emailHash,nome:nome,apelido:value('cad-apelido'),nivel:nivel,praia:value('cad-praia'),cidade:value('cad-cidade'),insta:value('cad-insta'),validade:new Date(new Date().getFullYear()+1,new Date().getMonth(),new Date().getDate()).toISOString().split('T')[0]};
-  const r=await issue(payload),old=originalLoad()||{},same=old.emailHash===emailHash&&old.numero===r.numero;
-  const d={nome,nivel,praia:payload.praia,apelido:payload.apelido,cidade:payload.cidade,insta:payload.insta,numero:r.numero,validade:r.validade.split('-').reverse().join('/'),desde:same&&old.desde?old.desde:new Date().toLocaleDateString('pt-BR'),foto:same?old.foto||null:null,emailHash,lgpdConsent:new Date().toISOString(),registrada:new Date().toISOString()};
-  ASF_CARD.save(d);section.hidden=true;result.hidden=false;ASF_CARD.init();
-  feedback(r.status==='existente'?'Cadastro atualizado. Mesma carteirinha, com validade mantida até '+d.validade+'.':r.status==='renovada'?'Cadastro confirmado e carteirinha renovada até '+d.validade+'.':'Cadastro confirmado no Supabase. Carteirinha emitida até '+d.validade+'.');
-  result.scrollIntoView({behavior:'smooth',block:'start'});
- }catch(e){
-  result.hidden=true;section.hidden=false;currentCard=null;
-  feedback('Não foi possível confirmar o cadastro. Nenhuma carteirinha será exibida sem confirmação do Supabase. Tente novamente com o mesmo e-mail para evitar outro cadastro.',true);
- }finally{busy=false;button.disabled=false;button.textContent='Cadastrar e emitir minha carteirinha';}
-});
-})();
-</script>
+<script src="./otp-emissao.js?v=20261030-otp1"></script>
 </body></html>
