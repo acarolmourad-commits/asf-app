@@ -1,12 +1,12 @@
 {
   "date": "2026-10-31",
   "new_tip": {
-    "category": "Equipamento",
-    "title": "Qual leash escolher",
-    "content": "Use leash do mesmo tamanho ou ligeiramente menor que a prancha.",
+    "category": "Saúde",
+    "title": "Treino de força",
+    "content": "Foque em exercícios compostos: remada com elástico, agachamentos, plank. 2-3x/semana.",
     "tags": [
-      "Equipamento",
-      "Leash"
+      "Saúde",
+      "Treino"
     ]
   },
   "new_utility": {
@@ -16,9 +16,9 @@
   },
   "improvements": [
     {
-      "type": "feature",
-      "title": "Medidor de condições do mar",
-      "priority": "high"
+      "type": "layout",
+      "title": "Modo escuro",
+      "priority": "medium"
     },
     {
       "type": "content",
@@ -26,5 +26,5 @@
       "priority": "high"
     }
   ],
-  "generated_at": "2026-10-31T11:19:16.879949"
+  "generated_at": "2026-10-31T15:57:56.929783"
 }
