@@ -283,3 +283,53 @@ body { padding-bottom: calc(88px + env(safe-area-inset-bottom)) !important; }
     outline-offset: 3px;
   }
 }
+
+
+/* Mobile menu recovery: keep a persistent, unmistakable menu trigger in view.
+   The header itself can be visually displaced by mobile hero/language layers. */
+@media (max-width: 600px) {
+  body > header,
+  header {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+  }
+  header #menu-toggle {
+    position: fixed !important;
+    top: max(10px, env(safe-area-inset-top)) !important;
+    right: 14px !important;
+    z-index: 2147483000 !important;
+    display: flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    width: 50px !important;
+    min-width: 50px !important;
+    height: 50px !important;
+    min-height: 50px !important;
+    flex: none !important;
+    border-radius: 14px !important;
+    background: #064B63 !important;
+    color: #fff !important;
+    border: 2px solid #fff !important;
+    box-shadow: 0 4px 16px rgba(3,30,45,.42) !important;
+    font-size: 27px !important;
+    line-height: 1 !important;
+    transform: none !important;
+  }
+  #header-menu {
+    position: fixed !important;
+    top: max(68px, calc(env(safe-area-inset-top) + 64px)) !important;
+    left: 12px !important;
+    right: 12px !important;
+    z-index: 2147482999 !important;
+    width: auto !important;
+    max-width: none !important;
+    max-height: calc(100dvh - 150px) !important;
+    overflow-y: auto !important;
+    overscroll-behavior: contain;
+    box-sizing: border-box !important;
+  }
+  #header-menu .asf-menu-group {
+    grid-template-columns: minmax(0, 1fr) !important;
+  }
+}
