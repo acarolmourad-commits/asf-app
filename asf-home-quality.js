@@ -2,11 +2,47 @@
 (function () {
   'use strict';
 
+  function organizeMainMenu() {
+    var menu = document.getElementById('header-menu');
+    if (!menu || menu.dataset.asfGrouped === 'true') return;
+    var items = Array.prototype.filter.call(menu.children, function (node) {
+      return node.matches && node.matches('.menu-item');
+    });
+    if (!items.length) return;
+
+    var groups = [
+      { label: 'SURF E APRENDIZADO', keys: ['Dicas', 'Mobilidade', 'Praias', 'News', 'Cultura', 'Ondas', 'ASF Tempo', 'Surftrips', 'Utilitários', 'Quiz', 'Guias', 'Conteúdo'] },
+      { label: 'COMUNIDADE', keys: ['Desafios', 'Perfil', 'Comunidade', 'Sessões', 'Competições', 'Destaques'] },
+      { label: 'ASF E SERVIÇOS', keys: ['Parceiros & benefícios', 'Assistente', 'Carteirinha', 'Segurança'] }
+    ];
+    var wrappers = groups.map(function (group) {
+      var wrapper = document.createElement('div');
+      wrapper.className = 'asf-menu-group';
+      wrapper.setAttribute('role', 'group');
+      wrapper.setAttribute('aria-label', group.label);
+      var heading = document.createElement('p');
+      heading.className = 'asf-menu-group-title';
+      heading.textContent = group.label;
+      wrapper.appendChild(heading);
+      menu.appendChild(wrapper);
+      return { keys: group.keys, wrapper: wrapper };
+    });
+
+    items.forEach(function (item) {
+      var label = (item.textContent || '').replace(/^\s*\S+\s*/, '').trim();
+      var target = wrappers.find(function (group) {
+        return group.keys.some(function (key) { return label.indexOf(key) !== -1; });
+      });
+      if (target) target.wrapper.appendChild(item);
+      else menu.appendChild(item); // Keep any unclassified item visible and functional.
+    });
+    menu.dataset.asfGrouped = 'true';
+  }
+
   function applyHomeQuality() {
     if (document.documentElement.dataset.asfHomeQuality === 'applied') return;
     document.documentElement.dataset.asfHomeQuality = 'applied';
 
-    // Keyboard users can skip the floating menu and move straight to the primary choices.
     if (!document.querySelector('.skip-link')) {
       var skip = document.createElement('a');
       skip.className = 'skip-link';
@@ -21,8 +57,6 @@
       return /INCENTIVOS DE UNIÃO/i.test(el.textContent || '');
     });
 
-    // Keep all content, but put the main value proposition before search and gamification.
-    // DOM nodes are moved intact; form state remains untouched.
     if (start && search && search.parentNode && search !== start.nextElementSibling) {
       search.id = search.id || 'asf-home-search';
       start.insertAdjacentElement('afterend', search);
@@ -51,13 +85,14 @@
       chatInput.setAttribute('aria-label', 'Mensagem para o assistente virtual ASF');
     }
 
-    // Explicit safe rel for any existing external link that opens a new tab.
     document.querySelectorAll('a[target="_blank"]').forEach(function (link) {
       var rel = new Set((link.getAttribute('rel') || '').split(/\s+/).filter(Boolean));
       rel.add('noopener');
       rel.add('noreferrer');
       link.setAttribute('rel', Array.from(rel).join(' '));
     });
+
+    organizeMainMenu();
   }
 
   if (document.readyState === 'loading') {
