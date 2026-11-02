@@ -161,3 +161,81 @@ body { padding-bottom: calc(88px + env(safe-area-inset-bottom)) !important; }
   .asf-bottom-nav a small { font-size: 10px; }
   .asf-bottom-nav a span { font-size: 17px; }
 }
+
+
+/* First-screen mobile refinement: compact logo, stronger hierarchy and CTA. */
+.hero .hero-logo {
+  width: 54px;
+  height: auto;
+  display: block;
+  margin: 10px auto 12px;
+}
+.hero h1 {
+  max-width: 640px;
+  margin: 0 auto 12px;
+  text-wrap: balance;
+}
+.hero > p {
+  max-width: 600px;
+  margin: 0 auto 20px;
+  text-wrap: pretty;
+}
+.hero-cta .btn-primary {
+  background: #00A8CC !important;
+  color: #fff !important;
+  border: 1px solid #0089A8 !important;
+  border-radius: 14px !important;
+  padding: 13px 22px !important;
+  font-weight: 800 !important;
+  box-shadow: 0 6px 18px rgba(0,168,204,.22);
+}
+.hero-cta .btn-secondary {
+  border: 1px solid rgba(0,112,142,.35) !important;
+  border-radius: 14px !important;
+  padding: 12px 20px !important;
+  font-weight: 700 !important;
+}
+@media (max-width: 640px) {
+  .hero {
+    padding: 18px 18px 24px !important;
+    text-align: center;
+  }
+  .hero .hero-badge { margin-bottom: 4px; }
+  .hero .hero-logo { width: 48px; margin: 8px auto 10px; }
+  .hero h1 {
+    font-size: clamp(26px, 7.2vw, 34px) !important;
+    line-height: 1.14 !important;
+    margin-bottom: 10px;
+  }
+  .hero > p {
+    max-width: 34rem;
+    font-size: clamp(15px, 4.15vw, 18px) !important;
+    line-height: 1.5 !important;
+    margin-bottom: 18px;
+  }
+  .hero-cta {
+    max-width: 340px;
+    margin: 0 auto;
+    gap: 9px !important;
+  }
+  .hero-cta .btn-primary,
+  .hero-cta .btn-secondary {
+    min-height: 48px;
+    font-size: 16px !important;
+  }
+}
+/* Ensure a language selector is not clipped by its own row on narrow screens. */
+@media (max-width: 640px) {
+  [aria-label="Idioma"], [aria-label="Language"],
+  .language-switcher, .lang-switcher, .asf-language-switcher {
+    max-width: 100%;
+    box-sizing: border-box;
+    flex-wrap: wrap;
+    overflow: visible;
+  }
+  [aria-label="Idioma"] button, [aria-label="Language"] button,
+  .language-switcher button, .lang-switcher button, .asf-language-switcher button {
+    min-height: 44px;
+    max-width: 100%;
+  }
+}
