@@ -239,3 +239,47 @@ body { padding-bottom: calc(88px + env(safe-area-inset-bottom)) !important; }
     max-width: 100%;
   }
 }
+
+
+/* Keep the mobile hamburger control visible above hero artwork and overlays. */
+@media (max-width: 768px) {
+  header {
+    position: sticky !important;
+    top: 0;
+    z-index: 12000 !important;
+    overflow: visible !important;
+    isolation: isolate;
+  }
+  header .header-content,
+  header .header-actions {
+    position: relative;
+    z-index: 12001;
+    overflow: visible;
+  }
+  header #menu-toggle {
+    display: inline-flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    position: relative !important;
+    z-index: 12002 !important;
+    flex: 0 0 44px;
+    width: 44px;
+    min-width: 44px;
+    height: 44px;
+    min-height: 44px;
+    align-items: center;
+    justify-content: center;
+    color: #fff !important;
+    background: #0E526B !important;
+    border: 2px solid rgba(255,255,255,.92) !important;
+    border-radius: 12px !important;
+    box-shadow: 0 3px 12px rgba(14,36,57,.28);
+    font-size: 24px !important;
+    line-height: 1;
+    pointer-events: auto;
+  }
+  header #menu-toggle:focus-visible {
+    outline: 3px solid #FFD45A;
+    outline-offset: 3px;
+  }
+}
