@@ -1,14 +1,20 @@
 {
-  "date": "2026-11-03T00:07:22.331807+00:00",
-  "total": 113,
-  "ok": 101,
+  "date": "2026-11-03T13:08:12.045396+00:00",
+  "total": 107,
+  "ok": 94,
   "skipped": 10,
-  "broken_count": 2,
+  "broken_count": 3,
   "broken": [
     "https://www.spsurf.com.br",
-    "https://www.spsurf.com.br/"
+    "https://www.spsurf.com.br/",
+    "prancha-ideal/"
   ],
   "results": [
+    {
+      "url": "https://acarolmourad-commits.github.io/asf-app/",
+      "status": "ok",
+      "http": 200
+    },
     {
       "url": "https://acarolmourad-commits.github.io/asf-atlas/",
       "status": "ok",
@@ -66,11 +72,6 @@
     },
     {
       "url": "https://acarolmourad-commits.github.io/asf-nutricao/",
-      "status": "ok",
-      "http": 200
-    },
-    {
-      "url": "https://acarolmourad-commits.github.io/asf-parceiras/",
       "status": "ok",
       "http": 200
     },
@@ -413,12 +414,6 @@
       "local": true
     },
     {
-      "url": "bem-estar/surf-saude-mental-mulheres.html",
-      "status": "ok",
-      "http": 200,
-      "local": true
-    },
-    {
       "url": "carteirinha.js",
       "status": "ok",
       "http": 200,
@@ -468,12 +463,6 @@
     },
     {
       "url": "guia-apps.html",
-      "status": "ok",
-      "http": 200,
-      "local": true
-    },
-    {
-      "url": "guias/planejar-surf-trip/",
       "status": "ok",
       "http": 200,
       "local": true
@@ -539,33 +528,9 @@
       "local": true
     },
     {
-      "url": "parcerias/surfmappers/",
-      "status": "ok",
-      "http": 200,
-      "local": true
-    },
-    {
-      "url": "parcerias/villa-blu/",
-      "status": "ok",
-      "http": 200,
-      "local": true
-    },
-    {
-      "url": "praias/melhores-praias-iniciantes-litoral-norte-sp.html",
-      "status": "ok",
-      "http": 200,
-      "local": true
-    },
-    {
-      "url": "praias/surf-feminino-sao-sebastiao.html",
-      "status": "ok",
-      "http": 200,
-      "local": true
-    },
-    {
       "url": "prancha-ideal/",
-      "status": "ok",
-      "http": 200,
+      "status": "broken",
+      "http": 503,
       "local": true
     },
     {
