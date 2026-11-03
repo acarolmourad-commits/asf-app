@@ -1,13 +1,12 @@
 {
-  "date": "2026-11-03T13:08:12.045396+00:00",
+  "date": "2026-11-03T18:15:38.608954+00:00",
   "total": 107,
-  "ok": 94,
+  "ok": 95,
   "skipped": 10,
-  "broken_count": 3,
+  "broken_count": 2,
   "broken": [
     "https://www.spsurf.com.br",
-    "https://www.spsurf.com.br/",
-    "prancha-ideal/"
+    "https://www.spsurf.com.br/"
   ],
   "results": [
     {
@@ -529,8 +528,8 @@
     },
     {
       "url": "prancha-ideal/",
-      "status": "broken",
-      "http": 503,
+      "status": "ok",
+      "http": 200,
       "local": true
     },
     {
