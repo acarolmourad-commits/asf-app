@@ -2281,7 +2281,26 @@ function openAffiliateLink(url, productId) {
   }
 }
 // Newsletter
-function subscribeNewsletter(){const e=document.getElementById('newsletter-email'),t=e?e.value.trim():'';if(!t||!t.includes('@'))return showToast('❌ Email inválido!','error');const o=JSON.parse(localStorage.getItem('asf-newsletter')||'[]');o.push({email:t,date:new Date().toISOString()}),localStorage.setItem('asf-newsletter',JSON.stringify(o)),showToast('✅ Inscrita! Você receberá dicas toda semana.','success'),e&&(e.value=''),typeof gtag!=='undefined'&&gtag('event','newsletter_signup',{event_category:'engagement',value:1})}
+// Newsletter — Google Sheets via Google Apps Script Web App.
+var ASF_NEWSLETTER_ENDPOINT = 'CONFIGURE_GOOGLE_APPS_SCRIPT_WEB_APP_URL';
+async function subscribeNewsletter(){
+  const emailEl=document.getElementById('newsletter-email');
+  const consentEl=document.getElementById('newsletter-consent');
+  const honeypot=document.getElementById('newsletter-website');
+  const email=emailEl?emailEl.value.trim().toLowerCase():'';
+  if(!email || !/^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/.test(email)) return showToast('❌ Informe um e-mail válido.','error');
+  if(!consentEl || !consentEl.checked) return showToast('Marque o consentimento para se inscrever.','error');
+  if(honeypot && honeypot.value) return;
+  if(!ASF_NEWSLETTER_ENDPOINT || ASF_NEWSLETTER_ENDPOINT.indexOf('CONFIGURE_')===0) return showToast('A inscrição está em configuração. Tente novamente em breve.','error');
+  try {
+    await fetch(ASF_NEWSLETTER_ENDPOINT,{method:'POST',mode:'no-cors',headers:{'Content-Type':'application/x-www-form-urlencoded;charset=UTF-8'},body:new URLSearchParams({email:email,consent:'true',source:'ASF app newsletter',website:honeypot?honeypot.value:''}).toString()});
+    // no-cors response is opaque; a toast is not proof of a successful Sheets write.
+    showToast('📩 Solicitação enviada. A confirmação do registro pode levar alguns instantes.','success');
+    if(emailEl) emailEl.value='';
+    if(consentEl) consentEl.checked=false;
+    if(typeof gtag!=='undefined') gtag('event','newsletter_signup',{event_category:'engagement',value:1});
+  } catch(err) { showToast('Não foi possível enviar agora. Tente novamente.','error'); }
+}
 function showPremiumModal(){/* removido: sem área premium */}
 function hidePremiumModal(){/* removido */}
 function startPayment(){/* removido: sem pagamentos */}
