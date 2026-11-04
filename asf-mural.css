@@ -5,7 +5,7 @@
 .asf-bottom-nav a{display:flex;flex-direction:column;align-items:center;gap:2px;
   text-decoration:none;color:inherit;font-size:.7rem;opacity:.7}
 .asf-bottom-nav a.ativo{opacity:1;color:var(--asf-primary,#0b7fab)}
-body{padding-bottom:64px}
+body{padding-bottom:calc(84px + env(safe-area-inset-bottom))}
 
 .mural-foto-mes{background:linear-gradient(135deg,#0b7fab,#14b8d4);color:#fff;
   border-radius:16px;padding:1rem;margin-bottom:1rem}
