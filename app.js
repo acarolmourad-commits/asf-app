@@ -2288,7 +2288,7 @@ async function subscribeNewsletter(){
   const consentEl=document.getElementById('newsletter-consent');
   const honeypot=document.getElementById('newsletter-website');
   const email=emailEl?emailEl.value.trim().toLowerCase():'';
-  if(!email || !/^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/.test(email)) return showToast('❌ Informe um e-mail válido.','error');
+  if(!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return showToast('❌ Informe um e-mail válido.','error');
   if(!consentEl || !consentEl.checked) return showToast('Marque o consentimento para se inscrever.','error');
   if(honeypot && honeypot.value) return;
   if(!ASF_NEWSLETTER_ENDPOINT || ASF_NEWSLETTER_ENDPOINT.indexOf('CONFIGURE_')===0) return showToast('A inscrição está em configuração. Tente novamente em breve.','error');
