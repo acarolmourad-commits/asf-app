@@ -1986,9 +1986,9 @@ t Section -->
       <h4 style="margin: 0 0 8px 0; color: var(--primary); font-size: 16px;">📧 Receba a Dica do Dia</h4>
       <p style="margin: 0 0 12px 0; font-size: 13px; color: var(--gray-600);">Surf dicas direto no seu email! Sem spam.</p>
       <div style="display: flex; gap: 8px;">
-        <input type="email" id="newsletter-email" placeholder="seu@email.com"
-        seu email está seguro — não compartilhamos dados com terceiros.
- style="flex: 1; padding: 12px 16px; border: 2px solid var(--primary); border-radius: 12px; font-size: 14px; font-family: inherit;" onkeypress="if(event.key === 'Enter') subscribeNewsletter()">
+        <input type="email" id="newsletter-email" name="email" placeholder="seu@email.com" autocomplete="email" required aria-label="Seu endereço de e-mail"
+        style="flex: 1; min-width: 0; padding: 12px 16px; border: 2px solid var(--primary); border-radius: 12px; font-size: 14px; font-family: inherit;" onkeypress="if(event.key === 'Enter') subscribeNewsletter()">
+        <p id="newsletter-privacy-note" style="margin:8px 0 0;font-size:12px;color:var(--gray-600);">Seu e-mail está seguro — não compartilhamos dados com terceiros.</p>
         <button onclick="subscribeNewsletter()" style="background: var(--primary); color: white; border: none; padding: 12px 20px; border-radius: 12px; font-weight: 600; cursor: pointer; white-space: nowrap;">📩 Inscrever</button>
       </div>
     </div>
