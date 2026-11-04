@@ -350,3 +350,8 @@ html body footer[role="contentinfo"] > div {
   color: #FFFFFF !important;
   opacity: 1 !important;
 }
+/* Keep the partner showcase only in the early homepage highlight.
+   The mid-page brand-home-card repeats the same partner logos and CTA. */
+html body #brand-home-card {
+  display: none !important;
+}
