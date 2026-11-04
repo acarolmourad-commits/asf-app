@@ -9,7 +9,7 @@ function doPost(e) {
     if (String(p.website || '').trim()) return json_({ ok: true }); // honeypot
     const email = String(p.email || '').trim().toLowerCase();
     const consent = String(p.consent || '').toLowerCase() === 'true';
-    if (!/^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/.test(email) || !consent) return json_({ ok: false, error: 'invalid_input' });
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) || !consent) return json_({ ok: false, error: 'invalid_input' });
     const sheet = SpreadsheetApp.openById(SPREADSHEET_ID).getSheetByName(TAB_NAME);
     if (!sheet) throw new Error('Destination tab not found');
     if (sheet.getLastRow() === 0) sheet.appendRow(HEADERS);
