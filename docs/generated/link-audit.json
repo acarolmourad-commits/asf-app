@@ -1,7 +1,7 @@
 {
-  "date": "2026-11-03T22:38:40.849471+00:00",
-  "total": 107,
-  "ok": 95,
+  "date": "2026-11-04T03:37:52.621464+00:00",
+  "total": 106,
+  "ok": 94,
   "skipped": 10,
   "broken_count": 2,
   "broken": [
@@ -238,11 +238,6 @@
       "url": "https://www.tiktok.com/@Cahrol.asf",
       "status": "skipped",
       "http": null
-    },
-    {
-      "url": "https://www.villablumaresias.com.br",
-      "status": "ok",
-      "http": 200
     },
     {
       "url": "./",
