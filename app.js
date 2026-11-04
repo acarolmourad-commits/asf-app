@@ -2282,7 +2282,7 @@ function openAffiliateLink(url, productId) {
 }
 // Newsletter
 // Newsletter — Google Sheets via Google Apps Script Web App.
-var ASF_NEWSLETTER_ENDPOINT = 'CONFIGURE_GOOGLE_APPS_SCRIPT_WEB_APP_URL';
+var ASF_NEWSLETTER_ENDPOINT = 'https://script.google.com/macros/s/AKfycbztQlw3cuvHHYiTODqz0I8TrhJ_2n1vgwJbPtWBPEKBr9I97iUTQzrCPv3154QzesWF/exec';
 async function subscribeNewsletter(){
   const emailEl=document.getElementById('newsletter-email');
   const consentEl=document.getElementById('newsletter-consent');
