@@ -333,3 +333,20 @@ body { padding-bottom: calc(88px + env(safe-area-inset-bottom)) !important; }
     grid-template-columns: minmax(0, 1fr) !important;
   }
 }
+/* Institutional block: readable even while the user selects/copies its text. */
+html body footer[role="contentinfo"] ::selection,
+html body footer[role="contentinfo"]::selection {
+  color: #FFFFFF !important;
+  background: #006B8F !important;
+  -webkit-text-fill-color: #FFFFFF !important;
+}
+html body footer[role="contentinfo"] nav a {
+  color: #FFFFFF !important;
+  text-decoration-color: #FFFFFF !important;
+}
+html body footer[role="contentinfo"] p,
+html body footer[role="contentinfo"] strong,
+html body footer[role="contentinfo"] > div {
+  color: #FFFFFF !important;
+  opacity: 1 !important;
+}
