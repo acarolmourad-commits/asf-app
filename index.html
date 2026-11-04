@@ -1989,6 +1989,11 @@ t Section -->
         <input type="email" id="newsletter-email" name="email" placeholder="seu@email.com" autocomplete="email" required aria-label="Seu endereço de e-mail"
         style="flex: 1; min-width: 0; padding: 12px 16px; border: 2px solid var(--primary); border-radius: 12px; font-size: 14px; font-family: inherit;" onkeypress="if(event.key === 'Enter') subscribeNewsletter()">
         <p id="newsletter-privacy-note" style="margin:8px 0 0;font-size:12px;color:var(--gray-600);">Seu e-mail está seguro — não compartilhamos dados com terceiros.</p>
+        <label for="newsletter-consent" style="display:flex;align-items:flex-start;gap:8px;margin:8px 0;font-size:12px;color:var(--gray-600);">
+          <input id="newsletter-consent" type="checkbox" required style="margin-top:2px;flex:0 0 auto;">
+          <span>Concordo em receber novidades e dicas da ASF por e-mail. Posso cancelar a inscrição quando quiser.</span>
+        </label>
+        <input id="newsletter-website" type="text" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;" aria-label="Deixe este campo vazio">
         <button onclick="subscribeNewsletter()" style="background: var(--primary); color: white; border: none; padding: 12px 20px; border-radius: 12px; font-weight: 600; cursor: pointer; white-space: nowrap;">📩 Inscrever</button>
       </div>
     </div>
