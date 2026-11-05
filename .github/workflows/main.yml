@@ -81,9 +81,20 @@ jobs:
           if [ "$changed" = true ]; then
             git add docs/generated/respiracao.html docs/generated/alongamento.html
             git commit -m "🧘 Breathing & stretching update - $(date +%Y-%m-%d %H:%M)"
+            pushed=false
             for i in 1 2 3 4 5; do
-              git pull --rebase origin main && git push && break || { echo "retry $i"; sleep $((i*5)); git fetch origin main; }
+              if git pull --rebase origin main && git push origin HEAD:main; then
+                pushed=true
+                break
+              fi
+              # Preserve our commit after a rebase conflict; never force-push.
+              git rebase --abort 2>/dev/null || true
+              if [ "$i" -lt 5 ]; then echo "retry $i"; sleep $((i*5)); fi
             done
+            if [ "$pushed" != true ]; then
+              echo "::error::Could not publish generated changes after 5 attempts. Remote changes were preserved."
+              exit 1
+            fi
             echo "✅ Updated"
           else
             echo "📭 No changes"
@@ -103,6 +114,12 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: ${{ env.PYTHON_VERSION }}
+      - name: 🏄 Validate Curated Surf Tips
+        run: python3 -B -m unittest discover -s tests -p 'test_surf_tips.py' -v
+      - name: 🏄 Publish Daily Surf Tip Selection
+        run: |
+          python3 scripts/generate_surf_tips.py
+          python3 scripts/generate_surf_tips.py --check
       - name: 🧠 Generate Daily Mental Tip
         run: |
           python3 scripts/daily_tip.py
@@ -195,8 +212,31 @@ jobs:
             git add -A
             git status --short
             git commit -m "📝 Daily content update - $(date +%Y-%m-%d)"
+            pushed=false
             for i in 1 2 3 4 5; do
-              git pull --rebase origin main && git push && break || { echo "retry $i"; sleep $((i*5)); git fetch origin main; }
+              if git pull --rebase origin main; then
+                # A concurrent editorial commit can change the catalog without
+                # conflicting with the generated JSON. Rebuild from rebased HEAD.
+                if ! python3 scripts/generate_surf_tips.py || ! python3 scripts/generate_surf_tips.py --check; then
+                  echo "::error::Surf tips do not match the current catalog; nothing was pushed."
+                  exit 1
+                fi
+                if ! git diff --quiet -- docs/generated/surf-tips.json; then
+                  git add -- docs/generated/surf-tips.json
+                  git commit -m "🏄 Refresh surf tip selection after synchronization"
+                fi
+                if git push origin HEAD:main; then
+                  pushed=true
+                  break
+                fi
+              fi
+              # Preserve our commit after a rebase conflict; never force-push.
+              git rebase --abort 2>/dev/null || true
+              if [ "$i" -lt 5 ]; then echo "retry $i"; sleep $((i*5)); fi
             done
+            if [ "$pushed" != true ]; then
+              echo "::error::Could not publish generated changes after 5 attempts. Remote changes were preserved."
+              exit 1
+            fi
             echo "✅ All changes committed"
           fi
