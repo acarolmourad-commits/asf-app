@@ -1,13 +1,10 @@
 {
-  "date": "2026-11-04T22:57:42.055489+00:00",
-  "total": 106,
-  "ok": 94,
-  "skipped": 10,
-  "broken_count": 2,
-  "broken": [
-    "https://www.spsurf.com.br",
-    "https://www.spsurf.com.br/"
-  ],
+  "date": "2026-11-05T03:57:17.592118+00:00",
+  "total": 101,
+  "ok": 92,
+  "skipped": 9,
+  "broken_count": 0,
+  "broken": [],
   "results": [
     {
       "url": "https://acarolmourad-commits.github.io/asf-app/",
@@ -95,11 +92,6 @@
       "http": 200
     },
     {
-      "url": "https://acarolmourad-commits.github.io/asf-ranking/",
-      "status": "ok",
-      "http": 200
-    },
-    {
       "url": "https://acarolmourad-commits.github.io/asf-respira/",
       "status": "ok",
       "http": 200
@@ -146,6 +138,11 @@
     },
     {
       "url": "https://asf.surf/",
+      "status": "ok",
+      "http": 200
+    },
+    {
+      "url": "https://eventos.asf.surf/",
       "status": "ok",
       "http": 200
     },
@@ -200,11 +197,6 @@
       "http": null
     },
     {
-      "url": "https://www.fecasurf.com.br/",
-      "status": "ok",
-      "http": 200
-    },
-    {
       "url": "https://www.googletagmanager.com",
       "status": "skipped",
       "http": null
@@ -213,26 +205,6 @@
       "url": "https://www.instagram.com/associacaosurffeminino",
       "status": "skipped",
       "http": null
-    },
-    {
-      "url": "https://www.instagram.com/spsurfoficial/",
-      "status": "skipped",
-      "http": null
-    },
-    {
-      "url": "https://www.spsurf.com.br",
-      "status": "broken",
-      "http": "URLError"
-    },
-    {
-      "url": "https://www.spsurf.com.br/",
-      "status": "broken",
-      "http": "URLError"
-    },
-    {
-      "url": "https://www.surfbrasil.org.br/",
-      "status": "ok",
-      "http": 200
     },
     {
       "url": "https://www.tiktok.com/@Cahrol.asf",
@@ -390,12 +362,6 @@
       "local": true
     },
     {
-      "url": "assets/js/inline/asf-inline-04.js",
-      "status": "ok",
-      "http": 200,
-      "local": true
-    },
-    {
       "url": "assets/js/inline/asf-inline-05.js",
       "status": "ok",
       "http": 200,
@@ -511,6 +477,12 @@
     },
     {
       "url": "mareas/",
+      "status": "ok",
+      "http": 200,
+      "local": true
+    },
+    {
+      "url": "newsletter/config.js",
       "status": "ok",
       "http": 200,
       "local": true
