@@ -1,0 +1,96 @@
+{
+  "schema_version": 1,
+  "catalog_version": "2026-11-05",
+  "tips": [
+    {
+      "id": "primeira-aula",
+      "category": "Começar",
+      "title": "Leve suas dúvidas para a primeira aula",
+      "summary": "Uma instrutora qualificada pode avaliar seu momento, o equipamento e as condições locais. Conte o que você já sabe e o que ainda causa insegurança.",
+      "action": "Antes de marcar, pergunte como a escola acompanha iniciantes e decide quando adiar uma aula por causa do mar.",
+      "label": "Explorar guias para começar",
+      "href": "/aprender/"
+    },
+    {
+      "id": "pergunta-da-sessao",
+      "category": "Começar",
+      "title": "Escolha uma pergunta para a próxima aula",
+      "summary": "Aprender também é perceber o que ainda precisa de orientação. Uma dificuldade observada na sessão pode virar uma pergunta concreta para sua instrutora.",
+      "action": "Anote uma situação que gostaria de entender melhor, sem comparar seu ritmo com o de outras pessoas.",
+      "label": "Ler o guia de aprendizado",
+      "href": "/guias/pos-surf-e-aprendizado/"
+    },
+    {
+      "id": "previsao-e-observacao",
+      "category": "Segurança",
+      "title": "A previsão é um começo, não uma autorização",
+      "summary": "Altura, período, vento e maré ajudam a planejar. São estimativas e não garantem condições adequadas ao seu nível na praia escolhida.",
+      "action": "Confira a previsão e confirme as condições no local com guarda-vidas ou uma instrutora qualificada. Na dúvida, não entre.",
+      "label": "Consultar a previsão ASF",
+      "href": "/previsao-surf/"
+    },
+    {
+      "id": "mar-calmo-nao-basta",
+      "category": "Segurança",
+      "title": "Aparência tranquila não garante segurança",
+      "summary": "Uma faixa sem ondas quebrando pode ter corrente de retorno. Não escolha a entrada apenas porque a água parece calma.",
+      "action": "Respeite a sinalização e peça orientação local sobre riscos, entrada e saída. Se não houver condições adequadas, adie a sessão.",
+      "label": "Entender a leitura da previsão",
+      "href": "/guias/previsao-de-ondas/"
+    },
+    {
+      "id": "respeitar-limites",
+      "category": "Segurança",
+      "title": "Você pode mudar o plano",
+      "summary": "Ter surfado ali antes não garante as mesmas condições hoje. Cansaço, insegurança, mar e orientações locais devem fazer parte da decisão.",
+      "action": "Se as condições estiverem além do seu preparo, fique em terra e converse com sua instrutora sobre outra oportunidade.",
+      "label": "Rever o planejamento da sessão",
+      "href": "/guias/previsao-de-ondas/"
+    },
+    {
+      "id": "revisar-equipamento",
+      "category": "Equipamento",
+      "title": "Observe o equipamento antes de sair",
+      "summary": "Desgaste no leash, danos na prancha ou acessórios soltos merecem atenção. Uma checagem visual ajuda a identificar dúvidas, mas não certifica segurança.",
+      "action": "Siga as instruções do fabricante e procure avaliação especializada se houver dano ou dúvida sobre o uso.",
+      "label": "Ver cuidados com o equipamento",
+      "href": "/guias/pos-surf-e-aprendizado/"
+    },
+    {
+      "id": "cuidar-apos-surf",
+      "category": "Equipamento",
+      "title": "Inclua o equipamento no pós-surf",
+      "summary": "Limpeza, secagem e armazenamento dependem do material. Cuidar da prancha e dos acessórios também faz parte da rotina de surf.",
+      "action": "Consulte as recomendações do fabricante antes de limpar, guardar ou tentar reparar seu equipamento.",
+      "label": "Abrir o guia de pós-surf",
+      "href": "/guias/pos-surf-e-aprendizado/"
+    },
+    {
+      "id": "registro-sem-cobranca",
+      "category": "Treino",
+      "title": "Registre aprendizados, não só resultados",
+      "summary": "Um diário pode guardar o que você observou, as condições da sessão e suas dúvidas. Não precisa virar uma cobrança por desempenho.",
+      "action": "Anote um aprendizado e uma pergunta para sua próxima orientação, sem incluir dados de outras pessoas sem autorização.",
+      "label": "Abrir meu diário de surf",
+      "href": "/diario/"
+    },
+    {
+      "id": "planejar-com-orientacao",
+      "category": "Treino",
+      "title": "Planeje a prática com orientação",
+      "summary": "Conteúdos e aplicativos ajudam a organizar ideias, mas não avaliam seu corpo, seu nível ou as condições da praia.",
+      "action": "Leve suas metas a uma profissional habilitada para definir uma progressão adequada, em vez de copiar uma rotina pronta.",
+      "label": "Organizar o próximo aprendizado",
+      "href": "/guias/pos-surf-e-aprendizado/"
+    },
+    {
+      "id": "descanso-faz-parte",
+      "category": "Treino",
+      "title": "Descansar também cabe no planejamento",
+      "summary": "Sequências, desafios e pontuações não devem decidir quando você entra no mar. Seu momento e as condições locais vêm antes de uma meta no aplicativo.",
+      "action": "Respeite cansaço e dor. Não force a prática para completar uma meta e busque orientação profissional quando necessário.",
+      "label": "Ler sobre rotina e aprendizado",
+      "href": "/guias/pos-surf-e-aprendizado/"
+    }
+  ]
+}

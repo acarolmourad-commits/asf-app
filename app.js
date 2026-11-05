@@ -2455,7 +2455,7 @@ function walkTree(el) {
                 var row = node(href ? 'a' : 'button', 'search-result-item');
                 row.style.cssText = 'display:block;width:100%;text-align:left;box-sizing:border-box;border:0;background:transparent;color:inherit;font:inherit;text-decoration:none';
                 if (href) row.href = href;
-                else { row.type = 'button'; row.addEventListener('click', function () { if (document.getElementById(sectionId)) window.goToSection(sectionId, row); }); }
+                else { row.type = 'button'; row.dataset.sectionTarget = sectionId; row.addEventListener('click', function () { if (document.getElementById(sectionId)) window.goToSection(sectionId, row); }); }
                 row.appendChild(node('div', 'result-title', (item.icon || '🔎') + ' ' + String(item.title || 'Conteúdo ASF')));
                 row.appendChild(node('div', 'result-section', item.section || 'Conteúdo ASF'));
                 var text = String(item.text || ''); row.appendChild(node('div', 'result-preview', text.length > 80 ? text.slice(0, 80) + '...' : text));
