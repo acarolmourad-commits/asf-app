@@ -1,7 +1,7 @@
 {
-  "date": "2026-11-05T19:33:17.473853+00:00",
-  "total": 101,
-  "ok": 92,
+  "date": "2026-11-05T22:58:09.529316+00:00",
+  "total": 106,
+  "ok": 97,
   "skipped": 9,
   "broken_count": 0,
   "broken": [],
@@ -242,6 +242,24 @@
       "local": true
     },
     {
+      "url": "/aprender/",
+      "status": "ok",
+      "http": 200,
+      "local": true
+    },
+    {
+      "url": "/diario/",
+      "status": "ok",
+      "http": 200,
+      "local": true
+    },
+    {
+      "url": "/previsao-surf/",
+      "status": "ok",
+      "http": 200,
+      "local": true
+    },
+    {
       "url": "app-posts.js",
       "status": "ok",
       "http": 200,
@@ -333,6 +351,12 @@
     },
     {
       "url": "assets/css/asf-inline.css",
+      "status": "ok",
+      "http": 200,
+      "local": true
+    },
+    {
+      "url": "assets/css/surf-tips.css",
       "status": "ok",
       "http": 200,
       "local": true
@@ -465,6 +489,12 @@
     },
     {
       "url": "js/home-quiz-i18n.js",
+      "status": "ok",
+      "http": 200,
+      "local": true
+    },
+    {
+      "url": "js/surf-tips.js",
       "status": "ok",
       "http": 200,
       "local": true
