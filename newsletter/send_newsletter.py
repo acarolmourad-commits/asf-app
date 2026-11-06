@@ -71,6 +71,8 @@ def brevo_send(api_key, to_email, subject, body):
 
 def main():
     mode = os.getenv('MODE', 'preview').lower(); week = week_key(); sheet_id = os.getenv('SHEET_ID') or DEFAULT_SHEET_ID
+    if mode not in ('preview', 'test', 'send'):
+        print(f'Blocked: unsupported MODE={mode!r}. Use preview, test or send.'); return 2
     svc = sheets_service(); config, subscribers, content = {}, [], []
     if svc:
         config = {r[0]: r[1] for r in get_values(svc, sheet_id, 'Config!A2:B50') if len(r) >= 2}
@@ -102,7 +104,7 @@ def main():
     for sub in targets:
         email = sub['email']
         if mode == 'send' and (week, email) in sent_log: continue
-        body = build_html(week, items, f"{unsub_base}?action=unsubscribe&token={sub.get('token_cancelamento','')}")
+        body = build_html(week, items, f"{unsub_base}?action=unsubscribe&token={sub.get('token','')}")
         try:
             brevo_send(api_key, email, ('[TESTE] ' if mode == 'test' else '') + subject, body); status, err = 'enviado', ''
         except Exception as exc:
