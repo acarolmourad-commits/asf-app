@@ -8,7 +8,7 @@
 ## Estado e segurança
 A planilha é nova e não há inscrições anteriores para migrar. O formulário do site permanece desativado enquanto o endpoint estiver vazio. Nenhum disparo de campanha está autorizado por esta configuração.
 
-O Apps Script versionado no GitHub precisa ser copiado para o projeto Apps Script institucional e implantado como Web App. Atualizar o arquivo no GitHub **não atualiza automaticamente** o projeto Apps Script.
+O Apps Script versionado no GitHub precisa ser copiado para o projeto Apps Script institucional e implantado como Web App. Atualizar o arquivo no GitHub **não atualiza automaticamente** o projeto Apps Script. Atenção: o remetente semanal Python ainda está integrado ao Brevo; a migração completa do disparo para MailApp ainda não foi feita. O fluxo de inscrição/confirmação usa MailApp.
 
 ## 1. Preparar a planilha
 1. Abra o projeto Apps Script institucional vinculado à conta `asf.surffeminino@gmail.com`.
@@ -16,7 +16,7 @@ O Apps Script versionado no GitHub precisa ser copiado para o projeto Apps Scrip
 3. Salve.
 4. No seletor de funções, escolha `setup` e execute uma vez.
 5. Autorize o acesso à planilha e o envio de e-mail solicitado pelo Google.
-6. Confirme que a aba `Inscritas` foi criada com os cabeçalhos: `created_at, email, name, source, consent, status, token, updated_at`.
+6. Confirme que a aba `Inscritas` foi criada com os cabeçalhos: `created_at, email, name, source, consentimento, status, token, updated_at`.
 
 A função `setup()` cria a aba e os cabeçalhos somente se necessário. Se encontrar uma primeira linha diferente, interrompe sem sobrescrever dados.
 
