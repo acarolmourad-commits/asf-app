@@ -118,11 +118,11 @@ function doGet(e) {
       const row = i + 2;
       const currentStatus = String(values[i][5] || '');
       if (action === 'confirm' && currentStatus === 'pendente') {
-        sh.getRange(row, 6, 1, 2).setValues([['ativa', new Date()]]);
+        sh.getRange(row, 6).setValue('ativa');\n        sh.getRange(row, 8).setValue(new Date());
         return HtmlService.createHtmlOutput('<p>Inscrição confirmada! Bem-vinda à Newsletter ASF.</p>');
       }
       if (action === 'unsubscribe' && currentStatus !== 'cancelada') {
-        sh.getRange(row, 6, 1, 2).setValues([['cancelada', new Date()]]);
+        sh.getRange(row, 6).setValue('cancelada');\n        sh.getRange(row, 8).setValue(new Date());
         return HtmlService.createHtmlOutput('<p>Inscrição cancelada. Você não receberá novos e-mails da ASF.</p>');
       }
       if (action === 'confirm' && currentStatus === 'ativa') {
