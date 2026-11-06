@@ -1977,7 +1977,44 @@ function openAffiliateLink(url, productId) {
     });
   }
 }
-async function subscribeNewsletter(){const e=document.getElementById('newsletter-email'),c=document.getElementById('newsletter-consent'),h=document.getElementById('newsletter-website'),t=e?e.value.trim().toLowerCase():'';if(h&&h.value)return showToast('Inscrita!','success');if(!/^[^@ ]+@[^@ ]+.[^@ ]{2,}$/.test(t))return showToast('Email invalido!','error');if(c&&!c.checked)return showToast('Marque o consentimento para receber a newsletter.','error');const endpoint=window.ASF_NEWSLETTER_ENDPOINT||'';if(!endpoint){try{const key='asf-newsletter-pendente';const list=JSON.parse(localStorage.getItem(key)||'[]');if(!list.some(x=>x.email===t))list.push({email:t,date:new Date().toISOString(),status:'aguardando-ativacao'});localStorage.setItem(key,JSON.stringify(list));}catch(_){} return showToast('Inscricoes online em ativacao. Tente novamente em breve.','error');}try{const body=new URLSearchParams({email:t,consent:'sim',origem:'home'});await fetch(endpoint,{method:'POST',mode:'no-cors',headers:{'Content-Type':'application/x-www-form-urlencoded'},body});const key='asf-newsletter';const list=JSON.parse(localStorage.getItem(key)||'[]');if(!list.some(x=>x.email===t))list.push({email:t,date:new Date().toISOString(),status:'confirmacao-pendente'});localStorage.setItem(key,JSON.stringify(list));e&&(e.value='');showToast('Confira seu e-mail para confirmar a inscricao na Newsletter ASF!','success');typeof gtag!=='undefined'&&gtag('event','newsletter_signup',{event_category:'engagement',value:1});}catch(_){showToast('Nao foi possivel enviar agora. Tente novamente.','error');}}
+async async function subscribeNewsletter(){
+  const emailInput = document.getElementById('newsletter-email');
+  const consent = document.getElementById('newsletter-consent');
+  const honeypot = document.getElementById('newsletter-website');
+  const email = emailInput ? emailInput.value.trim().toLowerCase() : '';
+  if (honeypot && honeypot.value) return;
+  if (!/^[^\\s@]+@[^\\s@]+\\.[^\\s@]{2,}$/.test(email)) {
+    return showToast('Digite um e-mail válido.', 'error');
+  }
+  if (!consent || !consent.checked) {
+    return showToast('Marque o consentimento para receber a newsletter.', 'error');
+  }
+  const endpoint = window.ASF_NEWSLETTER_ENDPOINT || '';
+  if (!endpoint) {
+    return showToast('Inscrições online temporariamente indisponíveis. Tente novamente em breve.', 'error');
+  }
+  const button = document.querySelector('#newsletter-destaque button');
+  if (button) { button.disabled = true; button.setAttribute('aria-busy', 'true'); }
+  try {
+    const body = new URLSearchParams({ email, consent: 'sim', origem: 'home' });
+    await fetch(endpoint, {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body
+    });
+    if (emailInput) emailInput.value = '';
+    consent.checked = false;
+    showToast('Solicitação encaminhada. Confira seu e-mail para confirmar a inscrição; se a mensagem não chegar, tente novamente mais tarde.', 'success');
+    if (typeof gtag !== 'undefined') {
+      gtag('event', 'newsletter_signup_request', { event_category: 'engagement', value: 1 });
+    }
+  } catch (error) {
+    showToast('Não foi possível encaminhar sua inscrição. Tente novamente.', 'error');
+  } finally {
+    if (button) { button.disabled = false; button.removeAttribute('aria-busy'); }
+  }
+}
 function showPremiumModal(){/* removido: sem área premium */}
 function hidePremiumModal(){/* removido */}
 function startPayment(){/* removido: sem pagamentos */}
