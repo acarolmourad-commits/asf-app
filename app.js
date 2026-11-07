@@ -315,6 +315,8 @@ function callLua() {
 function showBrandSupport() { document.getElementById('brand-support').style.display = 'block'; }
 function sendSupport(valor) {/* removido: sem cobranças */}
 function showSection(sectionId) {
+            // Competições e eventos possuem aplicativo dedicado.
+            if (sectionId === 'competicoes') { window.location.href = 'https://eventos.asf.surf/'; return; }
             // Redireciona secoes desativadas
             if (sectionId === 'loja') sectionId = 'lojas';
             if (sectionId === 'badges') sectionId = 'progresso';
