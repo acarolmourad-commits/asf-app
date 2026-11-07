@@ -1977,7 +1977,7 @@ function openAffiliateLink(url, productId) {
     });
   }
 }
-async async function subscribeNewsletter(){
+async function subscribeNewsletter(){
   const emailInput = document.getElementById('newsletter-email');
   const consent = document.getElementById('newsletter-consent');
   const honeypot = document.getElementById('newsletter-website');
