@@ -256,28 +256,7 @@ t Section -->
     </section>
 
 
-    <!-- Newsletter ASF — destaque na home, logo após o hero -->
-<section id="newsletter-destaque" aria-labelledby="newsletter-title"
-  style="margin:24px 16px 30px;padding:clamp(20px,4vw,30px);border-radius:24px;background:linear-gradient(135deg,#E8FAFC 0%,#F7F0FC 100%);border:2px solid rgba(0,168,204,.24);box-shadow:0 12px 32px rgba(14,36,57,.10);scroll-margin-top:90px;">
-  <div style="max-width:760px;margin:0 auto;">
-    <div style="display:inline-flex;align-items:center;gap:7px;background:#fff;color:#087D96;padding:7px 12px;border-radius:999px;font-size:12px;font-weight:800;letter-spacing:.04em;margin-bottom:12px;">💌 NEWSLETTER ASF</div>
-    <h2 id="newsletter-title" style="margin:0 0 10px;color:#0E2439;font-size:clamp(23px,5vw,32px);line-height:1.15;">Receba a próxima onda de novidades.</h2>
-    <p style="margin:0 0 18px;color:#3D5668;font-size:15px;line-height:1.6;">Dicas de surf, novidades da comunidade e conteúdos especiais direto no seu e-mail. Gratuito — e você pode cancelar quando quiser.</p>
-    <div style="display:grid;grid-template-columns:minmax(0,1fr);gap:12px;">
-      <label for="newsletter-email" style="font-size:13px;font-weight:700;color:#0E2439;">Seu e-mail</label>
-      <input type="email" id="newsletter-email" name="email" placeholder="seu@email.com" autocomplete="email" required aria-label="Seu endereço de e-mail"
-        style="box-sizing:border-box;width:100%;min-width:0;padding:14px 16px;border:2px solid #00A8CC;background:#fff;border-radius:12px;font-size:16px;font-family:inherit;"
-        onkeypress="if(event.key === 'Enter') subscribeNewsletter()">
-      <label for="newsletter-consent" style="display:flex;align-items:flex-start;gap:10px;padding:12px;background:rgba(255,255,255,.72);border-radius:12px;font-size:13px;line-height:1.5;color:#3D5668;">
-        <input id="newsletter-consent" type="checkbox" required style="margin-top:3px;flex:0 0 auto;width:18px;height:18px;">
-        <span>Concordo em receber novidades e dicas da ASF por e-mail. Posso cancelar a inscrição quando quiser.</span>
-      </label>
-      <input id="newsletter-website" type="text" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;" aria-label="Deixe este campo vazio">
-      <button type="button" onclick="subscribeNewsletter()" style="display:flex;align-items:center;justify-content:center;gap:9px;width:100%;min-height:50px;padding:14px 20px;background:#007F9E;color:#fff;border:0;border-radius:999px;font-size:16px;font-weight:800;cursor:pointer;box-shadow:0 5px 14px rgba(0,127,158,.22);">📩 Quero receber as novidades</button>
-      <p id="newsletter-privacy-note" style="margin:0;text-align:center;font-size:12px;color:#526A7A;">🔒 Seu e-mail é usado para a newsletter da ASF e não é compartilhado com terceiros.</p>
-    </div>
-  </div>
-</section>
+    
 
     <!-- Destaque de parceiros ASF: posicionado logo após o hero -->
     <section id="parcerias-destaque" aria-labelledby="parcerias-destaque-titulo"
@@ -2160,6 +2139,29 @@ t Section -->
         <p style="font-size:13.5px;margin:0 0 12px;color:#444;line-height:1.6;">A ASF – Associação de Surf Feminino conecta mulheres ao surf, à comunidade e à evolução dentro do esporte — do primeiro banho de mar ao free surf.</p>
         <a href="sobre.html" style="display:block;text-align:center;background:#fff;border:1px solid rgba(0,168,204,0.3);color:var(--primary,#00A8CC);padding:12px;border-radius:12px;text-decoration:none;font-weight:600;">Conheça a ASF →</a>
     </div>
+
+    <!-- Newsletter ASF — no final da pagina, antes do rodape -->
+<section id="newsletter-destaque" aria-labelledby="newsletter-title"
+  style="margin:24px 16px 30px;padding:clamp(20px,4vw,30px);border-radius:24px;background:linear-gradient(135deg,#E8FAFC 0%,#F7F0FC 100%);border:2px solid rgba(0,168,204,.24);box-shadow:0 12px 32px rgba(14,36,57,.10);scroll-margin-top:90px;">
+  <div style="max-width:760px;margin:0 auto;">
+    <div style="display:inline-flex;align-items:center;gap:7px;background:#fff;color:#087D96;padding:7px 12px;border-radius:999px;font-size:12px;font-weight:800;letter-spacing:.04em;margin-bottom:12px;">💌 NEWSLETTER ASF</div>
+    <h2 id="newsletter-title" style="margin:0 0 10px;color:#0E2439;font-size:clamp(23px,5vw,32px);line-height:1.15;">Receba a próxima onda de novidades.</h2>
+    <p style="margin:0 0 18px;color:#3D5668;font-size:15px;line-height:1.6;">Dicas de surf, novidades da comunidade e conteúdos especiais direto no seu e-mail. Gratuito — e você pode cancelar quando quiser.</p>
+    <div style="display:grid;grid-template-columns:minmax(0,1fr);gap:12px;">
+      <label for="newsletter-email" style="font-size:13px;font-weight:700;color:#0E2439;">Seu e-mail</label>
+      <input type="email" id="newsletter-email" name="email" placeholder="seu@email.com" autocomplete="email" required aria-label="Seu endereço de e-mail"
+        style="box-sizing:border-box;width:100%;min-width:0;padding:14px 16px;border:2px solid #00A8CC;background:#fff;border-radius:12px;font-size:16px;font-family:inherit;"
+        onkeypress="if(event.key === 'Enter') subscribeNewsletter()">
+      <label for="newsletter-consent" style="display:flex;align-items:flex-start;gap:10px;padding:12px;background:rgba(255,255,255,.72);border-radius:12px;font-size:13px;line-height:1.5;color:#3D5668;">
+        <input id="newsletter-consent" type="checkbox" required style="margin-top:3px;flex:0 0 auto;width:18px;height:18px;">
+        <span>Concordo em receber novidades e dicas da ASF por e-mail. Posso cancelar a inscrição quando quiser.</span>
+      </label>
+      <input id="newsletter-website" type="text" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;" aria-label="Deixe este campo vazio">
+      <button type="button" onclick="subscribeNewsletter()" style="display:flex;align-items:center;justify-content:center;gap:9px;width:100%;min-height:50px;padding:14px 20px;background:#007F9E;color:#fff;border:0;border-radius:999px;font-size:16px;font-weight:800;cursor:pointer;box-shadow:0 5px 14px rgba(0,127,158,.22);">📩 Quero receber as novidades</button>
+      <p id="newsletter-privacy-note" style="margin:0;text-align:center;font-size:12px;color:#526A7A;">🔒 Seu e-mail é usado para a newsletter da ASF e não é compartilhado com terceiros.</p>
+    </div>
+  </div>
+</section>
 
     <footer role="contentinfo" style="background: var(--secondary); color: #F5FAFF; padding: 32px 20px 24px; margin-top: 40px; font-size: 13px;">
         <style>footer[role="contentinfo"], footer[role="contentinfo"] * { color: #FFFFFF !important; opacity: 1 !important; } footer[role="contentinfo"] a { color: #FFFFFF !important; text-decoration: underline !important; text-underline-offset: 3px; } footer[role="contentinfo"] a:focus-visible { outline: 2px solid #FFFFFF; outline-offset: 3px; border-radius: 3px; } footer[role="contentinfo"] ::selection { color: #FFFFFF !important; background: #006B8F !important; }</style>
