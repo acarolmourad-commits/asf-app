@@ -320,12 +320,17 @@ function showSection(sectionId) {
             // Redireciona secoes desativadas
             if (sectionId === 'loja') sectionId = 'lojas';
             if (sectionId === 'badges') sectionId = 'progresso';
+            // Valida o destino antes de ocultar a seção atual: um ID ausente
+            // não pode deixar a homepage inteira em branco.
+            const sec = document.getElementById(sectionId);
+            if (!sec) {
+                console.warn('[ASF] Seção não encontrada:', sectionId);
+                return;
+            }
             document.querySelectorAll('.section').forEach(s => { s.classList.remove('active'); s.style.setProperty('display', 'none', 'important'); });
             document.querySelectorAll('.tab').forEach(t => { t.classList.remove('active'); t.setAttribute('aria-selected', 'false'); });
             document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
             // Show selected section
-            const sec = document.getElementById(sectionId);
-            if (!sec) return;
             sec.classList.add('active');
             sec.style.setProperty('display', 'block', 'important');
             const tab = document.querySelector('.tab[aria-controls="' + sectionId + '"]');
