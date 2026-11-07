@@ -547,8 +547,8 @@ function showBeachManas(beach) {
             listDiv.innerHTML = '<div class="card" style="text-align:center;padding:18px;"><p style="font-weight:600;">🏄‍♀️ ' + label + '</p><p style="font-size:13px;color:var(--gray-600);">Ainda não há uma lista de perfis reais conectada para esta região. A ASF não exibirá cadastros demonstrativos como se fossem surfistas disponíveis.</p></div>';
             detailDiv.style.display = 'block';
         }
-function connectManas(name) {
-            showToast(`🏄‍♀️ Solicitação enviada para ${name}!\n\nVocê receberá uma notificação quando ela aceitar. Enquanto isso, continue surfando! 🌊`);
+function connectManas() {
+            showToast('A conexão entre surfistas ainda não está disponível. A ASF avisará quando esse recurso estiver ativo.', 'info');
         }
 function getLevel(points) {
             for (let i = LEVELS.length - 1; i >= 0; i--) {
