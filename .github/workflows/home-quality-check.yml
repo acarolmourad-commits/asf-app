@@ -4,10 +4,14 @@ on:
   pull_request:
     paths:
       - 'index.html'
+      - 'app.js'
+      - 'js/home-main.js'
+      - 'assets/js/inline/asf-inline-06.js'
       - 'asf-home-quality.css'
       - 'asf-home-quality.js'
       - 'carteirinha.js'
       - 'tests/home-quality-layer.test.cjs'
+      - 'tests/home-guides-partners.test.cjs'
       - '.github/workflows/home-quality-check.yml'
   workflow_dispatch:
 
@@ -22,7 +26,11 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '20'
-      - name: Validate JavaScript syntax
-        run: node --check asf-home-quality.js
-      - name: Run regression tests
-        run: node --test tests/home-quality-layer.test.cjs
+      - name: Validate homepage JavaScript syntax
+        run: |
+          node --check app.js
+          node --check js/home-main.js
+          node --check assets/js/inline/asf-inline-06.js
+          node --check asf-home-quality.js
+      - name: Run homepage regression tests
+        run: node --test tests/home-quality-layer.test.cjs tests/home-guides-partners.test.cjs
