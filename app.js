@@ -224,7 +224,7 @@ function renderBrandHub() {
     }
 }
 function showBrandChallenge() {
-            alert('📸 CAMPANHAS ASF\n\nAs campanhas com brindes serão anunciadas aqui quando houver parceria ativa. Brindes vêm de doações de lojas parceiras e são vinculados à pontuação da carteirinha ASF — tudo gratuito.\n\nAcompanhe o app! 🏄‍♀️');
+            showToast('No momento, não há campanha ativa publicada. Acompanhe os canais oficiais da ASF para conhecer novas iniciativas e suas condições.', 'info');
         }
 function showBrandContact() {
             window.open('https://wa.me/5511954346288?text=Olá!%20Quero%20anunciar%20no%20ASF%20Brand%20Lab.%20Meu%20nome:%20[MARCA]', '_blank');
@@ -260,26 +260,36 @@ function importData(input) {
                 reader.readAsText(file);
             }
 function enviarCadastroParceiro() {
-            var nome = document.getElementById("parceiro-nome").value.trim();
-            var insta = document.getElementById("parceiro-insta").value.trim();
-            var site = document.getElementById("parceiro-site").value.trim();
-            var logo = document.getElementById("parceiro-logo").value.trim();
+            var nomeEl = document.getElementById("parceiro-nome");
+            var instaEl = document.getElementById("parceiro-insta");
+            var siteEl = document.getElementById("parceiro-site");
+            var logoEl = document.getElementById("parceiro-logo");
+            var nome = nomeEl ? nomeEl.value.trim() : "";
+            var insta = instaEl ? instaEl.value.trim() : "";
+            var site = siteEl ? siteEl.value.trim() : "";
+            var logo = logoEl ? logoEl.value.trim() : "";
             if (!nome) {
-                alert("Preencha o nome da marca!");
+                showToast("Preencha o nome da marca!", "error");
+                if (nomeEl) nomeEl.focus();
                 return;
             }
-            // Save registration
-            var parceiro = { nome: nome, insta: insta, site: site, logo: logo, data: new Date().toISOString() };
-            localStorage.setItem("asf-parceiros", JSON.stringify(parceiro));
-            // Send to Carol
-            var msg = "🏄♀️ NOVO CADASTRO DE PARCEIRO!\n\n";
-            msg += "Marca: " + nome + "\n";
-            if (insta) msg += "Instagram: " + insta + "\n";
-            if (site) msg += "Site: " + site + "\n";
-            msg += "\nComprovante: " + comprovante + "\n";
-            msg += "Revisar e ativar!";
-            window.open("https://wa.me/5511954346288?text=" + encodeURIComponent(msg), "_blank");
-            showToast("✓ Cadastro enviado! Revisaremos em breve.");
+            // O cadastro fica apenas neste navegador até a pessoa concluir o envio.
+            var parceiro = { nome: nome, insta: insta, site: site, logo: logo, data: new Date().toISOString(), status: "aguardando_envio" };
+            try {
+                localStorage.setItem("asf-parceiros", JSON.stringify(parceiro));
+            } catch (error) {
+                showToast("Não foi possível preparar o cadastro neste dispositivo.", "error");
+                return;
+            }
+            var msg = "NOVO CADASTRO DE PARCEIRO ASF\\n\\n";
+            msg += "Marca: " + nome + "\\n";
+            if (insta) msg += "Instagram: " + insta + "\\n";
+            if (site) msg += "Site: " + site + "\\n";
+            if (logo) msg += "Logo: " + logo + "\\n";
+            msg += "\\nCadastro sujeito à análise e ativação pela ASF.";
+            var wa = "https://wa.me/5511954346288?text=" + encodeURIComponent(msg);
+            var opened = window.open(wa, "_blank", "noopener,noreferrer");
+            showToast(opened ? "Cadastro preparado. Conclua o envio pelo WhatsApp para encaminhar à ASF." : "Cadastro salvo apenas neste dispositivo. Abra o WhatsApp para concluir o envio.", "info");
         }
 function checkBadge(type) {
         var sessions = (JSON.parse(localStorage.getItem('surf-sessions') || '[]')).length;
@@ -2273,7 +2283,26 @@ function showPixDonation(){/* removido */}
 function showReferralModal(){const m=document.getElementById('referral-modal');if(m){m.style.display='flex';const codeDisplay=document.getElementById('referral-code-display');if(codeDisplay){const userCode=localStorage.getItem('asf-my-referral-code');if(userCode){codeDisplay.textContent=userCode}else{const newCode=generateReferralCode();localStorage.setItem('asf-my-referral-code',newCode);codeDisplay.textContent=newCode}}trackEvent('referral','modal_view')}}
 function hideReferralModal(){const m=document.getElementById('referral-modal');if(m)m.style.display='none'}
 function copyReferralCode(){const code=localStorage.getItem('asf-my-referral-code')||generateReferralCode();navigator.clipboard.writeText(code).then(()=>showToast('✅ Código copiado!','success')).catch(()=>showToast('❌ Erro ao copiar','error'));trackEvent('referral','code_copy')}
-function shareReferral(platform){const code=localStorage.getItem('asf-my-referral-code')||generateReferralCode();const url=`${window.ASF_BASE_URL}?ref=${code}`;let shareUrl='';switch(platform){case'whatsapp':shareUrl=`https://wa.me/?text=Olá! Quero te convidar para o app ASF - Dicas de surf gratuitas! Baixe aqui: ${url}`;break;case'copy':shareUrl=url;break}shareUrl&&window.open(shareUrl,'_blank');trackEvent('referral','share',platform)}
+function shareReferral(platform) {
+            var code = localStorage.getItem('asf-my-referral-code') || generateReferralCode();
+            var base = window.ASF_BASE_URL || 'https://asf.surf/';
+            var url = new URL(base);
+            url.searchParams.set('ref', code);
+            var shareUrl = '';
+            switch (platform) {
+                case 'whatsapp':
+                    shareUrl = 'https://wa.me/?text=' + encodeURIComponent('Olá! Quero te convidar para conhecer a ASF! ' + url.toString());
+                    break;
+                case 'instagram':
+                    shareUrl = 'https://www.instagram.com/associacaosurffeminino/';
+                    break;
+                case 'copy':
+                    shareUrl = url.toString();
+                    break;
+            }
+            if (shareUrl) window.open(shareUrl, '_blank', 'noopener,noreferrer');
+            trackEvent('referral', 'share', platform);
+        }
 function hidePixDonation(){/* removido */}
 function copyPixKey(){/* removido: sem doações via Pix */}
 function getUserId(){try{let uid=localStorage.getItem('asf-user-id');if(!uid){uid='user_'+Math.random().toString(36).substring(7);localStorage.setItem('asf-user-id',uid)}return uid}catch(e){return 'user_anon'}}
