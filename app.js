@@ -554,64 +554,16 @@ function requestLocation() {
         }
 function findNearbyManas() {
             const nearbyDiv = document.getElementById('nearby-manas');
-            nearbyDiv.innerHTML = '<p style="text-align: center; color: var(--primary);">🔄 Buscando manas próximas...</p>';
-            // Simula busca (em produção usaria a localização real)
-            setTimeout(() => {
-                const allManas = [];
-                Object.keys(MOCK_MANAS).forEach(beach => {
-                    MOCK_MANAS[beach].forEach(mana => {
-                        allManas.push({ ...mana, region: beach });
-                    });
-                });
-                // Ordena por distância
-                allManas.sort((a, b) => a.distance - b.distance);
-                // Pega as 5 mais próximas
-                const closest = allManas.slice(0, 5);
-                nearbyDiv.innerHTML = `
-                    <h4 style="color: var(--secondary); margin-bottom: 15px;">📍 Manas mais próximas</h4>
-                    ${closest.map(mana => `
-                        <div class="card" style="margin-bottom: 15px; cursor: pointer;" onclick="connectManas('${mana.name}')">
-                            <div style="display: flex; align-items: center; gap: 15px;">
-                                <div style="font-size: 40px;">${mana.avatar}</div>
-                                <div style="flex: 1;">
-                                    <h4 style="font-size: 16px; color: var(--secondary);">${mana.name}</h4>
-                                    <p style="font-size: 12px; color: var(--gray-600);">${mana.level} • ${mana.beach}</p>
-                                    <p style="font-size: 11px; color: var(--primary); font-weight: bold;">📍 ${mana.distance} km</p>
-                                </div>
-                                <button class="btn btn-primary" style="font-size: 12px; padding: 8px 12px;">Conectar</button>
-                            </div>
-                        </div>
-                    `).join('')}
-                    <p style="text-align: center; font-size: 12px; color: var(--gray-400); margin-top: 15px;">Total: ${allManas.length} manas encontradas</p>
-                `;
-            }, 1500);
+            if (!nearbyDiv) return;
+            nearbyDiv.innerHTML = '<div class="card" style="text-align:center;padding:18px;"><p style="font-weight:600;">🤝 Comunidade ASF</p><p style="font-size:13px;color:var(--gray-600);">A busca por surfistas próximas ainda não está conectada a uma base de perfis reais. Nenhum perfil fictício será exibido como pessoa disponível.</p></div>';
         }
 function showBeachManas(beach) {
-            const manas = MOCK_MANAS[beach] || [];
             const listDiv = document.getElementById('beach-manas-list');
             const detailDiv = document.getElementById('beach-manas-detail');
-            const beachNames = {
-                bertioga: 'Bertioga',
-                santos: 'Santos',
-                guaruja: 'Guarujá',
-                ubatuba: 'Ubatuba'
-            };
-            listDiv.innerHTML = `
-                <h4 style="color: var(--secondary); margin-bottom: 15px;">🏖️ Manas em ${beachNames[beach]}</h4>
-                ${manas.map(mana => `
-                    <div class="card" style="margin-bottom: 15px; cursor: pointer;" onclick="connectManas('${mana.name}')">
-                        <div style="display: flex; align-items: center; gap: 15px;">
-                            <div style="font-size: 40px;">${mana.avatar}</div>
-                            <div style="flex: 1;">
-                                <h4 style="font-size: 16px; color: var(--secondary);">${mana.name}</h4>
-                                <p style="font-size: 12px; color: var(--gray-600);">${mana.level} • ${mana.beach}</p>
-                                <p style="font-size: 11px; color: var(--primary); font-weight: bold;">📍 ${mana.distance} km</p>
-                            </div>
-                            <button class="btn btn-primary" style="font-size: 12px; padding: 8px 12px;">Conectar</button>
-                        </div>
-                    </div>
-                `).join('')}
-            `;
+            if (!listDiv || !detailDiv) return;
+            const beachNames = { bertioga: 'Bertioga', santos: 'Santos', guaruja: 'Guarujá', ubatuba: 'Ubatuba' };
+            const label = beachNames[beach] || 'esta região';
+            listDiv.innerHTML = '<div class="card" style="text-align:center;padding:18px;"><p style="font-weight:600;">🏄‍♀️ ' + label + '</p><p style="font-size:13px;color:var(--gray-600);">Ainda não há uma lista de perfis reais conectada para esta região. A ASF não exibirá cadastros demonstrativos como se fossem surfistas disponíveis.</p></div>';
             detailDiv.style.display = 'block';
         }
 function connectManas(name) {
