@@ -65,12 +65,22 @@ if(typeof ASF_CARD==='undefined'){button.disabled=true;feedback('Não foi possí
 const originalLoad=ASF_CARD.load.bind(ASF_CARD),originalSave=ASF_CARD.save.bind(ASF_CARD);
 const pendingKey='asf_card_pending_issue';
 try {
- const pending=JSON.parse(sessionStorage.getItem(pendingKey)||'null');
- if(pending && Date.now()-Number(pending.createdAt||0)<15*60*1000){
+ const pending=JSON.parse(localStorage.getItem(pendingKey)||'null');
+ if(pending && Date.now()-Number(pending.createdAt||0)<24*60*60*1000){
   ['nome','email','apelido','nivel','praia','cidade','insta'].forEach(k=>{const el=document.getElementById('cad-'+k);if(el&&pending[k]!=null)el.value=pending[k];});
   const consent=document.getElementById('cad-consent');if(consent)consent.checked=true;
-  feedback('Recuperamos os dados desta inscrição. Após confirmar o e-mail, envie novamente para concluir a emissão.',false);
- }else if(pending){sessionStorage.removeItem(pendingKey);}
+  feedback('Seus dados foram recuperados com segurança. A confirmação do e-mail foi concluída? Toque em “Concluir emissão” para finalizar o cadastro.',false);
+  button.textContent='Concluir emissão';
+  // O retorno do Magic Link pode abrir uma nova aba; aguarde a sessão ser restaurada pelo Supabase.
+  ASF_CARD.getAuthSession().then(session=>{
+   if(session && String(session.user?.email||'').toLowerCase()===String(pending.email||'').toLowerCase()){
+    feedback('E-mail confirmado! Seus dados estão preservados. Toque em “Concluir emissão” para gerar sua carteirinha.',false);
+    button.textContent='Concluir emissão';
+   }else if(session){
+    feedback('A sessão autenticada pertence a outro e-mail. Use o mesmo endereço informado no cadastro.',true);
+   }
+  }).catch(()=>{});
+ }else if(pending){localStorage.removeItem(pendingKey);}
 }catch(e){}
 // Não exibir a carteirinha de outro cadastro salvo anteriormente neste navegador.
 ASF_CARD.load=()=>currentCard;
@@ -78,7 +88,7 @@ ASF_CARD.save=function(d){currentCard=d;try{originalSave(d);}catch(e){showToast(
 ASF_CARD.init=function(){if(currentCard)this.renderCard(document.getElementById('carteirinha-content'),currentCard);};
 ASF_CARD.render=function(){this.init();};
 ASF_CARD.editar=function(){result.hidden=true;section.hidden=false;feedback('Confira seus dados e envie novamente. O servidor mantém a mesma carteirinha para o e-mail informado.');document.getElementById('cad-nome').focus();};
-document.getElementById('novo-cadastro').addEventListener('click',()=>{currentCard=null;result.hidden=true;section.hidden=false;form.reset();try{sessionStorage.removeItem(pendingKey);}catch(e){}feedback('');document.getElementById('cad-nome').focus();});
+document.getElementById('novo-cadastro').addEventListener('click',()=>{currentCard=null;result.hidden=true;section.hidden=false;form.reset();try{localStorage.removeItem(pendingKey);}catch(e){}feedback('');document.getElementById('cad-nome').focus();});
 async function issue(payload){
   // A RPC só aceita sessão autenticada cujo e-mail foi confirmado pelo Supabase.
   const verifiedSession = await ASF_CARD.ensureVerifiedEmail(payload.email);
@@ -97,7 +107,7 @@ form.addEventListener('submit',async event=>{
  try{
   const emailHash=await ASF_CARD.sha256(email);
   const payload={numero:ASF_CARD.gerarNumero(),email:email,email_hash:emailHash,nome:nome,apelido:value('cad-apelido'),nivel:nivel,praia:value('cad-praia'),cidade:value('cad-cidade'),insta:value('cad-insta'),validade:new Date(new Date().getFullYear()+1,new Date().getMonth(),new Date().getDate()).toISOString().split('T')[0]};
-  sessionStorage.setItem(pendingKey,JSON.stringify({...payload,createdAt:Date.now()}));
+  localStorage.setItem(pendingKey,JSON.stringify({...payload,createdAt:Date.now()}));
   const r=await issue(payload),old=originalLoad()||{},same=old.emailHash===emailHash&&old.numero===r.numero;
   const d={nome,nivel,praia:payload.praia,apelido:payload.apelido,cidade:payload.cidade,insta:payload.insta,numero:r.numero,validade:r.validade.split('-').reverse().join('/'),desde:same&&old.desde?old.desde:new Date().toLocaleDateString('pt-BR'),foto:same?old.foto||null:null,emailHash,lgpdConsent:new Date().toISOString(),registrada:new Date().toISOString()};
   try{sessionStorage.removeItem(pendingKey);}catch(e){}
