@@ -43,7 +43,7 @@ const ASF_CARD = {
 
   async ensureVerifiedEmail(email) {
     const normalized = String(email || '').trim().toLowerCase();
-    if (!/^[^@\\s]+@[^@\\s]+\\.[^@\\s]+$/.test(normalized)) throw new Error('EMAIL_REQUIRED');
+    if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(normalized)) throw new Error('EMAIL_REQUIRED');
     const session = await this.getAuthSession();
     if (session) {
       const signedEmail = String(session.user && session.user.email || '').trim().toLowerCase();
@@ -207,7 +207,7 @@ const ASF_CARD = {
     if (nome.length < 2) { showToast('Informe seu nome de surfista.'); return; }
     if (!this.niveis.includes(nivel)) { showToast('Selecione seu nível.'); return; }
     if (!consent || !consent.checked) { showToast('Confirme o consentimento para gerar a carteirinha.'); return; }
-    if (central && !/^[^@\\s]+@[^@\\s]+\\.[^@\\s]+$/.test(email)) {
+    if (central && !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) {
       showToast('Para registrar na ASF, informe um e-mail válido.'); return;
     }
     const d = {
