@@ -1,0 +1,39 @@
+name: Improve home for brands 2026-11-08 (one-shot)
+on:
+  push:
+    branches: [main]
+    paths: ['.github/workflows/improve-home-brands-20261108.yml']
+permissions:
+  contents: write
+jobs:
+  fix:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Add brand conversion elements to home
+        run: |
+          python3 - <<'PY'
+          import pathlib, sys
+          p = pathlib.Path('index.html')
+          s = p.read_text(encoding='utf-8')
+          def rep(old, new, label):
+              global s
+              if s.count(old) != 1:
+                  print(f'anchor count != 1: {label} = {s.count(old)}'); sys.exit(1)
+              s = s.replace(old, new, 1)
+          rep('''<a href="#carteirinha" onclick="showSection('carteirinha')" style="display:inline-flex;align-items:center;justify-content:center;gap:8px;border:1px solid rgba(255,255,255,.55);color:#fff;padding:12px 18px;border-radius:999px;text-decoration:none;font-weight:700;font-size:14px;min-height:46px;">Carteirinha ASF</a>''', '''<a href="#carteirinha" onclick="showSection('carteirinha')" style="display:inline-flex;align-items:center;justify-content:center;gap:8px;border:1px solid rgba(255,255,255,.55);color:#fff;padding:12px 18px;border-radius:999px;text-decoration:none;font-weight:700;font-size:14px;min-height:46px;">Carteirinha ASF</a>\n          <a href="#para-marcas" style="display:inline-flex;align-items:center;justify-content:center;gap:8px;color:#BDEFF4;padding:12px 6px;text-decoration:underline;font-weight:700;font-size:14px;min-height:46px;">Sou uma marca</a>''', 'brand anchor in highlight')
+          box = '''<div style="margin:18px 0 4px;padding:16px;border:1px solid rgba(255,255,255,.22);border-radius:16px;background:rgba(255,255,255,.06);">\n      <p style="margin:0 0 10px;font-weight:800;color:#fff;">O que construímos juntos</p>\n      <ul style="margin:0 0 12px;padding-left:18px;line-height:1.65;color:rgba(255,255,255,.86);">\n        <li><strong>Página oficial da parceria</strong> no site da ASF, publicada somente após aprovação escrita dos dois lados;</li>\n        <li><strong>Divulgação nos canais ASF</strong> (site/app e Instagram @asf.surffeminino), no formato combinado com a marca — sem promessa de alcance garantido;</li>\n        <li><strong>Benefício privado para associadas</strong> com Carteirinha válida, pelas condições e canais definidos pelo parceiro;</li>\n        <li><strong>Exemplo já publicado:</strong> <a href="parcerias/surfmappers/" style="color:#8FE3FF;">ASF × Surfmappers</a>.</li>\n      </ul>\n      <details style="color:rgba(255,255,255,.84);line-height:1.6;margin-bottom:12px;"><summary style="cursor:pointer;font-weight:800;color:#fff;">Perguntas rápidas de marcas</summary><p style="margin:10px 0 6px;"><strong>Precisa ser desconto?</strong> Não necessariamente. Pode ser benefício, condição especial, experiência ou conteúdo — sempre definido pela marca e aprovado por escrito.</p><p style="margin:6px 0;"><strong>Como a associada comprova?</strong> Com a Carteirinha ASF válida, pelo canal privado combinado. Não compartilhamos base de associadas nem documentos pessoais.</p><p style="margin:6px 0 0;"><strong>Existe formato comercial diferente?</strong> Somente com acordo escrito separado. Neste programa, a contrapartida central é o benefício às associadas.</p></details>\n      <a href="mailto:asf.surffeminino@gmail.com?subject=Kit%20de%20parceria%20ASF%20para%20marcas&amp;body=Aloha%2C%20equipe%20ASF!%0A%0AMarca%3A%0ASite%2FInstagram%3A%0ACidade%2FUF%3A%0AQuero%20receber%20o%20kit%20de%20parceria%20e%20entender%20os%20formatos.%0A%0AObrigada!" style="display:inline-flex;align-items:center;justify-content:center;padding:12px 18px;background:#fff;color:#0E2439;border-radius:999px;font-weight:800;text-decoration:none;">Pedir o kit de parceria</a>\n    </div>\n    '''
+          rep('''<p style="margin:14px 0 0;color:rgba(255,255,255,.75);font-size:13px;line-height:1.55;">É associada?''', box + '''<p style="margin:14px 0 0;color:rgba(255,255,255,.75);font-size:13px;line-height:1.55;">É associada?''', 'deliverables box')
+          if s.count('id="para-marcas"') != 1 or s.count('Pedir o kit de parceria') != 1 or s.count('Sou uma marca') != 1:
+              print('final validation failed'); sys.exit(1)
+          p.write_text(s, encoding='utf-8')
+          print('home brand improvements applied')
+          PY
+      - name: Commit and push if changed
+        run: |
+          if git diff --quiet; then echo 'No changes'; exit 0; fi
+          git config user.name 'ASF Bot'
+          git config user.email 'bot@asf-app.com'
+          git add index.html
+          git commit -m 'feat(home): melhora conversao e transparencia para marcas parceiras'
+          git push
