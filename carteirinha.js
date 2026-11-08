@@ -23,12 +23,49 @@ const ASF_CARD = {
     return Array.from(new Uint8Array(b)).map(x => x.toString(16).padStart(2, '0')).join('');
   },
 
+  getAuthClient() {
+    if (!window.supabase || typeof window.supabase.createClient !== 'function') {
+      throw new Error('AUTH_CLIENT_UNAVAILABLE');
+    }
+    if (!this._authClient) {
+      this._authClient = window.supabase.createClient(this.SUPABASE_URL, this.SUPABASE_ANON_KEY, {
+        auth: { persistSession: true, autoRefreshToken: true, detectSessionInUrl: true }
+      });
+    }
+    return this._authClient;
+  },
+
+  async getAuthSession() {
+    const { data, error } = await this.getAuthClient().auth.getSession();
+    if (error) throw error;
+    return data && data.session ? data.session : null;
+  },
+
+  async ensureVerifiedEmail(email) {
+    const normalized = String(email || '').trim().toLowerCase();
+    if (!/^[^@\\s]+@[^@\\s]+\\.[^@\\s]+$/.test(normalized)) throw new Error('EMAIL_REQUIRED');
+    const session = await this.getAuthSession();
+    if (session) {
+      const signedEmail = String(session.user && session.user.email || '').trim().toLowerCase();
+      if (signedEmail !== normalized) throw new Error('AUTH_EMAIL_MISMATCH');
+      return session;
+    }
+    const { error } = await this.getAuthClient().auth.signInWithOtp({
+      email: normalized,
+      options: { emailRedirectTo: window.location.href, shouldCreateUser: true }
+    });
+    if (error) throw error;
+    return null;
+  },
+
   async sbRpc(fn, body) {
+    const session = await this.getAuthSession();
+    if (!session || !session.access_token) throw new Error('EMAIL_VERIFICATION_REQUIRED');
     const r = await fetch(this.SUPABASE_URL + '/rest/v1/rpc/' + fn, {
       method: 'POST',
       headers: {
         'apikey': this.SUPABASE_ANON_KEY,
-        'Authorization': 'Bearer ' + this.SUPABASE_ANON_KEY,
+        'Authorization': 'Bearer ' + session.access_token,
         'Content-Type': 'application/json',
       },
       body: JSON.stringify(body),
@@ -170,7 +207,7 @@ const ASF_CARD = {
     if (nome.length < 2) { showToast('Informe seu nome de surfista.'); return; }
     if (!this.niveis.includes(nivel)) { showToast('Selecione seu nível.'); return; }
     if (!consent || !consent.checked) { showToast('Confirme o consentimento para gerar a carteirinha.'); return; }
-    if (central && !atual.emailHash && !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) {
+    if (central && !/^[^@\\s]+@[^@\\s]+\\.[^@\\s]+$/.test(email)) {
       showToast('Para registrar na ASF, informe um e-mail válido.'); return;
     }
     const d = {
@@ -195,7 +232,12 @@ const ASF_CARD = {
           'associadas' com a chave anonima neste fluxo. -- */
       if (central && this.supabaseOn) {
         try {
-          const emailHash = atual.emailHash || await this.sha256(email);
+          const verifiedSession = await this.ensureVerifiedEmail(email);
+          if (!verifiedSession) {
+            showToast('Enviamos um link de confirmação para ' + email + '. Abra o e-mail, confirme o endereço e volte para concluir o registro.');
+            return;
+          }
+          const emailHash = await this.sha256(email);
           d.emailHash = emailHash;
           const res = await this.emitirCarteirinha({
             p_numero: d.numero,
