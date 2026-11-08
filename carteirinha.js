@@ -52,7 +52,7 @@ const ASF_CARD = {
     }
     const { error } = await this.getAuthClient().auth.signInWithOtp({
       email: normalized,
-      options: { emailRedirectTo: window.location.href, shouldCreateUser: true }
+      options: { emailRedirectTo: window.location.origin + window.location.pathname, shouldCreateUser: true }
     });
     if (error) throw error;
     return null;
