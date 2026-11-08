@@ -1,0 +1,62 @@
+name: Add Para Marcas home section 2026-11-08 (one-shot)
+on:
+  push:
+    branches: [main]
+    paths: ['.github/workflows/add-para-marcas-home-20261108.yml']
+permissions:
+  contents: write
+jobs:
+  fix:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Insert Para Marcas section after partners highlight
+        run: |
+          python3 - <<'PY'
+          import pathlib, sys
+          p = pathlib.Path('index.html')
+          s = p.read_text(encoding='utf-8')
+          if 'id="para-marcas"' in s:
+              print('para-marcas already exists'); sys.exit(1)
+          anchor = '<nav id="comecar"'
+          i = s.find(anchor)
+          if i < 0:
+              print('comecar nav anchor not found'); sys.exit(1)
+          # sanity: partners highlight must be before the insertion point
+          if s.find('id="parcerias-destaque"') < 0 or s.find('id="parcerias-destaque"') > i:
+              print('parcerias-destaque not before comecar'); sys.exit(1)
+          block = '''<section id="para-marcas" aria-labelledby="para-marcas-title" style="margin:24px 16px 30px;padding:clamp(20px,4vw,30px);border-radius:24px;background:#0E2439;color:#fff;box-shadow:0 12px 32px rgba(14,36,57,.18);scroll-margin-top:90px;">
+  <div style="max-width:860px;margin:0 auto;">
+    <div style="display:inline-flex;align-items:center;gap:7px;background:rgba(255,255,255,.12);color:#BDEFFF;padding:7px 12px;border-radius:999px;font-size:12px;font-weight:800;letter-spacing:.04em;margin-bottom:12px;">🤝 PARA MARCAS E NEGÓCIOS</div>
+    <h2 id="para-marcas-title" style="margin:0 0 10px;color:#fff;font-size:clamp(23px,5vw,32px);line-height:1.15;">Sua marca apoiando quem surfa.</h2>
+    <p style="margin:0 0 18px;color:rgba(255,255,255,.88);font-size:15px;line-height:1.6;">A ASF é uma associação sem fins lucrativos que conecta mulheres ao surf — do primeiro banho de mar ao free surf. Marcas parceiras oferecem benefícios voluntários para associadas, e a ASF divulga com responsabilidade. Não vendemos produtos, não cobramos mensalidade e não intermediamos pagamentos: a compra e a reserva são sempre direto com o parceiro.</p>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin:0 0 16px;">
+      <div style="background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.16);border-radius:16px;padding:16px;"><strong style="display:block;margin-bottom:6px;">🌊 Comunidade focada</strong><span style="color:rgba(255,255,255,.85);font-size:14px;line-height:1.55;">Mulheres surfistas, ecossistema de apps e conteúdos ASF e presença no litoral paulista e online, com o Instagram <a href="https://www.instagram.com/asf.surffeminino" target="_blank" rel="noopener" style="color:#8FE3FF;">@asf.surffeminino</a>.</span></div>
+      <div style="background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.16);border-radius:16px;padding:16px;"><strong style="display:block;margin-bottom:6px;">🪪 Benefício controlado</strong><span style="color:rgba(255,255,255,.85);font-size:14px;line-height:1.55;">Só para Carteirinha ASF válida/ativa, por canal privado. Condições, valores e validade são do parceiro — e códigos nunca são publicados sem autorização expressa.</span></div>
+      <div style="background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.16);border-radius:16px;padding:16px;"><strong style="display:block;margin-bottom:6px;">✅ Transparência</strong><span style="color:rgba(255,255,255,.85);font-size:14px;line-height:1.55;">Nada é anunciado antes de aprovação escrita dos dois lados. A ASF não compartilha base de associadas nem documentos pessoais.</span></div>
+    </div>
+    <p style="margin:0 0 8px;color:#fff;font-weight:800;font-size:14px;">Como funciona: 1) conversa por e-mail · 2) proposta e aprovação escrita · 3) página e divulgação · 4) benefício liberado por canal privado</p>
+    <p style="margin:0 0 18px;color:rgba(255,255,255,.85);font-size:14px;line-height:1.6;">Estamos buscando especialmente: viagens e hospedagens, fotografia de surf, academias e funcional, bem-estar e massagem, lycras com proteção UV e surfwear, lojas e equipamentos e serviços locais como lava-rápido.</p>
+    <div style="display:flex;flex-wrap:wrap;gap:10px;">
+      <a href="mailto:asf.surffeminino@gmail.com?subject=Parceria%20ASF%20%E2%80%94%20benef%C3%ADcio%20para%20associadas&amp;body=Aloha%2C%20equipe%20ASF!%0A%0AMarca%3A%0ASite%2FInstagram%3A%0ACidade%2FUF%3A%0AO%20que%20podemos%20oferecer%20para%20associadas%20com%20Carteirinha%20ASF%20v%C3%A1lida%3A%0ACondi%C3%A7%C3%B5es%20e%20validade%20sugeridas%3A%0A%0AObrigada!" style="display:inline-flex;align-items:center;justify-content:center;padding:13px 20px;background:#FF6B9D;color:#fff;border-radius:999px;font-weight:800;text-decoration:none;">Quero apoiar a ASF</a>
+      <a href="parcerias/" style="display:inline-flex;align-items:center;justify-content:center;padding:13px 20px;background:rgba(255,255,255,.12);color:#fff;border:1px solid rgba(255,255,255,.35);border-radius:999px;font-weight:800;text-decoration:none;">Ver parcerias atuais</a>
+    </div>
+    <p style="margin:14px 0 0;color:rgba(255,255,255,.75);font-size:13px;line-height:1.55;">É associada? Os benefícios são liberados somente com a Carteirinha ASF válida, por canal privado, nas condições de cada parceiro. <a href="#carteirinha" style="color:#8FE3FF;">Conheça a Carteirinha</a>.</p>
+  </div>
+</section>
+
+'''
+          s = s[:i] + block + s[i:]
+          if s.count('id="para-marcas"') != 1:
+              print('para-marcas count wrong after insert'); sys.exit(1)
+          p.write_text(s, encoding='utf-8')
+          print('para-marcas inserted')
+          PY
+      - name: Commit and push if changed
+        run: |
+          if git diff --quiet; then echo 'No changes'; exit 0; fi
+          git config user.name 'ASF Bot'
+          git config user.email 'bot@asf-app.com'
+          git add index.html
+          git commit -m 'feat(home): secao Para Marcas com proposta e governanca para parceiros'
+          git push
