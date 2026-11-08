@@ -204,6 +204,7 @@ const ASF_CARD = {
     const optin = document.getElementById('card-registrar');
     const central = !!(optin && optin.checked);
     const email = value('card-email').toLowerCase();
+    if (!central) { try { sessionStorage.removeItem('asf_card_pending_registration'); } catch (e) {} }
     if (nome.length < 2) { showToast('Informe seu nome de surfista.'); return; }
     if (!this.niveis.includes(nivel)) { showToast('Selecione seu nível.'); return; }
     if (!consent || !consent.checked) { showToast('Confirme o consentimento para gerar a carteirinha.'); return; }
@@ -230,8 +231,17 @@ const ASF_CARD = {
           A RPC existe; emite/renova, registra em 'emissoes' e retorna apenas
           numero, validade e status. Nunca acessar diretamente a tabela
           'associadas' com a chave anonima neste fluxo. -- */
+      if (central && !this.supabaseOn) {
+        showToast('O registro central da ASF está indisponível no momento. Nenhuma carteirinha será emitida localmente como se estivesse registrada.');
+        return;
+      }
       if (central && this.supabaseOn) {
         try {
+          sessionStorage.setItem('asf_card_pending_registration', JSON.stringify({
+            nome:d.nome, nivel:d.nivel, praia:d.praia, apelido:d.apelido, cidade:d.cidade,
+            insta:d.insta, email:email, registrada:true, lgpdConsent:d.lgpdConsent,
+            createdAt:Date.now()
+          }));
           const verifiedSession = await this.ensureVerifiedEmail(email);
           if (!verifiedSession) {
             showToast('Enviamos um link de confirmação para ' + email + '. Abra o e-mail, confirme o endereço e volte para concluir o registro.');
@@ -254,6 +264,7 @@ const ASF_CARD = {
             d.numero = result.numero;
             if (result.validade) d.validade = String(result.validade).split('-').reverse().join('/');
             d.registrada = new Date().toISOString();
+            try { sessionStorage.removeItem('asf_card_pending_registration'); } catch (e) {}
             this.registrarEmissao(d.numero);
             this.save(d);
             this.render('carteirinha-content');
@@ -265,10 +276,11 @@ const ASF_CARD = {
           }
         } catch (e) {
           console.warn('Supabase registro erro:', e.message);
-          showToast('Registro indisponivel. Sua carteirinha sera salva neste dispositivo; tente registrar depois.');
+          showToast('Não foi possível concluir o registro na ASF. Nenhuma carteirinha central será emitida. Confira o e-mail e tente novamente.');
+          return;
         }
       }
-      /* cai no fluxo local abaixo */
+      /* O registro central solicitado nunca cai no modo local. */
       if (atual.numero && atual.validade && this.diasParaExpirar(atual) > 30) {
         d.validade = atual.validade;
       } else if (atual.numero && atual.validade) {
@@ -362,6 +374,12 @@ const ASF_CARD = {
   },
 
   renderForm(el, p) {
+    try {
+      const pending = JSON.parse(sessionStorage.getItem('asf_card_pending_registration') || 'null');
+      if (pending && Date.now() - Number(pending.createdAt || 0) < 15 * 60 * 1000) p = Object.assign({}, p || {}, pending);
+      else if (pending) sessionStorage.removeItem('asf_card_pending_registration');
+    } catch (e) {}
+    p = p || {};
     const field = (id, label, max, val) => '<label for="'+id+'">'+label+'</label><input id="'+id+'" maxlength="'+max+'" value="'+this.escape(val)+'">';
     el.innerHTML = '<div style="max-width:480px;margin:0 auto"><div class="card">' +
       '<h2>'+(p.numero ? 'Editar sua carteirinha' : 'Crie sua Carteirinha ASF')+'</h2>' +
@@ -373,7 +391,7 @@ const ASF_CARD = {
       field('card-apelido','Apelido',30,p.apelido) + field('card-cidade','Cidade',40,p.cidade) + field('card-insta','Instagram',30,p.insta) + '</details>' +
       '<label class="card-consent"><input id="card-lgpd" type="checkbox"'+(p.lgpdConsent ? ' checked' : '')+'><span>Autorizo salvar minha carteirinha neste dispositivo. A foto fica neste navegador. <a href="privacidade.html" target="_blank" rel="noopener">Política de Privacidade</a>.</span></label>' +
       '<label class="card-consent"><input id="card-registrar" type="checkbox"'+(p.registrada ? ' checked' : '')+'><span>Também autorizo o registro dos dados preenchidos, número e validade no controle interno ASF, para validar o QR na rede. Não será publicada uma lista de associadas. Opcional; desmarcar não exclui registros anteriores. Para exclusão, contate a ASF.</span></label>' +
-      '<label for="card-email">E-mail (necessário apenas para registrar na ASF)</label><input id="card-email" type="email" maxlength="80" autocomplete="email" placeholder="seu@email.com">' +
+      '<label for="card-email">E-mail (necessário apenas para registrar na ASF)</label><input id="card-email" type="email" maxlength="80" autocomplete="email" placeholder="seu@email.com" value="'+this.escape(p.email||'')+'">' +
       '<p style="font-size:12px">O registro usa um hash do e-mail, não o e-mail em texto. O QR confirma somente nível, validade e situação, sem nome ou contatos.</p>' +
       '<button id="card-submit" onclick="ASF_CARD.salvar()" class="btn btn-primary">'+(p.numero ? 'Salvar carteirinha' : 'Gerar minha carteirinha')+'</button>' +
       (p.numero ? '<button onclick="ASF_CARD.init()" class="btn btn-secondary">Voltar à carteirinha</button>' : '') + '</div></div>';
