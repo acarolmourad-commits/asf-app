@@ -93,7 +93,7 @@ END;
 $function$;
 
 REVOKE ALL ON FUNCTION public.emitir_carteirinha(text, text, text, text, text, text, text, text)
-  FROM PUBLIC, anon, service_role;
+  FROM PUBLIC, anon;
 GRANT EXECUTE ON FUNCTION public.emitir_carteirinha(text, text, text, text, text, text, text, text)
   TO authenticated;
 
