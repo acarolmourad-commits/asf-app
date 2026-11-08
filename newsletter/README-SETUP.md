@@ -16,9 +16,9 @@ O Apps Script versionado no GitHub precisa ser copiado para o projeto Apps Scrip
 3. Salve.
 4. No seletor de funções, escolha `setup` e execute uma vez.
 5. Autorize o acesso à planilha e o envio de e-mail solicitado pelo Google.
-6. Confirme que a aba `Inscritas` foi criada com os cabeçalhos: `created_at, email, name, source, consentimento, status, token, updated_at`.
+6. Confirme que a aba `Inscritas` foi criada com os cabeçalhos: `data_inscricao, email, nome, origem, consentimento, status, token_cancelamento, atualizado_em`.
 
-A função `setup()` cria a aba e os cabeçalhos somente se necessário. Se encontrar uma primeira linha diferente, interrompe sem sobrescrever dados.
+A função `setup()` cria a aba e os cabeçalhos somente se necessário. Se encontrar uma primeira linha diferente, interrompe sem sobrescrever dados. Os cabeçalhos atuais da aba `Inscritas` já foram conferidos diretamente na planilha institucional e correspondem à lista acima.
 
 ## 2. Implantar como Web App
 1. No Apps Script, selecione **Implantar > Nova implantação**.
