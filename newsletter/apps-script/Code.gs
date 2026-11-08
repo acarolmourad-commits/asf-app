@@ -5,7 +5,7 @@
  */
 const SHEET_ID = '1V4aepr98rLiQi2_tM0LavJSWAha23RDz0eQ84n5m6pg';
 const SHEET_TAB = 'Inscritas';
-const HEADERS = ['created_at', 'email', 'name', 'source', 'consentimento', 'status', 'token', 'updated_at'];
+const HEADERS = ['data_inscricao', 'email', 'nome', 'origem', 'consentimento', 'status', 'token_cancelamento', 'atualizado_em'];
 
 function setup() {
   const ss = SpreadsheetApp.openById(SHEET_ID);
