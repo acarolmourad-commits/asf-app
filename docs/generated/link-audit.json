@@ -1,8 +1,8 @@
 {
-  "date": "2026-11-08T17:39:42.294358+00:00",
-  "total": 106,
-  "ok": 97,
-  "skipped": 9,
+  "date": "2026-11-08T21:25:46.493073+00:00",
+  "total": 108,
+  "ok": 98,
+  "skipped": 10,
   "broken_count": 0,
   "broken": [],
   "results": [
@@ -142,6 +142,11 @@
       "http": 200
     },
     {
+      "url": "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2",
+      "status": "ok",
+      "http": 200
+    },
+    {
       "url": "https://eventos.asf.surf/",
       "status": "ok",
       "http": 200
@@ -198,6 +203,11 @@
     },
     {
       "url": "https://www.googletagmanager.com",
+      "status": "skipped",
+      "http": null
+    },
+    {
+      "url": "https://www.instagram.com/asf.surffeminino",
       "status": "skipped",
       "http": null
     },
@@ -428,12 +438,6 @@
       "local": true
     },
     {
-      "url": "data/mock-manas.js",
-      "status": "ok",
-      "http": 200,
-      "local": true
-    },
-    {
       "url": "data/translations.js",
       "status": "ok",
       "http": 200,
@@ -519,6 +523,12 @@
     },
     {
       "url": "parcerias/",
+      "status": "ok",
+      "http": 200,
+      "local": true
+    },
+    {
+      "url": "parcerias/surfmappers/",
       "status": "ok",
       "http": 200,
       "local": true
