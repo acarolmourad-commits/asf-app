@@ -19,13 +19,9 @@
     window.showSection = patched;
   }
   function fixCount() {
+    // Mantém apenas o redirecionamento legado de Trips.
+    // A contagem oficial é controlada por data/apps-count.js.
     patchTrips();
-    var nodes = document.querySelectorAll('small, p, span');
-    nodes.forEach(function (el) {
-      if (el.children.length === 0 && el.textContent.indexOf('Todos os 52 apps') !== -1) {
-        el.textContent = el.textContent.replace('Todos os 52 apps', 'Todos os 53 apps');
-      }
-    });
   }
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', fixCount);
