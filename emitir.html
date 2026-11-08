@@ -110,7 +110,7 @@ form.addEventListener('submit',async event=>{
   localStorage.setItem(pendingKey,JSON.stringify({...payload,createdAt:Date.now()}));
   const r=await issue(payload),old=originalLoad()||{},same=old.emailHash===emailHash&&old.numero===r.numero;
   const d={nome,nivel,praia:payload.praia,apelido:payload.apelido,cidade:payload.cidade,insta:payload.insta,numero:r.numero,validade:r.validade.split('-').reverse().join('/'),desde:same&&old.desde?old.desde:new Date().toLocaleDateString('pt-BR'),foto:same?old.foto||null:null,emailHash,lgpdConsent:new Date().toISOString(),registrada:new Date().toISOString()};
-  try{sessionStorage.removeItem(pendingKey);}catch(e){}
+  try{localStorage.removeItem(pendingKey);}catch(e){}
   ASF_CARD.save(d);section.hidden=true;result.hidden=false;ASF_CARD.init();
   feedback(r.status==='existente'?'Cadastro atualizado. Mesma carteirinha, com validade mantida até '+d.validade+'.':r.status==='renovada'?'Cadastro confirmado e carteirinha renovada até '+d.validade+'.':'Cadastro confirmado no Supabase. Carteirinha emitida até '+d.validade+'.');
   result.scrollIntoView({behavior:'smooth',block:'start'});
