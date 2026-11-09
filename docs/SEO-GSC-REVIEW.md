@@ -1,6 +1,6 @@
 # 📈 Revisao SEO Semanal — rede ASF
 
-_Gerado em 02/11/2026 21:16 UTC pelo workflow gsc-seo-review_
+_Gerado em 09/11/2026 21:49 UTC pelo workflow gsc-seo-review_
 
 ## Sitemaps (13 propriedades-chave)
 
