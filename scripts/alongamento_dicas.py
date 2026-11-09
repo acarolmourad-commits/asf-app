@@ -83,8 +83,8 @@ ALONGAMENTO_EXERCICIOS = [
         "video_url": "https://exemplo.com/video/tornozelo"
     },
     {
-        "title": "Alongamento Pós-Surf (Recuperação)",
-        "description": "Músculos aquecidos alongam melhor! Alongue ombros, costas e pernas após surfar. Recuperação 40% mais rápida com alongamento pós-esforço.",
+        "title": "Alongamento Pós-Surf (Rotina leve)",
+        "description": "Após surfar, se estiver confortável, faça movimentos suaves de ombros, costas e pernas, sem forçar. Interrompa se sentir dor.",
         "steps": [
             "Faça rotação de ombros (1 min)",
             "Alongamento de gato-vaca (1 min)",
@@ -92,7 +92,7 @@ ALONGAMENTO_EXERCICIOS = [
             "Alongamento de isquiotibiais (1 min cada perna)",
             "Respiração profunda (1 min)"
         ],
-        "benefits": ["Recuperação muscular mais rápida", "Menor dor no dia seguinte", "Libera tensão acumulada"],
+        "benefits": ["Movimentos suaves", "Respeito aos limites do corpo", "Pausa para respirar"],
         "duration": "6-8 min",
         "place": "Na praia ou em casa",
         "video_url": "https://exemplo.com/video/pos-surf"
