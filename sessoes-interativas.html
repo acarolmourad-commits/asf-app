@@ -82,13 +82,14 @@
         </p>
 
         <div class="nome-bar" id="nome-bar">
-            🪪 Para participar, informe seu <strong>nº de carteirinha ASF</strong>:
-            <span style="display:inline-flex;gap:6px;margin-top:6px;">
-                <input id="cart-input" inputmode="numeric" maxlength="20" placeholder="Ex: 22">
-                <button onclick="validarCarteirinha()">Entrar</button>
-            </span>
-            <div id="cart-erro" style="margin-top:6px;display:none;"></div>
-            <div style="margin-top:6px;">Ainda não tem? <a href="https://asf.surf/emitir.html" style="color:#00A8CC;">Emita a sua grátis</a>.</div>
+            🪪 Para participar, informe o <strong>nº da sua carteirinha ASF</strong> e o e-mail usado na emissão:
+            <div style="display:flex;flex-direction:column;gap:8px;margin-top:8px;">
+                <input id="cart-input" inputmode="text" maxlength="24" autocomplete="off" placeholder="Nº da carteirinha ASF" style="width:100%;padding:9px 12px;">
+                <input id="chat-email" type="email" maxlength="120" autocomplete="email" placeholder="E-mail cadastrado na ASF" style="width:100%;padding:9px 12px;">
+                <button id="enter-btn" type="button" onclick="validarCarteirinha()" style="align-self:flex-start;padding:9px 16px;">Validar acesso</button>
+            </div>
+            <div id="cart-erro" role="status" aria-live="polite" style="margin-top:8px;display:none;"></div>
+            <div style="margin-top:8px;">Você receberá um link de confirmação no e-mail. O acesso só será liberado após a confirmação. Ainda não tem carteirinha? <a href="https://asf.surf/emitir.html" style="color:#00A8CC;">Emita a sua grátis</a>.</div>
         </div>
 
         <div class="assoc-badge hidden" id="assoc-badge"></div>
@@ -124,6 +125,8 @@
         var currentRoom = null, sb = null, canal = null;
         var minhaCart = localStorage.getItem('asf_chat_cart') || '';
         var meuNomeOficial = localStorage.getItem('asf_chat_nome') || '';
+        var emailAutenticado = '';
+        var chatAutenticado = false;
 
         function esc(s) {
             return String(s == null ? "" : s).replace(/[&<>"]/g, function (c) {
@@ -141,7 +144,9 @@
         }
 
         function cliente() {
-            if (!sb && window.supabase) sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+            if (!sb && window.supabase) sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY, {
+                auth: { persistSession: true, autoRefreshToken: true, detectSessionInUrl: true }
+            });
             return sb;
         }
 
@@ -163,37 +168,87 @@
         }
 
         function mostrarBadge() {
-            if (!minhaCart) return;
+            if (!minhaCart || !chatAutenticado) return;
             document.getElementById('nome-bar').classList.add('hidden');
             var b = document.getElementById('assoc-badge');
             b.classList.remove('hidden');
-            b.innerHTML = '✅ Logada como <strong>' + esc(meuNomeOficial || ('Carteirinha nº ' + minhaCart)) + '</strong> (nº ' + esc(minhaCart) + ') · <a href="#" onclick="sair();return false;" style="color:#1E7A46;">trocar</a>';
+            b.innerHTML = '✅ Acesso verificado para <strong>' + esc(meuNomeOficial || ('Carteirinha ' + minhaCart)) + '</strong> · ' + esc(emailAutenticado) + ' · <a href="#" onclick="sair();return false;" style="color:#1E7A46;">sair</a>';
         }
 
-        function sair() {
+        function mostrarErroChat(msg) {
+            var erro = document.getElementById('cart-erro');
+            erro.style.display = 'block';
+            erro.textContent = msg;
+        }
+
+        async function concluirValidacaoChat(num) {
+            var r = await cliente().rpc('validar_acesso_chat', { p_numero: num });
+            if (r.error || !r.data || !r.data.length) {
+                chatAutenticado = false;
+                mostrarErroChat('Não foi possível confirmar esta carteirinha com o e-mail autenticado. Confira os dados ou fale com a ASF.');
+                return false;
+            }
+            minhaCart = num;
+            meuNomeOficial = r.data[0].nome || '';
+            chatAutenticado = true;
+            localStorage.setItem('asf_chat_cart', num);
+            localStorage.setItem('asf_chat_nome', meuNomeOficial);
+            mostrarBadge();
+            return true;
+        }
+
+        async function sair() {
+            if (canal) { await cliente().removeChannel(canal); canal = null; }
+            await cliente().auth.signOut();
             localStorage.removeItem('asf_chat_cart');
             localStorage.removeItem('asf_chat_nome');
-            minhaCart = ''; meuNomeOficial = '';
+            minhaCart = ''; meuNomeOficial = ''; emailAutenticado = ''; chatAutenticado = false;
+            currentRoom = null;
             document.getElementById('assoc-badge').classList.add('hidden');
             document.getElementById('nome-bar').classList.remove('hidden');
+            showRoomsList();
         }
 
-        function validarCarteirinha() {
+        async function validarCarteirinha() {
             var num = document.getElementById('cart-input').value.trim();
+            var email = document.getElementById('chat-email').value.trim().toLowerCase();
             var erro = document.getElementById('cart-erro');
-            if (!num) { erro.style.display = 'block'; erro.textContent = 'Digite o número da sua carteirinha.'; return; }
+            var btn = document.getElementById('enter-btn');
+            if (!num) { mostrarErroChat('Informe o número da sua carteirinha.'); return; }
             erro.style.display = 'none';
-            cliente().rpc('verificar_carteirinha', { p_numero: num }).then(function (r) {
-                if (r.error || !r.data || !r.data.length || !r.data[0].valida) {
-                    erro.style.display = 'block';
-                    erro.textContent = 'Carteirinha não encontrada ou vencida. Verifique o número ou emita a sua em asf.surf/emitir.html 💛';
+            btn.disabled = true;
+            try {
+                var auth = cliente().auth;
+                var sess = await auth.getSession();
+                var session = sess.data && sess.data.session;
+                if (session && session.user && session.user.email) {
+                    emailAutenticado = String(session.user.email).trim().toLowerCase();
+                    if (email && email !== emailAutenticado) {
+                        mostrarErroChat('O e-mail informado é diferente do e-mail autenticado. Saia e entre com o e-mail da carteirinha.');
+                        return;
+                    }
+                    await concluirValidacaoChat(num);
                     return;
                 }
-                minhaCart = num;
-                localStorage.setItem('asf_chat_cart', num);
-                meuNomeOficial = '';
-                mostrarBadge();
-            });
+                if (!email || !/^[^@\\s]+@[^@\\s]+\\.[^@\\s]+$/.test(email)) {
+                    mostrarErroChat('Informe um e-mail válido, o mesmo utilizado para emitir sua carteirinha.');
+                    return;
+                }
+                localStorage.setItem('asf_chat_pending_cart', num);
+                var sent = await auth.signInWithOtp({
+                    email: email,
+                    options: {
+                        emailRedirectTo: window.location.origin + window.location.pathname,
+                        shouldCreateUser: true
+                    }
+                });
+                if (sent.error) throw sent.error;
+                mostrarErroChat('Enviamos um link seguro para ' + email + '. Abra o e-mail no mesmo dispositivo e toque no link. Depois, volte a esta página para concluir a validação.');
+            } catch (e) {
+                mostrarErroChat('Não foi possível iniciar a autenticação. Tente novamente em instantes. (' + String(e && e.message || 'erro de conexão').slice(0,120) + ')');
+            } finally {
+                btn.disabled = false;
+            }
         }
 
         function carregarSalas() {
@@ -211,7 +266,7 @@
         }
 
         function openRoom(roomId, roomTitle) {
-            if (!minhaCart) {
+            if (!minhaCart || !chatAutenticado) {
                 document.getElementById('nome-bar').scrollIntoView({ behavior: 'smooth' });
                 document.getElementById('cart-input').focus();
                 return;
@@ -265,7 +320,7 @@
         }
 
         function sendMessage() {
-            if (!minhaCart) { showRoomsList(); return; }
+            if (!minhaCart || !chatAutenticado) { showRoomsList(); return; }
             var input = document.getElementById('message-input');
             var texto = input.value.trim();
             if (!texto || !currentRoom) return;
@@ -275,8 +330,8 @@
                 .then(function (r) {
                     btn.disabled = false;
                     if (r.error) {
-                        if (String(r.error.message || '').indexOf('carteirinha_invalida') >= 0) {
-                            alert('Sua carteirinha não foi validada. Confira o número. 💛');
+                        if (String(r.error.message || '').indexOf('carteirinha_invalida') >= 0 || String(r.error.message || '').indexOf('42501') >= 0) {
+                            alert('A autenticação ou a validade da carteirinha precisa ser confirmada novamente. 💛');
                             sair(); showRoomsList();
                         } else {
                             alert('Não consegui enviar. Tente de novo! 🌊');
@@ -299,12 +354,22 @@
                     document.getElementById('rooms-list').innerHTML = '<p class="status-msg">Sem conexão agora. Tente novamente em instantes 🌊</p>';
                     return;
                 }
-                if (minhaCart) {
-                    cliente().rpc('verificar_carteirinha', { p_numero: minhaCart }).then(function (r) {
-                        if (r.error || !r.data || !r.data.length || !r.data[0].valida) { sair(); return; }
-                        mostrarBadge();
-                    });
-                }
+                cliente().auth.getSession().then(async function (authResult) {
+                    var session = authResult.data && authResult.data.session;
+                    var pending = localStorage.getItem('asf_chat_pending_cart');
+                    if (session && session.user && session.user.email) {
+                        emailAutenticado = String(session.user.email).trim().toLowerCase();
+                        var cardNumber = pending || minhaCart;
+                        if (cardNumber) {
+                            document.getElementById('cart-input').value = cardNumber;
+                            await concluirValidacaoChat(cardNumber);
+                            localStorage.removeItem('asf_chat_pending_cart');
+                        }
+                    } else if (pending) {
+                        document.getElementById('cart-input').value = pending;
+                        mostrarErroChat('Confirme o link enviado por e-mail para concluir o acesso.');
+                    }
+                }).catch(function () {});
                 carregarSalas();
             });
 
