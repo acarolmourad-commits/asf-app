@@ -105,7 +105,9 @@ client.auth.onAuthStateChange((event,session)=>{
  if(event==='SIGNED_IN'&&session){
   const saved=sessionStorage.getItem('asf_card_recovery_email')||'';
   if(saved&&saved.toLowerCase()===String(session.user.email||'').toLowerCase()){
-   email.value=saved;recover().catch(err=>message(err.message||'Não foi possível localizar a carteirinha.',true));
+   email.value=saved;
+   // Run network work after the auth callback releases Supabase's internal lock.
+   setTimeout(()=>recover().catch(err=>message(err.message||'Não foi possível localizar a carteirinha.',true)),0);
   }
  }
 });
