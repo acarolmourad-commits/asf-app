@@ -103,8 +103,8 @@
 
     <div id="chat-view" class="hidden">
         <div class="chat-header">
-            <button aria-label="Voltar" class="back-btn" onclick="showRoomsList()">←</button>
             <div class="chat-title" id="room-title">Sala</div>
+            <button type="button" aria-label="Voltar às salas da comunidade" onclick="showRoomsList()" style="flex:0 0 auto;display:inline-flex;align-items:center;justify-content:center;gap:6px;padding:10px 14px;border:1px solid rgba(255,255,255,.75);border-radius:999px;background:#fff;color:#0E2439;font:600 14px Outfit,sans-serif;cursor:pointer;position:relative;z-index:5;white-space:nowrap;">← Salas</button>
             <div class="online-dot"></div>
         </div>
         <div class="chat-messages" id="messages-container"></div>
@@ -285,6 +285,8 @@
             document.getElementById('rooms-view').classList.remove('hidden');
             if (canal) { cliente().removeChannel(canal); canal = null; }
             currentRoom = null;
+            carregarSalas();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
         function renderMsg(m) {
