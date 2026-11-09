@@ -99,7 +99,7 @@ document.getElementById('download').addEventListener('click',()=>{
  c.font='bold 38px monospace';c.fillText(recovered.numero,55,390);
  c.font='24px system-ui';c.fillText('Válida até '+dateBR(recovered.validade),55,445);
  const img=new Image();img.onload=()=>{c.drawImage(img,760,350,180,180);const a=document.createElement('a');a.download='carteirinha-asf.png';a.href=canvas.toDataURL('image/png');a.click();};
- img.onload();img.src=qrData;
+ img.src=qrData;
 });
 client.auth.onAuthStateChange((event,session)=>{
  if(event==='SIGNED_IN'&&session){
