@@ -231,7 +231,7 @@
                     await concluirValidacaoChat(num);
                     return;
                 }
-                if (!email || !/^[^@\\s]+@[^@\\s]+\\.[^@\\s]+$/.test(email)) {
+                if (!email || !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) {
                     mostrarErroChat('Informe um e-mail válido, o mesmo utilizado para emitir sua carteirinha.');
                     return;
                 }
