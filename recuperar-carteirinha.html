@@ -77,10 +77,10 @@ form.addEventListener('submit',async e=>{
  button.disabled=true;button.textContent='Enviando…';
  try{
   const {data:{session}}=await client.auth.getSession();
-  if(session){
-   if(String(session.user.email||'').toLowerCase()!==address)throw new Error('A sessão autenticada pertence a outro e-mail. Saia da sessão e tente novamente com o endereço cadastrado.');
+  if(session && String(session.user.email||'').toLowerCase()===address){
    await recover();return;
   }
+  if(session) await client.auth.signOut();
   sessionStorage.setItem('asf_card_recovery_email',address);
   const {error}=await client.auth.signInWithOtp({email:address,options:{emailRedirectTo:location.origin+location.pathname,shouldCreateUser:true}});
   if(error)throw error;
