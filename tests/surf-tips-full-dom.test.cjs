@@ -7,7 +7,12 @@ const path = require('node:path');
 const vm = require('node:vm');
 const { JSDOM, VirtualConsole } = require('jsdom');
 const root = path.resolve(__dirname, '..');
-test('real app search reveals a matching tip excluded by the current category', async () => {
+const feed = JSON.parse(fs.readFileSync(path.join(root, 'docs/generated/surf-tips.json'), 'utf8'));
+// This integration consumes the changing generated feed, so its clock must follow
+// that fixture rather than freezing before the next daily selection is published.
+const generatedAt = Date.parse(feed.generated_at);
+assert.ok(Number.isFinite(generatedAt), 'Generated feed must have a valid timestamp');
+async function withHome(now, check) {
   const errors = [];
   const virtualConsole = new VirtualConsole();
   virtualConsole.on('jsdomError', error => errors.push(error.message));
@@ -15,7 +20,7 @@ test('real app search reveals a matching tip excluded by the current category', 
     url: 'https://asf.review.invalid/', runScripts: 'outside-only', virtualConsole,
     beforeParse(w) {
       const RealDate = w.Date;
-      w.Date = class extends RealDate { constructor(...args) { super(...(args.length ? args : ['2026-11-05T23:00:00Z'])); } static now() { return new RealDate('2026-11-05T23:00:00Z').getTime(); } };
+      w.Date = class extends RealDate { constructor(...args) { super(...(args.length ? args : [now])); } static now() { return now; } };
       w.fetch = async input => {
         const url = new URL(typeof input === 'string' ? input : input.url, 'https://asf.review.invalid/');
         const file = path.join(root, url.pathname);
@@ -46,7 +51,13 @@ test('real app search reveals a matching tip excluded by the current category', 
       vm.runInContext(content, dom.getInternalVMContext(), { filename });
     }
     await new Promise(resolve => setTimeout(resolve, 1600));
-    const w = dom.window, doc = w.document;
+    await check(dom.window, dom.window.document);
+    assert.deepEqual(errors, []);
+  } finally { dom.window.close(); }
+}
+
+test('real app search reveals a matching tip excluded by the current category', async () => {
+  await withHome(generatedAt, (w, doc) => {
     assert.equal(doc.getElementById('surf-tips-filters').hidden, false);
     assert.equal(w.normalizedSearchIndex.filter(item => item.sectionId === 'dicas').length, 11);
     for (const query of ['Aparência tranquila', 'leash']) {
@@ -61,6 +72,16 @@ test('real app search reveals a matching tip excluded by the current category', 
       assert.equal(doc.querySelectorAll('#surf-tips-grid article').length, 10);
       assert.equal(doc.querySelector('[data-tips-category="Todas"]').getAttribute('aria-pressed'), 'true');
     }
-    assert.deepEqual(errors, []);
-  } finally { dom.window.close(); }
+  });
+});
+
+test('real app keeps reference tips and offers retry for a future-dated feed', async () => {
+  await withHome(generatedAt - 24 * 60 * 60 * 1000, (w, doc) => {
+    assert.equal(doc.getElementById('surf-tips-filters').hidden, true);
+    assert.equal(doc.querySelectorAll('#surf-tips-grid article').length, 3);
+    assert.equal(doc.getElementById('surf-tip-title').textContent, 'Comece com orientação');
+    assert.match(doc.getElementById('surf-tips-status').textContent, /Não foi possível/);
+    assert.equal(doc.getElementById('surf-tips-retry').hidden, false);
+    assert.equal(doc.getElementById('surf-tips-retry').disabled, false);
+  });
 });

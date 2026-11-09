@@ -12,50 +12,47 @@ from datetime import datetime
 ALONGAMENTO_EXERCICIOS = [
     {
         "title": "Rotação de Ombros",
-        "description": "10 rotações para frente, 10 para trás. Mantém core engajado durante movimento. Fundamental para paddling saudável.",
+        "description": "Faça rotações suaves dos ombros para frente e para trás, dentro de uma amplitude confortável.",
         "steps": [
             "Fique em pé com braços relaxados ao lado do corpo",
             "Gire ombros para frente em círculos grandes (10x)",
             "Gire ombros para trás em círculos grandes (10x)",
             "Repita com círculos menores (10x cada)"
         ],
-        "benefits": ["Melhora mobilidade para remar", "Previne tendinite no ombro", "Aquecimento rápido"],
+        "benefits": ["Movimentos suaves", "Respeito aos limites do corpo", "Respiração natural"],
         "duration": "2 min",
-        "place": "Em qualquer lugar",
-        "video_url": "https://exemplo.com/video/ombros"
+        "place": "Em local firme e seco, fora da água"
     },
     {
         "title": "Alongamento de Costas (Gato-Vaca)",
-        "description": "De joelhos no chão, alterna entre arquear e curvar coluna. Alonga toda coluna vertebral e alivia tensão do remo.",
+        "description": "Em quatro apoios, alterne lentamente entre arredondar e estender suavemente as costas, sem forçar.",
         "steps": [
-            "Fique de 4 apoios (mãos e joelhos)",
-            "Inspire e arquear costas (como gato assustado)",
-            "Expire e curve costas (como vaca)",
-            "Repita 10 vezes, lentamente"
+            "Apoie mãos e joelhos em uma superfície confortável",
+            "Arredonde as costas suavemente",
+            "Volte à posição inicial e estenda suavemente as costas",
+            "Alterne devagar, respirando naturalmente, sem forçar"
         ],
-        "benefits": ["Alivia dor nas costas", "Aumenta flexibilidade", "Melhora postura na prancha"],
+        "benefits": ["Movimentos suaves", "Respeito aos limites do corpo", "Respiração natural"],
         "duration": "3 min",
-        "place": "Na areia ou em casa",
-        "video_url": "https://exemplo.com/video/costas"
+        "place": "Em local firme e seco, fora da água"
     },
     {
         "title": "Alongamento de Quadril (Borboleta)",
-        "description": "Abre quadril para manobras. Posição sentada com plantas dos pés juntas, joelhos para fora. Segure 30 segundos.",
+        "description": "Sentada, aproxime as plantas dos pés e deixe os joelhos para os lados, sem pressioná-los.",
         "steps": [
             "Sente no chão, costas retas",
             "Junte plantas dos pés, deixando joelhos caírem para os lados",
             "Segure pés com as mãos",
             "Incline corpo para frente mantendo coluna reta",
-            "Segure 30 segundos, respire fundo"
+            "Se confortável, mantenha até 30 segundos, respirando naturalmente"
         ],
-        "benefits": ["Maior mobilidade para bottom turn", "Previne lesões no quadril", "Melhora abertura para manobras"],
+        "benefits": ["Movimentos suaves", "Respeito aos limites do corpo", "Respiração natural"],
         "duration": "2 min por lado",
-        "place": "Em qualquer lugar",
-        "video_url": "https://exemplo.com/video/quadril"
+        "place": "Em local firme e seco, fora da água"
     },
     {
         "title": "Alongamento de Isquiotibiais",
-        "description": "Alongamento posterior da coxa essencial para movimento de pé na prancha. Flexibilidade para manobras e prevenção de lesões.",
+        "description": "Sentada, estenda uma perna e incline o tronco apenas até sentir uma tensão leve, sem dor.",
         "steps": [
             "Sentada, estique uma perna",
             "Dobre a outra com pé próximo à coxa oposta",
@@ -63,24 +60,22 @@ ALONGAMENTO_EXERCICIOS = [
             "Mantenha coluna reta, não arredonde costas",
             "Segure 30s, troque perna"
         ],
-        "benefits": ["Alongamento profundo", "Previne tensão", "Melhora amplitude de movimento"],
+        "benefits": ["Movimentos suaves", "Respeito aos limites do corpo", "Respiração natural"],
         "duration": "4 min total",
-        "place": "Em casa ou na praia",
-        "video_url": "https://exemplo.com/video/ischio"
+        "place": "Em local firme e seco, fora da água"
     },
     {
         "title": "Mobilidade de Tornozelo",
-        "description": "Gire tornozelos em círculos, 10x cada pé. Melhora equilíbrio na prancha e previne torções. Pode fazer sentada ou em pé!",
+        "description": "Sentada em local firme e seco, mova um tornozelo de cada vez em círculos suaves.",
         "steps": [
-            "Sentada ou em pé, cruze uma perna",
-            "Gire tornozelo em círculos (10x)",
-            "Gire em direção oposta (10x)",
-            "Repita no outro pé"
+            "Sente-se em um apoio estável",
+            "Mova um tornozelo em círculos suaves",
+            "Inverta o sentido, sem forçar",
+            "Repita com o outro tornozelo"
         ],
-        "benefits": ["Equilíbrio melhor na prancha", "Previne torções", "Facilita posicionamento dos pés"],
+        "benefits": ["Movimentos suaves", "Respeito aos limites do corpo", "Respiração natural"],
         "duration": "2 min",
-        "place": "Qualquer lugar (até na água!)",
-        "video_url": "https://exemplo.com/video/tornozelo"
+        "place": "Em local firme e seco, fora da água"
     },
     {
         "title": "Alongamento Pós-Surf (Rotina leve)",
@@ -90,28 +85,26 @@ ALONGAMENTO_EXERCICIOS = [
             "Alongamento de gato-vaca (1 min)",
             "Alongamento de quadril borboleta (1 min)",
             "Alongamento de isquiotibiais (1 min cada perna)",
-            "Respiração profunda (1 min)"
+            "Respiração natural, sem prender o ar (até 1 min)"
         ],
-        "benefits": ["Movimentos suaves", "Respeito aos limites do corpo", "Pausa para respirar"],
+        "benefits": ["Movimentos suaves", "Respeito aos limites do corpo", "Respiração natural"],
         "duration": "6-8 min",
-        "place": "Na praia ou em casa",
-        "video_url": "https://exemplo.com/video/pos-surf"
+        "place": "Em local firme e seco, fora da água"
     },
     {
         "title": "Rotina Completa Pré-Surf (5 min)",
-        "description": "Aquecimento rápido antes de entrar na água. Sequência: ombros → costas → quadril → tornozelos → respiração.",
+        "description": "Sugestão de movimentos leves em terra: ombros, costas, quadril e tornozelos. Adapte a rotina com orientação profissional.",
         "steps": [
             "Rotação de ombros: 1 min",
             "Gato-vaca: 1 min",
             "Rotação de quadril: 1 min",
             "Mobilidade tornozelo: 1 min",
-            "Respiração 4-7-8: 1 min"
+            "Respire naturalmente, sem prender o ar"
         ],
-        "benefits": ["Previne lesões", "Melhora performance", "Prepara corpo e mente"],
+        "benefits": ["Movimentos suaves", "Respeito aos limites do corpo", "Respiração natural"],
         "duration": "5 min",
-        "place": "Na areia antes de entrar",
-        "video_url": "https://exemplo.com/video/pre-surf"
-    },
+        "place": "Em local firme e seco, fora da água"
+    }
 ]
 
 def get_random_exercise():
@@ -134,15 +127,17 @@ def generate_html(exercise):
     </div>
     
     <div style="margin-bottom: 12px;">
-        <p style="margin: 0 0 8px 0; font-size: 13px;"><strong>✨ Benefícios:</strong></p>
+        <p style="margin: 0 0 8px 0; font-size: 13px;"><strong>✨ Cuidados:</strong></p>
         <div>{benefits_html}</div>
     </div>
     
     <div style="display: flex; justify-content: space-between; font-size: 12px; opacity: 0.8; margin-top: 12px; padding-top: 8px; border-top: 1px solid rgba(255,255,255,0.2);">
         <span>⏱️ {exercise['duration']}</span>
         <span>📍 {exercise['place']}</span>
-        <span>📊 {exercise['level'] if 'level' in exercise else 'Todos'}</span>
+        <span>📊 {exercise['level'] if 'level' in exercise else 'Adapte aos seus limites'}</span>
     </div>
+    <p style="font-size: 12px; line-height: 1.5;">Orientação geral, não tratamento. Os tempos são sugestões, não metas. Não force nem continue com dor. Se houver lesão ou limitação, procure orientação profissional.</p>
+    <p style="font-size: 11px;"><a style="color: inherit;" href="https://www.mayoclinic.org/healthy-lifestyle/fitness/in-depth/stretching/art-20047931">Fonte: Mayo Clinic — cuidados ao alongar</a></p>
 </div>
 """
 

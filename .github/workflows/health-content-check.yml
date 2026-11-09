@@ -1,0 +1,36 @@
+name: ASF Health Content Checks
+on:
+  push:
+    paths:
+      - 'scripts/alongamento_dicas.py'
+      - 'scripts/respiracao_dicas.py'
+      - 'scripts/mobility_agent.py'
+      - 'docs/generated/alongamento.html'
+      - 'docs/generated/respiracao.html'
+      - 'docs/generated/mobility.*'
+      - 'tests/test_alongamento.py'
+      - 'tests/test_health_generators.py'
+      - '.github/workflows/health-content-check.yml'
+  pull_request:
+    paths:
+      - 'scripts/alongamento_dicas.py'
+      - 'scripts/respiracao_dicas.py'
+      - 'scripts/mobility_agent.py'
+      - 'docs/generated/alongamento.html'
+      - 'docs/generated/respiracao.html'
+      - 'docs/generated/mobility.*'
+      - 'tests/test_alongamento.py'
+      - 'tests/test_health_generators.py'
+      - '.github/workflows/health-content-check.yml'
+permissions:
+  contents: read
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: python -B -m unittest discover -s tests -p 'test_alongamento.py' -v
+      - run: python -B -m unittest discover -s tests -p 'test_health_generators.py' -v
