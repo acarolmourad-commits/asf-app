@@ -16,9 +16,9 @@
   },
   "improvements": [
     {
-      "type": "feature",
-      "title": "Medidor de condições do mar",
-      "priority": "high"
+      "type": "layout",
+      "title": "Modo escuro",
+      "priority": "medium"
     },
     {
       "type": "content",
@@ -26,5 +26,5 @@
       "priority": "high"
     }
   ],
-  "generated_at": "2026-11-10T13:52:09.645083"
+  "generated_at": "2026-11-10T18:29:54.100789"
 }
