@@ -3,13 +3,14 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Surf Trip Planner ASF — Planeje sua Viagem de Surf</title>
-  <meta name="description" content="Planeje sua surf trip: orçamento por destino, checklist de prancha e viagem, custos de gasolina e hospedagem. Gratuito, da ASF — Associação de Surf Feminino.">
+  <title>Surf trip feminina: guia completo da primeira viagem (roteiro, mala e segurança) | ASF</title>
+  <meta name="description" content="Sua primeira surf trip feminina, sem perrengue: como escolher o destino pelo seu nível, mala inteligente, segurança e planner gratuito da ASF.">
   <meta name="robots" content="index,follow">
-  <link rel="canonical" href="https://acarolmourad-commits.github.io/asf-app/surf-trip/">
+  <link rel="canonical" href="https://asf.surf/surf-trip/">
   <meta property="og:type" content="website">
-  <meta property="og:title" content="Surf Trip Planner ASF">
-  <meta property="og:description" content="Planeje sua surf trip: orçamento, checklist e dicas por destino.">
+  <meta property="og:title" content="Surf trip feminina: guia completo da primeira viagem">
+  <meta property="og:description" content="Roteiro, mala e segurança para a primeira viagem de surf — com planner e checklist da ASF.">
+  <meta property="og:url" content="https://asf.surf/surf-trip/">
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800&display=swap" rel="stylesheet">
   <style>
     *{margin:0;padding:0;box-sizing:border-box}
@@ -36,15 +37,27 @@
     footer{text-align:center;color:#9A9A9A;font-size:12px;padding:20px}
     .prog{height:8px;background:#E4E6E9;border-radius:4px;margin-top:10px}
     .prog i{display:block;height:100%;background:#2ECC71;border-radius:4px;transition:width .3s}
+    .steps{padding-left:20px;font-size:14px;line-height:1.9}
   </style>
     <link rel="stylesheet" href="/asf-app/asf-site-redesign.css">
 </head>
 <body>
 <header>
-  <h1>🚐 Surf Trip Planner</h1>
-  <p>Orçamento + checklist + destinos — planeje sua próxima aventura • ASF</p>
+  <h1>🚐 Surf Trip Feminina</h1>
+  <p>Guia da primeira viagem + planner: roteiro, mala e segurança • ASF</p>
 </header>
 <div class="wrap">
+  <div class="card">
+    <h2>🧭 Primeira surf trip? Comece por aqui</h2>
+    <ol class="steps">
+      <li><strong>Escolha o destino pelo seu nível</strong> — primeira trip pede fundo de areia e onda amigável (veja os destinos abaixo).</li>
+      <li><strong>Confira a previsão antes de fechar datas</strong> — swell, vento e maré decidem a qualidade da viagem.</li>
+      <li><strong>Monte a mala com o checklist</strong> desta página e marque item a item.</li>
+      <li><strong>Planeje o deslocamento</strong> com a calculadora: dividam carro, dias e custos entre as manas.</li>
+      <li><strong>Segurança combinada:</strong> avisem onde vão surfar, compartilhem localização e nunca entrem sozinhas em pico desconhecido.</li>
+    </ol>
+  </div>
+
   <div class="card">
     <h2>💰 Calculadora de orçamento</h2>
     <label>Destino (distância ida+volta)</label>
@@ -121,7 +134,7 @@ function calc(){
   document.getElementById('rFood').textContent = fmt(foodT);
   document.getElementById('rPed').textContent = fmt(ped);
   document.getElementById('rTotal').textContent = 'Total: ' + fmt(total);
-  document.getElementById('rpP').textContent = fmt(total) + ' por pessoa';
+  document.getElementById('rPP').textContent = fmt(total) + ' por pessoa';
   document.getElementById('res').style.display = 'block';
 }
 const ITEMS = ['🏄‍♀️ Prancha + leash + parafina','🩱 Roupa de neoprene / lycra UV','🧴 Protetor solar + zinco','💊 Kit primeiros socorros','💧 Garrafa de água + snacks','🔧 Kit reparo de prancha','📱 Carregador + documentos','🛏️ Reserva de hospedagem confirmada','⛽ Tanque cheio + cartão de pedágio','🌊 Conferir previsão (link abaixo!)','👯‍♀️ Avisar as manas / compartilhar localização'];
