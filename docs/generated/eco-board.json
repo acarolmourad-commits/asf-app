@@ -1,11 +1,11 @@
 {
   "date": "2026-11-11",
   "board_tip": {
-    "title": "Shortboard: Performance",
-    "content": "Shortboards (5'6\"-6'6\") são para performance. Requer técnica e condicionamento.",
+    "title": "Longboard: O clássico",
+    "content": "Longboards (9'0\"+) são perfeitas para ondas pequenas e estabilidade.",
     "tags": [
-      "Shortboard",
-      "Performance"
+      "Longboard",
+      "Clássico"
     ]
   },
   "eco_tip": {
@@ -13,6 +13,6 @@
     "content": "Núcleo EPS ecológico. Pode ser 100% reciclado ou biodegradado. Menor impacto ambiental.",
     "category": "Sustentabilidade"
   },
-  "daily_message": "Alongue ombros e costas antes de entrar na água!",
-  "generated_at": "2026-11-11T18:26:24.416288"
+  "daily_message": "Hidrate-se: 500ml de água antes de surfar!",
+  "generated_at": "2026-11-11T23:46:11.905156"
 }
