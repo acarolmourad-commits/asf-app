@@ -14,8 +14,8 @@
   }
 
   function semaforo(swell, vento) {
-    if (vento <= 10 && swell >= 0.8) return { cor: "azul", txt: "Condicoes Perfeitas" };
-    if (vento <= 20) return { cor: "verde", txt: "Ideal / Seguro" };
+    if (vento <= 10 && swell >= 0.8) return { cor: "azul", txt: "Vento fraco previsto" };
+    if (vento <= 20) return { cor: "verde", txt: "Confira as condições locais" };
     return { cor: "amarelo", txt: "Atencao" };
   }
 
@@ -23,13 +23,14 @@
     var s = semaforo(d.swell, d.vento);
     el.className = "card card-previsao status-" + s.cor;
     el.innerHTML =
-      '<h3 style="margin:0 0 6px">\uD83C\uDF0A ' + PRAIA.nome + ' agora ' +
+      '<h3 style="margin:0 0 6px">\uD83C\uDF0A ' + PRAIA.nome + ' · previsão ' +
         '<span class="status-tag">' + s.txt + '</span></h3>' +
       '<ul style="list-style:none;padding:0;margin:0 0 8px;display:flex;gap:14px;flex-wrap:wrap">' +
         '<li>Swell: <strong>' + d.swell.toFixed(1) + ' m</strong></li>' +
         '<li>Periodo: <strong>' + d.periodo.toFixed(0) + ' s</strong></li>' +
         '<li>Vento: <strong>' + d.vento.toFixed(0) + ' km/h</strong></li>' +
       '</ul>' +
+      '<p>Fonte: Open-Meteo · Consultado: ' + new Date(d.consultedAt).toLocaleString('pt-BR') + '. Estimativa de modelo, não uma garantia de segurança.</p>' +
       '<a href="./previsao-surf/" style="color:#fff;font-weight:600">Ver previsao completa</a>';
   }
 
@@ -46,7 +47,7 @@
     // cache local (praia = areia, sinal ruim)
     try {
       var c = JSON.parse(localStorage.getItem(LS_KEY) || "null");
-      if (c && Date.now() - c.ts < TTL) { render(el, c.data); return; }
+      if (c && c.data && Number.isFinite(c.data.consultedAt) && Date.now() - c.ts < TTL) { render(el, c.data); return; }
     } catch (e) {}
 
     var marine = "https://marine-api.open-meteo.com/v1/marine?latitude=" + PRAIA.lat +
@@ -56,10 +57,12 @@
     Promise.all([fetch(marine).then(function (r) { return r.json(); }), fetch(meteo).then(function (r) { return r.json(); })])
       .then(function (rs) {
         var data = {
-          swell: (rs[0].current && rs[0].current.wave_height) || 0,
-          periodo: (rs[0].current && rs[0].current.wave_period) || 0,
-          vento: (rs[1].current && rs[1].current.wind_speed_10m) || 0
+          swell: rs[0].current && rs[0].current.wave_height,
+          periodo: rs[0].current && rs[0].current.wave_period,
+          vento: rs[1].current && rs[1].current.wind_speed_10m,
+          consultedAt: Date.now()
         };
+        if (![data.swell, data.periodo, data.vento].every(Number.isFinite)) throw new Error("Dados de previsão indisponíveis");
         try { localStorage.setItem(LS_KEY, JSON.stringify({ ts: Date.now(), data: data })); } catch (e) {}
         render(el, data);
       })
