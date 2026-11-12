@@ -272,37 +272,10 @@ document.addEventListener('DOMContentLoaded', function () {
   } catch (e) { console.warn('ASF compliance patch:', e); }
 });
 
-// ============================================================
-// ASF - Banner de consentimento de cookies (LGPD / Google AdSense)
-// ============================================================
+// Consent is owned by assets/js/inline/asf-inline-03.js on every viewport.
 document.addEventListener('DOMContentLoaded', function () {
-  try {
-    if (localStorage.getItem('asf-cookie-consent')) return;
-    // Mobile uses the existing banner with both consent choices. Never infer consent.
-    var mobileConsent = window.matchMedia('(max-width: 767px)');
-    function usePrimaryConsentOnMobile() {
-      if (!mobileConsent.matches || !document.getElementById('cookie-consent-banner')) return;
-      var duplicate = document.getElementById('asf-cookie-banner');
-      if (duplicate) duplicate.remove();
-    }
-    if (mobileConsent.addEventListener) mobileConsent.addEventListener('change', usePrimaryConsentOnMobile);
-    else if (mobileConsent.addListener) mobileConsent.addListener(usePrimaryConsentOnMobile);
-    if (mobileConsent.matches && document.getElementById('cookie-consent-banner')) return;
-    var bar = document.createElement('div');
-    bar.id = 'asf-cookie-banner';
-    bar.style.cssText = 'position:fixed;left:0;right:0;bottom:0;background:#0E2439;color:#fff;padding:14px 16px;z-index:10001;display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:center;font-family:system-ui,sans-serif;font-size:13px;box-shadow:0 -2px 12px rgba(0,0,0,0.25)';
-    bar.innerHTML =
-      '<span style="max-width:640px">🍪 Usamos cookies para personalizar conteúdo e exibir anúncios (Google AdSense). Ao continuar, você concorda com nossa ' +
-      '<a href="privacidade.html" style="color:#7FD4EC;text-decoration:underline">Política de Privacidade</a>.</span>' +
-      '<button id="asf-cookie-accept" style="background:#00A8CC;color:#fff;border:none;padding:10px 18px;border-radius:8px;font-weight:600;cursor:pointer">Aceitar</button>';
-    document.body.appendChild(bar);
-    document.getElementById('asf-cookie-accept').addEventListener('click', function () {
-      localStorage.setItem('asf-cookie-consent', 'accepted');
-      bar.remove();
-    });
-  } catch (e) { console.warn('ASF cookie banner:', e); }
+  if (window.ASFConsent) window.ASFConsent.refresh();
 });
-
 
 // --- ASF: seções de conteúdo movidas para apps dedicados (evita duplicação na home) ---
 (function () {

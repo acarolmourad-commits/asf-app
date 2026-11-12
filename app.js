@@ -2,7 +2,7 @@
   // ASF: Google Analytics desativado ate configurar um ID real (G-...).
   var ASF_GA_ID = '';
   window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
+  function gtag(){if(window.ASFConsent && window.ASFConsent.get() === 'all') dataLayer.push(arguments);}
   if (ASF_GA_ID) {
     gtag('js', new Date());
     gtag('config', ASF_GA_ID, {
@@ -2274,11 +2274,11 @@ function showPremiumModal(){/* removido: sem área premium */}
 function hidePremiumModal(){/* removido */}
 function startPayment(){/* removido: sem pagamentos */}
 function contactWhatsApp(){trackEvent('contact','whatsapp_click'),window.open('https://wa.me/5511954346288','_blank')}
-function trackEvent(e,t,o){const n=JSON.parse(localStorage.getItem('asf-monetization-stats')||'{}');n.events||(n.events=[]),n.events.push({category:e,action:t,label:o,timestamp:Date.now()}),localStorage.setItem('asf-monetization-stats',JSON.stringify(n))}
+function trackEvent(e,t,o){if(!window.ASFConsent || window.ASFConsent.get() !== 'all') return;const n=JSON.parse(localStorage.getItem('asf-monetization-stats')||'{}');n.events||(n.events=[]),n.events.push({category:e,action:t,label:o,timestamp:Date.now()}),localStorage.setItem('asf-monetization-stats',JSON.stringify(n))}
 function getStats(){return JSON.parse(localStorage.getItem('asf-monetization-stats')||'{}')}
-function getCookieConsent(){return localStorage.getItem('asf-cookie-consent')}
-function acceptAllCookies(){localStorage.setItem('asf-cookie-consent','all');const b=document.getElementById('cookie-consent-banner');if(b){b.style.animation='toastOut 0.3s ease-out forwards';setTimeout(()=>b.remove(),300)}trackEvent('legal','cookie_consent','all');}
-function essentialCookies(){localStorage.setItem('asf-cookie-consent','essential');const b=document.getElementById('cookie-consent-banner');if(b){b.style.animation='toastOut 0.3s ease-out forwards';setTimeout(()=>b.remove(),300)}trackEvent('legal','cookie_consent','essential');}
+function getCookieConsent(){return window.ASFConsent ? window.ASFConsent.get() : null;}
+function acceptAllCookies(){if(window.ASFConsent) window.ASFConsent.set('all');}
+function essentialCookies(){if(window.ASFConsent) window.ASFConsent.set('essential');}
 function showPixDonation(){/* removido */}
 function showReferralModal(){const m=document.getElementById('referral-modal');if(m){m.style.display='flex';const codeDisplay=document.getElementById('referral-code-display');if(codeDisplay){const userCode=localStorage.getItem('asf-my-referral-code');if(userCode){codeDisplay.textContent=userCode}else{const newCode=generateReferralCode();localStorage.setItem('asf-my-referral-code',newCode);codeDisplay.textContent=newCode}}trackEvent('referral','modal_view')}}
 function hideReferralModal(){const m=document.getElementById('referral-modal');if(m)m.style.display='none'}
@@ -2390,12 +2390,8 @@ function initGoogleAnalytics(){}
     window.ACHIEVEMENTS_INIT = true;
     asfOnHomeReady(renderAchievements);
 })();
-function getConsent() { return localStorage.getItem(COOKIE_CONSENT); }
-function setConsent(level) {
-      localStorage.setItem(COOKIE_CONSENT, level);
-      if (banner) banner.remove();
-      trackEvent('legal', 'cookie_consent', level);
-    }
+function getConsent() { return getCookieConsent(); }
+function setConsent(level) { if(window.ASFConsent) window.ASFConsent.set(level); }
 function walkTree(el) {
         if (el.nodeType === 3 && el.textContent.trim().length > 2 && !el.parentElement.classList.contains('icon')) {
             var txt = el.textContent;

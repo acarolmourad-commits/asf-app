@@ -705,7 +705,9 @@
           var total = document.createElement('b'); total.textContent = String(cats[k]); row.appendChild(total);
           box.appendChild(row);
         });
-        parent.insertBefore(box, bands[0].el.nextSibling);
+        var directory = document.getElementById('asf-explore-directory');
+        if (directory) directory.appendChild(box);
+        else bands[0].el.insertAdjacentElement('afterend', box);
         requestAnimationFrame(function () {
           Array.prototype.forEach.call(box.querySelectorAll('i[data-w]'), function (i) { i.style.width = i.getAttribute('data-w') + '%'; });
         });

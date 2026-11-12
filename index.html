@@ -28,7 +28,7 @@
     <link rel="preconnect" href="https://api.open-meteo.com">
     <link rel="preconnect" href="https://marine-api.open-meteo.com">
     <link rel="preconnect" href="https://wa.me">
-    <link rel="preconnect" href="https://www.googletagmanager.com">
+
 
     <script type="application/ld+json">
     {
@@ -72,9 +72,10 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://acarolmourad-commits.github.io/thumbnails/asf-app.jpg">
   <link rel="stylesheet" href="./asf-mural.css">
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1643806355443576" crossorigin="anonymous"></script>
+
 <link rel="stylesheet" href="asf-journeys-review.css">
 <link rel="stylesheet" href="asf-home-quality.css">
+<link rel="stylesheet" href="assets/css/home-journey.css">
     <link rel="stylesheet" href="assets/css/surf-tips.css">
 </head><body>
     <!-- Skip to content for accessibility -->
@@ -132,12 +133,12 @@ t Section -->
     <!-- Cookie Consent Banner (LGPD) -->
     <div id="cookie-consent-banner" style="position: fixed; bottom: 0; left: 0; right: 0; background: #1A3A5C; color: white; padding: 16px 20px; display: none; align-items: center; justify-content: space-between; gap: 12px; z-index: 9999; box-shadow: 0 -4px 20px rgba(0,0,0,0.3); font-size: 13px;">
       <div style="flex: 1;">
-        <strong>🍪 Cookies</strong> — Usamos cookies essenciais para funcionar e analytics (Google) para melhorar o app. Ao continuar, você aceita nossa
+        <strong>🍪 Cookies</strong> — Usamos armazenamento essencial para preferências e recursos. Recursos opcionais de medição local e publicidade (Google AdSense) só são ativados se você permitir. Você pode mudar sua escolha nas preferências. Consulte a
         <a href="privacidade.html" target="_blank" style="color: #00A8CC; text-decoration: underline;">Política de Privacidade</a> &middot; <a href="cookies.html" target="_blank" style="color: #00A8CC; text-decoration: underline;">Política de Cookies</a>.
       </div>
       <div style="display: flex; gap: 8px; flex-shrink: 0;">
-        <button onclick="essentialCookies()" style="background: rgba(255,255,255,0.15); color: white; border: none; padding: 8px 16px; border-radius: 8px; cursor: pointer; font-size: 12px; font-weight: 600;">Essenciais</button>
-        <button onclick="acceptAllCookies()" style="background: #00A8CC; color: white; border: none; padding: 8px 16px; border-radius: 8px; cursor: pointer; font-size: 12px; font-weight: 600;">Aceitar Tudo</button>
+        <button onclick="essentialCookies()" style="background: rgba(255,255,255,0.15); color: white; border: none; padding: 8px 16px; border-radius: 8px; cursor: pointer; font-size: 12px; font-weight: 600;">Somente essenciais</button>
+        <button onclick="acceptAllCookies()" style="background: #00A8CC; color: white; border: none; padding: 8px 16px; border-radius: 8px; cursor: pointer; font-size: 12px; font-weight: 600;">Aceitar opcionais</button>
       </div>
     </div>
 
@@ -380,7 +381,7 @@ t Section -->
     </section>
 
 
-    <a href="previsao-surf/" style="display:flex;gap:14px;align-items:center;background:#fff;border-radius:16px;padding:18px;margin:12px 20px;text-decoration:none;color:#0E2439;box-shadow:0 2px 10px rgba(0,0,0,.06);border:1px solid rgba(0,168,204,0.15)"><span style="font-size:2rem">🌊</span><span><b style="display:block">Previsão de Ondas</b><small style="color:#666">Altura, período e direção do swell em tempo real</small></span></a>
+    <a href="previsao-surf/" style="display:flex;gap:14px;align-items:center;background:#fff;border-radius:16px;padding:18px;margin:12px 20px;text-decoration:none;color:#0E2439;box-shadow:0 2px 10px rgba(0,0,0,.06);border:1px solid rgba(0,168,204,0.15)"><span style="font-size:2rem">🌊</span><span><b style="display:block">Previsão de Ondas</b><small style="color:#666">Altura, período e direção do swell na previsão disponível</small></span></a>
     <a href="#carteirinha" id="carteirinha-home-card" onclick="showSection('carteirinha');if(typeof ASF_CARD!=='undefined')ASF_CARD.init();return false" style="display:flex;gap:14px;align-items:center;background:#fff;border-radius:16px;padding:18px;margin:12px 20px;text-decoration:none;color:#0E2439;box-shadow:0 2px 10px rgba(0,0,0,.06);border:1px solid rgba(0,168,204,0.15)"><span style="font-size:2rem">🪪</span><span><b style="display:block">Carteirinha ASF</b><small style="color:#666">Sua identidade de surfista: gratuita, digital e personalizada</small></span></a>
     <a href="guia-apps.html" style="display:flex;gap:14px;align-items:center;background:linear-gradient(135deg,#0E2439,#00A8CC);border-radius:16px;padding:18px;margin:12px 20px;text-decoration:none;color:#fff;box-shadow:0 4px 14px rgba(14,36,57,.28);border:2px solid #00A8CC"><span style="font-size:2rem">🗺️</span><span><b style="display:block">Guia de Apps ASF <span style="background:#f4d03f;color:#0E2439;font-size:10px;padding:2px 8px;border-radius:10px;vertical-align:middle;margin-left:6px">NOVO</span></b><small style="color:rgba(255,255,255,.9)">Todos os <span data-asf-apps-count>54</span> apps gratuitos da rede de surf feminino, organizados por categoria — encontre o app certo para cada momento</small></span></a>
     <a href="apps-em-destaque.html" style="display:flex;gap:14px;align-items:center;background:linear-gradient(135deg,#ff4d8d,#7b2ff7);border-radius:16px;padding:18px;margin:12px 20px;text-decoration:none;color:#fff;box-shadow:0 4px 14px rgba(123,47,247,.3)"><span style="font-size:2rem">📣</span><span><b style="display:block">Apps em Destaque da Semana</b><small style="color:rgba(255,255,255,.9)">Previsao, mare, vento, seguranca, treinos e comunidade — os apps da rede para a sua proxima sessao</small></span></a>
@@ -411,91 +412,11 @@ t Section -->
     </div>
 
 
-    <!-- Beach Tips Section -->
-    <div style="padding: 20px;">
-        <h2 style="font-size: 18px; color: #0E2439; margin-bottom: 15px;">🏖️ Dicas por Praia</h2>
-
-        <div class="cards-grid" style="grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));">
-            <!-- Bertioga -->
-            <div class="card" style="border-left: 4px solid #27AE60;">
-                <span class="card-tag green">DICA DA PRAIA</span>
-                <h3>🏖️ Dicas: Bertioga</h3>
-                <div style="font-size: 13px; color: var(--gray-600); line-height: 1.7; margin-top: 8px;">
-                    <p>🌊 <strong>Melhor época:</strong> Março a Novembro</p>
-                    <p>🏄 <strong>Nível:</strong> Iniciante a Intermediário</p>
-                    <p>🌅 <strong>direção:</strong> Sul</p>
-                    <p>💡 <strong>Dica:</strong> Evite fins de semana CHEIOS. Chegue às 6h para pegar boas ondas!</p>
-                    <p>🚗 <strong>Estacionamento:</strong> confirme valores e regras atuais no local</p>
-                </div>
-            </div>
-
-            <!-- Santos -->
-            <div class="card" style="border-left: 4px solid #3498DB;">
-                <span class="card-tag">DICA DA PRAIA</span>
-                <h3>🏐 Dicas: Santos</h3>
-                <div style="font-size: 13px; color: var(--gray-600); line-height: 1.7; margin-top: 8px;">
-                    <p>🌊 <strong>Melhor época:</strong> Ano todo (ondas pequenas)</p>
-                    <p>🏄 <strong>Nível:</strong> Iniciante</p>
-                    <p>🌅 <strong>direção:</strong> Sul-Sudeste</p>
-                    <p>💡 <strong>Dica:</strong> Praia flat demais no verão. Vá no inverno!</p>
-                    <p>🅿️ <strong>Estacionamento:</strong> confirme valores e regras atuais no local</p>
-                </div>
-            </div>
-
-            <!-- Guarujá -->
-            <div class="card" style="border-left: 4px solid #F39C12;">
-                <span class="card-tag accent">DICA DA PRAIA</span>
-                <h3>🏝️ Dicas: Guarujá</h3>
-                <div style="font-size: 13px; color: var(--gray-600); line-height: 1.7; margin-top: 8px;">
-                    <p>🌊 <strong>Melhor época:</strong> Março a Outubro</p>
-                    <p>🏄 <strong>Nível:</strong> Iniciante a Avançado</p>
-                    <p>🌅 <strong>direção:</strong> Sul</p>
-                    <p>💡 <strong>Dica:</strong> Praia das Astúrias e Tombo são as melhores. Evite os horários de pico!</p>
-                    <p>🏪 <strong>Estrutura:</strong> Lojas e quiosques na orla</p>
-                </div>
-            </div>
-
-            <!-- Ubatuba -->
-            <div class="card" style="border-left: 4px solid #9B59B6;">
-                <span class="card-tag purple">DICA DA PRAIA</span>
-                <h3>🌊 Dicas: Ubatuba</h3>
-                <div style="font-size: 13px; color: var(--gray-600); line-height: 1.7; margin-top: 8px;">
-                    <p>🌊 <strong>Melhor época:</strong> Março a Setembro</p>
-                    <p>🏄 <strong>Nível:</strong> Todos os níveis</p>
-                    <p>🌅 <strong>direção:</strong> Sul, Sudoeste</p>
-                    <p>💡 <strong>Dica:</strong> Itamambuca e Felix são TOP! Muita escola de surf.</p>
-                    <p>🦟 <strong>Atenção:</strong> Repelente sempre!</p>
-                </div>
-            </div>
-
-            <!-- Maresias -->
-            <div class="card" style="border-left: 4px solid #E74C3C;">
-                <span class="card-tag coral">DICA DA PRAIA</span>
-                <h3>🌴 Dicas: Maresias</h3>
-                <div style="font-size: 13px; color: var(--gray-600); line-height: 1.7; margin-top: 8px;">
-                    <p>🌊 <strong>Melhor época:</strong> Abril a Setembro</p>
-                    <p>🏄 <strong>Nível:</strong> Intermediário a Avançado</p>
-                    <p>🌅 <strong>direção:</strong> Sul</p>
-                    <p>💡 <strong>Dica:</strong> É um point break clássico! Muita gente no final de semana!</p>
-                    <p>🚗 <strong>Acesso:</strong> 2h de SP, estrada boa</p>
-                </div>
-            </div>
-
-            <!-- Ilhabela -->
-            <div class="card" style="border-left: 4px solid #1ABC9C;">
-                <span class="card-tag green">DICA DA PRAIA</span>
-                <h3>⛵ Dicas: Ilhabela</h3>
-                <div style="font-size: 13px; color: var(--gray-600); line-height: 1.7; margin-top: 8px;">
-                    <p>🌊 <strong>Melhor época:</strong> Abril a Outubro</p>
-                    <p>🏄 <strong>Nível:</strong> Intermediário a Avançado</p>
-                    <p>🌅 <strong>direção:</strong> Sul, Sudeste</p>
-                    <p>💡 <strong>Dica:</strong> Barra Velha e Saco do Capitão são os picos!</p>
-                    <p>⛴️ <strong>Acesso:</strong> Balsa de São Sebastião (fila!)</p>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- End Beach Tips -->
+    <section id="praias-guia" class="card" aria-labelledby="praias-guia-title">
+      <h2 id="praias-guia-title">Escolha a praia com informação, não com pressa.</h2>
+      <p>Conheça as características dos locais no app Praias. Antes de entrar, confira a previsão e converse com instrutoras ou guarda-vidas: nenhuma indicação fixa garante condições seguras.</p>
+      <a href="https://praias.asf.surf/">Explorar o app Praias →</a>
+    </section>
 
 
 
@@ -1473,7 +1394,7 @@ t Section -->
                     <div class="icon">🌡️</div>
                     <h4>Clima Agora</h4>
                     <div id="clima-data">
-                        <p style="font-size: 14px; color: var(--primary);">Atualizando condições do mar em tempo real...</p>
+                        <p style="font-size: 14px; color: var(--primary);">Atualizando condições do mar na previsão disponível...</p>
                     </div>
                     <button class="btn btn-secondary" style="width: 100%; margin-top: 12px;" id="btn-clima-details" onclick="showClimaDetails()">Ver Previsão 7 dias</button>
                 </div>
@@ -1485,7 +1406,7 @@ t Section -->
                     <h4>Índice UV</h4>
                     <p>Radiação solar - Proteja sua pele!</p>
                     <div id="uv-data" style="text-align: center; margin: 12px 0;">
-                        <p style="font-size: 14px; color: var(--primary);">Atualizando condições do mar em tempo real...</p>
+                        <p style="font-size: 14px; color: var(--primary);">Atualizando condições do mar na previsão disponível...</p>
                     </div>
                     <div id="uv-protection" style="background: var(--light); padding: 12px; border-radius: 12px; font-size: 12px;">
                         <p style="margin: 0;"><strong>☀️ Dica:</strong> Aplicar protetor FPS 30+ a cada 2h</p>
@@ -1608,10 +1529,10 @@ t Section -->
       <div id="surf-conditions-container"></div>
     </div>
 
-    <!-- 📰 Notícias de Surf -->
+    <!-- 📚 Leituras de Surf -->
     <div class="section" id="surf-news">
       <div class="section-header">
-        <h2 class="section-title">📰 Notícias de Surf</h2>
+        <h2 class="section-title">📚 Leituras de Surf</h2>
       </div>
       <div id="surf-news-container" style="padding: 0 16px;"></div>
     </div>
@@ -1873,12 +1794,9 @@ t Section -->
             <div class="card" style="background: linear-gradient(135deg, rgba(0,168,204,0.1) 0%, rgba(155,89,182,0.1) 100%);">
                 <span class="card-tag" style="background: var(--primary); color: white;">📅 WSL</span>
                 <h3>Calendário WSL Feminino</h3>
-                <p style="font-size: 14px; margin: 10px 0;">Próxima etapa confirmada no Brasil</p>
-                <div style="margin: 12px 0; padding: 12px; background: rgba(255,255,255,0.5); border-radius: 8px;">
-                    <div style="font-size: 13px; margin-bottom: 6px;"><strong>📍 São Sebastião (SP)</strong> — 26 Set a 03 Out</div>
-                    <div style="font-size: 13px; margin-bottom: 6px;">🌎 Challenger Series — Banco do Brasil São Sebastião Pro</div>
-                    <div style="font-size: 13px;">🏄‍♀️ 48 mulheres competindo por vagas na elite mundial</div>
-                </div>
+                <p>Datas e locais podem mudar. Consulte a programação atual diretamente na organização antes de planejar a viagem.</p>
+                <a href="https://www.worldsurfleague.com/events" target="_blank" rel="noopener noreferrer">Consultar calendário oficial da WSL →</a>
+            </div>
             </div>
             
             <!-- Previsões Antecipadas -->
@@ -1901,14 +1819,14 @@ t Section -->
                 <div style="font-size: 13px; color: var(--gray-600);">
                     <div style="margin-bottom: 4px;">🌊 <a href="https://acarolmourad-commits.github.io/asf-swell/" style="color: inherit;"><b>Direção e período do swell</b> por spot</a></div>
                     <div style="margin-bottom: 4px;">⏱ <a href="https://acarolmourad-commits.github.io/asf-goldenhour/" style="color: inherit;"><b>Janela de pico do dia</b> — maré, vento e luz</a></div>
-                    <div>📏 <a href="https://acarolmourad-commits.github.io/asf-previsao/" style="color: inherit;"><b>Altura de onda</b> e condições ao vivo</a></div>
+                    <div>📏 <a href="https://acarolmourad-commits.github.io/asf-previsao/" style="color: inherit;"><b>Altura de onda</b> e condições previstas</a></div>
                 </div>
             </div>
             
             <!-- Guia de Spots -->
             <div class="card" style="background: linear-gradient(135deg, rgba(155,89,182,0.15) 0%, rgba(255,107,107,0.1) 100%);">
                 <span class="card-tag" style="background: var(--purple); color: white;">🏖️ Spots</span>
-                <h3>Guia de Spots Exclusivo</h3>
+                <h3>Guia de praias gratuito</h3>
                 <p style="font-size: 14px; margin: 10px 0;">Guia completo de spots — acesso livre para todas</p>
                 <div style="font-size: 12px; color: var(--gray-600);">
                     <div style="display: flex; justify-content: space-between; margin: 8px 0;">
@@ -2043,15 +1961,15 @@ t Section -->
     <script src="js/home-main.js"></script>
 
     <!-- Surf Culture Section -->
-    <div class="section" id="surf-culture"><p style="text-align:center;padding:32px;font-size:14px;color:var(--gray-400)">🎨 Explore a rica história e cultura do surf, desde suas origens polinésias até os dias atuais.</p>
+    <div class="section" id="surf-culture"><p style="text-align:center;padding:32px;font-size:14px;color:var(--gray-400)">Leituras sobre escolhas responsáveis, aprendizagem e cuidado coletivo no surf.</p>
         <div class="section-header">
-            <h2 class="section-title">🏛️ Histórias do Surf</h2>
+            <h2 class="section-title">🏛️ Cultura de cuidado no surf</h2>
 <p style="text-align:center;margin:6px 0 0"><a data-app="historia" href="https://acarolmourad-commits.github.io/asf-historia/" style="display:inline-block;background:linear-gradient(90deg,#00A8CC,#0E2439);color:#fff;padding:6px 14px;border-radius:999px;font-size:12.5px;font-weight:700;text-decoration:none">🚀 Versão completa no app ASF História →</a></p>
         </div>
         
         <div style="padding: 0 16px 80px;">
             <p style="font-size: 14px; color: var(--gray-600); margin-bottom: 16px;">
-                Curiosidades e histórias raras sobre o surf pelo mundo
+                Leituras educativas com fontes para aprender, respeitar o mar e cuidar da comunidade.
             </p>
             <div id="surf-culture-container">
                 <!-- Stories rendered by surf-culture.js -->
@@ -2207,7 +2125,7 @@ t Section -->
                 <nav aria-label="Links institucionais" style="min-width: 160px;">
                     <strong style="color: #fff;">ASF</strong>
                     <ul style="list-style: none; padding: 0; margin: 10px 0 0; line-height: 2;">
-                        <li><a href="sobre.html" style="color: inherit; text-decoration: none;">Sobre o ASF</a></li>
+                        <li><a href="sobre.html" style="color: inherit; text-decoration: none;">Sobre a ASF</a></li>
                         <li><a href="contato.html" style="color: inherit; text-decoration: none;">Contato</a></li>
                         <li><a href="parcerias/" style="color: inherit; text-decoration: none;">Parcerias</a></li>
                     </ul>
@@ -2227,6 +2145,7 @@ t Section -->
                     <ul style="list-style: none; padding: 0; margin: 10px 0 0; line-height: 2;">
                         <li><a href="privacidade.html" style="color: inherit; text-decoration: none;">Política de Privacidade</a></li>
                         <li><a href="termos-de-uso.html" style="color: inherit; text-decoration: none;">Termos de Uso</a></li>
+                        <li><button type="button" id="preferencias-cookies" onclick="openCookiePreferences()">Preferências de cookies</button></li>
                     </ul>
                 </nav>
             </div>
@@ -2246,5 +2165,6 @@ t Section -->
 <script defer src="js/asf-i18n.js?v=1"></script>
 <script defer src="asf-home-quality.js"></script>
 <script defer src="js/surf-tips.js"></script>
+<script defer src="js/home-journey.js"></script>
 </body>
 </html>

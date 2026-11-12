@@ -3,7 +3,7 @@
   // ASF: Google Analytics desativado ate configurar um ID real (G-...).
   var ASF_GA_ID = '';
   window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
+  function gtag(){if(window.ASFConsent && window.ASFConsent.get() === 'all') dataLayer.push(arguments);}
   if (ASF_GA_ID) {
     gtag('js', new Date());
     gtag('config', ASF_GA_ID, {
@@ -1965,7 +1965,7 @@ function showPremiumModal(){/* removido: sem área premium */}
 function hidePremiumModal(){/* removido */}
 function startPayment(){/* removido: sem pagamentos */}
 function contactWhatsApp(){trackEvent('contact','whatsapp_click'),window.open('https://wa.me/5511954346288','_blank')}
-function trackEvent(e,t,o){const n=JSON.parse(localStorage.getItem('asf-monetization-stats')||'{}');n.events||(n.events=[]),n.events.push({category:e,action:t,label:o,timestamp:Date.now()}),localStorage.setItem('asf-monetization-stats',JSON.stringify(n)),console.log('📊 Track:',e,t,o)}
+function trackEvent(e,t,o){if(!window.ASFConsent || window.ASFConsent.get() !== 'all') return;const n=JSON.parse(localStorage.getItem('asf-monetization-stats')||'{}');n.events||(n.events=[]),n.events.push({category:e,action:t,label:o,timestamp:Date.now()}),localStorage.setItem('asf-monetization-stats',JSON.stringify(n)),console.log('📊 Track:',e,t,o)}
 function getStats(){return JSON.parse(localStorage.getItem('asf-monetization-stats')||'{}')}
 function showPixDonation(){/* removido */}
 function showReferralModal(){const m=document.getElementById('referral-modal');if(m){m.style.display='flex';document.body.style.overflow='hidden';const codeDisplay=document.getElementById('referral-code-display');if(codeDisplay){const userCode=localStorage.getItem('asf-my-referral-code');if(userCode){codeDisplay.textContent=userCode}else{const newCode=generateReferralCode();localStorage.setItem('asf-my-referral-code',newCode);codeDisplay.textContent=newCode}}trackEvent('referral','modal_view')}}
