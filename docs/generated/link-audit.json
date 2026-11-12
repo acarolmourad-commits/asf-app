@@ -1,10 +1,13 @@
 {
-  "date": "2026-11-12T04:38:13.037588+00:00",
-  "total": 108,
-  "ok": 98,
-  "skipped": 10,
-  "broken_count": 0,
-  "broken": [],
+  "date": "2026-11-12T14:06:33.911501+00:00",
+  "total": 110,
+  "ok": 100,
+  "skipped": 8,
+  "broken_count": 2,
+  "broken": [
+    "https://acarolmourad-commits.github.io/asf-mare/",
+    "https://acarolmourad-commits.github.io/asf-swell/"
+  ],
   "results": [
     {
       "url": "https://acarolmourad-commits.github.io/asf-app/",
@@ -58,8 +61,8 @@
     },
     {
       "url": "https://acarolmourad-commits.github.io/asf-mare/",
-      "status": "ok",
-      "http": 200
+      "status": "broken",
+      "http": 404
     },
     {
       "url": "https://acarolmourad-commits.github.io/asf-mental/",
@@ -113,8 +116,8 @@
     },
     {
       "url": "https://acarolmourad-commits.github.io/asf-swell/",
-      "status": "ok",
-      "http": 200
+      "status": "broken",
+      "http": 404
     },
     {
       "url": "https://acarolmourad-commits.github.io/asf-treino/",
@@ -182,9 +185,9 @@
       "http": 200
     },
     {
-      "url": "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1643806355443576",
-      "status": "skipped",
-      "http": null
+      "url": "https://praias.asf.surf/",
+      "status": "ok",
+      "http": 200
     },
     {
       "url": "https://tempo.asf.surf/",
@@ -202,11 +205,6 @@
       "http": null
     },
     {
-      "url": "https://www.googletagmanager.com",
-      "status": "skipped",
-      "http": null
-    },
-    {
       "url": "https://www.instagram.com/asf.surffeminino",
       "status": "skipped",
       "http": null
@@ -220,6 +218,11 @@
       "url": "https://www.tiktok.com/@Cahrol.asf",
       "status": "skipped",
       "http": null
+    },
+    {
+      "url": "https://www.worldsurfleague.com/events",
+      "status": "ok",
+      "http": 200
     },
     {
       "url": "./",
@@ -366,6 +369,12 @@
       "local": true
     },
     {
+      "url": "assets/css/home-journey.css",
+      "status": "ok",
+      "http": 200,
+      "local": true
+    },
+    {
       "url": "assets/css/surf-tips.css",
       "status": "ok",
       "http": 200,
@@ -481,6 +490,12 @@
     },
     {
       "url": "js/home-conquistas.js",
+      "status": "ok",
+      "http": 200,
+      "local": true
+    },
+    {
+      "url": "js/home-journey.js",
       "status": "ok",
       "http": 200,
       "local": true
