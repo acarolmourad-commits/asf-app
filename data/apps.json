@@ -1,7 +1,7 @@
 {
   "hub": "https://acarolmourad-commits.github.io/asf-app/",
   "version": 2,
-  "updated": "2026-10-23",
+  "updated": "2026-11-12",
   "apps": [
     {
       "slug": "asf-previsao",
@@ -26,18 +26,6 @@
       "icon_apps": "🏖️",
       "name_apps": "ASF Praias",
       "desc_apps": "Guia interativo de praias para surfistas no litoral norte de SP"
-    },
-    {
-      "slug": "asf-mare",
-      "name": "🌙 ASF Maré",
-      "url": "https://acarolmourad-commits.github.io/asf-mare/",
-      "icon": "🌙",
-      "title": "ASF Maré",
-      "category": "🌊 Mar & Condições",
-      "desc": "Tábua de marés e fases da lua",
-      "icon_apps": "🌙",
-      "name_apps": "ASF Maré",
-      "desc_apps": "Calculadora de tábua de marés e fases da lua para surfistas"
     },
     {
       "slug": "asf-mapa",
@@ -110,30 +98,6 @@
       "icon_apps": "🌅",
       "name_apps": "ASF Golden Hour",
       "desc_apps": "Nascer/pôr do sol ao vivo e contagem regressiva para fotos de surf"
-    },
-    {
-      "slug": "asf-vento",
-      "name": "💨 ASF Vento",
-      "url": "https://acarolmourad-commits.github.io/asf-vento/",
-      "icon": "💨",
-      "title": "ASF Vento",
-      "category": "🌊 Mar & Condições",
-      "desc": "Vento e temperatura ao vivo nas praias",
-      "icon_apps": "💨",
-      "name_apps": "ASF Vento",
-      "desc_apps": "Vento, direção e temperatura ao vivo nas praias do litoral norte de SP"
-    },
-    {
-      "slug": "asf-swell",
-      "name": "🌊 ASF Swell",
-      "url": "https://acarolmourad-commits.github.io/asf-swell/",
-      "icon": "🌊",
-      "title": "ASF Swell",
-      "category": "🌊 Mar & Condições",
-      "desc": "Direção de swell, ângulo de quebra e janela de pico por spot",
-      "icon_apps": "🌊",
-      "name_apps": "ASF Swell",
-      "desc_apps": "Direção e período do swell por spot, com janela de pico do dia"
     },
     {
       "slug": "asf-treino",
