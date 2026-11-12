@@ -1,0 +1,47 @@
+name: Retire Mare Vento Swell 2026-11-12 (one-shot)
+on:
+  push:
+    branches: [main]
+    paths: ['.github/workflows/retire-mare-vento-swell-20261112.yml']
+permissions:
+  contents: write
+jobs:
+  fix:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Remove redirect apps from registry and network menu
+        run: |
+          python3 - <<'PY'
+          import pathlib, json, re, sys
+          slugs = ['asf-mare', 'asf-vento', 'asf-swell']
+          p = pathlib.Path('data/apps.json')
+          data = json.loads(p.read_text(encoding='utf-8'))
+          before = len(data['apps'])
+          data['apps'] = [a for a in data['apps'] if a.get('slug') not in slugs]
+          if before - len(data['apps']) != 3:
+              print('expected removing 3 apps, removed', before - len(data['apps'])); sys.exit(1)
+          data['updated'] = '2026-11-12'
+          p.write_text(json.dumps(data, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
+          n = pathlib.Path('asf-network.js')
+          s = n.read_text(encoding='utf-8')
+          for slug in slugs:
+              pattern = r'\{[^}]*acarolmourad-commits\.github\.io/' + slug + r'/[^}]*\},?\s*'
+              s2, count = re.subn(pattern, '', s)
+              if count != 1:
+                  print('network entry not removed exactly once', slug, count); sys.exit(1)
+              s = s2
+          for slug in slugs:
+              if slug in s:
+                  print('slug still present in network', slug); sys.exit(1)
+          n.write_text(s, encoding='utf-8')
+          print('registry and network menu cleaned')
+          PY
+      - name: Commit and push if changed
+        run: |
+          if git diff --quiet; then echo 'No changes'; exit 0; fi
+          git config user.name 'ASF Bot'
+          git config user.email 'bot@asf-app.com'
+          git add data/apps.json asf-network.js
+          git commit -m 'chore(apps): retira Mare Vento e Swell da rede (central Previsao)'
+          git push
