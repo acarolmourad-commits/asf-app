@@ -1,6 +1,9 @@
 /* Progressive disclosure: preserve existing sections, IDs and personal records. */
 (function () {
   'use strict';
+  function decodeHash(value) {
+    try { return decodeURIComponent(value); } catch (_) { return value; }
+  }
   function reveal(id) {
     var target = document.getElementById(id);
     for (var node = target; node; node = node.parentElement) {
@@ -46,7 +49,7 @@
       if (!anchor) return;
       var url = new URL(anchor.href, location.href);
       if (url.origin === location.origin && url.pathname === location.pathname && url.hash) {
-        reveal(decodeURIComponent(url.hash.slice(1)));
+        reveal(decodeHash(url.hash.slice(1)));
       }
     }, true);
     ['showSection', 'asfNav'].forEach(function (name) {
@@ -54,9 +57,9 @@
       if (typeof original !== 'function') return;
       window[name] = function (id) { reveal(id); return original.apply(this, arguments); };
     });
-    window.addEventListener('hashchange', function () { reveal(decodeURIComponent(location.hash.slice(1))); });
+    window.addEventListener('hashchange', function () { reveal(decodeHash(location.hash.slice(1))); });
     if (location.hash) {
-      var target = reveal(decodeURIComponent(location.hash.slice(1)));
+      var target = reveal(decodeHash(location.hash.slice(1)));
       if (target) target.scrollIntoView({block:'start'});
     }
   }

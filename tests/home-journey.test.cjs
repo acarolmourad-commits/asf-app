@@ -9,7 +9,7 @@ const root = path.resolve(__dirname, '..');
 const source = fs.readFileSync(path.join(root, 'js/home-journey.js'), 'utf8');
 function fixture(hash = '') {
   const dom = new JSDOM(`<!doctype html><body><section class="hero"></section><div id="parcerias-destaque">Parceiros</div><nav class="asfv2-nav"></nav><div class="asfv2-band" id="asfv2-explorar"><h2 class="asfv2-band-title">Explorar</h2><nav id="comecar"></nav><div id="asf-home-search"></div><section id="dicas"><input id="personal" value="Preservado"><button id="action">Ação</button></section></div><footer>Antigo</footer><footer role="contentinfo">Institucional</footer><div id="last-content">Mais conteúdo</div><a id="jump" href="#dicas">Dicas</a></body>`, {url:'https://asf.review.invalid/'+hash,runScripts:'outside-only'});
-  const w=dom.window; w.HTMLElement.prototype.scrollIntoView=function(){};
+  const w=dom.window; w.runtimeErrors=[]; w.addEventListener('error',event=>{w.runtimeErrors.push(event.message);event.preventDefault();}); w.HTMLElement.prototype.scrollIntoView=function(){};
   w.localStorage.setItem('asf-card-v2','registro que não deve mudar');
   w.calls=[]; w.showSection=function(id){w.calls.push(id); return 42;};
   w.asfNav=function(id){w.calls.push(id);};
@@ -63,5 +63,19 @@ test('real home scripts preserve search and open a matching section inside discl
   row.click();assert.equal(disclosure.open,true,'search result opens hidden parent disclosure');
   assert.equal(d.querySelector('.hero').nextElementSibling.id,'comecar');
   assert.equal(d.body.lastElementChild.getAttribute('role'),'contentinfo');
+ }finally{dom.window.close();}
+});
+
+test('hash changes reveal the requested topic without changing stored records',()=>{
+ const {dom,w,d}=fixture();try{
+  const details=d.getElementById('dicas').closest('details');
+  details.open=false;w.history.replaceState(null,'','#dicas');w.dispatchEvent(new w.HashChangeEvent('hashchange'));
+  assert.equal(details.open,true);assert.equal(w.localStorage.getItem('asf-card-v2'),'registro que não deve mudar');
+ }finally{dom.window.close();}
+});
+test('malformed URL fragment does not throw during initialization or navigation',()=>{
+ const {dom,w}=fixture('#%E0%A4%A');try{
+  assert.deepEqual([...w.runtimeErrors],[]);
+  w.dispatchEvent(new w.HashChangeEvent('hashchange'));assert.deepEqual([...w.runtimeErrors],[]);
  }finally{dom.window.close();}
 });

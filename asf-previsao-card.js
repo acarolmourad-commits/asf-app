@@ -47,7 +47,7 @@
     // cache local (praia = areia, sinal ruim)
     try {
       var c = JSON.parse(localStorage.getItem(LS_KEY) || "null");
-      if (c && c.data && Number.isFinite(c.data.consultedAt) && Date.now() - c.ts < TTL) { render(el, c.data); return; }
+      if (c && c.data && Number.isFinite(c.ts) && Number.isFinite(c.data.consultedAt) && c.data.consultedAt <= Date.now() && Date.now() - c.ts >= 0 && Date.now() - c.ts < TTL && [c.data.swell, c.data.periodo, c.data.vento].every(Number.isFinite)) { render(el, c.data); return; }
     } catch (e) {}
 
     var marine = "https://marine-api.open-meteo.com/v1/marine?latitude=" + PRAIA.lat +
