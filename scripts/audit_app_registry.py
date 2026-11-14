@@ -111,7 +111,7 @@ def load_json(path: Path) -> dict[str, Any]:
     return value
 
 
-def build_report(registry: dict[str, Any], previous: dict[str, Any] | None = None) -> dict[str, Any]:
+def build_report(registry: dict[str, Any], previous: dict[str, Any] | None = None, timeout: int = TIMEOUT_SECONDS) -> dict[str, Any]:
     apps = registry.get("apps")
     if not isinstance(apps, dict) or not apps:
         raise ValueError("Registry must contain a non-empty 'apps' object")
@@ -123,7 +123,7 @@ def build_report(registry: dict[str, Any], previous: dict[str, Any] | None = Non
         for url in (app.get("github_io"), app.get("asf_surf"))
         if isinstance(url, str) and url.startswith(("http://", "https://"))
     })
-    probes = {url: probe(url) for url in unique_urls}
+    probes = {url: probe(url, timeout) for url in unique_urls}
 
     details = []
     for app_id, config in sorted(apps.items()):
@@ -195,15 +195,12 @@ def main() -> int:
     parser.add_argument("--timeout", type=int, default=TIMEOUT_SECONDS)
     args = parser.parse_args()
 
-    global TIMEOUT_SECONDS
-    TIMEOUT_SECONDS = max(3, min(args.timeout, 60))
-
     registry_path = Path(args.registry)
     previous_path = Path(args.previous)
     output_path = Path(args.output)
     registry = load_json(registry_path)
     previous = load_json(previous_path) if previous_path.exists() else None
-    report = build_report(registry, previous)
+    report = build_report(registry, previous, max(3, min(args.timeout, 60)))
     output_path.parent.mkdir(parents=True, exist_ok=True)
     output_path.write_text(json.dumps(report, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
 
