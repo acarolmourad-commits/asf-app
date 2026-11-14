@@ -1,12 +1,13 @@
 {
-  "date": "2026-11-14T12:37:07.547877+00:00",
+  "date": "2026-11-14T16:52:45.340122+00:00",
   "total": 110,
-  "ok": 100,
+  "ok": 99,
   "skipped": 8,
-  "broken_count": 2,
+  "broken_count": 3,
   "broken": [
     "https://acarolmourad-commits.github.io/asf-mare/",
-    "https://acarolmourad-commits.github.io/asf-swell/"
+    "https://acarolmourad-commits.github.io/asf-swell/",
+    "apps-em-destaque.html"
   ],
   "results": [
     {
@@ -286,8 +287,8 @@
     },
     {
       "url": "apps-em-destaque.html",
-      "status": "ok",
-      "http": 200,
+      "status": "broken",
+      "http": 503,
       "local": true
     },
     {
