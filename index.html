@@ -101,29 +101,44 @@ t Section -->
             </div>
         </div>
         <nav id="header-menu" role="menu" aria-label="Menu principal">
-        <button class="menu-item" role="menuitem" onclick="showSection('dicas');closeMenu()"><span>📚</span> Dicas</button>
-        <button class="menu-item" role="menuitem" onclick="showSection('mobilidade');closeMenu()"><span>🧘</span> Mobilidade</button>
-        <button class="menu-item" role="menuitem" onclick="location.href='parcerias/';closeMenu()"><span>🤝</span> Parceiros &amp; benefícios</button>
-        <button class="menu-item" role="menuitem" onclick="showSection('praias');closeMenu()"><span>🏖️</span> Praias</button>
-        <button class="menu-item" role="menuitem" onclick="showSection('surf-news');closeMenu()"><span>📰</span> News</button>
-        <button class="menu-item" role="menuitem" onclick="showSection('metas');closeMenu()"><span>🎯</span> Metas</button>
-        <button class="menu-item" role="menuitem" onclick="showSection('surf-culture');closeMenu()"><span>🏛️</span> Cultura</button>
-        <button class="menu-item" role="menuitem" onclick="location.href='previsao-surf/';closeMenu()"><span>🌊</span> Ondas</button>
-        <button class="menu-item" role="menuitem" onclick="location.href='https://tempo.asf.surf/';closeMenu()"><span>⛅</span> ASF Tempo</button>
-        <button class="menu-item" role="menuitem" onclick="showSection('desafios');closeMenu()"><span>🏆</span> Desafios</button>
-        <button class="menu-item" role="menuitem" onclick="showSection('surfer-profile');closeMenu()"><span>🏄</span> Perfil</button>
-        <button class="menu-item" role="menuitem" onclick="location.href='surf-trip/';closeMenu()"><span>🚗</span> Surftrips</button>
-        <button class="menu-item" role="menuitem" onclick="showSection('utilities');closeMenu()"><span>🌊</span> Utilitários</button>
-        <button class="menu-item" role="menuitem" onclick="showSection('comunidade');closeMenu()"><span>👥</span> Comunidade</button>
-        <button class="menu-item" role="menuitem" onclick="window.location.href='sessoes-interativas.html';closeMenu()"><span>💬</span> Sessões</button>
-        <button class="menu-item" role="menuitem" onclick="showSection('competicoes');closeMenu()"><span>🏆</span> Competições</button>
-        <button class="menu-item" role="menuitem" onclick="location.href='quiz/';closeMenu()"><span>🧠</span> Quiz</button>
-        <button class="menu-item" role="menuitem" onclick="showSection('assinantes');closeMenu()"><span>🌟</span> Destaques</button>
-        <button class="menu-item" role="menuitem" onclick="showSection('premium');closeMenu()"><span>⭐</span> Guias</button>
-        <button class="menu-item" role="menuitem" onclick="showSection('assistente');closeMenu()"><span>🤖</span> Assistente</button>
-        <button class="menu-item" role="menuitem" onclick="showSection('conteudo');closeMenu()"><span>📖</span> Conteúdo</button>
-        <button class="menu-item" role="menuitem" onclick="showSection('carteirinha');ASF_CARD.init();closeMenu()"><span>🪪</span> Carteirinha</button>
-        <button class="menu-item" role="menuitem" onclick="showSection('seguranca');closeMenu()"><span>🚺</span> Segurança</button>
+        <div class="asf-menu-group" role="group" aria-label="Comece aqui">
+          <div class="asf-menu-group-title">COMECE AQUI</div>
+          <button class="menu-item" role="menuitem" onclick="showSection('dicas');closeMenu()"><span>📚</span> Dicas</button>
+          <button class="menu-item" role="menuitem" onclick="showSection('conteudo');closeMenu()"><span>📖</span> Conteúdo</button>
+          <button class="menu-item" role="menuitem" onclick="showSection('surf-culture');closeMenu()"><span>🏛️</span> Cultura</button>
+          <button class="menu-item" role="menuitem" onclick="location.href='quiz/';closeMenu()"><span>🧠</span> Quiz</button>
+          <button class="menu-item" role="menuitem" onclick="showSection('surfer-profile');closeMenu()"><span>🏄</span> Perfil</button>
+        </div>
+        <div class="asf-menu-group" role="group" aria-label="Explore o mar">
+          <div class="asf-menu-group-title">EXPLORE O MAR</div>
+          <button class="menu-item" role="menuitem" onclick="showSection('praias');closeMenu()"><span>🏖️</span> Praias</button>
+          <button class="menu-item" role="menuitem" onclick="location.href='previsao-surf/';closeMenu()"><span>🌊</span> Ondas</button>
+          <button class="menu-item" role="menuitem" onclick="location.href='https://tempo.asf.surf/';closeMenu()"><span>⛅</span> ASF Tempo</button>
+          <button class="menu-item" role="menuitem" onclick="window.location.href='sessoes-interativas.html';closeMenu()"><span>💬</span> Sessões</button>
+          <button class="menu-item" role="menuitem" onclick="showSection('surf-news');closeMenu()"><span>📰</span> News</button>
+        </div>
+        <div class="asf-menu-group" role="group" aria-label="Treine e evolua">
+          <div class="asf-menu-group-title">TREINE E EVOLUA</div>
+          <button class="menu-item" role="menuitem" onclick="showSection('mobilidade');closeMenu()"><span>🧘</span> Mobilidade</button>
+          <button class="menu-item" role="menuitem" onclick="showSection('metas');closeMenu()"><span>🎯</span> Metas</button>
+          <button class="menu-item" role="menuitem" onclick="showSection('desafios');closeMenu()"><span>🏆</span> Desafios</button>
+          <button class="menu-item" role="menuitem" onclick="location.href='surf-trip/';closeMenu()"><span>🚗</span> Surftrips</button>
+          <button class="menu-item" role="menuitem" onclick="showSection('utilities');closeMenu()"><span>🌊</span> Utilitários</button>
+          <button class="menu-item" role="menuitem" onclick="showSection('seguranca');closeMenu()"><span>🚺</span> Segurança</button>
+        </div>
+        <div class="asf-menu-group" role="group" aria-label="Comunidade">
+          <div class="asf-menu-group-title">COMUNIDADE</div>
+          <button class="menu-item" role="menuitem" onclick="showSection('comunidade');closeMenu()"><span>👥</span> Comunidade</button>
+          <button class="menu-item" role="menuitem" onclick="showSection('competicoes');closeMenu()"><span>🏆</span> Competições</button>
+          <button class="menu-item" role="menuitem" onclick="showSection('assinantes');closeMenu()"><span>🌟</span> Destaques</button>
+          <button class="menu-item" role="menuitem" onclick="showSection('assistente');closeMenu()"><span>🤖</span> Assistente</button>
+        </div>
+        <div class="asf-menu-group" role="group" aria-label="ASF e benefícios">
+          <div class="asf-menu-group-title">ASF E BENEFÍCIOS</div>
+          <button class="menu-item" role="menuitem" onclick="location.href='parcerias/';closeMenu()"><span>🤝</span> Parceiros &amp; benefícios</button>
+          <button class="menu-item" role="menuitem" onclick="showSection('carteirinha');ASF_CARD.init();closeMenu()"><span>🪪</span> Carteirinha</button>
+          <button class="menu-item" role="menuitem" onclick="showSection('premium');closeMenu()"><span>⭐</span> Guias</button>
+        </div>
         </nav>
     </header>
     
