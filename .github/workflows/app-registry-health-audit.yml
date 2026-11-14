@@ -1,0 +1,68 @@
+name: ASF App Registry Health Audit
+
+on:
+  pull_request:
+    paths:
+      - 'data/app-links.json'
+      - 'app-status.json'
+      - 'scripts/audit_app_registry.py'
+      - 'tests/test_app_registry_audit.py'
+      - '.github/workflows/app-registry-health-audit.yml'
+  workflow_dispatch:
+  schedule:
+    - cron: "0 12 * * *" # 09:00 America/Sao_Paulo (UTC-3)
+
+permissions:
+  contents: read
+
+concurrency:
+  group: asf-app-registry-health-audit
+  cancel-in-progress: false
+
+jobs:
+  audit:
+    name: Probe canonical app URLs
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Run audit unit tests
+        run: python -m unittest tests.test_app_registry_audit -v
+
+      - name: Audit registry and endpoints
+        run: |
+          mkdir -p artifacts
+          python scripts/audit_app_registry.py \
+            --registry data/app-links.json \
+            --previous app-status.json \
+            --output artifacts/app-status.json \
+            --timeout 15
+
+      - name: Validate generated report
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+
+          report = json.loads(Path("artifacts/app-status.json").read_text(encoding="utf-8"))
+          assert report["registry_count"] > 0
+          assert len(report["details"]) == report["registry_count"]
+          assert report["checked_unique_urls"] > 0
+          print("Report structure OK")
+          print("Registry consistency:", report["registry_consistency"])
+          PY
+
+      - name: Upload audit report
+        uses: actions/upload-artifact@v4
+        with:
+          name: asf-app-registry-health-${{ github.run_number }}
+          path: artifacts/app-status.json
+          if-no-files-found: error
+          retention-days: 30
