@@ -1,18 +1,18 @@
 {
   "date": "2026-11-14",
   "board_tip": {
-    "title": "Fish: Para ondas pequenas",
-    "content": "Shape com outline curto e largo. Perfeita para ondas fracas! Twin ou quad fin para mais speed.",
+    "title": "Shortboard: Performance",
+    "content": "Shortboards (5'6\"-6'6\") são para performance. Requer técnica e condicionamento.",
     "tags": [
-      "Fish",
-      "Speed"
+      "Shortboard",
+      "Performance"
     ]
   },
   "eco_tip": {
-    "title": "Bloco Phenix Teccel",
-    "content": "Núcleo EPS ecológico. Pode ser 100% reciclado ou biodegradado. Menor impacto ambiental.",
-    "category": "Sustentabilidade"
+    "title": "Por que escolher ecológico?",
+    "content": "Quando a prancha chegar ao fim, o bloco pode ser reciclado ou se degrada naturalmente!",
+    "category": "Consumo Consciente"
   },
   "daily_message": "Alongue ombros e costas antes de entrar na água!",
-  "generated_at": "2026-11-14T03:49:28.845365"
+  "generated_at": "2026-11-14T12:36:55.871710"
 }
