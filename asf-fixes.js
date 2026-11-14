@@ -226,3 +226,12 @@
     document.head.appendChild(st);
   });
 })();
+
+/* ---------- RETIRE ASF LOJA (14/11/2026) ---------- */
+(function(){
+  function removeRetiredShop(){
+    ['lojas','loja'].forEach(function(id){var el=document.getElementById(id);if(el)el.remove();});
+    document.querySelectorAll('a[href*="asf-loja"],a[href*="loja.asf.surf"]').forEach(function(a){a.remove();});
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',removeRetiredShop);else removeRetiredShop();
+})();
