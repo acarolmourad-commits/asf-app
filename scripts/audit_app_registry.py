@@ -7,6 +7,8 @@ The registry is the source of truth; historical report-only apps are reported as
 from __future__ import annotations
 
 import argparse
+from concurrent.futures import ThreadPoolExecutor
+from functools import partial
 import json
 import socket
 import ssl
@@ -123,7 +125,9 @@ def build_report(registry: dict[str, Any], previous: dict[str, Any] | None = Non
         for url in (app.get("github_io"), app.get("asf_surf"))
         if isinstance(url, str) and url.startswith(("http://", "https://"))
     })
-    probes = {url: probe(url, timeout) for url in unique_urls}
+    with ThreadPoolExecutor(max_workers=12) as executor:
+        results = executor.map(partial(probe, timeout=timeout), unique_urls)
+        probes = dict(zip(unique_urls, results))
 
     details = []
     for app_id, config in sorted(apps.items()):
@@ -177,6 +181,11 @@ def build_report(registry: dict[str, Any], previous: dict[str, Any] | None = Non
             "gh_only": gh_only,
             "surf_only": surf_only,
             "both_failed": both_failed,
+            "both_404": sorted(
+                d["app"] for d in details
+                if d["github_io"].get("http_status") == 404
+                and d["asf_surf"].get("http_status") == 404
+            ),
         },
         "registry_consistency": {
             "previous_report_only": sorted(previous_ids - ids),
