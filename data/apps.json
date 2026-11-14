@@ -292,18 +292,6 @@
       "desc_apps": "Apoie o surf feminino: cotas de patrocínio e parcerias de marcas"
     },
     {
-      "slug": "asf-loja",
-      "name": "🛍️ ASF Loja",
-      "url": "https://acarolmourad-commits.github.io/asf-loja/",
-      "icon": "🛍️",
-      "title": "ASF Loja",
-      "category": "💜 Vida & Comunidade",
-      "desc": "Marcas parceiras e cupons exclusivos",
-      "icon_apps": "🛍️",
-      "name_apps": "ASF Loja",
-      "desc_apps": "Marcas parceiras e cupons exclusivos para a comunidade"
-    },
-    {
       "slug": "asf-glossario",
       "name": "📖 ASF Glossário",
       "url": "https://acarolmourad-commits.github.io/asf-glossario/",
@@ -647,7 +635,6 @@
     "asf-inspiracao",
     "asf-kids",
     "asf-leitura",
-    "asf-loja",
     "asf-mala",
     "asf-manobras",
     "asf-mapa",
