@@ -37,7 +37,7 @@ main{max-width:560px;margin:5vh auto}.panel{background:#fff;border:1px solid #dc
 <p class="notice">Não tem mais acesso ao e-mail cadastrado? <a href="mailto:asf.surffeminino@gmail.com?subject=Ajuda%20para%20recuperar%20carteirinha">Fale com a equipe ASF</a> para uma recuperação assistida.</p>
 </section><footer><a href="/emitir.html">Voltar à página da carteirinha</a> · <a href="/">Início</a></footer></main>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.4/build/qrcode.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js" integrity="sha512-CNgIRecGo7nphbeZ04Sc13ka07paqdeTu0WR1IM4kNcpmBAUSHSQX0FslNhTDadL4O5SAGapGt4FodqL8My0mA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script>
 (function(){
 'use strict';
@@ -62,7 +62,14 @@ async function recover(){
  document.getElementById('member-number').textContent=row.numero;
  document.getElementById('member-validity').textContent='Validade: '+dateBR(row.validade);
  const qrUrl=location.origin+'/verificar.html?numero='+encodeURIComponent(row.numero);
- qrData=await QRCode.toDataURL(qrUrl,{width:320,margin:2,errorCorrectionLevel:'M'});
+ if(typeof QRCode!=='function')throw new Error('Não foi possível carregar o gerador do QR Code. Verifique a conexão e tente novamente.');
+ const qrTarget=document.createElement('div');
+ new QRCode(qrTarget,{text:qrUrl,width:320,height:320,colorDark:'#102d45',colorLight:'#ffffff',correctLevel:QRCode.CorrectLevel.M});
+ const qrImage=qrTarget.querySelector('img');
+ const qrCanvas=qrTarget.querySelector('canvas');
+ if(qrImage&&qrImage.src){qrData=qrImage.src;}
+ else if(qrCanvas){qrData=qrCanvas.toDataURL('image/png');}
+ else throw new Error('Não foi possível gerar o QR Code da carteirinha.');
  document.getElementById('qr').src=qrData;
  const active=!!row.ativo && String(row.validade)>=new Date().toISOString().slice(0,10);
  document.getElementById('card-status').textContent=active?'✓ Carteirinha ativa':'Carteirinha localizada · regularização necessária';
@@ -81,7 +88,6 @@ form.addEventListener('submit',async e=>{
    await recover();return;
   }
   if(session) await client.auth.signOut();
-  sessionStorage.setItem('asf_card_recovery_email',address);
   const {error}=await client.auth.signInWithOtp({email:address,options:{emailRedirectTo:location.origin+location.pathname,shouldCreateUser:true}});
   if(error)throw error;
   message('Enviamos um link seguro para o endereço informado. Abra o e-mail neste dispositivo ou navegador e retorne a esta página para visualizar sua carteirinha.');
@@ -103,15 +109,20 @@ document.getElementById('download').addEventListener('click',()=>{
 });
 client.auth.onAuthStateChange((event,session)=>{
  if(event==='SIGNED_IN'&&session){
-  const saved=sessionStorage.getItem('asf_card_recovery_email')||'';
-  if(saved&&saved.toLowerCase()===String(session.user.email||'').toLowerCase()){
-   email.value=saved;
-   // Run network work after the auth callback releases Supabase's internal lock.
-   setTimeout(()=>recover().catch(err=>message(err.message||'Não foi possível localizar a carteirinha.',true)),0);
-  }
+  // The authenticated account email is authoritative; do not depend on
+  // sessionStorage, which may be isolated when a Magic Link opens on iOS.
+  email.value=String(session.user.email||'');
+  setTimeout(()=>recover().catch(err=>message(err.message||'Não foi possível localizar a carteirinha.',true)),0);
  }
 });
-(async()=>{try{const saved=sessionStorage.getItem('asf_card_recovery_email');if(saved)email.value=saved;const {data:{session}}=await client.auth.getSession();if(session){if(saved&&saved.toLowerCase()!==String(session.user.email||'').toLowerCase()){message('A sessão atual usa outro e-mail. Saia e entre com o e-mail cadastrado na ASF.',true);return;}if(saved){await recover();}}}catch(err){message(err.message||'Não foi possível recuperar a carteirinha.',true);}})();
+(async()=>{try{
+ const {data:{session},error}=await client.auth.getSession();
+ if(error)throw error;
+ if(session){
+  email.value=String(session.user.email||'');
+  await recover();
+ }
+}catch(err){message(err.message||'Não foi possível recuperar a carteirinha.',true);}})();
 })();
 </script>
 </body></html>
