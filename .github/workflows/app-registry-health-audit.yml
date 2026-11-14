@@ -26,6 +26,9 @@ jobs:
         with:
           python-version: "3.12"
 
+      - name: Run audit unit tests
+        run: python -m unittest tests.test_app_registry_audit -v
+
       - name: Audit registry and endpoints
         run: |
           mkdir -p artifacts
