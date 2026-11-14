@@ -88,7 +88,6 @@ form.addEventListener('submit',async e=>{
    await recover();return;
   }
   if(session) await client.auth.signOut();
-  sessionStorage.setItem('asf_card_recovery_email',address);
   const {error}=await client.auth.signInWithOtp({email:address,options:{emailRedirectTo:location.origin+location.pathname,shouldCreateUser:true}});
   if(error)throw error;
   message('Enviamos um link seguro para o endereço informado. Abra o e-mail neste dispositivo ou navegador e retorne a esta página para visualizar sua carteirinha.');
