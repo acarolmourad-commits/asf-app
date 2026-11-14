@@ -52,7 +52,6 @@
       "asf-viagens",
       "asf-eco",
       "asf-equipamento",
-      "asf-loja",
       "asf-patrocinio",
       "asf-mercado"
     ],
@@ -110,7 +109,6 @@
       "asf-viagens",
       "asf-eco",
       "asf-equipamento",
-      "asf-loja",
       "asf-patrocinio",
       "asf-mercado"
     ],
@@ -370,11 +368,6 @@
     },
     {
       "app": "asf-equipamento",
-      "github_io": 200,
-      "asf_surf": "ERR_DOWN"
-    },
-    {
-      "app": "asf-loja",
       "github_io": 200,
       "asf_surf": "ERR_DOWN"
     },
