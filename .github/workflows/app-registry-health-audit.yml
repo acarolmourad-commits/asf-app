@@ -1,6 +1,13 @@
 name: ASF App Registry Health Audit
 
 on:
+  pull_request:
+    paths:
+      - 'data/app-links.json'
+      - 'app-status.json'
+      - 'scripts/audit_app_registry.py'
+      - 'tests/test_app_registry_audit.py'
+      - '.github/workflows/app-registry-health-audit.yml'
   workflow_dispatch:
   schedule:
     - cron: "0 12 * * *" # 09:00 America/Sao_Paulo (UTC-3)
