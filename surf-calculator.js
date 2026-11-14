@@ -113,7 +113,7 @@ window.SurfCalculator = SurfCalculator;
     ['Comunidade','asf-comunidade'],['Parceiras','asf-parceiras'],['Mentorias','asf-mentorias'],
     ['Carona','asf-carona'],['Eventos','asf-eventos'],['Galeria','asf-galeria'],
     ['Mercado','asf-mercado'],['Eco','asf-eco'],['Viagens','asf-viagens'],
-    ['Patrocínio','asf-patrocinio'],['Loja','asf-loja'],['Glossário','asf-glossario'],
+    ['Patrocínio','asf-patrocinio'],['Glossário','asf-glossario'],
     ['História','asf-historia'],['Kids','asf-kids'],['Checklist','asf-checklist'],
     ['Quiz','asf-quiz'],['Ranking','asf-ranking'],['Desafio 30','asf-desafio'],
     ['Desafios','asf-desafios'],['Memória','asf-memoria'],['Diário','asf-diario'],
