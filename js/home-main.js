@@ -1002,23 +1002,10 @@ function updateTideClock(tides, now) {
             const timeStr = String(now.getHours()).padStart(2,'0') + ':' + String(now.getMinutes()).padStart(2,'0');
             label.textContent = 'agora: ' + timeStr;
         }
-function getEstimatedTides(beach, date) {
-            const dayOfYear = Math.floor((date - new Date(date.getFullYear(), 0, 0)) / 86400000);
-            const baseOffset = (dayOfYear % 14) * 0.8; // ~50 min shift per day
-            const baseHigh = 5 + baseOffset;
-            const baseLow = 11 + baseOffset;
-            const high1 = Math.floor(baseHigh) % 24;
-            const highMin1 = Math.floor((baseHigh % 1) * 60);
-            const low1 = Math.floor(baseLow) % 24;
-            const lowMin1 = Math.floor((baseLow % 1) * 60);
-            const high2 = (high1 + 12) % 24;
-
-            return {
-                high: `${String(high1).padStart(2,'0')}:${String(highMin1).padStart(2,'0')} (${(1.0 + Math.sin(dayOfYear * 0.4) * 0.4).toFixed(1)}m)`,
-                low: `${String(low1).padStart(2,'0')}:${String(lowMin1).padStart(2,'0')} (${(0.3 + Math.sin(dayOfYear * 0.4) * 0.2).toFixed(1)}m)`,
-                tip: `💡 Próxima alta: ${String(high2).padStart(2,'0')}:${String(highMin1).padStart(2,'0')}`
-            };
+function getEstimatedTides() {
+            return {high:'Indisponível',low:'Indisponível',tip:'Consulte a Tábua de Marés da Marinha: https://pam.marinha.mil.br/tabuamares/tabuamares.html. Confira estação, data e fuso.'};
         }
+
 function showMarDetails() {
             if (!cachedMarine[currentBeach]) {
                 showToast('Dados ainda carregando. Tente novamente em instantes.');
