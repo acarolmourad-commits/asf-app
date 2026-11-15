@@ -22,10 +22,10 @@ document.addEventListener('DOMContentLoaded', function () {
   var isGuia = !!document.querySelector('.cat[data-cat]') && !!document.getElementById('busca');
   if (isGuia) {
     var grid = document.querySelector('.cat[data-cat] .grid');
-    if (grid && !document.querySelector('a.app[href*="asf-mare"]')) {
+    if (grid && !document.querySelector('a.app[data-asf-consolidated]')) {
       grid.insertAdjacentHTML('beforeend',
-        '<a class="app" href="https://acarolmourad-commits.github.io/asf-mare/"><b>🌙 Maré</b><span>Calculadora de tábua de marés e fases da lua</span></a>' +
-        '<a class="app" href="https://acarolmourad-commits.github.io/asf-swell/"><b>🌀 Swell</b><span>Direção e período do swell por spot, com janela de pico</span></a>' +
+        '<a class="app" data-asf-consolidated href="https://previsao.asf.surf/"><b>🌙 Maré</b><span>Acesse a central consolidada ASF Previsão</span></a>' +
+        '<a class="app" href="https://previsao.asf.surf/"><b>🌀 Swell</b><span>Altura, direção e período das ondas na central ASF Previsão</span></a>' +
         '<a class="app" href="https://acarolmourad-commits.github.io/asf-vento/"><b>💨 Vento</b><span>Vento, direção e temperatura ao vivo nas praias</span></a>');
     }
     var cont = document.getElementById('cont');
