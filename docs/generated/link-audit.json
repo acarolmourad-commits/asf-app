@@ -1,13 +1,10 @@
 {
-  "date": "2026-11-15T18:31:22.367977+00:00",
-  "total": 110,
-  "ok": 100,
+  "date": "2026-11-15T22:11:33.111855+00:00",
+  "total": 109,
+  "ok": 101,
   "skipped": 8,
-  "broken_count": 2,
-  "broken": [
-    "https://acarolmourad-commits.github.io/asf-mare/",
-    "https://acarolmourad-commits.github.io/asf-swell/"
-  ],
+  "broken_count": 0,
+  "broken": [],
   "results": [
     {
       "url": "https://acarolmourad-commits.github.io/asf-app/",
@@ -60,9 +57,9 @@
       "http": 200
     },
     {
-      "url": "https://acarolmourad-commits.github.io/asf-mare/",
-      "status": "broken",
-      "http": 404
+      "url": "https://acarolmourad-commits.github.io/asf-matematica/",
+      "status": "ok",
+      "http": 200
     },
     {
       "url": "https://acarolmourad-commits.github.io/asf-mental/",
@@ -115,11 +112,6 @@
       "http": 200
     },
     {
-      "url": "https://acarolmourad-commits.github.io/asf-swell/",
-      "status": "broken",
-      "http": 404
-    },
-    {
       "url": "https://acarolmourad-commits.github.io/asf-treino/",
       "status": "ok",
       "http": 200
@@ -150,11 +142,6 @@
       "http": 200
     },
     {
-      "url": "https://eventos.asf.surf/",
-      "status": "ok",
-      "http": 200
-    },
-    {
       "url": "https://fonts.googleapis.com",
       "status": "skipped",
       "http": null
@@ -181,6 +168,11 @@
     },
     {
       "url": "https://mental.asf.surf/#mental-de-competidora",
+      "status": "ok",
+      "http": 200
+    },
+    {
+      "url": "https://pam.marinha.mil.br/tabuamares/tabuamares.html",
       "status": "ok",
       "http": 200
     },
