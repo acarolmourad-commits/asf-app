@@ -1,6 +1,6 @@
 # 📈 Revisao SEO Semanal — rede ASF
 
-_Gerado em 09/11/2026 21:49 UTC pelo workflow gsc-seo-review_
+_Gerado em 16/11/2026 21:30 UTC pelo workflow gsc-seo-review_
 
 ## Sitemaps (13 propriedades-chave)
 
@@ -11,7 +11,7 @@ _Modo HTTP (sem credenciais OAuth — configure os secrets para dados de indexac
 | asf.surf | 200 | ✅ |
 | goldenhour | 200 | ✅ |
 | praias | 200 | ✅ |
-| mare | 200 | ✅ |
+| mare | 404 | ❌ |
 | previsao | 200 | ✅ |
 | nutricao | 200 | ✅ |
 | yoga | 200 | ✅ |
@@ -19,7 +19,7 @@ _Modo HTTP (sem credenciais OAuth — configure os secrets para dados de indexac
 | equipamento | 200 | ✅ |
 | historia | 200 | ✅ |
 | manobras | 200 | ✅ |
-| vento | 200 | ✅ |
+| vento | 404 | ❌ |
 | sono | 200 | ✅ |
 
 ## Links rapidos
