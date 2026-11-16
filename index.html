@@ -78,8 +78,8 @@
 <link rel="stylesheet" href="assets/css/home-journey.css">
     <link rel="stylesheet" href="assets/css/surf-tips.css">
     <link rel="stylesheet" href="assets/css/home-modernization.css?v=20261116">
-    <link rel="stylesheet" href="asf-navigation-a11y.css?v=20261116b">
-</head><body>
+    <link rel="stylesheet" href="asf-navigation-a11y.css?v=20261116-nav">
+</head><body class="asf-home-page">
     <!-- Skip to content for accessibility -->
     <!-- Link skip to content movido para script -->
     <div class="scroll-progress" id="scrollProgress"></div>
@@ -92,7 +92,7 @@ t Section -->
     <!-- Animated Background -->
     <div class="bg-animation"></div>
 
-    <header>
+    <header id="asf-site-header">
         <div class="header-content">
             <a class="logo" href="./" style="text-decoration:none;">
                 <img src="assets/asf-logo-512.png" alt="ASF" class="logo-icon" style="border-radius:50%;">
@@ -118,7 +118,7 @@ t Section -->
         <button class="menu-item" onclick="showSection('utilities');closeMenu()"><span>🌊</span> Utilitários</button>
         <button class="menu-item" onclick="showSection('comunidade');closeMenu()"><span>👥</span> Comunidade</button>
         <button class="menu-item" onclick="window.location.href='sessoes-interativas.html';closeMenu()"><span>💬</span> Sessões</button>
-        <button class="menu-item" onclick="showSection('competicoes');closeMenu()"><span>🏆</span> Competições</button>
+        <button class="menu-item" onclick="location.href='https://eventos.asf.surf/';closeMenu()"><span>🏆</span> Competições</button>
         <button class="menu-item" onclick="location.href='quiz/';closeMenu()"><span>🧠</span> Quiz</button>
         <button class="menu-item" onclick="showSection('assinantes');closeMenu()"><span>🌟</span> Destaques</button>
         <button class="menu-item" onclick="showSection('premium');closeMenu()"><span>⭐</span> Guias</button>
@@ -2080,7 +2080,7 @@ t Section -->
 <script src="assets/js/inline/asf-inline-05.js"></script>
     
     <script src="assets/js/inline/asf-inline-06.js"></script>
-    <script src="asf-ux.js" defer></script>
+    <script src="asf-ux.js?v=20261116-nav" defer></script>
 
     <!-- BLOCO 11 - Sobre a ASF -->
     <div class="card" style="margin: 0 20px 24px; padding: 18px 20px; border-radius: 16px;">
@@ -2153,8 +2153,16 @@ t Section -->
         </div>
     </footer>
   <!-- ASF Mural/BottomNav/SW includes (aditivo, 01/10/2026) -->
+  <!-- Essential destinations work before optional scripts load, including without JavaScript. -->
+  <nav class="asf-bottom-nav" aria-label="Navegação principal ASF" data-asf-bottom-nav="true">
+    <a href="./index.html" class="ativo" aria-current="page" aria-label="Início"><span aria-hidden="true">🏠</span><small>Início</small></a>
+    <a href="./previsao-surf/" aria-label="Previsão"><span aria-hidden="true">🌊</span><small>Previsão</small></a>
+    <a href="./mural/" aria-label="Mural"><span aria-hidden="true">📸</span><small>Mural</small></a>
+    <a href="./diario/" aria-label="Diário"><span aria-hidden="true">📓</span><small>Diário</small></a>
+    <a href="./carteirinhas.html" aria-label="Carteirinha"><span aria-hidden="true">🪪</span><small>Carteirinha</small></a>
+  </nav>
   <script defer src="./asf-bottomnav.js?v=20261116-hitfix3"></script>
-  <script defer src="./asf-navigation-a11y.js?v=20261116b"></script>
+  <script defer src="./asf-navigation-a11y.js?v=20261116-nav"></script>
   <script defer src="./asf-mural.js"></script>
   <script>
     if ("serviceWorker" in navigator) {
