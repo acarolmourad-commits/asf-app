@@ -32,6 +32,13 @@ async function hitCheck(locator) {
   const browser=await chromium.launch({headless:true,...(process.env.ASF_CHROMIUM_PATH?{executablePath:process.env.ASF_CHROMIUM_PATH}:{})});
   const summary=[];
   try {
+    const noJS=await browser.newContext({javaScriptEnabled:false,viewport:{width:390,height:844}});
+    const fallbackPage=await noJS.newPage();
+    await fallbackPage.route('**/*',r=>new URL(r.request().url()).origin===origin?r.continue():r.abort());
+    await fallbackPage.goto(origin+'/');
+    assert.equal(await fallbackPage.locator('.asf-bottom-nav a[href]').count(),5,'Five native links without JavaScript');
+    assert.ok((await hitCheck(fallbackPage.locator('.asf-bottom-nav a'))).every(x=>x.reachable),'No-script bottom navigation remains tappable');
+    await noJS.close();
     for (const width of [390,768,1365]) {
       const context=await browser.newContext({viewport:{width,height:844},isMobile:width<600,hasTouch:width<600,reducedMotion:'reduce',serviceWorkers:'block'});
       await context.route('**/*',route=> {
