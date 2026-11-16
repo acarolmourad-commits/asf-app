@@ -21,7 +21,7 @@ document.addEventListener('DOMContentLoaded', function () {
     a.id = 'historia-banner';
     a.href = 'sobre.html';
     a.style.cssText = 'display:block;margin:0 20px 20px;padding:16px 18px;border-radius:16px;text-decoration:none;color:#fff;background:linear-gradient(135deg,#833AB4,#FD1D1D,#F77737);box-shadow:0 2px 10px rgba(0,0,0,.08)';
-    a.innerHTML = '<b style="display:block;font-size:15px">\uD83C\uDF0A Nossa Hist\u00F3ria \u2014 com fotos reais da ASF</b><small style="opacity:.95">Da funda\u00E7\u00E3o em 2017 aos campeonatos: reviva a jornada das manas \u2192</small>';
+    a.innerHTML = '<b style="display:block;font-size:15px">\uD83C\uDF0A Nossa Hist\u00F3ria \u2014 com fotos reais da ASF</b><small style="opacity:.95">Conhe\u00E7a a trajet\u00F3ria da ASF e reviva a jornada das manas \u2192</small>';
     hero.parentNode.insertBefore(a, hero.nextSibling);
   } catch (e) { /* falha silenciosa */ }
 });
