@@ -168,6 +168,9 @@ document.addEventListener('keydown', function(e){
       var label = ((el.getAttribute('aria-label') || '') + ' ' + (el.getAttribute('title') || '') + ' ' + (el.innerText || el.textContent || '')).replace(/\\s+/g, ' ').trim();
       if (!/Galeria das Manas/i.test(label)) return;
       if (openPanel) {
+        // This observer also sees our own accessibility/style changes. Apply
+        // the hidden state once so it cannot schedule itself indefinitely.
+        if (el.dataset.asfNetworkFabState) return;
         if (!el.dataset.asfNetworkFabState) {
           el.dataset.asfNetworkFabState = '1';
           el.dataset.asfNetworkFabVisibility = el.style.visibility || '';

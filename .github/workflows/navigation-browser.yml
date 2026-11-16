@@ -8,6 +8,8 @@ on:
       - 'asf-bottomnav.js'
       - 'asf-mural.css'
       - 'asf-home-quality.*'
+      - 'assets/js/inline/asf-inline-06.js'
+      - 'surf-calculator.js'
       - 'js/home-journey.js'
       - 'tests/navigation-browser.cjs'
       - '.github/workflows/navigation-browser.yml'
