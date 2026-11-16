@@ -26,6 +26,14 @@ async function waitFor(check, label) {
 async function hitCheck(locator) {
   return locator.evaluateAll(els=>els.map(el=>{const r=el.getBoundingClientRect(); const hit=document.elementFromPoint(r.x+r.width/2,r.y+r.height/2); return {label:el.getAttribute('aria-label')||el.textContent.trim(),reachable:!!hit&&el.contains(hit),target:hit?.id||hit?.tagName};}));
 }
+async function menuFocusVisible(page) {
+  return page.locator('#header-menu').evaluate(menu=>{
+    const active=document.activeElement;
+    const item=active.getBoundingClientRect();
+    const top=menu.getBoundingClientRect().top+menu.clientTop;
+    return menu.contains(active) && item.top>=top+3 && item.bottom<=top+menu.clientHeight-3;
+  });
+}
 (async()=>{
   fs.mkdirSync(output,{recursive:true});
   await new Promise(resolve=>server.listen(0,'127.0.0.1',resolve));
@@ -87,16 +95,32 @@ async function hitCheck(locator) {
         for(const location of ['top','bottom']) {
           await page.evaluate(position=>window.scrollTo(0,position==='bottom'?document.body.scrollHeight:0),location);
           await waitFor(async()=> (await hitCheck(page.locator('#menu-toggle,.asf-bottom-nav > a'))).every(x=>x.reachable),`Unreachable controls at ${width}px/${location}: ${JSON.stringify(await hitCheck(page.locator('#menu-toggle,.asf-bottom-nav > a')))}`);
+          const pageScroll=await page.evaluate(()=>window.scrollY);
           await click(page.locator('#menu-toggle'));
           await page.locator('#header-menu.open').waitFor();
           await waitFor(()=>page.locator('#menu-toggle').getAttribute('aria-expanded').then(x=>x==='true'),'Menu ARIA state');
           assert.equal(await page.evaluate(()=>document.getElementById('header-menu').getBoundingClientRect().bottom < document.getElementById('asf-sat-nav').getBoundingClientRect().top),true,'Menu must not overlap floating shortcuts');
           assert.equal(await page.locator('#header-menu .menu-item').count(),23);
+          await waitFor(()=>menuFocusVisible(page),'Opening reveals the focused first item');
+          assert.ok(Math.abs(await page.evaluate(()=>window.scrollY)-pageScroll)<=1,'Opening preserves page scroll');
           await page.locator('#header-menu .menu-item').first().press('End');
           assert.equal(await page.locator('#header-menu .menu-item').last().evaluate(e=>e===document.activeElement),true);
+          await waitFor(()=>menuFocusVisible(page),'End reveals the focused last item');
           await page.locator('#header-menu .menu-item').last().press('Escape');
           await page.locator('#header-menu.open').waitFor({state:'hidden'});
           assert.equal(await page.locator('#menu-toggle').evaluate(e=>e===document.activeElement),true);
+          await click(page.locator('#menu-toggle'));
+          await waitFor(()=>menuFocusVisible(page),'Reopening a scrolled menu reveals its focused item');
+          assert.ok(Math.abs(await page.evaluate(()=>window.scrollY)-pageScroll)<=1,'Reopening preserves page scroll');
+          await page.locator('#header-menu').evaluate(menu=>{menu.scrollTop=menu.scrollHeight;});
+          await page.keyboard.press('Home');
+          await waitFor(()=>menuFocusVisible(page),'Home reveals an already-focused item after manual scroll');
+          for(let step=0;step<23;step++) {
+            await page.keyboard.press('ArrowDown');
+            assert.equal(await menuFocusVisible(page),true,'ArrowDown keeps focus visible');
+          }
+          await page.keyboard.press('Escape');
+          await page.locator('#header-menu.open').waitFor({state:'hidden'});
         }
         // Every internal menu action must reveal its original section and close the menu.
         for(const target of menuTargets) {
