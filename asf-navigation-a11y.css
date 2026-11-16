@@ -1,0 +1,89 @@
+/* ASF Navigation UX — visual and touch-target refinements */
+#menu-toggle {
+  min-width: 48px;
+  min-height: 48px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+#header-menu {
+  max-height: min(72vh, 680px);
+  max-height: min(72dvh, 680px);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
+}
+#header-menu .menu-item {
+  min-height: 44px;
+  line-height: 1.35;
+}
+#header-menu .menu-item:focus-visible,
+#menu-toggle:focus-visible,
+#asf-sat-nav:focus-visible,
+#asf-sat-nav-panel a:focus-visible,
+#asf-sat-nav-panel button:focus-visible,
+#asf-galeria-btn a:focus-visible,
+.asf-bottom-nav a:focus-visible {
+  outline: 3px solid #f6c744 !important;
+  outline-offset: 3px;
+}
+#asf-sat-nav {
+  min-height: 44px;
+}
+#asf-sat-nav-panel {
+  max-width: min(360px, calc(100vw - 32px)) !important;
+}
+#asf-sat-nav-panel a {
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+  min-height: 40px;
+  box-sizing: border-box;
+}
+#asf-galeria-btn a {
+  min-height: 44px;
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+}
+.asf-bottom-nav a {
+  min-height: 48px;
+  justify-content: center;
+}
+@media (max-width: 520px) {
+  #header-menu {
+    left: 12px !important;
+    right: 12px !important;
+    width: auto !important;
+    max-height: calc(100dvh - 100px) !important;
+    padding-bottom: max(8px, env(safe-area-inset-bottom)) !important;
+  }
+  #asf-sat-nav-panel {
+    max-height: calc(100dvh - 160px) !important;
+    bottom: calc(132px + env(safe-area-inset-bottom)) !important;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  #header-menu, #asf-sat-nav-panel, #asf-galeria-btn a {
+    scroll-behavior: auto !important;
+    transition: none !important;
+  }
+}
+
+/* Explicit :focus styling is intentional: programmatic focus after opening
+   a menu must remain visibly perceivable even when the click began with a pointer. */
+#header-menu .menu-item:focus,
+#menu-toggle:focus,
+#asf-sat-nav:focus,
+#asf-sat-nav-panel a:focus,
+#asf-sat-nav-panel button:focus,
+#asf-galeria-btn a:focus,
+.asf-bottom-nav a:focus {
+  outline: 3px solid #f6c744 !important;
+  outline-offset: 3px;
+}
+#header-menu .menu-item:focus {
+  background: rgba(0, 168, 204, .14) !important;
+  color: #0a4d68 !important;
+}

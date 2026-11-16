@@ -1,7 +1,7 @@
 {
   "hub": "https://acarolmourad-commits.github.io/asf-app/",
   "version": 2,
-  "updated": "2026-11-12",
+  "updated": "2026-11-15",
   "apps": [
     {
       "slug": "asf-previsao",
@@ -292,18 +292,6 @@
       "desc_apps": "Apoie o surf feminino: cotas de patrocínio e parcerias de marcas"
     },
     {
-      "slug": "asf-loja",
-      "name": "🛍️ ASF Loja",
-      "url": "https://acarolmourad-commits.github.io/asf-loja/",
-      "icon": "🛍️",
-      "title": "ASF Loja",
-      "category": "💜 Vida & Comunidade",
-      "desc": "Marcas parceiras e cupons exclusivos",
-      "icon_apps": "🛍️",
-      "name_apps": "ASF Loja",
-      "desc_apps": "Marcas parceiras e cupons exclusivos para a comunidade"
-    },
-    {
       "slug": "asf-glossario",
       "name": "📖 ASF Glossário",
       "url": "https://acarolmourad-commits.github.io/asf-glossario/",
@@ -568,18 +556,6 @@
       "desc_apps": "Vision board de metas e sonhos de surf"
     },
     {
-      "slug": "asf-clube",
-      "name": "💳 ASF Clube → Carteirinha",
-      "url": "https://asf.surf/#carteirinha",
-      "icon": "💳",
-      "title": "ASF Clube → Carteirinha",
-      "category": "🎨 Cultura & Utilidades",
-      "desc": "Clube desativado; carteirinha digital e benefícios centralizados na hub ASF",
-      "icon_apps": "🪪",
-      "name_apps": "ASF Clube → Carteirinha",
-      "desc_apps": "Clube desativado; acesse a carteirinha digital e os benefícios na hub ASF"
-    },
-    {
       "slug": "asf-achados",
       "name": "🔍 ASF Achados",
       "url": "https://acarolmourad-commits.github.io/asf-achados/",
@@ -632,7 +608,6 @@
     "asf-bemestar",
     "asf-carona",
     "asf-checklist",
-    "asf-clube",
     "asf-comunidade",
     "asf-desafios",
     "asf-desafio",
@@ -647,11 +622,9 @@
     "asf-inspiracao",
     "asf-kids",
     "asf-leitura",
-    "asf-loja",
     "asf-mala",
     "asf-manobras",
     "asf-mapa",
-    "asf-mare",
     "asf-matematica",
     "asf-memoria",
     "asf-mental",
@@ -674,7 +647,6 @@
     "asf-sos",
     "asf-treino",
     "asf-tempo",
-    "asf-vento",
     "asf-viagens",
     "asf-volume",
     "asf-yoga"

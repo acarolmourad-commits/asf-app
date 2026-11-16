@@ -31,15 +31,15 @@
 | Tema | Fonte oficial |
 |---|---|
 | Institucional ASF | `sobre.html` |
-| Carteirinha/associação | asf-clube + `carteirinha.js` |
-| Eventos | asf-eventos + `data/events.json` |
+| Carteirinha/associação | `carteirinha.js` + `https://asf.surf/#carteirinha` |
+| Eventos | Mural das Manas no App ASF |
 | Praias | asf-praias |
 | Guias/artigos | `aprender/` |
 | Previsão/condições do mar | asf-previsao |
-| Marés | asf-mare |
+| Marés e condições do mar | asf-previsao |
 | Hub da rede de satélites | `guia-apps.html` |
 
-As demais páginas devem resumir + linkar a fonte canônica — nunca manter cópias independentes.
+Os projetos aposentados (ASF Clube, Eventos, Maré, Vento e Swell) não devem aparecer como aplicativos ativos. Seus endereços antigos podem manter redirecionamentos para as fontes canônicas. As demais páginas devem resumir + linkar a fonte canônica — nunca manter cópias independentes.
 
 ## Regra de segurança
 

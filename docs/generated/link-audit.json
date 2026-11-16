@@ -1,13 +1,10 @@
 {
-  "date": "2026-11-14T12:37:07.547877+00:00",
-  "total": 110,
-  "ok": 100,
+  "date": "2026-11-16T14:08:19.485849+00:00",
+  "total": 112,
+  "ok": 104,
   "skipped": 8,
-  "broken_count": 2,
-  "broken": [
-    "https://acarolmourad-commits.github.io/asf-mare/",
-    "https://acarolmourad-commits.github.io/asf-swell/"
-  ],
+  "broken_count": 0,
+  "broken": [],
   "results": [
     {
       "url": "https://acarolmourad-commits.github.io/asf-app/",
@@ -60,9 +57,9 @@
       "http": 200
     },
     {
-      "url": "https://acarolmourad-commits.github.io/asf-mare/",
-      "status": "broken",
-      "http": 404
+      "url": "https://acarolmourad-commits.github.io/asf-matematica/",
+      "status": "ok",
+      "http": 200
     },
     {
       "url": "https://acarolmourad-commits.github.io/asf-mental/",
@@ -115,11 +112,6 @@
       "http": 200
     },
     {
-      "url": "https://acarolmourad-commits.github.io/asf-swell/",
-      "status": "broken",
-      "http": 404
-    },
-    {
       "url": "https://acarolmourad-commits.github.io/asf-treino/",
       "status": "ok",
       "http": 200
@@ -146,11 +138,6 @@
     },
     {
       "url": "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2",
-      "status": "ok",
-      "http": 200
-    },
-    {
-      "url": "https://eventos.asf.surf/",
       "status": "ok",
       "http": 200
     },
@@ -185,7 +172,17 @@
       "http": 200
     },
     {
+      "url": "https://pam.marinha.mil.br/tabuamares/tabuamares.html",
+      "status": "ok",
+      "http": 200
+    },
+    {
       "url": "https://praias.asf.surf/",
+      "status": "ok",
+      "http": 200
+    },
+    {
+      "url": "https://previsao.asf.surf/",
       "status": "ok",
       "http": 200
     },
@@ -249,7 +246,7 @@
       "local": true
     },
     {
-      "url": "./asf-previsao-card.js",
+      "url": "./asf-navigation-a11y.js",
       "status": "ok",
       "http": 200,
       "local": true
@@ -345,6 +342,12 @@
       "local": true
     },
     {
+      "url": "asf-navigation-a11y.css",
+      "status": "ok",
+      "http": 200,
+      "local": true
+    },
+    {
       "url": "asf-ux.css",
       "status": "ok",
       "http": 200,
@@ -370,6 +373,12 @@
     },
     {
       "url": "assets/css/home-journey.css",
+      "status": "ok",
+      "http": 200,
+      "local": true
+    },
+    {
+      "url": "assets/css/home-modernization.css",
       "status": "ok",
       "http": 200,
       "local": true

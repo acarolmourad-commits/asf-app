@@ -552,33 +552,12 @@ const ASF_SURF_CONDITIONS={
 
 function resetPosSurf(){ASF_POS_SURF.resetToday();showToast('✅ Checklist pós-surf reiniciado!')};
 
-async function renderSurfConditions(containerId){
-  const el=document.getElementById(containerId);
-  if(!el) return;
-  el.dataset.loaded='1';
-  const keys=Object.keys(beaches);
-  el.innerHTML='<div class="cards-grid">'+keys.map(k=>'<div class="card utility-card" id="sc-card-'+k+'"><div class="icon">🏖️</div><h4>'+beaches[k].name+'</h4><p style="font-size:13px;color:var(--gray-400)">Carregando…</p></div>').join('')+'</div>';
-  for(const k of keys){
-    const card=document.getElementById('sc-card-'+k);
-    try{
-      const m=await fetchMarine(k);
-      if(m&&m.current){
-        const c=m.current;
-        const r=surfRating(c.wave_height);
-        card.innerHTML='<div class="icon">🌊</div><h4>'+beaches[k].name+'</h4>'
-          +'<p style="font-size:22px;font-weight:700;color:var(--primary);margin:4px 0;">'+c.wave_height.toFixed(1)+'m</p>'
-          +'<p style="font-size:13px;color:'+r.color+';font-weight:600;">'+r.text+'</p>'
-          +'<div style="font-size:12px;color:var(--gray-600);margin-top:6px;">Período: '+c.wave_period.toFixed(0)+'s | Direção: '+windDir(c.wave_direction)+'</div>'
-          +(c.swell_wave_height?'<div style="font-size:12px;color:var(--gray-600);">Swell: '+c.swell_wave_height.toFixed(1)+'m</div>':'')
-          +'<button class="btn btn-secondary" style="width:100%;margin-top:10px;font-size:12px;" onclick="showSection(\'utilities\')">Detalhes →</button>';
-      } else {
-        card.innerHTML='<div class="icon">🏖️</div><h4>'+beaches[k].name+'</h4><p style="font-size:13px;color:var(--gray-400)">Dados indisponíveis no momento</p>';
-      }
-    }catch(e){
-      card.innerHTML='<div class="icon">🏖️</div><h4>'+beaches[k].name+'</h4><p style="font-size:13px;color:var(--gray-400)">Erro ao carregar</p>';
-    }
-  }
+function renderSurfConditions(containerId){
+ const el=document.getElementById(containerId);if(!el)return;
+ el.dataset.loaded='1';
+ el.innerHTML='<a class="btn btn-secondary" href="https://previsao.asf.surf/">Consultar a Central ASF Previsão →</a>';
 }
+
 function asfInitFeatures(){
   try{
     const nc=document.getElementById('surf-news-container');if(nc&&!nc.dataset.loaded){nc.dataset.loaded='1';if(typeof ASF_NEWS!=='undefined')ASF_NEWS.render('surf-news-container')}

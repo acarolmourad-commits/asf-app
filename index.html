@@ -71,12 +71,14 @@
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://acarolmourad-commits.github.io/thumbnails/asf-app.jpg">
-  <link rel="stylesheet" href="./asf-mural.css">
+  <link rel="stylesheet" href="./asf-mural.css?v=20261116-hitfix3">
 
 <link rel="stylesheet" href="asf-journeys-review.css">
 <link rel="stylesheet" href="asf-home-quality.css">
 <link rel="stylesheet" href="assets/css/home-journey.css">
     <link rel="stylesheet" href="assets/css/surf-tips.css">
+    <link rel="stylesheet" href="assets/css/home-modernization.css?v=20261116">
+    <link rel="stylesheet" href="asf-navigation-a11y.css?v=20261116b">
 </head><body>
     <!-- Skip to content for accessibility -->
     <!-- Link skip to content movido para script -->
@@ -100,44 +102,44 @@ t Section -->
                 <button class="icon-btn" id="menu-toggle" aria-label="Abrir menu" aria-expanded="false" aria-controls="header-menu" onclick="toggleMenu(event)">☰</button>
             </div>
         </div>
-        <nav id="header-menu" role="menu" aria-label="Menu principal">
+        <nav id="header-menu" aria-label="Navegação principal" data-asf-grouped="true">
         <div class="asf-menu-group" role="group" aria-label="Comece aqui">
           <div class="asf-menu-group-title">COMECE AQUI</div>
-          <button class="menu-item" role="menuitem" onclick="showSection('dicas');closeMenu()"><span>📚</span> Dicas</button>
-          <button class="menu-item" role="menuitem" onclick="showSection('conteudo');closeMenu()"><span>📖</span> Conteúdo</button>
-          <button class="menu-item" role="menuitem" onclick="showSection('surf-culture');closeMenu()"><span>🏛️</span> Cultura</button>
-          <button class="menu-item" role="menuitem" onclick="location.href='quiz/';closeMenu()"><span>🧠</span> Quiz</button>
-          <button class="menu-item" role="menuitem" onclick="showSection('surfer-profile');closeMenu()"><span>🏄</span> Perfil</button>
+          <button type="button" class="menu-item" onclick="showSection('dicas');closeMenu()"><span>📚</span> Dicas</button>
+          <button type="button" class="menu-item" onclick="showSection('conteudo');closeMenu()"><span>📖</span> Conteúdo</button>
+          <button type="button" class="menu-item" onclick="showSection('surf-culture');closeMenu()"><span>🏛️</span> Cultura</button>
+          <button type="button" class="menu-item" onclick="location.href='quiz/';closeMenu()"><span>🧠</span> Quiz</button>
+          <button type="button" class="menu-item" onclick="showSection('surfer-profile');closeMenu()"><span>🏄</span> Perfil</button>
         </div>
         <div class="asf-menu-group" role="group" aria-label="Explore o mar">
           <div class="asf-menu-group-title">EXPLORE O MAR</div>
-          <button class="menu-item" role="menuitem" onclick="showSection('praias');closeMenu()"><span>🏖️</span> Praias</button>
-          <button class="menu-item" role="menuitem" onclick="location.href='previsao-surf/';closeMenu()"><span>🌊</span> Ondas</button>
-          <button class="menu-item" role="menuitem" onclick="location.href='https://tempo.asf.surf/';closeMenu()"><span>⛅</span> ASF Tempo</button>
-          <button class="menu-item" role="menuitem" onclick="window.location.href='sessoes-interativas.html';closeMenu()"><span>💬</span> Sessões</button>
-          <button class="menu-item" role="menuitem" onclick="showSection('surf-news');closeMenu()"><span>📰</span> News</button>
+          <button type="button" class="menu-item" onclick="showSection('praias');closeMenu()"><span>🏖️</span> Praias</button>
+          <button type="button" class="menu-item" onclick="location.href='previsao-surf/';closeMenu()"><span>🌊</span> Ondas</button>
+          <button type="button" class="menu-item" onclick="location.href='https://tempo.asf.surf/';closeMenu()"><span>⛅</span> ASF Tempo</button>
+          <button type="button" class="menu-item" onclick="window.location.href='sessoes-interativas.html';closeMenu()"><span>💬</span> Sessões</button>
+          <button type="button" class="menu-item" onclick="showSection('surf-news');closeMenu()"><span>📰</span> News</button>
         </div>
         <div class="asf-menu-group" role="group" aria-label="Treine e evolua">
           <div class="asf-menu-group-title">TREINE E EVOLUA</div>
-          <button class="menu-item" role="menuitem" onclick="showSection('mobilidade');closeMenu()"><span>🧘</span> Mobilidade</button>
-          <button class="menu-item" role="menuitem" onclick="showSection('metas');closeMenu()"><span>🎯</span> Metas</button>
-          <button class="menu-item" role="menuitem" onclick="showSection('desafios');closeMenu()"><span>🏆</span> Desafios</button>
-          <button class="menu-item" role="menuitem" onclick="location.href='surf-trip/';closeMenu()"><span>🚗</span> Surftrips</button>
-          <button class="menu-item" role="menuitem" onclick="showSection('utilities');closeMenu()"><span>🌊</span> Utilitários</button>
-          <button class="menu-item" role="menuitem" onclick="showSection('seguranca');closeMenu()"><span>🚺</span> Segurança</button>
+          <button type="button" class="menu-item" onclick="showSection('mobilidade');closeMenu()"><span>🧘</span> Mobilidade</button>
+          <button type="button" class="menu-item" onclick="showSection('metas');closeMenu()"><span>🎯</span> Metas</button>
+          <button type="button" class="menu-item" onclick="showSection('desafios');closeMenu()"><span>🏆</span> Desafios</button>
+          <button type="button" class="menu-item" onclick="location.href='surf-trip/';closeMenu()"><span>🚗</span> Surftrips</button>
+          <button type="button" class="menu-item" onclick="showSection('utilities');closeMenu()"><span>🌊</span> Utilitários</button>
+          <button type="button" class="menu-item" onclick="showSection('seguranca');closeMenu()"><span>🚺</span> Segurança</button>
         </div>
         <div class="asf-menu-group" role="group" aria-label="Comunidade">
           <div class="asf-menu-group-title">COMUNIDADE</div>
-          <button class="menu-item" role="menuitem" onclick="showSection('comunidade');closeMenu()"><span>👥</span> Comunidade</button>
-          <button class="menu-item" role="menuitem" onclick="showSection('competicoes');closeMenu()"><span>🏆</span> Competições</button>
-          <button class="menu-item" role="menuitem" onclick="showSection('assinantes');closeMenu()"><span>🌟</span> Destaques</button>
-          <button class="menu-item" role="menuitem" onclick="showSection('assistente');closeMenu()"><span>🤖</span> Assistente</button>
+          <button type="button" class="menu-item" onclick="showSection('comunidade');closeMenu()"><span>👥</span> Comunidade</button>
+          <button type="button" class="menu-item" onclick="showSection('competicoes');closeMenu()"><span>🏆</span> Competições</button>
+          <button type="button" class="menu-item" onclick="showSection('assinantes');closeMenu()"><span>🌟</span> Destaques</button>
+          <button type="button" class="menu-item" onclick="showSection('assistente');closeMenu()"><span>🤖</span> Assistente</button>
         </div>
         <div class="asf-menu-group" role="group" aria-label="ASF e benefícios">
           <div class="asf-menu-group-title">ASF E BENEFÍCIOS</div>
-          <button class="menu-item" role="menuitem" onclick="location.href='parcerias/';closeMenu()"><span>🤝</span> Parceiros &amp; benefícios</button>
-          <button class="menu-item" role="menuitem" onclick="showSection('carteirinha');ASF_CARD.init();closeMenu()"><span>🪪</span> Carteirinha</button>
-          <button class="menu-item" role="menuitem" onclick="showSection('premium');closeMenu()"><span>⭐</span> Guias</button>
+          <button type="button" class="menu-item" onclick="location.href='parcerias/';closeMenu()"><span>🤝</span> Parceiros &amp; benefícios</button>
+          <button type="button" class="menu-item" onclick="showSection('carteirinha');ASF_CARD.init();closeMenu()"><span>🪪</span> Carteirinha</button>
+          <button type="button" class="menu-item" onclick="showSection('premium');closeMenu()"><span>⭐</span> Guias</button>
         </div>
         </nav>
     </header>
@@ -180,6 +182,7 @@ t Section -->
 
     
         <!-- Search Bar -->
+    <main id="main-content" tabindex="-1">
     <div class="search-container">
         <div class="search-bar">
             <span class="search-icon">🔍</span>
@@ -396,9 +399,9 @@ t Section -->
     </section>
 
 
-    <a href="previsao-surf/" style="display:flex;gap:14px;align-items:center;background:#fff;border-radius:16px;padding:18px;margin:12px 20px;text-decoration:none;color:#0E2439;box-shadow:0 2px 10px rgba(0,0,0,.06);border:1px solid rgba(0,168,204,0.15)"><span style="font-size:2rem">🌊</span><span><b style="display:block">Previsão de Ondas</b><small style="color:#666">Altura, período e direção do swell na previsão disponível</small></span></a>
+    <a href="https://previsao.asf.surf/" style="display:flex;gap:14px;align-items:center;background:#fff;border-radius:16px;padding:18px;margin:12px 20px;text-decoration:none;color:#0E2439;box-shadow:0 2px 10px rgba(0,0,0,.06);border:1px solid rgba(0,168,204,0.15)"><span style="font-size:2rem">🌊</span><span><b style="display:block">Previsão de Ondas</b><small style="color:#666">Consulte ondas e vento na Central ASF Previsão, com fonte, horários e disponibilidade</small></span></a>
     <a href="#carteirinha" id="carteirinha-home-card" onclick="showSection('carteirinha');if(typeof ASF_CARD!=='undefined')ASF_CARD.init();return false" style="display:flex;gap:14px;align-items:center;background:#fff;border-radius:16px;padding:18px;margin:12px 20px;text-decoration:none;color:#0E2439;box-shadow:0 2px 10px rgba(0,0,0,.06);border:1px solid rgba(0,168,204,0.15)"><span style="font-size:2rem">🪪</span><span><b style="display:block">Carteirinha ASF</b><small style="color:#666">Sua identidade de surfista: gratuita, digital e personalizada</small></span></a>
-    <a href="guia-apps.html" style="display:flex;gap:14px;align-items:center;background:linear-gradient(135deg,#0E2439,#00A8CC);border-radius:16px;padding:18px;margin:12px 20px;text-decoration:none;color:#fff;box-shadow:0 4px 14px rgba(14,36,57,.28);border:2px solid #00A8CC"><span style="font-size:2rem">🗺️</span><span><b style="display:block">Guia de Apps ASF <span style="background:#f4d03f;color:#0E2439;font-size:10px;padding:2px 8px;border-radius:10px;vertical-align:middle;margin-left:6px">NOVO</span></b><small style="color:rgba(255,255,255,.9)">Todos os <span data-asf-apps-count>54</span> apps gratuitos da rede de surf feminino, organizados por categoria — encontre o app certo para cada momento</small></span></a>
+    <a href="guia-apps.html" style="display:flex;gap:14px;align-items:center;background:linear-gradient(135deg,#0E2439,#00A8CC);border-radius:16px;padding:18px;margin:12px 20px;text-decoration:none;color:#fff;box-shadow:0 4px 14px rgba(14,36,57,.28);border:2px solid #00A8CC"><span style="font-size:2rem">🗺️</span><span><b style="display:block">Guia de Apps ASF <span style="background:#f4d03f;color:#0E2439;font-size:10px;padding:2px 8px;border-radius:10px;vertical-align:middle;margin-left:6px">NOVO</span></b><small style="color:rgba(255,255,255,.9)">Todos os <span data-asf-apps-count>49</span> apps gratuitos da rede de surf feminino, organizados por categoria — encontre o app certo para cada momento</small></span></a>
     <a href="apps-em-destaque.html" style="display:flex;gap:14px;align-items:center;background:linear-gradient(135deg,#ff4d8d,#7b2ff7);border-radius:16px;padding:18px;margin:12px 20px;text-decoration:none;color:#fff;box-shadow:0 4px 14px rgba(123,47,247,.3)"><span style="font-size:2rem">📣</span><span><b style="display:block">Apps em Destaque da Semana</b><small style="color:rgba(255,255,255,.9)">Previsao, mare, vento, seguranca, treinos e comunidade — os apps da rede para a sua proxima sessao</small></span></a>
             <a href="#brandhub" onclick="showSection('brandhub')" style="font-size:12px;font-weight:600;color:var(--primary);text-decoration:none;cursor:pointer">Ver todas →</a>
         </div>
@@ -591,7 +594,7 @@ t Section -->
                 <p style="font-size: 14px; color: var(--text);">Rotinas completas de mobilidade, yoga e respiração para surfistas estão nos apps dedicados da rede ASF:</p>
                 <a data-app="yoga" href="https://acarolmourad-commits.github.io/asf-yoga/" style="display:block; text-align:center; background: linear-gradient(135deg, #00b4d8, #0077b6); color: white; padding: 12px; border-radius: 12px; text-decoration: none; font-weight: 600; margin-top: 8px;">🧘 ASF Yoga — mobilidade guiada →</a>
                 <a data-app="respira" href="https://acarolmourad-commits.github.io/asf-respira/" style="display:block; text-align:center; background: linear-gradient(135deg, #00b4d8, #0077b6); color: white; padding: 12px; border-radius: 12px; text-decoration: none; font-weight: 600; margin-top: 8px;">🌬️ ASF Respira — breathing & apnea →</a>
-                <a data-app="treino" data-app="treino" data-app="treino" href="https://acarolmourad-commits.github.io/asf-treino/" style="display:block; text-align:center; background: linear-gradient(135deg, #00b4d8, #0077b6); color: white; padding: 12px; border-radius: 12px; text-decoration: none; font-weight: 600; margin-top: 8px;">🏋️ ASF Treino — rotinas funcionais →</a>
+                <a data-app="treino" href="https://acarolmourad-commits.github.io/asf-treino/" style="display:block; text-align:center; background: linear-gradient(135deg, #00b4d8, #0077b6); color: white; padding: 12px; border-radius: 12px; text-decoration: none; font-weight: 600; margin-top: 8px;">🏋️ ASF Treino — rotinas funcionais →</a>
             </div>
         </div>
 
@@ -599,7 +602,7 @@ t Section -->
         <div class="section" id="alimentacao">
             <div class="section-header">
                 <h2 class="section-title">🥗 Alimentação & Nutrição</h2>
-<p style="text-align:center;margin:6px 0 0"><a data-app="nutricao" data-app="nutricao" href="https://acarolmourad-commits.github.io/asf-nutricao/" style="display:inline-block;background:linear-gradient(90deg,#00A8CC,#0E2439);color:#fff;padding:6px 14px;border-radius:999px;font-size:12.5px;font-weight:700;text-decoration:none">🚀 Versão completa no app ASF Nutrição →</a></p>
+<p style="text-align:center;margin:6px 0 0"><a data-app="nutricao" href="https://acarolmourad-commits.github.io/asf-nutricao/" style="display:inline-block;background:linear-gradient(90deg,#00A8CC,#0E2439);color:#fff;padding:6px 14px;border-radius:999px;font-size:12.5px;font-weight:700;text-decoration:none">🚀 Versão completa no app ASF Nutrição →</a></p>
                 <a href="#" class="see-all" onclick="event.preventDefault();return false">Ver todas →</a>
             </div>
 
@@ -1433,7 +1436,7 @@ t Section -->
             </div>
             <div style="margin: 0 20px 20px;">
                 <p style="font-size: 14px; color: var(--text);">Checklist, cronômetro de treino e contatos de emergência estão nos apps dedicados:</p>
-                <a data-app="checklist" data-app="checklist" href="https://acarolmourad-commits.github.io/asf-checklist/" style="display:block; text-align:center; background: linear-gradient(135deg, #00b4d8, #0077b6); color: white; padding: 12px; border-radius: 12px; text-decoration: none; font-weight: 600; margin-top: 8px;">✅ ASF Checklist — pré e pós-surf →</a>
+                <a data-app="checklist" href="https://acarolmourad-commits.github.io/asf-checklist/" style="display:block; text-align:center; background: linear-gradient(135deg, #00b4d8, #0077b6); color: white; padding: 12px; border-radius: 12px; text-decoration: none; font-weight: 600; margin-top: 8px;">✅ ASF Checklist — pré e pós-surf →</a>
                 <a href="https://acarolmourad-commits.github.io/asf-treino/" style="display:block; text-align:center; background: linear-gradient(135deg, #00b4d8, #0077b6); color: white; padding: 12px; border-radius: 12px; text-decoration: none; font-weight: 600; margin-top: 8px;">⏱️ ASF Treino — cronômetro de treino →</a>
                 <a data-app="sos" href="https://acarolmourad-commits.github.io/asf-sos/" style="display:block; text-align:center; background: linear-gradient(135deg, #e74c3c, #c0392b); color: white; padding: 12px; border-radius: 12px; text-decoration: none; font-weight: 600; margin-top: 8px;">🆘 ASF SOS — emergência e segurança →</a>
             </div>
@@ -1535,15 +1538,10 @@ t Section -->
   <div style="font-size:32px;margin-bottom:8px;">🏆</div>
   <h2 id="eventos-cta-title" style="font-size:22px;line-height:1.2;margin:0 0 8px;color:#fff;">Competições &amp; Eventos</h2>
   <p style="font-size:14px;line-height:1.55;margin:0 0 16px;color:rgba(255,255,255,.9);">Calendário de campeonatos, datas, locais e resultados do surf feminino.</p>
-  <a href="https://eventos.asf.surf/" style="display:inline-flex;align-items:center;justify-content:center;min-height:46px;padding:12px 20px;border-radius:999px;background:#fff;color:#0E2439;text-decoration:none;font-size:14px;font-weight:800;">Abrir app Eventos →</a>
+  <a href="https://acarolmourad-commits.github.io/asf-app/" style="display:inline-flex;align-items:center;justify-content:center;min-height:46px;padding:12px 20px;border-radius:999px;background:#fff;color:#0E2439;text-decoration:none;font-size:14px;font-weight:800;">Abrir app Eventos →</a>
 </section>
 
     <!-- Surf News Section -->
-    <!-- 🌊 Surf Conditions Widget -->
-    <div id="surf-conditions-section" style="padding: 0 16px; max-width: 800px; margin: 0 auto 16px;">
-      <div id="surf-conditions-container"></div>
-    </div>
-
     <!-- 📚 Leituras de Surf -->
     <div class="section" id="surf-news">
       <div class="section-header">
@@ -1821,8 +1819,8 @@ t Section -->
                 <p style="font-size: 14px; margin: 10px 0;">Previsões completas com 7 dias de antecedência</p>
                 <ul style="font-size: 13px; color: var(--gray-600); padding-left: 18px; margin: 10px 0;">
                     <li>📍 <a href="https://acarolmourad-commits.github.io/asf-previsao/" style="color: inherit;">Ondas, vento e maré — 7 dias</a></li>
-                    <li>📍 <a href="https://acarolmourad-commits.github.io/asf-mare/" style="color: inherit;">Melhores horários de maré</a></li>
-                    <li>📍 <a href="https://acarolmourad-commits.github.io/asf-swell/" style="color: inherit;">Direção de swell por spot</a></li>
+                    <li>📍 <a href="https://pam.marinha.mil.br/tabuamares/tabuamares.html" style="color: inherit;">Melhores horários de maré</a></li>
+                    <li>📍 <a href="https://acarolmourad-commits.github.io/asf-matematica/" style="color: inherit;">Direção de swell por spot</a></li>
                 </ul>
             </div>
             
@@ -1832,7 +1830,7 @@ t Section -->
                 <h3>Análise Técnica</h3>
                 <p style="font-size: 14px; margin: 10px 0;">Detalhes técnicos avançados dos spots</p>
                 <div style="font-size: 13px; color: var(--gray-600);">
-                    <div style="margin-bottom: 4px;">🌊 <a href="https://acarolmourad-commits.github.io/asf-swell/" style="color: inherit;"><b>Direção e período do swell</b> por spot</a></div>
+                    <div style="margin-bottom: 4px;">🌊 <a href="https://acarolmourad-commits.github.io/asf-matematica/" style="color: inherit;"><b>Direção e período do swell</b> por spot</a></div>
                     <div style="margin-bottom: 4px;">⏱ <a href="https://acarolmourad-commits.github.io/asf-goldenhour/" style="color: inherit;"><b>Janela de pico do dia</b> — maré, vento e luz</a></div>
                     <div>📏 <a href="https://acarolmourad-commits.github.io/asf-previsao/" style="color: inherit;"><b>Altura de onda</b> e condições previstas</a></div>
                 </div>
@@ -2129,6 +2127,8 @@ t Section -->
   </div>
 </section>
 
+    </main>
+
     <footer role="contentinfo" style="background: var(--secondary); color: #F5FAFF; padding: 32px 20px 24px; margin-top: 40px; font-size: 13px;">
         <style>footer[role="contentinfo"], footer[role="contentinfo"] * { color: #FFFFFF !important; opacity: 1 !important; } footer[role="contentinfo"] a { color: #FFFFFF !important; text-decoration: underline !important; text-underline-offset: 3px; } footer[role="contentinfo"] a:focus-visible { outline: 2px solid #FFFFFF; outline-offset: 3px; border-radius: 3px; } footer[role="contentinfo"] ::selection { color: #FFFFFF !important; background: #006B8F !important; }</style>
         <div style="max-width: 900px; margin: 0 auto;">
@@ -2168,7 +2168,8 @@ t Section -->
         </div>
     </footer>
   <!-- ASF Mural/BottomNav/SW includes (aditivo, 01/10/2026) -->
-  <script defer src="./asf-bottomnav.js"></script>
+  <script defer src="./asf-bottomnav.js?v=20261116-hitfix3"></script>
+  <script defer src="./asf-navigation-a11y.js?v=20261116b"></script>
   <script defer src="./asf-mural.js"></script>
   <script>
     if ("serviceWorker" in navigator) {
@@ -2176,7 +2177,7 @@ t Section -->
         navigator.serviceWorker.register("./sw.js").catch(() => {}));
     }
   </script>
-  <script defer src="./asf-previsao-card.js"></script>
+
 <script defer src="js/asf-i18n.js?v=1"></script>
 <script defer src="asf-home-quality.js"></script>
 <script defer src="js/surf-tips.js"></script>
