@@ -1,4 +1,4 @@
-const CACHE = "asf-app-v12-newsletter-events";
+const CACHE = "asf-app-v13-mobile-hitfix";
 const OFFLINE_PAGES = [
   "./index.html",
   "./praias/",
