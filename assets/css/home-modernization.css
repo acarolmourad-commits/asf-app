@@ -1,0 +1,171 @@
+/* ASF Home — modernização institucional 2026
+   Camada visual aditiva: preserva IDs, fluxos, formulários e integrações existentes. */
+:root {
+  --asf-ink: #102b3a;
+  --asf-ocean: #07566b;
+  --asf-teal: #08a9bf;
+  --asf-aqua: #dff6f7;
+  --asf-sand: #f8f6f0;
+}
+html { scroll-behavior: smooth; }
+body {
+  background: linear-gradient(180deg, #f4fbfb 0, #fff 460px, #f8fbfc 100%);
+  color: var(--asf-ink);
+}
+header #menu-toggle {
+  background: linear-gradient(135deg, #073b50, #087f91) !important;
+  border: 1px solid rgba(255,255,255,.55) !important;
+  box-shadow: 0 8px 24px rgba(7,59,80,.22) !important;
+}
+#header-menu {
+  border: 1px solid rgba(9,71,89,.12);
+  border-radius: 20px;
+  box-shadow: 0 18px 50px rgba(8,42,57,.2);
+  backdrop-filter: blur(18px);
+}
+.search-container {
+  max-width: 900px;
+  margin: 18px auto 8px;
+  padding: 10px 20px 14px;
+  background: transparent;
+}
+.search-bar {
+  height: 54px;
+  border-radius: 999px;
+  border: 1px solid #d7e8eb;
+  background: rgba(255,255,255,.94);
+  box-shadow: 0 8px 28px rgba(13,67,82,.07);
+}
+#searchInput { color: var(--asf-ink); }
+.hero {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  max-width: 1160px;
+  margin: 12px auto 30px;
+  padding: clamp(42px,7vw,84px) 28px clamp(38px,6vw,68px);
+  border-radius: 32px;
+  text-align: center;
+  color: #fff;
+  background:
+    radial-gradient(ellipse at 12% 90%, rgba(112,224,220,.28), transparent 42%),
+    radial-gradient(ellipse at 88% 10%, rgba(255,255,255,.16), transparent 34%),
+    linear-gradient(128deg, #082e43 0%, #07566b 52%, #08a9bf 100%);
+  box-shadow: 0 24px 60px rgba(8,67,84,.18);
+}
+.hero::before, .hero::after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  border: 1px solid rgba(255,255,255,.16);
+  border-radius: 50%;
+  pointer-events: none;
+}
+.hero::before { width: 420px; height: 420px; right: -130px; bottom: -280px; }
+.hero::after { width: 300px; height: 300px; left: -130px; top: -210px; }
+.hero .hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 14px;
+  margin: 0 auto 14px;
+  border: 1px solid rgba(255,255,255,.3);
+  border-radius: 999px;
+  background: rgba(255,255,255,.11);
+  color: #e8fcff;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: .09em;
+  text-transform: uppercase;
+}
+.hero .hero-logo {
+  width: 68px;
+  height: 68px;
+  object-fit: contain;
+  padding: 7px;
+  margin: 0 auto 16px;
+  border: 1px solid rgba(255,255,255,.55);
+  border-radius: 22px;
+  background: rgba(255,255,255,.96);
+  box-shadow: 0 10px 30px rgba(0,0,0,.14);
+}
+.hero h1 {
+  max-width: 820px;
+  margin: 0 auto 16px;
+  color: #fff;
+  font-size: clamp(36px,6vw,66px);
+  font-weight: 850;
+  letter-spacing: -.045em;
+  line-height: 1.02;
+}
+.hero h1 span { color: #aaf2ef; }
+.hero > p {
+  max-width: 650px;
+  margin: 0 auto 28px;
+  color: rgba(255,255,255,.88);
+  font-size: clamp(16px,2vw,20px);
+  line-height: 1.65;
+}
+.hero-cta { gap: 12px; }
+.hero-cta .btn-primary {
+  background: #fff !important;
+  color: #07566b !important;
+  border: 1px solid #fff !important;
+  border-radius: 999px !important;
+  padding: 15px 24px !important;
+  box-shadow: 0 10px 24px rgba(0,0,0,.14);
+}
+.hero-cta .btn-secondary {
+  color: #fff !important;
+  border: 1px solid rgba(255,255,255,.58) !important;
+  background: rgba(255,255,255,.08) !important;
+  border-radius: 999px !important;
+  padding: 14px 22px !important;
+}
+#parcerias-destaque {
+  border: 1px solid rgba(255,255,255,.12);
+  box-shadow: 0 18px 42px rgba(8,42,57,.15) !important;
+}
+#comecar { padding-top: 18px; padding-bottom: 30px; }
+#comecar .section-title {
+  margin-bottom: 18px;
+  color: #10394a;
+  font-size: clamp(24px,3vw,34px);
+  letter-spacing: -.03em;
+}
+#comecar > div > a {
+  border: 1px solid #e0edef !important;
+  border-radius: 20px !important;
+  box-shadow: 0 8px 24px rgba(14,54,68,.055) !important;
+  transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+}
+#comecar > div > a:hover {
+  transform: translateY(-3px);
+  border-color: #80d5dc !important;
+  box-shadow: 0 14px 30px rgba(14,54,68,.10) !important;
+}
+.section-title { letter-spacing: -.025em; }
+.card, .well-card, .guide-card { border-radius: 20px; }
+a, button { -webkit-tap-highlight-color: transparent; }
+@media (min-width: 900px) {
+  .hero { margin-top: 18px; }
+  #parcerias-destaque { padding: 38px !important; }
+}
+@media (max-width: 640px) {
+  .search-container { margin: 10px 0 4px; padding: 8px 16px 12px; }
+  .hero {
+    margin: 8px 12px 22px;
+    width: auto;
+    border-radius: 26px;
+    padding: 34px 20px 30px !important;
+  }
+  .hero .hero-logo { width: 56px; height: 56px; border-radius: 18px; }
+  .hero h1 { font-size: clamp(34px,9vw,46px) !important; }
+  .hero > p { font-size: 16px !important; }
+  .hero-cta { max-width: 360px; }
+  .hero-cta .btn-primary, .hero-cta .btn-secondary { border-radius: 15px !important; }
+  #comecar { margin-inline: 12px !important; padding-inline: 4px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero-cta .btn, #comecar > div > a { transition: none !important; }
+}
