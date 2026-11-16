@@ -116,6 +116,8 @@
           if (satelliteButton.getAttribute("aria-expanded") === "true") {
             var items = focusable(satellitePanel);
             (items[0] || satellitePanel).focus();
+          } else {
+            satelliteButton.focus();
           }
         }, 0);
       });
