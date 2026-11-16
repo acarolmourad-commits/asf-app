@@ -168,11 +168,14 @@ document.addEventListener('keydown', function(e){
       var label = ((el.getAttribute('aria-label') || '') + ' ' + (el.getAttribute('title') || '') + ' ' + (el.innerText || el.textContent || '')).replace(/\\s+/g, ' ').trim();
       if (!/Galeria das Manas/i.test(label)) return;
       if (openPanel) {
-        if (!el.dataset.asfNetworkFabState) {
-          el.dataset.asfNetworkFabState = '1';
-          el.dataset.asfNetworkFabVisibility = el.style.visibility || '';
-          el.dataset.asfNetworkFabPointer = el.style.pointerEvents || '';
-        }
+        // This observer also sees our attribute changes. Apply only once per
+        // opening, otherwise even setAttribute with the same value loops forever.
+        if (el.dataset.asfNetworkFabState) return;
+        el.dataset.asfNetworkFabState = '1';
+        el.dataset.asfNetworkFabVisibility = el.style.visibility || '';
+        el.dataset.asfNetworkFabPointer = el.style.pointerEvents || '';
+        el.dataset.asfNetworkFabAria = JSON.stringify(el.getAttribute('aria-hidden'));
+        el.dataset.asfNetworkFabTabindex = JSON.stringify(el.getAttribute('tabindex'));
         el.style.visibility = 'hidden';
         el.style.pointerEvents = 'none';
         el.setAttribute('aria-hidden', 'true');
@@ -180,8 +183,12 @@ document.addEventListener('keydown', function(e){
       } else if (el.dataset.asfNetworkFabState) {
         el.style.visibility = el.dataset.asfNetworkFabVisibility;
         el.style.pointerEvents = el.dataset.asfNetworkFabPointer;
-        el.removeAttribute('aria-hidden');
-        el.removeAttribute('tabindex');
+        [['aria-hidden', 'asfNetworkFabAria'], ['tabindex', 'asfNetworkFabTabindex']].forEach(function (entry) {
+          var value = JSON.parse(el.dataset[entry[1]]);
+          if (value === null) el.removeAttribute(entry[0]);
+          else el.setAttribute(entry[0], value);
+          delete el.dataset[entry[1]];
+        });
         delete el.dataset.asfNetworkFabState;
         delete el.dataset.asfNetworkFabVisibility;
         delete el.dataset.asfNetworkFabPointer;
