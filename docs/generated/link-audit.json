@@ -1,7 +1,7 @@
 {
-  "date": "2026-11-16T20:50:35.023223+00:00",
-  "total": 112,
-  "ok": 104,
+  "date": "2026-11-16T21:40:39.687251+00:00",
+  "total": 118,
+  "ok": 110,
   "skipped": 8,
   "broken_count": 0,
   "broken": [],
@@ -247,6 +247,36 @@
     },
     {
       "url": "./asf-navigation-a11y.js",
+      "status": "ok",
+      "http": 200,
+      "local": true
+    },
+    {
+      "url": "./carteirinhas.html",
+      "status": "ok",
+      "http": 200,
+      "local": true
+    },
+    {
+      "url": "./diario/",
+      "status": "ok",
+      "http": 200,
+      "local": true
+    },
+    {
+      "url": "./index.html",
+      "status": "ok",
+      "http": 200,
+      "local": true
+    },
+    {
+      "url": "./mural/",
+      "status": "ok",
+      "http": 200,
+      "local": true
+    },
+    {
+      "url": "./previsao-surf/",
       "status": "ok",
       "http": 200,
       "local": true
@@ -535,6 +565,12 @@
     },
     {
       "url": "mareas/",
+      "status": "ok",
+      "http": 200,
+      "local": true
+    },
+    {
+      "url": "mural/",
       "status": "ok",
       "http": 200,
       "local": true
