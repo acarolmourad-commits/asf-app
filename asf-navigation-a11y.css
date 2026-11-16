@@ -2,9 +2,14 @@
 /* The legacy zero-height header had backdrop-filter, trapping its fixed button
    beneath the hero. Give the homepage header its own real layout and stacking
    context; do not change headers inside articles or satellite applications. */
+.asf-home-page {
+  padding-top: calc(65px + env(safe-area-inset-top, 0px)) !important;
+}
 #asf-site-header {
-  position: sticky !important;
+  position: fixed !important;
   top: 0 !important;
+  left: 0;
+  right: 0;
   z-index: 2147483000 !important;
   height: auto !important;
   min-height: 64px;
