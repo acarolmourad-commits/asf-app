@@ -105,7 +105,7 @@ window.SurfCalculator = SurfCalculator;
   if (document.getElementById('asf-sat-nav')) return;
   var sites = [
     ['ASF App','asf-app'],['Previsão','asf-previsao'],['Praias','asf-praias'],
-    ['Previsão','asf-previsao'],['Mapa','asf-mapa'],['Atlas','asf-atlas'],
+    ['Mapa','asf-mapa'],['Atlas','asf-atlas'],
     ['Alerta','asf-alerta'],['Ponto','asf-ponto'],['Leitura de Mar','asf-leitura'],
     ['Golden Hour','asf-goldenhour'],['Treino','asf-treino'],
     ['Manobras','asf-manobras'],['Pop-up','asf-popup'],['Apneia','asf-apnea'],
