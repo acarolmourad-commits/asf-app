@@ -18,6 +18,7 @@ const server = http.createServer((req, res) => {
   fs.createReadStream(file).pipe(res);
 });
 const menuTargets = [...fs.readFileSync(path.join(root,'index.html'),'utf8').matchAll(/class="menu-item" onclick="showSection\('([^']+)'\)[^"]*">([\s\S]*?)<\/button>/g)].map(m=>({id:m[1],label:m[2].replace(/<[^>]*>/g,'').trim()}));
+const pageTargets = [...fs.readFileSync(path.join(root,'index.html'),'utf8').matchAll(/class="menu-item" onclick="(?:window\.)?location\.href='([^']+)'[^"]*">([\s\S]*?)<\/button>/g)].map(m=>({href:m[1],label:m[2].replace(/<[^>]*>/g,'').trim()}));
 async function waitFor(check, label) {
   for (let i=0;i<40;i++) { if(await check()) return; await new Promise(r=>setTimeout(r,50)); }
   throw Error(label);
@@ -88,6 +89,13 @@ async function hitCheck(locator) {
         await page.locator('#header-menu.open').waitFor();
         await page.screenshot({path:path.join(output,`menu-${width}.png`)});
         await page.locator('#header-menu .menu-item').first().press('Escape');
+        for (const target of pageTargets) {
+          await home();
+          await click(page.locator('#menu-toggle'));
+          await click(page.locator('#header-menu').getByRole('button',{name:target.label,exact:true}));
+          const expected=target.href==='previsao-surf/'?'https://previsao.asf.surf/':new URL(target.href,origin+'/').href;
+          await page.waitForURL(expected);
+        }
         const destinations=[['Início','/index.html'],['Previsão','https://previsao.asf.surf/'],['Mural','/mural/'],['Diário','/diario/'],['Carteirinha','/emitir.html']];
         for(const [label,target] of destinations) {
           await home();
@@ -95,7 +103,7 @@ async function hitCheck(locator) {
           await page.waitForURL(target.startsWith('https:')?target:origin+target);
         }
         assert.deepEqual(errors.filter(e=>/lq is not defined|asf-ux:/.test(e)),[]);
-        summary.push({width,menuItems:23,internalActions:menuTargets.length,bottomDestinations:5,hitTargets:'top and bottom',status:'passed'});
+        summary.push({width,menuItems:23,internalActions:menuTargets.length,pageActions:pageTargets.length,bottomDestinations:5,hitTargets:'top and bottom',status:'passed'});
       } catch(error) {
         await page.screenshot({path:path.join(output,`failure-${width}.png`),fullPage:true});
         throw error;
