@@ -31,21 +31,27 @@
     catch (_) { return href.replace(/\/$/, ""); }
   };
 
-  document.addEventListener("DOMContentLoaded", () => {
-    if (!document.querySelector(".asf-bottom-nav")) {
-      const nav = document.createElement("nav");
-      nav.className = "asf-bottom-nav";
-      nav.setAttribute("aria-label", "Navegação principal");
-      const atual = location.pathname.replace(/\/$/, "");
-      nav.innerHTML = NAV.map(i => {
-        const target = pathFor(i.href);
-        const active = atual === target || (target.endsWith("/index.html") && atual === target.slice(0, -11));
-        return `<a href="${esc(i.href)}" class="${active ? "ativo" : ""}"${active ? ' aria-current="page"' : ""}>
-          <span aria-hidden="true">${i.icon}</span><small>${esc(i.label)}</small></a>`;
-      }).join("");
-      document.body.appendChild(nav);
-    }
-  });
+  function mountBottomNav() {
+    if (!document.body || document.querySelector(".asf-bottom-nav")) return;
+    const nav = document.createElement("nav");
+    nav.className = "asf-bottom-nav";
+    nav.setAttribute("aria-label", "Navegação principal");
+    nav.setAttribute("data-asf-bottom-nav", "true");
+    const atual = location.pathname.replace(/\/$/, "");
+    nav.innerHTML = NAV.map(i => {
+      const target = pathFor(i.href);
+      const active = atual === target || (target.endsWith("/index.html") && atual === target.slice(0, -11));
+      return `<a href="${esc(i.href)}" class="${active ? "ativo" : ""}"${active ? ' aria-current="page"' : ""} aria-label="${esc(i.label)}">
+        <span aria-hidden="true">${i.icon}</span><small>${esc(i.label)}</small></a>`;
+    }).join("");
+    document.body.appendChild(nav);
+  }
+  // Also supports dynamically injected scripts that execute after DOMContentLoaded.
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", mountBottomNav, { once: true });
+  } else {
+    mountBottomNav();
+  }
 
   window.asfHubFilter = {
     init(inputEl, chipsEl, gridEl, apps) {
