@@ -10,7 +10,7 @@
     { label: "Carteirinha", icon: "\u{1FAAA}", href: base + "carteirinhas.html" },
   ];
   const CATEGORIAS = {
-    "Mar/Vento": ["asf-mare", "asf-vento", "asf-swell", "asf-previsao", "asf-atlas", "asf-alerta"],
+    "Mar/Vento": ["asf-previsao", "asf-atlas", "asf-alerta"],
     "Treinos/Yoga": ["asf-yoga", "asf-treino", "asf-respira", "asf-apnea", "asf-nutricao", "asf-sono", "asf-mental"],
     "Viagens": ["asf-viagens", "asf-mala", "asf-carona", "hospedagens", "asf-achados"],
     "Segurança": ["asf-sos", "asf-seguranca", "asf-ponto", "asf-kids"],
