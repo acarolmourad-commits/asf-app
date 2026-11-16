@@ -10,21 +10,21 @@
     ]
   },
   "new_utility": {
-    "name": "Calculadora de Prancha",
-    "description": "Volume ideal",
-    "icon": "🧮"
+    "name": "Calculadora de Maré",
+    "description": "Horários de maré",
+    "icon": "🗓️"
   },
   "improvements": [
+    {
+      "type": "feature",
+      "title": "Medidor de condições do mar",
+      "priority": "high"
+    },
     {
       "type": "content",
       "title": "Mais dicas técnicas avançadas",
       "priority": "high"
-    },
-    {
-      "type": "layout",
-      "title": "Modo escuro",
-      "priority": "medium"
     }
   ],
-  "generated_at": "2026-11-16T03:29:00.005635"
+  "generated_at": "2026-11-16T14:07:42.903949"
 }

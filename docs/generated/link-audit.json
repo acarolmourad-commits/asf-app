@@ -1,7 +1,7 @@
 {
-  "date": "2026-11-16T03:29:25.558809+00:00",
-  "total": 109,
-  "ok": 101,
+  "date": "2026-11-16T14:08:19.485849+00:00",
+  "total": 112,
+  "ok": 104,
   "skipped": 8,
   "broken_count": 0,
   "broken": [],
@@ -246,6 +246,12 @@
       "local": true
     },
     {
+      "url": "./asf-navigation-a11y.js",
+      "status": "ok",
+      "http": 200,
+      "local": true
+    },
+    {
       "url": "/aprender/",
       "status": "ok",
       "http": 200,
@@ -336,6 +342,12 @@
       "local": true
     },
     {
+      "url": "asf-navigation-a11y.css",
+      "status": "ok",
+      "http": 200,
+      "local": true
+    },
+    {
       "url": "asf-ux.css",
       "status": "ok",
       "http": 200,
@@ -361,6 +373,12 @@
     },
     {
       "url": "assets/css/home-journey.css",
+      "status": "ok",
+      "http": 200,
+      "local": true
+    },
+    {
+      "url": "assets/css/home-modernization.css",
       "status": "ok",
       "http": 200,
       "local": true
