@@ -104,7 +104,7 @@ document.getElementById('download').addEventListener('click',()=>{
  c.font='26px system-ui';c.fillText([recovered.nivel,recovered.praia].filter(Boolean).join(' · '),55,230);
  c.font='bold 38px monospace';c.fillText(recovered.numero,55,390);
  c.font='24px system-ui';c.fillText('Válida até '+dateBR(recovered.validade),55,445);
- const img=new Image();img.onload=()=>{c.drawImage(img,760,350,180,180);const a=document.createElement('a');a.download='carteirinha-asf.png';a.href=canvas.toDataURL('image/png');a.click();};
+ const img=new Image();img.onload=()=>{c.fillStyle='#ffffff';c.fillRect(736,326,228,228);c.drawImage(img,760,350,180,180);const a=document.createElement('a');a.download='carteirinha-asf.png';a.href=canvas.toDataURL('image/png');a.click();};
  img.src=qrData;
 });
 client.auth.onAuthStateChange((event,session)=>{
