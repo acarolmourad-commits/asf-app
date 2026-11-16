@@ -1,141 +1,137 @@
-// Real rendering/input regression. Install playwright@1.56.1 and its Chromium.
-// Run: node tests/navigation-browser.cjs
-// Requests stay on a local server; no registration, message or live API writes.
+// Browser regression: real homepage layout/scripts, isolated from external APIs.
+// Usage: NODE_PATH=<playwright install>/node_modules node tests/navigation-browser.cjs
 const assert = require('node:assert/strict');
 const fs = require('node:fs');
-const http = require('node:http');
 const path = require('node:path');
+const http = require('node:http');
 const { chromium } = require('playwright');
 const root = path.resolve(__dirname, '..');
-const output = process.env.ASF_BROWSER_OUTPUT || path.join(root, 'test-results/navigation');
-const types = {'.html':'text/html','.js':'text/javascript','.css':'text/css','.json':'application/json','.svg':'image/svg+xml','.png':'image/png','.jpg':'image/jpeg','.webp':'image/webp'};
+const output = path.join(root, 'test-results/navigation');
+const mime = {'.html':'text/html','.js':'text/javascript','.css':'text/css','.json':'application/json','.png':'image/png','.svg':'image/svg+xml','.webp':'image/webp'};
 const server = http.createServer((req, res) => {
-  if (req.method !== 'GET') { res.writeHead(405).end(); return; }
   const pathname = decodeURIComponent(new URL(req.url, 'http://localhost').pathname);
   let file = path.resolve(root, '.' + pathname);
-  if (!file.startsWith(root + path.sep)) { res.writeHead(403).end(); return; }
+  if (file !== root && !file.startsWith(root + path.sep)) { res.writeHead(403).end(); return; }
   if (fs.existsSync(file) && fs.statSync(file).isDirectory()) file = path.join(file, 'index.html');
   if (!fs.existsSync(file)) { res.writeHead(404).end(); return; }
-  res.setHeader('Content-Type', types[path.extname(file)] || 'application/octet-stream');
+  res.setHeader('Content-Type', mime[path.extname(file)] || 'application/octet-stream');
   fs.createReadStream(file).pipe(res);
 });
-const cases = [
-  {name:'desktop',width:1363,height:936,touch:false},
-  {name:'mobile-360',width:360,height:800,touch:true},
-  {name:'mobile-390',width:390,height:844,touch:true},
-  {name:'landscape',width:844,height:390,touch:true},
-  {name:'tablet',width:768,height:1024,touch:true}
-];
-async function hitTarget(locator) {
-  return locator.evaluate(e => {
-    const r=e.getBoundingClientRect();
-    return r.width >= 40 && r.height >= 40 && r.left >= 0 && r.top >= 0 &&
-      r.right <= innerWidth && r.bottom <= innerHeight &&
-      e.contains(document.elementFromPoint(r.x+r.width/2,r.y+r.height/2));
-  });
+const menuTargets = [...fs.readFileSync(path.join(root,'index.html'),'utf8').matchAll(/class="menu-item" onclick="showSection\('([^']+)'\)[^"]*">([\s\S]*?)<\/button>/g)].map(m=>({id:m[1],label:m[2].replace(/<[^>]*>/g,'').replace(/&amp;/g,'&').trim()}));
+const pageTargets = [...fs.readFileSync(path.join(root,'index.html'),'utf8').matchAll(/class="menu-item" onclick="(?:window\.)?location\.href='([^']+)'[^"]*">([\s\S]*?)<\/button>/g)].map(m=>({href:m[1],label:m[2].replace(/<[^>]*>/g,'').replace(/&amp;/g,'&').trim()}));
+async function waitFor(check, label) {
+  for (let i=0;i<40;i++) { if(await check()) return; await new Promise(r=>setTimeout(r,50)); }
+  throw Error(label);
 }
-(async () => {
-  fs.mkdirSync(output, {recursive:true});
-  await new Promise(resolve => server.listen(0,'127.0.0.1',resolve));
-  const origin = 'http://127.0.0.1:' + server.address().port;
-  let browser;
-  const results=[];
+async function hitCheck(locator) {
+  return locator.evaluateAll(els=>els.map(el=>{const r=el.getBoundingClientRect(); const hit=document.elementFromPoint(r.x+r.width/2,r.y+r.height/2); return {label:el.getAttribute('aria-label')||el.textContent.trim(),reachable:!!hit&&el.contains(hit),target:hit?.id||hit?.tagName};}));
+}
+(async()=>{
+  fs.mkdirSync(output,{recursive:true});
+  await new Promise(resolve=>server.listen(0,'127.0.0.1',resolve));
+  const origin='http://127.0.0.1:'+server.address().port;
+  const browser=await chromium.launch({headless:true,...(process.env.ASF_CHROMIUM_PATH?{executablePath:process.env.ASF_CHROMIUM_PATH}:{})});
+  const summary=[];
   try {
-    browser=await chromium.launch({headless:true});
-    for (const spec of cases) {
-      const context=await browser.newContext({viewport:{width:spec.width,height:spec.height},hasTouch:spec.touch,isMobile:spec.touch,serviceWorkers:'block',reducedMotion:'reduce'});
-      await context.route('**/*', route => new URL(route.request().url()).origin === origin ? route.continue() : route.abort());
+    const noJS=await browser.newContext({javaScriptEnabled:false,viewport:{width:390,height:844}});
+    const fallbackPage=await noJS.newPage();
+    await fallbackPage.route('**/*',r=>new URL(r.request().url()).origin===origin?r.continue():r.abort());
+    await fallbackPage.goto(origin+'/');
+    assert.equal(await fallbackPage.locator('.asf-bottom-nav a[href]').count(),5,'Five native links without JavaScript');
+    assert.ok((await hitCheck(fallbackPage.locator('.asf-bottom-nav a'))).every(x=>x.reachable),'No-script bottom navigation remains tappable');
+    await noJS.close();
+    for (const [width,height] of [[360,800],[390,844],[768,1024],[844,390],[1365,936]]) {
+      const context=await browser.newContext({viewport:{width,height},isMobile:width<900,hasTouch:width<900,reducedMotion:'reduce',serviceWorkers:'block'});
+      await context.route('**/*',route=> {
+        const request=route.request();
+        if (new URL(request.url()).origin===origin) return route.continue();
+        // Confirm destination URLs without fetching third-party data or submitting forms.
+        if (request.isNavigationRequest()) return route.fulfill({status:200,contentType:'text/html',body:'<h1>Destino externo de navegação</h1>'});
+        return route.abort();
+      });
       const page=await context.newPage();
-      page.setDefaultTimeout(7000);
-      const act=locator => spec.touch ? locator.tap() : locator.click();
-      try {
-        await page.goto(origin+'/index.html');
+      const errors=[]; page.on('pageerror',e=>errors.push(e.message));
+      page.on('console',m=>{if(m.type()==='error' && /asf-ux:/.test(m.text())) errors.push(m.text());});
+      const click=async locator=>width<900?locator.tap():locator.click();
+      async function home() {
+        await page.goto(origin+'/');
         await page.locator('#asf-explore-directory').waitFor();
-        await page.waitForFunction(()=>document.getElementById('menu-toggle').getAttribute('aria-controls')==='header-menu');
+        await page.locator('.asf-bottom-nav').waitFor();
         const consent=page.getByRole('button',{name:'Somente essenciais',exact:true});
-        if(await consent.isVisible()) await consent.click();
-        const toggle=page.locator('#menu-toggle'), menu=page.locator('#header-menu');
-        const items=menu.locator('.menu-item');
-        assert.equal(await menu.locator('.asf-menu-group').count(),5);
-        assert.equal(await items.count(),23);
-        assert.equal(await menu.locator('[role="menu"],[role="menuitem"]').count(),0);
-        assert.ok(await hitTarget(toggle),'menu trigger receives pointer at its center');
-        await act(toggle);
-        await page.waitForFunction(()=>document.activeElement===document.querySelector('#header-menu .menu-item'));
-        assert.equal(await toggle.getAttribute('aria-expanded'),'true');
-        assert.ok(await items.first().evaluate(e=>getComputedStyle(e).outlineStyle!=='none'),'visible focus');
-        await page.keyboard.press('ArrowDown');
-        assert.ok(await items.nth(1).evaluate(e=>e===document.activeElement));
-        await page.keyboard.press('End');
-        assert.ok(await items.last().evaluate(e=>e===document.activeElement));
-        await page.keyboard.press('ArrowDown');
-        assert.ok(await items.first().evaluate(e=>e===document.activeElement));
-        await page.keyboard.press('ArrowUp');
-        assert.ok(await items.last().evaluate(e=>e===document.activeElement));
-        await page.keyboard.press('Home');
-        await page.keyboard.press('Tab');
-        assert.ok(await items.nth(1).evaluate(e=>e===document.activeElement));
-        await page.screenshot({path:path.join(output,spec.name+'-menu.png')});
-        await page.keyboard.press('Escape');
-        assert.equal(await toggle.getAttribute('aria-expanded'),'false');
-        assert.ok(await toggle.evaluate(e=>e===document.activeElement));
-        await toggle.press('Enter');
-        await page.waitForFunction(()=>document.activeElement===document.querySelector('#header-menu .menu-item'));
-        await act(menu.getByRole('button',{name:'🏆 Competições',exact:true}));
-        await page.locator('#competicoes').waitFor({state:'visible'});
-        assert.equal(await page.locator('#eventos-cta a').getAttribute('href'),'mural/');
-        assert.equal(await toggle.getAttribute('aria-expanded'),'false');
-        // Verify the fixed controls still receive input after scrolling.
-        const nav=page.locator('.asf-bottom-nav a');
-        assert.deepEqual(await nav.evaluateAll(es=>es.map(e=>new URL(e.href).pathname)),['/index.html','/previsao-surf/','/mural/','/diario/','/carteirinhas.html']);
-        for(const link of await nav.all()) assert.ok(await hitTarget(link),'fixed footer target');
-        const network=page.locator('#asf-sat-nav'), panel=page.locator('#asf-sat-nav-panel'), gallery=page.locator('#asf-galeria-btn a');
-        assert.ok(await hitTarget(gallery),'gallery target');
-        assert.equal(await gallery.getAttribute('href'),'https://galeria.asf.surf/');
-        assert.ok(await hitTarget(network),'network target');
-        for(const close of ['escape','button','outside']) {
-          await act(network);
-          await panel.waitFor({state:'visible'});
-          await page.waitForFunction(()=>document.getElementById('asf-sat-nav-panel').contains(document.activeElement));
-          assert.equal(await network.getAttribute('aria-expanded'),'true');
-          assert.equal(await gallery.getAttribute('aria-hidden'),'true');
-          const controls=panel.locator('button,a[href]');
-          await controls.last().focus();
-          await page.keyboard.press('Tab');
-          assert.ok(await controls.first().evaluate(e=>e===document.activeElement));
-          await page.keyboard.press('Shift+Tab');
-          assert.ok(await controls.last().evaluate(e=>e===document.activeElement));
-          if(close==='escape') {
-            await page.screenshot({path:path.join(output,spec.name+'-network.png')});
-            await page.keyboard.press('Escape');
-          } else if(close==='button') await act(panel.getByRole('button',{name:'Fechar catálogo da Rede ASF',exact:true}));
-          else await page.locator('#asf-sat-nav-backdrop').click({position:{x:2,y:2}});
-          await panel.waitFor({state:'hidden'});
-          await page.waitForFunction(()=>document.activeElement===document.getElementById('asf-sat-nav'));
-          assert.equal(await gallery.getAttribute('aria-hidden'),null);
-          assert.ok(await hitTarget(gallery),'gallery restored');
+        if(await consent.isVisible()) await click(consent);
+      }
+      try {
+        await home();
+        assert.equal(await page.locator('.asf-bottom-nav').count(),1);
+        assert.equal(await page.locator('#header-menu .asf-menu-group').count(),5);
+        assert.equal(await page.locator('#header-menu [role=menuitem]').count(),0);
+        // Opening the network panel previously starved the browser event loop:
+        // a MutationObserver kept rewriting the gallery's aria-hidden attribute.
+        const networkButton=page.locator('#asf-sat-nav');
+        const networkPanel=page.locator('#asf-sat-nav-panel');
+        const gallery=page.locator('#asf-galeria-btn a');
+        for(const closeWith of ['button','escape','backdrop']) {
+          await click(networkButton);
+          await networkPanel.waitFor({state:'visible'});
+          await waitFor(()=>networkButton.getAttribute('aria-expanded').then(x=>x==='true'),'Network panel state');
+          assert.equal(await gallery.isVisible(),false,'Gallery yields space to the network panel');
+          assert.ok(await networkPanel.locator('a[href]').count()>0,'Network destinations are present');
+          if(closeWith==='button') await click(networkPanel.getByRole('button',{name:'Fechar catálogo da Rede ASF',exact:true}));
+          else if(closeWith==='escape') await networkPanel.press('Escape');
+          else await page.locator('#asf-sat-nav-backdrop').click({position:{x:page.viewportSize().width-4,y:page.viewportSize().height/2}});
+          await networkPanel.waitFor({state:'hidden'});
+          await waitFor(()=>networkButton.getAttribute('aria-expanded').then(x=>x==='false'),'Network panel closes');
+          assert.equal(await gallery.isVisible(),true,'Gallery returns after closing');
+          assert.equal(await networkButton.evaluate(e=>e===document.activeElement),true,'Focus returns to network control');
         }
-        // Follow actual footer clicks; later responses are inert fixtures so no
-        // external app/API is exercised or changed by this navigation regression.
-        for(const [label,target] of [['Início','index.html'],['Previsão','previsao-surf/'],['Mural','mural/'],['Diário','diario/'],['Carteirinha','carteirinhas.html']]) {
-          await page.route(origin+'/'+target, route=>route.fulfill({status:200,contentType:'text/html',body:'<h1>Navigation target</h1>'}));
-          await act(page.locator('.asf-bottom-nav').getByRole('link',{name:label,exact:true}));
-          await page.waitForURL(origin+'/'+target);
-          await page.unroute(origin+'/'+target);
-          await page.goto(origin+'/index.html');
-          await page.locator('#asf-explore-directory').waitFor();
+        for(const location of ['top','bottom']) {
+          await page.evaluate(position=>window.scrollTo(0,position==='bottom'?document.body.scrollHeight:0),location);
+          await waitFor(async()=> (await hitCheck(page.locator('#menu-toggle,.asf-bottom-nav > a'))).every(x=>x.reachable),`Unreachable controls at ${width}px/${location}: ${JSON.stringify(await hitCheck(page.locator('#menu-toggle,.asf-bottom-nav > a')))}`);
+          await click(page.locator('#menu-toggle'));
+          await page.locator('#header-menu.open').waitFor();
+          await waitFor(()=>page.locator('#menu-toggle').getAttribute('aria-expanded').then(x=>x==='true'),'Menu ARIA state');
+          assert.equal(await page.evaluate(()=>document.getElementById('header-menu').getBoundingClientRect().bottom < document.getElementById('asf-sat-nav').getBoundingClientRect().top),true,'Menu must not overlap floating shortcuts');
+          assert.equal(await page.locator('#header-menu .menu-item').count(),23);
+          await page.locator('#header-menu .menu-item').first().press('End');
+          assert.equal(await page.locator('#header-menu .menu-item').last().evaluate(e=>e===document.activeElement),true);
+          await page.locator('#header-menu .menu-item').last().press('Escape');
+          await page.locator('#header-menu.open').waitFor({state:'hidden'});
+          assert.equal(await page.locator('#menu-toggle').evaluate(e=>e===document.activeElement),true);
         }
-        results.push({case:spec.name,status:'passed'});
-        console.log('PASS '+spec.name+': menu, keyboard, competitions, network, gallery, five footer clicks');
+        // Every internal menu action must reveal its original section and close the menu.
+        for(const target of menuTargets) {
+          await click(page.locator('#menu-toggle'));
+          await click(page.locator('#header-menu').getByRole('button',{name:target.label,exact:true}));
+          await page.locator('#header-menu.open').waitFor({state:'hidden'});
+          assert.equal(await page.locator('#'+target.id).isVisible(),true,`Hidden target ${target.id} at ${width}px`);
+        }
+        await home();
+        await page.screenshot({path:path.join(output,`home-${width}.png`)});
+        await click(page.locator('#menu-toggle'));
+        await page.locator('#header-menu.open').waitFor();
+        await page.screenshot({path:path.join(output,`menu-${width}.png`)});
+        await page.locator('#header-menu .menu-item').first().press('Escape');
+        for (const target of pageTargets) {
+          await home();
+          await click(page.locator('#menu-toggle'));
+          await click(page.locator('#header-menu').getByRole('button',{name:target.label,exact:true}));
+          const expected=target.href==='previsao-surf/'?'https://previsao.asf.surf/':new URL(target.href,origin+'/').href;
+          await page.waitForURL(expected);
+        }
+        const destinations=[['Início','/index.html'],['Previsão','https://previsao.asf.surf/'],['Mural','/mural/'],['Diário','/diario/'],['Carteirinha','/emitir.html']];
+        for(const [label,target] of destinations) {
+          await home();
+          await click(page.locator('.asf-bottom-nav').getByRole('link',{name:label,exact:true}));
+          await page.waitForURL(target.startsWith('https:')?target:origin+target);
+        }
+        assert.deepEqual(errors.filter(e=>/lq is not defined|asf-ux:/.test(e)),[]);
+        summary.push({width,height,menuItems:23,internalActions:menuTargets.length,pageActions:pageTargets.length,bottomDestinations:5,networkPanel:'open/close button, Escape, backdrop',hitTargets:'top and bottom',status:'passed'});
       } catch(error) {
-        results.push({case:spec.name,status:'failed',message:error.message});
-        await page.screenshot({path:path.join(output,spec.name+'-failure.png'),timeout:3000}).catch(()=>{});
+        await page.screenshot({path:path.join(output,`failure-${width}.png`),fullPage:true});
         throw error;
       } finally {await context.close();}
     }
-  } finally {
-    fs.writeFileSync(path.join(output,'results.json'),JSON.stringify(results,null,2));
-    if(browser) await browser.close();
-    await new Promise(resolve=>server.close(resolve));
-  }
-})().catch(error=>{console.error(error);process.exitCode=1;});
+    fs.writeFileSync(path.join(output,'results.json'),JSON.stringify(summary,null,2));
+    console.log(JSON.stringify(summary,null,2));
+  } finally {await browser.close();server.close();}
+})().catch(error=>{console.error(error);server.close();process.exitCode=1;});

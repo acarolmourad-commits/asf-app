@@ -74,12 +74,12 @@
   <link rel="stylesheet" href="./asf-mural.css?v=20261116-hitfix3">
 
 <link rel="stylesheet" href="asf-journeys-review.css">
-<link rel="stylesheet" href="asf-home-quality.css?v=20261116-controls1">
+<link rel="stylesheet" href="asf-home-quality.css">
 <link rel="stylesheet" href="assets/css/home-journey.css">
     <link rel="stylesheet" href="assets/css/surf-tips.css">
     <link rel="stylesheet" href="assets/css/home-modernization.css?v=20261116">
-    <link rel="stylesheet" href="asf-navigation-a11y.css?v=20261116b">
-</head><body>
+    <link rel="stylesheet" href="asf-navigation-a11y.css?v=20261116-nav">
+</head><body class="asf-home-page">
     <!-- Skip to content for accessibility -->
     <!-- Link skip to content movido para script -->
     <div class="scroll-progress" id="scrollProgress"></div>
@@ -92,7 +92,7 @@ t Section -->
     <!-- Animated Background -->
     <div class="bg-animation"></div>
 
-    <header>
+    <header id="asf-site-header">
         <div class="header-content">
             <a class="logo" href="./" style="text-decoration:none;">
                 <img src="assets/asf-logo-512.png" alt="ASF" class="logo-icon" style="border-radius:50%;">
@@ -131,7 +131,7 @@ t Section -->
         <div class="asf-menu-group" role="group" aria-label="Comunidade">
           <div class="asf-menu-group-title">COMUNIDADE</div>
           <button type="button" class="menu-item" onclick="showSection('comunidade');closeMenu()"><span>👥</span> Comunidade</button>
-          <button type="button" class="menu-item" onclick="showSection('competicoes');closeMenu()"><span>🏆</span> Competições</button>
+          <button type="button" class="menu-item" onclick="location.href='https://eventos.asf.surf/';closeMenu()"><span>🏆</span> Competições</button>
           <button type="button" class="menu-item" onclick="showSection('assinantes');closeMenu()"><span>🌟</span> Destaques</button>
           <button type="button" class="menu-item" onclick="showSection('assistente');closeMenu()"><span>🤖</span> Assistente</button>
         </div>
@@ -249,7 +249,7 @@ t Section -->
             <span class="icon">🧮</span>
             <span class="label">Calculadora</span>
         </button>
-        <button class="utility-btn" onclick="showSection('competicoes')" style="background: linear-gradient(135deg, rgba(155,89,182,0.1) 0%, rgba(255,107,107,0.1) 100%);">
+        <button class="utility-btn" onclick="location.href='https://eventos.asf.surf/'" style="background: linear-gradient(135deg, rgba(155,89,182,0.1) 0%, rgba(255,107,107,0.1) 100%);">
             <span class="icon">🏆</span>
             <span class="label">Competições</span>
         </button>
@@ -1533,15 +1533,13 @@ t Section -->
         </div>
     </div>
 
-        <!-- Preserve o destino do menu; divulgações de eventos ficam no Mural. -->
-<div class="section" id="competicoes">
+        <!-- Eventos e competições foram transferidos para o app dedicado -->
 <section id="eventos-cta" aria-labelledby="eventos-cta-title" style="margin:20px 16px;padding:22px;border-radius:20px;background:linear-gradient(135deg,#0E2439,#007F9E);color:#fff;text-align:center;">
   <div style="font-size:32px;margin-bottom:8px;">🏆</div>
   <h2 id="eventos-cta-title" style="font-size:22px;line-height:1.2;margin:0 0 8px;color:#fff;">Competições &amp; Eventos</h2>
-  <p style="font-size:14px;line-height:1.55;margin:0 0 16px;color:rgba(255,255,255,.9);">Consulte as divulgações da comunidade no Mural das Manas. Confira datas, locais e condições com a organização de cada evento antes de participar.</p>
-  <a href="mural/" style="display:inline-flex;align-items:center;justify-content:center;min-height:46px;padding:12px 20px;border-radius:999px;background:#fff;color:#0E2439;text-decoration:none;font-size:14px;font-weight:800;">Abrir Mural das Manas →</a>
+  <p style="font-size:14px;line-height:1.55;margin:0 0 16px;color:rgba(255,255,255,.9);">Consulte competições e eventos no app Eventos. Confirme datas, locais e condições com a organização antes de participar.</p>
+  <a href="https://eventos.asf.surf/" style="display:inline-flex;align-items:center;justify-content:center;min-height:46px;padding:12px 20px;border-radius:999px;background:#fff;color:#0E2439;text-decoration:none;font-size:14px;font-weight:800;">Abrir app Eventos →</a>
 </section>
-</div>
 
     <!-- Surf News Section -->
     <!-- 📚 Leituras de Surf -->
@@ -1672,7 +1670,7 @@ t Section -->
         <div class="card" style="text-align: center; background: linear-gradient(135deg, rgba(243,157,18,0.05), rgba(155,89,182,0.05));">
             <p style="font-size: 13px; color: var(--gray-600);">🔐 Quer acesso a todo conteúdo exclusivo?</p>
             <p style="font-size: 12px; color: var(--gray-400); margin-top: 4px;">Participe dos eventos ASF e desbloqueie o acesso completo!</p>
-            <button class="btn btn-primary" style="margin-top: 12px;" onclick="showSection('competicoes')">🏆 Ver Próximos Eventos</button>
+            <button class="btn btn-primary" style="margin-top: 12px;" onclick="location.href='https://eventos.asf.surf/'">🏆 Ver Próximos Eventos</button>
         </div>
     </div>
 
@@ -2096,8 +2094,8 @@ t Section -->
 
 <script src="assets/js/inline/asf-inline-05.js"></script>
     
-    <script src="assets/js/inline/asf-inline-06.js?v=20261116-controls1"></script>
-    <script src="asf-ux.js?v=20261116-controls1" defer></script>
+    <script src="assets/js/inline/asf-inline-06.js?v=20261116-controls2"></script>
+    <script src="asf-ux.js?v=20261116-nav" defer></script>
 
     <!-- BLOCO 11 - Sobre a ASF -->
     <div class="card" style="margin: 0 20px 24px; padding: 18px 20px; border-radius: 16px;">
@@ -2170,8 +2168,16 @@ t Section -->
         </div>
     </footer>
   <!-- ASF Mural/BottomNav/SW includes (aditivo, 01/10/2026) -->
+  <!-- Essential destinations work before optional scripts load, including without JavaScript. -->
+  <nav class="asf-bottom-nav" aria-label="Navegação principal ASF" data-asf-bottom-nav="true">
+    <a href="./index.html" class="ativo" aria-current="page" aria-label="Início"><span aria-hidden="true">🏠</span><small>Início</small></a>
+    <a href="./previsao-surf/" aria-label="Previsão"><span aria-hidden="true">🌊</span><small>Previsão</small></a>
+    <a href="./mural/" aria-label="Mural"><span aria-hidden="true">📸</span><small>Mural</small></a>
+    <a href="./diario/" aria-label="Diário"><span aria-hidden="true">📓</span><small>Diário</small></a>
+    <a href="./carteirinhas.html" aria-label="Carteirinha"><span aria-hidden="true">🪪</span><small>Carteirinha</small></a>
+  </nav>
   <script defer src="./asf-bottomnav.js?v=20261116-hitfix3"></script>
-  <script defer src="./asf-navigation-a11y.js?v=20261116b"></script>
+  <script defer src="./asf-navigation-a11y.js?v=20261116-nav"></script>
   <script defer src="./asf-mural.js"></script>
   <script>
     if ("serviceWorker" in navigator) {

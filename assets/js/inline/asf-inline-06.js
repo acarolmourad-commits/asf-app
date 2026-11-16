@@ -168,14 +168,16 @@ document.addEventListener('keydown', function(e){
       var label = ((el.getAttribute('aria-label') || '') + ' ' + (el.getAttribute('title') || '') + ' ' + (el.innerText || el.textContent || '')).replace(/\\s+/g, ' ').trim();
       if (!/Galeria das Manas/i.test(label)) return;
       if (openPanel) {
-        // This observer also sees our attribute changes. Apply only once per
-        // opening, otherwise even setAttribute with the same value loops forever.
+        // This observer also sees our own accessibility/style changes. Apply
+        // the hidden state once so it cannot schedule itself indefinitely.
         if (el.dataset.asfNetworkFabState) return;
-        el.dataset.asfNetworkFabState = '1';
-        el.dataset.asfNetworkFabVisibility = el.style.visibility || '';
-        el.dataset.asfNetworkFabPointer = el.style.pointerEvents || '';
-        el.dataset.asfNetworkFabAria = JSON.stringify(el.getAttribute('aria-hidden'));
-        el.dataset.asfNetworkFabTabindex = JSON.stringify(el.getAttribute('tabindex'));
+        if (!el.dataset.asfNetworkFabState) {
+          el.dataset.asfNetworkFabState = '1';
+          el.dataset.asfNetworkFabVisibility = el.style.visibility || '';
+          el.dataset.asfNetworkFabPointer = el.style.pointerEvents || '';
+          el.dataset.asfNetworkFabAria = JSON.stringify(el.getAttribute('aria-hidden'));
+          el.dataset.asfNetworkFabTabindex = JSON.stringify(el.getAttribute('tabindex'));
+        }
         el.style.visibility = 'hidden';
         el.style.pointerEvents = 'none';
         el.setAttribute('aria-hidden', 'true');

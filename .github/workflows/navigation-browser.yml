@@ -1,0 +1,39 @@
+name: ASF navigation browser regression
+on:
+  pull_request:
+    paths:
+      - 'index.html'
+      - 'asf-navigation-a11y.*'
+      - 'asf-ux.*'
+      - 'asf-bottomnav.js'
+      - 'asf-mural.css'
+      - 'asf-home-quality.*'
+      - 'assets/js/inline/asf-inline-06.js'
+      - 'surf-calculator.js'
+      - 'js/home-journey.js'
+      - 'tests/navigation-browser.cjs'
+      - '.github/workflows/navigation-browser.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  navigation:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install isolated browser test dependencies
+        run: |
+          npm install --prefix "$RUNNER_TEMP/asf-navigation" playwright@1.62.1 --no-audit --no-fund
+          "$RUNNER_TEMP/asf-navigation/node_modules/.bin/playwright" install --with-deps chromium
+      - name: Verify menus at desktop, tablet and touch viewport sizes
+        run: NODE_PATH="$RUNNER_TEMP/asf-navigation/node_modules" node tests/navigation-browser.cjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: asf-navigation-evidence
+          path: test-results/navigation/
+          retention-days: 14

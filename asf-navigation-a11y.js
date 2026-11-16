@@ -42,7 +42,7 @@
           syncMenu();
           if (menu.classList.contains("open")) {
             var items = focusable(menu);
-            if (items.length) items[0].focus();
+            if (items.length) items[0].focus({ preventScroll: true });
           }
         }, 0);
       });
