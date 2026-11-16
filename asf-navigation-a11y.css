@@ -70,3 +70,20 @@
     transition: none !important;
   }
 }
+
+/* Explicit :focus styling is intentional: programmatic focus after opening
+   a menu must remain visibly perceivable even when the click began with a pointer. */
+#header-menu .menu-item:focus,
+#menu-toggle:focus,
+#asf-sat-nav:focus,
+#asf-sat-nav-panel a:focus,
+#asf-sat-nav-panel button:focus,
+#asf-galeria-btn a:focus,
+.asf-bottom-nav a:focus {
+  outline: 3px solid #f6c744 !important;
+  outline-offset: 3px;
+}
+#header-menu .menu-item:focus {
+  background: rgba(0, 168, 204, .14) !important;
+  color: #0a4d68 !important;
+}
