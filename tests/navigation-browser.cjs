@@ -80,7 +80,7 @@ async function hitCheck(locator) {
           await networkPanel.waitFor({state:'hidden'});
           await waitFor(()=>networkButton.getAttribute('aria-expanded').then(x=>x==='false'),'Network panel closes');
           assert.equal(await gallery.isVisible(),true,'Gallery returns after closing');
-          assert.equal(await networkButton.evaluate(e=>e===document.activeElement),true,'Focus returns to network control');
+          await waitFor(()=>networkButton.evaluate(e=>e===document.activeElement),`Focus returns to network control after ${closeWith}`);
         }
         for(const location of ['top','bottom']) {
           await page.evaluate(position=>window.scrollTo(0,position==='bottom'?document.body.scrollHeight:0),location);
