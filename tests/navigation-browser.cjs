@@ -40,8 +40,8 @@ async function hitCheck(locator) {
     assert.equal(await fallbackPage.locator('.asf-bottom-nav a[href]').count(),5,'Five native links without JavaScript');
     assert.ok((await hitCheck(fallbackPage.locator('.asf-bottom-nav a'))).every(x=>x.reachable),'No-script bottom navigation remains tappable');
     await noJS.close();
-    for (const width of [390,768,1365]) {
-      const context=await browser.newContext({viewport:{width,height:844},isMobile:width<600,hasTouch:width<600,reducedMotion:'reduce',serviceWorkers:'block'});
+    for (const [width,height] of [[360,800],[390,844],[768,1024],[844,390],[1365,936]]) {
+      const context=await browser.newContext({viewport:{width,height},isMobile:width<900,hasTouch:width<900,reducedMotion:'reduce',serviceWorkers:'block'});
       await context.route('**/*',route=> {
         const request=route.request();
         if (new URL(request.url()).origin===origin) return route.continue();
@@ -52,7 +52,7 @@ async function hitCheck(locator) {
       const page=await context.newPage();
       const errors=[]; page.on('pageerror',e=>errors.push(e.message));
       page.on('console',m=>{if(m.type()==='error' && /asf-ux:/.test(m.text())) errors.push(m.text());});
-      const click=async locator=>width<600?locator.tap():locator.click();
+      const click=async locator=>width<900?locator.tap():locator.click();
       async function home() {
         await page.goto(origin+'/');
         await page.locator('#asf-explore-directory').waitFor();
@@ -63,6 +63,8 @@ async function hitCheck(locator) {
       try {
         await home();
         assert.equal(await page.locator('.asf-bottom-nav').count(),1);
+        assert.equal(await page.locator('#header-menu .asf-menu-group').count(),5);
+        assert.equal(await page.locator('#header-menu [role=menuitem]').count(),0);
         // Opening the network panel previously starved the browser event loop:
         // a MutationObserver kept rewriting the gallery's aria-hidden attribute.
         const networkButton=page.locator('#asf-sat-nav');
@@ -123,7 +125,7 @@ async function hitCheck(locator) {
           await page.waitForURL(target.startsWith('https:')?target:origin+target);
         }
         assert.deepEqual(errors.filter(e=>/lq is not defined|asf-ux:/.test(e)),[]);
-        summary.push({width,menuItems:23,internalActions:menuTargets.length,pageActions:pageTargets.length,bottomDestinations:5,networkPanel:'open/close button, Escape, backdrop',hitTargets:'top and bottom',status:'passed'});
+        summary.push({width,height,menuItems:23,internalActions:menuTargets.length,pageActions:pageTargets.length,bottomDestinations:5,networkPanel:'open/close button, Escape, backdrop',hitTargets:'top and bottom',status:'passed'});
       } catch(error) {
         await page.screenshot({path:path.join(output,`failure-${width}.png`),fullPage:true});
         throw error;

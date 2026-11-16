@@ -175,6 +175,8 @@ document.addEventListener('keydown', function(e){
           el.dataset.asfNetworkFabState = '1';
           el.dataset.asfNetworkFabVisibility = el.style.visibility || '';
           el.dataset.asfNetworkFabPointer = el.style.pointerEvents || '';
+          el.dataset.asfNetworkFabAria = JSON.stringify(el.getAttribute('aria-hidden'));
+          el.dataset.asfNetworkFabTabindex = JSON.stringify(el.getAttribute('tabindex'));
         }
         el.style.visibility = 'hidden';
         el.style.pointerEvents = 'none';
@@ -183,8 +185,12 @@ document.addEventListener('keydown', function(e){
       } else if (el.dataset.asfNetworkFabState) {
         el.style.visibility = el.dataset.asfNetworkFabVisibility;
         el.style.pointerEvents = el.dataset.asfNetworkFabPointer;
-        el.removeAttribute('aria-hidden');
-        el.removeAttribute('tabindex');
+        [['aria-hidden', 'asfNetworkFabAria'], ['tabindex', 'asfNetworkFabTabindex']].forEach(function (entry) {
+          var value = JSON.parse(el.dataset[entry[1]]);
+          if (value === null) el.removeAttribute(entry[0]);
+          else el.setAttribute(entry[0], value);
+          delete el.dataset[entry[1]];
+        });
         delete el.dataset.asfNetworkFabState;
         delete el.dataset.asfNetworkFabVisibility;
         delete el.dataset.asfNetworkFabPointer;

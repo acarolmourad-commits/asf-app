@@ -47,3 +47,41 @@ test('institutional footer has explicit readable colors and visible link focus',
   assert.match(css, /footer\[role="contentinfo"\] nav a:focus-visible[\s\S]*?outline:\s*3px solid #FFD166/i);
 });
 
+// Contract for PR #117: retain all actions while grouping ordinary navigation
+// buttons, without reviving the menu/menuitem roles removed by PR #120.
+const menu = html.match(/<nav\b[^>]*id="header-menu"[^>]*>[\s\S]*?<\/nav>/)[0];
+const expectedGroups = [
+  ['Comece aqui', ['dicas', 'conteudo', 'surf-culture', 'quiz/', 'surfer-profile']],
+  ['Explore o mar', ['praias', 'previsao-surf/', 'https://tempo.asf.surf/', 'sessoes-interativas.html', 'surf-news']],
+  ['Treine e evolua', ['mobilidade', 'metas', 'desafios', 'surf-trip/', 'utilities', 'seguranca']],
+  ['Comunidade', ['comunidade', 'competicoes', 'assinantes', 'assistente']],
+  ['ASF e benefícios', ['parcerias/', 'carteirinha', 'premium']]
+];
+
+test('main navigation keeps five named groups and all 23 destinations in order', () => {
+  const groups = [...menu.matchAll(/<div class="asf-menu-group"[^>]*aria-label="([^"]+)"[^>]*>\s*<div[^>]*>[\s\S]*?<\/div>([\s\S]*?)<\/div>/g)];
+  assert.deepEqual(groups.map(group => [group[1], [...group[2].matchAll(/onclick="([^"]+)"/g)].map(action =>
+    action[1].match(/(?:showSection\('|location\.href=')([^']+)/)?.[1]
+  )]), expectedGroups);
+  assert.equal((menu.match(/<button\b/g) || []).length, 23);
+  assert.equal(new Set(expectedGroups.flatMap(group => group[1])).size, 23);
+});
+
+test('grouped navigation retains native buttons and accessible group labels', () => {
+  assert.match(menu, /aria-label="Navegação principal"/);
+  assert.doesNotMatch(menu, /role="(?:menu|menuitem|menubar)"/);
+  assert.equal((menu.match(/role="group"/g) || []).length, 5);
+  for (const button of menu.matchAll(/<button\b[^>]*>/g)) {
+    assert.match(button[0], /type="button"/);
+    assert.doesNotMatch(button[0], /tabindex="-1"/);
+    assert.match(button[0], /closeMenu\(\)/);
+  }
+  assert.match(menu, /showSection\('carteirinha'\);ASF_CARD\.init\(\);closeMenu\(\)/);
+});
+
+test('authored groups opt out of legacy regrouping and retain the accessibility layer', () => {
+  assert.match(menu, /data-asf-grouped="true"/);
+  assert.match(html, /asf-navigation-a11y\.css\?v=/);
+  assert.match(html, /asf-navigation-a11y\.js\?v=/);
+  assert.ok(html.indexOf('asf-navigation-a11y.css') > html.indexOf('asf-home-quality.css'));
+});

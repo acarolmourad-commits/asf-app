@@ -102,30 +102,45 @@ t Section -->
                 <button class="icon-btn" id="menu-toggle" aria-label="Abrir menu" aria-expanded="false" aria-controls="header-menu" onclick="toggleMenu(event)">☰</button>
             </div>
         </div>
-        <nav id="header-menu" aria-label="Navegação principal">
-        <button class="menu-item" onclick="showSection('dicas');closeMenu()"><span>📚</span> Dicas</button>
-        <button class="menu-item" onclick="showSection('mobilidade');closeMenu()"><span>🧘</span> Mobilidade</button>
-        <button class="menu-item" onclick="location.href='parcerias/';closeMenu()"><span>🤝</span> Parceiros &amp; benefícios</button>
-        <button class="menu-item" onclick="showSection('praias');closeMenu()"><span>🏖️</span> Praias</button>
-        <button class="menu-item" onclick="showSection('surf-news');closeMenu()"><span>📰</span> News</button>
-        <button class="menu-item" onclick="showSection('metas');closeMenu()"><span>🎯</span> Metas</button>
-        <button class="menu-item" onclick="showSection('surf-culture');closeMenu()"><span>🏛️</span> Cultura</button>
-        <button class="menu-item" onclick="location.href='previsao-surf/';closeMenu()"><span>🌊</span> Ondas</button>
-        <button class="menu-item" onclick="location.href='https://tempo.asf.surf/';closeMenu()"><span>⛅</span> ASF Tempo</button>
-        <button class="menu-item" onclick="showSection('desafios');closeMenu()"><span>🏆</span> Desafios</button>
-        <button class="menu-item" onclick="showSection('surfer-profile');closeMenu()"><span>🏄</span> Perfil</button>
-        <button class="menu-item" onclick="location.href='surf-trip/';closeMenu()"><span>🚗</span> Surftrips</button>
-        <button class="menu-item" onclick="showSection('utilities');closeMenu()"><span>🌊</span> Utilitários</button>
-        <button class="menu-item" onclick="showSection('comunidade');closeMenu()"><span>👥</span> Comunidade</button>
-        <button class="menu-item" onclick="window.location.href='sessoes-interativas.html';closeMenu()"><span>💬</span> Sessões</button>
-        <button class="menu-item" onclick="location.href='https://eventos.asf.surf/';closeMenu()"><span>🏆</span> Competições</button>
-        <button class="menu-item" onclick="location.href='quiz/';closeMenu()"><span>🧠</span> Quiz</button>
-        <button class="menu-item" onclick="showSection('assinantes');closeMenu()"><span>🌟</span> Destaques</button>
-        <button class="menu-item" onclick="showSection('premium');closeMenu()"><span>⭐</span> Guias</button>
-        <button class="menu-item" onclick="showSection('assistente');closeMenu()"><span>🤖</span> Assistente</button>
-        <button class="menu-item" onclick="showSection('conteudo');closeMenu()"><span>📖</span> Conteúdo</button>
-        <button class="menu-item" onclick="showSection('carteirinha');ASF_CARD.init();closeMenu()"><span>🪪</span> Carteirinha</button>
-        <button class="menu-item" onclick="showSection('seguranca');closeMenu()"><span>🚺</span> Segurança</button>
+        <nav id="header-menu" aria-label="Navegação principal" data-asf-grouped="true">
+        <div class="asf-menu-group" role="group" aria-label="Comece aqui">
+          <div class="asf-menu-group-title">COMECE AQUI</div>
+          <button type="button" class="menu-item" onclick="showSection('dicas');closeMenu()"><span>📚</span> Dicas</button>
+          <button type="button" class="menu-item" onclick="showSection('conteudo');closeMenu()"><span>📖</span> Conteúdo</button>
+          <button type="button" class="menu-item" onclick="showSection('surf-culture');closeMenu()"><span>🏛️</span> Cultura</button>
+          <button type="button" class="menu-item" onclick="location.href='quiz/';closeMenu()"><span>🧠</span> Quiz</button>
+          <button type="button" class="menu-item" onclick="showSection('surfer-profile');closeMenu()"><span>🏄</span> Perfil</button>
+        </div>
+        <div class="asf-menu-group" role="group" aria-label="Explore o mar">
+          <div class="asf-menu-group-title">EXPLORE O MAR</div>
+          <button type="button" class="menu-item" onclick="showSection('praias');closeMenu()"><span>🏖️</span> Praias</button>
+          <button type="button" class="menu-item" onclick="location.href='previsao-surf/';closeMenu()"><span>🌊</span> Ondas</button>
+          <button type="button" class="menu-item" onclick="location.href='https://tempo.asf.surf/';closeMenu()"><span>⛅</span> ASF Tempo</button>
+          <button type="button" class="menu-item" onclick="window.location.href='sessoes-interativas.html';closeMenu()"><span>💬</span> Sessões</button>
+          <button type="button" class="menu-item" onclick="showSection('surf-news');closeMenu()"><span>📰</span> News</button>
+        </div>
+        <div class="asf-menu-group" role="group" aria-label="Treine e evolua">
+          <div class="asf-menu-group-title">TREINE E EVOLUA</div>
+          <button type="button" class="menu-item" onclick="showSection('mobilidade');closeMenu()"><span>🧘</span> Mobilidade</button>
+          <button type="button" class="menu-item" onclick="showSection('metas');closeMenu()"><span>🎯</span> Metas</button>
+          <button type="button" class="menu-item" onclick="showSection('desafios');closeMenu()"><span>🏆</span> Desafios</button>
+          <button type="button" class="menu-item" onclick="location.href='surf-trip/';closeMenu()"><span>🚗</span> Surftrips</button>
+          <button type="button" class="menu-item" onclick="showSection('utilities');closeMenu()"><span>🌊</span> Utilitários</button>
+          <button type="button" class="menu-item" onclick="showSection('seguranca');closeMenu()"><span>🚺</span> Segurança</button>
+        </div>
+        <div class="asf-menu-group" role="group" aria-label="Comunidade">
+          <div class="asf-menu-group-title">COMUNIDADE</div>
+          <button type="button" class="menu-item" onclick="showSection('comunidade');closeMenu()"><span>👥</span> Comunidade</button>
+          <button type="button" class="menu-item" onclick="showSection('competicoes');closeMenu()"><span>🏆</span> Competições</button>
+          <button type="button" class="menu-item" onclick="showSection('assinantes');closeMenu()"><span>🌟</span> Destaques</button>
+          <button type="button" class="menu-item" onclick="showSection('assistente');closeMenu()"><span>🤖</span> Assistente</button>
+        </div>
+        <div class="asf-menu-group" role="group" aria-label="ASF e benefícios">
+          <div class="asf-menu-group-title">ASF E BENEFÍCIOS</div>
+          <button type="button" class="menu-item" onclick="location.href='parcerias/';closeMenu()"><span>🤝</span> Parceiros &amp; benefícios</button>
+          <button type="button" class="menu-item" onclick="showSection('carteirinha');ASF_CARD.init();closeMenu()"><span>🪪</span> Carteirinha</button>
+          <button type="button" class="menu-item" onclick="showSection('premium');closeMenu()"><span>⭐</span> Guias</button>
+        </div>
         </nav>
     </header>
     
@@ -1518,13 +1533,15 @@ t Section -->
         </div>
     </div>
 
-        <!-- Eventos e competições foram transferidos para o app dedicado -->
+        <!-- Preserve o destino do menu; divulgações de eventos ficam no Mural. -->
+<div class="section" id="competicoes">
 <section id="eventos-cta" aria-labelledby="eventos-cta-title" style="margin:20px 16px;padding:22px;border-radius:20px;background:linear-gradient(135deg,#0E2439,#007F9E);color:#fff;text-align:center;">
   <div style="font-size:32px;margin-bottom:8px;">🏆</div>
   <h2 id="eventos-cta-title" style="font-size:22px;line-height:1.2;margin:0 0 8px;color:#fff;">Competições &amp; Eventos</h2>
-  <p style="font-size:14px;line-height:1.55;margin:0 0 16px;color:rgba(255,255,255,.9);">Calendário de campeonatos, datas, locais e resultados do surf feminino.</p>
-  <a href="https://acarolmourad-commits.github.io/asf-app/" style="display:inline-flex;align-items:center;justify-content:center;min-height:46px;padding:12px 20px;border-radius:999px;background:#fff;color:#0E2439;text-decoration:none;font-size:14px;font-weight:800;">Abrir app Eventos →</a>
+  <p style="font-size:14px;line-height:1.55;margin:0 0 16px;color:rgba(255,255,255,.9);">Consulte as divulgações da comunidade no Mural das Manas. Confira datas, locais e condições com a organização de cada evento antes de participar.</p>
+  <a href="mural/" style="display:inline-flex;align-items:center;justify-content:center;min-height:46px;padding:12px 20px;border-radius:999px;background:#fff;color:#0E2439;text-decoration:none;font-size:14px;font-weight:800;">Abrir Mural das Manas →</a>
 </section>
+</div>
 
     <!-- Surf News Section -->
     <!-- 📚 Leituras de Surf -->
@@ -2079,8 +2096,8 @@ t Section -->
 
 <script src="assets/js/inline/asf-inline-05.js"></script>
     
-    <script src="assets/js/inline/asf-inline-06.js?v=20261116-panel"></script>
-    <script src="asf-ux.js?v=20261116-nav" defer></script>
+    <script src="assets/js/inline/asf-inline-06.js?v=20261116-controls2"></script>
+    <script src="asf-ux.js?v=20261116-controls2" defer></script>
 
     <!-- BLOCO 11 - Sobre a ASF -->
     <div class="card" style="margin: 0 20px 24px; padding: 18px 20px; border-radius: 16px;">

@@ -12,6 +12,9 @@ on:
       - 'carteirinha.js'
       - 'tests/home-quality-layer.test.cjs'
       - 'tests/home-guides-partners.test.cjs'
+      - 'tests/navigation-dom.test.cjs'
+      - 'asf-navigation-a11y.js'
+      - 'asf-ux.js'
       - '.github/workflows/home-quality-check.yml'
   workflow_dispatch:
 
@@ -34,3 +37,7 @@ jobs:
           node --check asf-home-quality.js
       - name: Run homepage regression tests
         run: node --test tests/home-quality-layer.test.cjs tests/home-guides-partners.test.cjs
+      - name: Install isolated DOM test dependency
+        run: npm install --prefix "$RUNNER_TEMP/asf-dom" --no-save jsdom@26.1.0 --no-audit --no-fund
+      - name: Verify navigation and observer lifecycle
+        run: NODE_PATH="$RUNNER_TEMP/asf-dom/node_modules" node --test tests/navigation-dom.test.cjs
