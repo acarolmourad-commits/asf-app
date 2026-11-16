@@ -69,6 +69,7 @@ async function hitCheck(locator) {
           await click(page.locator('#menu-toggle'));
           await page.locator('#header-menu.open').waitFor();
           await waitFor(()=>page.locator('#menu-toggle').getAttribute('aria-expanded').then(x=>x==='true'),'Menu ARIA state');
+          assert.equal(await page.evaluate(()=>document.getElementById('header-menu').getBoundingClientRect().bottom < document.getElementById('asf-sat-nav').getBoundingClientRect().top),true,'Menu must not overlap floating shortcuts');
           assert.equal(await page.locator('#header-menu .menu-item').count(),23);
           await page.locator('#header-menu .menu-item').first().press('End');
           assert.equal(await page.locator('#header-menu .menu-item').last().evaluate(e=>e===document.activeElement),true);
