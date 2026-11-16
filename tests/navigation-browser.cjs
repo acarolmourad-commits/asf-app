@@ -63,6 +63,25 @@ async function hitCheck(locator) {
       try {
         await home();
         assert.equal(await page.locator('.asf-bottom-nav').count(),1);
+        // Opening the network panel previously starved the browser event loop:
+        // a MutationObserver kept rewriting the gallery's aria-hidden attribute.
+        const networkButton=page.locator('#asf-sat-nav');
+        const networkPanel=page.locator('#asf-sat-nav-panel');
+        const gallery=page.locator('#asf-galeria-btn a');
+        for(const closeWith of ['button','escape','backdrop']) {
+          await click(networkButton);
+          await networkPanel.waitFor({state:'visible'});
+          await waitFor(()=>networkButton.getAttribute('aria-expanded').then(x=>x==='true'),'Network panel state');
+          assert.equal(await gallery.isVisible(),false,'Gallery yields space to the network panel');
+          assert.ok(await networkPanel.locator('a[href]').count()>0,'Network destinations are present');
+          if(closeWith==='button') await click(networkPanel.getByRole('button',{name:'Fechar catálogo da Rede ASF',exact:true}));
+          else if(closeWith==='escape') await networkPanel.press('Escape');
+          else await page.locator('#asf-sat-nav-backdrop').click({position:{x:page.viewportSize().width-4,y:page.viewportSize().height/2}});
+          await networkPanel.waitFor({state:'hidden'});
+          await waitFor(()=>networkButton.getAttribute('aria-expanded').then(x=>x==='false'),'Network panel closes');
+          assert.equal(await gallery.isVisible(),true,'Gallery returns after closing');
+          assert.equal(await networkButton.evaluate(e=>e===document.activeElement),true,'Focus returns to network control');
+        }
         for(const location of ['top','bottom']) {
           await page.evaluate(position=>window.scrollTo(0,position==='bottom'?document.body.scrollHeight:0),location);
           await waitFor(async()=> (await hitCheck(page.locator('#menu-toggle,.asf-bottom-nav > a'))).every(x=>x.reachable),`Unreachable controls at ${width}px/${location}: ${JSON.stringify(await hitCheck(page.locator('#menu-toggle,.asf-bottom-nav > a')))}`);
@@ -104,7 +123,7 @@ async function hitCheck(locator) {
           await page.waitForURL(target.startsWith('https:')?target:origin+target);
         }
         assert.deepEqual(errors.filter(e=>/lq is not defined|asf-ux:/.test(e)),[]);
-        summary.push({width,menuItems:23,internalActions:menuTargets.length,pageActions:pageTargets.length,bottomDestinations:5,hitTargets:'top and bottom',status:'passed'});
+        summary.push({width,menuItems:23,internalActions:menuTargets.length,pageActions:pageTargets.length,bottomDestinations:5,networkPanel:'open/close button, Escape, backdrop',hitTargets:'top and bottom',status:'passed'});
       } catch(error) {
         await page.screenshot({path:path.join(output,`failure-${width}.png`),fullPage:true});
         throw error;
