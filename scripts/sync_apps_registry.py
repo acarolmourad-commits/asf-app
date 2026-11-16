@@ -139,7 +139,7 @@ def validate(reg):
     if any(urlsplit(u).scheme != "https" or not urlsplit(u).netloc for u in urls):
         print("ERRO: URL insegura ou invalida no registry")
         ok = False
-    consolidated = {"asf-mare", "asf-vento", "asf-swell"}
+    consolidated = {"asf-previsao", "asf-mare", "asf-vento", "asf-swell", "asf-clube"}
     forecast = "https://previsao.asf.surf/"
     legacy_forecast = BASE + "/asf-previsao/"
     carteirinha = "https://asf.surf/#carteirinha"
