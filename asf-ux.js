@@ -24,7 +24,7 @@
   var RELATED = {
     praias:      [['🌊 Previsao do mar', 'previsao-surf/'], ['🧭 Prancha ideal', 'prancha-ideal/'], ['📚 Guias', 'aprender/']],
     eventos:     [['🏆 Competicoes', 'competicoes'], ['👥 Manas', 'manas'], ['✍️ Diario', 'diario/']],
-    competicoes: [['📅 Eventos', 'eventos'], ['📈 Progresso', 'progresso']],
+    competicoes: [['📣 Mural das Manas', 'mural/'], ['🌊 Previsao do mar', 'previsao-surf/']],
     progresso:   [['🎯 Metas', 'metas'], ['🏅 Badges', 'badges'], ['🪪 Carteirinha', 'carteirinha']],
     metas:       [['📈 Progresso', 'progresso'], ['✍️ Diario', 'diario/']],
     manas:       [['💬 Comunidade', 'comunidade'], ['🌊 Mar e clima', 'previsao-surf/']],

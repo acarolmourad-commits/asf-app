@@ -54,7 +54,7 @@ const expectedGroups = [
   ['Comece aqui', ['dicas', 'conteudo', 'surf-culture', 'quiz/', 'surfer-profile']],
   ['Explore o mar', ['praias', 'previsao-surf/', 'https://tempo.asf.surf/', 'sessoes-interativas.html', 'surf-news']],
   ['Treine e evolua', ['mobilidade', 'metas', 'desafios', 'surf-trip/', 'utilities', 'seguranca']],
-  ['Comunidade', ['comunidade', 'https://eventos.asf.surf/', 'assinantes', 'assistente']],
+  ['Comunidade', ['comunidade', 'competicoes', 'assinantes', 'assistente']],
   ['ASF e benefícios', ['parcerias/', 'carteirinha', 'premium']]
 ];
 

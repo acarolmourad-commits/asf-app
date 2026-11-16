@@ -134,18 +134,22 @@ test('grouped navigation with the real local homepage scripts', async t => {
       if (disclosure) assert.equal(disclosure.open, true);
       assert.deepEqual(errors, []);
     });
-    await t.test('all 16 internal menu destinations exist', () => {
+    await t.test('all 17 internal menu destinations exist, including competitions', () => {
       for (const id of ['dicas','conteudo','surf-culture','surfer-profile','praias','surf-news',
-        'mobilidade','metas','desafios','utilities','seguranca','comunidade',
+        'mobilidade','metas','desafios','utilities','seguranca','comunidade','competicoes',
         'assinantes','assistente','carteirinha','premium']) {
         assert.ok(d.getElementById(id), id);
       }
     });
-    await t.test('all competition shortcuts target the dedicated Events app', () => {
-      const html = fs.readFileSync(path.join(root, 'index.html'), 'utf8');
-      assert.equal((html.match(/location.href='https:\/\/eventos.asf.surf\/'/g) || []).length, 3);
-      assert.doesNotMatch(html, /showSection\('competicoes'\)/);
-      assert.equal(d.querySelector('#eventos-cta a').href, 'https://eventos.asf.surf/');
+    await t.test('competitions opens its section and offers the working Mural route', async () => {
+      toggle.click(); await tick();
+      items.find(item => item.textContent.includes('Competições')).click(); await tick();
+      state(false);
+      const section = d.getElementById('competicoes');
+      assert.equal(w.getComputedStyle(section).display, 'block');
+      if (section.closest('details')) assert.equal(section.closest('details').open, true);
+      assert.equal(section.querySelector('#eventos-cta a').getAttribute('href'), 'mural/');
+      assert.equal(section.querySelectorAll('[onclick*="showSection"]').length, 0);
     });
     await t.test('network opens repeatedly without an observer loop and restores gallery state', async () => {
       const button = d.getElementById('asf-sat-nav');

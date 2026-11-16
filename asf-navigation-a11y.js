@@ -152,9 +152,11 @@
 
       document.addEventListener("keydown", function (event) {
         if (event.key === "Escape" && satelliteButton.getAttribute("aria-expanded") === "true") {
+          event.preventDefault();
+          event.stopPropagation();
           if (satelliteBackdrop) satelliteBackdrop.click();
         }
-      });
+      }, true);
     }
 
     /* Gallery shortcut */
