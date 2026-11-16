@@ -37,12 +37,27 @@
       menuObserver.observe(menu, { attributes: true, attributeFilter: ["class"] });
       syncMenu();
 
+      function focusMenuItem(item) {
+        item.focus({ preventScroll: true });
+        // Scroll only the menu, including when the item already has focus.
+        var itemRect = item.getBoundingClientRect();
+        var top = menu.getBoundingClientRect().top + menu.clientTop;
+        var bottom = top + menu.clientHeight;
+        var focusMargin = 4;
+        if (itemRect.top < top + focusMargin) {
+          menu.scrollTop -= top + focusMargin - itemRect.top;
+        } else if (itemRect.bottom > bottom - focusMargin) {
+          menu.scrollTop += itemRect.bottom - bottom + focusMargin;
+        }
+      }
+
       toggle.addEventListener("click", function () {
         window.setTimeout(function () {
           syncMenu();
           if (menu.classList.contains("open")) {
             var items = focusable(menu);
-            if (items.length) items[0].focus({ preventScroll: true });
+            menu.scrollTop = 0;
+            if (items.length) focusMenuItem(items[0]);
           }
         }, 0);
       });
@@ -55,13 +70,13 @@
         if (event.key === "ArrowDown" || event.key === "ArrowUp") {
           event.preventDefault();
           var delta = event.key === "ArrowDown" ? 1 : -1;
-          items[(index + delta + items.length) % items.length].focus();
+          focusMenuItem(items[(index + delta + items.length) % items.length]);
         } else if (event.key === "Home") {
           event.preventDefault();
-          items[0].focus();
+          focusMenuItem(items[0]);
         } else if (event.key === "End") {
           event.preventDefault();
-          items[items.length - 1].focus();
+          focusMenuItem(items[items.length - 1]);
         } else if (event.key === "Escape") {
           event.preventDefault();
           if (typeof window.closeMenu === "function") window.closeMenu();

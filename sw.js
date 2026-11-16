@@ -1,4 +1,4 @@
-const CACHE = "asf-app-v17-network-panel";
+const CACHE = "asf-app-v18-visible-focus";
 const OFFLINE_PAGES = [
   "./index.html",
   "./praias/",
