@@ -70,13 +70,15 @@
         }
       });
 
+      /* Capture Escape before legacy document handlers so focus is restored reliably. */
       document.addEventListener("keydown", function (event) {
-        if (event.key === "Escape" && menu.classList.contains("open")) {
-          if (typeof window.closeMenu === "function") window.closeMenu();
-          else menu.classList.remove("open");
-          toggle.focus();
-        }
-      });
+        if (event.key !== "Escape" || !menu.classList.contains("open")) return;
+        event.preventDefault();
+        event.stopPropagation();
+        if (typeof window.closeMenu === "function") window.closeMenu();
+        else menu.classList.remove("open");
+        toggle.focus();
+      }, true);
     }
 
     /* Satellite network overlay */
