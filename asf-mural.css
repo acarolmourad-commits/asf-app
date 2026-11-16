@@ -286,3 +286,40 @@ html, body { background: #FFFFFF !important; }
   #asf-sat-nav { min-height: 44px; }
   #asf-galeria-btn a { min-height: 44px; display: inline-flex !important; align-items: center; }
 }
+
+
+/* ASF NAVIGATION STACKING OVERRIDE — mobile hit testing */
+@media (max-width: 900px) {
+  .asf-bottom-nav {
+    position: fixed !important;
+    inset-inline: 0 !important;
+    inset-block-end: 0 !important;
+    z-index: 2147483001 !important;
+    display: flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    pointer-events: auto !important;
+    isolation: isolate !important;
+  }
+  .asf-bottom-nav a {
+    flex: 1 1 20% !important;
+    min-width: 0 !important;
+    min-height: 48px !important;
+    position: relative !important;
+    z-index: 1 !important;
+    pointer-events: auto !important;
+    touch-action: manipulation !important;
+  }
+  #asf-sat-nav, #asf-galeria-btn {
+    z-index: 2147483002 !important;
+    pointer-events: auto !important;
+    touch-action: manipulation !important;
+  }
+  #asf-sat-nav-backdrop {
+    z-index: 2147483003 !important;
+  }
+  #asf-sat-nav-panel {
+    z-index: 2147483004 !important;
+    pointer-events: auto !important;
+  }
+}
