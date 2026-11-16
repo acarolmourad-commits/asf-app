@@ -323,3 +323,30 @@ html, body { background: #FFFFFF !important; }
     pointer-events: auto !important;
   }
 }
+
+
+/* ASF MOBILE CONTROL HIT-TEST — keep floating shortcuts above the bottom bar */
+@media (max-width: 900px) {
+  .asf-bottom-nav {
+    z-index: 2147483001 !important;
+    pointer-events: auto !important;
+  }
+  .asf-bottom-nav > a {
+    position: relative !important;
+    z-index: 1 !important;
+    pointer-events: auto !important;
+    touch-action: manipulation !important;
+    min-height: 48px !important;
+  }
+  #asf-sat-nav, #asf-galeria-btn {
+    z-index: 2147483002 !important;
+    bottom: calc(76px + env(safe-area-inset-bottom, 0px)) !important;
+    pointer-events: auto !important;
+    touch-action: manipulation !important;
+  }
+  #asf-sat-nav { position: fixed !important; }
+  #asf-galeria-btn { position: fixed !important; }
+  #asf-sat-nav-panel { z-index: 2147483004 !important; pointer-events: auto !important; }
+  #asf-sat-nav-backdrop { z-index: 2147483003 !important; }
+  #asf-galeria-btn a { pointer-events: auto !important; touch-action: manipulation !important; }
+}
