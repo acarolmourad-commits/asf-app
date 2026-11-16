@@ -1,6 +1,6 @@
-/* Fonte única do número de apps da Rede ASF.
-   Valor verificado em app-status.json (github_io_ok = 54 apps online). */
-window.ASF_TOTAL_APPS = 54;
+/* Fonte única do número de apps ativos da Rede ASF.
+   Catálogo ativo: data/apps.json (49 aplicativos). */
+window.ASF_TOTAL_APPS = 49;
 document.addEventListener('DOMContentLoaded', function () {
   document.querySelectorAll('[data-asf-apps-count]').forEach(function (el) {
     el.textContent = window.ASF_TOTAL_APPS;
@@ -14,37 +14,17 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   });
 
-  /* Complemento do Guia de Apps (2026-10-20): cards que faltavam no catálogo
-     estático (Maré, Swell e Vento já existiam na hub raiz e na barra de rede)
-     e assets de redesign com caminho correto no domínio asf.surf, onde
-     /asf-app/... retorna 404. A busca/filtros do guia re-consultam .app a
-     cada aplicação, então os cards injetados já nascem pesquisáveis. */
+  /* Catálogo do Guia: os destinos consolidados são apresentados uma única vez
+     como ASF Previsão no próprio HTML. Nenhum card legado é injetado aqui. */
   var isGuia = !!document.querySelector('.cat[data-cat]') && !!document.getElementById('busca');
   if (isGuia) {
-    var grid = document.querySelector('.cat[data-cat] .grid');
-    if (grid && !document.querySelector('a.app[data-asf-consolidated]')) {
-      grid.insertAdjacentHTML('beforeend',
-        '<a class="app" data-asf-consolidated href="https://previsao.asf.surf/"><b>🌙 Maré</b><span>Acesse a central consolidada ASF Previsão</span></a>' +
-        '<a class="app" href="https://previsao.asf.surf/"><b>🌀 Swell</b><span>Altura, direção e período das ondas na central ASF Previsão</span></a>' +
-        '<a class="app" href="https://acarolmourad-commits.github.io/asf-vento/"><b>💨 Vento</b><span>Vento, direção e temperatura ao vivo nas praias</span></a>');
-    }
     var cont = document.getElementById('cont');
     if (cont) cont.textContent = String(document.querySelectorAll('.cat[data-cat] .app').length);
     if (location.hostname === 'asf.surf') {
       var linkOk = document.querySelector('link[href="/asf-site-redesign.css"]');
-      if (!linkOk) {
-        var l = document.createElement('link');
-        l.rel = 'stylesheet';
-        l.href = '/asf-site-redesign.css';
-        document.head.appendChild(l);
-      }
+      if (!linkOk) { var l = document.createElement('link'); l.rel = 'stylesheet'; l.href = '/asf-site-redesign.css'; document.head.appendChild(l); }
       var scriptOk = document.querySelector('script[src="/asf-redesign.js"]');
-      if (!scriptOk) {
-        var s = document.createElement('script');
-        s.src = '/asf-redesign.js';
-        s.defer = true;
-        document.body.appendChild(s);
-      }
+      if (!scriptOk) { var s = document.createElement('script'); s.src = '/asf-redesign.js'; s.defer = true; document.body.appendChild(s); }
     }
   }
 
