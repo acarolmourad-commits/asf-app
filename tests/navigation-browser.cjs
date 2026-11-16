@@ -17,8 +17,8 @@ const server = http.createServer((req, res) => {
   res.setHeader('Content-Type', mime[path.extname(file)] || 'application/octet-stream');
   fs.createReadStream(file).pipe(res);
 });
-const menuTargets = [...fs.readFileSync(path.join(root,'index.html'),'utf8').matchAll(/class="menu-item" onclick="showSection\('([^']+)'\)[^"]*">([\s\S]*?)<\/button>/g)].map(m=>({id:m[1],label:m[2].replace(/<[^>]*>/g,'').trim()}));
-const pageTargets = [...fs.readFileSync(path.join(root,'index.html'),'utf8').matchAll(/class="menu-item" onclick="(?:window\.)?location\.href='([^']+)'[^"]*">([\s\S]*?)<\/button>/g)].map(m=>({href:m[1],label:m[2].replace(/<[^>]*>/g,'').trim()}));
+const menuTargets = [...fs.readFileSync(path.join(root,'index.html'),'utf8').matchAll(/class="menu-item" onclick="showSection\('([^']+)'\)[^"]*">([\s\S]*?)<\/button>/g)].map(m=>({id:m[1],label:m[2].replace(/<[^>]*>/g,'').replace(/&amp;/g,'&').trim()}));
+const pageTargets = [...fs.readFileSync(path.join(root,'index.html'),'utf8').matchAll(/class="menu-item" onclick="(?:window\.)?location\.href='([^']+)'[^"]*">([\s\S]*?)<\/button>/g)].map(m=>({href:m[1],label:m[2].replace(/<[^>]*>/g,'').replace(/&amp;/g,'&').trim()}));
 async function waitFor(check, label) {
   for (let i=0;i<40;i++) { if(await check()) return; await new Promise(r=>setTimeout(r,50)); }
   throw Error(label);
