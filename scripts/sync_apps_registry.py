@@ -2,7 +2,7 @@
 """
 ASF Apps Registry Sync (Fase 9 - centralizacao de dados do monolito)
 
-Fonte unica de verdade: data/apps.json (52 satelites: slug, nome, url, icone,
+Fonte unica de verdade: data/apps.json (49 satelites; a Carteirinha e uma experiencia integrada ao hub): slug, nome, url, icone,
 categoria, descricoes por contexto, ordens e extras).
 
 Modos:
@@ -25,7 +25,7 @@ REGISTRY = "data/apps.json"
 NETWORK_JS = "asf-network.js"
 SATELLITES_HTML = "satellites.html"
 APPS_INDEX_HTML = "apps/index.html"
-VALIDATE_ONLY = ["guia-apps.html", "rede.html", "novidades.html"]
+VALIDATE_ONLY = ["index.html", "guia-apps.html", "rede.html", "novidades.html"]
 BASE = "https://acarolmourad-commits.github.io"
 
 
@@ -39,14 +39,17 @@ def load_registry():
 def gen_network_js(apps):
     with open(NETWORK_JS, encoding="utf-8") as f:
         src = f.read()
-    entries = ", ".join('{"u": "%s", "n": "%s"}' % (a["url"], a["name"]) for a in apps)
+    entries = [json.dumps({"u": a["url"], "n": a["name"]}, ensure_ascii=False) for a in apps]
+    if not any(a.get("slug") == "asf-clube" for a in apps):
+        entries.append(json.dumps({"u": "https://asf.surf/#carteirinha", "n": "💳 ASF Clube → Carteirinha"}, ensure_ascii=False))
+    entries = ", ".join(entries)
     new, n = re.subn(r"var APPS=\[.*?\];", "var APPS=[%s];" % entries, src, flags=re.S)
     if n != 1:
         print("ERRO: array APPS nao encontrado em", NETWORK_JS)
         sys.exit(2)
     with open(NETWORK_JS, "w", encoding="utf-8") as f:
         f.write(new)
-    print("OK:", NETWORK_JS, "regenerado (%d apps)" % len(apps))
+    print("OK:", NETWORK_JS, "regenerado (%d satélites + Carteirinha)" % len(apps))
 
 
 def _sat_card(a):
@@ -103,7 +106,8 @@ def gen_apps_index_html(reg):
     block_new = "\n".join(_app_line(by_slug[s]) for s in generated_slugs)
     with open(APPS_INDEX_HTML, "w", encoding="utf-8") as f:
         f.write(src.replace(block_old, block_new))
-    print("OK:", APPS_INDEX_HTML, "regenerado (%d apps)" % len(generated_slugs))
+    preserved = len(reg["apps"]) - len(generated_slugs)
+    print("OK:", APPS_INDEX_HTML, "regenerado (%d links GitHub; %d links canônicos preservados)" % (len(generated_slugs), preserved))
 
 
 # ---------- validacao ----------
@@ -154,6 +158,9 @@ def validate(reg):
             continue
         if path == NETWORK_JS:
             missing = [a["url"] for a in apps if a["url"] not in content]
+            if "https://asf.surf/#carteirinha" not in content:
+                print("ERRO: experiencia Carteirinha ausente em", NETWORK_JS)
+                ok = False
         else:
             parsed = Links()
             parsed.feed(content)
@@ -166,6 +173,9 @@ def validate(reg):
                     ok = False
                 continue
             missing = []
+            if path == "index.html" and carteirinha not in parsed.hrefs:
+                print("ERRO: experiencia Carteirinha ausente em", path)
+                ok = False
             for app in apps:
                 accepted = {app["url"]}
                 if app["slug"] in consolidated:
@@ -190,7 +200,7 @@ def validate(reg):
 def main():
     reg = load_registry()
     apps = reg["apps"]
-    print("ASF Apps Registry v%s: %d satelites (hub: %s)" % (reg.get("version", "?"), len(apps), reg["hub"]))
+    print("ASF Apps Registry v%s: %d satélites + Carteirinha (hub: %s)" % (reg.get("version", "?"), len(apps), reg["hub"]))
     if "--write" in sys.argv:
         gen_network_js(apps)
         gen_satellites_html(reg)

@@ -1,13 +1,13 @@
 # Rede de aplicativos ASF — padrão operacional
 
 Última auditoria: 18/11/2026  
-Fonte oficial da rede: asf-network.js  
+Fonte única de verdade das 49 páginas satélites: data/apps.json; asf-network.js é o consumidor de navegação  
 Catálogo público: guia-apps.html  
 Páginas de destaque: apps-em-destaque.html e destaques-rede.html
 
 ## Inventário e navegação
 
-A rede reúne 50 ferramentas e experiências digitais no registro APPS de asf-network.js: 49 páginas satélites e a experiência Carteirinha, integrada ao site principal. O site https://asf.surf/ é o hub institucional.
+A rede reúne 50 ferramentas e experiências digitais: 49 páginas satélites definidas em data/apps.json e a experiência Carteirinha, integrada ao site principal. O array APPS de asf-network.js contém os 49 aplicativos mais a Carteirinha. O site https://asf.surf/ é o hub institucional.
 
 O script compartilhado de navegação é publicado em:
 
