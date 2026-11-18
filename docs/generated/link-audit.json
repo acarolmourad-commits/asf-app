@@ -1,7 +1,7 @@
 {
-  "date": "2026-11-18T20:02:07.854749+00:00",
-  "total": 145,
-  "ok": 137,
+  "date": "2026-11-18T23:39:48.947014+00:00",
+  "total": 146,
+  "ok": 138,
   "skipped": 8,
   "broken_count": 0,
   "broken": [],
@@ -641,6 +641,12 @@
     },
     {
       "url": "hospedagens/",
+      "status": "ok",
+      "http": 200,
+      "local": true
+    },
+    {
+      "url": "indicacoes/",
       "status": "ok",
       "http": 200,
       "local": true
