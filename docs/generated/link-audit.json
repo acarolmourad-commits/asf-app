@@ -1,13 +1,18 @@
 {
-  "date": "2026-11-18T00:06:27.872069+00:00",
-  "total": 118,
-  "ok": 110,
+  "date": "2026-11-18T14:41:58.794777+00:00",
+  "total": 145,
+  "ok": 137,
   "skipped": 8,
   "broken_count": 0,
   "broken": [],
   "results": [
     {
-      "url": "https://acarolmourad-commits.github.io/asf-app/",
+      "url": "https://acarolmourad-commits.github.io/asf-achados/",
+      "status": "ok",
+      "http": 200
+    },
+    {
+      "url": "https://acarolmourad-commits.github.io/asf-alerta/",
       "status": "ok",
       "http": 200
     },
@@ -17,12 +22,52 @@
       "http": 200
     },
     {
+      "url": "https://acarolmourad-commits.github.io/asf-bemestar/",
+      "status": "ok",
+      "http": 200
+    },
+    {
+      "url": "https://acarolmourad-commits.github.io/asf-carona/",
+      "status": "ok",
+      "http": 200
+    },
+    {
       "url": "https://acarolmourad-commits.github.io/asf-checklist/",
       "status": "ok",
       "http": 200
     },
     {
+      "url": "https://acarolmourad-commits.github.io/asf-comunidade/",
+      "status": "ok",
+      "http": 200
+    },
+    {
+      "url": "https://acarolmourad-commits.github.io/asf-desafio/",
+      "status": "ok",
+      "http": 200
+    },
+    {
+      "url": "https://acarolmourad-commits.github.io/asf-desafios/",
+      "status": "ok",
+      "http": 200
+    },
+    {
       "url": "https://acarolmourad-commits.github.io/asf-diario/",
+      "status": "ok",
+      "http": 200
+    },
+    {
+      "url": "https://acarolmourad-commits.github.io/asf-eco/",
+      "status": "ok",
+      "http": 200
+    },
+    {
+      "url": "https://acarolmourad-commits.github.io/asf-equipamento/",
+      "status": "ok",
+      "http": 200
+    },
+    {
+      "url": "https://acarolmourad-commits.github.io/asf-filmes/",
       "status": "ok",
       "http": 200
     },
@@ -42,7 +87,22 @@
       "http": 200
     },
     {
+      "url": "https://acarolmourad-commits.github.io/asf-inspiracao/",
+      "status": "ok",
+      "http": 200
+    },
+    {
+      "url": "https://acarolmourad-commits.github.io/asf-kids/",
+      "status": "ok",
+      "http": 200
+    },
+    {
       "url": "https://acarolmourad-commits.github.io/asf-leitura/",
+      "status": "ok",
+      "http": 200
+    },
+    {
+      "url": "https://acarolmourad-commits.github.io/asf-mala/",
       "status": "ok",
       "http": 200
     },
@@ -62,12 +122,47 @@
       "http": 200
     },
     {
+      "url": "https://acarolmourad-commits.github.io/asf-memoria/",
+      "status": "ok",
+      "http": 200
+    },
+    {
       "url": "https://acarolmourad-commits.github.io/asf-mental/",
       "status": "ok",
       "http": 200
     },
     {
+      "url": "https://acarolmourad-commits.github.io/asf-mentorias/",
+      "status": "ok",
+      "http": 200
+    },
+    {
+      "url": "https://acarolmourad-commits.github.io/asf-mercado/",
+      "status": "ok",
+      "http": 200
+    },
+    {
       "url": "https://acarolmourad-commits.github.io/asf-nutricao/",
+      "status": "ok",
+      "http": 200
+    },
+    {
+      "url": "https://acarolmourad-commits.github.io/asf-parceiras/",
+      "status": "ok",
+      "http": 200
+    },
+    {
+      "url": "https://acarolmourad-commits.github.io/asf-patrocinio/",
+      "status": "ok",
+      "http": 200
+    },
+    {
+      "url": "https://acarolmourad-commits.github.io/asf-podcast/",
+      "status": "ok",
+      "http": 200
+    },
+    {
+      "url": "https://acarolmourad-commits.github.io/asf-ponto/",
       "status": "ok",
       "http": 200
     },
@@ -92,7 +187,7 @@
       "http": 200
     },
     {
-      "url": "https://acarolmourad-commits.github.io/asf-respira/",
+      "url": "https://acarolmourad-commits.github.io/asf-ranking/",
       "status": "ok",
       "http": 200
     },
@@ -107,17 +202,22 @@
       "http": 200
     },
     {
-      "url": "https://acarolmourad-commits.github.io/asf-sos/",
+      "url": "https://acarolmourad-commits.github.io/asf-sono/",
       "status": "ok",
       "http": 200
     },
     {
-      "url": "https://acarolmourad-commits.github.io/asf-treino/",
+      "url": "https://acarolmourad-commits.github.io/asf-tempo/",
       "status": "ok",
       "http": 200
     },
     {
       "url": "https://acarolmourad-commits.github.io/asf-viagens/",
+      "status": "ok",
+      "http": 200
+    },
+    {
+      "url": "https://acarolmourad-commits.github.io/asf-volume/",
       "status": "ok",
       "http": 200
     },
@@ -132,7 +232,17 @@
       "http": null
     },
     {
+      "url": "https://apnea.asf.surf/",
+      "status": "ok",
+      "http": 200
+    },
+    {
       "url": "https://asf.surf/",
+      "status": "ok",
+      "http": 200
+    },
+    {
+      "url": "https://asf.surf/#carteirinha",
       "status": "ok",
       "http": 200
     },
@@ -150,6 +260,11 @@
       "url": "https://fonts.gstatic.com",
       "status": "skipped",
       "http": null
+    },
+    {
+      "url": "https://galeria.asf.surf/",
+      "status": "ok",
+      "http": 200
     },
     {
       "url": "https://images.unsplash.com",
@@ -187,7 +302,22 @@
       "http": 200
     },
     {
+      "url": "https://respira.asf.surf/",
+      "status": "ok",
+      "http": 200
+    },
+    {
+      "url": "https://sos.asf.surf/",
+      "status": "ok",
+      "http": 200
+    },
+    {
       "url": "https://tempo.asf.surf/",
+      "status": "ok",
+      "http": 200
+    },
+    {
+      "url": "https://treino.asf.surf/",
       "status": "ok",
       "http": 200
     },
@@ -487,6 +617,12 @@
     },
     {
       "url": "data/translations.js",
+      "status": "ok",
+      "http": 200,
+      "local": true
+    },
+    {
+      "url": "destaques-rede.html",
       "status": "ok",
       "http": 200,
       "local": true
