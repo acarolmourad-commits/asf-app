@@ -81,3 +81,11 @@ footer a { color: white; }
   .cards, .category-index ul { grid-template-columns: 1fr; }
   .disclosure { margin-bottom: 1.25rem; }
 }
+
+.hero-actions { display: flex; align-items: center; flex-wrap: wrap; gap: .4rem 1.2rem; margin-top: 1.45rem; }
+.hero-actions .cta { margin-top: 0; }
+.season-link { display: inline-flex; align-items: center; gap: .35rem; padding-block: .65rem; font-weight: 700; }
+.seasonal-hero { background: var(--ink); color: var(--paper); }
+.seasonal-hero .eyebrow { color: #a6dfca; }
+.seasonal-hero .cta { background: var(--pale); color: var(--ink); }
+.season-intro { max-width: 72ch; margin-top: .75rem; color: var(--muted); }
