@@ -1,38 +1,123 @@
-name: SSL Cert Watch (diario) - ativa HTTPS quando o certificado sair
-
+name: ASF SSL & App Network Monitor
 on:
   schedule:
-    - cron: '0 13 * * *'   # todo dia 10h BRT (13h UTC)
+    - cron: '0 13 * * *'
   workflow_dispatch:
-
 permissions:
-  pages: write
   contents: read
-
 jobs:
   ssl-watch:
     runs-on: ubuntu-latest
+    timeout-minutes: 20
     steps:
-      - name: Checar HTTPS nos subdominios e ativar enforce quando o cert existir
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Checkout do registro oficial
+        uses: actions/checkout@v4
+      - name: Verificar URLs oficiais, HTTPS e navegação compartilhada
         run: |
-          OK=0; PENDENTES=""
-          for line in $(curl -s "https://api.github.com/users/acarolmourad-commits/repos?per_page=100" | grep -o '"name": "asf-[^"]*"' | cut -d'"' -f4 | grep -v '^asf-app$' | grep -v '^asf-eventos$'); do
-            sub=${line#asf-}
-            host="$sub.asf.surf"
-            code=$(curl -s -o /dev/null -w '%{http_code}' --max-time 15 "https://$host/" || echo 000)
-            if [ "$code" = "200" ]; then
-              OK=$((OK+1))
-              ENFORCED=$(curl -s -H "Authorization: Bearer $GH_TOKEN" "https://api.github.com/repos/acarolmourad-commits/$line/pages" | grep -o '"https_enforced": *[a-z]*' | cut -d: -f2 | tr -d ' ')
-              if [ "$ENFORCED" != "true" ]; then
-                curl -s -X PUT -H "Authorization: Bearer $GH_TOKEN" -H 'Content-Type: application/json' \
-                  "https://api.github.com/repos/acarolmourad-commits/$line/pages" \
-                  -d '{"https_enforced":true}' > /dev/null && echo "HTTPS enforce ativado: $host"
-              fi
-            else
-              PENDENTES="$PENDENTES $host($code)"
-            fi
-          done
-          echo "Com HTTPS valido: $OK"
-          [ -n "$PENDENTES" ] && echo "Pendentes (cert ainda nao emitido):$PENDENTES"
+          python3 - <<'PY'
+          import datetime, json, subprocess, sys
+          from pathlib import Path
+
+          NAV = 'https://acarolmourad-commits.github.io/asf-app/asf-network.js'
+          raw = Path('asf-network.js').read_text(encoding='utf-8')
+          marker = 'var APPS='
+          start = raw.find(marker)
+          end = raw.find('];', start)
+          if start < 0 or end < 0:
+              raise SystemExit('Registro APPS não encontrado em asf-network.js')
+          apps = json.loads(raw[start + len(marker):end + 1])
+          urls = [(a.get('n', 'App ASF'), a.get('u', '')) for a in apps]
+          if not urls or any(not u.startswith('https://') for _, u in urls):
+              raise SystemExit('Registro de apps vazio ou com URL fora de HTTPS')
+          if len({u for _, u in urls}) != len(urls):
+              raise SystemExit('URLs duplicadas no registro oficial')
+
+          def fetch(url):
+              cmd = ['curl', '-sS', '-L', '--max-time', '18', '-w', ' ASFSTATUS:%{http_code} ASFFINAL:%{url_effective}', url]
+              p = subprocess.run(cmd, capture_output=True, text=True, timeout=22)
+              if ' ASFSTATUS:' not in p.stdout:
+                  return '', '000', '', p.returncode, (p.stderr or p.stdout).strip()
+              body, tail = p.stdout.rsplit(' ASFSTATUS:', 1)
+              if ' ASFFINAL:' not in tail:
+                  return body, '000', '', p.returncode, (p.stderr or '').strip()
+              code, final = tail.split(' ASFFINAL:', 1)
+              return body, code.strip(), final.strip(), p.returncode, (p.stderr or '').strip()
+
+          def http_fallback(url):
+              http_url = url.replace('https://', 'http://', 1)
+              p = subprocess.run(['curl','-sS','-o','/dev/null','-w','%{http_code}','--max-time','10',http_url],capture_output=True,text=True,timeout=15)
+              return p.stdout.strip() or '000'
+
+          lines = ['ASF SSL & Network Monitor - '+datetime.datetime.now(datetime.timezone.utc).isoformat()]
+          failures = []
+          pending = []
+          checked = 0
+
+          def verify(label, url, require_nav=False):
+              global checked
+              body, code, final, rc, err = fetch(url)
+              if code == '200' and final.startswith('https://'):
+                  if require_nav and 'asf-network.js' not in body:
+                      failures.append(label+' sem navegação compartilhada')
+                      lines.append('FALHA '+label+': asf-network.js ausente')
+                      return
+                  checked += 1
+                  lines.append('OK '+label+' '+final)
+                  return
+              if code == '000' and http_fallback(url) in ('200','301','302','307','308'):
+                  pending.append(label+' ('+url+')')
+                  lines.append('PENDENTE_CERT '+label+'; HTTPS ainda não confirmou')
+                  return
+              failures.append(label+' ('+url+')')
+              lines.append('FALHA '+label+' HTTP='+code+' '+err)
+
+          # Hub and editorial/catalog pages
+          verify('ASF Home', 'https://asf.surf/')
+          verify('Guia de aplicativos', 'https://asf.surf/guia-apps.html', True)
+          verify('Apps em destaque', 'https://asf.surf/apps-em-destaque.html', True)
+          verify('Destaques da rede', 'https://asf.surf/destaques-rede.html', True)
+          verify('Script global de navegação', NAV)
+
+          # Canonical active registry. Carteirinha is an anchor in the hub, not a satellite page.
+          for name, url in urls:
+              verify(name, url, require_nav=('#carteirinha' not in url))
+
+          # Legacy URLs are intentionally retained and must keep pointing to canonical destinations.
+          legacy = [
+              ('ASF Maré (legado)', 'https://mare.asf.surf/', 'previsao.asf.surf'),
+              ('ASF Vento (legado)', 'https://vento.asf.surf/', 'previsao.asf.surf'),
+              ('ASF Swell (legado)', 'https://swell.asf.surf/', 'previsao.asf.surf'),
+              ('ASF App (legado)', 'https://app.asf.surf/', 'asf-app'),
+              ('ASF Eventos (legado)', 'https://eventos.asf.surf/', 'asf-app'),
+              ('ASF Clube (legado)', 'https://acarolmourad-commits.github.io/asf-clube/', 'asf.surf/#carteirinha'),
+          ]
+          for name, url, target in legacy:
+              body, code, final, rc, err = fetch(url)
+              if code == '200' and final.startswith('https://'):
+                  if target.lower() not in body.lower():
+                      failures.append(name+' sem destino esperado')
+                      lines.append('FALHA '+name+': destino '+target+' ausente')
+                  else:
+                      checked += 1
+                      lines.append('OK redirect '+name+' -> '+target)
+              elif code == '000' and http_fallback(url) in ('200','301','302','307','308'):
+                  pending.append(name+' ('+url+')')
+                  lines.append('PENDENTE_CERT '+name)
+              else:
+                  failures.append(name+' ('+url+')')
+                  lines.append('FALHA '+name+' HTTP='+code+' '+err)
+
+          lines.append('Resumo: '+str(len(urls))+' experiências no registro; '+str(checked)+' verificações HTTPS concluídas; '+str(len(pending))+' certificados pendentes; '+str(len(failures))+' falhas.')
+          report = chr(10).join(lines) + chr(10)
+          Path('relatorio-ssl.txt').write_text(report, encoding='utf-8')
+          print(report)
+          sys.exit(1 if failures else 0)
+          PY
+      - name: Guardar relatório
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: asf-ssl-network-report
+          path: relatorio-ssl.txt
+          if-no-files-found: error
+          retention-days: 14
