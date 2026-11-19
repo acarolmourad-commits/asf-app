@@ -16,8 +16,8 @@
   },
   "improvements": [
     {
-      "type": "content",
-      "title": "Mais dicas técnicas avançadas",
+      "type": "feature",
+      "title": "Medidor de condições do mar",
       "priority": "high"
     },
     {
@@ -26,5 +26,5 @@
       "priority": "medium"
     }
   ],
-  "generated_at": "2026-11-19T04:46:49.290295"
+  "generated_at": "2026-11-19T14:48:25.084350"
 }
