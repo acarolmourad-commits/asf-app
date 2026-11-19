@@ -7,8 +7,8 @@
   <url><loc>https://asf.surf/termos-de-uso.html</loc><lastmod>2026-09-22</lastmod><changefreq>weekly</changefreq><priority>0.7</priority></url>
   <url><loc>https://asf.surf/verificar.html</loc><lastmod>2026-09-22</lastmod><changefreq>weekly</changefreq><priority>0.7</priority></url>
   <url><loc>https://asf.surf/sessoes-interativas.html</loc><lastmod>2026-09-22</lastmod><changefreq>weekly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://asf.surf/parcerias/</loc><lastmod>2026-09-22</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://asf.surf/beneficios/</loc><lastmod>2026-11-08</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://asf.surf/parcerias/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://asf.surf/beneficios/</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
   <url><loc>https://asf.surf/aprender/</loc><lastmod>2026-09-22</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
   <url><loc>https://asf.surf/aprender/como-comecar-a-surfar-mulheres.html</loc><lastmod>2026-09-22</lastmod><changefreq>weekly</changefreq><priority>0.7</priority></url>
   <url><loc>https://asf.surf/aprender/correntes-de-retorno-seguranca.html</loc><lastmod>2026-09-22</lastmod><changefreq>weekly</changefreq><priority>0.7</priority></url>
@@ -35,6 +35,7 @@
   <url><loc>https://asf.surf/guias/previsao-de-ondas/</loc><lastmod>2026-10-23</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
   <url><loc>https://asf.surf/guias/surf-forecast/</loc><lastmod>2026-10-23</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
   <url><loc>https://asf.surf/guias/boletim-das-ondas/</loc><lastmod>2026-10-23</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://asf.surf/parcerias/surfside-maresias/</loc></url>
   <url><loc>https://asf.surf/parcerias/surfmappers/</loc><lastmod>2026-10-29</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://asf.surf/indicacoes/</loc><lastmod>2026-11-18</lastmod></url>
   <url><loc>https://asf.surf/indicacoes/black-friday/</loc><lastmod>2026-11-18</lastmod></url>
