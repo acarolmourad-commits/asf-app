@@ -1,7 +1,7 @@
 {
-  "date": "2026-11-19T23:58:37.629072+00:00",
-  "total": 146,
-  "ok": 138,
+  "date": "2026-11-20T05:28:52.838317+00:00",
+  "total": 148,
+  "ok": 140,
   "skipped": 8,
   "broken_count": 0,
   "broken": [],
@@ -647,6 +647,18 @@
     },
     {
       "url": "indicacoes/",
+      "status": "ok",
+      "http": 200,
+      "local": true
+    },
+    {
+      "url": "indicacoes/black-friday/",
+      "status": "ok",
+      "http": 200,
+      "local": true
+    },
+    {
+      "url": "indicacoes/equipamento-na-praia.webp",
       "status": "ok",
       "http": 200,
       "local": true
