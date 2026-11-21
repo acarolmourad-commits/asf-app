@@ -1,11 +1,11 @@
 {
-  "date": "2026-11-20",
+  "date": "2026-11-21",
   "board_tip": {
-    "title": "Funboard: A versátil",
-    "content": "Funboards (7'0\"-8'6\") são ideais para evolução. Mais ágil que longboard, mantém estabilidade.",
+    "title": "Shortboard: Performance",
+    "content": "Shortboards (5'6\"-6'6\") são para performance. Requer técnica e condicionamento.",
     "tags": [
-      "Funboard",
-      "Evolução"
+      "Shortboard",
+      "Performance"
     ]
   },
   "eco_tip": {
@@ -14,5 +14,5 @@
     "category": "Consumo Consciente"
   },
   "daily_message": "Você sabia? O bloco Phenix Teccel pode ser reciclado!",
-  "generated_at": "2026-11-20T23:26:59.198061"
+  "generated_at": "2026-11-21T04:31:40.662480"
 }
