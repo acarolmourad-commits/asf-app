@@ -1,13 +1,13 @@
 {
   "date": "2026-11-22",
-  "issues_found": 3,
+  "issues_found": 1,
   "improvements_available": 4,
-  "score": 83,
+  "score": 91,
   "suggested": [
     {
-      "type": "css",
-      "change": "Better header gradient",
-      "impact": "high"
+      "type": "seo",
+      "change": "Meta tags optimization",
+      "impact": "medium"
     },
     {
       "type": "js",
@@ -15,5 +15,5 @@
       "impact": "high"
     }
   ],
-  "timestamp": "2026-11-22T03:46:19.813577"
+  "timestamp": "2026-11-22T13:41:37.265285"
 }
