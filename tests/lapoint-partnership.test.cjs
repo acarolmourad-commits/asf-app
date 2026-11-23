@@ -77,6 +77,7 @@ test('both language routes are discoverable and link back to one another', () =>
   const pt = 'https://asf.surf/parcerias/lapoint/';
   const en = pt + 'en/';
   const sitemap = read('sitemap.xml');
+  assert.notEqual(page.match(/<title>(.*?)<\/title>/)[1], english.match(/<title>(.*?)<\/title>/)[1]);
   for (const [html, canonical, other] of [[page, pt, en], [english, en, pt]]) {
     assert.ok(html.includes('<link rel="canonical" href="' + canonical + '">'));
     assert.match(html, /name="robots" content="index,follow"/);
