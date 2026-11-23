@@ -40,6 +40,12 @@ p { margin: .75rem 0; }
 .card .category { margin: 0 0 .65rem; }
 .card a { margin-top: auto; padding-top: .65rem; font-weight: bold; }
 .surfside-maresias { --accent: #085b60; --tint: #def1eb; }
+.surfside-maresias .actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: .75rem;
+}
 .villa-blu { --accent: #264e80; --tint: #e4edf6; }
 .surferinhas { --accent: #853a48; --tint: #f9e6e6; }
 .surfmappers { --accent: #514179; --tint: #eee9f7; }
