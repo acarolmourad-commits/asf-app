@@ -1,7 +1,7 @@
 {
-  "date": "2026-11-22T22:54:09.318001+00:00",
-  "total": 148,
-  "ok": 140,
+  "date": "2026-11-23T04:23:55.387639+00:00",
+  "total": 147,
+  "ok": 139,
   "skipped": 8,
   "broken_count": 0,
   "broken": [],
@@ -737,12 +737,6 @@
     },
     {
       "url": "parcerias/",
-      "status": "ok",
-      "http": 200,
-      "local": true
-    },
-    {
-      "url": "parcerias/surfmappers/",
       "status": "ok",
       "http": 200,
       "local": true
