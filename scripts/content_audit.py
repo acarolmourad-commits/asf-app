@@ -8,14 +8,29 @@ conflito só ocorre quando DUAS páginas reivindicam a MESMA canonical própria.
 Fragmentos sem <head> são componentes/snippets, não páginas indexáveis.
 """
 import os, re, sys, json
+from html.parser import HTMLParser
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-BASE = "https://acarolmourad-commits.github.io/asf-app/"
+SITE_ROOTS = ("https://asf.surf/", "https://acarolmourad-commits.github.io/asf-app/")
 INTERNAL_DIRS = ("docs/", "scripts/", "meta-integration/", ".github/")
 
 report = []
 titles, descriptions = {}, {}
 self_canonical = {}  # canonical url -> path que a reivindica como própria
+
+class CanonicalParser(HTMLParser):
+    def __init__(self):
+        super().__init__()
+        self.canonical = ""
+
+    def handle_starttag(self, tag, attributes):
+        if tag != "link" or self.canonical:
+            return
+        attrs = dict(attributes)
+        rel = (attrs.get("rel") or "").lower().split()
+        if "canonical" in rel:
+            self.canonical = (attrs.get("href") or "").strip()
+
 
 def add(path, status, msg):
     report.append({"arquivo": path, "status": status, "detalhe": msg})
@@ -35,7 +50,9 @@ for path in sorted(html_files):
     is_fragment = "<head" not in raw.lower()  # snippet/componente, não página indexável
     is_verification = re.match(r"google[a-z0-9]+\.html$", os.path.basename(path)) is not None
     title = (re.search(r"<title>(.*?)</title>", raw, re.S | re.I) or [None, ""])[1].strip()
-    canon = (re.search(r'rel="canonical"\s+href="(.*?)"', raw, re.S | re.I) or [None, ""])[1].strip()
+    parser = CanonicalParser()
+    parser.feed(raw)
+    canon = parser.canonical
     desc = (re.search(r'name="description"\s+content="(.*?)"', raw, re.S | re.I) or [None, ""])[1].strip()
     noindex = "noindex" in raw.lower()
 
@@ -57,8 +74,8 @@ for path in sorted(html_files):
 
     # Canonical: conflito só se duas páginas reivindicam a mesma canonical como própria
     if canon:
-        page_url = BASE + path
-        is_self = canon.rstrip("/") in (page_url.rstrip("/"), page_url.replace("index.html", "").rstrip("/"))
+        own_paths = {path, path.removesuffix("index.html") if path.endswith("/index.html") or path == "index.html" else path}
+        is_self = any(canon.rstrip("/") == (base + suffix).rstrip("/") for base in SITE_ROOTS for suffix in own_paths)
         if is_self:
             if canon in self_canonical:
                 add(path, "CONFLITO", f"Canonical própria também reivindicada por {self_canonical[canon]}: {canon}")
