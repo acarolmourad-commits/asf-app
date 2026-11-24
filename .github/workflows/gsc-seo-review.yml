@@ -45,9 +45,6 @@ jobs:
             echo "|---------|-----------|-------|-----------|" >> $R
             SITE=$(python3 -c "import urllib.parse;print(urllib.parse.quote('sc-domain:asf.surf',safe=''))")
             for h in $HOSTS; do
-              FEED="https://$h/sitemap.xml"; [ "$h" != "asf.surf" ] && FEED="https://$h.asf.surf/sitemap.xml" && FEED="https://$h/sitemap.xml"
-              FEED="https://$h/sitemap.xml"; if [ "$h" != "asf.surf" ]; then FEED="https://${h/asf.surf/}"; FEED="https://$h/sitemap.xml"; fi
-              # monta feed corretamente
               if [ "$h" = "asf.surf" ]; then FEED="https://asf.surf/sitemap.xml"; else FEED="https://$h.asf.surf/sitemap.xml"; fi
               ENC=$(python3 -c "import urllib.parse,sys;print(urllib.parse.quote('$FEED',safe=''))")
               RESP=$(curl -s -H "Authorization: Bearer $TOKEN" "https://www.googleapis.com/webmasters/v3/sites/$SITE/sitemaps/$ENC")
@@ -58,7 +55,7 @@ jobs:
               echo "| $h | $ST | ${ERR:-0} | ${IDX:--} |" >> $R
             done
           else
-            echo "_Modo HTTP (sem credenciais OAuth — configure os secrets para dados de indexacao reais; ver docs/GSC-SETUP.md)_" >> $R
+            echo "_Modo HTTP (sem acesso OAuth confirmado nesta execução; impressões e cliques indisponíveis; ver docs/GSC-SETUP.md)_" >> $R
             echo "" >> $R
             echo "| Sitemap | HTTP | Conteudo valido |" >> $R
             echo "|---------|------|-----------------|" >> $R
@@ -77,7 +74,7 @@ jobs:
             echo "| Consulta | Cliques | Impressoes | CTR | Posicao |" >> $R
             echo "|----------|---------|------------|-----|---------|" >> $R
             SITE=$(python3 -c "import urllib.parse;print(urllib.parse.quote('sc-domain:asf.surf',safe=''))")
-            END=$(date -u -d '3 days ago' +%F); START=$(date -u -d '31 days ago' +%F)
+            END=$(date -u -d '3 days ago' +%F); START=$(date -u -d '30 days ago' +%F)
             curl -s -X POST -H "Authorization: Bearer $TOKEN" -H 'Content-Type: application/json' \
               "https://www.googleapis.com/webmasters/v3/sites/$SITE/searchAnalytics/query" \
               -d "{\"startDate\":\"$START\",\"endDate\":\"$END\",\"dimensions\":[\"query\"],\"rowLimit\":20}" \
@@ -85,6 +82,9 @@ jobs:
             import sys, json
             try:
                 d = json.load(sys.stdin)
+                if 'error' in d:
+                    print('| (erro retornado pelo Search Console) | - | - | - | - |')
+                    sys.exit(0)
                 rows = d.get('rows', [])
                 if not rows: print('| (sem dados ainda) | - | - | - | - |')
                 for r in rows:
@@ -104,8 +104,8 @@ jobs:
       - name: Marco das 10 semanas - abrir issue de revisao
         run: |
           # Plano iniciado em 02/10/2026 -> revisao apos 10 semanas = 11/12/2026
-          if [ "$(date -u +%F)" \u003e= "2026-12-11" ]; then
-            EXISTS=$(gh issue list --state open --search "Revisao SEO 10 semanas" --json number --jq length 2>/dev/null || echo 0)
+          if [[ ! "$(date -u +%F)" < "2026-12-11" ]]; then
+            EXISTS=$(gh issue list --state all --search 'in:title "Revisao SEO das 10 semanas"' --json number --jq length)
             if [ "$EXISTS" = "0" ]; then
               gh issue create --title "📊 Revisao SEO das 10 semanas (plano de conteudo)" \
                 --body "Chegou o marco das 10 semanas do plano de conteudo. Verificar docs/SEO-GSC-REVIEW.md e o Search Console: quais palavras-chave geraram impressoes/cliques e dobrar a aposta nos temas vencedores, conforme docs/PLANO-CONTEUDO.md."

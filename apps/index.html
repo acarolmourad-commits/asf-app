@@ -4,12 +4,12 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ASF Apps — Ferramentas Gratuitas para Surfistas</title>
-  <meta name="description" content="Mini-apps e 53 sites satélites da ASF: quiz do surf, prancha ideal, surf trip planner, diário de surf, previsão de ondas, guia de marés e mais.">
+  <meta name="description" content="Planeje sua sessão ou viagem de surf com os aplicativos da ASF. Consulte a previsão, prepare o equipamento, divida os gastos do trajeto e registre o que aprendeu.">
   <meta name="robots" content="index,follow">
   <meta property="og:title" content="ASF Apps — Ferramentas Gratuitas para Surfistas">
   <meta property="og:description" content="Descubra mais sobre ASF Apps — Ferramentas Gratuitas para Surfistas na Associação Surf Feminino (ASF).">
   <meta property="og:image" content="https://asf.surf/assets/images/asf-og-image.jpg">
-  <meta property="og:url" content="https://asf.surf/apps">
+  <meta property="og:url" content="https://asf.surf/apps/">
   <meta property="og:type" content="website">
   <link rel="canonical" href="https://asf.surf/apps/">
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800&display=swap" rel="stylesheet">
@@ -24,14 +24,31 @@
     .app b{display:block}
     .app small{color:#666}
     .new{background:#F4D03F;color:#0E2439;font-size:10px;font-weight:800;padding:2px 8px;border-radius:8px;margin-left:6px}
+    .roteiro{margin:0 0 28px;padding:clamp(18px,4vw,28px);background:#e8f4f5;border-radius:16px}
+    .roteiro h2,.roteiro h3{line-height:1.25;margin-bottom:.45em}
+    .roteiro p{line-height:1.55}
+    .roteiro ol{padding-left:1.5em;margin:1em 0}
+    .roteiro li+li{margin-top:1em}
+    .roteiro a,footer a{color:#00576a;text-underline-offset:.18em}
+    a:focus-visible{outline:3px solid #9b3d68;outline-offset:3px}
+    @media(prefers-reduced-motion:reduce){.app{transition:none}.app:hover{transform:none}}
     footer{text-align:center;color:#9A9A9A;font-size:12px;padding:20px}
   </style>
     <link rel="stylesheet" href="/asf-app/asf-site-redesign.css">
 </head>
 <body>
 <header><h1>🧰 ASF Apps</h1><p>Ferramentas gratuitas da Associação de Surf Feminino</p></header>
-<div class="wrap">
-  <a class="app" href="./surfmappers/"><span class="ic">📸</span><span><b>ASF × Surfmappers <span class="new">PARCERIA</span></b><small>Encontre fotos das sessões, conheça o Surfmappers Experience e veja o benefício ASF10</small></span></a>
+<main class="wrap">
+  <section class="roteiro" aria-labelledby="roteiro">
+    <h2 id="roteiro">Um roteiro para a próxima sessão</h2>
+    <ol>
+      <li><h3>Escolha o horário</h3><p>Abra a <a href="https://previsao.asf.surf/">previsão de ondas</a> para a praia e o dia da aula. Anote o horário da previsão e pergunte à escola onde será o encontro se as condições mudarem.</p></li>
+      <li><h3>Combine a viagem</h3><p>No <a href="../surf-trip/">planejador de surf trip</a>, escolha o destino e informe quantas pessoas dividem o carro. Use o orçamento por pessoa para conversar com o grupo e o checklist para conferir o que levar.</p></li>
+      <li><h3>Guarde uma observação</h3><p>No <a href="../diario/">diário de surf</a>, registre a praia, a prancha e uma orientação que recebeu. Na sessão seguinte, releia a anotação para retomar o que estava praticando.</p></li>
+    </ol>
+    <a href="../guia-apps.html">Buscar outros aplicativos por tema</a>
+  </section>
+  <a class="app" href="../parcerias/surfmappers/"><span class="ic" aria-hidden="true">📸</span><span><b>Fotografia de surf com a Surfmappers</b><small>Conheça os álbuns de sessões e leia a apresentação em revisão.</small></span></a>
   <a class="app" href="../quiz/"><span class="ic">🌊</span><span><b>Quiz do Surf<span class="new">NOVO</span></b><small>Qual é o seu perfil de surfista? 6 perguntas, 1 minuto</small></span></a>
   <a class="app" href="../prancha-ideal/"><span class="ic">🏄‍♀️</span><span><b>Prancha Ideal</b><small>Descubra a litragem e o modelo perfeito para você</small></span></a>
   <a class="app" href="../surf-trip/"><span class="ic">🚐</span><span><b>Surf Trip Planner</b><small>Orçamento por destino, checklist e dicas das manas</small></span></a>
@@ -92,9 +109,9 @@
   <a class="app" href="https://acarolmourad-commits.github.io/asf-yoga/" target="_blank" rel="noopener"><span class="ic">🧘‍♀️</span><span><b>ASF Yoga</b><small>Aquecimento e yoga guiado para surfistas com timer</small></span></a>
   <a class="app" href="../"><span class="ic">🏄‍♀️</span><span><b>ASF App</b><small>Voltar ao aplicativo principal</small></span></a>
   <a class="app" href="https://praia.digital/apps/" target="_blank" rel="noopener"><span class="ic">🏠</span><span><b>Praia Digital Apps</b><small>Parceiro: simuladores imobiliários do litoral</small></span></a>
-  <a class="app" href="../guia-apps.html"><span class="ic">🌐</span><span><b>Guia de Apps ASF — Rede Completa</b><small>Todos os 53 sites satélites da rede de surf feminino, organizados por categoria</small></span></a>
-</div>
-<footer>ASF — Associação de Surf Feminino · <a href="https://asf.surf/guia-apps.html" style="color:#00A8CC">Guia de apps (rede completa)</a> · <a href="https://asf.surf/novidades.html" style="color:#00A8CC">Novidades</a></footer>
+  <a class="app" href="../guia-apps.html"><span class="ic">🌐</span><span><b>Guia de Apps ASF — Rede Completa</b><small>Os aplicativos da rede de surf feminino, organizados por categoria</small></span></a>
+</main>
+<footer>ASF — Associação de Surf Feminino · <a href="https://asf.surf/guia-apps.html" style="color:#00576a">Guia de apps (rede completa)</a> · <a href="https://asf.surf/novidades.html" style="color:#00576a">Novidades</a></footer>
     <script src="/asf-app/asf-redesign.js" defer></script>
 </body>
 </html>
