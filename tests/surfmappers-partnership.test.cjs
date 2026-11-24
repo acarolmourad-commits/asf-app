@@ -42,3 +42,13 @@ test('benefits page links photography only in its separate no-benefit section', 
   assert.match(section, /Colaborações sem benefício individual anunciado/);
   assert.match(section, /href="\/parcerias\/surfmappers\/"/);
 });
+
+test('existing entry points continue to link the partnership without claiming an app launch', () => {
+  for (const file of ['novidades.html', 'apps/index.html']) {
+    const html = read(file);
+    const link = html.split('href="').find(x => /^(?:\.\.\/)?parcerias\/surfmappers\//.test(x));
+    assert.ok(link, file);
+    assert.doesNotMatch(link.split('</a>')[0], /revisão|lançamento|novo app/i, file);
+    if (file==='novidades.html') assert.match(html, /Conheça a colaboração de fotografia de surf com a ASF e saiba como encontrar os álbuns por data e local/);
+  }
+});
