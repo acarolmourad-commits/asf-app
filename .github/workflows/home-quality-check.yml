@@ -13,6 +13,9 @@ on:
       - 'tests/home-quality-layer.test.cjs'
       - 'tests/home-guides-partners.test.cjs'
       - 'tests/navigation-dom.test.cjs'
+      - 'tests/diario-ficha.test.cjs'
+      - 'diario/index.html'
+      - 'guias/boletim-das-ondas/index.html'
       - 'asf-navigation-a11y.js'
       - 'asf-ux.js'
       - '.github/workflows/home-quality-check.yml'
@@ -39,5 +42,5 @@ jobs:
         run: node --test tests/home-quality-layer.test.cjs tests/home-guides-partners.test.cjs
       - name: Install isolated DOM test dependency
         run: npm install --prefix "$RUNNER_TEMP/asf-dom" --no-save jsdom@26.1.0 --no-audit --no-fund
-      - name: Verify navigation and observer lifecycle
-        run: NODE_PATH="$RUNNER_TEMP/asf-dom/node_modules" node --test tests/navigation-dom.test.cjs
+      - name: Verify navigation and session diary
+        run: NODE_PATH="$RUNNER_TEMP/asf-dom/node_modules" node --test tests/navigation-dom.test.cjs tests/diario-ficha.test.cjs

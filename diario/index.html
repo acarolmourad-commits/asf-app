@@ -6,7 +6,7 @@
   <title>Diário de Surf ASF — Registre suas Sessões e Evolua</title>
   <meta name="description" content="Diário de surf gratuito: registre suas sessões, acompanhe sequência, ganhe badges e veja sua evolução. Dados ficam no seu aparelho. ASF — Associação de Surf Feminino.">
   <meta name="robots" content="index,follow">
-  <link rel="canonical" href="https://acarolmourad-commits.github.io/asf-app/diario/">
+  <link rel="canonical" href="https://asf.surf/diario/">
   <meta property="og:type" content="website">
   <meta property="og:title" content="Diário de Surf ASF">
   <meta property="og:description" content="Registre sessões, acompanhe streaks e ganhe badges de surf.">
@@ -32,7 +32,13 @@
     .entry{background:#F8F9FA;border-radius:12px;padding:12px 14px;margin-bottom:8px;font-size:13px}
     .entry b{color:#0E2439}
     .entry .meta{color:#9A9A9A;font-size:12px;margin-top:2px}
-    .del{float:right;background:none;border:none;cursor:pointer;color:#FF6B6B;font-size:14px}
+    .entry{overflow-wrap:anywhere}
+    .entry .meta{color:#43586a;white-space:pre-wrap}
+    .del{float:right;width:auto;margin:0 0 8px 10px;padding:8px 12px;background:#fff;color:#932b31;border:1px solid #c9a3a4;font-size:14px}
+    .card button[type="submit"]{background:#00677a}
+    :focus-visible{outline:3px solid #154a70;outline-offset:3px}
+    #aviso-diario{color:#284754;font-weight:600}
+    #aviso-diario:not(:empty){margin-top:12px}
     .links{display:grid;gap:10px;margin-top:8px}
     .links a{display:block;background:#fff;border:1px solid #E4E6E9;border-radius:12px;padding:14px 16px;text-decoration:none;color:#0E2439;font-weight:600}
     .links a span{color:#00A8CC}
@@ -47,7 +53,7 @@
   <h1>🏄‍♀️ Diário de Surf</h1>
   <p>Registre suas sessões, mantenha a sequência e evolua no mar • ASF</p>
 </header>
-<div class="wrap">
+<main class="wrap">
   <div class="card">
     <h2>📊 Sua evolução</h2>
     <div class="stats">
@@ -63,25 +69,26 @@
     <div class="badges" id="badges"></div>
   </div>
 
-  <div class="card">
-    <h2>✍️ Registrar sessão</h2>
-    <label>Data</label><input type="date" id="fData">
-    <label>Praia</label>
+  <form class="card" id="registrar" aria-labelledby="titulo-registro">
+    <h2 id="titulo-registro">Registrar sessão</h2>
+    <label for="fData">Data</label><input type="date" id="fData" required>
+    <label for="fPraia">Praia</label>
     <select id="fPraia">
       <option>Bertioga</option><option>Santos</option><option>São Vicente</option><option>Praia Grande</option>
       <option>Guarujá</option><option>São Sebastião</option><option>Maresias</option><option>Ubatuba</option><option>Outra</option>
     </select>
-    <label>Duração (minutos)</label><input type="number" id="fDur" value="60" min="5">
-    <label>Como estava o mar?</label>
+    <label for="fDur">Duração (minutos)</label><input type="number" id="fDur" value="60" min="5" step="1" required>
+    <label for="fMar">Como estava o mar?</label>
     <select id="fMar"><option>🌱 Pequeno e tranquilo</option><option>🌊 Perfeito</option><option>⚡ Grande e desafiador</option><option>💨 Ventando</option></select>
-    <label>Notas (manobras, sensações, aprendizados)</label>
+    <label for="fNotas">Notas (manobras, sensações, aprendizados)</label>
     <textarea id="fNotas" rows="2" placeholder="Ex: consegui ficar em pé 3x, drop na esquerda..."></textarea>
-    <button onclick="addEntry()">Salvar sessão 🌊</button>
-    <div class="priv">🔒 Seus dados ficam 100% no seu aparelho (localStorage). Nada é enviado para servidores.</div>
-  </div>
+    <button type="submit">Salvar sessão</button>
+    <p id="aviso-diario" role="status" aria-live="polite"></p>
+    <p class="priv">O diário guarda suas sessões neste navegador. Você pode voltar para reler as notas. Limpar os dados do site apaga os registros.</p>
+  </form>
 
   <div class="card">
-    <h2>📖 Sessões recentes</h2>
+    <h2 id="historico" tabindex="-1">Sessões recentes</h2>
     <div id="entries"></div>
   </div>
 
@@ -90,19 +97,30 @@
     <div class="links">
       <a href="../">🏄‍♀️ <span>ASF App</span> — home da comunidade</a>
       <a href="../apps/#roteiro">Planejar a próxima sessão com os apps ASF</a>
-      <a href="../previsao-surf/">🌊 Previsão de ondas em tempo real</a>
+      <a href="../guias/boletim-das-ondas/#ficha">Preparar a ficha do boletim antes de sair</a>
+      <a href="../guias/pos-surf-e-aprendizado/">Usar as notas para planejar a próxima aula</a>
+      <a href="https://previsao.asf.surf/">Consultar a previsão de ondas</a>
       <a href="../mareas/">🌙 Guia de marés e fases da lua</a>
       <a href="../bem-estar/surf-saude-mental-mulheres.html">💆 Surf e saúde mental</a>
       <a href="https://praia.digital/apps/" target="_blank" rel="noopener">🧮 <span>Praia Digital Apps</span> — simuladores imobiliários do litoral</a>
     </div>
   </div>
-</div>
+</main>
 <footer>ASF — Associação de Surf Feminino • <a href="../" style="color:#00A8CC">Voltar ao app</a></footer>
 <script>
 const KEY = 'asf-diario-surf';
-const get = () => JSON.parse(localStorage.getItem(KEY) || '[]');
-const save = (d) => localStorage.setItem(KEY, JSON.stringify(d));
-document.getElementById('fData').valueAsDate = new Date();
+const form = document.getElementById('registrar');
+const statusDiario = document.getElementById('aviso-diario');
+const notes = document.getElementById('fNotas');
+const today = new Date();
+const pad = n => String(n).padStart(2, '0');
+document.getElementById('fData').value = today.getFullYear() + '-' + pad(today.getMonth() + 1) + '-' + pad(today.getDate());
+
+function readEntries() {
+  const entries = JSON.parse(localStorage.getItem(KEY) || '[]');
+  if (!Array.isArray(entries)) throw new Error('Formato de diário desconhecido');
+  return entries;
+}
 
 const BADGES = [
   {id:'b1', icon:'🌊', name:'Primeira sessão', test: d => d.length >= 1},
@@ -116,40 +134,116 @@ const BADGES = [
 
 function streak(d){
   if (!d.length) return 0;
-  const weeks = new Set(d.map(e => { const dt = new Date(e.data); const o = new Date(dt); o.setDate(dt.getDate()-dt.getDay()); return o.toDateString(); }));
+  const weeks = new Set(d.map(e => { const dt = new Date(e.data+'T12:00:00'); const o = new Date(dt); o.setDate(dt.getDate()-dt.getDay()); return o.toDateString(); }));
   let s = 0, cur = new Date(); cur.setDate(cur.getDate()-cur.getDay());
   while (weeks.has(cur.toDateString())) { s++; cur.setDate(cur.getDate()-7); }
   return s;
 }
 
-function render(){
-  const d = get().sort((a,b)=> b.data.localeCompare(a.data));
-  document.getElementById('sTotal').textContent = d.length;
-  document.getElementById('sHoras').textContent = (d.reduce((s,e)=>s+e.dur,0)/60).toFixed(1)+'h';
-  document.getElementById('sStreak').textContent = streak(d);
-  document.getElementById('sPraias').textContent = new Set(d.map(e=>e.praia)).size;
-  document.getElementById('badges').innerHTML = BADGES.map(b =>
-    `<span class="badge ${b.test(d)?'on':''}">${b.icon} ${b.name}</span>`).join('');
-  document.getElementById('entries').innerHTML = d.length ? d.slice(0,10).map((e,i) =>
-    `<div class="entry"><button aria-label="✕" class="del" onclick="del(${d.indexOf(e)})" title="Excluir">✕</button>
-     <b>${e.praia}</b> — ${e.mar}<div class="meta">${new Date(e.data+'T12:00').toLocaleDateString('pt-BR')} • ${e.dur} min${e.notas ? ' • '+e.notas : ''}</div></div>`
-  ).join('') : '<div class="empty">Nenhuma sessão ainda. Registre a primeira! 🌊</div>';
+function showRecent(entries) {
+  const container = document.getElementById('entries');
+  container.replaceChildren();
+  const sorted = entries.map((entry, index) => ({entry, index}))
+    .sort((a, b) => b.entry.data.localeCompare(a.entry.data) || b.index - a.index);
+  if (!sorted.length) {
+    const empty = document.createElement('p');
+    empty.className = 'empty';
+    empty.textContent = 'Nenhuma sessão ainda. Registre a primeira!';
+    container.append(empty);
+    return;
+  }
+  for (const {entry, index} of sorted.slice(0, 10)) {
+    const row = document.createElement('article');
+    row.className = 'entry';
+    const date = new Date(entry.data + 'T12:00:00').toLocaleDateString('pt-BR');
+    const location = document.createElement('b');
+    location.textContent = entry.praia;
+    const details = document.createElement('div');
+    details.className = 'meta';
+    details.textContent = [date, entry.dur + ' min', entry.notas].filter(Boolean).join(' • ');
+    const remove = document.createElement('button');
+    remove.className = 'del';
+    remove.type = 'button';
+    remove.textContent = 'Excluir';
+    remove.setAttribute('aria-label', 'Excluir sessão de ' + date + ' em ' + entry.praia);
+    remove.addEventListener('click', () => {
+      if (!confirm('Excluir a sessão de ' + date + ' em ' + entry.praia + '?')) return;
+      try {
+        const current = readEntries();
+        if (JSON.stringify(current) !== JSON.stringify(entries)) {
+          render();
+          statusDiario.textContent = 'O histórico mudou. Confira a lista antes de excluir.';
+          return;
+        }
+        current.splice(index, 1);
+        localStorage.setItem(KEY, JSON.stringify(current));
+        render();
+        statusDiario.textContent = 'Sessão excluída.';
+        document.getElementById('historico').focus();
+      } catch {
+        statusDiario.textContent = 'O navegador não conseguiu excluir a sessão.';
+      }
+    });
+    row.append(remove, location, ' — ' + entry.mar, details);
+    container.append(row);
+  }
 }
 
-function addEntry(){
-  const data = document.getElementById('fData').value;
-  if (!data) { alert('Escolha a data!'); return; }
-  const d = get();
-  d.push({ data, praia: document.getElementById('fPraia').value,
-           dur: parseInt(document.getElementById('fDur').value)||60,
-           mar: document.getElementById('fMar').value,
-           notas: document.getElementById('fNotas').value.trim() });
-  save(d);
-  document.getElementById('fNotas').value = '';
-  render();
+function render() {
+  try {
+    const entries = readEntries();
+    document.getElementById('sTotal').textContent = entries.length;
+    document.getElementById('sHoras').textContent = (entries.reduce((sum, e) => sum + e.dur, 0) / 60).toFixed(1) + 'h';
+    document.getElementById('sStreak').textContent = streak(entries);
+    document.getElementById('sPraias').textContent = new Set(entries.map(e => e.praia)).size;
+    document.getElementById('badges').innerHTML = BADGES.map(b =>
+      `<span class="badge ${b.test(entries) ? 'on' : ''}">${b.icon} ${b.name}</span>`).join('');
+    showRecent(entries);
+  } catch {
+    statusDiario.textContent = 'O navegador não conseguiu abrir o histórico. Seus registros foram preservados.';
+  }
 }
-function del(i){ const d = get(); d.splice(i,1); save(d); render(); }
+
+form.addEventListener('submit', event => {
+  event.preventDefault();
+  if (!form.reportValidity()) return;
+  try {
+    const entries = readEntries();
+    entries.push({
+      data: document.getElementById('fData').value,
+      praia: document.getElementById('fPraia').value,
+      dur: document.getElementById('fDur').valueAsNumber,
+      mar: document.getElementById('fMar').value,
+      notas: notes.value.trim()
+    });
+    localStorage.setItem(KEY, JSON.stringify(entries));
+  } catch {
+    statusDiario.textContent = 'O navegador não conseguiu salvar. Suas notas continuam no campo acima.';
+    return;
+  }
+  notes.value = '';
+  render();
+  statusDiario.textContent = 'Sessão salva neste navegador.';
+});
+
+window.addEventListener('storage', event => {
+  if (event.key === KEY || event.key === null) render();
+});
+
 render();
+if (location.hash === '#da-ficha') {
+  try {
+    const draft = sessionStorage.getItem('asf-ficha-para-diario');
+    if (draft) {
+      notes.value = [notes.value, draft].filter(Boolean).join('\n\n');
+      sessionStorage.removeItem('asf-ficha-para-diario');
+      statusDiario.textContent = 'Notas da ficha adicionadas. Revise a data, a praia e a duração antes de salvar.';
+      notes.focus();
+    }
+  } catch {
+    statusDiario.textContent = 'Não foi possível trazer a ficha. Você pode copiar as notas manualmente.';
+  }
+}
 </script>
     <script src="/asf-app/asf-redesign.js" defer></script>
 </body>

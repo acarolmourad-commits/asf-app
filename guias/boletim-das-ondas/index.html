@@ -7,6 +7,9 @@
 .ficha-campos input, .ficha-campos textarea { display: block; width: 100%; margin-top: .2rem; padding: .65rem; color: var(--ink); border: 1px solid #627e89; border-radius: .35rem; font: inherit; font-weight: 400; }
 .ficha-campos textarea { resize: vertical; }
 .ficha-campos :focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+#transferir-ficha { background: var(--accent); color: white; border: 0; border-radius: .4rem; padding: .65rem 1rem; font: inherit; cursor: pointer; }
+#transferir-ficha:focus-visible { outline: 3px solid var(--ink); outline-offset: 3px; }
+@media print { #transferir-ficha { display: none; } }
 .ficha-impressao { display: none; }
 @media print { .ficha-campos .com-copia { display: none; } .ficha-impressao { display: block; min-height: 2em; padding: .5rem; white-space: pre-wrap; overflow-wrap: anywhere; border-bottom: 1px solid #888; } header, footer, article > :not(#ficha), #ficha > p { display: none; } body, article { color: #111; background: white; } main, article { padding: 0; border: 0; } .ficha-campos label { break-inside: avoid; } .ficha-campos ::placeholder { color: transparent; } }
 </style></head><body><header><nav><a href="/">Início ASF</a><a href="/guia-apps.html">Aplicativos</a><a href="/guias/previsao-de-ondas/">Previsão de ondas</a><a href="/guias/surf-forecast/">Surf forecast</a></nav></header><main><article><p>Litoral norte de SP · Guia ASF · Atualizado em 24/11/2026</p><h1>Boletim das ondas do litoral norte de SP: condições do mar e como conferir hoje</h1><p>Quem procura o “boletim das ondas” quer saber das condições do mar antes de pegar a estrada. Como elas mudam por praia e por horário, este é um boletim permanente de método: o passo a passo para montar o seu boletim do dia com a <a href="https://previsao.asf.surf/">ASF Previsão</a>.</p><p class="notice">Confira a data de atualização do boletim e os <a href="https://www.marinha.mil.br/cpsp/previsao_meteorologica">avisos de mau tempo da Marinha</a>. Na praia, siga a sinalização e as orientações dos guarda-vidas.</p><p><a href="#ficha">Preencher a ficha do boletim</a></p><h2>O boletim em 4 conferências</h2><h3>1. Ondulação</h3><p>Altura, período e direção do swell — e se ela entra na janela da praia. Método no guia de <a href="/guias/previsao-de-ondas/">previsão de ondas</a>.</p><h3>2. Vento e tempo</h3><p>Direção, intensidade e rajadas por horário na <a href="https://previsao.asf.surf/">ASF Previsão</a> e alertas no <a href="https://tempo.asf.surf/">ASF Tempo</a>.</p><h3>3. Maré</h3><p>Cheia, vazante e virada na <a href="https://previsao.asf.surf/">previsão para a praia</a>: o mesmo fundo rende ondas diferentes conforme a maré.</p><h3>4. A praia certa para o seu nível</h3><p>Compare picos no <a href="https://mapa.asf.surf/">ASF Mapa</a> e no <a href="https://atlas.asf.surf/">ASF Atlas</a>. Fundo, acesso, estrutura e canais contam tanto quanto a previsão.</p><h2>Na praia, o boletim final é o seu olhar</h2><p>Observe onde quebram, onde estão os canais, para onde puxa a corrente e por onde entram as mais experientes. Treine no <a href="https://leitura.asf.surf/">ASF Leitura de Mar</a> e revise o <a href="https://seguranca.asf.surf/">ASF Segurança</a>.</p><h2>E se o boletim disser “hoje não”?</h2><p>Dia sem condição também evolui: treino fora da água, revisão de equipamento, estudo no guia <a href="/guias/surf-forecast/">surf forecast em português</a> ou sessão acompanhada adequada ao seu nível, com orientação local.</p><section id="ficha" aria-labelledby="titulo-ficha">
@@ -19,10 +22,32 @@
     <label>O que o boletim indicava<textarea rows="3" placeholder="Anote a fonte, a atualização e os campos disponíveis para esse horário."></textarea></label>
     <label>O que você observou na areia<textarea rows="3" placeholder="O que mudou em relação ao previsto? Que dúvida ficou para a próxima aula?"></textarea></label>
   </fieldset>
-  <p>As anotações ficam nesta página enquanto ela estiver aberta. Para guardar uma cópia, use a opção de imprimir do navegador ou leve suas observações para o <a href="/diario/">Diário de Surf</a>.</p>
+  <p>Para guardar uma cópia em papel, use a opção de imprimir do navegador. Para continuar no <a href="/diario/">Diário de Surf</a>, transfira as notas nesta aba e revise a sessão antes de salvar.</p>
+  <button type="button" id="transferir-ficha" hidden>Levar minhas notas ao Diário</button>
+  <p id="aviso-ficha" role="status"></p>
   <p><a href="/apps/#roteiro">Continuar no roteiro da sessão</a></p>
 </section>
 <script>
+  const transfer = document.getElementById('transferir-ficha');
+  transfer.hidden = false;
+  transfer.addEventListener('click', () => {
+    const fields = document.querySelectorAll('.ficha-campos input, .ficha-campos textarea');
+    const lines = Array.from(fields).filter(field => field.value.trim()).map(field =>
+      field.labels[0].firstChild.textContent.trim() + ': ' + field.value.trim());
+    const message = document.getElementById('aviso-ficha');
+    if (!lines.length) {
+      message.textContent = 'Preencha pelo menos um campo para levar suas notas ao Diário.';
+      fields[0].focus();
+      return;
+    }
+    try {
+      sessionStorage.setItem('asf-ficha-para-diario', lines.join('\n'));
+    } catch {
+      message.textContent = 'O navegador bloqueou a transferência. Copie as notas ou imprima a ficha.';
+      return;
+    }
+    location.assign('/diario/#da-ficha');
+  });
   window.addEventListener('beforeprint', () => {
     for (const campo of document.querySelectorAll('.ficha-campos input, .ficha-campos textarea')) {
       let copia = campo.nextElementSibling;
