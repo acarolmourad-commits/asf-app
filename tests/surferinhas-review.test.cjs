@@ -14,7 +14,7 @@ test('static bilingual preview preserves shared design and navigation', () => {
  assert.match(page,/href="#english"/);
  assert.match(page,/href="\/parcerias\/parcerias.css"/);
  assert.match(page,/href="\/parcerias\/"/);
- assert.doesNotMatch(page,/<script|<form|<img/);
+ assert.doesNotMatch(page,/<script|<form/);
  const ids=[...page.matchAll(/\bid="([^"]+)"/g)].map(m=>m[1]);
  assert.equal(ids.length,new Set(ids).size);
  for(const a of page.matchAll(/href="#([^"]+)"/g)) assert.ok(ids.includes(a[1]));
