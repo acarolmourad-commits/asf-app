@@ -1,0 +1,41 @@
+name: Link Surfmappers in parcerias 2026-10-29 (one-shot)
+on:
+  push:
+    branches: [main]
+    paths: ['.github/workflows/link-surfmappers-parcerias-20261029.yml']
+permissions:
+  contents: write
+jobs:
+  fix:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Insert Surfmappers section in parcerias index
+        run: |
+          python3 - <<'PY'
+          import pathlib, sys
+          p = pathlib.Path('parcerias/index.html')
+          s = p.read_text(encoding='utf-8')
+          if 'parceria-surfmappers' in s:
+              print('already linked'); raise SystemExit(0)
+          anchor = '<section id="parceria-surferinhas">'
+          if anchor not in s:
+              print('anchor not found'); sys.exit(1)
+          section = '''<section id="parceria-surfmappers">
+            <h2>Surfmappers × ASF</h2>
+            <p>Parceria de divulgação com a maior plataforma que conecta fotógrafos e surfistas — e com o Surfmappers Experience: escolinhas de surf, fotógrafos, hospedagens e muito mais. Tudo que você precisa para viver o surf em um só lugar!</p>
+            <a class="cta" href="./surfmappers/">Conhecer a parceria com a Surfmappers</a>
+          </section>
+          '''
+          s = s.replace(anchor, section + anchor, 1)
+          p.write_text(s, encoding='utf-8')
+          print('inserted')
+          PY
+      - name: Commit and push if changed
+        run: |
+          if git diff --quiet; then echo 'No changes'; exit 0; fi
+          git config user.name 'ASF Bot'
+          git config user.email 'bot@asf-app.com'
+          git add parcerias/index.html
+          git commit -m 'feat(parcerias): linka Surfmappers no indice de parcerias'
+          git push

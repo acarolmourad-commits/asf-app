@@ -1,0 +1,44 @@
+name: Fix Surfmappers public page 2026-10-30 (one-shot)
+on:
+  push:
+    branches: [main]
+    paths: ['.github/workflows/fix-surfmappers-public-20261030.yml']
+permissions:
+  contents: write
+jobs:
+  fix:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Remove negotiation backstage, keep public partnership disclosure
+        run: |
+          python3 - <<'PY'
+          import pathlib, re, sys
+          p = pathlib.Path('parcerias/surfmappers/index.html')
+          s = p.read_text(encoding='utf-8')
+          def sub(pattern, repl, text, label):
+              out, n = re.subn(pattern, repl, text, count=1, flags=re.S)
+              if n != 1:
+                  print(f'anchor not found: {label} ({n})'); sys.exit(1)
+              return out
+          s = sub(r'Conforme o resumo enviado pela Surfmappers após a chamada de 29/10/2026, a parceria inclui:', 'Parceiros da rede ASF têm uma condição especial para entrar no Surfmappers Experience:', s, 'intro beneficio')
+          s = sub(r'<li><strong>Página da ASF no Surfmappers Experience:</strong>.*?</li>', '<li><strong>ASF no Surfmappers Experience:</strong> um espaço para conectar a comunidade ASF a escolinhas de surf, fotógrafos, hospedagens e experiências de surf;</li>', s, 'pagina ASF li')
+          s = sub(r'<li>Neste benefício, “parceiros da ASF” são.*?</li>', '<li><strong>Quem pode participar:</strong> escolinhas de surf, fotógrafos, hospedagens e outras experiências ligadas à rede ASF;</li>', s, 'quem pode li')
+          s = sub(r'<p style="margin-top:12px">Benefícios futuros.*?</p>', '<p style="margin-top:12px">Confira no link oficial as condições de cadastro, elegibilidade e validade do cupom.</p>', s, 'pos-cta')
+          s = sub(r'<p>Esta é uma <strong>parceria de divulgação</strong>.*?</p>', '<p>ASF e Surfmappers se unem para valorizar quem registra e quem vive o surf. A ASF apresenta a plataforma à sua comunidade e convida escolinhas, fotógrafos, hospedagens e experiências parceiras a conhecerem o Surfmappers Experience.</p>', s, 'sobre p1')
+          s = sub(r'<p>Também ficou aberto o espaço para publicações.*?</p>', '', s, 'sobre p2')
+          banned = ['resumo enviado', 'após a chamada', 'em finalização', 'após aprovação', 'fechada em 29/10/2026', 'resumo escrito', 'Materiais visuais', 'collab']
+          leftovers = [b for b in banned if b.lower() in s.lower()]
+          if leftovers:
+              print('leftovers', leftovers); sys.exit(1)
+          p.write_text(s, encoding='utf-8')
+          print('public-only partnership page ok')
+          PY
+      - name: Commit and push if changed
+        run: |
+          if git diff --quiet; then echo 'No changes'; exit 0; fi
+          git config user.name 'ASF Bot'
+          git config user.email 'bot@asf-app.com'
+          git add parcerias/surfmappers/index.html
+          git commit -m 'fix(parcerias): divulga Surfmappers sem bastidores da negociacao'
+          git push

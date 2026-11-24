@@ -23,12 +23,49 @@ const ASF_CARD = {
     return Array.from(new Uint8Array(b)).map(x => x.toString(16).padStart(2, '0')).join('');
   },
 
+  getAuthClient() {
+    if (!window.supabase || typeof window.supabase.createClient !== 'function') {
+      throw new Error('AUTH_CLIENT_UNAVAILABLE');
+    }
+    if (!this._authClient) {
+      this._authClient = window.supabase.createClient(this.SUPABASE_URL, this.SUPABASE_ANON_KEY, {
+        auth: { persistSession: true, autoRefreshToken: true, detectSessionInUrl: true }
+      });
+    }
+    return this._authClient;
+  },
+
+  async getAuthSession() {
+    const { data, error } = await this.getAuthClient().auth.getSession();
+    if (error) throw error;
+    return data && data.session ? data.session : null;
+  },
+
+  async ensureVerifiedEmail(email) {
+    const normalized = String(email || '').trim().toLowerCase();
+    if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(normalized)) throw new Error('EMAIL_REQUIRED');
+    const session = await this.getAuthSession();
+    if (session) {
+      const signedEmail = String(session.user && session.user.email || '').trim().toLowerCase();
+      if (signedEmail !== normalized) throw new Error('AUTH_EMAIL_MISMATCH');
+      return session;
+    }
+    const { error } = await this.getAuthClient().auth.signInWithOtp({
+      email: normalized,
+      options: { emailRedirectTo: window.location.origin + window.location.pathname, shouldCreateUser: true }
+    });
+    if (error) throw error;
+    return null;
+  },
+
   async sbRpc(fn, body) {
+    const session = await this.getAuthSession();
+    if (!session || !session.access_token) throw new Error('EMAIL_VERIFICATION_REQUIRED');
     const r = await fetch(this.SUPABASE_URL + '/rest/v1/rpc/' + fn, {
       method: 'POST',
       headers: {
         'apikey': this.SUPABASE_ANON_KEY,
-        'Authorization': 'Bearer ' + this.SUPABASE_ANON_KEY,
+        'Authorization': 'Bearer ' + session.access_token,
         'Content-Type': 'application/json',
       },
       body: JSON.stringify(body),
@@ -36,6 +73,14 @@ const ASF_CARD = {
     if (!r.ok) throw new Error('RPC ' + fn + ': ' + r.status);
     return r.json();
   },
+
+  async emitirCarteirinha(params) {
+    let lastError;
+    for (let attempt = 0; attempt < 3; attempt++) {
+      try { return await this.sbRpc('emitir_carteirinha', params); } catch (e) {
+        lastError = e; const msg = String((e && e.message) || e);
+        if (attempt < 2 && /409|23505|duplicate|associadas_numero/i.test(msg)) { params = Object.assign({}, params, { p_numero: this.gerarNumero() }); continue; }
+        throw e; } } throw lastError; },
 
   /* --- controle anual de emissão --- */
   parseDataBR(s) {
@@ -70,8 +115,8 @@ const ASF_CARD = {
     return livre.getTime() > Date.now() ? livre : null;
   },
 
-  /* Registro de associadas via Supabase REST API (tabela: associadas).
-     Dados LGPD ficam no banco protegido por RLS. */
+  /* Cadastro central exclusivamente por RPC Supabase; não consultar nem gravar
+     diretamente a tabela associadas a partir do navegador. */
 
   niveis: ['Iniciante', 'Intermediária', 'Avançada'],
 
@@ -102,7 +147,7 @@ const ASF_CARD = {
       const quer = (cb && cb.checked) || d.registrada;
       if (!quer) return;
       if (!this.supabaseOn || !d.emailHash || d.registrada) return;
-      this.sbRpc('emitir_carteirinha', {
+      this.emitirCarteirinha({
         p_numero: d.numero,
         p_email_hash: d.emailHash,
         p_nome: d.nome,
@@ -159,10 +204,11 @@ const ASF_CARD = {
     const optin = document.getElementById('card-registrar');
     const central = !!(optin && optin.checked);
     const email = value('card-email').toLowerCase();
+    if (!central) { try { sessionStorage.removeItem('asf_card_pending_registration'); } catch (e) {} }
     if (nome.length < 2) { showToast('Informe seu nome de surfista.'); return; }
     if (!this.niveis.includes(nivel)) { showToast('Selecione seu nível.'); return; }
     if (!consent || !consent.checked) { showToast('Confirme o consentimento para gerar a carteirinha.'); return; }
-    if (central && !atual.emailHash && !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) {
+    if (central && !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) {
       showToast('Para registrar na ASF, informe um e-mail válido.'); return;
     }
     const d = {
@@ -185,11 +231,25 @@ const ASF_CARD = {
           A RPC existe; emite/renova, registra em 'emissoes' e retorna apenas
           numero, validade e status. Nunca acessar diretamente a tabela
           'associadas' com a chave anonima neste fluxo. -- */
+      if (central && !this.supabaseOn) {
+        showToast('O registro central da ASF está indisponível no momento. Nenhuma carteirinha será emitida localmente como se estivesse registrada.');
+        return;
+      }
       if (central && this.supabaseOn) {
         try {
-          const emailHash = atual.emailHash || await this.sha256(email);
+          sessionStorage.setItem('asf_card_pending_registration', JSON.stringify({
+            nome:d.nome, nivel:d.nivel, praia:d.praia, apelido:d.apelido, cidade:d.cidade,
+            insta:d.insta, email:email, registrada:true, lgpdConsent:d.lgpdConsent,
+            createdAt:Date.now()
+          }));
+          const verifiedSession = await this.ensureVerifiedEmail(email);
+          if (!verifiedSession) {
+            showToast('Enviamos um link de confirmação para ' + email + '. Abra o e-mail, confirme o endereço e volte para concluir o registro.');
+            return;
+          }
+          const emailHash = await this.sha256(email);
           d.emailHash = emailHash;
-          const res = await this.sbRpc('emitir_carteirinha', {
+          const res = await this.emitirCarteirinha({
             p_numero: d.numero,
             p_email_hash: emailHash,
             p_nome: d.nome,
@@ -204,6 +264,7 @@ const ASF_CARD = {
             d.numero = result.numero;
             if (result.validade) d.validade = String(result.validade).split('-').reverse().join('/');
             d.registrada = new Date().toISOString();
+            try { sessionStorage.removeItem('asf_card_pending_registration'); } catch (e) {}
             this.registrarEmissao(d.numero);
             this.save(d);
             this.render('carteirinha-content');
@@ -215,10 +276,11 @@ const ASF_CARD = {
           }
         } catch (e) {
           console.warn('Supabase registro erro:', e.message);
-          showToast('Registro indisponivel. Sua carteirinha sera salva neste dispositivo; tente registrar depois.');
+          showToast('Não foi possível concluir o registro na ASF. Nenhuma carteirinha central será emitida. Confira o e-mail e tente novamente.');
+          return;
         }
       }
-      /* cai no fluxo local abaixo */
+      /* O registro central solicitado nunca cai no modo local. */
       if (atual.numero && atual.validade && this.diasParaExpirar(atual) > 30) {
         d.validade = atual.validade;
       } else if (atual.numero && atual.validade) {
@@ -312,6 +374,12 @@ const ASF_CARD = {
   },
 
   renderForm(el, p) {
+    try {
+      const pending = JSON.parse(sessionStorage.getItem('asf_card_pending_registration') || 'null');
+      if (pending && Date.now() - Number(pending.createdAt || 0) < 15 * 60 * 1000) p = Object.assign({}, p || {}, pending);
+      else if (pending) sessionStorage.removeItem('asf_card_pending_registration');
+    } catch (e) {}
+    p = p || {};
     const field = (id, label, max, val) => '<label for="'+id+'">'+label+'</label><input id="'+id+'" maxlength="'+max+'" value="'+this.escape(val)+'">';
     el.innerHTML = '<div style="max-width:480px;margin:0 auto"><div class="card">' +
       '<h2>'+(p.numero ? 'Editar sua carteirinha' : 'Crie sua Carteirinha ASF')+'</h2>' +
@@ -323,7 +391,7 @@ const ASF_CARD = {
       field('card-apelido','Apelido',30,p.apelido) + field('card-cidade','Cidade',40,p.cidade) + field('card-insta','Instagram',30,p.insta) + '</details>' +
       '<label class="card-consent"><input id="card-lgpd" type="checkbox"'+(p.lgpdConsent ? ' checked' : '')+'><span>Autorizo salvar minha carteirinha neste dispositivo. A foto fica neste navegador. <a href="privacidade.html" target="_blank" rel="noopener">Política de Privacidade</a>.</span></label>' +
       '<label class="card-consent"><input id="card-registrar" type="checkbox"'+(p.registrada ? ' checked' : '')+'><span>Também autorizo o registro dos dados preenchidos, número e validade no controle interno ASF, para validar o QR na rede. Não será publicada uma lista de associadas. Opcional; desmarcar não exclui registros anteriores. Para exclusão, contate a ASF.</span></label>' +
-      '<label for="card-email">E-mail (necessário apenas para registrar na ASF)</label><input id="card-email" type="email" maxlength="80" autocomplete="email" placeholder="seu@email.com">' +
+      '<label for="card-email">E-mail (necessário apenas para registrar na ASF)</label><input id="card-email" type="email" maxlength="80" autocomplete="email" placeholder="seu@email.com" value="'+this.escape(p.email||'')+'">' +
       '<p style="font-size:12px">O registro usa um hash do e-mail, não o e-mail em texto. O QR confirma somente nível, validade e situação, sem nome ou contatos.</p>' +
       '<button id="card-submit" onclick="ASF_CARD.salvar()" class="btn btn-primary">'+(p.numero ? 'Salvar carteirinha' : 'Gerar minha carteirinha')+'</button>' +
       (p.numero ? '<button onclick="ASF_CARD.init()" class="btn btn-secondary">Voltar à carteirinha</button>' : '') + '</div></div>';
@@ -345,14 +413,16 @@ const ASF_CARD = {
       '<div><p style="font-size:10px;opacity:0.6;margin:0;letter-spacing:2px;text-transform:uppercase">Nº da associada</p>' +
       '<p style="font-size:17px;font-weight:800;letter-spacing:1px;margin:2px 0 8px;font-family:monospace">' + d.numero + '</p>' +
       '<p style="font-size:11px;opacity:0.75;margin:0">Associada desde ' + d.desde + ' · Válida até ' + d.validade + '</p></div>' +
-      '<a href="' + this.verificacaoUrl(d.numero) + '" target="_blank" rel="noopener"><img src="' + this.qrUrl(d.numero) + '" alt="QR de verificação" style="width:76px;height:76px;border-radius:10px;background:white;padding:4px"></a>' +
+      (d.registrada ? '<a href="' + this.verificacaoUrl(d.numero) + '" target="_blank" rel="noopener"><img src="' + this.qrUrl(d.numero) + '" alt="QR de verificação ASF confirmada" style="width:76px;height:76px;border-radius:10px;background:white;padding:4px"></a>' : '<div style="width:76px;height:76px;border-radius:10px;background:#ffffff20;display:flex;align-items:center;justify-content:center;text-align:center;font-size:10px;padding:5px">QR após confirmação</div>') +
       '</div></div>' +
       '<div style="text-align:center;margin:0 0 12px;font-size:13px;font-weight:700">' +
-      (this.expirada(d)
-        ? '<span style="background:#E74C3C;color:#fff;padding:6px 14px;border-radius:20px">🔴 Expirada — clique em ✏️ Editar e salve para renovar</span>'
-        : this.diasParaExpirar(d) <= 30
-          ? '<span style="background:#F39C12;color:#fff;padding:6px 14px;border-radius:20px">🟡 Expira em ' + this.diasParaExpirar(d) + ' dias — já pode renovar em ✏️ Editar</span>'
-          : '<span style="background:#27AE60;color:#fff;padding:6px 14px;border-radius:20px">🟢 Válida até ' + d.validade + '</span>') +
+      (!d.registrada
+        ? '<span style="background:#5B6470;color:#fff;padding:6px 14px;border-radius:20px">⚪ Carteirinha local — ainda não confirmada pela ASF</span>'
+        : this.expirada(d)
+          ? '<span style="background:#E74C3C;color:#fff;padding:6px 14px;border-radius:20px">🔴 Expirada — clique em ✏️ Editar e salve para renovar</span>'
+          : this.diasParaExpirar(d) <= 30
+            ? '<span style="background:#F39C12;color:#fff;padding:6px 14px;border-radius:20px">🟡 Expira em ' + this.diasParaExpirar(d) + ' dias — já pode renovar em ✏️ Editar</span>'
+            : '<span style="background:#27AE60;color:#fff;padding:6px 14px;border-radius:20px">🟢 ASF confirmou validade até ' + d.validade + '</span>') +
       '</div>' +
       '<div style="display:flex;gap:8px;margin-bottom:16px">' +
       '<button onclick="ASF_CARD.baixar()" class="btn btn-secondary" style="flex:1;font-size:13px">⬇️ Baixar PNG</button>' +
@@ -360,7 +430,7 @@ const ASF_CARD = {
       '<button onclick="ASF_CARD.editar()" class="btn btn-secondary" style="flex:1;font-size:13px">✏️ Editar</button>' +
       '<input id="card-foto-input" type="file" accept="image/*" style="display:none" onchange="ASF_CARD.uploadFoto(this)">' +
       '</div>' +
-      '<p style="font-size:12px;text-align:center">' + (d.registrada ? 'Registro ASF confirmado. O QR não mostra nome ou contatos.' : 'Salva neste dispositivo. Para validar o QR na rede, use Editar e autorize o registro ASF.') + '</p>' +
+      '<p style="font-size:12px;text-align:center">' + (d.registrada ? 'Registro ASF confirmado. O QR verifica a situação sem mostrar nome ou contatos.' : 'Esta é uma versão local e não comprova associação ativa. Para obter confirmação e QR verificável, edite e autorize o registro ASF; é necessária conexão.') + '</p>' +
       '</div>';
   },
 
@@ -432,13 +502,20 @@ const ASF_CARD = {
       showToast('Carteirinha baixada! 🪪');
     };
     const foto = d.foto ? new Image() : null;
-    const qr = new Image(); qr.crossOrigin = 'anonymous';
-    let photo = null, qrImage = null, remaining = foto ? 2 : 1, finished = false;
+    const qr = d.registrada ? new Image() : null;
+    if (qr) qr.crossOrigin = 'anonymous';
+    let photo = null, qrImage = null, remaining = (foto ? 1 : 0) + (qr ? 1 : 0), finished = false;
+    if (remaining === 0) remaining = 1;
     const finish = () => { if (!finished && --remaining === 0) { finished = true; draw(photo, qrImage); } };
     if (foto) { foto.onload = () => { photo = foto; finish(); }; foto.onerror = finish; foto.src = d.foto; }
-    qr.onload = () => { qrImage = qr; finish(); };
-    qr.onerror = finish;
-    qr.src = this.qrUrl(d.numero);
+    if (qr) {
+      qr.onload = () => { qrImage = qr; finish(); };
+      qr.onerror = finish;
+      qr.src = this.qrUrl(d.numero);
+    } else if (!foto) {
+      finished = true;
+      draw(null, null);
+    }
     // PNG continua disponível se o provedor de QR não responder.
     setTimeout(() => { if (!finished) { finished = true; draw(photo, qrImage); } }, 7000);
   },

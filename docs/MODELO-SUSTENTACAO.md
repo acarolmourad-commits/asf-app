@@ -13,8 +13,8 @@ conexão do público feminino com o surf.
 2. **Doações de parceiras** — destinadas a:
    - 🎁 **Sorteios** para a comunidade
    - 🏄‍♀️ **Eventos pontuais beneficentes**
-   - 🎒 **Brindes** vinculados à **pontuação da carteirinha ASF** (asf-clube/asf-ranking)
-3. **Cupons e benefícios** negociados para associadas (asf-loja) — desconto, nunca cobrança.
+   - 🎒 **Brindes** vinculados à **pontuação da carteirinha ASF** (Carteirinha ASF e ASF Ranking)
+3. **Benefícios de parceiros** negociados para associadas e divulgados na seção Parcerias do site institucional, somente após confirmação das condições.
 
 ## Enforcement
 O workflow `free-content-guard.yml` roda `scripts/test_free_content.py` a cada alteração

@@ -1,0 +1,21 @@
+name: ASF partnership content checks
+on:
+  pull_request:
+    paths:
+      - 'parcerias/**'
+      - 'sitemap.xml'
+      - 'tests/lapoint-partnership.test.cjs'
+      - '.github/workflows/partnership-content-check.yml'
+permissions:
+  contents: read
+jobs:
+  partnership-content:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - run: node --test tests/lapoint-partnership.test.cjs

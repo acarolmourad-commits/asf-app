@@ -1,7 +1,7 @@
 {
-  "hub": "https://acarolmourad-commits.github.io/asf-app/",
+  "hub": "https://asf.surf/",
   "version": 2,
-  "updated": "2026-10-23",
+  "updated": "2026-11-15",
   "apps": [
     {
       "slug": "asf-previsao",
@@ -26,18 +26,6 @@
       "icon_apps": "🏖️",
       "name_apps": "ASF Praias",
       "desc_apps": "Guia interativo de praias para surfistas no litoral norte de SP"
-    },
-    {
-      "slug": "asf-mare",
-      "name": "🌙 ASF Maré",
-      "url": "https://acarolmourad-commits.github.io/asf-mare/",
-      "icon": "🌙",
-      "title": "ASF Maré",
-      "category": "🌊 Mar & Condições",
-      "desc": "Tábua de marés e fases da lua",
-      "icon_apps": "🌙",
-      "name_apps": "ASF Maré",
-      "desc_apps": "Calculadora de tábua de marés e fases da lua para surfistas"
     },
     {
       "slug": "asf-mapa",
@@ -112,33 +100,9 @@
       "desc_apps": "Nascer/pôr do sol ao vivo e contagem regressiva para fotos de surf"
     },
     {
-      "slug": "asf-vento",
-      "name": "💨 ASF Vento",
-      "url": "https://acarolmourad-commits.github.io/asf-vento/",
-      "icon": "💨",
-      "title": "ASF Vento",
-      "category": "🌊 Mar & Condições",
-      "desc": "Vento e temperatura ao vivo nas praias",
-      "icon_apps": "💨",
-      "name_apps": "ASF Vento",
-      "desc_apps": "Vento, direção e temperatura ao vivo nas praias do litoral norte de SP"
-    },
-    {
-      "slug": "asf-swell",
-      "name": "🌊 ASF Swell",
-      "url": "https://acarolmourad-commits.github.io/asf-swell/",
-      "icon": "🌊",
-      "title": "ASF Swell",
-      "category": "🌊 Mar & Condições",
-      "desc": "Direção de swell, ângulo de quebra e janela de pico por spot",
-      "icon_apps": "🌊",
-      "name_apps": "ASF Swell",
-      "desc_apps": "Direção e período do swell por spot, com janela de pico do dia"
-    },
-    {
       "slug": "asf-treino",
       "name": "🏋️ ASF Treino",
-      "url": "https://acarolmourad-commits.github.io/asf-treino/",
+      "url": "https://treino.asf.surf/",
       "icon": "🏋️",
       "title": "ASF Treino",
       "category": "🏄‍♀️ Performance & Treino",
@@ -174,7 +138,7 @@
     {
       "slug": "asf-apnea",
       "name": "🫁 ASF Apneia",
-      "url": "https://acarolmourad-commits.github.io/asf-apnea/",
+      "url": "https://apnea.asf.surf/",
       "icon": "🫁",
       "title": "ASF Apneia",
       "category": "🏄‍♀️ Performance & Treino",
@@ -186,7 +150,7 @@
     {
       "slug": "asf-respira",
       "name": "🌬️ ASF Respira",
-      "url": "https://acarolmourad-commits.github.io/asf-respira/",
+      "url": "https://respira.asf.surf/",
       "icon": "🌬️",
       "title": "ASF Respira",
       "category": "🏄‍♀️ Performance & Treino",
@@ -270,7 +234,7 @@
     {
       "slug": "asf-galeria",
       "name": "📸 ASF Galeria",
-      "url": "https://acarolmourad-commits.github.io/asf-galeria/",
+      "url": "https://galeria.asf.surf/",
       "icon": "📸",
       "title": "ASF Galeria",
       "category": "💜 Vida & Comunidade",
@@ -326,18 +290,6 @@
       "icon_apps": "💜",
       "name_apps": "ASF Patrocínio",
       "desc_apps": "Apoie o surf feminino: cotas de patrocínio e parcerias de marcas"
-    },
-    {
-      "slug": "asf-loja",
-      "name": "🛍️ ASF Loja",
-      "url": "https://acarolmourad-commits.github.io/asf-loja/",
-      "icon": "🛍️",
-      "title": "ASF Loja",
-      "category": "💜 Vida & Comunidade",
-      "desc": "Marcas parceiras e cupons exclusivos",
-      "icon_apps": "🛍️",
-      "name_apps": "ASF Loja",
-      "desc_apps": "Marcas parceiras e cupons exclusivos para a comunidade"
     },
     {
       "slug": "asf-glossario",
@@ -474,7 +426,7 @@
     {
       "slug": "asf-sos",
       "name": "🆘 ASF SOS",
-      "url": "https://acarolmourad-commits.github.io/asf-sos/",
+      "url": "https://sos.asf.surf/",
       "icon": "🆘",
       "title": "ASF SOS",
       "category": "🛟 Saúde & Segurança",
@@ -604,18 +556,6 @@
       "desc_apps": "Vision board de metas e sonhos de surf"
     },
     {
-      "slug": "asf-clube",
-      "name": "💳 ASF Clube → Carteirinha",
-      "url": "https://asf.surf/#carteirinha",
-      "icon": "💳",
-      "title": "ASF Clube → Carteirinha",
-      "category": "🎨 Cultura & Utilidades",
-      "desc": "Clube desativado; carteirinha digital e benefícios centralizados na hub ASF",
-      "icon_apps": "🪪",
-      "name_apps": "ASF Clube → Carteirinha",
-      "desc_apps": "Clube desativado; acesse a carteirinha digital e os benefícios na hub ASF"
-    },
-    {
       "slug": "asf-achados",
       "name": "🔍 ASF Achados",
       "url": "https://acarolmourad-commits.github.io/asf-achados/",
@@ -668,7 +608,6 @@
     "asf-bemestar",
     "asf-carona",
     "asf-checklist",
-    "asf-clube",
     "asf-comunidade",
     "asf-desafios",
     "asf-desafio",
@@ -683,11 +622,9 @@
     "asf-inspiracao",
     "asf-kids",
     "asf-leitura",
-    "asf-loja",
     "asf-mala",
     "asf-manobras",
     "asf-mapa",
-    "asf-mare",
     "asf-matematica",
     "asf-memoria",
     "asf-mental",
@@ -708,9 +645,8 @@
     "asf-sonhos",
     "asf-sono",
     "asf-sos",
-    "asf-tempo",
     "asf-treino",
-    "asf-vento",
+    "asf-tempo",
     "asf-viagens",
     "asf-volume",
     "asf-yoga"

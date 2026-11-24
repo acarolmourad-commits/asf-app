@@ -2,7 +2,7 @@
   // ASF: Google Analytics desativado ate configurar um ID real (G-...).
   var ASF_GA_ID = '';
   window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
+  function gtag(){if(window.ASFConsent && window.ASFConsent.get() === 'all') dataLayer.push(arguments);}
   if (ASF_GA_ID) {
     gtag('js', new Date());
     gtag('config', ASF_GA_ID, {
@@ -224,7 +224,7 @@ function renderBrandHub() {
     }
 }
 function showBrandChallenge() {
-            alert('📸 CAMPANHAS ASF\n\nAs campanhas com brindes serão anunciadas aqui quando houver parceria ativa. Brindes vêm de doações de lojas parceiras e são vinculados à pontuação da carteirinha ASF — tudo gratuito.\n\nAcompanhe o app! 🏄‍♀️');
+            showToast('No momento, não há campanha ativa publicada. Acompanhe os canais oficiais da ASF para conhecer novas iniciativas e suas condições.', 'info');
         }
 function showBrandContact() {
             window.open('https://wa.me/5511954346288?text=Olá!%20Quero%20anunciar%20no%20ASF%20Brand%20Lab.%20Meu%20nome:%20[MARCA]', '_blank');
@@ -260,26 +260,36 @@ function importData(input) {
                 reader.readAsText(file);
             }
 function enviarCadastroParceiro() {
-            var nome = document.getElementById("parceiro-nome").value.trim();
-            var insta = document.getElementById("parceiro-insta").value.trim();
-            var site = document.getElementById("parceiro-site").value.trim();
-            var logo = document.getElementById("parceiro-logo").value.trim();
+            var nomeEl = document.getElementById("parceiro-nome");
+            var instaEl = document.getElementById("parceiro-insta");
+            var siteEl = document.getElementById("parceiro-site");
+            var logoEl = document.getElementById("parceiro-logo");
+            var nome = nomeEl ? nomeEl.value.trim() : "";
+            var insta = instaEl ? instaEl.value.trim() : "";
+            var site = siteEl ? siteEl.value.trim() : "";
+            var logo = logoEl ? logoEl.value.trim() : "";
             if (!nome) {
-                alert("Preencha o nome da marca!");
+                showToast("Preencha o nome da marca!", "error");
+                if (nomeEl) nomeEl.focus();
                 return;
             }
-            // Save registration
-            var parceiro = { nome: nome, insta: insta, site: site, logo: logo, data: new Date().toISOString() };
-            localStorage.setItem("asf-parceiros", JSON.stringify(parceiro));
-            // Send to Carol
-            var msg = "🏄♀️ NOVO CADASTRO DE PARCEIRO!\n\n";
-            msg += "Marca: " + nome + "\n";
-            if (insta) msg += "Instagram: " + insta + "\n";
-            if (site) msg += "Site: " + site + "\n";
-            msg += "\nComprovante: " + comprovante + "\n";
-            msg += "Revisar e ativar!";
-            window.open("https://wa.me/5511954346288?text=" + encodeURIComponent(msg), "_blank");
-            showToast("✓ Cadastro enviado! Revisaremos em breve.");
+            // O cadastro fica apenas neste navegador até a pessoa concluir o envio.
+            var parceiro = { nome: nome, insta: insta, site: site, logo: logo, data: new Date().toISOString(), status: "aguardando_envio" };
+            try {
+                localStorage.setItem("asf-parceiros", JSON.stringify(parceiro));
+            } catch (error) {
+                showToast("Não foi possível preparar o cadastro neste dispositivo.", "error");
+                return;
+            }
+            var msg = "NOVO CADASTRO DE PARCEIRO ASF\\n\\n";
+            msg += "Marca: " + nome + "\\n";
+            if (insta) msg += "Instagram: " + insta + "\\n";
+            if (site) msg += "Site: " + site + "\\n";
+            if (logo) msg += "Logo: " + logo + "\\n";
+            msg += "\\nCadastro sujeito à análise e ativação pela ASF.";
+            var wa = "https://wa.me/5511954346288?text=" + encodeURIComponent(msg);
+            var opened = window.open(wa, "_blank", "noopener,noreferrer");
+            showToast(opened ? "Cadastro preparado. Conclua o envio pelo WhatsApp para encaminhar à ASF." : "Cadastro salvo apenas neste dispositivo. Abra o WhatsApp para concluir o envio.", "info");
         }
 function checkBadge(type) {
         var sessions = (JSON.parse(localStorage.getItem('surf-sessions') || '[]')).length;
@@ -315,15 +325,22 @@ function callLua() {
 function showBrandSupport() { document.getElementById('brand-support').style.display = 'block'; }
 function sendSupport(valor) {/* removido: sem cobranças */}
 function showSection(sectionId) {
+            // Competições e eventos possuem aplicativo dedicado.
+            if (sectionId === 'competicoes') { window.location.href = 'https://eventos.asf.surf/'; return; }
             // Redireciona secoes desativadas
             if (sectionId === 'loja') sectionId = 'lojas';
             if (sectionId === 'badges') sectionId = 'progresso';
+            // Valida o destino antes de ocultar a seção atual: um ID ausente
+            // não pode deixar a homepage inteira em branco.
+            const sec = document.getElementById(sectionId);
+            if (!sec) {
+                console.warn('[ASF] Seção não encontrada:', sectionId);
+                return;
+            }
             document.querySelectorAll('.section').forEach(s => { s.classList.remove('active'); s.style.setProperty('display', 'none', 'important'); });
             document.querySelectorAll('.tab').forEach(t => { t.classList.remove('active'); t.setAttribute('aria-selected', 'false'); });
             document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
             // Show selected section
-            const sec = document.getElementById(sectionId);
-            if (!sec) return;
             sec.classList.add('active');
             sec.style.setProperty('display', 'block', 'important');
             const tab = document.querySelector('.tab[aria-controls="' + sectionId + '"]');
@@ -552,68 +569,20 @@ function requestLocation() {
         }
 function findNearbyManas() {
             const nearbyDiv = document.getElementById('nearby-manas');
-            nearbyDiv.innerHTML = '<p style="text-align: center; color: var(--primary);">🔄 Buscando manas próximas...</p>';
-            // Simula busca (em produção usaria a localização real)
-            setTimeout(() => {
-                const allManas = [];
-                Object.keys(MOCK_MANAS).forEach(beach => {
-                    MOCK_MANAS[beach].forEach(mana => {
-                        allManas.push({ ...mana, region: beach });
-                    });
-                });
-                // Ordena por distância
-                allManas.sort((a, b) => a.distance - b.distance);
-                // Pega as 5 mais próximas
-                const closest = allManas.slice(0, 5);
-                nearbyDiv.innerHTML = `
-                    <h4 style="color: var(--secondary); margin-bottom: 15px;">📍 Manas mais próximas</h4>
-                    ${closest.map(mana => `
-                        <div class="card" style="margin-bottom: 15px; cursor: pointer;" onclick="connectManas('${mana.name}')">
-                            <div style="display: flex; align-items: center; gap: 15px;">
-                                <div style="font-size: 40px;">${mana.avatar}</div>
-                                <div style="flex: 1;">
-                                    <h4 style="font-size: 16px; color: var(--secondary);">${mana.name}</h4>
-                                    <p style="font-size: 12px; color: var(--gray-600);">${mana.level} • ${mana.beach}</p>
-                                    <p style="font-size: 11px; color: var(--primary); font-weight: bold;">📍 ${mana.distance} km</p>
-                                </div>
-                                <button class="btn btn-primary" style="font-size: 12px; padding: 8px 12px;">Conectar</button>
-                            </div>
-                        </div>
-                    `).join('')}
-                    <p style="text-align: center; font-size: 12px; color: var(--gray-400); margin-top: 15px;">Total: ${allManas.length} manas encontradas</p>
-                `;
-            }, 1500);
+            if (!nearbyDiv) return;
+            nearbyDiv.innerHTML = '<div class="card" style="text-align:center;padding:18px;"><p style="font-weight:600;">🤝 Comunidade ASF</p><p style="font-size:13px;color:var(--gray-600);">A busca por surfistas próximas ainda não está conectada a uma base de perfis reais. Nenhum perfil fictício será exibido como pessoa disponível.</p></div>';
         }
 function showBeachManas(beach) {
-            const manas = MOCK_MANAS[beach] || [];
             const listDiv = document.getElementById('beach-manas-list');
             const detailDiv = document.getElementById('beach-manas-detail');
-            const beachNames = {
-                bertioga: 'Bertioga',
-                santos: 'Santos',
-                guaruja: 'Guarujá',
-                ubatuba: 'Ubatuba'
-            };
-            listDiv.innerHTML = `
-                <h4 style="color: var(--secondary); margin-bottom: 15px;">🏖️ Manas em ${beachNames[beach]}</h4>
-                ${manas.map(mana => `
-                    <div class="card" style="margin-bottom: 15px; cursor: pointer;" onclick="connectManas('${mana.name}')">
-                        <div style="display: flex; align-items: center; gap: 15px;">
-                            <div style="font-size: 40px;">${mana.avatar}</div>
-                            <div style="flex: 1;">
-                                <h4 style="font-size: 16px; color: var(--secondary);">${mana.name}</h4>
-                                <p style="font-size: 12px; color: var(--gray-600);">${mana.level} • ${mana.beach}</p>
-                                <p style="font-size: 11px; color: var(--primary); font-weight: bold;">📍 ${mana.distance} km</p>
-                            </div>
-                            <button class="btn btn-primary" style="font-size: 12px; padding: 8px 12px;">Conectar</button>
-                        </div>
-                    </div>
-                `).join('')}
-            `;
+            if (!listDiv || !detailDiv) return;
+            const beachNames = { bertioga: 'Bertioga', santos: 'Santos', guaruja: 'Guarujá', ubatuba: 'Ubatuba' };
+            const label = beachNames[beach] || 'esta região';
+            listDiv.innerHTML = '<div class="card" style="text-align:center;padding:18px;"><p style="font-weight:600;">🏄‍♀️ ' + label + '</p><p style="font-size:13px;color:var(--gray-600);">Ainda não há uma lista de perfis reais conectada para esta região. A ASF não exibirá cadastros demonstrativos como se fossem surfistas disponíveis.</p></div>';
             detailDiv.style.display = 'block';
         }
-function connectManas(name) {
-            alert(`🏄‍♀️ Solicitação enviada para ${name}!\n\nVocê receberá uma notificação quando ela aceitar. Enquanto isso, continue surfando! 🌊`);
+function connectManas() {
+            alert('A conexão entre surfistas ainda não está disponível. A ASF avisará quando esse recurso estiver ativo.');
         }
 function getLevel(points) {
             for (let i = LEVELS.length - 1; i >= 0; i--) {
@@ -1101,23 +1070,10 @@ function updateTideClock(tides, now) {
             const timeStr = String(now.getHours()).padStart(2,'0') + ':' + String(now.getMinutes()).padStart(2,'0');
             label.textContent = 'agora: ' + timeStr;
         }
-function getEstimatedTides(beach, date) {
-            // Approximate tidal cycle - shifts ~50min per day
-            const dayOfYear = Math.floor((date - new Date(date.getFullYear(), 0, 0)) / 86400000);
-            const baseOffset = (dayOfYear % 14) * 0.8; // ~50 min shift per day
-            const baseHigh = 5 + baseOffset;
-            const baseLow = 11 + baseOffset;
-            const high1 = Math.floor(baseHigh) % 24;
-            const highMin1 = Math.floor((baseHigh % 1) * 60);
-            const low1 = Math.floor(baseLow) % 24;
-            const lowMin1 = Math.floor((baseLow % 1) * 60);
-            const high2 = (high1 + 12) % 24;
-            return {
-                high: `${String(high1).padStart(2,'0')}:${String(highMin1).padStart(2,'0')} (${(1.0 + Math.sin(dayOfYear * 0.4) * 0.4).toFixed(1)}m)`,
-                low: `${String(low1).padStart(2,'0')}:${String(lowMin1).padStart(2,'0')} (${(0.3 + Math.sin(dayOfYear * 0.4) * 0.2).toFixed(1)}m)`,
-                tip: `💡 Próxima alta: ${String(high2).padStart(2,'0')}:${String(highMin1).padStart(2,'0')}`
-            };
+function getEstimatedTides() {
+            return {high:'Indisponível',low:'Indisponível',tip:'Consulte a Tábua de Marés da Marinha: https://pam.marinha.mil.br/tabuamares/tabuamares.html. Confira estação, data e fuso.'};
         }
+
 function showMarDetails() {
             if (!cachedMarine[currentBeach]) {
                 alert('Dados ainda carregando. Tente novamente em instantes.');
@@ -2281,21 +2237,59 @@ function openAffiliateLink(url, productId) {
   }
 }
 // Newsletter
-function subscribeNewsletter(){const e=document.getElementById('newsletter-email'),t=e?e.value.trim():'';if(!t||!t.includes('@'))return showToast('❌ Email inválido!','error');const o=JSON.parse(localStorage.getItem('asf-newsletter')||'[]');o.push({email:t,date:new Date().toISOString()}),localStorage.setItem('asf-newsletter',JSON.stringify(o)),showToast('✅ Inscrita! Você receberá dicas toda semana.','success'),e&&(e.value=''),typeof gtag!=='undefined'&&gtag('event','newsletter_signup',{event_category:'engagement',value:1})}
+// Newsletter — Google Sheets via Google Apps Script Web App.
+var ASF_NEWSLETTER_ENDPOINT = 'https://script.google.com/macros/s/AKfycbztQlw3cuvHHYiTODqz0I8TrhJ_2n1vgwJbPtWBPEKBr9I97iUTQzrCPv3154QzesWF/exec';
+async function subscribeNewsletter(){
+  const emailEl=document.getElementById('newsletter-email');
+  const consentEl=document.getElementById('newsletter-consent');
+  const honeypot=document.getElementById('newsletter-website');
+  const email=emailEl?emailEl.value.trim().toLowerCase():'';
+  if(!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return showToast('❌ Informe um e-mail válido.','error');
+  if(!consentEl || !consentEl.checked) return showToast('Marque o consentimento para se inscrever.','error');
+  if(honeypot && honeypot.value) return;
+  if(!ASF_NEWSLETTER_ENDPOINT || ASF_NEWSLETTER_ENDPOINT.indexOf('CONFIGURE_')===0) return showToast('A inscrição está em configuração. Tente novamente em breve.','error');
+  try {
+    await fetch(ASF_NEWSLETTER_ENDPOINT,{method:'POST',mode:'no-cors',headers:{'Content-Type':'application/x-www-form-urlencoded;charset=UTF-8'},body:new URLSearchParams({email:email,consent:'true',source:'ASF app newsletter',website:honeypot?honeypot.value:''}).toString()});
+    // no-cors response is opaque; a toast is not proof of a successful Sheets write.
+    showToast('📩 Solicitação enviada. A confirmação do registro pode levar alguns instantes.','success');
+    if(emailEl) emailEl.value='';
+    if(consentEl) consentEl.checked=false;
+    if(typeof gtag!=='undefined') gtag('event','newsletter_signup',{event_category:'engagement',value:1});
+  } catch(err) { showToast('Não foi possível enviar agora. Tente novamente.','error'); }
+}
 function showPremiumModal(){/* removido: sem área premium */}
 function hidePremiumModal(){/* removido */}
 function startPayment(){/* removido: sem pagamentos */}
 function contactWhatsApp(){trackEvent('contact','whatsapp_click'),window.open('https://wa.me/5511954346288','_blank')}
-function trackEvent(e,t,o){const n=JSON.parse(localStorage.getItem('asf-monetization-stats')||'{}');n.events||(n.events=[]),n.events.push({category:e,action:t,label:o,timestamp:Date.now()}),localStorage.setItem('asf-monetization-stats',JSON.stringify(n))}
+function trackEvent(e,t,o){if(!window.ASFConsent || window.ASFConsent.get() !== 'all') return;const n=JSON.parse(localStorage.getItem('asf-monetization-stats')||'{}');n.events||(n.events=[]),n.events.push({category:e,action:t,label:o,timestamp:Date.now()}),localStorage.setItem('asf-monetization-stats',JSON.stringify(n))}
 function getStats(){return JSON.parse(localStorage.getItem('asf-monetization-stats')||'{}')}
-function getCookieConsent(){return localStorage.getItem('asf-cookie-consent')}
-function acceptAllCookies(){localStorage.setItem('asf-cookie-consent','all');const b=document.getElementById('cookie-consent-banner');if(b){b.style.animation='toastOut 0.3s ease-out forwards';setTimeout(()=>b.remove(),300)}trackEvent('legal','cookie_consent','all');}
-function essentialCookies(){localStorage.setItem('asf-cookie-consent','essential');const b=document.getElementById('cookie-consent-banner');if(b){b.style.animation='toastOut 0.3s ease-out forwards';setTimeout(()=>b.remove(),300)}trackEvent('legal','cookie_consent','essential');}
+function getCookieConsent(){return window.ASFConsent ? window.ASFConsent.get() : null;}
+function acceptAllCookies(){if(window.ASFConsent) window.ASFConsent.set('all');}
+function essentialCookies(){if(window.ASFConsent) window.ASFConsent.set('essential');}
 function showPixDonation(){/* removido */}
 function showReferralModal(){const m=document.getElementById('referral-modal');if(m){m.style.display='flex';const codeDisplay=document.getElementById('referral-code-display');if(codeDisplay){const userCode=localStorage.getItem('asf-my-referral-code');if(userCode){codeDisplay.textContent=userCode}else{const newCode=generateReferralCode();localStorage.setItem('asf-my-referral-code',newCode);codeDisplay.textContent=newCode}}trackEvent('referral','modal_view')}}
 function hideReferralModal(){const m=document.getElementById('referral-modal');if(m)m.style.display='none'}
 function copyReferralCode(){const code=localStorage.getItem('asf-my-referral-code')||generateReferralCode();navigator.clipboard.writeText(code).then(()=>showToast('✅ Código copiado!','success')).catch(()=>showToast('❌ Erro ao copiar','error'));trackEvent('referral','code_copy')}
-function shareReferral(platform){const code=localStorage.getItem('asf-my-referral-code')||generateReferralCode();const url=`${window.ASF_BASE_URL}?ref=${code}`;let shareUrl='';switch(platform){case'whatsapp':shareUrl=`https://wa.me/?text=Olá! Quero te convidar para o app ASF - Dicas de surf gratuitas! Baixe aqui: ${url}`;break;case'copy':shareUrl=url;break}shareUrl&&window.open(shareUrl,'_blank');trackEvent('referral','share',platform)}
+function shareReferral(platform) {
+            var code = localStorage.getItem('asf-my-referral-code') || generateReferralCode();
+            var base = window.ASF_BASE_URL || 'https://asf.surf/';
+            var url = new URL(base);
+            url.searchParams.set('ref', code);
+            var shareUrl = '';
+            switch (platform) {
+                case 'whatsapp':
+                    shareUrl = 'https://wa.me/?text=' + encodeURIComponent('Olá! Quero te convidar para conhecer a ASF! ' + url.toString());
+                    break;
+                case 'instagram':
+                    shareUrl = 'https://www.instagram.com/associacaosurffeminino/';
+                    break;
+                case 'copy':
+                    shareUrl = url.toString();
+                    break;
+            }
+            if (shareUrl) window.open(shareUrl, '_blank', 'noopener,noreferrer');
+            trackEvent('referral', 'share', platform);
+        }
 function hidePixDonation(){/* removido */}
 function copyPixKey(){/* removido: sem doações via Pix */}
 function getUserId(){try{let uid=localStorage.getItem('asf-user-id');if(!uid){uid='user_'+Math.random().toString(36).substring(7);localStorage.setItem('asf-user-id',uid)}return uid}catch(e){return 'user_anon'}}
@@ -2383,12 +2377,8 @@ function initGoogleAnalytics(){}
     window.ACHIEVEMENTS_INIT = true;
     asfOnHomeReady(renderAchievements);
 })();
-function getConsent() { return localStorage.getItem(COOKIE_CONSENT); }
-function setConsent(level) {
-      localStorage.setItem(COOKIE_CONSENT, level);
-      if (banner) banner.remove();
-      trackEvent('legal', 'cookie_consent', level);
-    }
+function getConsent() { return getCookieConsent(); }
+function setConsent(level) { if(window.ASFConsent) window.ASFConsent.set(level); }
 function walkTree(el) {
         if (el.nodeType === 3 && el.textContent.trim().length > 2 && !el.parentElement.classList.contains('icon')) {
             var txt = el.textContent;
@@ -2436,7 +2426,7 @@ function walkTree(el) {
                 var row = node(href ? 'a' : 'button', 'search-result-item');
                 row.style.cssText = 'display:block;width:100%;text-align:left;box-sizing:border-box;border:0;background:transparent;color:inherit;font:inherit;text-decoration:none';
                 if (href) row.href = href;
-                else { row.type = 'button'; row.addEventListener('click', function () { if (document.getElementById(sectionId)) window.goToSection(sectionId, row); }); }
+                else { row.type = 'button'; row.dataset.sectionTarget = sectionId; row.addEventListener('click', function () { if (document.getElementById(sectionId)) window.goToSection(sectionId, row); }); }
                 row.appendChild(node('div', 'result-title', (item.icon || '🔎') + ' ' + String(item.title || 'Conteúdo ASF')));
                 row.appendChild(node('div', 'result-section', item.section || 'Conteúdo ASF'));
                 var text = String(item.text || ''); row.appendChild(node('div', 'result-preview', text.length > 80 ? text.slice(0, 80) + '...' : text));

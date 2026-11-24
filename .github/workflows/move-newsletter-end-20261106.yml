@@ -1,0 +1,55 @@
+name: Move newsletter to page end 2026-11-06 (one-shot)
+on:
+  push:
+    branches: [main]
+    paths: ['.github/workflows/move-newsletter-end-20261106.yml']
+permissions:
+  contents: write
+jobs:
+  fix:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Move newsletter section before footer
+        run: |
+          python3 - <<'PY'
+          import pathlib, sys
+          p = pathlib.Path('index.html')
+          s = p.read_text(encoding='utf-8')
+          start_marker = '<!-- Newsletter ASF'
+          start = s.find(start_marker)
+          if start < 0:
+              print('newsletter start marker not found'); sys.exit(1)
+          end_tag = '</section>'
+          end = s.find(end_tag, start)
+          if end < 0:
+              print('newsletter section end not found'); sys.exit(1)
+          end = end + len(end_tag)
+          block = s[start:end]
+          if 'id="newsletter-destaque"' not in block:
+              print('newsletter id not in extracted block'); sys.exit(1)
+          if s.count('id="newsletter-destaque"') != 1:
+              print('newsletter id count is not 1'); sys.exit(1)
+          block = block.replace('destaque na home, logo após o hero', 'no final da pagina, antes do rodape', 1)
+          s_without = s[:start] + s[end:]
+          footer = s_without.find('<footer')
+          if footer < 0:
+              print('footer anchor not found'); sys.exit(1)
+          s_new = s_without[:footer] + block + '\n\n    ' + s_without[footer:]
+          if s_new.count('id="newsletter-destaque"') != 1:
+              print('final newsletter count is not 1'); sys.exit(1)
+          if not (s_new.find('id="newsletter-destaque"') > s_new.find('id="parcerias-destaque"')):
+              print('newsletter is not after hero partners section'); sys.exit(1)
+          if not (s_new.find('id="newsletter-destaque"') < s_new.find('<footer')):
+              print('newsletter is not before footer'); sys.exit(1)
+          p.write_text(s_new, encoding='utf-8')
+          print('newsletter moved before footer')
+          PY
+      - name: Commit and push if changed
+        run: |
+          if git diff --quiet; then echo 'No changes'; exit 0; fi
+          git config user.name 'ASF Bot'
+          git config user.email 'bot@asf-app.com'
+          git add index.html
+          git commit -m 'style(home): move newsletter para o fim da pagina'
+          git push

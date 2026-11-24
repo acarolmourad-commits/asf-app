@@ -1,0 +1,357 @@
+/* ASF home quality layer — additive and reversible. No card or member data is touched. */
+.skip-link {
+  position: fixed; left: 12px; top: 12px; z-index: 10000;
+  transform: translateY(-180%); padding: 12px 16px; border-radius: 10px;
+  background: #0e2439; color: #fff; font-weight: 700; text-decoration: none;
+  box-shadow: 0 4px 16px rgba(14,36,57,.25);
+}
+.skip-link:focus { transform: translateY(0); }
+a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible,
+textarea:focus-visible, [tabindex]:focus-visible {
+  outline: 3px solid #9b3d68 !important; outline-offset: 3px;
+}
+.hero { padding: clamp(24px, 5vw, 48px) 20px 28px; }
+.hero h1 { max-width: 760px; margin-inline: auto; line-height: 1.12; text-wrap: balance; }
+.hero > p { max-width: 680px; margin-inline: auto; line-height: 1.65; }
+.hero-cta { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; }
+.hero-cta .btn { min-height: 44px; display: inline-flex; align-items: center; justify-content: center; }
+#comecar { max-width: 1000px; margin-inline: auto; }
+#comecar > div { gap: 12px !important; }
+#comecar > div > a {
+  min-height: 124px; display: flex !important; flex-direction: column;
+  justify-content: center; transition: border-color .15s ease, box-shadow .15s ease;
+}
+#comecar > div > a:hover { border-color: #00a8cc !important; box-shadow: 0 5px 18px rgba(14,36,57,.09) !important; }
+#asf-home-search { position: relative; z-index: 2; margin: 0 20px 18px; }
+#asf-home-search .search-bar { min-height: 48px; }
+#asf-home-search input { min-height: 44px; font: inherit; }
+#asf-home-search .search-clear { min-width: 44px; min-height: 44px; }
+.asf-home-reordered-incentive { margin-top: 8px !important; }
+#searchResults[aria-live] { overflow-wrap: anywhere; }
+img { max-width: 100%; }
+
+/* Grouped navigation improves scanning while preserving every existing menu action. */
+#header-menu .asf-menu-group {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 4px 8px;
+  padding: 12px 0;
+  border-bottom: 1px solid rgba(14,36,57,.12);
+}
+#header-menu .asf-menu-group:last-of-type { border-bottom: 0; }
+#header-menu .asf-menu-group-title {
+  grid-column: 1 / -1;
+  margin: 0 8px 5px;
+  color: #526778;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: .09em;
+  line-height: 1.4;
+}
+#header-menu .asf-menu-group .menu-item {
+  min-width: 0;
+  width: 100%;
+  box-sizing: border-box;
+  text-align: left;
+  justify-content: flex-start;
+  border-radius: 10px;
+}
+@media (max-width: 480px) {
+  .hero { padding-inline: 16px; }
+  .hero h1 { font-size: clamp(28px, 8vw, 38px); }
+  .hero-cta { flex-direction: column; align-items: stretch; }
+  .hero-cta .btn { width: 100%; box-sizing: border-box; }
+  #comecar { margin-inline: 16px !important; }
+  #comecar > div { grid-template-columns: 1fr !important; }
+  #comecar > div > a { min-height: 0; padding: 16px !important; }
+  #asf-home-search { margin-inline: 16px; }
+  #header-menu .asf-menu-group { grid-template-columns: minmax(0, 1fr); }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+}
+
+/* Footer institutional: contrast explicitly independent from global theme. */
+footer[role="contentinfo"] {
+  background: #0E2439 !important;
+  color: #EAF4F8 !important;
+  border-top: 1px solid #315066 !important;
+}
+footer[role="contentinfo"] > div { color: #EAF4F8 !important; }
+footer[role="contentinfo"] strong { color: #FFFFFF !important; }
+footer[role="contentinfo"] p { color: #DCEAF2 !important; opacity: 1 !important; }
+footer[role="contentinfo"] nav a {
+  color: #8BE3F7 !important;
+  text-decoration: underline !important;
+  text-decoration-color: transparent !important;
+  text-underline-offset: 3px;
+}
+footer[role="contentinfo"] nav a:hover,
+footer[role="contentinfo"] nav a:focus-visible {
+  color: #FFFFFF !important;
+  text-decoration-color: currentColor !important;
+}
+footer[role="contentinfo"] nav a:focus-visible {
+  outline: 3px solid #FFD166 !important;
+  outline-offset: 3px;
+  border-radius: 3px;
+}
+@media (max-width: 640px) {
+  footer[role="contentinfo"] > div > div:first-child { gap: 20px !important; }
+  footer[role="contentinfo"] nav {
+    min-width: min(100%, 140px) !important;
+    flex: 1 1 140px;
+  }
+  footer[role="contentinfo"] > div > p { line-height: 1.65; padding-top: 16px; }
+}
+
+
+/* Mobile home polish: prevent fixed navigation and floating controls from
+   covering cards, banners, or the last interactive element. */
+.asf-bottom-nav {
+  box-sizing: border-box;
+  min-height: 64px;
+  padding: 8px 8px calc(8px + env(safe-area-inset-bottom));
+  background: #0E2439;
+  color: #EAF4F8;
+  border-top: 1px solid rgba(255,255,255,.14);
+  box-shadow: 0 -8px 24px rgba(14,36,57,.12);
+}
+.asf-bottom-nav a {
+  flex: 1 1 0;
+  min-width: 0;
+  min-height: 44px;
+  justify-content: center;
+  gap: 4px;
+  color: #D6E5ED;
+  opacity: 1;
+}
+.asf-bottom-nav a.ativo { color: #59D7F0; }
+.asf-bottom-nav a span { font-size: 18px; line-height: 1.1; }
+.asf-bottom-nav a small { font-size: 11px; line-height: 1.2; white-space: nowrap; }
+body { padding-bottom: calc(112px + env(safe-area-inset-bottom)) !important; }
+
+@media (max-width: 640px) {
+  /* More compact intro; retain readable copy and clear CTA separation. */
+  .hero { padding: 22px 16px 20px !important; }
+  .hero > p { font-size: clamp(16px, 4.2vw, 19px); line-height: 1.55; }
+  .hero-cta { gap: 10px; }
+  .hero-cta .btn { min-height: 48px; }
+
+  /* Cards and promotional banners should never spill beyond the viewport. */
+  #parcerias-destaque,
+  #brandhub,
+  .card {
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+  #parcerias-destaque { margin-inline: 16px !important; }
+  #parcerias-destaque a { max-width: 100%; box-sizing: border-box; }
+
+  /* Keep common floating actions above the bottom navigation and away from
+     the page edge. Selector list is intentionally scoped to known float patterns. */
+  [class*="floating"], [class*="float-btn"], [class*="fab"],
+  [id*="floating"], [id*="fab"] {
+    max-width: calc(100vw - 32px);
+  }
+  .asf-bottom-nav { z-index: 1000; }
+}
+
+@media (max-width: 380px) {
+  .asf-bottom-nav a small { font-size: 10px; }
+  .asf-bottom-nav a span { font-size: 17px; }
+}
+
+
+/* First-screen mobile refinement: compact logo, stronger hierarchy and CTA. */
+.hero .hero-logo {
+  width: 54px;
+  height: auto;
+  display: block;
+  margin: 10px auto 12px;
+}
+.hero h1 {
+  max-width: 640px;
+  margin: 0 auto 12px;
+  text-wrap: balance;
+}
+.hero > p {
+  max-width: 600px;
+  margin: 0 auto 20px;
+  text-wrap: pretty;
+}
+.hero-cta .btn-primary {
+  background: #00A8CC !important;
+  color: #fff !important;
+  border: 1px solid #0089A8 !important;
+  border-radius: 14px !important;
+  padding: 13px 22px !important;
+  font-weight: 800 !important;
+  box-shadow: 0 6px 18px rgba(0,168,204,.22);
+}
+.hero-cta .btn-secondary {
+  border: 1px solid rgba(0,112,142,.35) !important;
+  border-radius: 14px !important;
+  padding: 12px 20px !important;
+  font-weight: 700 !important;
+}
+@media (max-width: 640px) {
+  .hero {
+    padding: 18px 18px 24px !important;
+    text-align: center;
+  }
+  .hero .hero-badge { margin-bottom: 4px; }
+  .hero .hero-logo { width: 48px; margin: 8px auto 10px; }
+  .hero h1 {
+    font-size: clamp(26px, 7.2vw, 34px) !important;
+    line-height: 1.14 !important;
+    margin-bottom: 10px;
+  }
+  .hero > p {
+    max-width: 34rem;
+    font-size: clamp(15px, 4.15vw, 18px) !important;
+    line-height: 1.5 !important;
+    margin-bottom: 18px;
+  }
+  .hero-cta {
+    max-width: 340px;
+    margin: 0 auto;
+    gap: 9px !important;
+  }
+  .hero-cta .btn-primary,
+  .hero-cta .btn-secondary {
+    min-height: 48px;
+    font-size: 16px !important;
+  }
+}
+/* Ensure a language selector is not clipped by its own row on narrow screens. */
+@media (max-width: 640px) {
+  [aria-label="Idioma"], [aria-label="Language"],
+  .language-switcher, .lang-switcher, .asf-language-switcher {
+    max-width: 100%;
+    box-sizing: border-box;
+    flex-wrap: wrap;
+    overflow: visible;
+  }
+  [aria-label="Idioma"] button, [aria-label="Language"] button,
+  .language-switcher button, .lang-switcher button, .asf-language-switcher button {
+    min-height: 44px;
+    max-width: 100%;
+  }
+}
+
+
+/* Keep the mobile hamburger control visible above hero artwork and overlays. */
+@media (max-width: 768px) {
+  header {
+    position: sticky !important;
+    top: 0;
+    z-index: 12000 !important;
+    overflow: visible !important;
+    isolation: isolate;
+  }
+  header .header-content,
+  header .header-actions {
+    position: relative;
+    z-index: 12001;
+    overflow: visible;
+  }
+  header #menu-toggle {
+    display: inline-flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    position: relative !important;
+    z-index: 12002 !important;
+    flex: 0 0 44px;
+    width: 44px;
+    min-width: 44px;
+    height: 44px;
+    min-height: 44px;
+    align-items: center;
+    justify-content: center;
+    color: #fff !important;
+    background: #0E526B !important;
+    border: 2px solid rgba(255,255,255,.92) !important;
+    border-radius: 12px !important;
+    box-shadow: 0 3px 12px rgba(14,36,57,.28);
+    font-size: 24px !important;
+    line-height: 1;
+    pointer-events: auto;
+  }
+  header #menu-toggle:focus-visible {
+    outline: 3px solid #FFD45A;
+    outline-offset: 3px;
+  }
+}
+
+
+/* Mobile menu recovery: keep a persistent, unmistakable menu trigger in view.
+   The header itself can be visually displaced by mobile hero/language layers. */
+@media (max-width: 600px) {
+  body > header,
+  header {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+  }
+  header #menu-toggle {
+    position: fixed !important;
+    top: max(10px, env(safe-area-inset-top)) !important;
+    right: 14px !important;
+    z-index: 2147483000 !important;
+    display: flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    width: 50px !important;
+    min-width: 50px !important;
+    height: 50px !important;
+    min-height: 50px !important;
+    flex: none !important;
+    border-radius: 14px !important;
+    background: #064B63 !important;
+    color: #fff !important;
+    border: 2px solid #fff !important;
+    box-shadow: 0 4px 16px rgba(3,30,45,.42) !important;
+    font-size: 27px !important;
+    line-height: 1 !important;
+    transform: none !important;
+  }
+  #header-menu {
+    position: fixed !important;
+    top: max(68px, calc(env(safe-area-inset-top) + 64px)) !important;
+    left: 12px !important;
+    right: 12px !important;
+    z-index: 2147482999 !important;
+    width: auto !important;
+    max-width: none !important;
+    max-height: calc(100dvh - 150px) !important;
+    overflow-y: auto !important;
+    overscroll-behavior: contain;
+    box-sizing: border-box !important;
+  }
+  #header-menu .asf-menu-group {
+    grid-template-columns: minmax(0, 1fr) !important;
+  }
+}
+/* Institutional block: readable even while the user selects/copies its text. */
+html body footer[role="contentinfo"] ::selection,
+html body footer[role="contentinfo"]::selection {
+  color: #FFFFFF !important;
+  background: #006B8F !important;
+  -webkit-text-fill-color: #FFFFFF !important;
+}
+html body footer[role="contentinfo"] nav a {
+  color: #FFFFFF !important;
+  text-decoration-color: #FFFFFF !important;
+}
+html body footer[role="contentinfo"] p,
+html body footer[role="contentinfo"] strong,
+html body footer[role="contentinfo"] > div {
+  color: #FFFFFF !important;
+  opacity: 1 !important;
+}
+/* Keep the partner showcase only in the early homepage highlight.
+   The mid-page brand-home-card repeats the same partner logos and CTA. */
+html body #brand-home-card {
+  display: none !important;
+}

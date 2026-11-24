@@ -1,0 +1,46 @@
+name: ASF Newsletter Semanal
+on:
+  schedule:
+    - cron: '0 12 * * 1' # Segundas 09h em America/Sao_Paulo (12h UTC)
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: 'preview nunca envia; test envia so para test_email; send envia para a lista'
+        type: choice
+        options: [preview, test, send]
+        default: preview
+      test_email:
+        description: 'Obrigatorio no modo test'
+        type: string
+        required: false
+permissions:
+  contents: read
+concurrency:
+  group: asf-newsletter
+  cancel-in-progress: false
+jobs:
+  newsletter:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: '3.12' }
+      - run: pip install google-api-python-client google-auth requests
+      - name: Gerar preview ou enviar com travas
+        env:
+          MODE: ${{ github.event_name == 'schedule' && vars.ASF_NEWSLETTER_SEND_ENABLED == 'true' && 'send' || inputs.mode || 'preview' }}
+          ALLOW_SEND: ${{ vars.ASF_NEWSLETTER_SEND_ENABLED }}
+          TEST_EMAIL: ${{ inputs.test_email }}
+          SHEET_ID: ${{ vars.ASF_NEWSLETTER_SHEET_ID }}
+          GOOGLE_SERVICE_ACCOUNT_JSON: ${{ secrets.GOOGLE_SERVICE_ACCOUNT_JSON }}
+          BREVO_API_KEY: ${{ secrets.BREVO_API_KEY }}
+          UNSUBSCRIBE_BASE_URL: ${{ vars.ASF_NEWSLETTER_UNSUBSCRIBE_BASE }}
+          NEWS_RSS_URLS: ${{ vars.ASF_NEWSLETTER_RSS_URLS }}
+        run: python newsletter/send_newsletter.py
+      - name: Salvar preview como artefato
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: newsletter-preview-${{ github.run_id }}
+          path: newsletter-preview.html
+          if-no-files-found: ignore

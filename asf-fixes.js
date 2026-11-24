@@ -19,13 +19,9 @@
     window.showSection = patched;
   }
   function fixCount() {
+    // Mantém apenas o redirecionamento legado de Trips.
+    // A contagem oficial é controlada por data/apps-count.js.
     patchTrips();
-    var nodes = document.querySelectorAll('small, p, span');
-    nodes.forEach(function (el) {
-      if (el.children.length === 0 && el.textContent.indexOf('Todos os 52 apps') !== -1) {
-        el.textContent = el.textContent.replace('Todos os 52 apps', 'Todos os 53 apps');
-      }
-    });
   }
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', fixCount);
@@ -229,4 +225,13 @@
       '.search-results{display:none}';
     document.head.appendChild(st);
   });
+})();
+
+/* ---------- RETIRE ASF LOJA (14/11/2026) ---------- */
+(function(){
+  function removeRetiredShop(){
+    ['lojas','loja'].forEach(function(id){var el=document.getElementById(id);if(el)el.remove();});
+    document.querySelectorAll('a[href*="asf-loja"],a[href*="loja.asf.surf"]').forEach(function(a){a.remove();});
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',removeRetiredShop);else removeRetiredShop();
 })();

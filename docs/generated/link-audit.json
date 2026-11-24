@@ -1,16 +1,33 @@
 {
-  "date": "2026-10-25T10:16:57.765415+00:00",
-  "total": 109,
-  "ok": 97,
-  "skipped": 10,
-  "broken_count": 2,
-  "broken": [
-    "https://www.spsurf.com.br",
-    "https://www.spsurf.com.br/"
-  ],
+  "date": "2026-11-24T03:32:53.119327+00:00",
+  "total": 147,
+  "ok": 139,
+  "skipped": 8,
+  "broken_count": 0,
+  "broken": [],
   "results": [
     {
+      "url": "https://acarolmourad-commits.github.io/asf-achados/",
+      "status": "ok",
+      "http": 200
+    },
+    {
+      "url": "https://acarolmourad-commits.github.io/asf-alerta/",
+      "status": "ok",
+      "http": 200
+    },
+    {
       "url": "https://acarolmourad-commits.github.io/asf-atlas/",
+      "status": "ok",
+      "http": 200
+    },
+    {
+      "url": "https://acarolmourad-commits.github.io/asf-bemestar/",
+      "status": "ok",
+      "http": 200
+    },
+    {
+      "url": "https://acarolmourad-commits.github.io/asf-carona/",
       "status": "ok",
       "http": 200
     },
@@ -20,7 +37,37 @@
       "http": 200
     },
     {
+      "url": "https://acarolmourad-commits.github.io/asf-comunidade/",
+      "status": "ok",
+      "http": 200
+    },
+    {
+      "url": "https://acarolmourad-commits.github.io/asf-desafio/",
+      "status": "ok",
+      "http": 200
+    },
+    {
+      "url": "https://acarolmourad-commits.github.io/asf-desafios/",
+      "status": "ok",
+      "http": 200
+    },
+    {
       "url": "https://acarolmourad-commits.github.io/asf-diario/",
+      "status": "ok",
+      "http": 200
+    },
+    {
+      "url": "https://acarolmourad-commits.github.io/asf-eco/",
+      "status": "ok",
+      "http": 200
+    },
+    {
+      "url": "https://acarolmourad-commits.github.io/asf-equipamento/",
+      "status": "ok",
+      "http": 200
+    },
+    {
+      "url": "https://acarolmourad-commits.github.io/asf-filmes/",
       "status": "ok",
       "http": 200
     },
@@ -40,7 +87,22 @@
       "http": 200
     },
     {
+      "url": "https://acarolmourad-commits.github.io/asf-inspiracao/",
+      "status": "ok",
+      "http": 200
+    },
+    {
+      "url": "https://acarolmourad-commits.github.io/asf-kids/",
+      "status": "ok",
+      "http": 200
+    },
+    {
       "url": "https://acarolmourad-commits.github.io/asf-leitura/",
+      "status": "ok",
+      "http": 200
+    },
+    {
+      "url": "https://acarolmourad-commits.github.io/asf-mala/",
       "status": "ok",
       "http": 200
     },
@@ -55,12 +117,27 @@
       "http": 200
     },
     {
-      "url": "https://acarolmourad-commits.github.io/asf-mare/",
+      "url": "https://acarolmourad-commits.github.io/asf-matematica/",
+      "status": "ok",
+      "http": 200
+    },
+    {
+      "url": "https://acarolmourad-commits.github.io/asf-memoria/",
       "status": "ok",
       "http": 200
     },
     {
       "url": "https://acarolmourad-commits.github.io/asf-mental/",
+      "status": "ok",
+      "http": 200
+    },
+    {
+      "url": "https://acarolmourad-commits.github.io/asf-mentorias/",
+      "status": "ok",
+      "http": 200
+    },
+    {
+      "url": "https://acarolmourad-commits.github.io/asf-mercado/",
       "status": "ok",
       "http": 200
     },
@@ -71,6 +148,21 @@
     },
     {
       "url": "https://acarolmourad-commits.github.io/asf-parceiras/",
+      "status": "ok",
+      "http": 200
+    },
+    {
+      "url": "https://acarolmourad-commits.github.io/asf-patrocinio/",
+      "status": "ok",
+      "http": 200
+    },
+    {
+      "url": "https://acarolmourad-commits.github.io/asf-podcast/",
+      "status": "ok",
+      "http": 200
+    },
+    {
+      "url": "https://acarolmourad-commits.github.io/asf-ponto/",
       "status": "ok",
       "http": 200
     },
@@ -100,11 +192,6 @@
       "http": 200
     },
     {
-      "url": "https://acarolmourad-commits.github.io/asf-respira/",
-      "status": "ok",
-      "http": 200
-    },
-    {
       "url": "https://acarolmourad-commits.github.io/asf-seguranca/",
       "status": "ok",
       "http": 200
@@ -115,22 +202,22 @@
       "http": 200
     },
     {
-      "url": "https://acarolmourad-commits.github.io/asf-sos/",
+      "url": "https://acarolmourad-commits.github.io/asf-sono/",
       "status": "ok",
       "http": 200
     },
     {
-      "url": "https://acarolmourad-commits.github.io/asf-swell/",
-      "status": "ok",
-      "http": 200
-    },
-    {
-      "url": "https://acarolmourad-commits.github.io/asf-treino/",
+      "url": "https://acarolmourad-commits.github.io/asf-tempo/",
       "status": "ok",
       "http": 200
     },
     {
       "url": "https://acarolmourad-commits.github.io/asf-viagens/",
+      "status": "ok",
+      "http": 200
+    },
+    {
+      "url": "https://acarolmourad-commits.github.io/asf-volume/",
       "status": "ok",
       "http": 200
     },
@@ -145,7 +232,22 @@
       "http": null
     },
     {
+      "url": "https://apnea.asf.surf/",
+      "status": "ok",
+      "http": 200
+    },
+    {
       "url": "https://asf.surf/",
+      "status": "ok",
+      "http": 200
+    },
+    {
+      "url": "https://asf.surf/#carteirinha",
+      "status": "ok",
+      "http": 200
+    },
+    {
+      "url": "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2",
       "status": "ok",
       "http": 200
     },
@@ -158,6 +260,11 @@
       "url": "https://fonts.gstatic.com",
       "status": "skipped",
       "http": null
+    },
+    {
+      "url": "https://galeria.asf.surf/",
+      "status": "ok",
+      "http": 200
     },
     {
       "url": "https://images.unsplash.com",
@@ -180,9 +287,39 @@
       "http": 200
     },
     {
-      "url": "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1643806355443576",
-      "status": "skipped",
-      "http": null
+      "url": "https://pam.marinha.mil.br/tabuamares/tabuamares.html",
+      "status": "ok",
+      "http": 200
+    },
+    {
+      "url": "https://praias.asf.surf/",
+      "status": "ok",
+      "http": 200
+    },
+    {
+      "url": "https://previsao.asf.surf/",
+      "status": "ok",
+      "http": 200
+    },
+    {
+      "url": "https://respira.asf.surf/",
+      "status": "ok",
+      "http": 200
+    },
+    {
+      "url": "https://sos.asf.surf/",
+      "status": "ok",
+      "http": 200
+    },
+    {
+      "url": "https://tempo.asf.surf/",
+      "status": "ok",
+      "http": 200
+    },
+    {
+      "url": "https://treino.asf.surf/",
+      "status": "ok",
+      "http": 200
     },
     {
       "url": "https://treino.asf.surf/#plano-30-dias",
@@ -195,12 +332,7 @@
       "http": null
     },
     {
-      "url": "https://www.fecasurf.com.br/",
-      "status": "ok",
-      "http": 200
-    },
-    {
-      "url": "https://www.googletagmanager.com",
+      "url": "https://www.instagram.com/asf.surffeminino",
       "status": "skipped",
       "http": null
     },
@@ -210,32 +342,12 @@
       "http": null
     },
     {
-      "url": "https://www.instagram.com/spsurfoficial/",
-      "status": "skipped",
-      "http": null
-    },
-    {
-      "url": "https://www.spsurf.com.br",
-      "status": "broken",
-      "http": "URLError"
-    },
-    {
-      "url": "https://www.spsurf.com.br/",
-      "status": "broken",
-      "http": "URLError"
-    },
-    {
-      "url": "https://www.surfbrasil.org.br/",
-      "status": "ok",
-      "http": 200
-    },
-    {
       "url": "https://www.tiktok.com/@Cahrol.asf",
       "status": "skipped",
       "http": null
     },
     {
-      "url": "https://www.villablumaresias.com.br",
+      "url": "https://www.worldsurfleague.com/events",
       "status": "ok",
       "http": 200
     },
@@ -264,7 +376,55 @@
       "local": true
     },
     {
-      "url": "./asf-previsao-card.js",
+      "url": "./asf-navigation-a11y.js",
+      "status": "ok",
+      "http": 200,
+      "local": true
+    },
+    {
+      "url": "./carteirinhas.html",
+      "status": "ok",
+      "http": 200,
+      "local": true
+    },
+    {
+      "url": "./diario/",
+      "status": "ok",
+      "http": 200,
+      "local": true
+    },
+    {
+      "url": "./index.html",
+      "status": "ok",
+      "http": 200,
+      "local": true
+    },
+    {
+      "url": "./mural/",
+      "status": "ok",
+      "http": 200,
+      "local": true
+    },
+    {
+      "url": "./previsao-surf/",
+      "status": "ok",
+      "http": 200,
+      "local": true
+    },
+    {
+      "url": "/aprender/",
+      "status": "ok",
+      "http": 200,
+      "local": true
+    },
+    {
+      "url": "/diario/",
+      "status": "ok",
+      "http": 200,
+      "local": true
+    },
+    {
+      "url": "/previsao-surf/",
       "status": "ok",
       "http": 200,
       "local": true
@@ -324,7 +484,25 @@
       "local": true
     },
     {
+      "url": "asf-home-quality.css",
+      "status": "ok",
+      "http": 200,
+      "local": true
+    },
+    {
+      "url": "asf-home-quality.js",
+      "status": "ok",
+      "http": 200,
+      "local": true
+    },
+    {
       "url": "asf-journeys-review.css",
+      "status": "ok",
+      "http": 200,
+      "local": true
+    },
+    {
+      "url": "asf-navigation-a11y.css",
       "status": "ok",
       "http": 200,
       "local": true
@@ -354,6 +532,24 @@
       "local": true
     },
     {
+      "url": "assets/css/home-journey.css",
+      "status": "ok",
+      "http": 200,
+      "local": true
+    },
+    {
+      "url": "assets/css/home-modernization.css",
+      "status": "ok",
+      "http": 200,
+      "local": true
+    },
+    {
+      "url": "assets/css/surf-tips.css",
+      "status": "ok",
+      "http": 200,
+      "local": true
+    },
+    {
       "url": "assets/images/asf-logo-small.png",
       "status": "ok",
       "http": 200,
@@ -378,12 +574,6 @@
       "local": true
     },
     {
-      "url": "assets/js/inline/asf-inline-04.js",
-      "status": "ok",
-      "http": 200,
-      "local": true
-    },
-    {
       "url": "assets/js/inline/asf-inline-05.js",
       "status": "ok",
       "http": 200,
@@ -391,12 +581,6 @@
     },
     {
       "url": "assets/js/inline/asf-inline-06.js",
-      "status": "ok",
-      "http": 200,
-      "local": true
-    },
-    {
-      "url": "bem-estar/surf-saude-mental-mulheres.html",
       "status": "ok",
       "http": 200,
       "local": true
@@ -432,13 +616,13 @@
       "local": true
     },
     {
-      "url": "data/mock-manas.js",
+      "url": "data/translations.js",
       "status": "ok",
       "http": 200,
       "local": true
     },
     {
-      "url": "data/translations.js",
+      "url": "destaques-rede.html",
       "status": "ok",
       "http": 200,
       "local": true
@@ -456,13 +640,25 @@
       "local": true
     },
     {
-      "url": "guias/planejar-surf-trip/",
+      "url": "hospedagens/",
       "status": "ok",
       "http": 200,
       "local": true
     },
     {
-      "url": "hospedagens/",
+      "url": "indicacoes/",
+      "status": "ok",
+      "http": 200,
+      "local": true
+    },
+    {
+      "url": "indicacoes/black-friday/",
+      "status": "ok",
+      "http": 200,
+      "local": true
+    },
+    {
+      "url": "indicacoes/equipamento-na-praia.webp",
       "status": "ok",
       "http": 200,
       "local": true
@@ -492,6 +688,12 @@
       "local": true
     },
     {
+      "url": "js/home-journey.js",
+      "status": "ok",
+      "http": 200,
+      "local": true
+    },
+    {
       "url": "js/home-main.js",
       "status": "ok",
       "http": 200,
@@ -499,6 +701,12 @@
     },
     {
       "url": "js/home-quiz-i18n.js",
+      "status": "ok",
+      "http": 200,
+      "local": true
+    },
+    {
+      "url": "js/surf-tips.js",
       "status": "ok",
       "http": 200,
       "local": true
@@ -516,25 +724,19 @@
       "local": true
     },
     {
+      "url": "mural/",
+      "status": "ok",
+      "http": 200,
+      "local": true
+    },
+    {
+      "url": "newsletter/config.js",
+      "status": "ok",
+      "http": 200,
+      "local": true
+    },
+    {
       "url": "parcerias/",
-      "status": "ok",
-      "http": 200,
-      "local": true
-    },
-    {
-      "url": "parcerias/villa-blu/",
-      "status": "ok",
-      "http": 200,
-      "local": true
-    },
-    {
-      "url": "praias/melhores-praias-iniciantes-litoral-norte-sp.html",
-      "status": "ok",
-      "http": 200,
-      "local": true
-    },
-    {
-      "url": "praias/surf-feminino-sao-sebastiao.html",
       "status": "ok",
       "http": 200,
       "local": true

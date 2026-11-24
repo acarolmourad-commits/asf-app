@@ -5,7 +5,7 @@
 .asf-bottom-nav a{display:flex;flex-direction:column;align-items:center;gap:2px;
   text-decoration:none;color:inherit;font-size:.7rem;opacity:.7}
 .asf-bottom-nav a.ativo{opacity:1;color:var(--asf-primary,#0b7fab)}
-body{padding-bottom:64px}
+body{padding-bottom:calc(84px + env(safe-area-inset-bottom))}
 
 .mural-foto-mes{background:linear-gradient(135deg,#0b7fab,#14b8d4);color:#fff;
   border-radius:16px;padding:1rem;margin-bottom:1rem}
@@ -239,4 +239,114 @@ html, body { background: #FFFFFF !important; }
 #brandhub div[style*="#9B59B6 100%"] button.cta-button {
   margin-bottom: 28px;
   box-shadow: 0 6px 18px rgba(0,0,0,.3);
+}
+
+
+/* ASF MOBILE HIT-TARGET FIX — 16/11/2026
+   Keep bottom navigation and floating shortcuts independently tappable on iOS.
+   The Rede ASF backdrop remains above all controls only while its panel is open. */
+.asf-bottom-nav {
+  position: fixed !important;
+  z-index: 100000 !important;
+  pointer-events: auto !important;
+  isolation: isolate;
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
+}
+.asf-bottom-nav a {
+  position: relative;
+  z-index: 1;
+  pointer-events: auto !important;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: rgba(0,168,204,.22);
+}
+#asf-sat-nav,
+#asf-galeria-btn {
+  z-index: 100001 !important;
+  pointer-events: auto !important;
+  touch-action: manipulation;
+}
+#asf-sat-nav button,
+#asf-galeria-btn a {
+  pointer-events: auto !important;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: rgba(0,168,204,.22);
+}
+#asf-sat-nav-backdrop {
+  z-index: 100002 !important;
+  touch-action: manipulation;
+}
+#asf-sat-nav-panel {
+  z-index: 100003 !important;
+  pointer-events: auto !important;
+  -webkit-overflow-scrolling: touch;
+}
+@media (hover: none) and (pointer: coarse) {
+  .asf-bottom-nav a { min-height: 48px; }
+  #asf-sat-nav { min-height: 44px; }
+  #asf-galeria-btn a { min-height: 44px; display: inline-flex !important; align-items: center; }
+}
+
+
+/* ASF NAVIGATION STACKING OVERRIDE — mobile hit testing */
+@media (max-width: 900px) {
+  .asf-bottom-nav {
+    position: fixed !important;
+    inset-inline: 0 !important;
+    inset-block-end: 0 !important;
+    z-index: 2147483001 !important;
+    display: flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    pointer-events: auto !important;
+    isolation: isolate !important;
+  }
+  .asf-bottom-nav a {
+    flex: 1 1 20% !important;
+    min-width: 0 !important;
+    min-height: 48px !important;
+    position: relative !important;
+    z-index: 1 !important;
+    pointer-events: auto !important;
+    touch-action: manipulation !important;
+  }
+  #asf-sat-nav, #asf-galeria-btn {
+    z-index: 2147483002 !important;
+    pointer-events: auto !important;
+    touch-action: manipulation !important;
+  }
+  #asf-sat-nav-backdrop {
+    z-index: 2147483003 !important;
+  }
+  #asf-sat-nav-panel {
+    z-index: 2147483004 !important;
+    pointer-events: auto !important;
+  }
+}
+
+
+/* ASF MOBILE CONTROL HIT-TEST — keep floating shortcuts above the bottom bar */
+@media (max-width: 900px) {
+  .asf-bottom-nav {
+    z-index: 2147483001 !important;
+    pointer-events: auto !important;
+  }
+  .asf-bottom-nav > a {
+    position: relative !important;
+    z-index: 1 !important;
+    pointer-events: auto !important;
+    touch-action: manipulation !important;
+    min-height: 48px !important;
+  }
+  #asf-sat-nav, #asf-galeria-btn {
+    z-index: 2147483002 !important;
+    bottom: calc(76px + env(safe-area-inset-bottom, 0px)) !important;
+    pointer-events: auto !important;
+    touch-action: manipulation !important;
+  }
+  #asf-sat-nav { position: fixed !important; }
+  #asf-galeria-btn { position: fixed !important; }
+  #asf-sat-nav-panel { z-index: 2147483004 !important; pointer-events: auto !important; }
+  #asf-sat-nav-backdrop { z-index: 2147483003 !important; }
+  #asf-galeria-btn a { pointer-events: auto !important; touch-action: manipulation !important; }
 }

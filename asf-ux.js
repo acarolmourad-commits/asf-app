@@ -24,7 +24,7 @@
   var RELATED = {
     praias:      [['🌊 Previsao do mar', 'previsao-surf/'], ['🧭 Prancha ideal', 'prancha-ideal/'], ['📚 Guias', 'aprender/']],
     eventos:     [['🏆 Competicoes', 'competicoes'], ['👥 Manas', 'manas'], ['✍️ Diario', 'diario/']],
-    competicoes: [['📅 Eventos', 'eventos'], ['📈 Progresso', 'progresso']],
+    competicoes: [['📣 Mural das Manas', 'mural/'], ['🌊 Previsao do mar', 'previsao-surf/']],
     progresso:   [['🎯 Metas', 'metas'], ['🏅 Badges', 'badges'], ['🪪 Carteirinha', 'carteirinha']],
     metas:       [['📈 Progresso', 'progresso'], ['✍️ Diario', 'diario/']],
     manas:       [['💬 Comunidade', 'comunidade'], ['🌊 Mar e clima', 'previsao-surf/']],
@@ -103,7 +103,7 @@
     if (!sec || sec.querySelector('.asf-idcard')) return;
     var pts = ls('asf_points', { total: 0 });
     var sessions = ls('surf-sessions', []);
-    var quizzes = lq('quizzes-done', []);
+    var quizzes = ls('quizzes-done', []);
     var profile = ls('asf-profile', null);
     var nome = profile && profile.name ? profile.name : 'Surfista ASF';
     var nivel = (typeof getLevel === 'function') ? getLevel(pts.total || 0) : null;
@@ -422,12 +422,8 @@
     var t = document.getElementById('menu-toggle');
     if (t) t.addEventListener('click', function () { setTimeout(placeMenu, 0); });
 
-    // fecha o menu ao rolar (evita dropdown flutuando sobre conteúdo)
-    window.addEventListener('scroll', function () {
-      if (!menu.classList.contains('open')) return;
-      menu.classList.remove('open');
-      if (t) { t.setAttribute('aria-expanded', 'false'); t.textContent = '\u2630'; }
-    }, { passive: true });
+    // Keep the fixed menu open during scrolling, including focus-induced scrolling.
+    // It closes on item selection, outside click, toggle or Escape.
   });
 })();
 
@@ -705,7 +701,9 @@
           var total = document.createElement('b'); total.textContent = String(cats[k]); row.appendChild(total);
           box.appendChild(row);
         });
-        parent.insertBefore(box, bands[0].el.nextSibling);
+        var directory = document.getElementById('asf-explore-directory');
+        if (directory) directory.appendChild(box);
+        else bands[0].el.insertAdjacentElement('afterend', box);
         requestAnimationFrame(function () {
           Array.prototype.forEach.call(box.querySelectorAll('i[data-w]'), function (i) { i.style.width = i.getAttribute('data-w') + '%'; });
         });

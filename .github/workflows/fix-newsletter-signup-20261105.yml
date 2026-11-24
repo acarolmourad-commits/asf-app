@@ -1,0 +1,35 @@
+name: Fix newsletter signup server 2026-11-05 (one-shot)
+on:
+  push:
+    branches: [main]
+    paths: ['.github/workflows/fix-newsletter-signup-20261105.yml']
+permissions:
+  contents: write
+jobs:
+  fix:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Wire newsletter form to Sheets endpoint with consent and honeypot
+        run: |
+          python3 - <<'PY'
+          import pathlib, re, sys
+          idx = pathlib.Path('index.html'); home = idx.read_text(encoding='utf-8')
+          if 'newsletter/config.js' not in home:
+              home, n = re.subn(r'<script src="js/home-main\.js"></script>', '<script src="newsletter/config.js"></script>\n    <script src="js/home-main.js"></script>', home, count=1)
+              if n != 1: print('home-main script anchor not found'); sys.exit(1)
+              idx.write_text(home, encoding='utf-8')
+          p = pathlib.Path('js/home-main.js'); s = p.read_text(encoding='utf-8')
+          new_fn = '''async function subscribeNewsletter(){const e=document.getElementById('newsletter-email'),c=document.getElementById('newsletter-consent'),h=document.getElementById('newsletter-website'),t=e?e.value.trim().toLowerCase():'';if(h&&h.value)return showToast('✅ Inscrita! Você receberá dicas toda semana.','success');if(!/^[^\\s@]+@[^\\s@]+\\.[^\\s@]{2,}$/.test(t))return showToast('❌ Email inválido!','error');if(c&&!c.checked)return showToast('❌ Marque o consentimento para receber a newsletter.','error');const endpoint=window.ASF_NEWSLETTER_ENDPOINT||'';if(!endpoint){try{const key='asf-newsletter-pendente';const list=JSON.parse(localStorage.getItem(key)||'[]');if(!list.some(x=>x.email===t))list.push({email:t,date:new Date().toISOString(),status:'aguardando-ativacao'});localStorage.setItem(key,JSON.stringify(list));}catch(_){} return showToast('⚠️ Inscrições online em ativação. Tente novamente em breve.','error');}try{const body=new URLSearchParams({email:t,consent:'sim',origem:'home'});await fetch(endpoint,{method:'POST',mode:'no-cors',headers:{'Content-Type':'application/x-www-form-urlencoded'},body});const key='asf-newsletter';const list=JSON.parse(localStorage.getItem(key)||'[]');if(!list.some(x=>x.email===t))list.push({email:t,date:new Date().toISOString(),status:'confirmacao-pendente'});localStorage.setItem(key,JSON.stringify(list));e&&(e.value='');showToast('💌 Confira seu e-mail para confirmar a inscrição na Newsletter ASF!','success');typeof gtag!=='undefined'&&gtag('event','newsletter_signup',{event_category:'engagement',value:1});}catch(_){showToast('❌ Não foi possível enviar agora. Tente novamente.','error');}}'''
+          s2, n = re.subn(r'function subscribeNewsletter\(\)\{.*?\} function showPremiumModal', new_fn + ' function showPremiumModal', s, count=1, flags=re.S)
+          if n != 1: print('subscribeNewsletter anchor not found'); sys.exit(1)
+          p.write_text(s2, encoding='utf-8'); print('newsletter signup wired')
+          PY
+      - name: Commit and push if changed
+        run: |
+          if git diff --quiet; then echo 'No changes'; exit 0; fi
+          git config user.name 'ASF Bot'
+          git config user.email 'bot@asf-app.com'
+          git add index.html js/home-main.js
+          git commit -m 'fix(newsletter): inscricao com consentimento, honeypot e endpoint Sheets'
+          git push

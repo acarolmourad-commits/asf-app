@@ -10,6 +10,7 @@ on:
       - "guia-apps.html"
       - "rede.html"
       - "novidades.html"
+      - "index.html"
       - "apps/index.html"
       - "scripts/sync_apps_registry.py"
       - ".github/workflows/apps-registry.yml"

@@ -1,0 +1,88 @@
+.partner-page, .partner-directory {
+  background: #fcfbf8;
+}
+.partner-page .top, .partner-directory .top {
+  padding-block: .8rem;
+}
+.partner-hero {
+  background: #103b3d;
+  color: #fff;
+}
+.villa-blu .partner-hero { background: #1b3654; }
+.surferinhas .partner-hero { background: #573441; }
+.surfmappers .partner-hero { background: #322e4e; }
+.yoko-acupuntura .partner-hero { background: #304c40; }
+.partner-hero > .wrap {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr);
+  gap: clamp(1.5rem, 4vw, 4rem);
+  align-items: stretch;
+}
+.hero-copy { align-self: center; padding-block: clamp(2rem, 5vw, 4.5rem); }
+.partner-hero .category { color: #e3f0ae; font-size: .875rem; }
+.partner-hero h1 { font-size: clamp(2.8rem, 5.2vw, 5.2rem); margin: .3rem 0 1.4rem; }
+.partner-hero .lead { font-size: clamp(1.1rem, 1.5vw, 1.3rem); max-width: 38ch; }
+.partner-hero figure { position: relative; margin: 0; min-height: 26rem; }
+.partner-hero img { width: 100%; height: 100%; position: absolute; inset: 0; object-fit: cover; }
+.partner-hero figcaption, .catalog-photo figcaption {
+  position: absolute;
+  left: 1rem; bottom: 1rem;
+  max-width: calc(100% - 2rem);
+  padding: .3rem .7rem;
+  font-size: .875rem;
+  background: #142f37ed;
+  color: #fff;
+}
+.hero-actions { display: flex; gap: .5rem 1.2rem; align-items: center; flex-wrap: wrap; margin-top: 1.5rem; }
+.hero-actions a { color: white; padding-block: .75rem; font-weight: 650; }
+.hero-actions .button { color: #183f36; background: #e3f0ae; }
+.status-band { background: var(--tint); border-bottom: 1px solid #c9d4cf; }
+.status-band > .wrap { padding-block: 1.3rem; display: grid; grid-template-columns: minmax(13rem, 1fr) 2fr; gap: 1.5rem; align-items: center; }
+.status-band strong { font: 500 clamp(1.25rem, 2.3vw, 1.8rem)/1.2 Georgia, serif; }
+.status-band p { margin: 0; }
+.editorial { padding-block: clamp(2.5rem, 5vw, 4.8rem); }
+.editorial > .category { font-size: .875rem; }
+.editorial-intro { display: grid; grid-template-columns: 1fr 1.1fr; align-items: start; gap: clamp(1.5rem, 5vw, 5rem); }
+.editorial h2 { font: 500 clamp(2.15rem, 4.1vw, 3.5rem)/1.08 Georgia, serif; letter-spacing: -.035em; }
+.editorial-intro > p { margin-top: .1rem; font-size: 1.1rem; }
+.editorial-tiles { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: clamp(1.5rem,3vw,3rem); margin-block: 1.8rem 2.7rem; }
+.editorial-tiles article { border-top: 2px solid var(--accent); padding-top: 1.1rem; }
+.editorial h3 { font: 500 1.6rem/1.15 Georgia, serif; margin: .2rem 0 .75rem; }
+.local-note { background: var(--tint); padding: clamp(1.25rem,3vw,2rem); }
+.local-note > p { max-width: 80ch; }
+.source-links a { display: inline-block; padding-block: .2rem; }
+.trip-plan { margin-top: 2.8rem; }
+.trip-plan ul { padding: 0; margin: 1.3rem 0 0; list-style: none; display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 1.8rem; }
+.trip-plan li { border-left: 2px solid #a7bdb3; padding-left: 1rem; }
+.trip-plan strong, .trip-plan span { display: block; }
+.trip-plan strong { margin-bottom: .45rem; }
+.partner-page .profile { border-top: 1px solid #c9d4cf; }
+.partner-page .details { max-width: 54rem; }
+.partner-page .details h2 { font-family: Georgia, serif; font-weight: 500; }
+.partner-page [id], .partner-directory [id] { scroll-margin-top: 1rem; }
+.partner-page .contents { position: sticky; top: 1.25rem; }
+.partner-page .photo-credits, .partner-directory .photo-credits { border-top: 1px solid #c9d4cf; margin-top: 1rem; padding-top: .5rem; }
+.photo-credits summary { cursor: pointer; padding-block: .7rem; font-weight: 650; }
+.photo-credits p { font-size: .875rem; }
+.partner-directory .catalog-photo { position: relative; margin: 0; }
+.partner-directory .catalog-photo img { display: block; border-radius: .5rem; aspect-ratio: 1.4; object-fit: cover; }
+.partner-directory .card-photo { width: 100%; height: auto; aspect-ratio: 1.65; object-fit: cover; border-radius: .25rem; margin-bottom: 1rem; }
+.partner-directory .card { padding: 1rem 1rem 1.4rem; border-top-width: 1px; border-radius: .45rem; }
+.partner-directory .card h3 { font-size: 2rem; }
+.partner-directory .card .category { font-size: .875rem; letter-spacing: .04em; }
+.partner-directory .card a { padding-top: 1rem; }
+.partner-directory .card p { margin-bottom: 1rem; }
+.partner-hero :focus-visible { outline-color: #fff; }
+@media (max-width: 48rem) {
+  .partner-hero > .wrap, .editorial-intro, .editorial-tiles, .trip-plan ul, .status-band > .wrap { grid-template-columns: 1fr; }
+  .partner-hero > .wrap { width: 100%; gap: 0; }
+  .hero-copy { padding: 2.5rem 5%; }
+  .partner-hero figure { min-height: 0; aspect-ratio: 1.8; }
+  .status-band > .wrap { gap: .6rem; }
+  .editorial-intro, .editorial-tiles { gap: 1.25rem; }
+  .partner-page .contents { position: static; }
+  .partner-directory .catalog-photo img { aspect-ratio: 2; }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .partner-page { scroll-behavior: smooth; }
+}

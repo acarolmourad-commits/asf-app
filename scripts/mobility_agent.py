@@ -12,39 +12,39 @@ from datetime import datetime
 MOBILITY_EXERCISES = [
     {
         "title": "Rotação de Ombros",
-        "description": "10 rotações para frente, 10 para trás. Mantém core engajado. Melhora mobilidade para paddling.",
+        "description": "Faça rotações suaves dos ombros para frente e para trás, sem forçar.",
         "duration": "2 min",
-        "level": "Essencial",
-        "benefits": ["Paddling mais eficiente", "Previne lesões no ombro"]
+        "level": "Adapte aos seus limites",
+        "benefits": ["Movimentos suaves", "Respeite seus limites"]
     },
     {
         "title": "Alongamento de Costas (Gato-Vaca)",
-        "description": "De joelhos, alterna arquear e curvar coluna. 10 repetições. Alivia tensão do remo.",
+        "description": "Em quatro apoios, alterne lentamente entre arredondar e estender suavemente as costas, sem forçar.",
         "duration": "3 min",
-        "level": "Essencial",
-        "benefits": ["Alivia tensão nas costas", "Melhora flexibilidade"]
+        "level": "Adapte aos seus limites",
+        "benefits": ["Movimentos suaves", "Respeite seus limites"]
     },
     {
         "title": "Mobilidade de Quadril (Borboleta)",
-        "description": "Sentada, plantas dos pés juntas, joelhos para fora. Segure 30s. Abre quadril para manobras.",
+        "description": "Sentada, aproxime as plantas dos pés e deixe os joelhos para os lados, sem pressioná-los.",
         "duration": "2 min",
-        "level": "Essencial",
-        "benefits": ["Melhora manobras", "Previne lesões no quadril"]
+        "level": "Adapte aos seus limites",
+        "benefits": ["Movimentos suaves", "Respeite seus limites"]
     },
     {
         "title": "Mobilidade de Tornozelo",
-        "description": "Gire tornozelos em círculos, 10x cada pé. Melhora equilíbrio na prancha.",
+        "description": "Sentada em apoio estável, mova um tornozelo de cada vez em círculos suaves.",
         "duration": "2 min",
-        "level": "Essencial",
-        "benefits": ["Equilíbrio melhor", "Previne torções"]
+        "level": "Adapte aos seus limites",
+        "benefits": ["Movimentos suaves", "Respeite seus limites"]
     },
     {
         "title": "Alongamento de Isquiotibiais",
-        "description": "Sentada, uma perna esticada, inclina para frente. 30s cada lado.",
+        "description": "Sentada, estenda uma perna e incline o tronco apenas até uma tensão leve, sem dor.",
         "duration": "3 min",
-        "level": "Avançado",
-        "benefits": ["Flexibilidade para maneuvers", "Previne lesões"]
-    },
+        "level": "Adapte aos seus limites",
+        "benefits": ["Movimentos suaves", "Respeite seus limites"]
+    }
 ]
 
 def generate_daily():
@@ -78,6 +78,8 @@ def generate_daily():
     <div style="display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px;">
         {"".join(f'<span style="background:rgba(255,255,255,0.2);padding:2px 10px;border-radius:10px;font-size:11px;">{benefit}</span>' for benefit in exercise['benefits'])}
     </div>
+    <p style="font-size: 12px; line-height: 1.5;">Orientação geral, não tratamento. Os tempos são sugestões, não metas. Não force nem continue com dor. Se houver lesão ou limitação, procure orientação profissional.</p>
+    <p style="font-size: 11px;"><a style="color: inherit;" href="https://www.mayoclinic.org/healthy-lifestyle/fitness/in-depth/stretching/art-20047931">Fonte: Mayo Clinic — cuidados ao alongar</a></p>
 </div>
 """
     with open('docs/generated/mobility.html', 'w', encoding='utf-8') as f:

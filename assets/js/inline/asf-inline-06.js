@@ -150,3 +150,59 @@ document.addEventListener('keydown', function(e){
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded',function () { setTimeout(applyHomeReview,0); });
   else setTimeout(applyHomeReview,0);
 })();
+
+
+/* Corrige sobreposição do FAB "Galeria das Manas" sobre o painel Rede ASF.
+   Acompanha abertura/fechamento do painel sem interferir nos outros controles. */
+(function () {
+  'use strict';
+  function applyNetworkPanelLayer() {
+    var nodes = Array.prototype.slice.call(document.querySelectorAll('[role="dialog"], [aria-modal="true"], .modal, .overlay, [class*="panel"]'));
+    var openPanel = nodes.find(function (el) {
+      if (!el || !el.getClientRects().length) return false;
+      var text = (el.innerText || el.textContent || '').replace(/\\s+/g, ' ').trim();
+      return /Sites da Rede ASF/i.test(text) && !/display\\s*:\\s*none/i.test(el.getAttribute('style') || '');
+    });
+    var fabCandidates = Array.prototype.slice.call(document.querySelectorAll('button, a, [role="button"]'));
+    fabCandidates.forEach(function (el) {
+      var label = ((el.getAttribute('aria-label') || '') + ' ' + (el.getAttribute('title') || '') + ' ' + (el.innerText || el.textContent || '')).replace(/\\s+/g, ' ').trim();
+      if (!/Galeria das Manas/i.test(label)) return;
+      if (openPanel) {
+        // This observer also sees our own accessibility/style changes. Apply
+        // the hidden state once so it cannot schedule itself indefinitely.
+        if (el.dataset.asfNetworkFabState) return;
+        if (!el.dataset.asfNetworkFabState) {
+          el.dataset.asfNetworkFabState = '1';
+          el.dataset.asfNetworkFabVisibility = el.style.visibility || '';
+          el.dataset.asfNetworkFabPointer = el.style.pointerEvents || '';
+          el.dataset.asfNetworkFabAria = JSON.stringify(el.getAttribute('aria-hidden'));
+          el.dataset.asfNetworkFabTabindex = JSON.stringify(el.getAttribute('tabindex'));
+        }
+        el.style.visibility = 'hidden';
+        el.style.pointerEvents = 'none';
+        el.setAttribute('aria-hidden', 'true');
+        el.setAttribute('tabindex', '-1');
+      } else if (el.dataset.asfNetworkFabState) {
+        el.style.visibility = el.dataset.asfNetworkFabVisibility;
+        el.style.pointerEvents = el.dataset.asfNetworkFabPointer;
+        [['aria-hidden', 'asfNetworkFabAria'], ['tabindex', 'asfNetworkFabTabindex']].forEach(function (entry) {
+          var value = JSON.parse(el.dataset[entry[1]]);
+          if (value === null) el.removeAttribute(entry[0]);
+          else el.setAttribute(entry[0], value);
+          delete el.dataset[entry[1]];
+        });
+        delete el.dataset.asfNetworkFabState;
+        delete el.dataset.asfNetworkFabVisibility;
+        delete el.dataset.asfNetworkFabPointer;
+      }
+    });
+  }
+  function init() {
+    applyNetworkPanelLayer();
+    if (window.MutationObserver) {
+      var observer = new MutationObserver(applyNetworkPanelLayer);
+      observer.observe(document.body, { childList: true, subtree: true, attributes: true, attributeFilter: ['style', 'class', 'aria-hidden', 'aria-modal'] });
+    }
+  }
+  document.readyState === 'loading' ? document.addEventListener('DOMContentLoaded', init) : init();
+})();

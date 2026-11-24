@@ -1,0 +1,43 @@
+name: ASF home quality regression checks
+
+on:
+  pull_request:
+    paths:
+      - 'index.html'
+      - 'app.js'
+      - 'js/home-main.js'
+      - 'assets/js/inline/asf-inline-06.js'
+      - 'asf-home-quality.css'
+      - 'asf-home-quality.js'
+      - 'carteirinha.js'
+      - 'tests/home-quality-layer.test.cjs'
+      - 'tests/home-guides-partners.test.cjs'
+      - 'tests/navigation-dom.test.cjs'
+      - 'asf-navigation-a11y.js'
+      - 'asf-ux.js'
+      - '.github/workflows/home-quality-check.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  home-quality:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Validate homepage JavaScript syntax
+        run: |
+          node --check app.js
+          node --check js/home-main.js
+          node --check assets/js/inline/asf-inline-06.js
+          node --check asf-home-quality.js
+      - name: Run homepage regression tests
+        run: node --test tests/home-quality-layer.test.cjs tests/home-guides-partners.test.cjs
+      - name: Install isolated DOM test dependency
+        run: npm install --prefix "$RUNNER_TEMP/asf-dom" --no-save jsdom@26.1.0 --no-audit --no-fund
+      - name: Verify navigation and observer lifecycle
+        run: NODE_PATH="$RUNNER_TEMP/asf-dom/node_modules" node --test tests/navigation-dom.test.cjs

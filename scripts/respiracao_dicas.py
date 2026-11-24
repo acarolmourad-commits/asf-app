@@ -11,47 +11,47 @@ from datetime import datetime
 
 RESPIRAÇÃO_DICAS = [
     {
-        "title": "Respiração 4-7-8",
-        "description": "Inspire 4s → segure 7s → expire 8s. Repita 3x. Técnica comprovada para acalmar sistema nervoso instantaneamente.",
-        "when_to_use": "Antes de entrar na água, durante ansiedade, antes de manobras difíceis",
-        "benefits": ["Reduz cortisol", "Diminui frequência cardíaca", "Aumenta foco"],
-        "level": "Todos"
+        "title": "Respiração suave em terra",
+        "description": "Sentada em local seguro e seco, deixe o ar entrar e sair suavemente, sem forçar e sem prender a respiração.",
+        "when_to_use": "Durante uma pausa tranquila, fora da água",
+        "benefits": ["Sem prender o ar", "Segurança em primeiro lugar"],
+        "level": "Orientação geral"
     },
     {
-        "title": "Respiração Box (4-4-4-4)",
-        "description": "Inspire 4s → segure 4s → expire 4s → segure 4s. Padrão quadrado que equilibra corpo e mente. Muito usado por atletas olímpicos.",
-        "when_to_use": "No lineup esperando onda, entre sets, quando nervosa",
-        "benefits": ["Controle da ansiedade", "Foco no presente", "Regular sistema nervoso"],
-        "level": "Todos"
+        "title": "Respiração sem metas de tempo",
+        "description": "Se ajudar, conte devagar enquanto inspira e expira. Use um ritmo confortável, sem tentar atingir uma contagem fixa e sem pausas para prender o ar.",
+        "when_to_use": "Em repouso, sentada e fora da água",
+        "benefits": ["Sem prender o ar", "Segurança em primeiro lugar"],
+        "level": "Orientação geral"
     },
     {
-        "title": "Respiração Abdominal (Diafragmática)",
-        "description": "Mãos na barriga. Inspire expandindo barriga (não peito). Expira completamente. Ativa nervo vago e sistema parassimpático.",
-        "when_to_use": "Antes de remar, após queda de onda, momentos de pânico",
-        "benefits": ["Mais oxigênio no sangue", "Reduz cortisol", "Aumenta calma"],
-        "level": "Todos"
+        "title": "Observe sua respiração",
+        "description": "Em uma posição confortável, observe o movimento da respiração. Não force a barriga nem tente encher os pulmões ao máximo.",
+        "when_to_use": "Em local seguro e seco, fora da água",
+        "benefits": ["Sem prender o ar", "Segurança em primeiro lugar"],
+        "level": "Orientação geral"
     },
     {
-        "title": "Respiração before Paddling",
-        "description": "3 respirações profundas antes de começar a remada. Inhala pelo nariz, exhala pela boca. Prepara corpo para esforço aeróbico.",
-        "when_to_use": "Antes de sair para o lineup, antes de remar para onda grande",
-        "benefits": ["Oxygena músculos", "Prepara diafragma", "Diminui sensação de cansaço"],
-        "level": "Iniciante+"
+        "title": "Pausa antes da sessão",
+        "description": "Ainda em terra, reserve uma pausa para observar como você está. Respire naturalmente; não faça séries de respirações profundas ou rápidas para se preparar para submergir.",
+        "when_to_use": "Em terra, antes de decidir entrar no mar",
+        "benefits": ["Sem prender o ar", "Segurança em primeiro lugar"],
+        "level": "Orientação geral"
     },
     {
-        "title": "Respiração durante wipeout",
-        "description": "Na queda, proteja cabeça e concentre-se em expirar lentamente. Isso evita pânico e conserve ar. Confie na prancha e no leash!",
-        "when_to_use": "Durante queda, quando onda te virar, em situações de sufocamento",
-        "benefits": ["Mantém calma", "Conserva ar", "Reduz pânico"],
-        "level": "Intermediário+"
+        "title": "Segurança na água vem primeiro",
+        "description": "Exercícios de respiração não são técnica de resgate. Não pratique retenção de ar nem hiperventilação na água. Se estiver em dificuldade, peça ajuda ao guarda-vidas.",
+        "when_to_use": "Lembrete de segurança antes da sessão; não é exercício para fazer na água",
+        "benefits": ["Sem prender o ar", "Segurança em primeiro lugar"],
+        "level": "Orientação geral"
     },
     {
-        "title": "Respiração recovering",
-        "description": "Depois de passar porwave difícil, faça 5 ciclos de 4-7-8. Acalma coração e mente antes de voltar a remar.",
-        "when_to_use": "Após queda assustadora, depois de passar muito tempo debaixo d'água",
-        "benefits": ["Recuperação rápida", "Controle emocional", "Prepara para próxima"],
-        "level": "Todos"
-    },
+        "title": "Após um susto no mar",
+        "description": "Interrompa a sessão e busque um local seguro. Não tente compensar falta de ar com ciclos de apneia. Se houver dificuldade para respirar após submersão, procure atendimento imediato.",
+        "when_to_use": "Após um incidente, priorize ajuda e avaliação, não exercícios respiratórios",
+        "benefits": ["Sem prender o ar", "Segurança em primeiro lugar"],
+        "level": "Orientação geral"
+    }
 ]
 
 def get_random_tip():
@@ -73,6 +73,8 @@ def generate_html(tip):
         <span style="background: rgba(255,255,255,0.2); padding: 4px 12px; border-radius: 12px; font-size: 11px;">✅ {tip['benefits'][1]}</span>
     </div>
     <p style="font-size: 11px; opacity: 0.7; margin-top: 12px;">Nível: {tip['level']}</p>
+    <p style="font-size: 12px; line-height: 1.5;">Pratique apenas em terra, sem forçar. Pare se sentir tontura ou desconforto. Não use estas dicas para tratar falta de ar ou substituir atendimento.</p>
+    <p style="font-size: 11px;"><a style="color: inherit;" href="https://www.nhs.uk/mental-health/self-help/guides-tools-and-activities/breathing-exercises-for-stress/">Fonte: NHS — respiração confortável</a> · <a style="color: inherit;" href="https://www.ausport.gov.au/ais/position_statements/breath-hold-training">AIS — riscos de apneia e hiperventilação</a></p>
 </div>
 """
 

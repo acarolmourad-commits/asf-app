@@ -153,13 +153,9 @@ function unlockConquista(type, btn) {
             return dirs[Math.round(deg / 45) % 8];
         };
 
-        const surfRating = (waveHeight) => {
-            if (waveHeight < 0.3) return { text: 'Sem ondas', color: 'var(--gray-400)' };
-            if (waveHeight < 0.6) return { text: '🟢 Iniciante', color: 'var(--success)' };
-            if (waveHeight < 1.0) return { text: '🟡 Todos os níveis', color: 'var(--accent)' };
-            if (waveHeight < 1.5) return { text: '🟠 Intermediário', color: '#FF8C00' };
-            if (waveHeight < 2.0) return { text: '🔴 Avançado', color: 'var(--coral)' };
-            return { text: '🔴 Expert only', color: 'var(--coral)' };
+        const surfRating = (h) => {
+            if (!Number.isFinite(h)||h<0) return {text:'Sem dados',color:'var(--gray-400)'};
+            return {text:h<0.8?'Altura abaixo de 0,8 m':h<1.5?'Altura de 0,8 a menos de 1,5 m':'Altura a partir de 1,5 m',color:'var(--gray-600)'};
         };
 
         asfOnHomeReady(function() { loadLiveData('bertioga'); updateMoonPhase(); });

@@ -46,3 +46,13 @@ O repositório não possui secret `GH_TOKEN` configurado. O token não pode ser 
 2. Configure-o como variável de ambiente `GH_TOKEN` no serviço que executa o cron.
 3. Não salve o valor em código, issues, documentos ou logs.
 4. Rode o relatório novamente e confirme que o aviso de modo unauthenticated desapareceu.
+
+
+## Fase A+B - RPC unico + painel admin (2026-10-26)
+
+- Emissao oficial UNICA: RPC emitir_carteirinha via ASF_CARD.emitirCarteirinha() (home e emitir.html). Proibido gravar direto em /rest/v1/associadas.
+- Dados preservados: localStorage asf-card-v2/asf-card-history, associadas e emissoes.
+- Painel interno carteirinhas-admin.html: login por link magico, RLS admin, Realtime.
+- Policy publica de SELECT so sai depois do 1o login confirmado (etapa separada).
+- Planilha privada = backup/reconciliacao, nunca fonte.
+- Workflows one-shot antigos removidos.

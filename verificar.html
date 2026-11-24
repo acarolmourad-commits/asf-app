@@ -9,7 +9,7 @@
   <meta property="og:image" content="https://asf.surf/assets/images/asf-og-image.jpg">
   <meta property="og:url" content="https://asf.surf/verificar">
   <meta property="og:type" content="website">
-  <link rel="canonical" href="https://acarolmourad-commits.github.io/asf-app/verificar.html">
+  <link rel="canonical" href="https://asf.surf/verificar.html">
     <title>Verificar Carteirinha — ASF</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', system-ui, sans-serif; }
@@ -32,7 +32,7 @@
         .nota { font-size: 12px; color: #888; line-height: 1.5; }
         a.voltar { display: inline-block; margin-top: 20px; color: #00A8CC; text-decoration: none; font-size: 14px; font-weight: 600; }
     </style>
-    <link rel="stylesheet" href="/asf-app/asf-site-redesign.css">
+    <link rel="stylesheet" href="/asf-site-redesign.css">
 </head>
 <body>
     <div class="card">
@@ -65,10 +65,16 @@
                 '</div>';
         }
 
+        function escapeHtml(value) {
+            return String(value == null ? '' : value).replace(/[&<>"']/g, c => ({
+                '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
+            })[c]);
+        }
+
         function offline() {
             if (formatoOk) {
-                bloco('pendente', '⏳', 'Formato válido — verificação online indisponível',
-                      'Número em formato oficial ASF, mas o registro central está offline. Confira a validade impressa na carteirinha.');
+                bloco('pendente', '⏳', 'Não foi possível confirmar online',
+                      'O número tem formato compatível, mas a situação oficial não foi confirmada. Não considere a carteirinha válida até a consulta central responder.');
             } else {
                 bloco('invalida', '⚠️', 'Carteirinha não reconhecida',
                       'Este número não segue o padrão oficial ASF.');
@@ -96,17 +102,17 @@
                           'Este número não consta no registro oficial ASF. Peça para a associada abrir a carteirinha no app e apresentar o QR novamente.');
                 } else if (c.valida) {
                     bloco('valida', '✅', 'Carteirinha válida',
-                          (c.nivel ? 'Nível: ' + c.nivel + ' · ' : '') +
-                          'Válida até ' + String(c.validade).split('-').reverse().join('/') +
-                          '. A associada pode utilizar os benefícios de parceiros.');
+                          (c.nivel ? 'Nível: ' + escapeHtml(c.nivel) + ' · ' : '') +
+                          'Válida até ' + escapeHtml(String(c.validade).split('-').reverse().join('/')) +
+                          '. A situação foi confirmada pelo registro central ASF.');
                 } else {
                     bloco('invalida', '🔴', c.ativo ? 'Carteirinha expirada' : 'Carteirinha inativa',
-                          'Validade encerrada em ' + String(c.validade).split('-').reverse().join('/') +
+                          'Validade encerrada em ' + escapeHtml(String(c.validade).split('-').reverse().join('/')) +
                           '. A associada precisa renovar no app.');
                 }
             } catch (e) { offline(); }
         })();
     </script>
-    <script src="/asf-app/asf-redesign.js" defer></script>
+    <script src="/asf-redesign.js" defer></script>
 </body>
 </html>

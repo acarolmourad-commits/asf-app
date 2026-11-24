@@ -3,7 +3,7 @@
   // ASF: Google Analytics desativado ate configurar um ID real (G-...).
   var ASF_GA_ID = '';
   window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
+  function gtag(){if(window.ASFConsent && window.ASFConsent.get() === 'all') dataLayer.push(arguments);}
   if (ASF_GA_ID) {
     gtag('js', new Date());
     gtag('config', ASF_GA_ID, {
@@ -535,74 +535,20 @@ function requestLocation() {
         }
 function findNearbyManas() {
             const nearbyDiv = document.getElementById('nearby-manas');
-            nearbyDiv.innerHTML = '<p style="text-align: center; color: var(--primary);">🔄 Buscando manas próximas...</p>';
-
-            setTimeout(() => {
-                const allManas = [];
-                Object.keys(MOCK_MANAS).forEach(beach => {
-                    MOCK_MANAS[beach].forEach(mana => {
-                        allManas.push({ ...mana, region: beach });
-                    });
-                });
-
-                allManas.sort((a, b) => a.distance - b.distance);
-
-                const closest = allManas.slice(0, 5);
-
-                nearbyDiv.innerHTML = `
-                    <p style="text-align:center;font-size:11px;color:#b0392e;background:#fdecea;border:1px solid #f5c6cb;border-radius:8px;padding:8px;margin:0 0 12px">⚠️ Demonstração: perfis fictícios. Perfis reais aparecerão aqui quando o recurso de comunidade estiver ativo.</p>
-                    <h4 style="color: var(--secondary); margin-bottom: 15px;">📍 Manas mais próximas</h4>
-                    ${closest.map(mana => `
-                        <div class="card" style="margin-bottom: 15px; cursor: pointer;" onclick="connectManas('${mana.name}')">
-                            <div style="display: flex; align-items: center; gap: 15px;">
-                                <div style="font-size: 40px;">${mana.avatar}</div>
-                                <div style="flex: 1;">
-                                    <h4 style="font-size: 16px; color: var(--secondary);">${mana.name}</h4>
-                                    <p style="font-size: 12px; color: var(--gray-600);">${mana.level} • ${mana.beach}</p>
-                                    <p style="font-size: 11px; color: var(--primary); font-weight: bold;">📍 ${mana.distance} km</p>
-                                </div>
-                                <button class="btn btn-primary" style="font-size: 12px; padding: 8px 12px;" onclick="showToast('🤝 Conexões entre surfistas em breve!')">Conectar</button>
-                            </div>
-                        </div>
-                    `).join('')}
-                    <p style="text-align: center; font-size: 12px; color: var(--gray-400); margin-top: 15px;">Total: ${allManas.length} manas encontradas</p>
-                `;
-            }, 1500);
+            if (!nearbyDiv) return;
+            nearbyDiv.innerHTML = '<div class="card" style="text-align:center;padding:18px;"><p style="font-weight:600;">🤝 Comunidade ASF</p><p style="font-size:13px;color:var(--gray-600);">A busca por surfistas próximas ainda não está conectada a uma base de perfis reais. Nenhum perfil fictício será exibido como pessoa disponível.</p></div>';
         }
 function showBeachManas(beach) {
-            const manas = MOCK_MANAS[beach] || [];
             const listDiv = document.getElementById('beach-manas-list');
             const detailDiv = document.getElementById('beach-manas-detail');
-
-            const beachNames = {
-                bertioga: 'Bertioga',
-                santos: 'Santos',
-                guaruja: 'Guarujá',
-                ubatuba: 'Ubatuba'
-            };
-
-            listDiv.innerHTML = `
-                <p style="text-align:center;font-size:11px;color:#b0392e;background:#fdecea;border:1px solid #f5c6cb;border-radius:8px;padding:8px;margin:0 0 12px">⚠️ Demonstração: perfis fictícios. Perfis reais aparecerão aqui quando o recurso de comunidade estiver ativo.</p>
-                <h4 style="color: var(--secondary); margin-bottom: 15px;">🏖️ Manas em ${beachNames[beach]}</h4>
-                ${manas.map(mana => `
-                    <div class="card" style="margin-bottom: 15px; cursor: pointer;" onclick="connectManas('${mana.name}')">
-                        <div style="display: flex; align-items: center; gap: 15px;">
-                            <div style="font-size: 40px;">${mana.avatar}</div>
-                            <div style="flex: 1;">
-                                <h4 style="font-size: 16px; color: var(--secondary);">${mana.name}</h4>
-                                <p style="font-size: 12px; color: var(--gray-600);">${mana.level} • ${mana.beach}</p>
-                                <p style="font-size: 11px; color: var(--primary); font-weight: bold;">📍 ${mana.distance} km</p>
-                            </div>
-                            <button class="btn btn-primary" style="font-size: 12px; padding: 8px 12px;" onclick="showToast('🤝 Conexões entre surfistas em breve!')">Conectar</button>
-                        </div>
-                    </div>
-                `).join('')}
-            `;
-
+            if (!listDiv || !detailDiv) return;
+            const beachNames = { bertioga: 'Bertioga', santos: 'Santos', guaruja: 'Guarujá', ubatuba: 'Ubatuba' };
+            const label = beachNames[beach] || 'esta região';
+            listDiv.innerHTML = '<div class="card" style="text-align:center;padding:18px;"><p style="font-weight:600;">🏄‍♀️ ' + label + '</p><p style="font-size:13px;color:var(--gray-600);">Ainda não há uma lista de perfis reais conectada para esta região. A ASF não exibirá cadastros demonstrativos como se fossem surfistas disponíveis.</p></div>';
             detailDiv.style.display = 'block';
         }
-function connectManas(name) {
-            showToast(`🏄‍♀️ Solicitação enviada para ${name}!\n\nVocê receberá uma notificação quando ela aceitar. Enquanto isso, continue surfando! 🌊`);
+function connectManas() {
+            showToast('A conexão entre surfistas ainda não está disponível. A ASF avisará quando esse recurso estiver ativo.', 'info');
         }
 function getLevel(points) {
             for (let i = LEVELS.length - 1; i >= 0; i--) {
@@ -1056,23 +1002,10 @@ function updateTideClock(tides, now) {
             const timeStr = String(now.getHours()).padStart(2,'0') + ':' + String(now.getMinutes()).padStart(2,'0');
             label.textContent = 'agora: ' + timeStr;
         }
-function getEstimatedTides(beach, date) {
-            const dayOfYear = Math.floor((date - new Date(date.getFullYear(), 0, 0)) / 86400000);
-            const baseOffset = (dayOfYear % 14) * 0.8; // ~50 min shift per day
-            const baseHigh = 5 + baseOffset;
-            const baseLow = 11 + baseOffset;
-            const high1 = Math.floor(baseHigh) % 24;
-            const highMin1 = Math.floor((baseHigh % 1) * 60);
-            const low1 = Math.floor(baseLow) % 24;
-            const lowMin1 = Math.floor((baseLow % 1) * 60);
-            const high2 = (high1 + 12) % 24;
-
-            return {
-                high: `${String(high1).padStart(2,'0')}:${String(highMin1).padStart(2,'0')} (${(1.0 + Math.sin(dayOfYear * 0.4) * 0.4).toFixed(1)}m)`,
-                low: `${String(low1).padStart(2,'0')}:${String(lowMin1).padStart(2,'0')} (${(0.3 + Math.sin(dayOfYear * 0.4) * 0.2).toFixed(1)}m)`,
-                tip: `💡 Próxima alta: ${String(high2).padStart(2,'0')}:${String(highMin1).padStart(2,'0')}`
-            };
+function getEstimatedTides() {
+            return {high:'Indisponível',low:'Indisponível',tip:'Consulte a Tábua de Marés da Marinha: https://pam.marinha.mil.br/tabuamares/tabuamares.html. Confira estação, data e fuso.'};
         }
+
 function showMarDetails() {
             if (!cachedMarine[currentBeach]) {
                 showToast('Dados ainda carregando. Tente novamente em instantes.');
@@ -1977,12 +1910,49 @@ function openAffiliateLink(url, productId) {
     });
   }
 }
-function subscribeNewsletter(){const e=document.getElementById('newsletter-email'),t=e?e.value.trim():'';if(!t||!t.includes('@'))return showToast('❌ Email inválido!','error');const o=JSON.parse(localStorage.getItem('asf-newsletter')||'[]');o.push({email:t,date:new Date().toISOString()}),localStorage.setItem('asf-newsletter',JSON.stringify(o)),showToast('✅ Inscrita! Você receberá dicas toda semana.','success'),e&&(e.value=''),typeof gtag!=='undefined'&&gtag('event','newsletter_signup',{event_category:'engagement',value:1})}
+async function subscribeNewsletter(){
+  const emailInput = document.getElementById('newsletter-email');
+  const consent = document.getElementById('newsletter-consent');
+  const honeypot = document.getElementById('newsletter-website');
+  const email = emailInput ? emailInput.value.trim().toLowerCase() : '';
+  if (honeypot && honeypot.value) return;
+  if (!/^[^\\s@]+@[^\\s@]+\\.[^\\s@]{2,}$/.test(email)) {
+    return showToast('Digite um e-mail válido.', 'error');
+  }
+  if (!consent || !consent.checked) {
+    return showToast('Marque o consentimento para receber a newsletter.', 'error');
+  }
+  const endpoint = window.ASF_NEWSLETTER_ENDPOINT || '';
+  if (!endpoint) {
+    return showToast('Inscrições online temporariamente indisponíveis. Tente novamente em breve.', 'error');
+  }
+  const button = document.querySelector('#newsletter-destaque button');
+  if (button) { button.disabled = true; button.setAttribute('aria-busy', 'true'); }
+  try {
+    const body = new URLSearchParams({ email, consent: 'sim', origem: 'home' });
+    await fetch(endpoint, {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body
+    });
+    if (emailInput) emailInput.value = '';
+    consent.checked = false;
+    showToast('Solicitação encaminhada. Confira seu e-mail para confirmar a inscrição; se a mensagem não chegar, tente novamente mais tarde.', 'success');
+    if (typeof gtag !== 'undefined') {
+      gtag('event', 'newsletter_signup_request', { event_category: 'engagement', value: 1 });
+    }
+  } catch (error) {
+    showToast('Não foi possível encaminhar sua inscrição. Tente novamente.', 'error');
+  } finally {
+    if (button) { button.disabled = false; button.removeAttribute('aria-busy'); }
+  }
+}
 function showPremiumModal(){/* removido: sem área premium */}
 function hidePremiumModal(){/* removido */}
 function startPayment(){/* removido: sem pagamentos */}
 function contactWhatsApp(){trackEvent('contact','whatsapp_click'),window.open('https://wa.me/5511954346288','_blank')}
-function trackEvent(e,t,o){const n=JSON.parse(localStorage.getItem('asf-monetization-stats')||'{}');n.events||(n.events=[]),n.events.push({category:e,action:t,label:o,timestamp:Date.now()}),localStorage.setItem('asf-monetization-stats',JSON.stringify(n)),console.log('📊 Track:',e,t,o)}
+function trackEvent(e,t,o){if(!window.ASFConsent || window.ASFConsent.get() !== 'all') return;const n=JSON.parse(localStorage.getItem('asf-monetization-stats')||'{}');n.events||(n.events=[]),n.events.push({category:e,action:t,label:o,timestamp:Date.now()}),localStorage.setItem('asf-monetization-stats',JSON.stringify(n)),console.log('📊 Track:',e,t,o)}
 function getStats(){return JSON.parse(localStorage.getItem('asf-monetization-stats')||'{}')}
 function showPixDonation(){/* removido */}
 function showReferralModal(){const m=document.getElementById('referral-modal');if(m){m.style.display='flex';document.body.style.overflow='hidden';const codeDisplay=document.getElementById('referral-code-display');if(codeDisplay){const userCode=localStorage.getItem('asf-my-referral-code');if(userCode){codeDisplay.textContent=userCode}else{const newCode=generateReferralCode();localStorage.setItem('asf-my-referral-code',newCode);codeDisplay.textContent=newCode}}trackEvent('referral','modal_view')}}
