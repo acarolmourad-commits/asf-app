@@ -1,7 +1,7 @@
 {
-  "date": "2026-11-24T16:37:07.637724+00:00",
-  "total": 154,
-  "ok": 146,
+  "date": "2026-11-24T21:01:09.261336+00:00",
+  "total": 155,
+  "ok": 147,
   "skipped": 8,
   "broken_count": 0,
   "broken": [],
@@ -263,6 +263,11 @@
     },
     {
       "url": "https://galeria.asf.surf/",
+      "status": "ok",
+      "http": 200
+    },
+    {
+      "url": "https://glossario.asf.surf/",
       "status": "ok",
       "http": 200
     },
