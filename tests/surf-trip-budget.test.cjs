@@ -2,71 +2,77 @@ const assert = require('node:assert/strict');
 const { readFileSync } = require('node:fs');
 const { join } = require('node:path');
 const test = require('node:test');
-const { createContext, runInContext } = require('node:vm');
+const { JSDOM } = require('jsdom');
 
 const html = readFileSync(join(__dirname, '../surf-trip/index.html'), 'utf8');
 
-function loadPlanner() {
-  const elements = new Map();
-  const listeners = new Map();
-  for (const [, tag, attrs] of html.matchAll(/<([\w-]+)\b([^>]*\bid="[^"]*"[^>]*)>/g)) {
-    const [, id] = attrs.match(/\bid="([^"]+)"/);
-    assert.ok(!elements.has(id), `duplicate id: ${id}`);
-    elements.set(id, {
-      value: attrs.match(/\bvalue="([^"]*)"/)?.[1] ??
-        (tag === 'select' ? html.match(/<select\s+id="fDest"[^>]*>\s*<option\s+value="([^"]+)"/)?.[1] : ''),
-      style: { display: attrs.match(/(?:style="|;)\s*display:([^;"]+)/)?.[1] || '' },
-      textContent: '',
-      addEventListener(type, fn) { listeners.set(`${id}:${type}`, fn); },
-    });
+function loadPlanner(t) {
+  const dom = new JSDOM(html, { url: 'https://asf.surf/surf-trip/', runScripts: 'dangerously' });
+  t.after(() => dom.window.close());
+  const document = dom.window.document;
+  const get = id => document.getElementById(id);
+  function set(id, value) {
+    get(id).value = value;
+    get(id).dispatchEvent(new dom.window.Event('input', { bubbles: true }));
   }
-  const [, handler] = html.match(/<button\b[^>]*\bonclick="([^"]+)">\s*Calcular orçamento/);
-  const [, script] = html.match(/<script>([\s\S]*?)<\/script>/);
-  const context = createContext({
-    document: { getElementById: id => elements.get(id) ?? null },
-    localStorage: { getItem: () => null },
-  });
-  runInContext(script, context);
-  return {
-    get: id => elements.get(id),
-    click: () => runInContext(handler, context),
-    change: id => listeners.get(`${id}:change`)(),
-  };
+  const submit = () => document.querySelector('button[type="submit"]').click();
+  const value = id => get(id).textContent.replace(/\s/g, ' ');
+  return { get, set, submit, value };
 }
 
-test('Calcular orçamento reveals every default result', () => {
-  const { get, click } = loadPlanner();
-  assert.equal(get('res').style.display, 'none');
-
-  click();
-
-  assert.equal(get('res').style.display, 'block');
-  assert.equal(get('rGas').textContent, 'R$ 19');
-  assert.equal(get('rHosp').textContent, 'R$ 80');
-  assert.equal(get('rFood').textContent, 'R$ 140');
-  assert.equal(get('rPed').textContent, 'R$ 6');
-  assert.equal(get('rTotal').textContent, 'Total: R$ 245');
-  assert.equal(get('rPP').textContent, 'R$ 245 por pessoa');
+test('default trip displays the group total and each traveler’s share', t => {
+  const { get, submit, value } = loadPlanner(t);
+  assert.equal(get('res').hidden, true);
+  submit();
+  assert.equal(get('res').hidden, false);
+  assert.equal(value('rGas'), 'R$ 19,33');
+  assert.equal(value('rPed'), 'R$ 6,00');
+  assert.equal(value('rFood'), 'R$ 140,00');
+  assert.equal(value('rHosp'), 'R$ 80,00');
+  assert.equal(value('rPP'), 'R$ 245,33');
+  assert.equal(value('rTotal'), 'R$ 981,33');
 });
 
-test('a second click refreshes the visible total after input changes', () => {
-  const { get, click, change } = loadPlanner();
-  click();
-  get('fDias').value = '3';
-  click();
-  assert.equal(get('res').style.display, 'block');
-  assert.equal(get('rTotal').textContent, 'Total: R$ 395');
-  assert.equal(get('rPP').textContent, 'R$ 395 por pessoa');
+test('a day trip has no lodging and adding a night restores the chosen rate', t => {
+  const { get, set, submit, value } = loadPlanner(t);
+  set('fDest', '0');
+  assert.equal(get('fKm').disabled, false);
+  set('fKm', '240');
+  set('fPessoas', '2');
+  set('fHosp', '25.50');
+  set('fDias', '1');
+  assert.equal(get('fHosp').disabled, true);
+  submit();
+  assert.equal(value('rHosp'), 'R$ 0,00');
+  assert.equal(value('rGas'), 'R$ 58,00');
+  assert.equal(value('rPed'), 'R$ 12,00');
+  assert.equal(value('rPP'), 'R$ 140,00');
+  assert.equal(value('rTotal'), 'R$ 280,00');
+  set('fDias', '3');
+  assert.equal(get('res').hidden, true);
+  assert.equal(get('fHosp').disabled, false);
+  submit();
+  assert.equal(value('rHosp'), 'R$ 51,00');
+  assert.equal(value('rPP'), 'R$ 331,00');
+  assert.equal(value('rTotal'), 'R$ 662,00');
+});
 
-  get('fDest').value = '0';
-  change('fDest');
-  assert.equal(get('customKm').style.display, 'block');
-  get('fKm').value = '240';
-  get('fPessoas').value = '2';
-  click();
-  assert.equal(get('rGas').textContent, 'R$ 58');
-  assert.equal(get('rPed').textContent, 'R$ 12');
-  assert.equal(get('rTotal').textContent, 'Total: R$ 440');
-  assert.equal(get('rPP').textContent, 'R$ 440 por pessoa');
-  assert.equal(get('res').style.display, 'block');
+test('invalid edits hide the previous estimate and hidden distance never blocks a preset', t => {
+  const { get, set, submit } = loadPlanner(t);
+  submit();
+  set('fPessoas', '0');
+  submit();
+  assert.equal(get('res').hidden, true);
+  set('fPessoas', '2');
+  set('fDest', '0');
+  set('fKm', '-1');
+  submit();
+  assert.equal(get('res').hidden, true);
+  set('fDest', '160');
+  assert.equal(get('fKm').disabled, true);
+  submit();
+  assert.equal(get('res').hidden, false);
+  set('fFood', '');
+  submit();
+  assert.equal(get('res').hidden, true);
 });
