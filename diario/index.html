@@ -34,6 +34,7 @@
     .entry .meta{color:#9A9A9A;font-size:12px;margin-top:2px}
     .entry{overflow-wrap:anywhere}
     .entry .meta{color:#43586a;white-space:pre-wrap}
+    #sessoes-anteriores summary{color:#00576a;cursor:pointer;padding:12px 0;font-weight:700}
     .del{float:right;width:auto;margin:0 0 8px 10px;padding:8px 12px;background:#fff;color:#932b31;border:1px solid #c9a3a4;font-size:14px}
     .card button[type="submit"]{background:#00677a}
     :focus-visible{outline:3px solid #154a70;outline-offset:3px}
@@ -90,12 +91,17 @@
   <div class="card">
     <h2 id="historico" tabindex="-1">Sessões recentes</h2>
     <div id="entries"></div>
+    <details id="sessoes-anteriores" hidden>
+      <summary>Sessões anteriores</summary>
+      <div id="entries-anteriores"></div>
+    </details>
   </div>
 
   <div class="card">
     <h2>🔗 Explore mais</h2>
     <div class="links">
       <a href="../">🏄‍♀️ <span>ASF App</span> — home da comunidade</a>
+      <a href="https://glossario.asf.surf/">Procurar no Glossário um termo da aula</a>
       <a href="../apps/#roteiro">Planejar a próxima sessão com os apps ASF</a>
       <a href="../guias/boletim-das-ondas/#ficha">Preparar a ficha do boletim antes de sair</a>
       <a href="../guias/pos-surf-e-aprendizado/">Usar as notas para planejar a próxima aula</a>
@@ -142,7 +148,12 @@ function streak(d){
 
 function showRecent(entries) {
   const container = document.getElementById('entries');
+  const archive = document.getElementById('sessoes-anteriores');
+  const olderEntries = document.getElementById('entries-anteriores');
   container.replaceChildren();
+  olderEntries.replaceChildren();
+  archive.hidden = entries.length <= 10;
+  if (archive.hidden) archive.open = false;
   const sorted = entries.map((entry, index) => ({entry, index}))
     .sort((a, b) => b.entry.data.localeCompare(a.entry.data) || b.index - a.index);
   if (!sorted.length) {
@@ -152,7 +163,7 @@ function showRecent(entries) {
     container.append(empty);
     return;
   }
-  for (const {entry, index} of sorted.slice(0, 10)) {
+  for (const [position, {entry, index}] of sorted.entries()) {
     const row = document.createElement('article');
     row.className = 'entry';
     const date = new Date(entry.data + 'T12:00:00').toLocaleDateString('pt-BR');
@@ -185,7 +196,8 @@ function showRecent(entries) {
       }
     });
     row.append(remove, location, ' — ' + entry.mar, details);
-    container.append(row);
+    const list = position < 10 ? container : olderEntries;
+    list.append(row);
   }
 }
 

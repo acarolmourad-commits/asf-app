@@ -70,3 +70,26 @@ test('mudança em outra aba e histórico ilegível preservam o conteúdo existen
   assert.equal(diary.document.querySelector('#fNotas').value,'manter no campo');
   diary.close();
 });
+
+test('histórico permite rever e excluir sessões anteriores às dez mais recentes', () => {
+  const entries = Array.from({ length: 12 }, (_, i) => ({
+    data: '2026-11-' + String(i + 1).padStart(2, '0'),
+    praia: 'Maresias', dur: 45, mar: 'Pequeno', notas: 'Aula ' + (i + 1)
+  }));
+  const diary = openPage('diario', w => w.localStorage.setItem(key, JSON.stringify(entries)));
+  const doc = diary.document;
+  const archive = doc.querySelector('#sessoes-anteriores');
+  assert.equal(doc.querySelectorAll('#entries .entry').length, 10);
+  assert.equal(archive.hidden, false);
+  assert.equal(archive.open, false);
+  archive.querySelector('summary').click();
+  assert.deepEqual([...archive.querySelectorAll('.meta')].map(el => el.textContent.split(' • ').pop()), ['Aula 2', 'Aula 1']);
+  diary.confirm = () => true;
+  archive.querySelector('button').click();
+  assert.equal(archive.open, true);
+  assert.match(archive.textContent, /Aula 1/);
+  archive.querySelector('button').click();
+  assert.equal(archive.hidden, true);
+  assert.deepEqual(JSON.parse(diary.localStorage.getItem(key)), entries.slice(2));
+  diary.close();
+});
