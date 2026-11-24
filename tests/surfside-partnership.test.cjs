@@ -28,8 +28,8 @@ test('the booking guidance is exact in both languages, in the partner page and c
 
 test('other partners remain distinct and no private Surfside terms appear in public surfaces', () => {
   const [active, pending] = catalog.split('<h2 id="previas">');
-  for (const slug of ['surfside-maresias', 'lapoint', 'villa-blu']) assert.match(active, new RegExp('id="parceria-' + slug + '"'));
-  for (const slug of ['surferinhas', 'surfmappers', 'yoko-acupuntura']) {
+  for (const slug of ['surfside-maresias', 'lapoint', 'villa-blu', 'surfmappers']) assert.match(active, new RegExp('id="parceria-' + slug + '"'));
+  for (const slug of ['surferinhas', 'yoko-acupuntura']) {
     assert.match(pending, new RegExp('id="parceria-' + slug + '"'));
     assert.doesNotMatch(active, new RegExp('id="parceria-' + slug + '"'));
   }

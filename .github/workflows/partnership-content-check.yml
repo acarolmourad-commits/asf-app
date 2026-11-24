@@ -5,6 +5,7 @@ on:
       - 'parcerias/**'
       - 'beneficios/index.html'
       - 'tests/surfside-partnership.test.cjs'
+      - 'tests/surfmappers-partnership.test.cjs'
       - 'sitemap.xml'
       - 'tests/lapoint-partnership.test.cjs'
       - '.github/workflows/partnership-content-check.yml'
@@ -20,4 +21,4 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '20'
-      - run: node --test tests/lapoint-partnership.test.cjs tests/surfside-partnership.test.cjs
+      - run: node --test tests/lapoint-partnership.test.cjs tests/surfside-partnership.test.cjs tests/surfmappers-partnership.test.cjs
