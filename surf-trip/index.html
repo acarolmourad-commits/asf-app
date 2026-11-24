@@ -27,18 +27,19 @@
     .total{font-size:1.5rem;font-weight:800;color:#116244;text-align:center;margin-top:12px}
     .check{display:flex;align-items:center;gap:10px;padding:9px 0;border-bottom:1px solid #F0F2F5;font-size:14px;cursor:pointer}
     .check input{width:auto}
-    .check.done span{text-decoration:line-through;color:#9A9A9A}
+    .check input:checked + span{text-decoration:line-through;color:#54636d}
+    .check{min-height:44px}
+    .check input{width:1.15rem;height:1.15rem;flex-shrink:0}
+    #checklist progress:not([hidden]){display:block;width:100%;height:.65rem;accent-color:#116244}
     .dest{background:#F8F9FA;border-radius:12px;padding:14px;margin-bottom:10px}
     .dest b{color:#00A8CC}
     .links{display:grid;gap:10px;margin-top:8px}
     .links a{display:block;background:#fff;border:1px solid #E4E6E9;border-radius:12px;padding:14px 16px;text-decoration:none;color:#0E2439;font-weight:600}
     .links a span{color:#00A8CC}
     footer{text-align:center;color:#9A9A9A;font-size:12px;padding:20px}
-    .prog{height:8px;background:#E4E6E9;border-radius:4px;margin-top:10px}
     .planner-note{font-size:.9rem;line-height:1.5;margin:.65rem 0;color:#334c59}
     #bate-volta p+p{margin-top:.65rem}
     #orcamento,#bate-volta{scroll-margin-top:1rem}
-    .prog i{display:block;height:100%;background:#2ECC71;border-radius:4px;transition:width .3s}
   </style>
     <link rel="stylesheet" href="/asf-app/asf-site-redesign.css">
 </head>
@@ -87,20 +88,39 @@
     <p>Em um bate-volta, consulte a <a href="https://previsao.asf.surf/">previsão de ondas</a> e combine o ponto de encontro na <a href="../guias/boletim-das-ondas/#ficha">ficha do boletim</a>. Se decidirem pernoitar em Maresias, vejam as diferenças entre as <a href="#maresias">hospedagens parceiras</a> antes de reservar.</p>
   </section>
 
-  <div class="card">
-    <h2>✅ Checklist da trip <span id="pct" style="font-size:13px;color:#2ECC71"></span></h2>
-    <div class="prog"><i id="bar" style="width:0%"></i></div>
-    <div id="checks" style="margin-top:10px"></div>
-  </div>
+  <section class="card" id="checklist" aria-labelledby="titulo-checklist">
+    <h2 id="titulo-checklist">Lista de viagem</h2>
+    <p class="planner-note">Comece pelo equipamento que vai usar. Para escolher o que levar para a areia, consulte a <a href="https://mala.asf.surf/">ASF Mala</a>. Antes de sair, anote o horário e o ponto de encontro na <a href="../guias/boletim-das-ondas/#ficha">ficha do boletim</a>.</p>
+    <div id="checks">
+      <label class="check"><input type="checkbox" value="0"><span>Prancha, leash e parafina</span></label>
+      <label class="check"><input type="checkbox" value="1"><span>Roupa de neoprene ou lycra</span></label>
+      <label class="check"><input type="checkbox" value="2"><span>Proteção solar</span></label>
+      <label class="check"><input type="checkbox" value="3"><span>Kit de primeiros socorros</span></label>
+      <label class="check"><input type="checkbox" value="4"><span>Água e lanche</span></label>
+      <label class="check"><input type="checkbox" value="5"><span>Kit de reparo da prancha</span></label>
+      <label class="check"><input type="checkbox" value="6"><span>Carregador e documentos</span></label>
+      <label class="check"><input type="checkbox" value="7"><span>Hospedagem confirmada, se houver pernoite</span></label>
+      <label class="check"><input type="checkbox" value="8"><span>Combustível e pedágio, se for de carro</span></label>
+      <label class="check"><input type="checkbox" value="9"><span>Previsão de ondas consultada</span></label>
+      <label class="check"><input type="checkbox" value="10"><span>Ponto de encontro combinado com a turma</span></label>
+    </div>
+    <p id="pct" role="status"></p>
+    <progress id="bar" aria-label="Itens conferidos" hidden></progress>
+    <p id="salvamento" class="planner-note" hidden></p>
+  </section>
 
   <div class="card">
     <h2>🏄‍♀️ Destinos favoritos das manas</h2>
     <div class="dest" id="maresias">
       <h3>Onde ficar com a turma em Maresias</h3>
       <p>A ASF reuniu duas hospedagens parceiras com reserva direta. Quem quer cozinhar com a turma pode conhecer os chalés e a cozinha compartilhada do <a href="../parcerias/surfside-maresias/">Surfside Maresias</a>. Para quem prefere começar o dia com café da manhã na pousada e descansar na piscina depois da praia, veja a <a href="../parcerias/villa-blu/">Villa Blu</a>.</p>
-      <p>Converse com a hospedagem sobre as datas e onde guardar as pranchas. Quando a reserva estiver confirmada, marque esse item no checklist da viagem.</p>
+      <p>Converse com a hospedagem sobre as datas e onde guardar as pranchas. Quando a reserva estiver confirmada, marque esse item na <a href="#checklist">lista de viagem</a>.</p>
     </div>
-    <div class="dest"><b>Ubatuba (Itamambuca)</b> — 3h. Point break clássico, vibe tranquila. Melhor: abril–setembro.</div>
+    <section class="dest" id="ubatuba" aria-labelledby="titulo-ubatuba">
+      <h3 id="titulo-ubatuba">Ubatuba em família · Museu da Vida Marinha</h3>
+      <p>Entre uma ida à praia e outra, as famílias podem conhecer espécies marinhas de perto no Museu da Vida Marinha, em Ubatuba. A exposição reúne exemplares reais preservados por taxidermia e convida crianças e adultos a observar diferenças entre os animais. Antes de sair, consulte o perfil oficial <a href="https://www.instagram.com/museudavidamarinha/">@museudavidamarinha</a> para confirmar o horário e as condições de visita.</p>
+      <p class="planner-note">Museu da Vida Marinha · Instituto Argonauta</p>
+    </section>
     <div class="dest"><b>Ilhabela</b> — consulte os horários da travessia e combine como chegar a Castelhanos ou ao Bonete antes de fechar o trajeto.</div>
     <div class="dest"><b>Floripa (Joaquina)</b> — trip grande. Ondas de excelência, campeonatos, berçário do surf BR.</div>
   </div>
@@ -158,19 +178,68 @@ form.addEventListener('submit', event => {
   document.getElementById('rTotal').textContent = currency.format(groupTotal);
   result.hidden = false;
 });
-const ITEMS = ['🏄‍♀️ Prancha + leash + parafina','🩱 Roupa de neoprene / lycra UV','🧴 Protetor solar + zinco','💊 Kit primeiros socorros','💧 Garrafa de água + snacks','🔧 Kit reparo de prancha','📱 Carregador + documentos','🛏️ Reserva de hospedagem confirmada','⛽ Tanque cheio + cartão de pedágio','🌊 Conferir previsão (link abaixo!)','👯‍♀️ Avisar as manas / compartilhar localização'];
-const CK = 'asf-trip-checklist';
-const state = JSON.parse(localStorage.getItem(CK)||'{}');
-function renderChecks(){
-  const el = document.getElementById('checks');
-  el.innerHTML = ITEMS.map((t,i)=>`<label class="check ${state[i]?'done':''}"><input type="checkbox" ${state[i]?'checked':''} onchange="toggle(${i})"><span>${t}</span></label>`).join('');
-  const done = ITEMS.filter((_,i)=>state[i]).length;
-  const pct = Math.round(done/ITEMS.length*100);
-  document.getElementById('pct').textContent = pct+'% pronto';
-  document.getElementById('bar').style.width = pct+'%';
+const checklistKey = 'asf-trip-checklist';
+const boxes = Array.from(document.querySelectorAll('#checks input'));
+const progress = document.getElementById('bar');
+const storageNote = document.getElementById('salvamento');
+let unsaved = {};
+
+function showStorageStatus(available) {
+  storageNote.textContent = available
+    ? 'As marcações ficam salvas neste navegador.'
+    : 'Você pode conferir os itens nesta aba. O navegador não conseguiu salvar as marcações.';
+  storageNote.hidden = false;
 }
-function toggle(i){ state[i] = !state[i]; localStorage.setItem(CK, JSON.stringify(state)); renderChecks(); }
-renderChecks();
+
+function updateProgress() {
+  const count = boxes.filter(box => box.checked).length;
+  progress.max = boxes.length;
+  progress.value = count;
+  progress.hidden = false;
+  document.getElementById('pct').textContent = count + ' de ' + boxes.length + ' itens conferidos';
+}
+
+function readChecklist() {
+  const json = localStorage.getItem(checklistKey);
+  if (!json) return {};
+  try {
+    const saved = JSON.parse(json);
+    return saved && typeof saved === 'object' ? saved : {};
+  } catch {
+    return {};
+  }
+}
+
+function restoreChecklist() {
+  try {
+    const saved = { ...readChecklist(), ...unsaved };
+    boxes.forEach(box => { box.checked = saved[box.value] === true; });
+    showStorageStatus(Object.keys(unsaved).length === 0);
+  } catch {
+    showStorageStatus(false);
+  }
+  updateProgress();
+}
+
+document.getElementById('checks').addEventListener('change', event => {
+  const box = event.target;
+  if (!boxes.includes(box)) return;
+  unsaved[box.value] = box.checked;
+  try {
+    const saved = { ...readChecklist(), ...unsaved };
+    localStorage.setItem(checklistKey, JSON.stringify(saved));
+    unsaved = {};
+    boxes.forEach(item => { item.checked = saved[item.value] === true; });
+    showStorageStatus(true);
+  } catch {
+    showStorageStatus(false);
+  }
+  updateProgress();
+});
+window.addEventListener('storage', event => {
+  if (event.key === checklistKey || event.key === null) restoreChecklist();
+});
+restoreChecklist();
 </script>
     <script src="/asf-app/asf-redesign.js" defer></script>
 </body>

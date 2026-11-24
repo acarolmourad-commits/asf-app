@@ -6,8 +6,8 @@ const { JSDOM } = require('jsdom');
 
 const html = readFileSync(join(__dirname, '../surf-trip/index.html'), 'utf8');
 
-function loadPlanner(t) {
-  const dom = new JSDOM(html, { url: 'https://asf.surf/surf-trip/', runScripts: 'dangerously' });
+function loadPlanner(t, beforeParse) {
+  const dom = new JSDOM(html, { url: 'https://asf.surf/surf-trip/', runScripts: 'dangerously', beforeParse });
   t.after(() => dom.window.close());
   const document = dom.window.document;
   const get = id => document.getElementById(id);
@@ -17,7 +17,7 @@ function loadPlanner(t) {
   }
   const submit = () => document.querySelector('button[type="submit"]').click();
   const value = id => get(id).textContent.replace(/\s/g, ' ');
-  return { get, set, submit, value };
+  return { get, set, submit, value, document, window: dom.window };
 }
 
 test('default trip displays the group total and each traveler’s share', t => {
@@ -75,4 +75,58 @@ test('invalid edits hide the previous estimate and hidden distance never blocks 
   set('fFood', '');
   submit();
   assert.equal(get('res').hidden, true);
+});
+
+test('trip checklist restores previous records and keeps keyboard focus after checking an item', t => {
+  const { document, get, window } = loadPlanner(t, w => {
+    w.localStorage.setItem('asf-trip-checklist', '{"2":true}');
+  });
+  const boxes = document.querySelectorAll('#checks input');
+  assert.equal(boxes.length, 11);
+  assert.equal(boxes[2].checked, true);
+  boxes[3].focus();
+  boxes[3].click();
+  assert.equal(document.activeElement, boxes[3]);
+  assert.equal(get('bar').value, 2);
+  assert.deepEqual(JSON.parse(window.localStorage.getItem('asf-trip-checklist')), { 2: true, 3: true });
+  window.localStorage.clear();
+  window.dispatchEvent(new window.StorageEvent('storage', { key: null }));
+  assert.equal(get('bar').value, 0);
+  assert.equal(boxes[2].checked, false);
+});
+
+test('unreadable saved JSON leaves the list usable and can be replaced by a valid selection', t => {
+  const { document, get, window } = loadPlanner(t, w => {
+    w.localStorage.setItem('asf-trip-checklist', '{');
+  });
+  document.querySelector('#checks input').click();
+  assert.equal(get('bar').value, 1);
+  assert.deepEqual(JSON.parse(window.localStorage.getItem('asf-trip-checklist')), { 0: true });
+});
+
+test('after a storage failure, the next successful save retains both selections', t => {
+  let available = false;
+  const { document, get, window } = loadPlanner(t, w => {
+    const original = w.Storage.prototype.setItem;
+    w.Storage.prototype.setItem = function (key, val) {
+      if (!available) throw new Error('Unavailable');
+      original.call(this, key, val);
+    };
+  });
+  const boxes = document.querySelectorAll('#checks input');
+  boxes[0].click();
+  assert.equal(get('bar').value, 1);
+  assert.match(get('salvamento').textContent, /nesta aba/);
+  available = true;
+  boxes[1].click();
+  assert.deepEqual(JSON.parse(window.localStorage.getItem('asf-trip-checklist')), { 0: true, 1: true });
+});
+
+test('blocked storage access keeps the checklist available in the current tab', t => {
+  const { document, get } = loadPlanner(t, w => {
+    Object.defineProperty(w, 'localStorage', { get() { throw new Error('Storage blocked'); } });
+  });
+  document.querySelector('#checks input').click();
+  assert.equal(get('bar').value, 1);
+  assert.match(get('salvamento').textContent, /nesta aba/);
 });
