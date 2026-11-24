@@ -33,6 +33,30 @@ test('default trip displays the group total and each traveler’s share', t => {
   assert.equal(value('rTotal'), 'R$ 981,33');
 });
 
+test('Ubatuba example opens an editable day trip and preserves the group and meal inputs', t => {
+  const { document, get, set, submit, value } = loadPlanner(t);
+  set('fDest', '0');
+  set('fKm', '310');
+  set('fPessoas', '3');
+  set('fFood', '45');
+  submit();
+  assert.equal(get('res').hidden, false);
+  assert.equal(get('simular-ubatuba').hidden, false);
+  get('simular-ubatuba').click();
+  assert.equal(document.activeElement, get('fDest'));
+  assert.equal(get('fDest').value, '220');
+  assert.equal(get('fDias').value, '1');
+  assert.equal(get('fHosp').disabled, true);
+  assert.equal(get('fPessoas').value, '3');
+  assert.equal(get('fFood').value, '45');
+  assert.equal(get('res').hidden, true);
+  submit();
+  assert.equal(value('rHosp'), 'R$ 0,00');
+  set('fDest', '0');
+  assert.equal(get('fKm').value, '310');
+  assert.equal(get('fKm').disabled, false);
+});
+
 test('a day trip has no lodging and adding a night restores the chosen rate', t => {
   const { get, set, submit, value } = loadPlanner(t);
   set('fDest', '0');

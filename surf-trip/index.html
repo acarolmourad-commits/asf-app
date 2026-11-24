@@ -48,7 +48,7 @@
   <h1>🚐 Surf Trip Planner</h1>
   <p>Orçamento + checklist + destinos — planeje sua próxima aventura • ASF</p>
 </header>
-<div class="wrap">
+<main class="wrap" id="asf-main" tabindex="-1">
   <section class="card" id="orcamento" aria-labelledby="titulo-orcamento">
     <h2 id="titulo-orcamento">Calculadora de orçamento da viagem</h2>
     <form id="trip-form">
@@ -56,7 +56,7 @@
       <label for="fDest">Destino ou distância personalizada</label>
       <select id="fDest" aria-describedby="ajuda-distancia">
         <option value="160">Maresias / São Sebastião · exemplo de 160 km no total</option>
-        <option value="220">Ubatuba · exemplo de 220 km no total</option>
+        <option id="destino-ubatuba" value="220">Ubatuba · exemplo de 220 km no total</option>
         <option value="180">Ilhabela · exemplo de 180 km no total</option>
         <option value="600">Florianópolis · exemplo de 600 km no total</option>
         <option value="900">Rio de Janeiro · exemplo de 900 km no total</option>
@@ -116,10 +116,14 @@
       <p>A ASF reuniu duas hospedagens parceiras com reserva direta. Quem quer cozinhar com a turma pode conhecer os chalés e a cozinha compartilhada do <a href="../parcerias/surfside-maresias/">Surfside Maresias</a>. Para quem prefere começar o dia com café da manhã na pousada e descansar na piscina depois da praia, veja a <a href="../parcerias/villa-blu/">Villa Blu</a>.</p>
       <p>Converse com a hospedagem sobre as datas e onde guardar as pranchas. Quando a reserva estiver confirmada, marque esse item na <a href="#checklist">lista de viagem</a>.</p>
     </div>
-    <section class="dest" id="ubatuba" aria-labelledby="titulo-ubatuba">
+    <section class="dest" id="ubatuba" aria-labelledby="titulo-ubatuba" tabindex="-1">
       <h3 id="titulo-ubatuba">Ubatuba em família · Museu da Vida Marinha</h3>
       <p>Entre uma ida à praia e outra, as famílias podem conhecer espécies marinhas de perto no Museu da Vida Marinha, em Ubatuba. A exposição reúne exemplares reais preservados por taxidermia e convida crianças e adultos a observar diferenças entre os animais. Antes de sair, consulte o perfil oficial <a href="https://www.instagram.com/museudavidamarinha/">@museudavidamarinha</a> para confirmar o horário e as condições de visita.</p>
       <p class="planner-note">Museu da Vida Marinha · Instituto Argonauta</p>
+      <h4>Como encaixar a visita no bate-volta</h4>
+      <p>Escolha com a família se a visita fica antes ou depois da praia. Combine onde vocês vão se encontrar e a hora de começar a viagem de volta. Na <a href="../guias/boletim-das-ondas/#ficha">ficha do boletim</a>, vocês podem anotar o ponto de encontro.</p>
+      <p class="planner-note">O exemplo da <a href="#orcamento">calculadora</a> usa um dia e 220 km de ida e volta. Para usar o trajeto da sua família, escolha “Distância personalizada”. Ingressos e estacionamento ficam fora da estimativa.</p>
+      <button type="button" id="simular-ubatuba" hidden>Usar o exemplo de Ubatuba na calculadora</button>
     </section>
     <div class="dest"><b>Ilhabela</b> — consulte os horários da travessia e combine como chegar a Castelhanos ou ao Bonete antes de fechar o trajeto.</div>
     <div class="dest"><b>Floripa (Joaquina)</b> — trip grande. Ondas de excelência, campeonatos, berçário do surf BR.</div>
@@ -136,7 +140,7 @@
       <a href="https://praia.digital/apps/" target="_blank" rel="noopener">🏠 <span>Praia Digital Apps</span> — pensando em morar perto do mar?</a>
     </div>
   </div>
-</div>
+</main>
 <footer><a href="../apps/#roteiro">Roteiro de uma sessão</a> · ASF — Associação de Surf Feminino • <a href="../" style="color:#00A8CC">Voltar ao app</a></footer>
 <script>
 const sel = document.getElementById('fDest');
@@ -158,6 +162,15 @@ function syncInputs() {
 form.addEventListener('input', syncInputs);
 form.addEventListener('change', syncInputs);
 syncInputs();
+
+const ubatubaExample = document.getElementById('simular-ubatuba');
+ubatubaExample.hidden = false;
+ubatubaExample.addEventListener('click', () => {
+  sel.value = document.getElementById('destino-ubatuba').value;
+  days.value = '1';
+  syncInputs();
+  sel.focus();
+});
 
 form.addEventListener('submit', event => {
   event.preventDefault();
