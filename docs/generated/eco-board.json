@@ -1,11 +1,11 @@
 {
   "date": "2026-11-25",
   "board_tip": {
-    "title": "Fish: Para ondas pequenas",
-    "content": "Shape com outline curto e largo. Perfeita para ondas fracas! Twin ou quad fin para mais speed.",
+    "title": "Longboard: O clássico",
+    "content": "Longboards (9'0\"+) são perfeitas para ondas pequenas e estabilidade.",
     "tags": [
-      "Fish",
-      "Speed"
+      "Longboard",
+      "Clássico"
     ]
   },
   "eco_tip": {
@@ -13,6 +13,6 @@
     "content": "1. ♻️ 100% reciclável 2. 🌿 Biodegradável 3. 🧊 Livre de CFC 4. 💧 Menor consumo de água",
     "category": "Meio Ambiente"
   },
-  "daily_message": "Maré baixa às 11:45 hoje - melhor para iniciantes!",
-  "generated_at": "2026-11-25T16:18:50.028629"
+  "daily_message": "Hidrate-se: 500ml de água antes de surfar!",
+  "generated_at": "2026-11-25T20:23:32.746287"
 }
