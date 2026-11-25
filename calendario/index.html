@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Calendário do Surf | ASF</title>
+  <meta name="description" content="Agenda da ASF para acompanhar campeonatos de surf: datas confirmadas, programação anunciada e links oficiais.">
+  <link rel="canonical" href="https://asf.surf/calendario/">
+  <meta name="robots" content="index,follow">
+  <meta name="theme-color" content="#0e2439">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Calendário do Surf | ASF">
+  <meta property="og:description" content="Veja datas, locais e fontes oficiais de campeonatos de surf.">
+  <meta property="og:url" content="https://asf.surf/calendario/">
+  <style>
+    *{box-sizing:border-box}
+    body{margin:0;background:#f1f6f7;color:#142e42;font:1rem/1.6 system-ui,sans-serif}
+    .wrap{width:min(62rem,100% - 2rem);margin-inline:auto}
+    a{color:#075967;text-underline-offset:.22em;overflow-wrap:anywhere}
+    a:focus-visible{outline:3px solid #007383;outline-offset:4px}
+    .skip{position:absolute;top:-6rem;left:1rem;padding:.55rem 1rem;background:white;color:#142e42;z-index:2}
+    .skip:focus{top:1rem}
+    header{background:#0e2439;color:white;border-bottom:5px solid #66d3c1}
+    header a{color:#dbfffa}
+    header a:focus-visible{outline-color:#91f0df}
+    nav{display:flex;gap:1.2rem;flex-wrap:wrap;padding-block:1rem}
+    .hero{padding-block:1rem 2.4rem}
+    h1,h2,h3{line-height:1.18}
+    h1{font-size:clamp(2.15rem,6vw,3.8rem);margin:.35rem 0 .8rem}
+    h2{font-size:clamp(1.45rem,4vw,1.9rem)}
+    h3{font-size:1.25rem;margin:.38rem 0 .5rem}
+    .kicker{font-weight:800;letter-spacing:.09em;font-size:.78rem;text-transform:uppercase}
+    .hero p{max-width:42rem;margin:.4rem 0}
+    main{padding-block:1rem 2rem}
+    main section{margin-block:1.4rem}
+    .cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1rem}
+    article{min-width:0;background:white;border:1px solid #cadddf;border-radius:1rem;padding:1.05rem}
+    article p{margin:.46rem 0}
+    .badge{display:inline-block;border-radius:.45rem;padding:.18rem .52rem;color:#18433e;background:#e1f4ed;font-size:.82rem;font-weight:760}
+    .planned{color:#544018;background:#fff0cf}
+    .past{color:#374654;background:#e8edf0}
+    .date{font-weight:750}
+    .meta{color:#3c5360}
+    footer{padding:.6rem 0 1.25rem;border-top:1px solid #cadddf}
+    [hidden]{display:none!important}
+    @media(max-width:40rem){.cards{grid-template-columns:1fr}}
+  </style>
+  <script src="./calendario.js" defer></script>
+</head>
+<body>
+  <a class="skip" href="#conteudo">Pular para o conteúdo</a>
+  <header>
+    <div class="wrap">
+      <nav aria-label="Navegação principal"><a href="/">Início ASF</a><a href="/surf-trip/">Planejar uma surf trip</a></nav>
+      <div class="hero">
+        <p class="kicker">Associação de Surf Feminino</p>
+        <h1>Calendário do Surf</h1>
+        <p>Veja campeonatos de surf, confira o que já foi confirmado e acompanhe a programação anunciada pelas organizações.</p>
+      </div>
+    </div>
+  </header>
+  <main class="wrap" id="conteudo" tabindex="-1">
+    <p class="meta">Agenda verificada em <time datetime="2026-11-25">25 de novembro de 2026</time>. O calendário é atualizado por curadoria, não em tempo real. Confira as fontes oficiais antes de sair.</p>
+    <section aria-labelledby="confirmados">
+      <h2 id="confirmados">Datas confirmadas pela organização</h2>
+      <div class="cards" id="confirmed-events">
+        <article data-end="2026-11-28" id="maresias-shootout" aria-labelledby="maresias-title">
+          <p class="badge" data-status>Confirmado</p>
+          <h3 id="maresias-title">Maresias Shootout</h3>
+          <p class="date"><time datetime="2026-11-28">Sábado, 28 de novembro de 2026</time></p>
+          <p>Praia de Maresias, Entrada 20 · São Sebastião, SP</p>
+          <p>Competição com categoria feminina e entrada gratuita para quem assistir na praia. A inscrição de atletas é por convite.</p>
+          <p>A organização anunciou transmissão pelo Série ao Fundo, no YouTube. Sem link direto ou horários de baterias verificados.</p>
+          <p><a href="https://maresiasshootout.com.br/blog/evento-confirmado-dia-28-de-novembro-de-2026-praia-de-maresias">Comunicado oficial do Maresias Shootout</a> · <a href="https://maresiasshootout.com.br/">Site da organização</a></p>
+        </article>
+        <article data-end="2026-11-29" id="surf-brasil-pro" aria-labelledby="cbsurf-title">
+          <p class="badge" data-status>Janela oficial</p>
+          <h3 id="cbsurf-title">Surf Brasil Pro · 4ª etapa</h3>
+          <p class="date"><time datetime="2026-11-21">21</time> a <time datetime="2026-11-29">29 de novembro de 2026</time></p>
+          <p>Guarda do Embaú · Palhoça, SC</p>
+          <p>A CBSurf informou início de baterias em 22 de novembro. A janela não determina o horário de cada bateria.</p>
+          <p><a href="https://www.surfbrasil.org.br/evento/56/surf-brasil-pro-2026/4-etapa">Janela oficial na CBSurf</a> · <a href="https://www.surfbrasil.org.br/noticia/4115/lucas-haag-se-destaca-na-abertura-do-mini-kalzone-surf-brasil-pro-guarda-do-embau">Boletim de abertura</a></p>
+        </article>
+      </div>
+      <p id="confirmed-empty" hidden>Nenhuma data confirmada futura consta nesta edição.</p>
+    </section>
+    <section aria-labelledby="programados">
+      <h2 id="programados">Programados · a reconfirmar</h2>
+      <p>Datas previstas nas agendas municipais, não confirmação de horários de baterias.</p>
+      <div class="cards" id="planned-events">
+        <article data-end="2026-11-29" aria-labelledby="ubatuba-title">
+          <p class="badge planned" data-status>Programado pela Prefeitura</p>
+          <h3 id="ubatuba-title">Ubatuba Pro Surf · 3ª etapa</h3>
+          <p class="date"><time datetime="2026-11-27">27</time> a <time datetime="2026-11-29">29 de novembro de 2026</time></p>
+          <p>Praia Vermelha do Centro · Ubatuba, SP</p>
+          <p><a href="https://www.ubatuba.sp.gov.br/noticias/legado/ubatubaprosurfe23out">Comunicado da Prefeitura de Ubatuba</a></p>
+        </article>
+        <article data-end="2026-12-06" aria-labelledby="guaruja-title">
+          <p class="badge planned" data-status>Programado na agenda municipal</p>
+          <h3 id="guaruja-title">Circuito Guarujaense de Surf · 2ª etapa</h3>
+          <p class="date"><time datetime="2026-12-04">4</time> a <time datetime="2026-12-06">6 de dezembro de 2026</time></p>
+          <p>Praia do Tombo · Guarujá, SP</p>
+          <p><a href="https://portalguaruja.tur.br/">Agenda oficial de eventos no Portal Guarujá</a> · <a href="https://portalguaruja.tur.br/guaruja-lanca-agenda-oficial-de-eventos-no-portal/">Comunicado sobre a agenda municipal</a></p>
+        </article>
+      </div>
+      <p id="planned-empty" hidden>Nenhuma data prevista futura consta nesta edição.</p>
+    </section>
+    <section aria-labelledby="datas-a-confirmar">
+      <h2 id="datas-a-confirmar">Eventos anunciados sem data definida</h2>
+      <p>Nenhum evento sem data definida foi verificado para esta edição. Novas entradas precisam de anúncio da organização.</p>
+    </section>
+    <section id="historico" aria-labelledby="datas-passadas" hidden>
+      <h2 id="datas-passadas">Datas já passadas</h2>
+      <p>Registro da programação divulgada. Estar aqui não confirma que a competição ocorreu nem informa seus resultados.</p>
+      <div class="cards" id="history-events"></div>
+    </section>
+  </main>
+  <footer><div class="wrap"><p>ASF · Associação de Surf Feminino · <a href="/">Voltar ao início da ASF</a></p></div></footer>
+</body>
+</html>
