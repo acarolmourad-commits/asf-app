@@ -10,6 +10,11 @@ on:
       - 'asf-home-quality.css'
       - 'asf-home-quality.js'
       - 'carteirinha.js'
+      - 'emitir.html'
+      - 'recuperar-carteirinha.html'
+      - 'assets/js/card-qr.js'
+      - 'assets/vendor/qrcode-generator-*.js'
+      - 'tests/card-recovery.test.cjs'
       - 'tests/home-quality-layer.test.cjs'
       - 'tests/home-guides-partners.test.cjs'
       - 'tests/navigation-dom.test.cjs'
@@ -44,5 +49,5 @@ jobs:
         run: node --test tests/home-quality-layer.test.cjs tests/home-guides-partners.test.cjs
       - name: Install isolated DOM test dependency
         run: npm install --prefix "$RUNNER_TEMP/asf-dom" --no-save jsdom@26.1.0 --no-audit --no-fund
-      - name: Verify navigation, session diary and trip budget
-        run: NODE_PATH="$RUNNER_TEMP/asf-dom/node_modules" node --test tests/navigation-dom.test.cjs tests/diario-ficha.test.cjs tests/surf-trip-budget.test.cjs
+      - name: Verify navigation, session diary, trip budget and card recovery
+        run: NODE_PATH="$RUNNER_TEMP/asf-dom/node_modules" node --test tests/navigation-dom.test.cjs tests/diario-ficha.test.cjs tests/surf-trip-budget.test.cjs tests/card-recovery.test.cjs

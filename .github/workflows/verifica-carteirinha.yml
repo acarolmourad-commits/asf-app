@@ -42,7 +42,7 @@ jobs:
           privacy = Path('docs/carteirinhas-privacy-2026-10-07.md').read_text(encoding='utf-8')
 
           checks = {
-              'emissao usa RPC central': "emitir_carteirinha" in js and "emitir_carteirinha" in emitir,
+              'emissao usa RPC central': "this.sbRpc('emitir_carteirinha', params)" in js and 'await ASF_CARD.emitirCarteirinha(' in emitir,
               'nao existe escrita direta no endpoint associadas em JS da carteirinha': "/rest/v1/associadas" not in js,
               'pagina de emissao oculta resultado se RPC falhar': "Nenhuma carteirinha será exibida sem confirmação do Supabase" in emitir,
               'verificacao offline nao afirma validade': "Não considere a carteirinha válida até a consulta central responder" in verificar,
