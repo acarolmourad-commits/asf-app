@@ -18,6 +18,8 @@
     "Surf trips, hospedagens, cultura e destinos.": "Surf trips, places to stay, culture and destinations.",
     "Nossa História — com fotos reais da ASF": "Our story in photos",
     "Conheça a trajetória da ASF e reviva a jornada das manas →": "Meet the women behind ASF and explore our history →",
+    "Planeje um fim de semana de surf em Maresias": "Plan a surf weekend in Maresias",
+    "com a calculadora de viagem, a lista de bagagem e a previsão de ondas.": "with the trip calculator, packing list and wave forecast.",
     "Explore no seu ritmo": "Explore at your own pace",
     "Abra um tema para encontrar os conteúdos e ferramentas. Seus registros e aplicativos continuam disponíveis.": "Choose a topic to find guides and tools. You can still access your saved records and apps.",
     "Comunidade & Eventos": "Community & events",
