@@ -1,228 +1,18 @@
 {
-  "date": "2026-11-25T01:41:34.177900+00:00",
-  "total": 155,
-  "ok": 147,
+  "date": "2026-11-25T16:19:27.822742+00:00",
+  "total": 154,
+  "ok": 146,
   "skipped": 8,
   "broken_count": 0,
   "broken": [],
   "results": [
     {
-      "url": "https://acarolmourad-commits.github.io/asf-achados/",
+      "url": "https://achados.asf.surf/",
       "status": "ok",
       "http": 200
     },
     {
-      "url": "https://acarolmourad-commits.github.io/asf-alerta/",
-      "status": "ok",
-      "http": 200
-    },
-    {
-      "url": "https://acarolmourad-commits.github.io/asf-atlas/",
-      "status": "ok",
-      "http": 200
-    },
-    {
-      "url": "https://acarolmourad-commits.github.io/asf-bemestar/",
-      "status": "ok",
-      "http": 200
-    },
-    {
-      "url": "https://acarolmourad-commits.github.io/asf-carona/",
-      "status": "ok",
-      "http": 200
-    },
-    {
-      "url": "https://acarolmourad-commits.github.io/asf-checklist/",
-      "status": "ok",
-      "http": 200
-    },
-    {
-      "url": "https://acarolmourad-commits.github.io/asf-comunidade/",
-      "status": "ok",
-      "http": 200
-    },
-    {
-      "url": "https://acarolmourad-commits.github.io/asf-desafio/",
-      "status": "ok",
-      "http": 200
-    },
-    {
-      "url": "https://acarolmourad-commits.github.io/asf-desafios/",
-      "status": "ok",
-      "http": 200
-    },
-    {
-      "url": "https://acarolmourad-commits.github.io/asf-diario/",
-      "status": "ok",
-      "http": 200
-    },
-    {
-      "url": "https://acarolmourad-commits.github.io/asf-eco/",
-      "status": "ok",
-      "http": 200
-    },
-    {
-      "url": "https://acarolmourad-commits.github.io/asf-equipamento/",
-      "status": "ok",
-      "http": 200
-    },
-    {
-      "url": "https://acarolmourad-commits.github.io/asf-filmes/",
-      "status": "ok",
-      "http": 200
-    },
-    {
-      "url": "https://acarolmourad-commits.github.io/asf-glossario/",
-      "status": "ok",
-      "http": 200
-    },
-    {
-      "url": "https://acarolmourad-commits.github.io/asf-goldenhour/",
-      "status": "ok",
-      "http": 200
-    },
-    {
-      "url": "https://acarolmourad-commits.github.io/asf-historia/",
-      "status": "ok",
-      "http": 200
-    },
-    {
-      "url": "https://acarolmourad-commits.github.io/asf-inspiracao/",
-      "status": "ok",
-      "http": 200
-    },
-    {
-      "url": "https://acarolmourad-commits.github.io/asf-kids/",
-      "status": "ok",
-      "http": 200
-    },
-    {
-      "url": "https://acarolmourad-commits.github.io/asf-leitura/",
-      "status": "ok",
-      "http": 200
-    },
-    {
-      "url": "https://acarolmourad-commits.github.io/asf-mala/",
-      "status": "ok",
-      "http": 200
-    },
-    {
-      "url": "https://acarolmourad-commits.github.io/asf-manobras/",
-      "status": "ok",
-      "http": 200
-    },
-    {
-      "url": "https://acarolmourad-commits.github.io/asf-mapa/",
-      "status": "ok",
-      "http": 200
-    },
-    {
-      "url": "https://acarolmourad-commits.github.io/asf-matematica/",
-      "status": "ok",
-      "http": 200
-    },
-    {
-      "url": "https://acarolmourad-commits.github.io/asf-memoria/",
-      "status": "ok",
-      "http": 200
-    },
-    {
-      "url": "https://acarolmourad-commits.github.io/asf-mental/",
-      "status": "ok",
-      "http": 200
-    },
-    {
-      "url": "https://acarolmourad-commits.github.io/asf-mentorias/",
-      "status": "ok",
-      "http": 200
-    },
-    {
-      "url": "https://acarolmourad-commits.github.io/asf-mercado/",
-      "status": "ok",
-      "http": 200
-    },
-    {
-      "url": "https://acarolmourad-commits.github.io/asf-nutricao/",
-      "status": "ok",
-      "http": 200
-    },
-    {
-      "url": "https://acarolmourad-commits.github.io/asf-parceiras/",
-      "status": "ok",
-      "http": 200
-    },
-    {
-      "url": "https://acarolmourad-commits.github.io/asf-patrocinio/",
-      "status": "ok",
-      "http": 200
-    },
-    {
-      "url": "https://acarolmourad-commits.github.io/asf-podcast/",
-      "status": "ok",
-      "http": 200
-    },
-    {
-      "url": "https://acarolmourad-commits.github.io/asf-ponto/",
-      "status": "ok",
-      "http": 200
-    },
-    {
-      "url": "https://acarolmourad-commits.github.io/asf-popup/",
-      "status": "ok",
-      "http": 200
-    },
-    {
-      "url": "https://acarolmourad-commits.github.io/asf-praias/",
-      "status": "ok",
-      "http": 200
-    },
-    {
-      "url": "https://acarolmourad-commits.github.io/asf-previsao/",
-      "status": "ok",
-      "http": 200
-    },
-    {
-      "url": "https://acarolmourad-commits.github.io/asf-quiz/",
-      "status": "ok",
-      "http": 200
-    },
-    {
-      "url": "https://acarolmourad-commits.github.io/asf-ranking/",
-      "status": "ok",
-      "http": 200
-    },
-    {
-      "url": "https://acarolmourad-commits.github.io/asf-seguranca/",
-      "status": "ok",
-      "http": 200
-    },
-    {
-      "url": "https://acarolmourad-commits.github.io/asf-sonhos/",
-      "status": "ok",
-      "http": 200
-    },
-    {
-      "url": "https://acarolmourad-commits.github.io/asf-sono/",
-      "status": "ok",
-      "http": 200
-    },
-    {
-      "url": "https://acarolmourad-commits.github.io/asf-tempo/",
-      "status": "ok",
-      "http": 200
-    },
-    {
-      "url": "https://acarolmourad-commits.github.io/asf-viagens/",
-      "status": "ok",
-      "http": 200
-    },
-    {
-      "url": "https://acarolmourad-commits.github.io/asf-volume/",
-      "status": "ok",
-      "http": 200
-    },
-    {
-      "url": "https://acarolmourad-commits.github.io/asf-yoga/",
+      "url": "https://alerta.asf.surf/",
       "status": "ok",
       "http": 200
     },
@@ -242,12 +32,67 @@
       "http": 200
     },
     {
-      "url": "https://asf.surf/#carteirinha",
+      "url": "https://asf.surf/emitir.html",
+      "status": "ok",
+      "http": 200
+    },
+    {
+      "url": "https://atlas.asf.surf/",
+      "status": "ok",
+      "http": 200
+    },
+    {
+      "url": "https://bemestar.asf.surf/",
+      "status": "ok",
+      "http": 200
+    },
+    {
+      "url": "https://carona.asf.surf/",
       "status": "ok",
       "http": 200
     },
     {
       "url": "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2",
+      "status": "ok",
+      "http": 200
+    },
+    {
+      "url": "https://checklist.asf.surf/",
+      "status": "ok",
+      "http": 200
+    },
+    {
+      "url": "https://comunidade.asf.surf/",
+      "status": "ok",
+      "http": 200
+    },
+    {
+      "url": "https://desafio.asf.surf/",
+      "status": "ok",
+      "http": 200
+    },
+    {
+      "url": "https://desafios.asf.surf/",
+      "status": "ok",
+      "http": 200
+    },
+    {
+      "url": "https://diario.asf.surf/",
+      "status": "ok",
+      "http": 200
+    },
+    {
+      "url": "https://eco.asf.surf/",
+      "status": "ok",
+      "http": 200
+    },
+    {
+      "url": "https://equipamento.asf.surf/",
+      "status": "ok",
+      "http": 200
+    },
+    {
+      "url": "https://filmes.asf.surf/",
       "status": "ok",
       "http": 200
     },
@@ -272,7 +117,42 @@
       "http": 200
     },
     {
+      "url": "https://goldenhour.asf.surf/",
+      "status": "ok",
+      "http": 200
+    },
+    {
+      "url": "https://historia.asf.surf/",
+      "status": "ok",
+      "http": 200
+    },
+    {
       "url": "https://images.unsplash.com",
+      "status": "ok",
+      "http": 200
+    },
+    {
+      "url": "https://inspiracao.asf.surf/",
+      "status": "ok",
+      "http": 200
+    },
+    {
+      "url": "https://kids.asf.surf/",
+      "status": "ok",
+      "http": 200
+    },
+    {
+      "url": "https://leitura.asf.surf/",
+      "status": "ok",
+      "http": 200
+    },
+    {
+      "url": "https://mala.asf.surf/",
+      "status": "ok",
+      "http": 200
+    },
+    {
+      "url": "https://manobras.asf.surf/",
       "status": "ok",
       "http": 200
     },
@@ -282,9 +162,29 @@
       "http": 200
     },
     {
+      "url": "https://mapa.asf.surf/",
+      "status": "ok",
+      "http": 200
+    },
+    {
       "url": "https://marine-api.open-meteo.com",
       "status": "skipped",
       "http": null
+    },
+    {
+      "url": "https://matematica.asf.surf/",
+      "status": "ok",
+      "http": 200
+    },
+    {
+      "url": "https://memoria.asf.surf/",
+      "status": "ok",
+      "http": 200
+    },
+    {
+      "url": "https://mental.asf.surf/",
+      "status": "ok",
+      "http": 200
     },
     {
       "url": "https://mental.asf.surf/#mental-de-competidora",
@@ -292,7 +192,47 @@
       "http": 200
     },
     {
+      "url": "https://mentorias.asf.surf/",
+      "status": "ok",
+      "http": 200
+    },
+    {
+      "url": "https://mercado.asf.surf/",
+      "status": "ok",
+      "http": 200
+    },
+    {
+      "url": "https://nutricao.asf.surf/",
+      "status": "ok",
+      "http": 200
+    },
+    {
       "url": "https://pam.marinha.mil.br/tabuamares/tabuamares.html",
+      "status": "ok",
+      "http": 200
+    },
+    {
+      "url": "https://parceiras.asf.surf/",
+      "status": "ok",
+      "http": 200
+    },
+    {
+      "url": "https://patrocinio.asf.surf/",
+      "status": "ok",
+      "http": 200
+    },
+    {
+      "url": "https://podcast.asf.surf/",
+      "status": "ok",
+      "http": 200
+    },
+    {
+      "url": "https://ponto.asf.surf/",
+      "status": "ok",
+      "http": 200
+    },
+    {
+      "url": "https://popup.asf.surf/",
       "status": "ok",
       "http": 200
     },
@@ -307,7 +247,37 @@
       "http": 200
     },
     {
+      "url": "https://previsao.asf.surf/?lang=en",
+      "status": "ok",
+      "http": 200
+    },
+    {
+      "url": "https://quiz.asf.surf/",
+      "status": "ok",
+      "http": 200
+    },
+    {
+      "url": "https://ranking.asf.surf/",
+      "status": "ok",
+      "http": 200
+    },
+    {
       "url": "https://respira.asf.surf/",
+      "status": "ok",
+      "http": 200
+    },
+    {
+      "url": "https://seguranca.asf.surf/",
+      "status": "ok",
+      "http": 200
+    },
+    {
+      "url": "https://sonhos.asf.surf/",
+      "status": "ok",
+      "http": 200
+    },
+    {
+      "url": "https://sono.asf.surf/",
       "status": "ok",
       "http": 200
     },
@@ -328,6 +298,16 @@
     },
     {
       "url": "https://treino.asf.surf/#plano-30-dias",
+      "status": "ok",
+      "http": 200
+    },
+    {
+      "url": "https://viagens.asf.surf/",
+      "status": "ok",
+      "http": 200
+    },
+    {
+      "url": "https://volume.asf.surf/",
       "status": "ok",
       "http": 200
     },
@@ -353,6 +333,11 @@
     },
     {
       "url": "https://www.worldsurfleague.com/events",
+      "status": "ok",
+      "http": 200
+    },
+    {
+      "url": "https://yoga.asf.surf/",
       "status": "ok",
       "http": 200
     },
@@ -418,6 +403,12 @@
     },
     {
       "url": "/aprender/",
+      "status": "ok",
+      "http": 200,
+      "local": true
+    },
+    {
+      "url": "/calendario/",
       "status": "ok",
       "http": 200,
       "local": true
@@ -669,6 +660,12 @@
       "local": true
     },
     {
+      "url": "guias/pos-surf-e-aprendizado/",
+      "status": "ok",
+      "http": 200,
+      "local": true
+    },
+    {
       "url": "hospedagens/",
       "status": "ok",
       "http": 200,
@@ -753,12 +750,6 @@
       "local": true
     },
     {
-      "url": "mural/",
-      "status": "ok",
-      "http": 200,
-      "local": true
-    },
-    {
       "url": "newsletter/config.js",
       "status": "ok",
       "http": 200,
@@ -808,6 +799,12 @@
     },
     {
       "url": "quiz/",
+      "status": "ok",
+      "http": 200,
+      "local": true
+    },
+    {
+      "url": "recuperar-carteirinha.html",
       "status": "ok",
       "http": 200,
       "local": true
