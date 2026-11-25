@@ -3,10 +3,27 @@ on:
   schedule:
     - cron: '0 13 * * *'
   workflow_dispatch:
+  pull_request:
+    paths:
+      - '.github/workflows/ssl-cert-watch.yml'
+      - 'scripts/network_navigation.py'
+      - 'tests/test_network_navigation.py'
+      - 'emitir.html'
+      - 'asf-network.js'
 permissions:
   contents: read
 jobs:
+  navigation-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: python -B -m unittest discover -s tests -p 'test_network_navigation.py' -v
   ssl-watch:
+    if: github.event_name != 'pull_request'
+    needs: navigation-tests
     runs-on: ubuntu-latest
     timeout-minutes: 20
     steps:
@@ -17,6 +34,7 @@ jobs:
           python3 - <<'PY'
           import datetime, json, subprocess, sys
           from pathlib import Path
+          from scripts.network_navigation import navigation_error
 
           NAV = 'https://acarolmourad-commits.github.io/asf-app/asf-network.js'
           raw = Path('asf-network.js').read_text(encoding='utf-8')
@@ -57,9 +75,10 @@ jobs:
               global checked
               body, code, final, rc, err = fetch(url)
               if code == '200' and final.startswith('https://'):
-                  if require_nav and 'asf-network.js' not in body:
-                      failures.append(label+' sem navegação compartilhada')
-                      lines.append('FALHA '+label+': asf-network.js ausente')
+                  nav_error = navigation_error(url, final, body) if require_nav else None
+                  if nav_error:
+                      failures.append(label+' '+nav_error)
+                      lines.append('FALHA '+label+': '+nav_error)
                       return
                   checked += 1
                   lines.append('OK '+label+' '+final)
@@ -78,9 +97,9 @@ jobs:
           verify('Destaques da rede', 'https://asf.surf/destaques-rede.html', True)
           verify('Script global de navegação', NAV)
 
-          # Canonical active registry. Carteirinha is an anchor in the hub, not a satellite page.
+          # Satellites use the network script; card issuance has its own required links.
           for name, url in urls:
-              verify(name, url, require_nav=('#carteirinha' not in url))
+              verify(name, url, require_nav=True)
 
           # Legacy URLs are intentionally retained and must keep pointing to canonical destinations.
           legacy = [
