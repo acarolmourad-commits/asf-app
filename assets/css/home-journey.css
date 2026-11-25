@@ -10,6 +10,8 @@ body { padding-bottom: max(90px, env(safe-area-inset-bottom)); }
 .asf-journey-directory > p { line-height:1.7; max-width:70ch; color:#435b67; }
 .asf-journey-topic { border:1px solid #c9dde3; background:#fff; border-radius:18px; margin:14px 0; overflow:clip; }
 .asf-journey-topic > summary { padding:22px; font-size:19px; line-height:1.4; font-weight:700; cursor:pointer; min-height:56px; }
+.asf-community-link { margin: 8px 20px; }
+.asf-community-link a { display:inline-block; padding:12px 0; color:#07546b; font-weight:700; }
 .asf-journey-topic[open] > summary { border-bottom:1px solid #d7e6eb; background:#edf8fa; }
 .asf-journey-topic .asfv2-band { margin:0!important; border-radius:0; padding:16px 0!important; }
 .asf-topic-repeated-title, .asf-directory-nav, .asf-legacy-footer { display:none!important; }

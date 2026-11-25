@@ -690,7 +690,7 @@
         var box = document.createElement('div'); box.className = 'asfv2-stats';
         var heading = document.createElement('h2'); heading.textContent = '📊 Rede em números'; box.appendChild(heading);
         var description = document.createElement('p');
-        description.textContent = count + ' entradas do catálogo ASF, por categoria. O catálogo não comprova disponibilidade dos aplicativos.';
+        description.textContent = count + ' aplicativos no catálogo ASF, por categoria. O guia também inclui um atalho para a carteirinha.';
         box.appendChild(description);
         names.forEach(function (k) {
           var row = document.createElement('div'); row.className = 'asfv2-bar-row';

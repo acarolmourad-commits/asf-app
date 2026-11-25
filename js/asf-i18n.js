@@ -3,6 +3,46 @@
   'use strict';
   if (window.ASF_I18N) return;
   var EN = {
+    "Aprenda, evolua, encontre manas e descubra praias para surfar — do primeiro banho de mar ao free surf.": "Learn to surf, meet other women who surf and discover beaches, from your first dip to your next session.",
+    "O surf é ainda melhor": "Surfing is even better",
+    "juntas.": "together.",
+    "Explorar os aplicativos": "Explore the apps",
+    "Caminhos principais": "Ways to get started",
+    "Quero Surfar": "Go surfing",
+    "Quero Evoluir": "Build my skills",
+    "Quero Conhecer Manas": "Meet other surfers",
+    "Quero Explorar": "Plan a surf trip",
+    "Previsão, praias, marés, condições e segurança.": "Forecasts, beaches, tides, conditions and safety.",
+    "Técnica, treino, yoga, nutrição e bem-estar.": "Technique, training, yoga, nutrition and wellbeing.",
+    "Comunidade, diário, eventos e conquistas.": "Community, surf journal, events and achievements.",
+    "Surf trips, hospedagens, cultura e destinos.": "Surf trips, places to stay, culture and destinations.",
+    "Nossa História — com fotos reais da ASF": "Our story in photos",
+    "Conheça a trajetória da ASF e reviva a jornada das manas →": "Meet the women behind ASF and explore our history →",
+    "Explore no seu ritmo": "Explore at your own pace",
+    "Abra um tema para encontrar os conteúdos e ferramentas. Seus registros e aplicativos continuam disponíveis.": "Choose a topic to find guides and tools. You can still access your saved records and apps.",
+    "Comunidade & Eventos": "Community & events",
+    "Parceiros & Rede": "Partners & network",
+    "Explorar & Praias": "Explore beaches",
+    "Corpo & Mente": "Body & mind",
+    "Meu Surf": "My surfing",
+    "Buscar conteúdos, ferramentas e serviços da ASF": "Search ASF guides, tools and services",
+    "Pular para o conteúdo principal": "Skip to main content",
+    "Pular para o conteúdo": "Skip to content",
+    "Voluntariado no Instituto ParaSurf": "Volunteer with Instituto ParaSurf",
+    "Emitir carteirinha de associada": "Get a membership card",
+    "Carteirinha salva neste dispositivo": "Card saved on this device",
+    "Recuperar minha carteirinha": "Recover my membership card",
+    "Para usar benefícios, apresente a carteirinha com registro ASF válido. Se já tem cadastro, recupere a sua pelo e-mail usado na emissão.": "To use partner benefits, show a valid registered ASF card. If you are already registered, recover your card with the email used to sign up.",
+    "Cadastre-se com seu e-mail para usar os benefícios da ASF.": "Register with your email to access ASF partner benefits.",
+    "Explorar o guia completo de aplicativos →": "Browse the full app guide →",
+    "Rede em números": "Network in numbers",
+    "Início": "Home",
+    "Previsão": "Forecast",
+    "Mural": "Community board",
+    "Diário": "Journal",
+    "Voltar ao app": "Back to the app",
+    "Navegação principal": "Main navigation",
+    "Navegação principal ASF": "ASF navigation",
     'Dicas':'Tips','Mobilidade':'Mobility','Lojas':'Shops','Praias':'Beaches','Metas':'Goals','Cultura':'Culture','Ondas':'Waves','Desafios':'Challenges','Perfil':'Profile','Surftrips':'Surf trips','Utilitários':'Tools','Comunidade':'Community','Sessões':'Sessions','Competições':'Competitions','Destaques':'Highlights','Guias':'Guides','Assistente':'Assistant','Conteúdo':'Content','Carteirinha':'Membership card','Segurança':'Safety',
     'Menu principal':'Main menu','Abrir menu':'Open menu','Fechar menu':'Close menu','Idioma':'Language','Português':'Português','English':'English','Enviar':'Send','Publicar':'Publish','Responder':'Reply','Editar':'Edit','Compartilhar':'Share','Salvar':'Save','Fechar':'Close','Voltar':'Back','Cancelar':'Cancel','Confirmar':'Confirm','Atualizar':'Refresh','Buscar':'Search','Limpar busca':'Clear search','Pesquisar':'Search','Copiar Link':'Copy link','Copiar Código':'Copy code','Aceitar Tudo':'Accept all','Essenciais':'Essential only','Seu nome':'Your name','Seu e-mail':'Your email','Digite seu e-mail':'Enter your email','Buscar dicas, lojas, treinos...':'Search tips, shops, workouts...',
     'Surf Mais Juntas, Mais Fortes':'Surf More Together, Stronger Together','Conectando Mulheres Surfistas':'Connecting Women Surfers','Começar agora':'Get started','Explorar a ASF':'Explore ASF','Por onde você quer começar?':'Where would you like to start?','Comece sua jornada':'Start your journey','A Rede ASF':'The ASF Network','Uma rede, três formas de começar':'One network, three ways to start','Antes de entrar no mar':'Before entering the water','Evolua no seu ritmo':'Progress at your own pace','Explore com a comunidade':'Explore with the community','Aprenda e Evolua':'Learn and Progress','Bem-vinda ao ASF!':'Welcome to ASF!','Começar':'Start','Explorar Depois':'Explore later',
@@ -12,7 +52,8 @@
     'Guia Completo: Como Fazer o Cutback Perfeito':'Complete Guide: How to Do the Perfect Cutback','Aprender no ASF Manobras →':'Learn in ASF Manobras →','Mental de Competidora: Técnicas de Visualização':'Competition Mindset: Visualization Techniques','Plano de Treino: 30 Dias para Surfar Melhor':'Training Plan: 30 Days to Surf Better','Compartilhar ASF':'Share ASF','Cadastro de Parceiros':'Partner Registration','Parceiros & Benefícios ASF':'ASF Partners & Benefits','Seja um Parceiro ASF!':'Become an ASF Partner!','Destaques ASF':'ASF Highlights','Receba a Dica do Dia':'Get the Tip of the Day','Inscrever':'Subscribe','Fale com a ASF':'Contact ASF','Chamar no WhatsApp':'Contact us on WhatsApp','Divulgue a ASF!':'Share ASF!','Indique & Ganhe':'Refer & Earn','Indique e Ganhe!':'Refer and Earn!','Histórias do Surf':'Surf Stories','Metas de Surf':'Surf Goals','Segurança no Surf':'Surf Safety','Assistente Virtual ASF':'ASF Virtual Assistant','Conteúdo ASF':'ASF Content','Todas':'All','Técnica':'Technique','Mental':'Mindset','Nutrição':'Nutrition','Sustentabilidade':'Sustainability','Treino':'Training','Bem-estar':'Wellbeing','Carteirinha ASF':'ASF Membership Card','Sobre a ASF':'About ASF','Política de Privacidade':'Privacy Policy','Termos de Uso':'Terms of Use','Contato':'Contact',
     'Dica do Dia':'Tip of the Day','Modo Noturno':'Dark Mode','Notificações':'Notifications','Carrinho':'Cart','Apoie o App':'Support the App','Configurações':'Settings','Nível':'Level','pontos':'points','Aulas':'Lessons','Diário de Bordo':'Logbook','Ler mais':'Read more','Curtir':'Like','Comentário':'Comment','Remover':'Remove','Abrir':'Open','Sim':'Yes','Não':'No'
   };
-  var SKIP = 'script,style,noscript,textarea,input,select,[contenteditable], [data-i18n-skip],#asf-language-control,#user-posts,#chatbot-messages,#chatbot-messages-asf,#surfer-profile-content';
+  Object.assign(EN, window.ASF_ENTRY_EN || {});
+  var SKIP = 'script,style,noscript,textarea,input,select:not([data-translate-options]),[contenteditable], [data-i18n-skip],#asf-language-control,#user-posts,#chatbot-messages,#chatbot-messages-asf,#surfer-profile-content';
   var originals = new WeakMap(), attrs = new WeakMap(), observer, queued = false, mounted = false;
   function saved() { try { return localStorage.getItem('asf-language') || localStorage.getItem('asf-lang'); } catch (_) { return null; } }
   var lang = saved() === 'en' ? 'en' : 'pt-BR';
@@ -61,6 +102,10 @@
     if (observer) observer.disconnect();
     scan(document.body);
     document.documentElement.lang=lang;
+    document.querySelectorAll('a[data-en-href]').forEach(function (link) {
+      if (!link.dataset.ptHref) link.dataset.ptHref = link.getAttribute('href');
+      link.setAttribute('href', lang === 'en' ? link.dataset.enHref : link.dataset.ptHref);
+    });
     document.querySelectorAll('[data-asf-lang]').forEach(function(button){button.setAttribute('aria-pressed',button.dataset.asfLang===lang?'true':'false');});
     document.querySelectorAll('button[onclick^="setLanguage"]').forEach(function(button){
       var code=(button.getAttribute('onclick').match(/setLanguage\(['"](\w+)/)||[])[1];

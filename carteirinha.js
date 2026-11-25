@@ -374,11 +374,19 @@ const ASF_CARD = {
   },
 
   renderForm(el, p) {
+    let pendingRegistration = false;
     try {
       const pending = JSON.parse(sessionStorage.getItem('asf_card_pending_registration') || 'null');
-      if (pending && Date.now() - Number(pending.createdAt || 0) < 15 * 60 * 1000) p = Object.assign({}, p || {}, pending);
+      if (pending && Date.now() - Number(pending.createdAt || 0) < 15 * 60 * 1000) {
+        pendingRegistration = true;
+        p = Object.assign({}, p || {}, pending);
+      }
       else if (pending) sessionStorage.removeItem('asf_card_pending_registration');
     } catch (e) {}
+    if (el.hasAttribute('data-saved-card-view') && !(p && p.numero) && !pendingRegistration) {
+      el.textContent = 'Nenhuma carteirinha salva neste navegador.';
+      return;
+    }
     p = p || {};
     const field = (id, label, max, val) => '<label for="'+id+'">'+label+'</label><input id="'+id+'" maxlength="'+max+'" value="'+this.escape(val)+'">';
     el.innerHTML = '<div style="max-width:480px;margin:0 auto"><div class="card">' +

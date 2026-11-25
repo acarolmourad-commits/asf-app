@@ -41,7 +41,7 @@ def gen_network_js(apps):
         src = f.read()
     entries = [json.dumps({"u": a["url"], "n": a["name"]}, ensure_ascii=False) for a in apps]
     if not any(a.get("slug") == "asf-clube" for a in apps):
-        entries.append(json.dumps({"u": "https://asf.surf/#carteirinha", "n": "💳 ASF Clube → Carteirinha"}, ensure_ascii=False))
+        entries.append(json.dumps({"u": "https://asf.surf/emitir.html", "n": "💳 ASF Clube → Carteirinha"}, ensure_ascii=False))
     entries = ", ".join(entries)
     new, n = re.subn(r"var APPS=\[.*?\];", "var APPS=[%s];" % entries, src, flags=re.S)
     if n != 1:
@@ -146,7 +146,7 @@ def validate(reg):
     consolidated = {"asf-previsao", "asf-mare", "asf-vento", "asf-swell", "asf-clube"}
     forecast = "https://previsao.asf.surf/"
     legacy_forecast = BASE + "/asf-previsao/"
-    carteirinha = "https://asf.surf/#carteirinha"
+    carteirinha = "https://asf.surf/emitir.html"
     guide = reg["hub"].rstrip("/") + "/guia-apps.html"
 
     for path in VALIDATE_ONLY + [NETWORK_JS, SATELLITES_HTML, APPS_INDEX_HTML]:
@@ -158,7 +158,7 @@ def validate(reg):
             continue
         if path == NETWORK_JS:
             missing = [a["url"] for a in apps if a["url"] not in content]
-            if "https://asf.surf/#carteirinha" not in content:
+            if "https://asf.surf/emitir.html" not in content:
                 print("ERRO: experiencia Carteirinha ausente em", NETWORK_JS)
                 ok = False
         else:

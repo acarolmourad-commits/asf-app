@@ -54,7 +54,7 @@
     <form id="trip-form">
       <p class="planner-note" id="ajuda-distancia">Os destinos trazem exemplos de quilometragem total. Para calcular seu trajeto, escolha a distância personalizada e some a ida e a volta.</p>
       <label for="fDest">Destino ou distância personalizada</label>
-      <select id="fDest" aria-describedby="ajuda-distancia">
+      <select data-translate-options id="fDest" aria-describedby="ajuda-distancia">
         <option value="160">Maresias / São Sebastião · exemplo de 160 km no total</option>
         <option id="destino-ubatuba" value="220">Ubatuba · exemplo de 220 km no total</option>
         <option value="180">Ilhabela · exemplo de 180 km no total</option>
@@ -209,7 +209,9 @@ function updateProgress() {
   progress.max = boxes.length;
   progress.value = count;
   progress.hidden = false;
-  document.getElementById('pct').textContent = count + ' de ' + boxes.length + ' itens conferidos';
+  document.getElementById('pct').textContent = document.documentElement.lang === 'en'
+    ? count + ' of ' + boxes.length + ' items checked'
+    : count + ' de ' + boxes.length + ' itens conferidos';
 }
 
 function readChecklist() {
@@ -253,7 +255,11 @@ window.addEventListener('storage', event => {
   if (event.key === checklistKey || event.key === null) restoreChecklist();
 });
 restoreChecklist();
+window.addEventListener('asf:languagechange', updateProgress);
+document.addEventListener('DOMContentLoaded', updateProgress);
 </script>
     <script src="/asf-app/asf-redesign.js" defer></script>
+<script defer src="../js/entry-translations.js"></script>
+<script defer src="../js/asf-i18n.js?v=2"></script>
 </body>
 </html>
