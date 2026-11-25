@@ -42,6 +42,13 @@ header p{opacity:.95;margin-top:8px;max-width:640px;margin-left:auto;margin-righ
 .app span{font-size:12.5px;color:var(--g)}
 .hero-card{background:#fff;border-radius:16px;padding:20px;box-shadow:0 2px 12px rgba(14,36,57,.08);margin-bottom:8px}
 .busca{width:100%;padding:14px 18px;font-size:16px;border:2px solid var(--p);border-radius:14px;margin:6px 0 4px}
+#buscar-apps{scroll-margin-top:90px}
+#buscar-apps label{display:block;font-weight:700;margin-top:10px}
+#buscar-apps button{font:inherit;cursor:pointer;min-height:44px;padding:8px 12px;border:1px solid var(--g);border-radius:10px;background:#fff;color:var(--d)}
+#buscar-apps button[aria-pressed="true"]{background:var(--d);color:#fff;border-color:var(--d)}
+#buscar-apps button:focus-visible,.busca:focus-visible{outline:3px solid var(--u);outline-offset:3px}
+#sem-resultados{margin-top:12px;padding:12px;border-left:4px solid var(--u);background:var(--bg)}
+#buscar-apps [hidden]{display:none!important}
 details{margin:.5rem 0;border:1px solid #E5EEF2;border-radius:10px;padding:.7rem 1rem;background:#fff}
 summary{cursor:pointer;font-weight:700;color:var(--u)}
 footer{text-align:center;font-size:12.5px;color:var(--g);padding:24px;border-top:1px solid #E5EEF2}
@@ -68,11 +75,18 @@ footer{text-align:center;font-size:12.5px;color:var(--g);padding:24px;border-top
 <p>Comece pelo <a href="parcerias/#parceiros">catálogo de parcerias ativas</a> para escolher uma experiência e consultar as condições com a parceira. Se precisar comprovar seu vínculo, <a href="emitir.html">emita sua carteirinha ASF</a>. No dia de surfar, <a href="previsao-surf/">consulte a previsão do local</a>.</p>
 </section>
 
-<div class="hero-card">
-<h2 style="font-size:17px;margin-bottom:6px">🔍 Buscar app</h2>
-<input class="busca" id="busca" type="search" placeholder="Digite: previsão, yoga, segurança, quiz…" oninput="filtra(this.value)">
-<p style="font-size:12.5px;color:var(--g)">49 aplicativos e um atalho para a carteirinha. Resultados nesta seleção: <span id="cont" aria-live="polite">50</span>.</p>
-</div>
+<section class="hero-card" id="buscar-apps" aria-labelledby="titulo-busca">
+<h2 id="titulo-busca" style="font-size:17px;margin-bottom:6px">🔍 Encontre seu próximo app</h2>
+<p>Procure pelo nome ou por uma atividade. Os filtros de categoria e o texto da busca funcionam juntos.</p>
+<label for="busca">Nome ou atividade</label>
+<input class="busca" id="busca" type="search" placeholder="Ex.: previsão, yoga, segurança, quiz…" aria-describedby="ajuda-busca" oninput="filtra(this.value)">
+<p id="ajuda-busca" style="font-size:12.5px;color:var(--g)">A busca aceita palavras com ou sem acento. Escolha uma categoria para refinar a seleção.</p>
+<p style="font-size:12.5px;color:var(--g)" aria-live="polite" aria-atomic="true">49 aplicativos e um atalho para a carteirinha. Resultados nesta seleção: <span id="cont">50</span>.</p>
+<div id="chips-cat" role="group" aria-label="Filtrar aplicativos por categoria" style="display:flex;flex-wrap:wrap;gap:6px;margin-top:10px"></div>
+<p id="sem-resultados" hidden>Nenhum aplicativo corresponde a esta combinação. Tente uma palavra mais curta ou limpe a busca e a categoria para ver o catálogo completo.</p>
+<button type="button" id="limpar-busca" hidden style="margin-top:12px">Limpar busca e categoria</button>
+<p style="margin-top:14px">Prefere começar por um roteiro? Explore <a href="aprender/como-comecar-a-surfar-mulheres.html">a primeira aula de surf</a> ou <a href="guias/pos-surf-e-aprendizado/#rever-sessao">o aprendizado depois da sessão</a>.</p>
+</section>
 
 <div class="cat" data-cat>
 <h2>🌊 Mar & Condições</h2>
@@ -210,8 +224,10 @@ footer{text-align:center;font-size:12.5px;color:var(--g);padding:24px;border-top
   const cats=Array.from(document.querySelectorAll('.cat[data-cat]'));
   const input=document.getElementById('busca');
   const count=document.getElementById('cont');
-  const hero=document.querySelector('.hero-card');
-  if(!cats.length||!hero)return;
+  const bar=document.getElementById('chips-cat');
+  const empty=document.getElementById('sem-resultados');
+  const clear=document.getElementById('limpar-busca');
+  if(!cats.length||!bar)return;
   let selected=null;
   const normalize=value=>value.normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().trim();
   function apply(query){
@@ -225,11 +241,11 @@ footer{text-align:center;font-size:12.5px;color:var(--g);padding:24px;border-top
       cat.style.display=matches?'':'none';visible+=matches;
     });
     if(count)count.textContent=String(visible);
+    if(empty)empty.hidden=visible!==0;
+    if(clear)clear.hidden=!q&&!selected;
   }
   window.filtra=apply;
   window.addEventListener('asf:languagechange', () => apply(input ? input.value : ''));
-  const bar=document.createElement('div');bar.id='chips-cat';
-  bar.style.cssText='display:flex;flex-wrap:wrap;gap:6px;margin-top:10px';
   function chip(label,category){
     const button=document.createElement('button');button.type='button';button.className='chip';button.textContent=label;
     button.setAttribute('aria-pressed',category===null?'true':'false');
@@ -242,10 +258,20 @@ footer{text-align:center;font-size:12.5px;color:var(--g);padding:24px;border-top
   }
   bar.appendChild(chip('Todas',null));
   cats.forEach(cat=>{const heading=cat.querySelector('h2');if(heading)bar.appendChild(chip(heading.textContent.trim(),cat));});
-  hero.appendChild(bar);apply(input?input.value:'');
+  if(clear)clear.addEventListener('click',()=>{
+    selected=null;
+    if(input)input.value='';
+    bar.querySelectorAll('.chip').forEach((button,index)=>{
+      button.classList.toggle('ativo',index===0);
+      button.setAttribute('aria-pressed',String(index===0));
+    });
+    apply('');
+    if(input)input.focus();
+  });
+  apply(input?input.value:'');
 })();
 </script>
-<script defer src="js/entry-translations.js?v=4201c711d5"></script>
+<script defer src="js/entry-translations.js?v=09f14cc7db"></script>
 <script defer src="js/asf-i18n.js?v=6afd38bf47"></script>
 </body>
 </html>
