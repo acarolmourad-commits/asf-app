@@ -441,7 +441,7 @@
     { icon: '📸', title: 'Galeria das Manas', desc: 'Mural colaborativo de fotos e stokes da comunidade', href: 'https://galeria.asf.surf/', kw: 'galeria mural fotos stokes manas comunidade posts' },
     { icon: '🧠', title: 'Quiz de Surf', desc: 'Teste seus conhecimentos e ganhe pontos', href: 'quiz/', kw: 'quiz perguntas conhecimento pontos desafio' },
     { icon: '🚗', title: 'Surftrips', desc: 'Planeje viagens de surf com as manas', href: 'surf-trip/', kw: 'viagem trip surftrip roteiro estrada' },
-    { icon: '📖', title: 'Glossário do Surf', desc: 'Dicionário com 30 termos de surf explicados', href: 'https://acarolmourad-commits.github.io/asf-glossario/', kw: 'glossario dicionario termos significado palavras' },
+    { icon: '📖', title: 'Glossário do Surf', desc: 'Dicionário com 30 termos de surf explicados', href: 'https://glossario.asf.surf/', kw: 'glossario dicionario termos significado palavras' },
     { icon: '💬', title: 'Sessões Interativas', desc: 'Conversas e atividades guiadas da comunidade', href: 'sessoes-interativas.html', kw: 'sessoes interativas chat atividades' },
     { icon: '🏄‍♀️', title: 'Prancha Ideal', desc: 'Descubra o tamanho e tipo de prancha para você', href: 'prancha-ideal/', kw: 'prancha tamanho volume iniciante board' },
     { icon: '🎓', title: 'Guias e Aprendizado', desc: 'Tutoriais e guias para evoluir no surf', href: 'aprender/', kw: 'aprender guias tutoriais aulas como surfar' },

@@ -1,12 +1,12 @@
 {
   "hub": "https://asf.surf/",
   "version": 2,
-  "updated": "2026-11-15",
+  "updated": "2026-11-25",
   "apps": [
     {
       "slug": "asf-previsao",
       "name": "🌊 ASF Previsão",
-      "url": "https://acarolmourad-commits.github.io/asf-previsao/",
+      "url": "https://previsao.asf.surf/",
       "icon": "🌊",
       "title": "ASF Previsão",
       "category": "🌊 Mar & Condições",
@@ -18,7 +18,7 @@
     {
       "slug": "asf-praias",
       "name": "🏖️ ASF Praias",
-      "url": "https://acarolmourad-commits.github.io/asf-praias/",
+      "url": "https://praias.asf.surf/",
       "icon": "🏖️",
       "title": "ASF Praias",
       "category": "🌊 Mar & Condições",
@@ -30,7 +30,7 @@
     {
       "slug": "asf-mapa",
       "name": "🗺️ ASF Mapa",
-      "url": "https://acarolmourad-commits.github.io/asf-mapa/",
+      "url": "https://mapa.asf.surf/",
       "icon": "🗺️",
       "title": "ASF Mapa",
       "category": "🌊 Mar & Condições",
@@ -42,7 +42,7 @@
     {
       "slug": "asf-atlas",
       "name": "🧭 ASF Atlas",
-      "url": "https://acarolmourad-commits.github.io/asf-atlas/",
+      "url": "https://atlas.asf.surf/",
       "icon": "🧭",
       "title": "ASF Atlas",
       "category": "🌊 Mar & Condições",
@@ -54,7 +54,7 @@
     {
       "slug": "asf-alerta",
       "name": "🚨 ASF Alerta",
-      "url": "https://acarolmourad-commits.github.io/asf-alerta/",
+      "url": "https://alerta.asf.surf/",
       "icon": "🚨",
       "title": "ASF Alerta",
       "category": "🌊 Mar & Condições",
@@ -66,7 +66,7 @@
     {
       "slug": "asf-ponto",
       "name": "📍 ASF Ponto",
-      "url": "https://acarolmourad-commits.github.io/asf-ponto/",
+      "url": "https://ponto.asf.surf/",
       "icon": "📍",
       "title": "ASF Ponto",
       "category": "🌊 Mar & Condições",
@@ -78,7 +78,7 @@
     {
       "slug": "asf-leitura",
       "name": "👁️ ASF Leitura de Mar",
-      "url": "https://acarolmourad-commits.github.io/asf-leitura/",
+      "url": "https://leitura.asf.surf/",
       "icon": "👁️",
       "title": "ASF Leitura de Mar",
       "category": "🌊 Mar & Condições",
@@ -90,7 +90,7 @@
     {
       "slug": "asf-goldenhour",
       "name": "🌅 ASF Golden Hour",
-      "url": "https://acarolmourad-commits.github.io/asf-goldenhour/",
+      "url": "https://goldenhour.asf.surf/",
       "icon": "🌅",
       "title": "ASF Golden Hour",
       "category": "🌊 Mar & Condições",
@@ -114,7 +114,7 @@
     {
       "slug": "asf-manobras",
       "name": "⚡ ASF Manobras",
-      "url": "https://acarolmourad-commits.github.io/asf-manobras/",
+      "url": "https://manobras.asf.surf/",
       "icon": "⚡",
       "title": "ASF Manobras",
       "category": "🏄‍♀️ Performance & Treino",
@@ -126,7 +126,7 @@
     {
       "slug": "asf-popup",
       "name": "⏱️ ASF Pop-up",
-      "url": "https://acarolmourad-commits.github.io/asf-popup/",
+      "url": "https://popup.asf.surf/",
       "icon": "⏱️",
       "title": "ASF Pop-up",
       "category": "🏄‍♀️ Performance & Treino",
@@ -162,7 +162,7 @@
     {
       "slug": "asf-yoga",
       "name": "🧘 ASF Yoga",
-      "url": "https://acarolmourad-commits.github.io/asf-yoga/",
+      "url": "https://yoga.asf.surf/",
       "icon": "🧘",
       "title": "ASF Yoga",
       "category": "🏄‍♀️ Performance & Treino",
@@ -174,7 +174,7 @@
     {
       "slug": "asf-volume",
       "name": "🏄 ASF Volume",
-      "url": "https://acarolmourad-commits.github.io/asf-volume/",
+      "url": "https://volume.asf.surf/",
       "icon": "🏄",
       "title": "ASF Volume",
       "category": "🏄‍♀️ Performance & Treino",
@@ -186,7 +186,7 @@
     {
       "slug": "asf-comunidade",
       "name": "💬 ASF Comunidade",
-      "url": "https://acarolmourad-commits.github.io/asf-comunidade/",
+      "url": "https://comunidade.asf.surf/",
       "icon": "💬",
       "title": "ASF Comunidade",
       "category": "💜 Vida & Comunidade",
@@ -198,7 +198,7 @@
     {
       "slug": "asf-parceiras",
       "name": "🤝 ASF Parceiras",
-      "url": "https://acarolmourad-commits.github.io/asf-parceiras/",
+      "url": "https://parceiras.asf.surf/",
       "icon": "🤝",
       "title": "ASF Parceiras",
       "category": "💜 Vida & Comunidade",
@@ -210,7 +210,7 @@
     {
       "slug": "asf-mentorias",
       "name": "🎓 ASF Mentorias",
-      "url": "https://acarolmourad-commits.github.io/asf-mentorias/",
+      "url": "https://mentorias.asf.surf/",
       "icon": "🎓",
       "title": "ASF Mentorias",
       "category": "💜 Vida & Comunidade",
@@ -222,7 +222,7 @@
     {
       "slug": "asf-carona",
       "name": "🛖 ASF Carona",
-      "url": "https://acarolmourad-commits.github.io/asf-carona/",
+      "url": "https://carona.asf.surf/",
       "icon": "🛖",
       "title": "ASF Carona",
       "category": "💜 Vida & Comunidade",
@@ -246,7 +246,7 @@
     {
       "slug": "asf-mercado",
       "name": "🛒 ASF Mercado",
-      "url": "https://acarolmourad-commits.github.io/asf-mercado/",
+      "url": "https://mercado.asf.surf/",
       "icon": "🛒",
       "title": "ASF Mercado",
       "category": "💜 Vida & Comunidade",
@@ -258,7 +258,7 @@
     {
       "slug": "asf-eco",
       "name": "🌱 ASF Eco",
-      "url": "https://acarolmourad-commits.github.io/asf-eco/",
+      "url": "https://eco.asf.surf/",
       "icon": "🌱",
       "title": "ASF Eco",
       "category": "💜 Vida & Comunidade",
@@ -270,7 +270,7 @@
     {
       "slug": "asf-viagens",
       "name": "✈️ ASF Viagens",
-      "url": "https://acarolmourad-commits.github.io/asf-viagens/",
+      "url": "https://viagens.asf.surf/",
       "icon": "✈️",
       "title": "ASF Viagens",
       "category": "💜 Vida & Comunidade",
@@ -282,7 +282,7 @@
     {
       "slug": "asf-patrocinio",
       "name": "💛 ASF Patrocínio",
-      "url": "https://acarolmourad-commits.github.io/asf-patrocinio/",
+      "url": "https://patrocinio.asf.surf/",
       "icon": "💛",
       "title": "ASF Patrocínio",
       "category": "💜 Vida & Comunidade",
@@ -294,7 +294,7 @@
     {
       "slug": "asf-glossario",
       "name": "📖 ASF Glossário",
-      "url": "https://acarolmourad-commits.github.io/asf-glossario/",
+      "url": "https://glossario.asf.surf/",
       "icon": "📖",
       "title": "ASF Glossário",
       "category": "🏆 Aprendizado & Jogos",
@@ -306,7 +306,7 @@
     {
       "slug": "asf-historia",
       "name": "📜 ASF História",
-      "url": "https://acarolmourad-commits.github.io/asf-historia/",
+      "url": "https://historia.asf.surf/",
       "icon": "📜",
       "title": "ASF História",
       "category": "🏆 Aprendizado & Jogos",
@@ -318,7 +318,7 @@
     {
       "slug": "asf-kids",
       "name": "🧒 ASF Kids",
-      "url": "https://acarolmourad-commits.github.io/asf-kids/",
+      "url": "https://kids.asf.surf/",
       "icon": "🧒",
       "title": "ASF Kids",
       "category": "🏆 Aprendizado & Jogos",
@@ -330,7 +330,7 @@
     {
       "slug": "asf-checklist",
       "name": "✅ ASF Checklist",
-      "url": "https://acarolmourad-commits.github.io/asf-checklist/",
+      "url": "https://checklist.asf.surf/",
       "icon": "✅",
       "title": "ASF Checklist",
       "category": "🏆 Aprendizado & Jogos",
@@ -342,7 +342,7 @@
     {
       "slug": "asf-quiz",
       "name": "🧠 ASF Quiz",
-      "url": "https://acarolmourad-commits.github.io/asf-quiz/",
+      "url": "https://quiz.asf.surf/",
       "icon": "🧠",
       "title": "ASF Quiz",
       "category": "🏆 Aprendizado & Jogos",
@@ -354,7 +354,7 @@
     {
       "slug": "asf-ranking",
       "name": "🏆 ASF Ranking",
-      "url": "https://acarolmourad-commits.github.io/asf-ranking/",
+      "url": "https://ranking.asf.surf/",
       "icon": "🏆",
       "title": "ASF Ranking",
       "category": "🏆 Aprendizado & Jogos",
@@ -366,7 +366,7 @@
     {
       "slug": "asf-desafio",
       "name": "🗓️ ASF Desafio 30",
-      "url": "https://acarolmourad-commits.github.io/asf-desafio/",
+      "url": "https://desafio.asf.surf/",
       "icon": "🗓️",
       "title": "ASF Desafio 30",
       "category": "🏆 Aprendizado & Jogos",
@@ -378,7 +378,7 @@
     {
       "slug": "asf-memoria",
       "name": "🏏 ASF Memória",
-      "url": "https://acarolmourad-commits.github.io/asf-memoria/",
+      "url": "https://memoria.asf.surf/",
       "icon": "🏏",
       "title": "ASF Memória",
       "category": "🏆 Aprendizado & Jogos",
@@ -390,7 +390,7 @@
     {
       "slug": "asf-diario",
       "name": "📓 ASF Diário",
-      "url": "https://acarolmourad-commits.github.io/asf-diario/",
+      "url": "https://diario.asf.surf/",
       "icon": "📓",
       "title": "ASF Diário",
       "category": "🏆 Aprendizado & Jogos",
@@ -402,7 +402,7 @@
     {
       "slug": "asf-mala",
       "name": "🎒 ASF Mala",
-      "url": "https://acarolmourad-commits.github.io/asf-mala/",
+      "url": "https://mala.asf.surf/",
       "icon": "🎒",
       "title": "ASF Mala",
       "category": "🏆 Aprendizado & Jogos",
@@ -414,7 +414,7 @@
     {
       "slug": "asf-seguranca",
       "name": "🛟 ASF Segurança",
-      "url": "https://acarolmourad-commits.github.io/asf-seguranca/",
+      "url": "https://seguranca.asf.surf/",
       "icon": "🛟",
       "title": "ASF Segurança",
       "category": "🛟 Saúde & Segurança",
@@ -438,7 +438,7 @@
     {
       "slug": "asf-sono",
       "name": "😴 ASF Sono",
-      "url": "https://acarolmourad-commits.github.io/asf-sono/",
+      "url": "https://sono.asf.surf/",
       "icon": "😴",
       "title": "ASF Sono",
       "category": "🛟 Saúde & Segurança",
@@ -450,7 +450,7 @@
     {
       "slug": "asf-bemestar",
       "name": "💖 ASF Bem-Estar",
-      "url": "https://acarolmourad-commits.github.io/asf-bemestar/",
+      "url": "https://bemestar.asf.surf/",
       "icon": "💖",
       "title": "ASF Bem-Estar",
       "category": "🛟 Saúde & Segurança",
@@ -462,7 +462,7 @@
     {
       "slug": "asf-mental",
       "name": "🧠 ASF Mental",
-      "url": "https://acarolmourad-commits.github.io/asf-mental/",
+      "url": "https://mental.asf.surf/",
       "icon": "🧠",
       "title": "ASF Mental",
       "category": "🛟 Saúde & Segurança",
@@ -474,7 +474,7 @@
     {
       "slug": "asf-nutricao",
       "name": "🥗 ASF Nutrição",
-      "url": "https://acarolmourad-commits.github.io/asf-nutricao/",
+      "url": "https://nutricao.asf.surf/",
       "icon": "🥗",
       "title": "ASF Nutrição",
       "category": "🛟 Saúde & Segurança",
@@ -486,7 +486,7 @@
     {
       "slug": "asf-equipamento",
       "name": "🏄‍♀️ ASF Equipamento",
-      "url": "https://acarolmourad-commits.github.io/asf-equipamento/",
+      "url": "https://equipamento.asf.surf/",
       "icon": "🏄‍♀️",
       "title": "ASF Equipamento",
       "category": "🛟 Saúde & Segurança",
@@ -498,7 +498,7 @@
     {
       "slug": "asf-desafios",
       "name": "🎯 ASF Desafios",
-      "url": "https://acarolmourad-commits.github.io/asf-desafios/",
+      "url": "https://desafios.asf.surf/",
       "icon": "🎯",
       "title": "ASF Desafios",
       "category": "🎨 Cultura & Utilidades",
@@ -510,7 +510,7 @@
     {
       "slug": "asf-filmes",
       "name": "🎬 ASF Filmes",
-      "url": "https://acarolmourad-commits.github.io/asf-filmes/",
+      "url": "https://filmes.asf.surf/",
       "icon": "🎬",
       "title": "ASF Filmes",
       "category": "🎨 Cultura & Utilidades",
@@ -522,7 +522,7 @@
     {
       "slug": "asf-podcast",
       "name": "🎧 ASF Podcast",
-      "url": "https://acarolmourad-commits.github.io/asf-podcast/",
+      "url": "https://podcast.asf.surf/",
       "icon": "🎧",
       "title": "ASF Podcast",
       "category": "🎨 Cultura & Utilidades",
@@ -534,7 +534,7 @@
     {
       "slug": "asf-inspiracao",
       "name": "✨ ASF Inspiração",
-      "url": "https://acarolmourad-commits.github.io/asf-inspiracao/",
+      "url": "https://inspiracao.asf.surf/",
       "icon": "✨",
       "title": "ASF Inspiração",
       "category": "🎨 Cultura & Utilidades",
@@ -546,7 +546,7 @@
     {
       "slug": "asf-sonhos",
       "name": "🌠 ASF Sonhos",
-      "url": "https://acarolmourad-commits.github.io/asf-sonhos/",
+      "url": "https://sonhos.asf.surf/",
       "icon": "🌠",
       "title": "ASF Sonhos",
       "category": "🎨 Cultura & Utilidades",
@@ -558,7 +558,7 @@
     {
       "slug": "asf-achados",
       "name": "🔍 ASF Achados",
-      "url": "https://acarolmourad-commits.github.io/asf-achados/",
+      "url": "https://achados.asf.surf/",
       "icon": "🔍",
       "title": "ASF Achados",
       "category": "🎨 Cultura & Utilidades",
@@ -570,7 +570,7 @@
     {
       "slug": "asf-matematica",
       "name": "🔢 ASF Matemática",
-      "url": "https://acarolmourad-commits.github.io/asf-matematica/",
+      "url": "https://matematica.asf.surf/",
       "icon": "🔢",
       "title": "ASF Matemática",
       "category": "🏄‍♀️ Performance & Treino",
@@ -582,7 +582,7 @@
     {
       "slug": "asf-tempo",
       "name": "⛅ ASF Tempo",
-      "url": "https://acarolmourad-commits.github.io/asf-tempo/",
+      "url": "https://tempo.asf.surf/",
       "icon": "⛅",
       "title": "ASF Tempo",
       "category": "🌊 Mar & Condições",

@@ -44,8 +44,8 @@ footer a{color:var(--p);font-weight:700}
 <nav>
 <a href="https://acarolmourad-commits.github.io/asf-app/">ASF App</a>
 <a href="https://acarolmourad-commits.github.io/asf-app/guia-apps.html">🗺️ Guia de Apps</a>
-<a href="https://acarolmourad-commits.github.io/asf-quiz/">🧠 Quiz Diário</a>
-<a href="https://acarolmourad-commits.github.io/asf-ranking/">🏆 Ranking</a>
+<a href="https://quiz.asf.surf/">🧠 Quiz Diário</a>
+<a href="https://ranking.asf.surf/">🏆 Ranking</a>
 </nav>
 <header>
 <h1>🧠 ASF Quiz — Trilha de Conhecimento</h1>
@@ -188,12 +188,12 @@ function finish(){
     + (total>=10 ? '🏄 Conquista <b>Surfista Completa</b> desbloqueada na home!<br>'
       : total>=5 ? '📚 Conquista <b>Estudiosa</b> desbloqueada na home!<br>'
       : total>=1 ? '🌟 Conquista <b>Primeira Onda</b> desbloqueada na home!<br>' : '')
-    + (last ? 'Você zerou a trilha! Continue no <a href="https://acarolmourad-commits.github.io/asf-quiz/" style="color:var(--p);font-weight:700">Quiz Diário</a>.' : 'O próximo nível já está aberto 👇');
+    + (last ? 'Você zerou a trilha! Continue no <a href="https://quiz.asf.surf/" style="color:var(--p);font-weight:700">Quiz Diário</a>.' : 'O próximo nível já está aberto 👇');
   renderLevels();
   document.getElementById('levels').style.display='block';
 }
 renderLevels();
 </script>
-<script src="https://acarolmourad-commits.github.io/asf-app/asf-network.js" defer></script>
+<script src="https://asf.surf/asf-network.js?v=0374bb2409" defer></script>
 </body>
 </html>
