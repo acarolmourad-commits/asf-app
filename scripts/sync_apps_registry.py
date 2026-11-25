@@ -17,6 +17,7 @@ Consumidores regenerados com --write:
 Consumidores somente validados (markup editorial proprio):
   - guia-apps.html, rede.html, novidades.html
 """
+from html import escape
 import json
 import re
 import sys
@@ -85,29 +86,31 @@ def gen_satellites_html(reg):
 def _app_line(a):
     return ('  <a class="app" href="%s" target="_blank" rel="noopener">'
             '<span class="ic">%s</span><span><b>%s</b><small>%s</small></span></a>'
-            % (a["url"], a["icon_apps"], a["name_apps"], a["desc_apps"]))
+            % tuple(escape(a[key]) for key in ("url", "icon_apps", "name_apps", "desc_apps")))
+
+
+def render_apps_index(src, reg):
+    start = "<!-- BEGIN ASF REGISTRY -->"
+    end = "<!-- END ASF REGISTRY -->"
+    if src.count(start) != 1 or src.count(end) != 1 or src.index(start) > src.index(end):
+        raise ValueError("marcadores do catálogo ausentes, duplicados ou invertidos")
+    by_slug = {app["slug"]: app for app in reg["apps"]}
+    order = reg["apps_index_order"]
+    if len(order) != len(by_slug) or set(order) != set(by_slug):
+        raise ValueError("apps_index_order precisa incluir cada aplicativo uma vez")
+    before, after_start = src.split(start)
+    _, after = after_start.split(end)
+    cards = "\n".join(_app_line(by_slug[slug]) for slug in order)
+    return before + start + "\n" + cards + "\n" + end + after
 
 
 def gen_apps_index_html(reg):
-    by_slug = {a["slug"]: a for a in reg["apps"]}
     with open(APPS_INDEX_HTML, encoding="utf-8") as f:
         src = f.read()
-    lines = re.findall(r"^  <a class=\"app\" href=\"%s/asf-[^\"]*\".*$" % BASE, src, re.M)
-    if not lines:
-        print("ERRO: bloco de apps nao encontrado em", APPS_INDEX_HTML)
-        sys.exit(2)
-    block_old = "\n".join(lines)
-    # Regenerate only the GitHub Pages satellite cards. Editorial cards using
-    # custom domains (for example ASF Clube at asf.surf) stay in their own slot.
-    generated_slugs = [
-        s for s in reg["apps_index_order"]
-        if by_slug[s]["url"].startswith(BASE + "/asf-")
-    ]
-    block_new = "\n".join(_app_line(by_slug[s]) for s in generated_slugs)
+    new = render_apps_index(src, reg)
     with open(APPS_INDEX_HTML, "w", encoding="utf-8") as f:
-        f.write(src.replace(block_old, block_new))
-    preserved = len(reg["apps"]) - len(generated_slugs)
-    print("OK:", APPS_INDEX_HTML, "regenerado (%d links GitHub; %d links canônicos preservados)" % (len(generated_slugs), preserved))
+        f.write(new)
+    print("OK:", APPS_INDEX_HTML, "regenerado (%d aplicativos)" % len(reg["apps"]))
 
 
 # ---------- validacao ----------
@@ -162,6 +165,14 @@ def validate(reg):
                 print("ERRO: experiencia Carteirinha ausente em", NETWORK_JS)
                 ok = False
         else:
+            if path == APPS_INDEX_HTML:
+                try:
+                    if render_apps_index(content, reg) != content:
+                        print("ERRO: catálogo desatualizado; execute scripts/sync_apps_registry.py --write")
+                        ok = False
+                except ValueError as exc:
+                    print("ERRO:", path, str(exc))
+                    ok = False
             parsed = Links()
             parsed.feed(content)
             if path in {SATELLITES_HTML, "rede.html"}:
