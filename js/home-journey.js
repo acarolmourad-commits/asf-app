@@ -39,6 +39,9 @@
       details.append(summary, band); directory.append(details);
       if (heading) heading.classList.add('asf-topic-repeated-title');
     });
+    var community = document.getElementById('asfv2-comunidade');
+    var volunteering = document.getElementById('asf-voluntariado-link');
+    if (community && volunteering) community.prepend(volunteering);
     var nav = document.querySelector('.asfv2-nav');
     if (nav) { directory.insertBefore(nav, directory.firstChild); nav.classList.add('asf-directory-nav'); }
     // A single institutional footer ends the document's content, after legacy modules.
@@ -57,11 +60,14 @@
       if (typeof original !== 'function') return;
       window[name] = function (id) { reveal(id); return original.apply(this, arguments); };
     });
-    window.addEventListener('hashchange', function () { reveal(decodeHash(location.hash.slice(1))); });
-    if (location.hash) {
-      var target = reveal(decodeHash(location.hash.slice(1)));
+    function openFragment() {
+      var id = decodeHash(location.hash.slice(1));
+      var target = reveal(id);
+      if (target && id === 'carteirinha' && typeof window.showSection === 'function') window.showSection(id);
       if (target) target.scrollIntoView({block:'start'});
     }
+    window.addEventListener('hashchange', openFragment);
+    if (location.hash) openFragment();
   }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init, {once:true});
   else init();

@@ -93,21 +93,21 @@
             <div style="margin-top:8px;">Você receberá um link de confirmação no e-mail. O acesso só será liberado após a confirmação. Ainda não tem carteirinha? <a href="https://asf.surf/emitir.html" style="color:#00A8CC;">Emita a sua grátis</a>.</div>
         </div>
 
-        <div class="assoc-badge hidden" id="assoc-badge"></div>
+        <div class="assoc-badge hidden" data-i18n-skip id="assoc-badge"></div>
 
         <h3 class="section-title">Salas da Comunidade</h3>
-        <div class="rooms-list" id="rooms-list">
+        <div class="rooms-list" data-i18n-skip id="rooms-list">
             <p class="status-msg">Carregando salas…</p>
         </div>
     </div>
 
     <div id="chat-view" class="hidden">
         <div class="chat-header">
-            <div class="chat-title" id="room-title">Sala</div>
+            <div class="chat-title" data-i18n-skip id="room-title">Sala</div>
             <button type="button" aria-label="Voltar às salas da comunidade" onclick="showRoomsList()" style="flex:0 0 auto;display:inline-flex;align-items:center;justify-content:center;gap:6px;padding:10px 14px;border:1px solid rgba(255,255,255,.75);border-radius:999px;background:#fff;color:#0E2439;font:600 14px Outfit,sans-serif;cursor:pointer;position:relative;z-index:5;white-space:nowrap;">← Salas</button>
             <div class="online-dot"></div>
         </div>
-        <div class="chat-messages" id="messages-container"></div>
+        <div class="chat-messages" data-i18n-skip id="messages-container"></div>
         <div class="chat-input-area">
             <textarea id="message-input" class="chat-input" placeholder="Digite sua mensagem..." rows="1" maxlength="500"></textarea>
             <button aria-label="Enviar" class="send-btn" id="send-btn" onclick="sendMessage()">➤</button>
@@ -383,5 +383,7 @@
         });
     </script>
     <script src="/asf-app/asf-redesign.js" defer></script>
+<script defer src="js/entry-translations.js"></script>
+<script defer src="js/asf-i18n.js?v=2"></script>
 </body>
 </html>
