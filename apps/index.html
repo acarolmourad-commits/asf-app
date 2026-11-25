@@ -32,10 +32,12 @@
     .atalhos{display:flex;flex-wrap:wrap;gap:.4rem 1rem;margin:0 0 1rem}
     .atalhos a{display:inline-flex;align-items:center;min-height:44px;color:#00576a;text-underline-offset:.18em}
     [id]{scroll-margin-top:1rem}
-    .roteiro ol{padding-left:1.5em;margin:1em 0}
+    .roteiro ol,.perguntas-acesso{padding-left:1.5em;margin:1em 0}
+    .perguntas-acesso{line-height:1.55}
+    .roteiro p+h3{margin-top:1em}
     .roteiro li+li{margin-top:1em}
     .roteiro a,footer a{color:#00576a;text-underline-offset:.18em}
-    a:focus-visible{outline:3px solid #9b3d68;outline-offset:3px}
+    :is(a,summary,[tabindex="-1"]):focus-visible{outline:3px solid #9b3d68;outline-offset:3px}
     @media(prefers-reduced-motion:reduce){.app{transition:none}.app:hover{transform:none}}
     footer{text-align:center;color:#9A9A9A;font-size:12px;padding:20px}
   </style>
@@ -47,6 +49,7 @@
   <nav class="atalhos" aria-label="Ir direto para">
     <a href="#roteiro">Próxima sessão</a>
     <a href="#maresias">Viagem a Maresias</a>
+    <a href="#inclusao-no-surfe">Acessibilidade na praia</a>
     <a href="#voluntariado-parasurf">Voluntariado</a>
     <a href="#aplicativos">Lista de aplicativos</a>
   </nav>
@@ -68,6 +71,34 @@
     <p>Houve um fotógrafo na praia? Guarde a data e o nome do pico no <a href="../diario/#registrar">Diário de Surf</a>. A página da <a href="../parcerias/surfmappers/#conhecer">Surfmappers</a> explica como procurar o álbum da sessão.</p>
     <details lang="en"><summary>Plan a surf weekend in Maresias</summary>
       <p id="maresias-en" tabindex="-1">Use the <a href="../surf-trip/#orcamento">trip planner</a> to compare a day trip with an overnight stay. Check dates directly with <a href="../parcerias/surfside-maresias/#english">Surfside Maresias</a> and look up the <a href="https://previsao.asf.surf/?lang=en">wave forecast</a> before packing. If a photographer covered your session, <a href="../parcerias/surfmappers/#english">Surfmappers explains how to find the album</a>.</p>
+    </details>
+  </section>
+  <section class="roteiro" aria-labelledby="inclusao-no-surfe">
+    <h2 id="inclusao-no-surfe" tabindex="-1">Acesso à praia e ao surfe adaptado</h2>
+    <p>Uma primeira visita pode ser um dia na areia para assistir à atividade, uma conversa com a equipe ou uma aula. Quem vai participar pode escolher como prefere receber orientações e que apoio deseja.</p>
+
+    <h3>Antes de sair com a família ou a turma</h3>
+    <ul class="perguntas-acesso">
+      <li>Qual é o ponto de encontro? Como é o trajeto do desembarque até lá e onde ficam o banheiro acessível e um lugar para descansar?</li>
+      <li>Quem recebe o grupo? Podemos conhecer o local antes de decidir sobre a aula? Uma pessoa de confiança pode acompanhar?</li>
+      <li>Que equipamentos estão disponíveis nessa data? Por qual canal a equipe avisa se o local ou o horário mudar?</li>
+    </ul>
+    <p>As <a href="../aprender/como-comecar-a-surfar-mulheres.html#acesso-aula">perguntas para a primeira aula</a> incluem uma mensagem que você pode adaptar para a escola.</p>
+
+    <h3>Onde consultar programas públicos</h3>
+    <p>O <a href="https://www.gov.br/esporte/pt-br/acoes-e-programas/mare-inclusiva">Maré Inclusiva, do Ministério do Esporte</a>, apresenta núcleos de surfe adaptado e orienta instituições interessadas em aderir ao programa. Antes de planejar uma aula, confirme com a organização local se há atendimento para a sua região e data.</p>
+    <p>Para um passeio em Santos, a <a href="https://www.santos.sp.gov.br/?q=servico/programa-praia-acessivel">página municipal do Praia Acessível</a> descreve o banho de mar com cadeira anfíbia e informa os canais da equipe. Na consulta de <time datetime="2026-11-25">25 de novembro de 2026</time>, a página ainda trazia um aviso de suspensão. Confirme a retomada antes de se deslocar.</p>
+
+    <h3 id="colaborar-inclusao" tabindex="-1">Voluntariado e apoio de equipes</h3>
+    <p>Para conhecer o trabalho do Instituto ParaSurf, siga a <a href="#voluntariado-parasurf">orientação do Instituto para a primeira visita à praia</a>. Depois de conhecer a atividade, converse com a equipe sobre como contribuir.</p>
+    <p>Uma marca, escola ou coletivo pode <a href="../contato.html">apresentar uma proposta à ASF</a>. Indique em que cidade atua, o que pode oferecer e quando. Por exemplo, uma equipe pode descrever o caminho de acesso para um encontro e oferecer a descrição em texto e áudio. Consulte também <a href="../parcerias/">as parcerias divulgadas pela ASF</a>.</p>
+
+    <details lang="en"><summary>Beach access, adaptive surfing and volunteering</summary>
+      <div id="beach-access" tabindex="-1">
+        <p>Before a visit or surf lesson, ask about the route from the drop-off point to the beach, accessible toilets, places to rest, equipment for that date and who will meet you. Ask what happens if plans change. The person taking part can say what support they want and whether someone will accompany them.</p>
+        <p>Brazil’s Ministry of Sport describes its adaptive surfing programme on the <a href="https://www.gov.br/esporte/pt-br/acoes-e-programas/mare-inclusiva" hreflang="pt-BR">Maré Inclusiva page</a>. For an accessible sea-bathing visit in Santos, <a href="https://www.santos.sp.gov.br/?q=servico/programa-praia-acessivel" hreflang="pt-BR">contact the city programme</a> to confirm that it has resumed before travelling.</p>
+        <p>Interested in volunteering? <a href="#voluntariado-parasurf" hreflang="pt-BR">Instituto ParaSurf’s guidance</a> invites you to visit the beach first and then discuss how to help. Schools, brands and community groups can <a href="../contato.html" hreflang="pt-BR">contact ASF</a> with the location, timing and support they can offer.</p>
+      </div>
     </details>
   </section>
 <section class="roteiro" aria-labelledby="voluntariado-parasurf">
