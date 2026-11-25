@@ -141,14 +141,18 @@ test('grouped navigation with the real local homepage scripts', async t => {
         assert.ok(d.getElementById(id), id);
       }
     });
-    await t.test('competitions opens its section and offers the working Mural route', async () => {
+    await t.test('competitions opens its section and offers the dedicated surf calendar', async () => {
       toggle.click(); await tick();
       items.find(item => item.textContent.includes('Competições')).click(); await tick();
       state(false);
       const section = d.getElementById('competicoes');
       assert.equal(w.getComputedStyle(section).display, 'block');
       if (section.closest('details')) assert.equal(section.closest('details').open, true);
-      assert.equal(section.querySelector('#eventos-cta a').getAttribute('href'), 'mural/');
+      const link = section.querySelector('#eventos-cta a');
+      assert.equal(link.getAttribute('href'), '/calendario/');
+      assert.match(link.textContent, /Calendário do Surf/);
+      const destination = fs.readFileSync(path.join(root, link.getAttribute('href').slice(1), 'index.html'), 'utf8');
+      assert.match(destination, /<h1>Calendário do Surf<\/h1>/);
       assert.equal(section.querySelectorAll('[onclick*="showSection"]').length, 0);
     });
     await t.test('network opens repeatedly without an observer loop and restores gallery state', async () => {
