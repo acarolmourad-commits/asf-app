@@ -4,12 +4,25 @@ name: Verifica Carteirinha ASF (read-only)
 # nem renovar registros reais. Regras de unicidade/renovacao devem ser
 # testadas em ambiente Supabase de teste com fixtures descartaveis.
 on:
+  pull_request:
+    paths:
+      - '.github/workflows/verifica-carteirinha.yml'
+      - 'carteirinha.js'
+      - 'emitir.html'
+      - 'recuperar-carteirinha.html'
+      - 'assets/js/card-qr.js'
+      - 'assets/vendor/qrcode-generator-*.js'
+      - 'tests/card-recovery.test.cjs'
   push:
     branches: [main]
     paths:
       - '.github/workflows/verifica-carteirinha.yml'
       - 'carteirinha.js'
       - 'emitir.html'
+      - 'recuperar-carteirinha.html'
+      - 'assets/js/card-qr.js'
+      - 'assets/vendor/qrcode-generator-*.js'
+      - 'tests/card-recovery.test.cjs'
       - 'verificar.html'
       - 'carteirinhas-admin.html'
       - 'docs/carteirinhas-privacy-2026-10-07.md'
@@ -25,6 +38,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+
+      - name: Testar o retorno da recuperação em uma nova aba
+        if: github.event_name != 'schedule'
+        run: |
+          npm install --prefix "$RUNNER_TEMP/asf-card" --no-save jsdom@26.1.0 --no-audit --no-fund
+          NODE_PATH="$RUNNER_TEMP/asf-card/node_modules" node --test tests/card-recovery.test.cjs
 
       - name: Validar sintaxe JavaScript
         run: node --check carteirinha.js
@@ -42,7 +61,7 @@ jobs:
           privacy = Path('docs/carteirinhas-privacy-2026-10-07.md').read_text(encoding='utf-8')
 
           checks = {
-              'emissao usa RPC central': "emitir_carteirinha" in js and "emitir_carteirinha" in emitir,
+              'emissao usa RPC central': "this.sbRpc('emitir_carteirinha', params)" in js and 'await ASF_CARD.emitirCarteirinha(' in emitir,
               'nao existe escrita direta no endpoint associadas em JS da carteirinha': "/rest/v1/associadas" not in js,
               'pagina de emissao oculta resultado se RPC falhar': "Nenhuma carteirinha será exibida sem confirmação do Supabase" in emitir,
               'verificacao offline nao afirma validade': "Não considere a carteirinha válida até a consulta central responder" in verificar,
@@ -62,6 +81,7 @@ jobs:
           PY
 
       - name: Verificar endpoint RPC sem alterar dados
+        if: github.event_name != 'pull_request'
         env:
           RPC_URL: https://qktabrzbgdfndklytwub.supabase.co/rest/v1/rpc/emitir_carteirinha
           PUBLIC_KEY: sb_publishable_qIvPxh6DavCPtntfflaRLw_QI_pZJih
