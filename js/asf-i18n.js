@@ -30,6 +30,7 @@
     "Buscar conteúdos, ferramentas e serviços da ASF": "Search ASF guides, tools and services",
     "Pular para o conteúdo principal": "Skip to main content",
     "Pular para o conteúdo": "Skip to content",
+    "Acesso à praia e ao surfe adaptado": "Beach access and adaptive surfing",
     "Voluntariado no Instituto ParaSurf": "Volunteer with Instituto ParaSurf",
     "Emitir carteirinha de associada": "Get a membership card",
     "Carteirinha salva neste dispositivo": "Card saved on this device",
