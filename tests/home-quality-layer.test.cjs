@@ -16,7 +16,7 @@ test('home quality layer never accesses browser storage or card API', () => {
 test('membership storage keys and card code remain present', () => {
   assert.match(card, /KEY:\s*'asf-card-v2'/);
   assert.match(card, /HIST_KEY:\s*'asf-card-history'/);
-  assert.match(html, /src="carteirinha\.js"/);
+  assert.match(html, /src="carteirinha\.js(?:\?v=[a-f0-9]+)?"/);
   assert.match(html, /id="carteirinha"/);
 });
 
