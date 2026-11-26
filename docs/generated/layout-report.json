@@ -1,8 +1,8 @@
 {
   "date": "2026-11-26",
-  "issues_found": 0,
+  "issues_found": 2,
   "improvements_available": 4,
-  "score": 89,
+  "score": 76,
   "suggested": [
     {
       "type": "css",
@@ -15,5 +15,5 @@
       "impact": "high"
     }
   ],
-  "timestamp": "2026-11-26T01:14:39.819483"
+  "timestamp": "2026-11-26T15:54:38.424823"
 }
