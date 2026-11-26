@@ -42,7 +42,7 @@ header p{opacity:.95;margin-top:8px;max-width:640px;margin-left:auto;margin-righ
 .app span{font-size:12.5px;color:var(--g)}
 .hero-card{background:#fff;border-radius:16px;padding:20px;box-shadow:0 2px 12px rgba(14,36,57,.08);margin-bottom:8px}
 .busca{width:100%;padding:14px 18px;font-size:16px;border:2px solid var(--p);border-radius:14px;margin:6px 0 4px}
-#buscar-apps{scroll-margin-top:90px}
+#buscar-apps,#busca{scroll-margin-top:90px}
 #buscar-apps label{display:block;font-weight:700;margin-top:10px}
 #buscar-apps button{font:inherit;cursor:pointer;min-height:44px;padding:8px 12px;border:1px solid var(--g);border-radius:10px;background:#fff;color:var(--d)}
 #buscar-apps button[aria-pressed="true"]{background:var(--d);color:#fff;border-color:var(--d)}
@@ -231,18 +231,20 @@ footer{text-align:center;font-size:12.5px;color:var(--g);padding:24px;border-top
   let selected=null;
   const normalize=value=>value.normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().trim();
   function apply(query){
-    const q=normalize(query||'');let visible=0;
+    const words = normalize(query || '').split(/\s+/).filter(Boolean);
+    let visible = 0;
     cats.forEach(cat=>{
       let matches=0;
       cat.querySelectorAll('.app').forEach(card=>{
-        const show=(!selected||selected===cat)&&(!q||normalize(card.textContent).includes(q));
+        const text = normalize(Array.from(card.children, node => node.textContent).join(' '));
+        const show = (!selected || selected === cat) && words.every(word => text.includes(word));
         card.style.display=show?'':'none';if(show)matches++;
       });
       cat.style.display=matches?'':'none';visible+=matches;
     });
     if(count)count.textContent=String(visible);
     if(empty)empty.hidden=visible!==0;
-    if(clear)clear.hidden=!q&&!selected;
+    if(clear)clear.hidden=words.length===0&&!selected;
   }
   window.filtra=apply;
   window.addEventListener('asf:languagechange', () => apply(input ? input.value : ''));
