@@ -4,6 +4,7 @@ on:
   pull_request:
     paths:
       - 'index.html'
+      - 'guia-apps.html'
       - 'app.js'
       - 'js/home-main.js'
       - 'assets/js/inline/asf-inline-06.js'

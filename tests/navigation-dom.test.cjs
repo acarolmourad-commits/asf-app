@@ -203,3 +203,37 @@ test('grouped navigation with the real local homepage scripts', async t => {
     });
   } finally {observers.forEach(observer=>observer.disconnect()); w.close();}
 });
+
+test('busca do guia combina palavras e tema e recupera a lista ao limpar', () => {
+  const dom = new JSDOM(fs.readFileSync(path.join(root, 'guia-apps.html'), 'utf8'), {
+    url: 'https://asf.surf/guia-apps.html', runScripts: 'dangerously'
+  });
+  try {
+    const { document, Event } = dom.window;
+    const input = document.getElementById('busca');
+    const count = document.getElementById('cont');
+    const panel = input.closest('.hero-card');
+    const buttons = [...panel.querySelectorAll('#chips-cat button')];
+    const total = document.querySelectorAll('.cat[data-cat] .app').length;
+    assert.ok(input.labels.length);
+    assert.equal(Number(count.textContent), total);
+    const search = text => {
+      input.value = text;
+      input.dispatchEvent(new Event('input', {bubbles:true}));
+    };
+    search('  limpeza   eco ');
+    assert.equal(count.textContent, '1');
+    buttons.find(button => button.textContent.includes('Treino')).click();
+    assert.equal(count.textContent, '0');
+    assert.equal(document.getElementById('sem-resultados').hidden, false);
+    panel.querySelector('#limpar-busca').click();
+    assert.equal(count.textContent, String(total));
+    assert.equal(document.activeElement, input);
+    assert.equal(buttons[0].getAttribute('aria-pressed'), 'true');
+    assert.equal(document.getElementById('sem-resultados').hidden, true);
+    search('previsao');
+    assert.ok(Number(count.textContent) > 0);
+  } finally {
+    dom.window.close();
+  }
+});
