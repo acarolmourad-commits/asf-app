@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Conferência de devolução do equipamento | ASF</title>
+  <meta name="description" content="Confira a devolução da prancha e dos acessórios após o surfe. Lista gratuita, sem cadastro, em português e inglês.">
+  <link rel="canonical" href="https://asf.surf/devolucao-equipamento/">
+  <script defer src="./gear-return.js"></script>
+  <style>
+    *,*::before,*::after{box-sizing:border-box}
+    body{margin:0;background:#f4f8f8;color:#112737;font:1rem/1.55 system-ui,sans-serif}
+    .top{background:#102e43;color:#fff}
+    .top p{margin:0;font-weight:750;letter-spacing:.05em}
+    .wrap{width:min(100%,48rem);margin:auto;padding:1rem clamp(.9rem,4vw,1.7rem)}
+    main.wrap{padding-bottom:3rem}
+    h1,h2{line-height:1.18;margin:.4rem 0 1rem}
+    a{color:#00556b;text-underline-offset:.2em}
+    :focus-visible{outline:3px solid #a95400;outline-offset:3px}
+    fieldset{min-width:0;padding:.85rem 1rem 1rem;border:1px solid #8ba6b0;border-radius:.65rem;background:#fff}
+    legend{font-weight:720}
+    .row{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);align-items:center;gap:.4rem .85rem;padding:.6rem 0;border-bottom:1px solid #dae5e9}
+    label{font-weight:620}
+    button,select,summary{min-height:44px;font:inherit}
+    select{width:100%;padding:.45rem;color:#112737;background:#fff;border:1px solid #4c6974;border-radius:.35rem}
+    button{padding:.4rem .8rem;border:1px solid #006475;border-radius:.4rem;color:#fff;background:#006475;font-weight:700;cursor:pointer}
+    details{margin:1.5rem 0 0;border:1px solid #8ba6b0;border-radius:.65rem;padding:.55rem .9rem;background:#e8f4f5;scroll-margin-top:.5rem}
+    summary{display:list-item;padding:.55rem .2rem;cursor:pointer;font-weight:700}
+    .notice{font-size:.93rem;color:#294958}
+    .status{font-weight:700}
+    .note{border-left:.25rem solid #087083;padding-left:.8rem}
+    @media(max-width:36rem){.row{grid-template-columns:minmax(0,1fr)}}
+    @media print{body,fieldset,details{background:#fff;color:#000}button{display:none}}
+  </style>
+</head>
+<body>
+<header class="top"><div class="wrap"><p>ASF · Associação de Surf Feminino</p></div></header>
+<main class="wrap">
+  <a href="../apps/#roteiro">ASF Apps · Roteiro de uma sessão</a>
+  <h1>Conferência de devolução do equipamento</h1>
+  <noscript><p>Você pode marcar os itens, mas o resumo, o botão de limpar e a recuperação das marcações exigem JavaScript.</p></noscript>
+    <p>Use depois do surfe para conferir o que voltou com você e o que ainda precisa ser devolvido. Se um item não fazia parte do combinado, marque “Não se aplica”.</p>
+    <fieldset data-lang="pt">
+      <legend>Conferência por item</legend>
+      <div class="row"><label for="pt-board">Prancha</label><select id="pt-board" data-gear="board"><option value="pending">A conferir</option><option value="done">Marquei como devolvido</option><option value="na">Não se aplica</option></select></div>
+      <div class="row"><label for="pt-fins">Quilhas removíveis</label><select id="pt-fins" data-gear="fins"><option value="pending">A conferir</option><option value="done">Marquei como devolvido</option><option value="na">Não se aplica</option></select></div>
+      <div class="row"><label for="pt-leash">Leash</label><select id="pt-leash" data-gear="leash"><option value="pending">A conferir</option><option value="done">Marquei como devolvido</option><option value="na">Não se aplica</option></select></div>
+      <div class="row"><label for="pt-cover">Capa ou bolsa</label><select id="pt-cover" data-gear="cover"><option value="pending">A conferir</option><option value="done">Marquei como devolvido</option><option value="na">Não se aplica</option></select></div>
+      <div class="row"><label for="pt-wetsuit">Roupa de neoprene ou lycra</label><select id="pt-wetsuit" data-gear="wetsuit"><option value="pending">A conferir</option><option value="done">Marquei como devolvido</option><option value="na">Não se aplica</option></select></div>
+      <div class="row"><label for="pt-extras">Outros acessórios combinados</label><select id="pt-extras" data-gear="extras"><option value="pending">A conferir</option><option value="done">Marquei como devolvido</option><option value="na">Não se aplica</option></select></div>
+      <p class="status" data-status role="status" hidden></p>
+      <button type="button" data-reset hidden>Limpar marcações</button>
+      <p class="notice" data-storage-note hidden>Se o navegador permitir, as marcações ficam nesta aba ao recarregar a página. A ferramenta não envia as seleções para nenhum serviço.</p>
+    </fieldset>
+    <p class="note">Esta lista é uma anotação sua. Não comprova a devolução nem substitui o recibo ou a conferência com quem emprestou ou alugou o equipamento.</p>
+    <p><a href="../apps/#roteiro">Voltar ao roteiro da sessão</a></p>
+  <details id="english" lang="en">
+    <summary>English: surf gear return checklist</summary>
+    <h2>Surf gear return checklist</h2>
+    <noscript><p>You can select items, but the summary, clear button and saved selections require JavaScript.</p></noscript>
+    <p>After surfing, check what has already been returned and what is still pending. Choose “Not applicable” for anything that was not part of the borrowing or rental agreement.</p>
+    <fieldset data-lang="en">
+      <legend>Check each item</legend>
+      <div class="row"><label for="en-board">Surfboard</label><select id="en-board" data-gear="board"><option value="pending">To check</option><option value="done">Marked as returned</option><option value="na">Not applicable</option></select></div>
+      <div class="row"><label for="en-fins">Removable fins</label><select id="en-fins" data-gear="fins"><option value="pending">To check</option><option value="done">Marked as returned</option><option value="na">Not applicable</option></select></div>
+      <div class="row"><label for="en-leash">Leash</label><select id="en-leash" data-gear="leash"><option value="pending">To check</option><option value="done">Marked as returned</option><option value="na">Not applicable</option></select></div>
+      <div class="row"><label for="en-cover">Board bag or cover</label><select id="en-cover" data-gear="cover"><option value="pending">To check</option><option value="done">Marked as returned</option><option value="na">Not applicable</option></select></div>
+      <div class="row"><label for="en-wetsuit">Wetsuit or rash guard</label><select id="en-wetsuit" data-gear="wetsuit"><option value="pending">To check</option><option value="done">Marked as returned</option><option value="na">Not applicable</option></select></div>
+      <div class="row"><label for="en-extras">Other agreed accessories</label><select id="en-extras" data-gear="extras"><option value="pending">To check</option><option value="done">Marked as returned</option><option value="na">Not applicable</option></select></div>
+      <p class="status" data-status role="status" hidden></p>
+      <button type="button" data-reset hidden>Clear selections</button>
+      <p class="notice" data-storage-note hidden>If the browser allows it, selections stay in this tab when you reload. The tool does not send your selections to any service.</p>
+    </fieldset>
+    <p class="note">This checklist is your own record, not proof of a return. Keep any receipt and confirm the return with the lender or rental provider.</p>
+    <p><a href="../apps/#roteiro">Back to the surf session guide (Portuguese)</a></p>
+  </details>
+</main>
+</body>
+</html>
