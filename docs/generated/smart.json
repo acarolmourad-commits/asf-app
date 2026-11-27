@@ -1,12 +1,12 @@
 {
   "date": "2026-11-27",
   "new_tip": {
-    "category": "Saúde",
-    "title": "Treino de força",
-    "content": "Foque em exercícios compostos: remada com elástico, agachamentos, plank. 2-3x/semana.",
+    "category": "Técnica",
+    "title": "Como fazer o bottom turn",
+    "content": "O bottom turn é a base. Transfira o peso para o pé da frente e gire a prancha.",
     "tags": [
-      "Saúde",
-      "Treino"
+      "Técnica",
+      "Manobras"
     ]
   },
   "new_utility": {
@@ -21,10 +21,10 @@
       "priority": "high"
     },
     {
-      "type": "content",
-      "title": "Mais dicas técnicas avançadas",
-      "priority": "high"
+      "type": "layout",
+      "title": "Modo escuro",
+      "priority": "medium"
     }
   ],
-  "generated_at": "2026-11-27T15:43:14.893763"
+  "generated_at": "2026-11-27T19:49:34.662611"
 }
