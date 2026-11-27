@@ -56,6 +56,15 @@ for (const [locale, html] of [['pt-BR', page], ['en', english]]) {
     }
     assert.doesNotMatch(html, /<script|<iframe|<form|<video|\b(?:cupom|código|percentual|desconto|coupon|discount|promo code)\b|\d\s*%/i);
   });
+  test(locale + ' offers email and membership card in the benefit section without JavaScript', () => {
+    const section = html.match(/<section\b[^>]*aria-labelledby="beneficio"[^>]*>([\s\S]*?)<\/section>/);
+    assert.ok(section, 'Benefit section must exist');
+    const emailLabel = locale === 'en' ? 'Contact ASF by email' : 'Consultar a ASF por e-mail';
+    const cardLabel = locale === 'en' ? 'My ASF membership card' : 'Minha carteirinha';
+    assert.ok(section[1].includes('<!--email_off--><a class="action" href="mailto:asf.surffeminino@gmail.com">' + emailLabel + '</a><!--/email_off-->'));
+    assert.ok(section[1].includes('<a href="/emitir.html">' + cardLabel + '</a>'));
+    assert.ok(fs.existsSync(path.join(root, 'emitir.html')));
+  });
   test(locale + ' has accessible headings, working anchors and shared styling', () => {
     assert.equal((html.match(/<h1>/g) || []).length, 1);
     assert.match(html, /<main id="conteudo" tabindex="-1"/);
