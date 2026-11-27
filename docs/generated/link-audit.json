@@ -1,10 +1,12 @@
 {
-  "date": "2026-11-27T19:50:05.185711+00:00",
+  "date": "2026-11-27T20:44:13.047700+00:00",
   "total": 154,
-  "ok": 146,
+  "ok": 145,
   "skipped": 8,
-  "broken_count": 0,
-  "broken": [],
+  "broken_count": 1,
+  "broken": [
+    "guias/boletim-das-ondas/"
+  ],
   "results": [
     {
       "url": "https://achados.asf.surf/",
@@ -655,8 +657,8 @@
     },
     {
       "url": "guias/boletim-das-ondas/",
-      "status": "ok",
-      "http": 200,
+      "status": "broken",
+      "http": 503,
       "local": true
     },
     {
