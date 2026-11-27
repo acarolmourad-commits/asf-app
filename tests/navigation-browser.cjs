@@ -5,6 +5,7 @@ const fs = require('node:fs');
 const path = require('node:path');
 const http = require('node:http');
 const { chromium } = require('playwright');
+const verifyGearReturn = require('./gear-return-browser.cjs');
 const root = path.resolve(__dirname, '..');
 const output = path.join(root, 'test-results/navigation');
 const mime = {'.html':'text/html','.js':'text/javascript','.css':'text/css','.json':'application/json','.png':'image/png','.svg':'image/svg+xml','.webp':'image/webp'};
@@ -148,6 +149,7 @@ async function menuFocusVisible(page) {
           await click(page.locator('.asf-bottom-nav').getByRole('link',{name:label,exact:true}));
           await page.waitForURL(target.startsWith('https:')?target:origin+target);
         }
+        if (width === 390 || width >= 1200) await verifyGearReturn(browser, origin, {width,height});
         assert.deepEqual(errors.filter(e=>/lq is not defined|asf-ux:/.test(e)),[]);
         summary.push({width,height,menuItems:23,internalActions:menuTargets.length,pageActions:pageTargets.length,bottomDestinations:5,networkPanel:'open/close button, Escape, backdrop',hitTargets:'top and bottom',status:'passed'});
       } catch(error) {
