@@ -66,7 +66,12 @@
   var SKIP = 'script,style,noscript,textarea,input,select:not([data-translate-options]),[contenteditable], [data-i18n-skip],#asf-language-control,#user-posts,#chatbot-messages,#chatbot-messages-asf,#surfer-profile-content';
   var originals = new WeakMap(), attrs = new WeakMap(), observer, queued = false, mounted = false;
   function saved() { try { return localStorage.getItem('asf-language') || localStorage.getItem('asf-lang'); } catch (_) { return null; } }
-  var lang = saved() === 'en' ? 'en' : 'pt-BR';
+  function languageFromUrl() {
+    if (!document.documentElement.hasAttribute('data-asf-query-language')) return null;
+    var requested = new URLSearchParams(window.location.search).get('lang');
+    return requested === 'en' || requested === 'pt-BR' ? requested : null;
+  }
+  var lang = languageFromUrl() || (saved() === 'en' ? 'en' : 'pt-BR');
   function split(value) {
     var match = value.match(/^(\s*)([\s\S]*?)(\s*)$/), core = match[2];
     if (Object.prototype.hasOwnProperty.call(EN, core)) return {before:match[1], key:core, after:match[3]};
@@ -127,6 +132,14 @@
   function choose(value) {
     if (!['pt','pt-BR','en'].includes(value)) return;
     lang=value==='en'?'en':'pt-BR';
+    if (languageFromUrl()) {
+      // An explicit choice also updates a valid incoming language hint for reloads.
+      try {
+        var url = new URL(window.location.href);
+        url.searchParams.set('lang', lang);
+        window.history.replaceState(window.history.state, '', url);
+      } catch (_) {}
+    }
     try {localStorage.setItem('asf-language',lang);localStorage.setItem('asf-lang',lang==='en'?'en':'pt');} catch (_) {}
     apply();
     window.dispatchEvent(new CustomEvent('asf:languagechange',{detail:{language:lang}}));

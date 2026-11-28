@@ -94,6 +94,31 @@ async function menuFocusVisible(page) {
           await click(page.locator('#asf-language-control button[data-asf-lang="pt-BR"]'));
           await waitFor(()=>card.getAttribute('href').then(x=>x===pt),'Restored Portuguese forecast URL');
           assert.equal(await card.locator('b').innerText(),'Previsão de Ondas');
+          // Return links can override the stored language for this visit without persisting.
+          const preference=()=>page.evaluate(()=>localStorage.getItem('asf-language'));
+          const cardHash='#forecast-home-card';
+          await page.goto(origin+'/?lang=en&source=qa'+cardHash);
+          await waitFor(()=>card.getAttribute('href').then(x=>x===en),'Explicit English overrides stored Portuguese');
+          assert.equal(await page.locator('html').getAttribute('lang'),'en');
+          assert.equal(await preference(),'pt-BR');
+          await click(page.locator('#asf-language-control button[data-asf-lang="pt-BR"]'));
+          const toggled=new URL(page.url());
+          assert.equal(toggled.searchParams.get('lang'),'pt-BR');
+          assert.equal(toggled.searchParams.get('source'),'qa');
+          assert.equal(toggled.hash,cardHash);
+          await page.reload();
+          await waitFor(()=>card.getAttribute('href').then(x=>x===pt),'Manual choice survives reload');
+          await click(page.locator('#asf-language-control button[data-asf-lang="en"]'));
+          assert.equal(await preference(),'en');
+          await page.goto(origin+'/?lang=pt-BR'+cardHash);
+          await waitFor(()=>card.getAttribute('href').then(x=>x===pt),'Explicit Portuguese overrides stored English');
+          assert.equal(await preference(),'en');
+          await page.goto(origin+'/?lang=invalid'+cardHash);
+          await waitFor(()=>card.getAttribute('href').then(x=>x===en),'Invalid language uses saved preference');
+          await home();
+          await waitFor(()=>card.getAttribute('href').then(x=>x===en),'No language query uses saved preference');
+          await click(page.locator('#asf-language-control button[data-asf-lang="pt-BR"]'));
+          await waitFor(()=>card.getAttribute('href').then(x=>x===pt),'End test in Portuguese');
         }
         // Opening the network panel previously starved the browser event loop:
         // a MutationObserver kept rewriting the gallery's aria-hidden attribute.
