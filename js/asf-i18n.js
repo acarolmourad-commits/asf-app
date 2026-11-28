@@ -18,6 +18,8 @@
     "Quero Conhecer Manas": "Meet other surfers",
     "Quero Explorar": "Plan a surf trip",
     "Previsão, praias, marés, condições e segurança.": "Forecasts, beaches, tides, conditions and safety.",
+    "Previsão de Ondas": "Surf forecast",
+    "Planeje sua sessão: consulte ondas e vento, a Tábua de Marés e os avisos oficiais da Marinha.": "Plan your session: check waves and wind, tide tables and official Brazilian Navy warnings.",
     "Técnica, treino, yoga, nutrição e bem-estar.": "Technique, training, yoga, nutrition and wellbeing.",
     "Comunidade, diário, eventos e conquistas.": "Community, surf journal, events and achievements.",
     "Surf trips, hospedagens, cultura e destinos.": "Surf trips, places to stay, culture and destinations.",
