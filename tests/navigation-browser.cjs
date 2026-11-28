@@ -74,6 +74,27 @@ async function menuFocusVisible(page) {
         assert.equal(await page.locator('.asf-bottom-nav').count(),1);
         assert.equal(await page.locator('#header-menu .asf-menu-group').count(),5);
         assert.equal(await page.locator('#header-menu [role=menuitem]').count(),0);
+        if(width===390||width===1365) {
+          const card=page.locator('#forecast-home-card');
+          const pt='https://previsao.asf.surf/', en='https://previsao.asf.surf/?lang=en';
+          assert.equal(await card.count(),1,'Only the existing forecast card is promoted');
+          assert.equal(await page.getByText(/os avisos oficiais da Marinha/).count(),1);
+          assert.equal(await card.getAttribute('href'),pt);
+          await click(card);
+          await page.waitForURL(pt);
+          await home();
+          await click(page.locator('#asf-language-control button[data-asf-lang="en"]'));
+          await waitFor(()=>card.getAttribute('href').then(x=>x===en),'English forecast URL');
+          assert.equal(await card.locator('b').innerText(),'Surf forecast');
+          assert.match(await card.locator('small').innerText(),/tide tables and official Brazilian Navy warnings/);
+          assert.equal(await page.getByText(/official Brazilian Navy warnings/).count(),1);
+          await click(card);
+          await page.waitForURL(en);
+          await home();
+          await click(page.locator('#asf-language-control button[data-asf-lang="pt-BR"]'));
+          await waitFor(()=>card.getAttribute('href').then(x=>x===pt),'Restored Portuguese forecast URL');
+          assert.equal(await card.locator('b').innerText(),'Previsão de Ondas');
+        }
         // Opening the network panel previously starved the browser event loop:
         // a MutationObserver kept rewriting the gallery's aria-hidden attribute.
         const networkButton=page.locator('#asf-sat-nav');
